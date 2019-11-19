@@ -53,7 +53,7 @@ module Google
           end
 
           ##
-          # Set a true filter on predicate-filter match.
+          # Sets a true filter on predicate-filter match.
           #
           # The filter to apply to the input row if `predicate_filter` returns any
           # results. If not provided, no results will be returned in the true case.
@@ -62,6 +62,7 @@ module Google
           # @return [Google::Cloud::Bigtable::RowFilter::ConditionFilter]
           #
           # @example
+          #   require "google/cloud/bigtable"
           #   predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
           #
           #   label = Google::Cloud::Bigtable::RowFilter.label("user")
@@ -85,6 +86,8 @@ module Google
           # @return [Google::Cloud::Bigtable::RowFilter::ConditionFilter]
           #
           # @example
+          #   require "google/cloud/bigtable"
+          #
           #   predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
           #
           #   label = Google::Cloud::Bigtable::RowFilter.label("user")

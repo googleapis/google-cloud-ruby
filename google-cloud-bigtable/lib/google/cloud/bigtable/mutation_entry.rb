@@ -42,7 +42,7 @@ module Google
       #     timestamp_to: timestamp_micros
       #   ).delete_from_family("cf3").delete_from_row
       #
-      # @example Using table
+      # @example Create using a table.
       #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
@@ -74,9 +74,9 @@ module Google
         end
 
         ##
-        # Add SetCell mutation to list of mutations.
+        # Adds a SetCell to the list of mutations.
         #
-        # A mutation that sets the value of the specified cell.
+        # A SetCell is a mutation that sets the value of the specified cell.
         #
         # @param family [String] Table column family name.
         #   The name of the family into which new data should be written.
@@ -101,7 +101,7 @@ module Google
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
         #   entry.set_cell("cf1", "field01", "XYZ")
         #
-        # @example With timestamp
+        # @example With timestamp.
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
         #   entry.set_cell(
         #     "cf-1",
@@ -128,10 +128,11 @@ module Google
         end
 
         ##
-        # Add DeleteFromColumn entry to list of mutations.
+        # Adds a DeleteFromColumn to the list of mutations.
         #
-        # A mutation that deletes cells from the specified column, optionally
-        # restricting the deletions to a given timestamp range.
+        # A DeleteFromColumn is a mutation that deletes cells from the
+        # specified column, optionally restricting the deletions to a given
+        # timestamp range.
         #
         # @param family [String] Table column family name.
         #   The name of the column family from which cells should be deleted.
@@ -153,11 +154,11 @@ module Google
         #   (millisecond granularity). For example: `1564257960168000`.
         # @return [MutationEntry] `self` object of entry for chaining.
         #
-        # @example Without timestamp range
+        # @example Without timestamp range.
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
         #   entry.delete_cells("cf-1", "field-1")
         #
-        # @example With timestamp range
+        # @example With timestamp range.
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
         #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   entry.delete_cells(
@@ -166,7 +167,7 @@ module Google
         #     timestamp_from: timestamp_micros - 5000000,
         #     timestamp_to: timestamp_micros
         #   )
-        # @example With timestamp range with lower boundary only
+        # @example With timestamp range with lower boundary only.
         #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
         #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
         #   entry.delete_cells(
@@ -188,9 +189,9 @@ module Google
         end
 
         ##
-        # Add DeleteFromFamily to list of mutations.
+        # Adds a DeleteFromFamily to the list of mutations.
         #
-        # A mutation that deletes all cells from the specified column family.
+        # A DeleteFromFamily is a mutation that deletes all cells from the specified column family.
         #
         # @param family [String] Table column family name.
         #   The name of the column family from which cells should be deleted.
@@ -207,9 +208,9 @@ module Google
         end
 
         ##
-        # Add DeleteFromRow entry to list of mutations
+        # Adds a DeleteFromRow to the list of mutations.
         #
-        # A Mutation which deletes all cells from the containing row.
+        # A DeleteFromRow is a mutation which deletes all cells from the containing row.
         #
         # @return [MutationEntry] `self` object of entry for chaining.
         #
@@ -223,7 +224,7 @@ module Google
         end
 
         ##
-        # Mutation entry is retryable or not based on set_cell value.
+        # If the mutation entry is retryable or not based on set_cell value.
         #
         # @return [Boolean]
         #
@@ -232,7 +233,7 @@ module Google
         end
 
         ##
-        # Number of mutations
+        # The number of mutations.
         #
         # @return [Integer]
         #

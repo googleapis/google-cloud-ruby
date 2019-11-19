@@ -25,10 +25,13 @@ module Google
         # A RowFilter that sends rows through several RowFilters in sequence.
         #
         # The elements of "filters" are chained together to process the input row:
-        # in row -> f(0) -> intermediate row -> f(1) -> ... -> f(N) -> out row
+        #
+        #     in row -> f(0) -> intermediate row -> f(1) -> ... -> f(N) -> out row
+        #
         # The full chain is executed atomically.
         #
         # @example
+        #   require "google/cloud/bigtable"
         #
         #   chain = Google::Cloud::Bigtable::RowFilter.chain
         #   # Add filters to chain filter
@@ -42,12 +45,14 @@ module Google
           end
 
           ##
-          # Adds a chain filter instance.
+          # Adds a chain filter.
           #
           # A Chain RowFilter that sends rows through several RowFilters in sequence.
           #
           # The elements of "filters" are chained together to process the input row:
-          # in row -> f(0) -> intermediate row -> f(1) -> ... -> f(N) -> out row
+          #
+          #     in row -> f(0) -> intermediate row -> f(1) -> ... -> f(N) -> out row
+          #
           # The full chain is executed atomically.
           #
           # @param filter [SimpleFilter, ChainFilter, InterleaveFilter, ConditionFilter]
@@ -55,6 +60,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example Create a chain filter and add a chain filter.
+          #   require "google/cloud/bigtable"
           #
           #   chain_1 = Google::Cloud::Bigtable::RowFilter.chain
           #
@@ -73,7 +79,7 @@ module Google
           end
 
           ##
-          # Add interleave filter.
+          # Adds an interleave filter.
           #
           # A RowFilter that sends each row to each of several component
           # RowFilters and interleaves the results.
@@ -110,7 +116,8 @@ module Google
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
           #   `self` instance of chain filter.
           #
-          # @example Add interleave filter to chain filter
+          # @example Add an interleave filter to the chain filter.
+          #   require "google/cloud/bigtable"
           #
           #   interleave = Google::Cloud::Bigtable::RowFilter.interleave
           #
@@ -125,7 +132,7 @@ module Google
           end
 
           ##
-          # Adds a condition filter instance.
+          # Adds a condition filter.
           #
           # A RowFilter that evaluates one of two possible RowFilters, depending on
           # whether or not a predicate RowFilter outputs any cells from the input row.
@@ -142,6 +149,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
           #
@@ -159,7 +167,7 @@ module Google
           end
 
           ##
-          # Adds a pass filter instance.
+          # Adds a pass filter.
           #
           # Matches all cells, regardless of input. Functionally equivalent to
           # leaving `filter` unset, but included for completeness.
@@ -168,6 +176,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.pass
           #
@@ -176,7 +185,7 @@ module Google
           end
 
           ##
-          # Adds a block-all filter instance.
+          # Adds a block-all filter.
           #
           # Does not match any cells, regardless of input. Useful for temporarily
           # disabling just part of a filter.
@@ -185,6 +194,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.block
           #
@@ -193,7 +203,7 @@ module Google
           end
 
           ##
-          # Adds a sink filter instance.
+          # Adds a sink filter.
           #
           # Outputs all cells directly to the output of the read rather than to any parent filter.
           #
@@ -201,6 +211,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.sink
           #
@@ -209,7 +220,7 @@ module Google
           end
 
           ##
-          # Adds a strip-value filter instance.
+          # Adds a strip-value filter.
           #
           # Replaces each cell's value with an empty string.
           #
@@ -217,6 +228,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.strip_value
           #
@@ -243,6 +255,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.key("user-*")
           #
@@ -251,17 +264,18 @@ module Google
           end
 
           ##
-          # Adds a sample-probability filter instance.
+          # Adds a sample-probability filter.
           #
           # Matches all cells from a row with probability p, and matches no cells
           # from the row with probability 1-p.
           #
-          # @param probability [Float] Probability value
-          #   Probability must be greather then 0 and less then 1.0.
+          # @param probability [Float] Probability value.
+          #   Probability must be greater than 0 and less than 1.0.
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.sample(0.5)
           #
@@ -287,6 +301,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.family("cf-*")
           #
@@ -295,7 +310,7 @@ module Google
           end
 
           ##
-          # Add a column-qualifier-match filter using a regular expression.
+          # Adds a column-qualifier-match filter using a regular expression.
           #
           # Matches only cells from columns whose qualifiers satisfy the given RE2
           # regex.
@@ -312,6 +327,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.qualifier("user-name*")
           #
@@ -336,6 +352,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.value("abc*")
           #
@@ -364,6 +381,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.label("user-detail")
           #
@@ -383,6 +401,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.cells_per_row_offset(3)
           #
@@ -391,17 +410,18 @@ module Google
           end
 
           ##
-          # Adds a cells-per-row-limit filter instance.
+          # Adds a cells-per-row-limit filter.
           #
           # Matches only the first N cells of each row.
           # If duplicate cells are present, as is possible when using an Interleave,
           # each copy of the cell is counted separately.
           #
-          # @param limit [String] Max cell match per row limit
+          # @param limit [String] Max cell match per row limit.
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.cells_per_row(5)
           #
@@ -410,7 +430,7 @@ module Google
           end
 
           ##
-          # Adds a cells-per-column filter instance.
+          # Adds a cells-per-column filter.
           #
           # Matches only the most recent N cells within each column. For example,
           # if N=2, this filter would match column `foo:bar` at timestamps 10 and 9,
@@ -419,11 +439,12 @@ module Google
           # If duplicate cells are present, as is possible when using an Interleave,
           # each copy of the cell is counted separately.
           #
-          # @param limit [String] Max cell match per column limit
+          # @param limit [String] Max cell match per column limit.
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.cells_per_column(5)
           #
@@ -432,7 +453,7 @@ module Google
           end
 
           ##
-          # Adds a timestamp-range filter instance.
+          # Adds a timestamp-range filter.
           #
           # Matches only cells with timestamps within the given range.
           # Specifies a contiguous range of timestamps.
@@ -445,6 +466,7 @@ module Google
           #   `self` instance of chain filter.
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
           #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
           #   from = timestamp_micros - 300000000
@@ -457,12 +479,12 @@ module Google
           end
 
           ##
-          # Adds a value-range filter instance.
+          # Adds a value-range filter.
           #
           # Matches only cells with values that fall within the given range.
           #
           # See {Google::Cloud::Bigtable::ValueRange#from} and { Google::Cloud::Bigtable::ValueRange#to} for range
-          # option inclusive/exclusive options
+          # option inclusive/exclusive options.
           #
           # * The value at which to start the range. If neither field is set, interpreted as an empty string, inclusive.
           # * The value at which to end the range. If neither field is set, interpreted as the infinite string,
@@ -472,7 +494,7 @@ module Google
           # @return [Google::Cloud::Bigtable::RowFilter::ChainFilter]
           #   `self` instance of chain filter.
           #
-          # @example Start to end range
+          # @example Start to end range.
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new
@@ -481,7 +503,7 @@ module Google
           #   range = table.new_value_range.from("value-001").to("value-005")
           #   filter = Google::Cloud::Bigtable::RowFilter.chain.value_range(range)
           #
-          # @example Start exclusive to infinite end range
+          # @example Start exclusive to infinite end range.
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new
@@ -495,7 +517,7 @@ module Google
           end
 
           ##
-          # Adds a column-range filter instance.
+          # Adds a column-range filter.
           #
           # Matches only cells from columns within the given range.
           #
@@ -520,9 +542,10 @@ module Google
           # @return [Integer]
           #
           # @example
+          #   require "google/cloud/bigtable"
           #
-          #  filter = Google::Cloud::Bigtable::RowFilter.chain.key("user-1*").label("user")
-          #  filter.length # 2
+          #   filter = Google::Cloud::Bigtable::RowFilter.chain.key("user-1*").label("user")
+          #   filter.length # 2
           #
           def length
             @filters.length

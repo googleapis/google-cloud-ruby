@@ -33,14 +33,13 @@ module Google
       # information about billing and authorized users, and they contain
       # Cloud Bigtable data. Each project has a friendly name and a unique ID.
       #
-      # Google::Cloud::Bigtable::Project is the main object for interacting with
+      # `Google::Cloud::Bigtable::Project` is the main object for interacting with
       # Cloud Bigtable.
       #
       # {Google::Cloud::Bigtable::Cluster} and {Google::Cloud::Bigtable::Instance}
       # objects are created, accessed, and managed by Google::Cloud::Bigtable::Project.
       #
-      # To create an instance, use {Google::Cloud::Bigtable.new} or
-      # {Google::Cloud#bigtable}.
+      # To create a `Project` instance, use {Google::Cloud::Bigtable.new}.
       #
       # @example Obtaining an instance and the clusters from a project.
       #   require "google/cloud/bigtable"
@@ -58,7 +57,6 @@ module Google
         # @private
         # Creates a new Bigtable Project instance.
         # @param service [Google::Cloud::Bigtable::Service]
-
         def initialize service
           @service = service
         end
@@ -109,9 +107,9 @@ module Google
         end
 
         ##
-        # Get an existing Bigtable instance.
+        # Gets an existing Bigtable instance.
         #
-        # @param instance_id [String] Existing instance id.
+        # @param instance_id [String] Existing instance ID.
         # @return [Google::Cloud::Bigtable::Instance, nil]
         #
         # @example
@@ -134,7 +132,7 @@ module Google
         end
 
         ##
-        # Create a Bigtable instance.
+        # Creates a Bigtable instance.
         #
         # @see https://cloud.google.com/compute/docs/regions-zones Cluster zone locations
         #
@@ -145,9 +143,9 @@ module Google
         # @param display_name [String] The descriptive name for this instance as it
         #   appears in UIs. Must be unique per project and between 4 and 30
         #   characters.
-        # @param type [Symbol] The type of the instance.
-        #   Valid values are `:DEVELOPMENT` or `:PRODUCTION`.
-        #   Default `:PRODUCTION` instance will created if left blank.
+        # @param type [Symbol] The type of the instance. When creating a development instance,
+        #   `nodes` on the cluster must not be set.
+        #   Valid values are `:DEVELOPMENT` or `:PRODUCTION`. Default is `:PRODUCTION`.
         # @param labels [Hash{String=>String}] labels Cloud Labels are a flexible and lightweight
         #   mechanism for organizing cloud resources into groups that reflect a
         #   customer's organizational needs and deployment strategies. Cloud
@@ -174,7 +172,7 @@ module Google
         #   The job representing the long-running, asynchronous processing of
         #   an instance create operation.
         #
-        # @example Create development instance.
+        # @example Create a development instance.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -185,7 +183,7 @@ module Google
         #     type: :DEVELOPMENT,
         #     labels: { "env" => "dev"}
         #   ) do |clusters|
-        #     clusters.add("test-cluster", "us-east1-b", nodes: 1)
+        #     clusters.add("test-cluster", "us-east1-b") # nodes not allowed
         #   end
         #
         #   job.done? #=> false
@@ -200,7 +198,7 @@ module Google
         #     instance = job.instance
         #   end
         #
-        # @example Create production instance.
+        # @example Create a production instance.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -242,7 +240,7 @@ module Google
         end
 
         ##
-        # List all clusters in project.
+        # Lists all clusters in the project.
         #
         # @param token [String] The `token` value returned by the last call to
         #   `clusters` indicates that this is a continuation of a call
@@ -266,13 +264,13 @@ module Google
         end
 
         ##
-        # List all tables for given instance.
+        # Lists all tables for the given instance.
         #
         # @param instance_id [String] Existing instance Id.
         # @return [Array<Google::Cloud::Bigtable::Table>]
         #   (See {Google::Cloud::Bigtable::Table::List})
         #
-        # @example Get tables
+        # @example
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -289,7 +287,8 @@ module Google
         end
 
         ##
-        # Get table information.
+        # Returns a table representation. If `perform_lookup` is `false` (the default), a sparse representation will be
+        # returned without performing an RPC and without verifying that the table resource exists.
         #
         # @param instance_id [String] Existing instance Id.
         # @param table_id [String] Existing table Id.
@@ -310,7 +309,14 @@ module Google
         #   "default" application profile will be used.
         # @return [Google::Cloud::Bigtable::Table, nil]
         #
-        # @example Get table with schema only view
+        # @example Get a sparse table representation without performing an RPC.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table")
+        #
+        # @example Get a table with schema-only view.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -321,14 +327,7 @@ module Google
         #     puts table.column_families
         #   end
         #
-        # @example Get table object without calling get table admin api.
-        #   require "google/cloud/bigtable"
-        #
-        #   bigtable = Google::Cloud::Bigtable.new
-        #
-        #   table = bigtable.table("my-instance", "my-table")
-        #
-        # @example Get table with all fields, cluster states, and column families.
+        # @example Get a table with all fields, cluster states, and column families.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -338,33 +337,6 @@ module Google
         #     puts table.name
         #     puts table.column_families
         #     puts table.cluster_states
-        #   end
-        #
-        # @example Mutate rows
-        #   require "google/cloud/bigtable"
-        #
-        #   bigtable = Google::Cloud::Bigtable.new
-        #
-        #   table = bigtable.table("my-instance", "my-table")
-        #
-        #   entry = table.new_mutation_entry("user-1")
-        #   entry.set_cell(
-        #     "cf-1",
-        #     "field-1",
-        #     "XYZ",
-        #     timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
-        #   ).delete_cells("cf2", "field02")
-        #
-        #   table.mutate_row(entry)
-        # @example Read rows using app profile routing
-        #   require "google/cloud/bigtable"
-        #
-        #   bigtable = Google::Cloud::Bigtable.new
-        #
-        #   table = bigtable.table("my-instance", "my-table", app_profile_id: "my-app-profile")
-        #
-        #   table.read_rows(limit: 5).each do |row|
-        #     p row
         #   end
         #
         def table instance_id, table_id, view: nil, perform_lookup: nil, app_profile_id: nil
@@ -417,8 +389,6 @@ module Google
         #     * Tablet 3 : `[customer_1, customer_2) => {"customer_1"}`
         #     * Tablet 4 : `[customer_2, other)      => {"customer_2"}`
         #     * Tablet 5 : `[other, )                => {"other", "zz"}`
-        #   A hash in the form of `Google::Bigtable::Admin::V2::CreateTableRequest::Split`
-        #   can also be provided.
         # @yield [column_families] A block for adding column families.
         # @yieldparam [Google::Cloud::Bigtable::ColumnFamilyMap] column_families
         #   A mutable object containing the column families for the table,
@@ -467,15 +437,14 @@ module Google
         end
 
         ##
-        # Permanently deletes a specified table and all of its data.
+        # Permanently deletes the specified table and all of its data.
         #
         # @param instance_id [String]
         #  The unique ID of the instance the table is in.
         # @param table_id [String]
-        #   The unique ID of the table to be deleted,
-        #   e.g., `foobar`
+        #   The unique ID of the table to be deleted.
         #
-        # @example Create table with column families and initial splits.
+        # @example
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new

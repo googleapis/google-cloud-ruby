@@ -29,7 +29,7 @@ module Google
       # # Instance
       #
       # Represents a Bigtable instance. Instances are dedicated Bigtable
-      # storage resources that Bigtable tables.
+      # storage resources that contain Bigtable tables.
       #
       # See {Google::Cloud::Bigtable::Project#instances},
       # {Google::Cloud::Bigtable::Project#instance}, and
@@ -46,7 +46,7 @@ module Google
       #     type: :DEVELOPMENT,
       #     labels: { "env" => "dev"}
       #   ) do |clusters|
-      #     clusters.add("test-cluster", "us-east1-b", nodes: 1)
+      #     clusters.add("test-cluster", "us-east1-b") # nodes not allowed
       #   end
       #
       #   job.done? #=> false
@@ -75,7 +75,7 @@ module Google
         end
 
         ##
-        # The unique identifier for the project.
+        # The unique identifier for the project to which the instance belongs.
         #
         # @return [String]
         #
@@ -93,7 +93,7 @@ module Google
         end
 
         ##
-        # The descriptive name for this instance as it appears in UIs. Must be
+        # The descriptive name for the instance as it appears in UIs. Must be
         # unique per project and between 4 and 30 characters long.
         #
         # @return [String]
@@ -103,11 +103,11 @@ module Google
         end
 
         ##
-        # Updates the descriptive name for this instance as it appears in UIs.
+        # Updates the descriptive name for the instance as it appears in UIs.
         # Can be changed at any time, but should be kept globally unique
         # to avoid confusion.
         #
-        # @param value [String] The descriptive name for this instance.
+        # @param value [String] The descriptive name for the instance.
         #
         def display_name= value
           @grpc.display_name = value
@@ -154,8 +154,7 @@ module Google
         end
 
         ##
-        # Instance type. Possible values are `:DEVELOPMENT`, `:PRODUCTION`,
-        # `:TYPE_UNSPECIFIED`
+        # Instance type. Possible values include `:DEVELOPMENT` and `:PRODUCTION`.
         #
         # @return [Symbol]
         #
@@ -167,10 +166,10 @@ module Google
         # The instance is meant for development and testing purposes only; it has
         # no performance or uptime guarantees and is not covered by SLA.
         # After a development instance is created, it can be upgraded by
-        # updating the instance to type `PRODUCTION`. An instance created
+        # updating the instance to type `:PRODUCTION`. An instance created
         # as a production instance cannot be changed to a development instance.
-        # When creating a development instance, `serve_nodes` on the cluster must
-        # not be set.
+        # When creating a development instance, `nodes` on the cluster must
+        # not be set. (See {#create_cluster}.)
         #
         # @return [Boolean]
         #
@@ -179,8 +178,8 @@ module Google
         end
 
         ##
-        # An instance meant for production use. `serve_nodes` must be set
-        # on the cluster.
+        # An instance meant for production use. Requires that `nodes` must be set
+        # on the cluster. (See {#create_cluster}.)
         #
         # @return [Boolean]
         #
@@ -189,11 +188,11 @@ module Google
         end
 
         ##
-        # Set instance type.
+        # Sets the instance type.
         #
-        # Valid values are `:DEVELOPMENT`, `:PRODUCTION`.
+        # Valid values are `:DEVELOPMENT` and `:PRODUCTION`.
         # After a development instance is created, it can be upgraded
-        # by updating the instance to type `PRODUCTION`.
+        # by updating the instance to type `:PRODUCTION`.
         # An instance created as a production instance cannot be changed to a
         # development instance.
         #
@@ -204,7 +203,7 @@ module Google
         end
 
         ##
-        # Get instance labels.
+        # Gets the Cloud Labels for the instance.
         #
         # Cloud Labels are a flexible and lightweight mechanism for organizing
         # cloud resources into groups that reflect a customer's organizational
@@ -226,7 +225,7 @@ module Google
         end
 
         ##
-        # Set the Cloud Labels.
+        # Sets the Cloud Labels for the instance.
         #
         # @param labels [Hash{String=>String}] The Cloud Labels.
         #
@@ -239,10 +238,10 @@ module Google
         end
 
         ##
-        # Update instance.
+        # Updates the instance.
         #
-        # Updatable attributes are :
-        #   * `display_name` - The descriptive name for this instance.
+        # Updatable attributes are:
+        #   * `display_name` - The descriptive name for the instance.
         #   * `type` -  `:DEVELOPMENT` type instance can be upgraded to `:PRODUCTION` instance.
         #     An instance created as a production instance cannot be changed to a development instance.
         #   * `labels` - Cloud Labels are a flexible and lightweight mechanism for organizing cloud resources.
@@ -283,7 +282,7 @@ module Google
         alias update save
 
         ##
-        # Reload instance information.
+        # Reloads instance data.
         #
         # @return [Google::Cloud::Bigtable::Instance]
         #
@@ -293,7 +292,7 @@ module Google
         end
 
         ##
-        # Permanently deletes the instance from a project.
+        # Permanently deletes the instance from the project.
         #
         # @return [Boolean] Returns `true` if the instance was deleted.
         #
@@ -312,16 +311,16 @@ module Google
         end
 
         ##
-        # Lists information about clusters in an instance.
+        # Lists the clusters in the instance.
         #
-        #  See to delete {Google::Cloud::Bigtable::Cluster#delete} and update
-        #  cluster {Google::Cloud::Bigtable::Cluster#save}.
+        # See {Google::Cloud::Bigtable::Cluster#delete} and
+        # {Google::Cloud::Bigtable::Cluster#save}.
         #
         # @param token [String] The `token` value returned by the last call to
         #   `clusters`; indicates that this is a continuation of a call
         #   and that the system should return the next page of data.
         # @return [Array<Google::Cloud::Bigtable::Cluster>]
-        #  See({Google::Cloud::Bigtable::Cluster::List})
+        #   See({Google::Cloud::Bigtable::Cluster::List})
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -341,10 +340,10 @@ module Google
         end
 
         ##
-        # Gets cluster information.
+        # Gets a cluster in the instance.
         #
-        #  See to delete {Google::Cloud::Bigtable::Cluster#delete} and update
-        #  cluster {Google::Cloud::Bigtable::Cluster#save}.
+        # See {Google::Cloud::Bigtable::Cluster#delete} and
+        # {Google::Cloud::Bigtable::Cluster#save}.
         #
         # @param cluster_id [String] The unique ID of the requested cluster.
         # @return [Google::Cloud::Bigtable::Cluster, nil]
@@ -368,11 +367,10 @@ module Google
         end
 
         ##
-        # Creates a cluster within an instance.
+        # Creates a cluster in the instance.
         #
         # @param cluster_id [String]
-        #   The ID to be used when referring to the new cluster within its instance,
-        #   e.g., just `mycluster`
+        #   The ID to be used when referring to the new cluster within its instance.
         # @param location [String]
         #   The location where this cluster's nodes and storage reside. For best
         #   performance, clients should be located as close as possible to this
@@ -426,10 +424,10 @@ module Google
         end
 
         ##
-        # List all tables.
+        # Lists all tables in the instance.
         #
-        #  See to delete table {Google::Cloud::Bigtable::Table#delete} and update
-        #  table {Google::Cloud::Bigtable::Table#save}.
+        #  See {Google::Cloud::Bigtable::Table#delete} and
+        #  {Google::Cloud::Bigtable::Table#save}.
         #
         # @return [Array<Google::Cloud::Bigtable::Table>]
         #   (See {Google::Cloud::Bigtable::Table::List})
@@ -453,10 +451,10 @@ module Google
         end
 
         ##
-        # Get metadata information of table.
+        # Gets metadata information of a table in the instance.
         #
         # @param view [Symbol]
-        #   The view to be applied to the returned tables' fields
+        #   The view to be applied to the returned tables' fields.
         #   Defaults to `SCHEMA_VIEW` if unspecified.
         #   Valid view types are.
         #   * `:NAME_ONLY` - Only populates `name`
@@ -490,7 +488,7 @@ module Google
         #   table = instance.table("my-table", view: :NAME_ONLY, perform_lookup: true)
         #   puts table.name
         #
-        # @example  Mutate rows
+        # @example  Mutate rows.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -524,14 +522,14 @@ module Google
         end
 
         ##
-        # Creates a new table.
+        # Creates a new table in the instance.
         #
         # The table can be created with a full set of initial column families,
         # specified in the request.
         #
         # @param name [String]
         #   The name by which the new table should be referred to within the parent
-        #   instance, e.g., `foobar`
+        #   instance.
         # @param column_families [Google::Cloud::Bigtable::ColumnFamilyMap]
         #   An object containing the column families for the table, mapped by
         #   column family name.
@@ -610,11 +608,11 @@ module Google
         end
 
         ##
-        # Create app profile for an instance with a routing policy.
-        # Only one routing policy can applied to app profile. The policy can be
+        # Creates an app profile for the instance with a routing policy.
+        # Only one routing policy can applied to the app profile. The policy can be
         # multi-cluster routing or single cluster routing.
         #
-        # @param name [String] Unique Id of the app profile
+        # @param name [String] Unique ID of the app profile.
         # @param routing_policy [Google::Cloud::Bigtable::RoutingPolicy]
         #   The routing policy for all read/write requests that use this app
         #   profile. A value must be explicitly set.
@@ -630,7 +628,7 @@ module Google
         #     preserves read-your-writes consistency but does not improve
         #     availability. Value contains `cluster_id` and optional field
         #     `allow_transactional_writes`.
-        # @param description [String] Description of the use case for this app profile
+        # @param description [String] Description of the use case for this app profile.
         # @param etag [String]
         #   Strongly validated etag for optimistic concurrency control. Preserve the
         #   value returned from `GetAppProfile` when calling `UpdateAppProfile` to
@@ -641,10 +639,10 @@ module Google
         #   [RFC 7232](https://tools.ietf.org/html/rfc7232#section-2.3) for more details.
         # @param ignore_warnings [Boolean]
         #   If true, ignore safety checks when creating the app profile.
-        #   Default value is `false`
+        #   Default value is `false`.
         # @return [Google::Cloud::Bigtable::AppProfile]
         #
-        # @example Create an app profile with a single cluster routing policy
+        # @example Create an app profile with a single cluster routing policy.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -663,7 +661,7 @@ module Google
         #   )
         #   puts app_profile.name
         #
-        # @example Create an app profile with multi-cluster routing policy
+        # @example Create an app profile with multi-cluster routing policy.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -722,10 +720,10 @@ module Google
         end
 
         ##
-        # Get app profile.
+        # Gets an app profile in the instance.
         #
-        #  See to delete app_profile {Google::Cloud::Bigtable::AppProfile#delete} and update
-        #  app_profile {Google::Cloud::Bigtable::AppProfile#save}.
+        # See {Google::Cloud::Bigtable::AppProfile#delete} and
+        # {Google::Cloud::Bigtable::AppProfile#save}.
         #
         # @param app_profile_id [String] The unique name of the requested app profile.
         # @return [Google::Cloud::Bigtable::AppProfile, nil]
@@ -752,13 +750,13 @@ module Google
         end
 
         ##
-        # List all app profiles
+        # Lists all app profiles in the instance.
         #
-        #  See to delete app_profile {Google::Cloud::Bigtable::AppProfile#delete} and update
-        #  app_profile {Google::Cloud::Bigtable::AppProfile#save}.
+        # See {Google::Cloud::Bigtable::AppProfile#delete} and
+        # {Google::Cloud::Bigtable::AppProfile#save}.
         #
         # @return [Array<Google::Cloud::Bigtable::AppProfile>]
-        #  (See {Google::Cloud::Bigtable::AppProfile::List})
+        #   (See {Google::Cloud::Bigtable::AppProfile::List})
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -779,7 +777,7 @@ module Google
 
         ##
         # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
-        # policy for this instance.
+        # policy for the instance.
         #
         # @see https://cloud.google.com/bigtable/docs/access-control
         #
@@ -788,9 +786,9 @@ module Google
         #   the block completes, the modified policy will be written to the
         #   service.
         # @yieldparam [Policy] policy the current Cloud IAM Policy for this
-        #   instance
+        #   instance.
         #
-        # @return [Policy] The current Cloud IAM Policy for this instance.
+        # @return [Policy] The current Cloud IAM Policy for the instance.
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -800,7 +798,7 @@ module Google
         #   instance = bigtable.instance("my-instance")
         #   policy = instance.policy
         #
-        # @example Update the policy by passing a block:
+        # @example Update the policy by passing a block.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -821,7 +819,7 @@ module Google
 
         ##
         # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
-        # policy for this instance. The policy should be read from {#policy}.
+        # policy for the instance. The policy should be read from {#policy}.
         # See {Google::Cloud::Bigtable::Policy} for an explanation of the policy
         # `etag` property and how to modify policies.
         #
@@ -857,13 +855,13 @@ module Google
         # Tests the specified permissions against the [Cloud
         # IAM](https://cloud.google.com/iam/) access control policy.
         #
-        # @see https://cloud.google.com/iam/docs/managing-policies Managing
-        #   Policies
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing Policies
+        # @see https://cloud.google.com/bigtable/docs/access-control Access Control
         #
         # @param permissions [String, Array<String>] permissions The set of permissions to
         #   check access for. Permissions with wildcards (such as `*` or
         #   `bigtable.*`) are not allowed.
-        #   See (https://cloud.google.com/bigtable/docs/access-control)
+        #   See [Access Control](https://cloud.google.com/bigtable/docs/access-control).
         #
         #   Some of the permissions that can be checked on a instance are:
         #   * bigtable.instances.create

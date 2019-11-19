@@ -35,11 +35,11 @@ module Google
           ##
           # Creates a row cell instance.
           #
-          # @param family [String] Column family name
-          # @param qualifier [String] Column cell qualifier name
-          # @param timestamp [Integer] Timestamp in microseconds
-          # @param value [String] Cell value
-          # @param labels [Array<String>] List of label array
+          # @param family [String] Column family name.
+          # @param qualifier [String] Column cell qualifier name.
+          # @param timestamp [Integer] Timestamp in microseconds.
+          # @param value [String] Cell value.
+          # @param labels [Array<String>] List of label array.
           #
           def initialize family, qualifier, timestamp, value, labels = []
             @family = family
@@ -52,9 +52,9 @@ module Google
           ##
           # Converts timestamp to Time instance.
           #
-          # @param granularity [Symbol] Optional
-          #   Valid granularity types are `:micros`, `millis`
-          #   Default granularity is a millis.
+          # @param granularity [Symbol] Optional.
+          #   Valid granularity types are `:micros`, `:millis`.
+          #   Default is `:millis`.
           # @return [Time | nil]
           #
           def to_time granularity = nil
@@ -74,7 +74,7 @@ module Google
 
           # @private
           #
-          # Cell object comparator
+          # Cell object comparator.
           #
           # @return [Boolean]
           #
@@ -88,19 +88,19 @@ module Google
         end
 
         ##
-        # @return [String] Row key
+        # @return [String] Row key.
         #
         attr_accessor :key
 
         ##
-        # @return [Hash{String => Array<Google::Cloud::Bigtable::Row::Cell>}] Row cells
+        # @return [Hash{String => Array<Google::Cloud::Bigtable::Row::Cell>}] Row cells.
         #
         attr_accessor :cells
 
         ##
         # Creates a flat row object.
         #
-        # @param key [String] Row key name
+        # @param key [String] Row key name.
         #
         def initialize key = nil
           @key = key
@@ -108,7 +108,7 @@ module Google
         end
 
         ##
-        # List of column families names
+        # List of column families names.
         #
         # @return [Array<String>]
         #
@@ -118,7 +118,7 @@ module Google
 
         # @private
         #
-        # FlatRow object comparator
+        # FlatRow object comparator.
         #
         # @return [Boolean]
         #

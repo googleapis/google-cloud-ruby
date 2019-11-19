@@ -61,7 +61,7 @@ module Google
         end
 
         ##
-        # The unique identifier for the project.
+        # The unique identifier for the project to which the app profile belongs.
         #
         # @return [String]
         #
@@ -70,7 +70,7 @@ module Google
         end
 
         ##
-        # The unique identifier for the instance.
+        # The unique identifier for the instance to which the app profile belongs.
         #
         # @return [String]
         #
@@ -88,8 +88,8 @@ module Google
         end
 
         ##
-        # The full path for the instance resource. Values are of the form
-        # `projects/<project_id>/instances/<instance_id>`.
+        # The full path for the app profile resource. Values are of the form:
+        # `projects/<project_id>/instances/<instance_id>/appProfiles/<app_profile_name>`.
         #
         # @return [String]
         #
@@ -107,7 +107,7 @@ module Google
         end
 
         ##
-        # Description of the AppProfile.
+        # Description of the app profile.
         #
         # @return [String]
         #
@@ -116,7 +116,7 @@ module Google
         end
 
         ##
-        # Set description of the AppProfile.
+        # Sets the description of the app profile.
         #
         # @param text [String] Description text
         #
@@ -168,7 +168,7 @@ module Google
         #     availability. Value contains `cluster_id` and optional field
         #     `allow_transactional_writes`.
         #
-        # @example Set multi cluster routing policy
+        # @example Set multi cluster routing policy.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -178,7 +178,7 @@ module Google
         #   routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
         #   app_profile.routing_policy = routing_policy
         #
-        # @example Set single cluster routing policy
+        # @example Set single cluster routing policy.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -241,7 +241,7 @@ module Google
         end
 
         ##
-        # Delete app profile.
+        # Deletes the app profile.
         #
         # @param ignore_warnings [Boolean]
         #   Default value is false. If true, ignore safety checks when deleting
@@ -269,14 +269,14 @@ module Google
         end
 
         ##
-        # Update app profile.
+        # Updates the app profile.
         #
         # @param ignore_warnings [Boolean]
         #   Default value is false. If true, ignore safety checks when updating
         #   the app profile.
         # @return [Google::Cloud::Bigtable::AppProfile::Job]
         #
-        # @example Update
+        # @example
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -298,7 +298,7 @@ module Google
         #     app_profile = job.app_profile
         #   end
         #
-        # @example Update with single cluster routing
+        # @example Update with single cluster routing.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -336,7 +336,7 @@ module Google
         alias update save
 
         ##
-        # Reload app profile information.
+        # Reloads the app profile data.
         #
         # @return [Google::Cloud::Bigtable::AppProfile]
         #

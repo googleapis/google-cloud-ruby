@@ -36,13 +36,11 @@ module Google
       #
       module MutationOperations
         ##
-        # Mutate row.
-        #
         # Mutates a row atomically. Cells in the row are left
-        # unchanged unless explicitly changed by +mutation+.
+        # unchanged unless explicitly changed by the mutations.
         # Changes to be atomically applied to the specified row. Entries are applied
         # in order, meaning that earlier mutations can be masked by later mutations.
-        # Must contain at least one mutation entry and at most 100,000.
+        # Must contain at least one mutation and at most 100,000.
         #
         # @param entry [Google::Cloud::Bigtable::MutationEntry]
         #   Mutation entry with row key and list of mutations.
@@ -82,7 +80,7 @@ module Google
 
         ##
         # Mutates multiple rows in a batch. Each individual row is mutated
-        # atomically as in MutateRow, but the entire batch is not executed
+        # atomically as in #{mutate_row}, but the entire batch is not executed
         # atomically.
         #
         # @param entries [Array<Google::Cloud::Bigtable::MutationEntry>]
@@ -210,7 +208,8 @@ module Google
         #   Must contain at least one entry if +true_mutations+ is empty and at most
         #   100,000 entries.
         # @return [Boolean]
-        #   Predicate match or not status
+        #   Predicate match or not status.
+        #
         # @example
         #   require "google/cloud/bigtable"
         #
@@ -255,9 +254,9 @@ module Google
         end
 
         ##
-        # Create an instance of mutation_entry
+        # Creates a mutation entry instance.
         #
-        # @param row_key [String] Row key. Optional
+        # @param row_key [String] Row key. Optional.
         #   The row key of the row to which the mutation should be applied.
         # @return [Google::Cloud::Bigtable::MutationEntry]
         #
@@ -277,13 +276,13 @@ module Google
         end
 
         ##
-        # Create an instance of ReadModifyWriteRule to append or increment the value
+        # Create a read/modify/write rule to append or increment the value
         # of the cell qualifier.
         #
         # @param family [String]
-        #   The name of the column family to which the read/modify/write should be applied.
+        #   The name of the column family to which the read/modify/write rule should be applied.
         # @param qualifier [String]
-        #   The qualifier of the column to which the read/modify/write should be applied.
+        #   The qualifier of the column to which the read/modify/write rule should be applied.
         # @return [Google::Cloud::Bigtable::ReadModifyWriteRule]
         #
         # @example Create rule to append to qualifier value.

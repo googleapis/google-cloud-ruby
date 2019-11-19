@@ -37,10 +37,12 @@ module Google
       #   puts column_family.gc_rule
       #
       class ColumnFamily
-        # Name of the column family
+        ##
+        # Name of the column family.
         # @return [String]
         attr_reader :name
 
+        ##
         # The garbage collection rule to be used for the column family.
         # Optional. The service default value will be used when not specified.
         # @return [Google::Cloud::Bigtable::GcRule, nil]
