@@ -1,5 +1,15 @@
 # Release History
 
+### 0.40.0 / 2019-11-19
+
+#### Features
+
+* Add WordInfo#speaker_tag
+
+#### Documentation
+
+* Update bucket name in code examples
+
 ### 0.39.1 / 2019-11-06
 
 #### Bug Fixes
