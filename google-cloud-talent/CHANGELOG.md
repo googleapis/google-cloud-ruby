@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.1 / 2019-11-19
+
+#### Documentation
+
+* Minor corrections to descriptions of several constants
+
 ### 0.8.1 / 2019-11-12
 
 #### Documentation
