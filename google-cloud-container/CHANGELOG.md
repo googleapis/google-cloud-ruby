@@ -1,5 +1,17 @@
 # Release History
 
+### 0.7.0 / 2019-11-19
+
+#### Features
+
+* New RPC, classes, and attributes
+  * New RPC methods
+    * Add ClusterManagerClient#list_usable_subnetworks
+  * New attributes
+    * Add NodeConfig#taints
+    * Add NodeConfig#shielded_instance_config
+    * Add AddonsConfig#cloud_run_config
+
 ### 0.6.1 / 2019-11-06
 
 #### Bug Fixes
