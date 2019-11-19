@@ -8,7 +8,7 @@
 
 #### Bug Fixes
 
-* Update #post_object to support special variable ${filename}
+* Update #post_object to support special variable `${filename}`
 
 ### 1.23.0 / 2019-11-05
 
