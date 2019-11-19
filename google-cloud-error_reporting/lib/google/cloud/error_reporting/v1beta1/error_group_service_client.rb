@@ -59,18 +59,18 @@ module Google
           ].freeze
 
 
-          GROUP_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+          ERROR_GROUP_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/groups/{group}"
           )
 
-          private_constant :GROUP_PATH_TEMPLATE
+          private_constant :ERROR_GROUP_PATH_TEMPLATE
 
-          # Returns a fully-qualified group resource name string.
+          # Returns a fully-qualified error_group resource name string.
           # @param project [String]
           # @param group [String]
           # @return [String]
-          def self.group_path project, group
-            GROUP_PATH_TEMPLATE.render(
+          def self.error_group_path project, group
+            ERROR_GROUP_PATH_TEMPLATE.render(
               :"project" => project,
               :"group" => group
             )
@@ -207,7 +207,7 @@ module Google
           # Get the specified group.
           #
           # @param group_name [String]
-          #   [Required] The group resource name. Written as
+          #   Required. The group resource name. Written as
           #   <code>projects/<var>projectID</var>/groups/<var>group_name</var></code>.
           #   Call
           #   <a href="/error-reporting/reference/rest/v1beta1/projects.groupStats/list">
@@ -227,7 +227,7 @@ module Google
           #   require "google/cloud/error_reporting"
           #
           #   error_group_client = Google::Cloud::ErrorReporting::ErrorGroup.new(version: :v1beta1)
-          #   formatted_group_name = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceClient.group_path("[PROJECT]", "[GROUP]")
+          #   formatted_group_name = Google::Cloud::ErrorReporting::V1beta1::ErrorGroupServiceClient.error_group_path("[PROJECT]", "[GROUP]")
           #   response = error_group_client.get_group(formatted_group_name)
 
           def get_group \
@@ -245,7 +245,7 @@ module Google
           # Fails if the group does not exist.
           #
           # @param group [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup | Hash]
-          #   [Required] The group which replaces the resource on the server.
+          #   Required. The group which replaces the resource on the server.
           #   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]

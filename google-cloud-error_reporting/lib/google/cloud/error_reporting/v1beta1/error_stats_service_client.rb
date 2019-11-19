@@ -228,45 +228,46 @@ module Google
           # Lists the specified groups.
           #
           # @param project_name [String]
-          #   [Required] The resource name of the Google Cloud Platform project. Written
+          #   Required. The resource name of the Google Cloud Platform project. Written
           #   as <code>projects/</code> plus the
           #   <a href="https://support.google.com/cloud/answer/6158840">Google Cloud
           #   Platform project ID</a>.
           #
           #   Example: <code>projects/my-project-123</code>.
-          # @param time_range [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange | Hash]
-          #   [Optional] List data for the given time range.
-          #   If not set a default time range is used. The field time_range_begin
-          #   in the response will specify the beginning of this time range.
-          #   Only <code>ErrorGroupStats</code> with a non-zero count in the given time
-          #   range are returned, unless the request contains an explicit group_id list.
-          #   If a group_id list is given, also <code>ErrorGroupStats</code> with zero
-          #   occurrences are returned.
-          #   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange`
-          #   can also be provided.
           # @param group_id [Array<String>]
-          #   [Optional] List all <code>ErrorGroupStats</code> with these IDs.
+          #   Optional. List all <code>ErrorGroupStats</code> with these IDs.
           # @param service_filter [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter | Hash]
-          #   [Optional] List only <code>ErrorGroupStats</code> which belong to a service
+          #   Optional. List only <code>ErrorGroupStats</code> which belong to a service
           #   context that matches the filter.
           #   Data for all service contexts is returned if this field is not specified.
           #   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter`
           #   can also be provided.
+          # @param time_range [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange | Hash]
+          #   Optional. List data for the given time range.
+          #   If not set, a default time range is used. The field
+          #   <code>time_range_begin</code> in the response will specify the beginning
+          #   of this time range.
+          #   Only <code>ErrorGroupStats</code> with a non-zero count in the given time
+          #   range are returned, unless the request contains an explicit
+          #   <code>group_id</code> list. If a <code>group_id</code> list is given, also
+          #   <code>ErrorGroupStats</code> with zero occurrences are returned.
+          #   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange`
+          #   can also be provided.
           # @param timed_count_duration [Google::Protobuf::Duration | Hash]
-          #   [Optional] The preferred duration for a single returned `TimedCount`.
+          #   Optional. The preferred duration for a single returned `TimedCount`.
           #   If not set, no timed counts are returned.
           #   A hash of the same form as `Google::Protobuf::Duration`
           #   can also be provided.
           # @param alignment [Google::Devtools::Clouderrorreporting::V1beta1::TimedCountAlignment]
-          #   [Optional] The alignment of the timed counts to be returned.
+          #   Optional. The alignment of the timed counts to be returned.
           #   Default is `ALIGNMENT_EQUAL_AT_END`.
           # @param alignment_time [Google::Protobuf::Timestamp | Hash]
-          #   [Optional] Time where the timed counts shall be aligned if rounded
+          #   Optional. Time where the timed counts shall be aligned if rounded
           #   alignment is chosen. Default is 00:00 UTC.
           #   A hash of the same form as `Google::Protobuf::Timestamp`
           #   can also be provided.
           # @param order [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupOrder]
-          #   [Optional] The sort order in which the results are returned.
+          #   Optional. The sort order in which the results are returned.
           #   Default is `COUNT_DESC`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -292,16 +293,13 @@ module Google
           #   error_stats_client = Google::Cloud::ErrorReporting::ErrorStats.new(version: :v1beta1)
           #   formatted_project_name = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsServiceClient.project_path("[PROJECT]")
           #
-          #   # TODO: Initialize `time_range`:
-          #   time_range = {}
-          #
           #   # Iterate over all results.
-          #   error_stats_client.list_group_stats(formatted_project_name, time_range).each do |element|
+          #   error_stats_client.list_group_stats(formatted_project_name).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   error_stats_client.list_group_stats(formatted_project_name, time_range).each_page do |page|
+          #   error_stats_client.list_group_stats(formatted_project_name).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -310,9 +308,9 @@ module Google
 
           def list_group_stats \
               project_name,
-              time_range,
               group_id: nil,
               service_filter: nil,
+              time_range: nil,
               timed_count_duration: nil,
               alignment: nil,
               alignment_time: nil,
@@ -322,9 +320,9 @@ module Google
               &block
             req = {
               project_name: project_name,
-              time_range: time_range,
               group_id: group_id,
               service_filter: service_filter,
+              time_range: time_range,
               timed_count_duration: timed_count_duration,
               alignment: alignment,
               alignment_time: alignment_time,
@@ -338,21 +336,21 @@ module Google
           # Lists the specified events.
           #
           # @param project_name [String]
-          #   [Required] The resource name of the Google Cloud Platform project. Written
+          #   Required. The resource name of the Google Cloud Platform project. Written
           #   as `projects/` plus the
           #   [Google Cloud Platform project
           #   ID](https://support.google.com/cloud/answer/6158840).
           #   Example: `projects/my-project-123`.
           # @param group_id [String]
-          #   [Required] The group for which events shall be returned.
+          #   Required. The group for which events shall be returned.
           # @param service_filter [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter | Hash]
-          #   [Optional] List only ErrorGroups which belong to a service context that
+          #   Optional. List only ErrorGroups which belong to a service context that
           #   matches the filter.
           #   Data for all service contexts is returned if this field is not specified.
           #   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter`
           #   can also be provided.
           # @param time_range [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange | Hash]
-          #   [Optional] List only data for the given time range.
+          #   Optional. List only data for the given time range.
           #   If not set a default time range is used. The field time_range_begin
           #   in the response will specify the beginning of this time range.
           #   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange`
@@ -419,7 +417,7 @@ module Google
           # Deletes all error events of a given project.
           #
           # @param project_name [String]
-          #   [Required] The resource name of the Google Cloud Platform project. Written
+          #   Required. The resource name of the Google Cloud Platform project. Written
           #   as `projects/` plus the
           #   [Google Cloud Platform project
           #   ID](https://support.google.com/cloud/answer/6158840).
