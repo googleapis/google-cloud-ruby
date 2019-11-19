@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.1 / 2019-11-19
+
+#### Documentation
+
+* Update OutputAudioEncoding documentation
+
 ### 0.11.0 / 2019-11-12
 
 #### Features
