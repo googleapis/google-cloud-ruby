@@ -233,7 +233,7 @@ module Google
           #   Required. The name of the project where the spans belong. The format is
           #   `projects/[PROJECT_ID]`.
           # @param spans [Array<Google::Devtools::Cloudtrace::V2::Span | Hash>]
-          #   A list of new spans. The span names must not match existing
+          #   Required. A list of new spans. The span names must not match existing
           #   spans, or the results are undefined.
           #   A hash of the same form as `Google::Devtools::Cloudtrace::V2::Span`
           #   can also be provided.
@@ -326,18 +326,18 @@ module Google
           #   A hash of the same form as `Google::Devtools::Cloudtrace::V2::Span::Links`
           #   can also be provided.
           # @param status [Google::Rpc::Status | Hash]
-          #   An optional final status for this span.
+          #   Optional. The final status for this span.
           #   A hash of the same form as `Google::Rpc::Status`
           #   can also be provided.
           # @param same_process_as_parent_span [Google::Protobuf::BoolValue | Hash]
-          #   (Optional) Set this parameter to indicate whether this span is in
+          #   Optional. Set this parameter to indicate whether this span is in
           #   the same process as its parent. If you do not set this parameter,
           #   Stackdriver Trace is unable to take advantage of this helpful
           #   information.
           #   A hash of the same form as `Google::Protobuf::BoolValue`
           #   can also be provided.
           # @param child_span_count [Google::Protobuf::Int32Value | Hash]
-          #   An optional number of child spans that were generated while this span
+          #   Optional. The number of child spans that were generated while this span
           #   was active. If set, allows implementation to detect missing child spans.
           #   A hash of the same form as `Google::Protobuf::Int32Value`
           #   can also be provided.

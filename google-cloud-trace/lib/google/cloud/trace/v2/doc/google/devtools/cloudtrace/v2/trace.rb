@@ -76,24 +76,24 @@ module Google
         #     Links associated with the span. You can have up to 128 links per Span.
         # @!attribute [rw] status
         #   @return [Google::Rpc::Status]
-        #     An optional final status for this span.
+        #     Optional. The final status for this span.
         # @!attribute [rw] same_process_as_parent_span
         #   @return [Google::Protobuf::BoolValue]
-        #     (Optional) Set this parameter to indicate whether this span is in
+        #     Optional. Set this parameter to indicate whether this span is in
         #     the same process as its parent. If you do not set this parameter,
         #     Stackdriver Trace is unable to take advantage of this helpful
         #     information.
         # @!attribute [rw] child_span_count
         #   @return [Google::Protobuf::Int32Value]
-        #     An optional number of child spans that were generated while this span
+        #     Optional. The number of child spans that were generated while this span
         #     was active. If set, allows implementation to detect missing child spans.
         class Span
           # A set of attributes, each in the format `[KEY]:[VALUE]`.
           # @!attribute [rw] attribute_map
           #   @return [Hash{String => Google::Devtools::Cloudtrace::V2::AttributeValue}]
           #     The set of attributes. Each attribute's key can be up to 128 bytes
-          #     long. The value can be a string up to 256 bytes, an integer, or the
-          #     Boolean values `true` and `false`. For example:
+          #     long. The value can be a string up to 256 bytes, a signed 64-bit integer,
+          #     or the Boolean values `true` and `false`. For example:
           #
           #         "/instance_id": "my-instance"
           #         "/http/user_agent": ""

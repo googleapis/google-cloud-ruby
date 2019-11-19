@@ -24,7 +24,7 @@ module Google
         #     `projects/[PROJECT_ID]`.
         # @!attribute [rw] spans
         #   @return [Array<Google::Devtools::Cloudtrace::V2::Span>]
-        #     A list of new spans. The span names must not match existing
+        #     Required. A list of new spans. The span names must not match existing
         #     spans, or the results are undefined.
         class BatchWriteSpansRequest; end
       end
