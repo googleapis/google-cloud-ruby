@@ -101,6 +101,13 @@ s.replace(
     'port = service_port || self.class::DEFAULT_SERVICE_PORT'
 )
 
+# Fix lookup for Google::Monitoring::V3::Service in Google::Monitoring::V3::ServiceMonitoringService::Service
+s.replace(
+    'lib/google/monitoring/v3/service_service_services_pb.rb',
+    ', Service',
+    ', Google::Monitoring::V3::Service'
+)
+
 # PERMANENT: Use a compatible version of googleapis-common-protos-types
 s.replace(
     'google-cloud-monitoring.gemspec',
