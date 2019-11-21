@@ -198,6 +198,18 @@ module Google
         #
         # @param instance_type [Symbol]
         #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   instance = bigtable.instance("my-instance")
+        #
+        #   instance.development? # true
+        #   instance.type = :PRODUCTION
+        #   instance.development? # false
+        #   instance.production? # true
+        #
         def type= instance_type
           @grpc.type = instance_type
         end
@@ -249,6 +261,7 @@ module Google
         # @return [Google::Cloud::Bigtable::Instance::Job]
         #   The job representing the long-running, asynchronous processing of
         #   an instance update operation.
+        #
         # @example
         #   require "google/cloud/bigtable"
         #
@@ -479,7 +492,6 @@ module Google
         #
         #   instance = bigtable.instance("my-instance")
         #
-        #   # Default view is full view
         #   table = instance.table("my-table", perform_lookup: true)
         #   puts table.name
         #   puts table.column_families

@@ -119,7 +119,6 @@ module Google
         #   end
         #
         # @example Read using filter.
-        #
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -134,7 +133,6 @@ module Google
         #   end
         #
         # @example Read using filter with limit.
-        #
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -175,7 +173,6 @@ module Google
         # @return [Google::Cloud::Bigtable::Row]
         #
         # @example
-        #
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -184,7 +181,6 @@ module Google
         #   row = table.read_row("user-1")
         #
         # @example Read row with filter.
-        #
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
