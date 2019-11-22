@@ -53,97 +53,12 @@ module Google
 
           DEFAULT_TIMEOUT = 30
 
-          PAGE_DESCRIPTORS = {
-            "list_queues" => Google::Gax::PageDescriptor.new(
-              "page_token",
-              "next_page_token",
-              "queues"),
-            "list_tasks" => Google::Gax::PageDescriptor.new(
-              "page_token",
-              "next_page_token",
-              "tasks")
-          }.freeze
-
-          private_constant :PAGE_DESCRIPTORS
-
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
             "https://www.googleapis.com/auth/cloud-platform"
           ].freeze
 
-
-          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}"
-          )
-
-          private_constant :LOCATION_PATH_TEMPLATE
-
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
-          QUEUE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}/queues/{queue}"
-          )
-
-          private_constant :QUEUE_PATH_TEMPLATE
-
-          TASK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}/queues/{queue}/tasks/{task}"
-          )
-
-          private_constant :TASK_PATH_TEMPLATE
-
-          # Returns a fully-qualified location resource name string.
-          # @param project [String]
-          # @param location [String]
-          # @return [String]
-          def self.location_path project, location
-            LOCATION_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location
-            )
-          end
-
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
-            )
-          end
-
-          # Returns a fully-qualified queue resource name string.
-          # @param project [String]
-          # @param location [String]
-          # @param queue [String]
-          # @return [String]
-          def self.queue_path project, location, queue
-            QUEUE_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location,
-              :"queue" => queue
-            )
-          end
-
-          # Returns a fully-qualified task resource name string.
-          # @param project [String]
-          # @param location [String]
-          # @param queue [String]
-          # @param task [String]
-          # @return [String]
-          def self.task_path project, location, queue, task
-            TASK_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location,
-              :"queue" => queue,
-              :"task" => task
-            )
-          end
 
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
@@ -233,7 +148,6 @@ module Google
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
-                page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
                 metadata: headers
               )
@@ -438,52 +352,48 @@ module Google
           #   Note that using filters might cause fewer queues than the
           #   requested_page size to be returned.
           # @param page_size [Integer]
-          #   The maximum number of resources contained in the underlying API
-          #   response. If page streaming is performed per-resource, this
-          #   parameter does not affect the return value. If page streaming is
-          #   performed per-page, this determines the maximum number of
-          #   resources in a page.
+          #   Requested page size.
+          #
+          #   The maximum page size is 9800. If unspecified, the page size will
+          #   be the maximum. Fewer queues than requested might be returned,
+          #   even if more queues exist; use the
+          #   {Google::Cloud::Tasks::V2beta2::ListQueuesResponse#next_page_token next_page_token} in the
+          #   response to determine if more queues exist.
+          # @param page_token [String]
+          #   A token identifying the page of results to return.
+          #
+          #   To request the first page results, page_token must be empty. To
+          #   request the next page of results, page_token must be the value of
+          #   {Google::Cloud::Tasks::V2beta2::ListQueuesResponse#next_page_token next_page_token} returned
+          #   from the previous call to {Google::Cloud::Tasks::V2beta2::CloudTasks::ListQueues ListQueues}
+          #   method. It is an error to switch the value of the
+          #   {Google::Cloud::Tasks::V2beta2::ListQueuesRequest#filter filter} while iterating through pages.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Queue>]
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::ListQueuesResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Queue>]
-          #   An enumerable of Google::Cloud::Tasks::V2beta2::Queue instances.
-          #   See Google::Gax::PagedEnumerable documentation for other
-          #   operations such as per-page iteration or access to the response
-          #   object.
+          # @return [Google::Cloud::Tasks::V2beta2::ListQueuesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
-          #
-          #   # Iterate over all results.
-          #   cloud_tasks_client.list_queues(formatted_parent).each do |element|
-          #     # Process element.
-          #   end
-          #
-          #   # Or iterate over results one page at a time.
-          #   cloud_tasks_client.list_queues(formatted_parent).each_page do |page|
-          #     # Process each page at a time.
-          #     page.each do |element|
-          #       # Process element.
-          #     end
-          #   end
+          #   response = cloud_tasks_client.list_queues
 
           def list_queues \
-              parent,
+              parent: nil,
               filter: nil,
               page_size: nil,
+              page_token: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               filter: filter,
-              page_size: page_size
+              page_size: page_size,
+              page_token: page_token
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::ListQueuesRequest)
             @list_queues.call(req, options, &block)
@@ -506,11 +416,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #   response = cloud_tasks_client.get_queue(formatted_name)
+          #   response = cloud_tasks_client.get_queue
 
           def get_queue \
-              name,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -558,15 +467,11 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
-          #
-          #   # TODO: Initialize `queue`:
-          #   queue = {}
-          #   response = cloud_tasks_client.create_queue(formatted_parent, queue)
+          #   response = cloud_tasks_client.create_queue
 
           def create_queue \
-              parent,
-              queue,
+              parent: nil,
+              queue: nil,
               options: nil,
               &block
             req = {
@@ -621,13 +526,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #
-          #   # TODO: Initialize `queue`:
-          #   queue = {}
-          #   response = cloud_tasks_client.update_queue(queue)
+          #   response = cloud_tasks_client.update_queue
 
           def update_queue \
-              queue,
+              queue: nil,
               update_mask: nil,
               options: nil,
               &block
@@ -667,11 +569,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #   cloud_tasks_client.delete_queue(formatted_name)
+          #   cloud_tasks_client.delete_queue
 
           def delete_queue \
-              name,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -704,11 +605,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #   response = cloud_tasks_client.purge_queue(formatted_name)
+          #   response = cloud_tasks_client.purge_queue
 
           def purge_queue \
-              name,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -741,11 +641,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #   response = cloud_tasks_client.pause_queue(formatted_name)
+          #   response = cloud_tasks_client.pause_queue
 
           def pause_queue \
-              name,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -784,11 +683,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #   response = cloud_tasks_client.resume_queue(formatted_name)
+          #   response = cloud_tasks_client.resume_queue
 
           def resume_queue \
-              name,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -828,11 +726,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #   response = cloud_tasks_client.get_iam_policy(formatted_resource)
+          #   response = cloud_tasks_client.get_iam_policy
 
           def get_iam_policy \
-              resource,
+              resource: nil,
               options_: nil,
               options: nil,
               &block
@@ -878,15 +775,11 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #
-          #   # TODO: Initialize `policy`:
-          #   policy = {}
-          #   response = cloud_tasks_client.set_iam_policy(formatted_resource, policy)
+          #   response = cloud_tasks_client.set_iam_policy
 
           def set_iam_policy \
-              resource,
-              policy,
+              resource: nil,
+              policy: nil,
               options: nil,
               &block
             req = {
@@ -925,15 +818,11 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #
-          #   # TODO: Initialize `permissions`:
-          #   permissions = []
-          #   response = cloud_tasks_client.test_iam_permissions(formatted_resource, permissions)
+          #   response = cloud_tasks_client.test_iam_permissions
 
           def test_iam_permissions \
-              resource,
-              permissions,
+              resource: nil,
+              permissions: nil,
               options: nil,
               &block
             req = {
@@ -971,52 +860,50 @@ module Google
           #   `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
           #   permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
           # @param page_size [Integer]
-          #   The maximum number of resources contained in the underlying API
-          #   response. If page streaming is performed per-resource, this
-          #   parameter does not affect the return value. If page streaming is
-          #   performed per-page, this determines the maximum number of
-          #   resources in a page.
+          #   Maximum page size.
+          #
+          #   Fewer tasks than requested might be returned, even if more tasks exist; use
+          #   {Google::Cloud::Tasks::V2beta2::ListTasksResponse#next_page_token next_page_token} in the response to
+          #   determine if more tasks exist.
+          #
+          #   The maximum page size is 1000. If unspecified, the page size will be the
+          #   maximum.
+          # @param page_token [String]
+          #   A token identifying the page of results to return.
+          #
+          #   To request the first page results, page_token must be empty. To
+          #   request the next page of results, page_token must be the value of
+          #   {Google::Cloud::Tasks::V2beta2::ListTasksResponse#next_page_token next_page_token} returned
+          #   from the previous call to {Google::Cloud::Tasks::V2beta2::CloudTasks::ListTasks ListTasks}
+          #   method.
+          #
+          #   The page token is valid for only 2 hours.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Task>]
+          # @yieldparam result [Google::Cloud::Tasks::V2beta2::ListTasksResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Task>]
-          #   An enumerable of Google::Cloud::Tasks::V2beta2::Task instances.
-          #   See Google::Gax::PagedEnumerable documentation for other
-          #   operations such as per-page iteration or access to the response
-          #   object.
+          # @return [Google::Cloud::Tasks::V2beta2::ListTasksResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #
-          #   # Iterate over all results.
-          #   cloud_tasks_client.list_tasks(formatted_parent).each do |element|
-          #     # Process element.
-          #   end
-          #
-          #   # Or iterate over results one page at a time.
-          #   cloud_tasks_client.list_tasks(formatted_parent).each_page do |page|
-          #     # Process each page at a time.
-          #     page.each do |element|
-          #       # Process element.
-          #     end
-          #   end
+          #   response = cloud_tasks_client.list_tasks
 
           def list_tasks \
-              parent,
+              parent: nil,
               response_view: nil,
               page_size: nil,
+              page_token: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               response_view: response_view,
-              page_size: page_size
+              page_size: page_size,
+              page_token: page_token
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Tasks::V2beta2::ListTasksRequest)
             @list_tasks.call(req, options, &block)
@@ -1052,11 +939,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-          #   response = cloud_tasks_client.get_task(formatted_name)
+          #   response = cloud_tasks_client.get_task
 
           def get_task \
-              name,
+              name: nil,
               response_view: nil,
               options: nil,
               &block
@@ -1142,15 +1028,11 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #
-          #   # TODO: Initialize `task`:
-          #   task = {}
-          #   response = cloud_tasks_client.create_task(formatted_parent, task)
+          #   response = cloud_tasks_client.create_task
 
           def create_task \
-              parent,
-              task,
+              parent: nil,
+              task: nil,
               response_view: nil,
               options: nil,
               &block
@@ -1183,11 +1065,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-          #   cloud_tasks_client.delete_task(formatted_name)
+          #   cloud_tasks_client.delete_task
 
           def delete_task \
-              name,
+              name: nil,
               options: nil,
               &block
             req = {
@@ -1224,6 +1105,17 @@ module Google
           # @param parent [String]
           #   Required. The queue name. For example:
           #   `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+          # @param max_tasks [Integer]
+          #   The maximum number of tasks to lease.
+          #
+          #   The system will make a best effort to return as close to as
+          #   `max_tasks` as possible.
+          #
+          #   The largest that `max_tasks` can be is 1000.
+          #
+          #   The maximum total size of a {Google::Cloud::Tasks::V2beta2::LeaseTasksResponse lease tasks response} is
+          #   32 MB. If the sum of all task sizes requested reaches this limit,
+          #   fewer tasks than requested are returned.
           # @param lease_duration [Google::Protobuf::Duration | Hash]
           #   Required. The duration of the lease.
           #
@@ -1246,17 +1138,6 @@ module Google
           #   `lease_duration` will be truncated to the nearest second.
           #   A hash of the same form as `Google::Protobuf::Duration`
           #   can also be provided.
-          # @param max_tasks [Integer]
-          #   The maximum number of tasks to lease.
-          #
-          #   The system will make a best effort to return as close to as
-          #   `max_tasks` as possible.
-          #
-          #   The largest that `max_tasks` can be is 1000.
-          #
-          #   The maximum total size of a {Google::Cloud::Tasks::V2beta2::LeaseTasksResponse lease tasks response} is
-          #   32 MB. If the sum of all task sizes requested reaches this limit,
-          #   fewer tasks than requested are returned.
           # @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
           #   The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
           #   returned.
@@ -1312,24 +1193,20 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #
-          #   # TODO: Initialize `lease_duration`:
-          #   lease_duration = {}
-          #   response = cloud_tasks_client.lease_tasks(formatted_parent, lease_duration)
+          #   response = cloud_tasks_client.lease_tasks
 
           def lease_tasks \
-              parent,
-              lease_duration,
+              parent: nil,
               max_tasks: nil,
+              lease_duration: nil,
               response_view: nil,
               filter: nil,
               options: nil,
               &block
             req = {
               parent: parent,
-              lease_duration: lease_duration,
               max_tasks: max_tasks,
+              lease_duration: lease_duration,
               response_view: response_view,
               filter: filter
             }.delete_if { |_, v| v.nil? }
@@ -1373,15 +1250,11 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-          #
-          #   # TODO: Initialize `schedule_time`:
-          #   schedule_time = {}
-          #   cloud_tasks_client.acknowledge_task(formatted_name, schedule_time)
+          #   cloud_tasks_client.acknowledge_task
 
           def acknowledge_task \
-              name,
-              schedule_time,
+              name: nil,
+              schedule_time: nil,
               options: nil,
               &block
             req = {
@@ -1443,19 +1316,12 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-          #
-          #   # TODO: Initialize `schedule_time`:
-          #   schedule_time = {}
-          #
-          #   # TODO: Initialize `lease_duration`:
-          #   lease_duration = {}
-          #   response = cloud_tasks_client.renew_lease(formatted_name, schedule_time, lease_duration)
+          #   response = cloud_tasks_client.renew_lease
 
           def renew_lease \
-              name,
-              schedule_time,
-              lease_duration,
+              name: nil,
+              schedule_time: nil,
+              lease_duration: nil,
               response_view: nil,
               options: nil,
               &block
@@ -1512,15 +1378,11 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-          #
-          #   # TODO: Initialize `schedule_time`:
-          #   schedule_time = {}
-          #   response = cloud_tasks_client.cancel_lease(formatted_name, schedule_time)
+          #   response = cloud_tasks_client.cancel_lease
 
           def cancel_lease \
-              name,
-              schedule_time,
+              name: nil,
+              schedule_time: nil,
               response_view: nil,
               options: nil,
               &block
@@ -1589,11 +1451,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2beta2)
-          #   formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-          #   response = cloud_tasks_client.run_task(formatted_name)
+          #   response = cloud_tasks_client.run_task
 
           def run_task \
-              name,
+              name: nil,
               response_view: nil,
               options: nil,
               &block

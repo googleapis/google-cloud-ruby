@@ -71,20 +71,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#list_queues."
 
     it 'invokes list_queues without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
-
       # Create expected grpc response
-      next_page_token = ""
-      queues_element = {}
-      queues = [queues_element]
-      expected_response = { next_page_token: next_page_token, queues: queues }
+      next_page_token = "nextPageToken-1530815211"
+      expected_response = { next_page_token: next_page_token }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::ListQueuesResponse)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::ListQueuesRequest, request)
-        assert_equal(formatted_parent, request.parent)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:list_queues, mock_method)
@@ -97,25 +90,24 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.list_queues(formatted_parent)
+          response = client.list_queues
 
           # Verify the response
-          assert(response.instance_of?(Google::Gax::PagedEnumerable))
-          assert_equal(expected_response, response.page.response)
-          assert_nil(response.next_page)
-          assert_equal(expected_response.queues.to_a, response.to_a)
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_queues do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
 
     it 'invokes list_queues with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::ListQueuesRequest, request)
-        assert_equal(formatted_parent, request.parent)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:list_queues, mock_method)
@@ -129,7 +121,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.list_queues(formatted_parent)
+            client.list_queues
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -143,18 +135,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#get_queue."
 
     it 'invokes get_queue without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Create expected grpc response
-      name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      name = "name3373707"
+      expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Queue)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::GetQueueRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:get_queue, mock_method)
@@ -167,13 +154,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.get_queue(formatted_name)
+          response = client.get_queue
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_queue(formatted_name) do |response, operation|
+          client.get_queue do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -183,13 +170,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes get_queue with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::GetQueueRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:get_queue, mock_method)
@@ -203,7 +185,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.get_queue(formatted_name)
+            client.get_queue
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -217,20 +199,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#create_queue."
 
     it 'invokes create_queue without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
-      queue = {}
-
       # Create expected grpc response
       name = "name3373707"
       expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Queue)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::CreateQueueRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(queue, Google::Cloud::Tasks::V2beta2::Queue), request.queue)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:create_queue, mock_method)
@@ -243,13 +218,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.create_queue(formatted_parent, queue)
+          response = client.create_queue
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.create_queue(formatted_parent, queue) do |response, operation|
+          client.create_queue do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -259,15 +234,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes create_queue with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path("[PROJECT]", "[LOCATION]")
-      queue = {}
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::CreateQueueRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(queue, Google::Cloud::Tasks::V2beta2::Queue), request.queue)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:create_queue, mock_method)
@@ -281,7 +249,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.create_queue(formatted_parent, queue)
+            client.create_queue
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -295,18 +263,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#update_queue."
 
     it 'invokes update_queue without error' do
-      # Create request parameters
-      queue = {}
-
       # Create expected grpc response
       name = "name3373707"
       expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Queue)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::UpdateQueueRequest, request)
-        assert_equal(Google::Gax::to_proto(queue, Google::Cloud::Tasks::V2beta2::Queue), request.queue)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:update_queue, mock_method)
@@ -319,13 +282,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.update_queue(queue)
+          response = client.update_queue
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.update_queue(queue) do |response, operation|
+          client.update_queue do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -335,13 +298,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes update_queue with error' do
-      # Create request parameters
-      queue = {}
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::UpdateQueueRequest, request)
-        assert_equal(Google::Gax::to_proto(queue, Google::Cloud::Tasks::V2beta2::Queue), request.queue)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:update_queue, mock_method)
@@ -355,7 +313,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.update_queue(queue)
+            client.update_queue
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -369,13 +327,9 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#delete_queue."
 
     it 'invokes delete_queue without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::DeleteQueueRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:delete_queue, mock_method)
@@ -388,13 +342,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.delete_queue(formatted_name)
+          response = client.delete_queue
 
           # Verify the response
           assert_nil(response)
 
           # Call method with block
-          client.delete_queue(formatted_name) do |response, operation|
+          client.delete_queue do |response, operation|
             # Verify the response
             assert_nil(response)
             refute_nil(operation)
@@ -404,13 +358,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes delete_queue with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::DeleteQueueRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:delete_queue, mock_method)
@@ -424,7 +373,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.delete_queue(formatted_name)
+            client.delete_queue
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -438,18 +387,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#purge_queue."
 
     it 'invokes purge_queue without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Create expected grpc response
-      name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      name = "name3373707"
+      expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Queue)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::PurgeQueueRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:purge_queue, mock_method)
@@ -462,13 +406,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.purge_queue(formatted_name)
+          response = client.purge_queue
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.purge_queue(formatted_name) do |response, operation|
+          client.purge_queue do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -478,13 +422,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes purge_queue with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::PurgeQueueRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:purge_queue, mock_method)
@@ -498,7 +437,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.purge_queue(formatted_name)
+            client.purge_queue
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -512,18 +451,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#pause_queue."
 
     it 'invokes pause_queue without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Create expected grpc response
-      name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      name = "name3373707"
+      expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Queue)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::PauseQueueRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:pause_queue, mock_method)
@@ -536,13 +470,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.pause_queue(formatted_name)
+          response = client.pause_queue
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.pause_queue(formatted_name) do |response, operation|
+          client.pause_queue do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -552,13 +486,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes pause_queue with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::PauseQueueRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:pause_queue, mock_method)
@@ -572,7 +501,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.pause_queue(formatted_name)
+            client.pause_queue
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -586,18 +515,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#resume_queue."
 
     it 'invokes resume_queue without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Create expected grpc response
-      name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      name = "name3373707"
+      expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Queue)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::ResumeQueueRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:resume_queue, mock_method)
@@ -610,13 +534,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.resume_queue(formatted_name)
+          response = client.resume_queue
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.resume_queue(formatted_name) do |response, operation|
+          client.resume_queue do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -626,13 +550,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes resume_queue with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::ResumeQueueRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:resume_queue, mock_method)
@@ -646,7 +565,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.resume_queue(formatted_name)
+            client.resume_queue
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -660,9 +579,6 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#get_iam_policy."
 
     it 'invokes get_iam_policy without error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Create expected grpc response
       version = 351608024
       etag = "21"
@@ -670,9 +586,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::Policy)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:get_iam_policy, mock_method)
@@ -685,13 +599,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.get_iam_policy(formatted_resource)
+          response = client.get_iam_policy
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_iam_policy(formatted_resource) do |response, operation|
+          client.get_iam_policy do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -701,13 +615,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes get_iam_policy with error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:get_iam_policy, mock_method)
@@ -721,7 +630,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.get_iam_policy(formatted_resource)
+            client.get_iam_policy
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -735,10 +644,6 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#set_iam_policy."
 
     it 'invokes set_iam_policy without error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-      policy = {}
-
       # Create expected grpc response
       version = 351608024
       etag = "21"
@@ -746,10 +651,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
       expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::Policy)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:set_iam_policy, mock_method)
@@ -762,13 +664,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.set_iam_policy(formatted_resource, policy)
+          response = client.set_iam_policy
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.set_iam_policy(formatted_resource, policy) do |response, operation|
+          client.set_iam_policy do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -778,15 +680,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes set_iam_policy with error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-      policy = {}
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:set_iam_policy, mock_method)
@@ -800,7 +695,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.set_iam_policy(formatted_resource, policy)
+            client.set_iam_policy
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -814,19 +709,12 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#test_iam_permissions."
 
     it 'invokes test_iam_permissions without error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-      permissions = []
-
       # Create expected grpc response
       expected_response = {}
       expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::TestIamPermissionsResponse)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(permissions, request.permissions)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:test_iam_permissions, mock_method)
@@ -839,13 +727,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.test_iam_permissions(formatted_resource, permissions)
+          response = client.test_iam_permissions
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.test_iam_permissions(formatted_resource, permissions) do |response, operation|
+          client.test_iam_permissions do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -855,15 +743,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes test_iam_permissions with error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-      permissions = []
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(permissions, request.permissions)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:test_iam_permissions, mock_method)
@@ -877,7 +758,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.test_iam_permissions(formatted_resource, permissions)
+            client.test_iam_permissions
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -891,20 +772,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#list_tasks."
 
     it 'invokes list_tasks without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Create expected grpc response
-      next_page_token = ""
-      tasks_element = {}
-      tasks = [tasks_element]
-      expected_response = { next_page_token: next_page_token, tasks: tasks }
+      next_page_token = "nextPageToken-1530815211"
+      expected_response = { next_page_token: next_page_token }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::ListTasksResponse)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::ListTasksRequest, request)
-        assert_equal(formatted_parent, request.parent)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:list_tasks, mock_method)
@@ -917,25 +791,24 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.list_tasks(formatted_parent)
+          response = client.list_tasks
 
           # Verify the response
-          assert(response.instance_of?(Google::Gax::PagedEnumerable))
-          assert_equal(expected_response, response.page.response)
-          assert_nil(response.next_page)
-          assert_equal(expected_response.tasks.to_a, response.to_a)
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_tasks do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
         end
       end
     end
 
     it 'invokes list_tasks with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::ListTasksRequest, request)
-        assert_equal(formatted_parent, request.parent)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:list_tasks, mock_method)
@@ -949,7 +822,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.list_tasks(formatted_parent)
+            client.list_tasks
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -963,18 +836,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#get_task."
 
     it 'invokes get_task without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-
       # Create expected grpc response
-      name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      name = "name3373707"
+      expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Task)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::GetTaskRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:get_task, mock_method)
@@ -987,13 +855,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.get_task(formatted_name)
+          response = client.get_task
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_task(formatted_name) do |response, operation|
+          client.get_task do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -1003,13 +871,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes get_task with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::GetTaskRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:get_task, mock_method)
@@ -1023,7 +886,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.get_task(formatted_name)
+            client.get_task
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1037,20 +900,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#create_task."
 
     it 'invokes create_task without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-      task = {}
-
       # Create expected grpc response
       name = "name3373707"
       expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Task)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::CreateTaskRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(task, Google::Cloud::Tasks::V2beta2::Task), request.task)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:create_task, mock_method)
@@ -1063,13 +919,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.create_task(formatted_parent, task)
+          response = client.create_task
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.create_task(formatted_parent, task) do |response, operation|
+          client.create_task do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -1079,15 +935,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes create_task with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-      task = {}
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::CreateTaskRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(task, Google::Cloud::Tasks::V2beta2::Task), request.task)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:create_task, mock_method)
@@ -1101,7 +950,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.create_task(formatted_parent, task)
+            client.create_task
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1115,13 +964,9 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#delete_task."
 
     it 'invokes delete_task without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::DeleteTaskRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:delete_task, mock_method)
@@ -1134,13 +979,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.delete_task(formatted_name)
+          response = client.delete_task
 
           # Verify the response
           assert_nil(response)
 
           # Call method with block
-          client.delete_task(formatted_name) do |response, operation|
+          client.delete_task do |response, operation|
             # Verify the response
             assert_nil(response)
             refute_nil(operation)
@@ -1150,13 +995,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes delete_task with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::DeleteTaskRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:delete_task, mock_method)
@@ -1170,7 +1010,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.delete_task(formatted_name)
+            client.delete_task
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1184,19 +1024,12 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#lease_tasks."
 
     it 'invokes lease_tasks without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-      lease_duration = {}
-
       # Create expected grpc response
       expected_response = {}
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::LeaseTasksResponse)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::LeaseTasksRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(lease_duration, Google::Protobuf::Duration), request.lease_duration)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:lease_tasks, mock_method)
@@ -1209,13 +1042,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.lease_tasks(formatted_parent, lease_duration)
+          response = client.lease_tasks
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.lease_tasks(formatted_parent, lease_duration) do |response, operation|
+          client.lease_tasks do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -1225,15 +1058,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes lease_tasks with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-      lease_duration = {}
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::LeaseTasksRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(lease_duration, Google::Protobuf::Duration), request.lease_duration)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:lease_tasks, mock_method)
@@ -1247,7 +1073,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.lease_tasks(formatted_parent, lease_duration)
+            client.lease_tasks
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1261,15 +1087,9 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#acknowledge_task."
 
     it 'invokes acknowledge_task without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-      schedule_time = {}
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
+      mock_method = proc do
         OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:acknowledge_task, mock_method)
@@ -1282,13 +1102,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.acknowledge_task(formatted_name, schedule_time)
+          response = client.acknowledge_task
 
           # Verify the response
           assert_nil(response)
 
           # Call method with block
-          client.acknowledge_task(formatted_name, schedule_time) do |response, operation|
+          client.acknowledge_task do |response, operation|
             # Verify the response
             assert_nil(response)
             refute_nil(operation)
@@ -1298,15 +1118,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes acknowledge_task with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-      schedule_time = {}
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:acknowledge_task, mock_method)
@@ -1320,7 +1133,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.acknowledge_task(formatted_name, schedule_time)
+            client.acknowledge_task
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1334,22 +1147,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#renew_lease."
 
     it 'invokes renew_lease without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-      schedule_time = {}
-      lease_duration = {}
-
       # Create expected grpc response
-      name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      name = "name3373707"
+      expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Task)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::RenewLeaseRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
-        assert_equal(Google::Gax::to_proto(lease_duration, Google::Protobuf::Duration), request.lease_duration)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:renew_lease, mock_method)
@@ -1362,21 +1166,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.renew_lease(
-            formatted_name,
-            schedule_time,
-            lease_duration
-          )
+          response = client.renew_lease
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.renew_lease(
-            formatted_name,
-            schedule_time,
-            lease_duration
-          ) do |response, operation|
+          client.renew_lease do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -1386,17 +1182,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes renew_lease with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-      schedule_time = {}
-      lease_duration = {}
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::RenewLeaseRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
-        assert_equal(Google::Gax::to_proto(lease_duration, Google::Protobuf::Duration), request.lease_duration)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:renew_lease, mock_method)
@@ -1410,11 +1197,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.renew_lease(
-              formatted_name,
-              schedule_time,
-              lease_duration
-            )
+            client.renew_lease
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1428,20 +1211,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#cancel_lease."
 
     it 'invokes cancel_lease without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-      schedule_time = {}
-
       # Create expected grpc response
-      name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      name = "name3373707"
+      expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Task)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::CancelLeaseRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:cancel_lease, mock_method)
@@ -1454,13 +1230,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.cancel_lease(formatted_name, schedule_time)
+          response = client.cancel_lease
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.cancel_lease(formatted_name, schedule_time) do |response, operation|
+          client.cancel_lease do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -1470,15 +1246,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes cancel_lease with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-      schedule_time = {}
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::CancelLeaseRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(schedule_time, Google::Protobuf::Timestamp), request.schedule_time)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:cancel_lease, mock_method)
@@ -1492,7 +1261,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.cancel_lease(formatted_name, schedule_time)
+            client.cancel_lease
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1506,18 +1275,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     custom_error = CustomTestError_v2beta2.new "Custom test error for Google::Cloud::Tasks::V2beta2::CloudTasksClient#run_task."
 
     it 'invokes run_task without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-
       # Create expected grpc response
-      name_2 = "name2-1052831874"
-      expected_response = { name: name_2 }
+      name = "name3373707"
+      expected_response = { name: name }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Tasks::V2beta2::Task)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::RunTaskRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:run_task, mock_method)
@@ -1530,13 +1294,13 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
           client = Google::Cloud::Tasks.new(version: :v2beta2)
 
           # Call method
-          response = client.run_task(formatted_name)
+          response = client.run_task
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.run_task(formatted_name) do |response, operation|
+          client.run_task do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -1546,13 +1310,8 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
 
     it 'invokes run_task with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path("[PROJECT]", "[LOCATION]", "[QUEUE]", "[TASK]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Tasks::V2beta2::RunTaskRequest, request)
-        assert_equal(formatted_name, request.name)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2beta2.new(:run_task, mock_method)
@@ -1566,7 +1325,7 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2beta2 do
-            client.run_task(formatted_name)
+            client.run_task
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

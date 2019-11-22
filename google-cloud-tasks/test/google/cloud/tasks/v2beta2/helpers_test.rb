@@ -37,55 +37,5 @@ end
 describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
   let(:mock_credentials) { HelperMockTasksCredentials_v2beta2.new }
 
-  describe "the location_path instance method" do
-    it "correctly calls Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path" do
-      Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-        parameters = Google::Cloud::Tasks::V2beta2::CloudTasksClient.method("location_path").parameters.map { |arg| arg.last.to_s }
-        client = Google::Cloud::Tasks.new version: :v2beta2
-        assert_equal(
-          client.location_path(*parameters),
-          Google::Cloud::Tasks::V2beta2::CloudTasksClient.location_path(*parameters)
-        )
-      end
-    end
-  end
 
-  describe "the project_path instance method" do
-    it "correctly calls Google::Cloud::Tasks::V2beta2::CloudTasksClient.project_path" do
-      Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-        parameters = Google::Cloud::Tasks::V2beta2::CloudTasksClient.method("project_path").parameters.map { |arg| arg.last.to_s }
-        client = Google::Cloud::Tasks.new version: :v2beta2
-        assert_equal(
-          client.project_path(*parameters),
-          Google::Cloud::Tasks::V2beta2::CloudTasksClient.project_path(*parameters)
-        )
-      end
-    end
-  end
-
-  describe "the queue_path instance method" do
-    it "correctly calls Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path" do
-      Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-        parameters = Google::Cloud::Tasks::V2beta2::CloudTasksClient.method("queue_path").parameters.map { |arg| arg.last.to_s }
-        client = Google::Cloud::Tasks.new version: :v2beta2
-        assert_equal(
-          client.queue_path(*parameters),
-          Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path(*parameters)
-        )
-      end
-    end
-  end
-
-  describe "the task_path instance method" do
-    it "correctly calls Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path" do
-      Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-        parameters = Google::Cloud::Tasks::V2beta2::CloudTasksClient.method("task_path").parameters.map { |arg| arg.last.to_s }
-        client = Google::Cloud::Tasks.new version: :v2beta2
-        assert_equal(
-          client.task_path(*parameters),
-          Google::Cloud::Tasks::V2beta2::CloudTasksClient.task_path(*parameters)
-        )
-      end
-    end
-  end
 end
