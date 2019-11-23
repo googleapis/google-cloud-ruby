@@ -855,13 +855,11 @@ module Google
               #   require "google/cloud/spanner/admin/instance"
               #
               #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-              #
-              #   # TODO: Initialize `resource`:
-              #   resource = ''
+              #   formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
               #
               #   # TODO: Initialize `policy`:
               #   policy = {}
-              #   response = instance_admin_client.set_iam_policy(resource, policy)
+              #   response = instance_admin_client.set_iam_policy(formatted_resource, policy)
 
               def set_iam_policy \
                   resource,
@@ -902,10 +900,8 @@ module Google
               #   require "google/cloud/spanner/admin/instance"
               #
               #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-              #
-              #   # TODO: Initialize `resource`:
-              #   resource = ''
-              #   response = instance_admin_client.get_iam_policy(resource)
+              #   formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+              #   response = instance_admin_client.get_iam_policy(formatted_resource)
 
               def get_iam_policy \
                   resource,
@@ -947,13 +943,11 @@ module Google
               #   require "google/cloud/spanner/admin/instance"
               #
               #   instance_admin_client = Google::Cloud::Spanner::Admin::Instance.new(version: :v1)
-              #
-              #   # TODO: Initialize `resource`:
-              #   resource = ''
+              #   formatted_resource = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
               #
               #   # TODO: Initialize `permissions`:
               #   permissions = []
-              #   response = instance_admin_client.test_iam_permissions(resource, permissions)
+              #   response = instance_admin_client.test_iam_permissions(formatted_resource, permissions)
 
               def test_iam_permissions \
                   resource,
