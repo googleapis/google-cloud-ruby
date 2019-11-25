@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 / 2019-11-25
+
+#### Documentation
+
+* Update TablesModelColumnInfo documentation
+
 ### 0.4.0 / 2019-11-05
 
 #### Features
