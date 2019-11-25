@@ -197,37 +197,6 @@ describe Google::Cloud::Storage::Bucket, :storage do
     random_bucket.must_be :nil?
   end
 
-  describe "IAM Policies and Permissions" do
-
-    it "allows policy to be updated on a bucket" do
-      # Check permissions first
-      roles = ["storage.buckets.getIamPolicy", "storage.buckets.setIamPolicy"]
-      permissions = bucket.test_permissions roles
-      skip "Don't have permissions to get/set bucket's policy" unless permissions == roles
-
-      bucket.policy.must_be_kind_of Google::Cloud::Storage::Policy
-
-      # We need a valid service account in order to update the policy
-      service_account = storage.service.credentials.client.issuer
-      service_account.wont_be :nil?
-      role = "roles/storage.objectCreator"
-      member = "serviceAccount:#{service_account}"
-      bucket.policy do |p|
-        p.add role, member
-        p.add role, member # duplicate member will not be added to request
-      end
-
-      role_member = bucket.policy.role(role).select { |x| x == member }
-      role_member.size.must_equal 1
-    end
-
-    it "allows permissions to be tested on a bucket" do
-      roles = ["storage.buckets.delete", "storage.buckets.get"]
-      permissions = bucket.test_permissions roles
-      permissions.must_equal roles
-    end
-  end
-
   describe "anonymous project" do
     it "raises when creating a bucket without authentication" do
       anonymous_storage = Google::Cloud::Storage.anonymous

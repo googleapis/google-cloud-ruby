@@ -14,28 +14,48 @@
 
 require "helper"
 
-describe Google::Cloud::Storage::Policy do
+describe Google::Cloud::Storage::Policy, :mock_storage do
   let(:etag)       { "etag-1" }
-  let(:roles) { { "roles/viewer" => ["allUsers"] } }
-  let(:policy)    { Google::Cloud::Storage::Policy.new etag, roles }
 
-  it "knows its etag" do
-    policy.etag.must_equal etag
-  end
+  describe "version 1" do
+    let(:policy_gapi_v1) {
+      policy_gapi(
+        etag: etag,
+        version: 1,
+        bindings: [
+          Google::Apis::StorageV1::Policy::Binding.new(
+            role: "roles/viewer",
+            members: [
+              "allUsers"
+            ]
+          )
+        ]
+      )
+    }
+    let(:policy) { Google::Cloud::Storage::Policy.from_gapi policy_gapi_v1 }
 
-  it "knows its roles" do
-    policy.roles.keys.sort.must_equal   roles.keys.sort
-    policy.roles.values.sort.must_equal roles.values.sort
-  end
+    it "knows its attributes" do
+      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.etag.must_equal etag
+      policy.version.must_equal 1
+    end
 
-  it "returns an empty array for missing role" do
-    role = policy.role "roles/does-not-exist"
-    role.must_be_kind_of Array
-    role.must_be :empty?
-    role.frozen?.must_equal false
-  end
+    it "knows its roles" do
+      policy.roles.keys.sort.must_equal ["roles/viewer"]
+      policy.roles.values.sort.must_equal [["allUsers"]]
+    end
 
-  describe :to_gapi do
+    it "returns an empty array for missing role" do
+      role = policy.role "roles/does-not-exist"
+      role.must_be_kind_of Array
+      role.must_be :empty?
+      role.frozen?.must_equal false
+    end
+
+    it "raises for unsupported method calls" do
+      expect { policy.bindings }.must_raise RuntimeError
+    end
+
     it "creates a Google::Apis::StorageV1::Policy object with the equivalent de-duped roles" do
       # Add a duplicate entry.
       existing_role, existing_members = policy.roles.first
@@ -49,36 +69,86 @@ describe Google::Cloud::Storage::Policy do
         binding.members.sort.must_equal policy.roles[binding.role].uniq.sort
       end
     end
-  end
-
-  describe :from_gapi do
-    it "creates from a typical Google::Apis::StorageV1::Policy object" do
-      gapi = Google::Apis::StorageV1::Policy.new(
-        etag: etag,
-        bindings: roles.map do |key, val|
-          Google::Apis::StorageV1::Policy::Binding.new(
-            role: key,
-            members: val
-          )
-        end
-      )
-
-      policy = Google::Cloud::Storage::Policy.from_gapi gapi
-
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
-      policy.etag.must_equal etag
-      policy.roles.keys.sort.must_equal   roles.keys.sort
-      policy.roles.values.sort.must_equal roles.values.sort
-    end
 
     it "creates from an empty Google::Apis::StorageV1::Policy object" do
-      gapi = Google::Apis::StorageV1::Policy.new
+      gapi = Google::Apis::StorageV1::Policy.new version: 1
 
       policy = Google::Cloud::Storage::Policy.from_gapi gapi
 
       policy.must_be_kind_of Google::Cloud::Storage::Policy
       policy.etag.must_be :nil?
+      policy.version.must_equal 1
       policy.roles.must_be :empty?
+    end
+  end
+
+  describe "version 3" do
+    let(:policy_gapi_v3) {
+      policy_gapi(
+        etag: etag,
+        version: 3,
+        bindings: [
+          Google::Apis::StorageV1::Policy::Binding.new(
+            role: "roles/storage.objectViewer",
+            members: [
+              "user:viewer@example.com"
+            ]
+          ),
+          Google::Apis::StorageV1::Policy::Binding.new(
+            role: "roles/storage.objectViewer",
+            members: [
+              "serviceAccount:1234567890@developer.gserviceaccount.com"
+            ],
+            condition: {
+              title: "always-true",
+              description: "test condition always-true",
+              expression: "true"
+            }
+          )
+        ]
+      )
+    }
+    let(:policy) { Google::Cloud::Storage::Policy.from_gapi policy_gapi_v3 }
+
+    it "knows its attributes" do
+      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.etag.must_equal etag
+      policy.version.must_equal 3
+    end
+
+    it "knows its bindings" do
+      policy.bindings.must_be_kind_of Array
+      policy.bindings.count.must_equal 2
+      policy.bindings[0].must_be_kind_of Hash
+      policy.bindings[0][:role].must_equal "roles/storage.objectViewer"
+      policy.bindings[0][:members].count.must_equal 1
+      policy.bindings[0][:members][0].must_equal "user:viewer@example.com"
+      policy.bindings[1].must_be_kind_of Hash
+      policy.bindings[1][:role].must_equal "roles/storage.objectViewer"
+      policy.bindings[1][:members].count.must_equal 1
+      policy.bindings[1][:members][0].must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+      policy.bindings[1][:condition][:title].must_equal "always-true"
+      policy.bindings[1][:condition][:description].must_equal "test condition always-true"
+      policy.bindings[1][:condition][:expression].must_equal "true"
+    end
+
+    it "raises for unsupported method calls" do
+      expect { policy.roles }.must_raise RuntimeError
+      expect { policy.add "roles/viewer", "allUsers" }.must_raise RuntimeError
+      expect { policy.remove "roles/viewer", "allUsers" }.must_raise RuntimeError
+      expect { policy.role "roles/viewer" }.must_raise RuntimeError
+      expect { policy.deep_dup }.must_raise RuntimeError
+    end
+
+    it "creates from an empty Google::Apis::StorageV1::Policy object" do
+      gapi = Google::Apis::StorageV1::Policy.new version: 3
+
+      policy = Google::Cloud::Storage::Policy.from_gapi gapi
+
+      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.etag.must_be :nil?
+      policy.version.must_equal 3
+      policy.bindings.must_be :empty?
     end
   end
 end

@@ -49,34 +49,169 @@ module Google
       # @attr [String] etag Used to verify whether the policy has changed since
       #   the last request. The policy will be written only if the `etag` values
       #   match.
-      # @attr [Hash{String => Array<String>}] roles The bindings that associate
-      #   roles with an array of members. See [Understanding
-      #   Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
-      #   listing of primitive and curated roles. See [Buckets:
-      #   setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
-      #   for a listing of values and patterns for members.
+      # @attr [Integer] version The syntax schema version of the policy. Each version
+      #   of the policy contains a specific syntax schema that can be used by bindings.
+      #   The newer version may contain role bindings with the newer syntax schema
+      #   that is unsupported by earlier versions. This field is not intended to
+      #   be used for any purposes other than policy syntax schema control.
       #
-      # @example
+      #   The following policy versions are valid:
+      #
+      #   * 1 -  The first version of Cloud IAM policy schema. Supports binding one
+      #     role to one or more members. Does not support conditional bindings.
+      #   * 3 - Introduces the condition field in the role binding, which further
+      #     constrains the role binding via context-based and attribute-based rules.
+      #     See [Conditions Overview](https://cloud.google.com/iam/docs/conditions-overview)
+      #     for more information.
+      #
+      # @example Using Policy version 1:
       #   require "google/cloud/storage"
       #
       #   storage = Google::Cloud::Storage.new
-      #
       #   bucket = storage.bucket "my-todo-app"
       #
       #   bucket.policy do |p|
+      #     p.version # 1
       #     p.remove "roles/storage.admin", "user:owner@example.com"
       #     p.add "roles/storage.admin", "user:newowner@example.com"
       #     p.roles["roles/storage.objectViewer"] = ["allUsers"]
       #   end
       #
+      # @example Updating Policy version 1 to version 3:
+      #   require "google/cloud/storage"
+      #
+      #   storage = Google::Cloud::Storage.new
+      #   bucket = storage.bucket "my-todo-app"
+      #
+      #   bucket.policy do |p|
+      #     p.version # 1
+      #     p.version = 3
+      #     p.bindings.push({
+      #                       role: "roles/storage.admin",
+      #                       members: ["user:owner@example.com"],
+      #                       condition: {
+      #                         title: "test-condition",
+      #                         description: "description of condition",
+      #                         expression: "expr1"
+      #                       }
+      #                     })
+      #   end
+      #
+      # @example Using Policy version 3:
+      #   require "google/cloud/storage"
+      #
+      #   storage = Google::Cloud::Storage.new
+      #   bucket = storage.bucket "my-todo-app"
+      #
+      #   bucket.policy(requested_policy_version: 3) do |p|
+      #     p.version # 3
+      #     p.bindings.push({
+      #                       role: "roles/storage.admin",
+      #                       members: ["user:owner@example.com"],
+      #                       condition: {
+      #                         title: "test-condition",
+      #                         description: "description of condition",
+      #                         expression: "expr1"
+      #                       }
+      #                     })
+      #   end
+      #
       class Policy
-        attr_reader :etag, :roles
+        attr_reader :etag
+        attr_reader :version
 
         ##
         # @private Creates a Policy object.
-        def initialize etag, roles
+        def initialize etag, version, roles: {}, bindings: []
           @etag = etag
+          @version = version
           @roles = roles
+          @bindings = bindings
+        end
+
+        ##
+        # Updates the syntax schema version of the policy. Each version of the
+        # policy contains a specific syntax schema that can be used by bindings.
+        # The newer version may contain role bindings with the newer syntax schema
+        # that is unsupported by earlier versions. This field is not intended to
+        # be used for any purposes other than policy syntax schema control.
+        #
+        # The following policy versions are valid:
+        #
+        # * 1 -  The first version of Cloud IAM policy schema. Supports binding one
+        #   role to one or more members. Does not support conditional bindings.
+        # * 3 - Introduces the condition field in the role binding, which further
+        #   constrains the role binding via context-based and attribute-based rules.
+        #   See [Conditions Overview](https://cloud.google.com/iam/docs/conditions-overview)
+        #   for more information.
+        #
+        # @param [Integer] new_version The syntax schema version of the policy.
+        #
+        # @see https://cloud.google.com/iam/docs/policies#versions Policy versions
+        #
+        # @example Updating Policy version 1 to version 3:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy do |p|
+        #     p.version # 1
+        #     p.version = 3
+        #     p.bindings.push({
+        #                       role: "roles/storage.admin",
+        #                       members: ["user:owner@example.com"],
+        #                       condition: {
+        #                         title: "test-condition",
+        #                         description: "description of condition",
+        #                         expression: "expr1"
+        #                       }
+        #                     })
+        #   end
+        #
+        def version= new_version
+          if new_version < version
+            raise "new_version (#{new_version}) cannot be less than the current Policy version (#{version})."
+          end
+          if version == 1 && new_version > 1
+            @roles.freeze
+            @bindings = roles_to_gapi.map(&:to_h)
+          end
+          @version = new_version
+        end
+
+        ##
+        # Returns the version 1 bindings as a hash that associates roles with an
+        # array of members. See [Understanding
+        # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+        # listing of primitive and curated roles. See [Buckets:
+        # setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
+        # for a listing of values and patterns for members.
+        #
+        # @raise [RuntimeError] If version is greater than 1.
+        #
+        # @return [Hash{String => Array<String>}] The Policy version 1 bindings.
+        #
+        def roles
+          ensure_version_1
+          @roles
+        end
+
+        ##
+        # Returns the Policy's bindings as an array of hashes that associate roles with an
+        # array of members. Conditions are allowed in the hashes. See [Understanding
+        # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+        # listing of primitive and curated roles. See [Buckets:
+        # setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
+        # for a listing of values and patterns for members.
+        #
+        # @raise [RuntimeError] If version is 1.
+        #
+        # @return [Array<Hash>] The Policy bindings.
+        #
+        def bindings
+          raise "Illegal operation for version 1. Use #roles instead." if version == 1
+          @bindings
         end
 
         ##
@@ -104,6 +239,7 @@ module Google
         #   end
         #
         def add role_name, member
+          ensure_version_1
           role(role_name) << member
         end
 
@@ -132,6 +268,7 @@ module Google
         #   end
         #
         def remove role_name, member
+          ensure_version_1
           role(role_name).delete member
         end
 
@@ -158,6 +295,7 @@ module Google
         #   end
         #
         def role role_name
+          ensure_version_1
           roles[role_name] ||= []
         end
 
@@ -170,6 +308,7 @@ module Google
         # @return [Policy]
         #
         def deep_dup
+          ensure_version_1
           warn "DEPRECATED: Storage::Policy#deep_dup"
           dup.tap do |p|
             roles_dup = p.roles.each_with_object({}) do |(k, v), memo|
@@ -183,15 +322,11 @@ module Google
         # @private Convert the Policy to a
         # Google::Apis::StorageV1::Policy.
         def to_gapi
+          bindings_gapi = version > 1 ? bindings : roles_to_gapi
           Google::Apis::StorageV1::Policy.new(
             etag: etag,
-            bindings: roles.keys.map do |role_name|
-              next if roles[role_name].empty?
-              Google::Apis::StorageV1::Policy::Binding.new(
-                role: role_name,
-                members: roles[role_name].uniq
-              )
-            end
+            version: version,
+            bindings: bindings_gapi
           )
         end
 
@@ -199,10 +334,30 @@ module Google
         # @private New Policy from a
         # Google::Apis::StorageV1::Policy object.
         def self.from_gapi gapi
-          roles = Array(gapi.bindings).each_with_object({}) do |binding, memo|
-            memo[binding.role] = binding.members.to_a
+          if gapi.version == 1
+            roles = Array(gapi.bindings).each_with_object({}) do |binding, memo|
+              memo[binding.role] = binding.members.to_a
+            end
+            new gapi.etag, gapi.version, roles: roles
+          else
+            new gapi.etag, gapi.version, bindings: Array(gapi.bindings).map(&:to_h)
           end
-          new gapi.etag, roles
+        end
+
+        protected
+
+        def ensure_version_1
+          raise "Illegal operation for Policy version > 1. Use Policy#bindings instead." if version > 1
+        end
+
+        def roles_to_gapi
+          roles.keys.map do |role_name|
+            next if roles[role_name].empty?
+            Google::Apis::StorageV1::Policy::Binding.new(
+              role: role_name,
+              members: roles[role_name].uniq
+            )
+          end
         end
       end
     end

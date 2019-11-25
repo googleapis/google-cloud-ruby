@@ -1776,10 +1776,11 @@ module Google
         #     p.add "roles/owner", "user:owner@example.com"
         #   end
         #
-        def policy force: nil
+        def policy force: nil, requested_policy_version: nil
           warn "DEPRECATED: 'force' in Bucket#policy" unless force.nil?
           ensure_service!
-          gapi = service.get_bucket_policy name, user_project: user_project
+          gapi = service.get_bucket_policy name, requested_policy_version: requested_policy_version,
+                                                 user_project: user_project
           policy = Policy.from_gapi gapi
           return policy unless block_given?
           yield policy
