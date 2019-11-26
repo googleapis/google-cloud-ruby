@@ -1,19 +1,19 @@
 {
-  "updateTime": "2019-11-15T11:44:54.975498Z",
+  "updateTime": "2019-11-23T11:41:57.599154Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.41.1",
-        "dockerImage": "googleapis/artman@sha256:545c758c76c3f779037aa259023ec3d1ef2d57d2c8cd00a222cb187d63ceac5e"
+        "version": "0.42.1",
+        "dockerImage": "googleapis/artman@sha256:c773192618c608a7a0415dd95282f841f8e6bcdef7dd760a988c93b77a64bd57"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "f6808ff4e8b966cd571e99279d4a2780ed97dff2",
-        "internalRef": "280581337"
+        "sha": "777b580a046c4fa84a35e1d00658b71964120bb0",
+        "internalRef": "282068850"
       }
     }
   ],
@@ -25,7 +25,7 @@
         "apiVersion": "v1",
         "language": "ruby",
         "generator": "gapic",
-        "config": "google/spanner/artman_spanner.yaml"
+        "config": "google/spanner/artman_spanner.legacy.yaml"
       }
     },
     {
@@ -35,7 +35,7 @@
         "apiVersion": "v1",
         "language": "ruby",
         "generator": "gapic",
-        "config": "google/spanner/admin/database/artman_spanner_admin_database.yaml"
+        "config": "google/spanner/admin/database/artman_spanner_admin_database.legacy.yaml"
       }
     },
     {
@@ -45,7 +45,7 @@
         "apiVersion": "v1",
         "language": "ruby",
         "generator": "gapic",
-        "config": "google/spanner/admin/instance/artman_spanner_admin_instance.yaml"
+        "config": "google/spanner/admin/instance/artman_spanner_admin_instance.legacy.yaml"
       }
     }
   ]
