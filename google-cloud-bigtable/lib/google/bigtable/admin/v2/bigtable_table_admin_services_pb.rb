@@ -109,7 +109,7 @@ module Google
             # recommended for production use. It is not subject to any SLA or deprecation
             # policy.
             rpc :DeleteSnapshot, DeleteSnapshotRequest, Google::Protobuf::Empty
-            # Gets the access control policy for an instance resource. Returns an empty
+            # Gets the access control policy for a table resource. Returns an empty
             # policy if an table exists but does not have a policy set.
             rpc :GetIamPolicy, Google::Iam::V1::GetIamPolicyRequest, Google::Iam::V1::Policy
             # Sets the access control policy on a table resource. Replaces any existing
