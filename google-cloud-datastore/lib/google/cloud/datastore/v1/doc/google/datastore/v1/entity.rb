@@ -100,8 +100,8 @@ module Google
       # @!attribute [rw] values
       #   @return [Array<Google::Datastore::V1::Value>]
       #     Values in the array.
-      #     The order of this array may not be preserved if it contains a mix of
-      #     indexed and unindexed values.
+      #     The order of values in an array is preserved as long as all values have
+      #     identical settings for 'exclude_from_indexes'.
       class ArrayValue; end
 
       # A message that can hold any of the supported value types and associated
@@ -129,8 +129,8 @@ module Google
       # @!attribute [rw] string_value
       #   @return [String]
       #     A UTF-8 encoded string value.
-      #     When `exclude_from_indexes` is false (it is indexed) , may have at most
-      #     1500 bytes. Otherwise, may be set to at least 1,000,000 bytes.
+      #     When `exclude_from_indexes` is false (it is indexed) , may have at most 1500 bytes.
+      #     Otherwise, may be set to at least 1,000,000 bytes.
       # @!attribute [rw] blob_value
       #   @return [String]
       #     A blob value.
