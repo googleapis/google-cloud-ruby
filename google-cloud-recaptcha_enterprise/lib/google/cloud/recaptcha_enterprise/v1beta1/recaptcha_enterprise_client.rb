@@ -52,6 +52,15 @@ module Google
 
           DEFAULT_TIMEOUT = 30
 
+          PAGE_DESCRIPTORS = {
+            "list_keys" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "keys")
+          }.freeze
+
+          private_constant :PAGE_DESCRIPTORS
+
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
@@ -64,6 +73,12 @@ module Google
           )
 
           private_constant :ASSESSMENT_PATH_TEMPLATE
+
+          KEY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/keys/{key}"
+          )
+
+          private_constant :KEY_PATH_TEMPLATE
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
@@ -79,6 +94,17 @@ module Google
             ASSESSMENT_PATH_TEMPLATE.render(
               :"project" => project,
               :"assessment" => assessment
+            )
+          end
+
+          # Returns a fully-qualified key resource name string.
+          # @param project [String]
+          # @param key [String]
+          # @return [String]
+          def self.key_path project, key
+            KEY_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"key" => key
             )
           end
 
@@ -179,6 +205,7 @@ module Google
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
+                page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
                 metadata: headers
               )
@@ -210,6 +237,46 @@ module Google
             @annotate_assessment = Google::Gax.create_api_call(
               @recaptcha_enterprise_stub.method(:annotate_assessment),
               defaults["annotate_assessment"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @create_key = Google::Gax.create_api_call(
+              @recaptcha_enterprise_stub.method(:create_key),
+              defaults["create_key"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @list_keys = Google::Gax.create_api_call(
+              @recaptcha_enterprise_stub.method(:list_keys),
+              defaults["list_keys"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @get_key = Google::Gax.create_api_call(
+              @recaptcha_enterprise_stub.method(:get_key),
+              defaults["get_key"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @update_key = Google::Gax.create_api_call(
+              @recaptcha_enterprise_stub.method(:update_key),
+              defaults["update_key"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'key.name' => request.key.name}
+              end
+            )
+            @delete_key = Google::Gax.create_api_call(
+              @recaptcha_enterprise_stub.method(:delete_key),
+              defaults["delete_key"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'name' => request.name}
@@ -296,6 +363,202 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::AnnotateAssessmentRequest)
             @annotate_assessment.call(req, options, &block)
+          end
+
+          # Creates a new reCAPTCHA Enterprise key.
+          #
+          # @param parent [String]
+          #   Required. The name of the project in which the key will be created, in the
+          #   format "projects/\\{project_number}".
+          # @param key [Google::Cloud::Recaptchaenterprise::V1beta1::Key | Hash]
+          #   Required. Information to create a reCAPTCHA Enterprise key.
+          #   A hash of the same form as `Google::Cloud::Recaptchaenterprise::V1beta1::Key`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/recaptcha_enterprise"
+          #
+          #   recaptcha_enterprise_client = Google::Cloud::RecaptchaEnterprise.new(version: :v1beta1)
+          #   formatted_parent = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize `key`:
+          #   key = {}
+          #   response = recaptcha_enterprise_client.create_key(formatted_parent, key)
+
+          def create_key \
+              parent,
+              key,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              key: key
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::CreateKeyRequest)
+            @create_key.call(req, options, &block)
+          end
+
+          # Returns the list of all keys that belong to a project.
+          #
+          # @param parent [String]
+          #   Required. The name of the project that contains the keys that will be
+          #   listed, in the format "projects/\\{project_number}".
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Recaptchaenterprise::V1beta1::Key>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Recaptchaenterprise::V1beta1::Key>]
+          #   An enumerable of Google::Cloud::Recaptchaenterprise::V1beta1::Key instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/recaptcha_enterprise"
+          #
+          #   recaptcha_enterprise_client = Google::Cloud::RecaptchaEnterprise.new(version: :v1beta1)
+          #   formatted_parent = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient.project_path("[PROJECT]")
+          #
+          #   # Iterate over all results.
+          #   recaptcha_enterprise_client.list_keys(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   recaptcha_enterprise_client.list_keys(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_keys \
+              parent,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::ListKeysRequest)
+            @list_keys.call(req, options, &block)
+          end
+
+          # Returns the specified key.
+          #
+          # @param name [String]
+          #   Required. The name of the requested key, in the format
+          #   "projects/\\{project_number}/keys/\\{key_id}".
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/recaptcha_enterprise"
+          #
+          #   recaptcha_enterprise_client = Google::Cloud::RecaptchaEnterprise.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient.key_path("[PROJECT]", "[KEY]")
+          #   response = recaptcha_enterprise_client.get_key(formatted_name)
+
+          def get_key \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::GetKeyRequest)
+            @get_key.call(req, options, &block)
+          end
+
+          # Updates the specified key.
+          #
+          # @param key [Google::Cloud::Recaptchaenterprise::V1beta1::Key | Hash]
+          #   Required. The key to update.
+          #   A hash of the same form as `Google::Cloud::Recaptchaenterprise::V1beta1::Key`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Optional. The mask to control which field of the key get updated. If the mask is not
+          #   present, all fields will be updated.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/recaptcha_enterprise"
+          #
+          #   recaptcha_enterprise_client = Google::Cloud::RecaptchaEnterprise.new(version: :v1beta1)
+          #   formatted_key = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient.key_path("[PROJECT]", "[KEY]")
+          #   response = recaptcha_enterprise_client.update_key(formatted_key)
+
+          def update_key \
+              key,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              key: key,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::UpdateKeyRequest)
+            @update_key.call(req, options, &block)
+          end
+
+          # Deletes the specified key.
+          #
+          # @param name [String]
+          #   Required. The name of the key to be deleted, in the format
+          #   "projects/\\{project_number}/keys/\\{key_id}".
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/recaptcha_enterprise"
+          #
+          #   recaptcha_enterprise_client = Google::Cloud::RecaptchaEnterprise.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient.key_path("[PROJECT]", "[KEY]")
+          #   recaptcha_enterprise_client.delete_key(formatted_name)
+
+          def delete_key \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::DeleteKeyRequest)
+            @delete_key.call(req, options, &block)
+            nil
           end
         end
       end
