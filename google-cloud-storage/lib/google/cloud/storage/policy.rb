@@ -192,6 +192,17 @@ module Google
         #
         # @return [Hash{String => Array<String>}] The Policy version 1 bindings.
         #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy do |p|
+        #     p.version # 1
+        #     p.roles["roles/storage.objectViewer"] = ["allUsers"]
+        #   end
+        #
         def roles
           ensure_version_1
           @roles
@@ -208,6 +219,25 @@ module Google
         # @raise [RuntimeError] If version is 1.
         #
         # @return [Array<Hash>] The Policy bindings.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy(requested_policy_version: 3) do |p|
+        #     p.version # 3
+        #     p.bindings.push({
+        #                       role: "roles/storage.admin",
+        #                       members: ["user:owner@example.com"],
+        #                       condition: {
+        #                         title: "test-condition",
+        #                         description: "description of condition",
+        #                         expression: "expr1"
+        #                       }
+        #                     })
+        #   end
         #
         def bindings
           raise "Illegal operation for version 1. Use #roles instead." if version == 1

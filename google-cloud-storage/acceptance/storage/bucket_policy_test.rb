@@ -14,7 +14,7 @@
 
 require "storage_helper"
 
-describe Google::Cloud::Storage::Bucket, :storage do
+describe Google::Cloud::Storage::Bucket, :policy, :storage do
   let(:bucket_name) { $bucket_names[1] } # Policy version 1
   let :bucket do
     storage.bucket(bucket_name) ||
@@ -94,7 +94,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
       bucket_policy_v3 = storage.bucket bucket_name_policy_v3
       # Requested policy version (1) cannot be less than the existing policy version (3).
-      # expect { bucket_policy_v3.policy requested_policy_version: 1 }.must_raise Google::Cloud::Error  TODO: uncomment after project is whitelisted
+      # expect { bucket_policy_v3.policy requested_policy_version: 1 }.must_raise Google::Cloud::Error # TODO: uncomment after project is whitelisted
       policy = bucket_policy_v3.policy requested_policy_version: 3
       policy.version.must_equal 3
       expect { policy.roles }.must_raise RuntimeError
