@@ -32,13 +32,13 @@ module Google
           attr_accessor :grpc
 
           # @private
-          # Creates a new AppProfile::List with an array of snapshot instances.
+          # Creates a new AppProfile::List with an array of app profiles.
           def initialize arr = []
             super arr
           end
 
           ##
-          # Whether there is a next page of instances.
+          # Whether there is a next page of app profiles.
           #
           # @return [Boolean]
           #
@@ -59,9 +59,9 @@ module Google
           end
 
           ##
-          # Retrieves the next page of app_profiles.
+          # Retrieves the next page of app profiles.
           #
-          # @return [AppProfile::List] The list of instances.
+          # @return [AppProfile::List] The list of app profiles.
           #
           # @example
           #   require "google/cloud/bigtable"
@@ -94,12 +94,12 @@ module Google
           # are retrieved (unlike `#each`, for example, which merely iterates
           # over the results returned by a single API call). Use with caution.
           #
-          # @yield [app_profile] The block for accessing each instance.
-          # @yieldparam [AppProfile] instance The instance object.
+          # @yield [app_profile] The block for accessing each app profile.
+          # @yieldparam [AppProfile] app_profile The app profile object.
           #
           # @return [Enumerator]
           #
-          # @example Iterating each instance by passing a block:
+          # @example Iterating each app profile by passing a block:
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new

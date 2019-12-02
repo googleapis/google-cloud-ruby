@@ -6,9 +6,6 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/cloud/automl/v1beta1/io_pb'
-require 'google/cloud/automl/v1beta1/model_pb'
-require 'google/cloud/automl/v1beta1/model_evaluation_pb'
-require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do

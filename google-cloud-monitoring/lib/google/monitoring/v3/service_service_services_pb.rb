@@ -38,23 +38,23 @@ module Google
           self.service_name = 'google.monitoring.v3.ServiceMonitoringService'
 
           # Create a `Service`.
-          rpc :CreateService, CreateServiceRequest, Service
+          rpc :CreateService, CreateServiceRequest, Google::Monitoring::V3::Service
           # Get the named `Service`.
-          rpc :GetService, GetServiceRequest, Service
+          rpc :GetService, GetServiceRequest, Google::Monitoring::V3::Service
           # List `Service`s for this workspace.
           rpc :ListServices, ListServicesRequest, ListServicesResponse
           # Update this `Service`.
-          rpc :UpdateService, UpdateServiceRequest, Service
+          rpc :UpdateService, UpdateServiceRequest, Google::Monitoring::V3::Service
           # Soft delete this `Service`.
           rpc :DeleteService, DeleteServiceRequest, Google::Protobuf::Empty
           # Create a `ServiceLevelObjective` for the given `Service`.
-          rpc :CreateServiceLevelObjective, CreateServiceLevelObjectiveRequest, ServiceLevelObjective
+          rpc :CreateServiceLevelObjective, CreateServiceLevelObjectiveRequest, Google::Monitoring::V3::ServiceLevelObjective
           # Get a `ServiceLevelObjective` by name.
-          rpc :GetServiceLevelObjective, GetServiceLevelObjectiveRequest, ServiceLevelObjective
+          rpc :GetServiceLevelObjective, GetServiceLevelObjectiveRequest, Google::Monitoring::V3::ServiceLevelObjective
           # List the `ServiceLevelObjective`s for the given `Service`.
           rpc :ListServiceLevelObjectives, ListServiceLevelObjectivesRequest, ListServiceLevelObjectivesResponse
           # Update the given `ServiceLevelObjective`.
-          rpc :UpdateServiceLevelObjective, UpdateServiceLevelObjectiveRequest, ServiceLevelObjective
+          rpc :UpdateServiceLevelObjective, UpdateServiceLevelObjectiveRequest, Google::Monitoring::V3::ServiceLevelObjective
           # Delete the given `ServiceLevelObjective`.
           rpc :DeleteServiceLevelObjective, DeleteServiceLevelObjectiveRequest, Google::Protobuf::Empty
         end

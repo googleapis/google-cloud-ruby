@@ -70,7 +70,7 @@ module Google
         end
 
         ##
-        # The unique identifier for the project.
+        # The unique identifier for the project to which the table belongs.
         #
         # @return [String]
         #
@@ -79,7 +79,7 @@ module Google
         end
 
         ##
-        # The unique identifier for the instance.
+        # The unique identifier for the instance to which the table belongs.
         #
         # @return [String]
         #
@@ -108,16 +108,16 @@ module Google
         end
 
         ##
-        # Reload table information.
+        # Reloads table data.
         #
         # @param view [Symbol] Table view type.
-        #   Default view type is `:SCHEMA_VIEW`
+        #   Default view type is `:SCHEMA_VIEW`.
         #   Valid view types are:
         #
-        #   * `:NAME_ONLY` - Only populates `name`
-        #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema
+        #   * `:NAME_ONLY` - Only populates `name`.
+        #   * `:SCHEMA_VIEW` - Only populates `name` and fields related to the table's schema.
         #   * `:REPLICATION_VIEW` - Only populates `name` and fields related to the table's replication state.
-        #   * `:FULL` - Populates all fields
+        #   * `:FULL` - Populates all fields.
         #
         # @return [Google::Cloud::Bigtable::Table]
         #
@@ -132,7 +132,7 @@ module Google
         # If it could not be determined whether or not the table has data in a
         # particular cluster (for example, if its zone is unavailable), then
         # there will be an entry for the cluster with UNKNOWN `replication_status`.
-        # Views: `FULL`
+        # Views: `FULL`.
         #
         # @return [Array<Google::Cloud::Bigtable::Table::ClusterState>]
         #
@@ -221,7 +221,7 @@ module Google
         # The granularity (e.g. `MILLIS`, `MICROS`) at which timestamps are stored in
         # this table. Timestamps not matching the granularity will be rejected.
         # If unspecified at creation time, the value will be set to `MILLIS`.
-        # Views: `SCHEMA_VIEW`, `FULL`
+        # Views: `SCHEMA_VIEW`, `FULL`.
         #
         # @return [Symbol]
         #
@@ -334,7 +334,7 @@ module Google
         # before this call started have been replicated. The tokens will be available
         # for 90 days.
         #
-        # @return [String] Generated consistency token
+        # @return [String] The generated consistency token
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -357,7 +357,7 @@ module Google
         # considered consistent if replication has caught up based on the conditions
         # specified in the token and the check request.
         # @param token [String] Consistency token
-        # @return [Boolean] Replication is consistent or not.
+        # @return [Boolean] `true` if replication is consistent
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -383,7 +383,7 @@ module Google
         # Wait for replication to check replication consistency.
         # Checks replication consistency by generating a consistency token and
         # making the `check_consistency` API call 5 times (by default).
-        # If the response is consistent, returns true. Otherwise tries again
+        # If the response is consistent, returns `true`. Otherwise tries again
         # repeatedly until the timeout. If the check does not succeed by the
         # timeout, returns `false`.
         #
@@ -391,7 +391,7 @@ module Google
         #   Timeout in seconds. Defaults value is 600 seconds.
         # @param check_interval [Integer]
         #   Consistency check interval in seconds. Default is 5 seconds.
-        # @return [Boolean] Replication is consistent or not.
+        # @return [Boolean] `true` if replication is consistent
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -410,7 +410,7 @@ module Google
         #   end
         #
         def wait_for_replication timeout: 600, check_interval: 5
-          raise InvalidArgumentError, "'check_interval' can not be greather then timeout" if check_interval > timeout
+          raise InvalidArgumentError, "'check_interval' cannot be greater than timeout" if check_interval > timeout
           token = generate_consistency_token
           status = false
           start_at = Time.now
@@ -427,7 +427,7 @@ module Google
         ##
         # Deletes all rows.
         #
-        # @param timeout [Integer] Call timeout in seconds
+        # @param timeout [Integer] Call timeout in seconds.
         #   Use in case of insufficient deadline for DropRowRange, then
         #   try again with a longer request deadline.
         # @return [Boolean]
@@ -451,8 +451,8 @@ module Google
         ##
         # Deletes rows using row key prefix.
         #
-        # @param prefix [String] Row key prefix (for example, "user")
-        # @param timeout [Integer] Call timeout in seconds
+        # @param prefix [String] Row key prefix (for example, "user").
+        # @param timeout [Integer] Call timeout in seconds.
         # @return [Boolean]
         # @example
         #   require "google/cloud/bigtable"
@@ -473,7 +473,7 @@ module Google
         ##
         # Drops row range by row key prefix or deletes all.
         #
-        # @param row_key_prefix [String] Row key prefix (for example, "user")
+        # @param row_key_prefix [String] Row key prefix (for example, "user").
         # @param delete_all_data [Boolean]
         # @return [Boolean]
         #

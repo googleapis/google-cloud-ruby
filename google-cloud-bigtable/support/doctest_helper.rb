@@ -137,7 +137,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Bigtable::AppProfile#save@Update" do
+  doctest.before "Google::Cloud::Bigtable::AppProfile#save" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
       mocked_instances.expect :get_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile"]
@@ -149,7 +149,7 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::Bigtable::AppProfile#save@Update with single cluster routing" do
+  doctest.before "Google::Cloud::Bigtable::AppProfile#save@Update with single cluster routing." do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
       mocked_instances.expect :get_app_profile, app_profile_resp, ["projects/my-project/instances/my-instance/appProfiles/my-app-profile"]

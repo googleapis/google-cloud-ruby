@@ -53,7 +53,7 @@ module Google
           end
 
           ##
-          # Whether there is a next page of instances.
+          # Whether there is a next page of clusters.
           #
           # @return [Boolean]
           #
@@ -126,7 +126,7 @@ module Google
           #   bigtable = Google::Cloud::Bigtable.new
           #
           #   all_cluster_ids = bigtable.clusters.all.map do |cluster|
-          #     puts cluster.instance_id
+          #     puts cluster.cluster_id
           #   end
           #
           def all

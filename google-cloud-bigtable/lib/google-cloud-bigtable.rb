@@ -102,7 +102,6 @@ module Google
     #   should already be composed with a `GRPC::Core::CallCredentials` object.
     #   `Proc` will be used as an updater_proc for the gRPC channel. The proc transforms the
     #   metadata for requests, generally, to give OAuth credentials.
-    # @param timeout [Integer]
     # @param scope [Array<String>]
     #   The OAuth 2.0 scopes controlling the set of resources and operations
     #   that the connection can access. See [Using OAuth 2.0 to Access Google

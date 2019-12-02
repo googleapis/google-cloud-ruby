@@ -74,7 +74,7 @@ end
 * `credentials`: [`String`] Path to shared service account JSON keyfile. Self discovered on GCP.
 * `use_error_reporting`: [`Boolean`] Explicitly enable or disable Error Reporting features. Default: `Rails.env.production?`
 * `use_debugger`: [`Boolean`] Explicitly enable or disable Debugger features. Default: `Rails.env.production?`
-* `use_logging`: [`Boolean`] Explicitly enable or disable Logging features. Default: `Rails.env.production?`
+* `use_logging`: [`Boolean`] Explicitly enable or disable Logging middleware. Default: `Rails.env.production?`
 * `use_trace`: [`Boolean`] Explicitly enable or disable Trace features. Default: `Rails.env.production?`
 
 #### Error Reporting

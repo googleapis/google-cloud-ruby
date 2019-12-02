@@ -30,6 +30,7 @@ require "google/longrunning/operations_client"
 require "google/cloud/automl/v1beta1/service_pb"
 require "google/cloud/automl/v1beta1/credentials"
 require "google/cloud/automl/version"
+require "google/cloud/automl/v1beta1/automl_client_helpers"
 
 module Google
   module Cloud

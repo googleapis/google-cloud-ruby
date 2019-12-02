@@ -1,5 +1,64 @@
 # Release History
 
+### 0.7.0 / 2019-11-19
+
+#### Features
+
+* New RPC methods
+  * Add ClusterManagerClient#list_usable_subnetworks
+* New attributes
+  * Add NodeConfig#taints
+  * Add NodeConfig#shielded_instance_config
+  * Add AddonsConfig#cloud_run_config
+  * Add IPAllocationPolicy#tpu_ipv4_cidr_block
+  * Add Cluster#binary_authorization
+  * Add Cluster#autoscaling
+  * Add Cluster#default_max_pods_constraint
+  * Add Cluster#resource_usage_export_config
+  * Add Cluster#authenticator_groups_config
+  * Add Cluster#database_encryption
+  * Add Cluster#vertical_pod_autoscaling
+  * Add Cluster#enable_tpu
+  * Add Cluster#tpu_ipv4_cidr_block
+  * Add Cluster#conditions
+  * Add ClusterUpdate#desired_database_encryption
+  * Add ClusterUpdate#desired_cluster_autoscaling
+  * Add ClusterUpdate#desired_binary_authorization
+  * Add ClusterUpdate#desired_logging_service
+  * Add ClusterUpdate#desired_resource_usage_export_config
+  * Add ClusterUpdate#desired_vertical_pod_autoscaling
+  * Add ClusterUpdate#desired_intra_node_visibility_config
+  * Add Operation#cluster_conditions
+  * Add Operation#nodepool_conditions
+  * Add NodePool#max_pods_constraint
+  * Add NodePool#conditions
+  * Add NodePool#pod_ipv4_cidr_size
+  * Add MaintenancePolicy#resource_version
+  * Add MaintenanceWindow#maintenance_exclusions
+  * Add MaintenanceWindow#recurring_window (optional)
+  * Add NodePoolAutoscaling#autoprovisioned
+* New classes
+  * Add NodeTaint
+  * Add ShieldedInstanceConfig
+  * Add CloudRunConfig
+  * Add AuthenticatorGroupsConfig
+  * Add BinaryAuthorization
+  * Add TimeWindow
+  * Add RecurringTimeWindow
+  * Add ClusterAutoscaling
+  * Add AutoprovisioningNodePoolDefaults
+  * Add ResourceLimit
+  * Add StatusCondition
+  * Add IntraNodeVisibilityConfig
+  * Add MaxPodsConstraint
+  * Add DatabaseEncryption
+  * Add UsableSubnetwork
+  * Add UsableSubnetworkSecondaryRange
+  * Add ResourceUsageExportConfig
+  * Add ResourceUsageExportConfig::BigQueryDestination
+  * Add ResourceUsageExportConfig::ConsumptionMeteringConfig
+  * Add VerticalPodAutoscaling
+
 ### 0.6.1 / 2019-11-06
 
 #### Bug Fixes

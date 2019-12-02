@@ -92,11 +92,11 @@ module Google
           # over the results returned by a single API call). Use with caution.
           #
           # @yield [table] The block for accessing each table instance.
-          # @yieldparam [Table] instance The table instance object.
+          # @yieldparam [Table] table The table instance object.
           #
           # @return [Enumerator]
           #
-          # @example Iterating each instance by passing a block:
+          # @example Iterating each table by passing a block:
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new

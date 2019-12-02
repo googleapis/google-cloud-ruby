@@ -35,11 +35,11 @@ module Google
           attr_accessor :token
 
           ##
-          # Locations from which Instance information could not be retrieved,
+          # Locations from which instance information could not be retrieved,
           # due to an outage or some other transient condition.
-          # Instances whose Clusters are all in one of the failed locations
-          # may be missing from `instances`, and Instances with at least one
-          # Cluster in a failed location may only have partial information returned.
+          # Instances whose clusters are all in one of the failed locations
+          # may be missing from `instances`, and instances with at least one
+          # cluster in a failed location may only have partial information returned.
           attr_accessor :failed_locations
 
           # @private

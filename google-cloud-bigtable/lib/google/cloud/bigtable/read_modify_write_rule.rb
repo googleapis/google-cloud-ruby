@@ -36,7 +36,7 @@ module Google
       #
       class ReadModifyWriteRule
         # @private
-        # Create an instance of ReadModifyWriteRule
+        # Creates an instance of ReadModifyWriteRule
         #
         # @param family [String]
         #   The name of the family to which the read/modify/write should be applied.
@@ -50,7 +50,7 @@ module Google
         end
 
         ##
-        # Create an instance of an append-value rule.
+        # Creates an instance of an append-value rule.
         #
         # @param family [String]
         #   The name of the family to which the read/modify/write should be applied.
@@ -73,7 +73,7 @@ module Google
         end
 
         ##
-        # Create an instance of an increment-amount rule.
+        # Creates an instance of an increment-amount rule.
         #
         # @param family [String]
         #   The name of the family to which the read/modify/write should be applied.
@@ -86,7 +86,7 @@ module Google
         #   as a 64-bit big-endian signed integer), or the entire request will fail.
         # @return [Google::Cloud::Bigtable::ReadModifyWriteRule]
         #
-        # @example increment value rule
+        # @example
         #   rule = Google::Cloud::Bigtable::ReadModifyWriteRule.increment(
         #     "cf", "field01", 1
         #   )
@@ -98,7 +98,7 @@ module Google
         end
 
         ##
-        # Set append value.
+        # Sets the append value.
         #
         # @param value [String]
         # @return [Google::Cloud::Bigtable::ReadModifyWriteRule]
@@ -109,7 +109,7 @@ module Google
         end
 
         ##
-        # Set increment amount.
+        # Sets the increment amount.
         #
         # @param amount [Integer]
         # @return [Google::Cloud::Bigtable::ReadModifyWriteRule]

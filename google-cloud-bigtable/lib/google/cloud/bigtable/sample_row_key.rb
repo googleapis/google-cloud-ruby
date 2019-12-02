@@ -31,7 +31,7 @@ module Google
       #   Note: that row keys in this list may not have ever been written to or read
       #   from, and users should therefore not make any assumptions about the row key
       #   structure that are specific to their use case.
-
+      #
       # * offset_bytes : Approximate total storage space used by all rows in the table which precede
       #   `row_key`. Buffering the contents of all rows between two subsequent
       #   samples would require space roughly equal to the difference in their

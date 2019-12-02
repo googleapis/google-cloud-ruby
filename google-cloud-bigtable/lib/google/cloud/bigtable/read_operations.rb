@@ -86,7 +86,7 @@ module Google
         #   The default (zero) is to return all results.
         # @return [Array<Google::Cloud::Bigtable::Row> | :yields: row]
         #   Array of row or yield block for each processed row.
-        # @example Read with limit
+        # @example Read with limit.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -96,7 +96,7 @@ module Google
         #     puts row
         #   end
         #
-        # @example Read using row keys
+        # @example Read using row keys.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -106,7 +106,7 @@ module Google
         #     puts row
         #   end
         #
-        # @example Read using row ranges
+        # @example Read using row ranges.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -118,8 +118,7 @@ module Google
         #     puts row
         #   end
         #
-        # @example Read using filter
-        #
+        # @example Read using filter.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -133,8 +132,7 @@ module Google
         #     puts row
         #   end
         #
-        # @example Read using filter with limit
-        #
+        # @example Read using filter with limit.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -169,13 +167,12 @@ module Google
         ##
         # Reads a single row by row key.
         #
-        # @param key [String] Row key. Required
+        # @param key [String] Row key. Required.
         # @param filter [Google::Cloud::Bigtable::RowFilter]
         #   The filter to apply to the contents of the specified row. Optional.
         # @return [Google::Cloud::Bigtable::Row]
         #
-        # @example Read row
-        #
+        # @example
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -183,8 +180,7 @@ module Google
         #
         #   row = table.read_row("user-1")
         #
-        # @example Read row
-        #
+        # @example Read row with filter.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -216,7 +212,7 @@ module Google
         #   # OR
         #   range = table.new_value_range.from("abc").to("xyz")
         #
-        # @example With exclusive from range
+        # @example With exclusive from range.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -229,9 +225,9 @@ module Google
         end
 
         ##
-        # Get a new instance of ColumnRange.
+        # Gets a new instance of ColumnRange.
         #
-        # @param family [String] Column family name
+        # @param family [String] Column family name.
         # @return [Google::Cloud::Bigtable::ColumnRange]
         #
         # @example
@@ -247,7 +243,7 @@ module Google
         #   # OR
         #   range = table.new_column_range("test-family").from("key-1").to("key-5")
         #
-        # @example With exclusive from range
+        # @example With exclusive from range.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
@@ -260,7 +256,7 @@ module Google
         end
 
         ##
-        # Get a new instance of RowRange.
+        # Gets a new instance of RowRange.
         #
         # @return [Google::Cloud::Bigtable::RowRange]
         #
@@ -277,7 +273,7 @@ module Google
         #   # OR
         #   range = table.new_row_range.from("key-1").to("key-5")
         #
-        # @example With exclusive from range
+        # @example With exclusive from range.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new

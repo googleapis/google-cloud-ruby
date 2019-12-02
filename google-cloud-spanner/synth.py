@@ -25,7 +25,7 @@ gapic = gcp.GAPICGenerator()
 
 v1_library = gapic.ruby_library(
     'spanner', 'v1',
-    config_path='/google/spanner/artman_spanner.yaml',
+    config_path='/google/spanner/artman_spanner.legacy.yaml',
     artman_output_name='google-cloud-ruby/google-cloud-spanner'
 )
 s.copy(v1_library / 'lib/google/cloud/spanner/v1')
@@ -34,7 +34,7 @@ s.copy(v1_library / 'test/google/cloud/spanner/v1')
 
 v1_database_library = gapic.ruby_library(
     'spanneradmindatabase', 'v1',
-    config_path='/google/spanner/admin/database/artman_spanner_admin_database.yaml',
+    config_path='/google/spanner/admin/database/artman_spanner_admin_database.legacy.yaml',
     artman_output_name='google-cloud-ruby/google-cloud-spanner_admin_database')
 s.copy(v1_database_library / 'lib/google/cloud/spanner/admin/database.rb')
 s.copy(v1_database_library / 'lib/google/cloud/spanner/admin/database/v1.rb')
@@ -44,7 +44,7 @@ s.copy(v1_database_library / 'test/google/cloud/spanner/admin/database/v1')
 
 v1_instance_library = gapic.ruby_library(
     'spanneradmininstance', 'v1',
-    config_path='/google/spanner/admin/instance/artman_spanner_admin_instance.yaml',
+    config_path='/google/spanner/admin/instance/artman_spanner_admin_instance.legacy.yaml',
     artman_output_name='google-cloud-ruby/google-cloud-spanner_admin_instance')
 s.copy(v1_instance_library / 'lib/google/cloud/spanner/admin/instance.rb')
 s.copy(v1_instance_library / 'lib/google/cloud/spanner/admin/instance/v1.rb')

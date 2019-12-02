@@ -239,6 +239,14 @@ module Google
                   &Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.method(:new)
                 )
 
+                @list_databases = Google::Gax.create_api_call(
+                  @database_admin_stub.method(:list_databases),
+                  defaults["list_databases"],
+                  exception_transformer: exception_transformer,
+                  params_extractor: proc do |request|
+                    {'parent' => request.parent}
+                  end
+                )
                 @create_database = Google::Gax.create_api_call(
                   @database_admin_stub.method(:create_database),
                   defaults["create_database"],
@@ -303,17 +311,64 @@ module Google
                     {'resource' => request.resource}
                   end
                 )
-                @list_databases = Google::Gax.create_api_call(
-                  @database_admin_stub.method(:list_databases),
-                  defaults["list_databases"],
-                  exception_transformer: exception_transformer,
-                  params_extractor: proc do |request|
-                    {'parent' => request.parent}
-                  end
-                )
               end
 
               # Service calls
+
+              # Lists Cloud Spanner databases.
+              #
+              # @param parent [String]
+              #   Required. The instance whose databases should be listed.
+              #   Values are of the form `projects/<project>/instances/<instance>`.
+              # @param page_size [Integer]
+              #   The maximum number of resources contained in the underlying API
+              #   response. If page streaming is performed per-resource, this
+              #   parameter does not affect the return value. If page streaming is
+              #   performed per-page, this determines the maximum number of
+              #   resources in a page.
+              # @param options [Google::Gax::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout,
+              #   retries, etc.
+              # @yield [result, operation] Access the result along with the RPC operation
+              # @yieldparam result [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Database::V1::Database>]
+              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @return [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Database::V1::Database>]
+              #   An enumerable of Google::Spanner::Admin::Database::V1::Database instances.
+              #   See Google::Gax::PagedEnumerable documentation for other
+              #   operations such as per-page iteration or access to the response
+              #   object.
+              # @raise [Google::Gax::GaxError] if the RPC is aborted.
+              # @example
+              #   require "google/cloud/spanner/admin/database"
+              #
+              #   database_admin_client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+              #   formatted_parent = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+              #
+              #   # Iterate over all results.
+              #   database_admin_client.list_databases(formatted_parent).each do |element|
+              #     # Process element.
+              #   end
+              #
+              #   # Or iterate over results one page at a time.
+              #   database_admin_client.list_databases(formatted_parent).each_page do |page|
+              #     # Process each page at a time.
+              #     page.each do |element|
+              #       # Process element.
+              #     end
+              #   end
+
+              def list_databases \
+                  parent,
+                  page_size: nil,
+                  options: nil,
+                  &block
+                req = {
+                  parent: parent,
+                  page_size: page_size
+                }.delete_if { |_, v| v.nil? }
+                req = Google::Gax::to_proto(req, Google::Spanner::Admin::Database::V1::ListDatabasesRequest)
+                @list_databases.call(req, options, &block)
+              end
 
               # Creates a new Cloud Spanner database and starts to prepare it for serving.
               # The returned {Google::Longrunning::Operation long-running operation} will
@@ -620,13 +675,11 @@ module Google
               #   require "google/cloud/spanner/admin/database"
               #
               #   database_admin_client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
-              #
-              #   # TODO: Initialize `resource`:
-              #   resource = ''
+              #   formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
               #
               #   # TODO: Initialize `policy`:
               #   policy = {}
-              #   response = database_admin_client.set_iam_policy(resource, policy)
+              #   response = database_admin_client.set_iam_policy(formatted_resource, policy)
 
               def set_iam_policy \
                   resource,
@@ -668,10 +721,8 @@ module Google
               #   require "google/cloud/spanner/admin/database"
               #
               #   database_admin_client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
-              #
-              #   # TODO: Initialize `resource`:
-              #   resource = ''
-              #   response = database_admin_client.get_iam_policy(resource)
+              #   formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
+              #   response = database_admin_client.get_iam_policy(formatted_resource)
 
               def get_iam_policy \
                   resource,
@@ -713,13 +764,11 @@ module Google
               #   require "google/cloud/spanner/admin/database"
               #
               #   database_admin_client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
-              #
-              #   # TODO: Initialize `resource`:
-              #   resource = ''
+              #   formatted_resource = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.database_path("[PROJECT]", "[INSTANCE]", "[DATABASE]")
               #
               #   # TODO: Initialize `permissions`:
               #   permissions = []
-              #   response = database_admin_client.test_iam_permissions(resource, permissions)
+              #   response = database_admin_client.test_iam_permissions(formatted_resource, permissions)
 
               def test_iam_permissions \
                   resource,
@@ -732,61 +781,6 @@ module Google
                 }.delete_if { |_, v| v.nil? }
                 req = Google::Gax::to_proto(req, Google::Iam::V1::TestIamPermissionsRequest)
                 @test_iam_permissions.call(req, options, &block)
-              end
-
-              # Lists Cloud Spanner databases.
-              #
-              # @param parent [String]
-              #   Required. The instance whose databases should be listed.
-              #   Values are of the form `projects/<project>/instances/<instance>`.
-              # @param page_size [Integer]
-              #   The maximum number of resources contained in the underlying API
-              #   response. If page streaming is performed per-resource, this
-              #   parameter does not affect the return value. If page streaming is
-              #   performed per-page, this determines the maximum number of
-              #   resources in a page.
-              # @param options [Google::Gax::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout,
-              #   retries, etc.
-              # @yield [result, operation] Access the result along with the RPC operation
-              # @yieldparam result [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Database::V1::Database>]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
-              # @return [Google::Gax::PagedEnumerable<Google::Spanner::Admin::Database::V1::Database>]
-              #   An enumerable of Google::Spanner::Admin::Database::V1::Database instances.
-              #   See Google::Gax::PagedEnumerable documentation for other
-              #   operations such as per-page iteration or access to the response
-              #   object.
-              # @raise [Google::Gax::GaxError] if the RPC is aborted.
-              # @example
-              #   require "google/cloud/spanner/admin/database"
-              #
-              #   database_admin_client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
-              #   formatted_parent = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
-              #
-              #   # Iterate over all results.
-              #   database_admin_client.list_databases(formatted_parent).each do |element|
-              #     # Process element.
-              #   end
-              #
-              #   # Or iterate over results one page at a time.
-              #   database_admin_client.list_databases(formatted_parent).each_page do |page|
-              #     # Process each page at a time.
-              #     page.each do |element|
-              #       # Process element.
-              #     end
-              #   end
-
-              def list_databases \
-                  parent,
-                  page_size: nil,
-                  options: nil,
-                  &block
-                req = {
-                  parent: parent,
-                  page_size: page_size
-                }.delete_if { |_, v| v.nil? }
-                req = Google::Gax::to_proto(req, Google::Spanner::Admin::Database::V1::ListDatabasesRequest)
-                @list_databases.call(req, options, &block)
               end
             end
           end

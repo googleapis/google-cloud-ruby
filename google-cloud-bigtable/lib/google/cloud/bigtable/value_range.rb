@@ -34,7 +34,7 @@ module Google
       #   bigtable = Google::Cloud::Bigtable.new
       #   table = bigtable.table("my-instance", "my-table")
       #
-      #   # Range that includes all row keys including "value-001" to "value-005" excluding
+      #   # Range that includes all row keys including "value-001" to "value-005" excluding.
       #   table.new_value_range.from("value-001").to("value-005")
       #
       #   # Range that includes all row keys including "value-001" up to inclusive "value-010".
@@ -46,13 +46,13 @@ module Google
       #   # Range that includes all row keys exclusive "value-001" up until end of the row keys.
       #   table.new_value_range.from("value-001", inclusive: false)
       #
-      #   # Range with unbounded from and the exclusive end "value-100"
+      #   # Range with unbounded from and the exclusive end "value-100".
       #   table.new_value_range.to("value-100")
       #
-      #   # Range that includes all row keys including from and end row keys "value-001", "value-100"
+      #   # Range that includes all row keys including from and end row keys "value-001", "value-100".
       #   table.new_value_range.between("value-001", "value-100")
       #
-      #   # Range that includes all row keys including "value-001" up until "value-100"
+      #   # Range that includes all row keys including "value-001" up until "value-100".
       #   table.new_value_range.of("value-001", "value-100")
       #
       class ValueRange
@@ -65,9 +65,9 @@ module Google
         ##
         # Sets the row range with the lower bound.
         #
-        # @param value [String] value. Required
-        # @param inclusive [String] Inclusive/Exclusive lower bound.
-        #   Default it is an inclusive lower bound.
+        # @param value [String] The value. Required.
+        # @param inclusive [Boolean] Whether the value is an inclusive or
+        #   exclusive lower bound. Default is `true`, an inclusive lower bound.
         # @return [Google::Cloud::Bigtable::ValueRange]
         #
         # @example Inclusive lower bound.
@@ -99,8 +99,8 @@ module Google
         # Sets the value range with upper bound.
         #
         # @param value [String] value. Required
-        # @param inclusive [String] Inclusive/Exclusive upper bound.
-        #   Default it is an exclusive upper bound.
+        # @param inclusive [Boolean] Whether the value is an inclusive or
+        #   exclusive lower bound. Default is `false`, an exclusive lower bound.
         # @return [Google::Cloud::Bigtable::ValueRange]
         #
         # @example Inclusive upper bound.
@@ -129,12 +129,12 @@ module Google
         end
 
         ##
-        # Sets the value range with the inclusive lower and upper bound.
+        # Sets the value range with inclusive lower and upper bounds.
         #
         # @param from_value [String] Inclusive from value. Required
-        # @param to_value [String] Inclusive end value. Required
+        # @param to_value [String] Inclusive to value. Required
         # @return [Google::Cloud::Bigtable::ValueRange]
-        #   Range with inclusive from and end value.
+        #   Range with inclusive from and to values.
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -149,11 +149,12 @@ module Google
         end
 
         ##
-        # Set value range with the inclusive lower and the exclusive upper bound.
+        # Set value range with an inclusive lower bound and an exclusive upper bound.
         #
         # @param from_value [String] Inclusive from value
         # @param to_value [String] Exclusive to value
         # @return [Google::Cloud::Bigtable::ValueRange]
+        #   Range with an inclusive from value and an exclusive to value.
         #
         # @example
         #   require "google/cloud/bigtable"

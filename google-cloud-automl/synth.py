@@ -230,6 +230,12 @@ s.replace(
     '(require \".*credentials\"\n)\n',
     '\\1require "google/cloud/automl/version"\n\n'
 )
+# Permanent: Append the helper code to the AutoML client
+s.replace(
+    'lib/google/cloud/automl/v1beta1/automl_client.rb',
+    'require "google/cloud/automl/version"',
+    'require "google/cloud/automl/version"\nrequire "google/cloud/automl/v1beta1/automl_client_helpers"'
+)
 s.replace(
     'lib/google/cloud/automl/v1beta1/*_client.rb',
     'Gem.loaded_specs\[.*\]\.version\.version',

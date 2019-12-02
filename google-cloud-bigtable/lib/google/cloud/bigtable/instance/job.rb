@@ -40,7 +40,7 @@ module Google
         #     type: :DEVELOPMENT,
         #     labels: { "env" => "dev"}
         #   ) do |clusters|
-        #     clusters.add("test-cluster", "us-east1-b", nodes: 1)
+        #     clusters.add("test-cluster", "us-east1-b") # nodes not allowed
         #   end
         #
         #   # Check and reload.
@@ -76,7 +76,7 @@ module Google
           #     type: :DEVELOPMENT,
           #     labels: { "env" => "dev"}
           #   ) do |clusters|
-          #     clusters.add("test-cluster", "us-east1-b", nodes: 1)
+          #     clusters.add("test-cluster", "us-east1-b") # nodes not allowed
           #   end
           #
           #   job.done? #=> false

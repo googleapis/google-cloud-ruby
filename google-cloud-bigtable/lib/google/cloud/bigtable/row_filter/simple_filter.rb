@@ -102,7 +102,7 @@ module Google
           #
           def sample probability
             if probability >= 1 || probability <= 0
-              raise RowFilterError, "Probability must be greather then 0 and less then 1.0"
+              raise RowFilterError, "Probability must be greater than 0 and less than 1.0."
             end
             @grpc.row_sample_filter = probability
             self
@@ -165,7 +165,7 @@ module Google
           #
           # Due to a technical limitation, it is not possible to apply
           # multiple labels to a cell. As a result, a chain may have no more than
-          # one sub-filter whithatch contains an `apply_label_transformer`. It is okay for
+          # one sub-filter that contains an `apply_label_transformer`. It is okay for
           # an interleave to contain multiple `apply_label_transformers`, as they
           # will be applied to separate copies of the input.
           #
@@ -220,7 +220,7 @@ module Google
           end
 
           ##
-          # Creates a timestamp-range filter instance.
+          # Creates a timestamp-range filter.
           #
           # Matches only cells with timestamps within the given range.
           # Specifies a contiguous range of timestamps.

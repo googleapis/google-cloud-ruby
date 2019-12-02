@@ -56,7 +56,7 @@ module Google
         end
 
         ##
-        # The unique identifier for the project.
+        # The unique identifier for the project to which the cluster belongs.
         #
         # @return [String]
         #
@@ -65,7 +65,7 @@ module Google
         end
 
         ##
-        # The unique identifier for the instance.
+        # The unique identifier for the instance to which the cluster belongs.
         #
         # @return [String]
         #
@@ -93,7 +93,7 @@ module Google
         end
 
         ##
-        # The current instance state.
+        # The current state of the cluster.
         # Possible values are
         # `:CREATING`, `:READY`, `:STATE_NOT_KNOWN`, `:RESIZING`, `:DISABLED`.
         #
@@ -113,7 +113,7 @@ module Google
         end
 
         ##
-        # The instance is currently being created, and may be destroyed if the
+        # The cluster is currently being created, and may be destroyed if the
         # creation process encounters an error.
         #
         # @return [Boolean]
@@ -197,9 +197,9 @@ module Google
         end
 
         ##
-        # Update cluster.
+        # Updates the cluster.
         #
-        # `serve_nodes` is the only updatable field
+        # `serve_nodes` is the only updatable field.
         #
         # @return [Google::Cloud::Bigtable::Cluster::Job]
         #   The job representing the long-running, asynchronous processing of
@@ -235,7 +235,7 @@ module Google
         alias update save
 
         ##
-        # Reloads cluster information.
+        # Reloads cluster data.
         #
         # @return [Google::Cloud::Bigtable::Cluster]
         #

@@ -79,7 +79,7 @@ module Google
         include Enumerable
 
         ##
-        # Create a new ColumnFamilyMap object.
+        # Creates a new ColumnFamilyMap object.
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -108,14 +108,14 @@ module Google
         end
 
         ##
-        # Calls block once for each column family in the map, passing passing
+        # Calls the block once for each column family in the map, passing
         # the name and column family pair as parameters.
         #
         # If no block is given, an enumerator is returned instead.
         #
-        # @yield [name, column_family] The name and column family pair
-        # @yieldparam [String] name the column family name
-        # @yieldparam [ColumnFamily] column_family the column family object
+        # @yield [name, column_family] The name and column family pair.
+        # @yieldparam [String] name the column family name.
+        # @yieldparam [ColumnFamily] column_family the column family object.
         #
         # @return [Enumerator]
         #
@@ -183,7 +183,7 @@ module Google
         # Adds a new column family to the table.
         #
         # @overload add(name, gc_rule: nil)
-        #   @param name [String] Column family name
+        #   @param name [String] Column family name.
         #   @param gc_rule [Google::Cloud::Bigtable::GcRule] The garbage
         #     collection rule to be used for the column family. Optional. The
         #     service default value will be used when not specified.
@@ -222,7 +222,7 @@ module Google
         ##
         # Updates an existing column family in the table.
         #
-        # @param name [String] Column family name
+        # @param name [String] Column family name.
         # @param gc_rule [Google::Cloud::Bigtable::GcRule] The new garbage
         #   collection rule to be used for the column family. Optional. The
         #   service default value will be used when not specified.
@@ -258,7 +258,7 @@ module Google
         ##
         # Deletes the named column family from the table.
         #
-        # @param name [String] Column family name
+        # @param name [String] Column family name.
         #
         # @raise [ArgumentError] if the column family name does not exist.
         # @raise [FrozenError] if the column family map is frozen.
