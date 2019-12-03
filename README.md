@@ -14,6 +14,7 @@ This client supports the following Google Cloud Platform services at a [General
 Availability (GA)](#versioning) quality level:
 
 * [BigQuery](#bigquery-ga) (GA)
+* [Cloud Bigtable](#cloud-bigtable-ga) (GA)
 * [Cloud Datastore](#cloud-datastore-ga) (GA)
 * [Cloud Firestore](#cloud-firestore-ga) (GA)
 * [Cloud Key Management Service](#cloud-key-management-service-ga) (GA)
@@ -29,7 +30,6 @@ This client supports the following Google Cloud Platform services at a
 
 * [Cloud Asset](#cloud-asset-beta) (Beta)
 * [BigQuery Data Transfer](#bigquery-data-transfer-api-beta) (Beta)
-* [Cloud Bigtable](#cloud-bigtable-beta) (Beta)
 * [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
 * [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
 * [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
@@ -189,7 +189,7 @@ data_transfer_service_client.list_data_sources(formatted_parent).each_page do |p
 end
 ```
 
-### Cloud Bigtable (Beta)
+### Cloud Bigtable (GA)
 
 - [google-cloud-bigtable README](google-cloud-bigtable/README.md)
 - [google-cloud-bigtable API documentation](https://googleapis.dev/ruby/google-cloud-bigtable/latest)
