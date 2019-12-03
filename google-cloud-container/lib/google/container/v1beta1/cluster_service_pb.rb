@@ -5,7 +5,10 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/protobuf/empty_pb'
+require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.container.v1beta1.NodeConfig" do
     optional :machine_type, :string, 1
@@ -23,6 +26,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :min_cpu_platform, :string, 13
     optional :workload_metadata_config, :message, 14, "google.container.v1beta1.WorkloadMetadataConfig"
     repeated :taints, :message, 15, "google.container.v1beta1.NodeTaint"
+    optional :shielded_instance_config, :message, 20, "google.container.v1beta1.ShieldedInstanceConfig"
+  end
+  add_message "google.container.v1beta1.ShieldedInstanceConfig" do
+    optional :enable_secure_boot, :bool, 1
+    optional :enable_integrity_monitoring, :bool, 2
   end
   add_message "google.container.v1beta1.NodeTaint" do
     optional :key, :string, 1
@@ -124,6 +132,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.container.v1beta1.PodSecurityPolicyConfig" do
     optional :enabled, :bool, 1
   end
+  add_message "google.container.v1beta1.AuthenticatorGroupsConfig" do
+    optional :enabled, :bool, 1
+    optional :security_group, :string, 2
+  end
   add_message "google.container.v1beta1.Cluster" do
     optional :name, :string, 1
     optional :description, :string, 2
@@ -154,6 +166,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :master_ipv4_cidr_block, :string, 29
     optional :default_max_pods_constraint, :message, 30, "google.container.v1beta1.MaxPodsConstraint"
     optional :resource_usage_export_config, :message, 33, "google.container.v1beta1.ResourceUsageExportConfig"
+    optional :authenticator_groups_config, :message, 34, "google.container.v1beta1.AuthenticatorGroupsConfig"
     optional :private_cluster_config, :message, 37, "google.container.v1beta1.PrivateClusterConfig"
     optional :vertical_pod_autoscaling, :message, 39, "google.container.v1beta1.VerticalPodAutoscaling"
     optional :self_link, :string, 100
@@ -173,6 +186,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :location, :string, 114
     optional :enable_tpu, :bool, 115
     optional :tpu_ipv4_cidr_block, :string, 116
+    optional :database_encryption, :message, 38, "google.container.v1beta1.DatabaseEncryption"
     repeated :conditions, :message, 118, "google.container.v1beta1.StatusCondition"
   end
   add_enum "google.container.v1beta1.Cluster.Status" do
@@ -199,6 +213,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :desired_logging_service, :string, 19
     optional :desired_resource_usage_export_config, :message, 21, "google.container.v1beta1.ResourceUsageExportConfig"
     optional :desired_vertical_pod_autoscaling, :message, 22, "google.container.v1beta1.VerticalPodAutoscaling"
+    optional :desired_intra_node_visibility_config, :message, 26, "google.container.v1beta1.IntraNodeVisibilityConfig"
     optional :desired_master_version, :string, 100
   end
   add_message "google.container.v1beta1.Operation" do
@@ -283,6 +298,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :node_pool_id, :string, 4
     optional :node_version, :string, 5
     optional :image_type, :string, 6
+    optional :workload_metadata_config, :message, 14, "google.container.v1beta1.WorkloadMetadataConfig"
     optional :name, :string, 8
   end
   add_message "google.container.v1beta1.SetNodePoolAutoscalingRequest" do
@@ -430,6 +446,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :management, :message, 5, "google.container.v1beta1.NodeManagement"
     optional :max_pods_constraint, :message, 6, "google.container.v1beta1.MaxPodsConstraint"
     repeated :conditions, :message, 105, "google.container.v1beta1.StatusCondition"
+    optional :pod_ipv4_cidr_size, :int32, 7
   end
   add_enum "google.container.v1beta1.NodePool.Status" do
     value :STATUS_UNSPECIFIED, 0
@@ -451,11 +468,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.container.v1beta1.MaintenancePolicy" do
     optional :window, :message, 1, "google.container.v1beta1.MaintenanceWindow"
+    optional :resource_version, :string, 3
   end
   add_message "google.container.v1beta1.MaintenanceWindow" do
+    map :maintenance_exclusions, :string, :message, 4, "google.container.v1beta1.TimeWindow"
     oneof :policy do
       optional :daily_maintenance_window, :message, 2, "google.container.v1beta1.DailyMaintenanceWindow"
+      optional :recurring_window, :message, 3, "google.container.v1beta1.RecurringTimeWindow"
     end
+  end
+  add_message "google.container.v1beta1.TimeWindow" do
+    optional :start_time, :message, 1, "google.protobuf.Timestamp"
+    optional :end_time, :message, 2, "google.protobuf.Timestamp"
+  end
+  add_message "google.container.v1beta1.RecurringTimeWindow" do
+    optional :window, :message, 1, "google.container.v1beta1.TimeWindow"
+    optional :recurrence, :string, 2
   end
   add_message "google.container.v1beta1.DailyMaintenanceWindow" do
     optional :start_time, :string, 2
@@ -490,6 +518,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.container.v1beta1.ClusterAutoscaling" do
     optional :enable_node_autoprovisioning, :bool, 1
     repeated :resource_limits, :message, 2, "google.container.v1beta1.ResourceLimit"
+    optional :autoprovisioning_node_pool_defaults, :message, 4, "google.container.v1beta1.AutoprovisioningNodePoolDefaults"
+    repeated :autoprovisioning_locations, :string, 5
+  end
+  add_message "google.container.v1beta1.AutoprovisioningNodePoolDefaults" do
+    repeated :oauth_scopes, :string, 1
+    optional :service_account, :string, 2
   end
   add_message "google.container.v1beta1.ResourceLimit" do
     optional :resource_type, :string, 1
@@ -583,10 +617,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :GKE_SERVICE_ACCOUNT_DELETED, 2
     value :GCE_QUOTA_EXCEEDED, 3
     value :SET_BY_OPERATOR, 4
+    value :CLOUD_KMS_KEY_ERROR, 7
   end
   add_message "google.container.v1beta1.NetworkConfig" do
     optional :network, :string, 1
     optional :subnetwork, :string, 2
+    optional :enable_intra_node_visibility, :bool, 5
   end
   add_message "google.container.v1beta1.ListUsableSubnetworksRequest" do
     optional :parent, :string, 1
@@ -620,15 +656,31 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.container.v1beta1.VerticalPodAutoscaling" do
     optional :enabled, :bool, 1
   end
+  add_message "google.container.v1beta1.IntraNodeVisibilityConfig" do
+    optional :enabled, :bool, 1
+  end
   add_message "google.container.v1beta1.MaxPodsConstraint" do
     optional :max_pods_per_node, :int64, 1
+  end
+  add_message "google.container.v1beta1.DatabaseEncryption" do
+    optional :state, :enum, 2, "google.container.v1beta1.DatabaseEncryption.State"
+    optional :key_name, :string, 1
+  end
+  add_enum "google.container.v1beta1.DatabaseEncryption.State" do
+    value :UNKNOWN, 0
+    value :ENCRYPTED, 1
+    value :DECRYPTED, 2
   end
   add_message "google.container.v1beta1.ResourceUsageExportConfig" do
     optional :bigquery_destination, :message, 1, "google.container.v1beta1.ResourceUsageExportConfig.BigQueryDestination"
     optional :enable_network_egress_metering, :bool, 2
+    optional :consumption_metering_config, :message, 3, "google.container.v1beta1.ResourceUsageExportConfig.ConsumptionMeteringConfig"
   end
   add_message "google.container.v1beta1.ResourceUsageExportConfig.BigQueryDestination" do
     optional :dataset_id, :string, 1
+  end
+  add_message "google.container.v1beta1.ResourceUsageExportConfig.ConsumptionMeteringConfig" do
+    optional :enabled, :bool, 1
   end
 end
 
@@ -636,6 +688,7 @@ module Google
   module Container
     module V1beta1
       NodeConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodeConfig").msgclass
+      ShieldedInstanceConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ShieldedInstanceConfig").msgclass
       NodeTaint = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodeTaint").msgclass
       NodeTaint::Effect = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodeTaint.Effect").enummodule
       MasterAuth = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.MasterAuth").msgclass
@@ -657,6 +710,7 @@ module Google
       IPAllocationPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.IPAllocationPolicy").msgclass
       BinaryAuthorization = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.BinaryAuthorization").msgclass
       PodSecurityPolicyConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.PodSecurityPolicyConfig").msgclass
+      AuthenticatorGroupsConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.AuthenticatorGroupsConfig").msgclass
       Cluster = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.Cluster").msgclass
       Cluster::Status = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.Cluster.Status").enummodule
       ClusterUpdate = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ClusterUpdate").msgclass
@@ -696,12 +750,15 @@ module Google
       AutoUpgradeOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.AutoUpgradeOptions").msgclass
       MaintenancePolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.MaintenancePolicy").msgclass
       MaintenanceWindow = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.MaintenanceWindow").msgclass
+      TimeWindow = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.TimeWindow").msgclass
+      RecurringTimeWindow = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.RecurringTimeWindow").msgclass
       DailyMaintenanceWindow = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.DailyMaintenanceWindow").msgclass
       SetNodePoolManagementRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.SetNodePoolManagementRequest").msgclass
       SetNodePoolSizeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.SetNodePoolSizeRequest").msgclass
       RollbackNodePoolUpgradeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.RollbackNodePoolUpgradeRequest").msgclass
       ListNodePoolsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ListNodePoolsResponse").msgclass
       ClusterAutoscaling = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ClusterAutoscaling").msgclass
+      AutoprovisioningNodePoolDefaults = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.AutoprovisioningNodePoolDefaults").msgclass
       ResourceLimit = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ResourceLimit").msgclass
       NodePoolAutoscaling = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodePoolAutoscaling").msgclass
       SetLabelsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.SetLabelsRequest").msgclass
@@ -726,9 +783,13 @@ module Google
       UsableSubnetworkSecondaryRange::Status = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.UsableSubnetworkSecondaryRange.Status").enummodule
       UsableSubnetwork = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.UsableSubnetwork").msgclass
       VerticalPodAutoscaling = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.VerticalPodAutoscaling").msgclass
+      IntraNodeVisibilityConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.IntraNodeVisibilityConfig").msgclass
       MaxPodsConstraint = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.MaxPodsConstraint").msgclass
+      DatabaseEncryption = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.DatabaseEncryption").msgclass
+      DatabaseEncryption::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.DatabaseEncryption.State").enummodule
       ResourceUsageExportConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ResourceUsageExportConfig").msgclass
       ResourceUsageExportConfig::BigQueryDestination = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ResourceUsageExportConfig.BigQueryDestination").msgclass
+      ResourceUsageExportConfig::ConsumptionMeteringConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ResourceUsageExportConfig.ConsumptionMeteringConfig").msgclass
     end
   end
 end
