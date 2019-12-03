@@ -127,6 +127,14 @@ s.replace(
         'lib/google/cloud/spanner/v*/*_client.rb',
         'lib/google/cloud/spanner/admin/*/v*/*_client.rb'
     ],
+    ',\n(\\s+)lib_name: lib_name,\n\\s+lib_version: lib_version',
+    ',\n\\1service_address: service_address,\n\\1service_port: service_port,\n\\1lib_name: lib_name,\n\\1lib_version: lib_version'
+)
+s.replace(
+    [
+        'lib/google/cloud/spanner/v*/*_client.rb',
+        'lib/google/cloud/spanner/admin/*/v*/*_client.rb'
+    ],
     'service_path = self\\.class::SERVICE_ADDRESS',
     'service_path = service_address || self.class::SERVICE_ADDRESS'
 )
