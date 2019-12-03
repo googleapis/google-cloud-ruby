@@ -40,6 +40,16 @@ module Google
             # Annotates a previously created Assessment to provide additional information
             # on whether the event turned out to be authentic or fradulent.
             rpc :AnnotateAssessment, AnnotateAssessmentRequest, AnnotateAssessmentResponse
+            # Creates a new reCAPTCHA Enterprise key.
+            rpc :CreateKey, CreateKeyRequest, Key
+            # Returns the list of all keys that belong to a project.
+            rpc :ListKeys, ListKeysRequest, ListKeysResponse
+            # Returns the specified key.
+            rpc :GetKey, GetKeyRequest, Key
+            # Updates the specified key.
+            rpc :UpdateKey, UpdateKeyRequest, Key
+            # Deletes the specified key.
+            rpc :DeleteKey, DeleteKeyRequest, Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

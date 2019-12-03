@@ -26,6 +26,14 @@ module Google
             self.class.assessment_path project, assessment
           end
           
+          # Alias for Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient.key_path.
+          # @param project [String]
+          # @param key [String]
+          # @return [String]
+          def key_path project, key
+            self.class.key_path project, key
+          end
+          
           # Alias for Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient.project_path.
           # @param project [String]
           # @return [String]

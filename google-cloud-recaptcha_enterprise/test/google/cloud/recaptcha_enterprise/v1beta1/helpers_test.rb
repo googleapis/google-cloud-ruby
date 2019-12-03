@@ -50,6 +50,19 @@ describe Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient 
     end
   end
 
+  describe "the key_path instance method" do
+    it "correctly calls Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient.key_path" do
+      Google::Cloud::RecaptchaEnterprise::V1beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::RecaptchaEnterprise.new version: :v1beta1
+        parameters = client.method("key_path").parameters.map { |arg| arg.last.to_s }
+        assert_equal(
+          client.key_path(*parameters),
+          Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient.key_path(*parameters)
+        )
+      end
+    end
+  end
+
   describe "the project_path instance method" do
     it "correctly calls Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient.project_path" do
       Google::Cloud::RecaptchaEnterprise::V1beta1::Credentials.stub(:default, mock_credentials) do
