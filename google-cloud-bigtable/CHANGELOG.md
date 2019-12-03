@@ -1,5 +1,19 @@
 # Release History
 
+### 0.8.1 / 2019-12-03
+
+#### Documentation
+
+* Add OVERVIEW guide with samples
+* Add sample to README.md
+* Correct error in lower-level API Table IAM documentation
+* Fix samples and copy edit all in-line documentation
+  * Fix samples for Project#create_instance type development
+  * Add acceptance test for Project#create_instance type development
+* Update documentation to indicate attributes as required
+* Update low-level IAM Policy documentation
+* Update release level to GA
+
 ### 0.8.0 / 2019-11-01
 
 #### ⚠ BREAKING CHANGES
