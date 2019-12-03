@@ -1,5 +1,17 @@
 # Release History
 
+### 1.0.0 / 2019-12-03
+
+#### Documentation
+
+* Update release level to GA
+* Add OVERVIEW.md guide with samples
+* Add sample to README.md
+* Fix samples and copy edit all in-line documentation
+* Correct error in lower-level API Table IAM documentation
+* Update lower-level API documentation to indicate attributes as required
+* Update low-level IAM Policy documentation
+
 ### 0.8.0 / 2019-11-01
 
 #### ⚠ BREAKING CHANGES
