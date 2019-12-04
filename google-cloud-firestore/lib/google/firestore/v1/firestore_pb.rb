@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/firestore/v1/common_pb'
 require 'google/firestore/v1/document_pb'
 require 'google/firestore/v1/query_pb'
@@ -12,7 +14,6 @@ require 'google/firestore/v1/write_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
-require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.firestore.v1.GetDocumentRequest" do
     optional :name, :string, 1
