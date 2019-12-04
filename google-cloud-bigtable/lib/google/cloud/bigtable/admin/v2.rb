@@ -25,7 +25,7 @@ module Google
         # rubocop:disable LineLength
 
         ##
-        # # Ruby Client for Cloud Bigtable Admin API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))
+        # # Ruby Client for Cloud Bigtable Admin API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
         #
         # [Cloud Bigtable Admin API][Product Documentation]:
         #
