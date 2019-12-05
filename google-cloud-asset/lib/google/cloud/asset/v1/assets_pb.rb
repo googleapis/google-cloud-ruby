@@ -4,12 +4,12 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.asset.v1.TemporalAsset" do
     optional :window, :message, 1, "google.cloud.asset.v1.TimeWindow"
@@ -25,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :asset_type, :string, 2
     optional :resource, :message, 3, "google.cloud.asset.v1.Resource"
     optional :iam_policy, :message, 4, "google.iam.v1.Policy"
+    repeated :ancestors, :string, 10
   end
   add_message "google.cloud.asset.v1.Resource" do
     optional :version, :string, 1

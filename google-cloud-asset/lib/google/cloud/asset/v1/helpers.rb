@@ -18,11 +18,12 @@ module Google
       module V1
         class AssetServiceClient
 
-          # Alias for Google::Cloud::Asset::V1::AssetServiceClient.project_path.
+          # Alias for Google::Cloud::Asset::V1::AssetServiceClient.feed_path.
           # @param project [String]
+          # @param feed [String]
           # @return [String]
-          def project_path project
-            self.class.project_path project
+          def feed_path project, feed
+            self.class.feed_path project, feed
           end
         end
       end
