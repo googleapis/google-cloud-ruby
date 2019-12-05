@@ -11,9 +11,11 @@ require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/cloud/talent/v4beta1/filters_pb'
 require 'google/cloud/talent/v4beta1/histogram_pb'
 require 'google/cloud/talent/v4beta1/profile_pb'
+require 'google/longrunning/operations_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.talent.v4beta1.ListProfilesRequest" do
     optional :parent, :string, 1
