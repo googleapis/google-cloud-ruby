@@ -211,11 +211,15 @@ module Google
         def insert_tabledata_json_rows dataset_id, table_id, json_rows, options = {}
           rows_and_ids = Array(json_rows).zip Array(options[:insert_ids])
           insert_rows = rows_and_ids.map do |json_row, insert_id|
-            insert_id ||= SecureRandom.uuid
-            {
-              insertId: insert_id,
-              json:     json_row
-            }
+            if insert_id == :skip
+              { json: json_row }
+            else
+              insert_id ||= SecureRandom.uuid
+              {
+                insertId: insert_id,
+                json:     json_row
+              }
+            end
           end
 
           insert_req = {

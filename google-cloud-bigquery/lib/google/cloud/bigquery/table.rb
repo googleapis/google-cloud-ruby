@@ -1978,12 +1978,13 @@ module Google
         #
         # @param [Hash, Array<Hash>] rows A hash object or array of hash objects
         #   containing the data. Required.
-        # @param [Array<String>] insert_ids A unique ID for each row. BigQuery
-        #   uses this property to detect duplicate insertion requests on a
-        #   best-effort basis. For more information, see [data
-        #   consistency](https://cloud.google.com/bigquery/streaming-data-into-bigquery#dataconsistency).
-        #   Optional. If not provided, the client library will assign a UUID to
-        #   each row before the request is sent.
+        # @param [Array<String|Symbol>, Symbol] insert_ids A unique ID for each row. BigQuery uses this property to
+        #   detect duplicate insertion requests on a best-effort basis. For more information, see [data
+        #   consistency](https://cloud.google.com/bigquery/streaming-data-into-bigquery#dataconsistency). Optional. If
+        #   not provided, the client library will assign a UUID to each row before the request is sent.
+        #
+        #  The value `:skip` can be provided to skip the generation of IDs for all rows, or to skip the generation of an
+        #  ID for a specific row in the array.
         # @param [Boolean] skip_invalid Insert all valid rows of a request, even
         #   if invalid rows exist. The default value is `false`, which causes
         #   the entire request to fail if any invalid rows exist.
@@ -2023,12 +2024,14 @@ module Google
         #
         def insert rows, insert_ids: nil, skip_invalid: nil, ignore_unknown: nil
           rows = [rows] if rows.is_a? Hash
+          raise ArgumentError, "No rows provided" if rows.empty?
+
+          insert_ids = Array.new(rows.count) { :skip } if insert_ids == :skip
           insert_ids = Array insert_ids
           if insert_ids.count.positive? && insert_ids.count != rows.count
             raise ArgumentError, "insert_ids must be the same size as rows"
           end
-          rows = [rows] if rows.is_a? Hash
-          raise ArgumentError, "No rows provided" if rows.empty?
+
           ensure_service!
           options = { skip_invalid: skip_invalid, ignore_unknown: ignore_unknown, insert_ids: insert_ids }
           gapi = service.insert_tabledata dataset_id, table_id, rows, options
