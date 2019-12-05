@@ -402,7 +402,10 @@ module Google
             @list_info_types = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_info_types),
               defaults["list_info_types"],
-              exception_transformer: exception_transformer
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'location_id' => request.location_id}
+              end
             )
             @create_inspect_template = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_inspect_template),
@@ -635,6 +638,9 @@ module Google
           #   that are set in this request will replace their corresponding fields in the
           #   template. Repeated fields are appended. Singular sub-messages and groups
           #   are recursively merged.
+          # @param location_id [String]
+          #   The geographic location to process content inspection. Reserved for future
+          #   extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -655,13 +661,15 @@ module Google
               inspect_config: nil,
               item: nil,
               inspect_template_name: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               inspect_config: inspect_config,
               item: item,
-              inspect_template_name: inspect_template_name
+              inspect_template_name: inspect_template_name,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::InspectContentRequest)
             @inspect_content.call(req, options, &block)
@@ -678,6 +686,9 @@ module Google
           #
           # @param parent [String]
           #   The parent resource name, for example projects/my-project-id.
+          # @param location_id [String]
+          #   The geographic location to process the request. Reserved for future
+          #   extensions.
           # @param inspect_config [Google::Privacy::Dlp::V2::InspectConfig | Hash]
           #   Configuration for the inspector.
           #   A hash of the same form as `Google::Privacy::Dlp::V2::InspectConfig`
@@ -710,6 +721,7 @@ module Google
 
           def redact_image \
               parent,
+              location_id: nil,
               inspect_config: nil,
               image_redaction_configs: nil,
               include_findings: nil,
@@ -718,6 +730,7 @@ module Google
               &block
             req = {
               parent: parent,
+              location_id: location_id,
               inspect_config: inspect_config,
               image_redaction_configs: image_redaction_configs,
               include_findings: include_findings,
@@ -766,6 +779,9 @@ module Google
           #   that are set in this request will replace their corresponding fields in the
           #   template. Repeated fields are appended. Singular sub-messages and groups
           #   are recursively merged.
+          # @param location_id [String]
+          #   The geographic location to process de-identification. Reserved for future
+          #   extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -788,6 +804,7 @@ module Google
               item: nil,
               inspect_template_name: nil,
               deidentify_template_name: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
@@ -796,7 +813,8 @@ module Google
               inspect_config: inspect_config,
               item: item,
               inspect_template_name: inspect_template_name,
-              deidentify_template_name: deidentify_template_name
+              deidentify_template_name: deidentify_template_name,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeidentifyContentRequest)
             @deidentify_content.call(req, options, &block)
@@ -843,6 +861,9 @@ module Google
           #   that are set in this request will replace their corresponding fields in the
           #   template. Repeated fields are appended. Singular sub-messages and groups
           #   are recursively merged.
+          # @param location_id [String]
+          #   The geographic location to process content reidentification.  Reserved for
+          #   future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -865,6 +886,7 @@ module Google
               item: nil,
               inspect_template_name: nil,
               reidentify_template_name: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
@@ -873,7 +895,8 @@ module Google
               inspect_config: inspect_config,
               item: item,
               inspect_template_name: inspect_template_name,
-              reidentify_template_name: reidentify_template_name
+              reidentify_template_name: reidentify_template_name,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ReidentifyContentRequest)
             @reidentify_content.call(req, options, &block)
@@ -890,6 +913,9 @@ module Google
           # @param filter [String]
           #   Optional filter to only return infoTypes supported by certain parts of the
           #   API. Defaults to supported_by=INSPECT.
+          # @param location_id [String]
+          #   The geographic location to list info types. Reserved for future
+          #   extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -907,11 +933,13 @@ module Google
           def list_info_types \
               language_code: nil,
               filter: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               language_code: language_code,
-              filter: filter
+              filter: filter,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListInfoTypesRequest)
             @list_info_types.call(req, options, &block)
@@ -933,6 +961,9 @@ module Google
           #   numbers, and hyphens; that is, it must match the regular
           #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
+          # @param location_id [String]
+          #   The geographic location to store the inspection template. Reserved for
+          #   future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -952,12 +983,14 @@ module Google
               parent,
               inspect_template: nil,
               template_id: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               inspect_template: inspect_template,
-              template_id: template_id
+              template_id: template_id,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateInspectTemplateRequest)
             @create_inspect_template.call(req, options, &block)
@@ -1066,6 +1099,9 @@ module Google
           #   * `update_time`: corresponds to time the template was last updated.
           #   * `name`: corresponds to template's name.
           #   * `display_name`: corresponds to template's display name.
+          # @param location_id [String]
+          #   The geographic location where inspection templates will be retrieved from.
+          #   Use `-` for all locations. Reserved for future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1101,12 +1137,14 @@ module Google
               parent,
               page_size: nil,
               order_by: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               page_size: page_size,
-              order_by: order_by
+              order_by: order_by,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListInspectTemplatesRequest)
             @list_inspect_templates.call(req, options, &block)
@@ -1162,6 +1200,9 @@ module Google
           #   numbers, and hyphens; that is, it must match the regular
           #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
+          # @param location_id [String]
+          #   The geographic location to store the deidentification template. Reserved
+          #   for future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1181,12 +1222,14 @@ module Google
               parent,
               deidentify_template: nil,
               template_id: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               deidentify_template: deidentify_template,
-              template_id: template_id
+              template_id: template_id,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateDeidentifyTemplateRequest)
             @create_deidentify_template.call(req, options, &block)
@@ -1299,6 +1342,9 @@ module Google
           #   * `update_time`: corresponds to time the template was last updated.
           #   * `name`: corresponds to template's name.
           #   * `display_name`: corresponds to template's display name.
+          # @param location_id [String]
+          #   The geographic location where deidentifications templates will be retrieved
+          #   from. Use `-` for all locations. Reserved for future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1334,12 +1380,14 @@ module Google
               parent,
               page_size: nil,
               order_by: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               page_size: page_size,
-              order_by: order_by
+              order_by: order_by,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListDeidentifyTemplatesRequest)
             @list_deidentify_templates.call(req, options, &block)
@@ -1400,6 +1448,9 @@ module Google
           #   numbers, and hyphens; that is, it must match the regular
           #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
+          # @param location_id [String]
+          #   The geographic location to store and process the job. Reserved for
+          #   future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1420,13 +1471,15 @@ module Google
               inspect_job: nil,
               risk_job: nil,
               job_id: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               inspect_job: inspect_job,
               risk_job: risk_job,
-              job_id: job_id
+              job_id: job_id,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateDlpJobRequest)
             @create_dlp_job.call(req, options, &block)
@@ -1489,6 +1542,9 @@ module Google
           #   * `end_time`: corresponds to time the job ended.
           #   * `name`: corresponds to job's name.
           #   * `state`: corresponds to `state`
+          # @param location_id [String]
+          #   The geographic location where jobs will be retrieved from.
+          #   Use `-` for all locations. Reserved for future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1526,6 +1582,7 @@ module Google
               page_size: nil,
               type: nil,
               order_by: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
@@ -1533,7 +1590,8 @@ module Google
               filter: filter,
               page_size: page_size,
               type: type,
-              order_by: order_by
+              order_by: order_by,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListDlpJobsRequest)
             @list_dlp_jobs.call(req, options, &block)
@@ -1691,6 +1749,9 @@ module Google
           #   * last_run_time > \"2017-12-12T00:00:00+00:00\"
           #
           #   The length of this field should be no more than 500 characters.
+          # @param location_id [String]
+          #   The geographic location where job triggers will be retrieved from.
+          #   Use `-` for all locations. Reserved for future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1727,13 +1788,15 @@ module Google
               page_size: nil,
               order_by: nil,
               filter: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               page_size: page_size,
               order_by: order_by,
-              filter: filter
+              filter: filter,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListJobTriggersRequest)
             @list_job_triggers.call(req, options, &block)
@@ -1864,6 +1927,9 @@ module Google
           #   numbers, and hyphens; that is, it must match the regular
           #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
+          # @param location_id [String]
+          #   The geographic location to store the job trigger. Reserved for
+          #   future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1883,12 +1949,14 @@ module Google
               parent,
               job_trigger: nil,
               trigger_id: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               job_trigger: job_trigger,
-              trigger_id: trigger_id
+              trigger_id: trigger_id,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateJobTriggerRequest)
             @create_job_trigger.call(req, options, &block)
@@ -1910,6 +1978,9 @@ module Google
           #   numbers, and hyphens; that is, it must match the regular
           #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           #   characters. Can be empty to allow the system to generate one.
+          # @param location_id [String]
+          #   The geographic location to store the stored infoType. Reserved for
+          #   future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1929,12 +2000,14 @@ module Google
               parent,
               config: nil,
               stored_info_type_id: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               config: config,
-              stored_info_type_id: stored_info_type_id
+              stored_info_type_id: stored_info_type_id,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateStoredInfoTypeRequest)
             @create_stored_info_type.call(req, options, &block)
@@ -2051,6 +2124,9 @@ module Google
           #   * `state`: corresponds to the state of the resource.
           #   * `name`: corresponds to resource name.
           #   * `display_name`: corresponds to info type's display name.
+          # @param location_id [String]
+          #   The geographic location where stored infoTypes will be retrieved from.
+          #   Use `-` for all locations. Reserved for future extensions.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -2086,12 +2162,14 @@ module Google
               parent,
               page_size: nil,
               order_by: nil,
+              location_id: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               page_size: page_size,
-              order_by: order_by
+              order_by: order_by,
+              location_id: location_id
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListStoredInfoTypesRequest)
             @list_stored_info_types.call(req, options, &block)

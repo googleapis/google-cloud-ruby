@@ -349,6 +349,10 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     The parent resource name, for example projects/my-project-id.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location to process the request. Reserved for future
+        #     extensions.
         # @!attribute [rw] inspect_config
         #   @return [Google::Privacy::Dlp::V2::InspectConfig]
         #     Configuration for the inspector.
@@ -438,6 +442,10 @@ module Google
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location to process de-identification. Reserved for future
+        #     extensions.
         class DeidentifyContentRequest; end
 
         # Results of de-identifying a ContentItem.
@@ -486,6 +494,10 @@ module Google
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location to process content reidentification.  Reserved for
+        #     future extensions.
         class ReidentifyContentRequest; end
 
         # Results of re-identifying a item.
@@ -515,6 +527,10 @@ module Google
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location to process content inspection. Reserved for future
+        #     extensions.
         class InspectContentRequest; end
 
         # Results of inspecting an item.
@@ -639,6 +655,10 @@ module Google
         #   @return [String]
         #     Optional filter to only return infoTypes supported by certain parts of the
         #     API. Defaults to supported_by=INSPECT.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location to list info types. Reserved for future
+        #     extensions.
         class ListInfoTypesRequest; end
 
         # Response to the ListInfoTypes request.
@@ -1607,12 +1627,13 @@ module Google
         # @!attribute [rw] context
         #   @return [Google::Privacy::Dlp::V2::FieldId]
         #     Points to the field that contains the context, for example, an entity id.
-        #     If set, must also set method. If set, shift will be consistent for the
+        #     If set, must also set cryptoKey. If set, shift will be consistent for the
         #     given context.
         # @!attribute [rw] crypto_key
         #   @return [Google::Privacy::Dlp::V2::CryptoKey]
         #     Causes the shift to be computed based on this key and the context. This
-        #     results in the same shift for the same context and crypto_key.
+        #     results in the same shift for the same context and crypto_key. If
+        #     set, must also set context. Can only be applied to table items.
         class DateShiftConfig; end
 
         # A type of transformation that will scan unstructured text and
@@ -1826,16 +1847,16 @@ module Google
         #     Short description (max 256 chars).
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The creation timestamp of a inspectTemplate, output only field.
+        #     The creation timestamp of an inspectTemplate, output only field.
         # @!attribute [rw] update_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The last update timestamp of a inspectTemplate, output only field.
+        #     The last update timestamp of an inspectTemplate, output only field.
         # @!attribute [rw] inspect_config
         #   @return [Google::Privacy::Dlp::V2::InspectConfig]
         #     The core content of the template. Configuration of the scanning process.
         class InspectTemplate; end
 
-        # The DeidentifyTemplates contains instructions on how to deidentify content.
+        # DeidentifyTemplates contains instructions on how to de-identify content.
         # See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
         # @!attribute [rw] name
         #   @return [String]
@@ -1852,10 +1873,10 @@ module Google
         #     Short description (max 256 chars).
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The creation timestamp of a inspectTemplate, output only field.
+        #     The creation timestamp of an inspectTemplate, output only field.
         # @!attribute [rw] update_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The last update timestamp of a inspectTemplate, output only field.
+        #     The last update timestamp of an inspectTemplate, output only field.
         # @!attribute [rw] deidentify_config
         #   @return [Google::Privacy::Dlp::V2::DeidentifyConfig]
         #     ///////////// // The core content of the template  // ///////////////
@@ -2026,6 +2047,10 @@ module Google
         #     numbers, and hyphens; that is, it must match the regular
         #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location to store the inspection template. Reserved for
+        #     future extensions.
         class CreateInspectTemplateRequest; end
 
         # Request message for UpdateInspectTemplate.
@@ -2078,6 +2103,10 @@ module Google
         #     * `update_time`: corresponds to time the template was last updated.
         #     * `name`: corresponds to template's name.
         #     * `display_name`: corresponds to template's display name.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location where inspection templates will be retrieved from.
+        #     Use `-` for all locations. Reserved for future extensions.
         class ListInspectTemplatesRequest; end
 
         # Response message for ListInspectTemplates.
@@ -2111,6 +2140,10 @@ module Google
         #     numbers, and hyphens; that is, it must match the regular
         #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location to store the job trigger. Reserved for
+        #     future extensions.
         class CreateJobTriggerRequest; end
 
         # Request message for ActivateJobTrigger.
@@ -2156,6 +2189,10 @@ module Google
         #     numbers, and hyphens; that is, it must match the regular
         #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location to store and process the job. Reserved for
+        #     future extensions.
         class CreateDlpJobRequest; end
 
         # Request message for ListJobTriggers.
@@ -2213,6 +2250,10 @@ module Google
         #     * last_run_time > \"2017-12-12T00:00:00+00:00\"
         #
         #     The length of this field should be no more than 500 characters.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location where job triggers will be retrieved from.
+        #     Use `-` for all locations. Reserved for future extensions.
         class ListJobTriggersRequest; end
 
         # Response message for ListJobTriggers.
@@ -2365,6 +2406,10 @@ module Google
         #     * `end_time`: corresponds to time the job ended.
         #     * `name`: corresponds to job's name.
         #     * `state`: corresponds to `state`
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location where jobs will be retrieved from.
+        #     Use `-` for all locations. Reserved for future extensions.
         class ListDlpJobsRequest; end
 
         # The response message for listing DLP jobs.
@@ -2402,6 +2447,10 @@ module Google
         #     numbers, and hyphens; that is, it must match the regular
         #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location to store the deidentification template. Reserved
+        #     for future extensions.
         class CreateDeidentifyTemplateRequest; end
 
         # Request message for UpdateDeidentifyTemplate.
@@ -2454,6 +2503,10 @@ module Google
         #     * `update_time`: corresponds to time the template was last updated.
         #     * `name`: corresponds to template's name.
         #     * `display_name`: corresponds to template's display name.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location where deidentifications templates will be retrieved
+        #     from. Use `-` for all locations. Reserved for future extensions.
         class ListDeidentifyTemplatesRequest; end
 
         # Response message for ListDeidentifyTemplates.
@@ -2501,7 +2554,9 @@ module Google
         #     Approximate number of distinct phrases in the dictionary.
         class LargeCustomDictionaryStats; end
 
-        # Configuration for a StoredInfoType.
+        # Configuration for stored infoTypes. All fields and subfield are provided
+        # by the user. For more information, see
+        # https://cloud.google.com/dlp/docs/creating-custom-infotypes.
         # @!attribute [rw] display_name
         #   @return [String]
         #     Display name of the StoredInfoType (max 256 characters).
@@ -2578,6 +2633,10 @@ module Google
         #     numbers, and hyphens; that is, it must match the regular
         #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location to store the stored infoType. Reserved for
+        #     future extensions.
         class CreateStoredInfoTypeRequest; end
 
         # Request message for UpdateStoredInfoType.
@@ -2633,6 +2692,10 @@ module Google
         #     * `state`: corresponds to the state of the resource.
         #     * `name`: corresponds to resource name.
         #     * `display_name`: corresponds to info type's display name.
+        # @!attribute [rw] location_id
+        #   @return [String]
+        #     The geographic location where stored infoTypes will be retrieved from.
+        #     Use `-` for all locations. Reserved for future extensions.
         class ListStoredInfoTypesRequest; end
 
         # Response message for ListStoredInfoTypes.
