@@ -21,10 +21,36 @@ module Google
     module Trace
       class FaradayMiddleware < Faraday::Middleware
         ##
+        # # Trace FaradayMiddleware
+        #
+        # A faraday middleware that setup request/response labels for trace.
+        #
+        # ## Installing
+        #
+        # To use this middleware, simply install it in your middleware stack.
+        # Here is an example configuration enable the Trace middleware:
+        #
+        # ```ruby
+        # conn = Faraday.new(:url => 'http://example.com') do |faraday|
+        #   # enable cross project tracing with option to true
+        #   faraday.use Google::Cloud::Trace, enable_cross_project_tracing: true
+        #   faraday.request  :url_encoded             # form-encode POST params
+        #   faraday.response :logger                  # log requests to $stdout
+        #   faraday.adapter  Faraday.default_adapter  # use Net::HTTP adapter
+        # end
+        # ```
+
+        def initialize app, enable_cross_project_tracing: false
+          super(app)
+          @enable_cross_project_tracing = enable_cross_project_tracing || false
+        end
+
+        ##
         # Create a Trace span with the HTTP request/response information.
         def call env
           Google::Cloud::Trace.in_span "faraday_request" do |span|
             add_request_labels span, env if span
+            add_trace_context_header env if @enable_cross_project_tracing
 
             response = @app.call env
 
@@ -83,6 +109,14 @@ module Google
         #
         def set_label labels, key, value
           labels[key] = value if value.is_a? ::String
+        end
+
+        ##
+        # @private Add X-Cloud-Trace-Context for request header
+        def add_trace_context_header env
+          if (trace_ctx = Stackdriver::Core::TraceContext.get)
+            env[:request_headers]["X-Cloud-Trace-Context"] = trace_ctx.to_string
+          end
         end
       end
     end
