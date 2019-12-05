@@ -200,7 +200,7 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
       permissions = bucket.test_permissions roles
       skip "Don't have permissions to get/set bucket's policy" unless permissions == roles
 
-      bucket.policy.must_be_kind_of Google::Cloud::Storage::Policy
+      bucket.policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
 
       # We need a valid service account in order to update the policy
       service_account = storage.service.credentials.client.issuer
