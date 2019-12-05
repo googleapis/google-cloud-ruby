@@ -174,15 +174,6 @@ module Google
           end
         end
 
-        # The projection of document's fields to return.
-        # @!attribute [rw] fields
-        #   @return [Array<Google::Firestore::V1::StructuredQuery::FieldReference>]
-        #     The fields to return.
-        #
-        #     If empty, all fields are returned. To only return the name
-        #     of the document, use `['__name__']`.
-        class Projection; end
-
         # An order on a field.
         # @!attribute [rw] field
         #   @return [Google::Firestore::V1::StructuredQuery::FieldReference]
@@ -196,6 +187,15 @@ module Google
         # @!attribute [rw] field_path
         #   @return [String]
         class FieldReference; end
+
+        # The projection of document's fields to return.
+        # @!attribute [rw] fields
+        #   @return [Array<Google::Firestore::V1::StructuredQuery::FieldReference>]
+        #     The fields to return.
+        #
+        #     If empty, all fields are returned. To only return the name
+        #     of the document, use `['__name__']`.
+        class Projection; end
 
         # A sort direction.
         module Direction
