@@ -113,26 +113,26 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before("Google::Cloud#datastore") do
     mock_datastore do |mock|
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud.datastore") do
     mock_datastore do |mock|
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore") do
     mock_datastore do |mock|
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore.new") do
     mock_datastore do |mock|
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -140,19 +140,19 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before("Google::Cloud::Datastore::Commit") do
     mock_datastore do |mock|
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Cursor") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
     end
   end
 
@@ -164,47 +164,47 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before("Google::Cloud::Datastore::Dataset#save") do
     mock_datastore do |mock|
-      mock.expect :commit, OpenStruct.new(mutation_results: [entity_grpc("Task", 123456)]), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: [entity_grpc("Task", 123456)]), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#save@Update an existing entity:") do
     mock_datastore do |mock|
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#insert") do
     mock_datastore do |mock|
-      mock.expect :commit, OpenStruct.new(mutation_results: [entity_grpc("Task", 123456)]), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: [entity_grpc("Task", 123456)]), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#update") do
     mock_datastore do |mock|
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#update@Update multiple new entities in a batch:") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#delete") do
     mock_datastore do |mock|
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#commit") do
     mock_datastore do |mock|
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -216,19 +216,19 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before("Google::Cloud::Datastore::Dataset#run@Run an ancestor query with eventual consistency:") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#run@Run the query within a namespace with the `namespace` option:") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Dataset#run@Run the GQL query within a namespace with `namespace` option:") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
     end
   end
 
@@ -236,7 +236,7 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -244,8 +244,8 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -257,8 +257,8 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before("Google::Cloud::Datastore::Dataset::QueryResults") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :run_query, run_query_res(:NO_MORE_RESULTS), ["my-todo-project", nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :run_query, run_query_res(:NO_MORE_RESULTS), ["my-todo-project", Hash]
     end
   end
 
@@ -271,20 +271,20 @@ YARD::Doctest.configure do |doctest|
   doctest.before("Google::Cloud::Datastore::Entity#key=") do
     mock_datastore do |mock|
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Entity#properties") do
     mock_datastore do |mock|
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :NON_TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::GqlQuery") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
     end
   end
 
@@ -297,19 +297,19 @@ YARD::Doctest.configure do |doctest|
   doctest.before("Google::Cloud::Datastore::Key#parent") do
     mock_datastore do |mock|
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Query") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Query@Run the query within a namespace with the `namespace` option:") do
     mock_datastore do |mock|
-      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
     end
   end
 
@@ -317,8 +317,8 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -326,8 +326,8 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -335,7 +335,7 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -343,7 +343,7 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
       mock.expect :rollback, OpenStruct.new(mutation_results: []), ["my-todo-project", String, Hash]
     end
   end
@@ -351,25 +351,25 @@ YARD::Doctest.configure do |doctest|
   doctest.before("Google::Cloud::Datastore::ReadOnlyTransaction#run") do
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::ReadOnlyTransaction#query") do
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::ReadOnlyTransaction#gql") do
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -377,7 +377,7 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", Hash]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -385,7 +385,7 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -393,8 +393,8 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -402,7 +402,7 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -410,23 +410,23 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Transaction#run") do
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
-      mock.expect :run_query, run_query_res, ["my-todo-project", nil, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
   doctest.before("Google::Cloud::Datastore::Transaction#run@Run the query within a namespace with the `namespace` option:") do
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
-      mock.expect :run_query, run_query_res, ["my-todo-project", Google::Datastore::V1::PartitionId, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :run_query, run_query_res, ["my-todo-project", Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 
@@ -434,7 +434,7 @@ YARD::Doctest.configure do |doctest|
     mock_datastore do |mock|
       mock.expect :begin_transaction, begin_tx_res, ["my-todo-project", transaction_options: nil]
       mock.expect :lookup, lookup_res, ["my-todo-project", Array, Hash]
-      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", :TRANSACTIONAL, Array, Hash]
+      mock.expect :commit, OpenStruct.new(mutation_results: []), ["my-todo-project", Hash]
     end
   end
 end

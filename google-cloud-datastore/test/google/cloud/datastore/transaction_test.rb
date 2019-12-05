@@ -305,7 +305,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       Google::Datastore::V1::Mutation.new(
         delete: Google::Cloud::Datastore::Key.new("ds-test", "to-be-deleted").to_grpc)
     ]
-    transaction.service.mocked_service.expect :commit, commit_res, [project, mode, mutations, transaction: tx_id, options: default_options]
+    transaction.service.mocked_service.expect :commit, commit_res, [project, mode: mode, mutations: mutations, transaction: tx_id, options: default_options]
 
     entity_to_be_saved = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "to-be-saved"
@@ -364,7 +364,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
   it "run will fulfill a query" do
     query_grpc = Google::Cloud::Datastore::Query.new.kind("User").to_grpc
     read_options = Google::Datastore::V1::ReadOptions.new(transaction: tx_id)
-    transaction.service.mocked_service.expect :run_query, run_query_res, [project, nil, read_options: read_options, query: query_grpc, gql_query: nil, options: default_options]
+    transaction.service.mocked_service.expect :run_query, run_query_res, [project, partition_id: nil, read_options: read_options, query: query_grpc, gql_query: nil, options: default_options]
 
     query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = transaction.run query
@@ -393,7 +393,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
           e["name"] = "thingamajig"
         end.to_grpc)
     ]
-    transaction.service.mocked_service.expect :commit, commit_res, [project, mode, mutations, transaction: tx_id, options: default_options]
+    transaction.service.mocked_service.expect :commit, commit_res, [project, mode: mode, mutations: mutations, transaction: tx_id, options: default_options]
 
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
@@ -422,7 +422,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
           e["name"] = "thingamajig"
         end.to_grpc)
     ]
-    transaction.service.mocked_service.expect :commit, commit_res, [project, mode, mutations, transaction: tx_id, options: default_options]
+    transaction.service.mocked_service.expect :commit, commit_res, [project, mode: mode, mutations: mutations, transaction: tx_id, options: default_options]
 
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test"
