@@ -107,12 +107,11 @@ module Google
           end
 
           execute do
-            service.run_query project,
-                              partition_id,
-                              read_options: read_options,
-                              query: query,
-                              gql_query: gql_query,
-                              options: default_options
+            service.run_query project, partition_id: partition_id,
+                                       read_options: read_options,
+                                       query: query,
+                                       gql_query: gql_query,
+                                       options: default_options
           end
         end
 
@@ -144,8 +143,10 @@ module Google
         def commit mutations, transaction: nil
           mode =  transaction.nil? ? :NON_TRANSACTIONAL : :TRANSACTIONAL
           execute do
-            service.commit project, mode, mutations, transaction: transaction,
-                                                     options: default_options
+            service.commit project, mode: mode,
+                                    mutations: mutations,
+                                    transaction: transaction,
+                                    options: default_options
           end
         end
 
