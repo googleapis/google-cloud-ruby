@@ -1,5 +1,12 @@
 # Release History
 
+### 0.36.2 / 2019-12-05
+
+#### Performance Improvements
+
+* Update network configuration
+  * Update documentation
+
 ### 0.36.1 / 2019-11-06
 
 #### Bug Fixes
