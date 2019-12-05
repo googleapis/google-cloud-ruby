@@ -25,12 +25,12 @@ module Google
       #     The version of the entity, a strictly positive number that monotonically
       #     increases with changes to the entity.
       #
-      #     This field is set for
-      #     {Google::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity results.
+      #     This field is set for {Google::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity
+      #     results.
       #
-      #     For {Google::Datastore::V1::LookupResponse#missing missing} entities in
-      #     `LookupResponse`, this is the version of the snapshot that was used to look
-      #     up the entity, and it is always set except for eventually consistent reads.
+      #     For {Google::Datastore::V1::LookupResponse#missing missing} entities in `LookupResponse`, this
+      #     is the version of the snapshot that was used to look up the entity, and it
+      #     is always set except for eventually consistent reads.
       # @!attribute [rw] cursor
       #   @return [String]
       #     A cursor that points to the position after the result entity.

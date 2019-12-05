@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/datastore/v1/entity_pb'
 require 'google/datastore/v1/query_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do

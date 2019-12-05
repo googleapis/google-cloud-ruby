@@ -236,9 +236,9 @@ module Google
           # Looks up entities by key.
           #
           # @param project_id [String]
-          #   The ID of the project against which to make the request.
+          #   Required. The ID of the project against which to make the request.
           # @param keys [Array<Google::Datastore::V1::Key | Hash>]
-          #   Keys of entities to look up.
+          #   Required. Keys of entities to look up.
           #   A hash of the same form as `Google::Datastore::V1::Key`
           #   can also be provided.
           # @param read_options [Google::Datastore::V1::ReadOptions | Hash]
@@ -283,7 +283,7 @@ module Google
           # Queries for entities.
           #
           # @param project_id [String]
-          #   The ID of the project against which to make the request.
+          #   Required. The ID of the project against which to make the request.
           # @param partition_id [Google::Datastore::V1::PartitionId | Hash]
           #   Entities are partitioned into subsets, identified by a partition ID.
           #   Queries are scoped to a single partition.
@@ -318,14 +318,11 @@ module Google
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
-          #
-          #   # TODO: Initialize `partition_id`:
-          #   partition_id = {}
-          #   response = datastore_client.run_query(project_id, partition_id)
+          #   response = datastore_client.run_query(project_id)
 
           def run_query \
               project_id,
-              partition_id,
+              partition_id: nil,
               read_options: nil,
               query: nil,
               gql_query: nil,
@@ -345,7 +342,7 @@ module Google
           # Begins a new transaction.
           #
           # @param project_id [String]
-          #   The ID of the project against which to make the request.
+          #   Required. The ID of the project against which to make the request.
           # @param transaction_options [Google::Datastore::V1::TransactionOptions | Hash]
           #   Options for a new transaction.
           #   A hash of the same form as `Google::Datastore::V1::TransactionOptions`
@@ -384,9 +381,13 @@ module Google
           # entities.
           #
           # @param project_id [String]
-          #   The ID of the project against which to make the request.
+          #   Required. The ID of the project against which to make the request.
           # @param mode [Google::Datastore::V1::CommitRequest::Mode]
           #   The type of commit to perform. Defaults to `TRANSACTIONAL`.
+          # @param transaction [String]
+          #   The identifier of the transaction associated with the commit. A
+          #   transaction identifier is returned by a call to
+          #   {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
           # @param mutations [Array<Google::Datastore::V1::Mutation | Hash>]
           #   The mutations to perform.
           #
@@ -403,10 +404,6 @@ module Google
           #   entity.
           #   A hash of the same form as `Google::Datastore::V1::Mutation`
           #   can also be provided.
-          # @param transaction [String]
-          #   The identifier of the transaction associated with the commit. A
-          #   transaction identifier is returned by a call to
-          #   {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -422,26 +419,20 @@ module Google
           #
           #   # TODO: Initialize `project_id`:
           #   project_id = ''
-          #
-          #   # TODO: Initialize `mode`:
-          #   mode = :MODE_UNSPECIFIED
-          #
-          #   # TODO: Initialize `mutations`:
-          #   mutations = []
-          #   response = datastore_client.commit(project_id, mode, mutations)
+          #   response = datastore_client.commit(project_id)
 
           def commit \
               project_id,
-              mode,
-              mutations,
+              mode: nil,
               transaction: nil,
+              mutations: nil,
               options: nil,
               &block
             req = {
               project_id: project_id,
               mode: mode,
-              mutations: mutations,
-              transaction: transaction
+              transaction: transaction,
+              mutations: mutations
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Datastore::V1::CommitRequest)
             @commit.call(req, options, &block)
@@ -450,9 +441,9 @@ module Google
           # Rolls back a transaction.
           #
           # @param project_id [String]
-          #   The ID of the project against which to make the request.
+          #   Required. The ID of the project against which to make the request.
           # @param transaction [String]
-          #   The transaction identifier, returned by a call to
+          #   Required. The transaction identifier, returned by a call to
           #   {Google::Datastore::V1::Datastore::BeginTransaction Datastore::BeginTransaction}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -491,9 +482,9 @@ module Google
           # before it is inserted.
           #
           # @param project_id [String]
-          #   The ID of the project against which to make the request.
+          #   Required. The ID of the project against which to make the request.
           # @param keys [Array<Google::Datastore::V1::Key | Hash>]
-          #   A list of keys with incomplete key paths for which to allocate IDs.
+          #   Required. A list of keys with incomplete key paths for which to allocate IDs.
           #   No key may be reserved/read-only.
           #   A hash of the same form as `Google::Datastore::V1::Key`
           #   can also be provided.
@@ -534,9 +525,9 @@ module Google
           # Datastore.
           #
           # @param project_id [String]
-          #   The ID of the project against which to make the request.
+          #   Required. The ID of the project against which to make the request.
           # @param keys [Array<Google::Datastore::V1::Key | Hash>]
-          #   A list of keys with complete key paths whose numeric IDs should not be
+          #   Required. A list of keys with complete key paths whose numeric IDs should not be
           #   auto-allocated.
           #   A hash of the same form as `Google::Datastore::V1::Key`
           #   can also be provided.
