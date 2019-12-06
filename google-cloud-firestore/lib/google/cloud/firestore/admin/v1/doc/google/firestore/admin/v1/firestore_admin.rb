@@ -20,17 +20,17 @@ module Google
         # The request for {Google::Firestore::Admin::V1::FirestoreAdmin::CreateIndex FirestoreAdmin::CreateIndex}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     A parent name of the form
+        #     Required. A parent name of the form
         #     `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}`
         # @!attribute [rw] index
         #   @return [Google::Firestore::Admin::V1::Index]
-        #     The composite index to create.
+        #     Required. The composite index to create.
         class CreateIndexRequest; end
 
         # The request for {Google::Firestore::Admin::V1::FirestoreAdmin::ListIndexes FirestoreAdmin::ListIndexes}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     A parent name of the form
+        #     Required. A parent name of the form
         #     `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}`
         # @!attribute [rw] filter
         #   @return [String]
@@ -58,21 +58,21 @@ module Google
         # The request for {Google::Firestore::Admin::V1::FirestoreAdmin::GetIndex FirestoreAdmin::GetIndex}.
         # @!attribute [rw] name
         #   @return [String]
-        #     A name of the form
+        #     Required. A name of the form
         #     `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`
         class GetIndexRequest; end
 
         # The request for {Google::Firestore::Admin::V1::FirestoreAdmin::DeleteIndex FirestoreAdmin::DeleteIndex}.
         # @!attribute [rw] name
         #   @return [String]
-        #     A name of the form
+        #     Required. A name of the form
         #     `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`
         class DeleteIndexRequest; end
 
         # The request for {Google::Firestore::Admin::V1::FirestoreAdmin::UpdateField FirestoreAdmin::UpdateField}.
         # @!attribute [rw] field
         #   @return [Google::Firestore::Admin::V1::Field]
-        #     The field to be updated.
+        #     Required. The field to be updated.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     A mask, relative to the field. If specified, only configuration specified
@@ -82,14 +82,14 @@ module Google
         # The request for {Google::Firestore::Admin::V1::FirestoreAdmin::GetField FirestoreAdmin::GetField}.
         # @!attribute [rw] name
         #   @return [String]
-        #     A name of the form
+        #     Required. A name of the form
         #     `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/fields/{field_id}`
         class GetFieldRequest; end
 
         # The request for {Google::Firestore::Admin::V1::FirestoreAdmin::ListFields FirestoreAdmin::ListFields}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     A parent name of the form
+        #     Required. A parent name of the form
         #     `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}`
         # @!attribute [rw] filter
         #   @return [String]
@@ -121,7 +121,7 @@ module Google
         # The request for {Google::Firestore::Admin::V1::FirestoreAdmin::ExportDocuments FirestoreAdmin::ExportDocuments}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Database to export. Should be of the form:
+        #     Required. Database to export. Should be of the form:
         #     `projects/{project_id}/databases/{database_id}`.
         # @!attribute [rw] collection_ids
         #   @return [Array<String>]
@@ -141,7 +141,7 @@ module Google
         # The request for {Google::Firestore::Admin::V1::FirestoreAdmin::ImportDocuments FirestoreAdmin::ImportDocuments}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Database to import into. Should be of the form:
+        #     Required. Database to import into. Should be of the form:
         #     `projects/{project_id}/databases/{database_id}`.
         # @!attribute [rw] collection_ids
         #   @return [Array<String>]

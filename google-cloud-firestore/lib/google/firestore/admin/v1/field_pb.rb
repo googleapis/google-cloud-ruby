@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/resource_pb'
 require 'google/firestore/admin/v1/index_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do

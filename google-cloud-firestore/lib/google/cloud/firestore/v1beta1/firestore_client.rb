@@ -370,7 +370,7 @@ module Google
           # Gets a single document.
           #
           # @param name [String]
-          #   The resource name of the Document to get. In the format:
+          #   Required. The resource name of the Document to get. In the format:
           #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           # @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
           #   The fields to return. If not set, returns all fields.
@@ -421,14 +421,14 @@ module Google
           # Lists documents.
           #
           # @param parent [String]
-          #   The parent resource name. In the format:
+          #   Required. The parent resource name. In the format:
           #   `projects/{project_id}/databases/{database_id}/documents` or
           #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           #   For example:
           #   `projects/my-project/databases/my-database/documents` or
           #   `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
           # @param collection_id [String]
-          #   The collection ID, relative to `parent`, to list. For example: `chatrooms`
+          #   Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`
           #   or `messages`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -522,17 +522,17 @@ module Google
           # Creates a new document.
           #
           # @param parent [String]
-          #   The parent resource. For example:
+          #   Required. The parent resource. For example:
           #   `projects/{project_id}/databases/{database_id}/documents` or
           #   `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}`
           # @param collection_id [String]
-          #   The collection ID, relative to `parent`, to list. For example: `chatrooms`.
+          #   Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`.
           # @param document_id [String]
           #   The client-assigned document ID to use for this document.
           #
           #   Optional. If not specified, an ID will be assigned by the service.
           # @param document [Google::Firestore::V1beta1::Document | Hash]
-          #   The document to create. `name` must not be set.
+          #   Required. The document to create. `name` must not be set.
           #   A hash of the same form as `Google::Firestore::V1beta1::Document`
           #   can also be provided.
           # @param mask [Google::Firestore::V1beta1::DocumentMask | Hash]
@@ -588,7 +588,7 @@ module Google
           # Updates or inserts a document.
           #
           # @param document [Google::Firestore::V1beta1::Document | Hash]
-          #   The updated document.
+          #   Required. The updated document.
           #   Creates the document if it does not already exist.
           #   A hash of the same form as `Google::Firestore::V1beta1::Document`
           #   can also be provided.
@@ -654,7 +654,7 @@ module Google
           # Deletes a document.
           #
           # @param name [String]
-          #   The resource name of the Document to delete. In the format:
+          #   Required. The resource name of the Document to delete. In the format:
           #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           # @param current_document [Google::Firestore::V1beta1::Precondition | Hash]
           #   An optional precondition on the document.
@@ -695,7 +695,7 @@ module Google
           # same order that they were requested.
           #
           # @param database [String]
-          #   The database name. In the format:
+          #   Required. The database name. In the format:
           #   `projects/{project_id}/databases/{database_id}`.
           # @param documents [Array<String>]
           #   The names of the documents to retrieve. In the format:
@@ -765,7 +765,7 @@ module Google
           # Starts a new transaction.
           #
           # @param database [String]
-          #   The database name. In the format:
+          #   Required. The database name. In the format:
           #   `projects/{project_id}/databases/{database_id}`.
           # @param options_ [Google::Firestore::V1beta1::TransactionOptions | Hash]
           #   The options for the transaction.
@@ -803,7 +803,7 @@ module Google
           # Commits a transaction, while optionally updating documents.
           #
           # @param database [String]
-          #   The database name. In the format:
+          #   Required. The database name. In the format:
           #   `projects/{project_id}/databases/{database_id}`.
           # @param writes [Array<Google::Firestore::V1beta1::Write | Hash>]
           #   The writes to apply.
@@ -849,10 +849,10 @@ module Google
           # Rolls back a transaction.
           #
           # @param database [String]
-          #   The database name. In the format:
+          #   Required. The database name. In the format:
           #   `projects/{project_id}/databases/{database_id}`.
           # @param transaction [String]
-          #   The transaction to roll back.
+          #   Required. The transaction to roll back.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -887,7 +887,7 @@ module Google
           # Runs a query.
           #
           # @param parent [String]
-          #   The parent resource name. In the format:
+          #   Required. The parent resource name. In the format:
           #   `projects/{project_id}/databases/{database_id}/documents` or
           #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           #   For example:
@@ -1018,7 +1018,7 @@ module Google
           # Lists all the collection IDs underneath a document.
           #
           # @param parent [String]
-          #   The parent document. In the format:
+          #   Required. The parent document. In the format:
           #   `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           #   For example:
           #   `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`

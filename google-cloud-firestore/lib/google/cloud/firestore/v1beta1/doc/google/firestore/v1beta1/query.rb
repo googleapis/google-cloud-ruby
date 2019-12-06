@@ -183,6 +183,11 @@ module Google
         #     The direction to order by. Defaults to `ASCENDING`.
         class Order; end
 
+        # A reference to a field, such as `max(messages.time) as max_time`.
+        # @!attribute [rw] field_path
+        #   @return [String]
+        class FieldReference; end
+
         # The projection of document's fields to return.
         # @!attribute [rw] fields
         #   @return [Array<Google::Firestore::V1beta1::StructuredQuery::FieldReference>]
@@ -191,11 +196,6 @@ module Google
         #     If empty, all fields are returned. To only return the name
         #     of the document, use `['__name__']`.
         class Projection; end
-
-        # A reference to a field, such as `max(messages.time) as max_time`.
-        # @!attribute [rw] field_path
-        #   @return [String]
-        class FieldReference; end
 
         # A sort direction.
         module Direction

@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/resource_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.firestore.admin.v1.Index" do
