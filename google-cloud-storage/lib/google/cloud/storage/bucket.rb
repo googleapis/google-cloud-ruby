@@ -1851,7 +1851,11 @@ module Google
           ensure_service!
           gapi = service.get_bucket_policy name, requested_policy_version: requested_policy_version,
                                                  user_project: user_project
-          policy = Policy.from_gapi gapi, use_bindings: !requested_policy_version.nil?
+          policy = if requested_policy_version.nil?
+                     PolicyV1.from_gapi gapi
+                   else
+                     PolicyV3.from_gapi gapi
+                   end
           return policy unless block_given?
           yield policy
           update_policy policy
@@ -1935,7 +1939,7 @@ module Google
           ensure_service!
           gapi = service.set_bucket_policy name, new_policy.to_gapi,
                                            user_project: user_project
-          Policy.from_gapi gapi, use_bindings: new_policy.use_bindings
+          new_policy.class.from_gapi gapi
         end
         alias policy= update_policy
 

@@ -60,9 +60,9 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
         ]
       )
     }
-    let(:old_policy) { Google::Cloud::Storage::Policy.from_gapi old_policy_gapi }
-    let(:updated_policy) { Google::Cloud::Storage::Policy.from_gapi updated_policy_gapi }
-    let(:new_policy) { Google::Cloud::Storage::Policy.from_gapi new_policy_gapi }
+    let(:old_policy) { Google::Cloud::Storage::PolicyV1.from_gapi old_policy_gapi }
+    let(:updated_policy) { Google::Cloud::Storage::PolicyV1.from_gapi updated_policy_gapi }
+    let(:new_policy) { Google::Cloud::Storage::PolicyV1.from_gapi new_policy_gapi }
 
     it "gets the policy" do
       mock = Minitest::Mock.new
@@ -72,7 +72,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy = bucket.policy
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
       policy.etag.must_equal "CAE="
       policy.version.must_equal 1
       policy.roles.must_be_kind_of Hash
@@ -90,7 +90,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy = bucket_user_project.policy
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
       policy.etag.must_equal "CAE="
       policy.version.must_equal 1
       policy.roles.must_be_kind_of Hash
@@ -108,7 +108,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy = bucket.update_policy updated_policy
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
       policy.etag.must_equal "CAF="
       policy.version.must_equal 1
       policy.roles.must_be_kind_of Hash
@@ -127,7 +127,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy = bucket_user_project.update_policy updated_policy
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
       policy.etag.must_equal "CAF="
       policy.version.must_equal 1
       policy.roles.must_be_kind_of Hash
@@ -150,7 +150,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       end
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
       policy.etag.must_equal "CAF="
       policy.version.must_equal 1
       policy.roles.must_be_kind_of Hash
@@ -173,7 +173,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       end
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
       policy.etag.must_equal "CAF="
       policy.version.must_equal 1
       policy.roles.must_be_kind_of Hash
@@ -248,9 +248,9 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
         ]
       )
     }
-    let(:old_policy) { Google::Cloud::Storage::Policy.from_gapi old_policy_gapi }
-    let(:updated_policy) { Google::Cloud::Storage::Policy.from_gapi updated_policy_gapi, use_bindings: true }
-    let(:new_policy) { Google::Cloud::Storage::Policy.from_gapi new_policy_gapi }
+    let(:old_policy) { Google::Cloud::Storage::PolicyV3.from_gapi old_policy_gapi }
+    let(:updated_policy) { Google::Cloud::Storage::PolicyV3.from_gapi updated_policy_gapi }
+    let(:new_policy) { Google::Cloud::Storage::PolicyV3.from_gapi new_policy_gapi }
 
     it "gets the policy" do
       mock = Minitest::Mock.new
@@ -260,7 +260,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy = bucket.policy requested_policy_version: 1
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAE="
       policy.version.must_equal 1
       policy.bindings.must_be_kind_of Array
@@ -279,7 +279,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy = bucket_user_project.policy requested_policy_version: 1
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAE="
       policy.version.must_equal 1
       policy.bindings.must_be_kind_of Array
@@ -298,7 +298,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy = bucket.update_policy updated_policy
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAF="
       policy.version.must_equal 3
       policy.bindings.must_be_kind_of Array
@@ -324,7 +324,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy = bucket_user_project.update_policy updated_policy
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAF="
       policy.version.must_equal 3
       policy.bindings.must_be_kind_of Array
@@ -363,7 +363,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       end
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAF="
       policy.version.must_equal 3
       policy.bindings.must_be_kind_of Array
@@ -402,7 +402,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       end
       mock.verify
 
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAF="
       policy.version.must_equal 3
       policy.bindings.must_be_kind_of Array

@@ -22,7 +22,7 @@ module Google
       ##
       # # Policy
       #
-      # Represents a Cloud IAM Policy for the Cloud Storage service.
+      # An abstract Cloud IAM Policy for the Cloud Storage service.
       #
       # A common pattern for updating a resource's metadata, such as its Policy,
       # is to read the current data from the service, update the data locally,
@@ -64,7 +64,35 @@ module Google
       #     See [Conditions Overview](https://cloud.google.com/iam/docs/conditions-overview)
       #     for more information.
       #
-      # @example Using Policy version 1:
+      class Policy
+        attr_reader :etag
+        attr_reader :version
+
+        ##
+        # @private Creates a Policy object.
+        def initialize etag, version
+          @etag = etag
+          @version = version
+        end
+      end
+
+      ##
+      # A subclass of {Google::Cloud::Storage::Policy} that supports access to {#roles}
+      # and related helpers. Attempts to call {#bindings} and {#version=} will
+      # raise a runtime error. To update the Policy version and add bindings with a newer
+      # syntax, use {Google::Cloud::Storage::PolicyV3} instead by calling
+      # {Google::Cloud::Storage::Bucket#policy} with a `requested_policy_version`. To
+      # obtain instances of this class, call {Google::Cloud::Storage::Bucket#policy}
+      # without the `requested_policy_version` keyword argument.
+      #
+      # @attr [Hash] roles Returns the version 1 bindings (no conditions) as a hash that
+      #   associates roles with arrays of members. See [Understanding
+      #   Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+      #   listing of primitive and curated roles. See [Buckets:
+      #   setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
+      #   for a listing of values and patterns for members.
+      #
+      # @example
       #   require "google/cloud/storage"
       #
       #   storage = Google::Cloud::Storage.new
@@ -76,6 +104,182 @@ module Google
       #     p.add "roles/storage.admin", "user:newowner@example.com"
       #     p.roles["roles/storage.objectViewer"] = ["allUsers"]
       #   end
+      #
+      class PolicyV1 < Policy
+        attr_reader :roles
+
+        ##
+        # @private Creates a PolicyV1 object.
+        def initialize etag, version, roles
+          super etag, version
+          @roles = roles
+        end
+
+        ##
+        # Convenience method for adding a member to a binding on this policy.
+        # See [Understanding
+        # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+        # listing of primitive and curated roles. See [Buckets:
+        # setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
+        # for a listing of values and patterns for members.
+        #
+        # @param [String] role_name A Cloud IAM role, such as
+        #   `"roles/storage.admin"`.
+        # @param [String] member A Cloud IAM identity, such as
+        #   `"user:owner@example.com"`.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy do |p|
+        #     p.add "roles/storage.admin", "user:newowner@example.com"
+        #   end
+        #
+        def add role_name, member
+          role(role_name) << member
+        end
+
+        ##
+        # Convenience method for removing a member from a binding on this
+        # policy. See [Understanding
+        # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+        # listing of primitive and curated roles. See [Buckets:
+        # setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
+        # for a listing of values and patterns for members.
+        #
+        # @param [String] role_name A Cloud IAM role, such as
+        #   `"roles/storage.admin"`.
+        # @param [String] member A Cloud IAM identity, such as
+        #   `"user:owner@example.com"`.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy do |p|
+        #     p.remove "roles/storage.admin", "user:owner@example.com"
+        #   end
+        #
+        def remove role_name, member
+          role(role_name).delete member
+        end
+
+        ##
+        # Convenience method returning the array of members bound to a role in
+        # this policy, or an empty array if no value is present for the role in
+        # {#roles}. See [Understanding
+        # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+        # listing of primitive and curated roles. See [Buckets:
+        # setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
+        # for a listing of values and patterns for members.
+        #
+        # @return [Array<String>] The members strings, or an empty array.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy do |p|
+        #     p.role("roles/storage.admin") << "user:owner@example.com"
+        #   end
+        #
+        def role role_name
+          roles[role_name] ||= []
+        end
+
+        ##
+        # Returns a deep copy of the policy.
+        #
+        # @deprecated Because the latest policy is now always retrieved by
+        #   {Bucket#policy}.
+        #
+        # @return [Policy]
+        #
+        def deep_dup
+          warn "DEPRECATED: Storage::PolicyV1#deep_dup"
+          dup.tap do |p|
+            roles_dup = p.roles.each_with_object({}) do |(k, v), memo|
+              memo[k] = v.dup rescue value
+            end
+            p.instance_variable_set :@roles, roles_dup
+          end
+        end
+
+        ##
+        # Illegal operation in PolicyV1. Use {#roles} instead.
+        #
+        # @raise [RuntimeError] If called on this class.
+        #
+        def bindings
+          raise "Illegal operation unless using PolicyV3. Use #roles instead."
+        end
+
+        ##
+        # Illegal operation in PolicyV1. Use {Google::Cloud::Storage::PolicyV3#version=} instead.
+        #
+        # @raise [RuntimeError] If called on this class.
+        #
+        def version=(*)
+          raise "Illegal operation unless using PolicyV3. Use #roles instead."
+        end
+
+        ##
+        # @private Convert the Policy to a
+        # Google::Apis::StorageV1::Policy.
+        def to_gapi
+          Google::Apis::StorageV1::Policy.new(
+            etag: etag,
+            version: version,
+            bindings: roles_to_gapi
+          )
+        end
+
+        ##
+        # @private New Policy from a
+        # Google::Apis::StorageV1::Policy object.
+        def self.from_gapi gapi
+          roles = Array(gapi.bindings).each_with_object({}) do |binding, memo|
+            memo[binding.role] = binding.members.to_a
+          end
+          new gapi.etag, gapi.version, roles
+        end
+
+        protected
+
+        def roles_to_gapi
+          roles.keys.map do |role_name|
+            next if roles[role_name].empty?
+            Google::Apis::StorageV1::Policy::Binding.new(
+              role: role_name,
+              members: roles[role_name].uniq
+            )
+          end
+        end
+      end
+
+      ##
+      # A subclass of {Google::Cloud::Storage::Policy} that supports access to {#bindings}
+      # and {version=}. Attempts to call {#roles} and relate helpers will raise a runtime
+      # error. This class may be used to update the Policy version and add bindings with a newer
+      # syntax. To obtain instances of this class, call {Google::Cloud::Storage::Bucket#policy}
+      # with a `requested_policy_version`.
+      #
+      # @attr [Array<Hash>] bindings Returns the Policy's bindings as an array of hashes that
+      #   associate roles with an array of members. Conditions are allowed in the hashes. See
+      #   [Understanding Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
+      #   listing of primitive and curated roles. See [Buckets:
+      #   setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
+      #   for a listing of values and patterns for members.
       #
       # @example Updating Policy version 1 to version 3:
       #   require "google/cloud/storage"
@@ -116,20 +320,13 @@ module Google
       #                     })
       #   end
       #
-      class Policy
-        attr_reader :etag
-        attr_reader :version
-
-        # @private
-        attr_reader :use_bindings
+      class PolicyV3 < Policy
+        attr_reader :bindings
 
         ##
-        # @private Creates a Policy object.
-        def initialize etag, version, use_bindings, roles: nil, bindings: nil
-          @etag = etag
-          @version = version
-          @use_bindings = use_bindings
-          @roles = roles
+        # @private Creates a PolicyV3 object.
+        def initialize etag, version, bindings
+          super etag, version
           @bindings = bindings
         end
 
@@ -175,219 +372,72 @@ module Google
         #
         def version= new_version
           if new_version < version
-            raise "new_version (#{new_version}) cannot be less than the current Policy version (#{version})."
+            raise "new_version (#{new_version}) cannot be less than the current version (#{version})."
           end
           @version = new_version
         end
 
         ##
-        # Returns the version 1 bindings as a hash that associates roles with an
-        # array of members. See [Understanding
-        # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
-        # listing of primitive and curated roles. See [Buckets:
-        # setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
-        # for a listing of values and patterns for members.
+        # Illegal operation in PolicyV3. Use {#bindings} instead.
         #
-        # @raise [RuntimeError] If version is greater than 1.
-        #
-        # @return [Hash{String => Array<String>}] The Policy version 1 bindings.
-        #
-        # @example
-        #   require "google/cloud/storage"
-        #
-        #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
-        #
-        #   bucket.policy do |p|
-        #     p.version # 1
-        #     p.roles["roles/storage.objectViewer"] = ["allUsers"]
-        #   end
+        # @raise [RuntimeError] If called on this class.
         #
         def roles
-          ensure_roles
-          @roles
+          raise "Illegal operation when using PolicyV1. Use Policy#bindings instead."
         end
 
         ##
-        # Returns the Policy's bindings as an array of hashes that associate roles with an
-        # array of members. Conditions are allowed in the hashes. See [Understanding
-        # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
-        # listing of primitive and curated roles. See [Buckets:
-        # setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
-        # for a listing of values and patterns for members.
+        # Illegal operation in PolicyV3. Use {#bindings} instead.
         #
-        # @raise [RuntimeError] If version is 1.
+        # @raise [RuntimeError] If called on this class.
         #
-        # @return [Array<Hash>] The Policy bindings.
-        #
-        # @example
-        #   require "google/cloud/storage"
-        #
-        #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
-        #
-        #   bucket.policy requested_policy_version: 3 do |p|
-        #     p.version # 3
-        #     p.bindings.push({
-        #                       role: "roles/storage.admin",
-        #                       members: ["user:owner@example.com"],
-        #                       condition: {
-        #                         title: "test-condition",
-        #                         description: "description of condition",
-        #                         expression: "expr1"
-        #                       }
-        #                     })
-        #   end
-        #
-        def bindings
-          raise "Illegal operation unless using requested_policy_version: 1. Use #roles instead." if @bindings.nil?
-          @bindings
+        def add(*)
+          raise "Illegal operation when using PolicyV1. Use Policy#bindings instead."
         end
 
         ##
-        # Convenience method for adding a member to a binding on this policy.
-        # See [Understanding
-        # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
-        # listing of primitive and curated roles. See [Buckets:
-        # setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
-        # for a listing of values and patterns for members.
+        # Illegal operation in PolicyV3. Use {#bindings} instead.
         #
-        # @param [String] role_name A Cloud IAM role, such as
-        #   `"roles/storage.admin"`.
-        # @param [String] member A Cloud IAM identity, such as
-        #   `"user:owner@example.com"`.
+        # @raise [RuntimeError] If called on this class.
         #
-        # @example
-        #   require "google/cloud/storage"
-        #
-        #   storage = Google::Cloud::Storage.new
-        #
-        #   bucket = storage.bucket "my-todo-app"
-        #
-        #   bucket.policy do |p|
-        #     p.add "roles/storage.admin", "user:newowner@example.com"
-        #   end
-        #
-        def add role_name, member
-          ensure_roles
-          role(role_name) << member
+        def remove(*)
+          raise "Illegal operation when using PolicyV1. Use Policy#bindings instead."
         end
 
         ##
-        # Convenience method for removing a member from a binding on this
-        # policy. See [Understanding
-        # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
-        # listing of primitive and curated roles. See [Buckets:
-        # setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
-        # for a listing of values and patterns for members.
+        # Illegal operation in PolicyV3. Use {#bindings} instead.
         #
-        # @param [String] role_name A Cloud IAM role, such as
-        #   `"roles/storage.admin"`.
-        # @param [String] member A Cloud IAM identity, such as
-        #   `"user:owner@example.com"`.
+        # @raise [RuntimeError] If called on this class.
         #
-        # @example
-        #   require "google/cloud/storage"
-        #
-        #   storage = Google::Cloud::Storage.new
-        #
-        #   bucket = storage.bucket "my-todo-app"
-        #
-        #   bucket.policy do |p|
-        #     p.remove "roles/storage.admin", "user:owner@example.com"
-        #   end
-        #
-        def remove role_name, member
-          ensure_roles
-          role(role_name).delete member
+        def role(*)
+          raise "Illegal operation when using PolicyV1. Use Policy#bindings instead."
         end
 
         ##
-        # Convenience method returning the array of members bound to a role in
-        # this policy, or an empty array if no value is present for the role in
-        # {#roles}. See [Understanding
-        # Roles](https://cloud.google.com/iam/docs/understanding-roles) for a
-        # listing of primitive and curated roles. See [Buckets:
-        # setIamPolicy](https://cloud.google.com/storage/docs/json_api/v1/buckets/setIamPolicy)
-        # for a listing of values and patterns for members.
+        # Illegal operation in PolicyV3. Deprecated in PolicyV1.
         #
-        # @return [Array<String>] The members strings, or an empty array.
-        #
-        # @example
-        #   require "google/cloud/storage"
-        #
-        #   storage = Google::Cloud::Storage.new
-        #
-        #   bucket = storage.bucket "my-todo-app"
-        #
-        #   bucket.policy do |p|
-        #     p.role("roles/storage.admin") << "user:owner@example.com"
-        #   end
-        #
-        def role role_name
-          ensure_roles
-          roles[role_name] ||= []
-        end
-
-        ##
-        # Returns a deep copy of the policy.
-        #
-        # @deprecated Because the latest policy is now always retrieved by
-        #   {Bucket#policy}.
-        #
-        # @return [Policy]
+        # @raise [RuntimeError] If called on this class.
         #
         def deep_dup
-          ensure_roles
-          warn "DEPRECATED: Storage::Policy#deep_dup"
-          dup.tap do |p|
-            roles_dup = p.roles.each_with_object({}) do |(k, v), memo|
-              memo[k] = v.dup rescue value
-            end
-            p.instance_variable_set :@roles, roles_dup
-          end
+          raise "Illegal operation when using PolicyV3. Deprecated in PolicyV1."
         end
 
         ##
         # @private Convert the Policy to a
         # Google::Apis::StorageV1::Policy.
         def to_gapi
-          bindings_gapi = use_bindings ? bindings : roles_to_gapi
           Google::Apis::StorageV1::Policy.new(
             etag: etag,
             version: version,
-            bindings: bindings_gapi
+            bindings: bindings
           )
         end
 
         ##
         # @private New Policy from a
         # Google::Apis::StorageV1::Policy object.
-        def self.from_gapi gapi, use_bindings: false
-          if use_bindings
-            new gapi.etag, gapi.version, use_bindings, bindings: Array(gapi.bindings).map(&:to_h)
-          else
-            roles = Array(gapi.bindings).each_with_object({}) do |binding, memo|
-              memo[binding.role] = binding.members.to_a
-            end
-            new gapi.etag, gapi.version, use_bindings, roles: roles
-          end
-        end
-
-        protected
-
-        def ensure_roles
-          raise "Illegal operation when using requested_policy_version. Use Policy#bindings instead." if @roles.nil?
-        end
-
-        def roles_to_gapi
-          roles.keys.map do |role_name|
-            next if roles[role_name].empty?
-            Google::Apis::StorageV1::Policy::Binding.new(
-              role: role_name,
-              members: roles[role_name].uniq
-            )
-          end
+        def self.from_gapi gapi
+          new gapi.etag, gapi.version, Array(gapi.bindings).map(&:to_h)
         end
       end
     end

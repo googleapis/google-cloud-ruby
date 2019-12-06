@@ -32,7 +32,7 @@ describe Google::Cloud::Storage::Policy, :mock_storage do
         ]
       )
     }
-    let(:policy) { Google::Cloud::Storage::Policy.from_gapi policy_gapi_v1 }
+    let(:policy) { Google::Cloud::Storage::PolicyV1.from_gapi policy_gapi_v1 }
 
     it "knows its attributes" do
       policy.must_be_kind_of Google::Cloud::Storage::Policy
@@ -73,7 +73,7 @@ describe Google::Cloud::Storage::Policy, :mock_storage do
     it "creates from an empty Google::Apis::StorageV1::Policy object" do
       gapi = Google::Apis::StorageV1::Policy.new version: 1
 
-      policy = Google::Cloud::Storage::Policy.from_gapi gapi
+      policy = Google::Cloud::Storage::PolicyV1.from_gapi gapi
 
       policy.must_be_kind_of Google::Cloud::Storage::Policy
       policy.etag.must_be :nil?
@@ -108,7 +108,7 @@ describe Google::Cloud::Storage::Policy, :mock_storage do
         ]
       )
     }
-    let(:policy) { Google::Cloud::Storage::Policy.from_gapi policy_gapi_v3, use_bindings: true }
+    let(:policy) { Google::Cloud::Storage::PolicyV3.from_gapi policy_gapi_v3 }
 
     it "knows its attributes" do
       policy.must_be_kind_of Google::Cloud::Storage::Policy
@@ -143,7 +143,7 @@ describe Google::Cloud::Storage::Policy, :mock_storage do
     it "creates from an empty Google::Apis::StorageV1::Policy object" do
       gapi = Google::Apis::StorageV1::Policy.new version: 3
 
-      policy = Google::Cloud::Storage::Policy.from_gapi gapi, use_bindings: true
+      policy = Google::Cloud::Storage::PolicyV3.from_gapi gapi
 
       policy.must_be_kind_of Google::Cloud::Storage::Policy
       policy.etag.must_be :nil?

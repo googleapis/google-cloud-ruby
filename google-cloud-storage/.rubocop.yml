@@ -24,6 +24,9 @@ Naming/FileName:
     - "lib/google-cloud-storage.rb"
 Style/IfUnlessModifier:
   Enabled: false
+Style/MethodDefParentheses:
+  Exclude:
+    - "lib/google/cloud/storage/policy.rb"
 Style/NumericPredicate:
   Enabled: false
 Style/SafeNavigation:
