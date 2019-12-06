@@ -1747,6 +1747,22 @@ module Google
         # @param [Boolean] force [Deprecated] Force the latest policy to be
         #   retrieved from the Storage service when `true`. Deprecated because
         #   the latest policy is now always retrieved. The default is `nil`.
+        # @attr [Integer] requested_policy_version The requested syntax schema version of
+        #   the policy. Optional. If `nil` or not provided, `Policy#roles` and related
+        #   helpers will be accessible, but attempts to call `Policy#bindings` will raise
+        #   a runtime error. If a value is provided, `Policy#bindings` will be accessible,
+        #   but attempts to call `Policy#roles` and related helpers will raise a runtime
+        #   error. The value is A higher version indicates that the policy contains role
+        #   bindings with the newer syntax schema that is unsupported by earlier versions.
+        #
+        #   The following requested policy versions are valid:
+        #
+        #   * 1 -  The first version of Cloud IAM policy schema. Supports binding one
+        #     role to one or more members. Does not support conditional bindings.
+        #   * 3 - Introduces the condition field in the role binding, which further
+        #     constrains the role binding via context-based and attribute-based rules.
+        #     See [Conditions Overview](https://cloud.google.com/iam/docs/conditions-overview)
+        #     for more information.
         #
         # @yield [policy] A block for updating the policy. The latest policy
         #   will be read from the service and passed to the block. After the
@@ -1756,24 +1772,78 @@ module Google
         #
         # @return [Policy] the current Cloud IAM Policy for this bucket
         #
-        # @example
+        # @example Retrieving a Policy that is implicitly version 1:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #
         #   bucket = storage.bucket "my-todo-app"
         #
         #   policy = bucket.policy
+        #   policy.version # 1
+        #   puts policy.roles["roles/storage.objectViewer"]
         #
-        # @example Retrieve the latest policy and update it in a block:
+        # @example Retrieving a version 1 or 3 Policy using `requested_policy_version`:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
         #
+        #   policy = bucket.policy requested_policy_version: 1
+        #   policy.version # 1
+        #   puts policy.bindings.find do |b|
+        #     b[:role] == "roles/storage.objectViewer"
+        #   end
+        #
+        # @example Updating a Policy that is implicitly version 1:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
         #   bucket.policy do |p|
-        #     p.add "roles/owner", "user:owner@example.com"
+        #     p.version # 1
+        #     p.remove "roles/storage.admin", "user:owner@example.com"
+        #     p.add "roles/storage.admin", "user:newowner@example.com"
+        #     p.roles["roles/storage.objectViewer"] = ["allUsers"]
+        #   end
+        #
+        # @example Updating a Policy from version 1 to version 3 by adding a condition:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy requested_policy_version: 1 do |p|
+        #     p.version # 1
+        #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+        #     p.bindings.push({
+        #                       role: "roles/storage.admin",
+        #                       members: ["user:owner@example.com"],
+        #                       condition: {
+        #                         title: "test-condition",
+        #                         description: "description of condition",
+        #                         expression: "expr1"
+        #                       }
+        #                     })
+        #   end
+        #
+        # @example Updating a version 3 Policy:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy requested_policy_version: 3 do |p|
+        #     p.version # 3 indicates an existing binding with a condition.
+        #     p.bindings.push({
+        #                       role: "roles/storage.admin",
+        #                       members: ["user:owner@example.com"],
+        #                       condition: {
+        #                         title: "test-condition",
+        #                         description: "description of condition",
+        #                         expression: "expr1"
+        #                       }
+        #                     })
         #   end
         #
         def policy force: nil, requested_policy_version: nil
@@ -1781,7 +1851,7 @@ module Google
           ensure_service!
           gapi = service.get_bucket_policy name, requested_policy_version: requested_policy_version,
                                                  user_project: user_project
-          policy = Policy.from_gapi gapi
+          policy = Policy.from_gapi gapi, use_bindings: !requested_policy_version.nil?
           return policy unless block_given?
           yield policy
           update_policy policy
@@ -1806,24 +1876,66 @@ module Google
         #
         # @return [Policy] The policy returned by the API update operation.
         #
-        # @example
+        # @example Updating a Policy that is implicitly version 1:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   policy = bucket.policy # API call
+        #   policy = bucket.policy
+        #   policy.version # 1
+        #   policy.remove "roles/storage.admin", "user:owner@example.com"
+        #   policy.add "roles/storage.admin", "user:newowner@example.com"
+        #   policy.roles["roles/storage.objectViewer"] = ["allUsers"]
         #
-        #   policy.add "roles/owner", "user:owner@example.com"
+        #   policy = bucket.update_policy policy
         #
-        #   bucket.update_policy policy # API call
+        # @example Updating a Policy from version 1 to version 3 by adding a condition:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   policy = bucket.policy requested_policy_version: 1
+        #   policy.version # 1
+        #   policy.version = 3
+        #   policy.bindings.push({
+        #                         role: "roles/storage.admin",
+        #                         members: ["user:owner@example.com"],
+        #                         condition: {
+        #                           title: "test-condition",
+        #                           description: "description of condition",
+        #                           expression: "expr1"
+        #                         }
+        #                       })
+        #
+        #   policy = bucket.update_policy policy
+        #
+        # @example Updating a version 3 Policy:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   policy = bucket.policy requested_policy_version: 3
+        #   policy.version # 3 indicates an existing binding with a condition.
+        #   policy.bindings.push({
+        #                         role: "roles/storage.admin",
+        #                         members: ["user:owner@example.com"],
+        #                         condition: {
+        #                           title: "test-condition",
+        #                           description: "description of condition",
+        #                           expression: "expr1"
+        #                         }
+        #                       })
+        #
+        #   policy = bucket.update_policy policy
         #
         def update_policy new_policy
           ensure_service!
           gapi = service.set_bucket_policy name, new_policy.to_gapi,
                                            user_project: user_project
-          Policy.from_gapi gapi
+          Policy.from_gapi gapi, use_bindings: new_policy.use_bindings
         end
         alias policy= update_policy
 

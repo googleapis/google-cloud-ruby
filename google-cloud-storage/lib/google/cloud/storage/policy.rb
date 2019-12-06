@@ -83,7 +83,7 @@ module Google
       #   storage = Google::Cloud::Storage.new
       #   bucket = storage.bucket "my-todo-app"
       #
-      #   bucket.policy do |p|
+      #   bucket.policy requested_policy_version: 1 do |p|
       #     p.version # 1
       #     p.version = 3
       #     p.bindings.push({
@@ -103,7 +103,7 @@ module Google
       #   storage = Google::Cloud::Storage.new
       #   bucket = storage.bucket "my-todo-app"
       #
-      #   bucket.policy(requested_policy_version: 3) do |p|
+      #   bucket.policy requested_policy_version: 3 do |p|
       #     p.version # 3
       #     p.bindings.push({
       #                       role: "roles/storage.admin",
@@ -120,11 +120,15 @@ module Google
         attr_reader :etag
         attr_reader :version
 
+        # @private
+        attr_reader :use_bindings
+
         ##
         # @private Creates a Policy object.
-        def initialize etag, version, roles: {}, bindings: []
+        def initialize etag, version, use_bindings, roles: nil, bindings: nil
           @etag = etag
           @version = version
+          @use_bindings = use_bindings
           @roles = roles
           @bindings = bindings
         end
@@ -155,7 +159,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   bucket.policy do |p|
+        #   bucket.policy requested_policy_version: 1 do |p|
         #     p.version # 1
         #     p.version = 3
         #     p.bindings.push({
@@ -172,10 +176,6 @@ module Google
         def version= new_version
           if new_version < version
             raise "new_version (#{new_version}) cannot be less than the current Policy version (#{version})."
-          end
-          if version == 1 && new_version > 1
-            @roles.freeze
-            @bindings = roles_to_gapi.map(&:to_h)
           end
           @version = new_version
         end
@@ -204,7 +204,7 @@ module Google
         #   end
         #
         def roles
-          ensure_version_1
+          ensure_roles
           @roles
         end
 
@@ -226,7 +226,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   bucket.policy(requested_policy_version: 3) do |p|
+        #   bucket.policy requested_policy_version: 3 do |p|
         #     p.version # 3
         #     p.bindings.push({
         #                       role: "roles/storage.admin",
@@ -240,7 +240,7 @@ module Google
         #   end
         #
         def bindings
-          raise "Illegal operation for version 1. Use #roles instead." if version == 1
+          raise "Illegal operation unless using requested_policy_version: 1. Use #roles instead." if @bindings.nil?
           @bindings
         end
 
@@ -269,7 +269,7 @@ module Google
         #   end
         #
         def add role_name, member
-          ensure_version_1
+          ensure_roles
           role(role_name) << member
         end
 
@@ -298,7 +298,7 @@ module Google
         #   end
         #
         def remove role_name, member
-          ensure_version_1
+          ensure_roles
           role(role_name).delete member
         end
 
@@ -325,7 +325,7 @@ module Google
         #   end
         #
         def role role_name
-          ensure_version_1
+          ensure_roles
           roles[role_name] ||= []
         end
 
@@ -338,7 +338,7 @@ module Google
         # @return [Policy]
         #
         def deep_dup
-          ensure_version_1
+          ensure_roles
           warn "DEPRECATED: Storage::Policy#deep_dup"
           dup.tap do |p|
             roles_dup = p.roles.each_with_object({}) do |(k, v), memo|
@@ -352,7 +352,7 @@ module Google
         # @private Convert the Policy to a
         # Google::Apis::StorageV1::Policy.
         def to_gapi
-          bindings_gapi = version > 1 ? bindings : roles_to_gapi
+          bindings_gapi = use_bindings ? bindings : roles_to_gapi
           Google::Apis::StorageV1::Policy.new(
             etag: etag,
             version: version,
@@ -363,21 +363,21 @@ module Google
         ##
         # @private New Policy from a
         # Google::Apis::StorageV1::Policy object.
-        def self.from_gapi gapi
-          if gapi.version == 1
+        def self.from_gapi gapi, use_bindings: false
+          if use_bindings
+            new gapi.etag, gapi.version, use_bindings, bindings: Array(gapi.bindings).map(&:to_h)
+          else
             roles = Array(gapi.bindings).each_with_object({}) do |binding, memo|
               memo[binding.role] = binding.members.to_a
             end
-            new gapi.etag, gapi.version, roles: roles
-          else
-            new gapi.etag, gapi.version, bindings: Array(gapi.bindings).map(&:to_h)
+            new gapi.etag, gapi.version, use_bindings, roles: roles
           end
         end
 
         protected
 
-        def ensure_version_1
-          raise "Illegal operation for Policy version > 1. Use Policy#bindings instead." if version > 1
+        def ensure_roles
+          raise "Illegal operation when using requested_policy_version. Use Policy#bindings instead." if @roles.nil?
         end
 
         def roles_to_gapi

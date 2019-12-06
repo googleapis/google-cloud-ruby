@@ -188,7 +188,7 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
   describe "version 3" do
     let(:old_policy_gapi) {
       policy_gapi(
-        version: 3,
+        version: 1,
         bindings: [
           Google::Apis::StorageV1::Policy::Binding.new(
             role: "roles/storage.objectViewer",
@@ -249,20 +249,20 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       )
     }
     let(:old_policy) { Google::Cloud::Storage::Policy.from_gapi old_policy_gapi }
-    let(:updated_policy) { Google::Cloud::Storage::Policy.from_gapi updated_policy_gapi }
+    let(:updated_policy) { Google::Cloud::Storage::Policy.from_gapi updated_policy_gapi, use_bindings: true }
     let(:new_policy) { Google::Cloud::Storage::Policy.from_gapi new_policy_gapi }
 
     it "gets the policy" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 3, user_project: nil]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 1, user_project: nil]
 
       storage.service.mocked_service = mock
-      policy = bucket.policy requested_policy_version: 3
+      policy = bucket.policy requested_policy_version: 1
       mock.verify
 
       policy.must_be_kind_of Google::Cloud::Storage::Policy
       policy.etag.must_equal "CAE="
-      policy.version.must_equal 3
+      policy.version.must_equal 1
       policy.bindings.must_be_kind_of Array
       policy.bindings.count.must_equal 1
       policy.bindings[0].must_be_kind_of Hash
@@ -273,15 +273,15 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
 
     it "gets the policy with user_project set to true" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 3, user_project: "test"]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 1, user_project: "test"]
 
       storage.service.mocked_service = mock
-      policy = bucket_user_project.policy requested_policy_version: 3
+      policy = bucket_user_project.policy requested_policy_version: 1
       mock.verify
 
       policy.must_be_kind_of Google::Cloud::Storage::Policy
       policy.etag.must_equal "CAE="
-      policy.version.must_equal 3
+      policy.version.must_equal 1
       policy.bindings.must_be_kind_of Array
       policy.bindings.count.must_equal 1
       policy.bindings[0].must_be_kind_of Hash
@@ -344,12 +344,13 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
 
     it "sets the policy in a block" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 3, user_project: nil]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 1, user_project: nil]
 
       mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: nil]
 
       storage.service.mocked_service = mock
-      policy = bucket.policy requested_policy_version: 3 do |p|
+      policy = bucket.policy requested_policy_version: 1 do |p|
+        p.version = 3
         p.bindings.push({
                           role: "roles/storage.objectViewer",
                           members: ["serviceAccount:1234567890@developer.gserviceaccount.com"],
@@ -382,12 +383,13 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
 
     it "sets the policy in a block with user_project set to true" do
       mock = Minitest::Mock.new
-      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 3, user_project: "test"]
+      mock.expect :get_bucket_iam_policy, old_policy_gapi, [bucket_name, options_requested_policy_version: 1, user_project: "test"]
 
       mock.expect :set_bucket_iam_policy, new_policy_gapi, [bucket_name, updated_policy_gapi, user_project: "test"]
 
       storage.service.mocked_service = mock
-      policy = bucket_user_project.policy requested_policy_version: 3 do |p|
+      policy = bucket_user_project.policy requested_policy_version: 1 do |p|
+        p.version = 3
         p.bindings.push({
                           role: "roles/storage.objectViewer",
                           members: ["serviceAccount:1234567890@developer.gserviceaccount.com"],
