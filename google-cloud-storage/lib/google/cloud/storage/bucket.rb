@@ -1816,15 +1816,15 @@ module Google
         #   bucket.policy requested_policy_version: 1 do |p|
         #     p.version # 1
         #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
-        #     p.bindings.push({
-        #                       role: "roles/storage.admin",
-        #                       members: ["user:owner@example.com"],
-        #                       condition: {
-        #                         title: "test-condition",
-        #                         description: "description of condition",
-        #                         expression: "expr1"
-        #                       }
-        #                     })
+        #     p.bindings.insert({
+        #                         role: "roles/storage.admin",
+        #                         members: ["user:owner@example.com"],
+        #                         condition: {
+        #                           title: "test-condition",
+        #                           description: "description of condition",
+        #                           expression: "expr1"
+        #                         }
+        #                       })
         #   end
         #
         # @example Updating a version 3 Policy:
@@ -1835,15 +1835,15 @@ module Google
         #
         #   bucket.policy requested_policy_version: 3 do |p|
         #     p.version # 3 indicates an existing binding with a condition.
-        #     p.bindings.push({
-        #                       role: "roles/storage.admin",
-        #                       members: ["user:owner@example.com"],
-        #                       condition: {
-        #                         title: "test-condition",
-        #                         description: "description of condition",
-        #                         expression: "expr1"
-        #                       }
-        #                     })
+        #     p.bindings.insert({
+        #                         role: "roles/storage.admin",
+        #                         members: ["user:owner@example.com"],
+        #                         condition: {
+        #                           title: "test-condition",
+        #                           description: "description of condition",
+        #                           expression: "expr1"
+        #                         }
+        #                       })
         #   end
         #
         def policy force: nil, requested_policy_version: nil
@@ -1903,15 +1903,15 @@ module Google
         #   policy = bucket.policy requested_policy_version: 1
         #   policy.version # 1
         #   policy.version = 3
-        #   policy.bindings.push({
-        #                         role: "roles/storage.admin",
-        #                         members: ["user:owner@example.com"],
-        #                         condition: {
-        #                           title: "test-condition",
-        #                           description: "description of condition",
-        #                           expression: "expr1"
-        #                         }
-        #                       })
+        #   policy.bindings.insert({
+        #                           role: "roles/storage.admin",
+        #                           members: ["user:owner@example.com"],
+        #                           condition: {
+        #                             title: "test-condition",
+        #                             description: "description of condition",
+        #                             expression: "expr1"
+        #                           }
+        #                         })
         #
         #   policy = bucket.update_policy policy
         #
@@ -1923,15 +1923,15 @@ module Google
         #
         #   policy = bucket.policy requested_policy_version: 3
         #   policy.version # 3 indicates an existing binding with a condition.
-        #   policy.bindings.push({
-        #                         role: "roles/storage.admin",
-        #                         members: ["user:owner@example.com"],
-        #                         condition: {
-        #                           title: "test-condition",
-        #                           description: "description of condition",
-        #                           expression: "expr1"
-        #                         }
-        #                       })
+        #   policy.bindings.insert({
+        #                           role: "roles/storage.admin",
+        #                           members: ["user:owner@example.com"],
+        #                           condition: {
+        #                             title: "test-condition",
+        #                             description: "description of condition",
+        #                             expression: "expr1"
+        #                           }
+        #                         })
         #
         #   policy = bucket.update_policy policy
         #

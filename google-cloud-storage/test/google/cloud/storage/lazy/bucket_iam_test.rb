@@ -263,12 +263,13 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAE="
       policy.version.must_equal 1
-      policy.bindings.must_be_kind_of Array
-      policy.bindings.count.must_equal 1
-      policy.bindings[0].must_be_kind_of Hash
-      policy.bindings[0][:role].must_equal "roles/storage.objectViewer"
-      policy.bindings[0][:members].count.must_equal 1
-      policy.bindings[0][:members][0].must_equal "user:viewer@example.com"
+      policy.bindings.must_be_kind_of Google::Cloud::Storage::Policy::Bindings
+      policy.bindings.to_a.count.must_equal 1
+      policy.bindings.to_a[0].must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      policy.bindings.to_a[0].role.must_equal "roles/storage.objectViewer"
+      policy.bindings.to_a[0].members.must_equal ["user:viewer@example.com"]
+      policy.bindings.to_a[0].condition.must_be :nil?
+      policy.bindings.to_a[0].condition.must_be :nil?
     end
 
     it "gets the policy with user_project set to true" do
@@ -282,12 +283,12 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAE="
       policy.version.must_equal 1
-      policy.bindings.must_be_kind_of Array
-      policy.bindings.count.must_equal 1
-      policy.bindings[0].must_be_kind_of Hash
-      policy.bindings[0][:role].must_equal "roles/storage.objectViewer"
-      policy.bindings[0][:members].count.must_equal 1
-      policy.bindings[0][:members][0].must_equal "user:viewer@example.com"
+      policy.bindings.must_be_kind_of Google::Cloud::Storage::Policy::Bindings
+      policy.bindings.to_a.count.must_equal 1
+      policy.bindings.to_a[0].must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      policy.bindings.to_a[0].role.must_equal "roles/storage.objectViewer"
+      policy.bindings.to_a[0].members.must_equal ["user:viewer@example.com"]
+      policy.bindings.to_a[0].condition.must_be :nil?
     end
 
     it "sets the policy" do
@@ -301,19 +302,19 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAF="
       policy.version.must_equal 3
-      policy.bindings.must_be_kind_of Array
-      policy.bindings.count.must_equal 2
-      policy.bindings[0].must_be_kind_of Hash
-      policy.bindings[0][:role].must_equal "roles/storage.objectViewer"
-      policy.bindings[0][:members].count.must_equal 1
-      policy.bindings[0][:members][0].must_equal "user:viewer@example.com"
-      policy.bindings[1].must_be_kind_of Hash
-      policy.bindings[1][:role].must_equal "roles/storage.objectViewer"
-      policy.bindings[1][:members].count.must_equal 1
-      policy.bindings[1][:members][0].must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
-      policy.bindings[1][:condition][:title].must_equal "always-true"
-      policy.bindings[1][:condition][:description].must_equal "test condition always-true"
-      policy.bindings[1][:condition][:expression].must_equal "true"
+      policy.bindings.must_be_kind_of Google::Cloud::Storage::Policy::Bindings
+      policy.bindings.to_a.count.must_equal 2
+      policy.bindings.to_a[0].must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      policy.bindings.to_a[0].role.must_equal "roles/storage.objectViewer"
+      policy.bindings.to_a[0].members.must_equal ["user:viewer@example.com"]
+      policy.bindings.to_a[0].condition.must_be :nil?
+      policy.bindings.to_a[1].must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      policy.bindings.to_a[1].role.must_equal "roles/storage.objectViewer"
+      policy.bindings.to_a[1].members.must_equal ["serviceAccount:1234567890@developer.gserviceaccount.com"]
+      policy.bindings.to_a[1].condition.must_be_kind_of Google::Cloud::Storage::Policy::Condition
+      policy.bindings.to_a[1].condition.title.must_equal "always-true"
+      policy.bindings.to_a[1].condition.description.must_equal "test condition always-true"
+      policy.bindings.to_a[1].condition.expression.must_equal "true"
     end
 
     it "sets the policy with user_project set to true" do
@@ -327,19 +328,19 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAF="
       policy.version.must_equal 3
-      policy.bindings.must_be_kind_of Array
-      policy.bindings.count.must_equal 2
-      policy.bindings[0].must_be_kind_of Hash
-      policy.bindings[0][:role].must_equal "roles/storage.objectViewer"
-      policy.bindings[0][:members].count.must_equal 1
-      policy.bindings[0][:members][0].must_equal "user:viewer@example.com"
-      policy.bindings[1].must_be_kind_of Hash
-      policy.bindings[1][:role].must_equal "roles/storage.objectViewer"
-      policy.bindings[1][:members].count.must_equal 1
-      policy.bindings[1][:members][0].must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
-      policy.bindings[1][:condition][:title].must_equal "always-true"
-      policy.bindings[1][:condition][:description].must_equal "test condition always-true"
-      policy.bindings[1][:condition][:expression].must_equal "true"
+      policy.bindings.must_be_kind_of Google::Cloud::Storage::Policy::Bindings
+      policy.bindings.to_a.count.must_equal 2
+      policy.bindings.to_a[0].must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      policy.bindings.to_a[0].role.must_equal "roles/storage.objectViewer"
+      policy.bindings.to_a[0].members.must_equal ["user:viewer@example.com"]
+      policy.bindings.to_a[0].condition.must_be :nil?
+      policy.bindings.to_a[1].must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      policy.bindings.to_a[1].role.must_equal "roles/storage.objectViewer"
+      policy.bindings.to_a[1].members.must_equal ["serviceAccount:1234567890@developer.gserviceaccount.com"]
+      policy.bindings.to_a[1].condition.must_be_kind_of Google::Cloud::Storage::Policy::Condition
+      policy.bindings.to_a[1].condition.title.must_equal "always-true"
+      policy.bindings.to_a[1].condition.description.must_equal "test condition always-true"
+      policy.bindings.to_a[1].condition.expression.must_equal "true"
     end
 
     it "sets the policy in a block" do
@@ -351,34 +352,34 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       storage.service.mocked_service = mock
       policy = bucket.policy requested_policy_version: 1 do |p|
         p.version = 3
-        p.bindings.push({
-                          role: "roles/storage.objectViewer",
-                          members: ["serviceAccount:1234567890@developer.gserviceaccount.com"],
-                          condition: {
-                            title: "always-true",
-                            description: "test condition always-true",
-                            expression: "true"
-                          }
-                        })
+        p.bindings.insert({
+                            role: "roles/storage.objectViewer",
+                            members: ["serviceAccount:1234567890@developer.gserviceaccount.com"],
+                            condition: {
+                              title: "always-true",
+                              description: "test condition always-true",
+                              expression: "true"
+                            }
+                          })
       end
       mock.verify
 
       policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAF="
       policy.version.must_equal 3
-      policy.bindings.must_be_kind_of Array
-      policy.bindings.count.must_equal 2
-      policy.bindings[0].must_be_kind_of Hash
-      policy.bindings[0][:role].must_equal "roles/storage.objectViewer"
-      policy.bindings[0][:members].count.must_equal 1
-      policy.bindings[0][:members][0].must_equal "user:viewer@example.com"
-      policy.bindings[1].must_be_kind_of Hash
-      policy.bindings[1][:role].must_equal "roles/storage.objectViewer"
-      policy.bindings[1][:members].count.must_equal 1
-      policy.bindings[1][:members][0].must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
-      policy.bindings[1][:condition][:title].must_equal "always-true"
-      policy.bindings[1][:condition][:description].must_equal "test condition always-true"
-      policy.bindings[1][:condition][:expression].must_equal "true"
+      policy.bindings.must_be_kind_of Google::Cloud::Storage::Policy::Bindings
+      policy.bindings.to_a.count.must_equal 2
+      policy.bindings.to_a[0].must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      policy.bindings.to_a[0].role.must_equal "roles/storage.objectViewer"
+      policy.bindings.to_a[0].members.must_equal ["user:viewer@example.com"]
+      policy.bindings.to_a[0].condition.must_be :nil?
+      policy.bindings.to_a[1].must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      policy.bindings.to_a[1].role.must_equal "roles/storage.objectViewer"
+      policy.bindings.to_a[1].members.must_equal ["serviceAccount:1234567890@developer.gserviceaccount.com"]
+      policy.bindings.to_a[1].condition.must_be_kind_of Google::Cloud::Storage::Policy::Condition
+      policy.bindings.to_a[1].condition.title.must_equal "always-true"
+      policy.bindings.to_a[1].condition.description.must_equal "test condition always-true"
+      policy.bindings.to_a[1].condition.expression.must_equal "true"
     end
 
     it "sets the policy in a block with user_project set to true" do
@@ -390,34 +391,34 @@ describe Google::Cloud::Storage::Bucket, :iam, :lazy, :mock_storage do
       storage.service.mocked_service = mock
       policy = bucket_user_project.policy requested_policy_version: 1 do |p|
         p.version = 3
-        p.bindings.push({
-                          role: "roles/storage.objectViewer",
-                          members: ["serviceAccount:1234567890@developer.gserviceaccount.com"],
-                          condition: {
-                            title: "always-true",
-                            description: "test condition always-true",
-                            expression: "true"
-                          }
-                        })
+        p.bindings.insert({
+                            role: "roles/storage.objectViewer",
+                            members: ["serviceAccount:1234567890@developer.gserviceaccount.com"],
+                            condition: {
+                              title: "always-true",
+                              description: "test condition always-true",
+                              expression: "true"
+                            }
+                          })
       end
       mock.verify
 
       policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.etag.must_equal "CAF="
       policy.version.must_equal 3
-      policy.bindings.must_be_kind_of Array
-      policy.bindings.count.must_equal 2
-      policy.bindings[0].must_be_kind_of Hash
-      policy.bindings[0][:role].must_equal "roles/storage.objectViewer"
-      policy.bindings[0][:members].count.must_equal 1
-      policy.bindings[0][:members][0].must_equal "user:viewer@example.com"
-      policy.bindings[1].must_be_kind_of Hash
-      policy.bindings[1][:role].must_equal "roles/storage.objectViewer"
-      policy.bindings[1][:members].count.must_equal 1
-      policy.bindings[1][:members][0].must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
-      policy.bindings[1][:condition][:title].must_equal "always-true"
-      policy.bindings[1][:condition][:description].must_equal "test condition always-true"
-      policy.bindings[1][:condition][:expression].must_equal "true"
+      policy.bindings.must_be_kind_of Google::Cloud::Storage::Policy::Bindings
+      policy.bindings.to_a.count.must_equal 2
+      policy.bindings.to_a[0].must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      policy.bindings.to_a[0].role.must_equal "roles/storage.objectViewer"
+      policy.bindings.to_a[0].members.must_equal ["user:viewer@example.com"]
+      policy.bindings.to_a[0].condition.must_be :nil?
+      policy.bindings.to_a[1].must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      policy.bindings.to_a[1].role.must_equal "roles/storage.objectViewer"
+      policy.bindings.to_a[1].members.must_equal ["serviceAccount:1234567890@developer.gserviceaccount.com"]
+      policy.bindings.to_a[1].condition.must_be_kind_of Google::Cloud::Storage::Policy::Condition
+      policy.bindings.to_a[1].condition.title.must_equal "always-true"
+      policy.bindings.to_a[1].condition.description.must_equal "test condition always-true"
+      policy.bindings.to_a[1].condition.expression.must_equal "true"
     end
   end
 

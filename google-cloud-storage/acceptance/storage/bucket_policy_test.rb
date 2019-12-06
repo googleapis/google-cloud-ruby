@@ -33,7 +33,7 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
       permissions = bucket.test_permissions roles
       skip "Don't have permissions to get/set bucket's policy" unless permissions == roles
 
-      bucket.policy.must_be_kind_of Google::Cloud::Storage::Policy
+      bucket.policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
 
       # We need a valid service account in order to update the policy
       service_account = storage.service.credentials.client.issuer
@@ -65,13 +65,13 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
       skip "Don't have permissions to get/set bucket's policy" unless permissions == roles
 
       policy = bucket_policy_v3.policy
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
       policy.version.must_equal 1
       policy.roles.count.must_equal 2
       expect { policy.bindings }.must_raise RuntimeError
 
       policy = bucket_policy_v3.policy requested_policy_version: 1
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.version.must_equal 1
       expect { policy.roles }.must_raise RuntimeError
       policy.bindings.count.must_equal 2
@@ -82,7 +82,7 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
       end
 
       policy = bucket_policy_v3.policy requested_policy_version: 3
-      policy.must_be_kind_of Google::Cloud::Storage::Policy
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
       policy.version.must_equal 1
       expect { policy.roles }.must_raise RuntimeError
       policy.bindings.count.must_equal 2
@@ -118,15 +118,15 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
         expect { p.add role, member }.must_raise RuntimeError
         expect { p.remove role, member }.must_raise RuntimeError
         expect { p.role role }.must_raise RuntimeError
-        p.bindings.push({
-                          role: role,
-                          members: [member],
-                          condition: {
-                            title: "always-true",
-                            description: "test condition always-true",
-                            expression: "true"
-                          }
-                        })
+        p.bindings.insert({
+                            role: role,
+                            members: [member],
+                            condition: {
+                              title: "always-true",
+                              description: "test condition always-true",
+                              expression: "true"
+                            }
+                          })
         p.version = 3 # This must be set before update RPC, either before or after addition of binding with condition.
       end
 
