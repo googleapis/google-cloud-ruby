@@ -188,6 +188,20 @@ module Google
           )
         end
 
+        ##
+        # The endpoint URIs based on the instance config.
+        # For example, instances located in a specific cloud region
+        # (or multi region) such as nam3, would have a nam3 specific
+        # endpoint URI. These endpoints are intended to optimize the network
+        # routing between the client and the instance's serving resources.
+        # If multiple endpoints are present, client may establish connections
+        # using any of the given URLs.
+        #
+        # @return [Array<String>] The list of URIs.
+        def endpoint_uris
+          @grpc.endpoint_uris
+        end
+
         def save
           job_grpc = service.update_instance @grpc
           Instance::Job.from_grpc job_grpc, service

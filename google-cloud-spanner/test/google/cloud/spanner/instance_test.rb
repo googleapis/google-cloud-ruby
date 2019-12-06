@@ -27,5 +27,6 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
     instance.state.must_equal :READY
     instance.must_be :ready?
     instance.wont_be :creating?
+    instance.endpoint_uris.must_be_empty
   end
 end
