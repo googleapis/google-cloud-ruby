@@ -42,7 +42,7 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
   it "retrieves the instance" do
     get_res = Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
     mock = Minitest::Mock.new
-    mock.expect :get_instance, get_res, [instance_path(instance_id)]
+    mock.expect :get_instance, get_res, [instance_path(instance_id), Hash]
     spanner.service.mocked_instances = mock
 
     instance = spanner.instance instance_id

@@ -15,6 +15,8 @@
 require "spanner_helper"
 
 describe "Spanner Instances", :spanner do
+  let(:instance_id) { $spanner_instance_id }
+
   it "lists and gets instances" do
     all_instances = spanner.instances.all.to_a
     all_instances.wont_be :empty?
@@ -24,6 +26,28 @@ describe "Spanner Instances", :spanner do
 
     first_instance = spanner.instance all_instances.first.instance_id
     first_instance.must_be_kind_of Google::Cloud::Spanner::Instance
+  end
+
+  describe "get instance" do
+    it "get all instance fields" do
+      instance = spanner.instance instance_id
+
+      instance.instance_id.must_equal instance_id
+      instance.path.wont_be_empty
+      instance.display_name.wont_be_empty
+      instance.nodes.must_be :>, 0
+      instance.state.must_equal :READY
+    end
+
+    it "get speicified instance fields" do
+      instance = spanner.instance instance_id, fields: ["name"]
+
+      instance.instance_id.must_equal instance_id
+      instance.path.wont_be_empty
+      instance.display_name.must_be_empty
+      instance.nodes.must_equal 0
+      instance.state.must_equal :STATE_UNSPECIFIED
+    end
   end
 
   describe "IAM Policies and Permissions" do

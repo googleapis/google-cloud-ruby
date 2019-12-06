@@ -135,7 +135,9 @@ module Google
         # Retrieves a Cloud Spanner instance by unique identifier.
         #
         # @param [String] instance_id The unique identifier for the instance.
-        #
+        # @param [Array<String>] fields Specifies the subset of fields that
+        #   should be returned. dIf fields not provided then all fields will
+        #   returned. Optional.
         # @return [Google::Cloud::Spanner::Instance, nil] The instance, or `nil`
         #   if the instance does not exist.
         #
@@ -151,9 +153,16 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #   instance = spanner.instance "non-existing" # nil
         #
-        def instance instance_id
+        # @example Get instance detail with specified fields.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   instance = spanner.instance "my-instance", fields: ["name"]
+        #
+        def instance instance_id, fields: nil
           ensure_service!
-          grpc = service.get_instance instance_id
+
+          grpc = service.get_instance instance_id, fields: fields
           Instance.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
           nil

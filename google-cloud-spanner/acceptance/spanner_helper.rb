@@ -254,9 +254,9 @@ $spanner_database_id = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.he
 fixture = Object.new
 fixture.extend Acceptance::SpannerTest::Fixtures
 
-instance = $spanner.instance "google-cloud-ruby-tests"
+instance = $spanner.instance $spanner_instance_id
 instance ||= begin
-  inst_job = $spanner.create_instance "google-cloud-ruby-tests", name: "google-cloud-ruby-tests", config: "regional-us-central1", nodes: 1
+  inst_job = $spanner.create_instance $spanner_instance_id, name: "google-cloud-ruby-tests", config: "regional-us-central1", nodes: 1
   inst_job.wait_until_done!
   fail GRPC::BadStatus.new(inst_job.error.code, inst_job.error.message) if inst_job.error?
   inst_job.instance

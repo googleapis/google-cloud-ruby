@@ -20,7 +20,7 @@ describe Google::Cloud::Spanner::Project, :instance, :mock_spanner do
 
     get_res = Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
     mock = Minitest::Mock.new
-    mock.expect :get_instance, get_res, [instance_path(instance_id)]
+    mock.expect :get_instance, get_res, [instance_path(instance_id), Hash]
     spanner.service.mocked_instances = mock
 
     instance = spanner.instance instance_id
@@ -47,5 +47,28 @@ describe Google::Cloud::Spanner::Project, :instance, :mock_spanner do
 
     instance = spanner.instance not_found_instance_id
     instance.must_be :nil?
+  end
+
+  it "returns instance with provided fields" do
+    instance_id = "my-instance-id"
+
+    get_res = Google::Spanner::Admin::Instance::V1::Instance.new name: instance_path(instance_id)
+    mock = Minitest::Mock.new
+    mock.expect :get_instance, get_res, [
+      instance_path(instance_id),
+      field_mask: Google::Protobuf::FieldMask.new(paths: ["name"])
+    ]
+    spanner.service.mocked_instances = mock
+
+    instance = spanner.instance instance_id, fields: ["name"]
+
+    mock.verify
+
+    instance.project_id.must_equal project
+    instance.instance_id.must_equal instance_id
+    instance.path.must_equal instance_path(instance_id)
+    instance.name.must_equal ""
+    instance.node_count.must_equal 0
+    instance.state.must_equal :STATE_UNSPECIFIED
   end
 end

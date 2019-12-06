@@ -120,9 +120,10 @@ module Google
           end
         end
 
-        def get_instance name
+        def get_instance name, fields: nil
+          field_mask = Google::Protobuf::FieldMask.new(paths: fields || [])
           execute do
-            instances.get_instance instance_path(name)
+            instances.get_instance instance_path(name), field_mask: field_mask
           end
         end
 

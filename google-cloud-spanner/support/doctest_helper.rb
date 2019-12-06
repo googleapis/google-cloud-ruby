@@ -108,14 +108,14 @@ YARD::Doctest.configure do |doctest|
       mock_client = Minitest::Mock.new
       mock_instances.expect :create_instance, create_instance_resp(client: mock_client), ["projects/my-project", "my-new-instance", Google::Spanner::Admin::Instance::V1::Instance]
       mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-new-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-new-instance", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#create_database" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
       mock_databases.expect :create_database, create_database_resp(client: mock_client), ["projects/my-project/instances/my-instance", "CREATE DATABASE `my-new-database`", {:extra_statements=>[]}]
     end
@@ -123,21 +123,21 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Instance#database" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#database@Will return `nil` if instance does not exist." do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_databases.expect :get_database, nil, ["projects/my-project/instances/my-instance/databases/my-database"]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#databases" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_databases.expect :list_databases, databases_resp(token: "token"), ["projects/my-project/instances/my-instance", Hash]
       mock_databases.expect :list_databases, databases_resp, ["projects/my-project/instances/my-instance", Hash]
     end
@@ -145,7 +145,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Instance#policy" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_instances.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance"]
       mock_instances.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance", Google::Iam::V1::Policy]
     end
@@ -153,7 +153,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Instance#update_policy" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_instances.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance"]
       mock_instances.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance", Google::Iam::V1::Policy]
     end
@@ -161,14 +161,14 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Instance#test_permissions" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_instances.expect :test_iam_permissions, test_permissions_res, ["projects/my-project/instances/my-instance", ["spanner.instances.get", "spanner.instances.update"]]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Instance#delete" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_instances.expect :delete_instance, nil, ["projects/my-project/instances/my-instance"]
     end
   end
@@ -310,7 +310,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Policy" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_instances.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance"]
       mock_instances.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance", Google::Iam::V1::Policy]
     end
@@ -320,7 +320,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Project" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
     end
   end
@@ -363,19 +363,19 @@ YARD::Doctest.configure do |doctest|
       mock_client = Minitest::Mock.new
       mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
       mock_instances.expect :create_instance, create_instance_resp(client: mock_client), ["projects/my-project", "my-new-instance", Google::Spanner::Admin::Instance::V1::Instance]
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-new-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-new-instance", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#instance" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
     end
   end
 
   doctest.before "Google::Cloud::Spanner::Project#instance@Will return `nil` if instance does not exist." do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/non-existing"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/non-existing", Hash]
     end
   end
 
@@ -416,7 +416,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Spanner::Project#databases" do
     mock_spanner do |mock, mock_instances, mock_databases|
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_databases.expect :list_databases, databases_resp(token: "token"), ["projects/my-project/instances/my-instance", Hash]
       mock_databases.expect :list_databases, databases_resp, ["projects/my-project/instances/my-instance", Hash]
     end
@@ -550,7 +550,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Spanner::Database" do
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_client = Minitest::Mock.new
-      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
       mock_databases.expect :create_database, create_database_resp(client: mock_client), ["projects/my-project/instances/my-instance", "CREATE DATABASE `my-new-database`", {:extra_statements=>[]}]
       mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-new-database"]
