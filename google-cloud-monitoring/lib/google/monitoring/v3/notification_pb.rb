@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/label_pb'
+require 'google/api/launch_stage_pb'
 require 'google/monitoring/v3/common_pb'
 require 'google/protobuf/wrappers_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
