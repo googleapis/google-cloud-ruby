@@ -50,19 +50,6 @@ describe Google::Cloud::Tasks::V2beta2::CloudTasksClient do
     end
   end
 
-  describe "the project_path instance method" do
-    it "correctly calls Google::Cloud::Tasks::V2beta2::CloudTasksClient.project_path" do
-      Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do
-        parameters = Google::Cloud::Tasks::V2beta2::CloudTasksClient.method("project_path").parameters.map { |arg| arg.last.to_s }
-        client = Google::Cloud::Tasks.new version: :v2beta2
-        assert_equal(
-          client.project_path(*parameters),
-          Google::Cloud::Tasks::V2beta2::CloudTasksClient.project_path(*parameters)
-        )
-      end
-    end
-  end
-
   describe "the queue_path instance method" do
     it "correctly calls Google::Cloud::Tasks::V2beta2::CloudTasksClient.queue_path" do
       Google::Cloud::Tasks::V2beta2::Credentials.stub(:default, mock_credentials) do

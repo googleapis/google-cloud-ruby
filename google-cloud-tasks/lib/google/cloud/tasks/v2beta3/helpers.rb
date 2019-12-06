@@ -24,13 +24,6 @@
             self.class.location_path project, location
           end
           
-          # Alias for Google::Cloud::Tasks::V2beta3::CloudTasksClient.project_path.
-          # @param project [String]
-          # @return [String]
-          def project_path project
-            self.class.project_path project
-          end
-          
           # Alias for Google::Cloud::Tasks::V2beta3::CloudTasksClient.queue_path.
           # @param project [String]
           # @param location [String]
