@@ -49,6 +49,12 @@ module Google
             DataType.from_gapi_json @gapi_json[:type]
           end
 
+          # ##
+          # # @private New Google::Apis::BigqueryV2::StandardSqlField object.
+          # def to_gapi
+          #   Google::Apis::BigqueryV2::StandardSqlField.from_json @gapi_json.to_json
+          # end
+
           ##
           # @private New StandardSql::Field from a JSON object.
           def self.from_gapi_json gapi_json
@@ -56,6 +62,13 @@ module Google
               f.instance_variable_set :@gapi_json, gapi_json
             end
           end
+
+          # ##
+          # # @private New StandardSql::Field from a Google::Apis::BigqueryV2::StandardSqlField object.
+          # def self.from_gapi gapi
+          #   gapi_json = JSON.parse gapi.to_json, symbolize_names: true
+          #   from_gapi_json gapi_json
+          # end
         end
 
         ##
@@ -247,12 +260,113 @@ module Google
           end
 
           ##
+          # @private New Google::Apis::BigqueryV2::StandardSqlDataType object.
+          def to_gapi
+            Google::Apis::BigqueryV2::StandardSqlDataType.from_json @gapi_json.to_json
+          end
+
+          ##
           # @private New StandardSql::DataType from a JSON object.
           def self.from_gapi_json gapi_json
             new.tap do |dt|
               dt.instance_variable_set :@gapi_json, gapi_json
             end
           end
+
+          ##
+          # @private New StandardSql::DataType from a Google::Apis::BigqueryV2::StandardSqlDataType object.
+          def self.from_gapi gapi
+            gapi_json = JSON.parse gapi.to_json, symbolize_names: true
+            from_gapi_json gapi_json
+          end
+
+          # ##
+          # # @private New primitive object representing this DataType.
+          # def to_primitive
+          #   if array?
+          #     [array_element_type.to_primitive]
+          #   elsif struct?
+          #     struct_type.to_primitive
+          #   else
+          #     type_kind.to_sym
+          #   end
+          # end
+          #
+          # ##
+          # # @private New StandardSql::DataType from a primitive object.
+          # def self.from_primitive primitive
+          #   if Array === primitive
+          #     gapi = Google::Apis::BigqueryV2::StandardSqlDataType.new(
+          #       type_kind: "ARRAY".freeze,
+          #       array_element_type: from_primitive(primitive.first)
+          #     )
+          #     from_gapi gapi
+          #   elsif Hash === primitive
+          #     # This is more complicated because we have to deal with missing names and sort them by their numeric values.
+          #
+          #     keys = primitive.keys
+          #     int_keys = keys.select { |key| key.is_a? Integer }
+          #     named_keys = keys - int_keys
+          #
+          #     Array.new(keys.count) do |index|
+          #       # name = int_keys.contain?(index) ? index : named_keys.shift
+          #       # raise ArgumentError, "missing struct field for index #{index}" if name.nil?
+          #
+          #       if int_keys.contain? index
+          #         Google::Apis::BigqueryV2::StandardSqlField.new(
+          #           type: DataType.from_primitive(primitive[index])
+          #         )
+          #       else
+          #         name = named_keys.shift
+          #         raise ArgumentError, "missing struct field for index #{index}" if name.nil?
+          #         value = primitive[name]
+          #
+          #         Google::Apis::BigqueryV2::StandardSqlField.new(
+          #           name: String(name),
+          #           type: DataType.from_primitive(primitive[name])
+          #         )
+          #       end
+          #       raise ArgumentError, "missing struct field for index #{index}" if name.nil?
+          #
+          #       name = int_keys.contain?(index) ? index : named_keys.shift
+          #       raise ArgumentError, "missing struct field for index #{index}" if name.nil?
+          #
+          #     end
+          #     fields = primitive.to_a do |name, value|
+          #     if name.is_a?(Integer)
+          #       Google::Apis::BigqueryV2::StandardSqlField.new(
+          #         type: DataType.from_primitive(value)
+          #       )
+          #     else
+          #       Google::Apis::BigqueryV2::StandardSqlField.new(
+          #         name: String(name),
+          #         type: DataType.from_primitive(value)
+          #       )
+          #     end
+          #
+          #
+          #     gapi = Google::Apis::BigqueryV2::StandardSqlDataType.new(
+          #       type_kind: "ARRAY".freeze,
+          #       array_element_type: from_primitive(primitive.first)
+          #     )
+          #     from_gapi gapi
+          #
+          #     Google::Apis::BigqueryV2::QueryParameterType.new(
+          #       type: "STRUCT".freeze,
+          #       struct_types: type.map do |key, val|
+          #         Google::Apis::BigqueryV2::QueryParameterType::StructType.new(
+          #           name: String(key),
+          #           type: to_query_param_type(val)
+          #         )
+          #       end
+          #     )
+          #   else
+          #     gapi = Google::Apis::BigqueryV2::StandardSqlDataType.new(
+          #       type_kind: String(primitive).freeze
+          #     )
+          #     from_gapi gapi
+          #   end
+          # end
         end
 
         ##
@@ -277,12 +391,35 @@ module Google
             end
           end
 
+          # ##
+          # # @private New Google::Apis::BigqueryV2::StandardSqlStructType object.
+          # def to_gapi
+          #   Google::Apis::BigqueryV2::StandardSqlStructType.from_json @gapi_json.to_json
+          # end
+
           ##
           # @private New StandardSql::StructType from a JSON object.
           def self.from_gapi_json gapi_json
             new.tap do |st|
               st.instance_variable_set :@gapi_json, gapi_json
             end
+          end
+
+          # ##
+          # # @private New StandardSql::Field from a Google::Apis::BigqueryV2::StandardSqlStructType object.
+          # def self.from_gapi gapi
+          #   gapi_json = JSON.parse gapi.to_json, symbolize_names: true
+          #   from_gapi_json gapi_json
+          # end
+
+          ##
+          # @private New Google::Apis::BigqueryV2::StandardSqlDataType object.
+          def to_primitive
+            field_pairs = fields.map_with_index do |field, index|
+              name = field.name&.to_sym || index
+              [name, field.type.to_primitive]
+            end
+            Hash[field_pairs]
           end
         end
       end
