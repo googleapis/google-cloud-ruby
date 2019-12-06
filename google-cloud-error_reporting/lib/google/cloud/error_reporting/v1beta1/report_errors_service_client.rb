@@ -196,22 +196,22 @@ module Google
 
           # Report an individual error event.
           #
-          # This endpoint accepts <strong>either</strong> an OAuth token,
-          # <strong>or</strong> an
-          # <a href="https://support.google.com/cloud/answer/6158862">API key</a>
+          # This endpoint accepts **either** an OAuth token,
+          # **or** an [API key](https://support.google.com/cloud/answer/6158862)
           # for authentication. To use an API key, append it to the URL as the value of
           # a `key` parameter. For example:
-          # <pre>POST
-          # https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456</pre>
+          #
+          # `POST
+          # https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456`
           #
           # @param project_name [String]
-          #   [Required] The resource name of the Google Cloud Platform project. Written
+          #   Required. The resource name of the Google Cloud Platform project. Written
           #   as `projects/` plus the
           #   [Google Cloud Platform project
           #   ID](https://support.google.com/cloud/answer/6158840). Example:
           #   `projects/my-project-123`.
           # @param event [Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent | Hash]
-          #   [Required] The error event to be reported.
+          #   Required. The error event to be reported.
           #   A hash of the same form as `Google::Devtools::Clouderrorreporting::V1beta1::ReportedErrorEvent`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]

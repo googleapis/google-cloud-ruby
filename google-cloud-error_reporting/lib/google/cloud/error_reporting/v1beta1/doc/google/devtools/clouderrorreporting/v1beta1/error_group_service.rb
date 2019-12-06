@@ -20,7 +20,7 @@ module Google
         # A request to return an individual group.
         # @!attribute [rw] group_name
         #   @return [String]
-        #     [Required] The group resource name. Written as
+        #     Required. The group resource name. Written as
         #     <code>projects/<var>projectID</var>/groups/<var>group_name</var></code>.
         #     Call
         #     <a href="/error-reporting/reference/rest/v1beta1/projects.groupStats/list">
@@ -33,7 +33,7 @@ module Google
         # A request to replace the existing data for the given group.
         # @!attribute [rw] group
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroup]
-        #     [Required] The group which replaces the resource on the server.
+        #     Required. The group which replaces the resource on the server.
         class UpdateGroupRequest; end
       end
     end

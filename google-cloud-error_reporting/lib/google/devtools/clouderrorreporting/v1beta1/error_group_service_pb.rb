@@ -5,6 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/devtools/clouderrorreporting/v1beta1/common_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.devtools.clouderrorreporting.v1beta1.GetGroupRequest" do
