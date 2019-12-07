@@ -207,14 +207,16 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/dataSources/{data_source_id}`
+          #     `projects/{project_id}/dataSources/{data_source_id}` or
+          #     `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
           class GetDataSourceRequest; end
 
           # Request to list supported data sources and their data transfer settings.
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The BigQuery project id for which data sources should be returned.
-          #     Must be in the form: `projects/{project_id}`
+          #     Must be in the form: `projects/{project_id}` or
+          #     `projects/{project_id}/locations/{location_id}
           # @!attribute [rw] page_token
           #   @return [String]
           #     Pagination token, which can be used to request a specific page
@@ -248,9 +250,9 @@ module Google
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The BigQuery project id where the transfer configuration should be created.
-          #     Must be in the format projects/\\{project_id}/locations/\\{location_id}
-          #     If specified location and location of the destination bigquery dataset
-          #     do not match - the request will fail.
+          #     Must be in the format projects/\\{project_id}/locations/\\{location_id} or
+          #     projects/\\{project_id}. If specified location and location of the
+          #     destination bigquery dataset do not match - the request will fail.
           # @!attribute [rw] transfer_config
           #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig]
           #     Required. Data transfer configuration to create.
@@ -280,6 +282,12 @@ module Google
           #     must use the "none+gsession" response type. which be return a
           #     version_info back in the authorization response which be be put in a JWT
           #     claim in the token request.
+          # @!attribute [rw] service_account_name
+          #   @return [String]
+          #     Optional service account name. If this field is set, transfer config will
+          #     be created with this service account credentials. It requires that
+          #     requesting user calling this API has permissions to act as this service
+          #     account.
           class CreateTransferConfigRequest; end
 
           # A request to update a transfer configuration. To update the user id of the
@@ -316,13 +324,21 @@ module Google
           #     must use the "none+gsession" response type. which be return a
           #     version_info back in the authorization response which be be put in a JWT
           #     claim in the token request.
+          # @!attribute [rw] service_account_name
+          #   @return [String]
+          #     Optional service account name. If this field is set and
+          #     "service_account_name" is set in update_mask, transfer config will be
+          #     updated to use this service account credentials. It requires that
+          #     requesting user calling this API has permissions to act as this service
+          #     account.
           class UpdateTransferConfigRequest; end
 
           # A request to get data transfer information.
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}`
+          #     `projects/{project_id}/transferConfigs/{config_id}` or
+          #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
           class GetTransferConfigRequest; end
 
           # A request to delete data transfer information. All associated transfer runs
@@ -330,28 +346,32 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}`
+          #     `projects/{project_id}/transferConfigs/{config_id}` or
+          #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
           class DeleteTransferConfigRequest; end
 
           # A request to get data transfer run information.
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+          #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
           class GetTransferRunRequest; end
 
           # A request to delete data transfer run information.
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The field will contain name of the resource requested, for example:
-          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}`
+          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+          #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
           class DeleteTransferRunRequest; end
 
           # A request to list data transfers configured for a BigQuery project.
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The BigQuery project id for which data sources
-          #     should be returned: `projects/{project_id}`.
+          #     should be returned: `projects/{project_id}` or
+          #     `projects/{project_id}/locations/{location_id}`
           # @!attribute [rw] data_source_ids
           #   @return [Array<String>]
           #     When specified, only configurations of requested data sources are returned.
@@ -386,7 +406,8 @@ module Google
           #   @return [String]
           #     Required. Name of transfer configuration for which transfer runs should be retrieved.
           #     Format of transfer configuration resource name is:
-          #     `projects/{project_id}/transferConfigs/{config_id}`.
+          #     `projects/{project_id}/transferConfigs/{config_id}` or
+          #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] states
           #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferState>]
           #     When specified, only transfer runs with requested states are returned.
@@ -430,7 +451,8 @@ module Google
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. Transfer run name in the form:
-          #     `projects/{project_id}/transferConfigs/{config_Id}/runs/{run_id}`.
+          #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
+          #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
           # @!attribute [rw] page_token
           #   @return [String]
           #     Pagination token, which can be used to request a specific page
@@ -468,7 +490,8 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     Required. The data source in the form:
-          #     `projects/{project_id}/dataSources/{data_source_id}`
+          #     `projects/{project_id}/dataSources/{data_source_id}` or
+          #     `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`.
           class CheckValidCredsRequest; end
 
           # A response indicating whether the credentials exist and are valid.
@@ -481,7 +504,8 @@ module Google
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. Transfer configuration name in the form:
-          #     `projects/{project_id}/transferConfigs/{config_id}`.
+          #     `projects/{project_id}/transferConfigs/{config_id}` or
+          #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] start_time
           #   @return [Google::Protobuf::Timestamp]
           #     Required. Start time of the range of transfer runs. For example,
@@ -502,7 +526,8 @@ module Google
           # @!attribute [rw] parent
           #   @return [String]
           #     Transfer configuration name in the form:
-          #     `projects/{project_id}/transferConfigs/{config_id}`.
+          #     `projects/{project_id}/transferConfigs/{config_id}` or
+          #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] requested_time_range
           #   @return [Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsRequest::TimeRange]
           #     Time range for the transfer runs that should be started.
