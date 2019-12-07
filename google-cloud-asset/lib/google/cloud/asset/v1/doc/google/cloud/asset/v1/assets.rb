@@ -59,6 +59,14 @@ module Google
         #   @return [Google::Iam::V1::Policy]
         #     Representation of the actual Cloud IAM policy set on a cloud resource. For
         #     each resource, there must be at most one Cloud IAM policy set on it.
+        # @!attribute [rw] ancestors
+        #   @return [Array<String>]
+        #     Asset's ancestry path in Cloud Resource Manager (CRM) hierarchy,
+        #     represented as a list of relative resource names. Ancestry path starts with
+        #     the closest CRM ancestor and ends at root. If the asset is a CRM
+        #     project/folder/organization, this starts from the asset itself.
+        #
+        #     Example: ["projects/123456789", "folders/5432", "organizations/1234"]
         class Asset; end
 
         # Representation of a cloud resource.

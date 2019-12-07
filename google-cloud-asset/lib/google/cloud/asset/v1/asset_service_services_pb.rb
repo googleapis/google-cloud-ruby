@@ -48,6 +48,17 @@ module Google
             # If a specified asset does not exist, this API returns an INVALID_ARGUMENT
             # error.
             rpc :BatchGetAssetsHistory, BatchGetAssetsHistoryRequest, BatchGetAssetsHistoryResponse
+            # Creates a feed in a parent project/folder/organization to listen to its
+            # asset updates.
+            rpc :CreateFeed, CreateFeedRequest, Feed
+            # Gets details about an asset feed.
+            rpc :GetFeed, GetFeedRequest, Feed
+            # Lists all asset feeds in a parent project/folder/organization.
+            rpc :ListFeeds, ListFeedsRequest, ListFeedsResponse
+            # Updates an asset feed configuration.
+            rpc :UpdateFeed, UpdateFeedRequest, Feed
+            # Deletes an asset feed.
+            rpc :DeleteFeed, DeleteFeedRequest, Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

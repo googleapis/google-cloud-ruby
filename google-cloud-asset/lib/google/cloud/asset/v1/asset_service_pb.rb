@@ -34,6 +34,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.asset.v1.BatchGetAssetsHistoryResponse" do
     repeated :assets, :message, 1, "google.cloud.asset.v1.TemporalAsset"
   end
+  add_message "google.cloud.asset.v1.CreateFeedRequest" do
+    optional :parent, :string, 1
+    optional :feed_id, :string, 2
+    optional :feed, :message, 3, "google.cloud.asset.v1.Feed"
+  end
+  add_message "google.cloud.asset.v1.GetFeedRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.cloud.asset.v1.ListFeedsRequest" do
+    optional :parent, :string, 1
+  end
+  add_message "google.cloud.asset.v1.ListFeedsResponse" do
+    repeated :feeds, :message, 1, "google.cloud.asset.v1.Feed"
+  end
+  add_message "google.cloud.asset.v1.UpdateFeedRequest" do
+    optional :feed, :message, 1, "google.cloud.asset.v1.Feed"
+    optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+  end
+  add_message "google.cloud.asset.v1.DeleteFeedRequest" do
+    optional :name, :string, 1
+  end
   add_message "google.cloud.asset.v1.OutputConfig" do
     oneof :destination do
       optional :gcs_destination, :message, 1, "google.cloud.asset.v1.GcsDestination"
@@ -50,6 +71,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :dataset, :string, 1
     optional :table, :string, 2
     optional :force, :bool, 3
+  end
+  add_message "google.cloud.asset.v1.PubsubDestination" do
+    optional :topic, :string, 1
+  end
+  add_message "google.cloud.asset.v1.FeedOutputConfig" do
+    oneof :destination do
+      optional :pubsub_destination, :message, 1, "google.cloud.asset.v1.PubsubDestination"
+    end
+  end
+  add_message "google.cloud.asset.v1.Feed" do
+    optional :name, :string, 1
+    repeated :asset_names, :string, 2
+    repeated :asset_types, :string, 3
+    optional :content_type, :enum, 4, "google.cloud.asset.v1.ContentType"
+    optional :feed_output_config, :message, 5, "google.cloud.asset.v1.FeedOutputConfig"
   end
   add_enum "google.cloud.asset.v1.ContentType" do
     value :CONTENT_TYPE_UNSPECIFIED, 0
@@ -68,9 +104,18 @@ module Google
         ExportAssetsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ExportAssetsResponse").msgclass
         BatchGetAssetsHistoryRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetAssetsHistoryRequest").msgclass
         BatchGetAssetsHistoryResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetAssetsHistoryResponse").msgclass
+        CreateFeedRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.CreateFeedRequest").msgclass
+        GetFeedRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.GetFeedRequest").msgclass
+        ListFeedsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ListFeedsRequest").msgclass
+        ListFeedsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ListFeedsResponse").msgclass
+        UpdateFeedRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.UpdateFeedRequest").msgclass
+        DeleteFeedRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.DeleteFeedRequest").msgclass
         OutputConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.OutputConfig").msgclass
         GcsDestination = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.GcsDestination").msgclass
         BigQueryDestination = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BigQueryDestination").msgclass
+        PubsubDestination = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.PubsubDestination").msgclass
+        FeedOutputConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.FeedOutputConfig").msgclass
+        Feed = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.Feed").msgclass
         ContentType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ContentType").enummodule
       end
     end
