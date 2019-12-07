@@ -19,9 +19,39 @@ module Google
   module Cloud
     module Storage
       class Policy
+        ##
+        # # Bindings
+        #
+        # Enumerable object for managing Cloud IAM bindings associated with
+        # a bucket.
+        #
+        # @see https://cloud.google.com/iam/docs/overview Cloud IAM Overview
+        #
+        # @example Updating a Policy from version 1 to version 3:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy requested_policy_version: 1 do |p|
+        #     p.version # 1
+        #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+        #     p.bindings.insert({
+        #                         role: "roles/storage.admin",
+        #                         members: ["user:owner@example.com"],
+        #                         condition: {
+        #                           title: "test-condition",
+        #                           description: "description of condition",
+        #                           expression: "expr1"
+        #                         }
+        #                       })
+        #   end
+        #
         class Bindings
           include Enumerable
 
+          ##
+          # @private Creates a Bindings object.
           def initialize
             @bindings = []
           end

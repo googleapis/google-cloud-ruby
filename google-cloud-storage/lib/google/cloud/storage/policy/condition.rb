@@ -17,8 +17,48 @@ module Google
   module Cloud
     module Storage
       class Policy
+        ##
+        # # Condition
+        #
+        # Value object accepting an attribute-based logic expression based on a
+        # subset of the Common Expression Language (CEL).
+        #
+        # @see https://cloud.google.com/iam/docs/conditions-overview Cloud IAM
+        #   policies with conditions
+        #
+        # @attr [String] title Used to identify the condition. Required.
+        # @attr [String] description Used to document the condition. Optional.
+        # @attr [String] expression Defines an attribute-based logic
+        #   expression using a subset of the Common Expression Language (CEL).
+        #   The condition expression can contain multiple statements, each uses
+        #   one attributes, and statements are combined using logic operators,
+        #   following CEL language specification. Required.
+        #
+        # @example Updating a Policy from version 1 to version 3 by adding a condition:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy requested_policy_version: 1 do |p|
+        #     p.version # 1
+        #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+        #     p.bindings.insert({
+        #                         role: "roles/storage.admin",
+        #                         members: ["user:owner@example.com"],
+        #                         condition: {
+        #                           title: "test-condition",
+        #                           description: "description of condition",
+        #                           expression: "expr1"
+        #                         }
+        #                       })
+        #   end
+        #
         class Condition
           attr_reader :title, :description, :expression
+
+          ##
+          # Creates a Binding object.
           def initialize title:, description:, expression:
             @title = String title
             @description = String description

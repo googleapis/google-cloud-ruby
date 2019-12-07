@@ -217,7 +217,7 @@ module Google
         end
 
         ##
-        # Illegal operation in PolicyV1. Use {#roles} instead.
+        # @private Illegal operation in PolicyV1. Use {#roles} instead.
         #
         # @raise [RuntimeError] If called on this class.
         #
@@ -226,7 +226,7 @@ module Google
         end
 
         ##
-        # Illegal operation in PolicyV1. Use {Google::Cloud::Storage::PolicyV3#version=} instead.
+        # @private Illegal operation in PolicyV1. Use {Google::Cloud::Storage::PolicyV3#version=} instead.
         #
         # @raise [RuntimeError] If called on this class.
         #
@@ -380,7 +380,7 @@ module Google
         end
 
         ##
-        # Illegal operation in PolicyV3. Use {#bindings} instead.
+        # @private Illegal operation in PolicyV3. Use {#bindings} instead.
         #
         # @raise [RuntimeError] If called on this class.
         #
@@ -389,7 +389,7 @@ module Google
         end
 
         ##
-        # Illegal operation in PolicyV3. Use {#bindings} instead.
+        # @private Illegal operation in PolicyV3. Use {#bindings} instead.
         #
         # @raise [RuntimeError] If called on this class.
         #
@@ -398,7 +398,7 @@ module Google
         end
 
         ##
-        # Illegal operation in PolicyV3. Use {#bindings} instead.
+        # @private Illegal operation in PolicyV3. Use {#bindings} instead.
         #
         # @raise [RuntimeError] If called on this class.
         #
@@ -407,7 +407,7 @@ module Google
         end
 
         ##
-        # Illegal operation in PolicyV3. Use {#bindings} instead.
+        # @private Illegal operation in PolicyV3. Use {#bindings} instead.
         #
         # @raise [RuntimeError] If called on this class.
         #
@@ -416,7 +416,7 @@ module Google
         end
 
         ##
-        # Illegal operation in PolicyV3. Deprecated in PolicyV1.
+        # @private Illegal operation in PolicyV3. Deprecated in PolicyV1.
         #
         # @raise [RuntimeError] If called on this class.
         #

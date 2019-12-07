@@ -19,9 +19,65 @@ module Google
   module Cloud
     module Storage
       class Policy
+        ##
+        # # Binding
+        #
+        # Value object associating members and an optional condition with a role.
+        #
+        # @see https://cloud.google.com/iam/docs/overview Cloud IAM Overview
+        #
+        # @attr [String] role Role that is assigned to members. For example,
+        #   `roles/viewer`, `roles/editor`, or `roles/owner`. Required.
+        # @attr [Array<String>] members Specifies the identities requesting
+        #   access for a Cloud Platform resource. members can have the
+        #   following values. Required.
+        #
+        #   * `allUsers`: A special identifier that represents anyone who is on
+        #     the internet; with or without a Google account.
+        #   * `allAuthenticatedUsers`: A special identifier that represents
+        #      anyone who is authenticated with a Google account or a service
+        #      account.
+        #   * `user:{emailid}`: An email address that represents a specific
+        #     Google account. For example, `alice@example.com`.
+        #   * `serviceAccount:{emailid}`: An email address that represents a
+        #     service account. For example, `my-other-app@appspot.gserviceaccount.com`.
+        #   * `group:{emailid}`: An email address that represents a Google group.
+        #     For example, `admins@example.com`.
+        #   * `domain:{domain}`: The G Suite domain (primary) that represents
+        #     all the users of that domain. For example, `google.com` or
+        #     `example.com`. Required.
+        #
+        # @attr [Google::Cloud::Storage::Policy::Condition] condition The
+        #   condition that is associated with this binding. NOTE: An unsatisfied
+        #   condition will not allow user access via current binding. Different
+        #   bindings, including their conditions, are examined independently.
+        #   Optional.
+        #
+        # @example Updating a Policy from version 1 to version 3:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   bucket.policy requested_policy_version: 1 do |p|
+        #     p.version # 1
+        #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+        #     p.bindings.insert({
+        #                         role: "roles/storage.admin",
+        #                         members: ["user:owner@example.com"],
+        #                         condition: {
+        #                           title: "test-condition",
+        #                           description: "description of condition",
+        #                           expression: "expr1"
+        #                         }
+        #                       })
+        #   end
+        #
         class Binding
           attr_reader :role, :members, :condition
 
+          ##
+          # Creates a Binding object.
           def initialize role:, members:, condition: nil
             @role = String role
 
