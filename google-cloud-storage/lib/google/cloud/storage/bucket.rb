@@ -1748,16 +1748,16 @@ module Google
         #   retrieved from the Storage service when `true`. Deprecated because
         #   the latest policy is now always retrieved. The default is `nil`.
         # @attr [Integer] requested_policy_version The requested syntax schema version of
-        #   the policy. Optional. If `nil` or not provided, `Policy#roles` and related
+        #   the policy. Optional. If `1`, `nil` or not provided, `Policy#roles` and related
         #   helpers will be accessible, but attempts to call `Policy#bindings` will raise
-        #   a runtime error. If a value is provided, `Policy#bindings` will be accessible,
+        #   a runtime error. If `3` is provided, `Policy#bindings` will be accessible,
         #   but attempts to call `Policy#roles` and related helpers will raise a runtime
-        #   error. The value is A higher version indicates that the policy contains role
+        #   error. A higher version indicates that the policy contains role
         #   bindings with the newer syntax schema that is unsupported by earlier versions.
         #
         #   The following requested policy versions are valid:
         #
-        #   * 1 -  The first version of Cloud IAM policy schema. Supports binding one
+        #   * 1 - The first version of Cloud IAM policy schema. Supports binding one
         #     role to one or more members. Does not support conditional bindings.
         #   * 3 - Introduces the condition field in the role binding, which further
         #     constrains the role binding via context-based and attribute-based rules.
@@ -1782,14 +1782,14 @@ module Google
         #   policy.version # 1
         #   puts policy.roles["roles/storage.objectViewer"]
         #
-        # @example Retrieving a version 1 or 3 Policy using `requested_policy_version`:
+        # @example Retrieving a version 3 Policy using `requested_policy_version`:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   policy = bucket.policy requested_policy_version: 1
-        #   policy.version # 1
+        #   policy = bucket.policy requested_policy_version: 3
+        #   policy.version # 3
         #   puts policy.bindings.find do |b|
         #     b[:role] == "roles/storage.objectViewer"
         #   end
@@ -1813,7 +1813,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   bucket.policy requested_policy_version: 1 do |p|
+        #   bucket.policy requested_policy_version: 3 do |p|
         #     p.version # 1
         #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
         #     p.bindings.insert({
@@ -1851,7 +1851,7 @@ module Google
           ensure_service!
           gapi = service.get_bucket_policy name, requested_policy_version: requested_policy_version,
                                                  user_project: user_project
-          policy = if requested_policy_version.nil?
+          policy = if requested_policy_version.nil? || requested_policy_version == 1
                      PolicyV1.from_gapi gapi
                    else
                      PolicyV3.from_gapi gapi
@@ -1900,7 +1900,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   policy = bucket.policy requested_policy_version: 1
+        #   policy = bucket.policy requested_policy_version: 3
         #   policy.version # 1
         #   policy.version = 3
         #   policy.bindings.insert({

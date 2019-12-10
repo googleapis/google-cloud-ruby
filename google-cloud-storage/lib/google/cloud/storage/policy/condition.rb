@@ -40,7 +40,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   bucket.policy requested_policy_version: 1 do |p|
+        #   bucket.policy requested_policy_version: 3 do |p|
         #     p.version # 1
         #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
         #     p.bindings.insert({

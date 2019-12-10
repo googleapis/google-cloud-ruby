@@ -71,12 +71,12 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
       expect { policy.bindings }.must_raise RuntimeError
 
       policy = bucket_policy_v3.policy requested_policy_version: 1
-      policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
+      policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
       policy.version.must_equal 1
-      expect { policy.roles }.must_raise RuntimeError
-      policy.bindings.count.must_equal 2
+      policy.roles.count.must_equal 2
+      expect { policy.bindings }.must_raise RuntimeError
 
-      bucket_policy_v3.policy requested_policy_version: 1 do |p|
+      bucket_policy_v3.policy requested_policy_version: 3 do |p|
         p.version.must_equal 1
         p.version = 3 # Won't be persisted by the service.
       end
@@ -146,9 +146,16 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
       expect { policy.deep_dup }.must_raise RuntimeError
       policy.bindings.count.must_equal 3
       binding = policy.bindings.find do |b|
-        b[:role] == role
+        b.role == role
       end
       binding.wont_be :nil?
+      binding.role.must_equal role
+      binding.members.count.must_equal 1
+      binding.members[0].must_equal member
+      binding.condition.wont_be :nil?
+      binding.condition.title.must_equal "always-true"
+      binding.condition.description.must_equal "test condition always-true"
+      binding.condition.expression.must_equal "true"
     end
   end
 end

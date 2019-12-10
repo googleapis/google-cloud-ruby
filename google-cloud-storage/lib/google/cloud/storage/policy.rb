@@ -231,7 +231,7 @@ module Google
         # @raise [RuntimeError] If called on this class.
         #
         def version=(*)
-          raise "Illegal operation unless using PolicyV3. Use #roles instead."
+          raise "Illegal operation unless using PolicyV3."
         end
 
         ##
@@ -288,7 +288,7 @@ module Google
       #   storage = Google::Cloud::Storage.new
       #   bucket = storage.bucket "my-todo-app"
       #
-      #   bucket.policy requested_policy_version: 1 do |p|
+      #   bucket.policy requested_policy_version: 3 do |p|
       #     p.version # 1
       #     p.version = 3
       #     p.bindings.insert({
@@ -358,7 +358,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   bucket = storage.bucket "my-todo-app"
         #
-        #   bucket.policy requested_policy_version: 1 do |p|
+        #   bucket.policy requested_policy_version: 3 do |p|
         #     p.version # 1
         #     p.version = 3
         #     p.bindings.insert({
