@@ -23,7 +23,9 @@ module Google
       ##
       # # Policy
       #
-      # An abstract Cloud IAM Policy for the Cloud Storage service.
+      # An abstract Cloud IAM Policy for the Cloud Storage service. See concrete
+      # subclasses {Google::Cloud::Storage::PolicyV1} and
+      # {Google::Cloud::Storage::PolicyV3}.
       #
       # A common pattern for updating a resource's metadata, such as its Policy,
       # is to read the current data from the service, update the data locally,

@@ -53,6 +53,17 @@ module Google
         #   bindings, including their conditions, are examined independently.
         #   Optional.
         #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-todo-app"
+        #
+        #   policy = bucket.policy requested_policy_version: 3
+        #   policy.bindings.each do |binding|
+        #     puts binding.role
+        #   end
+        #
         # @example Updating a Policy from version 1 to version 3:
         #   require "google/cloud/storage"
         #
@@ -78,6 +89,34 @@ module Google
 
           ##
           # Creates a Binding object.
+          #
+          # @param [String] role Role that is assigned to members. For example,
+          #   `roles/viewer`, `roles/editor`, or `roles/owner`. Required.
+          # @param [Array<String>] members Specifies the identities requesting
+          #   access for a Cloud Platform resource. members can have the
+          #   following values. Required.
+          #
+          #   * `allUsers`: A special identifier that represents anyone who is on
+          #     the internet; with or without a Google account.
+          #   * `allAuthenticatedUsers`: A special identifier that represents
+          #      anyone who is authenticated with a Google account or a service
+          #      account.
+          #   * `user:{emailid}`: An email address that represents a specific
+          #     Google account. For example, `alice@example.com`.
+          #   * `serviceAccount:{emailid}`: An email address that represents a
+          #     service account. For example, `my-other-app@appspot.gserviceaccount.com`.
+          #   * `group:{emailid}`: An email address that represents a Google group.
+          #     For example, `admins@example.com`.
+          #   * `domain:{domain}`: The G Suite domain (primary) that represents
+          #     all the users of that domain. For example, `google.com` or
+          #     `example.com`. Required.
+          #
+          # @param [Google::Cloud::Storage::Policy::Condition] condition The
+          #   condition that is associated with this binding. NOTE: An unsatisfied
+          #   condition will not allow user access via current binding. Different
+          #   bindings, including their conditions, are examined independently.
+          #   Optional.
+          #
           def initialize role:, members:, condition: nil
             @role = String role
 
@@ -91,17 +130,61 @@ module Google
             @condition = condition
           end
 
+          ##
+          # Sets the role for the binding.
+          #
+          # @param [String] new_role Role that is assigned to members. For example,
+          #   `roles/viewer`, `roles/editor`, or `roles/owner`. Required.
+          #
           def role= new_role
             @role = String new_role
           end
 
+          ##
+          # Sets the members for the binding.
+          #
+          # @param [Array<String>] new_members Specifies the identities requesting
+          #   access for a Cloud Platform resource. members can have the
+          #   following values. Required.
+          #
+          #   * `allUsers`: A special identifier that represents anyone who is on
+          #     the internet; with or without a Google account.
+          #   * `allAuthenticatedUsers`: A special identifier that represents
+          #      anyone who is authenticated with a Google account or a service
+          #      account.
+          #   * `user:{emailid}`: An email address that represents a specific
+          #     Google account. For example, `alice@example.com`.
+          #   * `serviceAccount:{emailid}`: An email address that represents a
+          #     service account. For example, `my-other-app@appspot.gserviceaccount.com`.
+          #   * `group:{emailid}`: An email address that represents a Google group.
+          #     For example, `admins@example.com`.
+          #   * `domain:{domain}`: The G Suite domain (primary) that represents
+          #     all the users of that domain. For example, `google.com` or
+          #     `example.com`. Required.
+          #
           def members= new_members
             new_members = Array new_members
             raise ArgumentError, "members is empty, must be provided" if new_members.empty?
             @members = new_members
           end
 
-          # TODO: overload method signature, showing a Condition and named arguments
+          ##
+          # Sets the condition for the binding.
+          #
+          # @param [Google::Cloud::Storage::Policy::Condition] new_condition The
+          #   condition that is associated with this binding. NOTE: An unsatisfied
+          #   condition will not allow user access via current binding. Different
+          #   bindings, including their conditions, are examined independently.
+          #   Optional.
+          # @overload new(title:, description: nil, expression:)
+          #   @param [String] title Used to identify the condition. Required.
+          #   @param [String] description Used to document the condition. Optional.
+          #   @param [String] expression Defines an attribute-based logic
+          #     expression using a subset of the Common Expression Language (CEL).
+          #     The condition expression can contain multiple statements, each uses
+          #     one attributes, and statements are combined using logic operators,
+          #     following CEL language specification. Required.
+          #
           def condition= new_condition
             new_condition = Condition.new(**new_condition) if new_condition.is_a? Hash
             if new_condition && !new_condition.is_a?(Condition)

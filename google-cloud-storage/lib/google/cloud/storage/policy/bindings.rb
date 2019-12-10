@@ -56,22 +56,96 @@ module Google
             @bindings = []
           end
 
+          ##
+          # Adds a binding or bindings to the collection.
+          #
+          # @param [Google::Cloud::Storage::Policy::Binding] bindings One or
+          #   more bindings to be added to the policy owning the collection.
+          #
+          # @example
+          #   require "google/cloud/storage"
+          #
+          #   storage = Google::Cloud::Storage.new
+          #   bucket = storage.bucket "my-todo-app"
+          #
+          #   bucket.policy requested_policy_version: 3 do |p|
+          #     p.bindings.insert({
+          #                         role: "roles/storage.admin",
+          #                         members: ["user:owner@example.com"],
+          #                         condition: {
+          #                           title: "test-condition",
+          #                           description: "description of condition",
+          #                           expression: "expr1"
+          #                         }
+          #                       })
+          #   end
+          #
           def insert *bindings
             bindings = coerce_bindings(*bindings)
             @bindings += bindings
           end
 
+          ##
+          # Deletes a binding or bindings from the collection.
+          #
+          # @param [Google::Cloud::Storage::Policy::Binding] bindings One or
+          #   more bindings to be removed from the policy owning the
+          #   collection.
+          #
+          # @example
+          #   require "google/cloud/storage"
+          #
+          #   storage = Google::Cloud::Storage.new
+          #   bucket = storage.bucket "my-todo-app"
+          #
+          #   bucket.policy requested_policy_version: 3 do |p|
+          #     p.bindings.remove({
+          #                         role: "roles/storage.admin",
+          #                         members: ["user:owner@example.com"],
+          #                         condition: {
+          #                           title: "test-condition",
+          #                           description: "description of condition",
+          #                           expression: "expr1"
+          #                         }
+          #                       })
+          #   end
+          #
           def remove *bindings
             bindings = coerce_bindings(*bindings)
             @bindings -= bindings
           end
 
+          ##
+          # Calls the block once for each binding in the collection, passing
+          # the binding object as parameter.
+          #
+          # If no block is given, an enumerator is returned instead.
+          #
+          # @yield [binding] A binding in this bindings collection.
+          # @yieldparam [Google::Cloud::Storage::Policy::Binding] binding A
+          #   binding object.
+          #
+          # @return [Enumerator]
+          #
+          # @example
+          #   require "google/cloud/storage"
+          #
+          #   storage = Google::Cloud::Storage.new
+          #   bucket = storage.bucket "my-todo-app"
+          #
+          #   policy = bucket.policy requested_policy_version: 3
+          #   policy.bindings.each do |binding|
+          #     puts binding.role
+          #   end
+          #
           def each
             return enum_for :each unless block_given?
 
             @bindings.each { |binding| yield binding }
           end
 
+          ##
+          # @private
           def to_gapi
             @bindings.map(&:to_gapi)
           end

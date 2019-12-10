@@ -40,12 +40,23 @@ describe Google::Cloud::Storage::PolicyV3, :bindings do
   let(:simple_binding) { Google::Cloud::Storage::Policy::Binding.new **simple_hash }
   let(:complex_binding) { Google::Cloud::Storage::Policy::Binding.new **complex_hash }
 
-  it "bindings can be added and removed" do
+  it "bindings can be added, iterated and removed" do
     policy.bindings.to_a.count.must_equal 0
     policy.bindings.insert simple_binding
     policy.bindings.to_a.count.must_equal 1
     policy.bindings.insert complex_binding
     policy.bindings.to_a.count.must_equal 2
+
+    idx = 0
+    policy.bindings.each do |binding|
+      binding.must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      idx += 1
+    end
+    idx.must_equal 2
+
+    enumerator = policy.bindings.each
+    enumerator.next.must_equal simple_binding
+    enumerator.next.must_equal complex_binding
 
     policy.bindings.remove complex_binding
     policy.bindings.to_a.count.must_equal 1
