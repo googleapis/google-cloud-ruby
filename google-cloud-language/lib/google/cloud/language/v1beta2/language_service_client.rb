@@ -321,7 +321,7 @@ module Google
           end
 
           # Analyzes the syntax of the text and provides sentence boundaries and
-          # tokenization along with part of speech tags, dependency trees, and other
+          # tokenization along with part-of-speech tags, dependency trees, and other
           # properties.
           #
           # @param document [Google::Cloud::Language::V1beta2::Document | Hash]

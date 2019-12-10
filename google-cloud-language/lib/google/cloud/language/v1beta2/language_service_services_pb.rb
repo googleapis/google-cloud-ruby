@@ -46,7 +46,7 @@ module Google
             # sentiment associated with each entity and its mentions.
             rpc :AnalyzeEntitySentiment, AnalyzeEntitySentimentRequest, AnalyzeEntitySentimentResponse
             # Analyzes the syntax of the text and provides sentence boundaries and
-            # tokenization along with part of speech tags, dependency trees, and other
+            # tokenization along with part-of-speech tags, dependency trees, and other
             # properties.
             rpc :AnalyzeSyntax, AnalyzeSyntaxRequest, AnalyzeSyntaxResponse
             # Classifies a document into categories.
