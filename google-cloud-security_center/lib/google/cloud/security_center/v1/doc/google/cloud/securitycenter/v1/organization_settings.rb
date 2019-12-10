@@ -24,7 +24,7 @@ module Google
         #     The relative resource name of the settings. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     Example:
-        #     "organizations/123/organizationSettings".
+        #     "organizations/{organization_id}/organizationSettings".
         # @!attribute [rw] enable_asset_discovery
         #   @return [true, false]
         #     A flag that indicates if Asset Discovery should be enabled. If the flag is
