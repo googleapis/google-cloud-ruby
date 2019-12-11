@@ -324,17 +324,10 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket#policy" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
-      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-todo-app", Hash]
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy, Hash]
-    end
-  end
-
-  doctest.before "Google::Cloud::Storage::Bucket#policy" do
-    mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
-      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-todo-app", Hash]
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy, Hash]
+      mock.expect :get_bucket, bucket_gapi("my-bucket"), ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-bucket", Hash]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-bucket", Google::Apis::StorageV1::Policy, Hash]
     end
   end
 
@@ -356,9 +349,10 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket#update_policy" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
-      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-todo-app", Hash]
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy, Hash]
+      mock.expect :get_bucket, bucket_gapi("my-bucket"), ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-bucket", Hash]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-bucket", Google::Apis::StorageV1::Policy, Hash]
     end
   end
   doctest.skip "Google::Cloud::Storage::Bucket#policy="
@@ -427,9 +421,9 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Bucket#test_permissions" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
-      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-todo-app", Hash]
-      mock.expect :test_bucket_iam_permissions, permissions_gapi, ["my-todo-app", ["storage.buckets.get", "storage.buckets.delete"], Hash]
+      mock.expect :get_bucket, bucket_gapi("my-bucket"), ["my-bucket", Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-bucket", Hash]
+      mock.expect :test_bucket_iam_permissions, permissions_gapi, ["my-bucket", ["storage.buckets.get", "storage.buckets.delete"], Hash]
     end
   end
 
@@ -653,17 +647,18 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Storage::Policy" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
-      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-todo-app", Hash]
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy, Hash]
+      mock.expect :get_bucket, bucket_gapi("my-bucket"), ["my-bucket", Hash]
+      mock.expect :patch_bucket, bucket_gapi("my-bucket"), ["my-bucket", Google::Apis::StorageV1::Bucket, Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-bucket", Hash]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-bucket", Google::Apis::StorageV1::Policy, Hash]
     end
   end
 
   doctest.before "Google::Cloud::Storage::Policy#role" do
     mock_storage do |mock|
-      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
-      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-todo-app", Hash]
-      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-todo-app", Google::Apis::StorageV1::Policy, Hash]
+      mock.expect :get_bucket, bucket_gapi("my-bucket"), ["my-bucket", Hash]
+      mock.expect :get_bucket_iam_policy, policy_gapi_v1, ["my-bucket", Hash]
+      mock.expect :set_bucket_iam_policy, new_policy_gapi, ["my-bucket", Google::Apis::StorageV1::Policy, Hash]
     end
   end
 

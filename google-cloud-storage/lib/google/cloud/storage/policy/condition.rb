@@ -38,7 +38,7 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy requested_policy_version: 3
         #   policy.bindings.each do |binding|
@@ -49,18 +49,22 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.uniform_bucket_level_access = true
         #
         #   bucket.policy requested_policy_version: 3 do |p|
-        #     p.version # 1
+        #     p.version # the value is 1
         #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+        #
+        #     expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
         #     p.bindings.insert({
         #                         role: "roles/storage.admin",
         #                         members: ["user:owner@example.com"],
         #                         condition: {
-        #                           title: "test-condition",
+        #                           title: "my-condition",
         #                           description: "description of condition",
-        #                           expression: "expr1"
+        #                           expression: expr
         #                         }
         #                       })
         #   end

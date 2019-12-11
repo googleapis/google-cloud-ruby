@@ -47,17 +47,17 @@ module Google
         #     all the users of that domain. For example, `google.com` or
         #     `example.com`. Required.
         #
-        # @attr [Google::Cloud::Storage::Policy::Condition] condition The
-        #   condition that is associated with this binding. NOTE: An unsatisfied
-        #   condition will not allow user access via current binding. Different
-        #   bindings, including their conditions, are examined independently.
-        #   Optional.
+        # @attr [Google::Cloud::Storage::Policy::Condition, nil] condition The
+        #   condition that is associated with this binding, or `nil` if there is
+        #   no condition. NOTE: An unsatisfied condition will not allow user
+        #   access via current binding. Different bindings, including their
+        #   conditions, are examined independently.
         #
         # @example
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy requested_policy_version: 3
         #   policy.bindings.each do |binding|
@@ -68,18 +68,22 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.uniform_bucket_level_access = true
         #
         #   bucket.policy requested_policy_version: 3 do |p|
-        #     p.version # 1
+        #     p.version # the value is 1
         #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+        #
+        #     expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
         #     p.bindings.insert({
         #                         role: "roles/storage.admin",
         #                         members: ["user:owner@example.com"],
         #                         condition: {
-        #                           title: "test-condition",
+        #                           title: "my-condition",
         #                           description: "description of condition",
-        #                           expression: "expr1"
+        #                           expression: expr
         #                         }
         #                       })
         #   end
@@ -176,7 +180,7 @@ module Google
           #   condition will not allow user access via current binding. Different
           #   bindings, including their conditions, are examined independently.
           #   Optional.
-          # @overload new(title:, description: nil, expression:)
+          # @overload condition=(title:, description: nil, expression:)
           #   @param [String] title Used to identify the condition. Required.
           #   @param [String] description Used to document the condition. Optional.
           #   @param [String] expression Defines an attribute-based logic

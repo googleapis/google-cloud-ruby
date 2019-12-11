@@ -64,7 +64,8 @@ module Google
       #     role to one or more members. Does not support conditional bindings.
       #   * 3 - Introduces the condition field in the role binding, which further
       #     constrains the role binding via context-based and attribute-based rules.
-      #     See [Conditions Overview](https://cloud.google.com/iam/docs/conditions-overview)
+      #     See [Understanding policies](https://cloud.google.com/iam/docs/policies)
+      #     and [Overview of Cloud IAM Conditions](https://cloud.google.com/iam/docs/conditions-overview)
       #     for more information.
       #
       class Policy
@@ -84,7 +85,7 @@ module Google
       # and related helpers. Attempts to call {#bindings} and {#version=} will
       # raise a runtime error. To update the Policy version and add bindings with a newer
       # syntax, use {Google::Cloud::Storage::PolicyV3} instead by calling
-      # {Google::Cloud::Storage::Bucket#policy} with a `requested_policy_version`. To
+      # {Google::Cloud::Storage::Bucket#policy} with `requested_policy_version: 3`. To
       # obtain instances of this class, call {Google::Cloud::Storage::Bucket#policy}
       # without the `requested_policy_version` keyword argument.
       #
@@ -99,10 +100,10 @@ module Google
       #   require "google/cloud/storage"
       #
       #   storage = Google::Cloud::Storage.new
-      #   bucket = storage.bucket "my-todo-app"
+      #   bucket = storage.bucket "my-bucket"
       #
       #   bucket.policy do |p|
-      #     p.version # 1
+      #     p.version # the value is 1
       #     p.remove "roles/storage.admin", "user:owner@example.com"
       #     p.add "roles/storage.admin", "user:newowner@example.com"
       #     p.roles["roles/storage.objectViewer"] = ["allUsers"]
@@ -136,7 +137,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.policy do |p|
         #     p.add "roles/storage.admin", "user:newowner@example.com"
@@ -164,7 +165,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.policy do |p|
         #     p.remove "roles/storage.admin", "user:owner@example.com"
@@ -190,7 +191,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.policy do |p|
         #     p.role("roles/storage.admin") << "user:owner@example.com"
@@ -275,7 +276,7 @@ module Google
       # and {version=}. Attempts to call {#roles} and relate helpers will raise a runtime
       # error. This class may be used to update the Policy version and add bindings with a newer
       # syntax. To obtain instances of this class, call {Google::Cloud::Storage::Bucket#policy}
-      # with a `requested_policy_version`.
+      # with `requested_policy_version: 3`.
       #
       # @attr [Bindings] bindings Returns the Policy's bindings object that associate roles with
       #   an array of members. Conditions can be configured on the {Binding} object. See
@@ -288,18 +289,22 @@ module Google
       #   require "google/cloud/storage"
       #
       #   storage = Google::Cloud::Storage.new
-      #   bucket = storage.bucket "my-todo-app"
+      #   bucket = storage.bucket "my-bucket"
+      #
+      #   bucket.uniform_bucket_level_access = true
       #
       #   bucket.policy requested_policy_version: 3 do |p|
-      #     p.version # 1
+      #     p.version # the value is 1
       #     p.version = 3
+      #
+      #     expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
       #     p.bindings.insert({
       #                         role: "roles/storage.admin",
       #                         members: ["user:owner@example.com"],
       #                         condition: {
-      #                           title: "test-condition",
+      #                           title: "my-condition",
       #                           description: "description of condition",
-      #                           expression: "expr1"
+      #                           expression: expr
       #                         }
       #                       })
       #   end
@@ -308,17 +313,21 @@ module Google
       #   require "google/cloud/storage"
       #
       #   storage = Google::Cloud::Storage.new
-      #   bucket = storage.bucket "my-todo-app"
+      #   bucket = storage.bucket "my-bucket"
+      #
+      #   bucket.uniform_bucket_level_access? # true
       #
       #   bucket.policy requested_policy_version: 3 do |p|
-      #     p.version # 3
+      #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+      #
+      #     expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
       #     p.bindings.insert({
       #                         role: "roles/storage.admin",
       #                         members: ["user:owner@example.com"],
       #                         condition: {
-      #                           title: "test-condition",
+      #                           title: "my-condition",
       #                           description: "description of condition",
-      #                           expression: "expr1"
+      #                           expression: expr
       #                         }
       #                       })
       #   end
@@ -347,7 +356,8 @@ module Google
         #   role to one or more members. Does not support conditional bindings.
         # * 3 - Introduces the condition field in the role binding, which further
         #   constrains the role binding via context-based and attribute-based rules.
-        #   See [Conditions Overview](https://cloud.google.com/iam/docs/conditions-overview)
+        #   See [Understanding policies](https://cloud.google.com/iam/docs/policies)
+        #   and [Overview of Cloud IAM Conditions](https://cloud.google.com/iam/docs/conditions-overview)
         #   for more information.
         #
         # @param [Integer] new_version The syntax schema version of the policy.
@@ -358,18 +368,22 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.uniform_bucket_level_access = true
         #
         #   bucket.policy requested_policy_version: 3 do |p|
-        #     p.version # 1
+        #     p.version # the value is 1
         #     p.version = 3
+        #
+        #     expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
         #     p.bindings.insert({
         #                         role: "roles/storage.admin",
         #                         members: ["user:owner@example.com"],
         #                         condition: {
-        #                           title: "test-condition",
+        #                           title: "my-condition",
         #                           description: "description of condition",
-        #                           expression: "expr1"
+        #                           expression: expr
         #                         }
         #                       })
         #   end

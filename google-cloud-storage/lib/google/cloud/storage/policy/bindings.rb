@@ -31,18 +31,22 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.uniform_bucket_level_access = true
         #
         #   bucket.policy requested_policy_version: 3 do |p|
-        #     p.version # 1
+        #     p.version # the value is 1
         #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+        #
+        #     expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
         #     p.bindings.insert({
         #                         role: "roles/storage.admin",
         #                         members: ["user:owner@example.com"],
         #                         condition: {
-        #                           title: "test-condition",
+        #                           title: "my-condition",
         #                           description: "description of condition",
-        #                           expression: "expr1"
+        #                           expression: expr
         #                         }
         #                       })
         #   end
@@ -57,25 +61,36 @@ module Google
           end
 
           ##
-          # Adds a binding or bindings to the collection.
+          # Adds a binding or bindings to the collection. The arguments may be
+          # {Google::Cloud::Storage::Policy::Binding} objects or equivalent hash
+          # objects that will be implicitly coerced to binding objects.
           #
-          # @param [Google::Cloud::Storage::Policy::Binding] bindings One or
-          #   more bindings to be added to the policy owning the collection.
+          # @param [Google::Cloud::Storage::Policy::Binding, Hash] bindings One
+          #   or more bindings to be added to the policy owning the collection.
+          #   The arguments may be {Google::Cloud::Storage::Policy::Binding}
+          #   objects or equivalent hash objects that will be implicitly coerced
+          #   to binding objects.
           #
-          # @example
+          # @example Updating a Policy from version 1 to version 3:
           #   require "google/cloud/storage"
           #
           #   storage = Google::Cloud::Storage.new
-          #   bucket = storage.bucket "my-todo-app"
+          #   bucket = storage.bucket "my-bucket"
+          #
+          #   bucket.uniform_bucket_level_access = true
           #
           #   bucket.policy requested_policy_version: 3 do |p|
+          #     p.version # the value is 1
+          #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+          #
+          #     expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
           #     p.bindings.insert({
           #                         role: "roles/storage.admin",
           #                         members: ["user:owner@example.com"],
           #                         condition: {
-          #                           title: "test-condition",
+          #                           title: "my-condition",
           #                           description: "description of condition",
-          #                           expression: "expr1"
+          #                           expression: expr
           #                         }
           #                       })
           #   end
@@ -86,27 +101,27 @@ module Google
           end
 
           ##
-          # Deletes a binding or bindings from the collection.
+          # Deletes the binding or bindings from the collection that are equal to
+          # the arguments. The specification arguments may be
+          # {Google::Cloud::Storage::Policy::Binding} objects or equivalent hash
+          # objects that will be implicitly coerced to binding objects.
           #
-          # @param [Google::Cloud::Storage::Policy::Binding] bindings One or
-          #   more bindings to be removed from the policy owning the
-          #   collection.
+          # @param [Google::Cloud::Storage::Policy::Binding, Hash] bindings One
+          #   or more specifications for bindings to be removed from the
+          #   collection. The arguments may be
+          #   {Google::Cloud::Storage::Policy::Binding} objects or equivalent
+          #   hash objects that will be implicitly coerced to binding objects.
           #
           # @example
           #   require "google/cloud/storage"
           #
           #   storage = Google::Cloud::Storage.new
-          #   bucket = storage.bucket "my-todo-app"
+          #   bucket = storage.bucket "my-bucket"
           #
           #   bucket.policy requested_policy_version: 3 do |p|
           #     p.bindings.remove({
           #                         role: "roles/storage.admin",
-          #                         members: ["user:owner@example.com"],
-          #                         condition: {
-          #                           title: "test-condition",
-          #                           description: "description of condition",
-          #                           expression: "expr1"
-          #                         }
+          #                         members: ["user:owner@example.com"]
           #                       })
           #   end
           #
@@ -117,13 +132,16 @@ module Google
 
           ##
           # Calls the block once for each binding in the collection, passing
-          # the binding object as parameter.
+          # a {Google::Cloud::Storage::Policy::Binding} object as parameter. A
+          # {Google::Cloud::Storage::Policy::Binding} object is passed even
+          # when the arguments to {#insert} were hash objects.
           #
           # If no block is given, an enumerator is returned instead.
           #
           # @yield [binding] A binding in this bindings collection.
           # @yieldparam [Google::Cloud::Storage::Policy::Binding] binding A
-          #   binding object.
+          #   binding object, even when the arguments to {#insert} were hash
+          #   objects.
           #
           # @return [Enumerator]
           #
@@ -131,7 +149,7 @@ module Google
           #   require "google/cloud/storage"
           #
           #   storage = Google::Cloud::Storage.new
-          #   bucket = storage.bucket "my-todo-app"
+          #   bucket = storage.bucket "my-bucket"
           #
           #   policy = bucket.policy requested_policy_version: 3
           #   policy.bindings.each do |binding|

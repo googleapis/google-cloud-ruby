@@ -1747,13 +1747,16 @@ module Google
         # @param [Boolean] force [Deprecated] Force the latest policy to be
         #   retrieved from the Storage service when `true`. Deprecated because
         #   the latest policy is now always retrieved. The default is `nil`.
-        # @attr [Integer] requested_policy_version The requested syntax schema version of
-        #   the policy. Optional. If `1`, `nil` or not provided, `Policy#roles` and related
-        #   helpers will be accessible, but attempts to call `Policy#bindings` will raise
-        #   a runtime error. If `3` is provided, `Policy#bindings` will be accessible,
-        #   but attempts to call `Policy#roles` and related helpers will raise a runtime
-        #   error. A higher version indicates that the policy contains role
-        #   bindings with the newer syntax schema that is unsupported by earlier versions.
+        # @param [Integer] requested_policy_version The requested syntax schema
+        #   version of the policy. Optional. If `1`, `nil`, or not provided, a
+        #   {Google::Cloud::Storage::PolicyV1} object is returned, which
+        #   provides {Google::Cloud::Storage::PolicyV1#roles} and related
+        #   helpers but does not provide a `bindings` method. If `3` is
+        #   provided, a {Google::Cloud::Storage::PolicyV3} object is returned,
+        #   which provides {Google::Cloud::Storage::PolicyV3#bindings} but does
+        #   not provide a `roles` method or related helpers. A higher version
+        #   indicates that the policy contains role bindings with the newer
+        #   syntax schema that is unsupported by earlier versions.
         #
         #   The following requested policy versions are valid:
         #
@@ -1761,7 +1764,8 @@ module Google
         #     role to one or more members. Does not support conditional bindings.
         #   * 3 - Introduces the condition field in the role binding, which further
         #     constrains the role binding via context-based and attribute-based rules.
-        #     See [Conditions Overview](https://cloud.google.com/iam/docs/conditions-overview)
+        #     See [Understanding policies](https://cloud.google.com/iam/docs/policies)
+        #     and [Overview of Cloud IAM Conditions](https://cloud.google.com/iam/docs/conditions-overview)
         #     for more information.
         #
         # @yield [policy] A block for updating the policy. The latest policy
@@ -1776,7 +1780,7 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy
         #   policy.version # 1
@@ -1786,7 +1790,7 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy requested_policy_version: 3
         #   policy.version # 3
@@ -1798,10 +1802,10 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   bucket.policy do |p|
-        #     p.version # 1
+        #     p.version # the value is 1
         #     p.remove "roles/storage.admin", "user:owner@example.com"
         #     p.add "roles/storage.admin", "user:newowner@example.com"
         #     p.roles["roles/storage.objectViewer"] = ["allUsers"]
@@ -1811,18 +1815,22 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.uniform_bucket_level_access = true
         #
         #   bucket.policy requested_policy_version: 3 do |p|
-        #     p.version # 1
+        #     p.version # the value is 1
         #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+        #
+        #     expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
         #     p.bindings.insert({
         #                         role: "roles/storage.admin",
         #                         members: ["user:owner@example.com"],
         #                         condition: {
-        #                           title: "test-condition",
+        #                           title: "my-condition",
         #                           description: "description of condition",
-        #                           expression: "expr1"
+        #                           expression: expr
         #                         }
         #                       })
         #   end
@@ -1831,17 +1839,21 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.uniform_bucket_level_access? # true
         #
         #   bucket.policy requested_policy_version: 3 do |p|
-        #     p.version # 3 indicates an existing binding with a condition.
+        #     p.version = 3 # Must be explicitly set to opt-in to support for conditions.
+        #
+        #     expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
         #     p.bindings.insert({
         #                         role: "roles/storage.admin",
         #                         members: ["user:owner@example.com"],
         #                         condition: {
-        #                           title: "test-condition",
+        #                           title: "my-condition",
         #                           description: "description of condition",
-        #                           expression: "expr1"
+        #                           expression: expr
         #                         }
         #                       })
         #   end
@@ -1884,7 +1896,7 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy
         #   policy.version # 1
@@ -1898,18 +1910,20 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy requested_policy_version: 3
         #   policy.version # 1
         #   policy.version = 3
+        #
+        #   expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
         #   policy.bindings.insert({
         #                           role: "roles/storage.admin",
         #                           members: ["user:owner@example.com"],
         #                           condition: {
-        #                             title: "test-condition",
+        #                             title: "my-condition",
         #                             description: "description of condition",
-        #                             expression: "expr1"
+        #                             expression: expr
         #                           }
         #                         })
         #
@@ -1919,17 +1933,19 @@ module Google
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   policy = bucket.policy requested_policy_version: 3
         #   policy.version # 3 indicates an existing binding with a condition.
+        #
+        #   expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
         #   policy.bindings.insert({
         #                           role: "roles/storage.admin",
         #                           members: ["user:owner@example.com"],
         #                           condition: {
-        #                             title: "test-condition",
+        #                             title: "my-condition",
         #                             description: "description of condition",
-        #                             expression: "expr1"
+        #                             expression: expr
         #                           }
         #                         })
         #
@@ -1962,7 +1978,7 @@ module Google
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   bucket = storage.bucket "my-todo-app"
+        #   bucket = storage.bucket "my-bucket"
         #
         #   permissions = bucket.test_permissions "storage.buckets.get",
         #                                         "storage.buckets.delete"
