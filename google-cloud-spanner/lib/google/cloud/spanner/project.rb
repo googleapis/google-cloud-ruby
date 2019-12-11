@@ -479,12 +479,21 @@ module Google
         #     end
         #   end
         #
-        def client instance_id, database_id, pool: {}, labels: nil
+        def client \
+            instance_id,
+            database_id,
+            pool: {},
+            labels: nil,
+            enable_resource_based_routing: nil
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
-          Client.new self, instance_id, database_id,
-                     session_labels: labels,
-                     pool_opts: valid_session_pool_options(pool)
+          Client.new \
+            self,
+            instance_id,
+            database_id,
+            session_labels: labels,
+            pool_opts: valid_session_pool_options(pool),
+            enable_resource_based_routing: enable_resource_based_routing
         end
 
         ##
@@ -538,10 +547,19 @@ module Google
         #   results = new_batch_snapshot.execute_partition \
         #     new_partition
         #
-        def batch_client instance_id, database_id, labels: nil
+        def batch_client \
+            instance_id,
+            database_id,
+            labels: nil,
+            enable_resource_based_routing: nil
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
-          BatchClient.new self, instance_id, database_id, session_labels: labels
+          BatchClient.new \
+            self,
+            instance_id,
+            database_id,
+            session_labels: labels,
+            enable_resource_based_routing: enable_resource_based_routing
         end
 
         protected

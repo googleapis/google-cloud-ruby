@@ -404,8 +404,9 @@ module Google
           ensure_service!
           commit = Commit.new
           yield commit
-          commit_resp = service.commit path, commit.mutations,
-                                       transaction_id: transaction_id
+          commit_resp = service.commit \
+            path, commit.mutations,
+            transaction_id: transaction_id
           @last_updated_at = Time.now
           Convert.timestamp_to_time commit_resp.commit_timestamp
         end

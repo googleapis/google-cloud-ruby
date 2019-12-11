@@ -23,6 +23,7 @@ require "google/cloud/spanner/snapshot"
 require "google/cloud/spanner/range"
 require "google/cloud/spanner/column_value"
 require "google/cloud/spanner/convert"
+require "google/cloud/spanner/client_service_proxy"
 
 module Google
   module Cloud
@@ -50,14 +51,22 @@ module Google
       #   end
       #
       class Client
+        ## @private Service wrapper for data client api.
+        # @return [ClientServiceProxy]
+        attr_reader :service
+
         ##
         # @private Creates a new Spanner Client instance.
         def initialize project, instance_id, database_id, session_labels: nil,
-                       pool_opts: {}
+                       pool_opts: {}, enable_resource_based_routing: nil
           @project = project
           @instance_id = instance_id
           @database_id = database_id
           @session_labels = session_labels
+          @service = ClientServiceProxy.new \
+            @project,
+            @instance_id,
+            enable_resource_based_routing: enable_resource_based_routing
           @pool = Pool.new self, pool_opts
         end
 
@@ -994,8 +1003,9 @@ module Google
             begin
               Thread.current[:transaction_id] = tx.transaction_id
               yield tx
-              commit_resp = @project.service.commit \
-                tx.session.path, tx.mutations, transaction_id: tx.transaction_id
+              commit_resp = @service.commit \
+                tx.session.path, tx.mutations,
+                transaction_id: tx.transaction_id
               return Convert.timestamp_to_time commit_resp.commit_timestamp
             rescue GRPC::Aborted, Google::Cloud::AbortedError => err
               # Re-raise if deadline has passed
@@ -1093,7 +1103,7 @@ module Google
 
           @pool.with_session do |session|
             begin
-              snp_grpc = @project.service.create_snapshot \
+              snp_grpc = @service.create_snapshot \
                 session.path, strong: strong,
                               timestamp: (timestamp || read_timestamp),
                               staleness: (staleness || exact_staleness)
@@ -1286,12 +1296,12 @@ module Google
         # Creates a new session object every time.
         def create_new_session
           ensure_service!
-          grpc = @project.service.create_session \
+          grpc = @service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id
             ),
             labels: @session_labels
-          Session.from_grpc grpc, @project.service
+          Session.from_grpc grpc, @service
         end
 
         ##
@@ -1314,13 +1324,15 @@ module Google
         #
         def batch_create_sessions session_count
           ensure_service!
-          resp = @project.service.batch_create_sessions \
+          resp = @service.batch_create_sessions \
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id
             ),
             session_count,
             labels: @session_labels
-          resp.session.map { |grpc| Session.from_grpc grpc, @project.service }
+          resp.session.map do |grpc|
+            Session.from_grpc grpc, @service
+          end
         end
 
         # @private
@@ -1385,7 +1397,7 @@ module Google
         end
 
         def pdml_transaction session
-          pdml_tx_grpc = @project.service.create_pdml session.path
+          pdml_tx_grpc = @service.create_pdml session.path
           Google::Spanner::V1::TransactionSelector.new id: pdml_tx_grpc.id
         end
 

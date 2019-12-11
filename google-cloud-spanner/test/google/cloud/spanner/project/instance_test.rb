@@ -52,21 +52,23 @@ describe Google::Cloud::Spanner::Project, :instance, :mock_spanner do
   it "returns instance with provided fields" do
     instance_id = "my-instance-id"
 
-    get_res = Google::Spanner::Admin::Instance::V1::Instance.new name: instance_path(instance_id)
+    get_res = Google::Spanner::Admin::Instance::V1::Instance.new \
+      name: instance_path(instance_id), endpoint_uris: ["test.host.com"]
     mock = Minitest::Mock.new
     mock.expect :get_instance, get_res, [
       instance_path(instance_id),
-      field_mask: Google::Protobuf::FieldMask.new(paths: ["name"])
+      field_mask: Google::Protobuf::FieldMask.new(paths: ["name", "endpoint_uris"])
     ]
     spanner.service.mocked_instances = mock
 
-    instance = spanner.instance instance_id, fields: ["name"]
+    instance = spanner.instance instance_id, fields: ["name", "endpoint_uris"]
 
     mock.verify
 
     instance.project_id.must_equal project
     instance.instance_id.must_equal instance_id
     instance.path.must_equal instance_path(instance_id)
+    instance.endpoint_uris.must_equal ["test.host.com"]
     instance.name.must_equal ""
     instance.node_count.must_equal 0
     instance.state.must_equal :STATE_UNSPECIFIED

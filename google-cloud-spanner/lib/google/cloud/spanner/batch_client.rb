@@ -63,13 +63,26 @@ module Google
       #     new_partition
       #
       class BatchClient
+        ## @private Service wrapper for batch data client api.
+        # @return [ClientServiceProxy]
+        attr_reader :service
+
         ##
         # @private Creates a new Spanner BatchClient instance.
-        def initialize project, instance_id, database_id, session_labels: nil
+        def initialize \
+            project,
+            instance_id,
+            database_id,
+            session_labels: nil,
+            enable_resource_based_routing: nil
           @project = project
           @instance_id = instance_id
           @database_id = database_id
           @session_labels = session_labels
+          @service = ClientServiceProxy.new \
+            @project,
+            @instance_id,
+            enable_resource_based_routing: enable_resource_based_routing
         end
 
         # The unique identifier for the project.
@@ -184,7 +197,7 @@ module Google
 
           ensure_service!
           snp_session = session
-          snp_grpc = @project.service.create_snapshot \
+          snp_grpc = @service.create_snapshot \
             snp_session.path, strong: strong,
                               timestamp: (timestamp || read_timestamp),
                               staleness: (staleness || exact_staleness)
@@ -231,7 +244,7 @@ module Google
         def load_batch_snapshot serialized_snapshot
           ensure_service!
 
-          BatchSnapshot.load serialized_snapshot, service: @project.service
+          BatchSnapshot.load serialized_snapshot, service: @service
         end
 
         ##
@@ -404,12 +417,12 @@ module Google
         # New session for each use.
         def session
           ensure_service!
-          grpc = @project.service.create_session \
+          grpc = @service.create_session \
             Admin::Database::V1::DatabaseAdminClient.database_path(
               project_id, instance_id, database_id
             ),
             labels: @session_labels
-          Session.from_grpc grpc, @project.service
+          Session.from_grpc grpc, @service
         end
 
         ##

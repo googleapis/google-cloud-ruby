@@ -1,3 +1,4 @@
+
 # Copyright 2016 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,6 +41,7 @@ module Google
           @host = host || V1::SpannerClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
+          @spanner_clients = {}
         end
 
         def channel
@@ -58,15 +60,16 @@ module Google
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
-        def service
+        def service endpoint_uri = nil
           return mocked_service if mocked_service
-          @service ||= \
+
+          @spanner_clients[endpoint_uri] ||= \
             V1::SpannerClient.new(
               credentials: channel,
               timeout: timeout,
               client_config: client_config,
-              service_address: service_address,
-              service_port: service_port,
+              service_address: service_address(endpoint_uri),
+              service_port: service_port(endpoint_uri),
               lib_name: "gccl",
               lib_version: Google::Cloud::Spanner::VERSION
             )
@@ -264,47 +267,58 @@ module Google
           end
         end
 
-        def get_session session_name
+        def get_session session_name, endpoint_uri: nil
           opts = default_options_from_session session_name
           execute do
-            service.get_session session_name, options: opts
+            service(endpoint_uri).get_session session_name, options: opts
           end
         end
 
-        def create_session database_name, labels: nil
+        def create_session database_name, labels: nil, endpoint_uri: nil
           opts = default_options_from_session database_name
           session = Google::Spanner::V1::Session.new labels: labels if labels
           execute do
-            service.create_session database_name, session: session,
-                                                  options: opts
+            service(endpoint_uri).create_session database_name, session: session,
+                                                 options: opts
           end
         end
 
-        def batch_create_sessions database_name, session_count, labels: nil
+        def batch_create_sessions \
+            database_name,
+            session_count,
+            labels: nil,
+            endpoint_uri: nil
           opts = default_options_from_session database_name
           session = Google::Spanner::V1::Session.new labels: labels if labels
           execute do
             # The response may have fewer sessions than requested in the RPC.
-            service.batch_create_sessions database_name,
-                                          session_count,
-                                          session_template: session,
-                                          options: opts
+            service(endpoint_uri).batch_create_sessions \
+              database_name,
+              session_count,
+              session_template: session,
+              options: opts
           end
         end
 
-        def delete_session session_name
+        def delete_session session_name, endpoint_uri: nil
           opts = default_options_from_session session_name
           execute do
-            service.delete_session session_name, options: opts
+            service(endpoint_uri).delete_session session_name, options: opts
           end
         end
 
-        def execute_streaming_sql session_name, sql, transaction: nil,
-                                  params: nil, types: nil, resume_token: nil,
-                                  partition_token: nil, seqno: nil
+        def execute_streaming_sql \
+            session_name, sql,
+            transaction: nil,
+            params: nil,
+            types: nil,
+            resume_token: nil,
+            partition_token: nil,
+            seqno: nil,
+            endpoint_uri: nil
           opts = default_options_from_session session_name
           execute do
-            service.execute_streaming_sql \
+            service(endpoint_uri).execute_streaming_sql \
               session_name, sql, transaction: transaction,
                                  params: params,
                                  param_types: types,
@@ -315,15 +329,21 @@ module Google
           end
         end
 
-        def execute_batch_dml session_name, transaction, statements, seqno
+        def execute_batch_dml \
+            session_name,
+            transaction,
+            statements,
+            seqno,
+            endpoint_uri: nil
           opts = default_options_from_session session_name
           statements = statements.map(&:to_grpc)
           results = execute do
-            service.execute_batch_dml session_name,
-                                      transaction,
-                                      statements,
-                                      seqno,
-                                      options: opts
+            service(endpoint_uri).execute_batch_dml \
+              session_name,
+              transaction,
+              statements,
+              seqno,
+              options: opts
           end
           if results.status.code.zero?
             results.result_sets.map { |rs| rs.stats.row_count_exact }
@@ -336,12 +356,20 @@ module Google
           end
         end
 
-        def streaming_read_table session_name, table_name, columns, keys: nil,
-                                 index: nil, transaction: nil, limit: nil,
-                                 resume_token: nil, partition_token: nil
+        def streaming_read_table \
+            session_name,
+            table_name,
+            columns,
+            keys: nil,
+            index: nil,
+            transaction: nil,
+            limit: nil,
+            resume_token: nil,
+            partition_token: nil,
+            endpoint_uri: nil
           opts = default_options_from_session session_name
           execute do
-            service.streaming_read \
+            service(endpoint_uri).streaming_read \
               session_name, table_name, columns, keys,
               transaction: transaction, index: index, limit: limit,
               resume_token: resume_token, partition_token: partition_token,
@@ -349,32 +377,45 @@ module Google
           end
         end
 
-        def partition_read session_name, table_name, columns, transaction,
-                           keys: nil, index: nil, partition_size_bytes: nil,
-                           max_partitions: nil
+        def partition_read \
+            session_name,
+            table_name,
+            columns,
+            transaction,
+            keys: nil,
+            index: nil,
+            partition_size_bytes: nil,
+            max_partitions: nil,
+            endpoint_uri: nil
           partition_opts = partition_options partition_size_bytes,
                                              max_partitions
 
           opts = default_options_from_session session_name
 
           execute do
-            service.partition_read \
+            service(endpoint_uri).partition_read \
               session_name, table_name, keys,
               transaction: transaction, index: index, columns: columns,
               partition_options: partition_opts, options: opts
           end
         end
 
-        def partition_query session_name, sql, transaction, params: nil,
-                            types: nil, partition_size_bytes: nil,
-                            max_partitions: nil
+        def partition_query \
+            session_name,
+            sql,
+            transaction,
+            params: nil,
+            types: nil,
+            partition_size_bytes: nil,
+            max_partitions: nil,
+            endpoint_uri: nil
           partition_opts = partition_options partition_size_bytes,
                                              max_partitions
 
           opts = default_options_from_session session_name
 
           execute do
-            service.partition_query \
+            service(endpoint_uri).partition_query \
               session_name, sql,
               transaction: transaction,
               params: params, param_types: types,
@@ -382,7 +423,11 @@ module Google
           end
         end
 
-        def commit session_name, mutations = [], transaction_id: nil
+        def commit \
+            session_name,
+            mutations = [],
+            transaction_id: nil,
+            endpoint_uri: nil
           tx_opts = nil
           if transaction_id.nil?
             tx_opts = Google::Spanner::V1::TransactionOptions.new(
@@ -391,32 +436,37 @@ module Google
           end
           opts = default_options_from_session session_name
           execute do
-            service.commit \
+            service(endpoint_uri).commit \
               session_name, mutations,
-              transaction_id: transaction_id, single_use_transaction: tx_opts,
+              transaction_id: transaction_id,
+              single_use_transaction: tx_opts,
               options: opts
           end
         end
 
-        def rollback session_name, transaction_id
+        def rollback session_name, transaction_id, endpoint_uri: nil
           opts = default_options_from_session session_name
           execute do
-            service.rollback session_name, transaction_id, options: opts
+            service(endpoint_uri).rollback session_name, transaction_id, options: opts
           end
         end
 
-        def begin_transaction session_name
+        def begin_transaction session_name, endpoint_uri: nil
           tx_opts = Google::Spanner::V1::TransactionOptions.new(
             read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new
           )
           opts = default_options_from_session session_name
           execute do
-            service.begin_transaction session_name, tx_opts, options: opts
+            service(endpoint_uri).begin_transaction session_name, tx_opts, options: opts
           end
         end
 
-        def create_snapshot session_name, strong: nil, timestamp: nil,
-                            staleness: nil
+        def create_snapshot \
+            session_name,
+            strong: nil,
+            timestamp: nil,
+            staleness: nil,
+            endpoint_uri: nil
           tx_opts = Google::Spanner::V1::TransactionOptions.new(
             read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
               {
@@ -429,18 +479,19 @@ module Google
           )
           opts = default_options_from_session session_name
           execute do
-            service.begin_transaction session_name, tx_opts, options: opts
+            service(endpoint_uri).begin_transaction session_name, tx_opts, options: opts
           end
         end
 
-        def create_pdml session_name
+        def create_pdml session_name, endpoint_uri: nil
           tx_opts = Google::Spanner::V1::TransactionOptions.new(
             partitioned_dml: \
               Google::Spanner::V1::TransactionOptions::PartitionedDml.new
           )
           opts = default_options_from_session session_name
           execute do
-            service.begin_transaction session_name, tx_opts, options: opts
+            service(endpoint_uri).begin_transaction \
+              session_name, tx_opts, options: opts
           end
         end
 
@@ -450,14 +501,12 @@ module Google
 
         protected
 
-        def service_address
-          return nil if host.nil?
-          URI.parse("//#{host}").host
+        def service_address uri = nil
+          URI.parse("//#{uri || host}").host
         end
 
-        def service_port
-          return nil if host.nil?
-          URI.parse("//#{host}").port
+        def service_port uri = nil
+          URI.parse("//#{uri || host}").port
         end
 
         def default_options_from_session session_name

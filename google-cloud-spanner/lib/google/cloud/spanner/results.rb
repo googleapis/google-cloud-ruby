@@ -265,7 +265,9 @@ module Google
                            transaction: transaction,
                            partition_token: partition_token }
           enum = service.streaming_read_table \
-            session_path, table, columns, read_options
+            session_path,
+            table, columns,
+            read_options
           from_enum(enum, service).tap do |results|
             results.instance_variable_set :@session_path, session_path
             results.instance_variable_set :@table,        table
