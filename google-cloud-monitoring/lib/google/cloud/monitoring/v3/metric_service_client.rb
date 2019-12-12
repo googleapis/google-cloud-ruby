@@ -602,14 +602,16 @@ module Google
           # @param view [Google::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView]
           #   Specifies which information is returned about the time series.
           # @param aggregation [Google::Monitoring::V3::Aggregation | Hash]
-          #   By default, the raw time series data is returned.
-          #   Use this field to combine multiple time series for different
-          #   views of the data.
+          #   Specifies the alignment of data points in individual time series as
+          #   well as how to combine the retrieved time series across specified labels.
+          #
+          #   By default (if no `aggregation` is explicitly specified), the raw time
+          #   series data is returned.
           #   A hash of the same form as `Google::Monitoring::V3::Aggregation`
           #   can also be provided.
           # @param order_by [String]
           #   Unsupported: must be left blank. The points in each time series are
-          #   returned in reverse time order.
+          #   currently returned in reverse time order (most recent to oldest).
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this

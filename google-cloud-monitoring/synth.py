@@ -31,13 +31,27 @@ v3_library = gapic.ruby_library(
     artman_output_name='google-cloud-ruby/google-cloud-monitoring'
 )
 s.copy(v3_library / 'acceptance')
-s.copy(v3_library / 'lib')
-s.copy(v3_library / 'test')
+s.copy(v3_library / 'lib/google/cloud/monitoring.rb')
+s.copy(v3_library / 'lib/google/cloud/monitoring/v3.rb')
+s.copy(v3_library / 'lib/google/cloud/monitoring/v3')
+s.copy(v3_library / 'lib/google/monitoring/v3')
+s.copy(v3_library / 'test/google/cloud/monitoring/v3')
 s.copy(v3_library / 'README.md')
 s.copy(v3_library / 'LICENSE')
 s.copy(v3_library / '.gitignore')
 s.copy(v3_library / '.yardopts')
 s.copy(v3_library / 'google-cloud-monitoring.gemspec', merge=ruby.merge_gemspec)
+
+v1_dashboard_library = gapic.ruby_library(
+    'monitoring', 'v1',
+    config_path='/google/monitoring/dashboard/v1/artman_monitoring.yaml',
+    artman_output_name='google-cloud-ruby/google-cloud-monitoring'
+)
+s.copy(v1_dashboard_library / 'lib/google/cloud/monitoring/dashboard.rb')
+s.copy(v1_dashboard_library / 'lib/google/cloud/monitoring/dashboard/v1')
+s.copy(v1_dashboard_library / 'lib/google/cloud/monitoring/dashboard/v1.rb')
+s.copy(v1_dashboard_library / 'lib/google/monitoring/dashboard/v1')
+s.copy(v1_dashboard_library / 'test/google/cloud/monitoring/dashboard/v1')
 
 # Copy common templates
 templates = gcp.CommonTemplates().ruby_library()
@@ -65,7 +79,10 @@ s.replace(
     [
         'lib/google/cloud/monitoring.rb',
         'lib/google/cloud/monitoring/v*.rb',
-        'lib/google/cloud/monitoring/v*/*_client.rb'
+        'lib/google/cloud/monitoring/v*/*_client.rb',
+        'lib/google/cloud/monitoring/dashboard.rb',
+        'lib/google/cloud/monitoring/dashboard/v*.rb',
+        'lib/google/cloud/monitoring/dashboard/v*/*_client.rb'
     ],
     '\n(\\s+)#(\\s+)@param exception_transformer',
     '\n\\1#\\2@param service_address [String]\n' +
@@ -77,7 +94,9 @@ s.replace(
 s.replace(
     [
         'lib/google/cloud/monitoring/v*.rb',
-        'lib/google/cloud/monitoring/v*/*_client.rb'
+        'lib/google/cloud/monitoring/v*/*_client.rb',
+        'lib/google/cloud/monitoring/dashboard/v*.rb',
+        'lib/google/cloud/monitoring/dashboard/v*/*_client.rb'
     ],
     '\n(\\s+)metadata: nil,\n\\s+exception_transformer: nil,\n',
     '\n\\1metadata: nil,\n\\1service_address: nil,\n\\1service_port: nil,\n\\1exception_transformer: nil,\n'
@@ -85,18 +104,26 @@ s.replace(
 s.replace(
     [
         'lib/google/cloud/monitoring/v*.rb',
-        'lib/google/cloud/monitoring/v*/*_client.rb'
+        'lib/google/cloud/monitoring/v*/*_client.rb',
+        'lib/google/cloud/monitoring/dashboard/v*.rb',
+        'lib/google/cloud/monitoring/dashboard/v*/*_client.rb'
     ],
     ',\n(\\s+)lib_name: lib_name,\n\\s+lib_version: lib_version',
     ',\n\\1lib_name: lib_name,\n\\1service_address: service_address,\n\\1service_port: service_port,\n\\1lib_version: lib_version'
 )
 s.replace(
-    'lib/google/cloud/monitoring/v*/*_client.rb',
+    [
+        'lib/google/cloud/monitoring/v*/*_client.rb',
+        'lib/google/cloud/monitoring/dashboard/v*/*_client.rb'
+    ],
     'service_path = self\\.class::SERVICE_ADDRESS',
     'service_path = service_address || self.class::SERVICE_ADDRESS'
 )
 s.replace(
-    'lib/google/cloud/monitoring/v*/*_client.rb',
+    [
+        'lib/google/cloud/monitoring/v*/*_client.rb',
+        'lib/google/cloud/monitoring/dashboard/v*/*_client.rb'
+    ],
     'port = self\\.class::DEFAULT_SERVICE_PORT',
     'port = service_port || self.class::DEFAULT_SERVICE_PORT'
 )
@@ -185,12 +212,18 @@ s.replace(
     '\\1Google::Cloud::Monitoring::VERSION'
 )
 s.replace(
-    'lib/google/cloud/monitoring/v3/*_client.rb',
+    [
+        'lib/google/cloud/monitoring/v*/*_client.rb',
+        'lib/google/cloud/monitoring/dashboard/v*/*_client.rb'
+    ],
     '(require \".*credentials\"\n)\n',
     '\\1require "google/cloud/monitoring/version"\n\n'
 )
 s.replace(
-    'lib/google/cloud/monitoring/v3/*_client.rb',
+    [
+        'lib/google/cloud/monitoring/v*/*_client.rb',
+        'lib/google/cloud/monitoring/dashboard/v*/*_client.rb'
+    ],
     'Gem.loaded_specs\[.*\]\.version\.version',
     'Google::Cloud::Monitoring::VERSION'
 )
