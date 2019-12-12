@@ -68,6 +68,9 @@ module Google
         def initialize logging, max_count: 10000, max_bytes: 10000000,
                        max_queue: 100, interval: 5, threads: 10,
                        partial_success: false
+          # init MonitorMixin
+          super()
+
           @logging = logging
 
           @max_count = max_count
@@ -84,9 +87,6 @@ module Google
 
           # Make sure all buffered messages are sent when process exits.
           at_exit { stop }
-
-          # init MonitorMixin
-          super()
         end
 
         ##

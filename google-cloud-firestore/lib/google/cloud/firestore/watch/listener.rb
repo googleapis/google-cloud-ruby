@@ -65,13 +65,13 @@ module Google
           end
 
           def initialize query, doc_ref, client, init_listen_req, &callback
+            super() # to init MonitorMixin
+
             @query = query
             @doc_ref = doc_ref
             @client = client
             @init_listen_req = init_listen_req
             @callback = callback
-
-            super() # to init MonitorMixin
           end
 
           def start

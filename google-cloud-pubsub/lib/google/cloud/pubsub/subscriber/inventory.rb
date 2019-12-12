@@ -27,12 +27,12 @@ module Google
           attr_reader :stream, :limit
 
           def initialize stream, limit
+            super()
+
             @stream = stream
             @limit = limit
             @_ack_ids = []
             @wait_cond = new_cond
-
-            super()
           end
 
           def ack_ids

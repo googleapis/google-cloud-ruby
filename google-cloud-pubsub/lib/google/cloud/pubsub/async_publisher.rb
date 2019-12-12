@@ -72,6 +72,9 @@ module Google
         ##
         # @private Create a new instance of the object.
         def initialize topic_name, service, max_bytes: 10_000_000, max_messages: 1000, interval: 0.25, threads: {}
+          # init MonitorMixin
+          super()
+
           @topic_name = service.topic_path topic_name
           @service    = service
 
@@ -90,9 +93,6 @@ module Google
           @batches = {}
 
           @cond = new_cond
-
-          # init MonitorMixin
-          super()
         end
 
         ##

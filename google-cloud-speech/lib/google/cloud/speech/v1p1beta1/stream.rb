@@ -60,13 +60,14 @@ module Google
           # This must always be private, since it may change as the implementation
           # changes over time.
           def initialize streaming_config, streaming_call
+            super() # to init MonitorMixin
+
             @streaming_call = streaming_call
             @streaming_recognize_request = {
               streaming_config: streaming_config
             }
             @results = []
             @callbacks = Hash.new { |h, k| h[k] = [] }
-            super() # to init MonitorMixin
           end
 
           ##
