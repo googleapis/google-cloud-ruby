@@ -1,5 +1,15 @@
 # Release History
 
+### 1.25.0 / 2019-12-12
+
+#### Features
+
+* Add IAM Conditions support to Policy
+
+#### Documentation
+
+* fix YARD warning in CHANGELOG.md
+
 ### 1.24.0 / 2019-11-12
 
 #### Features
