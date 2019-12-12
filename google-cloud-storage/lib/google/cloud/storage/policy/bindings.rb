@@ -71,6 +71,8 @@ module Google
           #   objects or equivalent hash objects that will be implicitly coerced
           #   to binding objects.
           #
+          # @return [Bindings] `self` for chaining.
+          #
           # @example Updating a Policy from version 1 to version 3:
           #   require "google/cloud/storage"
           #
@@ -98,6 +100,7 @@ module Google
           def insert *bindings
             bindings = coerce_bindings(*bindings)
             @bindings += bindings
+            self
           end
 
           ##
@@ -112,6 +115,8 @@ module Google
           #   {Google::Cloud::Storage::Policy::Binding} objects or equivalent
           #   hash objects that will be implicitly coerced to binding objects.
           #
+          # @return [Bindings] `self` for chaining.
+          #
           # @example
           #   require "google/cloud/storage"
           #
@@ -119,15 +124,22 @@ module Google
           #   bucket = storage.bucket "my-bucket"
           #
           #   bucket.policy requested_policy_version: 3 do |p|
+          #     expr = "resource.name.startsWith(\"projects/_/buckets/bucket-name/objects/prefix-a-\")"
           #     p.bindings.remove({
           #                         role: "roles/storage.admin",
-          #                         members: ["user:owner@example.com"]
+          #                         members: ["user:owner@example.com"],
+          #                         condition: {
+          #                           title: "my-condition",
+          #                           description: "description of condition",
+          #                           expression: expr
+          #                         }
           #                       })
           #   end
           #
           def remove *bindings
             bindings = coerce_bindings(*bindings)
             @bindings -= bindings
+            self
           end
 
           ##
