@@ -4,9 +4,7 @@
 
 #### Bug Fixes
 
-* Adjust required/optional argument settings for the low-level run_query and commit calls to match the backend
-* Update Service calls to run_query and commit
-  * Change positional params to keyword args
+* Update some positional params to keyword args in the lower-level API to match the backend service.
 
 ### 1.7.1 / 2019-11-06
 
