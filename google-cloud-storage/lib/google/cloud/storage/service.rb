@@ -202,12 +202,12 @@ module Google
 
         ##
         # Returns Google::Apis::StorageV1::Policy
-        def get_bucket_policy bucket_name, user_project: nil
+        def get_bucket_policy bucket_name, requested_policy_version: nil, user_project: nil
           # get_bucket_iam_policy(bucket, fields: nil, quota_user: nil,
           #                               user_ip: nil, options: nil)
           execute do
-            service.get_bucket_iam_policy \
-              bucket_name, user_project: user_project(user_project)
+            service.get_bucket_iam_policy bucket_name, options_requested_policy_version: requested_policy_version,
+                                                       user_project: user_project(user_project)
           end
         end
 

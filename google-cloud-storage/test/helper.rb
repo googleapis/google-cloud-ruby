@@ -189,4 +189,8 @@ class MockStorage < Minitest::Spec
       uniform_bucket_level_access: ubla
     )
   end
+
+  def policy_gapi etag: "CAE=", version: 1, bindings: []
+    Google::Apis::StorageV1::Policy.new etag: etag, version: version, bindings: bindings
+  end
 end
