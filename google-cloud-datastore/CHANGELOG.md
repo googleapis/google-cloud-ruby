@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.2 / 2019-12-12
+
+#### Bug Fixes
+
+* Update some positional params to keyword args in the lower-level API to match the backend service.
+
 ### 1.7.1 / 2019-11-06
 
 #### Bug Fixes
