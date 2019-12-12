@@ -1,5 +1,11 @@
 # Release History
 
+### 1.24.1 / 2019-12-12
+
+#### Documentation
+
+* fix YARD warning in CHANGELOG.md
+
 ### 1.24.0 / 2019-11-12
 
 #### Features
