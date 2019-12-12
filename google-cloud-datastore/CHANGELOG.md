@@ -1,5 +1,13 @@
 # Release History
 
+### 1.7.2 / 2019-12-12
+
+#### Bug Fixes
+
+* Adjust required/optional argument settings for the low-level run_query and commit calls to match the backend
+* Update Service calls to run_query and commit
+  * Change positional params to keyword args
+
 ### 1.7.1 / 2019-11-06
 
 #### Bug Fixes
