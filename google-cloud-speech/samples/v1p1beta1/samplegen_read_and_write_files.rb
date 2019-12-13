@@ -15,11 +15,11 @@
 # DO NOT EDIT! This is a generated sample ("Request",  "samplegen_read_and_write_files")
 
 # sample-metadata
-#   title: Showing repeated fields (in request and response)
-#   description: Showing repeated fields (in request and response)
+#   title: Read binary file into bytes field & write string in response to file
+#   description: Read binary file into bytes field & write string in response to file
 #   bundle exec ruby samples/v1p1beta1/samplegen_read_and_write_files.rb
 
-# Showing repeated fields (in request and response)
+# Read binary file into bytes field & write string in response to file
 def sample_recognize
   # [START samplegen_read_and_write_files]
   # Import client library
@@ -39,7 +39,9 @@ def sample_recognize
 
   response = speech_client.recognize(config, audio)
 
+
   # Your audio has been transcribed.
+
   # Writing audio transcript to transcript.txt for demonstration:
   File.write "transcript.txt", response.results[0].alternatives[0].transcript
 

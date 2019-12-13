@@ -49,8 +49,10 @@ def sample_recognize
 
   response = speech_client.recognize(config, audio)
 
+
   # Loop over all transcription results
   response.results.each do |result|
+
     # The first "alternative" of each result contains most likely transcription
     alternative = result.alternatives[0]
     puts "Transcription of result: #{alternative.transcript}"

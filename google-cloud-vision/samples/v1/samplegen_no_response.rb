@@ -32,7 +32,7 @@ def sample_delete_product_set
   formatted_name = product_search_client.class.product_set_path("[PROJECT]", "[LOCATION]", "[PRODUCT_SET]")
 
   product_search_client.delete_product_set(formatted_name)
-  # Deleted product set.
+  puts "Deleted product set."
   # [END samplegen_no_response]
 end
 

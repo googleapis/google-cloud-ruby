@@ -46,6 +46,7 @@ def sample_long_running_recognize
 
   response = operation.response
 
+
   # Your audio has been transcribed.
   puts "Transcript: #{response.results[0].alternatives[0].transcript}"
   # [END samplegen_lro]

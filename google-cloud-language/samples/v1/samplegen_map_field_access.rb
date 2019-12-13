@@ -44,23 +44,24 @@ def sample_analyze_entities
   response = language_client.analyze_entities(document)
 
   response.entities.each do |entity|
-    # Each detected entity has a map of metadata:
-    map = entity.metadata
 
     # Access value by key:
-    puts "URL: #{map["wikipedia_url"]}"
+    puts "URL: #{entity.metadata["wikipedia_url"]}"
+
     # Loop over keys and values:
-    map.each do |key, value|
+    entity.metadata.each do |key, value|
       puts "#{key}: #{value}"
     end
 
+
     # Loop over just keys:
-    map.keys.each do |the_key|
+    entity.metadata.keys.each do |the_key|
       puts "Key: #{the_key}"
     end
 
+
     # Loop over just values:
-    map.values.each do |the_value|
+    entity.metadata.values.each do |the_value|
       puts "Value: #{the_value}"
     end
 

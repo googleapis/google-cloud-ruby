@@ -33,6 +33,7 @@ def sample_list_product_sets
 
   # Iterate over all results.
   product_search_client.list_product_sets(formatted_parent).each do |element|
+
     # The entity in this iteration represents a product set
     product_set = element
     puts "The full name of this product set: #{product_set.name}"

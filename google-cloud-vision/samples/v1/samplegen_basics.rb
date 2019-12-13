@@ -38,6 +38,7 @@ def sample_create_product_set display_name = "This is the default value of the d
 
   response = product_search_client.create_product_set(formatted_parent, product_set)
 
+
   # The API response represents the created product set
   product_set = response
   puts "The full name of the created product set: #{product_set.name}"
