@@ -73,8 +73,8 @@ module Google
           # @private
           def initialize table, skip_invalid: nil, ignore_unknown: nil, max_bytes: 10_000_000, max_rows: 500,
                          interval: 10, threads: 4, &block
-           # init MonitorMixin
-           super()
+            # init MonitorMixin
+            super()
 
             @table = table
             @skip_invalid = skip_invalid
