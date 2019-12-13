@@ -27,7 +27,7 @@ module Google
       module V1
         module AutoscalingPolicyService
           # The API interface for managing autoscaling policies in the
-          # Google Cloud Dataproc API.
+          # Dataproc API.
           class Service
 
             include GRPC::GenericService

@@ -17,7 +17,7 @@ module Google
   module Cloud
     module Dataproc
       module V1
-        # A Cloud Dataproc workflow template resource.
+        # A Dataproc workflow template resource.
         # @!attribute [rw] id
         #   @return [String]
         # @!attribute [rw] name
@@ -279,7 +279,7 @@ module Google
         #     Required. List of allowed values for the parameter.
         class ValueValidation; end
 
-        # A Cloud Dataproc workflow template resource.
+        # A Dataproc workflow template resource.
         # @!attribute [rw] template
         #   @return [String]
         #     Output only. The resource name of the workflow template as described
