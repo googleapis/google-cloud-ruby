@@ -21,7 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/language"
-require "google/cloud/error"
+require "google/cloud/errors"
 require "google/cloud/language/version"
 require "google/cloud/language/v1beta1/language_service_pb"
 require "google/cloud/language/v1beta1/language_service/credentials"
