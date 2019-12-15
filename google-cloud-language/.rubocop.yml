@@ -24,3 +24,5 @@ Metrics/LineLength:
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-language.rb"
+Style/CaseEquality:
+  Enabled: false

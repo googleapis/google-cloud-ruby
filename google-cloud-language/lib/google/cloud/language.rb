@@ -46,7 +46,7 @@ module Google
         config_attr :credentials, nil do |value|
           allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
           allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
-          allowed.any? { |klass| value.is_a? klass }
+          allowed.any? { |klass| klass === value }
         end
         config_attr :lib_name,     nil, String, nil
         config_attr :lib_version,  nil, String, nil
