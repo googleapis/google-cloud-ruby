@@ -22,7 +22,7 @@ require "gapic/config"
 module Google
   module Cloud
     ##
-    # Configuration
+    # Language
     module Language
       ##
       # Default configuration for the google-cloud-language gem.
