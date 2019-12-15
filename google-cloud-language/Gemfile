@@ -3,4 +3,6 @@ source "https://rubygems.org"
 gemspec
 
 gem "gapic-common", github: "blowmage/gapic-generator-ruby", branch: "grpc-1.25"
+gem "google-cloud-core", path: "../google-cloud-core"
+gem "google-cloud-env", path: "../google-cloud-env"
 gem "rake", "~> 11.0"
