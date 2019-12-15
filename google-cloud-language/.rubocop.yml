@@ -10,3 +10,17 @@ AllCops:
     - "proto_docs/**/*"
     - "support/**/*"
     - "test/**/*"
+
+Metrics/ClassLength:
+  Exclude:
+    - "lib/google/cloud/language/v1/language_service/client.rb"
+    - "lib/google/cloud/language/v1beta1/language_service/client.rb"
+    - "lib/google/cloud/language/v1beta2/language_service/client.rb"
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/language/v1/language_service/client.rb"
+    - "lib/google/cloud/language/v1beta1/language_service/client.rb"
+    - "lib/google/cloud/language/v1beta2/language_service/client.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-language.rb"

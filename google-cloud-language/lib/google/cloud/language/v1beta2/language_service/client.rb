@@ -446,6 +446,8 @@ module Google
               raise Google::Cloud::Error.from_error(e)
             end
 
+            ##
+            # Configuration
             class Configuration
               extend Gapic::Config
 
@@ -453,7 +455,7 @@ module Google
               config_attr :credentials,  nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
-                allowed.any? { |klass| klass === value }
+                allowed.any? { |klass| value.is_a? klass }
               end
               config_attr :scope,        nil, String, Array, nil
               config_attr :lib_name,     nil, String, nil
@@ -478,6 +480,8 @@ module Google
                 end
               end
 
+              ##
+              # Configuration Rpcs
               class Rpcs
                 attr_reader :analyze_sentiment
                 attr_reader :analyze_entities
@@ -488,13 +492,17 @@ module Google
 
                 def initialize parent_rpcs = nil
                   analyze_sentiment_config = nil
-                  analyze_sentiment_config = parent_rpcs&.analyze_sentiment if parent_rpcs&.respond_to? :analyze_sentiment
+                  if parent_rpcs&.respond_to? :analyze_sentiment
+                    analyze_sentiment_config = parent_rpcs&.analyze_sentiment
+                  end
                   @analyze_sentiment = Gapic::Config::Method.new analyze_sentiment_config
                   analyze_entities_config = nil
                   analyze_entities_config = parent_rpcs&.analyze_entities if parent_rpcs&.respond_to? :analyze_entities
                   @analyze_entities = Gapic::Config::Method.new analyze_entities_config
                   analyze_entity_sentiment_config = nil
-                  analyze_entity_sentiment_config = parent_rpcs&.analyze_entity_sentiment if parent_rpcs&.respond_to? :analyze_entity_sentiment
+                  if parent_rpcs&.respond_to? :analyze_entity_sentiment
+                    analyze_entity_sentiment_config = parent_rpcs&.analyze_entity_sentiment
+                  end
                   @analyze_entity_sentiment = Gapic::Config::Method.new analyze_entity_sentiment_config
                   analyze_syntax_config = nil
                   analyze_syntax_config = parent_rpcs&.analyze_syntax if parent_rpcs&.respond_to? :analyze_syntax

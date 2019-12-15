@@ -21,6 +21,8 @@ require "gapic/config"
 
 module Google
   module Cloud
+    ##
+    # Configuration
     module Language
       ##
       # Default configuration for the google-cloud-language gem.
@@ -36,13 +38,15 @@ module Google
         @configure
       end
 
+      ##
+      # Configuration
       class Configuration
         extend Gapic::Config
 
         config_attr :credentials, nil do |value|
           allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
           allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
-          allowed.any? { |klass| klass === value }
+          allowed.any? { |klass| value.is_a? klass }
         end
         config_attr :lib_name,     nil, String, nil
         config_attr :lib_version,  nil, String, nil
