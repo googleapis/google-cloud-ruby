@@ -89,7 +89,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
       mock_stub = MockGrpcClientStubV1.new :analyze_sentiment, mock_method
 
       # Mock auth layer
-      mock_credentials = MockSpeechCredentialsV1.new "analyze_sentiment"
+      mock_credentials = MockLanguageServiceCredentialsV1beta1.new "analyze_sentiment"
 
       Google::Cloud::Language::V1beta1::LanguageService::Stub.stub :new, mock_stub do
         Google::Cloud::Language::V1beta1::LanguageService::Credentials.stub :default, mock_credentials do
@@ -126,7 +126,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
       mock_stub = MockGrpcClientStubV1.new :analyze_sentiment, mock_method
 
       # Mock auth layer
-      mock_credentials = MockSpeechCredentialsV1.new "analyze_sentiment"
+      mock_credentials = MockLanguageServiceCredentialsV1beta1.new "analyze_sentiment"
 
       Google::Cloud::Language::V1beta1::LanguageService::Stub.stub :new, mock_stub do
         Google::Cloud::Language::V1beta1::LanguageService::Credentials.stub :default, mock_credentials do
@@ -168,7 +168,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
       mock_stub = MockGrpcClientStubV1.new :analyze_entities, mock_method
 
       # Mock auth layer
-      mock_credentials = MockSpeechCredentialsV1.new "analyze_entities"
+      mock_credentials = MockLanguageServiceCredentialsV1beta1.new "analyze_entities"
 
       Google::Cloud::Language::V1beta1::LanguageService::Stub.stub :new, mock_stub do
         Google::Cloud::Language::V1beta1::LanguageService::Credentials.stub :default, mock_credentials do
@@ -205,7 +205,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
       mock_stub = MockGrpcClientStubV1.new :analyze_entities, mock_method
 
       # Mock auth layer
-      mock_credentials = MockSpeechCredentialsV1.new "analyze_entities"
+      mock_credentials = MockLanguageServiceCredentialsV1beta1.new "analyze_entities"
 
       Google::Cloud::Language::V1beta1::LanguageService::Stub.stub :new, mock_stub do
         Google::Cloud::Language::V1beta1::LanguageService::Credentials.stub :default, mock_credentials do
@@ -247,7 +247,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
       mock_stub = MockGrpcClientStubV1.new :analyze_syntax, mock_method
 
       # Mock auth layer
-      mock_credentials = MockSpeechCredentialsV1.new "analyze_syntax"
+      mock_credentials = MockLanguageServiceCredentialsV1beta1.new "analyze_syntax"
 
       Google::Cloud::Language::V1beta1::LanguageService::Stub.stub :new, mock_stub do
         Google::Cloud::Language::V1beta1::LanguageService::Credentials.stub :default, mock_credentials do
@@ -284,7 +284,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
       mock_stub = MockGrpcClientStubV1.new :analyze_syntax, mock_method
 
       # Mock auth layer
-      mock_credentials = MockSpeechCredentialsV1.new "analyze_syntax"
+      mock_credentials = MockLanguageServiceCredentialsV1beta1.new "analyze_syntax"
 
       Google::Cloud::Language::V1beta1::LanguageService::Stub.stub :new, mock_stub do
         Google::Cloud::Language::V1beta1::LanguageService::Credentials.stub :default, mock_credentials do
@@ -328,7 +328,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
       mock_stub = MockGrpcClientStubV1.new :annotate_text, mock_method
 
       # Mock auth layer
-      mock_credentials = MockSpeechCredentialsV1.new "annotate_text"
+      mock_credentials = MockLanguageServiceCredentialsV1beta1.new "annotate_text"
 
       Google::Cloud::Language::V1beta1::LanguageService::Stub.stub :new, mock_stub do
         Google::Cloud::Language::V1beta1::LanguageService::Credentials.stub :default, mock_credentials do
@@ -367,7 +367,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
       mock_stub = MockGrpcClientStubV1.new :annotate_text, mock_method
 
       # Mock auth layer
-      mock_credentials = MockSpeechCredentialsV1.new "annotate_text"
+      mock_credentials = MockLanguageServiceCredentialsV1beta1.new "annotate_text"
 
       Google::Cloud::Language::V1beta1::LanguageService::Stub.stub :new, mock_stub do
         Google::Cloud::Language::V1beta1::LanguageService::Credentials.stub :default, mock_credentials do
