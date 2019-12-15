@@ -3,11 +3,10 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "google-cloud-language.gemspec"
-    - "lib/google/**/*"
-    - "Rakefile"
-    - "test/**/*"
     - "acceptance/**/*"
-
-Documentation:
-  Enabled: false
+    - "google-cloud-language.gemspec"
+    - "lib/**/*_pb.rb"
+    - "Rakefile"
+    - "proto_docs/**/*"
+    - "support/**/*"
+    - "test/**/*"

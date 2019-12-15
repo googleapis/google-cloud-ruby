@@ -1,11 +1,10 @@
 --no-private
---title=Cloud Natural Language API
+--title=Google Cloud Language
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
 
 ./lib/**/*.rb
+./proto_docs/**/*.rb
 -
 README.md
-AUTHENTICATION.md
-LICENSE
