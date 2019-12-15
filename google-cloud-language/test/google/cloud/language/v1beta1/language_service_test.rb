@@ -73,7 +73,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
     it "invokes analyze_sentiment without error" do
       # Create request parameters
       document = {}
-      encoding_type = NONE
+      encoding_type = :NONE
 
       # Create expected grpc response
       expected_response = {}
@@ -114,7 +114,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
     it "invokes analyze_sentiment with error" do
       # Create request parameters
       document = {}
-      encoding_type = NONE
+      encoding_type = :NONE
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -152,7 +152,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
     it "invokes analyze_entities without error" do
       # Create request parameters
       document = {}
-      encoding_type = NONE
+      encoding_type = :NONE
 
       # Create expected grpc response
       expected_response = {}
@@ -193,7 +193,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
     it "invokes analyze_entities with error" do
       # Create request parameters
       document = {}
-      encoding_type = NONE
+      encoding_type = :NONE
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -231,7 +231,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
     it "invokes analyze_syntax without error" do
       # Create request parameters
       document = {}
-      encoding_type = NONE
+      encoding_type = :NONE
 
       # Create expected grpc response
       expected_response = {}
@@ -272,7 +272,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
     it "invokes analyze_syntax with error" do
       # Create request parameters
       document = {}
-      encoding_type = NONE
+      encoding_type = :NONE
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -311,7 +311,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
       # Create request parameters
       document = {}
       features = {}
-      encoding_type = NONE
+      encoding_type = :NONE
 
       # Create expected grpc response
       expected_response = {}
@@ -354,7 +354,7 @@ describe Google::Cloud::Language::V1beta1::LanguageService::Client do
       # Create request parameters
       document = {}
       features = {}
-      encoding_type = NONE
+      encoding_type = :NONE
 
       # Mock Grpc layer
       mock_method = proc do |request|
