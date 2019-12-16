@@ -68,56 +68,39 @@ class Google::Cloud::Language::V1beta1::LanguageService::ClientTest < Minitest::
         config.credentials = grpc_channel
       end
 
-      # Call method (positional / hash)
+      # Use hash object
+      # TODO: parens and curly braces are getting removed by rubocop, plz fix
       client.analyze_sentiment document: document, encoding_type: encoding_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method (positional / protobuf type)
-      client.analyze_sentiment Google::Cloud::Language::V1beta1::AnalyzeSentimentRequest.new(document: document, encoding_type: encoding_type) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method (named / hash)
+      # Use named arguments
       client.analyze_sentiment document: document, encoding_type: encoding_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method (named / protobuf type)
+      # Use protobuf object
       client.analyze_sentiment Google::Cloud::Language::V1beta1::AnalyzeSentimentRequest.new(document: document, encoding_type: encoding_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method with options (positional / hash)
+      # Use hash object with options
       client.analyze_sentiment({ document: document, encoding_type: encoding_type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method with options (positional / protobuf type)
-      client.analyze_sentiment Google::Cloud::Language::V1beta1::AnalyzeSentimentRequest.new(document: document, encoding_type: encoding_type), grpc_options do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method with options (named / hash)
-      client.analyze_sentiment({ document: document, encoding_type: encoding_type }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method with options (named / protobuf type)
+      # Use protobuf object with options
       client.analyze_sentiment Google::Cloud::Language::V1beta1::AnalyzeSentimentRequest.new(document: document, encoding_type: encoding_type), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
-      assert_equal 8, analyze_sentiment_client_stub.call_rpc_count
+      assert_equal 5, analyze_sentiment_client_stub.call_rpc_count
     end
   end
 
@@ -145,56 +128,39 @@ class Google::Cloud::Language::V1beta1::LanguageService::ClientTest < Minitest::
         config.credentials = grpc_channel
       end
 
-      # Call method (positional / hash)
+      # Use hash object
+      # TODO: parens and curly braces are getting removed by rubocop, plz fix
       client.analyze_entities document: document, encoding_type: encoding_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method (positional / protobuf type)
-      client.analyze_entities Google::Cloud::Language::V1beta1::AnalyzeEntitiesRequest.new(document: document, encoding_type: encoding_type) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method (named / hash)
+      # Use named arguments
       client.analyze_entities document: document, encoding_type: encoding_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method (named / protobuf type)
+      # Use protobuf object
       client.analyze_entities Google::Cloud::Language::V1beta1::AnalyzeEntitiesRequest.new(document: document, encoding_type: encoding_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method with options (positional / hash)
+      # Use hash object with options
       client.analyze_entities({ document: document, encoding_type: encoding_type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method with options (positional / protobuf type)
-      client.analyze_entities Google::Cloud::Language::V1beta1::AnalyzeEntitiesRequest.new(document: document, encoding_type: encoding_type), grpc_options do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method with options (named / hash)
-      client.analyze_entities({ document: document, encoding_type: encoding_type }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method with options (named / protobuf type)
+      # Use protobuf object with options
       client.analyze_entities Google::Cloud::Language::V1beta1::AnalyzeEntitiesRequest.new(document: document, encoding_type: encoding_type), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
-      assert_equal 8, analyze_entities_client_stub.call_rpc_count
+      assert_equal 5, analyze_entities_client_stub.call_rpc_count
     end
   end
 
@@ -222,56 +188,39 @@ class Google::Cloud::Language::V1beta1::LanguageService::ClientTest < Minitest::
         config.credentials = grpc_channel
       end
 
-      # Call method (positional / hash)
+      # Use hash object
+      # TODO: parens and curly braces are getting removed by rubocop, plz fix
       client.analyze_syntax document: document, encoding_type: encoding_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method (positional / protobuf type)
-      client.analyze_syntax Google::Cloud::Language::V1beta1::AnalyzeSyntaxRequest.new(document: document, encoding_type: encoding_type) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method (named / hash)
+      # Use named arguments
       client.analyze_syntax document: document, encoding_type: encoding_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method (named / protobuf type)
+      # Use protobuf object
       client.analyze_syntax Google::Cloud::Language::V1beta1::AnalyzeSyntaxRequest.new(document: document, encoding_type: encoding_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method with options (positional / hash)
+      # Use hash object with options
       client.analyze_syntax({ document: document, encoding_type: encoding_type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method with options (positional / protobuf type)
-      client.analyze_syntax Google::Cloud::Language::V1beta1::AnalyzeSyntaxRequest.new(document: document, encoding_type: encoding_type), grpc_options do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method with options (named / hash)
-      client.analyze_syntax({ document: document, encoding_type: encoding_type }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method with options (named / protobuf type)
+      # Use protobuf object with options
       client.analyze_syntax Google::Cloud::Language::V1beta1::AnalyzeSyntaxRequest.new(document: document, encoding_type: encoding_type), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
-      assert_equal 8, analyze_syntax_client_stub.call_rpc_count
+      assert_equal 5, analyze_syntax_client_stub.call_rpc_count
     end
   end
 
@@ -301,56 +250,39 @@ class Google::Cloud::Language::V1beta1::LanguageService::ClientTest < Minitest::
         config.credentials = grpc_channel
       end
 
-      # Call method (positional / hash)
+      # Use hash object
+      # TODO: parens and curly braces are getting removed by rubocop, plz fix
       client.annotate_text document: document, features: features, encoding_type: encoding_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method (positional / protobuf type)
-      client.annotate_text Google::Cloud::Language::V1beta1::AnnotateTextRequest.new(document: document, features: features, encoding_type: encoding_type) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method (named / hash)
+      # Use named arguments
       client.annotate_text document: document, features: features, encoding_type: encoding_type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method (named / protobuf type)
+      # Use protobuf object
       client.annotate_text Google::Cloud::Language::V1beta1::AnnotateTextRequest.new(document: document, features: features, encoding_type: encoding_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method with options (positional / hash)
+      # Use hash object with options
       client.annotate_text({ document: document, features: features, encoding_type: encoding_type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
-      # Call method with options (positional / protobuf type)
-      client.annotate_text Google::Cloud::Language::V1beta1::AnnotateTextRequest.new(document: document, features: features, encoding_type: encoding_type), grpc_options do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method with options (named / hash)
-      client.annotate_text({ document: document, features: features, encoding_type: encoding_type }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Call method with options (named / protobuf type)
+      # Use protobuf object with options
       client.annotate_text Google::Cloud::Language::V1beta1::AnnotateTextRequest.new(document: document, features: features, encoding_type: encoding_type), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
-      assert_equal 8, annotate_text_client_stub.call_rpc_count
+      assert_equal 5, annotate_text_client_stub.call_rpc_count
     end
   end
 end
