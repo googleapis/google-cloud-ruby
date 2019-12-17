@@ -66,11 +66,28 @@ module Google
             self::GRPC_INTERCEPTORS = AssetServiceClient::GRPC_INTERCEPTORS
           end
 
+          FEED_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/feeds/{feed}"
+          )
+
+          private_constant :FEED_PATH_TEMPLATE
+
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
           )
 
           private_constant :PROJECT_PATH_TEMPLATE
+
+          # Returns a fully-qualified feed resource name string.
+          # @param project [String]
+          # @param feed [String]
+          # @return [String]
+          def self.feed_path project, feed
+            FEED_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"feed" => feed
+            )
+          end
 
           # Returns a fully-qualified project resource name string.
           # @param project [String]
@@ -215,6 +232,46 @@ module Google
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
+              end
+            )
+            @create_feed = Google::Gax.create_api_call(
+              @asset_service_stub.method(:create_feed),
+              defaults["create_feed"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @get_feed = Google::Gax.create_api_call(
+              @asset_service_stub.method(:get_feed),
+              defaults["get_feed"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @list_feeds = Google::Gax.create_api_call(
+              @asset_service_stub.method(:list_feeds),
+              defaults["list_feeds"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @update_feed = Google::Gax.create_api_call(
+              @asset_service_stub.method(:update_feed),
+              defaults["update_feed"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'feed.name' => request.feed.name}
+              end
+            )
+            @delete_feed = Google::Gax.create_api_call(
+              @asset_service_stub.method(:delete_feed),
+              defaults["delete_feed"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
               end
             )
           end
@@ -394,6 +451,213 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest)
             @batch_get_assets_history.call(req, options, &block)
+          end
+
+          # Creates a feed in a parent project/folder/organization to listen to its
+          # asset updates.
+          #
+          # @param parent [String]
+          #   Required. The name of the project/folder/organization where this feed
+          #   should be created in. It can only be an organization number (such as
+          #   "organizations/123"), a folder number (such as "folders/123"), a project ID
+          #   (such as "projects/my-project-id")", or a project number (such as
+          #   "projects/12345").
+          # @param feed_id [String]
+          #   Required. This is the client-assigned asset feed identifier and it needs to
+          #   be unique under a specific parent project/folder/organization.
+          # @param feed [Google::Cloud::Asset::V1::Feed | Hash]
+          #   Required. The feed details. The field `name` must be empty and it will be generated
+          #   in the format of:
+          #   projects/project_number/feeds/feed_id
+          #   folders/folder_number/feeds/feed_id
+          #   organizations/organization_number/feeds/feed_id
+          #   A hash of the same form as `Google::Cloud::Asset::V1::Feed`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Asset::V1::Feed]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Asset::V1::Feed]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/asset"
+          #
+          #   asset_client = Google::Cloud::Asset.new(version: :v1)
+          #
+          #   # TODO: Initialize `parent`:
+          #   parent = ''
+          #
+          #   # TODO: Initialize `feed_id`:
+          #   feed_id = ''
+          #
+          #   # TODO: Initialize `feed`:
+          #   feed = {}
+          #   response = asset_client.create_feed(parent, feed_id, feed)
+
+          def create_feed \
+              parent,
+              feed_id,
+              feed,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              feed_id: feed_id,
+              feed: feed
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Asset::V1::CreateFeedRequest)
+            @create_feed.call(req, options, &block)
+          end
+
+          # Gets details about an asset feed.
+          #
+          # @param name [String]
+          #   Required. The name of the Feed and it must be in the format of:
+          #   projects/project_number/feeds/feed_id
+          #   folders/folder_number/feeds/feed_id
+          #   organizations/organization_number/feeds/feed_id
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Asset::V1::Feed]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Asset::V1::Feed]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/asset"
+          #
+          #   asset_client = Google::Cloud::Asset.new(version: :v1)
+          #   formatted_name = Google::Cloud::Asset::V1::AssetServiceClient.feed_path("[PROJECT]", "[FEED]")
+          #   response = asset_client.get_feed(formatted_name)
+
+          def get_feed \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Asset::V1::GetFeedRequest)
+            @get_feed.call(req, options, &block)
+          end
+
+          # Lists all asset feeds in a parent project/folder/organization.
+          #
+          # @param parent [String]
+          #   Required. The parent project/folder/organization whose feeds are to be
+          #   listed. It can only be using project/folder/organization number (such as
+          #   "folders/12345")", or a project ID (such as "projects/my-project-id").
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Asset::V1::ListFeedsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Asset::V1::ListFeedsResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/asset"
+          #
+          #   asset_client = Google::Cloud::Asset.new(version: :v1)
+          #
+          #   # TODO: Initialize `parent`:
+          #   parent = ''
+          #   response = asset_client.list_feeds(parent)
+
+          def list_feeds \
+              parent,
+              options: nil,
+              &block
+            req = {
+              parent: parent
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Asset::V1::ListFeedsRequest)
+            @list_feeds.call(req, options, &block)
+          end
+
+          # Updates an asset feed configuration.
+          #
+          # @param feed [Google::Cloud::Asset::V1::Feed | Hash]
+          #   Required. The new values of feed details. It must match an existing feed and the
+          #   field `name` must be in the format of:
+          #   projects/project_number/feeds/feed_id or
+          #   folders/folder_number/feeds/feed_id or
+          #   organizations/organization_number/feeds/feed_id.
+          #   A hash of the same form as `Google::Cloud::Asset::V1::Feed`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Required. Only updates the `feed` fields indicated by this mask.
+          #   The field mask must not be empty, and it must not contain fields that
+          #   are immutable or only set by the server.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Asset::V1::Feed]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Asset::V1::Feed]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/asset"
+          #
+          #   asset_client = Google::Cloud::Asset.new(version: :v1)
+          #
+          #   # TODO: Initialize `feed`:
+          #   feed = {}
+          #
+          #   # TODO: Initialize `update_mask`:
+          #   update_mask = {}
+          #   response = asset_client.update_feed(feed, update_mask)
+
+          def update_feed \
+              feed,
+              update_mask,
+              options: nil,
+              &block
+            req = {
+              feed: feed,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Asset::V1::UpdateFeedRequest)
+            @update_feed.call(req, options, &block)
+          end
+
+          # Deletes an asset feed.
+          #
+          # @param name [String]
+          #   Required. The name of the feed and it must be in the format of:
+          #   projects/project_number/feeds/feed_id
+          #   folders/folder_number/feeds/feed_id
+          #   organizations/organization_number/feeds/feed_id
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/asset"
+          #
+          #   asset_client = Google::Cloud::Asset.new(version: :v1)
+          #   formatted_name = Google::Cloud::Asset::V1::AssetServiceClient.feed_path("[PROJECT]", "[FEED]")
+          #   asset_client.delete_feed(formatted_name)
+
+          def delete_feed \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Asset::V1::DeleteFeedRequest)
+            @delete_feed.call(req, options, &block)
+            nil
           end
         end
       end

@@ -278,4 +278,392 @@ describe Google::Cloud::Asset::V1::AssetServiceClient do
       end
     end
   end
+
+  describe 'create_feed' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Asset::V1::AssetServiceClient#create_feed."
+
+    it 'invokes create_feed without error' do
+      # Create request parameters
+      parent = ''
+      feed_id = ''
+      feed = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      expected_response = { name: name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Asset::V1::Feed)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Asset::V1::CreateFeedRequest, request)
+        assert_equal(parent, request.parent)
+        assert_equal(feed_id, request.feed_id)
+        assert_equal(Google::Gax::to_proto(feed, Google::Cloud::Asset::V1::Feed), request.feed)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_feed, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAssetServiceCredentials_v1.new("create_feed")
+
+      Google::Cloud::Asset::V1::AssetService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Asset.new(version: :v1)
+
+          # Call method
+          response = client.create_feed(
+            parent,
+            feed_id,
+            feed
+          )
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_feed(
+            parent,
+            feed_id,
+            feed
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes create_feed with error' do
+      # Create request parameters
+      parent = ''
+      feed_id = ''
+      feed = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Asset::V1::CreateFeedRequest, request)
+        assert_equal(parent, request.parent)
+        assert_equal(feed_id, request.feed_id)
+        assert_equal(Google::Gax::to_proto(feed, Google::Cloud::Asset::V1::Feed), request.feed)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_feed, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAssetServiceCredentials_v1.new("create_feed")
+
+      Google::Cloud::Asset::V1::AssetService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Asset.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.create_feed(
+              parent,
+              feed_id,
+              feed
+            )
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_feed' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Asset::V1::AssetServiceClient#get_feed."
+
+    it 'invokes get_feed without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Asset::V1::AssetServiceClient.feed_path("[PROJECT]", "[FEED]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      expected_response = { name: name_2 }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Asset::V1::Feed)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Asset::V1::GetFeedRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_feed, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAssetServiceCredentials_v1.new("get_feed")
+
+      Google::Cloud::Asset::V1::AssetService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Asset.new(version: :v1)
+
+          # Call method
+          response = client.get_feed(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_feed(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_feed with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Asset::V1::AssetServiceClient.feed_path("[PROJECT]", "[FEED]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Asset::V1::GetFeedRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_feed, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAssetServiceCredentials_v1.new("get_feed")
+
+      Google::Cloud::Asset::V1::AssetService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Asset.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.get_feed(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_feeds' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Asset::V1::AssetServiceClient#list_feeds."
+
+    it 'invokes list_feeds without error' do
+      # Create request parameters
+      parent = ''
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Asset::V1::ListFeedsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Asset::V1::ListFeedsRequest, request)
+        assert_equal(parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_feeds, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAssetServiceCredentials_v1.new("list_feeds")
+
+      Google::Cloud::Asset::V1::AssetService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Asset.new(version: :v1)
+
+          # Call method
+          response = client.list_feeds(parent)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_feeds(parent) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes list_feeds with error' do
+      # Create request parameters
+      parent = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Asset::V1::ListFeedsRequest, request)
+        assert_equal(parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_feeds, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAssetServiceCredentials_v1.new("list_feeds")
+
+      Google::Cloud::Asset::V1::AssetService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Asset.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.list_feeds(parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'update_feed' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Asset::V1::AssetServiceClient#update_feed."
+
+    it 'invokes update_feed without error' do
+      # Create request parameters
+      feed = {}
+      update_mask = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      expected_response = { name: name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Asset::V1::Feed)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Asset::V1::UpdateFeedRequest, request)
+        assert_equal(Google::Gax::to_proto(feed, Google::Cloud::Asset::V1::Feed), request.feed)
+        assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_feed, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAssetServiceCredentials_v1.new("update_feed")
+
+      Google::Cloud::Asset::V1::AssetService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Asset.new(version: :v1)
+
+          # Call method
+          response = client.update_feed(feed, update_mask)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_feed(feed, update_mask) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes update_feed with error' do
+      # Create request parameters
+      feed = {}
+      update_mask = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Asset::V1::UpdateFeedRequest, request)
+        assert_equal(Google::Gax::to_proto(feed, Google::Cloud::Asset::V1::Feed), request.feed)
+        assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_feed, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAssetServiceCredentials_v1.new("update_feed")
+
+      Google::Cloud::Asset::V1::AssetService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Asset.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.update_feed(feed, update_mask)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'delete_feed' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Asset::V1::AssetServiceClient#delete_feed."
+
+    it 'invokes delete_feed without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Asset::V1::AssetServiceClient.feed_path("[PROJECT]", "[FEED]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Asset::V1::DeleteFeedRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_feed, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAssetServiceCredentials_v1.new("delete_feed")
+
+      Google::Cloud::Asset::V1::AssetService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Asset.new(version: :v1)
+
+          # Call method
+          response = client.delete_feed(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_feed(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_feed with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Asset::V1::AssetServiceClient.feed_path("[PROJECT]", "[FEED]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Asset::V1::DeleteFeedRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_feed, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAssetServiceCredentials_v1.new("delete_feed")
+
+      Google::Cloud::Asset::V1::AssetService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Asset::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Asset.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.delete_feed(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
 end
