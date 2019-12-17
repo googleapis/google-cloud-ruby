@@ -155,6 +155,8 @@ module Google
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of zones to return.
+        # @param [String] dns_name Restricts the list to return only zones
+        #   with this domain name.
         #
         # @return [Array<Google::Cloud::Dns::Zone>] (See
         # {Google::Cloud::Dns::Zone::List})
@@ -177,10 +179,10 @@ module Google
         #     puts zone.name
         #   end
         #
-        def zones token: nil, max: nil
+        def zones token: nil, max: nil, dns_name: nil
           ensure_service!
-          gapi = service.list_zones token: token, max: max
-          Zone::List.from_gapi gapi, service, max
+          gapi = service.list_zones token: token, max: max, dns_name: dns_name
+          Zone::List.from_gapi gapi, service, max, dns_name
         end
         alias find_zones zones
 

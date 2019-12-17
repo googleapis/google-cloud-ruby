@@ -72,10 +72,11 @@ module Google
 
         ##
         # Returns Google::Apis::DnsV1::ListManagedZonesResponse
-        def list_zones token: nil, max: nil
+        def list_zones token: nil, max: nil, dns_name: nil
           execute do
             service.list_managed_zones @project, max_results: max,
-                                                 page_token: token
+                                                 page_token: token,
+                                                 dns_name: dns_name
           end
         end
 

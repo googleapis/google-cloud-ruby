@@ -109,13 +109,13 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::Dns::Project#zones" do
     mock_dns do |mock|
-      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil}]
+      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil, :dns_name=>nil}]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Project#find_zones" do
     mock_dns do |mock|
-      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil}]
+      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil, :dns_name=>nil}]
     end
   end
 
@@ -341,13 +341,13 @@ YARD::Doctest.configure do |doctest|
   # Doctest also matches `#next?`
   doctest.before "Google::Cloud::Dns::Zone::List#next" do
     mock_dns do |mock|
-      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil}]
+      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil, :dns_name=>nil}]
     end
   end
 
   doctest.before "Google::Cloud::Dns::Zone::List#all" do
     mock_dns do |mock|
-      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil}]
+      mock.expect :list_managed_zones, list_zones_gapi, ["my-project", {:max_results=>nil, :page_token=>nil, :dns_name=>nil}]
     end
   end
 

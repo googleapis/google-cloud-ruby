@@ -70,8 +70,8 @@ module Google
           def next
             return nil unless next?
             ensure_service!
-            gapi = @service.list_zones token: token, max: @max
-            Zone::List.from_gapi gapi, @service, @max
+            gapi = @service.list_zones token: token, max: @max, dns_name: @dns_name
+            Zone::List.from_gapi gapi, @service, @max, @dns_name
           end
 
           ##
@@ -141,13 +141,14 @@ module Google
 
           ##
           # @private New Zones::List from a ListManagedZonesResponse object.
-          def self.from_gapi gapi, conn, max = nil
+          def self.from_gapi gapi, conn, max = nil, dns_name = nil
             zones = new(Array(gapi.managed_zones).map do |g|
               Zone.from_gapi g, conn
             end)
-            zones.instance_variable_set :@token,   gapi.next_page_token
-            zones.instance_variable_set :@service, conn
-            zones.instance_variable_set :@max,     max
+            zones.instance_variable_set :@token,    gapi.next_page_token
+            zones.instance_variable_set :@service,  conn
+            zones.instance_variable_set :@max,      max
+            zones.instance_variable_set :@dns_name, dns_name
             zones
           end
 
