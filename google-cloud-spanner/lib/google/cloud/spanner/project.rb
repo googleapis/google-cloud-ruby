@@ -461,7 +461,10 @@ module Google
         #   * Label values must be between 0 and 63 characters long and must
         #     conform to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
         #   * No more than 64 labels can be associated with a given resource.
-        #
+        # @param [Boolean, nil] enable_resource_based_routing Enable/Disable
+        #   resource-based routing for data operation, by default is disabled.
+        #   Resource based routing can be enabled using the environment
+        #   `GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING` to `YES` or `yes`.
         # @return [Client] The newly created client.
         #
         # @example
@@ -470,6 +473,22 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #
         #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction do |tx|
+        #     results = tx.execute_query "SELECT * FROM users"
+        #
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}"
+        #     end
+        #   end
+        #
+        # @example Enable resource based routing.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client \
+        #     "my-instance", "my-database", enable_resource_based_routing: true
         #
         #   db.transaction do |tx|
         #     results = tx.execute_query "SELECT * FROM users"
@@ -519,6 +538,10 @@ module Google
         #   * Label values must be between 0 and 63 characters long and must
         #     conform to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
         #   * No more than 64 labels can be associated with a given resource.
+        # @param [Boolean, nil] enable_resource_based_routing Enable/Disable
+        #   resource-based routing for data operation, by default is disabled.
+        #   Resource based routing can be enabled using the environment
+        #   `GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING` to `YES` or `yes`.
         #
         # @return [Client] The newly created client.
         #
@@ -528,6 +551,32 @@ module Google
         #   spanner = Google::Cloud::Spanner.new
         #
         #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #
+        #   batch_snapshot = batch_client.batch_snapshot
+        #   serialized_snapshot = batch_snapshot.dump
+        #
+        #   partitions = batch_snapshot.partition_read "users", [:id, :name]
+        #
+        #   partition = partitions.first
+        #   serialized_partition = partition.dump
+        #
+        #   # In a separate process
+        #   new_batch_snapshot = batch_client.load_batch_snapshot \
+        #     serialized_snapshot
+        #
+        #   new_partition = batch_client.load_partition \
+        #     serialized_partition
+        #
+        #   results = new_batch_snapshot.execute_partition \
+        #     new_partition
+        #
+        # @example Enable resource based routing.
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   batch_client = spanner.batch_client \
+        #     "my-instance", "my-database", enable_resource_based_routing: true
         #
         #   batch_snapshot = batch_client.batch_snapshot
         #   serialized_snapshot = batch_snapshot.dump

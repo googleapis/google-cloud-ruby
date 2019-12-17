@@ -347,8 +347,32 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Spanner::Project#batch_client@Enable resource based routing." do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
+      mock.expect :create_session, session_grpc, ["projects/my-project/instances/my-instance/databases/my-database", Hash]
+      mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+      mock.expect :partition_read, OpenStruct.new(partitions: [Google::Spanner::V1::Partition.new(partition_token: "partition-token")]),
+                  ["session-name", "users", Google::Spanner::V1::KeySet, Hash]
+      mock.expect :streaming_read, results_enum, ["session-name", "users", ["id", "name"], Google::Spanner::V1::KeySet, Hash]
+      mock.expect :delete_session, session_grpc, ["session-name", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Spanner::Project#client" do
     mock_spanner do |mock, mock_instances, mock_databases|
+      mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
+      5.times do
+        mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
+      end
+      mock.expect :execute_streaming_sql, results_enum, ["session-name", "SELECT * FROM users", Hash]
+      mock.expect :commit, commit_resp, ["session-name", Array, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Project#client@Enable resource based routing." do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance", Hash]
       mock.expect :batch_create_sessions, OpenStruct.new(session: Array.new(10) { session_grpc }), ["projects/my-project/instances/my-instance/databases/my-database", 10, Hash]
       5.times do
         mock.expect :begin_transaction, tx_resp, ["session-name", Google::Spanner::V1::TransactionOptions, Hash]
@@ -826,17 +850,6 @@ def project
   "my-project"
 end
 
-def instance_hash name: "my-instance", nodes: 1, state: "READY", labels: {}
-  {
-    name: "projects/#{project}/instances/#{name}",
-    config: "projects/#{project}/instanceConfigs/regional-us-central1",
-    display_name: name.split("-").map(&:capitalize).join(" "),
-    nodeCount: nodes,
-    state: state,
-    labels: labels
-  }
-end
-
 def job_grpc
   Google::Longrunning::Operation.new(
     name: "1234567890",
@@ -895,7 +908,8 @@ def instance_hash name: "my-instance", nodes: 1, state: "READY", labels: {}
     display_name: name.split("-").map(&:capitalize).join(" "),
     node_count: nodes,
     state: state,
-    labels: labels
+    labels: labels,
+    endpoint_uris: []
   }
 end
 

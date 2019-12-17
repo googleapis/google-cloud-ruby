@@ -211,7 +211,8 @@ module Google
           when FalseClass
             false
           when NilClass
-            ENV["GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING"] == "YES"
+            ["YES", "yes"].include? \
+              ENV["GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING"]
           else
             false
           end
