@@ -1,5 +1,13 @@
 # Release History
 
+### 1.1.3 / 2019-12-18
+
+#### Bug Fixes
+
+* Fix MonitorMixin usage on Ruby 2.7
+  * Ruby 2.7 will error if new_cond is called before super().
+  * Make the call to super() be the first call in initialize
+
 ### 1.1.2 / 2019-11-19
 
 #### Performance Improvements
