@@ -30,7 +30,7 @@ module Google
           def initialize publisher, ordering_key
             # init MonitorMixin
             super()
-          
+
             @publisher = publisher
             @ordering_key = ordering_key
             @items = []
