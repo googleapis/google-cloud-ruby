@@ -148,13 +148,15 @@ module Google
       #     in the response.
       # @!attribute [rw] aggregation
       #   @return [Google::Monitoring::V3::Aggregation]
-      #     By default, the raw time series data is returned.
-      #     Use this field to combine multiple time series for different
-      #     views of the data.
+      #     Specifies the alignment of data points in individual time series as
+      #     well as how to combine the retrieved time series across specified labels.
+      #
+      #     By default (if no `aggregation` is explicitly specified), the raw time
+      #     series data is returned.
       # @!attribute [rw] order_by
       #   @return [String]
       #     Unsupported: must be left blank. The points in each time series are
-      #     returned in reverse time order.
+      #     currently returned in reverse time order (most recent to oldest).
       # @!attribute [rw] view
       #   @return [Google::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView]
       #     Specifies which information is returned about the time series.
