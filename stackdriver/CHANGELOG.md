@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.1 / 2019-12-18
+
+#### Documentation
+
+* update use_logging description
+
 ### 0.16.0 / 2019-11-06
 
 #### Other
