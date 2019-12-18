@@ -1,5 +1,18 @@
 # Release History
 
+### 1.12.2 / 2019-12-18
+
+#### Bug Fixes
+
+* Rename endpoint_urls to endpoint_uris
+* revert #commit mutations to positional in lower-level API
+* Revert breaking change to lower-level API test_iam_permissions
+
+#### Performance Improvements
+
+* Update lower-level API
+  * Add Instance#endpoint_urls and GetInstanceRequest#field_mask.
+
 ### 1.12.1 / 2019-11-12
 
 #### Features
