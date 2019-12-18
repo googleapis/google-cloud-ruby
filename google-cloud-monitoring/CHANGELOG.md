@@ -1,5 +1,11 @@
 # Release History
 
+### 0.34.0 / 2019-12-18
+
+#### Features
+
+* Add support for monitoring dashboards API
+
 ### 0.33.1 / 2019-11-06
 
 #### Bug Fixes
