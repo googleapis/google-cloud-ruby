@@ -343,10 +343,10 @@ module Google
             # the operation will be the type {Google::Firestore::Admin::V1::IndexOperationMetadata IndexOperationMetadata}.
             #
             # @param parent [String]
-            #   A parent name of the form
+            #   Required. A parent name of the form
             #   `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}`
             # @param index [Google::Firestore::Admin::V1::Index | Hash]
-            #   The composite index to create.
+            #   Required. The composite index to create.
             #   A hash of the same form as `Google::Firestore::Admin::V1::Index`
             #   can also be provided.
             # @param options [Google::Gax::CallOptions]
@@ -383,7 +383,7 @@ module Google
             # Lists composite indexes.
             #
             # @param parent [String]
-            #   A parent name of the form
+            #   Required. A parent name of the form
             #   `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}`
             # @param filter [String]
             #   The filter to apply to list results.
@@ -442,7 +442,7 @@ module Google
             # Gets a composite index.
             #
             # @param name [String]
-            #   A name of the form
+            #   Required. A name of the form
             #   `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -473,7 +473,7 @@ module Google
             # Deletes a composite index.
             #
             # @param name [String]
-            #   A name of the form
+            #   Required. A name of the form
             #   `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -508,7 +508,7 @@ module Google
             # that a subset of the data has already been imported to Cloud Firestore.
             #
             # @param name [String]
-            #   Database to import into. Should be of the form:
+            #   Required. Database to import into. Should be of the form:
             #   `projects/{project_id}/databases/{database_id}`.
             # @param collection_ids [Array<String>]
             #   Which collection ids to import. Unspecified means all collections included
@@ -559,7 +559,7 @@ module Google
             # Cloud Storage.
             #
             # @param name [String]
-            #   Database to export. Should be of the form:
+            #   Required. Database to export. Should be of the form:
             #   `projects/{project_id}/databases/{database_id}`.
             # @param collection_ids [Array<String>]
             #   Which collection ids to export. Unspecified means all collections.
@@ -605,7 +605,7 @@ module Google
             # Gets the metadata and configuration for a Field.
             #
             # @param name [String]
-            #   A name of the form
+            #   Required. A name of the form
             #   `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/fields/{field_id}`
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -641,7 +641,7 @@ module Google
             # `indexConfig.usesAncestorConfig:false`.
             #
             # @param parent [String]
-            #   A parent name of the form
+            #   Required. A parent name of the form
             #   `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}`
             # @param filter [String]
             #   The filter to apply to list results. Currently,
@@ -716,7 +716,7 @@ module Google
             # `projects/{project_id}/databases/{database_id}/collectionGroups/__default__/fields/*`.
             #
             # @param field [Google::Firestore::Admin::V1::Field | Hash]
-            #   The field to be updated.
+            #   Required. The field to be updated.
             #   A hash of the same form as `Google::Firestore::Admin::V1::Field`
             #   can also be provided.
             # @param update_mask [Google::Protobuf::FieldMask | Hash]

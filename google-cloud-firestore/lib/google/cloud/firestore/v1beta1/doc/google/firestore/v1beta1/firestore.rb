@@ -19,7 +19,7 @@ module Google
       # The request for {Google::Firestore::V1beta1::Firestore::GetDocument Firestore::GetDocument}.
       # @!attribute [rw] name
       #   @return [String]
-      #     The resource name of the Document to get. In the format:
+      #     Required. The resource name of the Document to get. In the format:
       #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       # @!attribute [rw] mask
       #   @return [Google::Firestore::V1beta1::DocumentMask]
@@ -39,7 +39,7 @@ module Google
       # The request for {Google::Firestore::V1beta1::Firestore::ListDocuments Firestore::ListDocuments}.
       # @!attribute [rw] parent
       #   @return [String]
-      #     The parent resource name. In the format:
+      #     Required. The parent resource name. In the format:
       #     `projects/{project_id}/databases/{database_id}/documents` or
       #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       #     For example:
@@ -47,7 +47,7 @@ module Google
       #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
       # @!attribute [rw] collection_id
       #   @return [String]
-      #     The collection ID, relative to `parent`, to list. For example: `chatrooms`
+      #     Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`
       #     or `messages`.
       # @!attribute [rw] page_size
       #   @return [Integer]
@@ -94,12 +94,12 @@ module Google
       # The request for {Google::Firestore::V1beta1::Firestore::CreateDocument Firestore::CreateDocument}.
       # @!attribute [rw] parent
       #   @return [String]
-      #     The parent resource. For example:
+      #     Required. The parent resource. For example:
       #     `projects/{project_id}/databases/{database_id}/documents` or
       #     `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}`
       # @!attribute [rw] collection_id
       #   @return [String]
-      #     The collection ID, relative to `parent`, to list. For example: `chatrooms`.
+      #     Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`.
       # @!attribute [rw] document_id
       #   @return [String]
       #     The client-assigned document ID to use for this document.
@@ -107,7 +107,7 @@ module Google
       #     Optional. If not specified, an ID will be assigned by the service.
       # @!attribute [rw] document
       #   @return [Google::Firestore::V1beta1::Document]
-      #     The document to create. `name` must not be set.
+      #     Required. The document to create. `name` must not be set.
       # @!attribute [rw] mask
       #   @return [Google::Firestore::V1beta1::DocumentMask]
       #     The fields to return. If not set, returns all fields.
@@ -119,7 +119,7 @@ module Google
       # The request for {Google::Firestore::V1beta1::Firestore::UpdateDocument Firestore::UpdateDocument}.
       # @!attribute [rw] document
       #   @return [Google::Firestore::V1beta1::Document]
-      #     The updated document.
+      #     Required. The updated document.
       #     Creates the document if it does not already exist.
       # @!attribute [rw] update_mask
       #   @return [Google::Firestore::V1beta1::DocumentMask]
@@ -145,7 +145,7 @@ module Google
       # The request for {Google::Firestore::V1beta1::Firestore::DeleteDocument Firestore::DeleteDocument}.
       # @!attribute [rw] name
       #   @return [String]
-      #     The resource name of the Document to delete. In the format:
+      #     Required. The resource name of the Document to delete. In the format:
       #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       # @!attribute [rw] current_document
       #   @return [Google::Firestore::V1beta1::Precondition]
@@ -156,7 +156,7 @@ module Google
       # The request for {Google::Firestore::V1beta1::Firestore::BatchGetDocuments Firestore::BatchGetDocuments}.
       # @!attribute [rw] database
       #   @return [String]
-      #     The database name. In the format:
+      #     Required. The database name. In the format:
       #     `projects/{project_id}/databases/{database_id}`.
       # @!attribute [rw] documents
       #   @return [Array<String>]
@@ -209,7 +209,7 @@ module Google
       # The request for {Google::Firestore::V1beta1::Firestore::BeginTransaction Firestore::BeginTransaction}.
       # @!attribute [rw] database
       #   @return [String]
-      #     The database name. In the format:
+      #     Required. The database name. In the format:
       #     `projects/{project_id}/databases/{database_id}`.
       # @!attribute [rw] options
       #   @return [Google::Firestore::V1beta1::TransactionOptions]
@@ -226,7 +226,7 @@ module Google
       # The request for {Google::Firestore::V1beta1::Firestore::Commit Firestore::Commit}.
       # @!attribute [rw] database
       #   @return [String]
-      #     The database name. In the format:
+      #     Required. The database name. In the format:
       #     `projects/{project_id}/databases/{database_id}`.
       # @!attribute [rw] writes
       #   @return [Array<Google::Firestore::V1beta1::Write>]
@@ -253,17 +253,17 @@ module Google
       # The request for {Google::Firestore::V1beta1::Firestore::Rollback Firestore::Rollback}.
       # @!attribute [rw] database
       #   @return [String]
-      #     The database name. In the format:
+      #     Required. The database name. In the format:
       #     `projects/{project_id}/databases/{database_id}`.
       # @!attribute [rw] transaction
       #   @return [String]
-      #     The transaction to roll back.
+      #     Required. The transaction to roll back.
       class RollbackRequest; end
 
       # The request for {Google::Firestore::V1beta1::Firestore::RunQuery Firestore::RunQuery}.
       # @!attribute [rw] parent
       #   @return [String]
-      #     The parent resource name. In the format:
+      #     Required. The parent resource name. In the format:
       #     `projects/{project_id}/databases/{database_id}/documents` or
       #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       #     For example:
@@ -325,7 +325,7 @@ module Google
       # the next request.
       # @!attribute [rw] database
       #   @return [String]
-      #     The database name. In the format:
+      #     Required. The database name. In the format:
       #     `projects/{project_id}/databases/{database_id}`.
       #     This is only required in the first message.
       # @!attribute [rw] stream_id
@@ -387,7 +387,7 @@ module Google
       # A request for {Google::Firestore::V1beta1::Firestore::Listen Firestore::Listen}
       # @!attribute [rw] database
       #   @return [String]
-      #     The database name. In the format:
+      #     Required. The database name. In the format:
       #     `projects/{project_id}/databases/{database_id}`.
       # @!attribute [rw] add_target
       #   @return [Google::Firestore::V1beta1::Target]
@@ -538,7 +538,7 @@ module Google
       # The request for {Google::Firestore::V1beta1::Firestore::ListCollectionIds Firestore::ListCollectionIds}.
       # @!attribute [rw] parent
       #   @return [String]
-      #     The parent document. In the format:
+      #     Required. The parent document. In the format:
       #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
       #     For example:
       #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`

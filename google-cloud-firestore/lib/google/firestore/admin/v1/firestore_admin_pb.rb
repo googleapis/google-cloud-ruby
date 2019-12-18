@@ -5,12 +5,14 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/firestore/admin/v1/field_pb'
 require 'google/firestore/admin/v1/index_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.firestore.admin.v1.CreateIndexRequest" do
     optional :parent, :string, 1
