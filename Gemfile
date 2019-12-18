@@ -19,6 +19,8 @@ gem "actionpack", "~> 5.0"
 gem "railties", "~> 5.0"
 gem "rack", ">= 0.1"
 
+gem "gapic-common", github: "googleapis/gapic-generator-ruby"
+
 gem "google-cloud-core", path: "google-cloud-core"
 gem "google-cloud-env", path: "google-cloud-env"
 gem "google-cloud-asset", path: "google-cloud-asset"
