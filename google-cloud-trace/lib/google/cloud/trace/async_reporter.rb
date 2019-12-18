@@ -38,6 +38,9 @@ module Google
         # @private Creates a new AsyncReporter instance.
         def initialize service, max_count: 1000, max_bytes: 4000000,
                        max_queue: 100, interval: 5, threads: 10
+          # init MonitorMixin
+          super()
+
           @service = service
 
           @max_count = max_count
@@ -52,9 +55,6 @@ module Google
 
           # Make sure all buffered messages are sent when process exits.
           at_exit { stop! }
-
-          # init MonitorMixin
-          super()
         end
 
         ##

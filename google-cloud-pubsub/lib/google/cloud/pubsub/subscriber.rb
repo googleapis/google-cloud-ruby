@@ -80,6 +80,8 @@ module Google
         def initialize subscription_name, callback, deadline: nil,
                        message_ordering: nil, streams: nil, inventory: nil,
                        threads: {}, service: nil
+          super() # to init MonitorMixin
+
           @callback = callback
           @error_callbacks = []
           @subscription_name = subscription_name
@@ -102,8 +104,6 @@ module Google
           @stream_pool = stream_pool.map(&:value)
 
           @buffer = TimedUnaryBuffer.new self
-
-          super() # to init MonitorMixin
         end
 
         ##

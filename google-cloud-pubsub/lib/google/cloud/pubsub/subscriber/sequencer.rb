@@ -32,10 +32,10 @@ module Google
           def initialize &block
             raise ArgumentError if block.nil?
 
+            super() # to init MonitorMixin
+
             @seq_hash = Hash.new { |hash, key| hash[key] = [] }
             @process_callback = block
-
-            super() # to init MonitorMixin
           end
 
           ##

@@ -49,6 +49,8 @@ module Google
           ##
           # @private Create an empty Subscriber::Stream object.
           def initialize subscriber
+            super() # to init MonitorMixin
+
             @subscriber = subscriber
 
             @request_queue = nil
@@ -68,8 +70,6 @@ module Google
               # push empty request every 30 seconds to keep stream alive
               push Google::Cloud::PubSub::V1::StreamingPullRequest.new unless inventory.empty?
             end.execute
-
-            super() # to init MonitorMixin
           end
 
           def start
