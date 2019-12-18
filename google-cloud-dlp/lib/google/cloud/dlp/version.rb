@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Dlp
-      VERSION = "0.12.1".freeze
+      VERSION = "0.13.0".freeze
     end
   end
 end
