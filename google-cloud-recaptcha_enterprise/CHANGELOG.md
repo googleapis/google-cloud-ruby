@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2019-12-18
+
+#### Features
+
+* Add Key CRUD calls and new Event fields
+
 ### 0.3.1 / 2019-11-06
 
 #### Bug Fixes
