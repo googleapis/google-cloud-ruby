@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2019-12-18
+
+#### Features
+
+* Support real-time feeds in asset V1
+
 ### 0.5.2 / 2019-11-19
 
 #### Documentation
