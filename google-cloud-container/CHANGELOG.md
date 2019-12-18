@@ -1,5 +1,16 @@
 # Release History
 
+### 0.8.0 / 2019-12-18
+
+#### Features
+
+* Add various new types and attributes
+  * Add NodeConfig#shielded_instance_config (ShieldedInstanceConfig)
+  * Add Cluster#authenticator_groups_config (AuthenticatorGroupsConfig)
+  * Add Cluster#database_encryption(DatabaseEncryption)
+  * Add ClusterUpdate#desired_intra_node_visibility_config (IntraNodeVisibilityConfig)
+  * Add UpdateNodePoolRequest#workload_metadata_config (WorkloadMetadataConfig)
+
 ### 0.7.0 / 2019-11-19
 
 #### Features
