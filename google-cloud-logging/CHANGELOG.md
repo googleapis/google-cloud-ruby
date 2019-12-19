@@ -1,5 +1,17 @@
 # Release History
 
+### 1.9.2 / 2019-12-18
+
+#### Bug Fixes
+
+* Fix MonitorMixin usage on Ruby 2.7
+  * Ruby 2.7 will error if new_cond is called before super().
+  * Make the call to super() be the first call in initialize
+
+#### Documentation
+
+* Update docs for lower-level API call MetricDescriptorMetadata#unit
+
 ### 1.9.1 / 2019-11-06
 
 #### Bug Fixes
