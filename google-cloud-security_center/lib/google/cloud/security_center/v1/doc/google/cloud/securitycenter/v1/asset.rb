@@ -28,7 +28,7 @@ module Google
         #     The relative resource name of this asset. See:
         #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
         #     Example:
-        #     "organizations/123/assets/456".
+        #     "organizations/{organization_id}/assets/{asset_id}".
         # @!attribute [rw] security_center_properties
         #   @return [Google::Cloud::SecurityCenter::V1::Asset::SecurityCenterProperties]
         #     Cloud SCC managed properties. These properties are managed by

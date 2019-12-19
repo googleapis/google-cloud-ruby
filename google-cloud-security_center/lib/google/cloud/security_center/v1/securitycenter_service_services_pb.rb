@@ -50,14 +50,14 @@ module Google::Cloud::SecurityCenter::V1
       # specified properties.
       #
       # To group across all sources provide a `-` as the source id.
-      # Example: /v1/organizations/123/sources/-/findings
+      # Example: /v1/organizations/{organization_id}/sources/-/findings
       rpc :GroupFindings, GroupFindingsRequest, GroupFindingsResponse
       # Lists an organization's assets.
       rpc :ListAssets, ListAssetsRequest, ListAssetsResponse
       # Lists an organization or source's findings.
       #
       # To list across all sources provide a `-` as the source id.
-      # Example: /v1/organizations/123/sources/-/findings
+      # Example: /v1/organizations/{organization_id}/sources/-/findings
       rpc :ListFindings, ListFindingsRequest, ListFindingsResponse
       # Lists all sources belonging to an organization.
       rpc :ListSources, ListSourcesRequest, ListSourcesResponse

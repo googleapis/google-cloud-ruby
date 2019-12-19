@@ -5,6 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/security_center/v1/asset_pb'
 require 'google/cloud/security_center/v1/finding_pb'
 require 'google/cloud/security_center/v1/organization_settings_pb'
