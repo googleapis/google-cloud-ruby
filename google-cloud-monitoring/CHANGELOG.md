@@ -4,7 +4,8 @@
 
 #### Features
 
-* Add support for monitoring dashboards API
+* Add support for the Dashboards API.
+* Add support for the ServiceMonitoring API.
 
 ### 0.33.1 / 2019-11-06
 
