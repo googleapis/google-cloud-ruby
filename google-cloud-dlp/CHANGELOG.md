@@ -5,6 +5,11 @@
 #### Features
 
 * Add location_id to many operations
+* Add Action#publish_to_stackdriver
+
+#### Documentation
+
+* Update documentation
 
 ### 0.12.1 / 2019-11-06
 
