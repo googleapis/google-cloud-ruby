@@ -1,5 +1,12 @@
 # Release History
 
+### 0.8.2 / 2019-12-19
+
+#### Documentation
+
+* Update docs for DiversificationLevel::SIMPLE
+* Update PostalAddress#revision documentation
+
 ### 0.8.1 / 2019-11-19
 
 #### Documentation
