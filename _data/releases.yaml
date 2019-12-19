@@ -616,6 +616,7 @@ google-cloud-spanner:
 - v0.22.0
 - v0.21.0
 google-cloud-speech:
+- v0.40.1
 - v0.40.0
 - v0.39.1
 - v0.39.0
