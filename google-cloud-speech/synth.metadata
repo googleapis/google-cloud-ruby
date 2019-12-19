@@ -1,19 +1,19 @@
 {
-  "updateTime": "2019-12-06T11:44:36.313184Z",
+  "updateTime": "2019-12-19T11:41:29.115194Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.42.1",
-        "dockerImage": "googleapis/artman@sha256:c773192618c608a7a0415dd95282f841f8e6bcdef7dd760a988c93b77a64bd57"
+        "version": "0.42.3",
+        "dockerImage": "googleapis/artman@sha256:feed210b5723c6f524b52ef6d7740a030f2d1a8f7c29a71c5e5b4481ceaad7f5"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "b10e4547017ca529ac8d183e839f3c272e1c13de",
-        "internalRef": "284059574"
+        "sha": "d400cb8d45df5b2ae796b909f098a215b2275c1d",
+        "internalRef": "286312673"
       }
     },
     {
@@ -44,6 +44,164 @@
         "generator": "gapic",
         "config": "google/cloud/speech/artman_speech_v1p1beta1.yaml"
       }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "Rakefile"
+    },
+    {
+      "path": "synth.metadata"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": ".rubocop.yml"
+    },
+    {
+      "path": "AUTHENTICATION.md"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": ".yardopts"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "google-cloud-speech.gemspec"
+    },
+    {
+      "path": "Gemfile"
+    },
+    {
+      "path": "test/google/cloud/speech/v1p1beta1/stream_test.rb"
+    },
+    {
+      "path": "test/google/cloud/speech/v1p1beta1/get_operation_test.rb"
+    },
+    {
+      "path": "test/google/cloud/speech/v1p1beta1/speech_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/speech/v1/stream_test.rb"
+    },
+    {
+      "path": "test/google/cloud/speech/v1/get_operation_test.rb"
+    },
+    {
+      "path": "test/google/cloud/speech/v1/speech_client_test.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/version.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/stream.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/speech_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/cloud_speech_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/cloud_speech_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/helpers.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/speech_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/doc/google/longrunning/operations.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/doc/google/protobuf/duration.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/doc/google/protobuf/any.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/doc/google/cloud/speech/v1p1beta1/cloud_speech.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1p1beta1/doc/google/rpc/status.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/stream.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/speech_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/cloud_speech_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/cloud_speech_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/helpers.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/speech_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/doc/google/longrunning/operations.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/doc/google/protobuf/duration.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/doc/google/protobuf/any.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/doc/google/cloud/speech/v1/cloud_speech.rb"
+    },
+    {
+      "path": "lib/google/cloud/speech/v1/doc/google/rpc/status.rb"
+    },
+    {
+      "path": "__pycache__/synth.cpython-36.pyc"
+    },
+    {
+      "path": "acceptance/google/cloud/speech/v1p1beta1/stream_test.rb"
+    },
+    {
+      "path": "acceptance/google/cloud/speech/v1p1beta1/speech_smoke_test.rb"
+    },
+    {
+      "path": "acceptance/google/cloud/speech/v1/stream_test.rb"
+    },
+    {
+      "path": "acceptance/google/cloud/speech/v1/speech_smoke_test.rb"
     }
   ]
 }
