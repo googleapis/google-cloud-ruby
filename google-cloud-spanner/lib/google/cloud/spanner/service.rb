@@ -60,6 +60,13 @@ module Google
             GRPC::Core::CallCredentials.new credentials.client.updater_proc
         end
 
+        ##
+        # Create and cache spanner client connection based on instance
+        # endpoint uri for resource based request routing.
+        #
+        # @param [String, nil] endpoint_uri Instance endpoint uri.
+        # @return [V1::SpannerClient]
+        #
         def service endpoint_uri = nil
           return mocked_service if mocked_service
 
@@ -125,6 +132,7 @@ module Google
 
         def get_instance name, fields: nil
           field_mask = Google::Protobuf::FieldMask.new(paths: fields || [])
+
           execute do
             instances.get_instance instance_path(name), field_mask: field_mask
           end

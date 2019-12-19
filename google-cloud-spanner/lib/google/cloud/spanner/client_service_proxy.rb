@@ -48,7 +48,7 @@ module Google
           return @endpoint_uri if @endpoint_uri
 
           if resource_based_routing_enabled?
-            instance = @project.instance @instance_id, fields: ["endpoint_uri"]
+            instance = @project.instance @instance_id, fields: ["endpoint_uris"]
             @endpoint_uri = instance.endpoint_uris.first if instance
           end
 
@@ -76,7 +76,8 @@ module Google
         end
 
         def execute_streaming_sql \
-            session_name, sql,
+            session_name,
+            sql,
             transaction: nil,
             params: nil,
             types: nil,
@@ -84,7 +85,8 @@ module Google
             partition_token: nil,
             seqno: nil
           super \
-            session_name, sql,
+            session_name,
+            sql,
             transaction: transaction,
             params: params,
             types: types,
