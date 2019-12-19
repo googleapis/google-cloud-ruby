@@ -22,7 +22,7 @@ require "gapic/config"
 module Google
   module Cloud
     ##
-    # Language
+    # API Client library for Google Cloud Language API
     module Language
       ##
       # Default configuration for the google-cloud-language gem.
@@ -39,7 +39,7 @@ module Google
       end
 
       ##
-      # Configuration
+      # Configuration class for the google-cloud-language gem.
       class Configuration
         extend Gapic::Config
 

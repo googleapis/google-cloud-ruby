@@ -339,7 +339,7 @@ module Google
             end
 
             ##
-            # Configuration Rpcs
+            # Configuration class for the LanguageService API.
             class Configuration
               extend Gapic::Config
 
@@ -373,7 +373,7 @@ module Google
               end
 
               ##
-              # Configuration Rpcs
+              # Configuration RPC class for the LanguageService API.
               class Rpcs
                 attr_reader :analyze_sentiment
                 attr_reader :analyze_entities
