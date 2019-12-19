@@ -58,7 +58,7 @@ module Google
           end
         end
 
-        # A Cloud Dataproc job for running
+        # A Dataproc job for running
         # [Apache Hadoop
         # MapReduce](https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html)
         # jobs on [Apache Hadoop
@@ -97,7 +97,7 @@ module Google
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. A mapping of property names to values, used to configure Hadoop.
-        #     Properties that conflict with values set by the Cloud Dataproc API may be
+        #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in /etc/hadoop/conf/*-site and
         #     classes in user code.
         # @!attribute [rw] logging_config
@@ -105,7 +105,7 @@ module Google
         #     Optional. The runtime log config for job execution.
         class HadoopJob; end
 
-        # A Cloud Dataproc job for running [Apache Spark](http://spark.apache.org/)
+        # A Dataproc job for running [Apache Spark](http://spark.apache.org/)
         # applications on YARN.
         # @!attribute [rw] main_jar_file_uri
         #   @return [String]
@@ -135,7 +135,7 @@ module Google
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. A mapping of property names to values, used to configure Spark.
-        #     Properties that conflict with values set by the Cloud Dataproc API may be
+        #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in
         #     /etc/spark/conf/spark-defaults.conf and classes in user code.
         # @!attribute [rw] logging_config
@@ -143,7 +143,7 @@ module Google
         #     Optional. The runtime log config for job execution.
         class SparkJob; end
 
-        # A Cloud Dataproc job for running
+        # A Dataproc job for running
         # [Apache
         # PySpark](https://spark.apache.org/docs/0.9.0/python-programming-guide.html)
         # applications on YARN.
@@ -175,7 +175,7 @@ module Google
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. A mapping of property names to values, used to configure PySpark.
-        #     Properties that conflict with values set by the Cloud Dataproc API may be
+        #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in
         #     /etc/spark/conf/spark-defaults.conf and classes in user code.
         # @!attribute [rw] logging_config
@@ -202,7 +202,7 @@ module Google
         #         }
         class QueryList; end
 
-        # A Cloud Dataproc job for running [Apache Hive](https://hive.apache.org/)
+        # A Dataproc job for running [Apache Hive](https://hive.apache.org/)
         # queries on YARN.
         # @!attribute [rw] query_file_uri
         #   @return [String]
@@ -222,7 +222,7 @@ module Google
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. A mapping of property names and values, used to configure Hive.
-        #     Properties that conflict with values set by the Cloud Dataproc API may be
+        #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml,
         #     /etc/hive/conf/hive-site.xml, and classes in user code.
         # @!attribute [rw] jar_file_uris
@@ -232,7 +232,7 @@ module Google
         #     and UDFs.
         class HiveJob; end
 
-        # A Cloud Dataproc job for running [Apache Spark
+        # A Dataproc job for running [Apache Spark
         # SQL](http://spark.apache.org/sql/) queries.
         # @!attribute [rw] query_file_uri
         #   @return [String]
@@ -248,7 +248,7 @@ module Google
         #   @return [Hash{String => String}]
         #     Optional. A mapping of property names to values, used to configure
         #     Spark SQL's SparkConf. Properties that conflict with values set by the
-        #     Cloud Dataproc API may be overwritten.
+        #     Dataproc API may be overwritten.
         # @!attribute [rw] jar_file_uris
         #   @return [Array<String>]
         #     Optional. HCFS URIs of jar files to be added to the Spark CLASSPATH.
@@ -257,7 +257,7 @@ module Google
         #     Optional. The runtime log config for job execution.
         class SparkSqlJob; end
 
-        # A Cloud Dataproc job for running [Apache Pig](https://pig.apache.org/)
+        # A Dataproc job for running [Apache Pig](https://pig.apache.org/)
         # queries on YARN.
         # @!attribute [rw] query_file_uri
         #   @return [String]
@@ -277,7 +277,7 @@ module Google
         # @!attribute [rw] properties
         #   @return [Hash{String => String}]
         #     Optional. A mapping of property names to values, used to configure Pig.
-        #     Properties that conflict with values set by the Cloud Dataproc API may be
+        #     Properties that conflict with values set by the Dataproc API may be
         #     overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml,
         #     /etc/pig/conf/pig.properties, and classes in user code.
         # @!attribute [rw] jar_file_uris
@@ -289,17 +289,17 @@ module Google
         #     Optional. The runtime log config for job execution.
         class PigJob; end
 
-        # Cloud Dataproc job config.
+        # Dataproc job config.
         # @!attribute [rw] cluster_name
         #   @return [String]
         #     Required. The name of the cluster where the job will be submitted.
         # @!attribute [rw] cluster_uuid
         #   @return [String]
-        #     Output only. A cluster UUID generated by the Cloud Dataproc service when
+        #     Output only. A cluster UUID generated by the Dataproc service when
         #     the job is submitted.
         class JobPlacement; end
 
-        # Cloud Dataproc job status.
+        # Dataproc job status.
         # @!attribute [rw] state
         #   @return [Google::Cloud::Dataproc::V1::JobStatus::State]
         #     Output only. A state message specifying the overall job state.
@@ -371,7 +371,7 @@ module Google
             QUEUED = 2
 
             # The agent-reported status is out of date, which may be caused by a
-            # loss of communication between the agent and Cloud Dataproc. If the
+            # loss of communication between the agent and Dataproc. If the
             # agent does not send a timely update, the job will fail.
             #
             # Applies to RUNNING state.
@@ -447,7 +447,7 @@ module Google
           end
         end
 
-        # A Cloud Dataproc job resource.
+        # A Dataproc job resource.
         # @!attribute [rw] reference
         #   @return [Google::Cloud::Dataproc::V1::JobReference]
         #     Optional. The fully qualified reference to the job, which can be used to
@@ -538,7 +538,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] job
         #   @return [Google::Cloud::Dataproc::V1::Job]
         #     Required. The job resource.
@@ -564,7 +564,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] job_id
         #   @return [String]
         #     Required. The job ID.
@@ -577,7 +577,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional. The number of results to return in each response.
@@ -633,7 +633,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] job_id
         #   @return [String]
         #     Required. The job ID.
@@ -668,7 +668,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] job_id
         #   @return [String]
         #     Required. The job ID.
@@ -681,7 +681,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] job_id
         #   @return [String]
         #     Required. The job ID.

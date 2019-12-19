@@ -239,7 +239,7 @@ module Google
           #   Required. The ID of the Google Cloud Platform project that the cluster
           #   belongs to.
           # @param region [String]
-          #   Required. The Cloud Dataproc region in which to handle the request.
+          #   Required. The Dataproc region in which to handle the request.
           # @param cluster [Google::Cloud::Dataproc::V1::Cluster | Hash]
           #   Required. The cluster to create.
           #   A hash of the same form as `Google::Cloud::Dataproc::V1::Cluster`
@@ -334,7 +334,7 @@ module Google
           #   Required. The ID of the Google Cloud Platform project the
           #   cluster belongs to.
           # @param region [String]
-          #   Required. The Cloud Dataproc region in which to handle the request.
+          #   Required. The Dataproc region in which to handle the request.
           # @param cluster_name [String]
           #   Required. The cluster name.
           # @param cluster [Google::Cloud::Dataproc::V1::Cluster | Hash]
@@ -508,7 +508,7 @@ module Google
           #   Required. The ID of the Google Cloud Platform project that the cluster
           #   belongs to.
           # @param region [String]
-          #   Required. The Cloud Dataproc region in which to handle the request.
+          #   Required. The Dataproc region in which to handle the request.
           # @param cluster_name [String]
           #   Required. The cluster name.
           # @param cluster_uuid [String]
@@ -604,7 +604,7 @@ module Google
           #   Required. The ID of the Google Cloud Platform project that the cluster
           #   belongs to.
           # @param region [String]
-          #   Required. The Cloud Dataproc region in which to handle the request.
+          #   Required. The Dataproc region in which to handle the request.
           # @param cluster_name [String]
           #   Required. The cluster name.
           # @param options [Google::Gax::CallOptions]
@@ -651,7 +651,7 @@ module Google
           #   Required. The ID of the Google Cloud Platform project that the cluster
           #   belongs to.
           # @param region [String]
-          #   Required. The Cloud Dataproc region in which to handle the request.
+          #   Required. The Dataproc region in which to handle the request.
           # @param filter [String]
           #   Optional. A filter constraining the clusters to list. Filters are
           #   case-sensitive and have the following syntax:
@@ -743,7 +743,7 @@ module Google
           #   Required. The ID of the Google Cloud Platform project that the cluster
           #   belongs to.
           # @param region [String]
-          #   Required. The Cloud Dataproc region in which to handle the request.
+          #   Required. The Dataproc region in which to handle the request.
           # @param cluster_name [String]
           #   Required. The cluster name.
           # @param options [Google::Gax::CallOptions]

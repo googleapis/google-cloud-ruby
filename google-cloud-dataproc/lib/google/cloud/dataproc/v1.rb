@@ -238,7 +238,7 @@ module Google
         module WorkflowTemplateService
           ##
           # The API interface for managing Workflow Templates in the
-          # Cloud Dataproc API.
+          # Dataproc API.
           #
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can

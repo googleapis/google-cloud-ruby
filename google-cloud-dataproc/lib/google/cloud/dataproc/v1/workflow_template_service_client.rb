@@ -36,7 +36,7 @@ module Google
     module Dataproc
       module V1
         # The API interface for managing Workflow Templates in the
-        # Cloud Dataproc API.
+        # Dataproc API.
         #
         # @!attribute [r] workflow_template_service_stub
         #   @return [Google::Cloud::Dataproc::V1::WorkflowTemplateService::Stub]
