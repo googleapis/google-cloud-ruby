@@ -1,5 +1,17 @@
 # Release History
 
+### 0.5.0 / 2019-12-18
+
+#### Features
+
+* Add Long Running Operation methods
+  * Add AutoMLClient#get_operation
+  * Add AutoMLClient#list_operations
+
+#### Documentation
+
+* Update TablesModelColumnInfo documentation
+
 ### 0.4.0 / 2019-11-05
 
 #### Features
