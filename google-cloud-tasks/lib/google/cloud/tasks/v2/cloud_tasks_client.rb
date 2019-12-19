@@ -79,12 +79,6 @@ module Google
 
           private_constant :LOCATION_PATH_TEMPLATE
 
-          PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}"
-          )
-
-          private_constant :PROJECT_PATH_TEMPLATE
-
           QUEUE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/queues/{queue}"
           )
@@ -105,15 +99,6 @@ module Google
             LOCATION_PATH_TEMPLATE.render(
               :"project" => project,
               :"location" => location
-            )
-          end
-
-          # Returns a fully-qualified project resource name string.
-          # @param project [String]
-          # @return [String]
-          def self.project_path project
-            PROJECT_PATH_TEMPLATE.render(
-              :"project" => project
             )
           end
 
@@ -796,8 +781,10 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2)
-          #   formatted_resource = Google::Cloud::Tasks::V2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
-          #   response = cloud_tasks_client.get_iam_policy(formatted_resource)
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
+          #   response = cloud_tasks_client.get_iam_policy(resource)
 
           def get_iam_policy \
               resource,
@@ -846,11 +833,13 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2)
-          #   formatted_resource = Google::Cloud::Tasks::V2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `policy`:
           #   policy = {}
-          #   response = cloud_tasks_client.set_iam_policy(formatted_resource, policy)
+          #   response = cloud_tasks_client.set_iam_policy(resource, policy)
 
           def set_iam_policy \
               resource,
@@ -893,11 +882,13 @@ module Google
           #   require "google/cloud/tasks"
           #
           #   cloud_tasks_client = Google::Cloud::Tasks.new(version: :v2)
-          #   formatted_resource = Google::Cloud::Tasks::V2::CloudTasksClient.queue_path("[PROJECT]", "[LOCATION]", "[QUEUE]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `permissions`:
           #   permissions = []
-          #   response = cloud_tasks_client.test_iam_permissions(formatted_resource, permissions)
+          #   response = cloud_tasks_client.test_iam_permissions(resource, permissions)
 
           def test_iam_permissions \
               resource,
