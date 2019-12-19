@@ -1,5 +1,12 @@
 # Release History
 
+### 0.34.0 / 2019-12-18
+
+#### Features
+
+* Add support for the Dashboards API.
+* Add support for the ServiceMonitoring API.
+
 ### 0.33.1 / 2019-11-06
 
 #### Bug Fixes
