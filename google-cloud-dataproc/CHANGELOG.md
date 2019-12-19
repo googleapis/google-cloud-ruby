@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.2 / 2019-12-19
+
+#### Documentation
+
+* Update product name to Dataproc
+
 ### 0.7.1 / 2019-11-06
 
 #### Bug Fixes
