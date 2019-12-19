@@ -89,12 +89,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :transfer_config, :message, 2, "google.cloud.bigquery.datatransfer.v1.TransferConfig"
     optional :authorization_code, :string, 3
     optional :version_info, :string, 5
+    optional :service_account_name, :string, 6
   end
   add_message "google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest" do
     optional :transfer_config, :message, 1, "google.cloud.bigquery.datatransfer.v1.TransferConfig"
     optional :authorization_code, :string, 3
     optional :update_mask, :message, 4, "google.protobuf.FieldMask"
     optional :version_info, :string, 5
+    optional :service_account_name, :string, 6
   end
   add_message "google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest" do
     optional :name, :string, 1

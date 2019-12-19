@@ -255,6 +255,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       disabled = true
       user_id = 147132913
       dataset_region = "datasetRegion959248539"
+      notification_pubsub_topic = "notificationPubsubTopic1794281191"
       expected_response = {
         name: name,
         destination_dataset_id: destination_dataset_id,
@@ -264,7 +265,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         data_refresh_window_days: data_refresh_window_days,
         disabled: disabled,
         user_id: user_id,
-        dataset_region: dataset_region
+        dataset_region: dataset_region,
+        notification_pubsub_topic: notification_pubsub_topic
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig)
 
@@ -351,6 +353,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       disabled = true
       user_id = 147132913
       dataset_region = "datasetRegion959248539"
+      notification_pubsub_topic = "notificationPubsubTopic1794281191"
       expected_response = {
         name: name,
         destination_dataset_id: destination_dataset_id,
@@ -360,7 +363,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         data_refresh_window_days: data_refresh_window_days,
         disabled: disabled,
         user_id: user_id,
-        dataset_region: dataset_region
+        dataset_region: dataset_region,
+        notification_pubsub_topic: notification_pubsub_topic
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig)
 
@@ -515,6 +519,7 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       disabled = true
       user_id = 147132913
       dataset_region = "datasetRegion959248539"
+      notification_pubsub_topic = "notificationPubsubTopic1794281191"
       expected_response = {
         name: name_2,
         destination_dataset_id: destination_dataset_id,
@@ -524,7 +529,8 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
         data_refresh_window_days: data_refresh_window_days,
         disabled: disabled,
         user_id: user_id,
-        dataset_region: dataset_region
+        dataset_region: dataset_region,
+        notification_pubsub_topic: notification_pubsub_topic
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig)
 
@@ -768,12 +774,14 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
       data_source_id = "dataSourceId-1015796374"
       user_id = 147132913
       schedule = "schedule-697920873"
+      notification_pubsub_topic = "notificationPubsubTopic1794281191"
       expected_response = {
         name: name_2,
         destination_dataset_id: destination_dataset_id,
         data_source_id: data_source_id,
         user_id: user_id,
-        schedule: schedule
+        schedule: schedule,
+        notification_pubsub_topic: notification_pubsub_topic
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::TransferRun)
 

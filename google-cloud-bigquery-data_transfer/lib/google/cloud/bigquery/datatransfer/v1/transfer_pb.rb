@@ -10,6 +10,9 @@ require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.cloud.bigquery.datatransfer.v1.EmailPreferences" do
+    optional :enable_failure_email, :bool, 1
+  end
   add_message "google.cloud.bigquery.datatransfer.v1.ScheduleOptions" do
     optional :disable_auto_scheduling, :bool, 3
     optional :start_time, :message, 1, "google.protobuf.Timestamp"
@@ -29,6 +32,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :state, :enum, 10, "google.cloud.bigquery.datatransfer.v1.TransferState"
     optional :user_id, :int64, 11
     optional :dataset_region, :string, 14
+    optional :notification_pubsub_topic, :string, 15
+    optional :email_preferences, :message, 18, "google.cloud.bigquery.datatransfer.v1.EmailPreferences"
     oneof :destination do
       optional :destination_dataset_id, :string, 2
     end
@@ -46,6 +51,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :state, :enum, 8, "google.cloud.bigquery.datatransfer.v1.TransferState"
     optional :user_id, :int64, 11
     optional :schedule, :string, 12
+    optional :notification_pubsub_topic, :string, 23
+    optional :email_preferences, :message, 25, "google.cloud.bigquery.datatransfer.v1.EmailPreferences"
     oneof :destination do
       optional :destination_dataset_id, :string, 2
     end
@@ -81,6 +88,7 @@ module Google
     module Bigquery
       module Datatransfer
         module V1
+          EmailPreferences = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.EmailPreferences").msgclass
           ScheduleOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleOptions").msgclass
           TransferConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferConfig").msgclass
           TransferRun = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferRun").msgclass
