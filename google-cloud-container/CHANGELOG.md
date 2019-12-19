@@ -10,6 +10,15 @@
   * Add Cluster#database_encryption(DatabaseEncryption)
   * Add ClusterUpdate#desired_intra_node_visibility_config (IntraNodeVisibilityConfig)
   * Add UpdateNodePoolRequest#workload_metadata_config (WorkloadMetadataConfig)
+  * Add NodePool#pod_ipv4_cidr_size
+  * Add MaintenancePolicy#resource_version
+  * Add MaintenanceWindow#maintenance_exclusions (TimeWindow)
+  * Add MaintenanceWindow::Policy#recurring_window (RecurringTimeWindow)
+  * Add ClusterAutoscaling#autoprovisioning_node_pool_defaults (AutoprovisioningNodePoolDefaults)
+  * Add ClusterAutoscaling#autoprovisioning_locations
+  * Add StatusCondition::Code::CLOUD_KMS_KEY_ERROR
+  * Add NetworkConfig#enable_intra_node_visibility
+  * Add ResourceUsageExportConfig#consumption_metering_config (ConsumptionMeteringConfig)
 
 ### 0.7.0 / 2019-11-19
 
