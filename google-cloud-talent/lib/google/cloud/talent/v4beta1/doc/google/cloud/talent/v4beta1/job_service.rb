@@ -524,7 +524,10 @@ module Google
 
             # Default diversifying behavior. The result list is ordered so that
             # highly similar results are pushed to the end of the last page of search
-            # results.
+            # results. If you are using pageToken to page through the result set,
+            # latency might be lower but we can't guarantee that all results are
+            # returned. If you are using page offset, latency might be higher but all
+            # results are returned.
             SIMPLE = 2
           end
 
