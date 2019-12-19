@@ -4,20 +4,18 @@
 
 #### Features
 
-* Introduce enable_cross_project_tracing option to the faraday middleware
+* Introduce enable_cross_project_tracing option to the Faraday middleware
 
 #### Bug Fixes
 
 * Fix MonitorMixin usage on Ruby 2.7
-  * Ruby 2.7 will error if new_cond is called before super().
-  * Make the call to super() be the first call in initialize
+  * Ruby 2.7 will error if new_cond is called before super()
+  * Make the call to super() be the first call in initialize where possible
 
 #### Performance Improvements
 
-* Remove TraceServiceClient.span_path from lower-level API
-  * Update network configuration
+* Remove TraceServiceClient.span_path from the lower-level API
 * Update network configuration
-  * Update documentation
 
 ### 0.36.1 / 2019-11-06
 
