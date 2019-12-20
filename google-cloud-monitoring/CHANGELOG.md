@@ -1,5 +1,11 @@
 # Release History
 
+### 0.34.1 / 2019-12-20
+
+#### Documentation
+
+* Update description of MetricDescriptor#unit in lower-level API
+
 ### 0.34.0 / 2019-12-18
 
 #### Features
