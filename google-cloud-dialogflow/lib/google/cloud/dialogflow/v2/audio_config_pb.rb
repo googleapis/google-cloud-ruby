@@ -9,11 +9,24 @@ require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.cloud.dialogflow.v2.SpeechContext" do
+    repeated :phrases, :string, 1
+    optional :boost, :float, 2
+  end
+  add_message "google.cloud.dialogflow.v2.SpeechWordInfo" do
+    optional :word, :string, 3
+    optional :start_offset, :message, 1, "google.protobuf.Duration"
+    optional :end_offset, :message, 2, "google.protobuf.Duration"
+    optional :confidence, :float, 4
+  end
   add_message "google.cloud.dialogflow.v2.InputAudioConfig" do
     optional :audio_encoding, :enum, 1, "google.cloud.dialogflow.v2.AudioEncoding"
     optional :sample_rate_hertz, :int32, 2
     optional :language_code, :string, 3
+    optional :enable_word_info, :bool, 13
     repeated :phrase_hints, :string, 4
+    repeated :speech_contexts, :message, 11, "google.cloud.dialogflow.v2.SpeechContext"
+    optional :model, :string, 7
     optional :model_variant, :enum, 10, "google.cloud.dialogflow.v2.SpeechModelVariant"
     optional :single_utterance, :bool, 8
   end
@@ -67,6 +80,8 @@ module Google
   module Cloud
     module Dialogflow
       module V2
+        SpeechContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SpeechContext").msgclass
+        SpeechWordInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SpeechWordInfo").msgclass
         InputAudioConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.InputAudioConfig").msgclass
         VoiceSelectionParams = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.VoiceSelectionParams").msgclass
         SynthesizeSpeechConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SynthesizeSpeechConfig").msgclass

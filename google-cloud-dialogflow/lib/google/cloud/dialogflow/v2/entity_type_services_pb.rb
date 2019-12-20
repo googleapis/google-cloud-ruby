@@ -88,9 +88,11 @@ module Google
             # method does not affect entities in the entity type that aren't explicitly
             # specified in the request.
             #
+            #
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
             rpc :BatchUpdateEntities, BatchUpdateEntitiesRequest, Google::Longrunning::Operation
             # Deletes entities in the specified entity type.
+            #
             #
             # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
             rpc :BatchDeleteEntities, BatchDeleteEntitiesRequest, Google::Longrunning::Operation
