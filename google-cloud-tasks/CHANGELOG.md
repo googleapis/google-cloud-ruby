@@ -1,5 +1,15 @@
 # Release History
 
+### 1.3.2 / 2019-12-19
+
+#### Performance Improvements
+
+* Update network configuration
+
+#### Documentation
+
+* Update documentation, samples, and links
+
 ### 1.3.1 / 2019-11-19
 
 #### Documentation
