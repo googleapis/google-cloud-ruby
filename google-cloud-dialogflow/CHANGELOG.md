@@ -1,5 +1,17 @@
 # Release History
 
+### 0.12.0 / 2019-12-20
+
+#### Features
+
+* Add attributes to InputAudioConfig and StreamingRecognitionResult
+  * Add InputAudioConfig#enable_word_info
+  * Add InputAudioConfig#speech_contexts (SpeechContext)
+  * Add InputAudioConfig#model
+  * Add StreamingRecognitionResult#speech_word_info (SpeechWordInfo)
+  * Add StreamingRecognitionResult#speech_end_offset
+  * Update documentation
+
 ### 0.11.1 / 2019-11-19
 
 #### Documentation
