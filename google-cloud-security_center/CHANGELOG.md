@@ -1,5 +1,16 @@
 # Release History
 
+### 0.5.0 / 2019-12-20
+
+#### Features
+
+* Add attributes to SecurityCenterProperties and ListFindingsResult
+  * Add SecurityCenterProperties#resource_display_name
+  * Add SecurityCenterProperties#resource_parent_display_name
+  * Add SecurityCenterProperties#resource_project_display_name
+  * Add ListFindingsResult#resource (Resource)
+  * Update network configuration
+
 ### 0.4.3 / 2019-12-19
 
 #### Documentation
