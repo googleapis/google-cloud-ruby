@@ -1,5 +1,9 @@
 # Release History
 
+### 0.64.0 / 2019-12-19
+
+* Bigtable 1.0.0 release
+
 ### 0.63.0 / 2019-11-06
 
 #### Documentation
