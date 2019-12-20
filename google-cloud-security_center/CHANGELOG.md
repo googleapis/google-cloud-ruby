@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.3 / 2019-12-19
+
+#### Documentation
+
+* Update in-code samples
+
 ### 0.4.2 / 2019-11-19
 
 #### Documentation
