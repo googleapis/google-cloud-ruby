@@ -1,5 +1,13 @@
 # Release History
 
+### 0.34.1 / 2019-12-20
+
+#### Bug Fixes
+
+* Synchronize low-level interface to match the backend API
+  * Rename ErrorGroupServiceClient.group_path helper to error_group_path.
+  * Make time_range an optional argument to ErrorGroupServiceClient#list_group_stats
+
 ### 0.34.0 / 2019-11-11
 
 #### Features
