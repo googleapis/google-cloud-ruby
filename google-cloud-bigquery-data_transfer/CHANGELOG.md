@@ -1,5 +1,17 @@
 # Release History
 
+### 0.5.0 / 2019-12-19
+
+#### Features
+
+* Update TransferConfig attributes
+  * Add TransferConfig#notification_pubsub_topic
+  * Add TransferConfig#email_preferences (EmailPreferences)
+  * Add TransferRun#notification_pubsub_topic
+  * Add TransferRun#email_preferences (EmailPreferences)
+  * Add CreateTransferConfigRequest#service_account_name
+  * Add UpdateTransferConfigRequest#service_account_name
+
 ### 0.4.1 / 2019-11-06
 
 #### Bug Fixes
