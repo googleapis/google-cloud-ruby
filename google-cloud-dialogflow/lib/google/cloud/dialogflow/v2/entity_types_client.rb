@@ -820,6 +820,7 @@ module Google
           # method does not affect entities in the entity type that aren't explicitly
           # specified in the request.
           #
+          #
           # Operation <response: {Google::Protobuf::Empty}>
           #
           # @param parent [String]
@@ -906,6 +907,7 @@ module Google
           end
 
           # Deletes entities in the specified entity type.
+          #
           #
           # Operation <response: {Google::Protobuf::Empty}>
           #

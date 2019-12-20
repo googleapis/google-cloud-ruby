@@ -208,9 +208,13 @@ module Google
         #     the greatest `knowledgeAnswers.match_confidence` value in the list.
         # @!attribute [rw] diagnostic_info
         #   @return [Google::Protobuf::Struct]
-        #     The free-form diagnostic info. For example, this field could contain
-        #     webhook call latency. The string keys of the Struct's fields map can change
-        #     without notice.
+        #     Free-form diagnostic information for the associated detect intent request.
+        #     The fields of this data can change without notice, so you should not write
+        #     code that depends on its structure.
+        #     The data may contain:
+        #
+        #     * webhook call latency
+        #     * webhook errors
         # @!attribute [rw] sentiment_analysis_result
         #   @return [Google::Cloud::Dialogflow::V2::SentimentAnalysisResult]
         #     The sentiment analysis result, which depends on the
@@ -218,23 +222,26 @@ module Google
         class QueryResult; end
 
         # The top-level message sent by the client to the
-        # {StreamingDetectIntent} method.
+        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent Sessions::StreamingDetectIntent} method.
         #
         # Multiple request messages should be sent in order:
         #
-        # 1.  The first message must contain {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#session StreamingDetectIntentRequest#session},
-        #     [StreamingDetectIntentRequest.query_input] plus optionally
-        #     [StreamingDetectIntentRequest.query_params]. If the client wants to
-        #     receive an audio response, it should also contain
-        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config StreamingDetectIntentRequest#output_audio_config}. The message
-        #     must not contain {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio StreamingDetectIntentRequest#input_audio}.
-        # 2.  If {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input StreamingDetectIntentRequest#query_input} was set to
-        #     {StreamingDetectIntentRequest#query_input#audio_config}, all subsequent
-        #     messages must contain [StreamingDetectIntentRequest.input_audio] to
-        #     continue with Speech recognition.
+        # 1.  The first message must contain
+        # {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#session session},
+        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input} plus optionally
+        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params query_params}. If the client
+        #     wants to receive an audio response, it should also contain
+        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config}.
+        #     The message must not contain
+        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio}.
+        # 2.  If {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input} was set to
+        #     {Google::Cloud::Dialogflow::V2::InputAudioConfig query_input::audio_config}, all subsequent
+        #     messages must contain
+        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio} to continue with
+        #     Speech recognition.
         #     If you decide to rather detect an intent from text input after you
         #     already started Speech recognition, please send a message with
-        #     {StreamingDetectIntentRequest#query_input#text}.
+        #     {Google::Cloud::Dialogflow::V2::QueryInput#text query_input::text}.
         #
         #     However, note that:
         #
@@ -380,6 +387,15 @@ module Google
         #
         #     This field is typically only provided if `is_final` is true and you should
         #     not rely on it being accurate or even set.
+        # @!attribute [rw] speech_word_info
+        #   @return [Array<Google::Cloud::Dialogflow::V2::SpeechWordInfo>]
+        #     Word-specific information for the words recognized by Speech in
+        #     {Google::Cloud::Dialogflow::V2::StreamingRecognitionResult#transcript transcript}. Populated if and only if `message_type` = `TRANSCRIPT` and
+        #     [InputAudioConfig.enable_word_info] is set.
+        # @!attribute [rw] speech_end_offset
+        #   @return [Google::Protobuf::Duration]
+        #     Time offset of the end of this Speech recognition result relative to the
+        #     beginning of the audio. Only populated for `message_type` = `TRANSCRIPT`.
         class StreamingRecognitionResult
           # Type of the response message.
           module MessageType

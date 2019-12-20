@@ -102,8 +102,9 @@ module Google
         #   @return [String]
         #     Read-only after creation. The unique identifier of the parent intent in the
         #     chain of followup intents. You can set this field when creating an intent,
-        #     for example with {CreateIntent} or {BatchUpdateIntents}, in order to
-        #     make this intent a followup intent.
+        #     for example with {Google::Cloud::Dialogflow::V2::Intents::CreateIntent CreateIntent} or
+        #     {Google::Cloud::Dialogflow::V2::Intents::BatchUpdateIntents BatchUpdateIntents}, in order to make this
+        #     intent a followup intent.
         #
         #     It identifies the parent followup intent.
         #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.

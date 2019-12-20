@@ -17,6 +17,59 @@ module Google
   module Cloud
     module Dialogflow
       module V2
+        # Hints for the speech recognizer to help with recognition in a specific
+        # conversation state.
+        # @!attribute [rw] phrases
+        #   @return [Array<String>]
+        #     Optional. A list of strings containing words and phrases that the speech
+        #     recognizer should recognize with higher likelihood.
+        #
+        #     This list can be used to:
+        #     * improve accuracy for words and phrases you expect the user to say,
+        #       e.g. typical commands for your Dialogflow agent
+        #     * add additional words to the speech recognizer vocabulary
+        #     * ...
+        #
+        #     See the [Cloud Speech
+        #     documentation](https://cloud.google.com/speech-to-text/quotas) for usage
+        #     limits.
+        # @!attribute [rw] boost
+        #   @return [Float]
+        #     Optional. Boost for this context compared to other contexts:
+        #     * If the boost is positive, Dialogflow will increase the probability that
+        #       the phrases in this context are recognized over similar sounding phrases.
+        #     * If the boost is unspecified or non-positive, Dialogflow will not apply
+        #       any boost.
+        #
+        #     Dialogflow recommends that you use boosts in the range (0, 20] and that you
+        #     find a value that fits your use case with binary search.
+        class SpeechContext; end
+
+        # Information for a word recognized by the speech recognizer.
+        # @!attribute [rw] word
+        #   @return [String]
+        #     The word this info is for.
+        # @!attribute [rw] start_offset
+        #   @return [Google::Protobuf::Duration]
+        #     Time offset relative to the beginning of the audio that corresponds to the
+        #     start of the spoken word. This is an experimental feature and the accuracy
+        #     of the time offset can vary.
+        # @!attribute [rw] end_offset
+        #   @return [Google::Protobuf::Duration]
+        #     Time offset relative to the beginning of the audio that corresponds to the
+        #     end of the spoken word. This is an experimental feature and the accuracy of
+        #     the time offset can vary.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     The Speech confidence between 0.0 and 1.0 for this word. A higher number
+        #     indicates an estimated greater likelihood that the recognized word is
+        #     correct. The default of 0.0 is a sentinel value indicating that confidence
+        #     was not set.
+        #
+        #     This field is not guaranteed to be fully stable over time for the same
+        #     audio input. Users should also not rely on it to always be provided.
+        class SpeechWordInfo; end
+
         # Instructs the speech recognizer how to process the audio content.
         # @!attribute [rw] audio_encoding
         #   @return [Google::Cloud::Dialogflow::V2::AudioEncoding]
@@ -35,6 +88,12 @@ module Google
         #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. Note that queries in
         #     the same session do not necessarily need to specify the same language.
+        # @!attribute [rw] enable_word_info
+        #   @return [true, false]
+        #     Optional. If `true`, Dialogflow returns {Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
+        #     {Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult} with information about the recognized speech
+        #     words, e.g. start and end time offsets. If false or unspecified, Speech
+        #     doesn't return any word-level information.
         # @!attribute [rw] phrase_hints
         #   @return [Array<String>]
         #     Optional. A list of strings containing words and phrases that the speech
@@ -42,6 +101,30 @@ module Google
         #
         #     See [the Cloud Speech
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
+        #     for more details.
+        #
+        #     This field is deprecated. Please use [speech_contexts]() instead. If you
+        #     specify both [phrase_hints]() and [speech_contexts](), Dialogflow will
+        #     treat the [phrase_hints]() as a single additional [SpeechContext]().
+        # @!attribute [rw] speech_contexts
+        #   @return [Array<Google::Cloud::Dialogflow::V2::SpeechContext>]
+        #     Optional. Context information to assist speech recognition.
+        #
+        #     See [the Cloud Speech
+        #     documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
+        #     for more details.
+        # @!attribute [rw] model
+        #   @return [String]
+        #     Optional. Which Speech model to select for the given request. Select the
+        #     model best suited to your domain to get best results. If a model is not
+        #     explicitly specified, then we auto-select a model based on the parameters
+        #     in the InputAudioConfig.
+        #     If enhanced speech model is enabled for the agent and an enhanced
+        #     version of the specified model for the language does not exist, then the
+        #     speech is recognized using the standard version of the specified model.
+        #     Refer to
+        #     [Cloud Speech API
+        #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
         #     for more details.
         # @!attribute [rw] model_variant
         #   @return [Google::Cloud::Dialogflow::V2::SpeechModelVariant]
