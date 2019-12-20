@@ -1,5 +1,11 @@
 # Release History
 
+### 0.35.2 / 2019-12-19
+
+#### Documentation
+
+* Update spelling of "part-of-speech"
+
 ### 0.35.1 / 2019-11-06
 
 #### Bug Fixes
