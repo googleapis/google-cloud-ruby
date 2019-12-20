@@ -78,6 +78,15 @@ module Google
           # @!attribute [rw] resource_owners
           #   @return [Array<String>]
           #     Owners of the Google Cloud resource.
+          # @!attribute [rw] resource_display_name
+          #   @return [String]
+          #     The user defined display name for this resource.
+          # @!attribute [rw] resource_parent_display_name
+          #   @return [String]
+          #     The user defined display name for the parent of this resource.
+          # @!attribute [rw] resource_project_display_name
+          #   @return [String]
+          #     The user defined display name for the project of this resource.
           class SecurityCenterProperties; end
 
           # IAM Policy information associated with the GCP resource described by the

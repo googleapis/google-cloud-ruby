@@ -112,9 +112,12 @@ module Google
         #     * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
         #     * security_marks.marks: `=`, `:`
         #     * security_center_properties.resource_name: `=`, `:`
+        #     * security_center_properties.resource_display_name: `=`, `:`
         #     * security_center_properties.resource_type: `=`, `:`
         #     * security_center_properties.resource_parent: `=`, `:`
+        #     * security_center_properties.resource_parent_display_name: `=`, `:`
         #     * security_center_properties.resource_project: `=`, `:`
+        #     * security_center_properties.resource_project_display_name: `=`, `:`
         #     * security_center_properties.resource_owners: `=`, `:`
         #
         #     For example, `resource_properties.size = 100` is a valid filter string.
@@ -128,12 +131,16 @@ module Google
         #     The following fields are supported when compare_duration is not set:
         #
         #     * security_center_properties.resource_project
+        #     * security_center_properties.resource_project_display_name
         #     * security_center_properties.resource_type
         #     * security_center_properties.resource_parent
+        #     * security_center_properties.resource_parent_display_name
         #
         #     The following fields are supported when compare_duration is set:
         #
         #     * security_center_properties.resource_type
+        #     * security_center_properties.resource_project_display_name
+        #     * security_center_properties.resource_parent_display_name
         # @!attribute [rw] compare_duration
         #   @return [Google::Protobuf::Duration]
         #     When compare_duration is set, the GroupResult's "state_change" property is
@@ -418,9 +425,12 @@ module Google
         #     * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
         #     * security_marks.marks: `=`, `:`
         #     * security_center_properties.resource_name: `=`, `:`
+        #     * security_center_properties.resource_display_name: `=`, `:`
         #     * security_center_properties.resource_type: `=`, `:`
         #     * security_center_properties.resource_parent: `=`, `:`
+        #     * security_center_properties.resource_parent_display_name: `=`, `:`
         #     * security_center_properties.resource_project: `=`, `:`
+        #     * security_center_properties.resource_project_display_name: `=`, `:`
         #     * security_center_properties.resource_owners: `=`, `:`
         #
         #     For example, `resource_properties.size = 100` is a valid filter string.
@@ -441,8 +451,11 @@ module Google
         #     resource_properties
         #     security_marks.marks
         #     security_center_properties.resource_name
+        #     security_center_properties.resource_display_name
         #     security_center_properties.resource_parent
+        #     security_center_properties.resource_parent_display_name
         #     security_center_properties.resource_project
+        #     security_center_properties.resource_project_display_name
         #     security_center_properties.resource_type
         # @!attribute [rw] read_time
         #   @return [Google::Protobuf::Timestamp]
@@ -678,7 +691,30 @@ module Google
           # @!attribute [rw] state_change
           #   @return [Google::Cloud::SecurityCenter::V1::ListFindingsResponse::ListFindingsResult::StateChange]
           #     State change of the finding between the points in time.
+          # @!attribute [rw] resource
+          #   @return [Google::Cloud::SecurityCenter::V1::ListFindingsResponse::ListFindingsResult::Resource]
+          #     Output only. Resource that is associated with this finding.
           class ListFindingsResult
+            # Information related to the Google Cloud Platform (GCP) resource that is
+            # associated with this finding.
+            # @!attribute [rw] name
+            #   @return [String]
+            #     The full resource name of the resource. See:
+            #     https://cloud.google.com/apis/design/resource_names#full_resource_name
+            # @!attribute [rw] project_name
+            #   @return [String]
+            #     The full resource name of project that the resource belongs to.
+            # @!attribute [rw] project_display_name
+            #   @return [String]
+            #     The human readable name of project that the resource belongs to.
+            # @!attribute [rw] parent_name
+            #   @return [String]
+            #     The full resource name of resource's parent.
+            # @!attribute [rw] parent_display_name
+            #   @return [String]
+            #     The human readable name of resource's parent.
+            class Resource; end
+
             # The change in state of the finding.
             #
             # When querying across two points in time this describes

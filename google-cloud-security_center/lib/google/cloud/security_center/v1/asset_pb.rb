@@ -4,11 +4,11 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/security_center/v1/security_marks_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.securitycenter.v1.Asset" do
     optional :name, :string, 1
@@ -25,6 +25,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :resource_parent, :string, 3
     optional :resource_project, :string, 4
     repeated :resource_owners, :string, 5
+    optional :resource_display_name, :string, 6
+    optional :resource_parent_display_name, :string, 7
+    optional :resource_project_display_name, :string, 8
   end
   add_message "google.cloud.securitycenter.v1.Asset.IamPolicy" do
     optional :policy_blob, :string, 1

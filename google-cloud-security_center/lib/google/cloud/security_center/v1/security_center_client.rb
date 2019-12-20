@@ -701,12 +701,16 @@ module Google
           #   The following fields are supported when compare_duration is not set:
           #
           #   * security_center_properties.resource_project
+          #   * security_center_properties.resource_project_display_name
           #   * security_center_properties.resource_type
           #   * security_center_properties.resource_parent
+          #   * security_center_properties.resource_parent_display_name
           #
           #   The following fields are supported when compare_duration is set:
           #
           #   * security_center_properties.resource_type
+          #   * security_center_properties.resource_project_display_name
+          #   * security_center_properties.resource_parent_display_name
           # @param filter [String]
           #   Expression that defines the filter to apply across assets.
           #   The expression is a list of zero or more restrictions combined via logical
@@ -755,9 +759,12 @@ module Google
           #   * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
           #   * security_marks.marks: `=`, `:`
           #   * security_center_properties.resource_name: `=`, `:`
+          #   * security_center_properties.resource_display_name: `=`, `:`
           #   * security_center_properties.resource_type: `=`, `:`
           #   * security_center_properties.resource_parent: `=`, `:`
+          #   * security_center_properties.resource_parent_display_name: `=`, `:`
           #   * security_center_properties.resource_project: `=`, `:`
+          #   * security_center_properties.resource_project_display_name: `=`, `:`
           #   * security_center_properties.resource_owners: `=`, `:`
           #
           #   For example, `resource_properties.size = 100` is a valid filter string.
@@ -1079,9 +1086,12 @@ module Google
           #   * resource_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
           #   * security_marks.marks: `=`, `:`
           #   * security_center_properties.resource_name: `=`, `:`
+          #   * security_center_properties.resource_display_name: `=`, `:`
           #   * security_center_properties.resource_type: `=`, `:`
           #   * security_center_properties.resource_parent: `=`, `:`
+          #   * security_center_properties.resource_parent_display_name: `=`, `:`
           #   * security_center_properties.resource_project: `=`, `:`
+          #   * security_center_properties.resource_project_display_name: `=`, `:`
           #   * security_center_properties.resource_owners: `=`, `:`
           #
           #   For example, `resource_properties.size = 100` is a valid filter string.
@@ -1101,8 +1111,11 @@ module Google
           #   resource_properties
           #   security_marks.marks
           #   security_center_properties.resource_name
+          #   security_center_properties.resource_display_name
           #   security_center_properties.resource_parent
+          #   security_center_properties.resource_parent_display_name
           #   security_center_properties.resource_project
+          #   security_center_properties.resource_project_display_name
           #   security_center_properties.resource_type
           # @param read_time [Google::Protobuf::Timestamp | Hash]
           #   Time used as a reference point when filtering assets. The filter is limited
