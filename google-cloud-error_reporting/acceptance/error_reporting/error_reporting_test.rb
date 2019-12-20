@@ -41,7 +41,7 @@ describe Google::Cloud::ErrorReporting, :error_reporting do
     error_group_stats = nil
     wait_until do
       response = @error_stats_vtk_client.list_group_stats formatted_project,
-                                                          time_range,
+                                                          time_range: time_range,
                                                           order: sort_order,
                                                           service_filter: service_filter
       error_group_stats = response.page.response.error_group_stats

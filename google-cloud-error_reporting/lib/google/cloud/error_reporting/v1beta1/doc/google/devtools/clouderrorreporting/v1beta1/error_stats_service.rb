@@ -20,7 +20,7 @@ module Google
         # Specifies a set of `ErrorGroupStats` to return.
         # @!attribute [rw] project_name
         #   @return [String]
-        #     [Required] The resource name of the Google Cloud Platform project. Written
+        #     Required. The resource name of the Google Cloud Platform project. Written
         #     as <code>projects/</code> plus the
         #     <a href="https://support.google.com/cloud/answer/6158840">Google Cloud
         #     Platform project ID</a>.
@@ -28,44 +28,45 @@ module Google
         #     Example: <code>projects/my-project-123</code>.
         # @!attribute [rw] group_id
         #   @return [Array<String>]
-        #     [Optional] List all <code>ErrorGroupStats</code> with these IDs.
+        #     Optional. List all <code>ErrorGroupStats</code> with these IDs.
         # @!attribute [rw] service_filter
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter]
-        #     [Optional] List only <code>ErrorGroupStats</code> which belong to a service
+        #     Optional. List only <code>ErrorGroupStats</code> which belong to a service
         #     context that matches the filter.
         #     Data for all service contexts is returned if this field is not specified.
         # @!attribute [rw] time_range
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange]
-        #     [Optional] List data for the given time range.
-        #     If not set a default time range is used. The field time_range_begin
-        #     in the response will specify the beginning of this time range.
+        #     Optional. List data for the given time range.
+        #     If not set, a default time range is used. The field
+        #     <code>time_range_begin</code> in the response will specify the beginning
+        #     of this time range.
         #     Only <code>ErrorGroupStats</code> with a non-zero count in the given time
-        #     range are returned, unless the request contains an explicit group_id list.
-        #     If a group_id list is given, also <code>ErrorGroupStats</code> with zero
-        #     occurrences are returned.
+        #     range are returned, unless the request contains an explicit
+        #     <code>group_id</code> list. If a <code>group_id</code> list is given, also
+        #     <code>ErrorGroupStats</code> with zero occurrences are returned.
         # @!attribute [rw] timed_count_duration
         #   @return [Google::Protobuf::Duration]
-        #     [Optional] The preferred duration for a single returned `TimedCount`.
+        #     Optional. The preferred duration for a single returned `TimedCount`.
         #     If not set, no timed counts are returned.
         # @!attribute [rw] alignment
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::TimedCountAlignment]
-        #     [Optional] The alignment of the timed counts to be returned.
+        #     Optional. The alignment of the timed counts to be returned.
         #     Default is `ALIGNMENT_EQUAL_AT_END`.
         # @!attribute [rw] alignment_time
         #   @return [Google::Protobuf::Timestamp]
-        #     [Optional] Time where the timed counts shall be aligned if rounded
+        #     Optional. Time where the timed counts shall be aligned if rounded
         #     alignment is chosen. Default is 00:00 UTC.
         # @!attribute [rw] order
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ErrorGroupOrder]
-        #     [Optional] The sort order in which the results are returned.
+        #     Optional. The sort order in which the results are returned.
         #     Default is `COUNT_DESC`.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     [Optional] The maximum number of results to return per response.
+        #     Optional. The maximum number of results to return per response.
         #     Default is 20.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     [Optional] A `next_page_token` provided by a previous response. To view
+        #     Optional. A `next_page_token` provided by a previous response. To view
         #     additional results, pass this token along with the identical query
         #     parameters as the first request.
         class ListGroupStatsRequest; end
@@ -163,30 +164,30 @@ module Google
         # Specifies a set of error events to return.
         # @!attribute [rw] project_name
         #   @return [String]
-        #     [Required] The resource name of the Google Cloud Platform project. Written
+        #     Required. The resource name of the Google Cloud Platform project. Written
         #     as `projects/` plus the
         #     [Google Cloud Platform project
         #     ID](https://support.google.com/cloud/answer/6158840).
         #     Example: `projects/my-project-123`.
         # @!attribute [rw] group_id
         #   @return [String]
-        #     [Required] The group for which events shall be returned.
+        #     Required. The group for which events shall be returned.
         # @!attribute [rw] service_filter
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::ServiceContextFilter]
-        #     [Optional] List only ErrorGroups which belong to a service context that
+        #     Optional. List only ErrorGroups which belong to a service context that
         #     matches the filter.
         #     Data for all service contexts is returned if this field is not specified.
         # @!attribute [rw] time_range
         #   @return [Google::Devtools::Clouderrorreporting::V1beta1::QueryTimeRange]
-        #     [Optional] List only data for the given time range.
+        #     Optional. List only data for the given time range.
         #     If not set a default time range is used. The field time_range_begin
         #     in the response will specify the beginning of this time range.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     [Optional] The maximum number of results to return per response.
+        #     Optional. The maximum number of results to return per response.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     [Optional] A `next_page_token` provided by a previous response.
+        #     Optional. A `next_page_token` provided by a previous response.
         class ListEventsRequest; end
 
         # Contains a set of requested error events.
@@ -242,22 +243,22 @@ module Google
         # If a field is unset or empty, it matches arbitrary values.
         # @!attribute [rw] service
         #   @return [String]
-        #     [Optional] The exact value to match against
+        #     Optional. The exact value to match against
         #     [`ServiceContext.service`](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
         # @!attribute [rw] version
         #   @return [String]
-        #     [Optional] The exact value to match against
+        #     Optional. The exact value to match against
         #     [`ServiceContext.version`](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
         # @!attribute [rw] resource_type
         #   @return [String]
-        #     [Optional] The exact value to match against
+        #     Optional. The exact value to match against
         #     [`ServiceContext.resource_type`](https://cloud.google.com/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.resource_type).
         class ServiceContextFilter; end
 
         # Deletes all events in the project.
         # @!attribute [rw] project_name
         #   @return [String]
-        #     [Required] The resource name of the Google Cloud Platform project. Written
+        #     Required. The resource name of the Google Cloud Platform project. Written
         #     as `projects/` plus the
         #     [Google Cloud Platform project
         #     ID](https://support.google.com/cloud/answer/6158840).

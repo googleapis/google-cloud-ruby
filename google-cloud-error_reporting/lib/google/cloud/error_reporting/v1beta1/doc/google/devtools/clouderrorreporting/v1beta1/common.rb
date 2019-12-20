@@ -70,6 +70,8 @@ module Google
         #   @return [String]
         #     Represents the source code version that the developer provided,
         #     which could represent a version label or a Git SHA-1 hash, for example.
+        #     For App Engine standard environment, the version is set to the version of
+        #     the app.
         # @!attribute [rw] resource_type
         #   @return [String]
         #     Type of the MonitoredResource. List of possible values:
@@ -103,8 +105,7 @@ module Google
         #     report the error, usually the place where it was logged.
         #     For a logged exception this would be the source line where the
         #     exception is logged, usually close to the place where it was
-        #     caught. This value is in contrast to `Exception.cause_location`,
-        #     which describes the source line where the exception was thrown.
+        #     caught.
         class ErrorContext; end
 
         # HTTP request data that is related to a reported error.
@@ -134,11 +135,10 @@ module Google
         #     in the error report.
         class HttpRequestContext; end
 
-        # Indicates a location in the source code of the service for which
-        # errors are reported.
-        # This data should be provided by the application when reporting an error,
-        # unless the error report has been generated automatically from Google App
-        # Engine logs. All fields are optional.
+        # Indicates a location in the source code of the service for which errors are
+        # reported. `functionName` must be provided by the application when reporting
+        # an error, unless the error report contains a `message` with a supported
+        # exception stack trace. All fields are optional for the later case.
         # @!attribute [rw] file_path
         #   @return [String]
         #     The source code filename, which can include a truncated relative
