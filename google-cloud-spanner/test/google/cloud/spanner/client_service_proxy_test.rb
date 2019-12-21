@@ -286,7 +286,6 @@ describe Google::Cloud::Spanner::ClientServiceProxy, :mock_spanner do
       @mock.verify
     end
 
-    focus
     it "add endpoint uri to rollback" do
       api_call_stub = proc do |session_name, transaction_id, endpoint_uri: nil|
         session_name.must_equal session_path(instance_id, database_id, session_id)
@@ -301,7 +300,6 @@ describe Google::Cloud::Spanner::ClientServiceProxy, :mock_spanner do
       @mock.verify
     end
 
-    focus
     it "add endpoint uri to create_snapshot" do
       timestamp = Time.now
       api_call_stub = proc do |session_name, strong: nil, timestamp: nil,
