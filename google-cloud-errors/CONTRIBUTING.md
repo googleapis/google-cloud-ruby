@@ -44,7 +44,7 @@ there is a small amount of setup:
 4. Install the Google Cloud dependencies.
 
    ```sh
-   $ cd google-cloud-core/
+   $ cd google-cloud-errors/
    $ bundle exec rake bundleupdate
    ```
 
@@ -57,7 +57,7 @@ described in the {file:AUTHENTICATION.md Authentication Guide}. An IRB console
 can be created with:
 
 ```sh
-$ cd google-cloud-core/
+$ cd google-cloud-errors/
 $ bundle exec rake console
 ```
 
@@ -70,7 +70,7 @@ To run the unit tests, documentation tests, and code style checks together for a
 package:
 
 ``` sh
-$ cd google-cloud-core/
+$ cd google-cloud-errors/
 $ bundle exec rake ci
 ```
 
@@ -88,7 +88,7 @@ including [specs](https://github.com/seattlerb/minitest#specs),
 To run the Google Cloud unit tests:
 
 ``` sh
-$ cd google-cloud-core/
+$ cd google-cloud-errors/
 $ bundle exec rake test
 ```
 
@@ -105,7 +105,7 @@ project's unit test library, [minitest](https://github.com/seattlerb/minitest).
 To run the Google Cloud documentation tests:
 
 ``` sh
-$ cd google-cloud-core/
+$ cd google-cloud-errors/
 $ bundle exec rake doctest
 ```
 
@@ -130,7 +130,7 @@ on seattle-style:
 You can check your code against these rules by running Rubocop like so:
 
 ```sh
-$ cd google-cloud-core/
+$ cd google-cloud-errors/
 $ bundle exec rake rubocop
 ```
 
