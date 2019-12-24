@@ -1,14 +1,14 @@
-require File.expand_path("lib/google/cloud/core/version", __dir__)
+require File.expand_path("lib/google/cloud/errors/version", __dir__)
 
 Gem::Specification.new do |gem|
-  gem.name          = "google-cloud-core"
-  gem.version       = Google::Cloud::Core::VERSION
+  gem.name          = "google-cloud-errors"
+  gem.version       = Google::Cloud::Errors::VERSION
 
   gem.authors       = ["Mike Moore", "Chris Smith"]
   gem.email         = ["mike@blowmage.com", "quartzmo@gmail.com"]
-  gem.description   = "google-cloud-core is the internal shared library for google-cloud-ruby."
-  gem.summary       = "Internal shared library for google-cloud-ruby"
-  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-core"
+  gem.description   = "google-cloud-errors defines error classes for google-cloud-ruby."
+  gem.summary       = "Error classes for google-cloud-ruby"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-errors"
   gem.license       = "Apache-2.0"
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +
@@ -17,9 +17,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 2.4"
-
-  gem.add_dependency "google-cloud-env", "~> 1.0"
-  gem.add_dependency "google-cloud-errors", "~> 1.0"
 
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "google-style", "~> 1.24.0"

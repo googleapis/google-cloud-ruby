@@ -21,6 +21,7 @@ gem "rack", ">= 0.1"
 
 gem "google-cloud-core", path: "google-cloud-core"
 gem "google-cloud-env", path: "google-cloud-env"
+gem "google-cloud-errors", path: "google-cloud-errors"
 gem "google-cloud-asset", path: "google-cloud-asset"
 gem "google-cloud-automl", path: "google-cloud-automl"
 gem "google-cloud-bigquery", path: "google-cloud-bigquery"
