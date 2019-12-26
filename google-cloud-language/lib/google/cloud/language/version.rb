@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Language
-      VERSION = "0.35.2".freeze
+      VERSION = "0.99.0".freeze
     end
   end
 end

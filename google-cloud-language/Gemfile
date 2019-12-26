@@ -2,6 +2,9 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "gapic-common", github: "googleapis/gapic-generator-ruby"
+gem "google-cloud-language-v1", path: "../google-cloud-language-v1"
+
 gem "rake", "~> 12.3"
 
 # Pin minitest to 5.11.x to avoid warnings emitted by 5.12.

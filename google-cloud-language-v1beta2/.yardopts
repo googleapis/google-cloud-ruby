@@ -1,0 +1,11 @@
+--no-private
+--title=Google Cloud Language V1beta2
+--exclude _pb\.rb$
+--markup markdown
+--markup-provider redcarpet
+
+./lib/**/*.rb
+./proto_docs/**/*.rb
+-
+README.md
+LICENSE.md

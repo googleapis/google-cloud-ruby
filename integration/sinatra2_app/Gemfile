@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 gem "sinatra", "~> 2.0"
 
+gem "gapic-common", github: "googleapis/gapic-generator-ruby"
+
 gem "google-cloud-bigquery", path: "../../google-cloud-bigquery"
 gem "google-cloud-core", path: "../../google-cloud-core"
 gem "google-cloud-debugger", path: "../../google-cloud-debugger"
@@ -11,6 +13,7 @@ gem "google-cloud-debugger", path: "../../google-cloud-debugger"
 gem "google-cloud-dns", path: "../../google-cloud-dns"
 gem "google-cloud-error_reporting", path: "../../google-cloud-error_reporting"
 gem "google-cloud-language", path: "../../google-cloud-language"
+gem "google-cloud-language-v1", path: "../../google-cloud-language-v1"
 gem "google-cloud-logging", path: "../../google-cloud-logging"
 gem "google-cloud-monitoring", path: "../../google-cloud-monitoring"
 gem "google-cloud-pubsub", path: "../../google-cloud-pubsub"
