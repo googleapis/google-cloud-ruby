@@ -48,8 +48,13 @@ module Google
           return @endpoint_uri if @endpoint_uri
 
           if resource_based_routing_enabled?
-            instance = @project.instance @instance_id, fields: ["endpoint_uris"]
-            @endpoint_uri = instance.endpoint_uris.first if instance
+            begin
+              instance = @project.instance @instance_id, fields: ["endpoint_uris"]
+              @endpoint_uri = instance.endpoint_uris.first if instance
+            rescue Google::Cloud::PermissionDeniedError
+              warn "To use resource based routing please add" \
+                "'spanner.instances.get' permission."
+            end
           end
 
           @endpoint_uri ||= host
