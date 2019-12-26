@@ -69,39 +69,39 @@ desc "Run the google-cloud-language-v1 acceptance tests."
 task :acceptance, :project, :keyfile do |_t, args|
   project = args[:project]
   project ||=
-    ENV["V1_TEST_PROJECT"] ||
+    ENV["LANGUAGE_TEST_PROJECT"] ||
     ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
   keyfile ||=
-    ENV["V1_TEST_KEYFILE"] ||
+    ENV["LANGUAGE_TEST_KEYFILE"] ||
     ENV["GCLOUD_TEST_KEYFILE"]
   if keyfile
     keyfile = File.read keyfile
   else
     keyfile ||=
-      ENV["V1_TEST_KEYFILE_JSON"] ||
+      ENV["LANGUAGE_TEST_KEYFILE_JSON"] ||
       ENV["GCLOUD_TEST_KEYFILE_JSON"]
   end
   if project.nil? || keyfile.nil?
     raise "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or " \
-          "V1_TEST_PROJECT=test123 " \
-          "V1_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+          "LANGUAGE_TEST_PROJECT=test123 " \
+          "LANGUAGE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
 
-  ENV["V1_CREDENTIALS"] = nil
-  ENV["V1_KEYFILE"] = nil
+  ENV["LANGUAGE_CREDENTIALS"] = nil
+  ENV["LANGUAGE_KEYFILE"] = nil
   ENV["GOOGLE_CLOUD_CREDENTIALS"] = nil
   ENV["GOOGLE_CLOUD_KEYFILE"] = nil
   ENV["GCLOUD_KEYFILE"] = nil
 
-  ENV["V1_CREDENTIALS_JSON"] = nil
-  ENV["V1_KEYFILE_JSON"] = nil
+  ENV["LANGUAGE_CREDENTIALS_JSON"] = nil
+  ENV["LANGUAGE_KEYFILE_JSON"] = nil
   ENV["GOOGLE_CLOUD_CREDENTIALS_JSON"] = nil
   ENV["GOOGLE_CLOUD_KEYFILE_JSON"] = nil
   ENV["GCLOUD_KEYFILE_JSON"] = nil
 
-  ENV["V1_PROJECT"] = project
-  ENV["V1_CREDENTIALS_JSON"] = keyfile
+  ENV["LANGUAGE_PROJECT"] = project
+  ENV["LANGUAGE_CREDENTIALS_JSON"] = keyfile
 
   Rake::Task["acceptance:run"].invoke
 end
