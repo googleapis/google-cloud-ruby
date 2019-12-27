@@ -42,6 +42,13 @@ module Google
       #     Fields referenced in the mask, but not present in the input document, are
       #     deleted from the document on the server.
       #     The field paths in this mask must not contain a reserved field name.
+      # @!attribute [rw] update_transforms
+      #   @return [Array<Google::Firestore::V1::DocumentTransform::FieldTransform>]
+      #     The transforms to perform after update.
+      #
+      #     This field can be set only when the operation is `update`. If present, this
+      #     write is equivalent to performing `update` and `transform` to the same
+      #     document atomically and in order.
       # @!attribute [rw] current_document
       #   @return [Google::Firestore::V1::Precondition]
       #     An optional precondition on the document.
