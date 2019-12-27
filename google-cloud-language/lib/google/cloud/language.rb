@@ -13,6 +13,8 @@
 # limitations under the License.
 
 
+require "google-cloud-language"
+
 module Google
   module Cloud
     ##
