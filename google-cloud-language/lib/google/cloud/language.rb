@@ -35,7 +35,7 @@ module Google
                        .first
         service_module = package_module.const_get service_name
 
-        service_module.new(&block)
+        service_module.const_get("Client").new(&block)
       end
 
       ##
