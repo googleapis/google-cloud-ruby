@@ -1,0 +1,8 @@
+{
+    "name": "secretmanager",
+    "language": "ruby",
+    "distribution_name": "google-cloud-secretmanager",
+    "module_name": "SecretManager",
+    "module_name_credentials": "SecretManager::V1beta1",
+    "env_var_prefix": "SECRETMANAGER"
+}

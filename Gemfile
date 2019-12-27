@@ -19,6 +19,8 @@ gem "actionpack", "~> 5.0"
 gem "railties", "~> 5.0"
 gem "rack", ">= 0.1"
 
+gem "gapic-common", github: "googleapis/gapic-generator-ruby"
+
 gem "google-cloud-core", path: "google-cloud-core"
 gem "google-cloud-env", path: "google-cloud-env"
 gem "google-cloud-errors", path: "google-cloud-errors"
@@ -49,6 +51,8 @@ gem "google-cloud-recaptcha_enterprise", path: "google-cloud-recaptcha_enterpris
 gem "google-cloud-redis", path: "google-cloud-redis"
 gem "google-cloud-resource_manager", path: "google-cloud-resource_manager"
 gem "google-cloud-scheduler", path: "google-cloud-scheduler"
+gem "google-cloud-secretmanager", path: "google-cloud-secretmanager"
+gem "google-cloud-secretmanager-v1beta1", path: "google-cloud-secretmanager-v1beta1"
 gem "google-cloud-security_center", path: "google-cloud-security_center"
 gem "google-cloud-spanner", path: "google-cloud-spanner"
 gem "google-cloud-speech", path: "google-cloud-speech"
