@@ -1,0 +1,13 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "google-cloud-secret_manager.gemspec"
+    - "lib/google/**/*"
+    - "Rakefile"
+    - "test/**/*"
+    - "acceptance/**/*"
+
+Documentation:
+  Enabled: false

@@ -1,0 +1,116 @@
+{
+  "updateTime": "2019-12-27T04:41:52.866203Z",
+  "sources": [
+    {
+      "generator": {
+        "name": "artman",
+        "version": "0.42.3",
+        "dockerImage": "googleapis/artman@sha256:feed210b5723c6f524b52ef6d7740a030f2d1a8f7c29a71c5e5b4481ceaad7f5"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "2c28f646ca77b1d57550368be22aa388adde2e66",
+        "internalRef": "287250665"
+      }
+    },
+    {
+      "template": {
+        "name": "ruby_library",
+        "origin": "synthtool.gcp",
+        "version": "2019.10.17"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "secrets",
+        "apiVersion": "v1beta1",
+        "language": "ruby",
+        "generator": "gapic",
+        "config": "google/cloud/secrets/artman_secretmanager_v1beta1.yaml"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "AUTHENTICATION.md"
+    },
+    {
+      "path": ".yardopts"
+    },
+    {
+      "path": "google-cloud-secret_manager.gemspec"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "test/google/cloud/secret_manager/v1beta1/secret_manager_service_client_test.rb"
+    },
+    {
+      "path": "__pycache__/synth.cpython-36.pyc"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/service_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/secret_manager_service_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/service_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/secret_manager_service_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/resources_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/doc/google/cloud/secrets/v1beta1/resources.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/doc/google/cloud/secrets/v1beta1/service.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/doc/google/protobuf/empty.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/doc/google/protobuf/timestamp.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/doc/google/protobuf/field_mask.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/doc/google/iam/v1/iam_policy.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/doc/google/iam/v1/policy.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/doc/google/iam/v1/options.rb"
+    },
+    {
+      "path": "lib/google/cloud/secret_manager/v1beta1/doc/google/type/expr.rb"
+    }
+  ]
+}
