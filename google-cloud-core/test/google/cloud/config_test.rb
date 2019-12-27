@@ -387,6 +387,34 @@ describe Google::Cloud::Config do
     end
   end
 
+  describe "#to_s!" do
+    it "builds without warnings" do
+      -> () {
+        checked_config.to_s!.must_equal "<Config: opt1_int=1 sub1=<Config: opt2_sym=:hi sub2=<Config: opt3_bool=true opt3_bool_nil=true opt3_enum=:one opt3_regex=\"hi\" opt3_class=\"hi\" opt3_default=nil>>>"
+      }.must_be_silent
+    end
+
+    it "is aliased as inspect" do
+      -> () {
+        checked_config.inspect.must_equal "<Config: opt1_int=1 sub1=<Config: opt2_sym=:hi sub2=<Config: opt3_bool=true opt3_bool_nil=true opt3_enum=:one opt3_regex=\"hi\" opt3_class=\"hi\" opt3_default=nil>>>"
+      }.must_be_silent
+    end
+  end
+
+  describe "#respond_to?" do
+    it "is an alias of field" do
+      checked_config.field?(:opt1_int).must_equal true
+      checked_config.respond_to?(:opt1_int).must_equal true
+      checked_config.respond_to?(:opt1_int).must_equal checked_config.field?(:opt1_int)
+
+      checked_config.delete! :opt1_int
+
+      checked_config.field?(:opt1_int).must_equal false
+      checked_config.respond_to?(:opt1_int).must_equal false
+      checked_config.respond_to?(:opt1_int).must_equal checked_config.field?(:opt1_int)
+    end
+  end
+
   describe "shared config" do
     after {
       Google::Cloud.configure.reset!
