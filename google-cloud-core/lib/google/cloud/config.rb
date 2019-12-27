@@ -500,6 +500,7 @@ module Google
                       :instance_eval,
                       :instance_exec,
                       :method_missing,
+                      :send,
                       :singleton_method_added,
                       :singleton_method_removed,
                       :singleton_method_undefined].freeze
