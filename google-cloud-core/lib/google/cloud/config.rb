@@ -336,6 +336,7 @@ module Google
       def field? key
         @validators[key.to_sym].is_a? ::Proc
       end
+      alias respond_to? field?
 
       ##
       # Check if the given key has been explicitly added as a subconfig name.
@@ -395,11 +396,12 @@ module Google
       def to_s!
         elems = @validators.keys.map do |k|
           v = @values[k]
-          vstr = Config.config?(v) ? v.to_s! : value.inspect
+          vstr = Config.config?(v) ? v.to_s! : v.inspect
           " #{k}=#{vstr}"
         end
         "<Config:#{elems.join}>"
       end
+      alias inspect to_s!
 
       ##
       # Returns a nested hash representation of this configuration state,
@@ -497,6 +499,8 @@ module Google
                       :initialize,
                       :instance_eval,
                       :instance_exec,
+                      :inspect,
+                      :send,
                       :method_missing,
                       :singleton_method_added,
                       :singleton_method_removed,
