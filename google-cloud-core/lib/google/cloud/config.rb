@@ -400,6 +400,7 @@ module Google
         end
         "<Config:#{elems.join}>"
       end
+      alias inspect to_s!
 
       ##
       # Returns a nested hash representation of this configuration state,
@@ -495,6 +496,7 @@ module Google
       #
       ILLEGAL_KEYS = [:add_options,
                       :initialize,
+                      :inspect,
                       :instance_eval,
                       :instance_exec,
                       :method_missing,
