@@ -395,7 +395,7 @@ module Google
       def to_s!
         elems = @validators.keys.map do |k|
           v = @values[k]
-          vstr = Config.config?(v) ? v.to_s! : value.inspect
+          vstr = Config.config?(v) ? v.to_s! : v.inspect
           " #{k}=#{vstr}"
         end
         "<Config:#{elems.join}>"
