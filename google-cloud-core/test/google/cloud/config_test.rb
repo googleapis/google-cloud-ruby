@@ -401,6 +401,20 @@ describe Google::Cloud::Config do
     end
   end
 
+  describe "#respond_to?" do
+    it "is an alias of field" do
+      checked_config.field?(:opt1_int).must_equal true
+      checked_config.respond_to?(:opt1_int).must_equal true
+      checked_config.respond_to?(:opt1_int).must_equal checked_config.field?(:opt1_int)
+
+      checked_config.delete! :opt1_int
+
+      checked_config.field?(:opt1_int).must_equal false
+      checked_config.respond_to?(:opt1_int).must_equal false
+      checked_config.respond_to?(:opt1_int).must_equal checked_config.field?(:opt1_int)
+    end
+  end
+
   describe "shared config" do
     after {
       Google::Cloud.configure.reset!

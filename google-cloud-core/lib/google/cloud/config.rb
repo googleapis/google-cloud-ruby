@@ -336,6 +336,7 @@ module Google
       def field? key
         @validators[key.to_sym].is_a? ::Proc
       end
+      alias respond_to? field?
 
       ##
       # Check if the given key has been explicitly added as a subconfig name.
