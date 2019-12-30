@@ -34,6 +34,8 @@ module Google
     # See {file:OVERVIEW.md Spanner Overview}.
     #
     module Spanner
+      # rubocop:disable Metrics/MethodLength
+
       ##
       # Creates a new object for connecting to the Spanner service.
       # Each call creates a new connection.
@@ -86,24 +88,18 @@ module Google
         emulator_host ||= configure.emulator_host
 
         if emulator_host
-          project_id = project_id.to_s # Always cast to a string
-          raise ArgumentError, "project_id is missing" if project_id.empty?
+          credentials = :this_channel_is_insecure
+          endpoint = emulator_host
+        else
+          unless credentials.is_a? Google::Auth::Credentials
+            credentials = Spanner::Credentials.new credentials, scope: scope
+          end
 
-          return Spanner::Project.new(
-            Spanner::Service.new(
-              project_id, :this_channel_is_insecure,
-              host: emulator_host, timeout: timeout, client_config: client_config
-            )
-          )
+          if credentials.respond_to? :project_id
+            project_id ||= credentials.project_id
+          end
         end
 
-        unless credentials.is_a? Google::Auth::Credentials
-          credentials = Spanner::Credentials.new credentials, scope: scope
-        end
-
-        if credentials.respond_to? :project_id
-          project_id ||= credentials.project_id
-        end
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
@@ -114,6 +110,8 @@ module Google
           )
         )
       end
+
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Configure the Google Cloud Spanner library.
