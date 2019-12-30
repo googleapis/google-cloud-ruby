@@ -64,6 +64,8 @@ module Google
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
+      # @param [String] emulator_host Spanner emulator host. Optional.
+      #   If the param is nil, uses the value of the `emulator_host` config.
       #
       # @return [Google::Cloud::Spanner::Project]
       #
@@ -73,13 +75,27 @@ module Google
       #   spanner = Google::Cloud::Spanner.new
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, endpoint: nil, project: nil, keyfile: nil
+                   client_config: nil, endpoint: nil, project: nil, keyfile: nil,
+                   emulator_host: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         client_config ||= configure.client_config
         endpoint      ||= configure.endpoint
         credentials   ||= (keyfile || default_credentials(scope: scope))
+        emulator_host ||= configure.emulator_host
+
+        if emulator_host
+          project_id = project_id.to_s # Always cast to a string
+          raise ArgumentError, "project_id is missing" if project_id.empty?
+
+          return Spanner::Project.new(
+            Spanner::Service.new(
+              project_id, :this_channel_is_insecure,
+              host: emulator_host, timeout: timeout, client_config: client_config
+            )
+          )
+        end
 
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Spanner::Credentials.new credentials, scope: scope
@@ -117,6 +133,8 @@ module Google
       #   behavior of the API client.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
+      # * `emulator_host` - (String) Host name of the emulator. Defaults to
+      #   `ENV["SPANNER_EMULATOR_HOST"]`.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Spanner library uses.
