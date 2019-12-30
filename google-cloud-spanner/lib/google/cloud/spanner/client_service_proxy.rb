@@ -53,7 +53,7 @@ module Google
               @endpoint_uri = instance.endpoint_uris.first if instance
             rescue Google::Cloud::PermissionDeniedError
               warn "To use resource based routing please add" \
-                "'spanner.instances.get' permission."
+                " 'spanner.instances.get' permission."
             end
           end
 

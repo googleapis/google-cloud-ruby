@@ -21,21 +21,21 @@ describe Google::Cloud::Spanner::ClientServiceProxy, :endpoint_uri, :mock_spanne
     ENV.delete "GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING"
   end
 
-  it "gets default endpoint uri" do
+  it "returns default endpoint uri" do
     client_service_proxy = Google::Cloud::Spanner::ClientServiceProxy.new \
       spanner, instance_id
     client_service_proxy.endpoint_uri.must_equal \
       Google::Cloud::Spanner::V1::SpannerClient::SERVICE_ADDRESS
   end
 
-  it "gets default endpoint uri if resource based routing disabled" do
+  it "returns default endpoint uri if resource based routing disabled" do
     client_service_proxy = Google::Cloud::Spanner::ClientServiceProxy.new \
       spanner, instance_id, enable_resource_based_routing: false
     client_service_proxy.endpoint_uri.must_equal \
       Google::Cloud::Spanner::V1::SpannerClient::SERVICE_ADDRESS
   end
 
-  it "gets endpoint uri if resource based routing enabled" do
+  it "returns endpoint uri if resource based routing enabled" do
     get_res = Google::Spanner::Admin::Instance::V1::Instance.new \
       name: instance_path(instance_id), endpoint_uris: ["test.host.com"]
     mock = Minitest::Mock.new
@@ -53,7 +53,7 @@ describe Google::Cloud::Spanner::ClientServiceProxy, :endpoint_uri, :mock_spanne
     mock.verify
   end
 
-  it "gets endpoint uri if resource based routing enabled using an environment variable" do
+  it "returns endpoint uri if resource based routing enabled using an environment variable" do
     ENV["GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING"] = "YES"
 
     get_res = Google::Spanner::Admin::Instance::V1::Instance.new \
@@ -73,7 +73,7 @@ describe Google::Cloud::Spanner::ClientServiceProxy, :endpoint_uri, :mock_spanne
     mock.verify
   end
 
-  it "gets default endpoint uri if resource based routing enabled and instance endpoint uris not present" do
+  it "returns default endpoint uri if resource based routing enabled and instance endpoint uris not present" do
     get_res = Google::Spanner::Admin::Instance::V1::Instance.new \
       name: instance_path(instance_id), endpoint_uris: []
     mock = Minitest::Mock.new
@@ -90,5 +90,24 @@ describe Google::Cloud::Spanner::ClientServiceProxy, :endpoint_uri, :mock_spanne
       Google::Cloud::Spanner::V1::SpannerClient::SERVICE_ADDRESS
 
     mock.verify
+  end
+
+  it "returns default endpoint uri if get instance permission denied" do
+    stub = OpenStruct.new(api_call_count: 0)
+
+    def stub.get_instance *args
+      self.api_call_count += 1
+      gax_error = Google::Gax::GaxError.new "permission denied"
+      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(7, "permission denied")
+      raise gax_error
+    end
+    spanner.service.mocked_instances = stub
+
+    client_service_proxy = Google::Cloud::Spanner::ClientServiceProxy.new \
+      spanner, instance_id, enable_resource_based_routing: true
+
+    client_service_proxy.endpoint_uri.must_equal \
+      Google::Cloud::Spanner::V1::SpannerClient::SERVICE_ADDRESS
+    stub.api_call_count.must_equal 1
   end
 end
