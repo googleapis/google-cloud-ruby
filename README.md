@@ -782,7 +782,7 @@ end
 - [google-cloud-spanner README](google-cloud-spanner/README.md)
 - [google-cloud-spanner API documentation](https://googleapis.dev/ruby/google-cloud-spanner/latest)
 - [google-cloud-spanner on RubyGems](https://rubygems.org/gems/google-cloud-spanner)
-- [Google Cloud Speech API documentation](https://cloud.google.com/spanner/docs)
+- [Google Cloud Spanner API documentation](https://cloud.google.com/spanner/docs)
 
 #### Quick Start
 
