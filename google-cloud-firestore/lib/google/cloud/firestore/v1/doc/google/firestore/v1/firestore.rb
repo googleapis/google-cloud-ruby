@@ -247,7 +247,8 @@ module Google
       #     request.
       # @!attribute [rw] commit_time
       #   @return [Google::Protobuf::Timestamp]
-      #     The time at which the commit occurred.
+      #     The time at which the commit occurred. Any read with an equal or greater
+      #     `read_time` is guaranteed to see the effects of the commit.
       class CommitResponse; end
 
       # The request for {Google::Firestore::V1::Firestore::Rollback Firestore::Rollback}.
@@ -381,7 +382,8 @@ module Google
       #     request.
       # @!attribute [rw] commit_time
       #   @return [Google::Protobuf::Timestamp]
-      #     The time at which the commit occurred.
+      #     The time at which the commit occurred. Any read with an equal or greater
+      #     `read_time` is guaranteed to see the effects of the write.
       class WriteResponse; end
 
       # A request for {Google::Firestore::V1::Firestore::Listen Firestore::Listen}
