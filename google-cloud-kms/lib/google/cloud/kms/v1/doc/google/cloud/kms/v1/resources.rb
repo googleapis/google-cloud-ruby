@@ -45,12 +45,12 @@ module Google
         #     The {Google::Cloud::Kms::V1::CryptoKey CryptoKey}'s primary version can be updated via
         #     {Google::Cloud::Kms::V1::KeyManagementService::UpdateCryptoKeyPrimaryVersion UpdateCryptoKeyPrimaryVersion}.
         #
-        #     All keys with {Google::Cloud::Kms::V1::CryptoKey#purpose purpose}
-        #     {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT} have a
+        #     Keys with {Google::Cloud::Kms::V1::CryptoKey#purpose purpose}
+        #     {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT} may have a
         #     primary. For other keys, this field will be omitted.
         # @!attribute [rw] purpose
         #   @return [Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose]
-        #     The immutable purpose of this {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+        #     Immutable. The immutable purpose of this {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
         #     Output only. The time at which this {Google::Cloud::Kms::V1::CryptoKey CryptoKey} was created.
@@ -72,7 +72,8 @@ module Google
         # @!attribute [rw] rotation_period
         #   @return [Google::Protobuf::Duration]
         #     {Google::Cloud::Kms::V1::CryptoKey#next_rotation_time next_rotation_time} will be advanced by this period when the service
-        #     automatically rotates a key. Must be at least one day.
+        #     automatically rotates a key. Must be at least 24 hours and at most
+        #     876,000 hours.
         #
         #     If {Google::Cloud::Kms::V1::CryptoKey#rotation_period rotation_period} is set, {Google::Cloud::Kms::V1::CryptoKey#next_rotation_time next_rotation_time} must also be set.
         #
@@ -408,12 +409,10 @@ module Google
         #     `projects/*/locations/*/keyRings/*/importJobs/*`.
         # @!attribute [rw] import_method
         #   @return [Google::Cloud::Kms::V1::ImportJob::ImportMethod]
-        #     Required and immutable. The wrapping method to be used for incoming
-        #     key material.
+        #     Required. Immutable. The wrapping method to be used for incoming key material.
         # @!attribute [rw] protection_level
         #   @return [Google::Cloud::Kms::V1::ProtectionLevel]
-        #     Required and immutable. The protection level of the {Google::Cloud::Kms::V1::ImportJob ImportJob}. This
-        #     must match the
+        #     Required. Immutable. The protection level of the {Google::Cloud::Kms::V1::ImportJob ImportJob}. This must match the
         #     {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level} of the
         #     {Google::Cloud::Kms::V1::CryptoKey#version_template version_template} on the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} you
         #     attempt to import into.
@@ -515,6 +514,9 @@ module Google
 
           # Crypto operations are performed in a Hardware Security Module.
           HSM = 2
+
+          # Crypto operations are performed by an external key manager.
+          EXTERNAL = 3
         end
       end
     end

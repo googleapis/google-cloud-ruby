@@ -42,6 +42,7 @@ module Google
         # * {Google::Cloud::Kms::V1::KeyRing KeyRing}
         # * {Google::Cloud::Kms::V1::CryptoKey CryptoKey}
         # * {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+        # * {Google::Cloud::Kms::V1::ImportJob ImportJob}
         #
         # If you are using manual gRPC libraries, see
         # [Using gRPC with Cloud KMS](https://cloud.google.com/kms/docs/grpc).
@@ -560,10 +561,15 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param filter [String]
-          #   Optional. Only include resources that match the filter in the response.
+          #   Optional. Only include resources that match the filter in the response. For
+          #   more information, see
+          #   [Sorting and filtering list
+          #   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
           # @param order_by [String]
           #   Optional. Specify how the results should be sorted. If not specified, the
-          #   results will be sorted in the default order.
+          #   results will be sorted in the default order.  For more information, see
+          #   [Sorting and filtering list
+          #   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -624,10 +630,15 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param filter [String]
-          #   Optional. Only include resources that match the filter in the response.
+          #   Optional. Only include resources that match the filter in the response. For
+          #   more information, see
+          #   [Sorting and filtering list
+          #   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
           # @param order_by [String]
           #   Optional. Specify how the results should be sorted. If not specified, the
-          #   results will be sorted in the default order.
+          #   results will be sorted in the default order. For more information, see
+          #   [Sorting and filtering list
+          #   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -690,10 +701,15 @@ module Google
           # @param version_view [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
           #   The fields of the primary version to include in the response.
           # @param filter [String]
-          #   Optional. Only include resources that match the filter in the response.
+          #   Optional. Only include resources that match the filter in the response. For
+          #   more information, see
+          #   [Sorting and filtering list
+          #   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
           # @param order_by [String]
           #   Optional. Specify how the results should be sorted. If not specified, the
-          #   results will be sorted in the default order.
+          #   results will be sorted in the default order. For more information, see
+          #   [Sorting and filtering list
+          #   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -758,10 +774,15 @@ module Google
           # @param view [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
           #   The fields to include in the response.
           # @param filter [String]
-          #   Optional. Only include resources that match the filter in the response.
+          #   Optional. Only include resources that match the filter in the response. For
+          #   more information, see
+          #   [Sorting and filtering list
+          #   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
           # @param order_by [String]
           #   Optional. Specify how the results should be sorted. If not specified, the
-          #   results will be sorted in the default order.
+          #   results will be sorted in the default order. For more information, see
+          #   [Sorting and filtering list
+          #   results](https://cloud.google.com/kms/docs/sorting-and-filtering).
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -815,7 +836,7 @@ module Google
           # Returns metadata for a given {Google::Cloud::Kms::V1::KeyRing KeyRing}.
           #
           # @param name [String]
-          #   The {Google::Cloud::Kms::V1::KeyRing#name name} of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to get.
+          #   Required. The {Google::Cloud::Kms::V1::KeyRing#name name} of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to get.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -845,7 +866,7 @@ module Google
           # Returns metadata for a given {Google::Cloud::Kms::V1::ImportJob ImportJob}.
           #
           # @param name [String]
-          #   The {Google::Cloud::Kms::V1::ImportJob#name name} of the {Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
+          #   Required. The {Google::Cloud::Kms::V1::ImportJob#name name} of the {Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -876,7 +897,7 @@ module Google
           # {Google::Cloud::Kms::V1::CryptoKey#primary primary} {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
           #
           # @param name [String]
-          #   The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to get.
+          #   Required. The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to get.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -906,7 +927,7 @@ module Google
           # Returns metadata for a given {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
           #
           # @param name [String]
-          #   The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to get.
+          #   Required. The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to get.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -942,7 +963,7 @@ module Google
           #   Required. It must be unique within a location and match the regular
           #   expression `[a-zA-Z0-9_-]{1,63}`
           # @param key_ring [Google::Cloud::Kms::V1::KeyRing | Hash]
-          #   A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
+          #   Required. A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::KeyRing`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -1042,7 +1063,7 @@ module Google
           #   Required. It must be unique within a KeyRing and match the regular
           #   expression `[a-zA-Z0-9_-]{1,63}`
           # @param crypto_key [Google::Cloud::Kms::V1::CryptoKey | Hash]
-          #   A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
+          #   Required. A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKey`
           #   can also be provided.
           # @param skip_initial_version_creation [true, false]
@@ -1104,7 +1125,7 @@ module Google
           #   Required. The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} associated with
           #   the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}.
           # @param crypto_key_version [Google::Cloud::Kms::V1::CryptoKeyVersion | Hash]
-          #   A {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with initial field values.
+          #   Required. A {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with initial field values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKeyVersion`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -1172,6 +1193,11 @@ module Google
           #     </li>
           #   </ol>
           #
+          #   If importing symmetric key material, it is expected that the unwrapped
+          #   key contains plain bytes. If importing asymmetric key material, it is
+          #   expected that the unwrapped key is in PKCS#8-encoded DER format (the
+          #   PrivateKeyInfo structure from RFC 5208).
+          #
           #   This format is the same as the format produced by PKCS#11 mechanism
           #   CKM_RSA_AES_KEY_WRAP.
           # @param options [Google::Gax::CallOptions]
@@ -1215,11 +1241,11 @@ module Google
           # Update a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
           #
           # @param crypto_key [Google::Cloud::Kms::V1::CryptoKey | Hash]
-          #   {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with updated values.
+          #   Required. {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with updated values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKey`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Required list of fields to be updated in this request.
+          #   Required. List of fields to be updated in this request.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -1264,11 +1290,11 @@ module Google
           # move between other states.
           #
           # @param crypto_key_version [Google::Cloud::Kms::V1::CryptoKeyVersion | Hash]
-          #   {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with updated values.
+          #   Required. {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with updated values.
           #   A hash of the same form as `Google::Cloud::Kms::V1::CryptoKeyVersion`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Required list of fields to be updated in this request.
+          #   Required. List of fields to be updated in this request.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -1324,7 +1350,7 @@ module Google
           #   plaintext and additional_authenticated_data fields must be no larger than
           #   8KiB.
           # @param additional_authenticated_data [String]
-          #   Optional data that, if specified, must also be provided during decryption
+          #   Optional. Optional data that, if specified, must also be provided during decryption
           #   through {Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest#additional_authenticated_data}.
           #
           #   The maximum size depends on the key version's
@@ -1376,7 +1402,7 @@ module Google
           #   Required. The encrypted data originally returned in
           #   {Google::Cloud::Kms::V1::EncryptResponse#ciphertext EncryptResponse#ciphertext}.
           # @param additional_authenticated_data [String]
-          #   Optional data that must match the data originally supplied in
+          #   Optional. Optional data that must match the data originally supplied in
           #   {Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest#additional_authenticated_data}.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1416,9 +1442,9 @@ module Google
           # Returns an error if called on an asymmetric key.
           #
           # @param name [String]
-          #   The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to update.
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to update.
           # @param crypto_key_version_id [String]
-          #   The id of the child {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as primary.
+          #   Required. The id of the child {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as primary.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1464,7 +1490,7 @@ module Google
           # {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion RestoreCryptoKeyVersion} may be called to reverse the process.
           #
           # @param name [String]
-          #   The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to destroy.
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to destroy.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1500,7 +1526,7 @@ module Google
           # and {Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will be cleared.
           #
           # @param name [String]
-          #   The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
+          #   Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1533,7 +1559,7 @@ module Google
           # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT ASYMMETRIC_DECRYPT}.
           #
           # @param name [String]
-          #   The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to
+          #   Required. The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to
           #   get.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1647,6 +1673,9 @@ module Google
 
           # Sets the access control policy on the specified resource. Replaces
           # any existing policy.
+          #
+          # Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and
+          # PERMISSION_DENIED
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.

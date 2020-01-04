@@ -5,9 +5,11 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/kms/v1/resources_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.kms.v1.ListKeyRingsRequest" do
     optional :parent, :string, 1

@@ -15,7 +15,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-#
 
 
 require 'grpc'
@@ -34,6 +33,7 @@ module Google
           # * [KeyRing][google.cloud.kms.v1.KeyRing]
           # * [CryptoKey][google.cloud.kms.v1.CryptoKey]
           # * [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]
+          # * [ImportJob][google.cloud.kms.v1.ImportJob]
           #
           # If you are using manual gRPC libraries, see
           # [Using gRPC with Cloud KMS](https://cloud.google.com/kms/docs/grpc).

@@ -1,19 +1,19 @@
 {
-  "updateTime": "2019-10-29T10:40:39.552980Z",
+  "updateTime": "2020-01-04T11:39:44.617269Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.40.3",
-        "dockerImage": "googleapis/artman@sha256:c805f50525f5f557886c94ab76f56eaa09cb1da58c3ee95111fd34259376621a"
+        "version": "0.43.0",
+        "dockerImage": "googleapis/artman@sha256:264654a37596a44b0668b8ce6ac41082d713f6ee150b3fc6425fa78cc64e4f20"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "532773acbed8d09451dafb3d403ab1823e6a6e1e",
-        "internalRef": "277177415"
+        "sha": "91ef2d9dd69807b0b79555f22566fb2d81e49ff9",
+        "internalRef": "287999179"
       }
     },
     {
@@ -34,6 +34,125 @@
         "generator": "gapic",
         "config": "google/cloud/kms/artman_cloudkms.yaml"
       }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": "Gemfile.lock"
+    },
+    {
+      "path": ".rubocop.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".yardopts"
+    },
+    {
+      "path": "Rakefile"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "synth.metadata"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "google-cloud-kms.gemspec"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "AUTHENTICATION.md"
+    },
+    {
+      "path": "Gemfile"
+    },
+    {
+      "path": "test/google/cloud/kms/v1/key_management_service_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/kms/v1/helpers_test.rb"
+    },
+    {
+      "path": "__pycache__/synth.cpython-36.pyc"
+    },
+    {
+      "path": "acceptance/google/cloud/kms/v1/smoke_test.rb"
+    },
+    {
+      "path": "synth/helpers_test.rb.erb"
+    },
+    {
+      "path": "synth/helpers.rb.erb"
+    },
+    {
+      "path": "lib/google/cloud/kms.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/version.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/resources_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/helpers.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/key_management_service_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/service_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/key_management_service_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/service_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/doc/google/type/expr.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/doc/google/iam/v1/options.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/doc/google/iam/v1/policy.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/doc/google/iam/v1/iam_policy.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/doc/google/protobuf/field_mask.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/doc/google/protobuf/timestamp.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/doc/google/protobuf/duration.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/resources.rb"
+    },
+    {
+      "path": "lib/google/cloud/kms/v1/doc/google/cloud/kms/v1/service.rb"
     }
   ]
 }
