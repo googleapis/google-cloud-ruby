@@ -468,12 +468,12 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo-storage_class.png", storage_class: :nearline
 
     uploaded.storage_class.must_equal "NEARLINE"
-    uploaded.storage_class = :dra
-    uploaded.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    uploaded.storage_class = :archive
+    uploaded.storage_class.must_equal "ARCHIVE"
 
     retrieved1 = bucket.file "CloudLogo-storage_class.png"
 
-    retrieved1.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    retrieved1.storage_class.must_equal "ARCHIVE"
   end
 
   it "should copy an existing file" do

@@ -107,43 +107,43 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
   it "updates its storage_class" do
     mock = Minitest::Mock.new
-    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "DURABLE_REDUCED_AVAILABILITY"
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "NEARLINE"
     patched_file_gapi = file_gapi.dup
-    patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
+    patched_file_gapi.storage_class = "NEARLINE"
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
       [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
 
     file.service.mocked_service = mock
 
     file.storage_class.must_equal "STANDARD"
-    file.storage_class = :dra
-    file.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    file.storage_class = :nearline
+    file.storage_class.must_equal "NEARLINE"
 
     mock.verify
   end
 
   it "updates its storage_class with user_project set to true" do
     mock = Minitest::Mock.new
-    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "DURABLE_REDUCED_AVAILABILITY"
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "COLDLINE"
     patched_file_gapi = file_gapi.dup
-    patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
+    patched_file_gapi.storage_class = "COLDLINE"
     mock.expect :rewrite_object, done_rewrite(patched_file_gapi),
       [bucket_name, file.name, bucket_name, file_user_project.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: "test", options: {}]
 
     file_user_project.service.mocked_service = mock
 
     file_user_project.storage_class.must_equal "STANDARD"
-    file_user_project.storage_class = :dra
-    file_user_project.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    file_user_project.storage_class = :coldline
+    file_user_project.storage_class.must_equal "COLDLINE"
 
     mock.verify
   end
 
   it "updates its storage_class, calling rewrite_object as many times as is needed" do
     mock = Minitest::Mock.new
-    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "DURABLE_REDUCED_AVAILABILITY"
+    patch_file_gapi = Google::Apis::StorageV1::Object.new storage_class: "ARCHIVE"
     patched_file_gapi = file_gapi.dup
-    patched_file_gapi.storage_class = "DURABLE_REDUCED_AVAILABILITY"
+    patched_file_gapi.storage_class = "ARCHIVE"
     mock.expect :rewrite_object, undone_rewrite("notyetcomplete"),
       [bucket_name, file.name, bucket_name, file.name, patch_file_gapi, destination_kms_key_name: nil, destination_predefined_acl: nil, source_generation: nil, rewrite_token: nil, user_project: nil, options: {}]
     mock.expect :rewrite_object, undone_rewrite("keeptrying"),
@@ -160,8 +160,8 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     end
 
     file.storage_class.must_equal "STANDARD"
-    file.storage_class = :dra
-    file.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    file.storage_class = :archive
+    file.storage_class.must_equal "ARCHIVE"
 
     mock.verify
   end

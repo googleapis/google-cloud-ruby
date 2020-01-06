@@ -25,12 +25,13 @@ module Google
         def storage_class_for str
           return nil if str.nil?
           return str.map { |s| storage_class_for s } if str.is_a? Array
-          { "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
+          { "archive" => "ARCHIVE",
+            "coldline" => "COLDLINE",
             "dra" => "DURABLE_REDUCED_AVAILABILITY",
             "durable" => "DURABLE_REDUCED_AVAILABILITY",
-            "nearline" => "NEARLINE",
-            "coldline" => "COLDLINE",
+            "durable_reduced_availability" => "DURABLE_REDUCED_AVAILABILITY",
             "multi_regional" => "MULTI_REGIONAL",
+            "nearline" => "NEARLINE",
             "regional" => "REGIONAL",
             "standard" => "STANDARD" }[str.to_s.downcase] || str.to_s
         end
