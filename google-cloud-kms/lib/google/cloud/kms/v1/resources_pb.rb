@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -123,6 +125,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :PROTECTION_LEVEL_UNSPECIFIED, 0
     value :SOFTWARE, 1
     value :HSM, 2
+    value :EXTERNAL, 3
   end
 end
 

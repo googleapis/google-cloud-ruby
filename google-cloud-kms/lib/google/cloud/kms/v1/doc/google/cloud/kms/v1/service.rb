@@ -24,21 +24,26 @@ module Google
         #     {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional limit on the number of {Google::Cloud::Kms::V1::KeyRing KeyRings} to include in the
+        #     Optional. Optional limit on the number of {Google::Cloud::Kms::V1::KeyRing KeyRings} to include in the
         #     response.  Further {Google::Cloud::Kms::V1::KeyRing KeyRings} can subsequently be obtained by
         #     including the {Google::Cloud::Kms::V1::ListKeyRingsResponse#next_page_token ListKeyRingsResponse#next_page_token} in a subsequent
         #     request.  If unspecified, the server will pick an appropriate default.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional pagination token, returned earlier via
+        #     Optional. Optional pagination token, returned earlier via
         #     {Google::Cloud::Kms::V1::ListKeyRingsResponse#next_page_token ListKeyRingsResponse#next_page_token}.
         # @!attribute [rw] filter
         #   @return [String]
-        #     Optional. Only include resources that match the filter in the response.
+        #     Optional. Only include resources that match the filter in the response. For
+        #     more information, see
+        #     [Sorting and filtering list
+        #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
         # @!attribute [rw] order_by
         #   @return [String]
         #     Optional. Specify how the results should be sorted. If not specified, the
-        #     results will be sorted in the default order.
+        #     results will be sorted in the default order.  For more information, see
+        #     [Sorting and filtering list
+        #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
         class ListKeyRingsRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeys KeyManagementService::ListCryptoKeys}.
@@ -48,24 +53,29 @@ module Google
         #     `projects/*/locations/*/keyRings/*`.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional limit on the number of {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} to include in the
+        #     Optional. Optional limit on the number of {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} to include in the
         #     response.  Further {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} can subsequently be obtained by
         #     including the {Google::Cloud::Kms::V1::ListCryptoKeysResponse#next_page_token ListCryptoKeysResponse#next_page_token} in a subsequent
         #     request.  If unspecified, the server will pick an appropriate default.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional pagination token, returned earlier via
+        #     Optional. Optional pagination token, returned earlier via
         #     {Google::Cloud::Kms::V1::ListCryptoKeysResponse#next_page_token ListCryptoKeysResponse#next_page_token}.
         # @!attribute [rw] version_view
         #   @return [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
         #     The fields of the primary version to include in the response.
         # @!attribute [rw] filter
         #   @return [String]
-        #     Optional. Only include resources that match the filter in the response.
+        #     Optional. Only include resources that match the filter in the response. For
+        #     more information, see
+        #     [Sorting and filtering list
+        #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
         # @!attribute [rw] order_by
         #   @return [String]
         #     Optional. Specify how the results should be sorted. If not specified, the
-        #     results will be sorted in the default order.
+        #     results will be sorted in the default order. For more information, see
+        #     [Sorting and filtering list
+        #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
         class ListCryptoKeysRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::ListCryptoKeyVersions KeyManagementService::ListCryptoKeyVersions}.
@@ -75,25 +85,30 @@ module Google
         #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional limit on the number of {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} to
+        #     Optional. Optional limit on the number of {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} to
         #     include in the response. Further {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} can
         #     subsequently be obtained by including the
         #     {Google::Cloud::Kms::V1::ListCryptoKeyVersionsResponse#next_page_token ListCryptoKeyVersionsResponse#next_page_token} in a subsequent request.
         #     If unspecified, the server will pick an appropriate default.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional pagination token, returned earlier via
+        #     Optional. Optional pagination token, returned earlier via
         #     {Google::Cloud::Kms::V1::ListCryptoKeyVersionsResponse#next_page_token ListCryptoKeyVersionsResponse#next_page_token}.
         # @!attribute [rw] view
         #   @return [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
         #     The fields to include in the response.
         # @!attribute [rw] filter
         #   @return [String]
-        #     Optional. Only include resources that match the filter in the response.
+        #     Optional. Only include resources that match the filter in the response. For
+        #     more information, see
+        #     [Sorting and filtering list
+        #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
         # @!attribute [rw] order_by
         #   @return [String]
         #     Optional. Specify how the results should be sorted. If not specified, the
-        #     results will be sorted in the default order.
+        #     results will be sorted in the default order. For more information, see
+        #     [Sorting and filtering list
+        #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
         class ListCryptoKeyVersionsRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::ListImportJobs KeyManagementService::ListImportJobs}.
@@ -103,21 +118,26 @@ module Google
         #     `projects/*/locations/*/keyRings/*`.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional limit on the number of {Google::Cloud::Kms::V1::ImportJob ImportJobs} to include in the
+        #     Optional. Optional limit on the number of {Google::Cloud::Kms::V1::ImportJob ImportJobs} to include in the
         #     response. Further {Google::Cloud::Kms::V1::ImportJob ImportJobs} can subsequently be obtained by
         #     including the {Google::Cloud::Kms::V1::ListImportJobsResponse#next_page_token ListImportJobsResponse#next_page_token} in a subsequent
         #     request. If unspecified, the server will pick an appropriate default.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional pagination token, returned earlier via
+        #     Optional. Optional pagination token, returned earlier via
         #     {Google::Cloud::Kms::V1::ListImportJobsResponse#next_page_token ListImportJobsResponse#next_page_token}.
         # @!attribute [rw] filter
         #   @return [String]
-        #     Optional. Only include resources that match the filter in the response.
+        #     Optional. Only include resources that match the filter in the response. For
+        #     more information, see
+        #     [Sorting and filtering list
+        #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
         # @!attribute [rw] order_by
         #   @return [String]
         #     Optional. Specify how the results should be sorted. If not specified, the
-        #     results will be sorted in the default order.
+        #     results will be sorted in the default order. For more information, see
+        #     [Sorting and filtering list
+        #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
         class ListImportJobsRequest; end
 
         # Response message for {Google::Cloud::Kms::V1::KeyManagementService::ListKeyRings KeyManagementService::ListKeyRings}.
@@ -177,32 +197,32 @@ module Google
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::GetKeyRing KeyManagementService::GetKeyRing}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The {Google::Cloud::Kms::V1::KeyRing#name name} of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to get.
+        #     Required. The {Google::Cloud::Kms::V1::KeyRing#name name} of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to get.
         class GetKeyRingRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::GetCryptoKey KeyManagementService::GetCryptoKey}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to get.
+        #     Required. The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to get.
         class GetCryptoKeyRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::GetCryptoKeyVersion KeyManagementService::GetCryptoKeyVersion}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to get.
+        #     Required. The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to get.
         class GetCryptoKeyVersionRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::GetPublicKey KeyManagementService::GetPublicKey}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to
+        #     Required. The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to
         #     get.
         class GetPublicKeyRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::GetImportJob KeyManagementService::GetImportJob}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The {Google::Cloud::Kms::V1::ImportJob#name name} of the {Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
+        #     Required. The {Google::Cloud::Kms::V1::ImportJob#name name} of the {Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
         class GetImportJobRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::CreateKeyRing KeyManagementService::CreateKeyRing}.
@@ -216,7 +236,7 @@ module Google
         #     expression `[a-zA-Z0-9_-]{1,63}`
         # @!attribute [rw] key_ring
         #   @return [Google::Cloud::Kms::V1::KeyRing]
-        #     A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
+        #     Required. A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
         class CreateKeyRingRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::CreateCryptoKey KeyManagementService::CreateCryptoKey}.
@@ -230,7 +250,7 @@ module Google
         #     expression `[a-zA-Z0-9_-]{1,63}`
         # @!attribute [rw] crypto_key
         #   @return [Google::Cloud::Kms::V1::CryptoKey]
-        #     A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
+        #     Required. A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
         # @!attribute [rw] skip_initial_version_creation
         #   @return [true, false]
         #     If set to true, the request will create a {Google::Cloud::Kms::V1::CryptoKey CryptoKey} without any
@@ -247,7 +267,7 @@ module Google
         #     the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}.
         # @!attribute [rw] crypto_key_version
         #   @return [Google::Cloud::Kms::V1::CryptoKeyVersion]
-        #     A {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with initial field values.
+        #     Required. A {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with initial field values.
         class CreateCryptoKeyVersionRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::ImportCryptoKeyVersion KeyManagementService::ImportCryptoKeyVersion}.
@@ -283,6 +303,11 @@ module Google
         #       </li>
         #     </ol>
         #
+        #     If importing symmetric key material, it is expected that the unwrapped
+        #     key contains plain bytes. If importing asymmetric key material, it is
+        #     expected that the unwrapped key is in PKCS#8-encoded DER format (the
+        #     PrivateKeyInfo structure from RFC 5208).
+        #
         #     This format is the same as the format produced by PKCS#11 mechanism
         #     CKM_RSA_AES_KEY_WRAP.
         class ImportCryptoKeyVersionRequest; end
@@ -304,19 +329,19 @@ module Google
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::UpdateCryptoKey KeyManagementService::UpdateCryptoKey}.
         # @!attribute [rw] crypto_key
         #   @return [Google::Cloud::Kms::V1::CryptoKey]
-        #     {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with updated values.
+        #     Required. {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with updated values.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Required list of fields to be updated in this request.
+        #     Required. List of fields to be updated in this request.
         class UpdateCryptoKeyRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::UpdateCryptoKeyVersion KeyManagementService::UpdateCryptoKeyVersion}.
         # @!attribute [rw] crypto_key_version
         #   @return [Google::Cloud::Kms::V1::CryptoKeyVersion]
-        #     {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with updated values.
+        #     Required. {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with updated values.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Required list of fields to be updated in this request.
+        #     Required. List of fields to be updated in this request.
         class UpdateCryptoKeyVersionRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::Encrypt KeyManagementService::Encrypt}.
@@ -339,7 +364,7 @@ module Google
         #     8KiB.
         # @!attribute [rw] additional_authenticated_data
         #   @return [String]
-        #     Optional data that, if specified, must also be provided during decryption
+        #     Optional. Optional data that, if specified, must also be provided during decryption
         #     through {Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest#additional_authenticated_data}.
         #
         #     The maximum size depends on the key version's
@@ -361,7 +386,7 @@ module Google
         #     {Google::Cloud::Kms::V1::EncryptResponse#ciphertext EncryptResponse#ciphertext}.
         # @!attribute [rw] additional_authenticated_data
         #   @return [String]
-        #     Optional data that must match the data originally supplied in
+        #     Optional. Optional data that must match the data originally supplied in
         #     {Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest#additional_authenticated_data}.
         class DecryptRequest; end
 
@@ -396,7 +421,8 @@ module Google
         # Response message for {Google::Cloud::Kms::V1::KeyManagementService::Encrypt KeyManagementService::Encrypt}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used in encryption.
+        #     The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used in encryption. Check
+        #     this field to verify that the intended resource was used for encryption.
         # @!attribute [rw] ciphertext
         #   @return [String]
         #     The encrypted data.
@@ -417,22 +443,22 @@ module Google
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::UpdateCryptoKeyPrimaryVersion KeyManagementService::UpdateCryptoKeyPrimaryVersion}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to update.
+        #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to update.
         # @!attribute [rw] crypto_key_version_id
         #   @return [String]
-        #     The id of the child {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as primary.
+        #     Required. The id of the child {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as primary.
         class UpdateCryptoKeyPrimaryVersionRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::DestroyCryptoKeyVersion KeyManagementService::DestroyCryptoKeyVersion}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to destroy.
+        #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to destroy.
         class DestroyCryptoKeyVersionRequest; end
 
         # Request message for {Google::Cloud::Kms::V1::KeyManagementService::RestoreCryptoKeyVersion KeyManagementService::RestoreCryptoKeyVersion}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
+        #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
         class RestoreCryptoKeyVersionRequest; end
 
         # A {Google::Cloud::Kms::V1::Digest Digest} holds a cryptographic message digest.

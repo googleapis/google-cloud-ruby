@@ -90,6 +90,7 @@ module Google
         # * {Google::Cloud::Kms::V1::KeyRing KeyRing}
         # * {Google::Cloud::Kms::V1::CryptoKey CryptoKey}
         # * {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+        # * {Google::Cloud::Kms::V1::ImportJob ImportJob}
         #
         # If you are using manual gRPC libraries, see
         # [Using gRPC with Cloud KMS](https://cloud.google.com/kms/docs/grpc).
