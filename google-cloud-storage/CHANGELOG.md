@@ -1,5 +1,11 @@
 # Release History
 
+### 1.25.1 / 2020-01-06
+
+#### Documentation
+
+* Add ARCHIVE storage class
+
 ### 1.25.0 / 2019-12-12
 
 #### Features
