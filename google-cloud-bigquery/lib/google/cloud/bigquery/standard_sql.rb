@@ -75,9 +75,21 @@ module Google
         # The type of a field or a column.
         class DataType
           ##
-          # @private Create an empty StandardSql::DataType object.
-          def initialize
-            @gapi_json = nil
+          # Create an empty StandardSql::DataType object.
+          #
+          # @param type_kind [String]
+          #   Required.
+          # @param array_element_type [DataType, Hash]
+          #   The type of a variable, e.g., a function argument, if type_kind = "ARRAY".
+          # @param struct_type [StructType, Hash]
+          #   The fields of this struct, in order, if type_kind = "STRUCT".
+          def initialize **kwargs
+            # Convert struct_type to a gapi object if it is a veneer object (has #to_gapi defined)
+            kwargs[:array_element_type] = kwargs[:array_element_type].to_gapi if kwargs[:array_element_type].respond_to? :to_gapi
+            kwargs[:struct_type] = kwargs[:struct_type].to_gapi if kwargs[:struct_type].respond_to? :to_gapi
+
+            gapi = Google::Apis::BigqueryV2::StandardSqlDataType.new(**kwargs)
+            @gapi_json = JSON.parse gapi.to_json, symbolize_names: true
           end
 
           ##
@@ -391,11 +403,11 @@ module Google
             end
           end
 
-          # ##
-          # # @private New Google::Apis::BigqueryV2::StandardSqlStructType object.
-          # def to_gapi
-          #   Google::Apis::BigqueryV2::StandardSqlStructType.from_json @gapi_json.to_json
-          # end
+          ##
+          # @private New Google::Apis::BigqueryV2::StandardSqlStructType object.
+          def to_gapi
+            Google::Apis::BigqueryV2::StandardSqlStructType.from_json @gapi_json.to_json
+          end
 
           ##
           # @private New StandardSql::StructType from a JSON object.

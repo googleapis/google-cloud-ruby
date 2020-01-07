@@ -15,6 +15,28 @@
 require "helper"
 
 describe Google::Cloud::Bigquery::StandardSql, :value do
+  describe "immutable constructors" do
+    # TODO: move these tests someplace more logical...
+    it "takes DataType as an argument" do
+      parent = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRING"
+      data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "ARRAY", array_element_type: parent
+
+      data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      data_type.type_kind.must_equal "ARRAY"
+      data_type.array_element_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      data_type.array_element_type.type_kind.must_equal "STRING"
+    end
+
+    it "takes Hash as an argument" do
+      data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "ARRAY", array_element_type: { type_kind: "STRING" }
+
+      data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      data_type.type_kind.must_equal "ARRAY"
+      data_type.array_element_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      data_type.array_element_type.type_kind.must_equal "STRING"
+    end
+  end
+
   it "represents a INT64 field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "int_col", type: { typeKind: "INT64" } })
 
