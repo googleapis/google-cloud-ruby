@@ -2100,6 +2100,12 @@ module Google
         #   a new table with the given `table_id`, if no table is found for
         #   `table_id`. The default value is false.
         #
+        # @yield [table] a block for setting the table
+        # @yieldparam [Google::Cloud::Bigquery::Table::Updater] table An updater
+        #   to set additional properties on the table in the API request to
+        #   create it. Only used when `autocreate` is set and the table does not
+        #   already exist.
+        #
         # @return [Google::Cloud::Bigquery::InsertResponse] An insert response
         #   object.
         #
