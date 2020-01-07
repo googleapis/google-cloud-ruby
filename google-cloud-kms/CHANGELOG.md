@@ -1,5 +1,12 @@
 # Release History
 
+### 1.4.0 / 2020-01-07
+
+#### Features
+
+* Add ProtectionLevel::EXTERNAL
+  * Update documentation
+
 ### 1.3.1 / 2019-11-06
 
 #### Bug Fixes
