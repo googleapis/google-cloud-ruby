@@ -1,5 +1,16 @@
 # Release History
 
+### 1.3.0 / 2020-01-08
+
+#### Features
+
+* Add update_transforms attribute to the Write data type
+
+#### Bug Fixes
+
+* Revert the update_transforms addition
+* Use client instead of service in DocumentReference::List
+
 ### 1.2.2 / 2019-12-18
 
 #### Bug Fixes
