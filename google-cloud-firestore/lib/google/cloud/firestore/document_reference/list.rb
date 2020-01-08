@@ -85,10 +85,10 @@ module Google
           #   end
           def next
             return nil unless next?
-            ensure_service!
+            ensure_client!
             options = { token: token, max: @max }
-            grpc = @service.list_documents @parent, @collection_id, options
-            self.class.from_grpc grpc, @service, @parent, @collection_id, @max
+            grpc = @client.service.list_documents @parent, @collection_id, options
+            self.class.from_grpc grpc, @client, @parent, @collection_id, @max
           end
 
           ##
@@ -163,16 +163,16 @@ module Google
           ##
           # @private New DocumentReference::List from a
           # Google::Firestore::V1::ListDocumentsResponse object.
-          def self.from_grpc grpc, service, parent, collection_id, max = nil
+          def self.from_grpc grpc, client, parent, collection_id, max = nil
             documents = List.new(Array(grpc.documents).map do |document|
-              DocumentReference.from_path document.name, service
+              DocumentReference.from_path document.name, client
             end)
             documents.instance_variable_set :@parent, parent
             documents.instance_variable_set :@collection_id, collection_id
             token = grpc.next_page_token
             token = nil if token == "".freeze
             documents.instance_variable_set :@token, token
-            documents.instance_variable_set :@service, service
+            documents.instance_variable_set :@client, client
             documents.instance_variable_set :@max, max
             documents
           end
@@ -180,9 +180,9 @@ module Google
           protected
 
           ##
-          # Raise an error unless an active service is available.
-          def ensure_service!
-            raise "Must have active connection" unless @service
+          # Raise an error unless an active client is available.
+          def ensure_client!
+            raise "Must have active connection" unless @client
           end
         end
       end

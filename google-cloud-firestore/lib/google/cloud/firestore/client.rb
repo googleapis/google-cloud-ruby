@@ -672,7 +672,7 @@ module Google
           ensure_service!
           grpc = service.list_documents \
             parent, collection_id, token: token, max: max
-          DocumentReference::List.from_grpc grpc, service, parent, collection_id
+          DocumentReference::List.from_grpc grpc, self, parent, collection_id
         end
 
         protected

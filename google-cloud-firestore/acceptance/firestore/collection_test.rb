@@ -27,6 +27,7 @@ describe "Collection", :firestore_acceptance do
     doc_ref = root_col.doc # no id, will create random id instead
 
     doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    doc_ref.client.must_be_kind_of Google::Cloud::Firestore::Client
     doc_ref.document_id.length.must_equal 20 # random doc id
 
     doc_ref.parent.collection_path.must_equal root_col.collection_path
@@ -35,6 +36,7 @@ describe "Collection", :firestore_acceptance do
   it "has add method" do
     doc_ref = root_col.add({ foo: "hello world" })
     doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    doc_ref.client.must_be_kind_of Google::Cloud::Firestore::Client
 
     doc_snp = doc_ref.get
     doc_snp.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
@@ -51,8 +53,12 @@ describe "Collection", :firestore_acceptance do
     docs.must_be_kind_of Array
     docs.size.must_be :>, 1
     docs.first.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    docs.first.client.must_be_kind_of Google::Cloud::Firestore::Client
 
     docs_max_1 = rand_col.list_documents max: 1
     docs_max_1.size.must_equal 1
+
+    rand_col.list_documents.map(&:delete)
+    rand_col.list_documents.must_be :empty?
   end
 end
