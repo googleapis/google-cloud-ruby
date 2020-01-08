@@ -1,5 +1,12 @@
 # Release History
 
+### 1.13.0 / 2020-01-08
+
+#### Features
+
+* Add the support for SPANNER_EMULATOR_HOST. ([#4546](https://www.github.com/googleapis/google-cloud-ruby/issues/4546))
+  * Add the support for SPANNER_EMULATOR_HOST.
+
 ### 1.12.2 / 2019-12-19
 
 #### Bug Fixes
