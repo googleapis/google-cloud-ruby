@@ -57,5 +57,8 @@ describe "Collection", :firestore_acceptance do
 
     docs_max_1 = rand_col.list_documents max: 1
     docs_max_1.size.must_equal 1
+
+    rand_col.list_documents.map(&:delete)
+    rand_col.list_documents.must_be :empty?
   end
 end
