@@ -4,8 +4,7 @@
 
 #### Features
 
-* Add the support for SPANNER_EMULATOR_HOST. ([#4546](https://www.github.com/googleapis/google-cloud-ruby/issues/4546))
-  * Add the support for SPANNER_EMULATOR_HOST.
+* Add support for SPANNER_EMULATOR_HOST
 
 ### 1.12.2 / 2019-12-19
 
