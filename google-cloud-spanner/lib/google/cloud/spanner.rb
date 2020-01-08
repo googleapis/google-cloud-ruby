@@ -34,6 +34,8 @@ module Google
     # See {file:OVERVIEW.md Spanner Overview}.
     #
     module Spanner
+      # rubocop:disable Metrics/MethodLength
+
       ##
       # Creates a new object for connecting to the Spanner service.
       # Each call creates a new connection.
@@ -64,6 +66,8 @@ module Google
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
+      # @param [String] emulator_host Spanner emulator host. Optional.
+      #   If the param is nil, uses the value of the `emulator_host` config.
       #
       # @return [Google::Cloud::Spanner::Project]
       #
@@ -73,21 +77,29 @@ module Google
       #   spanner = Google::Cloud::Spanner.new
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
-                   client_config: nil, endpoint: nil, project: nil, keyfile: nil
+                   client_config: nil, endpoint: nil, project: nil, keyfile: nil,
+                   emulator_host: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
         client_config ||= configure.client_config
         endpoint      ||= configure.endpoint
         credentials   ||= (keyfile || default_credentials(scope: scope))
+        emulator_host ||= configure.emulator_host
 
-        unless credentials.is_a? Google::Auth::Credentials
-          credentials = Spanner::Credentials.new credentials, scope: scope
+        if emulator_host
+          credentials = :this_channel_is_insecure
+          endpoint = emulator_host
+        else
+          unless credentials.is_a? Google::Auth::Credentials
+            credentials = Spanner::Credentials.new credentials, scope: scope
+          end
+
+          if credentials.respond_to? :project_id
+            project_id ||= credentials.project_id
+          end
         end
 
-        if credentials.respond_to? :project_id
-          project_id ||= credentials.project_id
-        end
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
@@ -98,6 +110,8 @@ module Google
           )
         )
       end
+
+      # rubocop:enable Metrics/MethodLength
 
       ##
       # Configure the Google Cloud Spanner library.
@@ -117,6 +131,8 @@ module Google
       #   behavior of the API client.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
+      # * `emulator_host` - (String) Host name of the emulator. Defaults to
+      #   `ENV["SPANNER_EMULATOR_HOST"]`.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Spanner library uses.

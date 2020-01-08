@@ -272,6 +272,41 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "uses SPANNER_EMULATOR_HOST environment variable" do
+      emulator_host = "localhost:4567"
+      emulator_check = ->(name) { (name == "SPANNER_EMULATOR_HOST") ? emulator_host : nil }
+      # Clear all environment variables, except SPANNER_EMULATOR_HOST
+      ENV.stub :[], emulator_check do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+            spanner = Google::Cloud::Spanner.new
+            spanner.must_be_kind_of Google::Cloud::Spanner::Project
+            spanner.project.must_equal "project-id"
+            spanner.service.credentials.must_equal :this_channel_is_insecure
+            spanner.service.host.must_equal emulator_host
+          end
+        end
+      end
+    end
+
+    it "allows emulator_host to be set" do
+      emulator_host = "localhost:4567"
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+            spanner = Google::Cloud::Spanner.new emulator_host: emulator_host
+            spanner.must_be_kind_of Google::Cloud::Spanner::Project
+            spanner.project.must_equal "project-id"
+            spanner.service.credentials.must_equal :this_channel_is_insecure
+            spanner.service.host.must_equal emulator_host
+          end
+        end
+      end
+    end
   end
 
   describe "Spanner.configure" do
@@ -479,6 +514,24 @@ describe Google::Cloud do
             end
           end
         end
+      end
+    end
+
+    it "uses spanner config for emulator_host" do
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::Spanner.configure do |config|
+          config.project_id = "project-id"
+          config.keyfile = "path/to/keyfile.json"
+          config.emulator_host = "localhost:4567"
+        end
+
+        spanner = Google::Cloud::Spanner.new
+        spanner.must_be_kind_of Google::Cloud::Spanner::Project
+        spanner.project.must_equal "project-id"
+        spanner.service.credentials.must_equal :this_channel_is_insecure
+        spanner.service.host.must_equal "localhost:4567"
       end
     end
   end
