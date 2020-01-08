@@ -2,7 +2,6 @@
 
 [Cloud OS Login API][Product Documentation]:
 You can use OS Login to manage access to your VM instances using IAM roles.
-For more information, read [OS Login](/compute/docs/oslogin/).
 - [Client Library Documentation][]
 - [Product Documentation][]
 
