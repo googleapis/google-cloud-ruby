@@ -1,5 +1,11 @@
 # Release History
 
+### 1.13.0 / 2020-01-08
+
+#### Features
+
+* Add support for SPANNER_EMULATOR_HOST
+
 ### 1.12.2 / 2019-12-19
 
 #### Bug Fixes
