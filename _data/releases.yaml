@@ -346,6 +346,7 @@ google-cloud-error_reporting:
 - v0.21.1
 - v0.21.0
 google-cloud-firestore:
+- v1.2.3
 - v1.2.2
 - v1.2.1
 - v1.2.0
