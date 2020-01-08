@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.3 / 2020-01-08
+
+#### Bug Fixes
+
+* Use client instead of service in DocumentReference::List
+
 ### 1.2.2 / 2019-12-18
 
 #### Bug Fixes
