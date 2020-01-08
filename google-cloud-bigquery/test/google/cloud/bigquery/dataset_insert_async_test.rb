@@ -43,6 +43,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
                                           json: row
                                       }
                                     end }
+  let(:rows_without_insert_ids) { rows.map { |row| { json: row } } }
   let(:success_table_insert_gapi) { Google::Apis::BigqueryV2::InsertAllTableDataResponse.new insert_errors: [] }
 
   it "inserts one row" do
@@ -399,6 +400,70 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
 
     inserter.wont_be :started?
     inserter.must_be :stopped?
+
+    mock.verify
+  end
+
+  it "can skip insert_ids for multiple rows" do
+    mock = Minitest::Mock.new
+    insert_req = {
+        rows: rows_without_insert_ids, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+                [project, dataset_id, table_id, insert_req, options: { skip_serialization: true }]
+    dataset.service.mocked_service = mock
+
+    inserter = dataset.insert_async table_id
+
+    inserter.insert rows, insert_ids: :skip
+
+    inserter.batch.rows.must_equal rows
+
+    inserter.must_be :started?
+    inserter.wont_be :stopped?
+
+    # force the queued rows to be inserted
+    inserter.flush
+    inserter.stop.wait!
+
+    inserter.wont_be :started?
+    inserter.must_be :stopped?
+
+    inserter.batch.must_be :nil?
+
+    mock.verify
+  end
+
+  it "can skip insert_ids one row at a time" do
+    mock = Minitest::Mock.new
+    insert_req = {
+        rows: rows_without_insert_ids, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
+    mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+                [project, dataset_id, table_id, insert_req, options: { skip_serialization: true }]
+    dataset.service.mocked_service = mock
+
+    inserter = dataset.insert_async table_id
+
+    rows.each do |row|
+      inserter.insert row, insert_ids: :skip
+    end
+
+    inserter.batch.rows.must_equal rows
+
+    inserter.must_be :started?
+    inserter.wont_be :stopped?
+
+    # force the queued rows to be inserted
+    inserter.flush
+    inserter.stop.wait!
+
+    inserter.wont_be :started?
+    inserter.must_be :stopped?
+
+    inserter.batch.must_be :nil?
 
     mock.verify
   end

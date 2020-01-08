@@ -113,12 +113,13 @@ module Google
           #
           # @param [Hash, Array<Hash>] rows A hash object or array of hash
           #   objects containing the data.
-          # @param [Array<String>] insert_ids A unique ID for each row. BigQuery
-          #   uses this property to detect duplicate insertion requests on a
-          #   best-effort basis. For more information, see [data
-          #   consistency](https://cloud.google.com/bigquery/streaming-data-into-bigquery#dataconsistency).
-          #   Optional. If not provided, the client library will assign a UUID
-          #   to each row before the request is sent.
+          # @param [Array<String|Symbol>, Symbol] insert_ids A unique ID for each row. BigQuery uses this property to
+          #   detect duplicate insertion requests on a best-effort basis. For more information, see [data
+          #   consistency](https://cloud.google.com/bigquery/streaming-data-into-bigquery#dataconsistency). Optional. If
+          #   not provided, the client library will assign a UUID to each row before the request is sent.
+          #
+          #  The value `:skip` can be provided to skip the generation of IDs for all rows, or to skip the generation of
+          #  an ID for a specific row in the array.
           #
           def insert rows, insert_ids: nil
             return nil if rows.nil?
@@ -224,10 +225,14 @@ module Google
 
           def validate_insert_args rows, insert_ids
             rows = [rows] if rows.is_a? Hash
+            raise ArgumentError, "No rows provided" if rows.empty?
+
+            insert_ids = Array.new(rows.count) { :skip } if insert_ids == :skip
             insert_ids = Array insert_ids
             if insert_ids.count.positive? && insert_ids.count != rows.count
               raise ArgumentError, "insert_ids must be the same size as rows"
             end
+
             [rows, insert_ids]
           end
 
@@ -332,8 +337,13 @@ module Google
             end
 
             def addl_bytes_for json_row, insert_id
-              # "{\"insertId\":\"\",\"json\":},".bytesize #=> 24
-              24 + json_row.to_json.bytesize + insert_id.bytesize
+              if insert_id == :skip
+                # "{\"json\":},".bytesize #=> 10
+                10 + json_row.to_json.bytesize
+              else
+                # "{\"insertId\":\"\",\"json\":},".bytesize #=> 24
+                24 + json_row.to_json.bytesize + insert_id.bytesize
+              end
             end
           end
 

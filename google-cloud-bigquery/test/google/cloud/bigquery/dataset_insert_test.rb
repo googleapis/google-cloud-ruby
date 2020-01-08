@@ -37,6 +37,7 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
                                           json: row
                                       }
                                     end }
+  let(:rows_without_insert_ids) { rows.map { |row| { json: row } } }
 
   let(:table_id) { "table_id" }
   let(:table_hash) { random_table_hash dataset_id, table_id }
@@ -284,6 +285,24 @@ describe Google::Cloud::Bigquery::Dataset, :insert, :mock_bigquery do
     insert_ids.pop # Remove one of the insert_ids to cause error.
 
     expect { dataset.insert table_id, rows, insert_ids: insert_ids }.must_raise ArgumentError
+  end
+
+  it "can skip insert_ids" do
+    mock = Minitest::Mock.new
+    insert_req = {
+        rows: rows_without_insert_ids, ignoreUnknownValues: nil, skipInvalidRows: nil
+    }.to_json
+    mock.expect :insert_all_table_data, success_table_insert_gapi,
+                [project, dataset_id, table_id, insert_req, options: { skip_serialization: true }]
+    dataset.service.mocked_service = mock
+
+    result = dataset.insert table_id, rows, insert_ids: :skip
+
+    mock.verify
+
+    result.must_be :success?
+    result.insert_count.must_equal 3
+    result.error_count.must_equal 0
   end
 
   def success_table_insert_gapi
