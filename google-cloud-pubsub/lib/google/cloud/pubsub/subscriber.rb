@@ -85,7 +85,7 @@ module Google
           @inventory = inventory
           @inventory = { limit: @inventory } unless inventory.is_a? Hash
           @inventory[:limit] = Integer(@inventory[:limit] || 1000)
-          @inventory[:bytesize] = Integer(@inventory[:bytesize] || 100_000)
+          @inventory[:bytesize] = Integer(@inventory[:bytesize] || 100_000_000)
           @inventory[:extension] = Integer(@inventory[:extension] || 3600)
           @message_ordering = message_ordering
           @callback_threads = Integer(threads[:callback] || 8)
@@ -290,7 +290,7 @@ module Google
         alias inventory inventory_limit
 
         ##
-        # The total bytesize of received messages to be collected by subscriber. Default is 100,000 (100MB).
+        # The total bytesize of received messages to be collected by subscriber. Default is 100,000,000 (100MB).
         def inventory_bytesize
           @inventory[:bytesize]
         end

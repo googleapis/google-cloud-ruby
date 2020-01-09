@@ -563,7 +563,7 @@ module Google
         #
         #     * `:limit` (Integer) The number of received messages to be collected by subscriber. Default is 1,000.
         #     * `:bytesize` (Integer) The total bytesize of received messages to be collected by subscriber. Default is
-        #       100,000 (100MB).
+        #       100,000,000 (100MB).
         #     * `:extension` (Integer) The number of seconds that received messages can be held awaiting processing.
         #       Default is 3,600 (1 hour).
         # @param [Hash] threads The number of threads to create to handle

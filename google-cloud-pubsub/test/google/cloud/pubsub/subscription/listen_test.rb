@@ -31,7 +31,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
-    subscriber.inventory_bytesize.must_equal 100000
+    subscriber.inventory_bytesize.must_equal 100000000
     subscriber.inventory_extension.must_equal 3600
   end
 
@@ -45,7 +45,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
-    subscriber.inventory_bytesize.must_equal 100000
+    subscriber.inventory_bytesize.must_equal 100000000
     subscriber.inventory_extension.must_equal 3600
   end
 
@@ -59,7 +59,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
-    subscriber.inventory_bytesize.must_equal 100000
+    subscriber.inventory_bytesize.must_equal 100000000
     subscriber.inventory_extension.must_equal 3600
   end
 
@@ -73,7 +73,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 500
     subscriber.inventory_limit.must_equal 500
-    subscriber.inventory_bytesize.must_equal 100000
+    subscriber.inventory_bytesize.must_equal 100000000
     subscriber.inventory_extension.must_equal 3600
   end
 
@@ -87,7 +87,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 500
     subscriber.inventory_limit.must_equal 500
-    subscriber.inventory_bytesize.must_equal 100000
+    subscriber.inventory_bytesize.must_equal 100000000
     subscriber.inventory_extension.must_equal 3600
   end
 
@@ -115,7 +115,7 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
-    subscriber.inventory_bytesize.must_equal 100000
+    subscriber.inventory_bytesize.must_equal 100000000
     subscriber.inventory_extension.must_equal 7200
   end
 end
