@@ -1,5 +1,26 @@
 # Release History
 
+### 1.2.0 / 2020-01-09
+
+#### Features
+
+* Add Subscriber inventory settings
+  * Add the following settings to Subscriber:
+    * Subscriber#inventory_limit
+    * Subscriber#inventory_bytesize
+    * Subscriber#extension
+  * Allow Subscription#listen inventory argument to be a hash.
+
+#### Bug Fixes
+
+* Update AsyncPublisher configuration defaults
+  * Update AsyncPublisher defaults to the following:
+    * max_bytes to 1MB, was 10MB.
+    * max_messages to 100, was 1,000.
+    * interval to 10 milliseconds, was 250 milliseconds.
+    * publish thread count to 2, was 4
+    * callback thread count to 4, was 8.
+
 ### 1.1.3 / 2019-12-18
 
 #### Bug Fixes
