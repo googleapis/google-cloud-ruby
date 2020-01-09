@@ -100,6 +100,9 @@ module Grafeas
 
       # This represents a logical "role" that can attest to artifacts.
       ATTESTATION = 7
+
+      # This represents an available package upgrade.
+      UPGRADE = 8
     end
   end
 end

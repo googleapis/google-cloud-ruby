@@ -36,6 +36,12 @@ module Grafeas
     #     When an error is encountered this will contain a LocalizedMessage under
     #     details to show to the user. The LocalizedMessage is output only and
     #     populated by the API.
+    # @!attribute [rw] cpe
+    #   @return [String]
+    #     The CPE of the resource being scanned.
+    # @!attribute [rw] last_scan_time
+    #   @return [Google::Protobuf::Timestamp]
+    #     The last time this resource was scanned.
     class DiscoveryOccurrence
       # Analysis status for a resource. Currently for initial analysis only (not
       # updated in continuous analysis).

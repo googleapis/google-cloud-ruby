@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 require 'grafeas/v1/common_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -14,6 +15,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :continuous_analysis, :enum, 1, "grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis"
     optional :analysis_status, :enum, 2, "grafeas.v1.DiscoveryOccurrence.AnalysisStatus"
     optional :analysis_status_error, :message, 3, "google.rpc.Status"
+    optional :cpe, :string, 4
+    optional :last_scan_time, :message, 5, "google.protobuf.Timestamp"
   end
   add_enum "grafeas.v1.DiscoveryOccurrence.ContinuousAnalysis" do
     value :CONTINUOUS_ANALYSIS_UNSPECIFIED, 0
