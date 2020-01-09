@@ -10,9 +10,6 @@
     * Subscriber#inventory_bytesize
     * Subscriber#extension
   * Allow Subscription#listen inventory argument to be a hash.
-
-#### Bug Fixes
-
 * Update AsyncPublisher configuration defaults
   * Update AsyncPublisher defaults to the following:
     * max_bytes to 1MB, was 10MB.
