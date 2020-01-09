@@ -18,7 +18,7 @@ be discovered automatically, but this is only recommended during development.
 2. Set the [environment variable](#environment-variables).
 
 ```sh
-export SECRET_MANAGER_CREDENTIALS=/path/to/json`
+export SECRET_MANAGER_CREDENTIALS=path/to/keyfile.json
 ```
 
 3. Initialize the client.
@@ -29,20 +29,12 @@ require "google/cloud/secret_manager"
 client = Google::Cloud::SecretManager.new
 ```
 
-## Project and Credential Lookup
+## Credential Lookup
 
 The google-cloud-secret_manager library aims to make authentication
 as simple as possible, and provides several mechanisms to configure your system
-without providing **Project ID** and **Service Account Credentials** directly in
+without providing **Service Account Credentials** directly in
 code.
-
-**Project ID** is discovered in the following order:
-
-1. Specify project ID in method arguments
-2. Specify project ID in configuration
-3. Discover project ID in environment variables
-4. Discover GCP project ID
-5. Discover project ID in credentials JSON
 
 **Credentials** are discovered in the following order:
 
@@ -62,7 +54,7 @@ automatically. Code should be written as if already authenticated.
 
 ### Environment Variables
 
-The **Project ID** and **Credentials JSON** can be placed in environment
+The **Credentials JSON** can be placed in environment
 variables instead of declaring them directly in code. Each service has its own
 environment variable, allowing for different service accounts to be used for
 different services. (See the READMEs for the individual service gems for
@@ -71,12 +63,7 @@ environment variable, or the **Credentials JSON** itself can be stored for
 environments such as Docker containers where writing files is difficult or not
 encouraged.
 
-The environment variables that google-cloud-secret_manager checks for project ID are:
-
-1. `SECRET_MANAGER_PROJECT`
-2. `GOOGLE_CLOUD_PROJECT`
-
-The environment variables that google-cloud-secret_manager checks for credentials are configured on `Google::Cloud::SecretManager::V1beta1::Credentials`:
+The environment variables that google-cloud-secret_manager checks for credentials are configured on `Google::Cloud::SecretManager::V1beta1::SecretManagerService::Credentials`:
 
 1. `SECRET_MANAGER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SECRET_MANAGER_KEYFILE` - Path to JSON file, or JSON contents
@@ -87,7 +74,6 @@ The environment variables that google-cloud-secret_manager checks for credential
 ```ruby
 require "google/cloud/secret_manager"
 
-ENV["SECRET_MANAGER_PROJECT"]     = "my-project-id"
 ENV["SECRET_MANAGER_CREDENTIALS"] = "path/to/keyfile.json"
 
 client = Google::Cloud::SecretManager.new
@@ -95,13 +81,22 @@ client = Google::Cloud::SecretManager.new
 
 ### Configuration
 
-The **Project ID** and **Credentials JSON** can be configured instead of placing them in environment variables or providing them as arguments.
+The **Credentials JSON** can be configured instead of placing them in environment variables. Either on an individual client initialization:
+
+```ruby
+require "google/cloud/secret_manager"
+
+client = Google::Cloud::SecretManager.new do |config|
+  config.credentials = "path/to/keyfile.json"
+end
+```
+
+Or configured globally for all clients:
 
 ```ruby
 require "google/cloud/secret_manager"
 
 Google::Cloud::SecretManager.configure do |config|
-  config.project_id  = "my-project-id"
   config.credentials = "path/to/keyfile.json"
 end
 
@@ -134,8 +129,8 @@ To configure your system for this, simply:
 
 ## Creating a Service Account
 
-Google Cloud requires a **Project ID** and **Service Account Credentials** to
-connect to the APIs. You will use the **Project ID** and **JSON key file** to
+Google Cloud requires **Service Account Credentials** to
+connect to the APIs. You will use the **JSON key file** to
 connect to most services with google-cloud-secret_manager.
 
 If you are not running this client within [Google Cloud Platform
