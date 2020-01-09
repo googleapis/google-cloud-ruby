@@ -556,8 +556,16 @@ module Google
         #   argument is not provided. See {#reference?}.
         # @param [Integer] streams The number of concurrent streams to open to
         #   pull messages from the subscription. Default is 4. Optional.
-        # @param [Integer] inventory The number of received messages to be
-        #   collected by subscriber. Default is 1,000. Optional.
+        # @param [Hash, Integer] inventory The settings to control how received messages are to be handled by the
+        #   subscriber. When provided as an Integer instead of a Hash only the `limit` will be set. Optional.
+        #
+        #   Hash keys and values may include the following:
+        #
+        #     * `:limit` (Integer) The number of received messages to be collected by subscriber. Default is 1,000.
+        #     * `:bytesize` (Integer) The total bytesize of received messages to be collected by subscriber. Default is
+        #       100,000,000 (100MB).
+        #     * `:extension` (Integer) The number of seconds that received messages can be held awaiting processing.
+        #       Default is 3,600 (1 hour).
         # @param [Hash] threads The number of threads to create to handle
         #   concurrent calls by each stream opened by the subscriber. Optional.
         #

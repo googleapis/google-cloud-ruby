@@ -22,30 +22,39 @@ module Google
         ##
         # @private
         class Inventory
+          InventoryItem = Struct.new :bytesize, :pulled_at do
+            def self.from rec_msg
+              new rec_msg.to_proto.bytesize, Time.now
+            end
+          end
+
           include MonitorMixin
 
-          attr_reader :stream, :limit
+          attr_reader :stream, :limit, :bytesize, :extension
 
-          def initialize stream, limit
+          def initialize stream, limit:, bytesize:, extension:
             super()
-
             @stream = stream
             @limit = limit
-            @_ack_ids = []
+            @bytesize = bytesize
+            @extension = extension
+            @inventory = {}
             @wait_cond = new_cond
           end
 
           def ack_ids
-            @_ack_ids
+            @inventory.keys
           end
 
-          def add *ack_ids
-            ack_ids.flatten!
-            ack_ids.compact!
-            return if ack_ids.empty?
+          def add *rec_msgs
+            rec_msgs.flatten!
+            rec_msgs.compact!
+            return if rec_msgs.empty?
 
             synchronize do
-              @_ack_ids += ack_ids
+              rec_msgs.each do |rec_msg|
+                @inventory[rec_msg.ack_id] = InventoryItem.from rec_msg
+              end
               @wait_cond.broadcast
             end
           end
@@ -56,20 +65,34 @@ module Google
             return if ack_ids.empty?
 
             synchronize do
-              @_ack_ids -= ack_ids
+              @inventory.delete_if { |ack_id, _| ack_ids.include? ack_id }
+              @wait_cond.broadcast
+            end
+          end
+
+          def remove_expired!
+            synchronize do
+              extension_time = Time.new - extension
+              @inventory.delete_if { |_ack_id, item| item.pulled_at < extension_time }
               @wait_cond.broadcast
             end
           end
 
           def count
             synchronize do
-              @_ack_ids.count
+              @inventory.count
+            end
+          end
+
+          def total_bytesize
+            synchronize do
+              @inventory.values.sum(&:bytesize)
             end
           end
 
           def empty?
             synchronize do
-              @_ack_ids.empty?
+              @inventory.empty?
             end
           end
 
@@ -93,7 +116,9 @@ module Google
           end
 
           def full?
-            count >= limit
+            synchronize do
+              @inventory.count >= limit || @inventory.values.sum(&:bytesize) >= bytesize
+            end
           end
 
           protected
