@@ -302,7 +302,7 @@ module Google
         end
 
         ##
-        # private
+        # @private
         def stream_inventory
           {
             limit:     @inventory[:limit].fdiv(@streams).ceil,
