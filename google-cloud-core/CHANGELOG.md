@@ -1,5 +1,14 @@
 # Release History
 
+### 1.5.0 / 2020-01-09
+
+* Extract error classes into a separate gem, google-cloud-errors.
+* Various fixes for Core Config
+    * Fix warnings on to_s!
+    * Alias to_s! as inspect
+    * Add send to ILLEGAL_KEYS
+    * Add respond_to? as alias of field?
+
 ### 1.4.1 / 2019-10-29
 
 #### Documentation
