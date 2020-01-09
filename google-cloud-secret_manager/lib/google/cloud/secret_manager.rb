@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,11 +18,18 @@ require "google-cloud-secret_manager"
 module Google
   module Cloud
     ##
-    # TODO
+    # Secret Manager provides a secure and convenient tool for storing API keys, passwords, certificates, and other
+    # sensitive data.
     module SecretManager
       ##
-      # TODO
-      def self.new version: :v1beta1, service: :secret_manager_service, &block
+      # Create a new `SecretManagerService::Client` object.
+      #
+      # @param version [String, Symbol] The API version to create the client instance. Optional. If not provided
+      #   defaults to `:v1beta1`.
+      #
+      # @return [SecretManagerService::Client] A client object for the specified version.
+      #
+      def self.secret_manager_service version: :v1beta1, &block
         require "google/cloud/secret_manager/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::SecretManager
@@ -30,14 +37,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         package_module = Google::Cloud::SecretManager.const_get package_name
-
-        service_name = package_module
-                       .constants
-                       .select { |sym| sym.to_s.downcase == service.to_s.downcase.tr("_", "") }
-                       .first
-        service_module = package_module.const_get service_name
-
-        service_module.const_get("Client").new(&block)
+        package_module.const_get(:SecretManagerService).const_get(:Client).new(&block)
       end
 
       ##

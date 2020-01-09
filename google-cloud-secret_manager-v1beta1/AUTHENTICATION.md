@@ -1,6 +1,6 @@
 # Authentication
 
-In general, the google-cloud-secret_manager library uses [Service
+In general, the google-cloud-secret_manager-v1beta1 library uses [Service
 Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
 credentials to connect to Google Cloud services. When running within [Google
 Cloud Platform environments](#google-cloud-platform-environments)
@@ -24,17 +24,16 @@ export SECRET_MANAGER_CREDENTIALS=path/to/keyfile.json
 3. Initialize the client.
 
 ```ruby
-require "google/cloud/secret_manager"
+require "google/cloud/secret_manager/v1beta1"
 
-client = Google::Cloud::SecretManager.new
+client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
 ```
 
 ## Credential Lookup
 
-The google-cloud-secret_manager library aims to make authentication
+The google-cloud-secret_manager-v1beta1 library aims to make authentication
 as simple as possible, and provides several mechanisms to configure your system
-without providing **Service Account Credentials** directly in
-code.
+without **Service Account Credentials** directly in code.
 
 **Credentials** are discovered in the following order:
 
@@ -49,7 +48,7 @@ code.
 
 When running on Google Cloud Platform (GCP), including Google Compute Engine (GCE),
 Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions
-(GCF) and Cloud Run, the **Project ID** and **Credentials** and are discovered
+(GCF) and Cloud Run, **Credentials** and are discovered
 automatically. Code should be written as if already authenticated.
 
 ### Environment Variables
@@ -63,7 +62,7 @@ environment variable, or the **Credentials JSON** itself can be stored for
 environments such as Docker containers where writing files is difficult or not
 encouraged.
 
-The environment variables that google-cloud-secret_manager checks for credentials are configured on `Google::Cloud::SecretManager::V1beta1::SecretManagerService::Credentials`:
+The environment variables that google-cloud-secret_manager-v1beta1 checks for credentials are configured on the service Credentials class (such as {Google::Cloud::SecretManager::V1beta1::SecretManagerService::Credentials}):
 
 1. `SECRET_MANAGER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SECRET_MANAGER_KEYFILE` - Path to JSON file, or JSON contents
@@ -72,11 +71,11 @@ The environment variables that google-cloud-secret_manager checks for credential
 5. `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
-require "google/cloud/secret_manager"
+require "google/cloud/secret_manager/v1beta1"
 
 ENV["SECRET_MANAGER_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::SecretManager.new
+client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
 ```
 
 ### Configuration
@@ -84,9 +83,9 @@ client = Google::Cloud::SecretManager.new
 The **Credentials JSON** can be configured instead of placing them in environment variables. Either on an individual client initialization:
 
 ```ruby
-require "google/cloud/secret_manager"
+require "google/cloud/secret_manager/v1beta1"
 
-client = Google::Cloud::SecretManager.new do |config|
+client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -94,13 +93,13 @@ end
 Or configured globally for all clients:
 
 ```ruby
-require "google/cloud/secret_manager"
+require "google/cloud/secret_manager/v1beta1"
 
-Google::Cloud::SecretManager.configure do |config|
+Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::SecretManager.new
+client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
 ```
 
 ### Cloud SDK
@@ -131,7 +130,7 @@ To configure your system for this, simply:
 
 Google Cloud requires **Service Account Credentials** to
 connect to the APIs. You will use the **JSON key file** to
-connect to most services with google-cloud-secret_manager.
+connect to most services with google-cloud-secret_manager-v1beta1.
 
 If you are not running this client within [Google Cloud Platform
 environments](#google-cloud-platform-environments), you need a Google
@@ -165,8 +164,3 @@ Developers service account.
 
    The key file you download will be used by this library to authenticate API
    requests and should be stored in a secure location.
-
-## Troubleshooting
-
-If you're having trouble authenticating you can ask for help by following the
-{file:TROUBLESHOOTING.md Troubleshooting Guide}.
