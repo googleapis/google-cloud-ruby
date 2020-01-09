@@ -286,7 +286,7 @@ module Google
         def inventory_limit
           @inventory[:limit]
         end
-        # @deprecated Use {inventory_limit}.
+        # @deprecated Use {#inventory_limit}.
         alias inventory inventory_limit
 
         ##
