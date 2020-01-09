@@ -25,7 +25,7 @@ module Google
       # Create a new `SecretManagerService::Client` object.
       #
       # @param version [String, Symbol] The API version to create the client instance. Optional. If not provided
-      #   defaults to `V1beta1`.
+      #   defaults to `:v1beta1`.
       #
       # @return [SecretManagerService::Client] A client object for the specified version.
       #
