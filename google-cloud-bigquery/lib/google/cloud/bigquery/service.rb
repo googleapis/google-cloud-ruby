@@ -286,6 +286,31 @@ module Google
         end
 
         ##
+        # Lists all routines in the specified dataset.
+        # Requires the READER dataset role.
+        def list_routines dataset_id, options = {}
+          # The list operation is considered idempotent
+          execute backoff: true do
+            service.list_routines @project, dataset_id, max_results: options[:max], page_token: options[:token]
+          end
+        end
+
+        ##
+        # Gets the specified routine resource by routine ID.
+        def get_routine dataset_id, routine_id
+          # The get operation is considered idempotent
+          execute backoff: true do
+            service.get_routine @project, dataset_id, routine_id
+          end
+        end
+
+        ##
+        # Deletes the routine specified by routine_id from the dataset.
+        def delete_routine dataset_id, routine_id
+          execute { service.delete_routine @project, dataset_id, routine_id }
+        end
+
+        ##
         # Lists all jobs in the specified project to which you have
         # been granted the READER job role.
         def list_jobs options = {}

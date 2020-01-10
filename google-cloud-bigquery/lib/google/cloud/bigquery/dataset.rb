@@ -18,6 +18,7 @@ require "google/cloud/errors"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/table"
 require "google/cloud/bigquery/model"
+require "google/cloud/bigquery/routine"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/dataset/list"
 require "google/cloud/bigquery/dataset/access"
@@ -815,6 +816,87 @@ module Google
           ensure_service!
           gapi = service.list_models dataset_id, token: token, max: max
           Model::List.from_gapi gapi, service, dataset_id, max
+        end
+
+        ##
+        # Retrieves an existing routine by ID.
+        #
+        # @param [String] routine_id The ID of a routine.
+        # @param [Boolean] skip_lookup Optionally create just a local reference
+        #   object without verifying that the resource exists on the BigQuery
+        #   service. Calls made on this object will raise errors if the resource
+        #   does not exist. Default is `false`. Optional.
+        #
+        # @return [Google::Cloud::Bigquery::Routine, nil] Returns `nil` if the
+        #   routine does not exist.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routine = dataset.routine "my_routine"
+        #   puts routine.routine_id
+        #
+        # @example Avoid retrieving the routine resource with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routine = dataset.routine "my_routine", skip_lookup: true
+        #
+        # @!group Routine
+        #
+        def routine routine_id, skip_lookup: nil
+          ensure_service!
+          return Routine.new_reference project_id, dataset_id, routine_id, service if skip_lookup
+          gapi = service.get_routine dataset_id, routine_id
+          Routine.from_gapi gapi, service
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+
+        ##
+        # Retrieves the list of routines belonging to the dataset.
+        #
+        # @param [String] token A previously-returned page token representing
+        #   part of the larger set of results to view.
+        # @param [Integer] max Maximum number of routines to return.
+        #
+        # @return [Array<Google::Cloud::Bigquery::Routine>] An array of routines
+        #   (See {Google::Cloud::Bigquery::Routine::List})
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routines = dataset.routines
+        #   routines.each do |routine|
+        #     puts routine.routine_id
+        #   end
+        #
+        # @example Retrieve all routines: (See {Routine::List#all})
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routines = dataset.routines
+        #   routines.all do |routine|
+        #     puts routine.routine_id
+        #   end
+        #
+        # @!group Routine
+        #
+        def routines token: nil, max: nil
+          ensure_service!
+          gapi = service.list_routines dataset_id, token: token, max: max
+          Routine::List.from_gapi gapi, service, dataset_id, max
         end
 
         ##

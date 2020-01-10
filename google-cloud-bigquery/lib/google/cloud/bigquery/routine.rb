@@ -362,7 +362,92 @@ module Google
           Convert.millis_to_time @gapi.last_modified_time
         end
 
+        ##
+        # Permanently deletes the routine.
+        #
+        # @return [Boolean] Returns `true` if the routine was deleted.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.delete
+        #
+        # @!group Lifecycle
+        #
+        def delete
+          ensure_service!
+          service.delete_routine dataset_id, routine_id
+          # Set flag for #exists?
+          @exists = false
+          true
+        end
+
+        ##
+        # Reloads the routine with current data from the BigQuery service.
+        #
+        # @return [Google::Cloud::Bigquery::Routine] Returns the reloaded
+        #   routine.
+        #
+        # @example Skip retrieving the routine from the service, then load it:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine", skip_lookup: true
+        #
+        #   routine.reload!
+        #
+        # @!group Lifecycle
+        #
+        def reload!
+          ensure_service!
+          @gapi = service.get_routine dataset_id, routine_id
+          @reference = nil
+          @exists = nil
+          self
+        end
+        alias refresh! reload!
+
+        ##
+        # @private New Routine from a Google API Client object.
+        def self.from_gapi gapi, service
+          new.tap do |m|
+            m.instance_variable_set :@gapi, gapi
+            m.instance_variable_set :@service, service
+          end
+        end
+
+        ##
+        # @private New lazy Routine object without making an HTTP request.
+        def self.new_reference project_id, dataset_id, routine_id, service
+          raise ArgumentError, "project_id is required" unless project_id
+          raise ArgumentError, "dataset_id is required" unless dataset_id
+          raise ArgumentError, "routine_id is required" unless routine_id
+          raise ArgumentError, "service is required" unless service
+
+          new.tap do |m|
+            reference_gapi = Google::Apis::BigqueryV2::RoutineReference.new(
+              project_id: project_id,
+              dataset_id: dataset_id,
+              routine_id:   routine_id
+            )
+            m.instance_variable_set :@reference, reference_gapi
+            m.instance_variable_set :@service, service
+          end
+        end
+
         protected
+
+        ##
+        # Raise an error unless an active service is available.
+        def ensure_service!
+          raise "Must have active connection" unless service
+        end
 
         def frozen_check!
           return unless frozen?
