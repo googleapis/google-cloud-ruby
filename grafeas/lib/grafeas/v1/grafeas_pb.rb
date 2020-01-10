@@ -5,6 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -15,7 +18,7 @@ require 'grafeas/v1/deployment_pb'
 require 'grafeas/v1/discovery_pb'
 require 'grafeas/v1/image_pb'
 require 'grafeas/v1/package_pb'
-require 'grafeas/v1/provenance_pb'
+require 'grafeas/v1/upgrade_pb'
 require 'grafeas/v1/vulnerability_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "grafeas.v1.Occurrence" do
@@ -34,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :deployment, :message, 12, "grafeas.v1.DeploymentOccurrence"
       optional :discovery, :message, 13, "grafeas.v1.DiscoveryOccurrence"
       optional :attestation, :message, 14, "grafeas.v1.AttestationOccurrence"
+      optional :upgrade, :message, 15, "grafeas.v1.UpgradeOccurrence"
     end
   end
   add_message "grafeas.v1.Note" do
@@ -54,6 +58,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :deployment, :message, 14, "grafeas.v1.DeploymentNote"
       optional :discovery, :message, 15, "grafeas.v1.DiscoveryNote"
       optional :attestation, :message, 16, "grafeas.v1.AttestationNote"
+      optional :upgrade, :message, 17, "grafeas.v1.UpgradeNote"
     end
   end
   add_message "grafeas.v1.GetOccurrenceRequest" do

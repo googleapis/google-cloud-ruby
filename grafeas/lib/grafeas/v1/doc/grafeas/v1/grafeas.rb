@@ -65,6 +65,9 @@ module Grafeas
     # @!attribute [rw] attestation
     #   @return [Grafeas::V1::AttestationOccurrence]
     #     Describes an attestation of an artifact.
+    # @!attribute [rw] upgrade
+    #   @return [Grafeas::V1::UpgradeOccurrence]
+    #     Describes an available package upgrade on the linked resource.
     class Occurrence; end
 
     # A type of analysis that can be done for a resource.
@@ -120,6 +123,9 @@ module Grafeas
     # @!attribute [rw] attestation
     #   @return [Grafeas::V1::AttestationNote]
     #     A note describing an attestation role.
+    # @!attribute [rw] upgrade
+    #   @return [Grafeas::V1::UpgradeNote]
+    #     A note describing available package upgrades.
     class Note; end
 
     # Request to get an occurrence.
@@ -157,7 +163,7 @@ module Grafeas
     #     results.
     class ListOccurrencesResponse; end
 
-    # Request to delete a occurrence.
+    # Request to delete an occurrence.
     # @!attribute [rw] name
     #   @return [String]
     #     The name of the occurrence in the form of

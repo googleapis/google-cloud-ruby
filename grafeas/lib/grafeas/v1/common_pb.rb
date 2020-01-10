@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :DEPLOYMENT, 5
     value :DISCOVERY, 6
     value :ATTESTATION, 7
+    value :UPGRADE, 8
   end
 end
 
