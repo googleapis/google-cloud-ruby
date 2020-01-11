@@ -61,9 +61,6 @@ module Google
         #     this CellChunk is a continuation of the same row as the previous
         #     CellChunk in the response stream, even if that CellChunk was in a
         #     previous ReadRowsResponse message.
-        #
-        #     Classified as IDENTIFYING_ID to provide context around data accesses for
-        #     auditing systems.
         # @!attribute [rw] family_name
         #   @return [Google::Protobuf::StringValue]
         #     The column family name for this chunk of data.  If this message
@@ -140,9 +137,6 @@ module Google
       #     Note that row keys in this list may not have ever been written to or read
       #     from, and users should therefore not make any assumptions about the row key
       #     structure that are specific to their use case.
-      #
-      #     Classified as IDENTIFYING_ID to provide context around data accesses for
-      #     auditing systems.
       # @!attribute [rw] offset_bytes
       #   @return [Integer]
       #     Approximate total storage space used by all rows in the table which precede
@@ -164,9 +158,6 @@ module Google
       # @!attribute [rw] row_key
       #   @return [String]
       #     Required. The key of the row to which the mutation should be applied.
-      #
-      #     Classified as IDENTIFYING_ID to provide context around data accesses for
-      #     auditing systems.
       # @!attribute [rw] mutations
       #   @return [Array<Google::Bigtable::V2::Mutation>]
       #     Required. Changes to be atomically applied to the specified row. Entries are applied
@@ -197,9 +188,6 @@ module Google
         # @!attribute [rw] row_key
         #   @return [String]
         #     The key of the row to which the `mutations` should be applied.
-        #
-        #     Classified as IDENTIFYING_ID to provide context around data accesses for
-        #     auditing systems.
         # @!attribute [rw] mutations
         #   @return [Array<Google::Bigtable::V2::Mutation>]
         #     Required. Changes to be atomically applied to the specified row. Mutations are
@@ -242,9 +230,6 @@ module Google
       # @!attribute [rw] row_key
       #   @return [String]
       #     Required. The key of the row to which the conditional mutation should be applied.
-      #
-      #     Classified as IDENTIFYING_ID to provide context around data accesses for
-      #     auditing systems.
       # @!attribute [rw] predicate_filter
       #   @return [Google::Bigtable::V2::RowFilter]
       #     The filter to be applied to the contents of the specified row. Depending
@@ -288,9 +273,6 @@ module Google
       # @!attribute [rw] row_key
       #   @return [String]
       #     Required. The key of the row to which the read/modify/write rules should be applied.
-      #
-      #     Classified as IDENTIFYING_ID to provide context around data accesses for
-      #     auditing systems.
       # @!attribute [rw] rules
       #   @return [Array<Google::Bigtable::V2::ReadModifyWriteRule>]
       #     Required. Rules specifying how the specified row's contents are to be transformed

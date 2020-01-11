@@ -351,9 +351,6 @@ module Google
           #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param row_key [String]
           #   Required. The key of the row to which the mutation should be applied.
-          #
-          #   Classified as IDENTIFYING_ID to provide context around data accesses for
-          #   auditing systems.
           # @param mutations [Array<Google::Bigtable::V2::Mutation | Hash>]
           #   Required. Changes to be atomically applied to the specified row. Entries are applied
           #   in order, meaning that earlier mutations can be masked by later ones.
@@ -460,9 +457,6 @@ module Google
           #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param row_key [String]
           #   Required. The key of the row to which the conditional mutation should be applied.
-          #
-          #   Classified as IDENTIFYING_ID to provide context around data accesses for
-          #   auditing systems.
           # @param app_profile_id [String]
           #   This value specifies routing for replication. If not specified, the
           #   "default" application profile will be used.
@@ -541,9 +535,6 @@ module Google
           #   `projects/<project>/instances/<instance>/tables/<table>`.
           # @param row_key [String]
           #   Required. The key of the row to which the read/modify/write rules should be applied.
-          #
-          #   Classified as IDENTIFYING_ID to provide context around data accesses for
-          #   auditing systems.
           # @param rules [Array<Google::Bigtable::V2::ReadModifyWriteRule | Hash>]
           #   Required. Rules specifying how the specified row's contents are to be transformed
           #   into writes. Entries are applied in order, meaning that earlier rules will
