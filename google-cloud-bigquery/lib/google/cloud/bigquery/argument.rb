@@ -13,18 +13,13 @@
 # limitations under the License.
 
 
+require "google/cloud/bigquery/standard_sql"
+
 module Google
   module Cloud
     module Bigquery
       # Input/output argument of a function or a stored procedure.
       class Argument
-        # Optional. Defaults to FIXED_TYPE.
-        # Corresponds to the JSON property `argumentKind`
-        # @return [String]
-        attr_accessor :argument_kind
-        # FIXED_TYPE  The argument is a variable with fully specified type, which can be a struct or an array, but not a table.
-        # ANY_TYPE  The argument is any type, including struct or array, but not a table. To be added: FIXED_TABLE, ANY_TABLE
-
         # The type of a variable, e.g., a function argument.
         # Examples:
         # INT64: `type_kind="INT64"`
@@ -38,6 +33,13 @@ module Google
         # Corresponds to the JSON property `dataType`
         # @return [Google::Apis::BigqueryV2::StandardSqlDataType]
         attr_accessor :data_type
+
+        # Optional. Defaults to FIXED_TYPE.
+        # Corresponds to the JSON property `argumentKind`
+        # @return [String]
+        attr_accessor :kind
+        # FIXED_TYPE  The argument is a variable with fully specified type, which can be a struct or an array, but not a table.
+        # ANY_TYPE  The argument is any type, including struct or array, but not a table. To be added: FIXED_TABLE, ANY_TABLE
 
         # Optional. Specifies whether the argument is input or output.
         # Can be set for procedures only.
@@ -54,8 +56,36 @@ module Google
         # @return [String]
         attr_accessor :name
 
-        def initialize **args
-          update!(**args)
+        def initialize data_type, kind: nil, mode: nil, name: nil
+          @data_type = if data_type.kind_of? StandardSql::DataType
+                        data_type
+                      elsif data_type.respond_to? :to_s
+                        StandardSql::DataType.new(type_kind: data_type.to_s.upcase)
+
+                      end
+          @kind = kind
+          @mode = mode
+          @name = name
+        end
+
+        def to_gapi
+          Google::Apis::BigqueryV2::Argument.new(
+            name: @name,
+            argument_kind: @kind,
+            mode: @mode,
+            data_type: @data_type.to_gapi
+          )
+        end
+
+        ##
+        # @private New Routine from a Google API Client object.
+        def self.from_gapi gapi
+          new(
+            StandardSql::DataType.from_gapi(gapi.data_type),
+            kind: gapi.argument_kind,
+            mode: gapi.mode,
+            name: gapi.name
+          )
         end
       end
     end

@@ -228,7 +228,9 @@ module Google
         #
         #
         # @return [String]
-        attr_accessor :definition_body
+        def body
+          @gapi.definition_body
+        end
 
         # Optional. [Experimental] The description of the routine if defined.
         # Corresponds to the JSON property `description`
@@ -244,9 +246,11 @@ module Google
         # Optional. Defaults to "SQL".
         # Corresponds to the JSON property `language`
         # @return [String]
-        attr_accessor :language
         # SQL  SQL language.
         # JAVASCRIPT  JavaScript language.
+        def language
+          @gapi.language
+        end
 
         # Required. Reference describing the ID of this routine.
         # Corresponds to the JSON property `routineReference`
@@ -256,9 +260,11 @@ module Google
         # Required. The type of routine.
         # Corresponds to the JSON property `routineType`
         # @return [String]
-        attr_accessor :routine_type
         # SCALAR_FUNCTION  Non-builtin permanent scalar function.
         # PROCEDURE  Stored procedure.
+        def type
+          @gapi.routine_type
+        end
 
         ###
         # DOCS
@@ -416,9 +422,9 @@ module Google
         ##
         # @private New Routine from a Google API Client object.
         def self.from_gapi gapi, service
-          new.tap do |m|
-            m.instance_variable_set :@gapi, gapi
-            m.instance_variable_set :@service, service
+          new.tap do |r|
+            r.instance_variable_set :@gapi, gapi
+            r.instance_variable_set :@service, service
           end
         end
 
@@ -471,10 +477,12 @@ module Google
           def initialize gapi
             @updates = []
             @gapi = gapi.dup
-            @original_imported_libraries = Array(@gapi.imported_libraries).map(&:freeze).freeze
-            @imported_libraries = Array(@gapi.imported_libraries)
-            @original_arguments = Array(@gapi.fields).map { |arg| Argument.from_gapi(arg).freeze }.freeze
-            @arguments = Array(@gapi.arguments).map { |arg| Argument.from_gapi arg }
+            # @original_imported_libraries = Array(@gapi.imported_libraries).map(&:freeze).freeze
+            # @imported_libraries = Array(@gapi.imported_libraries)
+            # if @gapi.respond_to? :fields # TODO verify this attr
+            #   @original_arguments = Array(@gapi.fields).map { |arg| Argument.from_gapi(arg).freeze }.freeze
+            #   @arguments = Array(@gapi.arguments).map { |arg| Argument.from_gapi arg }
+            # end
           end
 
           def imported_libraries
@@ -486,28 +494,54 @@ module Google
           end
 
           def arguments
-            @arguments
+            @gapi.arguments
           end
 
           def arguments= new_arguments
-            @arguments = new_arguments
+            @gapi.arguments = new_arguments.map(&:to_gapi)
+          end
+
+          def body
+            @gapi.definition_body
+          end
+
+          def body= new_body
+            @gapi.definition_body = new_body
+          end
+
+          def language
+            @gapi.language
+          end
+
+          def language= new_language
+            @gapi.language = new_language
+          end
+
+          def type
+            @gapi.routine_type
+          end
+
+          def type= new_type
+            @gapi.routine_type = new_type
           end
 
           ##
           # Make sure any imported_libraries or arguments changes are saved.
-          def check_for_mutated_values!
-            if @original_imported_libraries != @imported_libraries
-              @gapi.update! imported_libraries: @imported_libraries
-              patch_gapi! :imported_libraries
-            end
-            if @original_arguments.map(&:to_gapi).map(&:to_h) != @arguments.map(&:to_gapi).map(&:to_h)
-              @gapi.update! arguments: @arguments.map(&:to_gapi)
-              patch_gapi! :arguments
-            end
-          end
+          # def check_for_mutated_values!
+          #   if @gapi.respond_to? :fields # TODO verify this attr
+          #     if @original_imported_libraries != @imported_libraries
+          #       @gapi.update! imported_libraries: @imported_libraries
+          #       patch_gapi! :imported_libraries
+          #     end
+          #     if @original_arguments.map(&:to_gapi).map(&:to_h) != @arguments.map(&:to_gapi).map(&:to_h)
+          #       @gapi.update! arguments: @arguments.map(&:to_gapi)
+          #       patch_gapi! :arguments
+          #     end
+          #   end
+          # end
 
           def to_gapi
-            check_for_mutated_values!
+            #check_for_mutated_values!
             @gapi
           end
 

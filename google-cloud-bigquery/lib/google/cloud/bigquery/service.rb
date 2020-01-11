@@ -286,6 +286,12 @@ module Google
         end
 
         ##
+        # Creates a new routine in the dataset.
+        def insert_routine dataset_id, new_routine_gapi
+          execute { service.insert_routine @project, dataset_id, new_routine_gapi }
+        end
+
+        ##
         # Lists all routines in the specified dataset.
         # Requires the READER dataset role.
         def list_routines dataset_id, options = {}

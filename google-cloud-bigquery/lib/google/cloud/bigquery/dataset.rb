@@ -819,6 +819,44 @@ module Google
         end
 
         ##
+        # Creates a new routine.
+        #
+        # @param [String] routine_id The ID of the routine. The ID must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum
+        #   length is 1,024 characters.
+        # @yield [routine] a block for setting the routine
+        # @yieldparam [Google::Cloud::Bigquery::Routine::Updater] routine An updater
+        #   to set additional properties on the routine in the API request to
+        #   create it.
+        #
+        # @return [Google::Cloud::Bigquery::Routine] A new routine object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routine = dataset.create_routine "my_routine"
+        #
+        # @!group Routine
+        #
+        def create_routine routine_id
+          ensure_service!
+          new_tb = Google::Apis::BigqueryV2::Routine.new(
+            routine_reference: Google::Apis::BigqueryV2::RoutineReference.new(
+              project_id: project_id, dataset_id: dataset_id, routine_id: routine_id
+            )
+          )
+          updater = Routine::Updater.new(new_tb)
+
+          yield updater if block_given?
+
+          gapi = service.insert_routine dataset_id, updater.to_gapi
+          Routine.from_gapi gapi, service
+        end
+
+        ##
         # Retrieves an existing routine by ID.
         #
         # @param [String] routine_id The ID of a routine.
