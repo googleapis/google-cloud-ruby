@@ -89,6 +89,7 @@ module Google
         #     See https://cloud.google.com/dlp/docs/likelihood to learn more.
         # @!attribute [rw] limits
         #   @return [Google::Privacy::Dlp::V2::InspectConfig::FindingLimits]
+        #     Configuration to control the number of findings returned.
         # @!attribute [rw] include_quote
         #   @return [true, false]
         #     When true, a contextual quote from the data that triggered a finding is
@@ -110,6 +111,7 @@ module Google
         #     Exclusion rules, contained in the set are executed in the end, other
         #     rules are executed in the order they are specified for each info type.
         class InspectConfig
+          # Configuration to control the number of findings returned.
           # @!attribute [rw] max_findings_per_item
           #   @return [Integer]
           #     Max number of findings that will be returned for each item scanned.
@@ -148,21 +150,30 @@ module Google
         #   @return [String]
         #     Content data to inspect or redact.
         class ByteContentItem
+          # The type of data being sent to in data.
           module BytesType
+            # Unused
             BYTES_TYPE_UNSPECIFIED = 0
 
+            # Any image type.
             IMAGE = 6
 
+            # jpeg
             IMAGE_JPEG = 1
 
+            # bmp
             IMAGE_BMP = 2
 
+            # png
             IMAGE_PNG = 3
 
+            # svg
             IMAGE_SVG = 4
 
+            # plain text
             TEXT_UTF8 = 5
 
+            # avro
             AVRO = 11
           end
         end
@@ -186,11 +197,15 @@ module Google
         # learn more.
         # @!attribute [rw] headers
         #   @return [Array<Google::Privacy::Dlp::V2::FieldId>]
+        #     Headers of the table.
         # @!attribute [rw] rows
         #   @return [Array<Google::Privacy::Dlp::V2::Table::Row>]
+        #     Rows of the table.
         class Table
+          # Values of the row.
           # @!attribute [rw] values
           #   @return [Array<Google::Privacy::Dlp::V2::Value>]
+          #     Individual cells.
           class Row; end
         end
 
@@ -262,9 +277,9 @@ module Google
         #     The top level name is the source file name or table name. Names of some
         #     common storage containers are formatted as follows:
         #
-        #     * BigQuery tables:  `<project_id>:<dataset_id>.<table_id>`
-        #     * Cloud Storage files: `gs://<bucket>/<path>`
-        #     * Datastore namespace: <namespace>
+        #     * BigQuery tables:  `{project_id}:{dataset_id}.{table_id}`
+        #     * Cloud Storage files: `gs://{bucket}/{path}`
+        #     * Datastore namespace: \\{namespace}
         #
         #     Nested names could be absent if the embedded object has no string
         #     identifier (for an example an image contained within a document).
@@ -430,14 +445,14 @@ module Google
         #     The item to de-identify. Will be treated as text.
         # @!attribute [rw] inspect_template_name
         #   @return [String]
-        #     Optional template to use. Any configuration directly specified in
+        #     Template to use. Any configuration directly specified in
         #     inspect_config will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
         # @!attribute [rw] deidentify_template_name
         #   @return [String]
-        #     Optional template to use. Any configuration directly specified in
+        #     Template to use. Any configuration directly specified in
         #     deidentify_config will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
@@ -481,14 +496,14 @@ module Google
         #     The item to re-identify. Will be treated as text.
         # @!attribute [rw] inspect_template_name
         #   @return [String]
-        #     Optional template to use. Any configuration directly specified in
+        #     Template to use. Any configuration directly specified in
         #     `inspect_config` will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
         # @!attribute [rw] reidentify_template_name
         #   @return [String]
-        #     Optional template to use. References an instance of `DeidentifyTemplate`.
+        #     Template to use. References an instance of `DeidentifyTemplate`.
         #     Any configuration directly specified in `reidentify_config` or
         #     `inspect_config` will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
@@ -522,7 +537,7 @@ module Google
         #     The item to inspect.
         # @!attribute [rw] inspect_template_name
         #   @return [String]
-        #     Optional template to use. Any configuration directly specified in
+        #     Template to use. Any configuration directly specified in
         #     inspect_config will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
@@ -570,6 +585,7 @@ module Google
         class OutputStorageConfig
           # Predefined schemas for storing findings.
           module OutputSchema
+            # Unused.
             OUTPUT_SCHEMA_UNSPECIFIED = 0
 
             # Basic schema including only `info_type`, `quote`, `certainty`, and
@@ -607,12 +623,14 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::InspectDataSourceDetails::Result]
         #     A summary of the outcome of this inspect job.
         class InspectDataSourceDetails
+          # Snapshot of the inspection configuration.
           # @!attribute [rw] snapshot_inspect_template
           #   @return [Google::Privacy::Dlp::V2::InspectTemplate]
           #     If run with an InspectTemplate, a snapshot of its state at the time of
           #     this run.
           # @!attribute [rw] job_config
           #   @return [Google::Privacy::Dlp::V2::InspectJobConfig]
+          #     Inspect config.
           class RequestedOptions; end
 
           # All result fields mentioned below are updated while the job is processing.
@@ -648,12 +666,12 @@ module Google
         # Request for the list of infoTypes.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional BCP-47 language code for localized infoType friendly
+        #     BCP-47 language code for localized infoType friendly
         #     names. If omitted, or if localized strings are not available,
         #     en-US strings will be returned.
         # @!attribute [rw] filter
         #   @return [String]
-        #     Optional filter to only return infoTypes supported by certain parts of the
+        #     filter to only return infoTypes supported by certain parts of the
         #     API. Defaults to supported_by=INSPECT.
         # @!attribute [rw] location_id
         #   @return [String]
@@ -684,7 +702,7 @@ module Google
         # A column with a semantic tag attached.
         # @!attribute [rw] field
         #   @return [Google::Privacy::Dlp::V2::FieldId]
-        #     Identifies the column. [required]
+        #     Required. Identifies the column.
         # @!attribute [rw] info_type
         #   @return [Google::Privacy::Dlp::V2::InfoType]
         #     A column can be tagged with a InfoType to use the relevant public
@@ -712,38 +730,47 @@ module Google
         # tuple is highly reidentifiable).
         # @!attribute [rw] table
         #   @return [Google::Privacy::Dlp::V2::BigQueryTable]
-        #     Auxiliary table location. [required]
+        #     Required. Auxiliary table location.
         # @!attribute [rw] quasi_ids
         #   @return [Array<Google::Privacy::Dlp::V2::StatisticalTable::QuasiIdentifierField>]
-        #     Quasi-identifier columns. [required]
+        #     Required. Quasi-identifier columns.
         # @!attribute [rw] relative_frequency
         #   @return [Google::Privacy::Dlp::V2::FieldId]
-        #     The relative frequency column must contain a floating-point number
+        #     Required. The relative frequency column must contain a floating-point number
         #     between 0 and 1 (inclusive). Null values are assumed to be zero.
-        #     [required]
         class StatisticalTable
           # A quasi-identifier column has a custom_tag, used to know which column
           # in the data corresponds to which column in the statistical model.
           # @!attribute [rw] field
           #   @return [Google::Privacy::Dlp::V2::FieldId]
+          #     Identifies the column.
           # @!attribute [rw] custom_tag
           #   @return [String]
+          #     A column can be tagged with a custom tag. In this case, the user must
+          #     indicate an auxiliary table that contains statistical information on
+          #     the possible values of this column (below).
           class QuasiIdentifierField; end
         end
 
         # Privacy metric to compute for reidentification risk analysis.
         # @!attribute [rw] numerical_stats_config
         #   @return [Google::Privacy::Dlp::V2::PrivacyMetric::NumericalStatsConfig]
+        #     Numerical stats
         # @!attribute [rw] categorical_stats_config
         #   @return [Google::Privacy::Dlp::V2::PrivacyMetric::CategoricalStatsConfig]
+        #     Categorical stats
         # @!attribute [rw] k_anonymity_config
         #   @return [Google::Privacy::Dlp::V2::PrivacyMetric::KAnonymityConfig]
+        #     K-anonymity
         # @!attribute [rw] l_diversity_config
         #   @return [Google::Privacy::Dlp::V2::PrivacyMetric::LDiversityConfig]
+        #     l-diversity
         # @!attribute [rw] k_map_estimation_config
         #   @return [Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig]
+        #     k-map
         # @!attribute [rw] delta_presence_estimation_config
         #   @return [Google::Privacy::Dlp::V2::PrivacyMetric::DeltaPresenceEstimationConfig]
+        #     delta-presence
         class PrivacyMetric
           # Compute numerical stats over an individual column, including
           # min, max, and quantiles.
@@ -773,7 +800,7 @@ module Google
           #     a repeated field.
           # @!attribute [rw] entity_id
           #   @return [Google::Privacy::Dlp::V2::EntityId]
-          #     Optional message indicating that multiple rows might be associated to a
+          #     Message indicating that multiple rows might be associated to a
           #     single individual. If the same entity_id is associated to multiple
           #     quasi-identifier tuples over distinct rows, we consider the entire
           #     collection of tuples as the composite quasi-identifier. This collection
@@ -802,15 +829,14 @@ module Google
           # using publicly available data (like the US Census), or using a custom
           # statistical model (indicated as one or several BigQuery tables), or by
           # extrapolating from the distribution of values in the input dataset.
-          # A column with a semantic tag attached.
           # @!attribute [rw] quasi_ids
           #   @return [Array<Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField>]
-          #     Fields considered to be quasi-identifiers. No two columns can have the
-          #     same tag. [required]
+          #     Required. Fields considered to be quasi-identifiers. No two columns can have the
+          #     same tag.
           # @!attribute [rw] region_code
           #   @return [String]
           #     ISO 3166-1 alpha-2 region code to use in the statistical modeling.
-          #     Required if no column is tagged with a region-specific InfoType (like
+          #     Set if no column is tagged with a region-specific InfoType (like
           #     US_ZIP_5) or a region code.
           # @!attribute [rw] auxiliary_tables
           #   @return [Array<Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable>]
@@ -818,9 +844,10 @@ module Google
           #     used to tag a quasi-identifiers column must appear in exactly one column
           #     of one auxiliary table.
           class KMapEstimationConfig
+            # A column with a semantic tag attached.
             # @!attribute [rw] field
             #   @return [Google::Privacy::Dlp::V2::FieldId]
-            #     Identifies the column. [required]
+            #     Required. Identifies the column.
             # @!attribute [rw] info_type
             #   @return [Google::Privacy::Dlp::V2::InfoType]
             #     A column can be tagged with a InfoType to use the relevant public
@@ -848,22 +875,23 @@ module Google
             # tuple is highly reidentifiable).
             # @!attribute [rw] table
             #   @return [Google::Privacy::Dlp::V2::BigQueryTable]
-            #     Auxiliary table location. [required]
+            #     Required. Auxiliary table location.
             # @!attribute [rw] quasi_ids
             #   @return [Array<Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable::QuasiIdField>]
-            #     Quasi-identifier columns. [required]
+            #     Required. Quasi-identifier columns.
             # @!attribute [rw] relative_frequency
             #   @return [Google::Privacy::Dlp::V2::FieldId]
-            #     The relative frequency column must contain a floating-point number
+            #     Required. The relative frequency column must contain a floating-point number
             #     between 0 and 1 (inclusive). Null values are assumed to be zero.
-            #     [required]
             class AuxiliaryTable
               # A quasi-identifier column has a custom_tag, used to know which column
               # in the data corresponds to which column in the statistical model.
               # @!attribute [rw] field
               #   @return [Google::Privacy::Dlp::V2::FieldId]
+              #     Identifies the column.
               # @!attribute [rw] custom_tag
               #   @return [String]
+              #     A auxiliary field.
               class QuasiIdField; end
             end
           end
@@ -874,12 +902,12 @@ module Google
           # knowing the attack dataset, so we use a statistical model instead.
           # @!attribute [rw] quasi_ids
           #   @return [Array<Google::Privacy::Dlp::V2::QuasiId>]
-          #     Fields considered to be quasi-identifiers. No two fields can have the
-          #     same tag. [required]
+          #     Required. Fields considered to be quasi-identifiers. No two fields can have the
+          #     same tag.
           # @!attribute [rw] region_code
           #   @return [String]
           #     ISO 3166-1 alpha-2 region code to use in the statistical modeling.
-          #     Required if no column is tagged with a region-specific InfoType (like
+          #     Set if no column is tagged with a region-specific InfoType (like
           #     US_ZIP_5) or a region code.
           # @!attribute [rw] auxiliary_tables
           #   @return [Array<Google::Privacy::Dlp::V2::StatisticalTable>]
@@ -898,16 +926,22 @@ module Google
         #     Input dataset to compute metrics over.
         # @!attribute [rw] numerical_stats_result
         #   @return [Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::NumericalStatsResult]
+        #     Numerical stats result
         # @!attribute [rw] categorical_stats_result
         #   @return [Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::CategoricalStatsResult]
+        #     Categorical stats result
         # @!attribute [rw] k_anonymity_result
         #   @return [Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::KAnonymityResult]
+        #     K-anonymity result
         # @!attribute [rw] l_diversity_result
         #   @return [Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::LDiversityResult]
+        #     L-divesity result
         # @!attribute [rw] k_map_estimation_result
         #   @return [Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::KMapEstimationResult]
+        #     K-map result
         # @!attribute [rw] delta_presence_estimation_result
         #   @return [Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult]
+        #     Delta-presence result
         class AnalyzeDataSourceRiskDetails
           # Result of the numerical stats computation.
           # @!attribute [rw] min_value
@@ -927,6 +961,7 @@ module Google
           #   @return [Array<Google::Privacy::Dlp::V2::AnalyzeDataSourceRiskDetails::CategoricalStatsResult::CategoricalStatsHistogramBucket>]
           #     Histogram of value frequencies in the column.
           class CategoricalStatsResult
+            # Histogram of value frequencies in the column.
             # @!attribute [rw] value_frequency_lower_bound
             #   @return [Integer]
             #     Lower bound on the value frequency of the values in this bucket.
@@ -963,6 +998,7 @@ module Google
             #     above set of values.
             class KAnonymityEquivalenceClass; end
 
+            # Histogram of k-anonymity equivalence classes.
             # @!attribute [rw] equivalence_class_size_lower_bound
             #   @return [Integer]
             #     Lower bound on the size of the equivalence classes in this bucket.
@@ -1003,6 +1039,7 @@ module Google
             #     Estimated frequencies of top sensitive values.
             class LDiversityEquivalenceClass; end
 
+            # Histogram of l-diversity equivalence class sensitive value frequencies.
             # @!attribute [rw] sensitive_value_frequency_lower_bound
             #   @return [Integer]
             #     Lower bound on the sensitive value frequencies of the equivalence
@@ -1148,20 +1185,28 @@ module Google
         # int64 only holds up to 8 bytes of data.
         # @!attribute [rw] integer_value
         #   @return [Integer]
+        #     integer
         # @!attribute [rw] float_value
         #   @return [Float]
+        #     float
         # @!attribute [rw] string_value
         #   @return [String]
+        #     string
         # @!attribute [rw] boolean_value
         #   @return [true, false]
+        #     boolean
         # @!attribute [rw] timestamp_value
         #   @return [Google::Protobuf::Timestamp]
+        #     timestamp
         # @!attribute [rw] time_value
         #   @return [Google::Type::TimeOfDay]
+        #     time of day
         # @!attribute [rw] date_value
         #   @return [Google::Type::Date]
+        #     date
         # @!attribute [rw] day_of_week_value
         #   @return [Google::Type::DayOfWeek]
+        #     day of week
         class Value; end
 
         # Message for infoType-dependent details parsed from quote.
@@ -1174,15 +1219,19 @@ module Google
         # e.g. 2018-01-01, 5th August.
         # @!attribute [rw] date
         #   @return [Google::Type::Date]
-        #     One or more of the following must be set. All fields are optional, but
-        #     when set must be valid date or time values.
+        #     One or more of the following must be set.
+        #     Must be a valid date or time value.
         # @!attribute [rw] day_of_week
         #   @return [Google::Type::DayOfWeek]
+        #     Day of week
         # @!attribute [rw] time
         #   @return [Google::Type::TimeOfDay]
+        #     Time of day
         # @!attribute [rw] time_zone
         #   @return [Google::Privacy::Dlp::V2::DateTime::TimeZone]
+        #     Time zone
         class DateTime
+          # Time zone of the date time object.
           # @!attribute [rw] offset_minutes
           #   @return [Integer]
           #     Set only if the offset can be determined. Positive for time ahead of UTC.
@@ -1205,34 +1254,48 @@ module Google
         # A rule for transforming a value.
         # @!attribute [rw] replace_config
         #   @return [Google::Privacy::Dlp::V2::ReplaceValueConfig]
+        #     Replace
         # @!attribute [rw] redact_config
         #   @return [Google::Privacy::Dlp::V2::RedactConfig]
+        #     Redact
         # @!attribute [rw] character_mask_config
         #   @return [Google::Privacy::Dlp::V2::CharacterMaskConfig]
+        #     Mask
         # @!attribute [rw] crypto_replace_ffx_fpe_config
         #   @return [Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig]
+        #     Ffx-Fpe
         # @!attribute [rw] fixed_size_bucketing_config
         #   @return [Google::Privacy::Dlp::V2::FixedSizeBucketingConfig]
+        #     Fixed size bucketing
         # @!attribute [rw] bucketing_config
         #   @return [Google::Privacy::Dlp::V2::BucketingConfig]
+        #     Bucketing
         # @!attribute [rw] replace_with_info_type_config
         #   @return [Google::Privacy::Dlp::V2::ReplaceWithInfoTypeConfig]
+        #     Replace with infotype
         # @!attribute [rw] time_part_config
         #   @return [Google::Privacy::Dlp::V2::TimePartConfig]
+        #     Time extraction
         # @!attribute [rw] crypto_hash_config
         #   @return [Google::Privacy::Dlp::V2::CryptoHashConfig]
+        #     Crypto
         # @!attribute [rw] date_shift_config
         #   @return [Google::Privacy::Dlp::V2::DateShiftConfig]
+        #     Date Shift
         # @!attribute [rw] crypto_deterministic_config
         #   @return [Google::Privacy::Dlp::V2::CryptoDeterministicConfig]
+        #     Deterministic Crypto
         class PrimitiveTransformation; end
 
         # For use with `Date`, `Timestamp`, and `TimeOfDay`, extract or preserve a
         # portion of the value.
         # @!attribute [rw] part_to_extract
         #   @return [Google::Privacy::Dlp::V2::TimePartConfig::TimePart]
+        #     The part of the time to keep.
         class TimePartConfig
+          # Components that make up time.
           module TimePart
+            # Unused
             TIME_PART_UNSPECIFIED = 0
 
             # [0-9999]
@@ -1279,7 +1342,7 @@ module Google
         #     This annotation will be applied to the surrogate by prefixing it with
         #     the name of the custom info type followed by the number of
         #     characters comprising the surrogate. The following scheme defines the
-        #     format: <info type name>(<surrogate character count>):<surrogate>
+        #     format: {info type name}({surrogate character count}):\\{surrogate}
         #
         #     For example, if the name of custom info type is 'MY_TOKEN_INFO_TYPE' and
         #     the surrogate is 'abc', the full replacement value
@@ -1290,7 +1353,7 @@ module Google
         #     surrogate when it occurs in free text.
         #
         #     Note: For record transformations where the entire cell in a table is being
-        #     transformed, surrogates are optional to use. Surrogates are used to denote
+        #     transformed, surrogates are not mandatory. Surrogates are used to denote
         #     the location of the token and are necessary for re-identification in free
         #     form text.
         #
@@ -1309,7 +1372,7 @@ module Google
         #     ⧝MY_TOKEN_TYPE.
         # @!attribute [rw] context
         #   @return [Google::Privacy::Dlp::V2::FieldId]
-        #     Optional. A context may be used for higher security and maintaining
+        #     A context may be used for higher security and maintaining
         #     referential integrity such that the same identifier in two different
         #     contexts will be given a distinct surrogate. The context is appended to
         #     plaintext value being encrypted. On decryption the provided context is
@@ -1347,10 +1410,15 @@ module Google
         # alone and skipped.
         # @!attribute [rw] characters_to_skip
         #   @return [String]
+        #     Characters to not transform when masking.
         # @!attribute [rw] common_characters_to_ignore
         #   @return [Google::Privacy::Dlp::V2::CharsToIgnore::CommonCharsToIgnore]
+        #     Common characters to not transform when masking. Useful to avoid removing
+        #     punctuation.
         class CharsToIgnore
+          # Convenience enum for indication common characters to not transform.
           module CommonCharsToIgnore
+            # Unused.
             COMMON_CHARS_TO_IGNORE_UNSPECIFIED = 0
 
             # 0-9
@@ -1407,7 +1475,7 @@ module Google
         # the user for simple bucketing strategies.
         #
         # The transformed value will be a hyphenated string of
-        # <lower_bound>-<upper_bound>, i.e if lower_bound = 10 and upper_bound = 20
+        # \\{lower_bound}-\\{upper_bound}, i.e if lower_bound = 10 and upper_bound = 20
         # all values that are within this bucket will be replaced with "10-20".
         #
         # This can be used on data of type: double, long.
@@ -1419,21 +1487,20 @@ module Google
         # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
         # @!attribute [rw] lower_bound
         #   @return [Google::Privacy::Dlp::V2::Value]
-        #     Lower bound value of buckets. All values less than `lower_bound` are
+        #     Required. Lower bound value of buckets. All values less than `lower_bound` are
         #     grouped together into a single bucket; for example if `lower_bound` = 10,
-        #     then all values less than 10 are replaced with the value “-10”. [Required].
+        #     then all values less than 10 are replaced with the value “-10”.
         # @!attribute [rw] upper_bound
         #   @return [Google::Privacy::Dlp::V2::Value]
-        #     Upper bound value of buckets. All values greater than upper_bound are
+        #     Required. Upper bound value of buckets. All values greater than upper_bound are
         #     grouped together into a single bucket; for example if `upper_bound` = 89,
         #     then all values greater than 89 are replaced with the value “89+”.
-        #     [Required].
         # @!attribute [rw] bucket_size
         #   @return [Float]
-        #     Size of each bucket (except for minimum and maximum buckets). So if
+        #     Required. Size of each bucket (except for minimum and maximum buckets). So if
         #     `lower_bound` = 10, `upper_bound` = 89, and `bucket_size` = 10, then the
         #     following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
-        #     60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works. [Required].
+        #     60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works.
         class FixedSizeBucketingConfig; end
 
         # Generalization function that buckets values based on ranges. The ranges and
@@ -1479,7 +1546,7 @@ module Google
         # referential integrity.
         # @!attribute [rw] crypto_key
         #   @return [Google::Privacy::Dlp::V2::CryptoKey]
-        #     The key used by the encryption algorithm. [required]
+        #     Required. The key used by the encryption algorithm.
         # @!attribute [rw] context
         #   @return [Google::Privacy::Dlp::V2::FieldId]
         #     The 'tweak', a context may be used for higher security since the same
@@ -1504,6 +1571,7 @@ module Google
         #     * a string is encoded in UTF-8 format followed by a single byte of value 2
         # @!attribute [rw] common_alphabet
         #   @return [Google::Privacy::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet]
+        #     Common alphabets.
         # @!attribute [rw] custom_alphabet
         #   @return [String]
         #     This is supported by mapping these to the alphanumeric characters
@@ -1548,6 +1616,7 @@ module Google
           # natively supports. In the algorithm, the alphabet is selected using
           # the "radix". Therefore each corresponds to particular radix.
           module FfxCommonNativeAlphabet
+            # Unused.
             FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED = 0
 
             # [0-9] (radix of 10)
@@ -1571,17 +1640,20 @@ module Google
         # unwrap the data crypto key.
         # @!attribute [rw] transient
         #   @return [Google::Privacy::Dlp::V2::TransientCryptoKey]
+        #     Transient crypto key
         # @!attribute [rw] unwrapped
         #   @return [Google::Privacy::Dlp::V2::UnwrappedCryptoKey]
+        #     Unwrapped crypto key
         # @!attribute [rw] kms_wrapped
         #   @return [Google::Privacy::Dlp::V2::KmsWrappedCryptoKey]
+        #     Kms wrapped key
         class CryptoKey; end
 
         # Use this to have a random data crypto key generated.
         # It will be discarded after the request finishes.
         # @!attribute [rw] name
         #   @return [String]
-        #     Name of the key. [required]
+        #     Required. Name of the key.
         #     This is an arbitrary string used to differentiate different keys.
         #     A unique key is generated per name: two separate `TransientCryptoKey`
         #     protos share the same generated key if their names are the same.
@@ -1593,7 +1665,7 @@ module Google
         # leaking the key. Choose another type of key if possible.
         # @!attribute [rw] key
         #   @return [String]
-        #     A 128/192/256 bit key. [required]
+        #     Required. A 128/192/256 bit key.
         class UnwrappedCryptoKey; end
 
         # Include to use an existing data crypto key wrapped by KMS.
@@ -1603,10 +1675,10 @@ module Google
         # dlp.kms.encrypt
         # @!attribute [rw] wrapped_key
         #   @return [String]
-        #     The wrapped data crypto key. [required]
+        #     Required. The wrapped data crypto key.
         # @!attribute [rw] crypto_key_name
         #   @return [String]
-        #     The resource name of the KMS CryptoKey to use for unwrapping. [required]
+        #     Required. The resource name of the KMS CryptoKey to use for unwrapping.
         class KmsWrappedCryptoKey; end
 
         # Shifts dates by random number of days, with option to be consistent for the
@@ -1614,16 +1686,14 @@ module Google
         # to learn more.
         # @!attribute [rw] upper_bound_days
         #   @return [Integer]
-        #     Range of shift in days. Actual shift will be selected at random within this
+        #     Required. Range of shift in days. Actual shift will be selected at random within this
         #     range (inclusive ends). Negative means shift to earlier in time. Must not
         #     be more than 365250 days (1000 years) each direction.
         #
         #     For example, 3 means shift date to at most 3 days into the future.
-        #     [Required]
         # @!attribute [rw] lower_bound_days
         #   @return [Integer]
-        #     For example, -5 means shift date to at most 5 days back in the past.
-        #     [Required]
+        #     Required. For example, -5 means shift date to at most 5 days back in the past.
         # @!attribute [rw] context
         #   @return [Google::Privacy::Dlp::V2::FieldId]
         #     Points to the field that contains the context, for example, an entity id.
@@ -1642,8 +1712,8 @@ module Google
         # info_type.
         # @!attribute [rw] transformations
         #   @return [Array<Google::Privacy::Dlp::V2::InfoTypeTransformations::InfoTypeTransformation>]
-        #     Transformation for each infoType. Cannot specify more than one
-        #     for a given infoType. [required]
+        #     Required. Transformation for each infoType. Cannot specify more than one
+        #     for a given infoType.
         class InfoTypeTransformations
           # A transformation to apply to text that is identified as a specific
           # info_type.
@@ -1654,19 +1724,19 @@ module Google
           #     infoTypes that were requested in `InspectConfig`.
           # @!attribute [rw] primitive_transformation
           #   @return [Google::Privacy::Dlp::V2::PrimitiveTransformation]
-          #     Primitive transformation to apply to the infoType. [required]
+          #     Required. Primitive transformation to apply to the infoType.
           class InfoTypeTransformation; end
         end
 
         # The transformation to apply to the field.
         # @!attribute [rw] fields
         #   @return [Array<Google::Privacy::Dlp::V2::FieldId>]
-        #     Input field(s) to apply the transformation to. [required]
+        #     Required. Input field(s) to apply the transformation to.
         # @!attribute [rw] condition
         #   @return [Google::Privacy::Dlp::V2::RecordCondition]
         #     Only apply the transformation if the condition evaluates to true for the
         #     given `RecordCondition`. The conditions are allowed to reference fields
-        #     that are not used in the actual transformation. [optional]
+        #     that are not used in the actual transformation.
         #
         #     Example Use Cases:
         #
@@ -1690,7 +1760,7 @@ module Google
         # @!attribute [rw] record_suppressions
         #   @return [Array<Google::Privacy::Dlp::V2::RecordSuppression>]
         #     Configuration defining which records get suppressed entirely. Records that
-        #     match any suppression rule are omitted from the output [optional].
+        #     match any suppression rule are omitted from the output.
         class RecordTransformations; end
 
         # Configuration to suppress records whose suppression conditions evaluate to
@@ -1728,18 +1798,19 @@ module Google
           # the condition will evaluate to false.
           # @!attribute [rw] field
           #   @return [Google::Privacy::Dlp::V2::FieldId]
-          #     Field within the record this condition is evaluated against. [required]
+          #     Required. Field within the record this condition is evaluated against.
           # @!attribute [rw] operator
           #   @return [Google::Privacy::Dlp::V2::RelationalOperator]
-          #     Operator used to compare the field or infoType to the value. [required]
+          #     Required. Operator used to compare the field or infoType to the value.
           # @!attribute [rw] value
           #   @return [Google::Privacy::Dlp::V2::Value]
-          #     Value to compare against. [Required, except for `EXISTS` tests.]
+          #     Value to compare against. [Mandatory, except for `EXISTS` tests.]
           class Condition; end
 
           # A collection of conditions.
           # @!attribute [rw] conditions
           #   @return [Array<Google::Privacy::Dlp::V2::RecordCondition::Condition>]
+          #     A collection of conditions.
           class Conditions; end
 
           # An expression, consisting or an operator and conditions.
@@ -1749,10 +1820,14 @@ module Google
           #     only supported value is `AND`.
           # @!attribute [rw] conditions
           #   @return [Google::Privacy::Dlp::V2::RecordCondition::Conditions]
+          #     Conditions to apply to the expression.
           class Expressions
+            # Logical operators for conditional checks.
             module LogicalOperator
+              # Unused
               LOGICAL_OPERATOR_UNSPECIFIED = 0
 
+              # Conditional AND
               AND = 1
             end
           end
@@ -1789,6 +1864,7 @@ module Google
         #     The specific suppression option these stats apply to.
         # @!attribute [rw] results
         #   @return [Array<Google::Privacy::Dlp::V2::TransformationSummary::SummaryResult>]
+        #     Collection of all transformations that took place or had an error.
         # @!attribute [rw] transformed_bytes
         #   @return [Integer]
         #     Total size in bytes that were transformed in some way.
@@ -1797,8 +1873,10 @@ module Google
           # `TransformationResultCode` and error details occurred.
           # @!attribute [rw] count
           #   @return [Integer]
+          #     Number of transformations counted by this result.
           # @!attribute [rw] code
           #   @return [Google::Privacy::Dlp::V2::TransformationSummary::TransformationResultCode]
+          #     Outcome of the transformation.
           # @!attribute [rw] details
           #   @return [String]
           #     A place for warnings or errors to show up if a transformation didn't
@@ -1807,10 +1885,13 @@ module Google
 
           # Possible outcomes of transformations.
           module TransformationResultCode
+            # Unused
             TRANSFORMATION_RESULT_CODE_UNSPECIFIED = 0
 
+            # Transformation completed without an error.
             SUCCESS = 1
 
+            # Transformation had an error.
             ERROR = 2
           end
         end
@@ -1834,11 +1915,11 @@ module Google
         # to learn more.
         # @!attribute [rw] name
         #   @return [String]
-        #     The template name. Output only.
+        #     Output only. The template name.
         #
         #     The template will have one of the following formats:
         #     `projects/PROJECT_ID/inspectTemplates/TEMPLATE_ID` OR
-        #     `organizations/ORGANIZATION_ID/inspectTemplates/TEMPLATE_ID`
+        #     `organizations/ORGANIZATION_ID/inspectTemplates/TEMPLATE_ID`;
         # @!attribute [rw] display_name
         #   @return [String]
         #     Display name (max 256 chars).
@@ -1847,10 +1928,10 @@ module Google
         #     Short description (max 256 chars).
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The creation timestamp of an inspectTemplate, output only field.
+        #     Output only. The creation timestamp of an inspectTemplate.
         # @!attribute [rw] update_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The last update timestamp of an inspectTemplate, output only field.
+        #     Output only. The last update timestamp of an inspectTemplate.
         # @!attribute [rw] inspect_config
         #   @return [Google::Privacy::Dlp::V2::InspectConfig]
         #     The core content of the template. Configuration of the scanning process.
@@ -1860,7 +1941,7 @@ module Google
         # See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
         # @!attribute [rw] name
         #   @return [String]
-        #     The template name. Output only.
+        #     Output only. The template name.
         #
         #     The template will have one of the following formats:
         #     `projects/PROJECT_ID/deidentifyTemplates/TEMPLATE_ID` OR
@@ -1873,10 +1954,10 @@ module Google
         #     Short description (max 256 chars).
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The creation timestamp of an inspectTemplate, output only field.
+        #     Output only. The creation timestamp of an inspectTemplate.
         # @!attribute [rw] update_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The last update timestamp of an inspectTemplate, output only field.
+        #     Output only. The last update timestamp of an inspectTemplate.
         # @!attribute [rw] deidentify_config
         #   @return [Google::Privacy::Dlp::V2::DeidentifyConfig]
         #     ///////////// // The core content of the template  // ///////////////
@@ -1884,9 +1965,9 @@ module Google
 
         # Details information about an error encountered during job execution or
         # the results of an unsuccessful activation of the JobTrigger.
-        # Output only field.
         # @!attribute [rw] details
         #   @return [Google::Rpc::Status]
+        #     Detailed error codes and messages.
         # @!attribute [rw] timestamps
         #   @return [Array<Google::Protobuf::Timestamp>]
         #     The times the error occurred.
@@ -1907,6 +1988,7 @@ module Google
         #     User provided description (max 256 chars)
         # @!attribute [rw] inspect_job
         #   @return [Google::Privacy::Dlp::V2::InspectJobConfig]
+        #     For inspect jobs, a snapshot of the configuration.
         # @!attribute [rw] triggers
         #   @return [Array<Google::Privacy::Dlp::V2::JobTrigger::Trigger>]
         #     A list of triggers which will be OR'ed together. Only one in the list
@@ -1914,22 +1996,22 @@ module Google
         #     a single Schedule trigger and must have at least one object.
         # @!attribute [rw] errors
         #   @return [Array<Google::Privacy::Dlp::V2::Error>]
-        #     A stream of errors encountered when the trigger was activated. Repeated
+        #     Output only. A stream of errors encountered when the trigger was activated. Repeated
         #     errors may result in the JobTrigger automatically being paused.
         #     Will return the last 100 errors. Whenever the JobTrigger is modified
-        #     this list will be cleared. Output only field.
+        #     this list will be cleared.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The creation timestamp of a triggeredJob, output only field.
+        #     Output only. The creation timestamp of a triggeredJob.
         # @!attribute [rw] update_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The last update timestamp of a triggeredJob, output only field.
+        #     Output only. The last update timestamp of a triggeredJob.
         # @!attribute [rw] last_run_time
         #   @return [Google::Protobuf::Timestamp]
-        #     The timestamp of the last time this trigger executed, output only field.
+        #     Output only. The timestamp of the last time this trigger executed.
         # @!attribute [rw] status
         #   @return [Google::Privacy::Dlp::V2::JobTrigger::Status]
-        #     A status for this trigger. [required]
+        #     Required. A status for this trigger.
         class JobTrigger
           # What event needs to occur for a new job to be started.
           # @!attribute [rw] schedule
@@ -1942,6 +2024,7 @@ module Google
           # pause triggers experiencing frequent errors. To restart a job, set the
           # status to HEALTHY after correcting user errors.
           module Status
+            # Unused.
             STATUS_UNSPECIFIED = 0
 
             # Trigger is healthy.
@@ -1971,7 +2054,7 @@ module Google
         #     Publish findings to Cloud Datahub.
         # @!attribute [rw] job_notification_emails
         #   @return [Google::Privacy::Dlp::V2::Action::JobNotificationEmails]
-        #     Enable email notification to project owners and editors on job's
+        #     Enable email notification for project owners and editors on job's
         #     completion/failure.
         # @!attribute [rw] publish_to_stackdriver
         #   @return [Google::Privacy::Dlp::V2::Action::PublishToStackdriver]
@@ -1983,6 +2066,7 @@ module Google
           # Compatible with: Inspect, Risk
           # @!attribute [rw] output_config
           #   @return [Google::Privacy::Dlp::V2::OutputStorageConfig]
+          #     Location to store findings outside of DLP.
           class SaveFindings; end
 
           # Publish a message into given Pub/Sub topic when DlpJob has completed. The
@@ -2040,7 +2124,7 @@ module Google
         #     organizations/my-org-id.
         # @!attribute [rw] inspect_template
         #   @return [Google::Privacy::Dlp::V2::InspectTemplate]
-        #     The InspectTemplate to create.
+        #     Required. The InspectTemplate to create.
         # @!attribute [rw] template_id
         #   @return [String]
         #     The template id can contain uppercase and lowercase letters,
@@ -2082,15 +2166,15 @@ module Google
         #     organizations/my-org-id.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional page token to continue retrieval. Comes from previous call
+        #     Page token to continue retrieval. Comes from previous call
         #     to `ListInspectTemplates`.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional size of the page, can be limited by server. If zero server returns
+        #     Size of the page, can be limited by server. If zero server returns
         #     a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [String]
-        #     Optional comma separated list of fields to order by,
+        #     Comma separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
         #     insignificant.
@@ -2133,7 +2217,7 @@ module Google
         #     Required. The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] job_trigger
         #   @return [Google::Privacy::Dlp::V2::JobTrigger]
-        #     The JobTrigger to create.
+        #     Required. The JobTrigger to create.
         # @!attribute [rw] trigger_id
         #   @return [String]
         #     The trigger id can contain uppercase and lowercase letters,
@@ -2181,8 +2265,10 @@ module Google
         #     Required. The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] inspect_job
         #   @return [Google::Privacy::Dlp::V2::InspectJobConfig]
+        #     Set to control what and how to inspect.
         # @!attribute [rw] risk_job
         #   @return [Google::Privacy::Dlp::V2::RiskAnalysisJobConfig]
+        #     Set to choose what metric to calculate.
         # @!attribute [rw] job_id
         #   @return [String]
         #     The job id can contain uppercase and lowercase letters,
@@ -2201,15 +2287,15 @@ module Google
         #     Required. The parent resource name, for example `projects/my-project-id`.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional page token to continue retrieval. Comes from previous call
+        #     Page token to continue retrieval. Comes from previous call
         #     to ListJobTriggers. `order_by` field must not
         #     change for subsequent calls.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional size of the page, can be limited by a server.
+        #     Size of the page, can be limited by a server.
         # @!attribute [rw] order_by
         #   @return [String]
-        #     Optional comma separated list of triggeredJob fields to order by,
+        #     Comma separated list of triggeredJob fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
         #     insignificant.
@@ -2226,14 +2312,14 @@ module Google
         #     * `status`: corresponds to JobTrigger's status.
         # @!attribute [rw] filter
         #   @return [String]
-        #     Optional. Allows filtering.
+        #     Allows filtering.
         #
         #     Supported syntax:
         #
         #     * Filter expressions are made up of one or more restrictions.
         #     * Restrictions can be combined by `AND` or `OR` logical operators. A
         #       sequence of restrictions implicitly uses `AND`.
-        #     * A restriction has the form of `<field> <operator> <value>`.
+        #     * A restriction has the form of `{field} {operator} {value}`.
         #     * Supported fields/values for inspect jobs:
         #       * `status` - HEALTHY|PAUSED|CANCELLED
         #         * `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -2273,6 +2359,7 @@ module Google
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         class DeleteJobTriggerRequest; end
 
+        # Controls what and how to inspect for findings.
         # @!attribute [rw] storage_config
         #   @return [Google::Privacy::Dlp::V2::StorageConfig]
         #     The data to scan.
@@ -2322,7 +2409,9 @@ module Google
         #   @return [Array<Google::Privacy::Dlp::V2::Error>]
         #     A stream of errors encountered running the job.
         class DlpJob
+          # Possible states of a job.
           module JobState
+            # Unused.
             JOB_STATE_UNSPECIFIED = 0
 
             # The job has not yet started.
@@ -2354,14 +2443,14 @@ module Google
         #     Required. The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] filter
         #   @return [String]
-        #     Optional. Allows filtering.
+        #     Allows filtering.
         #
         #     Supported syntax:
         #
         #     * Filter expressions are made up of one or more restrictions.
         #     * Restrictions can be combined by `AND` or `OR` logical operators. A
         #       sequence of restrictions implicitly uses `AND`.
-        #     * A restriction has the form of `<field> <operator> <value>`.
+        #     * A restriction has the form of `{field} {operator} {value}`.
         #     * Supported fields/values for inspect jobs:
         #       * `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
         #         * `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
@@ -2393,7 +2482,7 @@ module Google
         #     The type of job. Defaults to `DlpJobType.INSPECT`
         # @!attribute [rw] order_by
         #   @return [String]
-        #     Optional comma separated list of fields to order by,
+        #     Comma separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
         #     insignificant.
@@ -2440,7 +2529,7 @@ module Google
         #     organizations/my-org-id.
         # @!attribute [rw] deidentify_template
         #   @return [Google::Privacy::Dlp::V2::DeidentifyTemplate]
-        #     The DeidentifyTemplate to create.
+        #     Required. The DeidentifyTemplate to create.
         # @!attribute [rw] template_id
         #   @return [String]
         #     The template id can contain uppercase and lowercase letters,
@@ -2482,15 +2571,15 @@ module Google
         #     organizations/my-org-id.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional page token to continue retrieval. Comes from previous call
+        #     Page token to continue retrieval. Comes from previous call
         #     to `ListDeidentifyTemplates`.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional size of the page, can be limited by server. If zero server returns
+        #     Size of the page, can be limited by server. If zero server returns
         #     a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [String]
-        #     Optional comma separated list of fields to order by,
+        #     Comma separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
         #     insignificant.
@@ -2593,10 +2682,12 @@ module Google
         #     anomalies detected in the storedInfoType data that render it unusable. Only
         #     the five most recent errors will be displayed, with the most recent error
         #     appearing first.
-        #     <p>For example, some of the data for stored custom dictionaries is put in
+        #
+        #     For example, some of the data for stored custom dictionaries is put in
         #     the user's Google Cloud Storage bucket, and if this data is modified or
         #     deleted by the user or another system, the dictionary becomes invalid.
-        #     <p>If any errors occur, fix the problem indicated by the error message and
+        #
+        #     If any errors occur, fix the problem indicated by the error message and
         #     use the UpdateStoredInfoType API method to create another version of the
         #     storedInfoType to continue using it, reusing the same `config` if it was
         #     not the source of the error.
@@ -2626,7 +2717,7 @@ module Google
         #     organizations/my-org-id.
         # @!attribute [rw] config
         #   @return [Google::Privacy::Dlp::V2::StoredInfoTypeConfig]
-        #     Configuration of the storedInfoType to create.
+        #     Required. Configuration of the storedInfoType to create.
         # @!attribute [rw] stored_info_type_id
         #   @return [String]
         #     The storedInfoType ID can contain uppercase and lowercase letters,
@@ -2670,15 +2761,15 @@ module Google
         #     organizations/my-org-id.
         # @!attribute [rw] page_token
         #   @return [String]
-        #     Optional page token to continue retrieval. Comes from previous call
+        #     Page token to continue retrieval. Comes from previous call
         #     to `ListStoredInfoTypes`.
         # @!attribute [rw] page_size
         #   @return [Integer]
-        #     Optional size of the page, can be limited by server. If zero server returns
+        #     Size of the page, can be limited by server. If zero server returns
         #     a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [String]
-        #     Optional comma separated list of fields to order by,
+        #     Comma separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
         #     insignificant.
@@ -2728,8 +2819,9 @@ module Google
           CONTENT_IMAGE = 2
         end
 
-        # An enum to represent the various type of DLP jobs.
+        # An enum to represent the various types of DLP jobs.
         module DlpJobType
+          # Unused
           DLP_JOB_TYPE_UNSPECIFIED = 0
 
           # The job inspected Google Cloud for sensitive data.
@@ -2741,6 +2833,7 @@ module Google
 
         # Parts of the APIs which use certain infoTypes.
         module InfoTypeSupportedBy
+          # Unused.
           ENUM_TYPE_UNSPECIFIED = 0
 
           # Supported by the inspect operations.
@@ -2781,6 +2874,7 @@ module Google
 
         # Operators available for comparing the value of fields.
         module RelationalOperator
+          # Unused
           RELATIONAL_OPERATOR_UNSPECIFIED = 0
 
           # Equal. Attempts to match even with incompatible types.
@@ -2807,6 +2901,7 @@ module Google
 
         # State of a StoredInfoType version.
         module StoredInfoTypeState
+          # Unused
           STORED_INFO_TYPE_STATE_UNSPECIFIED = 0
 
           # StoredInfoType version is being created.
