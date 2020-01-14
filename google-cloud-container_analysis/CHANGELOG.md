@@ -4,7 +4,7 @@
 
 #### ⚠ BREAKING CHANGES
 
-* **container_analysis:** Update network configuration for IAM methods
+* **container_analysis:** Remove note_path and occurrence_path resource path helpers
 
 #### Performance Improvements
 
