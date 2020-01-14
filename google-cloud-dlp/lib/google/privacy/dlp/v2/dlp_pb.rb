@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/privacy/dlp/v2/storage_pb'
@@ -16,7 +17,6 @@ require 'google/rpc/status_pb'
 require 'google/type/date_pb'
 require 'google/type/dayofweek_pb'
 require 'google/type/timeofday_pb'
-require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2.ExcludeInfoTypes" do
     repeated :info_types, :message, 1, "google.privacy.dlp.v2.InfoType"
@@ -903,22 +903,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2.DeleteStoredInfoTypeRequest" do
     optional :name, :string, 1
   end
-  add_enum "google.privacy.dlp.v2.ContentOption" do
-    value :CONTENT_UNSPECIFIED, 0
-    value :CONTENT_TEXT, 1
-    value :CONTENT_IMAGE, 2
-  end
-  add_enum "google.privacy.dlp.v2.MatchingType" do
-    value :MATCHING_TYPE_UNSPECIFIED, 0
-    value :MATCHING_TYPE_FULL_MATCH, 1
-    value :MATCHING_TYPE_PARTIAL_MATCH, 2
-    value :MATCHING_TYPE_INVERSE_MATCH, 3
-  end
-  add_enum "google.privacy.dlp.v2.InfoTypeSupportedBy" do
-    value :ENUM_TYPE_UNSPECIFIED, 0
-    value :INSPECT, 1
-    value :RISK_ANALYSIS, 2
-  end
   add_enum "google.privacy.dlp.v2.RelationalOperator" do
     value :RELATIONAL_OPERATOR_UNSPECIFIED, 0
     value :EQUAL_TO, 1
@@ -928,6 +912,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :GREATER_THAN_OR_EQUALS, 5
     value :LESS_THAN_OR_EQUALS, 6
     value :EXISTS, 7
+  end
+  add_enum "google.privacy.dlp.v2.MatchingType" do
+    value :MATCHING_TYPE_UNSPECIFIED, 0
+    value :MATCHING_TYPE_FULL_MATCH, 1
+    value :MATCHING_TYPE_PARTIAL_MATCH, 2
+    value :MATCHING_TYPE_INVERSE_MATCH, 3
+  end
+  add_enum "google.privacy.dlp.v2.ContentOption" do
+    value :CONTENT_UNSPECIFIED, 0
+    value :CONTENT_TEXT, 1
+    value :CONTENT_IMAGE, 2
+  end
+  add_enum "google.privacy.dlp.v2.InfoTypeSupportedBy" do
+    value :ENUM_TYPE_UNSPECIFIED, 0
+    value :INSPECT, 1
+    value :RISK_ANALYSIS, 2
   end
   add_enum "google.privacy.dlp.v2.DlpJobType" do
     value :DLP_JOB_TYPE_UNSPECIFIED, 0
@@ -1113,10 +1113,10 @@ module Google
         ListStoredInfoTypesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListStoredInfoTypesRequest").msgclass
         ListStoredInfoTypesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListStoredInfoTypesResponse").msgclass
         DeleteStoredInfoTypeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DeleteStoredInfoTypeRequest").msgclass
-        ContentOption = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ContentOption").enummodule
-        MatchingType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.MatchingType").enummodule
-        InfoTypeSupportedBy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeSupportedBy").enummodule
         RelationalOperator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RelationalOperator").enummodule
+        MatchingType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.MatchingType").enummodule
+        ContentOption = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ContentOption").enummodule
+        InfoTypeSupportedBy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeSupportedBy").enummodule
         DlpJobType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DlpJobType").enummodule
         StoredInfoTypeState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StoredInfoTypeState").enummodule
       end
