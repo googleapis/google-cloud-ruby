@@ -1,5 +1,15 @@
 # Release History
 
+### 0.5.0 / 2020-01-14
+
+#### ⚠ BREAKING CHANGES
+
+* **container_analysis:** Update network configuration for IAM methods
+
+#### Performance Improvements
+
+* Update network configuration for IAM methods
+
 ### 0.4.2 / 2019-11-19
 
 #### Documentation
