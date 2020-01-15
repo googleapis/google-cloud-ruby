@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.3 / 2020-01-15
+
+#### Bug Fixes
+
+* Restore previous network configuration timeouts
+
 ### 1.3.2 / 2019-12-19
 
 #### Performance Improvements
