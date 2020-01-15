@@ -4,7 +4,15 @@
 
 #### Bug Fixes
 
-* Restore previous network configuration timeouts
+* Restore previous network configuration timeouts changed in 1.3.2
+
+#### Performance Improvements
+
+* Update network configuration
+
+#### Documentation
+
+* Update documentation, samples, and links
 
 ### 1.3.2 / 2019-12-19
 
