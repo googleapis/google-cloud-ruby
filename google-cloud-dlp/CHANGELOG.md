@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.1 / 2020-01-15
+
+#### Documentation
+
+* Update documentation
+
 ### 0.13.0 / 2019-12-18
 
 #### Features
