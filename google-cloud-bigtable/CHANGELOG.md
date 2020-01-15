@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.1 / 2020-01-15
+
+#### Documentation
+
+* Update lower-level API documentation
+
 ### 1.0.0 / 2019-12-03
 
 #### Documentation
