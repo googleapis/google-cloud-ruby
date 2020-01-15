@@ -1,5 +1,22 @@
 # Release History
 
+### 0.2.0 / 2020-01-15
+
+#### Features
+
+* Add Upgrade types and attributes
+  * Add UpgradeNote
+  * Add UpgradeDistribution
+  * Add WindowsUpdate
+  * Add UpgradeOccurrence
+  * Add NoteKind::UPGRADE
+  * Add DiscoveryOccurrence#cpe
+  * Add DiscoveryOccurrence#last_scan_time
+  * Add Note#upgrade
+  * Add Occurrence#upgrade
+  * Add VulnerabilityNote#source_update_time
+  * Add VulnerabilityNote::Detail#source_update_time
+
 ### 0.1.1 / 2019-11-06
 
 #### Bug Fixes
