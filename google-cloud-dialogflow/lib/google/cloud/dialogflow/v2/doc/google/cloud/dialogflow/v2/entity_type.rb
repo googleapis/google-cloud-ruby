@@ -52,7 +52,7 @@ module Google
           #
           #     For `KIND_MAP` entity types:
           #
-          #     * A canonical value to be used in place of synonyms.
+          #     * A reference value to be used in place of synonyms.
           #
           #     For `KIND_LIST` entity types:
           #
@@ -86,11 +86,11 @@ module Google
             # Not specified. This value should be never used.
             KIND_UNSPECIFIED = 0
 
-            # Map entity types allow mapping of a group of synonyms to a canonical
+            # Map entity types allow mapping of a group of synonyms to a reference
             # value.
             KIND_MAP = 1
 
-            # List entity types contain a set of entries that do not map to canonical
+            # List entity types contain a set of entries that do not map to reference
             # values. However, list entity types can contain references to other entity
             # types (with or without aliases).
             KIND_LIST = 2
@@ -281,7 +281,7 @@ module Google
         #     `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
         # @!attribute [rw] entity_values
         #   @return [Array<String>]
-        #     Required. The canonical `values` of the entities to delete. Note that
+        #     Required. The reference `values` of the entities to delete. Note that
         #     these are not fully-qualified names, i.e. they don't start with
         #     `projects/<Project ID>`.
         # @!attribute [rw] language_code

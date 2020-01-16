@@ -102,7 +102,7 @@ module Google
             MATCH_MODE_HYBRID = 1
 
             # Can be used for agents with a large number of examples in intents,
-            # especially the ones using @sys.any or very large developer entities.
+            # especially the ones using @sys.any or very large custom entities.
             MATCH_MODE_ML_ONLY = 2
           end
 
