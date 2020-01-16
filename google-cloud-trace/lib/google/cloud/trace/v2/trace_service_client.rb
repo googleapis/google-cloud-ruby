@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -70,12 +70,31 @@ module Google
 
           private_constant :PROJECT_PATH_TEMPLATE
 
+          SPAN_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/traces/{trace}/spans/{span}"
+          )
+
+          private_constant :SPAN_PATH_TEMPLATE
+
           # Returns a fully-qualified project resource name string.
           # @param project [String]
           # @return [String]
           def self.project_path project
             PROJECT_PATH_TEMPLATE.render(
               :"project" => project
+            )
+          end
+
+          # Returns a fully-qualified span resource name string.
+          # @param project [String]
+          # @param trace [String]
+          # @param span [String]
+          # @return [String]
+          def self.span_path project, trace, span
+            SPAN_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"trace" => trace,
+              :"span" => span
             )
           end
 
@@ -334,9 +353,7 @@ module Google
           #   require "google/cloud/trace"
           #
           #   trace_client = Google::Cloud::Trace.new(version: :v2)
-          #
-          #   # TODO: Initialize `name`:
-          #   name = ''
+          #   formatted_name = Google::Cloud::Trace::V2::TraceServiceClient.span_path("[PROJECT]", "[TRACE]", "[SPAN]")
           #
           #   # TODO: Initialize `span_id`:
           #   span_id = ''
@@ -349,7 +366,7 @@ module Google
           #
           #   # TODO: Initialize `end_time`:
           #   end_time = {}
-          #   response = trace_client.create_span(name, span_id, display_name, start_time, end_time)
+          #   response = trace_client.create_span(formatted_name, span_id, display_name, start_time, end_time)
 
           def create_span \
               name,
