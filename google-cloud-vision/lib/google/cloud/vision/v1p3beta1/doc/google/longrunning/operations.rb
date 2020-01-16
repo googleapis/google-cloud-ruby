@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ module Google
     #   @return [String]
     #     The server-assigned name, which is only unique within the same service that
     #     originally returns it. If you use the default HTTP mapping, the
-    #     `name` should have the format of `operations/some/unique/name`.
+    #     `name` should be a resource name ending with `operations/{unique_id}`.
     # @!attribute [rw] metadata
     #   @return [Google::Protobuf::Any]
     #     Service-specific metadata associated with the operation.  It typically
