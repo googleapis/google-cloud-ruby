@@ -1,19 +1,19 @@
 {
-  "updateTime": "2019-12-20T11:42:20.837483Z",
+  "updateTime": "2020-01-15T11:47:52.718026Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.42.3",
-        "dockerImage": "googleapis/artman@sha256:feed210b5723c6f524b52ef6d7740a030f2d1a8f7c29a71c5e5b4481ceaad7f5"
+        "version": "0.44.0",
+        "dockerImage": "googleapis/artman@sha256:10a6d0342b8d62544810ac5ad86c3b21049ec0696608ac60175da8e513234344"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "50af0530730348f1e3697bf3c70261f7daaf2981",
-        "internalRef": "286491002"
+        "sha": "d99df0d67057a233c711187e0689baa4f8e6333d",
+        "internalRef": "289709813"
       }
     },
     {
@@ -34,161 +34,6 @@
         "generator": "gapic",
         "config": "google/cloud/securitycenter/artman_securitycenter_v1.yaml"
       }
-    }
-  ],
-  "newFiles": [
-    {
-      "path": "Gemfile"
-    },
-    {
-      "path": ".gitignore"
-    },
-    {
-      "path": "synth.py"
-    },
-    {
-      "path": "LICENSE"
-    },
-    {
-      "path": "google-cloud-security_center.gemspec"
-    },
-    {
-      "path": "Rakefile"
-    },
-    {
-      "path": "CHANGELOG.md"
-    },
-    {
-      "path": ".yardopts"
-    },
-    {
-      "path": "AUTHENTICATION.md"
-    },
-    {
-      "path": "README.md"
-    },
-    {
-      "path": "Gemfile.lock"
-    },
-    {
-      "path": "synth.metadata"
-    },
-    {
-      "path": ".rubocop.yml"
-    },
-    {
-      "path": ".repo-metadata.json"
-    },
-    {
-      "path": "test/google/cloud/security_center/v1/helpers_test.rb"
-    },
-    {
-      "path": "test/google/cloud/security_center/v1/security_center_client_test.rb"
-    },
-    {
-      "path": "synth/helpers.rb.erb"
-    },
-    {
-      "path": "synth/helpers_test.rb.erb"
-    },
-    {
-      "path": "__pycache__/synth.cpython-36.pyc"
-    },
-    {
-      "path": "lib/google/cloud/security_center.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/version.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/source_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/security_center_client_config.json"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/run_asset_discovery_response_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/security_marks_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/helpers.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/asset_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/finding_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/securitycenter_service_services_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/credentials.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/security_center_client.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/securitycenter_service_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/organization_settings_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/longrunning/operations.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/protobuf/struct.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/protobuf/duration.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/protobuf/timestamp.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/protobuf/field_mask.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/protobuf/any.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/iam/v1/options.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/iam/v1/policy.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/iam/v1/iam_policy.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/type/expr.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/finding.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/securitycenter_service.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/security_marks.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/organization_settings.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/source.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/asset.rb"
-    },
-    {
-      "path": "lib/google/cloud/security_center/v1/doc/google/rpc/status.rb"
     }
   ]
 }
