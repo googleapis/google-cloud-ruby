@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/cloud/security_center/v1/run_asset_discovery_response_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
