@@ -1,5 +1,5 @@
 {
-  "updateTime": "2020-01-15T11:47:52.718026Z",
+  "updateTime": "2020-01-16T11:42:45.228229Z",
   "sources": [
     {
       "generator": {
@@ -12,8 +12,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d99df0d67057a233c711187e0689baa4f8e6333d",
-        "internalRef": "289709813"
+        "sha": "0735b4b096872960568d1f366bfa75b7b0e1f1a3",
+        "internalRef": "289939042"
       }
     },
     {
@@ -34,6 +34,155 @@
         "generator": "gapic",
         "config": "google/cloud/securitycenter/artman_securitycenter_v1.yaml"
       }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".yardopts"
+    },
+    {
+      "path": "synth.metadata"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "Gemfile"
+    },
+    {
+      "path": "Rakefile"
+    },
+    {
+      "path": "AUTHENTICATION.md"
+    },
+    {
+      "path": "google-cloud-security_center.gemspec"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": ".rubocop.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": "synth/helpers.rb.erb"
+    },
+    {
+      "path": "synth/helpers_test.rb.erb"
+    },
+    {
+      "path": "test/google/cloud/security_center/v1/helpers_test.rb"
+    },
+    {
+      "path": "test/google/cloud/security_center/v1/security_center_client_test.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/version.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/asset_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/run_asset_discovery_response_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/security_center_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/securitycenter_service_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/security_center_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/securitycenter_service_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/finding_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/security_marks_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/helpers.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/source_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/organization_settings_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/security_marks.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/organization_settings.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/securitycenter_service.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/asset.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/finding.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/cloud/securitycenter/v1/source.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/protobuf/duration.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/protobuf/any.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/protobuf/struct.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/protobuf/field_mask.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/protobuf/timestamp.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/longrunning/operations.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/type/expr.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/rpc/status.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/iam/v1/iam_policy.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/iam/v1/policy.rb"
+    },
+    {
+      "path": "lib/google/cloud/security_center/v1/doc/google/iam/v1/options.rb"
     }
   ]
 }
