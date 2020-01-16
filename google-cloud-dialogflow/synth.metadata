@@ -1,5 +1,5 @@
 {
-  "updateTime": "2020-01-15T11:42:34.100710Z",
+  "updateTime": "2020-01-16T11:39:23.051362Z",
   "sources": [
     {
       "generator": {
@@ -12,8 +12,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d99df0d67057a233c711187e0689baa4f8e6333d",
-        "internalRef": "289709813"
+        "sha": "0735b4b096872960568d1f366bfa75b7b0e1f1a3",
+        "internalRef": "289939042"
       }
     },
     {
@@ -34,6 +34,200 @@
         "generator": "gapic",
         "config": "google/cloud/dialogflow/v2/artman_dialogflow_v2.yaml"
       }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".yardopts"
+    },
+    {
+      "path": "synth.metadata"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "google-cloud-dialogflow.gemspec"
+    },
+    {
+      "path": "Gemfile"
+    },
+    {
+      "path": "Rakefile"
+    },
+    {
+      "path": "AUTHENTICATION.md"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": ".rubocop.yml"
+    },
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": "test/google/cloud/dialogflow/v2/contexts_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/dialogflow/v2/intents_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/dialogflow/v2/sessions_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/dialogflow/v2/entity_types_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/dialogflow/v2/agents_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/dialogflow/v2/session_entity_types_client_test.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/version.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/audio_config_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/session_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/agents_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/context_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/sessions_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/session_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/context_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/entity_type_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/session_entity_types_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/session_entity_types_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/session_entity_type_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/entity_types_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/webhook_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/sessions_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/session_entity_type_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/intents_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/entity_type_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/agent_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/contexts_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/entity_types_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/intent_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/contexts_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/agent_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/intent_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/intents_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/agents_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/intent.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/agent.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/session_entity_type.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/context.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/entity_type.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/cloud/dialogflow/v2/audio_config.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/protobuf/duration.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/protobuf/any.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/protobuf/struct.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/protobuf/field_mask.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/protobuf/empty.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/longrunning/operations.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/type/latlng.rb"
+    },
+    {
+      "path": "lib/google/cloud/dialogflow/v2/doc/google/rpc/status.rb"
     }
   ]
 }
