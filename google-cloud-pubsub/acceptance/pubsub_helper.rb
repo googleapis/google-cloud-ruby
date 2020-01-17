@@ -78,9 +78,9 @@ end
 require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
-$topic_prefix = "gcloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase
-$topic_names = 8.times.map { "#{$topic_prefix}-#{SecureRandom.hex(4)}".downcase }
-$snapshot_prefix = "gcloud-ruby-acceptance-#{t}-snapshot-#{SecureRandom.hex(4)}".downcase
+$topic_prefix = "ruby-topic-#{t}-#{SecureRandom.hex(4)}".downcase
+$topic_names = 10.times.map { "#{$topic_prefix}-#{SecureRandom.hex(4)}".downcase }
+$snapshot_prefix = "ruby-snp-#{t}-snapshot-#{SecureRandom.hex(4)}".downcase
 $snapshot_names = 3.times.map { "#{$snapshot_prefix}-#{SecureRandom.hex(4)}".downcase }
 
 def clean_up_pubsub_topics

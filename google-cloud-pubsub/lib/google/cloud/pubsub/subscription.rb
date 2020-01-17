@@ -20,6 +20,7 @@ require "google/cloud/pubsub/subscription/push_config"
 require "google/cloud/pubsub/received_message"
 require "google/cloud/pubsub/snapshot"
 require "google/cloud/pubsub/subscriber"
+require "google/cloud/pubsub/v1"
 
 module Google
   module Cloud
@@ -348,6 +349,115 @@ module Google
 
           update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, expiration_policy: new_expiration_policy
           @grpc = service.update_subscription update_grpc, :expiration_policy
+          @resource_name = nil
+        end
+
+        ##
+        # Returns the {Topic} to which dead letter messages should be published. Dead lettering is done on a best effort
+        # basis. The same message might be dead lettered multiple times.
+        #
+        # See also {#dead_letter_topic=}, {#dead_letter_max_delivery_attempts=} and
+        # {#dead_letter_max_delivery_attempts}.
+        #
+        # Makes an API call to retrieve the topic name when called on a reference object. See {#reference?}.
+        #
+        # @return [Topic]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
+        #   sub.topic.name #=> "projects/my-project/topics/my-topic"
+        #
+        def dead_letter_topic
+          ensure_grpc!
+          return nil unless @grpc.dead_letter_policy
+          Topic.from_name @grpc.dead_letter_policy.dead_letter_topic, service
+        end
+
+        ##
+        # Sets the {Topic} to which dead letter messages for the subscription should be published. Dead lettering is
+        # done on a best effort basis. The same message might be dead lettered multiple times.
+        # The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
+        # service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
+        # permission to Publish() to this topic.
+        #
+        # The operation will fail if the topic does not exist. Users should ensure that there is a subscription attached
+        # to this topic since messages published to a topic with no subscriptions are lost.
+        #
+        # See also {#dead_letter_topic}, {#dead_letter_max_delivery_attempts=} and {#dead_letter_max_delivery_attempts}.
+        #
+        # @param [Topic] new_dead_letter_topic The bucket to hold the logging output
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
+        #   sub.topic.name #=> "projects/my-project/topics/my-topic"
+        #
+        def dead_letter_topic= new_dead_letter_topic
+          ensure_grpc!
+          dead_letter_policy = @grpc.dead_letter_policy || Google::Cloud::PubSub::V1::DeadLetterPolicy.new
+          dead_letter_policy.dead_letter_topic = new_dead_letter_topic.name
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, dead_letter_policy: dead_letter_policy
+          @grpc = service.update_subscription update_grpc, :dead_letter_policy
+          @resource_name = nil
+        end
+
+        ##
+        # Returns the maximum number of delivery attempts for any message in the subscription's dead letter policy.
+        # Dead lettering is done on a best effort basis. The same message might be dead lettered multiple times.
+        # The value must be between 5 and 100.
+        #
+        # The number of delivery attempts is defined as 1 + (the sum of number of NACKs and number of times the
+        # acknowledgement deadline has been exceeded for the message). A NACK is any call to ModifyAckDeadline with a 0
+        # deadline. Note that client libraries may automatically extend ack_deadlines.
+        #
+        # This field will be honored on a best effort basis. If this parameter is 0, a default value of 5 is used.
+        #
+        # See also {#dead_letter_max_delivery_attempts=}, {#dead_letter_topic=} and {#dead_letter_topic}.
+        #
+        # Makes an API call to retrieve the value when called on a reference object. See {#reference?}.
+        #
+        # @return [Integer] A value between 5 and 100. If this value is 0, a default value of 5 is used.
+        #
+        def dead_letter_max_delivery_attempts
+          ensure_grpc!
+          @grpc.dead_letter_policy&.max_delivery_attempts
+        end
+
+        ##
+        # Sets the maximum number of delivery attempts for any message in the subscription's dead letter policy.
+        # Dead lettering is done on a best effort basis. The same message might be dead lettered multiple times.
+        # The value must be between 5 and 100.
+        #
+        # The number of delivery attempts is defined as 1 + (the sum of number of NACKs and number of times the
+        # acknowledgement deadline has been exceeded for the message). A NACK is any call to ModifyAckDeadline with a 0
+        # deadline. Note that client libraries may automatically extend ack_deadlines.
+        #
+        # This field will be honored on a best effort basis. If this parameter is 0, a default value of 5 is used.
+        #
+        # The dead letter topic must also be set. See {#dead_letter_topic=} and {#dead_letter_topic}.
+        #
+        # @param [Integer] new_dead_letter_max_delivery_attempts A value between 5 and 100. If this parameter is 0, a
+        #   default value of 5 is used.
+        #
+        def dead_letter_max_delivery_attempts= new_dead_letter_max_delivery_attempts
+          ensure_grpc!
+          unless @grpc.dead_letter_policy&.dead_letter_topic
+            # Service error message "3:Invalid resource name given (name=)." does not identify param.
+            raise ArgumentError, "dead_letter_topic is required with dead_letter_max_delivery_attempts"
+          end
+          dead_letter_policy = @grpc.dead_letter_policy || Google::Cloud::PubSub::V1::DeadLetterPolicy.new
+          dead_letter_policy.max_delivery_attempts = new_dead_letter_max_delivery_attempts
+          update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, dead_letter_policy: dead_letter_policy
+          @grpc = service.update_subscription update_grpc, :dead_letter_policy
           @resource_name = nil
         end
 

@@ -33,7 +33,9 @@ describe Google::Cloud::PubSub, :pubsub do
 
   let(:new_topic_name)  {  $topic_names[0] }
   let(:topic_names)     {  $topic_names[3..6] }
-  let(:reference_topic_name) {  $topic_names[7] }
+  let(:reference_topic_name) { $topic_names[7] }
+  let(:dead_letter_topic_name) { $topic_names[8] }
+  let(:dead_letter_topic_name_2) { $topic_names[9] }
   let(:labels) { { "foo" => "bar" } }
 
   before do
@@ -129,16 +131,30 @@ describe Google::Cloud::PubSub, :pubsub do
       end
     end
 
-    it "should allow creation of a subscription with options" do
-      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600, labels: labels
+    it "should allow create and update of subscription with options" do
+      dead_letter_topic = retrieve_topic dead_letter_topic_name
+      dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
+
+      # create
+      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600, labels: labels, dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 7
       subscription.wont_be :nil?
       subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       assert subscription.retain_acked
       subscription.retention.must_equal 600
       subscription.labels.must_equal labels
       subscription.labels.must_be :frozen?
+      subscription.dead_letter_max_delivery_attempts.must_equal 7
+      subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic.name
+
+      # update
       subscription.labels = {}
       subscription.labels.must_be :empty?
+      subscription.dead_letter_max_delivery_attempts = 8
+      subscription.dead_letter_max_delivery_attempts.must_equal 8
+      subscription.dead_letter_topic = dead_letter_topic_2
+      subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic_2.name
+
+      # delete
       subscription.delete
     end
 
