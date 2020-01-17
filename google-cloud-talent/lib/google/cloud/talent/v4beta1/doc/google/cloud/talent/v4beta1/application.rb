@@ -63,8 +63,8 @@ module Google
         #     The application date.
         # @!attribute [rw] stage
         #   @return [Google::Cloud::Talent::V4beta1::Application::ApplicationStage]
-        #     Required. What is the most recent stage of the application (that is, new,
-        #     screen, send cv, hired, finished work)?  This field is intentionally not
+        #     Required. What is the most recent stage of the application (that is, new, screen,
+        #     send cv, hired, finished work)?  This field is intentionally not
         #     comprehensive of every possible status, but instead, represents statuses
         #     that would be used to indicate to the ML models good / bad matches.
         # @!attribute [rw] state
