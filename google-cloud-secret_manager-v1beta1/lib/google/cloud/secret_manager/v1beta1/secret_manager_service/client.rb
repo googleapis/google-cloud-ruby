@@ -24,6 +24,7 @@ require "google/cloud/errors"
 require "google/cloud/secret_manager/v1beta1/version"
 require "google/cloud/secrets/v1beta1/service_pb"
 require "google/cloud/secret_manager/v1beta1/secret_manager_service/credentials"
+require "google/cloud/secret_manager/v1beta1/secret_manager_service/paths"
 
 
 module Google
@@ -33,6 +34,8 @@ module Google
         module SecretManagerService
           # Service that implements SecretManagerService API.
           class Client
+            include Paths
+
             # @private
             attr_reader :secret_manager_service_stub
 
