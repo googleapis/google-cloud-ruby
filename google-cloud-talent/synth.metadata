@@ -1,19 +1,19 @@
 {
-  "updateTime": "2020-01-16T11:43:37.950404Z",
+  "updateTime": "2020-01-17T11:43:52.167859Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.44.0",
-        "dockerImage": "googleapis/artman@sha256:10a6d0342b8d62544810ac5ad86c3b21049ec0696608ac60175da8e513234344"
+        "version": "0.44.1",
+        "dockerImage": "googleapis/artman@sha256:5599b61e56a372d21b671969ee915fbca0f6c3a0daaeb898d01f8f685f1bbc8b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "0735b4b096872960568d1f366bfa75b7b0e1f1a3",
-        "internalRef": "289939042"
+        "sha": "58e770d568a2b78168ddc19a874178fee8265a9d",
+        "internalRef": "290146169"
       }
     },
     {
@@ -38,31 +38,16 @@
   ],
   "newFiles": [
     {
-      "path": ".yardopts"
-    },
-    {
-      "path": "synth.metadata"
+      "path": ".gitignore"
     },
     {
       "path": ".repo-metadata.json"
     },
     {
-      "path": "google-cloud-talent.gemspec"
+      "path": ".rubocop.yml"
     },
     {
-      "path": "synth.py"
-    },
-    {
-      "path": "README.md"
-    },
-    {
-      "path": "LICENSE"
-    },
-    {
-      "path": "Gemfile"
-    },
-    {
-      "path": "Rakefile"
+      "path": ".yardopts"
     },
     {
       "path": "AUTHENTICATION.md"
@@ -71,40 +56,19 @@
       "path": "CHANGELOG.md"
     },
     {
-      "path": ".rubocop.yml"
+      "path": "Gemfile"
     },
     {
-      "path": ".gitignore"
+      "path": "LICENSE"
     },
     {
-      "path": "synth/helpers.rb.erb"
+      "path": "README.md"
     },
     {
-      "path": "synth/helpers_test.rb.erb"
+      "path": "Rakefile"
     },
     {
-      "path": "test/google/cloud/talent/v4beta1/tenant_service_client_test.rb"
-    },
-    {
-      "path": "test/google/cloud/talent/v4beta1/event_service_client_test.rb"
-    },
-    {
-      "path": "test/google/cloud/talent/v4beta1/application_service_client_test.rb"
-    },
-    {
-      "path": "test/google/cloud/talent/v4beta1/profile_service_client_test.rb"
-    },
-    {
-      "path": "test/google/cloud/talent/v4beta1/helpers_test.rb"
-    },
-    {
-      "path": "test/google/cloud/talent/v4beta1/company_service_client_test.rb"
-    },
-    {
-      "path": "test/google/cloud/talent/v4beta1/completion_client_test.rb"
-    },
-    {
-      "path": "test/google/cloud/talent/v4beta1/job_service_client_test.rb"
+      "path": "google-cloud-talent.gemspec"
     },
     {
       "path": "lib/google/cloud/talent.rb"
@@ -113,151 +77,61 @@
       "path": "lib/google/cloud/talent/v4beta1.rb"
     },
     {
-      "path": "lib/google/cloud/talent/version.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/profile_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/tenant_service_services_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/tenant_service_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/company_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/job_service_client_config.json"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/event_service_client_config.json"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/job_service_client.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/company_service_client.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/event_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/profile_service_client.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/event_service_client.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/credentials.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/company_service_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/completion_service_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/company_service_services_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/profile_service_client_config.json"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/application_service_client_config.json"
-    },
-    {
       "path": "lib/google/cloud/talent/v4beta1/application_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/tenant_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/completion_client.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/profile_service_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/job_service_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/tenant_service_client.rb"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/application_service_client.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/histogram_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/event_service_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/completion_client_config.json"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/tenant_service_client_config.json"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/batch_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/application_service_services_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/company_service_client_config.json"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/job_service_services_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/common_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/helpers.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/event_service_services_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/filters_pb.rb"
+      "path": "lib/google/cloud/talent/v4beta1/application_service_client_config.json"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/application_service_pb.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/job_pb.rb"
+      "path": "lib/google/cloud/talent/v4beta1/application_service_services_pb.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/profile_service_services_pb.rb"
+      "path": "lib/google/cloud/talent/v4beta1/batch_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/common_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/company_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/company_service_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/company_service_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/company_service_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/company_service_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/completion_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/completion_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/completion_service_pb.rb"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/completion_service_services_pb.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event_service.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/company_service.rb"
+      "path": "lib/google/cloud/talent/v4beta1/credentials.rb"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/histogram.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb"
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application_service.rb"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/common.rb"
@@ -266,13 +140,34 @@
       "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/company.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile_service.rb"
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/company_service.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/completion_service.rb"
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/event_service.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/filters.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/histogram.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/job_service.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/profile_service.rb"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant.rb"
@@ -281,31 +176,37 @@
       "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/tenant_service.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/cloud/talent/v4beta1/application_service.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/protobuf/duration.rb"
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/longrunning/operations.rb"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/doc/google/protobuf/any.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/protobuf/wrappers.rb"
-    },
-    {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/protobuf/field_mask.rb"
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/protobuf/duration.rb"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/doc/google/protobuf/empty.rb"
     },
     {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/protobuf/field_mask.rb"
+    },
+    {
       "path": "lib/google/cloud/talent/v4beta1/doc/google/protobuf/timestamp.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/longrunning/operations.rb"
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/protobuf/wrappers.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/rpc/status.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/type/date.rb"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/doc/google/type/latlng.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/doc/google/type/money.rb"
     },
     {
       "path": "lib/google/cloud/talent/v4beta1/doc/google/type/postal_address.rb"
@@ -314,13 +215,112 @@
       "path": "lib/google/cloud/talent/v4beta1/doc/google/type/timeofday.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/type/money.rb"
+      "path": "lib/google/cloud/talent/v4beta1/event_pb.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/type/date.rb"
+      "path": "lib/google/cloud/talent/v4beta1/event_service_client.rb"
     },
     {
-      "path": "lib/google/cloud/talent/v4beta1/doc/google/rpc/status.rb"
+      "path": "lib/google/cloud/talent/v4beta1/event_service_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/event_service_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/event_service_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/filters_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/helpers.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/histogram_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/job_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/job_service_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/job_service_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/job_service_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/job_service_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/profile_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/profile_service_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/profile_service_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/profile_service_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/profile_service_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/tenant_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/tenant_service_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/tenant_service_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/tenant_service_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/v4beta1/tenant_service_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/talent/version.rb"
+    },
+    {
+      "path": "synth.metadata"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "synth/helpers.rb.erb"
+    },
+    {
+      "path": "synth/helpers_test.rb.erb"
+    },
+    {
+      "path": "test/google/cloud/talent/v4beta1/application_service_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/talent/v4beta1/company_service_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/talent/v4beta1/completion_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/talent/v4beta1/event_service_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/talent/v4beta1/helpers_test.rb"
+    },
+    {
+      "path": "test/google/cloud/talent/v4beta1/job_service_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/talent/v4beta1/profile_service_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/talent/v4beta1/tenant_service_client_test.rb"
     }
   ]
 }

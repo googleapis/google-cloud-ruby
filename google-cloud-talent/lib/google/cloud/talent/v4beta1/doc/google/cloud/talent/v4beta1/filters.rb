@@ -26,8 +26,8 @@ module Google
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] query_language_code
         #   @return [String]
-        #     The language code of {Google::Cloud::Talent::V4beta1::JobQuery#query query}.
-        #     For example, "en-US". This field helps to better interpret the query.
+        #     The language code of {Google::Cloud::Talent::V4beta1::JobQuery#query query}. For example, "en-US". This field helps to
+        #     better interpret the query.
         #
         #     If a value isn't specified, the query language code is automatically
         #     detected, which may not be accurate.
@@ -56,24 +56,21 @@ module Google
         # @!attribute [rw] location_filters
         #   @return [Array<Google::Cloud::Talent::V4beta1::LocationFilter>]
         #     The location filter specifies geo-regions containing the jobs to
-        #     search against. See
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} for more
-        #     information.
+        #     search against. See {Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} for more information.
         #
         #     If a location value isn't specified, jobs fitting the other search
         #     criteria are retrieved regardless of where they're located.
         #
         #     If multiple values are specified, jobs are retrieved from any of the
         #     specified locations. If different values are specified for the
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     parameter, the maximum provided distance is used for all locations.
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} parameter, the maximum provided
+        #     distance is used for all locations.
         #
         #     At most 5 location filters are allowed.
         # @!attribute [rw] job_categories
         #   @return [Array<Google::Cloud::Talent::V4beta1::JobCategory>]
         #     The category filter specifies the categories of jobs to search against.
-        #     See {Google::Cloud::Talent::V4beta1::JobCategory JobCategory} for more
-        #     information.
+        #     See {Google::Cloud::Talent::V4beta1::JobCategory JobCategory} for more information.
         #
         #     If a value isn't specified, jobs from any category are searched against.
         #
@@ -84,17 +81,14 @@ module Google
         #     Allows filtering jobs by commute time with different travel methods (for
         #      example, driving or public transit).
         #
-        #     Note: This only works when you specify a
-        #     {Google::Cloud::Talent::V4beta1::CommuteMethod CommuteMethod}. In this case,
-        #     {Google::Cloud::Talent::V4beta1::JobQuery#location_filters location_filters}
-        #     is ignored.
+        #     Note: This only works when you specify a {Google::Cloud::Talent::V4beta1::CommuteMethod CommuteMethod}. In this case,
+        #     {Google::Cloud::Talent::V4beta1::JobQuery#location_filters location_filters} is ignored.
         #
         #      Currently we don't support sorting by commute time.
         # @!attribute [rw] company_display_names
         #   @return [Array<String>]
-        #     This filter specifies the exact company
-        #     {Google::Cloud::Talent::V4beta1::Company#display_name Company#display_name} of
-        #     the jobs to search against.
+        #     This filter specifies the exact company {Google::Cloud::Talent::V4beta1::Company#display_name Company#display_name}
+        #     of the jobs to search against.
         #
         #     If a value isn't specified, jobs within the search results are
         #     associated with any company.
@@ -106,15 +100,14 @@ module Google
         # @!attribute [rw] compensation_filter
         #   @return [Google::Cloud::Talent::V4beta1::CompensationFilter]
         #     This search filter is applied only to
-        #     {Google::Cloud::Talent::V4beta1::Job#compensation_info Job#compensation_info}.
-        #     For example, if the filter is specified as "Hourly job with per-hour
-        #     compensation > $15", only jobs meeting these criteria are searched. If a
-        #     filter isn't defined, all open jobs are searched.
+        #     {Google::Cloud::Talent::V4beta1::Job#compensation_info Job#compensation_info}. For example, if the filter is specified
+        #     as "Hourly job with per-hour compensation > $15", only jobs meeting
+        #     these criteria are searched. If a filter isn't defined, all open jobs
+        #     are searched.
         # @!attribute [rw] custom_attribute_filter
         #   @return [String]
         #     This filter specifies a structured syntax to match against the
-        #     {Google::Cloud::Talent::V4beta1::Job#custom_attributes Job#custom_attributes}
-        #     marked as `filterable`.
+        #     {Google::Cloud::Talent::V4beta1::Job#custom_attributes Job#custom_attributes} marked as `filterable`.
         #
         #     The syntax for this expression is a subset of SQL syntax.
         #
@@ -145,8 +138,7 @@ module Google
         # @!attribute [rw] employment_types
         #   @return [Array<Google::Cloud::Talent::V4beta1::EmploymentType>]
         #     The employment type filter specifies the employment type of jobs to
-        #     search against, such as
-        #     {Google::Cloud::Talent::V4beta1::EmploymentType::FULL_TIME EmploymentType::FULL_TIME}.
+        #     search against, such as {Google::Cloud::Talent::V4beta1::EmploymentType::FULL_TIME EmploymentType::FULL_TIME}.
         #
         #     If a value isn't specified, jobs in the search results includes any
         #     employment type.
@@ -189,61 +181,42 @@ module Google
         #     The location filter specifies geo-regions containing the profiles to
         #     search against.
         #
-        #     One of
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
-        #     or
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng LocationFilter#lat_lng}
-        #     must be provided or an error is thrown. If both
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
-        #     and
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng LocationFilter#lat_lng}
-        #     are provided, an error is thrown.
+        #     One of {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address} or {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng LocationFilter#lat_lng} must be
+        #     provided or an error is thrown. If both {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address} and
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng LocationFilter#lat_lng} are provided, an error is thrown.
         #
         #     The following logic is used to determine which locations in
         #     the profile to filter against:
         #
-        #     1. All of the profile's geocoded
-        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
-        #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL and
-        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
+        #     1. All of the profile's geocoded {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
+        #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL and {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
         #
         #     2. If the above set of locations is empty, all of the profile's geocoded
-        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
-        #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
-        #     CONTACT_INFO_USAGE_UNSPECIFIED and
-        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
+        #     CONTACT_INFO_USAGE_UNSPECIFIED and {Google::Cloud::Talent::V4beta1::Address#current Address#current} is true.
         #
         #     3. If the above set of locations is empty, all of the profile's geocoded
-        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
-        #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL or
-        #     CONTACT_INFO_USAGE_UNSPECIFIED and
-        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is not set.
+        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is PERSONAL or
+        #     CONTACT_INFO_USAGE_UNSPECIFIED and {Google::Cloud::Talent::V4beta1::Address#current Address#current} is not set.
         #
-        #     This means that any profiles without any
-        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} that
-        #     match any of the above criteria will not be included in a search with
-        #     location filter. Furthermore, any
-        #     {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where
-        #     {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is WORK or
-        #     SCHOOL or where
-        #     {Google::Cloud::Talent::V4beta1::Address#current Address#current} is false are
-        #     not considered for location filter.
+        #     This means that any profiles without any {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} that match
+        #     any of the above criteria will not be included in a search with location
+        #     filter. Furthermore, any {Google::Cloud::Talent::V4beta1::Profile#addresses Profile#addresses} where {Google::Cloud::Talent::V4beta1::Address#usage Address#usage} is
+        #     WORK or SCHOOL or where {Google::Cloud::Talent::V4beta1::Address#current Address#current} is false are not considered for
+        #     location filter.
         #
         #     If a location filter isn't specified, profiles fitting the other search
         #     criteria are retrieved regardless of where they're located.
         #
-        #     If
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#negated LocationFilter#negated}
-        #     is specified, the result doesn't contain profiles from that location.
+        #     If {Google::Cloud::Talent::V4beta1::LocationFilter#negated LocationFilter#negated} is specified, the result doesn't contain
+        #     profiles from that location.
         #
-        #     If
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
-        #     is provided, the
+        #     If {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address} is provided, the
         #     {Google::Cloud::Talent::V4beta1::Location::LocationType LocationType}, center
         #     point (latitude and longitude), and radius are automatically detected by
         #     the Google Maps Geocoding API and included as well. If
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
-        #     cannot be geocoded, the filter falls back to keyword search.
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address} cannot be geocoded, the filter
+        #     falls back to keyword search.
         #
         #     If the detected
         #     {Google::Cloud::Talent::V4beta1::Location::LocationType LocationType} is
@@ -256,38 +229,24 @@ module Google
         #     center point and a radius of detected location radius +
         #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}.
         #
-        #     If
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}
-        #     is provided,
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     is the additional radius on top of the radius of the location geocoded from
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}.
-        #     If
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng LocationFilter#lat_lng}
-        #     is provided,
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     is the only radius that is used.
+        #     If {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address} is provided,
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} is the additional radius on top of the
+        #     radius of the location geocoded from {Google::Cloud::Talent::V4beta1::LocationFilter#address LocationFilter#address}. If
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng LocationFilter#lat_lng} is provided,
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} is the only radius that is used.
         #
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     is 10 by default. Note that the value of
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     is 0 if it is unset, so the server does not differentiate
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     that is explicitly set to 0 and
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     that is not set. Which means that if
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     is explicitly set to 0, the server will use the default value of
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     which is 10. To work around this and effectively set
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     to 0, we recommend setting
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     to a very small decimal number (such as 0.00001).
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} is 10 by default. Note that the value
+        #     of {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} is 0 if it is unset, so the server
+        #     does not differentiate {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} that is
+        #     explicitly set to 0 and {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} that is not
+        #     set. Which means that if {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} is explicitly
+        #     set to 0, the server will use the default value of
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} which is 10. To work around this and
+        #     effectively set {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} to 0, we recommend
+        #     setting {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} to a very small decimal number
+        #     (such as 0.00001).
         #
-        #     If
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles}
-        #     is negative, an error is thrown.
+        #     If {Google::Cloud::Talent::V4beta1::LocationFilter#distance_in_miles LocationFilter#distance_in_miles} is negative, an error is thrown.
         # @!attribute [rw] job_title_filters
         #   @return [Array<Google::Cloud::Talent::V4beta1::JobTitleFilter>]
         #     Job title filter specifies job titles of profiles to match on.
@@ -297,9 +256,8 @@ module Google
         #     If multiple values are specified, profiles are retrieved with any of the
         #     specified job titles.
         #
-        #     If
-        #     {Google::Cloud::Talent::V4beta1::JobTitleFilter#negated JobTitleFilter#negated}
-        #     is specified, the result won't contain profiles with the job titles.
+        #     If {Google::Cloud::Talent::V4beta1::JobTitleFilter#negated JobTitleFilter#negated} is specified, the result won't contain
+        #     profiles with the job titles.
         #
         #     For example, search for profiles with a job title "Product Manager".
         # @!attribute [rw] employer_filters
@@ -312,9 +270,8 @@ module Google
         #     If multiple employer filters are specified, profiles with any matching
         #     employers are retrieved.
         #
-        #     If
-        #     {Google::Cloud::Talent::V4beta1::EmployerFilter#negated EmployerFilter#negated}
-        #     is specified, the result won't contain profiles that match the employers.
+        #     If {Google::Cloud::Talent::V4beta1::EmployerFilter#negated EmployerFilter#negated} is specified, the result won't contain
+        #     profiles that match the employers.
         #
         #     For example, search for profiles that have working experience at "Google
         #     LLC".
@@ -328,9 +285,8 @@ module Google
         #     If multiple education filters are specified, profiles that match any
         #     education filters are retrieved.
         #
-        #     If
-        #     {Google::Cloud::Talent::V4beta1::EducationFilter#negated EducationFilter#negated}
-        #     is specified, the result won't contain profiles that match the educations.
+        #     If {Google::Cloud::Talent::V4beta1::EducationFilter#negated EducationFilter#negated} is specified, the result won't contain
+        #     profiles that match the educations.
         #
         #     For example, search for profiles with a master degree.
         # @!attribute [rw] skill_filters
@@ -342,8 +298,8 @@ module Google
         #     If multiple skill filters are specified, profiles that match any skill
         #     filters are retrieved.
         #
-        #     If {Google::Cloud::Talent::V4beta1::SkillFilter#negated SkillFilter#negated}
-        #     is specified, the result won't contain profiles that match the skills.
+        #     If {Google::Cloud::Talent::V4beta1::SkillFilter#negated SkillFilter#negated} is specified, the result won't contain profiles
+        #     that match the skills.
         #
         #     For example, search for profiles that have "Java" and "Python" in skill
         #     list.
@@ -381,8 +337,7 @@ module Google
         # @!attribute [rw] custom_attribute_filter
         #   @return [String]
         #     This filter specifies a structured syntax to match against the
-        #     {Google::Cloud::Talent::V4beta1::Profile#custom_attributes Profile#custom_attributes}
-        #     that are marked as `filterable`.
+        #     {Google::Cloud::Talent::V4beta1::Profile#custom_attributes Profile#custom_attributes} that are marked as `filterable`.
         #
         #     The syntax for this expression is a subset of Google SQL syntax.
         #
@@ -413,8 +368,8 @@ module Google
         #     signals.
         #
         #     Signal 1: Number of days since most recent job application.  See
-        #     {Google::Cloud::Talent::V4beta1::Availability::JobApplicationAvailabilitySignal Availability::JobApplicationAvailabilitySignal}
-        #     for the details of this signal.
+        #     {Google::Cloud::Talent::V4beta1::Availability::JobApplicationAvailabilitySignal Availability::JobApplicationAvailabilitySignal} for the details of this
+        #     signal.
         #
         #     Signal 2: Number of days since last profile update. See
         #     {Google::Cloud::Talent::V4beta1::Availability::ProfileUpdateAvailabilitySignal Availability::ProfileUpdateAvailabilitySignal}
@@ -436,12 +391,9 @@ module Google
         #     indicate the candidate's potential qualification / interest / close ability
         #     for a specific job.
         #
-        #     There can be at most one
-        #     {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter} per
-        #     {Google::Cloud::Talent::V4beta1::AvailabilityFilter#signal_type signal_type}.
-        #     If there are multiple
-        #     {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter} for a
-        #     {Google::Cloud::Talent::V4beta1::AvailabilityFilter#signal_type signal_type},
+        #     There can be at most one {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter} per
+        #     {Google::Cloud::Talent::V4beta1::AvailabilityFilter#signal_type signal_type}. If there are multiple
+        #     {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter} for a {Google::Cloud::Talent::V4beta1::AvailabilityFilter#signal_type signal_type},
         #     an error is thrown.
         # @!attribute [rw] person_name_filters
         #   @return [Array<Google::Cloud::Talent::V4beta1::PersonNameFilter>]
@@ -485,15 +437,12 @@ module Google
         #     Allows the client to return jobs without a
         #     set location, specifically, telecommuting jobs (telecommuting is considered
         #     by the service as a special location.
-        #     {Google::Cloud::Talent::V4beta1::Job#posting_region Job#posting_region}
-        #     indicates if a job permits telecommuting. If this field is set to
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter::TelecommutePreference::TELECOMMUTE_ALLOWED TelecommutePreference::TELECOMMUTE_ALLOWED},
-        #     telecommuting jobs are searched, and
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#address address} and
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng lat_lng} are ignored.
-        #     If not set or set to
-        #     {Google::Cloud::Talent::V4beta1::LocationFilter::TelecommutePreference::TELECOMMUTE_EXCLUDED TelecommutePreference::TELECOMMUTE_EXCLUDED},
-        #     telecommute job are not searched.
+        #     {Google::Cloud::Talent::V4beta1::Job#posting_region Job#posting_region} indicates if a job permits telecommuting.
+        #     If this field is set to {Google::Cloud::Talent::V4beta1::LocationFilter::TelecommutePreference::TELECOMMUTE_ALLOWED TelecommutePreference::TELECOMMUTE_ALLOWED},
+        #     telecommuting jobs are searched, and {Google::Cloud::Talent::V4beta1::LocationFilter#address address} and {Google::Cloud::Talent::V4beta1::LocationFilter#lat_lng lat_lng} are
+        #     ignored. If not set or set to
+        #     {Google::Cloud::Talent::V4beta1::LocationFilter::TelecommutePreference::TELECOMMUTE_EXCLUDED TelecommutePreference::TELECOMMUTE_EXCLUDED}, telecommute job are not
+        #     searched.
         #
         #     This filter can be used by itself to search exclusively for telecommuting
         #     jobs, or it can be combined with another location
@@ -546,42 +495,32 @@ module Google
 
             # Filter by `base compensation entry's` unit. A job is a match if and
             # only if the job contains a base CompensationEntry and the base
-            # CompensationEntry's unit matches provided
-            # {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}. Populate
-            # one or more
-            # {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+            # CompensationEntry's unit matches provided {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+            # Populate one or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
             #
-            # See
-            # {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry}
-            # for definition of base compensation entry.
+            # See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry} for definition of
+            # base compensation entry.
             UNIT_ONLY = 1
 
             # Filter by `base compensation entry's` unit and amount / range. A job
             # is a match if and only if the job contains a base CompensationEntry, and
             # the base entry's unit matches provided
-            # {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit CompensationUnit}
-            # and amount or range overlaps with provided
+            # {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit CompensationUnit} and
+            # amount or range overlaps with provided
             # {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange CompensationRange}.
             #
-            # See
-            # {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry}
-            # for definition of base compensation entry.
+            # See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationInfo::CompensationEntry} for definition of
+            # base compensation entry.
             #
-            # Set exactly one
-            # {Google::Cloud::Talent::V4beta1::CompensationFilter#units units} and
-            # populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range}.
+            # Set exactly one {Google::Cloud::Talent::V4beta1::CompensationFilter#units units} and populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range}.
             UNIT_AND_AMOUNT = 2
 
             # Filter by annualized base compensation amount and `base compensation
-            # entry's` unit. Populate
-            # {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or
-            # more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+            # entry's` unit. Populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
             ANNUALIZED_BASE_AMOUNT = 3
 
             # Filter by annualized total compensation amount and `base compensation
-            # entry's` unit . Populate
-            # {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or
-            # more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
+            # entry's` unit . Populate {Google::Cloud::Talent::V4beta1::CompensationFilter#range range} and zero or more {Google::Cloud::Talent::V4beta1::CompensationFilter#units units}.
             ANNUALIZED_TOTAL_AMOUNT = 4
           end
         end
@@ -596,8 +535,8 @@ module Google
         #     commute time from.
         # @!attribute [rw] travel_duration
         #   @return [Google::Protobuf::Duration]
-        #     Required. The maximum travel time in seconds. The maximum allowed value is
-        #     `3600s` (one hour). Format is `123s`.
+        #     Required. The maximum travel time in seconds. The maximum allowed value is `3600s`
+        #     (one hour). Format is `123s`.
         # @!attribute [rw] allow_imprecise_addresses
         #   @return [true, false]
         #     If `true`, jobs without street level addresses may also be returned.
@@ -631,8 +570,7 @@ module Google
         # Job title of the search.
         # @!attribute [rw] job_title
         #   @return [String]
-        #     Required. The job title. For example, "Software engineer", or "Product
-        #     manager".
+        #     Required. The job title. For example, "Software engineer", or "Product manager".
         # @!attribute [rw] negated
         #   @return [true, false]
         #     Whether to apply negation to the filter so profiles matching the filter
@@ -655,30 +593,24 @@ module Google
         #     Required. The name of the employer, for example "Google", "Alphabet".
         # @!attribute [rw] mode
         #   @return [Google::Cloud::Talent::V4beta1::EmployerFilter::EmployerFilterMode]
-        #     Define set of
-        #     {Google::Cloud::Talent::V4beta1::EmploymentRecord EmploymentRecord}s to search
-        #     against.
+        #     Define set of {Google::Cloud::Talent::V4beta1::EmploymentRecord EmploymentRecord}s to search against.
         #
-        #     Defaults to
-        #     {Google::Cloud::Talent::V4beta1::EmployerFilter::EmployerFilterMode::ALL_EMPLOYMENT_RECORDS EmployerFilterMode::ALL_EMPLOYMENT_RECORDS}.
+        #     Defaults to {Google::Cloud::Talent::V4beta1::EmployerFilter::EmployerFilterMode::ALL_EMPLOYMENT_RECORDS EmployerFilterMode::ALL_EMPLOYMENT_RECORDS}.
         # @!attribute [rw] negated
         #   @return [true, false]
         #     Whether to apply negation to the filter so profiles matching the filter
         #     is excluded.
         class EmployerFilter
-          # Enum indicating which set of
-          # {Google::Cloud::Talent::V4beta1::Profile#employment_records Profile#employment_records}
-          # to search against.
+          # Enum indicating which set of {Google::Cloud::Talent::V4beta1::Profile#employment_records Profile#employment_records} to search
+          # against.
           module EmployerFilterMode
             # Default value.
             EMPLOYER_FILTER_MODE_UNSPECIFIED = 0
 
-            # Apply to all employers in
-            # {Google::Cloud::Talent::V4beta1::Profile#employment_records Profile#employment_records}.
+            # Apply to all employers in {Google::Cloud::Talent::V4beta1::Profile#employment_records Profile#employment_records}.
             ALL_EMPLOYMENT_RECORDS = 1
 
-            # Apply only to current employer in
-            # {Google::Cloud::Talent::V4beta1::Profile#employment_records Profile#employment_records}.
+            # Apply only to current employer in {Google::Cloud::Talent::V4beta1::Profile#employment_records Profile#employment_records}.
             CURRENT_EMPLOYMENT_RECORDS_ONLY = 2
 
             # Apply only to past (not current) employers in
@@ -710,10 +642,7 @@ module Google
         # Work experience filter.
         #
         # This filter is used to search for profiles with working experience length
-        # between
-        # {Google::Cloud::Talent::V4beta1::WorkExperienceFilter#min_experience min_experience}
-        # and
-        # {Google::Cloud::Talent::V4beta1::WorkExperienceFilter#max_experience max_experience}.
+        # between {Google::Cloud::Talent::V4beta1::WorkExperienceFilter#min_experience min_experience} and {Google::Cloud::Talent::V4beta1::WorkExperienceFilter#max_experience max_experience}.
         # @!attribute [rw] min_experience
         #   @return [Google::Protobuf::Duration]
         #     The minimum duration of the work experience (inclusive).
@@ -724,13 +653,9 @@ module Google
 
         # Application Date Range Filter.
         #
-        # The API matches profiles with
-        # {Google::Cloud::Talent::V4beta1::Application#application_date Application#application_date}
-        # between start date and end date (both boundaries are inclusive). The filter
-        # is ignored if both
-        # {Google::Cloud::Talent::V4beta1::ApplicationDateFilter#start_date start_date}
-        # and {Google::Cloud::Talent::V4beta1::ApplicationDateFilter#end_date end_date}
-        # are missing.
+        # The API matches profiles with {Google::Cloud::Talent::V4beta1::Application#application_date Application#application_date} between
+        # start date and end date (both boundaries are inclusive). The filter is
+        # ignored if both {Google::Cloud::Talent::V4beta1::ApplicationDateFilter#start_date start_date} and {Google::Cloud::Talent::V4beta1::ApplicationDateFilter#end_date end_date} are missing.
         # @!attribute [rw] start_date
         #   @return [Google::Type::Date]
         #     Start date. If it's missing, The API matches profiles with application date
@@ -744,33 +669,28 @@ module Google
         # Outcome Notes Filter.
         # @!attribute [rw] outcome_notes
         #   @return [String]
-        #     Required. User entered or selected outcome reason. The API does an exact
-        #     match on the
-        #     {Google::Cloud::Talent::V4beta1::Application#outcome_notes Application#outcome_notes}
-        #     in profiles.
+        #     Required. User entered or selected outcome reason. The API does an exact match on the
+        #     {Google::Cloud::Talent::V4beta1::Application#outcome_notes Application#outcome_notes} in profiles.
         # @!attribute [rw] negated
         #   @return [true, false]
         #     If true, The API excludes all candidates with any
-        #     {Google::Cloud::Talent::V4beta1::Application#outcome_notes Application#outcome_notes}
-        #     matching the outcome reason specified in the filter.
+        #     {Google::Cloud::Talent::V4beta1::Application#outcome_notes Application#outcome_notes} matching the outcome reason specified in
+        #     the filter.
         class ApplicationOutcomeNotesFilter; end
 
         # Filter on the job information of Application.
         # @!attribute [rw] job_requisition_id
         #   @return [String]
         #     The job requisition id in the application. The API does an exact match on
-        #     the {Google::Cloud::Talent::V4beta1::Job#requisition_id Job#requisition_id} of
-        #     {Google::Cloud::Talent::V4beta1::Application#job Application#job} in profiles.
+        #     the {Google::Cloud::Talent::V4beta1::Job#requisition_id Job#requisition_id} of {Google::Cloud::Talent::V4beta1::Application#job Application#job} in profiles.
         # @!attribute [rw] job_title
         #   @return [String]
         #     The job title in the application. The API does an exact match on the
-        #     {Google::Cloud::Talent::V4beta1::Job#title Job#title} of
-        #     {Google::Cloud::Talent::V4beta1::Application#job Application#job} in profiles.
+        #     {Google::Cloud::Talent::V4beta1::Job#title Job#title} of {Google::Cloud::Talent::V4beta1::Application#job Application#job} in profiles.
         # @!attribute [rw] negated
         #   @return [true, false]
-        #     If true, the API excludes all profiles with any
-        #     {Google::Cloud::Talent::V4beta1::Application#job Application#job} matching the
-        #     filters.
+        #     If true, the API excludes all profiles with any {Google::Cloud::Talent::V4beta1::Application#job Application#job}
+        #     matching the filters.
         class ApplicationJobFilter; end
 
         # Filter on create timestamp or update timestamp of profiles.
@@ -788,8 +708,7 @@ module Google
         #   @return [Google::Cloud::Talent::V4beta1::TimeFilter::TimeField]
         #     Specifies which time field to filter profiles.
         #
-        #     Defaults to
-        #     {Google::Cloud::Talent::V4beta1::TimeFilter::TimeField::CREATE_TIME TimeField::CREATE_TIME}.
+        #     Defaults to {Google::Cloud::Talent::V4beta1::TimeFilter::TimeField::CREATE_TIME TimeField::CREATE_TIME}.
         class TimeFilter
           # Time fields can be used in TimeFilter.
           module TimeField
@@ -822,12 +741,9 @@ module Google
         #     Required. Range of times to filter candidate signals by.
         # @!attribute [rw] required
         #   @return [true, false]
-        #     If multiple
-        #     {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter} are
-        #     provided, the default behavior is to OR all filters, but if this field is
-        #     set to true, this particular
-        #     {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter} will
-        #     be AND'ed against other
+        #     If multiple {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter} are provided, the default
+        #     behavior is to OR all filters, but if this field is set to true, this
+        #     particular {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter} will be AND'ed against other
         #     {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}.
         class AvailabilityFilter; end
 

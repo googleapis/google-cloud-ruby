@@ -332,22 +332,17 @@ module Google
           # Updates specified tenant.
           #
           # @param tenant [Google::Cloud::Talent::V4beta1::Tenant | Hash]
-          #   Required. The tenant resource to replace the current resource in the
-          #   system.
+          #   Required. The tenant resource to replace the current resource in the system.
           #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Tenant`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Strongly recommended for the best service experience.
           #
-          #   If
-          #   {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask}
-          #   is provided, only the specified fields in
-          #   {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant tenant} are
-          #   updated. Otherwise all the fields are updated.
+          #   If {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask} is provided, only the specified fields in
+          #   {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant tenant} are updated. Otherwise all the fields are updated.
           #
           #   A field mask to specify the tenant fields to be updated. Only
-          #   top level fields of {Google::Cloud::Talent::V4beta1::Tenant Tenant} are
-          #   supported.
+          #   top level fields of {Google::Cloud::Talent::V4beta1::Tenant Tenant} are supported.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
