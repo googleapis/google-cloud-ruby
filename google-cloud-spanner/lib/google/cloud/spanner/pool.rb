@@ -158,8 +158,12 @@ module Google
         end
 
         def reset
-          shutdown
+          close
           init
+
+          @mutex.synchronize do
+            @closed = false
+          end
 
           true
         end

@@ -1275,6 +1275,13 @@ module Google
         end
 
         ##
+        # Reset the client sessions.
+        #
+        def reset
+          @pool.reset
+        end
+
+        ##
         # @private
         # Creates a new session object every time.
         def create_new_session
