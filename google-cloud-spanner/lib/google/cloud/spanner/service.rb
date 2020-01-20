@@ -42,11 +42,27 @@ module Google
           @client_config = client_config || {}
         end
 
+        def channel
+          require "grpc"
+          GRPC::Core::Channel.new host, chan_args, chan_creds
+        end
+
+        def chan_args
+          { "grpc.service_config_disable_resolution" => 1 }
+        end
+
+        def chan_creds
+          return credentials if insecure?
+          require "grpc"
+          GRPC::Core::ChannelCredentials.new.compose \
+            GRPC::Core::CallCredentials.new credentials.client.updater_proc
+        end
+
         def service
           return mocked_service if mocked_service
           @service ||= \
             V1::SpannerClient.new(
-              credentials: credentials,
+              credentials: channel,
               timeout: timeout,
               client_config: client_config,
               service_address: service_address,
@@ -61,7 +77,7 @@ module Google
           return mocked_instances if mocked_instances
           @instances ||= \
             Admin::Instance::V1::InstanceAdminClient.new(
-              credentials: credentials,
+              credentials: channel,
               timeout: timeout,
               client_config: client_config,
               service_address: service_address,
@@ -76,7 +92,7 @@ module Google
           return mocked_databases if mocked_databases
           @databases ||= \
             Admin::Database::V1::DatabaseAdminClient.new(
-              credentials: credentials,
+              credentials: channel,
               timeout: timeout,
               client_config: client_config,
               service_address: service_address,
@@ -86,6 +102,10 @@ module Google
             )
         end
         attr_accessor :mocked_databases
+
+        def insecure?
+          credentials == :this_channel_is_insecure
+        end
 
         def list_instances token: nil, max: nil
           call_options = nil
