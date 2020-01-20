@@ -168,21 +168,22 @@ describe Google::Cloud::PubSub, :pubsub do
       subscription.wont_be :nil?
       subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       # No messages, should be empty
-      events = subscription.pull
-      events.must_be :empty?
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
       # Publish a new message
       msg = topic.publish "hello"
       msg.wont_be :nil?
       # Check it received the published message
-      events = pull_with_retry subscription
-      events.wont_be :empty?
-      events.count.must_equal 1
-      event = events.first
-      event.wont_be :nil?
-      event.msg.data.must_equal msg.data
-      event.msg.published_at.wont_be :nil?
+      received_messages = pull_with_retry subscription
+      received_messages.wont_be :empty?
+      received_messages.count.must_equal 1
+      received_message = received_messages.first
+      received_message.wont_be :nil?
+      received_message.delivery_attempt.wont_be :nil?
+      received_message.msg.data.must_equal msg.data
+      received_message.msg.published_at.wont_be :nil?
       # Acknowledge the message
-      subscription.ack event.ack_id
+      subscription.ack received_message.ack_id
       # Remove the subscription
       subscription.delete
     end
@@ -193,8 +194,8 @@ describe Google::Cloud::PubSub, :pubsub do
       subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
 
       # No messages, should be empty
-      events = subscription.pull
-      events.must_be :empty?
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
       # Publish a new message
       msg = topic.publish "hello-#{rand(1000)}"
       msg.wont_be :nil?
@@ -202,39 +203,41 @@ describe Google::Cloud::PubSub, :pubsub do
       snapshot = subscription.create_snapshot labels: labels
 
       # Check it pulls the message
-      events = pull_with_retry subscription
-      events.wont_be :empty?
-      events.count.must_equal 1
-      event = events.first
-      event.wont_be :nil?
-      event.msg.data.must_equal msg.data
-      event.msg.published_at.wont_be :nil?
+      received_messages = pull_with_retry subscription
+      received_messages.wont_be :empty?
+      received_messages.count.must_equal 1
+      received_message = received_messages.first
+      received_message.wont_be :nil?
+      received_message.delivery_attempt.wont_be :nil?
+      received_message.msg.data.must_equal msg.data
+      received_message.msg.published_at.wont_be :nil?
       # Acknowledge the message
-      subscription.ack event.ack_id
+      subscription.ack received_message.ack_id
 
       # No messages, should be empty
-      events = subscription.pull
-      events.must_be :empty?
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
 
       # Reset to the snapshot
       subscription.seek snapshot
 
       # Check it again pulls the message
-      events = pull_with_retry subscription
-      events.wont_be :empty?
-      events.count.must_equal 1
-      event = events.first
-      event.wont_be :nil?
-      event.msg.data.must_equal msg.data
+      received_messages = pull_with_retry subscription
+      received_messages.wont_be :empty?
+      received_messages.count.must_equal 1
+      received_message = received_messages.first
+      received_message.wont_be :nil?
+      received_message.delivery_attempt.wont_be :nil?
+      received_message.msg.data.must_equal msg.data
       # Acknowledge the message
-      subscription.ack event.ack_id
+      subscription.ack received_message.ack_id
       # No messages, should be empty
-      events = subscription.pull
-      events.must_be :empty?
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
 
       # No messages, should be empty
-      events = subscription.pull
-      events.must_be :empty?
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
 
       snapshot.labels.must_equal labels
       snapshot.labels.must_be :frozen?
@@ -246,16 +249,16 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     def pull_with_retry sub
-      events = []
+      received_messages = []
       retries = 0
       while retries <= 5 do
-        events = sub.pull
-        break if events.any?
+        received_messages = sub.pull
+        break if received_messages.any?
         retries += 1
         puts "the subscription does not have the message yet. sleeping for #{retries*retries} second(s) and retrying."
         sleep retries*retries
       end
-      events
+      received_messages
     end
   end
 

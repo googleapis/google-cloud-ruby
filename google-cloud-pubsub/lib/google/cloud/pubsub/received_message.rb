@@ -64,6 +64,49 @@ module Google
         end
 
         ##
+        # Returns the delivery attempt counter for the message. The delivery attempt
+        # counter is `1 + (the sum of number of NACKs and number of
+        # ack_deadline exceeds)` for the message.
+        #
+        # A NACK is any call to `ModifyAckDeadline` with a `0` deadline. An `ack_deadline`
+        # exceeds event is whenever a message is not acknowledged within
+        # `ack_deadline`. Note that `ack_deadline` is initially
+        # `Subscription.ackDeadlineSeconds`, but may get extended automatically by
+        # the client library.
+        #
+        # The first delivery of a given message will have this value as `1`. The value
+        # is calculated at best effort and is approximate.
+        #
+        # If a dead letter policy is not set on the subscription, this will be `0`. See
+        # {Topic#subscribe}, {Subscription#dead_letter_topic=} and
+        # {Subscription#dead_letter_max_delivery_attempts=}.
+        #
+        # EXPERIMENTAL: This feature is part of a closed alpha release. This
+        # API might be changed in backward-incompatible ways and is not recommended
+        # for production use. It is not subject to any SLA or deprecation policy.
+        #
+        # @return [Integer]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
+        #   sub = topic.subscribe "my-topic-sub",
+        #                         dead_letter_topic: dead_letter_topic,
+        #                         dead_letter_max_delivery_attempts: 10
+        #
+        #   subscriber = sub.listen do |received_message|
+        #     puts received_message.message.delivery_attempt
+        #   end
+        #
+        def delivery_attempt
+          @grpc.delivery_attempt
+        end
+
+        ##
         # The received message.
         def message
           Message.from_grpc @grpc.message

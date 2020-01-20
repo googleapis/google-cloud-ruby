@@ -68,6 +68,10 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
     rec_message.publish_time.must_equal publish_time
   end
 
+  it "knows its delivery_attempt counter" do
+    rec_message.delivery_attempt.must_equal 1
+  end
+
   it "can acknowledge" do
     ack_res = nil
     mock = Minitest::Mock.new
