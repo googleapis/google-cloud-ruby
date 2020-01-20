@@ -319,6 +319,17 @@ module Google
         #                         deadline: 120,
         #                         endpoint: "https://example.com/push"
         #
+        # @example Configure a Dead Letter Queues policy:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
+        #   sub = topic.subscribe "my-topic-sub",
+        #                         dead_letter_topic: dead_letter_topic,
+        #                         dead_letter_max_delivery_attempts: 10
+        #
         def subscribe subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil, labels: nil,
                       message_ordering: nil, dead_letter_topic: nil, dead_letter_max_delivery_attempts: nil
           ensure_service!

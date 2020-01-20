@@ -369,8 +369,8 @@ module Google
         #   pubsub = Google::Cloud::PubSub.new
         #
         #   sub = pubsub.subscription "my-topic-sub"
-        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
-        #   sub.topic.name #=> "projects/my-project/topics/my-topic"
+        #   sub.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
+        #   sub.dead_letter_max_delivery_attempts #=> 10
         #
         def dead_letter_topic
           ensure_grpc!
@@ -399,7 +399,7 @@ module Google
         #
         #   sub = pubsub.subscription "my-topic-sub"
         #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
-        #   sub.topic.name #=> "projects/my-project/topics/my-topic"
+        #   sub.dead_letter_topic = dead_letter_topic
         #
         def dead_letter_topic= new_dead_letter_topic
           ensure_grpc!
@@ -427,6 +427,15 @@ module Google
         #
         # @return [Integer] A value between 5 and 100. If this value is 0, a default value of 5 is used.
         #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
+        #   sub.dead_letter_max_delivery_attempts #=> 10
+        #
         def dead_letter_max_delivery_attempts
           ensure_grpc!
           @grpc.dead_letter_policy&.max_delivery_attempts
@@ -447,6 +456,16 @@ module Google
         #
         # @param [Integer] new_dead_letter_max_delivery_attempts A value between 5 and 100. If this parameter is 0, a
         #   default value of 5 is used.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.dead_letter_topic.name #=> "projects/my-project/topics/my-dead-letter-topic"
+        #
+        #   sub.dead_letter_max_delivery_attempts = 20
         #
         def dead_letter_max_delivery_attempts= new_dead_letter_max_delivery_attempts
           ensure_grpc!
