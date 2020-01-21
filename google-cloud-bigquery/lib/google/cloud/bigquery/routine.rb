@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 # require "google/cloud/errors"
 require "google/cloud/bigquery/convert"
 require "google/cloud/bigquery/service"
+require "google/cloud/bigquery/routine/list"
 require "google/cloud/bigquery/argument"
 
 module Google
@@ -94,8 +95,30 @@ module Google
           @gapi.etag
         end
 
+        ##
+        # The time when this routine was created.
+        #
+        # @return [Time, nil] The creation time.
+        #
+        # @!group Attributes
+        #
+        def created_at
+          Convert.millis_to_time @gapi.creation_time
+        end
+
+        ##
+        # The time when this routine was last modified.
+        #
+        # @return [Time, nil] The last modified time.
+        #
+        # @!group Attributes
+        #
+        def modified_at
+          Convert.millis_to_time @gapi.last_modified_time
+        end
+
         ###
-        # The description of the routine (if defined).
+        # Optional. [Experimental] The description of the routine if defined.
         #
         # @return [String] The routine description.
         #
@@ -133,13 +156,23 @@ module Google
         #
         def description= new_description
           @gapi.description = new_description
-          patch_gapi! :description
+          update_gapi!
         end
 
         ###
-        # DOCS
+        # The type of a variable, e.g., a function argument.
         #
-        # @return [TYPE] DESC
+        # Examples:
+        # INT64: `type_kind="INT64"`
+        # ARRAY<STRING>: `type_kind="ARRAY", array_element_type="STRING"`
+        # STRUCT<x STRING, y ARRAY<DATE>>:
+        # `type_kind="STRUCT",
+        # struct_type=`fields=[
+        # `name="x", type=`type_kind="STRING"``,
+        # `name="y", type=`type_kind="ARRAY", array_element_type="DATE"``
+        # ]``
+        # Corresponds to the JSON property `returnType`
+        # @return [StandardSql::DataTypee]
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -175,24 +208,10 @@ module Google
         #
         def return_type= new_return_type
           @gapi.return_type = new_return_type
-          patch_gapi! :return_type
+          update_gapi!
         end
 
-        # The type of a variable, e.g., a function argument.
-        #
-        # Examples:
-        # INT64: `type_kind="INT64"`
-        # ARRAY<STRING>: `type_kind="ARRAY", array_element_type="STRING"`
-        # STRUCT<x STRING, y ARRAY<DATE>>:
-        # `type_kind="STRUCT",
-        # struct_type=`fields=[
-        # `name="x", type=`type_kind="STRING"``,
-        # `name="y", type=`type_kind="ARRAY", array_element_type="DATE"``
-        # ]``
-        # Corresponds to the JSON property `returnType`
-        # @return [StandardSql::DataTypee]
-        attr_accessor :return_type
-
+        ##
         # The body of the routine.
         #
         # For functions {#scalar_function?}, this is the expression in the `AS` clause.
@@ -212,8 +231,41 @@ module Google
         # Note that both \n are replaced with linebreaks.
         # Corresponds to the JSON property `definitionBody`
         #
+        # For functions {sql?}, this is the expression in the `AS` clause. It is the substring inside (but excluding)
+        # the parentheses. For example, for the function created with the following statement: `CREATE FUNCTION
+        # JoinLines(x string, y string) as (concat(x, "\n", y))` The definition_body is `"concat(x, \"\n\", y)""`.
         #
+        # If language=JAVASCRIPT, it is the evaluated string in the AS clause.
+        # For example, for the function created with the following statement:
+        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
+        # The definition_body is
+        # `"return \"\n\";\n"`
         #
+        # @return [String]
+        #
+        def body
+          @gapi.definition_body
+        end
+
+        ##
+        # The body of the routine.
+        #
+        # For functions {#scalar_function?}, this is the expression in the `AS` clause.
+        #
+        # When the routine is a SQL function {#sql?}, it is the substring inside (but excluding) the
+        # parentheses. For example, for the function created with the following
+        # statement:
+        # `CREATE FUNCTION JoinLines(x string, y string) as (concat(x, "\n", y))`
+        # The definition_body is `concat(x, "\n", y)` (\n is not replaced with
+        # linebreak). ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
+        #
+        # When the routine is a JavaScript function {#javascript?}, it is the evaluated string in the `AS` clause.
+        # For example, for the function created with the following statement:
+        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
+        # The definition_body is
+        # `"return \"\n\";\n"` ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
+        # Note that both \n are replaced with linebreaks.
+        # Corresponds to the JSON property `definitionBody`
         #
         # For functions {sql?}, this is the expression in the `AS` clause. It is the substring inside (but excluding)
         # the parentheses. For example, for the function created with the following statement: `CREATE FUNCTION
@@ -225,17 +277,12 @@ module Google
         # The definition_body is
         # `"return \"\n\";\n"`
         #
-        #
-        #
         # @return [String]
-        def body
-          @gapi.definition_body
+        #
+        def body= new_body
+          @gapi.definition_body = new_body
+          update_gapi!
         end
-
-        # Optional. [Experimental] The description of the routine if defined.
-        # Corresponds to the JSON property `description`
-        # @return [String]
-        attr_accessor :description
 
         # Optional. If language = "JAVASCRIPT", this field stores the path of the
         # imported JAVASCRIPT libraries.
@@ -264,48 +311,6 @@ module Google
         # PROCEDURE  Stored procedure.
         def type
           @gapi.routine_type
-        end
-
-        ###
-        # DOCS
-        #
-        # @return [TYPE] DESC
-        #
-        # @example
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   routine = dataset.routine "my_routine"
-        #
-        #   routine.NAME # ORIGINALVALUE
-        #
-        # @!group Attributes
-        #
-        def NAME
-          @gapi.NAME
-        end
-
-        ##
-        # DOCS
-        #
-        # @param [TYPE] new_NAME DESC
-        #
-        # @example
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   routine = dataset.routine "my_routine"
-        #
-        #   routine.NAME # ORIGINALVALUE
-        #   routine.NAME = UPDATEDVALUE
-        #
-        # @!group Attributes
-        #
-        def NAME= new_NAME
-          @gapi.NAME = new_NAME
-          patch_gapi! :NAME
         end
 
         ##
@@ -343,29 +348,7 @@ module Google
         #
         def arguments= new_arguments
           @gapi.update! arguments: new_arguments.map(&:to_gapi)
-          patch_gapi! :arguments
-        end
-
-        ##
-        # The time when this routine was created.
-        #
-        # @return [Time, nil] The creation time.
-        #
-        # @!group Attributes
-        #
-        def created_at
-          Convert.millis_to_time @gapi.creation_time
-        end
-
-        ##
-        # The time when this routine was last modified.
-        #
-        # @return [Time, nil] The last modified time.
-        #
-        # @!group Attributes
-        #
-        def modified_at
-          Convert.millis_to_time @gapi.last_modified_time
+          update_gapi!
         end
 
         ##
@@ -429,7 +412,7 @@ module Google
         end
 
         ##
-        # @private New lazy Routine object without making an HTTP request.
+        # @private New lazy Routine object without making an HTTP request, for use with the skip_lookup option.
         def self.new_reference project_id, dataset_id, routine_id, service
           raise ArgumentError, "project_id is required" unless project_id
           raise ArgumentError, "dataset_id is required" unless dataset_id
@@ -440,7 +423,7 @@ module Google
             reference_gapi = Google::Apis::BigqueryV2::RoutineReference.new(
               project_id: project_id,
               dataset_id: dataset_id,
-              routine_id:   routine_id
+              routine_id: routine_id
             )
             m.instance_variable_set :@reference, reference_gapi
             m.instance_variable_set :@service, service
@@ -460,22 +443,22 @@ module Google
           raise ArgumentError, "Cannot modify a frozen schema"
         end
 
-        def add_argument _name, _type, description: nil, mode: :nullable
-          frozen_check!
-          # ...
+        def update_gapi!
+          ensure_service!
+          @gapi = service.update_routine dataset_id, routine_id, @gapi
         end
 
-        ##
-        # Yielded to a block to accumulate changes for a patch request.
-        class Updater < Routine
-          ##
-          # A list of attributes that were updated.
-          attr_reader :updates
+        # def add_argument _name, _type, description: nil, mode: :nullable
+        #   frozen_check!
+        #   # ...
+        # end
 
+        ##
+        # Yielded to a block to accumulate changes for an update request.
+        class Updater < Routine
           ##
           # Create an Updater object.
           def initialize gapi
-            @updates = []
             @gapi = gapi.dup
             # @original_imported_libraries = Array(@gapi.imported_libraries).map(&:freeze).freeze
             # @imported_libraries = Array(@gapi.imported_libraries)
@@ -485,48 +468,32 @@ module Google
             # end
           end
 
-          def imported_libraries
-            @imported_libraries
-          end
-
           def imported_libraries= new_imported_libraries
             @imported_libraries = new_imported_libraries
-          end
-
-          def arguments
-            @gapi.arguments
           end
 
           def arguments= new_arguments
             @gapi.arguments = new_arguments.map(&:to_gapi)
           end
 
-          def body
-            @gapi.definition_body
-          end
-
           def body= new_body
             @gapi.definition_body = new_body
-          end
-
-          def language
-            @gapi.language
           end
 
           def language= new_language
             @gapi.language = new_language
           end
 
-          def type
-            @gapi.routine_type
-          end
-
           def type= new_type
             @gapi.routine_type = new_type
           end
 
-          ##
-          # Make sure any imported_libraries or arguments changes are saved.
+          def description= new_description
+            @gapi.description = new_description
+          end
+
+          # ##
+          # # Make sure any imported_libraries or arguments changes are saved.
           # def check_for_mutated_values!
           #   if @gapi.respond_to? :fields # TODO verify this attr
           #     if @original_imported_libraries != @imported_libraries
@@ -541,17 +508,8 @@ module Google
           # end
 
           def to_gapi
-            #check_for_mutated_values!
+            # check_for_mutated_values!
             @gapi
-          end
-
-          protected
-
-          ##
-          # Queue up all the updates instead of making them.
-          def patch_gapi! attribute
-            @updates << attribute
-            @updates.uniq!
           end
         end
       end

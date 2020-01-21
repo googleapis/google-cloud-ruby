@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,8 +38,10 @@ module Google
         # Corresponds to the JSON property `argumentKind`
         # @return [String]
         attr_accessor :kind
-        # FIXED_TYPE  The argument is a variable with fully specified type, which can be a struct or an array, but not a table.
-        # ANY_TYPE  The argument is any type, including struct or array, but not a table. To be added: FIXED_TABLE, ANY_TABLE
+        # FIXED_TYPE  The argument is a variable with fully specified type, which can be a struct or an array, but not
+        # a table.
+        # ANY_TYPE  The argument is any type, including struct or array, but not a table. To be added: FIXED_TABLE,
+        # ANY_TABLE
 
         # Optional. Specifies whether the argument is input or output.
         # Can be set for procedures only.
@@ -57,12 +59,11 @@ module Google
         attr_accessor :name
 
         def initialize data_type, kind: nil, mode: nil, name: nil
-          @data_type = if data_type.kind_of? StandardSql::DataType
-                        data_type
-                      elsif data_type.respond_to? :to_s
-                        StandardSql::DataType.new(type_kind: data_type.to_s.upcase)
-
-                      end
+          @data_type = if data_type.is_a? StandardSql::DataType
+                         data_type
+                       elsif data_type.respond_to? :to_s
+                         StandardSql::DataType.new type_kind: data_type.to_s.upcase
+                       end
           @kind = kind
           @mode = mode
           @name = name
@@ -70,10 +71,10 @@ module Google
 
         def to_gapi
           Google::Apis::BigqueryV2::Argument.new(
-            name: @name,
+            name:          @name,
             argument_kind: @kind,
-            mode: @mode,
-            data_type: @data_type.to_gapi
+            mode:          @mode,
+            data_type:     @data_type.to_gapi
           )
         end
 

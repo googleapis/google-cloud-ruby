@@ -85,7 +85,9 @@ module Google
           #   The fields of this struct, in order, if type_kind = "STRUCT".
           def initialize **kwargs
             # Convert struct_type to a gapi object if it is a veneer object (has #to_gapi defined)
-            kwargs[:array_element_type] = kwargs[:array_element_type].to_gapi if kwargs[:array_element_type].respond_to? :to_gapi
+            if kwargs[:array_element_type].respond_to? :to_gapi
+              kwargs[:array_element_type] = kwargs[:array_element_type].to_gapi
+            end
             kwargs[:struct_type] = kwargs[:struct_type].to_gapi if kwargs[:struct_type].respond_to? :to_gapi
 
             gapi = Google::Apis::BigqueryV2::StandardSqlDataType.new(**kwargs)
@@ -314,7 +316,7 @@ module Google
           #     )
           #     from_gapi gapi
           #   elsif Hash === primitive
-          #     # This is more complicated because we have to deal with missing names and sort them by their numeric values.
+          #     # More complicated because we have to deal with missing names and sort them by their numeric values.
           #
           #     keys = primitive.keys
           #     int_keys = keys.select { |key| key.is_a? Integer }

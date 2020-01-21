@@ -40,7 +40,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.wont_be :failed?
 
     # can find the routine in the list of routines
-    # dataset.routines.all.map(&:routine_id).must_include routine_id
+    dataset.routines.all.map(&:routine_id).must_include routine_id
 
     # can get the routine
     routine = dataset.routine routine_id
@@ -49,6 +49,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     routine.dataset_id.must_equal dataset.dataset_id
     routine.routine_id.must_equal routine_id
 
+    routine.description.must_be :nil?
     routine.type.must_equal "SCALAR_FUNCTION"
     routine.language.must_equal "SQL"
     routine.body.must_equal "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
@@ -95,6 +96,7 @@ describe Google::Cloud::Bigquery, :bigquery do
   focus
   it "can create and delete a routine" do
     routine = dataset.create_routine routine_id do |r|
+      r.description = "my description"
       r.type = "SCALAR_FUNCTION"
       r.language = :SQL
       r.body = "x * 3"
@@ -108,6 +110,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     routine.dataset_id.must_equal dataset.dataset_id
     routine.routine_id.must_equal routine_id
 
+    routine.description.must_equal "my description"
     routine.type.must_equal "SCALAR_FUNCTION"
     routine.language.must_equal "SQL"
     routine.body.must_equal "x * 3"

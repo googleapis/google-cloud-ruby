@@ -311,6 +311,21 @@ module Google
         end
 
         ##
+        # Updates information in an existing routine, replacing the entire routine resource.
+        def update_routine dataset_id, routine_id, new_routine_gapi
+          update_with_backoff = false
+          options = {}
+          if new_routine_gapi.etag
+            options[:header] = { "If-Match" => new_routine_gapi.etag }
+            # The update with etag operation is considered idempotent
+            update_with_backoff = true
+          end
+          execute backoff: update_with_backoff do
+            service.update_routine @project, dataset_id, routine_id, new_routine_gapi, options: options
+          end
+        end
+
+        ##
         # Deletes the routine specified by routine_id from the dataset.
         def delete_routine dataset_id, routine_id
           execute { service.delete_routine @project, dataset_id, routine_id }

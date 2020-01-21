@@ -2279,7 +2279,7 @@ module Google
         end
 
         ##
-        # @private New lazy Table object without making an HTTP request.
+        # @private New lazy Table object without making an HTTP request, for use with the skip_lookup option.
         def self.new_reference project_id, dataset_id, table_id, service
           raise ArgumentError, "dataset_id is required" unless dataset_id
           raise ArgumentError, "table_id is required" unless table_id

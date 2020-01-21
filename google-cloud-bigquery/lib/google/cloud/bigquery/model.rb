@@ -668,7 +668,7 @@ module Google
         end
 
         ##
-        # @private New lazy Model object without making an HTTP request.
+        # @private New lazy Model object without making an HTTP request, for use with the skip_lookup option.
         def self.new_reference project_id, dataset_id, model_id, service
           raise ArgumentError, "project_id is required" unless project_id
           raise ArgumentError, "dataset_id is required" unless dataset_id

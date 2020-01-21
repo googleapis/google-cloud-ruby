@@ -848,7 +848,7 @@ module Google
               project_id: project_id, dataset_id: dataset_id, routine_id: routine_id
             )
           )
-          updater = Routine::Updater.new(new_tb)
+          updater = Routine::Updater.new new_tb
 
           yield updater if block_given?
 
@@ -2172,7 +2172,7 @@ module Google
         end
 
         ##
-        # @private New lazy Dataset object without making an HTTP request.
+        # @private New lazy Dataset object without making an HTTP request, for use with the skip_lookup option.
         def self.new_reference project_id, dataset_id, service
           raise ArgumentError, "dataset_id is required" unless dataset_id
           new.tap do |b|
