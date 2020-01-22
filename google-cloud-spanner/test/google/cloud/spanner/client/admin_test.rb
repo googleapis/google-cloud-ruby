@@ -73,9 +73,4 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
     database.database_id.must_equal database_id
     database.path.must_equal database_path(instance_id, database_id)
   end
-
-  it "set service as a client service proxy" do
-    client.service.must_be_kind_of Google::Cloud::Spanner::Service
-    client.service.class.must_equal Google::Cloud::Spanner::ClientServiceProxy
-  end
 end

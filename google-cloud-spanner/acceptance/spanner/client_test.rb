@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,16 +21,16 @@ describe "Spanner Client", :spanner do
   let(:database_id) { $spanner_database_id }
 
   it "create client connection without resource based routing" do
-    spanner.client instance_id, database_id
-    spanner_clients = spanner.service.instance_variable_get("@spanner_clients")
-    spanner_clients.length.must_equal 1
-    spanner_clients.must_include Google::Cloud::Spanner::V1::SpannerClient::SERVICE_ADDRESS
+    client = spanner.client instance_id, database_id
+    client.service.host.must_equal Google::Cloud::Spanner::V1::SpannerClient::SERVICE_ADDRESS
   end
 
   it "create client connection with resource based routing" do
-    spanner.client instance_id, database_id, enable_resource_based_routing: true
-    spanner_clients = spanner.service.instance_variable_get("@spanner_clients")
-    spanner_clients.length.must_equal 1
-    spanner_clients.must_include Google::Cloud::Spanner::V1::SpannerClient::SERVICE_ADDRESS
+    client = spanner.client instance_id, database_id, enable_resource_based_routing: true
+    client.resource_based_routing_enabled?.must_equal true
+    instance = spanner.instance instance_id, fields: ["endpoint_uris"]
+    # currently instance not returning endpoint uris, set to default if no endpoint uri present.
+    host = instance.endpoint_uris.first || Google::Cloud::Spanner::V1::SpannerClient::SERVICE_ADDRESS
+    client.service.host.must_equal host
   end
 end

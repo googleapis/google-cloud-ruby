@@ -23,7 +23,7 @@ require "google/cloud/spanner/snapshot"
 require "google/cloud/spanner/range"
 require "google/cloud/spanner/column_value"
 require "google/cloud/spanner/convert"
-require "google/cloud/spanner/client_service_proxy"
+require "google/cloud/spanner/resource_based_routing"
 
 module Google
   module Cloud
@@ -50,30 +50,57 @@ module Google
       #     end
       #   end
       #
+      # @example Enable resource based routing.
+      #
+      #   require "google/cloud"
+      #
+      #   spanner = Google::Cloud::Spanner.new
+      #
+      #   db = spanner.client(
+      #     "my-instance",
+      #     "my-database",
+      #     enable_resource_based_routing: true
+      #   )
+      #
+      #   db.transaction do |tx|
+      #     results = tx.execute_query "SELECT * FROM users"
+      #
+      #     results.rows.each do |row|
+      #       puts "User #{row[:id]} is #{row[:name]}"
+      #     end
+      #   end
+      #
       class Client
-        ## @private Service wrapper for data client api.
-        # @return [ClientServiceProxy]
+        # @!parse extend ResourceBasedRouting
+        include ResourceBasedRouting
+
+        ##
+        # @private The Service object.
+        # @return [Spanner::Service]
         attr_reader :service
 
         ##
         # @private Creates a new Spanner Client instance.
         def initialize project, instance_id, database_id, session_labels: nil,
-                       pool_opts: {}, enable_resource_based_routing: nil
+                       pool_opts: {}, enable_resource_based_routing: false
           @project = project
           @instance_id = instance_id
           @database_id = database_id
           @session_labels = session_labels
-          @service = ClientServiceProxy.new \
-            @project,
-            @instance_id,
-            enable_resource_based_routing: enable_resource_based_routing
+          @enable_resource_based_routing = enable_resource_based_routing
+
+          if resource_based_routing_enabled?
+            @service = resource_based_routing_service
+          end
+
+          @service ||= @project.service
           @pool = Pool.new self, pool_opts
         end
 
         # The unique identifier for the project.
         # @return [String]
         def project_id
-          @project.service.project
+          @service.project
         end
 
         # The unique identifier for the instance.
@@ -929,8 +956,7 @@ module Google
           end
         end
 
-        # rubocop:disable Metrics/AbcSize
-        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
 
         ##
         # Creates a transaction for reads and writes that execute atomically at
@@ -1004,8 +1030,7 @@ module Google
               Thread.current[:transaction_id] = tx.transaction_id
               yield tx
               commit_resp = @service.commit \
-                tx.session.path, tx.mutations,
-                transaction_id: tx.transaction_id
+                tx.session.path, tx.mutations, transaction_id: tx.transaction_id
               return Convert.timestamp_to_time commit_resp.commit_timestamp
             rescue GRPC::Aborted, Google::Cloud::AbortedError => err
               # Re-raise if deadline has passed
@@ -1032,9 +1057,7 @@ module Google
             end
           end
         end
-
-        # rubocop:enable Metrics/AbcSize
-        # rubocop:enable Metrics/MethodLength
+        # rubocop:enable Metrics/AbcSize,Metrics/MethodLength
 
         ##
         # Creates a snapshot read-only transaction for reads that execute
@@ -1330,9 +1353,7 @@ module Google
             ),
             session_count,
             labels: @session_labels
-          resp.session.map do |grpc|
-            Session.from_grpc grpc, @service
-          end
+          resp.session.map { |grpc| Session.from_grpc grpc, @service }
         end
 
         # @private
@@ -1352,7 +1373,7 @@ module Google
         # @private Raise an error unless an active connection to the service is
         # available.
         def ensure_service!
-          raise "Must have active connection to service" unless @project.service
+          raise "Must have active connection to service" unless @service
         end
 
         ##

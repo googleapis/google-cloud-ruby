@@ -461,10 +461,11 @@ module Google
         #   * Label values must be between 0 and 63 characters long and must
         #     conform to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
         #   * No more than 64 labels can be associated with a given resource.
-        # @param [Boolean, nil] enable_resource_based_routing Enable/Disable
-        #   resource-based routing for data operation, by default is disabled.
-        #   Resource based routing can be enabled using the environment
-        #   `GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING` to `YES` or `yes`.
+        # @param [Boolean] enable_resource_based_routing Enable/Disable
+        #   resource-based routing for data operation, by default it is
+        #   disabled. Resource based routing can be enabled using the
+        #   environment `GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING` to
+        #   `TRUE` or `true`.
         # @return [Client] The newly created client.
         #
         # @example
@@ -503,7 +504,7 @@ module Google
             database_id,
             pool: {},
             labels: nil,
-            enable_resource_based_routing: nil
+            enable_resource_based_routing: false
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
           Client.new \
@@ -538,10 +539,11 @@ module Google
         #   * Label values must be between 0 and 63 characters long and must
         #     conform to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
         #   * No more than 64 labels can be associated with a given resource.
-        # @param [Boolean, nil] enable_resource_based_routing Enable/Disable
-        #   resource-based routing for data operation, by default is disabled.
-        #   Resource based routing can be enabled using the environment
-        #   `GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING` to `YES` or `yes`.
+        # @param [Boolean] enable_resource_based_routing Enable/Disable
+        #   resource-based routing for data operation, by default it
+        #   is disabled. Resource based routing can be enabled using the
+        #   environment `GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING` to
+        #   `TRUE` or `true`.
         #
         # @return [Client] The newly created client.
         #
@@ -600,7 +602,7 @@ module Google
             instance_id,
             database_id,
             labels: nil,
-            enable_resource_based_routing: nil
+            enable_resource_based_routing: false
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
           BatchClient.new \

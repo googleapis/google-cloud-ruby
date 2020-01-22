@@ -17,6 +17,7 @@ require "google/cloud/spanner/errors"
 require "google/cloud/spanner/project"
 require "google/cloud/spanner/session"
 require "google/cloud/spanner/batch_snapshot"
+require "google/cloud/spanner/resource_based_routing"
 
 module Google
   module Cloud
@@ -63,6 +64,9 @@ module Google
       #     new_partition
       #
       class BatchClient
+        # @!parse extend ResourceBasedRouting
+        include ResourceBasedRouting
+
         ## @private Service wrapper for batch data client api.
         # @return [ClientServiceProxy]
         attr_reader :service
@@ -74,15 +78,18 @@ module Google
             instance_id,
             database_id,
             session_labels: nil,
-            enable_resource_based_routing: nil
+            enable_resource_based_routing: false
           @project = project
           @instance_id = instance_id
           @database_id = database_id
           @session_labels = session_labels
-          @service = ClientServiceProxy.new \
-            @project,
-            @instance_id,
-            enable_resource_based_routing: enable_resource_based_routing
+          @enable_resource_based_routing = enable_resource_based_routing
+
+          if resource_based_routing_enabled?
+            @service = resource_based_routing_service
+          end
+
+          @service ||= @project.service
         end
 
         # The unique identifier for the project.
