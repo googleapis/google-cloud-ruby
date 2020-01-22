@@ -1,5 +1,13 @@
 # Release History
 
+### 1.13.1 / 2020-01-22
+
+#### Documentation
+
+* fix incorrect doc links in CONTRIBUTING.md
+* Update copyright year
+* Update Status documentation
+
 ### 1.13.0 / 2020-01-08
 
 #### Features
