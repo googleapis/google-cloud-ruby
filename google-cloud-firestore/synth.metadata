@@ -1,19 +1,20 @@
 {
-  "updateTime": "2020-01-15T11:43:34.058763Z",
+  "updateTime": "2020-01-22T11:40:37.144423Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "0.44.0",
-        "dockerImage": "googleapis/artman@sha256:10a6d0342b8d62544810ac5ad86c3b21049ec0696608ac60175da8e513234344"
+        "version": "0.44.1",
+        "dockerImage": "googleapis/artman@sha256:5599b61e56a372d21b671969ee915fbca0f6c3a0daaeb898d01f8f685f1bbc8b"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d99df0d67057a233c711187e0689baa4f8e6333d",
-        "internalRef": "289709813"
+        "sha": "cda99c1f7dc5e4ca9b1caeae1dc330838cbc1461",
+        "internalRef": "290800639",
+        "log": "cda99c1f7dc5e4ca9b1caeae1dc330838cbc1461\nChange api_name to 'asset' for v1p1beta1\n\nPiperOrigin-RevId: 290800639\n\n94e9e90c303a820ce40643d9129e7f0d2054e8a1\nAdds Google Maps Road service\n\nPiperOrigin-RevId: 290795667\n\na3b23dcb2eaecce98c600c7d009451bdec52dbda\nrpc: new message ErrorInfo, other comment updates\n\nPiperOrigin-RevId: 290781668\n\n26420ef4e46c37f193c0fbe53d6ebac481de460e\nAdd proto definition for Org Policy v1.\n\nPiperOrigin-RevId: 290771923\n\n7f0dab8177cf371ae019a082e2512de7ac102888\nPublish Routes Preferred API v1 service definitions.\n\nPiperOrigin-RevId: 290326986\n\nad6e508d0728e1d1bca6e3f328cd562718cb772d\nFix: Qualify resource type references with \"jobs.googleapis.com/\"\n\nPiperOrigin-RevId: 290285762\n\n58e770d568a2b78168ddc19a874178fee8265a9d\ncts client library\n\nPiperOrigin-RevId: 290146169\n\naf9daa4c3b4c4a8b7133b81588dd9ffd37270af2\nAdd more programming language options to public proto\n\nPiperOrigin-RevId: 290144091\n\nd9f2bbf2df301ef84641d4cec7c828736a0bd907\ntalent: add missing resource.proto dep to Bazel build target\n\nPiperOrigin-RevId: 290143164\n\n3b3968237451d027b42471cd28884a5a1faed6c7\nAnnotate Talent API.\nAdd gRPC service config for retry.\nUpdate bazel file with google.api.resource dependency.\n\nPiperOrigin-RevId: 290125172\n\n0735b4b096872960568d1f366bfa75b7b0e1f1a3\nWeekly library update.\n\nPiperOrigin-RevId: 289939042\n\n8760d3d9a4543d7f9c0d1c7870aca08b116e4095\nWeekly library update.\n\nPiperOrigin-RevId: 289939020\n\n8607df842f782a901805187e02fff598145b0b0e\nChange Talent API timeout to 30s.\n\nPiperOrigin-RevId: 289912621\n\n908155991fe32570653bcb72ecfdcfc896642f41\nAdd Recommendations AI V1Beta1\n\nPiperOrigin-RevId: 289901914\n\n5c9a8c2bebd8b71aa66d1cc473edfaac837a2c78\nAdding no-arg method signatures for ListBillingAccounts and ListServices\n\nPiperOrigin-RevId: 289891136\n\n50b0e8286ac988b0593bd890eb31fef6ea2f5767\nlongrunning: add grpc service config and default_host annotation to operations.proto\n\nPiperOrigin-RevId: 289876944\n\n6cac27dabe51c54807b0401698c32d34998948a9\n  Updating default deadline for Cloud Security Command Center's v1 APIs.\n\nPiperOrigin-RevId: 289875412\n\n"
       }
     }
   ],
@@ -47,6 +48,1262 @@
         "generator": "gapic",
         "config": "google/firestore/admin/artman_firestore_v1.yaml"
       }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": ".rubocop.yml"
+    },
+    {
+      "path": ".yardopts"
+    },
+    {
+      "path": "AUTHENTICATION.md"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "path": "EMULATOR.md"
+    },
+    {
+      "path": "Gemfile"
+    },
+    {
+      "path": "LICENSE"
+    },
+    {
+      "path": "LOGGING.md"
+    },
+    {
+      "path": "OVERVIEW.md"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "Rakefile"
+    },
+    {
+      "path": "TROUBLESHOOTING.md"
+    },
+    {
+      "path": "acceptance/firestore/batch_test.rb"
+    },
+    {
+      "path": "acceptance/firestore/collection_test.rb"
+    },
+    {
+      "path": "acceptance/firestore/document_test.rb"
+    },
+    {
+      "path": "acceptance/firestore/firestore_test.rb"
+    },
+    {
+      "path": "acceptance/firestore/query_test.rb"
+    },
+    {
+      "path": "acceptance/firestore/transaction_test.rb"
+    },
+    {
+      "path": "acceptance/firestore/watch_test.rb"
+    },
+    {
+      "path": "acceptance/firestore_helper.rb"
+    },
+    {
+      "path": "benchmark/watch_sort_perf.rb"
+    },
+    {
+      "path": "benchmark/watch_sort_stats.rb"
+    },
+    {
+      "path": "conformance/v1/create-all-transforms.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayremove-multi.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayremove-nested.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayremove-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayremove-noarray.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayremove-with-st.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayremove.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayunion-multi.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayunion-nested.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayunion-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayunion-noarray.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayunion-with-st.json"
+    },
+    {
+      "path": "conformance/v1/create-arrayunion.json"
+    },
+    {
+      "path": "conformance/v1/create-basic.json"
+    },
+    {
+      "path": "conformance/v1/create-complex.json"
+    },
+    {
+      "path": "conformance/v1/create-del-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/create-del-noarray.json"
+    },
+    {
+      "path": "conformance/v1/create-empty.json"
+    },
+    {
+      "path": "conformance/v1/create-nodel.json"
+    },
+    {
+      "path": "conformance/v1/create-nosplit.json"
+    },
+    {
+      "path": "conformance/v1/create-special-chars.json"
+    },
+    {
+      "path": "conformance/v1/create-st-alone.json"
+    },
+    {
+      "path": "conformance/v1/create-st-multi.json"
+    },
+    {
+      "path": "conformance/v1/create-st-nested.json"
+    },
+    {
+      "path": "conformance/v1/create-st-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/create-st-noarray.json"
+    },
+    {
+      "path": "conformance/v1/create-st-with-empty-map.json"
+    },
+    {
+      "path": "conformance/v1/create-st.json"
+    },
+    {
+      "path": "conformance/v1/delete-exists-precond.json"
+    },
+    {
+      "path": "conformance/v1/delete-no-precond.json"
+    },
+    {
+      "path": "conformance/v1/delete-time-precond.json"
+    },
+    {
+      "path": "conformance/v1/get-basic.json"
+    },
+    {
+      "path": "conformance/v1/listen-add-mod-del-add.json"
+    },
+    {
+      "path": "conformance/v1/listen-add-one.json"
+    },
+    {
+      "path": "conformance/v1/listen-add-three.json"
+    },
+    {
+      "path": "conformance/v1/listen-doc-remove.json"
+    },
+    {
+      "path": "conformance/v1/listen-empty.json"
+    },
+    {
+      "path": "conformance/v1/listen-filter-nop.json"
+    },
+    {
+      "path": "conformance/v1/listen-multi-docs.json"
+    },
+    {
+      "path": "conformance/v1/listen-nocurrent.json"
+    },
+    {
+      "path": "conformance/v1/listen-nomod.json"
+    },
+    {
+      "path": "conformance/v1/listen-removed-target-ids.json"
+    },
+    {
+      "path": "conformance/v1/listen-reset.json"
+    },
+    {
+      "path": "conformance/v1/listen-target-add-nop.json"
+    },
+    {
+      "path": "conformance/v1/listen-target-add-wrong-id.json"
+    },
+    {
+      "path": "conformance/v1/listen-target-remove.json"
+    },
+    {
+      "path": "conformance/v1/proto/google/cloud/conformance/firestore/v1/tests.proto"
+    },
+    {
+      "path": "conformance/v1/proto/google/cloud/conformance/firestore/v1/tests_pb.rb"
+    },
+    {
+      "path": "conformance/v1/query-arrayremove-cursor.json"
+    },
+    {
+      "path": "conformance/v1/query-arrayremove-where.json"
+    },
+    {
+      "path": "conformance/v1/query-arrayunion-cursor.json"
+    },
+    {
+      "path": "conformance/v1/query-arrayunion-where.json"
+    },
+    {
+      "path": "conformance/v1/query-bad-NaN.json"
+    },
+    {
+      "path": "conformance/v1/query-bad-null.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-docsnap-order.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-docsnap-orderby-name.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-docsnap-where-eq.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-docsnap-where-neq-orderby.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-docsnap-where-neq.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-docsnap.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-endbefore-empty-map.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-endbefore-empty.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-no-order.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-startat-empty-map.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-startat-empty.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-vals-1a.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-vals-1b.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-vals-2.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-vals-docid.json"
+    },
+    {
+      "path": "conformance/v1/query-cursor-vals-last-wins.json"
+    },
+    {
+      "path": "conformance/v1/query-del-cursor.json"
+    },
+    {
+      "path": "conformance/v1/query-del-where.json"
+    },
+    {
+      "path": "conformance/v1/query-invalid-operator.json"
+    },
+    {
+      "path": "conformance/v1/query-invalid-path-order.json"
+    },
+    {
+      "path": "conformance/v1/query-invalid-path-select.json"
+    },
+    {
+      "path": "conformance/v1/query-invalid-path-where.json"
+    },
+    {
+      "path": "conformance/v1/query-offset-limit-last-wins.json"
+    },
+    {
+      "path": "conformance/v1/query-offset-limit.json"
+    },
+    {
+      "path": "conformance/v1/query-order.json"
+    },
+    {
+      "path": "conformance/v1/query-select-empty.json"
+    },
+    {
+      "path": "conformance/v1/query-select-last-wins.json"
+    },
+    {
+      "path": "conformance/v1/query-select.json"
+    },
+    {
+      "path": "conformance/v1/query-st-cursor.json"
+    },
+    {
+      "path": "conformance/v1/query-st-where.json"
+    },
+    {
+      "path": "conformance/v1/query-where-2.json"
+    },
+    {
+      "path": "conformance/v1/query-where-NaN.json"
+    },
+    {
+      "path": "conformance/v1/query-where-null.json"
+    },
+    {
+      "path": "conformance/v1/query-where.json"
+    },
+    {
+      "path": "conformance/v1/query-wrong-collection.json"
+    },
+    {
+      "path": "conformance/v1/set-all-transforms.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayremove-multi.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayremove-nested.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayremove-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayremove-noarray.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayremove-with-st.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayremove.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayunion-multi.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayunion-nested.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayunion-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayunion-noarray.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayunion-with-st.json"
+    },
+    {
+      "path": "conformance/v1/set-arrayunion.json"
+    },
+    {
+      "path": "conformance/v1/set-basic.json"
+    },
+    {
+      "path": "conformance/v1/set-complex.json"
+    },
+    {
+      "path": "conformance/v1/set-del-merge-alone.json"
+    },
+    {
+      "path": "conformance/v1/set-del-merge.json"
+    },
+    {
+      "path": "conformance/v1/set-del-mergeall.json"
+    },
+    {
+      "path": "conformance/v1/set-del-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/set-del-noarray.json"
+    },
+    {
+      "path": "conformance/v1/set-del-nomerge.json"
+    },
+    {
+      "path": "conformance/v1/set-del-nonleaf.json"
+    },
+    {
+      "path": "conformance/v1/set-del-wo-merge.json"
+    },
+    {
+      "path": "conformance/v1/set-empty.json"
+    },
+    {
+      "path": "conformance/v1/set-merge-fp.json"
+    },
+    {
+      "path": "conformance/v1/set-merge-nested.json"
+    },
+    {
+      "path": "conformance/v1/set-merge-nonleaf.json"
+    },
+    {
+      "path": "conformance/v1/set-merge-prefix.json"
+    },
+    {
+      "path": "conformance/v1/set-merge-present.json"
+    },
+    {
+      "path": "conformance/v1/set-merge.json"
+    },
+    {
+      "path": "conformance/v1/set-mergeall-empty.json"
+    },
+    {
+      "path": "conformance/v1/set-mergeall-nested.json"
+    },
+    {
+      "path": "conformance/v1/set-mergeall.json"
+    },
+    {
+      "path": "conformance/v1/set-nodel.json"
+    },
+    {
+      "path": "conformance/v1/set-nosplit.json"
+    },
+    {
+      "path": "conformance/v1/set-special-chars.json"
+    },
+    {
+      "path": "conformance/v1/set-st-alone-mergeall.json"
+    },
+    {
+      "path": "conformance/v1/set-st-alone.json"
+    },
+    {
+      "path": "conformance/v1/set-st-merge-both.json"
+    },
+    {
+      "path": "conformance/v1/set-st-merge-nonleaf-alone.json"
+    },
+    {
+      "path": "conformance/v1/set-st-merge-nonleaf.json"
+    },
+    {
+      "path": "conformance/v1/set-st-merge-nowrite.json"
+    },
+    {
+      "path": "conformance/v1/set-st-mergeall.json"
+    },
+    {
+      "path": "conformance/v1/set-st-multi.json"
+    },
+    {
+      "path": "conformance/v1/set-st-nested.json"
+    },
+    {
+      "path": "conformance/v1/set-st-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/set-st-noarray.json"
+    },
+    {
+      "path": "conformance/v1/set-st-nomerge.json"
+    },
+    {
+      "path": "conformance/v1/set-st-with-empty-map.json"
+    },
+    {
+      "path": "conformance/v1/set-st.json"
+    },
+    {
+      "path": "conformance/v1/update-all-transforms.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayremove-alone.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayremove-multi.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayremove-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayremove-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayremove-noarray.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayremove-with-st.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayremove.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayunion-alone.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayunion-multi.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayunion-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayunion-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayunion-noarray.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayunion-with-st.json"
+    },
+    {
+      "path": "conformance/v1/update-arrayunion.json"
+    },
+    {
+      "path": "conformance/v1/update-badchar.json"
+    },
+    {
+      "path": "conformance/v1/update-basic.json"
+    },
+    {
+      "path": "conformance/v1/update-complex.json"
+    },
+    {
+      "path": "conformance/v1/update-del-alone.json"
+    },
+    {
+      "path": "conformance/v1/update-del-dot.json"
+    },
+    {
+      "path": "conformance/v1/update-del-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-del-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-del-noarray.json"
+    },
+    {
+      "path": "conformance/v1/update-del.json"
+    },
+    {
+      "path": "conformance/v1/update-exists-precond.json"
+    },
+    {
+      "path": "conformance/v1/update-fp-empty-component.json"
+    },
+    {
+      "path": "conformance/v1/update-nested-transform-and-nested-value.json"
+    },
+    {
+      "path": "conformance/v1/update-no-paths.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-all-transforms.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayremove-alone.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayremove-multi.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayremove-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayremove-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayremove-noarray.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayremove-with-st.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayremove.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayunion-alone.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayunion-multi.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayunion-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayunion-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayunion-noarray.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayunion-with-st.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-arrayunion.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-basic.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-complex.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-del-alone.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-del-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-del-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-del-noarray.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-del.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-exists-precond.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-fp-del.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-fp-dup-transforms.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-fp-dup.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-fp-empty-component.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-fp-empty.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-fp-multi.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-fp-nosplit.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-nested-transform-and-nested-value.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-no-paths.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-prefix-1.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-prefix-2.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-prefix-3.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-special-chars.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-st-alone.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-st-multi.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-st-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-st-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-st-noarray.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-st-with-empty-map.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-st.json"
+    },
+    {
+      "path": "conformance/v1/update-paths-uptime.json"
+    },
+    {
+      "path": "conformance/v1/update-prefix-1.json"
+    },
+    {
+      "path": "conformance/v1/update-prefix-2.json"
+    },
+    {
+      "path": "conformance/v1/update-prefix-3.json"
+    },
+    {
+      "path": "conformance/v1/update-quoting.json"
+    },
+    {
+      "path": "conformance/v1/update-split-top-level.json"
+    },
+    {
+      "path": "conformance/v1/update-split.json"
+    },
+    {
+      "path": "conformance/v1/update-st-alone.json"
+    },
+    {
+      "path": "conformance/v1/update-st-dot.json"
+    },
+    {
+      "path": "conformance/v1/update-st-multi.json"
+    },
+    {
+      "path": "conformance/v1/update-st-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-st-noarray-nested.json"
+    },
+    {
+      "path": "conformance/v1/update-st-noarray.json"
+    },
+    {
+      "path": "conformance/v1/update-st-with-empty-map.json"
+    },
+    {
+      "path": "conformance/v1/update-st.json"
+    },
+    {
+      "path": "conformance/v1/update-uptime.json"
+    },
+    {
+      "path": "google-cloud-firestore.gemspec"
+    },
+    {
+      "path": "lib/google-cloud-firestore.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/doc/google/firestore/admin/v1/field.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/doc/google/firestore/admin/v1/firestore_admin.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/doc/google/firestore/admin/v1/index.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/doc/google/longrunning/operations.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/doc/google/protobuf/any.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/doc/google/protobuf/empty.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/doc/google/protobuf/field_mask.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/doc/google/rpc/status.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/firestore_admin_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/admin/v1/firestore_admin_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/firestore/batch.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/client.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/collection_reference.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/commit_response.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/convert.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/document_change.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/document_listener.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/document_reference.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/document_reference/list.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/document_snapshot.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/field_path.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/field_value.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/generate.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/query.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/query_listener.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/query_snapshot.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/service.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/transaction.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/doc/google/firestore/v1/common.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/doc/google/firestore/v1/document.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/doc/google/firestore/v1/firestore.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/doc/google/firestore/v1/query.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/doc/google/firestore/v1/write.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/doc/google/protobuf/any.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/doc/google/protobuf/empty.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/doc/google/protobuf/timestamp.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/doc/google/protobuf/wrappers.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/doc/google/rpc/status.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/firestore_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1/firestore_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/common.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/document.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/firestore.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/query.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/doc/google/firestore/v1beta1/write.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/doc/google/protobuf/any.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/doc/google/protobuf/empty.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/doc/google/protobuf/timestamp.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/doc/google/protobuf/wrappers.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/doc/google/rpc/status.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/firestore_client.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/v1beta1/firestore_client_config.json"
+    },
+    {
+      "path": "lib/google/cloud/firestore/version.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/watch/enumerator_queue.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/watch/inventory.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/watch/listener.rb"
+    },
+    {
+      "path": "lib/google/cloud/firestore/watch/order.rb"
+    },
+    {
+      "path": "lib/google/firestore/admin/v1/field_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/admin/v1/firestore_admin_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/admin/v1/firestore_admin_services_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/admin/v1/index_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/admin/v1/location_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/admin/v1/operation_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1/common_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1/document_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1/firestore_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1/firestore_services_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1/query_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1/write_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1beta1/common_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1beta1/document_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1beta1/firestore_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1beta1/firestore_services_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1beta1/query_pb.rb"
+    },
+    {
+      "path": "lib/google/firestore/v1beta1/write_pb.rb"
+    },
+    {
+      "path": "support/doctest_helper.rb"
+    },
+    {
+      "path": "synth.metadata"
+    },
+    {
+      "path": "synth.py"
+    },
+    {
+      "path": "test/google/cloud/firestore/admin/v1/firestore_admin_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/batch/closed_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/batch/create_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/batch/delete_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/batch/set_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/batch/update_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/batch/values_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/client/batch_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/client/col_group_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/client/col_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/client/cols_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/client/doc_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/client/get_all_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/client/transaction_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/collection_reference/add_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/collection_reference/doc_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/collection_reference/get_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/collection_reference/list_documents_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/collection_reference/listen_restart_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/collection_reference/listen_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/collection_reference/parent_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/collection_reference/query_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/commit_response_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/conformance_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/build_hash_from_field_paths_and_values_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/identify_leaf_nodes_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/is_field_value_nested_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/raw_to_value_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/remove_field_value_from_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/select_by_field_paths_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/value_to_raw_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/write_for_delete_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/writes_for_create_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/writes_for_set_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/convert/writes_for_update_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/attrs_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/col_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/cols_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/create_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/delete_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/get_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/listen_restart_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/listen_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/set_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/update_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_reference/values_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_snapshot/attrs_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_snapshot/data_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/document_snapshot/get_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/field_value_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/query/cursors_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/query/get_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/query/listen_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/query/where/array_contains_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/query/where/equal_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/query/where/greater_than_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/query/where/less_than_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/closed/get_all_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/closed/get_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/closed/query_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/closed_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/create_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/delete_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/empty/get_all_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/empty/get_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/empty/query_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/get_all_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/get_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/query_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/set_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/transaction/update_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/v1/firestore_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/v1beta1/firestore_client_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore/watch/order_test.rb"
+    },
+    {
+      "path": "test/google/cloud/firestore_test.rb"
+    },
+    {
+      "path": "test/helper.rb"
     }
   ]
 }
