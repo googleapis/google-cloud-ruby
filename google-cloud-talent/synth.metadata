@@ -1,5 +1,5 @@
 {
-  "updateTime": "2020-01-17T11:43:52.167859Z",
+  "updateTime": "2020-01-22T11:44:44.790771Z",
   "sources": [
     {
       "generator": {
@@ -12,8 +12,9 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "58e770d568a2b78168ddc19a874178fee8265a9d",
-        "internalRef": "290146169"
+        "sha": "cda99c1f7dc5e4ca9b1caeae1dc330838cbc1461",
+        "internalRef": "290800639",
+        "log": "cda99c1f7dc5e4ca9b1caeae1dc330838cbc1461\nChange api_name to 'asset' for v1p1beta1\n\nPiperOrigin-RevId: 290800639\n\n94e9e90c303a820ce40643d9129e7f0d2054e8a1\nAdds Google Maps Road service\n\nPiperOrigin-RevId: 290795667\n\na3b23dcb2eaecce98c600c7d009451bdec52dbda\nrpc: new message ErrorInfo, other comment updates\n\nPiperOrigin-RevId: 290781668\n\n26420ef4e46c37f193c0fbe53d6ebac481de460e\nAdd proto definition for Org Policy v1.\n\nPiperOrigin-RevId: 290771923\n\n7f0dab8177cf371ae019a082e2512de7ac102888\nPublish Routes Preferred API v1 service definitions.\n\nPiperOrigin-RevId: 290326986\n\nad6e508d0728e1d1bca6e3f328cd562718cb772d\nFix: Qualify resource type references with \"jobs.googleapis.com/\"\n\nPiperOrigin-RevId: 290285762\n\n"
       }
     },
     {
