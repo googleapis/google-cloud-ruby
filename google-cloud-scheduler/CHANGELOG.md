@@ -1,5 +1,12 @@
 # Release History
 
+### 1.2.1 / 2020-01-23
+
+#### Documentation
+
+* Update copyright year
+* Update Status documentation
+
 ### 1.2.0 / 2019-11-04
 
 This release requires Ruby 2.4 or later.
