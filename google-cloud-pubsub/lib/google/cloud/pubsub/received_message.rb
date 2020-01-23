@@ -64,28 +64,26 @@ module Google
         end
 
         ##
-        # Returns the delivery attempt counter for the message. The delivery attempt
-        # counter is `1 + (the sum of number of NACKs and number of
-        # ack_deadline exceeds)` for the message.
+        # Returns the delivery attempt counter for the message. If a dead letter policy is not set on the subscription,
+        # this will be `0`. See {Topic#subscribe}, {Subscription#dead_letter_topic=} and
+        # {Subscription#dead_letter_max_delivery_attempts=}.
         #
-        # A NACK is any call to `ModifyAckDeadline` with a `0` deadline. An `ack_deadline`
-        # exceeds event is whenever a message is not acknowledged within
-        # `ack_deadline`. Note that `ack_deadline` is initially
-        # `Subscription.ackDeadlineSeconds`, but may get extended automatically by
-        # the client library.
+        # The delivery attempt counter is `1 + (the sum of number of NACKs and number of ack_deadline exceeds)` for the
+        # message.
+        #
+        # A NACK is any call to `ModifyAckDeadline` with a `0` deadline. An `ack_deadline` exceeds event is whenever a
+        # message is not acknowledged within `ack_deadline`. Note that `ack_deadline` is initially
+        # `Subscription.ackDeadlineSeconds`, but may get extended automatically by the client library.
         #
         # The first delivery of a given message will have this value as `1`. The value
         # is calculated at best effort and is approximate.
         #
-        # If a dead letter policy is not set on the subscription, this will be `0`. See
-        # {Topic#subscribe}, {Subscription#dead_letter_topic=} and
-        # {Subscription#dead_letter_max_delivery_attempts=}.
+        # EXPERIMENTAL: This feature is part of a closed alpha release. This API might be changed in
+        # backward-incompatible ways and is not recommended for production use. It is not subject to any SLA or
+        # deprecation policy.
         #
-        # EXPERIMENTAL: This feature is part of a closed alpha release. This
-        # API might be changed in backward-incompatible ways and is not recommended
-        # for production use. It is not subject to any SLA or deprecation policy.
-        #
-        # @return [Integer]
+        # @return [Integer] A delivery attempt value of `1` or greater, or `0` if a dead letter policy is not set on the
+        #   subscription.
         #
         # @example
         #   require "google/cloud/pubsub"
