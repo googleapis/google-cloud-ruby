@@ -1,5 +1,11 @@
 # Release History
 
+### 0.35.2 / 2020-01-23
+
+#### Documentation
+
+* Update copyright year
+
 ### 0.35.1 / 2019-11-06
 
 #### Bug Fixes
