@@ -726,6 +726,7 @@ google-cloud-storage:
 - v0.20.1
 - v0.20.0
 google-cloud-talent:
+- v0.8.3
 - v0.8.2
 - v0.8.1
 - v0.8.0
