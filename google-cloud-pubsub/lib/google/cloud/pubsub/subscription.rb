@@ -353,15 +353,16 @@ module Google
         end
 
         ##
-        # Returns the {Topic} to which dead letter messages should be published. Dead lettering is done on a best effort
-        # basis. The same message might be dead lettered multiple times.
+        # Returns the {Topic} to which dead letter messages should be published if a dead letter policy is configured,
+        # otherwise `nil`. Dead lettering is done on a best effort basis. The same message might be dead lettered
+        # multiple times.
         #
         # See also {#dead_letter_topic=}, {#dead_letter_max_delivery_attempts=} and
         # {#dead_letter_max_delivery_attempts}.
         #
         # Makes an API call to retrieve the topic name when called on a reference object. See {#reference?}.
         #
-        # @return [Topic]
+        # @return [Topic, nil]
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -382,15 +383,16 @@ module Google
         # Sets the {Topic} to which dead letter messages for the subscription should be published. Dead lettering is
         # done on a best effort basis. The same message might be dead lettered multiple times.
         # The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
-        # service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
-        # permission to Publish() to this topic.
+        # `service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com`) must have permission to Publish() to this
+        # topic.
         #
         # The operation will fail if the topic does not exist. Users should ensure that there is a subscription attached
         # to this topic since messages published to a topic with no subscriptions are lost.
         #
         # See also {#dead_letter_topic}, {#dead_letter_max_delivery_attempts=} and {#dead_letter_max_delivery_attempts}.
         #
-        # @param [Topic] new_dead_letter_topic The bucket to hold the logging output
+        # @param [Topic] new_dead_letter_topic The topic to which dead letter messages for the subscription should be
+        #   published.
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -411,9 +413,9 @@ module Google
         end
 
         ##
-        # Returns the maximum number of delivery attempts for any message in the subscription's dead letter policy.
-        # Dead lettering is done on a best effort basis. The same message might be dead lettered multiple times.
-        # The value must be between 5 and 100.
+        # Returns the maximum number of delivery attempts for any message in the subscription's dead letter policy if a
+        # dead letter policy is configured, otherwise `nil`. Dead lettering is done on a best effort basis. The same
+        # message might be dead lettered multiple times. The value must be between 5 and 100.
         #
         # The number of delivery attempts is defined as 1 + (the sum of number of NACKs and number of times the
         # acknowledgement deadline has been exceeded for the message). A NACK is any call to ModifyAckDeadline with a 0
@@ -425,7 +427,8 @@ module Google
         #
         # Makes an API call to retrieve the value when called on a reference object. See {#reference?}.
         #
-        # @return [Integer] A value between 5 and 100. If this value is 0, a default value of 5 is used.
+        # @return [Integer, nil] A value between 5 and 100, or `nil` if no dead letter policy is configured. If this
+        #   value is 0, a default value of 5 is used.
         #
         # @example
         #   require "google/cloud/pubsub"

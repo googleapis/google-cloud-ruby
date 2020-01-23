@@ -288,8 +288,8 @@ module Google
         # @param [Topic] dead_letter_topic The {Topic} to which dead letter messages for the subscription should be
         #   published. Dead lettering is done on a best effort basis. The same message might be dead lettered multiple
         #   times. The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
-        #   service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have permission to Publish() to this
-        #   topic.
+        #   `service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com`) must have permission to Publish() to
+        #   this topic.
         #
         #   The operation will fail if the topic does not exist. Users should ensure that there is a subscription
         #   attached to this topic since messages published to a topic with no subscriptions are lost.

@@ -179,7 +179,7 @@ describe Google::Cloud::PubSub, :pubsub do
       received_messages.count.must_equal 1
       received_message = received_messages.first
       received_message.wont_be :nil?
-      received_message.delivery_attempt.wont_be :nil?
+      received_message.delivery_attempt.must_be :>, 0
       received_message.msg.data.must_equal msg.data
       received_message.msg.published_at.wont_be :nil?
       # Acknowledge the message
@@ -208,7 +208,7 @@ describe Google::Cloud::PubSub, :pubsub do
       received_messages.count.must_equal 1
       received_message = received_messages.first
       received_message.wont_be :nil?
-      received_message.delivery_attempt.wont_be :nil?
+      received_message.delivery_attempt.must_be :>, 0
       received_message.msg.data.must_equal msg.data
       received_message.msg.published_at.wont_be :nil?
       # Acknowledge the message
@@ -227,7 +227,7 @@ describe Google::Cloud::PubSub, :pubsub do
       received_messages.count.must_equal 1
       received_message = received_messages.first
       received_message.wont_be :nil?
-      received_message.delivery_attempt.wont_be :nil?
+      received_message.delivery_attempt.must_be :>, 0
       received_message.msg.data.must_equal msg.data
       # Acknowledge the message
       subscription.ack received_message.ack_id
