@@ -467,6 +467,46 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
+
+  def random_routine_gapi dataset, id = nil, name = nil, description = nil, project_id = nil
+    json = random_routine_hash(dataset, id, name, description, project_id).to_json
+    Google::Apis::BigqueryV2::Table.from_json json
+  end
+
+  def random_routine_hash dataset, id = nil, name = nil, description = nil, project_id = nil
+    id ||= "my_table"
+    name ||= "Table Name"
+
+    {
+      "kind" => "bigquery#table",
+      "etag" => "etag123456789",
+      "id" => "#{project}:#{dataset}.#{id}",
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
+      "tableReference" => {
+        "projectId" => (project_id || project),
+        "datasetId" => dataset,
+        "tableId" => id
+      },
+      "friendlyName" => name,
+      "description" => description,
+      "schema" => random_schema_hash,
+      "numBytes" => "1000", # String per google/google-api-ruby-client#439
+      "numRows" => "100",   # String per google/google-api-ruby-client#439
+      "creationTime" => time_millis,
+      "expirationTime" => time_millis,
+      "lastModifiedTime" => time_millis,
+      "type" => "TABLE",
+      "location" => "US",
+      "labels" => { "foo" => "bar" },
+      "streamingBuffer" => {
+        "estimatedBytes" => "2000", # String per google/google-api-ruby-client
+        "estimatedRows" => "200", # String per google/google-api-ruby-client
+        "oldestEntryTime" => time_millis
+      },
+      "requirePartitionFilter" => true
+    }
+  end
+
   def random_job_hash id = "job_9876543210", state = "running", location: "US"
     hash = {
       "kind" => "bigquery#job",
