@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.3 / 2020-01-23
+
+#### Documentation
+
+* Update copyright year
+
 ### 1.7.2 / 2019-12-12
 
 #### Bug Fixes
