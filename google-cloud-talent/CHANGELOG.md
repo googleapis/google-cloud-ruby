@@ -1,5 +1,17 @@
 # Release History
 
+### 0.8.3 / 2020-01-23
+
+#### Performance Improvements
+
+* Update network configuration
+
+#### Documentation
+
+* Reformat documentation for longer line length
+* Update copyright year
+* Update Status documentation
+
 ### 0.8.2 / 2019-12-19
 
 #### Documentation
