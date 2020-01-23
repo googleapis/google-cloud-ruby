@@ -1,0 +1,143 @@
+{
+  "updateTime": "2020-01-23T20:47:45.742793Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "a8a2514af326e4673063f9a3c9d0ef1091c87e6c",
+        "internalRef": "291217859"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "billing",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": ".rubocop.yml"
+    },
+    {
+      "path": ".yardopts"
+    },
+    {
+      "path": "AUTHENTICATION.md"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "Gemfile"
+    },
+    {
+      "path": "LICENSE.md"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "Rakefile"
+    },
+    {
+      "path": "google-cloud-billing-v1.gemspec"
+    },
+    {
+      "path": "lib/google-cloud-billing-v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_billing.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_billing/client.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_billing/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_billing/paths.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_billing_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_billing_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_catalog.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_catalog/client.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_catalog/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_catalog/paths.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_catalog_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/cloud_catalog_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/billing/v1/version.rb"
+    },
+    {
+      "path": "lib/google/cloud/common_resources_pb.rb"
+    },
+    {
+      "path": "proto_docs/README.md"
+    },
+    {
+      "path": "proto_docs/google/api/field_behavior.rb"
+    },
+    {
+      "path": "proto_docs/google/api/resource.rb"
+    },
+    {
+      "path": "proto_docs/google/cloud/billing/v1/cloud_billing.rb"
+    },
+    {
+      "path": "proto_docs/google/cloud/billing/v1/cloud_catalog.rb"
+    },
+    {
+      "path": "proto_docs/google/iam/v1/iam_policy.rb"
+    },
+    {
+      "path": "proto_docs/google/iam/v1/policy.rb"
+    },
+    {
+      "path": "proto_docs/google/protobuf/field_mask.rb"
+    },
+    {
+      "path": "proto_docs/google/protobuf/timestamp.rb"
+    },
+    {
+      "path": "proto_docs/google/type/money.rb"
+    },
+    {
+      "path": "test/google/cloud/billing/v1/cloud_billing_test.rb"
+    },
+    {
+      "path": "test/google/cloud/billing/v1/cloud_catalog_test.rb"
+    }
+  ]
+}
