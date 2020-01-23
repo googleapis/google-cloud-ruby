@@ -277,14 +277,11 @@ module Google
           session = Google::Spanner::V1::Session.new labels: labels if labels
           execute do
             service.create_session database_name, session: session,
-                                                 options: opts
+                                                  options: opts
           end
         end
 
-        def batch_create_sessions \
-            database_name,
-            session_count,
-            labels: nil
+        def batch_create_sessions database_name, session_count, labels: nil
           opts = default_options_from_session database_name
           session = Google::Spanner::V1::Session.new labels: labels if labels
           execute do
@@ -304,14 +301,9 @@ module Google
           end
         end
 
-        def execute_streaming_sql \
-            session_name, sql,
-            transaction: nil,
-            params: nil,
-            types: nil,
-            resume_token: nil,
-            partition_token: nil,
-            seqno: nil
+        def execute_streaming_sql session_name, sql, transaction: nil,
+                                  params: nil, types: nil, resume_token: nil,
+                                  partition_token: nil, seqno: nil
           opts = default_options_from_session session_name
           execute do
             service.execute_streaming_sql \
@@ -325,11 +317,7 @@ module Google
           end
         end
 
-        def execute_batch_dml \
-            session_name,
-            transaction,
-            statements,
-            seqno
+        def execute_batch_dml session_name, transaction, statements, seqno
           opts = default_options_from_session session_name
           statements = statements.map(&:to_grpc)
           results = execute do
@@ -351,16 +339,9 @@ module Google
           end
         end
 
-        def streaming_read_table \
-            session_name,
-            table_name,
-            columns,
-            keys: nil,
-            index: nil,
-            transaction: nil,
-            limit: nil,
-            resume_token: nil,
-            partition_token: nil
+        def streaming_read_table session_name, table_name, columns, keys: nil,
+                                 index: nil, transaction: nil, limit: nil,
+                                 resume_token: nil, partition_token: nil
           opts = default_options_from_session session_name
           execute do
             service.streaming_read \
@@ -371,15 +352,9 @@ module Google
           end
         end
 
-        def partition_read \
-            session_name,
-            table_name,
-            columns,
-            transaction,
-            keys: nil,
-            index: nil,
-            partition_size_bytes: nil,
-            max_partitions: nil
+        def partition_read session_name, table_name, columns, transaction,
+                           keys: nil, index: nil, partition_size_bytes: nil,
+                           max_partitions: nil
           partition_opts = partition_options partition_size_bytes,
                                              max_partitions
 
@@ -393,14 +368,9 @@ module Google
           end
         end
 
-        def partition_query \
-            session_name,
-            sql,
-            transaction,
-            params: nil,
-            types: nil,
-            partition_size_bytes: nil,
-            max_partitions: nil
+        def partition_query session_name, sql, transaction, params: nil,
+                            types: nil, partition_size_bytes: nil,
+                            max_partitions: nil
           partition_opts = partition_options partition_size_bytes,
                                              max_partitions
 
@@ -415,10 +385,7 @@ module Google
           end
         end
 
-        def commit \
-            session_name,
-            mutations = [],
-            transaction_id: nil
+        def commit session_name, mutations = [], transaction_id: nil
           tx_opts = nil
           if transaction_id.nil?
             tx_opts = Google::Spanner::V1::TransactionOptions.new(
@@ -452,11 +419,8 @@ module Google
           end
         end
 
-        def create_snapshot \
-            session_name,
-            strong: nil,
-            timestamp: nil,
-            staleness: nil
+        def create_snapshot session_name, strong: nil, timestamp: nil,
+                            staleness: nil
           tx_opts = Google::Spanner::V1::TransactionOptions.new(
             read_only: Google::Spanner::V1::TransactionOptions::ReadOnly.new(
               {

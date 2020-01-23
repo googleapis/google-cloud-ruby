@@ -51,9 +51,9 @@ describe Google::Cloud::Spanner::Client, :resource_based_routing, :mock_spanner 
     client.resource_based_routing_enabled?.must_equal false
   end
 
-  it "set service host to instance endpoint url if resource based routing enabled" do
+  it "set service host to instance endpoint uri if resource based routing enabled" do
     get_res = Google::Spanner::Admin::Instance::V1::Instance.new \
-      name: instance_path(instance_id), endpoint_uris: ["test.host.com"]
+      name: instance_path(instance_id), endpoint_uris: ["test1.host.com", "test2.host.com"]
     mock = Minitest::Mock.new
     mock.expect :get_instance, get_res, [
       instance_path(instance_id),
@@ -65,17 +65,17 @@ describe Google::Cloud::Spanner::Client, :resource_based_routing, :mock_spanner 
       client = Google::Cloud::Spanner::Client.new \
         spanner, instance_id, database_id, enable_resource_based_routing: true
       client.resource_based_routing_enabled?.must_equal true
-      client.service.host.must_equal "test.host.com"
+      client.service.host.must_equal "test1.host.com"
     end
 
     mock.verify
   end
 
-  it "set service host with instance endpoint url if resource based routing enabled using an environment variable" do
+  it "set service host with instance endpoint uri if resource based routing enabled using an environment variable" do
     ENV["GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING"] = "TRUE"
 
     get_res = Google::Spanner::Admin::Instance::V1::Instance.new \
-      name: instance_path(instance_id), endpoint_uris: ["nam1-test.host.com"]
+      name: instance_path(instance_id), endpoint_uris: ["test1.host.com", "test2.host.com"]
     mock = Minitest::Mock.new
     mock.expect :get_instance, get_res, [
       instance_path(instance_id),
@@ -87,7 +87,7 @@ describe Google::Cloud::Spanner::Client, :resource_based_routing, :mock_spanner 
       client = Google::Cloud::Spanner::Client.new \
         spanner, instance_id, database_id, enable_resource_based_routing: true
       client.resource_based_routing_enabled?.must_equal true
-      client.service.host.must_equal "nam1-test.host.com"
+      client.service.host.must_equal "test1.host.com"
     end
 
     mock.verify

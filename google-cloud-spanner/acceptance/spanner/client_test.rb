@@ -29,7 +29,7 @@ describe "Spanner Client", :spanner do
     client = spanner.client instance_id, database_id, enable_resource_based_routing: true
     client.resource_based_routing_enabled?.must_equal true
     instance = spanner.instance instance_id, fields: ["endpoint_uris"]
-    # currently instance not returning endpoint uris, set to default if no endpoint uri present.
+    # Set to default if no endpoint uri present.
     host = instance.endpoint_uris.first || Google::Cloud::Spanner::V1::SpannerClient::SERVICE_ADDRESS
     client.service.host.must_equal host
   end
