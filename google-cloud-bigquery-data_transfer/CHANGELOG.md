@@ -1,5 +1,12 @@
 # Release History
 
+### 0.5.1 / 2020-01-22
+
+#### Documentation
+
+* Update copyright year
+* Update Status documentation
+
 ### 0.5.0 / 2019-12-19
 
 #### Features
