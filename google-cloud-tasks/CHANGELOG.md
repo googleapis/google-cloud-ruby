@@ -1,5 +1,12 @@
 # Release History
 
+### 1.3.4 / 2020-01-23
+
+#### Documentation
+
+* Update copyright year
+* Update Status documentation
+
 ### 1.3.3 / 2020-01-15
 
 #### Bug Fixes
