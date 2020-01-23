@@ -1,0 +1,122 @@
+{
+  "updateTime": "2020-01-23T20:53:41.543666Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "a8a2514af326e4673063f9a3c9d0ef1091c87e6c",
+        "internalRef": "291217859"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "recommender",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": ".rubocop.yml"
+    },
+    {
+      "path": ".yardopts"
+    },
+    {
+      "path": "AUTHENTICATION.md"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "Gemfile"
+    },
+    {
+      "path": "LICENSE.md"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "Rakefile"
+    },
+    {
+      "path": "google-cloud-recommender-v1.gemspec"
+    },
+    {
+      "path": "lib/google-cloud-recommender-v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/common_resources_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/recommender/v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/recommender/v1/recommendation_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/recommender/v1/recommender.rb"
+    },
+    {
+      "path": "lib/google/cloud/recommender/v1/recommender/client.rb"
+    },
+    {
+      "path": "lib/google/cloud/recommender/v1/recommender/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/recommender/v1/recommender/paths.rb"
+    },
+    {
+      "path": "lib/google/cloud/recommender/v1/recommender_service_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/recommender/v1/recommender_service_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/recommender/v1/version.rb"
+    },
+    {
+      "path": "proto_docs/README.md"
+    },
+    {
+      "path": "proto_docs/google/api/field_behavior.rb"
+    },
+    {
+      "path": "proto_docs/google/api/resource.rb"
+    },
+    {
+      "path": "proto_docs/google/cloud/recommender/v1/recommendation.rb"
+    },
+    {
+      "path": "proto_docs/google/cloud/recommender/v1/recommender_service.rb"
+    },
+    {
+      "path": "proto_docs/google/protobuf/duration.rb"
+    },
+    {
+      "path": "proto_docs/google/protobuf/struct.rb"
+    },
+    {
+      "path": "proto_docs/google/protobuf/timestamp.rb"
+    },
+    {
+      "path": "proto_docs/google/type/money.rb"
+    },
+    {
+      "path": "test/google/cloud/recommender/v1/recommender_test.rb"
+    }
+  ]
+}
