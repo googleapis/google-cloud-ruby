@@ -119,9 +119,9 @@ describe Google::Cloud::Spanner::Client, :resource_based_routing, :mock_spanner 
 
     def stub.get_instance *args
       self.api_call_count += 1
-      gax_error = Google::Gax::GaxError.new "permission denied"
-      gax_error.instance_variable_set :@cause, GRPC::BadStatus.new(7, "permission denied")
-      raise gax_error
+      raise Google::Cloud::Error.from_error(
+        GRPC::PermissionDenied.new "permission denied"
+      )
     end
     spanner.service.mocked_instances = stub
 

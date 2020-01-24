@@ -39,7 +39,7 @@ describe "Spanner Instances", :spanner do
       instance.state.must_equal :READY
     end
 
-    it "get speicified instance fields" do
+    it "get specified instance fields" do
       instance = spanner.instance instance_id, fields: ["name"]
 
       instance.instance_id.must_equal instance_id

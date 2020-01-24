@@ -13,12 +13,6 @@
 # limitations under the License.
 
 
-require "time"
-require "date"
-require "stringio"
-require "base64"
-require "google/cloud/spanner/data"
-
 module Google
   module Cloud
     module Spanner
@@ -37,7 +31,7 @@ module Google
 
         protected
 
-        # Get Service instance using instance first endpoint uri.
+        # Returns a Service that uses the first endpoint uri for the instance.
         #
         # @return [Spanner::Service, nil] Returns service instance if instance
         #   endpoint uris present.
