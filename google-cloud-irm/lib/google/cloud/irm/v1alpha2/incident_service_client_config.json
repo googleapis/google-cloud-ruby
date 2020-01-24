@@ -20,6 +20,26 @@
         }
       },
       "methods": {
+        "DeleteArtifact": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "RequestIncidentRoleHandover": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ConfirmIncidentRoleHandover": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ForceIncidentRoleHandover": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateIncident": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -62,7 +82,7 @@
         },
         "DeleteTag": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListTags": {
@@ -80,12 +100,12 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "GetSignal": {
+        "LookupSignal": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "LookupSignal": {
+        "GetSignal": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
@@ -115,11 +135,6 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "DeleteArtifact": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
         "SendShiftHandoff": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -142,7 +157,7 @@
         },
         "DeleteSubscription": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateIncidentRoleAssignment": {
@@ -152,27 +167,12 @@
         },
         "DeleteIncidentRoleAssignment": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListIncidentRoleAssignments": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "RequestIncidentRoleHandover": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "ConfirmIncidentRoleHandover": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "ForceIncidentRoleHandover": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CancelIncidentRoleHandover": {

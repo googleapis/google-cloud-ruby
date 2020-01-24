@@ -36,7 +36,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the signal, for example,
-        #     "projects/{project_id}/signals/{signal_id}".
+        #     "projects/{project_id_or_number}/signals/{signal_id}".
         # @!attribute [rw] etag
         #   @return [String]
         #     Etag to validate the object is unchanged for a read-modify-write operation.
@@ -111,7 +111,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of the annotation, for example,
-        #     "projects/{project_id}/incidents/{incident_id}/annotations/{annotation_id}".
+        #     "projects/{project_id_or_number}/incidents/{incident_id}/annotations/{annotation_id}".
         # @!attribute [rw] author
         #   @return [Google::Cloud::Irm::V1alpha2::User]
         #     Output only. Author of the annotation.
@@ -120,18 +120,18 @@ module Google
         #     Output only. Time the annotation was created.
         # @!attribute [rw] content
         #   @return [String]
-        #     Content of the annotation. Immutable.
+        #     Content of the annotation.
         # @!attribute [rw] content_type
         #   @return [String]
         #     Content type of the annotation, for example, 'text/plain'
-        #     or 'text/markdown'. Immutable.
+        #     or 'text/markdown'.
         class Annotation; end
 
         # A tag by a user.
         # @!attribute [rw] name
         #   @return [String]
         #     Resource name of a tag, for example,
-        #     "projects/{project_id}/incidents/{incident_id}/tags/{tag_id}"
+        #     "projects/{project_id_or_number}/incidents/{incident_id}/tags/{tag_id}"
         # @!attribute [rw] display_name
         #   @return [String]
         #     Display name of the resource (for example, "cause:rollout"). Immutable.
@@ -158,7 +158,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Output only. Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] title
         #   @return [String]
         #     One-line summary of the incident.
@@ -292,11 +292,11 @@ module Google
         #     type can only be used once per incident, except for TYPE_OTHER.
         # @!attribute [rw] title
         #   @return [String]
-        #     Output only unless TYPE_OTHER is used. Title of the role. For TYPE_OTHER,
-        #     must be unique within an incident.
+        #     Output only and empty unless TYPE_OTHER is used. Title of the role. For
+        #     TYPE_OTHER, must be unique within an incident.
         # @!attribute [rw] description
         #   @return [String]
-        #     Output only unless TYPE_OTHER is used. Description of the role.
+        #     Output only and empty unless TYPE_OTHER is used. Description of the role.
         class IncidentRole
           # List of possible roles.
           module Type
@@ -336,7 +336,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Output only. Resource name such as
-        #     "projects/{project_id}/incidents/{incident_id}/role_assignments/{role_id}".
+        #     "projects/{project_id_or_number}/incidents/{incident_id}/role_assignments/{role_id}".
         # @!attribute [rw] etag
         #   @return [String]
         #     Output only. Etag for this version of the resource. Must be specified in
@@ -378,7 +378,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Output only. Resource name such as
-        #     "projects/{project_id}/incidents/{incident_id}/artifacts/{artifact_id}".
+        #     "projects/{project_id_or_number}/incidents/{incident_id}/artifacts/{artifact_id}".
         # @!attribute [rw] display_name
         #   @return [String]
         #     User provided name of an artifact.
@@ -435,7 +435,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Output only. Resource name such as
-        #     "projects/{project_id}/incidents/{incident_id}/subscriptions/{subscription_id}".
+        #     "projects/{project_id_or_number}/incidents/{incident_id}/subscriptions/{subscription_id}".
         # @!attribute [rw] etag
         #   @return [String]
         #     Output only. Etag for this version of the resource. Must be specified in

@@ -76,6 +76,19 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
     end
   end
 
+  describe "the incident_role_assignment_path instance method" do
+    it "correctly calls Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_role_assignment_path" do
+      Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+        parameters = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.method("incident_role_assignment_path").parameters.map { |arg| arg.last.to_s }
+        client = Google::Cloud::Irm.new version: :v1alpha2
+        assert_equal(
+          client.incident_role_assignment_path(*parameters),
+          Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_role_assignment_path(*parameters)
+        )
+      end
+    end
+  end
+
   describe "the project_path instance method" do
     it "correctly calls Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path" do
       Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
@@ -84,19 +97,6 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
         assert_equal(
           client.project_path(*parameters),
           Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path(*parameters)
-        )
-      end
-    end
-  end
-
-  describe "the role_assignment_path instance method" do
-    it "correctly calls Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path" do
-      Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-        parameters = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.method("role_assignment_path").parameters.map { |arg| arg.last.to_s }
-        client = Google::Cloud::Irm.new version: :v1alpha2
-        assert_equal(
-          client.role_assignment_path(*parameters),
-          Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path(*parameters)
         )
       end
     end
