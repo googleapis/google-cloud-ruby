@@ -132,27 +132,18 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should allow create and update of subscription with options" do
-      dead_letter_topic = retrieve_topic dead_letter_topic_name
-      dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
-
       # create
-      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600, labels: labels, dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 7
+      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600, labels: labels
       subscription.wont_be :nil?
       subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       assert subscription.retain_acked
       subscription.retention.must_equal 600
       subscription.labels.must_equal labels
       subscription.labels.must_be :frozen?
-      subscription.dead_letter_max_delivery_attempts.must_equal 7
-      subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic.name
 
       # update
       subscription.labels = {}
       subscription.labels.must_be :empty?
-      subscription.dead_letter_max_delivery_attempts = 8
-      subscription.dead_letter_max_delivery_attempts.must_equal 8
-      subscription.dead_letter_topic = dead_letter_topic_2
-      subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic_2.name
 
       # delete
       subscription.delete
@@ -223,7 +214,6 @@ describe Google::Cloud::PubSub, :pubsub do
 
       # Check it again pulls the message
       received_messages = pull_with_retry subscription
-      received_messages.wont_be :empty?
       received_messages.count.must_equal 1
       received_message = received_messages.first
       received_message.wont_be :nil?
@@ -246,6 +236,56 @@ describe Google::Cloud::PubSub, :pubsub do
 
       # Remove the subscription
       subscription.delete
+    end
+
+    it "should be able to direct messages to a dead letter topic" do
+      dead_letter_topic = retrieve_topic dead_letter_topic_name
+      dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
+      dead_letter_subscription = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub1"
+
+      # create
+      subscription = topic.subscribe "#{$topic_prefix}-sub3", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 7
+      subscription.dead_letter_max_delivery_attempts.must_equal 7
+      subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic.name
+
+      # update
+      subscription.dead_letter_max_delivery_attempts = 5
+      subscription.dead_letter_max_delivery_attempts.must_equal 5
+      subscription.dead_letter_topic = dead_letter_topic_2
+      subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic_2.name
+      subscription = topic.subscribe "#{$topic_prefix}-sub5"
+
+      # Publish a new message
+      msg = topic.publish "dead-letter-#{rand(1000)}"
+      msg.wont_be :nil?
+
+      # Check it pulls the message
+      5.times do
+        received_messages = pull_with_retry subscription
+        received_messages.count.must_equal 1
+        received_message = received_messages.first
+        puts received_message.delivery_attempt
+        received_message.msg.data.must_equal msg.data
+        received_message.nack!
+        sleep 1
+      end
+
+      # No messages, should be empty
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
+
+      # Check the dead letter subscription pulls the message
+      received_messages = pull_with_retry dead_letter_subscription
+      received_messages.wont_be :empty?
+      received_messages.count.must_equal 1
+      received_message = received_messages.first
+      received_message.wont_be :nil?
+      received_message.delivery_attempt.must_equal 1
+      received_message.msg.data.must_equal msg.data
+
+      # Remove the subscription
+      subscription.delete
+      dead_letter_subscription.delete
     end
 
     def pull_with_retry sub
