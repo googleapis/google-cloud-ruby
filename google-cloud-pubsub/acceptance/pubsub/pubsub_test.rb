@@ -124,7 +124,7 @@ describe Google::Cloud::PubSub, :pubsub do
 
     it "should list all subscriptions registered to the topic" do
       subscriptions = topic.subscriptions.all
-      subscriptions.count.must_equal subs.count
+      subscriptions.count.must_be :>=, subs.count
       subscriptions.each do |subscription|
         # subscriptions on topic are strings...
         subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
@@ -170,7 +170,7 @@ describe Google::Cloud::PubSub, :pubsub do
       received_messages.count.must_equal 1
       received_message = received_messages.first
       received_message.wont_be :nil?
-      received_message.delivery_attempt.must_be :>, 0
+      received_message.delivery_attempt.must_equal 0
       received_message.msg.data.must_equal msg.data
       received_message.msg.published_at.wont_be :nil?
       # Acknowledge the message
@@ -199,7 +199,7 @@ describe Google::Cloud::PubSub, :pubsub do
       received_messages.count.must_equal 1
       received_message = received_messages.first
       received_message.wont_be :nil?
-      received_message.delivery_attempt.must_be :>, 0
+      received_message.delivery_attempt.must_equal 0
       received_message.msg.data.must_equal msg.data
       received_message.msg.published_at.wont_be :nil?
       # Acknowledge the message
@@ -217,7 +217,7 @@ describe Google::Cloud::PubSub, :pubsub do
       received_messages.count.must_equal 1
       received_message = received_messages.first
       received_message.wont_be :nil?
-      received_message.delivery_attempt.must_be :>, 0
+      received_message.delivery_attempt.must_equal 0
       received_message.msg.data.must_equal msg.data
       # Acknowledge the message
       subscription.ack received_message.ack_id
@@ -237,51 +237,46 @@ describe Google::Cloud::PubSub, :pubsub do
       # Remove the subscription
       subscription.delete
     end
-
+focus
     it "should be able to direct messages to a dead letter topic" do
       dead_letter_topic = retrieve_topic dead_letter_topic_name
-      dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
-      dead_letter_subscription = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub1"
+      dead_letter_subscription = dead_letter_topic.subscribe "#{$topic_prefix}-dead-letter-sub1"
 
       # create
-      subscription = topic.subscribe "#{$topic_prefix}-sub3", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 7
-      subscription.dead_letter_max_delivery_attempts.must_equal 7
+      subscription = topic.subscribe "#{$topic_prefix}-sub6", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 6
+      subscription.dead_letter_max_delivery_attempts.must_equal 6
       subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic.name
 
       # update
-      subscription.dead_letter_max_delivery_attempts = 5
-      subscription.dead_letter_max_delivery_attempts.must_equal 5
-      subscription.dead_letter_topic = dead_letter_topic_2
-      subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic_2.name
-      subscription = topic.subscribe "#{$topic_prefix}-sub5"
+      # subscription.dead_letter_max_delivery_attempts = 5
+      # subscription.dead_letter_max_delivery_attempts.must_equal 5
+      # dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
+      # dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub1"
+      # subscription.dead_letter_topic = dead_letter_topic_2
+      # subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic_2.name
 
       # Publish a new message
       msg = topic.publish "dead-letter-#{rand(1000)}"
       msg.wont_be :nil?
 
       # Check it pulls the message
-      5.times do
+      (1..6).each do |i|
         received_messages = pull_with_retry subscription
         received_messages.count.must_equal 1
         received_message = received_messages.first
-        puts received_message.delivery_attempt
         received_message.msg.data.must_equal msg.data
+        received_message.delivery_attempt.must_equal i
         received_message.nack!
-        sleep 1
       end
 
-      # No messages, should be empty
-      received_messages = subscription.pull
-      received_messages.must_be :empty?
-
       # Check the dead letter subscription pulls the message
-      received_messages = pull_with_retry dead_letter_subscription
+      received_messages = dead_letter_subscription.pull
       received_messages.wont_be :empty?
       received_messages.count.must_equal 1
       received_message = received_messages.first
       received_message.wont_be :nil?
-      received_message.delivery_attempt.must_equal 1
       received_message.msg.data.must_equal msg.data
+      received_message.delivery_attempt.must_equal 1
 
       # Remove the subscription
       subscription.delete
