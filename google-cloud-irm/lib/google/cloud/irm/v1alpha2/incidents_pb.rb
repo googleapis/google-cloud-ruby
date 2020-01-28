@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.irm.v1alpha2.User" do

@@ -20,10 +20,10 @@ module Google
         # Request for the CreateIncident method.
         # @!attribute [rw] incident
         #   @return [Google::Cloud::Irm::V1alpha2::Incident]
-        #     The incident to create.
+        #     Required. The incident to create.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The resource name of the hosting Stackdriver project which the incident
+        #     Required. The resource name of the hosting Stackdriver project which the incident
         #     belongs to.
         #     The name is of the form `projects/{project_id_or_number}`
         #     .
@@ -32,14 +32,14 @@ module Google
         # Request for the GetIncident method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         class GetIncidentRequest; end
 
         # Request for the UpdateIncident method.
         # @!attribute [rw] incident
         #   @return [Google::Cloud::Irm::V1alpha2::Incident]
-        #     The incident to update with the new values.
+        #     Required. The incident to update with the new values.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     List of fields that should be updated.
@@ -48,8 +48,8 @@ module Google
         # Request for the SearchSimilarIncidents method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the incident or signal, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident or signal, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Number of similar incidents to return.
@@ -78,18 +78,18 @@ module Google
         # Request for the CreateAnnotation method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] annotation
         #   @return [Google::Cloud::Irm::V1alpha2::Annotation]
-        #     Only annotation.content is an input argument.
+        #     Required. Only annotation.content is an input argument.
         class CreateAnnotationRequest; end
 
         # Request for the ListAnnotations method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Number of annotations to return.
@@ -110,24 +110,24 @@ module Google
         # Request for the CreateTag method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] tag
         #   @return [Google::Cloud::Irm::V1alpha2::Tag]
-        #     Tag to create. Only tag.display_name is an input argument.
+        #     Required. Tag to create. Only tag.display_name is an input argument.
         class CreateTagRequest; end
 
         # Request for the DeleteTag method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the tag.
+        #     Required. Resource name of the tag.
         class DeleteTagRequest; end
 
         # Request for the ListTagsForIncident method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Number of tags to return.
@@ -148,17 +148,17 @@ module Google
         # Request for the CreateSignal method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The resource name of the hosting Stackdriver project which requested
+        #     Required. The resource name of the hosting Stackdriver project which requested
         #     signal belongs to.
         # @!attribute [rw] signal
         #   @return [Google::Cloud::Irm::V1alpha2::Signal]
-        #     The signal to create.
+        #     Required. The signal to create.
         class CreateSignalRequest; end
 
         # Request for the SearchSignals method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The resource name of the hosting Stackdriver project which requested
+        #     Required. The resource name of the hosting Stackdriver project which requested
         #     incidents belong to.
         # @!attribute [rw] query
         #   @return [String]
@@ -242,14 +242,14 @@ module Google
         # Request for the GetSignal method.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the Signal resource, for example,
-        #     "projects/{project_id}/signals/{signal_id}".
+        #     Required. Resource name of the Signal resource, for example,
+        #     "projects/{project_id_or_number}/signals/{signal_id}".
         class GetSignalRequest; end
 
         # Request for the LookupSignal method.
         # @!attribute [rw] cscc_finding
         #   @return [String]
-        #     Full resource name of the CSCC finding id this signal refers to (e.g.
+        #     Required. Full resource name of the CSCC finding id this signal refers to (e.g.
         #     "organizations/abc/sources/123/findings/xyz")
         # @!attribute [rw] stackdriver_notification_id
         #   @return [String]
@@ -259,7 +259,7 @@ module Google
         # Request for the UpdateSignal method.
         # @!attribute [rw] signal
         #   @return [Google::Cloud::Irm::V1alpha2::Signal]
-        #     The signal to update with the new values.
+        #     Required. The signal to update with the new values.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     List of fields that should be updated.
@@ -268,7 +268,7 @@ module Google
         # Request for the SearchIncidents method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The resource name of the hosting Stackdriver project which requested
+        #     Required. The resource name of the hosting Stackdriver project which requested
         #     incidents belong to.
         # @!attribute [rw] query
         #   @return [String]
@@ -349,7 +349,7 @@ module Google
         # Request to escalate an incident.
         # @!attribute [rw] incident
         #   @return [Google::Cloud::Irm::V1alpha2::Incident]
-        #     The incident to escalate with the new values.
+        #     Required. The incident to escalate with the new values.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     List of fields that should be updated.
@@ -390,18 +390,18 @@ module Google
         # Request for the CreateArtifact method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] artifact
         #   @return [Google::Cloud::Irm::V1alpha2::Artifact]
-        #     The artifact to create.
+        #     Required. The artifact to create.
         class CreateArtifactRequest; end
 
         # Request for the ListArtifacts method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Number of artifacts to return.
@@ -422,7 +422,7 @@ module Google
         # Request for the UpdateArtifact method.
         # @!attribute [rw] artifact
         #   @return [Google::Cloud::Irm::V1alpha2::Artifact]
-        #     The artifact to update with the new values.
+        #     Required. The artifact to update with the new values.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     List of fields that should be updated.
@@ -431,33 +431,33 @@ module Google
         # Request for deleting an artifact.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the artifact.
+        #     Required. Resource name of the artifact.
         class DeleteArtifactRequest; end
 
         # SendShiftHandoff and PreviewShiftHandoff RPC request.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The resource name of the Stackdriver project that the handoff is being sent
-        #     from. for example, `projects/{project_id}`
+        #     Required. The resource name of the Stackdriver project that the handoff is being sent
+        #     from. for example, `projects/{project_id_or_number}`
         # @!attribute [rw] recipients
         #   @return [Array<String>]
-        #     Email addresses of the recipients of the handoff, for example,
+        #     Required. Email addresses of the recipients of the handoff, for example,
         #     "user@example.com". Must contain at least one entry.
         # @!attribute [rw] cc
         #   @return [Array<String>]
-        #     Email addresses that should be CC'd on the handoff. Optional.
+        #     Optional. Email addresses that should be CC'd on the handoff.
         # @!attribute [rw] subject
         #   @return [String]
-        #     The subject of the email. Required.
+        #     Required. The subject of the email.
         # @!attribute [rw] notes_content_type
         #   @return [String]
         #     Content type string, for example, 'text/plain' or 'text/html'.
         # @!attribute [rw] notes_content
         #   @return [String]
-        #     Additional notes to be included in the handoff. Optional.
+        #     Optional. Additional notes to be included in the handoff.
         # @!attribute [rw] incidents
         #   @return [Array<Google::Cloud::Irm::V1alpha2::SendShiftHandoffRequest::Incident>]
-        #     The set of incidents that should be included in the handoff. Optional.
+        #     Optional. The set of incidents that should be included in the handoff.
         # @!attribute [rw] preview_only
         #   @return [true, false]
         #     If set to true a ShiftHandoffResponse will be returned but the handoff
@@ -469,7 +469,7 @@ module Google
           # @!attribute [rw] name
           #   @return [String]
           #     Resource name of the incident, for example,
-          #     "projects/{project_id}/incidents/{incident_id}".
+          #     "projects/{project_id_or_number}/incidents/{incident_id}".
           class Incident; end
         end
 
@@ -487,17 +487,17 @@ module Google
         # Request for the CreateSubscription method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] subscription
         #   @return [Google::Cloud::Irm::V1alpha2::Subscription]
-        #     The subscription to create.
+        #     Required. The subscription to create.
         class CreateSubscriptionRequest; end
 
         # Request for the UpdateSubscription method.
         # @!attribute [rw] subscription
         #   @return [Google::Cloud::Irm::V1alpha2::Subscription]
-        #     The subscription to update, with new values.
+        #     Required. The subscription to update, with new values.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     List of fields that should be updated.
@@ -506,8 +506,8 @@ module Google
         # Request for the ListSubscriptions method.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Number of subscriptions to return.
@@ -528,30 +528,30 @@ module Google
         # Request for deleting a subscription.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the subscription.
+        #     Required. Resource name of the subscription.
         class DeleteSubscriptionRequest; end
 
         # Request for creating a role assignment.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] incident_role_assignment
         #   @return [Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment]
-        #     Role assignment to create.
+        #     Required. Role assignment to create.
         class CreateIncidentRoleAssignmentRequest; end
 
         # Request for deleting a role assignment.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the role assignment.
+        #     Required. Resource name of the role assignment.
         class DeleteIncidentRoleAssignmentRequest; end
 
         # Request to list role assignments of an incident.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the incident, for example,
-        #     "projects/{project_id}/incidents/{incident_id}".
+        #     Required. Resource name of the incident, for example,
+        #     "projects/{project_id_or_number}/incidents/{incident_id}".
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Number of assignments to return.
@@ -572,39 +572,39 @@ module Google
         # Request to start a role handover.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the role assignment.
+        #     Required. Resource name of the role assignment.
         # @!attribute [rw] new_assignee
         #   @return [Google::Cloud::Irm::V1alpha2::User]
-        #     The proposed assignee.
+        #     Required. The proposed assignee.
         class RequestIncidentRoleHandoverRequest; end
 
         # Request to confirm a role handover.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the role assignment.
+        #     Required. Resource name of the role assignment.
         # @!attribute [rw] new_assignee
         #   @return [Google::Cloud::Irm::V1alpha2::User]
-        #     The proposed assignee, who will now be the assignee. This should be the
+        #     Required. The proposed assignee, who will now be the assignee. This should be the
         #     current user; otherwise ForceRoleHandover should be called.
         class ConfirmIncidentRoleHandoverRequest; end
 
         # Request to force a role handover.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the role assignment.
+        #     Required. Resource name of the role assignment.
         # @!attribute [rw] new_assignee
         #   @return [Google::Cloud::Irm::V1alpha2::User]
-        #     The proposed assignee, who will now be the assignee. This should not be
+        #     Required. The proposed assignee, who will now be the assignee. This should not be
         #     the current user; otherwise ConfirmRoleHandover should be called.
         class ForceIncidentRoleHandoverRequest; end
 
         # Request to cancel a role handover.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the role assignment.
+        #     Required. Resource name of the role assignment.
         # @!attribute [rw] new_assignee
         #   @return [Google::Cloud::Irm::V1alpha2::User]
-        #     Person who was proposed as the next assignee (i.e.
+        #     Required. Person who was proposed as the next assignee (i.e.
         #     IncidentRoleAssignment.proposed_assignee) and whose proposal is being
         #     cancelled.
         class CancelIncidentRoleHandoverRequest; end

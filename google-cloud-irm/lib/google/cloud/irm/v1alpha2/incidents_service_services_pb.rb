@@ -64,6 +64,9 @@ module Google
             rpc :CreateSignal, CreateSignalRequest, Signal
             # Lists signals that are part of an incident.
             # Signals are returned in reverse chronological order.
+            # Note that search should not be relied on for critical functionality.  It
+            # has lower availability guarantees and might fail to return valid results.
+            # Returned results might include stale or extraneous entries.
             rpc :SearchSignals, SearchSignalsRequest, SearchSignalsResponse
             # Finds a signal by other unique IDs.
             rpc :LookupSignal, LookupSignalRequest, Signal
@@ -108,6 +111,8 @@ module Google
             # Starts a role handover. The proposed assignee will receive an email
             # notifying them of the assignment. This will fail if a role handover is
             # already pending.
+            # Handover to an oncall ladder is not permitted. Use
+            # CreateIncidentRoleAssignment instead.
             rpc :RequestIncidentRoleHandover, RequestIncidentRoleHandoverRequest, IncidentRoleAssignment
             # Confirms a role handover. This will fail if the 'proposed_assignee' field
             # of the IncidentRoleAssignment is not equal to the 'new_assignee' field of

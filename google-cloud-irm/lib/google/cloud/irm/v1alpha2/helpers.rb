@@ -42,20 +42,20 @@
             self.class.incident_path project, incident
           end
           
+          # Alias for Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_role_assignment_path.
+          # @param project_id_or_number [String]
+          # @param incident_id [String]
+          # @param role_id [String]
+          # @return [String]
+          def incident_role_assignment_path project_id_or_number, incident_id, role_id
+            self.class.incident_role_assignment_path project_id_or_number, incident_id, role_id
+          end
+          
           # Alias for Google::Cloud::Irm::V1alpha2::IncidentServiceClient.project_path.
           # @param project [String]
           # @return [String]
           def project_path project
             self.class.project_path project
-          end
-          
-          # Alias for Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path.
-          # @param project [String]
-          # @param incident [String]
-          # @param role_assignment [String]
-          # @return [String]
-          def role_assignment_path project, incident, role_assignment
-            self.class.role_assignment_path project, incident, role_assignment
           end
           
           # Alias for Google::Cloud::Irm::V1alpha2::IncidentServiceClient.signal_path.

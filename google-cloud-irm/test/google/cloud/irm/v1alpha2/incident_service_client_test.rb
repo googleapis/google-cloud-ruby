@@ -67,6 +67,312 @@ end
 
 describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
 
+  describe 'delete_artifact' do
+    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#delete_artifact."
+
+    it 'invokes delete_artifact without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.artifact_path("[PROJECT]", "[INCIDENT]", "[ARTIFACT]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::DeleteArtifactRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:delete_artifact, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("delete_artifact")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          response = client.delete_artifact(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_artifact(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_artifact with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.artifact_path("[PROJECT]", "[INCIDENT]", "[ARTIFACT]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::DeleteArtifactRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:delete_artifact, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("delete_artifact")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
+            client.delete_artifact(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'request_incident_role_handover' do
+    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#request_incident_role_handover."
+
+    it 'invokes request_incident_role_handover without error' do
+      # Create request parameters
+      name = ''
+      new_assignee = {}
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      etag = "etag3123477"
+      expected_response = { name: name_2, etag: etag }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::RequestIncidentRoleHandoverRequest, request)
+        assert_equal(name, request.name)
+        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:request_incident_role_handover, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("request_incident_role_handover")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          response = client.request_incident_role_handover(name, new_assignee)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.request_incident_role_handover(name, new_assignee) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes request_incident_role_handover with error' do
+      # Create request parameters
+      name = ''
+      new_assignee = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::RequestIncidentRoleHandoverRequest, request)
+        assert_equal(name, request.name)
+        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:request_incident_role_handover, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("request_incident_role_handover")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
+            client.request_incident_role_handover(name, new_assignee)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'confirm_incident_role_handover' do
+    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#confirm_incident_role_handover."
+
+    it 'invokes confirm_incident_role_handover without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_role_assignment_path("[PROJECT_ID_OR_NUMBER]", "[INCIDENT_ID]", "[ROLE_ID]")
+      new_assignee = {}
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      etag = "etag3123477"
+      expected_response = { name: name_2, etag: etag }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::ConfirmIncidentRoleHandoverRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:confirm_incident_role_handover, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("confirm_incident_role_handover")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          response = client.confirm_incident_role_handover(formatted_name, new_assignee)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.confirm_incident_role_handover(formatted_name, new_assignee) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes confirm_incident_role_handover with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_role_assignment_path("[PROJECT_ID_OR_NUMBER]", "[INCIDENT_ID]", "[ROLE_ID]")
+      new_assignee = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::ConfirmIncidentRoleHandoverRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:confirm_incident_role_handover, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("confirm_incident_role_handover")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
+            client.confirm_incident_role_handover(formatted_name, new_assignee)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'force_incident_role_handover' do
+    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#force_incident_role_handover."
+
+    it 'invokes force_incident_role_handover without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_role_assignment_path("[PROJECT_ID_OR_NUMBER]", "[INCIDENT_ID]", "[ROLE_ID]")
+      new_assignee = {}
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      etag = "etag3123477"
+      expected_response = { name: name_2, etag: etag }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::ForceIncidentRoleHandoverRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:force_incident_role_handover, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("force_incident_role_handover")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          response = client.force_incident_role_handover(formatted_name, new_assignee)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.force_incident_role_handover(formatted_name, new_assignee) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes force_incident_role_handover with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_role_assignment_path("[PROJECT_ID_OR_NUMBER]", "[INCIDENT_ID]", "[ROLE_ID]")
+      new_assignee = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Irm::V1alpha2::ForceIncidentRoleHandoverRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:force_incident_role_handover, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("force_incident_role_handover")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
+            client.force_incident_role_handover(formatted_name, new_assignee)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'create_incident' do
     custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#create_incident."
 
@@ -999,6 +1305,82 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
     end
   end
 
+  describe 'lookup_signal' do
+    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#lookup_signal."
+
+    it 'invokes lookup_signal without error' do
+      # Create expected grpc response
+      name = "name3373707"
+      etag = "etag3123477"
+      incident = "incident86983890"
+      title = "title110371416"
+      content_type = "contentType831846208"
+      content = "content951530617"
+      expected_response = {
+        name: name,
+        etag: etag,
+        incident: incident,
+        title: title,
+        content_type: content_type,
+        content: content
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::Signal)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:lookup_signal, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("lookup_signal")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          response = client.lookup_signal
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.lookup_signal do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes lookup_signal with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1alpha2.new(:lookup_signal, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("lookup_signal")
+
+      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Irm.new(version: :v1alpha2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
+            client.lookup_signal
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'get_signal' do
     custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#get_signal."
 
@@ -1076,82 +1458,6 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.get_signal(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'lookup_signal' do
-    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#lookup_signal."
-
-    it 'invokes lookup_signal without error' do
-      # Create expected grpc response
-      name = "name3373707"
-      etag = "etag3123477"
-      incident = "incident86983890"
-      title = "title110371416"
-      content_type = "contentType831846208"
-      content = "content951530617"
-      expected_response = {
-        name: name,
-        etag: etag,
-        incident: incident,
-        title: title,
-        content_type: content_type,
-        content: content
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::Signal)
-
-      # Mock Grpc layer
-      mock_method = proc do
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:lookup_signal, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("lookup_signal")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          response = client.lookup_signal
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.lookup_signal do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes lookup_signal with error' do
-      # Mock Grpc layer
-      mock_method = proc do
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:lookup_signal, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("lookup_signal")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
-            client.lookup_signal
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1551,75 +1857,6 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
             client.update_artifact(artifact)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'delete_artifact' do
-    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#delete_artifact."
-
-    it 'invokes delete_artifact without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.artifact_path("[PROJECT]", "[INCIDENT]", "[ARTIFACT]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::DeleteArtifactRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: nil)
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:delete_artifact, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("delete_artifact")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          response = client.delete_artifact(formatted_name)
-
-          # Verify the response
-          assert_nil(response)
-
-          # Call method with block
-          client.delete_artifact(formatted_name) do |response, operation|
-            # Verify the response
-            assert_nil(response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes delete_artifact with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.artifact_path("[PROJECT]", "[INCIDENT]", "[ARTIFACT]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::DeleteArtifactRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:delete_artifact, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("delete_artifact")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
-            client.delete_artifact(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -2103,7 +2340,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
 
     it 'invokes delete_incident_role_assignment without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
+      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -2138,7 +2375,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
 
     it 'invokes delete_incident_role_assignment with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
+      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_path("[PROJECT]", "[INCIDENT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -2239,249 +2476,12 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
     end
   end
 
-  describe 'request_incident_role_handover' do
-    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#request_incident_role_handover."
-
-    it 'invokes request_incident_role_handover without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
-      new_assignee = {}
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      etag = "etag3123477"
-      expected_response = { name: name_2, etag: etag }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::RequestIncidentRoleHandoverRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:request_incident_role_handover, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("request_incident_role_handover")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          response = client.request_incident_role_handover(formatted_name, new_assignee)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.request_incident_role_handover(formatted_name, new_assignee) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes request_incident_role_handover with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
-      new_assignee = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::RequestIncidentRoleHandoverRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:request_incident_role_handover, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("request_incident_role_handover")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
-            client.request_incident_role_handover(formatted_name, new_assignee)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'confirm_incident_role_handover' do
-    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#confirm_incident_role_handover."
-
-    it 'invokes confirm_incident_role_handover without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
-      new_assignee = {}
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      etag = "etag3123477"
-      expected_response = { name: name_2, etag: etag }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::ConfirmIncidentRoleHandoverRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:confirm_incident_role_handover, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("confirm_incident_role_handover")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          response = client.confirm_incident_role_handover(formatted_name, new_assignee)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.confirm_incident_role_handover(formatted_name, new_assignee) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes confirm_incident_role_handover with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
-      new_assignee = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::ConfirmIncidentRoleHandoverRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:confirm_incident_role_handover, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("confirm_incident_role_handover")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
-            client.confirm_incident_role_handover(formatted_name, new_assignee)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'force_incident_role_handover' do
-    custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#force_incident_role_handover."
-
-    it 'invokes force_incident_role_handover without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
-      new_assignee = {}
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      etag = "etag3123477"
-      expected_response = { name: name_2, etag: etag }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Irm::V1alpha2::IncidentRoleAssignment)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::ForceIncidentRoleHandoverRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:force_incident_role_handover, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("force_incident_role_handover")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          response = client.force_incident_role_handover(formatted_name, new_assignee)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.force_incident_role_handover(formatted_name, new_assignee) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes force_incident_role_handover with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
-      new_assignee = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Irm::V1alpha2::ForceIncidentRoleHandoverRequest, request)
-        assert_equal(formatted_name, request.name)
-        assert_equal(Google::Gax::to_proto(new_assignee, Google::Cloud::Irm::V1alpha2::User), request.new_assignee)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1alpha2.new(:force_incident_role_handover, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockIncidentServiceCredentials_v1alpha2.new("force_incident_role_handover")
-
-      Google::Cloud::Irm::V1alpha2::IncidentService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Irm::V1alpha2::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Irm.new(version: :v1alpha2)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1alpha2 do
-            client.force_incident_role_handover(formatted_name, new_assignee)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
   describe 'cancel_incident_role_handover' do
     custom_error = CustomTestError_v1alpha2.new "Custom test error for Google::Cloud::Irm::V1alpha2::IncidentServiceClient#cancel_incident_role_handover."
 
     it 'invokes cancel_incident_role_handover without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
+      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_role_assignment_path("[PROJECT_ID_OR_NUMBER]", "[INCIDENT_ID]", "[ROLE_ID]")
       new_assignee = {}
 
       # Create expected grpc response
@@ -2524,7 +2524,7 @@ describe Google::Cloud::Irm::V1alpha2::IncidentServiceClient do
 
     it 'invokes cancel_incident_role_handover with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.role_assignment_path("[PROJECT]", "[INCIDENT]", "[ROLE_ASSIGNMENT]")
+      formatted_name = Google::Cloud::Irm::V1alpha2::IncidentServiceClient.incident_role_assignment_path("[PROJECT_ID_OR_NUMBER]", "[INCIDENT_ID]", "[ROLE_ID]")
       new_assignee = {}
 
       # Mock Grpc layer
