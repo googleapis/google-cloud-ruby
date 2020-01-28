@@ -1,0 +1,41 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "lib/**/*_pb.rb"
+    - "proto_docs/**/*"
+    - "test/**/*"
+
+Metrics/AbcSize:
+  Exclude:
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+Metrics/ClassLength:
+  Exclude:
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+Metrics/MethodLength:
+  Exclude:
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-billing-v1.rb"
+Style/CaseEquality:
+  Exclude:
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+    - "lib/google/cloud/billing/v1.rb"
