@@ -134,6 +134,8 @@ module Google
         # @!group Attributes
         #
         def description
+          return nil if reference?
+          ensure_full_data!
           @gapi.description
         end
 
@@ -186,7 +188,10 @@ module Google
         # @!group Attributes
         #
         def return_type
-          @gapi.return_type
+          return nil if reference?
+          ensure_full_data!
+          return nil unless @gapi.return_type
+          StandardSql::DataType.from_gapi @gapi.return_type
         end
 
         ##
@@ -244,6 +249,8 @@ module Google
         # @return [String]
         #
         def body
+          return nil if reference?
+          ensure_full_data!
           @gapi.definition_body
         end
 
@@ -331,6 +338,8 @@ module Google
         #   end
         #
         def arguments
+          return nil if reference?
+          ensure_full_data!
           # always return frozen arguments
           Array(@gapi.arguments).map { |arg| Argument.from_gapi(arg).freeze }.freeze
         end
@@ -403,6 +412,131 @@ module Google
         alias refresh! reload!
 
         ##
+        # Determines whether the routine exists in the BigQuery service. The
+        # result is cached locally. To refresh state, set `force` to `true`.
+        #
+        # @param [Boolean] force Force the latest resource representation to be
+        #   retrieved from the BigQuery service when `true`. Otherwise the
+        #   return value of this method will be memoized to reduce the number of
+        #   API calls made to the BigQuery service. The default is `false`.
+        #
+        # @return [Boolean] `true` when the routine exists in the BigQuery
+        #   service, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine", skip_lookup: true
+        #   routine.exists? #=> true
+        #
+        def exists? force: nil
+          return resource_exists? if force
+          # If we have a value, return it
+          return @exists unless @exists.nil?
+          # Always true if we have a gapi object
+          return true if resource?
+          resource_exists?
+        end
+
+        ##
+        # Whether the routine was created without retrieving the resource
+        # representation from the BigQuery service.
+        #
+        # @return [Boolean] `true` when the routine is just a local reference
+        #   object, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine", skip_lookup: true
+        #
+        #   routine.reference? #=> true
+        #   routine.reload!
+        #   routine.reference? #=> false
+        #
+        def reference?
+          @gapi.nil?
+        end
+
+        ##
+        # Whether the routine was created with a resource representation from
+        # the BigQuery service.
+        #
+        # @return [Boolean] `true` when the routine was created with a resource
+        #   representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine", skip_lookup: true
+        #
+        #   routine.resource? #=> false
+        #   routine.reload!
+        #   routine.resource? #=> true
+        #
+        def resource?
+          !@gapi.nil?
+        end
+
+        ##
+        # Whether the routine was created with a partial resource representation
+        # from the BigQuery service by retrieval through {Dataset#routines}.
+        # See [Models: list
+        # response](https://cloud.google.com/bigquery/docs/reference/rest/v2/routines/list#response)
+        # for the contents of the partial representation. Accessing any
+        # attribute outside of the partial representation will result in loading
+        # the full representation.
+        #
+        # @return [Boolean] `true` when the routine was created with a partial
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routines.first
+        #
+        #   routine.resource_partial? #=> true
+        #   routine.description # Loads the full resource.
+        #   routine.resource_partial? #=> false
+        #
+        def resource_partial?
+          resource? && !resource_full?
+        end
+
+        ##
+        # Whether the routine was created with a full resource representation
+        # from the BigQuery service.
+        #
+        # @return [Boolean] `true` when the routine was created with a full
+        #   resource representation, `false` otherwise.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.resource_full? #=> true
+        #
+        def resource_full?
+          resource? && @gapi.description
+        end
+
+        ##
         # @private New Routine from a Google API Client object.
         def self.from_gapi gapi, service
           new.tap do |r|
@@ -438,9 +572,20 @@ module Google
           raise "Must have active connection" unless service
         end
 
-        def frozen_check!
-          return unless frozen?
-          raise ArgumentError, "Cannot modify a frozen schema"
+        ##
+        # Fetch gapi and memoize whether resource exists.
+        def resource_exists?
+          reload!
+          @exists = true
+        rescue Google::Cloud::NotFoundError
+          @exists = false
+        end
+
+        ##
+        # Load the complete representation of the routine if it has been
+        # only partially loaded by a request to the API list method.
+        def ensure_full_data!
+          reload! unless resource_full?
         end
 
         def update_gapi!

@@ -468,43 +468,40 @@ class MockBigquery < Minitest::Spec
   end
 
 
-  def random_routine_gapi dataset, id = nil, name = nil, description = nil, project_id = nil
-    json = random_routine_hash(dataset, id, name, description, project_id).to_json
-    Google::Apis::BigqueryV2::Table.from_json json
+  def random_routine_gapi dataset, id = nil, project_id: nil, description: nil
+    json = random_routine_hash(dataset, id, project_id: project_id, description: description).to_json
+    Google::Apis::BigqueryV2::Routine.from_json json
   end
 
-  def random_routine_hash dataset, id = nil, name = nil, description = nil, project_id = nil
-    id ||= "my_table"
-    name ||= "Table Name"
+  def random_routine_hash dataset, id = nil, project_id: nil, description: nil
+    id ||= "my_routine"
 
     {
-      "kind" => "bigquery#table",
+      "kind" => "bigquery#routine",
       "etag" => "etag123456789",
       "id" => "#{project}:#{dataset}.#{id}",
-      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/tables/#{id}",
-      "tableReference" => {
+      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/routines/#{id}",
+      "routineReference" => {
         "projectId" => (project_id || project),
         "datasetId" => dataset,
-        "tableId" => id
+        "routineId" => id
       },
-      "friendlyName" => name,
-      "description" => description,
-      "schema" => random_schema_hash,
-      "numBytes" => "1000", # String per google/google-api-ruby-client#439
-      "numRows" => "100",   # String per google/google-api-ruby-client#439
       "creationTime" => time_millis,
-      "expirationTime" => time_millis,
       "lastModifiedTime" => time_millis,
-      "type" => "TABLE",
-      "location" => "US",
-      "labels" => { "foo" => "bar" },
-      "streamingBuffer" => {
-        "estimatedBytes" => "2000", # String per google/google-api-ruby-client
-        "estimatedRows" => "200", # String per google/google-api-ruby-client
-        "oldestEntryTime" => time_millis
-      },
-      "requirePartitionFilter" => true
+      "description" => description,
+      "returnType" => { "typeKind" => "INT64" },
+      "definitionBody" => "x * 3",
+      "language" => "SQL",
+      "routineType" => "SCALAR_FUNCTION",
+      "arguments" => [{ "name" => "x", "dataType" => { "typeKind" => "INT64" }}]
     }
+  end
+
+  def list_routines_gapi dataset, count = 2, token = nil
+    routines = count.times.map { |i| random_routine_hash dataset, "my_routine_#{i}" }
+    hash = { "kind"=>"bigquery#routineList", "routines" => routines }
+    hash["nextPageToken"] = token unless token.nil?
+    Google::Apis::BigqueryV2::ListRoutinesResponse.from_json hash.to_json
   end
 
   def random_job_hash id = "job_9876543210", state = "running", location: "US"

@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+ # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,170 +14,170 @@
 
 require "helper"
 
-describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
+describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
   let(:dataset_hash) { random_dataset_hash }
   let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
 
-  it "lists models" do
+  it "lists routines" do
     mock = Minitest::Mock.new
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3),
+      [project, dataset.dataset_id, max_results: nil, page_token: nil]
     dataset.service.mocked_service = mock
 
-    models = dataset.models
+    routines = dataset.routines
 
     mock.verify
 
-    models.size.must_equal 3
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
+    routines.size.must_equal 3
+    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 
-  it "lists models with max set" do
+  it "lists routines with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: 3, page_token: nil, options: { skip_deserialization: true }]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3, "next_page_token"),
+      [project, dataset.dataset_id, max_results: 3, page_token: nil]
     dataset.service.mocked_service = mock
 
-    models = dataset.models max: 3
+    routines = dataset.routines max: 3
 
     mock.verify
 
-    models.count.must_equal 3
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    models.token.wont_be :nil?
-    models.token.must_equal "next_page_token"
+    routines.count.must_equal 3
+    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    routines.token.wont_be :nil?
+    routines.token.must_equal "next_page_token"
   end
 
-  it "paginates models" do
+  it "paginates routines" do
     mock = Minitest::Mock.new
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 2, nil),
-      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3, "next_page_token"),
+      [project, dataset.dataset_id, max_results: nil, page_token: nil]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 2, nil),
+      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token"]
     dataset.service.mocked_service = mock
 
-    first_models = dataset.models
-    second_models = dataset.models token: first_models.token
+    first_routines = dataset.routines
+    second_routines = dataset.routines token: first_routines.token
 
     mock.verify
 
-    first_models.count.must_equal 3
-    first_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    first_models.token.wont_be :nil?
-    first_models.token.must_equal "next_page_token"
+    first_routines.count.must_equal 3
+    first_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    first_routines.token.wont_be :nil?
+    first_routines.token.must_equal "next_page_token"
 
-    second_models.count.must_equal 2
-    second_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    second_models.token.must_be :nil?
+    second_routines.count.must_equal 2
+    second_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    second_routines.token.must_be :nil?
   end
 
-  it "paginates models with next? and next" do
+  it "paginates routines with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 2, nil),
-      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3, "next_page_token"),
+      [project, dataset.dataset_id, max_results: nil, page_token: nil]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 2, nil),
+      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token"]
     dataset.service.mocked_service = mock
 
-    first_models = dataset.models
-    second_models = first_models.next
+    first_routines = dataset.routines
+    second_routines = first_routines.next
 
     mock.verify
 
-    first_models.count.must_equal 3
-    first_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    first_models.token.wont_be :nil?
-    first_models.token.must_equal "next_page_token"
+    first_routines.count.must_equal 3
+    first_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    first_routines.token.wont_be :nil?
+    first_routines.token.must_equal "next_page_token"
 
-    second_models.count.must_equal 2
-    second_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    second_models.token.must_be :nil?
+    second_routines.count.must_equal 2
+    second_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    second_routines.token.must_be :nil?
   end
 
-  it "paginates models with next? and next and max" do
+  it "paginates routines with next? and next and max" do
     mock = Minitest::Mock.new
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: 3, page_token: nil, options: { skip_deserialization: true }]
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 2, nil),
-      [project, dataset.dataset_id, max_results: 3, page_token: "next_page_token", options: { skip_deserialization: true }]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3, "next_page_token"),
+      [project, dataset.dataset_id, max_results: 3, page_token: nil]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 2, nil),
+      [project, dataset.dataset_id, max_results: 3, page_token: "next_page_token"]
     dataset.service.mocked_service = mock
 
-    first_models = dataset.models max: 3
-    second_models = first_models.next
+    first_routines = dataset.routines max: 3
+    second_routines = first_routines.next
 
     mock.verify
 
-    first_models.count.must_equal 3
-    first_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    first_models.next?.must_equal true
+    first_routines.count.must_equal 3
+    first_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    first_routines.next?.must_equal true
 
-    second_models.count.must_equal 2
-    second_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    second_models.next?.must_equal false
+    second_routines.count.must_equal 2
+    second_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    second_routines.next?.must_equal false
   end
 
-  it "paginates models with all" do
+  it "paginates routines with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 2, nil),
-      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3, "next_page_token"),
+      [project, dataset.dataset_id, max_results: nil, page_token: nil]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 2, nil),
+      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token"]
     dataset.service.mocked_service = mock
 
-    models = dataset.models.all.to_a
+    routines = dataset.routines.all.to_a
 
     mock.verify
 
-    models.count.must_equal 5
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
+    routines.count.must_equal 5
+    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 
-  it "paginates models with all and max" do
+  it "paginates routines with all and max" do
     mock = Minitest::Mock.new
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: 3, page_token: nil, options: { skip_deserialization: true }]
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 2, nil),
-      [project, dataset.dataset_id, max_results: 3, page_token: "next_page_token", options: { skip_deserialization: true }]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3, "next_page_token"),
+      [project, dataset.dataset_id, max_results: 3, page_token: nil]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 2, nil),
+      [project, dataset.dataset_id, max_results: 3, page_token: "next_page_token"]
     dataset.service.mocked_service = mock
 
-    models = dataset.models(max: 3).all.to_a
+    routines = dataset.routines(max: 3).all.to_a
 
     mock.verify
 
-    models.count.must_equal 5
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
+    routines.count.must_equal 5
+    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 
-  it "iterates models with all using Enumerator" do
+  it "iterates routines with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "second_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3, "next_page_token"),
+      [project, dataset.dataset_id, max_results: nil, page_token: nil]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3, "second_page_token"),
+      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token"]
     dataset.service.mocked_service = mock
 
-    models = dataset.models.all.take(5)
+    routines = dataset.routines.all.take(5)
 
     mock.verify
 
-    models.count.must_equal 5
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
+    routines.count.must_equal 5
+    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 
-  it "iterates models with all with request_limit set" do
+  it "iterates routines with all with request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
-    mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "second_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3, "next_page_token"),
+      [project, dataset.dataset_id, max_results: nil, page_token: nil]
+    mock.expect :list_routines, list_routines_gapi(dataset.dataset_id, 3, "second_page_token"),
+      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token"]
     dataset.service.mocked_service = mock
 
-    models = dataset.models.all(request_limit: 1).to_a
+    routines = dataset.routines.all(request_limit: 1).to_a
 
     mock.verify
 
-    models.count.must_equal 6
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
+    routines.count.must_equal 6
+    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 end
