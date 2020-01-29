@@ -294,7 +294,7 @@ module Google
         ##
         # Lists all routines in the specified dataset.
         # Requires the READER dataset role.
-        # Unless readMask is set in the request, only the following fields are populated: 
+        # Unless readMask is set in the request, only the following fields are populated:
         #   etag, projectId, datasetId, routineId, routineType, creationTime, lastModifiedTime, and language.
         def list_routines dataset_id, options = {}
           # The list operation is considered idempotent

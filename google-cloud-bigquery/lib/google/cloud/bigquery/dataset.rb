@@ -822,8 +822,8 @@ module Google
         # Creates a new routine.
         #
         # @param [String] routine_id The ID of the routine. The ID must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum
-        #   length is 1,024 characters.
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length
+        #   is 256 characters.
         # @yield [routine] a block for setting the routine
         # @yieldparam [Google::Cloud::Bigquery::Routine::Updater] routine An updater
         #   to set additional properties on the routine in the API request to

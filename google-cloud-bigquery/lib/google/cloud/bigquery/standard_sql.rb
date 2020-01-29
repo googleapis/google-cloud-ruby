@@ -77,12 +77,11 @@ module Google
           ##
           # Create an empty StandardSql::DataType object.
           #
-          # @param type_kind [String]
-          #   Required.
-          # @param array_element_type [DataType, Hash]
-          #   The type of a variable, e.g., a function argument, if type_kind = "ARRAY".
-          # @param struct_type [StructType, Hash]
-          #   The fields of this struct, in order, if type_kind = "STRUCT".
+          # @overload initialize(type_kind, array_element_type, struct_type)
+          #   @param type_kind [String] Required.
+          #   @param array_element_type [DataType, Hash] The type of a variable, e.g., a function argument, if
+          #      type_kind = "ARRAY".
+          #   @param struct_type [StructType, Hash] The fields of this struct, in order, if type_kind = "STRUCT".
           def initialize **kwargs
             # Convert struct_type to a gapi object if it is a veneer object (has #to_gapi defined)
             if kwargs[:array_element_type].respond_to? :to_gapi

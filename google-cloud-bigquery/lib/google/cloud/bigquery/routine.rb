@@ -33,46 +33,61 @@ module Google
         attr_accessor :gapi
 
         ##
+        # @private A Google API Client Dataset Reference object.
+        attr_reader :reference
+
+        ##
         # @private Create an empty Table object.
         def initialize
           @service = nil
           @gapi = nil
+          @reference = nil
         end
 
         ##
-        # A unique ID for this routine.
+        # A unique ID for this routine, without the project name.
         #
-        # @return [String] The dataset ID.
+        # @return [String] The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum
+        #   length is 256 characters.
         #
         # @!group Attributes
         #
         def routine_id
+          return reference.routine_id if reference?
           @gapi.routine_reference.routine_id
         end
-        # TODO: when creating, have the following documentation for choosing this value:
-        #   The ID must contain only letters (a-z, A-Z), numbers
-        #   (0-9), or underscores (_). The maximum length is 256 characters.
 
         ##
-        # The ID of the `Dataset` containing this routine.
+        # The ID of the dataset containing this routine.
         #
         # @return [String] The dataset ID.
         #
         # @!group Attributes
         #
         def dataset_id
+          return reference.dataset_id if reference?
           @gapi.routine_reference.dataset_id
         end
 
         ##
-        # The ID of the `Project` containing this routine.
+        # The ID of the project containing this routine.
         #
         # @return [String] The project ID.
         #
         # @!group Attributes
         #
         def project_id
+          return reference.project_id if reference?
           @gapi.routine_reference.project_id
+        end
+
+        ##
+        # @private The gapi fragment containing the Project ID, Dataset ID, and Routine ID.
+        #
+        # @return [Google::Apis::BigqueryV2::RoutineReference]
+        #
+        def routine_ref
+          reference? ? reference : @gapi.routine_reference
         end
 
         ##
@@ -92,7 +107,44 @@ module Google
         # @!group Attributes
         #
         def etag
+          return nil if reference?
+          ensure_full_data!
           @gapi.etag
+        end
+
+        # Required. The type of routine.
+        # @return [String]
+        # SCALAR_FUNCTION  Non-builtin permanent scalar function.
+        # PROCEDURE  Stored procedure.
+        def type
+          @gapi.routine_type
+        end
+
+        # Required. The type of routine.
+        # @return [String]
+        # SCALAR_FUNCTION  Non-builtin permanent scalar function.
+        # PROCEDURE  Stored procedure.
+        def type= new_type
+          @gapi.routine_type = new_type
+          update_gapi!
+        end
+
+        ##
+        # Checks if the value of {#type} is `PROCEDURE`. The default is `false`.
+        #
+        # @return [Boolean] `true` when `PROCEDURE`, `false` otherwise.
+        #
+        def procedure?
+          @gapi.type == "PROCEDURE"
+        end
+
+        ##
+        # Checks if the value of {#type} is `SCALAR_FUNCTION`. The default is `true`.
+        #
+        # @return [Boolean] `true` when `SCALAR_FUNCTION`, `false` otherwise.
+        #
+        def scalar_function?
+          @gapi.type == "SCALAR_FUNCTION"
         end
 
         ##
@@ -115,6 +167,228 @@ module Google
         #
         def modified_at
           Convert.millis_to_time @gapi.last_modified_time
+        end
+
+        # Optional. Defaults to "SQL".
+        # @return [String]
+        # SQL  SQL language.
+        # JAVASCRIPT  JavaScript language.
+        def language
+          @gapi.language
+        end
+
+        # Optional. Defaults to "SQL".
+        # @return [String]
+        # SQL  SQL language.
+        # JAVASCRIPT  JavaScript language.
+        def language= new_language
+          @gapi.language = new_language
+          update_gapi!
+        end
+
+        ##
+        # Checks if the value of {#language} is JAVASCRIPT. The default is `false`.
+        #
+        # @return [Boolean] `true` when `JAVASCRIPT`, `false` otherwise.
+        #
+        def javascript?
+          @gapi.language == "JAVASCRIPT"
+        end
+
+        ##
+        # Checks if the value of {#language} is `SQL`. The default is `true`.
+        #
+        # @return [Boolean] `true` when `SQL` or `nil`, `false` otherwise.
+        #
+        def sql?
+          return true if @gapi.language.nil?
+          @gapi.language == "SQL"
+        end
+
+        ##
+        # The input/output arguments of the routine.
+        #
+        # @return [Array<Argument>] An array of argument objects.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   puts "#{routine.routine_id} arguments:"
+        #   routine.arguments.each do |arguments|
+        #     puts "* #{arguments.name}"
+        #   end
+        #
+        def arguments
+          return nil if reference?
+          ensure_full_data!
+          # always return frozen arguments
+          Array(@gapi.arguments).map { |arg| Argument.from_gapi(arg).freeze }.freeze
+        end
+        # Optional.
+        # @return [Array<Google::Apis::BigqueryV2::Argument>]
+        # attr_accessor :arguments
+
+        ##
+        # Updates the input/output arguments of the routine.
+        #
+        # @param [Array<Argument>] new_arguments The new arguments.
+        #
+        # @!group Attributes
+        #
+        def arguments= new_arguments
+          @gapi.update! arguments: new_arguments.map(&:to_gapi)
+          update_gapi!
+        end
+
+        ###
+        # The type of a variable, e.g., a function argument.
+        #
+        # Examples:
+        # INT64: `type_kind="INT64"`
+        # ARRAY<STRING>: `type_kind="ARRAY", array_element_type="STRING"`
+        # STRUCT<x STRING, y ARRAY<DATE>>:
+        # `type_kind="STRUCT",
+        # struct_type=`fields=[
+        # `name="x", type=`type_kind="STRING"``,
+        # `name="y", type=`type_kind="ARRAY", array_element_type="DATE"``
+        # ]``
+        # @return [Google::Cloud::Bigquery::StandardSql::DataType]
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.return_type # ORIGINALVALUE
+        #
+        # @!group Attributes
+        #
+        def return_type
+          return nil if reference?
+          ensure_full_data!
+          return nil unless @gapi.return_type
+          StandardSql::DataType.from_gapi @gapi.return_type
+        end
+
+        ##
+        # DOCS
+        #
+        # @param [Google::Cloud::Bigquery::StandardSql::DataType] new_return_type DESC
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.return_type # ORIGINALVALUE
+        #   routine.return_type = UPDATEDVALUE
+        #
+        # @!group Attributes
+        #
+        def return_type= new_return_type
+          @gapi.return_type = new_return_type&.to_gapi
+          update_gapi!
+        end
+
+        ##
+        # If {#language} is `JAVASCRIPT`, a list of the Google Cloud Storage URIs of imported JavaScript libraries.
+        #
+        # @return [Array<String>, nil] A frozen array of Google Cloud Storage URIs, e.g.
+        #   `["gs://cloud-samples-data/bigquery/udfs/max-value.js"]`.
+        #
+        def imported_libraries
+          @gapi.imported_libraries.freeze
+        end
+
+        ##
+        # If {#language} is `JAVASCRIPT`, a list of the Google Cloud Storage URIs of imported JavaScript libraries.
+        #
+        # @param [Array<String>, nil] new_imported_libraries An array of Google Cloud Storage URIs, e.g.
+        #   `["gs://cloud-samples-data/bigquery/udfs/max-value.js"]`.
+        #
+        def imported_libraries= new_imported_libraries
+          @gapi.imported_libraries = new_imported_libraries
+          update_gapi!
+        end
+
+        ##
+        # The body of the routine.
+        #
+        # For functions {#scalar_function?}, this is the expression in the `AS` clause.
+        #
+        # When the routine is a SQL function {#sql?}, it is the substring inside (but excluding) the parentheses. For
+        # example, for the function created with the following statement:
+        # `CREATE FUNCTION JoinLines(x string, y string) as (concat(x, "\n", y))`
+        # The definition_body is `concat(x, "\n", y)` (\n is not replaced with
+        # linebreak). ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
+        #
+        # When the routine is a JavaScript function {#javascript?}, it is the evaluated string in the `AS` clause.
+        # For example, for the function created with the following statement:
+        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
+        # The definition_body is
+        # `"return \"\n\";\n"` ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
+        # Note that both \n are replaced with linebreaks.
+        #
+        # For functions {sql?}, this is the expression in the `AS` clause. It is the substring inside (but excluding)
+        # the parentheses. For example, for the function created with the following statement: `CREATE FUNCTION
+        # JoinLines(x string, y string) as (concat(x, "\n", y))` The definition_body is `"concat(x, \"\n\", y)""`.
+        #
+        # If language=JAVASCRIPT, it is the evaluated string in the AS clause.
+        # For example, for the function created with the following statement:
+        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
+        # The definition_body is
+        # `"return \"\n\";\n"`
+        #
+        # @return [String]
+        #
+        def body
+          return nil if reference?
+          ensure_full_data!
+          @gapi.definition_body
+        end
+
+        ##
+        # The body of the routine.
+        #
+        # For functions {#scalar_function?}, this is the expression in the `AS` clause.
+        #
+        # When the routine is a SQL function {#sql?}, it is the substring inside (but excluding) the
+        # parentheses. For example, for the function created with the following
+        # statement:
+        # `CREATE FUNCTION JoinLines(x string, y string) as (concat(x, "\n", y))`
+        # The definition_body is `concat(x, "\n", y)` (\n is not replaced with
+        # linebreak). ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
+        #
+        # When the routine is a JavaScript function {#javascript?}, it is the evaluated string in the `AS` clause.
+        # For example, for the function created with the following statement:
+        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
+        # The definition_body is
+        # `"return \"\n\";\n"` ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
+        # Note that both \n are replaced with linebreaks.
+        #
+        # For functions {sql?}, this is the expression in the `AS` clause. It is the substring inside (but excluding)
+        # the parentheses. For example, for the function created with the following statement: `CREATE FUNCTION
+        # JoinLines(x string, y string) as (concat(x, "\n", y))` The definition_body is `"concat(x, \"\n\", y)""`.
+        #
+        # If language=JAVASCRIPT, it is the evaluated string in the AS clause.
+        # For example, for the function created with the following statement:
+        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
+        # The definition_body is
+        # `"return \"\n\";\n"`
+        #
+        # @return [String]
+        #
+        def body= new_body
+          @gapi.definition_body = new_body
+          update_gapi!
         end
 
         ###
@@ -158,205 +432,6 @@ module Google
         #
         def description= new_description
           @gapi.description = new_description
-          update_gapi!
-        end
-
-        ###
-        # The type of a variable, e.g., a function argument.
-        #
-        # Examples:
-        # INT64: `type_kind="INT64"`
-        # ARRAY<STRING>: `type_kind="ARRAY", array_element_type="STRING"`
-        # STRUCT<x STRING, y ARRAY<DATE>>:
-        # `type_kind="STRUCT",
-        # struct_type=`fields=[
-        # `name="x", type=`type_kind="STRING"``,
-        # `name="y", type=`type_kind="ARRAY", array_element_type="DATE"``
-        # ]``
-        # Corresponds to the JSON property `returnType`
-        # @return [StandardSql::DataTypee]
-        #
-        # @example
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   routine = dataset.routine "my_routine"
-        #
-        #   routine.return_type # ORIGINALVALUE
-        #
-        # @!group Attributes
-        #
-        def return_type
-          return nil if reference?
-          ensure_full_data!
-          return nil unless @gapi.return_type
-          StandardSql::DataType.from_gapi @gapi.return_type
-        end
-
-        ##
-        # DOCS
-        #
-        # @param [TYPE] new_return_type DESC
-        #
-        # @example
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   routine = dataset.routine "my_routine"
-        #
-        #   routine.return_type # ORIGINALVALUE
-        #   routine.return_type = UPDATEDVALUE
-        #
-        # @!group Attributes
-        #
-        def return_type= new_return_type
-          @gapi.return_type = new_return_type
-          update_gapi!
-        end
-
-        ##
-        # The body of the routine.
-        #
-        # For functions {#scalar_function?}, this is the expression in the `AS` clause.
-        #
-        # When the routine is a SQL function {#sql?}, it is the substring inside (but excluding) the
-        # parentheses. For example, for the function created with the following
-        # statement:
-        # `CREATE FUNCTION JoinLines(x string, y string) as (concat(x, "\n", y))`
-        # The definition_body is `concat(x, "\n", y)` (\n is not replaced with
-        # linebreak). ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
-        #
-        # When the routine is a JavaScript function {#javascript?}, it is the evaluated string in the `AS` clause.
-        # For example, for the function created with the following statement:
-        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
-        # The definition_body is
-        # `"return \"\n\";\n"` ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
-        # Note that both \n are replaced with linebreaks.
-        # Corresponds to the JSON property `definitionBody`
-        #
-        # For functions {sql?}, this is the expression in the `AS` clause. It is the substring inside (but excluding)
-        # the parentheses. For example, for the function created with the following statement: `CREATE FUNCTION
-        # JoinLines(x string, y string) as (concat(x, "\n", y))` The definition_body is `"concat(x, \"\n\", y)""`.
-        #
-        # If language=JAVASCRIPT, it is the evaluated string in the AS clause.
-        # For example, for the function created with the following statement:
-        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
-        # The definition_body is
-        # `"return \"\n\";\n"`
-        #
-        # @return [String]
-        #
-        def body
-          return nil if reference?
-          ensure_full_data!
-          @gapi.definition_body
-        end
-
-        ##
-        # The body of the routine.
-        #
-        # For functions {#scalar_function?}, this is the expression in the `AS` clause.
-        #
-        # When the routine is a SQL function {#sql?}, it is the substring inside (but excluding) the
-        # parentheses. For example, for the function created with the following
-        # statement:
-        # `CREATE FUNCTION JoinLines(x string, y string) as (concat(x, "\n", y))`
-        # The definition_body is `concat(x, "\n", y)` (\n is not replaced with
-        # linebreak). ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
-        #
-        # When the routine is a JavaScript function {#javascript?}, it is the evaluated string in the `AS` clause.
-        # For example, for the function created with the following statement:
-        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
-        # The definition_body is
-        # `"return \"\n\";\n"` ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
-        # Note that both \n are replaced with linebreaks.
-        # Corresponds to the JSON property `definitionBody`
-        #
-        # For functions {sql?}, this is the expression in the `AS` clause. It is the substring inside (but excluding)
-        # the parentheses. For example, for the function created with the following statement: `CREATE FUNCTION
-        # JoinLines(x string, y string) as (concat(x, "\n", y))` The definition_body is `"concat(x, \"\n\", y)""`.
-        #
-        # If language=JAVASCRIPT, it is the evaluated string in the AS clause.
-        # For example, for the function created with the following statement:
-        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
-        # The definition_body is
-        # `"return \"\n\";\n"`
-        #
-        # @return [String]
-        #
-        def body= new_body
-          @gapi.definition_body = new_body
-          update_gapi!
-        end
-
-        # Optional. If language = "JAVASCRIPT", this field stores the path of the
-        # imported JAVASCRIPT libraries.
-        # Corresponds to the JSON property `importedLibraries`
-        # @return [Array<String>]
-        attr_accessor :imported_libraries
-
-        # Optional. Defaults to "SQL".
-        # Corresponds to the JSON property `language`
-        # @return [String]
-        # SQL  SQL language.
-        # JAVASCRIPT  JavaScript language.
-        def language
-          @gapi.language
-        end
-
-        # Required. Reference describing the ID of this routine.
-        # Corresponds to the JSON property `routineReference`
-        # @return [Google::Apis::BigqueryV2::RoutineReference]
-        attr_accessor :routine_reference
-
-        # Required. The type of routine.
-        # Corresponds to the JSON property `routineType`
-        # @return [String]
-        # SCALAR_FUNCTION  Non-builtin permanent scalar function.
-        # PROCEDURE  Stored procedure.
-        def type
-          @gapi.routine_type
-        end
-
-        ##
-        # The input/output arguments of the routine.
-        #
-        # @return [Array<Argument>] An array of argument objects.
-        #
-        # @example
-        #   require "google/cloud/bigquery"
-        #
-        #   bigquery = Google::Cloud::Bigquery.new
-        #   dataset = bigquery.dataset "my_dataset"
-        #   routine = dataset.routine "my_routine"
-        #
-        #   puts "#{routine.routine_id} arguments:"
-        #   routine.arguments.each do |arguments|
-        #     puts "* #{arguments.name}"
-        #   end
-        #
-        def arguments
-          return nil if reference?
-          ensure_full_data!
-          # always return frozen arguments
-          Array(@gapi.arguments).map { |arg| Argument.from_gapi(arg).freeze }.freeze
-        end
-        # Optional.
-        # Corresponds to the JSON property `arguments`
-        # @return [Array<Google::Apis::BigqueryV2::Argument>]
-        # attr_accessor :arguments
-
-        ##
-        # Updates the input/output arguments of the routine.
-        #
-        # @param [Array<Argument>] new_arguments The new arguments.
-        #
-        # @!group Attributes
-        #
-        def arguments= new_arguments
-          @gapi.update! arguments: new_arguments.map(&:to_gapi)
           update_gapi!
         end
 
@@ -553,14 +628,14 @@ module Google
           raise ArgumentError, "routine_id is required" unless routine_id
           raise ArgumentError, "service is required" unless service
 
-          new.tap do |m|
+          new.tap do |r|
             reference_gapi = Google::Apis::BigqueryV2::RoutineReference.new(
               project_id: project_id,
               dataset_id: dataset_id,
               routine_id: routine_id
             )
-            m.instance_variable_set :@reference, reference_gapi
-            m.instance_variable_set :@service, service
+            r.service = service
+            r.instance_variable_set :@reference, reference_gapi
           end
         end
 
@@ -605,32 +680,36 @@ module Google
           # Create an Updater object.
           def initialize gapi
             @gapi = gapi.dup
-            # @original_imported_libraries = Array(@gapi.imported_libraries).map(&:freeze).freeze
-            # @imported_libraries = Array(@gapi.imported_libraries)
-            # if @gapi.respond_to? :fields # TODO verify this attr
-            #   @original_arguments = Array(@gapi.fields).map { |arg| Argument.from_gapi(arg).freeze }.freeze
-            #   @arguments = Array(@gapi.arguments).map { |arg| Argument.from_gapi arg }
-            # end
+            # # @original_imported_libraries = Array(@gapi.imported_libraries).map(&:freeze).freeze
+            # # @imported_libraries = Array(@gapi.imported_libraries)
+            # # if @gapi.respond_to? :fields # TODO verify this attr
+            # #   @original_arguments = Array(@gapi.fields).map { |arg| Argument.from_gapi(arg).freeze }.freeze
+            # #   @arguments = Array(@gapi.arguments).map { |arg| Argument.from_gapi arg }
+            # # end
           end
 
-          def imported_libraries= new_imported_libraries
-            @imported_libraries = new_imported_libraries
-          end
-
-          def arguments= new_arguments
-            @gapi.arguments = new_arguments.map(&:to_gapi)
-          end
-
-          def body= new_body
-            @gapi.definition_body = new_body
+          def type= new_type
+            @gapi.routine_type = new_type
           end
 
           def language= new_language
             @gapi.language = new_language
           end
 
-          def type= new_type
-            @gapi.routine_type = new_type
+          def arguments= new_arguments
+            @gapi.arguments = new_arguments.map(&:to_gapi)
+          end
+
+          def return_type= new_return_type
+            @gapi.return_type = new_return_type
+          end
+
+          def imported_libraries= new_imported_libraries
+            @gapi.imported_libraries = new_imported_libraries
+          end
+
+          def body= new_body
+            @gapi.definition_body = new_body
           end
 
           def description= new_description
@@ -656,37 +735,6 @@ module Google
             # check_for_mutated_values!
             @gapi
           end
-        end
-      end
-
-      class RoutineReference
-        include Google::Apis::Core::Hashable
-
-        # [Required] The ID of the dataset containing this routine.
-        # Corresponds to the JSON property `datasetId`
-        # @return [String]
-        attr_accessor :dataset_id
-
-        # [Required] The ID of the project containing this routine.
-        # Corresponds to the JSON property `projectId`
-        # @return [String]
-        attr_accessor :project_id
-
-        # [Required] The ID of the routine. The ID must contain only letters (a-z, A-Z),
-        # numbers (0-9), or underscores (_). The maximum length is 256 characters.
-        # Corresponds to the JSON property `routineId`
-        # @return [String]
-        attr_accessor :routine_id
-
-        def initialize **args
-          update!(**args)
-        end
-
-        # Update properties of this object
-        def update! **args
-          @dataset_id = args[:dataset_id] if args.key? :dataset_id
-          @project_id = args[:project_id] if args.key? :project_id
-          @routine_id = args[:routine_id] if args.key? :routine_id
         end
       end
     end

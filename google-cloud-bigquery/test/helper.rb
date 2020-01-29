@@ -486,14 +486,15 @@ class MockBigquery < Minitest::Spec
         "datasetId" => dataset,
         "routineId" => id
       },
+      "routineType" => "SCALAR_FUNCTION",
       "creationTime" => time_millis,
       "lastModifiedTime" => time_millis,
-      "description" => description,
-      "returnType" => { "typeKind" => "INT64" },
-      "definitionBody" => "x * 3",
       "language" => "SQL",
-      "routineType" => "SCALAR_FUNCTION",
-      "arguments" => [{ "name" => "x", "dataType" => { "typeKind" => "INT64" }}]
+      "arguments" => [{ "name" => "x", "dataType" => { "typeKind" => "INT64" }}],
+      "returnType" => { "typeKind" => "INT64" },
+      "importedLibraries" => ["gs://cloud-samples-data/bigquery/udfs/max-value.js"],
+      "definitionBody" => "x * 3",
+      "description" => description
     }
   end
 
