@@ -26,7 +26,7 @@ export BILLING_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/billing/v1"
 
-client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+client = Google::Cloud::Billing::V1::CloudCatalog::Client.new
 ```
 
 ## Credential Lookup
@@ -62,7 +62,7 @@ environment variable, or the **Credentials JSON** itself can be stored for
 environments such as Docker containers where writing files is difficult or not
 encouraged.
 
-The environment variables that google-cloud-billing-v1 checks for credentials are configured on the service Credentials class (such as {Google::Cloud::Billing::V1::CloudBilling::Credentials}):
+The environment variables that google-cloud-billing-v1 checks for credentials are configured on the service Credentials class (such as {Google::Cloud::Billing::V1::CloudCatalog::Credentials}):
 
 1. `BILLING_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `BILLING_KEYFILE` - Path to JSON file, or JSON contents
@@ -75,7 +75,7 @@ require "google/cloud/billing/v1"
 
 ENV["BILLING_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+client = Google::Cloud::Billing::V1::CloudCatalog::Client.new
 ```
 
 ### Configuration
@@ -85,7 +85,7 @@ The **Credentials JSON** can be configured instead of placing them in environmen
 ```ruby
 require "google/cloud/billing/v1"
 
-client = Google::Cloud::Billing::V1::CloudBilling::Client.new do |config|
+client = Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -95,11 +95,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/billing/v1"
 
-Google::Cloud::Billing::V1::CloudBilling::Client.configure do |config|
+Google::Cloud::Billing::V1::CloudCatalog::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+client = Google::Cloud::Billing::V1::CloudCatalog::Client.new
 ```
 
 ### Cloud SDK

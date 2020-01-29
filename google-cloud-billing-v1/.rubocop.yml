@@ -9,33 +9,33 @@ AllCops:
 
 Metrics/AbcSize:
   Exclude:
-    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
     - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
 Metrics/ClassLength:
   Exclude:
-    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
     - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
 Metrics/CyclomaticComplexity:
   Exclude:
-    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
     - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
 Metrics/LineLength:
   Exclude:
-    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
     - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
 Metrics/MethodLength:
   Exclude:
-    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
     - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
 Metrics/PerceivedComplexity:
   Exclude:
-    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
     - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-billing-v1.rb"
 Style/CaseEquality:
   Exclude:
-    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
     - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+    - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
     - "lib/google/cloud/billing/v1.rb"
