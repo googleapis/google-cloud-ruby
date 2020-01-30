@@ -20,6 +20,10 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
   let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
   let(:routine_id) { "my-routine-id" }
+  let(:routine_hash) { random_routine_hash dataset_id, routine_id }
+  let(:routine_gapi) { Google::Apis::BigqueryV2::Routine.from_json routine_hash.to_json }
+  let(:routine_insert_hash) { random_routine_hash dataset_id, routine_id, etag: nil, creation_time: nil, last_modified_time: nil }
+  let(:routine_insert_gapi) { Google::Apis::BigqueryV2::Routine.from_json routine_insert_hash.to_json }
 
   it "creates a routine" do
     mock = Minitest::Mock.new
@@ -31,6 +35,32 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     routine = dataset.create_routine routine_id
+
+    mock.verify
+
+    routine.must_be_kind_of Google::Cloud::Bigquery::Routine
+    routine.routine_id.must_equal routine_id
+  end
+
+  it "creates a routine with attributes in a block" do
+    mock = Minitest::Mock.new
+    mock.expect :insert_routine, routine_gapi, [project, dataset_id, routine_insert_gapi]
+    dataset.service.mocked_service = mock
+
+    routine = dataset.create_routine routine_id do |r|
+      r.type = "SCALAR_FUNCTION"
+      r.language = "SQL"
+      r.arguments = [
+        Google::Cloud::Bigquery::Argument.new(
+          Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64"),
+          name: "x"
+        )
+      ]
+      r.return_type = Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64")
+      r.imported_libraries = ["gs://cloud-samples-data/bigquery/udfs/max-value.js"]
+      r.body = "x * 3"
+      r.description = "This is my routine"
+    end  
 
     mock.verify
 

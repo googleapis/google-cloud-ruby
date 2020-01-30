@@ -16,16 +16,17 @@ require "helper"
 require "json"
 require "uri"
 
-describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
+describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
   let(:dataset) { "my_dataset" }
   let(:routine_id) { "my_routine" }
   let(:etag) { "etag123456789" }
   let(:type) { "SCALAR_FUNCTION" }
+  let(:now) { ::Time.now }
   let(:language) { "SQL" }
   let(:arguments) do
     [
       Google::Cloud::Bigquery::Argument.new(
-        Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "INT64",
+        Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64"),
         name: "x"
       )
     ]
@@ -34,7 +35,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
   let(:imported_libraries) { ["gs://cloud-samples-data/bigquery/udfs/max-value.js"] }
   let(:body) { "x * 3" }
   let(:description) { "This is my routine" }
-  let(:routine_hash) { random_routine_hash dataset, routine_id, description: description }
+  let(:routine_hash) { random_routine_hash dataset, routine_id }
   let(:routine_gapi) { Google::Apis::BigqueryV2::Routine.from_json routine_hash.to_json }
   let(:routine) { Google::Cloud::Bigquery::Routine.from_gapi routine_gapi, bigquery.service }
 
@@ -42,8 +43,16 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
     routine.routine_id.must_equal routine_id
     routine.dataset_id.must_equal dataset
     routine.project_id.must_equal project
+    # routine_ref is private
+    routine.routine_ref.must_be_kind_of Google::Apis::BigqueryV2::RoutineReference
+    routine.routine_ref.routine_id.must_equal routine_id
+    routine.routine_ref.dataset_id.must_equal dataset
+    routine.routine_ref.project_id.must_equal project
+
     routine.etag.must_equal etag
     routine.type.must_equal "SCALAR_FUNCTION"
+    routine.created_at.must_be_close_to now, 1
+    routine.modified_at.must_be_close_to now, 1
     routine.language.must_equal "SQL"
     routine.arguments.must_be_kind_of Array
     routine.arguments.size.must_equal 1
@@ -55,16 +64,6 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
     routine.return_type.type_kind.must_equal "INT64"
     routine.body.must_equal "x * 3"
     routine.description.must_equal description
-  end
-
-  it "knows its creation and modification times" do
-    now = ::Time.now
-    routine_hash["creationTime"] = time_millis
-    routine_hash["lastModifiedTime"] = time_millis
-
-
-    routine.created_at.must_be_close_to now, 1
-    routine.modified_at.must_be_close_to now, 1
   end
 
   it "can test its existence" do

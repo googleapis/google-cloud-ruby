@@ -108,7 +108,6 @@ module Google
         #
         def etag
           return nil if reference?
-          ensure_full_data!
           @gapi.etag
         end
 
@@ -117,6 +116,7 @@ module Google
         # SCALAR_FUNCTION  Non-builtin permanent scalar function.
         # PROCEDURE  Stored procedure.
         def type
+          return nil if reference?
           @gapi.routine_type
         end
 
@@ -125,6 +125,7 @@ module Google
         # SCALAR_FUNCTION  Non-builtin permanent scalar function.
         # PROCEDURE  Stored procedure.
         def type= new_type
+          ensure_full_data!
           @gapi.routine_type = new_type
           update_gapi!
         end
@@ -155,6 +156,7 @@ module Google
         # @!group Attributes
         #
         def created_at
+          return nil if reference?
           Convert.millis_to_time @gapi.creation_time
         end
 
@@ -166,6 +168,7 @@ module Google
         # @!group Attributes
         #
         def modified_at
+          return nil if reference?
           Convert.millis_to_time @gapi.last_modified_time
         end
 
@@ -174,6 +177,7 @@ module Google
         # SQL  SQL language.
         # JAVASCRIPT  JavaScript language.
         def language
+          return nil if reference?
           @gapi.language
         end
 
@@ -182,6 +186,7 @@ module Google
         # SQL  SQL language.
         # JAVASCRIPT  JavaScript language.
         def language= new_language
+          ensure_full_data!
           @gapi.language = new_language
           update_gapi!
         end
@@ -240,6 +245,7 @@ module Google
         # @!group Attributes
         #
         def arguments= new_arguments
+          ensure_full_data!
           @gapi.update! arguments: new_arguments.map(&:to_gapi)
           update_gapi!
         end
@@ -288,12 +294,13 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   routine = dataset.routine "my_routine"
         #
-        #   routine.return_type # ORIGINALVALUE
-        #   routine.return_type = UPDATEDVALUE
+        #   routine.return_type.type_kind #=> "INT64"
+        #   routine.return_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRING"
         #
         # @!group Attributes
         #
         def return_type= new_return_type
+          ensure_full_data!
           @gapi.return_type = new_return_type&.to_gapi
           update_gapi!
         end
@@ -305,6 +312,8 @@ module Google
         #   `["gs://cloud-samples-data/bigquery/udfs/max-value.js"]`.
         #
         def imported_libraries
+          return nil if reference?
+          ensure_full_data!
           @gapi.imported_libraries.freeze
         end
 
@@ -315,6 +324,7 @@ module Google
         #   `["gs://cloud-samples-data/bigquery/udfs/max-value.js"]`.
         #
         def imported_libraries= new_imported_libraries
+          ensure_full_data!
           @gapi.imported_libraries = new_imported_libraries
           update_gapi!
         end
@@ -387,6 +397,7 @@ module Google
         # @return [String]
         #
         def body= new_body
+          ensure_full_data!
           @gapi.definition_body = new_body
           update_gapi!
         end
@@ -431,6 +442,7 @@ module Google
         # @!group Attributes
         #
         def description= new_description
+          ensure_full_data!
           @gapi.description = new_description
           update_gapi!
         end
@@ -582,9 +594,9 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   routine = dataset.routines.first
         #
-        #   routine.resource_partial? #=> true
+        #   routine.resource_partial? # true
         #   routine.description # Loads the full resource.
-        #   routine.resource_partial? #=> false
+        #   routine.resource_partial? # false
         #
         def resource_partial?
           resource? && !resource_full?
@@ -605,7 +617,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   routine = dataset.routine "my_routine"
         #
-        #   routine.resource_full? #=> true
+        #   routine.resource_full? # true
         #
         def resource_full?
           resource? && @gapi.description
@@ -701,7 +713,7 @@ module Google
           end
 
           def return_type= new_return_type
-            @gapi.return_type = new_return_type
+            @gapi.return_type = new_return_type&.to_gapi
           end
 
           def imported_libraries= new_imported_libraries

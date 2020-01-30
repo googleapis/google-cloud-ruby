@@ -90,7 +90,7 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_dataset_small_hash id = nil, name = nil
+  def random_dataset_partial_hash id = nil, name = nil
     id ||= "my_dataset"
     name ||= "My Dataset"
 
@@ -106,7 +106,7 @@ class MockBigquery < Minitest::Spec
   end
 
   def list_datasets_gapi count = 2, token = nil
-    datasets = count.times.map { random_dataset_small_hash }
+    datasets = count.times.map { random_dataset_partial_hash }
     hash = {"kind"=>"bigquery#datasetList", "datasets"=>datasets}
     hash["nextPageToken"] = token unless token.nil?
     Google::Apis::BigqueryV2::DatasetList.from_json hash.to_json
@@ -255,7 +255,7 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_table_small_hash dataset, id = nil, name = nil
+  def random_table_partial_hash dataset, id = nil, name = nil
     id ||= "my_table"
     name ||= "Table Name"
 
@@ -273,7 +273,7 @@ class MockBigquery < Minitest::Spec
   end
 
   def list_tables_gapi count = 2, token = nil, total = nil
-    tables = count.times.map { random_table_small_hash(dataset_id) }
+    tables = count.times.map { random_table_partial_hash(dataset_id) }
     hash = {"kind" => "bigquery#tableList", "tables" => tables,
             "totalItems" => (total || count)}
     hash["nextPageToken"] = token unless token.nil?
@@ -373,7 +373,7 @@ class MockBigquery < Minitest::Spec
     }
   end
 
-  def random_view_small_hash dataset, id = nil, name = nil
+  def random_view_partial_hash dataset, id = nil, name = nil
     id ||= "my_view"
     name ||= "View Name"
 
@@ -467,34 +467,46 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-
-  def random_routine_gapi dataset, id = nil, project_id: nil, description: nil
-    json = random_routine_hash(dataset, id, project_id: project_id, description: description).to_json
-    Google::Apis::BigqueryV2::Routine.from_json json
-  end
-
-  def random_routine_hash dataset, id = nil, project_id: nil, description: nil
+  def random_routine_hash dataset, id = nil, project_id: nil, etag: "etag123456789", description: "This is my routine", 
+                                             creation_time: time_millis, last_modified_time: time_millis
     id ||= "my_routine"
 
-    {
-      "kind" => "bigquery#routine",
-      "etag" => "etag123456789",
-      "id" => "#{project}:#{dataset}.#{id}",
-      "selfLink" => "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/routines/#{id}",
-      "routineReference" => {
-        "projectId" => (project_id || project),
-        "datasetId" => dataset,
-        "routineId" => id
+    h = {
+      kind: "bigquery#routine",
+      id: "#{project}:#{dataset}.#{id}",
+      selfLink: "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/routines/#{id}",
+      routineReference: {
+        projectId: (project_id || project),
+        datasetId: dataset,
+        routineId: id
       },
-      "routineType" => "SCALAR_FUNCTION",
-      "creationTime" => time_millis,
-      "lastModifiedTime" => time_millis,
-      "language" => "SQL",
-      "arguments" => [{ "name" => "x", "dataType" => { "typeKind" => "INT64" }}],
-      "returnType" => { "typeKind" => "INT64" },
-      "importedLibraries" => ["gs://cloud-samples-data/bigquery/udfs/max-value.js"],
-      "definitionBody" => "x * 3",
-      "description" => description
+      routineType: "SCALAR_FUNCTION",
+      language: "SQL",
+      arguments: [{ dataType: { typeKind: "INT64" }, name: "x", argumentKind: nil, mode: nil }],
+      returnType: { typeKind: "INT64" },
+      importedLibraries: ["gs://cloud-samples-data/bigquery/udfs/max-value.js"],
+      definitionBody: "x * 3",
+      description: description
+    }
+    h[:etag] = etag if etag
+    h[:creationTime] = creation_time if creation_time
+    h[:lastModifiedTime] = last_modified_time if last_modified_time
+    h
+  end
+
+  def random_routine_partial_hash dataset, id
+    # List representation: etag, routineReference, routineType, creationTime, lastModifiedTime and language.
+    { 
+      etag: "etag123456789",
+      routineReference: {
+        projectId: project,
+        datasetId: dataset,
+        routineId: id
+      },
+      routineType: "SCALAR_FUNCTION",
+      creationTime: time_millis,
+      lastModifiedTime: time_millis,
+      language: "SQL"
     }
   end
 
@@ -503,6 +515,11 @@ class MockBigquery < Minitest::Spec
     hash = { "kind"=>"bigquery#routineList", "routines" => routines }
     hash["nextPageToken"] = token unless token.nil?
     Google::Apis::BigqueryV2::ListRoutinesResponse.from_json hash.to_json
+  end
+
+  def random_routine_gapi dataset, id = nil, project_id: nil, description: nil
+    json = random_routine_hash(dataset, id, project_id: project_id, description: description).to_json
+    Google::Apis::BigqueryV2::Routine.from_json json
   end
 
   def random_job_hash id = "job_9876543210", state = "running", location: "US"
