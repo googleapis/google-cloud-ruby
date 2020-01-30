@@ -218,7 +218,7 @@ class MockPubsub < Minitest::Spec
     }
   end
 
-  def rec_message_hash message, id = rand(1000000), delivery_attempt: 1
+  def rec_message_hash message, id = rand(1000000), delivery_attempt: 10
     {
       ack_id: "ack-id-#{id}",
       delivery_attempt: delivery_attempt,

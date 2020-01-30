@@ -69,7 +69,14 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
   end
 
   it "knows its delivery_attempt counter" do
-    rec_message.delivery_attempt.must_equal 1
+    rec_message.delivery_attempt.must_equal 10
+  end
+
+  it "returns nil for delivery_attempt when delivery_attempt is 0" do
+    rec_message_data_non_dlq = rec_message_hash rec_message_msg, delivery_attempt: 0
+    rec_message_grpc_non_dlq = Google::Cloud::PubSub::V1::ReceivedMessage.new rec_message_data_non_dlq
+    rec_message_non_dlq = Google::Cloud::PubSub::ReceivedMessage.from_grpc rec_message_grpc_non_dlq, subscription
+    rec_message_non_dlq.delivery_attempt.must_be :nil?
   end
 
   it "can acknowledge" do

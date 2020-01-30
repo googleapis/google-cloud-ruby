@@ -101,6 +101,7 @@ module Google
         #   end
         #
         def delivery_attempt
+          return nil if @grpc.delivery_attempt && @grpc.delivery_attempt < 1
           @grpc.delivery_attempt
         end
 
