@@ -80,7 +80,7 @@ module Google
         #     size of the asset name list is 100 in one request.
         # @!attribute [rw] content_type
         #   @return [Google::Cloud::Asset::V1beta1::ContentType]
-        #     Required. The content type.
+        #     Optional. The content type.
         # @!attribute [rw] read_time_window
         #   @return [Google::Cloud::Asset::V1beta1::TimeWindow]
         #     Optional. The time window for the asset history. Both start_time and
@@ -111,6 +111,16 @@ module Google
         #     Editing Object
         #     Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
         #     for more information.
+        # @!attribute [rw] uri_prefix
+        #   @return [String]
+        #     The uri prefix of all generated Cloud Storage objects. For example:
+        #     "gs://bucket_name/object_name_prefix". Each object uri is in format:
+        #     "gs://bucket_name/object_name_prefix/<asset type>/<shard number> and only
+        #     contains assets for that type. <shard number> starts from 0. For example:
+        #     "gs://bucket_name/object_name_prefix/google.compute.disk/0" is the first
+        #     shard of output objects containing all google.compute.disk assets.
+        #     An INVALID_ARGUMENT error will be returned if file with the same name
+        #     "gs://bucket_name/object_name_prefix" already exists.
         class GcsDestination; end
 
         # Asset content type.
