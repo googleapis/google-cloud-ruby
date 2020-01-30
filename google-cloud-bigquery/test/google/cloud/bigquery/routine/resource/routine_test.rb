@@ -55,13 +55,17 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     routine.modified_at.must_be_close_to now, 1
     routine.language.must_equal "SQL"
     routine.arguments.must_be_kind_of Array
+    routine.arguments.must_be :frozen?
     routine.arguments.size.must_equal 1
     routine.arguments[0].must_be_kind_of Google::Cloud::Bigquery::Argument
     routine.arguments[0].name.must_equal "x"
     routine.arguments[0].data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
     routine.arguments[0].data_type.type_kind.must_equal "INT64"
     routine.return_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    routine.return_type.must_be :frozen?
     routine.return_type.type_kind.must_equal "INT64"
+    routine.imported_libraries.must_equal ["gs://cloud-samples-data/bigquery/udfs/max-value.js"]
+    routine.imported_libraries.must_be :frozen?
     routine.body.must_equal "x * 3"
     routine.description.must_equal description
   end

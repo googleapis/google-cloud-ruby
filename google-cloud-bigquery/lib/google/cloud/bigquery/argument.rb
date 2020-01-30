@@ -18,6 +18,7 @@ require "google/cloud/bigquery/standard_sql"
 module Google
   module Cloud
     module Bigquery
+      ##
       # Input/output argument of a function or a stored procedure.
       class Argument
         # The type of a variable, e.g., a function argument.
@@ -32,12 +33,12 @@ module Google
         # ]``
         # Corresponds to the JSON property `dataType`
         # @return [Google::Apis::BigqueryV2::StandardSqlDataType]
-        attr_accessor :data_type
+        attr_reader :data_type
 
         # Optional. Defaults to FIXED_TYPE.
         # Corresponds to the JSON property `argumentKind`
         # @return [String]
-        attr_accessor :kind
+        attr_reader :kind
         # FIXED_TYPE  The argument is a variable with fully specified type, which can be a struct or an array, but not
         # a table.
         # ANY_TYPE  The argument is any type, including struct or array, but not a table. To be added: FIXED_TABLE,
@@ -47,7 +48,7 @@ module Google
         # Can be set for procedures only.
         # Corresponds to the JSON property `mode`
         # @return [String]
-        attr_accessor :mode
+        attr_reader :mode
         # IN  The argument is input-only.
         # OUT  The argument is output-only.
         # INOUT  The argument is both an input and an output.
@@ -56,19 +57,25 @@ module Google
         # argument.
         # Corresponds to the JSON property `name`
         # @return [String]
-        attr_accessor :name
+        attr_reader :name
 
+        ##
+        #
+        #
         def initialize data_type, kind: nil, mode: nil, name: nil
-          @data_type = if data_type.is_a? StandardSql::DataType
-                         data_type
-                       elsif data_type.respond_to? :to_s
-                         StandardSql::DataType.new type_kind: data_type.to_s.upcase
-                       end
+          data_type = if data_type.is_a? StandardSql::DataType
+                        data_type
+                      elsif data_type.respond_to? :to_s
+                        StandardSql::DataType.new type_kind: data_type.to_s.upcase
+                      end
+          @data_type = data_type.freeze
           @kind = kind
           @mode = mode
           @name = name
         end
 
+        ##
+        # @private
         def to_gapi
           Google::Apis::BigqueryV2::Argument.new(
             name:          @name,

@@ -511,7 +511,7 @@ class MockBigquery < Minitest::Spec
   end
 
   def list_routines_gapi dataset, count = 2, token = nil
-    routines = count.times.map { |i| random_routine_hash dataset, "my_routine_#{i}" }
+    routines = count.times.map { |i| random_routine_partial_hash dataset, "my_routine_#{i}" }
     hash = { "kind"=>"bigquery#routineList", "routines" => routines }
     hash["nextPageToken"] = token unless token.nil?
     Google::Apis::BigqueryV2::ListRoutinesResponse.from_json hash.to_json

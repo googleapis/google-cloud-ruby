@@ -279,7 +279,7 @@ module Google
           return nil if reference?
           ensure_full_data!
           return nil unless @gapi.return_type
-          StandardSql::DataType.from_gapi @gapi.return_type
+          StandardSql::DataType.from_gapi(@gapi.return_type).freeze
         end
 
         ##
@@ -680,24 +680,13 @@ module Google
           @gapi = service.update_routine dataset_id, routine_id, @gapi
         end
 
-        # def add_argument _name, _type, description: nil, mode: :nullable
-        #   frozen_check!
-        #   # ...
-        # end
-
         ##
-        # Yielded to a block to accumulate changes for an update request.
+        # Yielded to a block to accumulate changes for a create request. See Dataset#create_routine.
         class Updater < Routine
           ##
           # Create an Updater object.
           def initialize gapi
             @gapi = gapi.dup
-            # # @original_imported_libraries = Array(@gapi.imported_libraries).map(&:freeze).freeze
-            # # @imported_libraries = Array(@gapi.imported_libraries)
-            # # if @gapi.respond_to? :fields # TODO verify this attr
-            # #   @original_arguments = Array(@gapi.fields).map { |arg| Argument.from_gapi(arg).freeze }.freeze
-            # #   @arguments = Array(@gapi.arguments).map { |arg| Argument.from_gapi arg }
-            # # end
           end
 
           def type= new_type
@@ -728,23 +717,7 @@ module Google
             @gapi.description = new_description
           end
 
-          # ##
-          # # Make sure any imported_libraries or arguments changes are saved.
-          # def check_for_mutated_values!
-          #   if @gapi.respond_to? :fields # TODO verify this attr
-          #     if @original_imported_libraries != @imported_libraries
-          #       @gapi.update! imported_libraries: @imported_libraries
-          #       patch_gapi! :imported_libraries
-          #     end
-          #     if @original_arguments.map(&:to_gapi).map(&:to_h) != @arguments.map(&:to_gapi).map(&:to_h)
-          #       @gapi.update! arguments: @arguments.map(&:to_gapi)
-          #       patch_gapi! :arguments
-          #     end
-          #   end
-          # end
-
           def to_gapi
-            # check_for_mutated_values!
             @gapi
           end
         end
