@@ -326,13 +326,15 @@ module Google
           # non-delete or deleted status.
           # For IAM_POLICY content, this API outputs history when the asset and its
           # attached IAM POLICY both exist. This can create gaps in the output history.
+          # If a specified asset does not exist, this API returns an INVALID_ARGUMENT
+          # error.
           #
           # @param parent [String]
           #   Required. The relative name of the root asset. It can only be an
           #   organization number (such as "organizations/123"), a project ID (such as
           #   "projects/my-project-id")", or a project number (such as "projects/12345").
           # @param content_type [Google::Cloud::Asset::V1beta1::ContentType]
-          #   Required. The content type.
+          #   Optional. The content type.
           # @param read_time_window [Google::Cloud::Asset::V1beta1::TimeWindow | Hash]
           #   Optional. The time window for the asset history. Both start_time and
           #   end_time are optional and if set, it must be after 2018-10-02 UTC. If
