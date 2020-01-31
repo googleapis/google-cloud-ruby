@@ -5,11 +5,13 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/api/monitored_resource_pb'
+require 'google/api/resource_pb'
 require 'google/monitoring/v3/service_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.monitoring.v3.CreateServiceRequest" do
     optional :parent, :string, 1

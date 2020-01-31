@@ -19,7 +19,7 @@ module Google
       # The `ListGroup` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The project whose groups are to be listed. The format is
+      #     Required. The project whose groups are to be listed. The format is
       #     `"projects/{project_id_or_number}"`.
       # @!attribute [rw] children_of_group
       #   @return [String]
@@ -63,18 +63,18 @@ module Google
       # The `GetGroup` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The group to retrieve. The format is
+      #     Required. The group to retrieve. The format is
       #     `"projects/{project_id_or_number}/groups/{group_id}"`.
       class GetGroupRequest; end
 
       # The `CreateGroup` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The project in which to create the group. The format is
+      #     Required. The project in which to create the group. The format is
       #     `"projects/{project_id_or_number}"`.
       # @!attribute [rw] group
       #   @return [Google::Monitoring::V3::Group]
-      #     A group definition. It is an error to define the `name` field because
+      #     Required. A group definition. It is an error to define the `name` field because
       #     the system assigns the name.
       # @!attribute [rw] validate_only
       #   @return [true, false]
@@ -84,7 +84,7 @@ module Google
       # The `UpdateGroup` request.
       # @!attribute [rw] group
       #   @return [Google::Monitoring::V3::Group]
-      #     The new definition of the group.  All fields of the existing group,
+      #     Required. The new definition of the group.  All fields of the existing group,
       #     excepting `name`, are replaced with the corresponding fields of this group.
       # @!attribute [rw] validate_only
       #   @return [true, false]
@@ -95,7 +95,7 @@ module Google
       # single group without any descendants.
       # @!attribute [rw] name
       #   @return [String]
-      #     The group to delete. The format is
+      #     Required. The group to delete. The format is
       #     `"projects/{project_id_or_number}/groups/{group_id}"`.
       # @!attribute [rw] recursive
       #   @return [true, false]
@@ -107,7 +107,7 @@ module Google
       # The `ListGroupMembers` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The group whose members are listed. The format is
+      #     Required. The group whose members are listed. The format is
       #     `"projects/{project_id_or_number}/groups/{group_id}"`.
       # @!attribute [rw] page_size
       #   @return [Integer]

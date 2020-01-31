@@ -282,7 +282,7 @@ module Google
           # Lists the existing groups.
           #
           # @param name [String]
-          #   The project whose groups are to be listed. The format is
+          #   Required. The project whose groups are to be listed. The format is
           #   `"projects/{project_id_or_number}"`.
           # @param children_of_group [String]
           #   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
@@ -358,7 +358,7 @@ module Google
           # Gets a single group.
           #
           # @param name [String]
-          #   The group to retrieve. The format is
+          #   Required. The group to retrieve. The format is
           #   `"projects/{project_id_or_number}/groups/{group_id}"`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -389,10 +389,10 @@ module Google
           # Creates a new group.
           #
           # @param name [String]
-          #   The project in which to create the group. The format is
+          #   Required. The project in which to create the group. The format is
           #   `"projects/{project_id_or_number}"`.
           # @param group [Google::Monitoring::V3::Group | Hash]
-          #   A group definition. It is an error to define the `name` field because
+          #   Required. A group definition. It is an error to define the `name` field because
           #   the system assigns the name.
           #   A hash of the same form as `Google::Monitoring::V3::Group`
           #   can also be provided.
@@ -435,7 +435,7 @@ module Google
           # You can change any group attributes except `name`.
           #
           # @param group [Google::Monitoring::V3::Group | Hash]
-          #   The new definition of the group.  All fields of the existing group,
+          #   Required. The new definition of the group.  All fields of the existing group,
           #   excepting `name`, are replaced with the corresponding fields of this group.
           #   A hash of the same form as `Google::Monitoring::V3::Group`
           #   can also be provided.
@@ -474,7 +474,7 @@ module Google
           # Deletes an existing group.
           #
           # @param name [String]
-          #   The group to delete. The format is
+          #   Required. The group to delete. The format is
           #   `"projects/{project_id_or_number}/groups/{group_id}"`.
           # @param recursive [true, false]
           #   If this field is true, then the request means to delete a group with all
@@ -511,7 +511,7 @@ module Google
           # Lists the monitored resources that are members of a group.
           #
           # @param name [String]
-          #   The group whose members are listed. The format is
+          #   Required. The group whose members are listed. The format is
           #   `"projects/{project_id_or_number}/groups/{group_id}"`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API

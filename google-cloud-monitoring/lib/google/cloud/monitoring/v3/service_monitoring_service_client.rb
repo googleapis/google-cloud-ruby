@@ -325,10 +325,10 @@ module Google
           # Create a `Service`.
           #
           # @param parent [String]
-          #   Resource name of the parent workspace.
+          #   Required. Resource name of the parent workspace.
           #   Of the form `projects/{project_id}`.
           # @param service [Google::Monitoring::V3::Service | Hash]
-          #   The `Service` to create.
+          #   Required. The `Service` to create.
           #   A hash of the same form as `Google::Monitoring::V3::Service`
           #   can also be provided.
           # @param service_id [String]
@@ -370,7 +370,7 @@ module Google
           # Get the named `Service`.
           #
           # @param name [String]
-          #   Resource name of the `Service`.
+          #   Required. Resource name of the `Service`.
           #   Of the form `projects/{project_id}/services/{service_id}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -401,7 +401,7 @@ module Google
           # List `Service`s for this workspace.
           #
           # @param parent [String]
-          #   Resource name of the parent `Workspace`.
+          #   Required. Resource name of the parent `Workspace`.
           #   Of the form `projects/{project_id}`.
           # @param filter [String]
           #   A filter specifying what `Service`s to return. The filter currently
@@ -474,7 +474,7 @@ module Google
           # Update this `Service`.
           #
           # @param service [Google::Monitoring::V3::Service | Hash]
-          #   The `Service` to draw updates from.
+          #   Required. The `Service` to draw updates from.
           #   The given `name` specifies the resource to update.
           #   A hash of the same form as `Google::Monitoring::V3::Service`
           #   can also be provided.
@@ -515,8 +515,8 @@ module Google
           # Soft delete this `Service`.
           #
           # @param name [String]
-          #   Resource name of the `Service` to delete.
-          #   Of the form `projects/{project_id}/service/{service_id}`.
+          #   Required. Resource name of the `Service` to delete.
+          #   Of the form `projects/{project_id}/services/{service_id}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -546,10 +546,10 @@ module Google
           # Create a `ServiceLevelObjective` for the given `Service`.
           #
           # @param parent [String]
-          #   Resource name of the parent `Service`.
+          #   Required. Resource name of the parent `Service`.
           #   Of the form `projects/{project_id}/services/{service_id}`.
           # @param service_level_objective [Google::Monitoring::V3::ServiceLevelObjective | Hash]
-          #   The `ServiceLevelObjective` to create.
+          #   Required. The `ServiceLevelObjective` to create.
           #   The provided `name` will be respected if no `ServiceLevelObjective` exists
           #   with this name.
           #   A hash of the same form as `Google::Monitoring::V3::ServiceLevelObjective`
@@ -594,7 +594,7 @@ module Google
           # Get a `ServiceLevelObjective` by name.
           #
           # @param name [String]
-          #   Resource name of the `ServiceLevelObjective` to get.
+          #   Required. Resource name of the `ServiceLevelObjective` to get.
           #   Of the form
           #   `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
           # @param view [Google::Monitoring::V3::ServiceLevelObjective::View]
@@ -633,7 +633,7 @@ module Google
           # List the `ServiceLevelObjective`s for the given `Service`.
           #
           # @param parent [String]
-          #   Resource name of the parent `Service`.
+          #   Required. Resource name of the parent `Service`.
           #   Of the form `projects/{project_id}/services/{service_id}`.
           # @param filter [String]
           #   A filter specifying what `ServiceLevelObjective`s to return.
@@ -699,7 +699,7 @@ module Google
           # Update the given `ServiceLevelObjective`.
           #
           # @param service_level_objective [Google::Monitoring::V3::ServiceLevelObjective | Hash]
-          #   The `ServiceLevelObjective` to draw updates from.
+          #   Required. The `ServiceLevelObjective` to draw updates from.
           #   The given `name` specifies the resource to update.
           #   A hash of the same form as `Google::Monitoring::V3::ServiceLevelObjective`
           #   can also be provided.
@@ -740,7 +740,7 @@ module Google
           # Delete the given `ServiceLevelObjective`.
           #
           # @param name [String]
-          #   Resource name of the `ServiceLevelObjective` to delete.
+          #   Required. Resource name of the `ServiceLevelObjective` to delete.
           #   Of the form
           #   `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
           # @param options [Google::Gax::CallOptions]

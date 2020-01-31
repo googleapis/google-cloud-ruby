@@ -19,7 +19,7 @@ module Google
       # The protocol for the `ListUptimeCheckConfigs` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     The project whose Uptime check configurations are listed. The format
+      #     Required. The project whose Uptime check configurations are listed. The format
       #       is `projects/[PROJECT_ID]`.
       # @!attribute [rw] page_size
       #   @return [Integer]
@@ -54,18 +54,18 @@ module Google
       # The protocol for the `GetUptimeCheckConfig` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The Uptime check configuration to retrieve. The format
+      #     Required. The Uptime check configuration to retrieve. The format
       #       is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
       class GetUptimeCheckConfigRequest; end
 
       # The protocol for the `CreateUptimeCheckConfig` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     The project in which to create the Uptime check. The format
+      #     Required. The project in which to create the Uptime check. The format
       #       is `projects/[PROJECT_ID]`.
       # @!attribute [rw] uptime_check_config
       #   @return [Google::Monitoring::V3::UptimeCheckConfig]
-      #     The new Uptime check configuration.
+      #     Required. The new Uptime check configuration.
       class CreateUptimeCheckConfigRequest; end
 
       # The protocol for the `UpdateUptimeCheckConfig` request.
@@ -93,7 +93,7 @@ module Google
       # The protocol for the `DeleteUptimeCheckConfig` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The Uptime check configuration to delete. The format
+      #     Required. The Uptime check configuration to delete. The format
       #       is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
       class DeleteUptimeCheckConfigRequest; end
 

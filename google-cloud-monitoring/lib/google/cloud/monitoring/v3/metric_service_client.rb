@@ -309,7 +309,7 @@ module Google
           # Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
           #
           # @param name [String]
-          #   The project on which to execute the request. The format is
+          #   Required. The project on which to execute the request. The format is
           #   `"projects/{project_id_or_number}"`.
           # @param filter [String]
           #   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
@@ -374,7 +374,7 @@ module Google
           # Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
           #
           # @param name [String]
-          #   The monitored resource descriptor to get.  The format is
+          #   Required. The monitored resource descriptor to get.  The format is
           #   `"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"`.
           #   The `{resource_type}` is a predefined type, such as
           #   `cloudsql_database`.
@@ -407,7 +407,7 @@ module Google
           # Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
           #
           # @param name [String]
-          #   The project on which to execute the request. The format is
+          #   Required. The project on which to execute the request. The format is
           #   `"projects/{project_id_or_number}"`.
           # @param filter [String]
           #   If this field is empty, all custom and
@@ -473,7 +473,7 @@ module Google
           # Gets a single metric descriptor. This method does not require a Stackdriver account.
           #
           # @param name [String]
-          #   The metric descriptor on which to execute the request. The format is
+          #   Required. The metric descriptor on which to execute the request. The format is
           #   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
           #   An example value of `{metric_id}` is
           #   `"compute.googleapis.com/instance/disk/read_bytes_count"`.
@@ -508,10 +508,10 @@ module Google
           # [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
           #
           # @param name [String]
-          #   The project on which to execute the request. The format is
+          #   Required. The project on which to execute the request. The format is
           #   `"projects/{project_id_or_number}"`.
           # @param metric_descriptor [Google::Api::MetricDescriptor | Hash]
-          #   The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
+          #   Required. The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
           #   descriptor.
           #   A hash of the same form as `Google::Api::MetricDescriptor`
           #   can also be provided.
@@ -550,7 +550,7 @@ module Google
           # [custom metrics](https://cloud.google.com/monitoring/custom-metrics) can be deleted.
           #
           # @param name [String]
-          #   The metric descriptor on which to execute the request. The format is
+          #   Required. The metric descriptor on which to execute the request. The format is
           #   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
           #   An example of `{metric_id}` is:
           #   `"custom.googleapis.com/my_test_metric"`.
@@ -583,10 +583,10 @@ module Google
           # Lists time series that match a filter. This method does not require a Stackdriver account.
           #
           # @param name [String]
-          #   The project on which to execute the request. The format is
+          #   Required. The project on which to execute the request. The format is
           #   "projects/\\{project_id_or_number}".
           # @param filter [String]
-          #   A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
+          #   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
           #   series should be returned.  The filter must specify a single metric type,
           #   and can additionally specify metric labels and other information. For
           #   example:
@@ -594,13 +594,13 @@ module Google
           #       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
           #           metric.labels.instance_name = "my-instance-name"
           # @param interval [Google::Monitoring::V3::TimeInterval | Hash]
-          #   The time interval for which results should be returned. Only time series
+          #   Required. The time interval for which results should be returned. Only time series
           #   that contain data points in the specified interval are included
           #   in the response.
           #   A hash of the same form as `Google::Monitoring::V3::TimeInterval`
           #   can also be provided.
           # @param view [Google::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView]
-          #   Specifies which information is returned about the time series.
+          #   Required. Specifies which information is returned about the time series.
           # @param aggregation [Google::Monitoring::V3::Aggregation | Hash]
           #   Specifies the alignment of data points in individual time series as
           #   well as how to combine the retrieved time series across specified labels.
@@ -687,10 +687,10 @@ module Google
           # included in the error response.
           #
           # @param name [String]
-          #   The project on which to execute the request. The format is
+          #   Required. The project on which to execute the request. The format is
           #   `"projects/{project_id_or_number}"`.
           # @param time_series [Array<Google::Monitoring::V3::TimeSeries | Hash>]
-          #   The new data to be added to a list of time series.
+          #   Required. The new data to be added to a list of time series.
           #   Adds at most one data point to each of several time series.  The new data
           #   point must be more recent than any other point in its time series.  Each
           #   `TimeSeries` value must fully specify a unique time series by supplying

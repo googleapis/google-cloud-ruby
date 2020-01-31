@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/resource_pb'
 require 'google/monitoring/v3/common_pb'
 require 'google/monitoring/v3/mutation_record_pb'
 require 'google/protobuf/duration_pb'
