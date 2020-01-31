@@ -276,7 +276,7 @@ module Google
           # (leaving out any invalid configurations).
           #
           # @param parent [String]
-          #   The project whose Uptime check configurations are listed. The format
+          #   Required. The project whose Uptime check configurations are listed. The format
           #     is `projects/[PROJECT_ID]`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -331,7 +331,7 @@ module Google
           # Gets a single Uptime check configuration.
           #
           # @param name [String]
-          #   The Uptime check configuration to retrieve. The format
+          #   Required. The Uptime check configuration to retrieve. The format
           #     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -362,10 +362,10 @@ module Google
           # Creates a new Uptime check configuration.
           #
           # @param parent [String]
-          #   The project in which to create the Uptime check. The format
+          #   Required. The project in which to create the Uptime check. The format
           #     is `projects/[PROJECT_ID]`.
           # @param uptime_check_config [Google::Monitoring::V3::UptimeCheckConfig | Hash]
-          #   The new Uptime check configuration.
+          #   Required. The new Uptime check configuration.
           #   A hash of the same form as `Google::Monitoring::V3::UptimeCheckConfig`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -460,7 +460,7 @@ module Google
           # other dependent configs that would be rendered invalid by the deletion.
           #
           # @param name [String]
-          #   The Uptime check configuration to delete. The format
+          #   Required. The Uptime check configuration to delete. The format
           #     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,

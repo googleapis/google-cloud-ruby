@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/monitored_resource_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/calendar_period_pb'

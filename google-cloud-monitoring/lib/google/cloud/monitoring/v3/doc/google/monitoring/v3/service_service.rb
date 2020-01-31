@@ -19,7 +19,7 @@ module Google
       # The `CreateService` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Resource name of the parent workspace.
+      #     Required. Resource name of the parent workspace.
       #     Of the form `projects/{project_id}`.
       # @!attribute [rw] service_id
       #   @return [String]
@@ -27,20 +27,20 @@ module Google
       #     generated instead. Must match the pattern [a-z0-9\-]+
       # @!attribute [rw] service
       #   @return [Google::Monitoring::V3::Service]
-      #     The `Service` to create.
+      #     Required. The `Service` to create.
       class CreateServiceRequest; end
 
       # The `GetService` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Resource name of the `Service`.
+      #     Required. Resource name of the `Service`.
       #     Of the form `projects/{project_id}/services/{service_id}`.
       class GetServiceRequest; end
 
       # The `ListServices` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Resource name of the parent `Workspace`.
+      #     Required. Resource name of the parent `Workspace`.
       #     Of the form `projects/{project_id}`.
       # @!attribute [rw] filter
       #   @return [String]
@@ -84,7 +84,7 @@ module Google
       # The `UpdateService` request.
       # @!attribute [rw] service
       #   @return [Google::Monitoring::V3::Service]
-      #     The `Service` to draw updates from.
+      #     Required. The `Service` to draw updates from.
       #     The given `name` specifies the resource to update.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
@@ -94,14 +94,14 @@ module Google
       # The `DeleteService` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Resource name of the `Service` to delete.
-      #     Of the form `projects/{project_id}/service/{service_id}`.
+      #     Required. Resource name of the `Service` to delete.
+      #     Of the form `projects/{project_id}/services/{service_id}`.
       class DeleteServiceRequest; end
 
       # The `CreateServiceLevelObjective` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Resource name of the parent `Service`.
+      #     Required. Resource name of the parent `Service`.
       #     Of the form `projects/{project_id}/services/{service_id}`.
       # @!attribute [rw] service_level_objective_id
       #   @return [String]
@@ -110,7 +110,7 @@ module Google
       #     match the pattern [a-z0-9\-]+
       # @!attribute [rw] service_level_objective
       #   @return [Google::Monitoring::V3::ServiceLevelObjective]
-      #     The `ServiceLevelObjective` to create.
+      #     Required. The `ServiceLevelObjective` to create.
       #     The provided `name` will be respected if no `ServiceLevelObjective` exists
       #     with this name.
       class CreateServiceLevelObjectiveRequest; end
@@ -118,7 +118,7 @@ module Google
       # The `GetServiceLevelObjective` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Resource name of the `ServiceLevelObjective` to get.
+      #     Required. Resource name of the `ServiceLevelObjective` to get.
       #     Of the form
       #     `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
       # @!attribute [rw] view
@@ -132,7 +132,7 @@ module Google
       # The `ListServiceLevelObjectives` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Resource name of the parent `Service`.
+      #     Required. Resource name of the parent `Service`.
       #     Of the form `projects/{project_id}/services/{service_id}`.
       # @!attribute [rw] filter
       #   @return [String]
@@ -168,7 +168,7 @@ module Google
       # The `UpdateServiceLevelObjective` request.
       # @!attribute [rw] service_level_objective
       #   @return [Google::Monitoring::V3::ServiceLevelObjective]
-      #     The `ServiceLevelObjective` to draw updates from.
+      #     Required. The `ServiceLevelObjective` to draw updates from.
       #     The given `name` specifies the resource to update.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
@@ -178,7 +178,7 @@ module Google
       # The `DeleteServiceLevelObjective` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Resource name of the `ServiceLevelObjective` to delete.
+      #     Required. Resource name of the `ServiceLevelObjective` to delete.
       #     Of the form
       #     `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
       class DeleteServiceLevelObjectiveRequest; end

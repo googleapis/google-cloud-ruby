@@ -19,7 +19,7 @@ module Google
       # The protocol for the `CreateAlertPolicy` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The project in which to create the alerting policy. The format is
+      #     Required. The project in which to create the alerting policy. The format is
       #     `projects/[PROJECT_ID]`.
       #
       #     Note that this field names the parent container in which the alerting
@@ -29,7 +29,7 @@ module Google
       #     `/alertPolicies/[POLICY_ID]`, identifying the policy in the container.
       # @!attribute [rw] alert_policy
       #   @return [Google::Monitoring::V3::AlertPolicy]
-      #     The requested alerting policy. You should omit the `name` field in this
+      #     Required. The requested alerting policy. You should omit the `name` field in this
       #     policy. The name will be returned in the new policy, including
       #     a new [ALERT_POLICY_ID] value.
       class CreateAlertPolicyRequest; end
@@ -37,7 +37,7 @@ module Google
       # The protocol for the `GetAlertPolicy` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The alerting policy to retrieve. The format is
+      #     Required. The alerting policy to retrieve. The format is
       #
       #         projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
       class GetAlertPolicyRequest; end
@@ -45,7 +45,7 @@ module Google
       # The protocol for the `ListAlertPolicies` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The project whose alert policies are to be listed. The format is
+      #     Required. The project whose alert policies are to be listed. The format is
       #
       #         projects/[PROJECT_ID]
       #
@@ -125,7 +125,7 @@ module Google
       # The protocol for the `DeleteAlertPolicy` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     The alerting policy to delete. The format is:
+      #     Required. The alerting policy to delete. The format is:
       #
       #         projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
       #

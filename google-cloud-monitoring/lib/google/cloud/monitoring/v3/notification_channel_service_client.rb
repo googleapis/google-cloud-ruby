@@ -322,7 +322,7 @@ module Google
           # makes it possible for new channel types to be dynamically added.
           #
           # @param name [String]
-          #   The REST resource name of the parent from which to retrieve
+          #   Required. The REST resource name of the parent from which to retrieve
           #   the notification channel descriptors. The expected syntax is:
           #
           #       projects/[PROJECT_ID]
@@ -385,7 +385,7 @@ module Google
           # are expected / permitted for a notification channel of the given type.
           #
           # @param name [String]
-          #   The channel type for which to execute the request. The format is
+          #   Required. The channel type for which to execute the request. The format is
           #   `projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -416,7 +416,7 @@ module Google
           # Lists the notification channels that have been created for the project.
           #
           # @param name [String]
-          #   The project on which to execute the request. The format is
+          #   Required. The project on which to execute the request. The format is
           #   `projects/[PROJECT_ID]`. That is, this names the container
           #   in which to look for the notification channels; it does not name a
           #   specific channel. To query a specific channel by REST resource name, use
@@ -497,7 +497,7 @@ module Google
           # that was supplied in the call to the create method.
           #
           # @param name [String]
-          #   The channel for which to execute the request. The format is
+          #   Required. The channel for which to execute the request. The format is
           #   `projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -529,7 +529,7 @@ module Google
           # endpoint such as an email address, SMS number, or PagerDuty service.
           #
           # @param name [String]
-          #   The project on which to execute the request. The format is:
+          #   Required. The project on which to execute the request. The format is:
           #
           #       projects/[PROJECT_ID]
           #
@@ -538,7 +538,7 @@ module Google
           #   channel's name will have a normalized version of this field as a prefix,
           #   but will add `/notificationChannels/[CHANNEL_ID]` to identify the channel.
           # @param notification_channel [Google::Monitoring::V3::NotificationChannel | Hash]
-          #   The definition of the `NotificationChannel` to create.
+          #   Required. The definition of the `NotificationChannel` to create.
           #   A hash of the same form as `Google::Monitoring::V3::NotificationChannel`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -576,7 +576,7 @@ module Google
           # remain unchanged.
           #
           # @param notification_channel [Google::Monitoring::V3::NotificationChannel | Hash]
-          #   A description of the changes to be applied to the specified
+          #   Required. A description of the changes to be applied to the specified
           #   notification channel. The description must provide a definition for
           #   fields to be updated; the names of these fields should also be
           #   included in the `update_mask`.
@@ -619,7 +619,7 @@ module Google
           # Deletes a notification channel.
           #
           # @param name [String]
-          #   The channel for which to execute the request. The format is
+          #   Required. The channel for which to execute the request. The format is
           #   `projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]`.
           # @param force [true, false]
           #   If true, the notification channel will be deleted regardless of its
@@ -658,7 +658,7 @@ module Google
           # can then be supplied in `VerifyNotificationChannel` to verify the channel.
           #
           # @param name [String]
-          #   The notification channel to which to send a verification code.
+          #   Required. The notification channel to which to send a verification code.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -708,7 +708,7 @@ module Google
           # 64 encoded string that has a longer expiration time.
           #
           # @param name [String]
-          #   The notification channel for which a verification code is to be generated
+          #   Required. The notification channel for which a verification code is to be generated
           #   and retrieved. This must name a channel that is already verified; if
           #   the specified channel is not verified, the request will fail.
           # @param expire_time [Google::Protobuf::Timestamp | Hash]
@@ -756,9 +756,9 @@ module Google
           # `SendNotificationChannelVerificationCode`.
           #
           # @param name [String]
-          #   The notification channel to verify.
+          #   Required. The notification channel to verify.
           # @param code [String]
-          #   The verification code that was delivered to the channel as
+          #   Required. The verification code that was delivered to the channel as
           #   a result of invoking the `SendNotificationChannelVerificationCode` API
           #   method or that was retrieved from a verified channel via
           #   `GetNotificationChannelVerificationCode`. For example, one might have

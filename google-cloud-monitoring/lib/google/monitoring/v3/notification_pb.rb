@@ -6,6 +6,7 @@ require 'google/protobuf'
 
 require 'google/api/label_pb'
 require 'google/api/launch_stage_pb'
+require 'google/api/resource_pb'
 require 'google/monitoring/v3/common_pb'
 require 'google/protobuf/wrappers_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -16,6 +17,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :description, :string, 3
     repeated :labels, :message, 4, "google.api.LabelDescriptor"
     repeated :supported_tiers, :enum, 5, "google.monitoring.v3.ServiceTier"
+    optional :launch_stage, :enum, 7, "google.api.LaunchStage"
   end
   add_message "google.monitoring.v3.NotificationChannel" do
     optional :type, :string, 1

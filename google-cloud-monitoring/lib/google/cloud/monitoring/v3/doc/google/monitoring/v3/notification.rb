@@ -48,6 +48,9 @@ module Google
       #   @return [Array<Google::Monitoring::V3::ServiceTier>]
       #     The tiers that support this notification channel; the project service tier
       #     must be one of the supported_tiers.
+      # @!attribute [rw] launch_stage
+      #   @return [Google::Api::LaunchStage]
+      #     The product launch stage for channels of this type.
       class NotificationChannelDescriptor; end
 
       # A `NotificationChannel` is a medium through which an alert is
