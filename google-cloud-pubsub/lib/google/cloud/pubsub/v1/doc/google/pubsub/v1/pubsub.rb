@@ -66,7 +66,8 @@ module Google
       #     at least one attribute.
       # @!attribute [rw] attributes
       #   @return [Hash{String => String}]
-      #     Optional attributes for this message.
+      #     Attributes for this message. If this field is empty, the message must
+      #     contain non-empty data.
       # @!attribute [rw] message_id
       #   @return [String]
       #     ID of this message, assigned by the server when the message is published.
@@ -80,10 +81,12 @@ module Google
       #     publisher in a `Publish` call.
       # @!attribute [rw] ordering_key
       #   @return [String]
-      #     Identifies related messages for which publish order should be respected.
-      #     If a `Subscription` has `enable_message_ordering` set to `true`, messages
-      #     published with the same `ordering_key` value will be delivered to
-      #     subscribers in the order in which they are received by the Pub/Sub system.
+      #     If non-empty, identifies related messages for which publish order should be
+      #     respected. If a `Subscription` has `enable_message_ordering` set to `true`,
+      #     messages published with the same non-empty `ordering_key` value will be
+      #     delivered to subscribers in the order in which they are received by the
+      #     Pub/Sub system. All `PubsubMessage`s published in a given `PublishRequest`
+      #     must specify the same `ordering_key` value.
       #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
       #     API might be changed in backward-incompatible ways and is not recommended
       #     for production use. It is not subject to any SLA or deprecation policy.
@@ -597,6 +600,14 @@ module Google
       #     first request on the stream, but it can also be updated on subsequent
       #     requests from client to server. The minimum deadline you can specify is 10
       #     seconds. The maximum deadline you can specify is 600 seconds (10 minutes).
+      # @!attribute [rw] client_id
+      #   @return [String]
+      #     A unique identifier that is used to distinguish client instances from each
+      #     other. Only needs to be provided on the initial request. When a stream
+      #     disconnects and reconnects for the same stream, the client_id should be set
+      #     to the same value so that state associated with the old stream can be
+      #     transferred to the new stream. The same client_id should not be used for
+      #     different client instances.
       class StreamingPullRequest; end
 
       # Response for the `StreamingPull` method. This response is used to stream
@@ -609,13 +620,12 @@ module Google
       # Request for the `CreateSnapshot` method.
       # @!attribute [rw] name
       #   @return [String]
-      #     Optional user-provided name for this snapshot.
-      #     If the name is not provided in the request, the server will assign a random
-      #     name for this snapshot on the same project as the subscription.
-      #     Note that for REST API requests, you must specify a name.  See the
-      #     <a href="https://cloud.google.com/pubsub/docs/admin#resource_names">
-      #     resource name rules</a>.
-      #     Format is `projects/{project}/snapshots/{snap}`.
+      #     User-provided name for this snapshot. If the name is not provided in the
+      #     request, the server will assign a random name for this snapshot on the same
+      #     project as the subscription. Note that for REST API requests, you must
+      #     specify a name.  See the <a
+      #     href="https://cloud.google.com/pubsub/docs/admin#resource_names"> resource
+      #     name rules</a>. Format is `projects/{project}/snapshots/{snap}`.
       # @!attribute [rw] subscription
       #   @return [String]
       #     The subscription whose backlog the snapshot retains.
