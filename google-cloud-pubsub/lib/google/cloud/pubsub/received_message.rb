@@ -65,7 +65,7 @@ module Google
 
         ##
         # Returns the delivery attempt counter for the message. If a dead letter policy is not set on the subscription,
-        # this will be `0`. See {Topic#subscribe}, {Subscription#dead_letter_topic=} and
+        # this will be `nil`. See {Topic#subscribe}, {Subscription#dead_letter_topic=} and
         # {Subscription#dead_letter_max_delivery_attempts=}.
         #
         # The delivery attempt counter is `1 + (the sum of number of NACKs and number of ack_deadline exceeds)` for the
@@ -75,15 +75,15 @@ module Google
         # message is not acknowledged within `ack_deadline`. Note that `ack_deadline` is initially
         # `Subscription.ackDeadlineSeconds`, but may get extended automatically by the client library.
         #
-        # The first delivery of a given message will have this value as `1`. The value
-        # is calculated at best effort and is approximate.
+        # The first delivery of a given message will have this value as `1`. The value is calculated at best effort and
+        # is approximate.
         #
         # EXPERIMENTAL: This feature is part of a closed alpha release. This API might be changed in
         # backward-incompatible ways and is not recommended for production use. It is not subject to any SLA or
         # deprecation policy.
         #
-        # @return [Integer] A delivery attempt value of `1` or greater, or `0` if a dead letter policy is not set on the
-        #   subscription.
+        # @return [Integer, nil] A delivery attempt value of `1` or greater, or `nil` if a dead letter policy is not set
+        #   on the subscription.
         #
         # @example
         #   require "google/cloud/pubsub"

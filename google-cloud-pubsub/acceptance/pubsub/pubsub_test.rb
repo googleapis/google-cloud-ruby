@@ -46,7 +46,6 @@ describe Google::Cloud::PubSub, :pubsub do
   end
 
   describe "Topic", :pubsub do
-
     it "should be listed" do
       topics = pubsub.topics.all
       topics.each do |topic|
@@ -238,49 +237,62 @@ describe Google::Cloud::PubSub, :pubsub do
       subscription.delete
     end
 
-    it "should be able to direct messages to a dead letter topic" do
-      dead_letter_topic = retrieve_topic dead_letter_topic_name
-      dead_letter_subscription = dead_letter_topic.subscribe "#{$topic_prefix}-dead-letter-sub1"
+    if $project_number
+      it "should be able to direct messages to a dead letter topic" do
+        # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is automatically
+        # created and managed by the service team in a private project.
+        service_account_email = "serviceAccount:service-#{$project_number}@gcp-sa-pubsub.iam.gserviceaccount.com"
 
-      # create
-      subscription = topic.subscribe "#{$topic_prefix}-sub6", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 6
-      subscription.dead_letter_max_delivery_attempts.must_equal 6
-      subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic.name
+        dead_letter_topic = retrieve_topic dead_letter_topic_name
+        dead_letter_topic.policy do |p|
+          p.add "roles/pubsub.publisher", service_account_email
+        end
+        dead_letter_subscription = dead_letter_topic.subscribe "#{$topic_prefix}-dead-letter-sub1"
 
-      # update
-      subscription.dead_letter_max_delivery_attempts = 5
-      subscription.dead_letter_max_delivery_attempts.must_equal 5
-      dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
-      dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub2"
-      subscription.dead_letter_topic = dead_letter_topic_2
-      subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic_2.name
+        dead_letter_subscription.policy do |p|
+          p.add "roles/pubsub.subscriber", service_account_email
+        end
 
-      # Publish a new message
-      msg = topic.publish "dead-letter-#{rand(1000)}"
-      msg.wont_be :nil?
+        # create
+        subscription = topic.subscribe "#{$topic_prefix}-sub6", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 6
+        subscription.dead_letter_max_delivery_attempts.must_equal 6
+        subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic.name
 
-      # Check it pulls the message
-      (1..5).each do |i|
-        received_messages = pull_with_retry subscription
+        # update
+        subscription.dead_letter_max_delivery_attempts = 5
+        subscription.dead_letter_max_delivery_attempts.must_equal 5
+        dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
+        dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub2"
+        subscription.dead_letter_topic = dead_letter_topic_2
+        subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic_2.name
+
+        # Publish a new message
+        msg = topic.publish "dead-letter-#{rand(1000)}"
+        msg.wont_be :nil?
+
+        # Check it pulls the message
+        (1..7).each do |i|
+          received_messages = pull_with_retry subscription
+          received_messages.count.must_equal 1
+          received_message = received_messages.first
+          received_message.msg.data.must_equal msg.data
+          received_message.delivery_attempt.must_be :>, 0
+          received_message.nack!
+        end
+
+        # Check the dead letter subscription pulls the message
+        received_messages = dead_letter_subscription.pull
+        received_messages.wont_be :empty?
         received_messages.count.must_equal 1
         received_message = received_messages.first
+        received_message.wont_be :nil?
         received_message.msg.data.must_equal msg.data
-        received_message.delivery_attempt.must_equal i
-        received_message.nack!
+        received_message.delivery_attempt.must_be :nil?
+
+        # Remove the subscription
+        subscription.delete
+        dead_letter_subscription.delete
       end
-
-      # Check the dead letter subscription pulls the message
-      received_messages = dead_letter_subscription.pull
-      received_messages.wont_be :empty?
-      received_messages.count.must_equal 1
-      received_message = received_messages.first
-      received_message.wont_be :nil?
-      received_message.msg.data.must_equal msg.data
-      received_message.delivery_attempt.must_equal 1
-
-      # Remove the subscription
-      subscription.delete
-      dead_letter_subscription.delete
     end
 
     def pull_with_retry sub

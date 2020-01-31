@@ -27,6 +27,11 @@ end
 # Create shared pubsub object so we don't create new for each test
 $pubsub = Google::Cloud.new.pubsub
 
+# Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is automatically
+# created and managed by the service team in a private project.
+# Format: `service-${GCLOUD_PROJECT_NUMBER}@gcp-sa-pubsub.iam.gserviceaccount.com`
+$project_number = ENV["GCLOUD_PROJECT_NUMBER"]
+
 module Acceptance
   ##
   # Test class for running against a PubSub instance.
@@ -109,4 +114,9 @@ end
 Minitest.after_run do
   clean_up_pubsub_topics
   clean_up_pubsub_snapshots
+  unless $project_number
+    puts "The Dead Letter Queue (DLQ) tests were not run. To enable, ensure that " \
+         "GCLOUD_PROJECT_NUMBER is present in the environment in order to bind IAM permissions to " \
+         "service-${GCLOUD_PROJECT_NUMBER}@gcp-sa-pubsub.iam.gserviceaccount.com"
+  end
 end
