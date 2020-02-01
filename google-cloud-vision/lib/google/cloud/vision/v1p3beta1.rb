@@ -106,20 +106,16 @@ module Google
           # Manages Products and ProductSets of reference images for use in product
           # search. It uses the following resource model:
           #
-          # * The API has a collection of
-          #   {Google::Cloud::Vision::V1p3beta1::ProductSet ProductSet} resources, named
+          # * The API has a collection of {Google::Cloud::Vision::V1p3beta1::ProductSet ProductSet} resources, named
           #   `projects/*/locations/*/productSets/*`, which acts as a way to put different
           #   products into groups to limit identification.
           #
           # In parallel,
           #
-          # * The API has a collection of
-          #   {Google::Cloud::Vision::V1p3beta1::Product Product} resources, named
+          # * The API has a collection of {Google::Cloud::Vision::V1p3beta1::Product Product} resources, named
           #   `projects/*/locations/*/products/*`
           #
-          # * Each {Google::Cloud::Vision::V1p3beta1::Product Product} has a collection of
-          #   {Google::Cloud::Vision::V1p3beta1::ReferenceImage ReferenceImage} resources,
-          #   named
+          # * Each {Google::Cloud::Vision::V1p3beta1::Product Product} has a collection of {Google::Cloud::Vision::V1p3beta1::ReferenceImage ReferenceImage} resources, named
           #   `projects/*/locations/*/products/*/referenceImages/*`
           #
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]

@@ -640,7 +640,7 @@ module Google
         # call.
         # @!attribute [rw] requests
         #   @return [Array<Google::Cloud::Vision::V1p3beta1::AsyncAnnotateFileRequest>]
-        #     Individual async file annotation requests for this batch.
+        #     Required. Individual async file annotation requests for this batch.
         class AsyncBatchAnnotateFilesRequest; end
 
         # Response to an async batch file annotation request.
