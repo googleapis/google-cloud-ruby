@@ -38,20 +38,16 @@ module Google
         # Manages Products and ProductSets of reference images for use in product
         # search. It uses the following resource model:
         #
-        # * The API has a collection of
-        #   {Google::Cloud::Vision::V1p3beta1::ProductSet ProductSet} resources, named
+        # * The API has a collection of {Google::Cloud::Vision::V1p3beta1::ProductSet ProductSet} resources, named
         #   `projects/*/locations/*/productSets/*`, which acts as a way to put different
         #   products into groups to limit identification.
         #
         # In parallel,
         #
-        # * The API has a collection of
-        #   {Google::Cloud::Vision::V1p3beta1::Product Product} resources, named
+        # * The API has a collection of {Google::Cloud::Vision::V1p3beta1::Product Product} resources, named
         #   `projects/*/locations/*/products/*`
         #
-        # * Each {Google::Cloud::Vision::V1p3beta1::Product Product} has a collection of
-        #   {Google::Cloud::Vision::V1p3beta1::ReferenceImage ReferenceImage} resources,
-        #   named
+        # * Each {Google::Cloud::Vision::V1p3beta1::Product Product} has a collection of {Google::Cloud::Vision::V1p3beta1::ReferenceImage ReferenceImage} resources, named
         #   `projects/*/locations/*/products/*/referenceImages/*`
         #
         # @!attribute [r] product_search_stub
@@ -458,11 +454,11 @@ module Google
           #   4096 characters.
           #
           # @param parent [String]
-          #   The project in which the ProductSet should be created.
+          #   Required. The project in which the ProductSet should be created.
           #
           #   Format is `projects/PROJECT_ID/locations/LOC_ID`.
           # @param product_set [Google::Cloud::Vision::V1p3beta1::ProductSet | Hash]
-          #   The ProductSet to create.
+          #   Required. The ProductSet to create.
           #   A hash of the same form as `Google::Cloud::Vision::V1p3beta1::ProductSet`
           #   can also be provided.
           # @param product_set_id [String]
@@ -514,7 +510,7 @@ module Google
           #   than 1.
           #
           # @param parent [String]
-          #   The project from which ProductSets should be listed.
+          #   Required. The project from which ProductSets should be listed.
           #
           #   Format is `projects/PROJECT_ID/locations/LOC_ID`.
           # @param page_size [Integer]
@@ -574,10 +570,10 @@ module Google
           # * Returns NOT_FOUND if the ProductSet does not exist.
           #
           # @param name [String]
-          #   Resource name of the ProductSet to get.
+          #   Required. Resource name of the ProductSet to get.
           #
           #   Format is:
-          #   `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
+          #   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -614,7 +610,7 @@ module Google
           #   missing from the request or longer than 4096 characters.
           #
           # @param product_set [Google::Cloud::Vision::V1p3beta1::ProductSet | Hash]
-          #   The ProductSet resource which replaces the one on the server.
+          #   Required. The ProductSet resource which replaces the one on the server.
           #   A hash of the same form as `Google::Cloud::Vision::V1p3beta1::ProductSet`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
@@ -667,7 +663,7 @@ module Google
           # * Returns NOT_FOUND if the ProductSet does not exist.
           #
           # @param name [String]
-          #   Resource name of the ProductSet to delete.
+          #   Required. Resource name of the ProductSet to delete.
           #
           #   Format is:
           #   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -707,12 +703,12 @@ module Google
           # * Returns INVALID_ARGUMENT if product_category is missing or invalid.
           #
           # @param parent [String]
-          #   The project in which the Product should be created.
+          #   Required. The project in which the Product should be created.
           #
           #   Format is
           #   `projects/PROJECT_ID/locations/LOC_ID`.
           # @param product [Google::Cloud::Vision::V1p3beta1::Product | Hash]
-          #   The product to create.
+          #   Required. The product to create.
           #   A hash of the same form as `Google::Cloud::Vision::V1p3beta1::Product`
           #   can also be provided.
           # @param product_id [String]
@@ -763,7 +759,7 @@ module Google
           # * Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.
           #
           # @param parent [String]
-          #   The project OR ProductSet from which Products should be listed.
+          #   Required. The project OR ProductSet from which Products should be listed.
           #
           #   Format:
           #   `projects/PROJECT_ID/locations/LOC_ID`
@@ -824,7 +820,7 @@ module Google
           # * Returns NOT_FOUND if the Product does not exist.
           #
           # @param name [String]
-          #   Resource name of the Product to get.
+          #   Required. Resource name of the Product to get.
           #
           #   Format is:
           #   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -870,7 +866,7 @@ module Google
           # * Returns INVALID_ARGUMENT if product_category is present in update_mask.
           #
           # @param product [Google::Cloud::Vision::V1p3beta1::Product | Hash]
-          #   The Product resource which replaces the one on the server.
+          #   Required. The Product resource which replaces the one on the server.
           #   product.name is immutable.
           #   A hash of the same form as `Google::Cloud::Vision::V1p3beta1::Product`
           #   can also be provided.
@@ -878,7 +874,7 @@ module Google
           #   The {Google::Protobuf::FieldMask FieldMask} that specifies which fields
           #   to update.
           #   If update_mask isn't specified, all mutable fields are to be updated.
-          #   Valid mask paths include `product_labels`, `display_name` and
+          #   Valid mask paths include `product_labels`, `display_name`, and
           #   `description`.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
@@ -926,7 +922,7 @@ module Google
           # * Returns NOT_FOUND if the product does not exist.
           #
           # @param name [String]
-          #   Resource name of product to delete.
+          #   Required. Resource name of product to delete.
           #
           #   Format is:
           #   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -977,12 +973,12 @@ module Google
           # * Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons.
           #
           # @param parent [String]
-          #   Resource name of the product in which to create the reference image.
+          #   Required. Resource name of the product in which to create the reference image.
           #
           #   Format is
           #   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
           # @param reference_image [Google::Cloud::Vision::V1p3beta1::ReferenceImage | Hash]
-          #   The reference image to create.
+          #   Required. The reference image to create.
           #   If an image ID is specified, it is ignored.
           #   A hash of the same form as `Google::Cloud::Vision::V1p3beta1::ReferenceImage`
           #   can also be provided.
@@ -1040,7 +1036,7 @@ module Google
           # * Returns NOT_FOUND if the reference image does not exist.
           #
           # @param name [String]
-          #   The resource name of the reference image to delete.
+          #   Required. The resource name of the reference image to delete.
           #
           #   Format is:
           #
@@ -1080,7 +1076,7 @@ module Google
           #   than 1.
           #
           # @param parent [String]
-          #   Resource name of the product containing the reference images.
+          #   Required. Resource name of the product containing the reference images.
           #
           #   Format is
           #   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
@@ -1141,7 +1137,7 @@ module Google
           # * Returns NOT_FOUND if the specified image does not exist.
           #
           # @param name [String]
-          #   The resource name of the ReferenceImage to get.
+          #   Required. The resource name of the ReferenceImage to get.
           #
           #   Format is:
           #
@@ -1182,12 +1178,12 @@ module Google
           # * Returns NOT_FOUND if the Product or the ProductSet doesn't exist.
           #
           # @param name [String]
-          #   The resource name for the ProductSet to modify.
+          #   Required. The resource name for the ProductSet to modify.
           #
           #   Format is:
           #   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
           # @param product [String]
-          #   The resource name for the Product to be added to this ProductSet.
+          #   Required. The resource name for the Product to be added to this ProductSet.
           #
           #   Format is:
           #   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1229,12 +1225,12 @@ module Google
           # * Returns NOT_FOUND If the Product is not found under the ProductSet.
           #
           # @param name [String]
-          #   The resource name for the ProductSet to modify.
+          #   Required. The resource name for the ProductSet to modify.
           #
           #   Format is:
           #   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
           # @param product [String]
-          #   The resource name for the Product to be removed from this ProductSet.
+          #   Required. The resource name for the Product to be removed from this ProductSet.
           #
           #   Format is:
           #   `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
@@ -1278,7 +1274,7 @@ module Google
           # * Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.
           #
           # @param name [String]
-          #   The ProductSet resource for which to retrieve Products.
+          #   Required. The ProductSet resource for which to retrieve Products.
           #
           #   Format is:
           #   `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
@@ -1345,11 +1341,11 @@ module Google
           # {Google::Cloud::Vision::V1p3beta1::ImportProductSetsGcsSource#csv_file_uri ImportProductSetsGcsSource#csv_file_uri}.
           #
           # @param parent [String]
-          #   The project in which the ProductSets should be imported.
+          #   Required. The project in which the ProductSets should be imported.
           #
           #   Format is `projects/PROJECT_ID/locations/LOC_ID`.
           # @param input_config [Google::Cloud::Vision::V1p3beta1::ImportProductSetsInputConfig | Hash]
-          #   The input content for the list of requests.
+          #   Required. The input content for the list of requests.
           #   A hash of the same form as `Google::Cloud::Vision::V1p3beta1::ImportProductSetsInputConfig`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]

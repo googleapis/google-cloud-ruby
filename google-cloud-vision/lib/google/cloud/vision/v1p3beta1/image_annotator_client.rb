@@ -245,7 +245,7 @@ module Google
           # `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).
           #
           # @param requests [Array<Google::Cloud::Vision::V1p3beta1::AsyncAnnotateFileRequest | Hash>]
-          #   Individual async file annotation requests for this batch.
+          #   Required. Individual async file annotation requests for this batch.
           #   A hash of the same form as `Google::Cloud::Vision::V1p3beta1::AsyncAnnotateFileRequest`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]

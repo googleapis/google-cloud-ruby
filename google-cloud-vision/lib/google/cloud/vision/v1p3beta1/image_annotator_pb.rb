@@ -5,6 +5,8 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
 require 'google/cloud/vision/v1p3beta1/geometry_pb'
 require 'google/cloud/vision/v1p3beta1/product_search_pb'
 require 'google/cloud/vision/v1p3beta1/text_annotation_pb'
