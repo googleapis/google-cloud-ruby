@@ -482,7 +482,41 @@ class MockBigquery < Minitest::Spec
       },
       routineType: "SCALAR_FUNCTION",
       language: "SQL",
-      arguments: [{ dataType: { typeKind: "INT64" }, name: "x", argumentKind: nil, mode: nil }],
+      arguments: [
+        { 
+          name: "arr",
+          argumentKind: "FIXED_TYPE",
+          mode: "IN",
+          dataType: { 
+            typeKind: "ARRAY",
+            arrayElementType: { 
+              typeKind: "STRUCT",
+              structType: {
+                fields: [
+                  {
+                    name: "my-struct-name",
+                    type: {
+                      typeKind: "STRING"
+                    }
+                  },
+                  {
+                    name: "my-struct-val",
+                    type: {
+                      typeKind: "INT64"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        { 
+          name: "out",
+          argumentKind: "ANY_TYPE",
+          mode: "OUT",
+          dataType: { typeKind: "STRING" }
+        }
+      ],
       returnType: { typeKind: "INT64" },
       importedLibraries: ["gs://cloud-samples-data/bigquery/udfs/max-value.js"],
       definitionBody: "x * 3",

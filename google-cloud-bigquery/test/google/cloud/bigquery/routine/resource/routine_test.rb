@@ -23,14 +23,6 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
   let(:type) { "SCALAR_FUNCTION" }
   let(:now) { ::Time.now }
   let(:language) { "SQL" }
-  let(:arguments) do
-    [
-      Google::Cloud::Bigquery::Argument.new(
-        Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64"),
-        name: "x"
-      )
-    ]
-  end
   let(:return_type) { Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "INT64" }
   let(:imported_libraries) { ["gs://cloud-samples-data/bigquery/udfs/max-value.js"] }
   let(:body) { "x * 3" }
@@ -54,16 +46,36 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     routine.created_at.must_be_close_to now, 1
     routine.modified_at.must_be_close_to now, 1
     routine.language.must_equal "SQL"
+
     routine.arguments.must_be_kind_of Array
     routine.arguments.must_be :frozen?
-    routine.arguments.size.must_equal 1
+    routine.arguments.size.must_equal 2
     routine.arguments[0].must_be_kind_of Google::Cloud::Bigquery::Argument
-    routine.arguments[0].name.must_equal "x"
+    routine.arguments[0].name.must_equal "arr"
+    routine.arguments[0].argument_kind.must_equal "FIXED_TYPE"
+    routine.arguments[0].mode.must_equal "IN"
     routine.arguments[0].data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    routine.arguments[0].data_type.type_kind.must_equal "INT64"
+    routine.arguments[0].data_type.type_kind.must_equal "ARRAY"
+    routine.arguments[0].data_type.array_element_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    routine.arguments[0].data_type.array_element_type.type_kind.must_equal "STRUCT"
+    routine.arguments[0].data_type.array_element_type.struct_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::StructType
+    routine.arguments[0].data_type.array_element_type.struct_type.fields.must_be_kind_of Array
+    routine.arguments[0].data_type.array_element_type.struct_type.fields.must_be :frozen?
+    routine.arguments[0].data_type.array_element_type.struct_type.fields.size.must_equal 2
+    routine.arguments[0].data_type.array_element_type.struct_type.fields[0].must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
+    routine.arguments[0].data_type.array_element_type.struct_type.fields[0].name.must_equal "my-struct-name"
+    routine.arguments[0].data_type.array_element_type.struct_type.fields[0].type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    routine.arguments[0].data_type.array_element_type.struct_type.fields[0].type.type_kind.must_equal "STRING"
+    routine.arguments[0].data_type.array_element_type.struct_type.fields[1].name.must_equal "my-struct-val"
+    routine.arguments[0].data_type.array_element_type.struct_type.fields[1].type.type_kind.must_equal "INT64"
+    routine.arguments[1].name.must_equal "out"
+    routine.arguments[1].argument_kind.must_equal "ANY_TYPE"
+    routine.arguments[1].mode.must_equal "OUT"
+    routine.arguments[1].data_type.type_kind.must_equal "STRING"
+
     routine.return_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    routine.return_type.must_be :frozen?
     routine.return_type.type_kind.must_equal "INT64"
+
     routine.imported_libraries.must_equal ["gs://cloud-samples-data/bigquery/udfs/max-value.js"]
     routine.imported_libraries.must_be :frozen?
     routine.body.must_equal "x * 3"
@@ -152,22 +164,22 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
   end
 
   it "updates its arguments" do
-    routine.arguments.size.must_equal arguments.size
+    routine.arguments.size.must_equal routine_gapi.arguments.size
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.arguments = [
       Google::Apis::BigqueryV2::Argument.new(
         data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "INT64"),
-        name: "x",
-        argument_kind: nil,
-        mode: nil
+        name: "x"
       ),
       Google::Apis::BigqueryV2::Argument.new(
         data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "STRING"),
-        name: "y",
-        argument_kind: nil,
-        mode: nil
+        name: "y"
+      ),
+      Google::Apis::BigqueryV2::Argument.new(
+        data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "BOOLEAN"),
+        name: "z"
       )
     ]
     mock.expect :update_routine, updated_routine_gapi,
@@ -176,12 +188,16 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     new_arguments = [
       Google::Cloud::Bigquery::Argument.new(
-        Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64"),
+        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64"),
         name: "x"
       ),
       Google::Cloud::Bigquery::Argument.new(
-        Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING"),
+        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING"),
         name: "y"
+      ),
+      Google::Cloud::Bigquery::Argument.new(
+        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "BOOLEAN"),
+        name: "z"
       )
     ]
 

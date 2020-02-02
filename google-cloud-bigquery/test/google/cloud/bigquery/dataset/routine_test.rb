@@ -52,11 +52,36 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
       r.language = "SQL"
       r.arguments = [
         Google::Cloud::Bigquery::Argument.new(
-          Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64"),
-          name: "x"
+          name: "arr",
+          argument_kind: "FIXED_TYPE",
+          mode: "IN",
+          data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+            type_kind: "ARRAY",
+            array_element_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+              type_kind: "STRUCT",
+              struct_type: Google::Cloud::Bigquery::StandardSql::StructType.new(
+                fields: [
+                  Google::Cloud::Bigquery::StandardSql::Field.new(
+                    name: "my-struct-name",
+                    type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING")
+                  ),
+                  Google::Cloud::Bigquery::StandardSql::Field.new(
+                    name: "my-struct-val",
+                    type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64")
+                  )
+                ]
+              )  
+            )
+          )
+        ),
+        Google::Cloud::Bigquery::Argument.new(
+          name: "out",
+          argument_kind: "ANY_TYPE",
+          mode: "OUT",
+          data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING")
         )
       ]
-      r.return_type = Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64")
+      r.return_type = "INT64"
       r.imported_libraries = ["gs://cloud-samples-data/bigquery/udfs/max-value.js"]
       r.body = "x * 3"
       r.description = "This is my routine"

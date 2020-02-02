@@ -231,7 +231,7 @@ module Google
           return nil if reference?
           ensure_full_data!
           # always return frozen arguments
-          Array(@gapi.arguments).map { |arg| Argument.from_gapi(arg).freeze }.freeze
+          Array(@gapi.arguments).map { |a| Argument.from_gapi a }.freeze
         end
         # Optional.
         # @return [Array<Google::Apis::BigqueryV2::Argument>]
@@ -279,7 +279,7 @@ module Google
           return nil if reference?
           ensure_full_data!
           return nil unless @gapi.return_type
-          StandardSql::DataType.from_gapi(@gapi.return_type).freeze
+          StandardSql::DataType.from_gapi @gapi.return_type
         end
 
         ##
@@ -702,7 +702,13 @@ module Google
           end
 
           def return_type= new_return_type
-            @gapi.return_type = new_return_type&.to_gapi
+            @gapi.return_type = if new_return_type.is_a? StandardSql::DataType
+                                  new_return_type.to_gapi
+                                elsif new_return_type.is_a? String
+                                  Google::Apis::BigqueryV2::StandardSqlDataType.new(
+                                    type_kind: new_return_type.upcase
+                                  )
+                                end
           end
 
           def imported_libraries= new_imported_libraries

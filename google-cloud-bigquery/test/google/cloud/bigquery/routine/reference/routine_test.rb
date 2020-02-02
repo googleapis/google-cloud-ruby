@@ -151,15 +151,15 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi.arguments = [
       Google::Apis::BigqueryV2::Argument.new(
         data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "INT64"),
-        name: "x",
-        argument_kind: nil,
-        mode: nil
+        name: "x"
       ),
       Google::Apis::BigqueryV2::Argument.new(
         data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "STRING"),
-        name: "y",
-        argument_kind: nil,
-        mode: nil
+        name: "y"
+      ),
+      Google::Apis::BigqueryV2::Argument.new(
+        data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "BOOLEAN"),
+        name: "z"
       )
     ]
     mock.expect :update_routine, updated_routine_gapi,
@@ -168,12 +168,16 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
 
     new_arguments = [
       Google::Cloud::Bigquery::Argument.new(
-        Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64"),
+        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64"),
         name: "x"
       ),
       Google::Cloud::Bigquery::Argument.new(
-        Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING"),
+        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING"),
         name: "y"
+      ),
+      Google::Cloud::Bigquery::Argument.new(
+        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "BOOLEAN"),
+        name: "z"
       )
     ]
 

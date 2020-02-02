@@ -60,7 +60,7 @@ describe Google::Cloud::Bigquery, :bigquery do
 
     argument = arguments.first
     argument.must_be_kind_of Google::Cloud::Bigquery::Argument
-    argument.kind.must_be :nil?
+    argument.argument_kind.must_be :nil?
     argument.mode.must_be :nil?
     argument.name.must_equal "arr"
 
@@ -101,7 +101,7 @@ describe Google::Cloud::Bigquery, :bigquery do
       r.language = :SQL
       r.body = "x * 3"
       r.arguments = [
-        Google::Cloud::Bigquery::Argument.new(:INT64, name: "x")
+        Google::Cloud::Bigquery::Argument.new(data_type: :INT64, name: "x")
       ]
     end
 
@@ -121,7 +121,7 @@ describe Google::Cloud::Bigquery, :bigquery do
 
     argument = arguments.first
     argument.must_be_kind_of Google::Cloud::Bigquery::Argument
-    argument.kind.must_be :nil?
+    argument.argument_kind.must_be :nil?
     argument.mode.must_be :nil?
     argument.name.must_equal "x"
 
