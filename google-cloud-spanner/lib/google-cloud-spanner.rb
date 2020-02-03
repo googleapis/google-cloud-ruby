@@ -45,6 +45,12 @@ module Google
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     # @param [Hash] client_config A hash of values to override the default
     #   behavior of the API client. Optional.
+    # @param [String] lib_name Library name. This will override the default
+    #   name of the library in the api call request header
+    #   for telemetry. Optional.
+    # @param [String] lib_version Library version. This will override the
+    #   default version of the library in the api call request header
+    #   for telemetry. Optional.
     #
     # @return [Google::Cloud::Spanner::Project]
     #
@@ -61,10 +67,13 @@ module Google
     #   platform_scope = "https://www.googleapis.com/auth/cloud-platform"
     #   spanner = gcloud.spanner scope: platform_scope
     #
-    def spanner scope: nil, timeout: nil, client_config: nil
+    def spanner scope: nil, timeout: nil, client_config: nil, lib_name: nil,
+                lib_version: nil
       Google::Cloud.spanner @project, @keyfile, scope: scope,
                                                 timeout: (timeout || @timeout),
-                                                client_config: client_config
+                                                client_config: client_config,
+                                                lib_name: lib_name,
+                                                lib_version: lib_version
     end
 
     ##
@@ -92,7 +101,12 @@ module Google
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     # @param [Hash] client_config A hash of values to override the default
     #   behavior of the API client. Optional.
-    #
+    # @param [String] lib_name Library name. This will override the default
+    #   name of the library in the api call request header
+    #   for telemetry. Optional.
+    # @param [String] lib_version Library version. This will override the
+    #   default version of the library in the api call request header
+    #   for telemetry. Optional.
     # @return [Google::Cloud::Spanner::Project]
     #
     # @example
@@ -101,12 +115,14 @@ module Google
     #   spanner = Google::Cloud.spanner
     #
     def self.spanner project_id = nil, credentials = nil, scope: nil,
-                     timeout: nil, client_config: nil
+                     timeout: nil, client_config: nil, lib_name: nil,
+                     lib_version: nil
       require "google/cloud/spanner"
       Google::Cloud::Spanner.new project_id: project_id,
                                  credentials: credentials,
                                  scope: scope, timeout: timeout,
-                                 client_config: client_config
+                                 client_config: client_config,
+                                 lib_name: lib_name, lib_version: lib_version
     end
   end
 end
@@ -137,4 +153,6 @@ Google::Cloud.configure.add_config! :spanner do |config|
   config.add_field! :client_config, nil, match: Hash
   config.add_field! :endpoint, nil, match: String
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
+  config.add_field! :lib_name, nil, match: String, allow_nil: true
+  config.add_field! :lib_version, nil, match: String, allow_nil: true
 end

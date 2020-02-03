@@ -29,17 +29,20 @@ module Google
       # @private Represents the gRPC Spanner service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :timeout, :client_config, :host
+        attr_accessor :project, :credentials, :timeout, :client_config, :host,
+                      :lib_name, :lib_version
 
         ##
         # Creates a new Service instance.
         def initialize project, credentials, host: nil, timeout: nil,
-                       client_config: nil
+                       client_config: nil, lib_name: nil, lib_version: nil
           @project = project
           @credentials = credentials
           @host = host || V1::SpannerClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
+          @lib_name = lib_name || "gccl"
+          @lib_version = lib_version || Google::Cloud::Spanner::VERSION
         end
 
         def channel
@@ -67,8 +70,8 @@ module Google
               client_config: client_config,
               service_address: service_address,
               service_port: service_port,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Spanner::VERSION
+              lib_name: lib_name,
+              lib_version: lib_version
             )
         end
         attr_accessor :mocked_service
@@ -82,8 +85,8 @@ module Google
               client_config: client_config,
               service_address: service_address,
               service_port: service_port,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Spanner::VERSION
+              lib_name: lib_name,
+              lib_version: lib_version
             )
         end
         attr_accessor :mocked_instances
@@ -97,8 +100,8 @@ module Google
               client_config: client_config,
               service_address: service_address,
               service_port: service_port,
-              lib_name: "gccl",
-              lib_version: Google::Cloud::Spanner::VERSION
+              lib_name: lib_name,
+              lib_version: lib_version
             )
         end
         attr_accessor :mocked_databases

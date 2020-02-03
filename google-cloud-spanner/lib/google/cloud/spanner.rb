@@ -34,7 +34,7 @@ module Google
     # See {file:OVERVIEW.md Spanner Overview}.
     #
     module Spanner
-      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/MethodLength,Metrics/AbcSize
 
       ##
       # Creates a new object for connecting to the Spanner service.
@@ -68,6 +68,12 @@ module Google
       #   Deprecated.
       # @param [String] emulator_host Spanner emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
+      # @param [String] lib_name Library name. This will override the default
+      #   name of the library in the api call request header
+      #   for telemetry. Optional.
+      # @param [String] lib_version Library version. This will override the
+      #   default version of the library in the api call request header
+      #   for telemetry. Optional.
       #
       # @return [Google::Cloud::Spanner::Project]
       #
@@ -78,7 +84,7 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, endpoint: nil, project: nil, keyfile: nil,
-                   emulator_host: nil
+                   emulator_host: nil, lib_name: nil, lib_version: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
@@ -86,6 +92,8 @@ module Google
         endpoint      ||= configure.endpoint
         credentials   ||= (keyfile || default_credentials(scope: scope))
         emulator_host ||= configure.emulator_host
+        lib_name      ||= configure.lib_name
+        lib_version   ||= configure.lib_version
 
         if emulator_host
           credentials = :this_channel_is_insecure
@@ -106,12 +114,13 @@ module Google
         Spanner::Project.new(
           Spanner::Service.new(
             project_id, credentials,
-            host: endpoint, timeout: timeout, client_config: client_config
+            host: endpoint, timeout: timeout, client_config: client_config,
+            lib_name: lib_name, lib_version: lib_version
           )
         )
       end
 
-      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/MethodLength,Metrics/AbcSize
 
       ##
       # Configure the Google Cloud Spanner library.
@@ -133,6 +142,10 @@ module Google
       #   to use the default endpoint.
       # * `emulator_host` - (String) Host name of the emulator. Defaults to
       #   `ENV["SPANNER_EMULATOR_HOST"]`.
+      # * `lib_name` - (String) Override the lib name , or `nil`
+      #   to use the default lib name.
+      # * `lib_version` - (String) Override the lib version , or `nil`
+      #   to use the default version.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Spanner library uses.
