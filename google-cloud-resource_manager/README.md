@@ -46,8 +46,8 @@ require "google/cloud/resource_manager"
 resource_manager = Google::Cloud::ResourceManager.new
 
 # List all projects
-resource_manager.projects.each do |projects|
-  puts projects.project_id
+resource_manager.projects.each do |project|
+  puts project.project_id
 end
 
 # Label a project as production
