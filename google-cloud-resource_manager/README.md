@@ -46,7 +46,7 @@ require "google/cloud/resource_manager"
 resource_manager = Google::Cloud::ResourceManager.new
 
 # List all projects
-resource_manager.projects.each do |project|
+resource_manager.projects.each do |projects|
   puts projects.project_id
 end
 
