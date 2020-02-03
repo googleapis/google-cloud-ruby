@@ -9,9 +9,9 @@ programmatically manage  container resources such as Organizations and Projects,
 * Delete projects
 * Undelete, or recover, projects that you don't want to delete
 
-- [google-cloud-resource_manager API documentation](https://googleapis.dev/ruby/google-cloud-resource_manager/latest)
-- [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
-- [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
+* [google-cloud-resource_manager API documentation](https://googleapis.dev/ruby/google-cloud-resource_manager/latest)
+* [google-cloud-resource_manager on RubyGems](https://rubygems.org/gems/google-cloud-resource_manager)
+* [Google Cloud Resource Manager documentation](https://cloud.google.com/resource-manager/)
 
 ## Quick Start
 
@@ -86,7 +86,7 @@ Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or in
 security maintenance, and not end of life. Currently, this means Ruby 2.4 and
 later. Older versions of Ruby _may_ still work, but are unsupported and not
-recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
+recommended. See [https://www.ruby-lang.org/en/downloads/branches/](https://www.ruby-lang.org/en/downloads/branches) for details
 about the Ruby support schedule.
 
 ## Versioning
