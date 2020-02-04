@@ -1,5 +1,11 @@
 # Release History
 
+### 0.37.3 / 2020-02-04
+
+#### Documentation
+
+* Mark required fields
+
 ### 0.37.2 / 2020-01-23
 
 #### Documentation
