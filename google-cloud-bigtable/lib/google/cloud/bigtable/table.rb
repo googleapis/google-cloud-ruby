@@ -20,6 +20,7 @@ require "google/cloud/bigtable/table/cluster_state"
 require "google/cloud/bigtable/column_family_map"
 require "google/cloud/bigtable/gc_rule"
 require "google/cloud/bigtable/mutation_operations"
+require "google/cloud/bigtable/policy"
 require "google/cloud/bigtable/read_operations"
 
 module Google
@@ -237,6 +238,117 @@ module Google
         #
         def granularity_millis?
           granularity == :MILLIS
+        end
+
+        ##
+        # Gets the [Cloud IAM](https://cloud.google.com/iam/) access control
+        # policy for the table.
+        #
+        # @see https://cloud.google.com/bigtable/docs/access-control
+        #
+        # @yield [policy] A block for updating the policy. The latest policy
+        #   will be read from the Bigtable service and passed to the block. After
+        #   the block completes, the modified policy will be written to the
+        #   service.
+        # @yieldparam [Policy] policy the current Cloud IAM Policy for this
+        #   table.
+        #
+        # @return [Policy] The current Cloud IAM Policy for the table.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   policy = table.policy
+        #
+        # @example Update the policy by passing a block.
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #
+        #   table.policy do |p|
+        #     p.add("roles/owner", "user:owner@example.com")
+        #   end # 2 API calls
+        #
+        def policy
+          ensure_service!
+          grpc = service.get_table_policy instance_id, name
+          policy = Policy.from_grpc grpc
+          return policy unless block_given?
+          yield policy
+          update_policy policy
+        end
+
+        ##
+        # Updates the [Cloud IAM](https://cloud.google.com/iam/) access control
+        # policy for the table. The policy should be read from {#policy}.
+        # See {Google::Cloud::Bigtable::Policy} for an explanation of the policy
+        # `etag` property and how to modify policies.
+        #
+        # You can also update the policy by passing a block to {#policy}, which
+        # will call this method internally after the block completes.
+        #
+        # @param new_policy [Policy] a new or modified Cloud IAM Policy for this
+        #   table
+        #
+        # @return [Policy] The policy returned by the API update operation.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #
+        #   policy = table.policy
+        #   policy.add("roles/owner", "user:owner@example.com")
+        #   updated_policy = table.update_policy(policy)
+        #
+        #   puts updated_policy.roles
+        #
+        def update_policy new_policy
+          ensure_service!
+          grpc = service.set_table_policy instance_id, name, new_policy.to_grpc
+          Policy.from_grpc grpc
+        end
+        alias policy= update_policy
+
+        ##
+        # Tests the specified permissions against the [Cloud
+        # IAM](https://cloud.google.com/iam/) access control policy.
+        #
+        # @see https://cloud.google.com/iam/docs/managing-policies Managing Policies
+        # @see https://cloud.google.com/bigtable/docs/access-control Access Control
+        #
+        # @param permissions [String, Array<String>] permissions The set of permissions to
+        #   check access for. Permissions with wildcards (such as `*` or
+        #   `bigtable.*`) are not allowed.
+        #   See [Access Control](https://cloud.google.com/bigtable/docs/access-control).
+        #
+        # @return [Array<Strings>] The permissions that have access.
+        #
+        # @example
+        #   require "google/cloud/bigtable"
+        #
+        #   bigtable = Google::Cloud::Bigtable.new
+        #
+        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #
+        #   permissions = table.test_iam_permissions(
+        #     "bigtable.tables.delete",
+        #     "bigtable.tables.get"
+        #   )
+        #   permissions.include? "bigtable.tables.delete" #=> false
+        #   permissions.include? "bigtable.tables.get" #=> true
+        #
+        def test_iam_permissions *permissions
+          ensure_service!
+          grpc = service.test_table_permissions instance_id, name, Array(permissions).flatten
+          grpc.permissions
         end
 
         ##

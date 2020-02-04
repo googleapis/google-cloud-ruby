@@ -854,7 +854,7 @@ module Google
         #   policy.add("roles/owner", "user:owner@example.com")
         #   updated_policy = instance.update_policy(policy)
         #
-        #   puts update_policy.roles
+        #   puts updated_policy.roles
         #
         def update_policy new_policy
           ensure_service!
