@@ -20,7 +20,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
   let(:dataset) { "my_dataset" }
   let(:routine_id) { "my_routine" }
   let(:etag) { "etag123456789" }
-  let(:type) { "SCALAR_FUNCTION" }
+  let(:routine_type) { "SCALAR_FUNCTION" }
   let(:now) { ::Time.now }
   let(:language) { "SQL" }
   let(:arguments) do
@@ -35,7 +35,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
   let(:imported_libraries) { ["gs://cloud-samples-data/bigquery/udfs/max-value.js"] }
   let(:body) { "x * 3" }
   let(:description) { "This is my routine" }
-  let(:new_type) { "PROCEDURE" }
+  let(:new_routine_type) { "PROCEDURE" }
   let(:new_language) { "JAVASCRIPT" }
   let(:new_arguments_gapi) do
     [
@@ -92,10 +92,14 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
     # Only the following fields are populated:
     # etag, routineReference, routineType, creationTime, lastModifiedTime and language
     routine.etag.must_equal etag
-    routine.type.must_equal "SCALAR_FUNCTION"
+    routine.routine_type.must_equal "SCALAR_FUNCTION"
+    routine.procedure?.must_equal false
+    routine.scalar_function?.must_equal true
     routine.created_at.must_be_close_to now, 1
     routine.modified_at.must_be_close_to now, 1
     routine.language.must_equal "SQL"
+    routine.javascript?.must_equal false
+    routine.sql?.must_equal true
   end
 
   it "can test its existence" do
@@ -138,20 +142,20 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
     routine.description.must_equal new_description
   end
 
-  it "updates its type" do
+  it "updates its routine_type" do
     mock = Minitest::Mock.new
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
     updated_routine_gapi = routine_gapi.dup
-    updated_routine_gapi.routine_type = new_type
+    updated_routine_gapi.routine_type = new_routine_type
     mock.expect :update_routine, updated_routine_gapi,
       [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
     routine.service.mocked_service = mock
 
-    routine.type = new_type
+    routine.routine_type = new_routine_type
 
     mock.verify
 
-    routine.type.must_equal new_type
+    routine.routine_type.must_equal new_routine_type
   end
 
   it "updates its language" do
@@ -274,7 +278,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
     mock = Minitest::Mock.new
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
     updated_routine_gapi = routine_gapi.dup
-    updated_routine_gapi.routine_type = new_type
+    updated_routine_gapi.routine_type = new_routine_type
     updated_routine_gapi.language = new_language
     updated_routine_gapi.arguments = new_arguments_gapi
     updated_routine_gapi.return_type = Google::Apis::BigqueryV2::StandardSqlDataType.new type_kind: "STRING"
@@ -286,7 +290,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
     routine.service.mocked_service = mock
 
     routine.update do |r|
-      r.type = new_type
+      r.routine_type = new_routine_type
       r.language = new_language
       r.arguments = new_arguments
       r.return_type = new_return_type
@@ -298,7 +302,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
 
     mock.verify
 
-    routine.type.must_equal new_type
+    routine.routine_type.must_equal new_routine_type
     routine.language.must_equal new_language
     routine.arguments.size.must_equal new_arguments.size
     routine.return_type.type_kind.must_equal new_return_type.type_kind

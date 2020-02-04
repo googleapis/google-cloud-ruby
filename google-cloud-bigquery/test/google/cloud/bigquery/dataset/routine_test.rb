@@ -48,7 +48,7 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     routine = dataset.create_routine routine_id do |r|
-      r.type = "SCALAR_FUNCTION"
+      r.routine_type = "SCALAR_FUNCTION"
       r.language = "SQL"
       r.arguments = [
         Google::Cloud::Bigquery::Argument.new(

@@ -115,7 +115,7 @@ module Google
         # @return [String]
         # SCALAR_FUNCTION  Non-builtin permanent scalar function.
         # PROCEDURE  Stored procedure.
-        def type
+        def routine_type
           return nil if reference?
           @gapi.routine_type
         end
@@ -124,28 +124,28 @@ module Google
         # @return [String]
         # SCALAR_FUNCTION  Non-builtin permanent scalar function.
         # PROCEDURE  Stored procedure.
-        def type= new_type
+        def routine_type= new_routine_type
           ensure_full_data!
-          @gapi.routine_type = new_type
+          @gapi.routine_type = new_routine_type
           update_gapi!
         end
 
         ##
-        # Checks if the value of {#type} is `PROCEDURE`. The default is `false`.
+        # Checks if the value of {#routine_type} is `PROCEDURE`. The default is `false`.
         #
         # @return [Boolean] `true` when `PROCEDURE`, `false` otherwise.
         #
         def procedure?
-          @gapi.type == "PROCEDURE"
+          @gapi.routine_type == "PROCEDURE"
         end
 
         ##
-        # Checks if the value of {#type} is `SCALAR_FUNCTION`. The default is `true`.
+        # Checks if the value of {#routine_type} is `SCALAR_FUNCTION`. The default is `true`.
         #
         # @return [Boolean] `true` when `SCALAR_FUNCTION`, `false` otherwise.
         #
         def scalar_function?
-          @gapi.type == "SCALAR_FUNCTION"
+          @gapi.routine_type == "SCALAR_FUNCTION"
         end
 
         ##
@@ -449,8 +449,8 @@ module Google
 
         ##
         # Updates the routine with changes made in the given block in a single update request. The following attributes
-        # may be set: {#type=}, {#language=}, {#arguments=}, {#return_type=}, {#imported_libraries=}, {#body=}, and
-        # {#description=}.
+        # may be set: {#routine_type=}, {#language=}, {#arguments=}, {#return_type=}, {#imported_libraries=}, {#body=},
+        # and {#description=}.
         #
         # @yield [routine] a block yielding a delegate object for updating the routine
         #
@@ -462,7 +462,7 @@ module Google
         #   routine = dataset.routine "my_routine"
         #
         #   routine.update do |r|
-        #     r.type = "SCALAR_FUNCTION"
+        #     r.routine_type = "SCALAR_FUNCTION"
         #     r.language = "SQL"
         #     r.arguments = [
         #       Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
@@ -725,8 +725,8 @@ module Google
             @gapi = gapi.dup
           end
 
-          def type= new_type
-            @gapi.routine_type = new_type
+          def routine_type= new_routine_type
+            @gapi.routine_type = new_routine_type
           end
 
           def language= new_language

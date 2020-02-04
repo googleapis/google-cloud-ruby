@@ -51,7 +51,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     routine.routine_id.must_equal routine_id
 
     routine.description.must_be :nil?
-    routine.type.must_equal "SCALAR_FUNCTION"
+    routine.routine_type.must_equal "SCALAR_FUNCTION"
     routine.language.must_equal "SQL"
     routine.body.must_equal "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
 
@@ -100,7 +100,7 @@ describe Google::Cloud::Bigquery, :bigquery do
   it "can create, update and delete a routine" do
     # create
     routine = dataset.create_routine routine_id do |r|
-      r.type = "SCALAR_FUNCTION"
+      r.routine_type = "SCALAR_FUNCTION"
       r.language = :SQL
       r.arguments = [
         Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
@@ -115,7 +115,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     routine.routine_id.must_equal routine_id
 
     routine.description.must_equal "my description"
-    routine.type.must_equal "SCALAR_FUNCTION"
+    routine.routine_type.must_equal "SCALAR_FUNCTION"
     routine.language.must_equal "SQL"
     routine.body.must_equal "x * 3"
 
