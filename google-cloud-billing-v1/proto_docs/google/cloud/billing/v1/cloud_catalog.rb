@@ -59,12 +59,12 @@ module Google
         #   @return [Google::Cloud::Billing::V1::Category]
         #     The category hierarchy of this SKU, purely for organizational purpose.
         # @!attribute [rw] service_regions
-        #   @return [String]
+        #   @return [Array<String>]
         #     List of service regions this SKU is offered at.
         #     Example: "asia-east1"
         #     Service regions can be found at https://cloud.google.com/about/locations/
         # @!attribute [rw] pricing_info
-        #   @return [Google::Cloud::Billing::V1::PricingInfo]
+        #   @return [Array<Google::Cloud::Billing::V1::PricingInfo>]
         #     A timeline of pricing info for this SKU in chronological order.
         # @!attribute [rw] service_provider_name
         #   @return [String]
@@ -172,7 +172,7 @@ module Google
         #     the display_quantity is "1000" then the recommended way of displaying the
         #     pricing info is "0.10 USD per 1000 GB"
         # @!attribute [rw] tiered_rates
-        #   @return [Google::Cloud::Billing::V1::PricingExpression::TierRate]
+        #   @return [Array<Google::Cloud::Billing::V1::PricingExpression::TierRate>]
         #     The list of tiered rates for this pricing. The total cost is computed by
         #     applying each of the tiered rates on usage. This repeated list is sorted
         #     by ascending order of start_usage_amount.
@@ -249,7 +249,7 @@ module Google
 
         # Response message for `ListServices`.
         # @!attribute [rw] services
-        #   @return [Google::Cloud::Billing::V1::Service]
+        #   @return [Array<Google::Cloud::Billing::V1::Service>]
         #     A list of services.
         # @!attribute [rw] next_page_token
         #   @return [String]
@@ -302,7 +302,7 @@ module Google
 
         # Response message for `ListSkus`.
         # @!attribute [rw] skus
-        #   @return [Google::Cloud::Billing::V1::Sku]
+        #   @return [Array<Google::Cloud::Billing::V1::Sku>]
         #     The list of public SKUs of the given service.
         # @!attribute [rw] next_page_token
         #   @return [String]

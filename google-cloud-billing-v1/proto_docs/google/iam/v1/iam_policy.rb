@@ -55,7 +55,7 @@ module Google
       #     `resource` is usually specified as a path. For example, a Project
       #     resource is specified as `projects/\\\{project\}`.
       # @!attribute [rw] permissions
-      #   @return [String]
+      #   @return [Array<String>]
       #     The set of permissions to check for the `resource`. Permissions with
       #     wildcards (such as '*' or 'storage.*') are not allowed. For more
       #     information see
@@ -67,7 +67,7 @@ module Google
 
       # Response message for `TestIamPermissions` method.
       # @!attribute [rw] permissions
-      #   @return [String]
+      #   @return [Array<String>]
       #     A subset of `TestPermissionsRequest.permissions` that the caller is
       #     allowed.
       class TestIamPermissionsResponse
