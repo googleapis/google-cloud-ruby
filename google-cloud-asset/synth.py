@@ -19,11 +19,13 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 import re
+import shutil
 from subprocess import call
 
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
+gapic2 = gcp.GAPICMicrogenerator()
 
 v1_library = gapic.ruby_library(
     'asset', 'v1', artman_output_name='google-cloud-ruby/google-cloud-asset',
@@ -46,6 +48,17 @@ v1beta1_library = gapic.ruby_library(
 s.copy(v1beta1_library / 'lib/google/cloud/asset/v1beta1.rb')
 s.copy(v1beta1_library / 'lib/google/cloud/asset/v1beta1')
 s.copy(v1beta1_library / 'test/google/cloud/asset/v1beta1')
+
+orgpolicy_library = gapic2.ruby_library(
+    'orgpolicy', 'v1',
+    generator_args={
+        "ruby-cloud-gem-name": "google-cloud-asset",
+    }
+)
+
+s.copy(orgpolicy_library / 'lib/google/cloud/orgpolicy')
+s.copy(orgpolicy_library / 'proto_docs/google/cloud/orgpolicy')
+shutil.move('proto_docs', 'lib/google/cloud/orgpolicy/v1/doc')
 
 # Copy common templates
 templates = gcp.CommonTemplates().ruby_library()
