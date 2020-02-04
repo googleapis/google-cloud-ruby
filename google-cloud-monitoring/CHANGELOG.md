@@ -1,5 +1,12 @@
 # Release History
 
+### 0.35.0 / 2020-02-04
+
+#### Features
+
+* Add NotificationChannelDescriptor#launch_stage
+  * Update documentation formatting
+
 ### 0.34.2 / 2020-01-23
 
 #### Documentation
