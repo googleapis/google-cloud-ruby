@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.2 / 2020-02-04
+
+#### Performance Improvements
+
+* Add StreamingPullRequest#client_id to the lower-level API
+
 ### 1.2.1 / 2020-01-23
 
 #### Documentation
