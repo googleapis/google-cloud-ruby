@@ -1,5 +1,11 @@
 # Release History
 
+### 0.33.1 / 2020-02-04
+
+#### Bug Fixes
+
+* List all projects example
+
 ### 0.33.0 / 2019-10-29
 
 This release requires Ruby 2.4 or later.
