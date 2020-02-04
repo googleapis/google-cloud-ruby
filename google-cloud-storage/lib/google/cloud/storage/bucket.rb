@@ -1269,7 +1269,7 @@ module Google
           path ||= file if file.is_a? String
           raise ArgumentError, "must provide path" if path.nil?
 
-          gapi = service.insert_file name, file, path, options
+          gapi = service.insert_file name, file, path, **options
           File.from_gapi gapi, service, user_project: user_project
         end
         alias upload_file create_file
@@ -1379,7 +1379,7 @@ module Google
             updater.check_for_changed_metadata!
           end
           gapi = service.compose_file name, sources, destination,
-                                      destination_gapi, options
+                                      destination_gapi, **options
           File.from_gapi gapi, service, user_project: user_project
         end
         alias compose_file compose
@@ -2163,7 +2163,7 @@ module Google
                       prefix: prefix, payload: payload,
                       user_project: user_project }
 
-          gapi = service.insert_notification name, topic, options
+          gapi = service.insert_notification name, topic, **options
           Notification.from_gapi name, gapi, service, user_project: user_project
         end
         alias new_notification create_notification
@@ -2249,7 +2249,7 @@ module Google
           patch_args = Hash[attributes.map do |attr|
             [attr, @gapi.send(attr)]
           end]
-          patch_gapi = API::Bucket.new patch_args
+          patch_gapi = API::Bucket.new **patch_args
           @gapi = service.patch_bucket name, patch_gapi,
                                        user_project: user_project
           @lazy = nil

@@ -152,9 +152,8 @@ module Google
         ##
         # Creates a new bucket ACL.
         def insert_bucket_acl bucket_name, entity, role, user_project: nil
-          new_acl = Google::Apis::StorageV1::BucketAccessControl.new(
-            { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
-          )
+          params = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
+          new_acl = Google::Apis::StorageV1::BucketAccessControl.new(**params)
           execute do
             service.insert_bucket_access_control \
               bucket_name, new_acl, user_project: user_project(user_project)
@@ -182,9 +181,8 @@ module Google
         ##
         # Creates a new default ACL.
         def insert_default_acl bucket_name, entity, role, user_project: nil
-          new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(
-            { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
-          )
+          param  = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
+          new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**param)
           execute do
             service.insert_default_object_access_control \
               bucket_name, new_acl, user_project: user_project(user_project)
@@ -243,13 +241,13 @@ module Google
         def insert_notification bucket_name, topic_name, custom_attrs: nil,
                                 event_types: nil, prefix: nil, payload: nil,
                                 user_project: nil
-          new_notification = Google::Apis::StorageV1::Notification.new(
+          params =
             { custom_attributes: custom_attrs,
               event_types: event_types(event_types),
               object_name_prefix: prefix,
               payload_format: payload_format(payload),
               topic: topic_path(topic_name) }.delete_if { |_k, v| v.nil? }
-          )
+          new_notification = Google::Apis::StorageV1::Notification.new(**params)
 
           execute do
             service.insert_notification \
@@ -298,14 +296,14 @@ module Google
                         storage_class: nil, key: nil, kms_key: nil,
                         temporary_hold: nil, event_based_hold: nil,
                         user_project: nil
-          file_obj = Google::Apis::StorageV1::Object.new(
+          params =
             { cache_control: cache_control, content_type: content_type,
               content_disposition: content_disposition, md5_hash: md5,
               content_encoding: content_encoding, crc32c: crc32c,
               content_language: content_language, metadata: metadata,
               storage_class: storage_class, temporary_hold: temporary_hold,
               event_based_hold: event_based_hold }.delete_if { |_k, v| v.nil? }
-          )
+          file_obj = Google::Apis::StorageV1::Object.new(**params)
           content_type ||= mime_type_for(path || Pathname(source).to_path)
 
           execute do
@@ -432,9 +430,8 @@ module Google
         # Creates a new file ACL.
         def insert_file_acl bucket_name, file_name, entity, role,
                             generation: nil, user_project: nil
-          new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(
-            { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
-          )
+          params = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
+          new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**params)
           execute do
             service.insert_object_access_control \
               bucket_name, file_name, new_acl,

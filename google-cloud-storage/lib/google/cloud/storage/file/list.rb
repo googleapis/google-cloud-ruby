@@ -81,7 +81,7 @@ module Google
               prefix: @prefix, delimiter: @delimiter, token: @token, max: @max,
               versions: @versions, user_project: @user_project
             }
-            gapi = @service.list_files @bucket, options
+            gapi = @service.list_files @bucket, **options
             File::List.from_gapi gapi, @service, @bucket, @prefix,
                                  @delimiter, @max, @versions,
                                  user_project: @user_project
