@@ -38,7 +38,7 @@ module Google
         #   @return [Google::Protobuf::Timestamp]
         #     Output only. The time at which the [Secret][google.cloud.secrets.v1beta1.Secret] was created.
         # @!attribute [rw] labels
-        #   @return [Google::Cloud::SecretManager::V1beta1::Secret::LabelsEntry]
+        #   @return [Google::Protobuf::Map{String => String}]
         #     The labels assigned to this Secret.
         #
         #     Label keys must be between 1 and 63 characters long, have a UTF-8 encoding
@@ -127,7 +127,7 @@ module Google
           # A replication policy that replicates the [Secret][google.cloud.secrets.v1beta1.Secret] payload into the
           # locations specified in [Secret.replication.user_managed.replicas][]
           # @!attribute [rw] replicas
-          #   @return [Google::Cloud::SecretManager::V1beta1::Replication::UserManaged::Replica]
+          #   @return [Array<Google::Cloud::SecretManager::V1beta1::Replication::UserManaged::Replica>]
           #     Required. The list of Replicas for this [Secret][google.cloud.secrets.v1beta1.Secret].
           #
           #     Cannot be empty.

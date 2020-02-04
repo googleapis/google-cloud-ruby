@@ -227,7 +227,7 @@ module Google
     # request should verify the included field paths, and return an
     # `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
     # @!attribute [rw] paths
-    #   @return [String]
+    #   @return [Array<String>]
     #     The set of field mask paths.
     class FieldMask
       include Google::Protobuf::MessageExts
