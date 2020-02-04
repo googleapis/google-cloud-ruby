@@ -97,10 +97,50 @@ describe Google::Cloud::Bigquery, :bigquery do
     dataset.routine(routine_id).must_be_nil
   end
 
-  it "can create and delete a routine" do
-    arguments = [
+  it "can create, update and delete a routine" do
+    # create
+    routine = dataset.create_routine routine_id do |r|
+      r.type = "SCALAR_FUNCTION"
+      r.language = :SQL
+      r.arguments = [
+        Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
+      ]
+      r.body = "x * 3"
+      r.description = "my description"
+    end
+
+    routine.must_be_kind_of Google::Cloud::Bigquery::Routine
+    routine.project_id.must_equal bigquery.project
+    routine.dataset_id.must_equal dataset.dataset_id
+    routine.routine_id.must_equal routine_id
+
+    routine.description.must_equal "my description"
+    routine.type.must_equal "SCALAR_FUNCTION"
+    routine.language.must_equal "SQL"
+    routine.body.must_equal "x * 3"
+
+    arguments = routine.arguments
+    arguments.must_be_kind_of Array
+    arguments.size.must_equal 1
+
+    argument = arguments.first
+    argument.must_be_kind_of Google::Cloud::Bigquery::Argument
+    argument.argument_kind.must_be :nil?
+    argument.mode.must_be :nil?
+    argument.name.must_equal "x"
+
+    data_type = argument.data_type
+    data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    data_type.type_kind.must_equal "INT64"
+    data_type.array_element_type.must_be :nil?
+    data_type.struct_type.must_be :nil?
+ 
+    # update 
+    new_body = "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
+    new_arguments = [
       Google::Cloud::Bigquery::Argument.new(
         name: "arr",
+        argument_kind: "FIXED_TYPE",
         data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
           type_kind: "ARRAY",
           array_element_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
@@ -121,24 +161,13 @@ describe Google::Cloud::Bigquery, :bigquery do
         )
       )
     ]
-    # create
-    routine = dataset.create_routine routine_id do |r|
-      r.description = "my description"
-      r.type = "SCALAR_FUNCTION"
-      r.language = :SQL
-      r.body = "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
-      r.arguments = arguments
+
+    routine.update do |r|
+      r.body = new_body
+      r.arguments = new_arguments
     end
 
-    routine.must_be_kind_of Google::Cloud::Bigquery::Routine
-    routine.project_id.must_equal bigquery.project
-    routine.dataset_id.must_equal dataset.dataset_id
-    routine.routine_id.must_equal routine_id
-
-    routine.description.must_equal "my description"
-    routine.type.must_equal "SCALAR_FUNCTION"
-    routine.language.must_equal "SQL"
-    routine.body.must_equal "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
+    routine.body.must_equal new_body
 
     arguments = routine.arguments
     arguments.must_be_kind_of Array
@@ -146,7 +175,7 @@ describe Google::Cloud::Bigquery, :bigquery do
 
     argument = arguments.first
     argument.must_be_kind_of Google::Cloud::Bigquery::Argument
-    argument.argument_kind.must_be :nil?
+    argument.argument_kind.must_equal "FIXED_TYPE"
     argument.mode.must_be :nil?
     argument.name.must_equal "arr"
 
@@ -169,38 +198,11 @@ describe Google::Cloud::Bigquery, :bigquery do
     struct_fields[1].name.must_equal "val"
     struct_fields[1].type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
     struct_fields[1].type.type_kind.must_equal "INT64"
- 
-    # update NOTE: These types are immutable, so changing a deeply nested value requires replacing everything.
-    new_arguments = [
-      Google::Cloud::Bigquery::Argument.new(
-        name: "arr",
-        argument_kind: "FIXED_TYPE",
-        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
-          type_kind: "ARRAY",
-          array_element_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
-            type_kind: "STRUCT",
-            struct_type: Google::Cloud::Bigquery::StandardSql::StructType.new(
-              fields: [
-                Google::Cloud::Bigquery::StandardSql::Field.new(
-                  name: "name",
-                  type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING")
-                ),
-                Google::Cloud::Bigquery::StandardSql::Field.new(
-                  name: "val",
-                  type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "FLOAT64")
-                )
-              ]
-            )  
-          )
-        )
-      )
-    ]
-    routine.arguments = new_arguments
-    routine.arguments.first.data_type.array_element_type.struct_type.fields.last.type.type_kind.must_equal "FLOAT64"
 
     # get
     routine.reload!
-    routine.arguments.first.data_type.array_element_type.struct_type.fields.last.type.type_kind.must_equal "FLOAT64"
+    routine.body.must_equal new_body
+    routine.arguments.first.data_type.array_element_type.struct_type.fields.last.type.type_kind.must_equal "INT64"
 
     # delete
     routine.delete.must_equal true

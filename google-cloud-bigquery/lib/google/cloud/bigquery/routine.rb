@@ -448,6 +448,37 @@ module Google
         end
 
         ##
+        # Updates the routine with changes made in the given block in a single update request. The following attributes
+        # may be set: {#type=}, {#language=}, {#arguments=}, {#return_type=}, {#imported_libraries=}, {#body=}, and
+        # {#description=}.
+        #
+        # @yield [routine] a block yielding a delegate object for updating the routine
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.update do |r|
+        #     r.type = "SCALAR_FUNCTION"
+        #     r.language = "SQL"
+        #     r.arguments = [
+        #       Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
+        #     ]
+        #     r.body = "x * 3"
+        #     r.description = "my new description"
+        #   end
+        #
+        def update
+          ensure_full_data!
+          updater = Updater.new @gapi
+          yield updater
+          update_gapi! updater.to_gapi if updater.updates?
+        end
+
+        ##
         # Permanently deletes the routine.
         #
         # @return [Boolean] Returns `true` if the routine was deleted.
@@ -675,17 +706,20 @@ module Google
           reload! unless resource_full?
         end
 
-        def update_gapi!
+        def update_gapi! update_gapi = nil
+          update_gapi ||= @gapi
           ensure_service!
-          @gapi = service.update_routine dataset_id, routine_id, @gapi
+          @gapi = service.update_routine dataset_id, routine_id, update_gapi
+          self
         end
 
         ##
-        # Yielded to a block to accumulate changes for a create request. See Dataset#create_routine.
+        # Yielded to a block to accumulate changes. See Dataset#create_routine and Routine#update.
         class Updater < Routine
           ##
           # Create an Updater object.
           def initialize gapi
+            @original_gapi = gapi
             @gapi = gapi.dup
           end
 
@@ -716,6 +750,12 @@ module Google
           def description= new_description
             @gapi.description = new_description
           end
+
+          # rubocop:disable Style/CaseEquality
+          def updates?
+            !(@gapi === @original_gapi)
+          end
+          # rubocop:enable Style/CaseEquality
 
           def to_gapi
             @gapi

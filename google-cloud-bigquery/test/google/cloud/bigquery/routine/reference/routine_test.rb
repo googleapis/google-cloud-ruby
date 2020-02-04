@@ -34,6 +34,44 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
   let(:imported_libraries) { ["gs://cloud-samples-data/bigquery/udfs/max-value.js"] }
   let(:body) { "x * 3" }
   let(:description) { "This is my routine" }
+  let(:new_type) { "PROCEDURE" }
+  let(:new_language) { "JAVASCRIPT" }
+  let(:new_arguments_gapi) do
+    [
+      Google::Apis::BigqueryV2::Argument.new(
+        data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "INT64"),
+        name: "x"
+      ),
+      Google::Apis::BigqueryV2::Argument.new(
+        data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "STRING"),
+        name: "y"
+      ),
+      Google::Apis::BigqueryV2::Argument.new(
+        data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "BOOL"),
+        name: "z"
+      )
+    ]
+  end
+  let(:new_arguments) do
+    [
+      Google::Cloud::Bigquery::Argument.new(
+        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64"),
+        name: "x"
+      ),
+      Google::Cloud::Bigquery::Argument.new(
+        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING"),
+        name: "y"
+      ),
+      Google::Cloud::Bigquery::Argument.new(
+        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "BOOL"),
+        name: "z"
+      )
+    ]
+  end
+  let(:new_return_type) { Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRING" }
+  let(:new_imported_libraries) { ["gs://cloud-samples-data/bigquery/udfs/max-value-2.js"] }
+  let(:new_body) { "x * 4" }
+  let(:new_description) { "This is my updated routine" }
   let(:routine_hash) { random_routine_hash dataset, routine_id }
   let(:routine_gapi) { Google::Apis::BigqueryV2::Routine.from_json routine_hash.to_json }
   let(:routine) { Google::Cloud::Bigquery::Routine.new_reference project, dataset, routine_id, bigquery.service }
@@ -92,8 +130,6 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
   end
 
   it "can reload itself" do
-    new_description = "New description of the routine."
-
     mock = Minitest::Mock.new
     routine_hash = random_routine_hash dataset, routine_id, description: new_description
     mock.expect :get_routine, Google::Apis::BigqueryV2::Routine.from_json(routine_hash.to_json),
@@ -109,8 +145,6 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
   end
 
   it "updates its type" do
-    new_type = "PROCEDURE"
-
     mock = Minitest::Mock.new
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
     updated_routine_gapi = routine_gapi.dup
@@ -127,8 +161,6 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
   end
 
   it "updates its language" do
-    new_language = "JAVASCRIPT"
-
     mock = Minitest::Mock.new
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
     updated_routine_gapi = routine_gapi.dup
@@ -148,38 +180,10 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     mock = Minitest::Mock.new
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
     updated_routine_gapi = routine_gapi.dup
-    updated_routine_gapi.arguments = [
-      Google::Apis::BigqueryV2::Argument.new(
-        data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "INT64"),
-        name: "x"
-      ),
-      Google::Apis::BigqueryV2::Argument.new(
-        data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "STRING"),
-        name: "y"
-      ),
-      Google::Apis::BigqueryV2::Argument.new(
-        data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "BOOL"),
-        name: "z"
-      )
-    ]
+    updated_routine_gapi.arguments = new_arguments_gapi
     mock.expect :update_routine, updated_routine_gapi,
       [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
     routine.service.mocked_service = mock
-
-    new_arguments = [
-      Google::Cloud::Bigquery::Argument.new(
-        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64"),
-        name: "x"
-      ),
-      Google::Cloud::Bigquery::Argument.new(
-        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING"),
-        name: "y"
-      ),
-      Google::Cloud::Bigquery::Argument.new(
-        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "BOOL"),
-        name: "z"
-      )
-    ]
 
     routine.arguments = new_arguments
 
@@ -196,8 +200,6 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     mock.expect :update_routine, updated_routine_gapi,
       [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
     routine.service.mocked_service = mock
-
-    new_return_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRING"
 
     routine.return_type = new_return_type
 
@@ -225,8 +227,6 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
   end
   
   it "updates its imported_libraries" do
-    new_imported_libraries = ["gs://cloud-samples-data/bigquery/udfs/max-value-2.js"]
-
     mock = Minitest::Mock.new
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
     updated_routine_gapi = routine_gapi.dup
@@ -243,8 +243,6 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
   end
   
   it "updates its body" do
-    new_body = "x * 4"
-
     mock = Minitest::Mock.new
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
     updated_routine_gapi = routine_gapi.dup
@@ -261,8 +259,6 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
   end
 
   it "updates its description" do
-    new_description = "This is my updated routine"
-
     mock = Minitest::Mock.new
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
     updated_routine_gapi = routine_gapi.dup
@@ -276,5 +272,53 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     mock.verify
 
     routine.description.must_equal new_description
+  end
+
+  it "updates its attributes in a block" do
+    mock = Minitest::Mock.new
+    mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
+    updated_routine_gapi = routine_gapi.dup
+    updated_routine_gapi.routine_type = new_type
+    updated_routine_gapi.language = new_language
+    updated_routine_gapi.arguments = new_arguments_gapi
+    updated_routine_gapi.return_type = Google::Apis::BigqueryV2::StandardSqlDataType.new type_kind: "STRING"
+    updated_routine_gapi.imported_libraries = new_imported_libraries
+    updated_routine_gapi.definition_body = new_body
+    updated_routine_gapi.description = new_description
+    mock.expect :update_routine, updated_routine_gapi,
+      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+    routine.service.mocked_service = mock
+
+    routine.update do |r|
+      r.type = new_type
+      r.language = new_language
+      r.arguments = new_arguments
+      r.return_type = new_return_type
+      r.imported_libraries = new_imported_libraries
+      r.description = new_description
+      r.body = new_body
+      r.description = new_description
+    end
+
+    mock.verify
+
+    routine.type.must_equal new_type
+    routine.language.must_equal new_language
+    routine.arguments.size.must_equal new_arguments.size
+    routine.return_type.type_kind.must_equal new_return_type.type_kind
+    routine.imported_libraries.must_equal new_imported_libraries
+    routine.body.must_equal new_body
+    routine.description.must_equal new_description
+  end
+
+  it "skips update when no updates are made in a block" do
+    mock = Minitest::Mock.new
+    mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
+    routine.service.mocked_service = mock
+
+    routine.update do |r|
+    end
+
+    mock.verify
   end    
 end
