@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2020-02-04
+
+#### Features
+
+* Add GcsDestination#uri_prefix
+
 ### 0.6.1 / 2020-01-22
 
 #### Documentation
