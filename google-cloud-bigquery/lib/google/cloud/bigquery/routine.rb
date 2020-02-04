@@ -471,6 +471,8 @@ module Google
         #     r.description = "my new description"
         #   end
         #
+        # @!group Lifecycle
+        #
         def update
           ensure_full_data!
           updater = Updater.new @gapi
