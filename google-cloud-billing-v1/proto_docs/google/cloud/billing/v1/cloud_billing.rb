@@ -114,7 +114,7 @@ module Google
 
         # Response message for `ListBillingAccounts`.
         # @!attribute [rw] billing_accounts
-        #   @return [Google::Cloud::Billing::V1::BillingAccount]
+        #   @return [Array<Google::Cloud::Billing::V1::BillingAccount>]
         #     A list of billing accounts.
         # @!attribute [rw] next_page_token
         #   @return [String]
@@ -175,7 +175,7 @@ module Google
 
         # Request message for `ListProjectBillingInfoResponse`.
         # @!attribute [rw] project_billing_info
-        #   @return [Google::Cloud::Billing::V1::ProjectBillingInfo]
+        #   @return [Array<Google::Cloud::Billing::V1::ProjectBillingInfo>]
         #     A list of `ProjectBillingInfo` resources representing the projects
         #     associated with the billing account.
         # @!attribute [rw] next_page_token

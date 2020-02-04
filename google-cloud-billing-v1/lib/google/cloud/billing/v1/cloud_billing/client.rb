@@ -812,7 +812,7 @@ module Google
             #     REQUIRED: The resource for which the policy detail is being requested.
             #     `resource` is usually specified as a path. For example, a Project
             #     resource is specified as `projects/\\\{project\}`.
-            #   @param permissions [String]
+            #   @param permissions [Array<String>]
             #     The set of permissions to check for the `resource`. Permissions with
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more
             #     information see
