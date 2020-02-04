@@ -17,6 +17,8 @@ module Google
   module Cloud
     module Dialogflow
       module V2
+        # ============================================================================
+        # Requests and responses for custom methods.
         # The request to detect user's intent.
         # @!attribute [rw] session
         #   @return [String]
