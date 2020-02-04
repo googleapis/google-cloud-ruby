@@ -42,7 +42,7 @@ module Google
 
         # Response message for [SecretManagerService.ListSecrets][google.cloud.secrets.v1beta1.SecretManagerService.ListSecrets].
         # @!attribute [rw] secrets
-        #   @return [Google::Cloud::SecretManager::V1beta1::Secret]
+        #   @return [Array<Google::Cloud::SecretManager::V1beta1::Secret>]
         #     The list of [Secrets][google.cloud.secrets.v1beta1.Secret] sorted in reverse by create_time (newest
         #     first).
         # @!attribute [rw] next_page_token
@@ -117,7 +117,7 @@ module Google
 
         # Response message for [SecretManagerService.ListSecretVersions][google.cloud.secrets.v1beta1.SecretManagerService.ListSecretVersions].
         # @!attribute [rw] versions
-        #   @return [Google::Cloud::SecretManager::V1beta1::SecretVersion]
+        #   @return [Array<Google::Cloud::SecretManager::V1beta1::SecretVersion>]
         #     The list of [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion] sorted in reverse by
         #     create_time (newest first).
         # @!attribute [rw] next_page_token

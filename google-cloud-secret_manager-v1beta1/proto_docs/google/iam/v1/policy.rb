@@ -55,7 +55,7 @@ module Google
       #   @return [Integer]
       #     Version of the `Policy`. The default version is 0.
       # @!attribute [rw] bindings
-      #   @return [Google::Iam::V1::Binding]
+      #   @return [Array<Google::Iam::V1::Binding>]
       #     Associates a list of `members` to a `role`.
       #     Multiple `bindings` must not be specified for the same `role`.
       #     `bindings` with no members will result in an error.
@@ -83,7 +83,7 @@ module Google
       #     For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
       #     Required
       # @!attribute [rw] members
-      #   @return [String]
+      #   @return [Array<String>]
       #     Specifies the identities requesting access for a Cloud Platform resource.
       #     `members` can have the following values:
       #
@@ -112,7 +112,7 @@ module Google
 
       # The difference delta between two policies.
       # @!attribute [rw] binding_deltas
-      #   @return [Google::Iam::V1::BindingDelta]
+      #   @return [Array<Google::Iam::V1::BindingDelta>]
       #     The delta for Bindings between two policies.
       class PolicyDelta
         include Google::Protobuf::MessageExts
