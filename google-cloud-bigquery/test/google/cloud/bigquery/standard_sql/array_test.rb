@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Bigquery::StandardSql, :array do
   it "represents a INT64 Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "int_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "INT64" } } })
+    field = array_field "int_array_col", "INT64"
 
     field.name.must_equal "int_array_col"
 
@@ -44,7 +44,7 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
   end
 
   it "represents a FLOAT64 Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "float_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "FLOAT64" } } })
+    field = array_field "float_array_col", "FLOAT64"
 
     field.name.must_equal "float_array_col"
 
@@ -72,7 +72,7 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
   end
 
   it "represents a NUMERIC Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "num_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "NUMERIC" } } })
+    field = array_field "num_array_col", "NUMERIC"
 
     field.name.must_equal "num_array_col"
 
@@ -100,7 +100,7 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
   end
 
   it "represents a BOOL Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "bool_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "BOOL" } } })
+    field = array_field "bool_array_col", "BOOL"
 
     field.name.must_equal "bool_array_col"
 
@@ -128,7 +128,7 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
   end
 
   it "represents a STRING Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "str_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "STRING" } } })
+    field = array_field "str_array_col", "STRING"
 
     field.name.must_equal "str_array_col"
 
@@ -156,7 +156,7 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
   end
 
   it "represents a BYTES Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "bytes_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "BYTES" } } })
+    field = array_field "bytes_array_col", "BYTES"
 
     field.name.must_equal "bytes_array_col"
 
@@ -184,7 +184,7 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
   end
 
   it "represents a DATE Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "date_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "DATE" } } })
+    field = array_field "date_array_col", "DATE"
 
     field.name.must_equal "date_array_col"
 
@@ -212,7 +212,7 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
   end
 
   it "represents a DATETIME Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "datetime_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "DATETIME" } } })
+    field = array_field "datetime_array_col", "DATETIME"
 
     field.name.must_equal "datetime_array_col"
 
@@ -240,7 +240,7 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
   end
 
   it "represents a GEOGRAPHY Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "geo_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "GEOGRAPHY" } } })
+    field = array_field "geo_array_col", "GEOGRAPHY"
 
     field.name.must_equal "geo_array_col"
 
@@ -268,7 +268,7 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
   end
 
   it "represents a TIME Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "time_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "TIME" } } })
+    field = array_field "time_array_col", "TIME"
 
     field.name.must_equal "time_array_col"
 
@@ -296,7 +296,7 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
   end
 
   it "represents a TIMESTAMP Array field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "ts_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "TIMESTAMP" } } })
+    field = array_field "ts_array_col", "TIMESTAMP"
 
     field.name.must_equal "ts_array_col"
 
@@ -321,5 +321,11 @@ describe Google::Cloud::Bigquery::StandardSql, :array do
     field.type.wont_be :timestamp?
     field.type.must_be :array?
     field.type.wont_be :struct?
+  end
+
+  def array_field name, type_kind
+    array_element_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: type_kind
+    array_data_type =Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "ARRAY", array_element_type: array_element_type
+    Google::Cloud::Bigquery::StandardSql::Field.new name: name, type: array_data_type
   end
 end

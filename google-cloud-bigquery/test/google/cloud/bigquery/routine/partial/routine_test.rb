@@ -152,7 +152,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
         name: "y"
       ),
       Google::Apis::BigqueryV2::Argument.new(
-        data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "BOOLEAN"),
+        data_type: Google::Apis::BigqueryV2::StandardSqlDataType.new(type_kind: "BOOL"),
         name: "z"
       )
     ]
@@ -170,7 +170,7 @@ describe Google::Cloud::Bigquery::Routine, :mock_bigquery do
         name: "y"
       ),
       Google::Cloud::Bigquery::Argument.new(
-        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "BOOLEAN"),
+        data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "BOOL"),
         name: "z"
       )
     ]

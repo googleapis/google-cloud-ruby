@@ -449,7 +449,8 @@ module Google
         def feature_columns
           ensure_full_data!
           Array(@gapi_json[:featureColumns]).map do |field_gapi_json|
-            StandardSql::Field.from_gapi_json field_gapi_json
+            field_gapi = Google::Apis::BigqueryV2::StandardSqlField.from_json field_gapi_json.to_json
+            StandardSql::Field.from_gapi field_gapi
           end
         end
 
@@ -464,7 +465,8 @@ module Google
         def label_columns
           ensure_full_data!
           Array(@gapi_json[:labelColumns]).map do |field_gapi_json|
-            StandardSql::Field.from_gapi_json field_gapi_json
+            field_gapi = Google::Apis::BigqueryV2::StandardSqlField.from_json field_gapi_json.to_json
+            StandardSql::Field.from_gapi field_gapi
           end
         end
 

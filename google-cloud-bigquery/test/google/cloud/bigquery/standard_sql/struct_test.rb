@@ -16,8 +16,11 @@ require "helper"
 
 describe Google::Cloud::Bigquery::StandardSql, :struct do
   it "represents a simple STRUCT field" do
-    struct_hash = { fields: [{ name: "int_col", type: { typeKind: "INT64" } }] }
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "struct_col", type: { typeKind: "STRUCT", structType: struct_hash } })
+    struct_type = Google::Cloud::Bigquery::StandardSql::StructType.new fields: [
+      Google::Cloud::Bigquery::StandardSql::Field.new(name: "int_col", type: "INT64")
+    ]
+    struct_data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRUCT", struct_type: struct_type
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "struct_col", type: struct_data_type
 
     field.name.must_equal "struct_col"
 
@@ -65,8 +68,11 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
   end
 
   it "represents an anonymous STRUCT field (missing)" do
-    struct_hash = { fields: [{ type: { typeKind: "INT64" } }] }
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "struct_col", type: { typeKind: "STRUCT", structType: struct_hash } })
+    struct_type = Google::Cloud::Bigquery::StandardSql::StructType.new fields: [
+      Google::Cloud::Bigquery::StandardSql::Field.new(type: "INT64")
+    ]
+    struct_data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRUCT", struct_type: struct_type
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "struct_col", type: struct_data_type
 
     field.name.must_equal "struct_col"
 
@@ -114,8 +120,11 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
   end
 
   it "represents an anonymous STRUCT field (empty)" do
-    struct_hash = { fields: [{ name: "", type: { typeKind: "INT64" } }] }
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "struct_col", type: { typeKind: "STRUCT", structType: struct_hash } })
+    struct_type = Google::Cloud::Bigquery::StandardSql::StructType.new fields: [
+      Google::Cloud::Bigquery::StandardSql::Field.new(name: "", type: "INT64")
+    ]
+    struct_data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRUCT", struct_type: struct_type
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "struct_col", type: struct_data_type
 
     field.name.must_equal "struct_col"
 
@@ -163,8 +172,9 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
   end
 
   it "represents an emtpy STRUCT field" do
-    struct_hash = { fields: [] }
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "struct_col", type: { typeKind: "STRUCT", structType: struct_hash } })
+    struct_type = Google::Cloud::Bigquery::StandardSql::StructType.new fields: []
+    struct_data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRUCT", struct_type: struct_type
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "struct_col", type: struct_data_type
 
     field.name.must_equal "struct_col"
 
@@ -192,11 +202,15 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
   end
 
   it "represents nested STRUCT fields" do
-    nested_hash = { fields: [{ name: "int_col", type: { typeKind: "INT64" } }] }
-    struct_hash = { fields: [
-      { name: "nested_col", type: { typeKind: "STRUCT", structType: nested_hash } }
-    ] }
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "struct_col", type: { typeKind: "STRUCT", structType: struct_hash } })
+    nested_struct_type = Google::Cloud::Bigquery::StandardSql::StructType.new fields: [
+      Google::Cloud::Bigquery::StandardSql::Field.new(name: "int_col", type: "INT64")
+    ]
+    nested_struct_data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRUCT", struct_type: nested_struct_type
+    struct_type = Google::Cloud::Bigquery::StandardSql::StructType.new fields: [
+      Google::Cloud::Bigquery::StandardSql::Field.new(name: "nested_col", type: nested_struct_data_type)
+    ]
+    struct_data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRUCT", struct_type: struct_type
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "struct_col", type: struct_data_type
 
     field.name.must_equal "struct_col"
 
@@ -264,20 +278,23 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
   end
 
   it "represents all types of value fields" do
-    struct_hash = { fields: [
-      { name: "int_col", type: { typeKind: "INT64" } },
-      { name: "float_col", type: { typeKind: "FLOAT64" } },
-      { name: "num_col", type: { typeKind: "NUMERIC" } },
-      { name: "bool_col", type: { typeKind: "BOOL" } },
-      { name: "str_col", type: { typeKind: "STRING" } },
-      { name: "bytes_col", type: { typeKind: "BYTES" } },
-      { name: "date_col", type: { typeKind: "DATE" } },
-      { name: "datetime_col", type: { typeKind: "DATETIME" } },
-      { name: "geo_col", type: { typeKind: "GEOGRAPHY" } },
-      { name: "time_col", type: { typeKind: "TIME" } },
-      { name: "ts_col", type: { typeKind: "TIMESTAMP" } }
-    ] }
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "struct_col", type: { typeKind: "STRUCT", structType: struct_hash } })
+    fields = [
+      value_field("int_col", "INT64"),
+      value_field("float_col", "FLOAT64"),
+      value_field("num_col", "NUMERIC"),
+      value_field("bool_col", "BOOL"),
+      value_field("str_col", "STRING"),
+      value_field("bytes_col", "BYTES"),
+      value_field("date_col", "DATE"),
+      value_field("datetime_col", "DATETIME"),
+      value_field("geo_col", "GEOGRAPHY"),
+      value_field("time_col", "TIME"),
+      value_field("ts_col", "TIMESTAMP")
+    ]
+
+    struct_type = Google::Cloud::Bigquery::StandardSql::StructType.new fields: fields
+    struct_data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRUCT", struct_type: struct_type
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "struct_col", type: struct_data_type
 
     field.name.must_equal "struct_col"
 
@@ -525,20 +542,23 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
   end
 
   it "represents all types of array fields" do
-    struct_hash = { fields: [
-      { name: "int_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "INT64" } } },
-      { name: "float_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "FLOAT64" } } },
-      { name: "num_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "NUMERIC" } } },
-      { name: "bool_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "BOOL" } } },
-      { name: "str_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "STRING" } } },
-      { name: "bytes_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "BYTES" } } },
-      { name: "date_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "DATE" } } },
-      { name: "datetime_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "DATETIME" } } },
-      { name: "geo_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "GEOGRAPHY" } } },
-      { name: "time_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "TIME" } } },
-      { name: "ts_array_col", type: { typeKind: "ARRAY", arrayElementType: { typeKind: "TIMESTAMP" } } }
-    ] }
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "struct_col", type: { typeKind: "STRUCT", structType: struct_hash } })
+    fields = [
+      array_field("int_array_col", "INT64"),
+      array_field("float_array_col", "FLOAT64"),
+      array_field("num_array_col", "NUMERIC"),
+      array_field("bool_array_col", "BOOL"),
+      array_field("str_array_col", "STRING"),
+      array_field("bytes_array_col", "BYTES"),
+      array_field("date_array_col", "DATE"),
+      array_field("datetime_array_col", "DATETIME"),
+      array_field("geo_array_col", "GEOGRAPHY"),
+      array_field("time_array_col", "TIME"),
+      array_field("ts_array_col", "TIMESTAMP")
+    ]
+
+    struct_type = Google::Cloud::Bigquery::StandardSql::StructType.new fields: fields
+    struct_data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRUCT", struct_type: struct_type
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "struct_col", type: struct_data_type
 
     field.name.must_equal "struct_col"
 
@@ -816,5 +836,16 @@ describe Google::Cloud::Bigquery::StandardSql, :struct do
     field.type.struct_type.fields[10].type.wont_be :timestamp?
     field.type.struct_type.fields[10].type.must_be :array?
     field.type.struct_type.fields[10].type.wont_be :struct?
+  end
+
+  def value_field name, type_kind
+    value_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: type_kind
+    Google::Cloud::Bigquery::StandardSql::Field.new name: name, type: value_type
+  end
+
+  def array_field name, type_kind
+    array_element_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: type_kind
+    array_data_type =Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "ARRAY", array_element_type: array_element_type
+    Google::Cloud::Bigquery::StandardSql::Field.new name: name, type: array_data_type
   end
 end

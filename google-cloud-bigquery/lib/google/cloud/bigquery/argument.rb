@@ -22,7 +22,7 @@ module Google
       # Input/output argument of a function or a stored procedure.
       class Argument
         ##
-        # Create an immutable Argument object.
+        # Creates a new, immutable Argument object.
         #
         # @overload initialize(data_type, kind, mode, name)
         #   @param [StandardSql::DataType, String] data_type Required.

@@ -37,7 +37,7 @@ module Google
         attr_reader :reference
 
         ##
-        # @private Create an empty Table object.
+        # @private Creates an empty Routine object.
         def initialize
           @service = nil
           @gapi = nil
@@ -702,13 +702,7 @@ module Google
           end
 
           def return_type= new_return_type
-            @gapi.return_type = if new_return_type.is_a? StandardSql::DataType
-                                  new_return_type.to_gapi
-                                elsif new_return_type.is_a? String
-                                  Google::Apis::BigqueryV2::StandardSqlDataType.new(
-                                    type_kind: new_return_type.upcase
-                                  )
-                                end
+            @gapi.return_type = StandardSql::DataType.gapi_from_string_or_data_type new_return_type
           end
 
           def imported_libraries= new_imported_libraries
