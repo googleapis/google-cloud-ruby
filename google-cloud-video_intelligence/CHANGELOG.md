@@ -1,5 +1,12 @@
 # Release History
 
+### 2.0.3 / 2020-02-04
+
+#### Documentation
+
+* Update formatting and grammar
+* Update formatting and grammar for v1p1beta1
+
 ### 2.0.2 / 2020-01-23
 
 #### Documentation
