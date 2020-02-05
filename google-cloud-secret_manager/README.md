@@ -11,7 +11,7 @@ steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Secret Manager API.](https://console.cloud.google.com/apis/library/language.googleapis.com)
+3. [Enable the Secret Manager API.](https://console.cloud.google.com/apis/library/secretmanager.googleapis.com)
 4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-secret_manager/latest/file.AUTHENTICATION.html)
 
 ### Installation
@@ -29,7 +29,7 @@ $ gem install google-cloud-secret_manager
 
 [Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-secret_manager/latest
 [V1beta1 Client Documentation]: https://googleapis.dev/ruby/google-cloud-secret_manager-v1beta1/latest
-[Product Documentation]: https://cloud.google.com/natural-language
+[Product Documentation]: https://cloud.google.com/secret-manager
 
 ## Enabling Logging
 
