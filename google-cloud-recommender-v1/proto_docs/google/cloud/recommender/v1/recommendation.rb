@@ -50,7 +50,7 @@ module Google
         #     The primary impact that this recommendation can have while trying to
         #     optimize for one category.
         # @!attribute [rw] additional_impact
-        #   @return [Google::Cloud::Recommender::V1::Impact]
+        #   @return [Array<Google::Cloud::Recommender::V1::Impact>]
         #     Optional set of additional impact that this recommendation may have when
         #     trying to optimize for the primary category. These may be positive
         #     or negative.
@@ -71,7 +71,7 @@ module Google
 
         # Contains what resources are changing and how they are changing.
         # @!attribute [rw] operation_groups
-        #   @return [Google::Cloud::Recommender::V1::OperationGroup]
+        #   @return [Array<Google::Cloud::Recommender::V1::OperationGroup>]
         #     Operations to one or more Google Cloud resources grouped in such a way
         #     that, all operations within one group are expected to be performed
         #     atomically and in an order.
@@ -82,7 +82,7 @@ module Google
 
         # Group of operations that need to be performed atomically.
         # @!attribute [rw] operations
-        #   @return [Google::Cloud::Recommender::V1::Operation]
+        #   @return [Array<Google::Cloud::Recommender::V1::Operation>]
         #     List of operations across one or more resources that belong to this group.
         #     Loosely based on RFC6902 and should be performed in the order they appear.
         class OperationGroup
@@ -138,7 +138,7 @@ module Google
         #     Can be set for action 'test' for advanced matching for the value of
         #     'path' field. Either this or `value` will be set for 'test' operation.
         # @!attribute [rw] path_filters
-        #   @return [Google::Cloud::Recommender::V1::Operation::PathFiltersEntry]
+        #   @return [Google::Protobuf::Map{String => Google::Protobuf::Value}]
         #     Set of filters to apply if `path` refers to array elements or nested array
         #     elements in order to narrow down to a single unique element that is being
         #     tested/modified.
@@ -160,7 +160,7 @@ module Google
         #     When both path_filters and path_value_matchers are set, an implicit AND
         #     must be performed.
         # @!attribute [rw] path_value_matchers
-        #   @return [Google::Cloud::Recommender::V1::Operation::PathValueMatchersEntry]
+        #   @return [Google::Protobuf::Map{String => Google::Cloud::Recommender::V1::ValueMatcher}]
         #     Similar to path_filters, this contains set of filters to apply if `path`
         #     field referes to array elements. This is meant to support value matching
         #     beyond exact match. To perform exact match, use path_filters.
@@ -249,7 +249,7 @@ module Google
         #   @return [ENUM(State)]
         #     The state of the recommendation, Eg ACTIVE, SUCCEEDED, FAILED.
         # @!attribute [rw] state_metadata
-        #   @return [Google::Cloud::Recommender::V1::RecommendationStateInfo::StateMetadataEntry]
+        #   @return [Google::Protobuf::Map{String => String}]
         #     A map of metadata for the state, provided by user or automations systems.
         class RecommendationStateInfo
           include Google::Protobuf::MessageExts

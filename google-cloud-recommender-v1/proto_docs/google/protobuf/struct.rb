@@ -28,7 +28,7 @@ module Google
     #
     # The JSON representation for `Struct` is JSON object.
     # @!attribute [rw] fields
-    #   @return [Google::Protobuf::Struct::FieldsEntry]
+    #   @return [Google::Protobuf::Map{String => Google::Protobuf::Value}]
     #     Unordered map of dynamically typed values.
     class Struct
       include Google::Protobuf::MessageExts
@@ -77,7 +77,7 @@ module Google
     #
     # The JSON representation for `ListValue` is JSON array.
     # @!attribute [rw] values
-    #   @return [Google::Protobuf::Value]
+    #   @return [Array<Google::Protobuf::Value>]
     #     Repeated field of dynamically typed values.
     class ListValue
       include Google::Protobuf::MessageExts

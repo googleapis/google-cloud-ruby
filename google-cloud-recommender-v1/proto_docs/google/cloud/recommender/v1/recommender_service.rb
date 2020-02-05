@@ -55,7 +55,7 @@ module Google
 
         # Response to the `ListRecommendations` method.
         # @!attribute [rw] recommendations
-        #   @return [Google::Cloud::Recommender::V1::Recommendation]
+        #   @return [Array<Google::Cloud::Recommender::V1::Recommendation>]
         #     The set of recommendations for the `parent` resource.
         # @!attribute [rw] next_page_token
         #   @return [String]
@@ -80,7 +80,7 @@ module Google
         #   @return [String]
         #     Required. Name of the recommendation.
         # @!attribute [rw] state_metadata
-        #   @return [Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest::StateMetadataEntry]
+        #   @return [Google::Protobuf::Map{String => String}]
         #     State properties to include with this state. Overwrites any existing
         #     `state_metadata`.
         #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\\{0,62\}$/.
@@ -107,7 +107,7 @@ module Google
         #   @return [String]
         #     Required. Name of the recommendation.
         # @!attribute [rw] state_metadata
-        #   @return [Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest::StateMetadataEntry]
+        #   @return [Google::Protobuf::Map{String => String}]
         #     State properties to include with this state. Overwrites any existing
         #     `state_metadata`.
         #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\\{0,62\}$/.
@@ -134,7 +134,7 @@ module Google
         #   @return [String]
         #     Required. Name of the recommendation.
         # @!attribute [rw] state_metadata
-        #   @return [Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest::StateMetadataEntry]
+        #   @return [Google::Protobuf::Map{String => String}]
         #     State properties to include with this state. Overwrites any existing
         #     `state_metadata`.
         #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\\{0,62\}$/.

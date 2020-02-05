@@ -288,7 +288,7 @@ module Google
             # @overload mark_recommendation_claimed(name: nil, state_metadata: nil, etag: nil)
             #   @param name [String]
             #     Required. Name of the recommendation.
-            #   @param state_metadata [Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest::StateMetadataEntry | Hash]
+            #   @param state_metadata [Hash{String => String}]
             #     State properties to include with this state. Overwrites any existing
             #     `state_metadata`.
             #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\\{0,62\}$/.
@@ -371,7 +371,7 @@ module Google
             # @overload mark_recommendation_succeeded(name: nil, state_metadata: nil, etag: nil)
             #   @param name [String]
             #     Required. Name of the recommendation.
-            #   @param state_metadata [Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest::StateMetadataEntry | Hash]
+            #   @param state_metadata [Hash{String => String}]
             #     State properties to include with this state. Overwrites any existing
             #     `state_metadata`.
             #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\\{0,62\}$/.
@@ -454,7 +454,7 @@ module Google
             # @overload mark_recommendation_failed(name: nil, state_metadata: nil, etag: nil)
             #   @param name [String]
             #     Required. Name of the recommendation.
-            #   @param state_metadata [Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest::StateMetadataEntry | Hash]
+            #   @param state_metadata [Hash{String => String}]
             #     State properties to include with this state. Overwrites any existing
             #     `state_metadata`.
             #     Keys must match the regex /^[a-z0-9][a-z0-9_.-]\\\{0,62\}$/.

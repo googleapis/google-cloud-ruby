@@ -140,7 +140,7 @@ module Google
     #     should use PascalCase (UpperCamelCase). The maximum number of
     #     characters allowed for the `resource_type_kind` is 100.
     # @!attribute [rw] pattern
-    #   @return [String]
+    #   @return [Array<String>]
     #     Optional. The relative resource name pattern associated with this resource
     #     type. The DNS prefix of the full resource name shouldn't be specified here.
     #

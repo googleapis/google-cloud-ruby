@@ -181,7 +181,7 @@ class Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
-    state_metadata = [{}]
+    state_metadata = {}
     etag = "hello world"
 
     mark_recommendation_claimed_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -243,7 +243,7 @@ class Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
-    state_metadata = [{}]
+    state_metadata = {}
     etag = "hello world"
 
     mark_recommendation_succeeded_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -305,7 +305,7 @@ class Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
-    state_metadata = [{}]
+    state_metadata = {}
     etag = "hello world"
 
     mark_recommendation_failed_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
