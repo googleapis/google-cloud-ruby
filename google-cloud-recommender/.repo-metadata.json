@@ -1,0 +1,8 @@
+{
+    "name": "recommender",
+    "language": "ruby",
+    "distribution_name": "google-cloud-recommender",
+    "module_name": "Recommender",
+    "module_name_credentials": "Recommender::V1",
+    "env_var_prefix": "RECOMMENDER"
+}
