@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2020-02-04
+
+#### Features
+
+* Add AutoscalingPolicyServiceClient
+
 ### 0.7.3 / 2020-01-23
 
 #### Documentation
