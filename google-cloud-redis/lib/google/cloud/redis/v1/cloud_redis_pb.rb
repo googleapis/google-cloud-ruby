@@ -31,6 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :memory_size_gb, :int32, 18
     optional :authorized_network, :string, 20
     optional :persistence_iam_identity, :string, 21
+    optional :connect_mode, :enum, 22, "google.cloud.redis.v1.Instance.ConnectMode"
   end
   add_enum "google.cloud.redis.v1.Instance.State" do
     value :STATE_UNSPECIFIED, 0
@@ -47,6 +48,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :TIER_UNSPECIFIED, 0
     value :BASIC, 1
     value :STANDARD_HA, 3
+  end
+  add_enum "google.cloud.redis.v1.Instance.ConnectMode" do
+    value :CONNECT_MODE_UNSPECIFIED, 0
+    value :DIRECT_PEERING, 1
+    value :PRIVATE_SERVICE_ACCESS, 2
   end
   add_message "google.cloud.redis.v1.ListInstancesRequest" do
     optional :parent, :string, 1
@@ -129,6 +135,7 @@ module Google
         Instance = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance").msgclass
         Instance::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.State").enummodule
         Instance::Tier = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.Tier").enummodule
+        Instance::ConnectMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.ConnectMode").enummodule
         ListInstancesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.ListInstancesRequest").msgclass
         ListInstancesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.ListInstancesResponse").msgclass
         GetInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.GetInstanceRequest").msgclass

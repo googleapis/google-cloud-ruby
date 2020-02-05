@@ -310,6 +310,14 @@ module Google
                 {'name' => request.name}
               end
             )
+            @upgrade_instance = Google::Gax.create_api_call(
+              @cloud_redis_stub.method(:upgrade_instance),
+              defaults["upgrade_instance"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
           end
 
           # Service calls
@@ -318,6 +326,7 @@ module Google
           # location (region) or all locations.
           #
           # The location should have the following format:
+          #
           # * `projects/{project_id}/locations/{location_id}`
           #
           # If `location_id` is specified as `-` (wildcard), then all regions
@@ -871,6 +880,76 @@ module Google
               @delete_instance.call(req, options),
               @operations_client,
               Google::Protobuf::Empty,
+              Google::Protobuf::Any,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
+          end
+
+          # Upgrades Redis instance to the newer Redis version specified in the
+          # request.
+          #
+          # @param name [String]
+          #   Required. Redis instance resource name using the form:
+          #       `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+          #   where `location_id` refers to a GCP region.
+          # @param redis_version [String]
+          #   Required. Specifies the target version of Redis software to upgrade to.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/redis"
+          #
+          #   cloud_redis_client = Google::Cloud::Redis.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::Redis::V1beta1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
+          #
+          #   # TODO: Initialize `redis_version`:
+          #   redis_version = ''
+          #
+          #   # Register a callback during the method call.
+          #   operation = cloud_redis_client.upgrade_instance(formatted_name, redis_version) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def upgrade_instance \
+              name,
+              redis_version,
+              options: nil
+            req = {
+              name: name,
+              redis_version: redis_version
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest)
+            operation = Google::Gax::Operation.new(
+              @upgrade_instance.call(req, options),
+              @operations_client,
+              Google::Cloud::Redis::V1beta1::Instance,
               Google::Protobuf::Any,
               call_options: options
             )

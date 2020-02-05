@@ -1109,4 +1109,149 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       end
     end
   end
+
+  describe 'upgrade_instance' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::Redis::V1beta1::CloudRedisClient#upgrade_instance."
+
+    it 'invokes upgrade_instance without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Redis::V1beta1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
+      redis_version = ''
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      display_name = "displayName1615086568"
+      location_id = "locationId552319461"
+      alternative_location_id = "alternativeLocationId-718920621"
+      redis_version_2 = "redisVersion2-1453337401"
+      reserved_ip_range = "reservedIpRange-1082940580"
+      host = "host3208616"
+      port = 3446913
+      current_location_id = "currentLocationId1312712735"
+      status_message = "statusMessage-239442758"
+      memory_size_gb = 34199707
+      authorized_network = "authorizedNetwork-1733809270"
+      persistence_iam_identity = "persistenceIamIdentity1061944584"
+      expected_response = {
+        name: name_2,
+        display_name: display_name,
+        location_id: location_id,
+        alternative_location_id: alternative_location_id,
+        redis_version: redis_version_2,
+        reserved_ip_range: reserved_ip_range,
+        host: host,
+        port: port,
+        current_location_id: current_location_id,
+        status_message: status_message,
+        memory_size_gb: memory_size_gb,
+        authorized_network: authorized_network,
+        persistence_iam_identity: persistence_iam_identity
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Redis::V1beta1::Instance)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/upgrade_instance_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(redis_version, request.redis_version)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:upgrade_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("upgrade_instance")
+
+      Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Redis.new(version: :v1beta1)
+
+          # Call method
+          response = client.upgrade_instance(formatted_name, redis_version)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes upgrade_instance and returns an operation error.' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Redis::V1beta1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
+      redis_version = ''
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Redis::V1beta1::CloudRedisClient#upgrade_instance.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/upgrade_instance_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(redis_version, request.redis_version)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:upgrade_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("upgrade_instance")
+
+      Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Redis.new(version: :v1beta1)
+
+          # Call method
+          response = client.upgrade_instance(formatted_name, redis_version)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes upgrade_instance with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Redis::V1beta1::CloudRedisClient.instance_path("[PROJECT]", "[LOCATION]", "[INSTANCE]")
+      redis_version = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest, request)
+        assert_equal(formatted_name, request.name)
+        assert_equal(redis_version, request.redis_version)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:upgrade_instance, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockCloudRedisCredentials_v1beta1.new("upgrade_instance")
+
+      Google::Cloud::Redis::V1beta1::CloudRedis::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Redis::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Redis.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.upgrade_instance(formatted_name, redis_version)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
 end
