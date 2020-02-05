@@ -159,6 +159,13 @@ Google::Cloud.configure.add_config! :spanner do |config|
     ENV["SPANNER_EMULATOR_HOST"]
   end
 
+  default_query_options = Google::Cloud::Config.deferred do
+    query_options = {}
+    optimizer_version = ENV["SPANNER_OPTIMIZER_VERSION"]
+    query_options[:optimizer_version] = optimizer_version if optimizer_version
+    query_options
+  end
+
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds,
@@ -172,4 +179,5 @@ Google::Cloud.configure.add_config! :spanner do |config|
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :lib_name, nil, match: String, allow_nil: true
   config.add_field! :lib_version, nil, match: String, allow_nil: true
+  config.add_field! :query_options, default_query_options, match: Hash
 end

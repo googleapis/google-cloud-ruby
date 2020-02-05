@@ -306,7 +306,8 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def execute_query sql, params: nil, types: nil, single_use: nil
+        def execute_query sql, params: nil, types: nil, single_use: nil,
+                          query_options: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -316,7 +317,8 @@ module Google
           results = nil
           @pool.with_session do |session|
             results = session.execute_query \
-              sql, params: params, types: types, transaction: single_use_tx
+              sql, params: params, types: types, transaction: single_use_tx,
+              query_options: query_options
           end
           results
         end

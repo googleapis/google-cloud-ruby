@@ -250,7 +250,7 @@ module Google
         #   end
         #
         def execute_query sql, params: nil, types: nil, transaction: nil,
-                          partition_token: nil, seqno: nil
+                          partition_token: nil, seqno: nil, query_options: nil
           ensure_service!
 
           results = Results.execute_query service, path, sql,
@@ -258,7 +258,8 @@ module Google
                                           types: types,
                                           transaction: transaction,
                                           partition_token: partition_token,
-                                          seqno: seqno
+                                          seqno: seqno,
+                                          query_options: query_options
           @last_updated_at = Time.now
           results
         end

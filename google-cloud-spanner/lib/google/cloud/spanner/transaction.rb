@@ -251,7 +251,7 @@ module Google
         #     end
         #   end
         #
-        def execute_query sql, params: nil, types: nil
+        def execute_query sql, params: nil, types: nil, query_options: nil
           ensure_session!
 
           @seqno += 1
@@ -259,7 +259,8 @@ module Google
           params, types = Convert.to_input_params_and_types params, types
 
           session.execute_query sql, params: params, types: types,
-                                     transaction: tx_selector, seqno: @seqno
+                                     transaction: tx_selector, seqno: @seqno,
+                                     query_options: query_options
         end
         alias execute execute_query
         alias query execute_query

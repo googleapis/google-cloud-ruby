@@ -470,12 +470,14 @@ module Google
         #     end
         #   end
         #
-        def client instance_id, database_id, pool: {}, labels: nil
+        def client instance_id, database_id, pool: {}, labels: nil,
+                   query_options: query_options
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
           Client.new self, instance_id, database_id,
                      session_labels: labels,
-                     pool_opts: valid_session_pool_options(pool)
+                     pool_opts: valid_session_pool_options(pool),
+                     query_options: query_options
         end
 
         ##
