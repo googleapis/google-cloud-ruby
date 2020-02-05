@@ -20,6 +20,18 @@ module Google
     module Bigquery
       ##
       # Input/output argument of a function or a stored procedure.
+      #
+      # @example
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   routine = dataset.routine "my_routine"
+      #
+      #   routine.arguments = [
+      #     Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
+      #   ]
+      #
       class Argument
         ##
         # Creates a new, immutable Argument object.
@@ -37,15 +49,6 @@ module Google
 
         ##
         # The type of a variable, e.g., a function argument.
-        # Examples:
-        # INT64: `type_kind="INT64"`
-        # ARRAY<STRING>: `type_kind="ARRAY", array_element_type="STRING"`
-        # STRUCT<x STRING, y ARRAY<DATE>>:
-        # `type_kind="STRUCT",
-        # struct_type=`fields=[
-        # `name="x", type=`type_kind="STRING"``,
-        # `name="y", type=`type_kind="ARRAY", array_element_type="DATE"``
-        # ]``
         #
         # @return [StandardSql::DataType]
         #

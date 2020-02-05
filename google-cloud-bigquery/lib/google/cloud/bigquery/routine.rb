@@ -22,7 +22,41 @@ require "google/cloud/bigquery/argument"
 module Google
   module Cloud
     module Bigquery
+      ##
+      # # Routine
+      #
       # A user-defined function or a stored procedure.
+      #
+      # @example Creating a new routine:
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #
+      #   routine = dataset.create_routine "my_routine" do |r|
+      #     r.routine_type = "SCALAR_FUNCTION"
+      #     r.language = "SQL"
+      #     r.arguments = [
+      #       Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
+      #     ]
+      #     r.body = "x * 3"
+      #     r.description = "My routine description"
+      #   end
+      #
+      #   puts routine.routine_id
+      #
+      # @example Retrieving and updating an existing routine:
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   routine = dataset.routine "my_routine"
+      #
+      #   routine.update do |r|
+      #     r.body = "x * 4"
+      #     r.description = "My new routine description"
+      #   end
+      #
       class Routine
         ##
         # @private The Service object.
@@ -111,19 +145,31 @@ module Google
           @gapi.etag
         end
 
-        # Required. The type of routine.
-        # @return [String]
-        # SCALAR_FUNCTION  Non-builtin permanent scalar function.
-        # PROCEDURE  Stored procedure.
+        ##
+        # The type of routine. Required.
+        #
+        # * `SCALAR_FUNCTION` - Non-builtin permanent scalar function.
+        # * `PROCEDURE` - Stored procedure.
+        #
+        # @return [String] The type of routine.
+        #
+        # @!group Attributes
+        #
         def routine_type
           return nil if reference?
           @gapi.routine_type
         end
 
-        # Required. The type of routine.
-        # @return [String]
-        # SCALAR_FUNCTION  Non-builtin permanent scalar function.
-        # PROCEDURE  Stored procedure.
+        ##
+        # Updates the type of routine. Required.
+        #
+        # * `SCALAR_FUNCTION` - Non-builtin permanent scalar function.
+        # * `PROCEDURE` - Stored procedure.
+        #
+        # @param [String] new_routine_type The new type of the routine.
+        #
+        # @!group Attributes
+        #
         def routine_type= new_routine_type
           ensure_full_data!
           @gapi.routine_type = new_routine_type
@@ -135,6 +181,8 @@ module Google
         #
         # @return [Boolean] `true` when `PROCEDURE`, `false` otherwise.
         #
+        # @!group Attributes
+        #
         def procedure?
           @gapi.routine_type == "PROCEDURE"
         end
@@ -143,6 +191,8 @@ module Google
         # Checks if the value of {#routine_type} is `SCALAR_FUNCTION`. The default is `true`.
         #
         # @return [Boolean] `true` when `SCALAR_FUNCTION`, `false` otherwise.
+        #
+        # @!group Attributes
         #
         def scalar_function?
           @gapi.routine_type == "SCALAR_FUNCTION"
@@ -172,19 +222,31 @@ module Google
           Convert.millis_to_time @gapi.last_modified_time
         end
 
-        # Optional. Defaults to "SQL".
-        # @return [String]
-        # SQL  SQL language.
-        # JAVASCRIPT  JavaScript language.
+        ##
+        # The programming language of routine. Optional. Defaults to "SQL".
+        #
+        # * `SQL` - SQL language.
+        # * `JAVASCRIPT` - JavaScript language.
+        #
+        # @return [String] The language in upper case.
+        #
+        # @!group Attributes
+        #
         def language
           return nil if reference?
           @gapi.language
         end
 
-        # Optional. Defaults to "SQL".
-        # @return [String]
-        # SQL  SQL language.
-        # JAVASCRIPT  JavaScript language.
+        ##
+        # Updates the programming language of routine. Optional. Defaults to "SQL".
+        #
+        # * `SQL` - SQL language.
+        # * `JAVASCRIPT` - JavaScript language.
+        #
+        # @param [String] new_language The new language in upper case.
+        #
+        # @!group Attributes
+        #
         def language= new_language
           ensure_full_data!
           @gapi.language = new_language
@@ -192,9 +254,11 @@ module Google
         end
 
         ##
-        # Checks if the value of {#language} is JAVASCRIPT. The default is `false`.
+        # Checks if the value of {#language} is `JAVASCRIPT`. The default is `false`.
         #
         # @return [Boolean] `true` when `JAVASCRIPT`, `false` otherwise.
+        #
+        # @!group Attributes
         #
         def javascript?
           @gapi.language == "JAVASCRIPT"
@@ -205,13 +269,15 @@ module Google
         #
         # @return [Boolean] `true` when `SQL` or `nil`, `false` otherwise.
         #
+        # @!group Attributes
+        #
         def sql?
           return true if @gapi.language.nil?
           @gapi.language == "SQL"
         end
 
         ##
-        # The input/output arguments of the routine.
+        # The input/output arguments of the routine. Optional.
         #
         # @return [Array<Argument>] An array of argument objects.
         #
@@ -227,20 +293,30 @@ module Google
         #     puts "* #{arguments.name}"
         #   end
         #
+        # @!group Attributes
+        #
         def arguments
           return nil if reference?
           ensure_full_data!
           # always return frozen arguments
           Array(@gapi.arguments).map { |a| Argument.from_gapi a }.freeze
         end
-        # Optional.
-        # @return [Array<Google::Apis::BigqueryV2::Argument>]
-        # attr_accessor :arguments
 
         ##
-        # Updates the input/output arguments of the routine.
+        # Updates the input/output arguments of the routine. Optional.
         #
         # @param [Array<Argument>] new_arguments The new arguments.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.arguments = [
+        #     Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
+        #   ]
         #
         # @!group Attributes
         #
@@ -250,18 +326,26 @@ module Google
           update_gapi!
         end
 
-        ###
-        # The type of a variable, e.g., a function argument.
+        ##
+        # The return type of the routine. Optional if the routine is a SQL function ({#sql?}); required otherwise.
         #
-        # Examples:
-        # INT64: `type_kind="INT64"`
-        # ARRAY<STRING>: `type_kind="ARRAY", array_element_type="STRING"`
-        # STRUCT<x STRING, y ARRAY<DATE>>:
-        # `type_kind="STRUCT",
-        # struct_type=`fields=[
-        # `name="x", type=`type_kind="STRING"``,
-        # `name="y", type=`type_kind="ARRAY", array_element_type="DATE"``
-        # ]``
+        # If absent, the return type is inferred from {#body} at query time in each query that references this routine.
+        # If present, then the evaluated result will be cast to the specified returned type at query time.
+        #
+        # For example, for the functions created with the following statements:
+        #
+        # * `CREATE FUNCTION Add(x FLOAT64, y FLOAT64) RETURNS FLOAT64 AS (x + y);`
+        # * `CREATE FUNCTION Increment(x FLOAT64) AS (Add(x, 1));`
+        # * `CREATE FUNCTION Decrement(x FLOAT64) RETURNS FLOAT64 AS (Add(x, -1));`
+        #
+        # The returnType is `{typeKind: "FLOAT64"}` for Add and Decrement, and is absent for Increment (inferred as
+        # `FLOAT64` at query time).
+        #
+        # Suppose the function Add is replaced by `CREATE OR REPLACE FUNCTION Add(x INT64, y INT64) AS (x + y);`
+        #
+        # Then the inferred return type of Increment is automatically changed to `INT64` at query time, while the return
+        # type of Decrement remains `FLOAT64`.
+        #
         # @return [Google::Cloud::Bigquery::StandardSql::DataType]
         #
         # @example
@@ -271,7 +355,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   routine = dataset.routine "my_routine"
         #
-        #   routine.return_type # ORIGINALVALUE
+        #   routine.return_type.type_kind #=> "INT64"
         #
         # @!group Attributes
         #
@@ -283,9 +367,28 @@ module Google
         end
 
         ##
-        # DOCS
+        # Updates the return type of the routine. Optional if the routine is a SQL function ({#sql?}); required
+        # otherwise.
         #
-        # @param [Google::Cloud::Bigquery::StandardSql::DataType] new_return_type DESC
+        # If absent, the return type is inferred from {#body} at query time in each query that references this routine.
+        # If present, then the evaluated result will be cast to the specified returned type at query time.
+        #
+        # For example, for the functions created with the following statements:
+        #
+        # * `CREATE FUNCTION Add(x FLOAT64, y FLOAT64) RETURNS FLOAT64 AS (x + y);`
+        # * `CREATE FUNCTION Increment(x FLOAT64) AS (Add(x, 1));`
+        # * `CREATE FUNCTION Decrement(x FLOAT64) RETURNS FLOAT64 AS (Add(x, -1));`
+        #
+        # The returnType is `{typeKind: "FLOAT64"}` for Add and Decrement, and is absent for Increment (inferred as
+        # `FLOAT64` at query time).
+        #
+        # Suppose the function Add is replaced by `CREATE OR REPLACE FUNCTION Add(x INT64, y INT64) AS (x + y);`
+        #
+        # Then the inferred return type of Increment is automatically changed to `INT64` at query time, while the return
+        # type of Decrement remains `FLOAT64`.
+        #
+        # @param [Google::Cloud::Bigquery::StandardSql::DataType, String] new_return_type The new return type for the
+        #   routine.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -295,21 +398,24 @@ module Google
         #   routine = dataset.routine "my_routine"
         #
         #   routine.return_type.type_kind #=> "INT64"
-        #   routine.return_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRING"
+        #   routine.return_type = "STRING"
         #
         # @!group Attributes
         #
         def return_type= new_return_type
           ensure_full_data!
-          @gapi.return_type = new_return_type&.to_gapi
+          @gapi.return_type = StandardSql::DataType.gapi_from_string_or_data_type new_return_type
           update_gapi!
         end
 
         ##
-        # If {#language} is `JAVASCRIPT`, a list of the Google Cloud Storage URIs of imported JavaScript libraries.
+        # The list of the Google Cloud Storage URIs of imported JavaScript libraries. Optional. Only used if
+        # {#language} is `JAVASCRIPT` ({#javascript?}).
         #
         # @return [Array<String>, nil] A frozen array of Google Cloud Storage URIs, e.g.
         #   `["gs://cloud-samples-data/bigquery/udfs/max-value.js"]`.
+        #
+        # @!group Attributes
         #
         def imported_libraries
           return nil if reference?
@@ -318,10 +424,24 @@ module Google
         end
 
         ##
-        # If {#language} is `JAVASCRIPT`, a list of the Google Cloud Storage URIs of imported JavaScript libraries.
+        # Updates the list of the Google Cloud Storage URIs of imported JavaScript libraries. Optional. Only used if
+        # {#language} is `JAVASCRIPT` ({#javascript?}).
         #
         # @param [Array<String>, nil] new_imported_libraries An array of Google Cloud Storage URIs, e.g.
         #   `["gs://cloud-samples-data/bigquery/udfs/max-value.js"]`.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.imported_libraries = [
+        #     "gs://cloud-samples-data/bigquery/udfs/max-value.js"
+        #   ]
+        #
+        # @!group Attributes
         #
         def imported_libraries= new_imported_libraries
           ensure_full_data!
@@ -330,34 +450,31 @@ module Google
         end
 
         ##
-        # The body of the routine.
+        # The body of the routine. Required.
         #
-        # For functions {#scalar_function?}, this is the expression in the `AS` clause.
+        # For functions ({#scalar_function?}), this is the expression in the `AS` clause.
         #
-        # When the routine is a SQL function {#sql?}, it is the substring inside (but excluding) the parentheses. For
+        # When the routine is a SQL function ({#sql?}), it is the substring inside (but excluding) the parentheses. For
         # example, for the function created with the following statement:
-        # `CREATE FUNCTION JoinLines(x string, y string) as (concat(x, "\n", y))`
-        # The definition_body is `concat(x, "\n", y)` (\n is not replaced with
-        # linebreak). ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
+        # ```
+        # CREATE FUNCTION JoinLines(x string, y string) as (concat(x, "\n", y))
+        # ```
+        # The definition_body is `concat(x, "\n", y)` (`\n` is not replaced with linebreak).
         #
-        # When the routine is a JavaScript function {#javascript?}, it is the evaluated string in the `AS` clause.
-        # For example, for the function created with the following statement:
-        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
+        # When the routine is a JavaScript function ({#javascript?}), it is the evaluated string in the `AS` clause. For
+        # example, for the function created with the following statement:
+        # ```
+        # CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'
+        # ```
         # The definition_body is
-        # `"return \"\n\";\n"` ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
-        # Note that both \n are replaced with linebreaks.
+        # ```
+        # "return \"\n\";\n"`
+        # ```
+        # Note that both `\n` are replaced with linebreaks.
         #
-        # For functions {sql?}, this is the expression in the `AS` clause. It is the substring inside (but excluding)
-        # the parentheses. For example, for the function created with the following statement: `CREATE FUNCTION
-        # JoinLines(x string, y string) as (concat(x, "\n", y))` The definition_body is `"concat(x, \"\n\", y)""`.
+        # @return [String] The body of the routine.
         #
-        # If language=JAVASCRIPT, it is the evaluated string in the AS clause.
-        # For example, for the function created with the following statement:
-        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
-        # The definition_body is
-        # `"return \"\n\";\n"`
-        #
-        # @return [String]
+        # @!group Attributes
         #
         def body
           return nil if reference?
@@ -366,35 +483,31 @@ module Google
         end
 
         ##
-        # The body of the routine.
+        # Updates the body of the routine. Required.
         #
-        # For functions {#scalar_function?}, this is the expression in the `AS` clause.
+        # For functions ({#scalar_function?}), this is the expression in the `AS` clause.
         #
-        # When the routine is a SQL function {#sql?}, it is the substring inside (but excluding) the
-        # parentheses. For example, for the function created with the following
-        # statement:
-        # `CREATE FUNCTION JoinLines(x string, y string) as (concat(x, "\n", y))`
-        # The definition_body is `concat(x, "\n", y)` (\n is not replaced with
-        # linebreak). ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
+        # When the routine is a SQL function ({#sql?}), it is the substring inside (but excluding) the parentheses. For
+        # example, for the function created with the following statement:
+        # ```
+        # CREATE FUNCTION JoinLines(x string, y string) as (concat(x, "\n", y))
+        # ```
+        # The definition_body is `concat(x, "\n", y)` (`\n` is not replaced with linebreak).
         #
-        # When the routine is a JavaScript function {#javascript?}, it is the evaluated string in the `AS` clause.
-        # For example, for the function created with the following statement:
-        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
+        # When the routine is a JavaScript function ({#javascript?}), it is the evaluated string in the `AS` clause. For
+        # example, for the function created with the following statement:
+        # ```
+        # CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'
+        # ```
         # The definition_body is
-        # `"return \"\n\";\n"` ((RUN THIS AND GET THE ACTUAL VALUE FOR THIS))
-        # Note that both \n are replaced with linebreaks.
+        # ```
+        # "return \"\n\";\n"`
+        # ```
+        # Note that both `\n` are replaced with linebreaks.
         #
-        # For functions {sql?}, this is the expression in the `AS` clause. It is the substring inside (but excluding)
-        # the parentheses. For example, for the function created with the following statement: `CREATE FUNCTION
-        # JoinLines(x string, y string) as (concat(x, "\n", y))` The definition_body is `"concat(x, \"\n\", y)""`.
+        # @param [String] new_body The new body of the routine.
         #
-        # If language=JAVASCRIPT, it is the evaluated string in the AS clause.
-        # For example, for the function created with the following statement:
-        # `CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'`
-        # The definition_body is
-        # `"return \"\n\";\n"`
-        #
-        # @return [String]
+        # @!group Attributes
         #
         def body= new_body
           ensure_full_data!
@@ -403,7 +516,7 @@ module Google
         end
 
         ###
-        # Optional. [Experimental] The description of the routine if defined.
+        # The description of the routine if defined. Optional. [Experimental]
         #
         # @return [String] The routine description.
         #
@@ -414,7 +527,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   routine = dataset.routine "my_routine"
         #
-        #   routine.description # "My routine description"
+        #   routine.description #=> "My routine description"
         #
         # @!group Attributes
         #
@@ -425,7 +538,7 @@ module Google
         end
 
         ##
-        # Updates the description of the routine.
+        # Updates the description of the routine. Optional. [Experimental]
         #
         # @param [String] new_description The new routine description.
         #
@@ -436,7 +549,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   routine = dataset.routine "my_routine"
         #
-        #   routine.description # "My routine description"
+        #   routine.description #=> "My routine description"
         #   routine.description = "My updated routine description"
         #
         # @!group Attributes
@@ -449,10 +562,12 @@ module Google
 
         ##
         # Updates the routine with changes made in the given block in a single update request. The following attributes
-        # may be set: {#routine_type=}, {#language=}, {#arguments=}, {#return_type=}, {#imported_libraries=}, {#body=},
-        # and {#description=}.
+        # may be set: {Updater#routine_type=}, {Updater#language=}, {Updater#arguments=}, {Updater#return_type=},
+        # {Updater#imported_libraries=}, {Updater#body=}, and {Updater#description=}.
         #
-        # @yield [routine] a block yielding a delegate object for updating the routine
+        # @yield [routine] A block for setting properties on the routine.
+        # @yieldparam [Google::Cloud::Bigquery::Routine::Updater] routine An updater to set additional properties on the
+        #   routine.
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -468,7 +583,7 @@ module Google
         #       Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
         #     ]
         #     r.body = "x * 3"
-        #     r.description = "my new description"
+        #     r.description = "My new routine description"
         #   end
         #
         # @!group Lifecycle
@@ -627,9 +742,9 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   routine = dataset.routines.first
         #
-        #   routine.resource_partial? # true
+        #   routine.resource_partial? #=> true
         #   routine.description # Loads the full resource.
-        #   routine.resource_partial? # false
+        #   routine.resource_partial? #=> false
         #
         def resource_partial?
           resource? && !resource_full?
@@ -650,10 +765,10 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   routine = dataset.routine "my_routine"
         #
-        #   routine.resource_full? # true
+        #   routine.resource_full? #=> true
         #
         def resource_full?
-          resource? && @gapi.description
+          resource? && !@gapi.definition_body.nil?
         end
 
         ##
@@ -716,49 +831,208 @@ module Google
         end
 
         ##
-        # Yielded to a block to accumulate changes. See Dataset#create_routine and Routine#update.
+        # Yielded to a block to accumulate changes. See {Dataset#create_routine} and {Routine#update}.
+        #
+        # @example Creating a new routine:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routine = dataset.create_routine "my_routine" do |r|
+        #     r.routine_type = "SCALAR_FUNCTION"
+        #     r.language = "SQL"
+        #     r.arguments = [
+        #       Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
+        #     ]
+        #     r.body = "x * 3"
+        #     r.description = "My routine description"
+        #   end
+        #
+        #   puts routine.routine_id
+        #
+        # @example Updating an existing routine:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.routine "my_routine"
+        #
+        #   routine.update do |r|
+        #     r.body = "x * 4"
+        #     r.description = "My new routine description"
+        #   end
+        #
         class Updater < Routine
           ##
-          # Create an Updater object.
+          # @private Create an Updater object.
           def initialize gapi
             @original_gapi = gapi
             @gapi = gapi.dup
           end
 
+          ##
+          # Updates the type of routine. Required.
+          #
+          # * `SCALAR_FUNCTION` - Non-builtin permanent scalar function.
+          # * `PROCEDURE` - Stored procedure.
+          #
+          # @param [String] new_routine_type The new type of the routine.
+          #
           def routine_type= new_routine_type
             @gapi.routine_type = new_routine_type
           end
 
+          ##
+          # Updates the programming language of routine. Optional. Defaults to "SQL".
+          #
+          # * `SQL` - SQL language.
+          # * `JAVASCRIPT` - JavaScript language.
+          #
+          # @param [String] new_language The new language in upper case.
+          #
           def language= new_language
             @gapi.language = new_language
           end
 
+          ##
+          # Updates the input/output arguments of the routine. Optional.
+          #
+          # @param [Array<Argument>] new_arguments The new arguments.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   routine = dataset.routine "my_routine"
+          #
+          #   routine.arguments = [
+          #     Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
+          #   ]
+          #
           def arguments= new_arguments
             @gapi.arguments = new_arguments.map(&:to_gapi)
           end
 
+          ##
+          # Updates the return type of the routine. Optional if the routine is a SQL function ({#sql?}); required
+          # otherwise.
+          #
+          # If absent, the return type is inferred from {#body} at query time in each query that references this
+          # routine. If present, then the evaluated result will be cast to the specified returned type at query time.
+          #
+          # For example, for the functions created with the following statements:
+          #
+          # * `CREATE FUNCTION Add(x FLOAT64, y FLOAT64) RETURNS FLOAT64 AS (x + y);`
+          # * `CREATE FUNCTION Increment(x FLOAT64) AS (Add(x, 1));`
+          # * `CREATE FUNCTION Decrement(x FLOAT64) RETURNS FLOAT64 AS (Add(x, -1));`
+          #
+          # The returnType is `{typeKind: "FLOAT64"}` for Add and Decrement, and is absent for Increment (inferred as
+          # `FLOAT64` at query time).
+          #
+          # Suppose the function Add is replaced by `CREATE OR REPLACE FUNCTION Add(x INT64, y INT64) AS (x + y);`
+          #
+          # Then the inferred return type of Increment is automatically changed to `INT64` at query time, while the
+          # return type of Decrement remains `FLOAT64`.
+          #
+          # @param [Google::Cloud::Bigquery::StandardSql::DataType, String] new_return_type The new return type for the
+          #   routine.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   routine = dataset.routine "my_routine"
+          #
+          #   routine.return_type.type_kind #=> "INT64"
+          #   routine.return_type = "STRING"
+          #
           def return_type= new_return_type
             @gapi.return_type = StandardSql::DataType.gapi_from_string_or_data_type new_return_type
           end
 
+          ##
+          # Updates the list of the Google Cloud Storage URIs of imported JavaScript libraries. Optional. Only used if
+          # {#language} is `JAVASCRIPT` ({#javascript?}).
+          #
+          # @param [Array<String>, nil] new_imported_libraries An array of Google Cloud Storage URIs, e.g.
+          #   `["gs://cloud-samples-data/bigquery/udfs/max-value.js"]`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   routine = dataset.routine "my_routine"
+          #
+          #   routine.imported_libraries = [
+          #     "gs://cloud-samples-data/bigquery/udfs/max-value.js"
+          #   ]
+          #
           def imported_libraries= new_imported_libraries
             @gapi.imported_libraries = new_imported_libraries
           end
 
+          ##
+          # Updates the body of the routine. Required.
+          #
+          # For functions ({#scalar_function?}), this is the expression in the `AS` clause.
+          #
+          # When the routine is a SQL function ({#sql?}), it is the substring inside (but excluding) the parentheses.
+          # For example, for the function created with the following statement:
+          # ```
+          # CREATE FUNCTION JoinLines(x string, y string) as (concat(x, "\n", y))
+          # ```
+          # The definition_body is `concat(x, "\n", y)` (`\n` is not replaced with linebreak).
+          #
+          # When the routine is a JavaScript function ({#javascript?}), it is the evaluated string in the `AS` clause.
+          # For example, for the function created with the following statement:
+          # ```
+          # CREATE FUNCTION f() RETURNS STRING LANGUAGE js AS 'return "\n";\n'
+          # ```
+          # The definition_body is
+          # ```
+          # "return \"\n\";\n"`
+          # ```
+          # Note that both `\n` are replaced with linebreaks.
+          #
+          # @param [String] new_body The new body of the routine.
+          #
           def body= new_body
             @gapi.definition_body = new_body
           end
 
+          ##
+          # Updates the description of the routine. Optional. [Experimental]
+          #
+          # @param [String] new_description The new routine description.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   routine = dataset.routine "my_routine"
+          #
+          #   routine.description #=> "My routine description"
+          #   routine.description = "My updated routine description"
+          #
           def description= new_description
             @gapi.description = new_description
           end
 
           # rubocop:disable Style/CaseEquality
+
+          # @private
           def updates?
             !(@gapi === @original_gapi)
           end
+
           # rubocop:enable Style/CaseEquality
 
+          # @private
           def to_gapi
             @gapi
           end

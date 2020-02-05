@@ -819,15 +819,17 @@ module Google
         end
 
         ##
-        # Creates a new routine.
+        # Creates a new routine. The following attributes may be set in the yielded block:
+        # {Routine::Updater#routine_type=}, {Routine::Updater#language=}, {Routine::Updater#arguments=},
+        # {Routine::Updater#return_type=}, {Routine::Updater#imported_libraries=}, {Routine::Updater#body=}, and
+        # {Routine::Updater#description=}.
         #
         # @param [String] routine_id The ID of the routine. The ID must contain only
         #   letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length
         #   is 256 characters.
-        # @yield [routine] a block for setting the routine
-        # @yieldparam [Google::Cloud::Bigquery::Routine::Updater] routine An updater
-        #   to set additional properties on the routine in the API request to
-        #   create it.
+        # @yield [routine] A block for setting properties on the routine.
+        # @yieldparam [Google::Cloud::Bigquery::Routine::Updater] routine An updater to set additional properties on the
+        #   routine.
         #
         # @return [Google::Cloud::Bigquery::Routine] A new routine object.
         #
@@ -837,7 +839,17 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   routine = dataset.create_routine "my_routine"
+        #   routine = dataset.create_routine "my_routine" do |r|
+        #     r.routine_type = "SCALAR_FUNCTION"
+        #     r.language = "SQL"
+        #     r.arguments = [
+        #       Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
+        #     ]
+        #     r.body = "x * 3"
+        #     r.description = "My routine description"
+        #   end
+        #
+        #   puts routine.routine_id
         #
         # @!group Routine
         #

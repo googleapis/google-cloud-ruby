@@ -216,7 +216,7 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     mock.verify
 
     routine.arguments.size.must_equal new_arguments.size
-  end  
+  end
 
   it "updates its return_type" do
     routine.return_type.type_kind.must_equal return_type.type_kind
@@ -229,6 +229,23 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     routine.service.mocked_service = mock
 
     routine.return_type = new_return_type
+
+    mock.verify
+
+    routine.return_type.type_kind.must_equal new_return_type.type_kind
+  end
+
+  it "updates its return_type with a string" do
+    routine.return_type.type_kind.must_equal return_type.type_kind
+
+    mock = Minitest::Mock.new
+    updated_routine_gapi = routine_gapi.dup
+    updated_routine_gapi.return_type = Google::Apis::BigqueryV2::StandardSqlDataType.new type_kind: "STRING"
+    mock.expect :update_routine, updated_routine_gapi,
+      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+    routine.service.mocked_service = mock
+
+    routine.return_type = "STRING"
 
     mock.verify
 

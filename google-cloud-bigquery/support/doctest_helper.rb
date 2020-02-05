@@ -711,6 +711,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigquery::Routine" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, [String, String]
+      mock.expect :insert_routine, random_routine_gapi("my_dataset", "my_routine"), ["my-project", "my_dataset", Google::Apis::BigqueryV2::Routine]
       mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
       mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
       mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
@@ -1328,7 +1329,7 @@ def table_data_hash token: "token1234567890"
   }
 end
 
-def random_routine_hash dataset, id = nil, project: "my-project", etag: "etag123456789", description: "This is my routine", 
+def random_routine_hash dataset, id = nil, project: "my-project", etag: "etag123456789", 
                                             creation_time: time_millis, last_modified_time: time_millis
   id ||= "my_routine"
 
@@ -1347,7 +1348,7 @@ def random_routine_hash dataset, id = nil, project: "my-project", etag: "etag123
     returnType: { typeKind: "INT64" },
     importedLibraries: ["gs://cloud-samples-data/bigquery/udfs/max-value.js"],
     definitionBody: "x * 3",
-    description: description
+    description: "My routine description"
   }
   h[:etag] = etag if etag
   h[:creationTime] = creation_time if creation_time
@@ -1372,14 +1373,14 @@ def random_routine_partial_hash dataset, id
 end
 
 def list_routines_gapi dataset, count = 2, token = nil
-  routines = count.times.map { |i| random_routine_hash dataset, "my_routine_#{i}" }
+  routines = count.times.map { |i| random_routine_partial_hash dataset, "my_routine" }
   hash = { "kind"=>"bigquery#routineList", "routines" => routines }
   hash["nextPageToken"] = token unless token.nil?
   Google::Apis::BigqueryV2::ListRoutinesResponse.from_json hash.to_json
 end
 
-def random_routine_gapi dataset, id = nil, project: nil, description: nil
-  json = random_routine_hash(dataset, id, project: project, description: description).to_json
+def random_routine_gapi dataset, id = nil, project: nil
+  json = random_routine_hash(dataset, id, project: project).to_json
   Google::Apis::BigqueryV2::Routine.from_json json
 end
 
