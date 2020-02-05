@@ -46,8 +46,8 @@ module Google
     # @param [Hash] client_config A hash of values to override the default
     #   behavior of the API client. Optional.
     # @param [String] lib_name Library name. This will override the default
-    #   name of the library in the api call request header
-    #   for telemetry. Optional.
+    #   name of the library in the api call request header for telemetry.
+    #   Optional.
     # @param [String] lib_version Library version. This will override the
     #   default version of the library in the api call request header
     #   for telemetry. Optional.

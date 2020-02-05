@@ -69,8 +69,8 @@ module Google
       # @param [String] emulator_host Spanner emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
       # @param [String] lib_name Library name. This will override the default
-      #   name of the library in the api call request header
-      #   for telemetry. Optional.
+      #   name of the library in the api call request header for telemetry.
+      #   Optional.
       # @param [String] lib_version Library version. This will override the
       #   default version of the library in the api call request header
       #   for telemetry. Optional.
