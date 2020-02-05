@@ -18,7 +18,7 @@ require "google-cloud-billing"
 module Google
   module Cloud
     ##
-    # Allows developers to manage billing for their Google Cloud Platform projects programmatically
+    # Allows developers to manage billing for their Google Cloud Platform projects programmatically.
     module Billing
       ##
       # Create a new `CloudBilling::Client` object.
