@@ -143,7 +143,7 @@ describe Google::Cloud::PubSub, :pubsub do
       # update
       subscription.labels = {}
       subscription.labels.must_be :empty?
-
+    ensure
       # delete
       subscription.delete
     end
@@ -174,6 +174,7 @@ describe Google::Cloud::PubSub, :pubsub do
       received_message.msg.published_at.wont_be :nil?
       # Acknowledge the message
       subscription.ack received_message.ack_id
+    ensure
       # Remove the subscription
       subscription.delete
     end
@@ -232,7 +233,7 @@ describe Google::Cloud::PubSub, :pubsub do
       snapshot.labels.must_be :frozen?
       snapshot.labels = {}
       snapshot.labels.must_be :empty?
-
+    ensure
       # Remove the subscription
       subscription.delete
     end
@@ -284,7 +285,7 @@ describe Google::Cloud::PubSub, :pubsub do
         received_message.wont_be :nil?
         received_message.msg.data.must_equal msg.data
         received_message.delivery_attempt.must_be :nil?
-
+      ensure
         # Remove the subscription
         subscription.delete
         dead_letter_subscription.delete
