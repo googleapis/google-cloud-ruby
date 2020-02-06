@@ -191,6 +191,8 @@ module Google
         class SynthesizeSpeechConfig; end
 
         # Instructs the speech synthesizer on how to generate the output audio content.
+        # If this audio config is supplied in a request, it overrides all existing
+        # text-to-speech settings applied to the agent.
         # @!attribute [rw] audio_encoding
         #   @return [Google::Cloud::Dialogflow::V2::OutputAudioEncoding]
         #     Required. Audio encoding of the synthesized audio content.
