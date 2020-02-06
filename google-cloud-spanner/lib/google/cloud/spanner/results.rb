@@ -246,7 +246,7 @@ module Google
                                query_options: nil
           execute_query_options = {
             transaction: transaction, params: params, types: types,
-            partition_token: partition_token, seqno: seqno, 
+            partition_token: partition_token, seqno: seqno,
             query_options: query_options
           }
           enum = service.execute_streaming_sql session_path, sql,

@@ -144,6 +144,8 @@ module Google
   end
 end
 
+# rubocop:disable Metrics/BlockLength
+
 # Set the default spanner configuration
 Google::Cloud.configure.add_config! :spanner do |config|
   default_project = Google::Cloud::Config.deferred do
@@ -181,3 +183,5 @@ Google::Cloud.configure.add_config! :spanner do |config|
   config.add_field! :lib_version, nil, match: String, allow_nil: true
   config.add_field! :query_options, default_query_options, match: Hash
 end
+
+# rubocop:enable Metrics/BlockLength

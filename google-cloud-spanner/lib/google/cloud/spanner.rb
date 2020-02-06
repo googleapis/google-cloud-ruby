@@ -127,7 +127,7 @@ module Google
             host: endpoint, timeout: timeout, client_config: client_config,
             lib_name: lib_name, lib_version: lib_version,
             query_options: query_options
-          ),
+          )
         )
       end
 

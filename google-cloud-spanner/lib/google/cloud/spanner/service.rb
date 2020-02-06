@@ -30,7 +30,7 @@ module Google
       # methods.
       class Service
         attr_accessor :project, :credentials, :timeout, :client_config, :host,
-                      :lib_name, :lib_version
+                      :lib_name, :lib_version, :query_options
 
         ##
         # Creates a new Service instance.
@@ -305,7 +305,7 @@ module Google
 
         def execute_streaming_sql session_name, sql, transaction: nil,
                                   params: nil, types: nil, resume_token: nil,
-                                  partition_token: nil, seqno: nil, 
+                                  partition_token: nil, seqno: nil,
                                   query_options: nil
           opts = default_options_from_session session_name
           query_options = @query_options if query_options.nil?
