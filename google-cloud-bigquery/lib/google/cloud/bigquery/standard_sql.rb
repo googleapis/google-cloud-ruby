@@ -18,21 +18,100 @@ module Google
     module Bigquery
       ##
       # BigQuery standard SQL is compliant with the SQL 2011 standard and has
-      # extensions that support querying nested and repeated data.
+      # extensions that support querying nested and repeated data. See {Routine} and {Argument}.
+      #
+      # @example
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #   dataset = bigquery.dataset "my_dataset"
+      #   routine = dataset.create_routine "my_routine" do |r|
+      #     r.routine_type = "SCALAR_FUNCTION"
+      #     r.language = :SQL
+      #     r.body = "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
+      #     r.arguments = [
+      #       Google::Cloud::Bigquery::Argument.new(
+      #         name: "arr",
+      #         argument_kind: "FIXED_TYPE",
+      #         data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+      #           type_kind: "ARRAY",
+      #           array_element_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+      #             type_kind: "STRUCT",
+      #             struct_type: Google::Cloud::Bigquery::StandardSql::StructType.new(
+      #               fields: [
+      #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+      #                   name: "name",
+      #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING")
+      #                 ),
+      #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+      #                   name: "val",
+      #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64")
+      #                 )
+      #               ]
+      #             )
+      #           )
+      #         )
+      #       )
+      #     ]
+      #   end
+      #
       module StandardSql
         ##
-        # A field or a column.
+        # A field or a column. See {Routine} and {Argument}.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.create_routine "my_routine" do |r|
+        #     r.routine_type = "SCALAR_FUNCTION"
+        #     r.language = :SQL
+        #     r.body = "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
+        #     r.arguments = [
+        #       Google::Cloud::Bigquery::Argument.new(
+        #         name: "arr",
+        #         argument_kind: "FIXED_TYPE",
+        #         data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+        #           type_kind: "ARRAY",
+        #           array_element_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+        #             type_kind: "STRUCT",
+        #             struct_type: Google::Cloud::Bigquery::StandardSql::StructType.new(
+        #               fields: [
+        #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+        #                   name: "name",
+        #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING")
+        #                 ),
+        #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+        #                   name: "val",
+        #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64")
+        #                 )
+        #               ]
+        #             )
+        #           )
+        #         )
+        #       )
+        #     ]
+        #   end
+        #
         class Field
           ##
           # Creates a new, immutable StandardSql::Field object.
+          #
+          # @overload initialize(name, type)
+          #   @param [String] name The name of the field. Optional. Can be absent for struct fields.
+          #   @param [StandardSql::DataType, String] type The type of the field. Optional. Absent if not explicitly
+          #     specified (e.g., `CREATE FUNCTION` statement can omit the return type; in this case the output parameter
+          #     does not have this "type" field).
+          #
           def initialize **kwargs
             # Convert client object kwargs to a gapi object
-            kwargs[:type] = DataType.gapi_from_string_or_data_type kwargs[:type]
+            kwargs[:type] = DataType.gapi_from_string_or_data_type kwargs[:type] if kwargs[:type]
             @gapi = Google::Apis::BigqueryV2::StandardSqlField.new(**kwargs)
           end
 
           ##
-          # The name of the field. (Can be absent for struct fields.)
+          # The name of the field. Optional. Can be absent for struct fields.
           #
           # @return [String, nil]
           #
@@ -42,12 +121,13 @@ module Google
           end
 
           ##
-          # The type of the field.
+          # The type of the field. Optional. Absent if not explicitly specified (e.g., `CREATE FUNCTION` statement can
+          # omit the return type; in this case the output parameter does not have this "type" field).
           #
-          # @return [DataType]
+          # @return [DataType, nil] The type of the field.
           #
           def type
-            DataType.from_gapi @gapi.type
+            DataType.from_gapi @gapi.type if @gapi.type
           end
 
           ##
@@ -66,16 +146,57 @@ module Google
         end
 
         ##
-        # The type of a field or a column.
+        # The type of a variable, e.g., a function argument. See {Routine} and {Argument}.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.create_routine "my_routine" do |r|
+        #     r.routine_type = "SCALAR_FUNCTION"
+        #     r.language = :SQL
+        #     r.body = "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
+        #     r.arguments = [
+        #       Google::Cloud::Bigquery::Argument.new(
+        #         name: "arr",
+        #         argument_kind: "FIXED_TYPE",
+        #         data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+        #           type_kind: "ARRAY",
+        #           array_element_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+        #             type_kind: "STRUCT",
+        #             struct_type: Google::Cloud::Bigquery::StandardSql::StructType.new(
+        #               fields: [
+        #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+        #                   name: "name",
+        #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING")
+        #                 ),
+        #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+        #                   name: "val",
+        #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64")
+        #                 )
+        #               ]
+        #             )
+        #           )
+        #         )
+        #       )
+        #     ]
+        #   end
+        #
+        # @see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types Standard SQL Data Types
+        #
         class DataType
           ##
           # Creates a new, immutable StandardSql::DataType object.
           #
           # @overload initialize(type_kind, array_element_type, struct_type)
-          #   @param [String] type_kind Required.
-          #   @param [DataType, Hash] array_element_type The type of a variable, e.g., a function argument, if
-          #      type_kind = "ARRAY".
-          #   @param [StructType, Hash] struct_type The fields of this struct, in order, if type_kind = "STRUCT".
+          #   @param [String] type_kind The top level type of this field. Required. Can be [any standard SQL data
+          #     type](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) (e.g., `INT64`, `DATE`,
+          #     `ARRAY`).
+          #   @param [DataType, String] array_element_type The type of the array's elements, if {#type_kind} is `ARRAY`.
+          #     See {#array?}. Optional.
+          #   @param [StructType] struct_type The fields of the struct, in order, if {#type_kind} is `STRUCT`. See
+          #     {#struct?}. Optional.
           #
           def initialize **kwargs
             # Convert client object kwargs to a gapi object
@@ -88,21 +209,19 @@ module Google
           end
 
           ##
-          # The top level type of this field.
+          # The top level type of this field. Required. Can be any standard SQL data type (e.g., `INT64`, `DATE`,
+          # `ARRAY`).
           #
-          # Can be any standard SQL data type (e.g., "INT64", "DATE", "ARRAY").
+          # @see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types Standard SQL Data Types
           #
-          # @see https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types
-          #   Standard SQL Data Types
-          #
-          # @return [String]
+          # @return [String] The upper case type.
           #
           def type_kind
             @gapi.type_kind
           end
 
           ##
-          # The type of a fields when DataType is an Array. (See #array?)
+          # The type of the array's elements, if {#type_kind} is `ARRAY`. See {#array?}. Optional.
           #
           # @return [DataType, nil]
           #
@@ -112,7 +231,7 @@ module Google
           end
 
           ##
-          # The fields of the struct. (See #struct?)
+          # The fields of the struct, in order, if {#type_kind} is `STRUCT`. See {#struct?}. Optional.
           #
           # @return [StructType, nil]
           #
@@ -295,10 +414,49 @@ module Google
         end
 
         ##
-        # The type of a `STRUCT` field or a column.
+        # The fields of a `STRUCT` type. See {DataType#struct_type}. See {Routine} and {Argument}.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.create_routine "my_routine" do |r|
+        #     r.routine_type = "SCALAR_FUNCTION"
+        #     r.language = :SQL
+        #     r.body = "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
+        #     r.arguments = [
+        #       Google::Cloud::Bigquery::Argument.new(
+        #         name: "arr",
+        #         argument_kind: "FIXED_TYPE",
+        #         data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+        #           type_kind: "ARRAY",
+        #           array_element_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+        #             type_kind: "STRUCT",
+        #             struct_type: Google::Cloud::Bigquery::StandardSql::StructType.new(
+        #               fields: [
+        #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+        #                   name: "name",
+        #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING")
+        #                 ),
+        #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+        #                   name: "val",
+        #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64")
+        #                 )
+        #               ]
+        #             )
+        #           )
+        #         )
+        #       )
+        #     ]
+        #   end
+        #
         class StructType
           ##
           # Creates a new, immutable StandardSql::StructType object.
+          #
+          # @overload initialize(fields)
+          #   @param [Array<Field>] fields The fields of the struct. Required.
           #
           def initialize **kwargs
             # Convert each field client object to gapi object, if fields given (self.from_gapi does not pass kwargs)
@@ -307,9 +465,7 @@ module Google
           end
 
           ##
-          # The top level type of this field.
-          #
-          # Can be any standard SQL data type (e.g., "INT64", "DATE", "ARRAY").
+          # The fields of the struct.
           #
           # @return [Array<Field>] A frozen array of fields.
           #

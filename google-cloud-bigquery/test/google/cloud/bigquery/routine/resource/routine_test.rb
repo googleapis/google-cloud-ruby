@@ -95,7 +95,12 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     routine.arguments[0].must_be_kind_of Google::Cloud::Bigquery::Argument
     routine.arguments[0].name.must_equal "arr"
     routine.arguments[0].argument_kind.must_equal "FIXED_TYPE"
+    routine.arguments[0].fixed_type?.must_equal true
+    routine.arguments[0].any_type?.must_equal false
     routine.arguments[0].mode.must_equal "IN"
+    routine.arguments[0].in?.must_equal true
+    routine.arguments[0].out?.must_equal false
+    routine.arguments[0].inout?.must_equal false
     routine.arguments[0].data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
     routine.arguments[0].data_type.type_kind.must_equal "ARRAY"
     routine.arguments[0].data_type.array_element_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
@@ -112,7 +117,12 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     routine.arguments[0].data_type.array_element_type.struct_type.fields[1].type.type_kind.must_equal "INT64"
     routine.arguments[1].name.must_equal "out"
     routine.arguments[1].argument_kind.must_equal "ANY_TYPE"
+    routine.arguments[1].fixed_type?.must_equal false
+    routine.arguments[1].any_type?.must_equal true
     routine.arguments[1].mode.must_equal "OUT"
+    routine.arguments[1].in?.must_equal false
+    routine.arguments[1].out?.must_equal true
+    routine.arguments[1].inout?.must_equal false
     routine.arguments[1].data_type.type_kind.must_equal "STRING"
 
     routine.return_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType

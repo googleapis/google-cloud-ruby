@@ -107,6 +107,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Argument" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_routine, random_routine_gapi("my_dataset", "my_routine"), ["my-project", "my_dataset", Google::Apis::BigqueryV2::Routine]
+    end
+  end
+
   doctest.skip "Google::Cloud::Bigquery::Credentials" # occasionally getting "This code example is not yet mocked"
 
   # Google::Cloud::Bigquery::Data#all@Iterating each rows by passing a block:
@@ -789,6 +796,13 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_table, table_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Table]
       mock.expect :patch_table, table_full_gapi, ["my-project", "my_dataset", "my_table", Google::Apis::BigqueryV2::Table, Hash]
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::StandardSql" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_routine, random_routine_gapi("my_dataset", "my_routine"), ["my-project", "my_dataset", Google::Apis::BigqueryV2::Routine]
     end
   end
 

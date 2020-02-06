@@ -62,7 +62,12 @@ describe Google::Cloud::Bigquery, :bigquery do
     argument = arguments.first
     argument.must_be_kind_of Google::Cloud::Bigquery::Argument
     argument.argument_kind.must_be :nil?
+    argument.fixed_type?.must_equal true
+    argument.any_type?.must_equal false
     argument.mode.must_be :nil?
+    argument.in?.must_equal false
+    argument.out?.must_equal false
+    argument.inout?.must_equal false
     argument.name.must_equal "arr"
 
     data_type = argument.data_type
@@ -156,7 +161,7 @@ describe Google::Cloud::Bigquery, :bigquery do
                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64")
                 )
               ]
-            )  
+            )
           )
         )
       )

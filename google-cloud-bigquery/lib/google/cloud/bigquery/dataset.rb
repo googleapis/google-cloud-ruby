@@ -851,6 +851,41 @@ module Google
         #
         #   puts routine.routine_id
         #
+        # @example Extended example:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.create_routine "my_routine" do |r|
+        #     r.routine_type = "SCALAR_FUNCTION"
+        #     r.language = :SQL
+        #     r.body = "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
+        #     r.arguments = [
+        #       Google::Cloud::Bigquery::Argument.new(
+        #         name: "arr",
+        #         argument_kind: "FIXED_TYPE",
+        #         data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+        #           type_kind: "ARRAY",
+        #           array_element_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+        #             type_kind: "STRUCT",
+        #             struct_type: Google::Cloud::Bigquery::StandardSql::StructType.new(
+        #               fields: [
+        #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+        #                   name: "name",
+        #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING")
+        #                 ),
+        #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+        #                   name: "val",
+        #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64")
+        #                 )
+        #               ]
+        #             )
+        #           )
+        #         )
+        #       )
+        #     ]
+        #   end
+        #
         # @!group Routine
         #
         def create_routine routine_id
