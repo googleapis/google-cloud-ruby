@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.1 / 2020-02-06
+
+#### Documentation
+
+* change a few readme references from language to secret-manager
+
 ### 0.2.0 / 2020-01-17
 
 #### Features
