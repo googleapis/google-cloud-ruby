@@ -94,19 +94,19 @@ module Google
   module Cloud
     module Billing
       module V1
-        Service = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.Service").msgclass
-        Sku = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.Sku").msgclass
-        Category = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.Category").msgclass
-        PricingInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.PricingInfo").msgclass
-        PricingExpression = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.PricingExpression").msgclass
-        PricingExpression::TierRate = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.PricingExpression.TierRate").msgclass
-        AggregationInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.AggregationInfo").msgclass
-        AggregationInfo::AggregationLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.AggregationInfo.AggregationLevel").enummodule
-        AggregationInfo::AggregationInterval = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.AggregationInfo.AggregationInterval").enummodule
-        ListServicesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListServicesRequest").msgclass
-        ListServicesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListServicesResponse").msgclass
-        ListSkusRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListSkusRequest").msgclass
-        ListSkusResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListSkusResponse").msgclass
+        Service = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.Service").msgclass
+        Sku = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.Sku").msgclass
+        Category = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.Category").msgclass
+        PricingInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.PricingInfo").msgclass
+        PricingExpression = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.PricingExpression").msgclass
+        PricingExpression::TierRate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.PricingExpression.TierRate").msgclass
+        AggregationInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.AggregationInfo").msgclass
+        AggregationInfo::AggregationLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.AggregationInfo.AggregationLevel").enummodule
+        AggregationInfo::AggregationInterval = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.AggregationInfo.AggregationInterval").enummodule
+        ListServicesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListServicesRequest").msgclass
+        ListServicesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListServicesResponse").msgclass
+        ListSkusRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListSkusRequest").msgclass
+        ListSkusResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListSkusResponse").msgclass
       end
     end
   end

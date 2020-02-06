@@ -67,17 +67,17 @@ module Google
   module Cloud
     module Billing
       module V1
-        BillingAccount = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.BillingAccount").msgclass
-        ProjectBillingInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ProjectBillingInfo").msgclass
-        GetBillingAccountRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.GetBillingAccountRequest").msgclass
-        ListBillingAccountsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListBillingAccountsRequest").msgclass
-        ListBillingAccountsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListBillingAccountsResponse").msgclass
-        CreateBillingAccountRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.CreateBillingAccountRequest").msgclass
-        UpdateBillingAccountRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.UpdateBillingAccountRequest").msgclass
-        ListProjectBillingInfoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListProjectBillingInfoRequest").msgclass
-        ListProjectBillingInfoResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListProjectBillingInfoResponse").msgclass
-        GetProjectBillingInfoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.GetProjectBillingInfoRequest").msgclass
-        UpdateProjectBillingInfoRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.UpdateProjectBillingInfoRequest").msgclass
+        BillingAccount = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.BillingAccount").msgclass
+        ProjectBillingInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ProjectBillingInfo").msgclass
+        GetBillingAccountRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.GetBillingAccountRequest").msgclass
+        ListBillingAccountsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListBillingAccountsRequest").msgclass
+        ListBillingAccountsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListBillingAccountsResponse").msgclass
+        CreateBillingAccountRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.CreateBillingAccountRequest").msgclass
+        UpdateBillingAccountRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.UpdateBillingAccountRequest").msgclass
+        ListProjectBillingInfoRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListProjectBillingInfoRequest").msgclass
+        ListProjectBillingInfoResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.ListProjectBillingInfoResponse").msgclass
+        GetProjectBillingInfoRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.GetProjectBillingInfoRequest").msgclass
+        UpdateProjectBillingInfoRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.billing.v1.UpdateProjectBillingInfoRequest").msgclass
       end
     end
   end
