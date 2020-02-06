@@ -324,8 +324,18 @@ module Google
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
+        #   # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is
+        #   # automatically created and managed by the service team in a private project.
+        #   my_project_number = "000000000000"
+        #   service_account_email = "serviceAccount:service-#{my_project_number}@gcp-sa-pubsub.iam.gserviceaccount.com"
+        #
+        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic"
+        #   dead_letter_subscription = dead_letter_topic.subscribe "my-dead-letter-sub"
+        #
+        #   dead_letter_topic.policy { |p| p.add "roles/pubsub.publisher", service_account_email }
+        #   dead_letter_subscription.policy { |p| p.add "roles/pubsub.subscriber", service_account_email }
+        #
         #   topic = pubsub.topic "my-topic"
-        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic", skip_lookup: true
         #   sub = topic.subscribe "my-topic-sub",
         #                         dead_letter_topic: dead_letter_topic,
         #                         dead_letter_max_delivery_attempts: 10

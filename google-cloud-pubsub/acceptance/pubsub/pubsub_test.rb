@@ -239,19 +239,15 @@ describe Google::Cloud::PubSub, :pubsub do
 
     if $project_number
       it "should be able to direct messages to a dead letter topic" do
-        # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is automatically
-        # created and managed by the service team in a private project.
-        service_account_email = "serviceAccount:service-#{$project_number}@gcp-sa-pubsub.iam.gserviceaccount.com"
-
         dead_letter_topic = retrieve_topic dead_letter_topic_name
-        dead_letter_topic.policy do |p|
-          p.add "roles/pubsub.publisher", service_account_email
-        end
         dead_letter_subscription = dead_letter_topic.subscribe "#{$topic_prefix}-dead-letter-sub1"
 
-        dead_letter_subscription.policy do |p|
-          p.add "roles/pubsub.subscriber", service_account_email
-        end
+        # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is
+        # automatically created and managed by the service team in a private project.
+        service_account_email = "serviceAccount:service-#{$project_number}@gcp-sa-pubsub.iam.gserviceaccount.com"
+
+        dead_letter_topic.policy { |p| p.add "roles/pubsub.publisher", service_account_email }
+        dead_letter_subscription.policy { |p| p.add "roles/pubsub.subscriber", service_account_email }
 
         # create
         subscription = topic.subscribe "#{$topic_prefix}-sub6", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 6

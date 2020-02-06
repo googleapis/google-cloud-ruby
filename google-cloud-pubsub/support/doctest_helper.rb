@@ -598,6 +598,19 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Topic#subscribe@Configure a Dead Letter Queues policy:" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_publisher.expect :get_topic, topic_resp("my-dead-letter-topic"), ["projects/my-project/topics/my-dead-letter-topic", Hash]
+      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-dead-letter-sub"), ["projects/my-project/subscriptions/my-dead-letter-sub", "projects/my-project/topics/my-dead-letter-topic", Hash]
+      mock_publisher.expect :get_iam_policy, policy_resp, ["projects/my-project/topics/my-dead-letter-topic", Hash]
+      mock_subscriber.expect :get_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-dead-letter-sub", Hash]
+      mock_publisher.expect :set_iam_policy, policy_resp, ["projects/my-project/topics/my-dead-letter-topic", Google::Iam::V1::Policy, Hash]
+      mock_subscriber.expect :set_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-dead-letter-sub", Google::Iam::V1::Policy, Hash]
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", "projects/my-project/topics/my-topic", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::Topic#subscription" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
