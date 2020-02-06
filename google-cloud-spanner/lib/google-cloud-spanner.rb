@@ -45,12 +45,20 @@ module Google
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     # @param [Hash] client_config A hash of values to override the default
     #   behavior of the API client. Optional.
-    # @param [String] lib_name Library name. This will override the default
-    #   name of the library in the api call request header for telemetry.
-    #   Optional.
-    # @param [String] lib_version Library version. This will override the
-    #   default version of the library in the api call request header
-    #   for telemetry. Optional.
+    # @param [String] lib_name Library name. This will be added as a prefix
+    #   to the API call tracking header `x-goog-api-client` with provided
+    #   lib version for telemetry. Optional. For example prefix looks like
+    #   `spanner-activerecord/0.0.1 gccl/1.13.1`. Here,
+    #   `spanner-activerecord/0.0.1` is provided custom library name and
+    #   version and `gccl/1.13.1` represents the Cloud Spanner Ruby library
+    #   with version.
+    # @param [String] lib_version Library version. This will be added as a
+    #   prefix to the API call tracking header `x-goog-api-client` with
+    #   provided lib name for telemetry. Optional. For example prefix look like
+    #   `spanner-activerecord/0.0.1 gccl/1.13.1`. Here,
+    #   `spanner-activerecord/0.0.1` is provided custom library name and
+    #   version and `gccl/1.13.1` represents the Cloud Spanner Ruby library
+    #   with version.
     #
     # @return [Google::Cloud::Spanner::Project]
     #
@@ -101,12 +109,21 @@ module Google
     # @param [Integer] timeout Default timeout to use in requests. Optional.
     # @param [Hash] client_config A hash of values to override the default
     #   behavior of the API client. Optional.
-    # @param [String] lib_name Library name. This will override the default
-    #   name of the library in the api call request header
-    #   for telemetry. Optional.
-    # @param [String] lib_version Library version. This will override the
-    #   default version of the library in the api call request header
-    #   for telemetry. Optional.
+    # @param [String] lib_name Library name. This will be added as a prefix
+    #   to the API call tracking header `x-goog-api-client` with provided
+    #   lib version for telemetry. Optional. For example prefix looks like
+    #   `spanner-activerecord/0.0.1 gccl/1.13.1`. Here,
+    #   `spanner-activerecord/0.0.1` is provided custom library name and
+    #   version and `gccl/1.13.1` represents the Cloud Spanner Ruby library
+    #   with version.
+    # @param [String] lib_version Library version. This will be added as a
+    #   prefix to the API call tracking header `x-goog-api-client` with
+    #   provided lib name for telemetry. Optional. For example prefix look like
+    #   `spanner-activerecord/0.0.1 gccl/1.13.1`. Here,
+    #   `spanner-activerecord/0.0.1` is provided custom library name and
+    #   version and `gccl/1.13.1` represents the Cloud Spanner Ruby library
+    #   with version.
+    #
     # @return [Google::Cloud::Spanner::Project]
     #
     # @example

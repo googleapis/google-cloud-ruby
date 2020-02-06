@@ -173,8 +173,9 @@ describe Google::Cloud do
             spanner.must_be_kind_of Google::Cloud::Spanner::Project
             spanner.project.must_equal "project-id"
             spanner.service.credentials.must_equal default_credentials
-            spanner.service.lib_name.must_equal "gccl"
-            spanner.service.lib_version.must_equal Google::Cloud::Spanner::VERSION
+            spanner.service.lib_name.must_be :nil?
+            spanner.service.lib_version.must_be :nil?
+            spanner.service.send(:lib_name_with_prefix).must_equal "gccl"
           end
         end
       end
@@ -359,6 +360,26 @@ describe Google::Cloud do
             spanner.project.must_equal "project-id"
             spanner.service.lib_name.must_equal lib_name
             spanner.service.lib_version.must_equal lib_version
+            spanner.service.send(:lib_name_with_prefix).must_equal "#{lib_name}/#{lib_version} gccl"
+          end
+        end
+      end
+    end
+
+    it "uses provided lib name only" do
+      lib_name = "spanner-ruby"
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+            spanner = Google::Cloud::Spanner.new lib_name: lib_name
+            spanner.must_be_kind_of Google::Cloud::Spanner::Project
+            spanner.project.must_equal "project-id"
+            spanner.service.lib_name.must_equal lib_name
+            spanner.service.lib_version.must_be :nil?
+            spanner.service.send(:lib_name_with_prefix).must_equal "#{lib_name} gccl"
           end
         end
       end

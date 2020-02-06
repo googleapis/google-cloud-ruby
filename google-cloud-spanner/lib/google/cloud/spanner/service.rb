@@ -41,8 +41,8 @@ module Google
           @host = host || V1::SpannerClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
-          @lib_name = lib_name || "gccl"
-          @lib_version = lib_version || Google::Cloud::Spanner::VERSION
+          @lib_name = lib_name
+          @lib_version = lib_version
         end
 
         def channel
@@ -70,8 +70,8 @@ module Google
               client_config: client_config,
               service_address: service_address,
               service_port: service_port,
-              lib_name: lib_name,
-              lib_version: lib_version
+              lib_name: lib_name_with_prefix,
+              lib_version: Google::Cloud::Spanner::VERSION
             )
         end
         attr_accessor :mocked_service
@@ -85,8 +85,8 @@ module Google
               client_config: client_config,
               service_address: service_address,
               service_port: service_port,
-              lib_name: lib_name,
-              lib_version: lib_version
+              lib_name: lib_name_with_prefix,
+              lib_version: Google::Cloud::Spanner::VERSION
             )
         end
         attr_accessor :mocked_instances
@@ -100,8 +100,8 @@ module Google
               client_config: client_config,
               service_address: service_address,
               service_port: service_port,
-              lib_name: lib_name,
-              lib_version: lib_version
+              lib_name: lib_name_with_prefix,
+              lib_version: Google::Cloud::Spanner::VERSION
             )
         end
         attr_accessor :mocked_databases
@@ -460,6 +460,14 @@ module Google
         def service_port
           return nil if host.nil?
           URI.parse("//#{host}").port
+        end
+
+        def lib_name_with_prefix
+          return "gccl" if [nil, "gccl"].include? lib_name
+
+          value = lib_name.dup
+          value << "/#{lib_version}" if lib_version
+          value << " gccl"
         end
 
         def default_options_from_session session_name

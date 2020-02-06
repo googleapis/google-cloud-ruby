@@ -68,12 +68,20 @@ module Google
       #   Deprecated.
       # @param [String] emulator_host Spanner emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
-      # @param [String] lib_name Library name. This will override the default
-      #   name of the library in the api call request header for telemetry.
-      #   Optional.
-      # @param [String] lib_version Library version. This will override the
-      #   default version of the library in the api call request header
-      #   for telemetry. Optional.
+      # @param [String] lib_name Library name. This will be added as a prefix
+      #   to the API call tracking header `x-goog-api-client` with provided
+      #   lib version for telemetry. Optional. For example prefix looks like
+      #   `spanner-activerecord/0.0.1 gccl/1.13.1`. Here,
+      #   `spanner-activerecord/0.0.1` is provided custom library name and
+      #   version and `gccl/1.13.1` represents the Cloud Spanner Ruby library
+      #   with version.
+      # @param [String] lib_version Library version. This will be added as a
+      #   prefix to the API call tracking header `x-goog-api-client` with
+      #   provided lib name for telemetry. Optional. For example prefix look like
+      #   `spanner-activerecord/0.0.1 gccl/1.13.1`. Here,
+      #   `spanner-activerecord/0.0.1` is provided custom library name and
+      #   version and `gccl/1.13.1` represents the Cloud Spanner Ruby library
+      #   with version.
       #
       # @return [Google::Cloud::Spanner::Project]
       #
@@ -143,9 +151,11 @@ module Google
       # * `emulator_host` - (String) Host name of the emulator. Defaults to
       #   `ENV["SPANNER_EMULATOR_HOST"]`.
       # * `lib_name` - (String) Override the lib name , or `nil`
-      #   to use the default lib name.
+      #   to use the default lib name without prefix in agent tracking
+      #   header.
       # * `lib_version` - (String) Override the lib version , or `nil`
-      #   to use the default version.
+      #   to use the default version lib name without prefix in agent
+      #   tracking header.
       #
       # @return [Google::Cloud::Config] The configuration object the
       #   Google::Cloud::Spanner library uses.
