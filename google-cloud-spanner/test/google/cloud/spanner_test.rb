@@ -99,7 +99,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "spanner-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_equal "spanner-credentials"
         timeout.must_be :nil?
@@ -157,7 +157,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "spanner-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_equal "spanner-credentials"
         timeout.must_be :nil?
@@ -185,7 +185,7 @@ describe Google::Cloud do
 
     it "uses provided endpoint" do
       endpoint = "spanner-endpoint2.example.com"
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_equal default_credentials
         timeout.must_be :nil?
@@ -211,7 +211,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "spanner-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_equal "spanner-credentials"
         timeout.must_be :nil?
@@ -243,7 +243,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_be_kind_of OpenStruct
         credentials.project_id.must_equal "project-id"
@@ -327,7 +327,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "spanner-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_equal "spanner-credentials"
         timeout.must_be :nil?
@@ -365,7 +365,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "spanner-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_equal "spanner-credentials"
         timeout.must_be :nil?
@@ -403,7 +403,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "spanner-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_equal "spanner-credentials"
         timeout.must_equal 42
@@ -443,7 +443,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "spanner-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_equal "spanner-credentials"
         timeout.must_equal 42
@@ -484,7 +484,7 @@ describe Google::Cloud do
         scope.must_be :nil?
         "spanner-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_equal "spanner-credentials"
         timeout.must_be :nil?

@@ -71,7 +71,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_span
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
+    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "SELECT * FROM users", transaction: transaction, options: default_options
     spanner.service.mocked_service = mock
 
     results = client.execute_query "SELECT * FROM users", single_use: { strong: true }
@@ -94,7 +94,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_span
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
+    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "SELECT * FROM users", transaction: transaction, options: default_options
     spanner.service.mocked_service = mock
 
     results = client.execute_query "SELECT * FROM users", single_use: { timestamp: time_obj }
@@ -117,7 +117,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_span
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
+    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "SELECT * FROM users", transaction: transaction, options: default_options
     spanner.service.mocked_service = mock
 
     results = client.execute_query "SELECT * FROM users", single_use: { read_timestamp: time_obj }
@@ -140,7 +140,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_span
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
+    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "SELECT * FROM users", transaction: transaction, options: default_options
     spanner.service.mocked_service = mock
 
     results = client.execute_query "SELECT * FROM users", single_use: { staleness: 120 }
@@ -163,7 +163,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_span
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
+    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "SELECT * FROM users", transaction: transaction, options: default_options
     spanner.service.mocked_service = mock
 
     results = client.execute_query "SELECT * FROM users", single_use: { exact_staleness: 120 }
@@ -186,7 +186,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_span
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
+    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "SELECT * FROM users", transaction: transaction, options: default_options
     spanner.service.mocked_service = mock
 
     results = client.execute_query "SELECT * FROM users", single_use: { bounded_timestamp: time_obj }
@@ -209,7 +209,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_span
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
+    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "SELECT * FROM users", transaction: transaction, options: default_options
     spanner.service.mocked_service = mock
 
     results = client.execute_query "SELECT * FROM users", single_use: { min_read_timestamp: time_obj }
@@ -232,7 +232,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_span
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
+    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "SELECT * FROM users", transaction: transaction, options: default_options
     spanner.service.mocked_service = mock
 
     results = client.execute_query "SELECT * FROM users", single_use: { bounded_staleness: 120 }
@@ -255,7 +255,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :single_use, :mock_span
 
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: transaction, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
+    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "SELECT * FROM users", transaction: transaction, options: default_options
     spanner.service.mocked_service = mock
 
     results = client.execute_query "SELECT * FROM users", single_use: { max_staleness: 120 }

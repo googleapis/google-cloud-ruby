@@ -106,10 +106,10 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
 
     it "increases seqno for each request" do
       mock = Minitest::Mock.new
-      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "UPDATE users SET active = true", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+      MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "UPDATE users SET active = true", transaction: tx_selector, seqno: 1, options: default_options
       statement = statement_grpc("UPDATE users SET age = @age", params: Google::Protobuf::Struct.new(fields: { "age" => Google::Protobuf::Value.new(string_value: "29") }), param_types: { "age" => Google::Spanner::V1::Type.new(code: :INT64) })
       mock.expect :execute_batch_dml, batch_response_grpc, [session_grpc.name, tx_selector, [statement], 2, options: default_options]
-      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "UPDATE users SET active = false", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 3, options: default_options]
+      MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "UPDATE users SET active = false", transaction: tx_selector, seqno: 3, options: default_options
       session.service.mocked_service = mock
 
       transaction.execute_update "UPDATE users SET active = true"

@@ -56,11 +56,7 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
     mock.expect :batch_create_sessions, batch_create_sessions_grpc, [
       database_path(instance_id, database_id), 1, session_template: nil, options: default_options
     ]
-    mock.expect :execute_streaming_sql, results_enum, [
-      session.path, "SELECT 1",
-      transaction: nil, params: nil, param_types: nil, resume_token: nil,
-      partition_token: nil, seqno: nil, options: default_options
-    ]
+    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session.path, "SELECT 1", options: default_options
 
     spanner.service.mocked_service = mock
     client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }
