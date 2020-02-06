@@ -188,7 +188,7 @@ class Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       assert_equal :mark_recommendation_claimed, name
       assert_kind_of Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest, request
       assert_equal "hello world", request.name
-      assert_kind_of Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest::StateMetadataEntry, request.state_metadata.first
+      assert_equal({}, request.state_metadata.to_h)
       assert_equal "hello world", request.etag
       refute_nil options
     end
@@ -250,7 +250,7 @@ class Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       assert_equal :mark_recommendation_succeeded, name
       assert_kind_of Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest, request
       assert_equal "hello world", request.name
-      assert_kind_of Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest::StateMetadataEntry, request.state_metadata.first
+      assert_equal({}, request.state_metadata.to_h)
       assert_equal "hello world", request.etag
       refute_nil options
     end
@@ -312,7 +312,7 @@ class Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
       assert_equal :mark_recommendation_failed, name
       assert_kind_of Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest, request
       assert_equal "hello world", request.name
-      assert_kind_of Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest::StateMetadataEntry, request.state_metadata.first
+      assert_equal({}, request.state_metadata.to_h)
       assert_equal "hello world", request.etag
       refute_nil options
     end

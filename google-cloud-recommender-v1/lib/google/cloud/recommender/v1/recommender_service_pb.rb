@@ -45,12 +45,12 @@ module Google
   module Cloud
     module Recommender
       module V1
-        ListRecommendationsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.ListRecommendationsRequest").msgclass
-        ListRecommendationsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.ListRecommendationsResponse").msgclass
-        GetRecommendationRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.GetRecommendationRequest").msgclass
-        MarkRecommendationClaimedRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.MarkRecommendationClaimedRequest").msgclass
-        MarkRecommendationSucceededRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.MarkRecommendationSucceededRequest").msgclass
-        MarkRecommendationFailedRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.MarkRecommendationFailedRequest").msgclass
+        ListRecommendationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.ListRecommendationsRequest").msgclass
+        ListRecommendationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.ListRecommendationsResponse").msgclass
+        GetRecommendationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.GetRecommendationRequest").msgclass
+        MarkRecommendationClaimedRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.MarkRecommendationClaimedRequest").msgclass
+        MarkRecommendationSucceededRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.MarkRecommendationSucceededRequest").msgclass
+        MarkRecommendationFailedRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.MarkRecommendationFailedRequest").msgclass
       end
     end
   end

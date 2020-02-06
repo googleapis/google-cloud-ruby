@@ -82,16 +82,16 @@ module Google
   module Cloud
     module Recommender
       module V1
-        Recommendation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Recommendation").msgclass
-        RecommendationContent = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.RecommendationContent").msgclass
-        OperationGroup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.OperationGroup").msgclass
-        Operation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Operation").msgclass
-        ValueMatcher = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.ValueMatcher").msgclass
-        CostProjection = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.CostProjection").msgclass
-        Impact = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Impact").msgclass
-        Impact::Category = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Impact.Category").enummodule
-        RecommendationStateInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.RecommendationStateInfo").msgclass
-        RecommendationStateInfo::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.RecommendationStateInfo.State").enummodule
+        Recommendation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Recommendation").msgclass
+        RecommendationContent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.RecommendationContent").msgclass
+        OperationGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.OperationGroup").msgclass
+        Operation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Operation").msgclass
+        ValueMatcher = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.ValueMatcher").msgclass
+        CostProjection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.CostProjection").msgclass
+        Impact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Impact").msgclass
+        Impact::Category = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Impact.Category").enummodule
+        RecommendationStateInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.RecommendationStateInfo").msgclass
+        RecommendationStateInfo::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.RecommendationStateInfo.State").enummodule
       end
     end
   end
