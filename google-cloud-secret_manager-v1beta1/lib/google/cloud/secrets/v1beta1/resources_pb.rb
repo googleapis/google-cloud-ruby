@@ -51,14 +51,14 @@ module Google
   module Cloud
     module SecretManager
       module V1beta1
-        Secret = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.Secret").msgclass
-        SecretVersion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.SecretVersion").msgclass
-        SecretVersion::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.SecretVersion.State").enummodule
-        Replication = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.Replication").msgclass
-        Replication::Automatic = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.Replication.Automatic").msgclass
-        Replication::UserManaged = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.Replication.UserManaged").msgclass
-        Replication::UserManaged::Replica = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.Replication.UserManaged.Replica").msgclass
-        SecretPayload = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.SecretPayload").msgclass
+        Secret = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.Secret").msgclass
+        SecretVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.SecretVersion").msgclass
+        SecretVersion::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.SecretVersion.State").enummodule
+        Replication = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.Replication").msgclass
+        Replication::Automatic = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.Replication.Automatic").msgclass
+        Replication::UserManaged = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.Replication.UserManaged").msgclass
+        Replication::UserManaged::Replica = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.Replication.UserManaged.Replica").msgclass
+        SecretPayload = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.SecretPayload").msgclass
       end
     end
   end

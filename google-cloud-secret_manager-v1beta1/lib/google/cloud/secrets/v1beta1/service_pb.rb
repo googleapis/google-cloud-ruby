@@ -79,21 +79,21 @@ module Google
   module Cloud
     module SecretManager
       module V1beta1
-        ListSecretsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.ListSecretsRequest").msgclass
-        ListSecretsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.ListSecretsResponse").msgclass
-        CreateSecretRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.CreateSecretRequest").msgclass
-        AddSecretVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.AddSecretVersionRequest").msgclass
-        GetSecretRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.GetSecretRequest").msgclass
-        ListSecretVersionsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.ListSecretVersionsRequest").msgclass
-        ListSecretVersionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.ListSecretVersionsResponse").msgclass
-        GetSecretVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.GetSecretVersionRequest").msgclass
-        UpdateSecretRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.UpdateSecretRequest").msgclass
-        AccessSecretVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.AccessSecretVersionRequest").msgclass
-        AccessSecretVersionResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.AccessSecretVersionResponse").msgclass
-        DeleteSecretRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.DeleteSecretRequest").msgclass
-        DisableSecretVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.DisableSecretVersionRequest").msgclass
-        EnableSecretVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.EnableSecretVersionRequest").msgclass
-        DestroySecretVersionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.DestroySecretVersionRequest").msgclass
+        ListSecretsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.ListSecretsRequest").msgclass
+        ListSecretsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.ListSecretsResponse").msgclass
+        CreateSecretRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.CreateSecretRequest").msgclass
+        AddSecretVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.AddSecretVersionRequest").msgclass
+        GetSecretRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.GetSecretRequest").msgclass
+        ListSecretVersionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.ListSecretVersionsRequest").msgclass
+        ListSecretVersionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.ListSecretVersionsResponse").msgclass
+        GetSecretVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.GetSecretVersionRequest").msgclass
+        UpdateSecretRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.UpdateSecretRequest").msgclass
+        AccessSecretVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.AccessSecretVersionRequest").msgclass
+        AccessSecretVersionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.AccessSecretVersionResponse").msgclass
+        DeleteSecretRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.DeleteSecretRequest").msgclass
+        DisableSecretVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.DisableSecretVersionRequest").msgclass
+        EnableSecretVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.EnableSecretVersionRequest").msgclass
+        DestroySecretVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.secrets.v1beta1.DestroySecretVersionRequest").msgclass
       end
     end
   end
