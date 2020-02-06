@@ -329,7 +329,7 @@ module Google
         #   `bigtable.*`) are not allowed.
         #   See [Access Control](https://cloud.google.com/bigtable/docs/access-control).
         #
-        # @return [Array<Strings>] The permissions that have access.
+        # @return [Array<String>] The permissions that are configured for the policy.
         #
         # @example
         #   require "google/cloud/bigtable"
@@ -347,8 +347,8 @@ module Google
         #
         def test_iam_permissions *permissions
           ensure_service!
-          grpc = service.test_table_permissions instance_id, name, Array(permissions).flatten
-          grpc.permissions
+          grpc = service.test_table_permissions instance_id, name, permissions.flatten
+          grpc.permissions.to_a
         end
 
         ##

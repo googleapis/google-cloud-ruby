@@ -125,9 +125,10 @@ describe "Instance Tables", :bigtable do
     let(:service_account) { bigtable.service.credentials.client.issuer }
     let(:table) { bigtable_read_table }
 
-    it "test permissions" do
+    it "tests permissions" do
       roles = ["bigtable.tables.delete", "bigtable.tables.get"]
       permissions = table.test_iam_permissions(roles)
+      permissions.must_be_kind_of Array
       permissions.must_equal roles
     end
 

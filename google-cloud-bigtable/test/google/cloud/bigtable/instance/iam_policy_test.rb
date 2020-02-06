@@ -149,6 +149,7 @@ describe Google::Cloud::Bigtable::Instance, :iam_policy, :mock_bigtable do
 
    mock.verify
 
+   permissions.must_be_kind_of Array
    permissions.must_equal ["bigtable.tables.list"]
  end
 end
