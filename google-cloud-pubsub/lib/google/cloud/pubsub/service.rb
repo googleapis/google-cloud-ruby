@@ -479,10 +479,11 @@ module Google
 
         def dead_letter_policy options
           return nil unless options[:dead_letter_topic_name]
-          Google::Cloud::PubSub::V1::DeadLetterPolicy.new(
-            dead_letter_topic:     options[:dead_letter_topic_name],
-            max_delivery_attempts: options[:dead_letter_max_delivery_attempts]
-          )
+          policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new dead_letter_topic: options[:dead_letter_topic_name]
+          if options[:dead_letter_max_delivery_attempts]
+            policy.max_delivery_attempts = options[:dead_letter_max_delivery_attempts]
+          end
+          policy
         end
 
         def default_headers
