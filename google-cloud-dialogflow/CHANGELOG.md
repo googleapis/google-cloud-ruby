@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.3 / 2020-02-06
+
+#### Documentation
+
+* Update audio_encoding description
+
 ### 0.12.2 / 2020-02-04
 
 #### Documentation
