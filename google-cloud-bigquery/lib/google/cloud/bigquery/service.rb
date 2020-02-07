@@ -299,7 +299,9 @@ module Google
         def list_routines dataset_id, options = {}
           # The list operation is considered idempotent
           execute backoff: true do
-            service.list_routines @project, dataset_id, max_results: options[:max], page_token: options[:token]
+            service.list_routines @project, dataset_id, max_results: options[:max],
+                                                        page_token:  options[:token],
+                                                        filter:      options[:filter]
           end
         end
 

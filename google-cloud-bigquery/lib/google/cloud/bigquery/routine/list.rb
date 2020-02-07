@@ -72,8 +72,8 @@ module Google
           def next
             return nil unless next?
             ensure_service!
-            gapi = @service.list_routines @dataset_id, token: token, max: @max
-            self.class.from_gapi gapi, @service, @dataset_id, @max
+            gapi = @service.list_routines @dataset_id, token: token, max: @max, filter: @filter
+            self.class.from_gapi gapi, @service, @dataset_id, @max, filter: @filter
           end
 
           ##
@@ -141,12 +141,13 @@ module Google
 
           ##
           # @private New Routine::List from a response object.
-          def self.from_gapi gapi_list, service, dataset_id = nil, max = nil
+          def self.from_gapi gapi_list, service, dataset_id = nil, max = nil, filter: nil
             routines = List.new(Array(gapi_list.routines).map { |gapi| Routine.from_gapi gapi, service })
             routines.instance_variable_set :@token,      gapi_list.next_page_token
             routines.instance_variable_set :@service,    service
             routines.instance_variable_set :@dataset_id, dataset_id
             routines.instance_variable_set :@max,        max
+            routines.instance_variable_set :@filter,     filter
             routines
           end
 

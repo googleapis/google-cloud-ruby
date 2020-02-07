@@ -43,6 +43,12 @@ describe Google::Cloud::Bigquery, :bigquery do
     # list
     dataset.routines.all.map(&:routine_id).must_include routine_id
 
+    # list with filter
+    dataset.routines(filter: "routineType:SCALAR_FUNCTION").all.map(&:routine_id).must_include routine_id
+
+    # list with filter
+    dataset.routines(filter: "routineType:PROCEDURE").all.map(&:routine_id).wont_include routine_id
+
     # get
     routine = dataset.routine routine_id
     routine.must_be_kind_of Google::Cloud::Bigquery::Routine
@@ -95,7 +101,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     routine.description = new_description
     routine.refresh!
     routine.description.must_equal new_description
-
+  ensure
     # delete
     routine.delete.must_equal true
 

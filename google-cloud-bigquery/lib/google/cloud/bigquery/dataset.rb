@@ -950,6 +950,8 @@ module Google
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of routines to return.
+        # @param [String] filter If set, then only the routines matching this filter are returned. The current supported
+        #   form is `routineType:`, with a {Routine#routine_type} enum value. Example: `routineType:SCALAR_FUNCTION`.
         #
         # @return [Array<Google::Cloud::Bigquery::Routine>] An array of routines
         #   (See {Google::Cloud::Bigquery::Routine::List})
@@ -978,10 +980,10 @@ module Google
         #
         # @!group Routine
         #
-        def routines token: nil, max: nil
+        def routines token: nil, max: nil, filter: nil
           ensure_service!
-          gapi = service.list_routines dataset_id, token: token, max: max
-          Routine::List.from_gapi gapi, service, dataset_id, max
+          gapi = service.list_routines dataset_id, token: token, max: max, filter: filter
+          Routine::List.from_gapi gapi, service, dataset_id, max, filter: filter
         end
 
         ##
