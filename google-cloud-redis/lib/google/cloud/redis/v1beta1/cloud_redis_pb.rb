@@ -31,6 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :memory_size_gb, :int32, 18
     optional :authorized_network, :string, 20
     optional :persistence_iam_identity, :string, 21
+    optional :connect_mode, :enum, 22, "google.cloud.redis.v1beta1.Instance.ConnectMode"
   end
   add_enum "google.cloud.redis.v1beta1.Instance.State" do
     value :STATE_UNSPECIFIED, 0
@@ -47,6 +48,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :TIER_UNSPECIFIED, 0
     value :BASIC, 1
     value :STANDARD_HA, 3
+  end
+  add_enum "google.cloud.redis.v1beta1.Instance.ConnectMode" do
+    value :CONNECT_MODE_UNSPECIFIED, 0
+    value :DIRECT_PEERING, 1
+    value :PRIVATE_SERVICE_ACCESS, 2
   end
   add_message "google.cloud.redis.v1beta1.ListInstancesRequest" do
     optional :parent, :string, 1
@@ -69,6 +75,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.redis.v1beta1.UpdateInstanceRequest" do
     optional :update_mask, :message, 1, "google.protobuf.FieldMask"
     optional :instance, :message, 2, "google.cloud.redis.v1beta1.Instance"
+  end
+  add_message "google.cloud.redis.v1beta1.UpgradeInstanceRequest" do
+    optional :name, :string, 1
+    optional :redis_version, :string, 2
   end
   add_message "google.cloud.redis.v1beta1.DeleteInstanceRequest" do
     optional :name, :string, 1
@@ -120,11 +130,13 @@ module Google
         Instance = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.Instance").msgclass
         Instance::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.Instance.State").enummodule
         Instance::Tier = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.Instance.Tier").enummodule
+        Instance::ConnectMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.Instance.ConnectMode").enummodule
         ListInstancesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.ListInstancesRequest").msgclass
         ListInstancesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.ListInstancesResponse").msgclass
         GetInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.GetInstanceRequest").msgclass
         CreateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.CreateInstanceRequest").msgclass
         UpdateInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.UpdateInstanceRequest").msgclass
+        UpgradeInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.UpgradeInstanceRequest").msgclass
         DeleteInstanceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.DeleteInstanceRequest").msgclass
         GcsSource = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.GcsSource").msgclass
         InputConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1beta1.InputConfig").msgclass

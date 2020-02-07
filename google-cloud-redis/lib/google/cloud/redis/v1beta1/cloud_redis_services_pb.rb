@@ -53,6 +53,7 @@ module Google
             # location (region) or all locations.
             #
             # The location should have the following format:
+            #
             # * `projects/{project_id}/locations/{location_id}`
             #
             # If `location_id` is specified as `-` (wildcard), then all regions
@@ -79,6 +80,9 @@ module Google
             # in the response field. The returned operation is automatically deleted
             # after a few hours, so there is no need to call DeleteOperation.
             rpc :UpdateInstance, UpdateInstanceRequest, Google::Longrunning::Operation
+            # Upgrades Redis instance to the newer Redis version specified in the
+            # request.
+            rpc :UpgradeInstance, UpgradeInstanceRequest, Google::Longrunning::Operation
             # Import a Redis RDB snapshot file from Cloud Storage into a Redis instance.
             #
             # Redis may stop serving during this operation. Instance state will be

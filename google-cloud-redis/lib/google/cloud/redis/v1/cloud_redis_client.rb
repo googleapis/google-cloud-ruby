@@ -318,6 +318,7 @@ module Google
           # location (region) or all locations.
           #
           # The location should have the following format:
+          #
           # * `projects/{project_id}/locations/{location_id}`
           #
           # If `location_id` is specified as `-` (wildcard), then all regions
@@ -512,7 +513,7 @@ module Google
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Required. Mask of fields to update. At least one path must be supplied in
           #   this field. The elements of the repeated paths field may only include these
-          #   fields from {CloudRedis::Instance Instance}:
+          #   fields from {Google::Cloud::Redis::V1::Instance Instance}:
           #
           #   * `displayName`
           #     * `labels`
