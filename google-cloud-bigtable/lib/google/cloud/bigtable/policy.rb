@@ -19,7 +19,7 @@ module Google
       ##
       # # Policy
       #
-      # Represents a Cloud IAM Policy for Bigtable instance resources.
+      # Represents a Cloud IAM Policy for Bigtable resources.
       #
       # A common pattern for updating a resource's metadata, such as its policy,
       # is to read the current data from the service, update the data locally,

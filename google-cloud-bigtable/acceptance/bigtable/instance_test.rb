@@ -50,11 +50,12 @@ describe "Instances", :bigtable do
   describe "IAM policies and permissions" do
     let(:service_account) { bigtable.service.credentials.client.issuer }
 
-    it "test permissions" do
+    it "tests permissions" do
       instance = bigtable_instance
 
       roles = ["bigtable.instances.get", "bigtable.tables.get"]
       permissions = instance.test_iam_permissions(roles)
+      permissions.must_be_kind_of Array
       permissions.must_equal roles
     end
 

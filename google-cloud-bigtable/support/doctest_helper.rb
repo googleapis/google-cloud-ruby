@@ -378,7 +378,7 @@ YARD::Doctest.configure do |doctest|
   doctest.before "Google::Cloud::Bigtable::Instance#test_iam_permissions" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_instances.expect :get_instance, instance_resp, ["projects/my-project/instances/my-instance"]
-      mocked_instances.expect :test_iam_permissions, iam_permissions_resp, ["projects/my-project/instances/my-instance", ["bigtable.instances.get", "bigtable.instances.update"]]
+      mocked_instances.expect :test_iam_permissions, instance_iam_permissions_resp, ["projects/my-project/instances/my-instance", ["bigtable.instances.get", "bigtable.instances.update"]]
     end
   end
 
@@ -652,6 +652,29 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigtable::Table#policy" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance/tables/my-table"]
+      mocked_tables.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance/tables/my-table", Google::Iam::V1::Policy]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#test_iam_permissions" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :test_iam_permissions, table_iam_permissions_resp, ["projects/my-project/instances/my-instance/tables/my-table", ["bigtable.tables.delete", "bigtable.tables.get"]]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigtable::Table#update_policy" do
+    mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
+      mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
+      mocked_tables.expect :get_iam_policy, policy_resp, ["projects/my-project/instances/my-instance/tables/my-table"]
+      mocked_tables.expect :set_iam_policy, policy_resp, ["projects/my-project/instances/my-instance/tables/my-table", Google::Iam::V1::Policy]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigtable::Table#wait_for_replication" do
     mock_bigtable do |mock, mocked_instances, mocked_tables, mocked_job|
       mocked_tables.expect :get_table, table_resp, ["projects/my-project/instances/my-instance/tables/my-table", Hash]
@@ -842,9 +865,15 @@ def column_families_grpc num: 3
   end
 end
 
-def iam_permissions_resp
+def instance_iam_permissions_resp
   OpenStruct.new(
     permissions: ["bigtable.instances.get"]
+  )
+end
+
+def table_iam_permissions_resp
+  OpenStruct.new(
+    permissions: ["bigtable.tables.get"]
   )
 end
 

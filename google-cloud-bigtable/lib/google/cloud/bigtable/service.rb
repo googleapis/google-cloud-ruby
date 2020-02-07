@@ -640,6 +640,58 @@ module Google
           end
         end
 
+        ##
+        # Gets the access control policy for an table resource. Returns an empty
+        # policy if an table exists but does not have a policy set.
+        #
+        # @param table_id [String]
+        #   Unique ID of the table for which the policy is being requested.
+        # @return [Google::Iam::V1::Policy]
+        #
+        def get_table_policy instance_id, table_id
+          execute do
+            tables.get_iam_policy table_path(instance_id, table_id)
+          end
+        end
+
+        ##
+        # Sets the access control policy on an table resource. Replaces any
+        # existing policy.
+        #
+        # @param table_id [String]
+        #   Unique ID of the table the policy is for.
+        # @param policy [Google::Iam::V1::Policy | Hash]
+        #   REQUIRED: The complete policy to be applied to the +resource+. The size of
+        #   the policy is limited to a few 10s of KB. An empty policy is valid
+        #   for Cloud Bigtable, but certain Cloud Platform services (such as Projects)
+        #   might reject an empty policy.
+        #   Alternatively, provide a hash similar to `Google::Iam::V1::Policy`.
+        # @return [Google::Iam::V1::Policy]
+        #
+        def set_table_policy instance_id, table_id, policy
+          execute do
+            tables.set_iam_policy table_path(instance_id, table_id), policy
+          end
+        end
+
+        ##
+        # Returns permissions that the caller has for the specified table resource.
+        #
+        # @param table_id [String]
+        #   The table ID that the policy detail is being requested for.
+        # @param permissions [Array<String>]
+        #   The set of permissions to check for the +resource+. Permissions with
+        #   wildcards (such as '*' or 'storage.*') are not allowed. For more
+        #   information see
+        #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+        # @return [Google::Iam::V1::TestIamPermissionsResponse]
+        #
+        def test_table_permissions instance_id, table_id, permissions
+          execute do
+            tables.test_iam_permissions table_path(instance_id, table_id), permissions
+          end
+        end
+
         def read_rows instance_id, table_id, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil
           # execute is not used because error handling is in ReadOperations#read_rows
           client.read_rows table_path(instance_id, table_id),

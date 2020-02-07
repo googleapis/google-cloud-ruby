@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,14 +15,22 @@
 
 require "helper"
 
-describe Google::Cloud::Bigtable::Instance, :iam_policy, :mock_bigtable do
+describe Google::Cloud::Bigtable::Table, :iam_policy, :mock_bigtable do
   let(:instance_id) { "test-instance" }
-  let(:instance_grpc){
-    Google::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))
+  let(:table_id) { "test-table" }
+  let(:column_families) { column_families_grpc }
+  let(:table_grpc){
+    Google::Bigtable::Admin::V2::Table.new(
+      table_hash(
+        name: table_path(instance_id, table_id),
+        column_families: column_families,
+        granularity: :MILLIS
+      )
+    )
   }
-  let(:instance) {
-    Google::Cloud::Bigtable::Instance.from_grpc(instance_grpc, bigtable.service)
-  }
+  let(:table) do
+    Google::Cloud::Bigtable::Table.from_grpc(table_grpc, bigtable.service)
+  end
   let(:viewer_policy_json) do
     {
       etag: "YWJj",
@@ -51,10 +59,10 @@ describe Google::Cloud::Bigtable::Instance, :iam_policy, :mock_bigtable do
   it "gets the IAM Policy" do
     get_res = Google::Iam::V1::Policy.decode_json(viewer_policy_json)
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [instance.path]
-    instance.service.mocked_instances = mock
+    mock.expect :get_iam_policy, get_res, [table.path]
+    table.service.mocked_tables = mock
 
-    policy = instance.policy
+    policy = table.policy
 
     mock.verify
 
@@ -71,7 +79,7 @@ describe Google::Cloud::Bigtable::Instance, :iam_policy, :mock_bigtable do
   it "update the iam policy" do
     get_res = Google::Iam::V1::Policy.decode_json(owner_policy_json)
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [instance.path]
+    mock.expect :get_iam_policy, get_res, [table.path]
 
     updated_policy_hash = JSON.parse(owner_policy_json)
     updated_policy_hash["bindings"].first["members"].shift
@@ -79,15 +87,15 @@ describe Google::Cloud::Bigtable::Instance, :iam_policy, :mock_bigtable do
 
     set_req = Google::Iam::V1::Policy.decode_json(updated_policy_hash.to_json)
     set_res = Google::Iam::V1::Policy.decode_json(updated_policy_hash.merge(etag: "eHl6").to_json)
-    mock.expect :set_iam_policy, set_res, [instance.path, set_req]
-    instance.service.mocked_instances = mock
+    mock.expect :set_iam_policy, set_res, [table.path, set_req]
+    table.service.mocked_tables = mock
 
-    policy = instance.policy
+    policy = table.policy
 
     policy.add("roles/owner", "user:newowner@example.com")
     policy.remove("roles/owner", "user:owner@example.com")
 
-    policy = instance.update_policy(policy)
+    policy = table.update_policy(policy)
 
     mock.verify
 
@@ -105,7 +113,7 @@ describe Google::Cloud::Bigtable::Instance, :iam_policy, :mock_bigtable do
   it "get and set policy using block" do
     get_res = Google::Iam::V1::Policy.decode_json(owner_policy_json)
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [instance.path]
+    mock.expect :get_iam_policy, get_res, [table.path]
 
     updated_policy_hash = JSON.parse(owner_policy_json)
     updated_policy_hash["bindings"].first["members"].shift
@@ -113,10 +121,10 @@ describe Google::Cloud::Bigtable::Instance, :iam_policy, :mock_bigtable do
 
     set_req = Google::Iam::V1::Policy.decode_json(updated_policy_hash.to_json)
     set_res = Google::Iam::V1::Policy.decode_json(updated_policy_hash.merge(etag: "eHl6").to_json)
-    mock.expect :set_iam_policy, set_res, [instance.path, set_req]
-    instance.service.mocked_instances = mock
+    mock.expect :set_iam_policy, set_res, [table.path, set_req]
+    table.service.mocked_tables = mock
 
-    policy = instance.policy do |v|
+    policy = table.policy do |v|
       v.add("roles/owner", "user:newowner@example.com")
       v.remove("roles/owner", "user:owner@example.com")
     end
@@ -140,10 +148,10 @@ describe Google::Cloud::Bigtable::Instance, :iam_policy, :mock_bigtable do
      permissions: ["bigtable.tables.list"]
    )
    mock = Minitest::Mock.new
-   mock.expect :test_iam_permissions, test_res, [instance.path, permissions]
-   instance.service.mocked_instances = mock
+   mock.expect :test_iam_permissions, test_res, [table.path, permissions]
+   table.service.mocked_tables = mock
 
-   permissions = instance.test_iam_permissions(
+   permissions = table.test_iam_permissions(
      "bigtable.tables.create", "bigtable.tables.list"
    )
 
