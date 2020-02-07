@@ -536,14 +536,11 @@ module Google
           #
           #   # TODO: Initialize `intent`:
           #   intent = {}
-          #
-          #   # TODO: Initialize `language_code`:
-          #   language_code = ''
-          #   response = intents_client.update_intent(intent, language_code)
+          #   response = intents_client.update_intent(intent)
 
           def update_intent \
               intent,
-              language_code,
+              language_code: nil,
               update_mask: nil,
               intent_view: nil,
               options: nil,
@@ -597,13 +594,6 @@ module Google
           # @param parent [String]
           #   Required. The name of the agent to update or create intents in.
           #   Format: `projects/<Project ID>/agent`.
-          # @param language_code [String]
-          #   Optional. The language of training phrases, parameters and rich messages
-          #   defined in `intents`. If not specified, the agent's default language is
-          #   used. [Many
-          #   languages](https://cloud.google.com/dialogflow/docs/reference/language)
-          #   are supported. Note: languages must be enabled in the agent before they can
-          #   be used.
           # @param intent_batch_uri [String]
           #   The URI to a Google Cloud Storage file containing intents to update or
           #   create. The file format can either be a serialized proto (of IntentBatch
@@ -612,6 +602,13 @@ module Google
           #   The collection of intents to update or create.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::IntentBatch`
           #   can also be provided.
+          # @param language_code [String]
+          #   Optional. The language of training phrases, parameters and rich messages
+          #   defined in `intents`. If not specified, the agent's default language is
+          #   used. [Many
+          #   languages](https://cloud.google.com/dialogflow/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional. The mask to control which fields get updated.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -629,11 +626,8 @@ module Google
           #   intents_client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
           #   formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
           #
-          #   # TODO: Initialize `language_code`:
-          #   language_code = ''
-          #
           #   # Register a callback during the method call.
-          #   operation = intents_client.batch_update_intents(formatted_parent, language_code) do |op|
+          #   operation = intents_client.batch_update_intents(formatted_parent) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
@@ -661,17 +655,17 @@ module Google
 
           def batch_update_intents \
               parent,
-              language_code,
               intent_batch_uri: nil,
               intent_batch_inline: nil,
+              language_code: nil,
               update_mask: nil,
               intent_view: nil,
               options: nil
             req = {
               parent: parent,
-              language_code: language_code,
               intent_batch_uri: intent_batch_uri,
               intent_batch_inline: intent_batch_inline,
+              language_code: language_code,
               update_mask: update_mask,
               intent_view: intent_view
             }.delete_if { |_, v| v.nil? }
