@@ -285,6 +285,18 @@ module Google
         #   Managing Labels](https://cloud.google.com/pubsub/docs/labels).
         # @param [Boolean] message_ordering Whether to enable message ordering
         #   on the subscription.
+        # @param [Topic] dead_letter_topic The {Topic} to which dead letter messages for the subscription should be
+        #   published. Dead lettering is done on a best effort basis. The same message might be dead lettered multiple
+        #   times. The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
+        #   `service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com`) must have permission to Publish() to
+        #   this topic.
+        #
+        #   The operation will fail if the topic does not exist. Users should ensure that there is a subscription
+        #   attached to this topic since messages published to a topic with no subscriptions are lost.
+        # @param [Integer] dead_letter_max_delivery_attempts The maximum number of delivery attempts for any message in
+        #   the subscription's dead letter policy. Dead lettering is done on a best effort basis. The same message might
+        #   be dead lettered multiple times. The value must be between 5 and 100. If this parameter is 0, a default
+        #   value of 5 is used. The `dead_letter_topic` must also be set.
         #
         # @return [Google::Cloud::PubSub::Subscription]
         #
@@ -307,11 +319,38 @@ module Google
         #                         deadline: 120,
         #                         endpoint: "https://example.com/push"
         #
+        # @example Configure a Dead Letter Queues policy:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is
+        #   # automatically created and managed by the service team in a private project.
+        #   my_project_number = "000000000000"
+        #   service_account_email = "serviceAccount:service-#{my_project_number}@gcp-sa-pubsub.iam.gserviceaccount.com"
+        #
+        #   dead_letter_topic = pubsub.topic "my-dead-letter-topic"
+        #   dead_letter_subscription = dead_letter_topic.subscribe "my-dead-letter-sub"
+        #
+        #   dead_letter_topic.policy { |p| p.add "roles/pubsub.publisher", service_account_email }
+        #   dead_letter_subscription.policy { |p| p.add "roles/pubsub.subscriber", service_account_email }
+        #
+        #   topic = pubsub.topic "my-topic"
+        #   sub = topic.subscribe "my-topic-sub",
+        #                         dead_letter_topic: dead_letter_topic,
+        #                         dead_letter_max_delivery_attempts: 10
+        #
         def subscribe subscription_name, deadline: nil, retain_acked: false, retention: nil, endpoint: nil, labels: nil,
-                      message_ordering: nil
+                      message_ordering: nil, dead_letter_topic: nil, dead_letter_max_delivery_attempts: nil
           ensure_service!
           options = { deadline: deadline, retain_acked: retain_acked, retention: retention, endpoint: endpoint,
-                      labels: labels, message_ordering: message_ordering }
+                      labels: labels, message_ordering: message_ordering,
+                      dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts }
+          options[:dead_letter_topic_name] = dead_letter_topic.name if dead_letter_topic
+          if options[:dead_letter_max_delivery_attempts] && !options[:dead_letter_topic_name]
+            # Service error message "3:Invalid resource name given (name=)." does not identify param.
+            raise ArgumentError, "dead_letter_topic is required with dead_letter_max_delivery_attempts"
+          end
           grpc = service.create_subscription name, subscription_name, options
           Subscription.from_grpc grpc, service
         end

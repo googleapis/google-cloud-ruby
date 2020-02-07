@@ -169,8 +169,12 @@ class MockPubsub < Minitest::Spec
 
   def subscription_hash topic_name, sub_name,
                         deadline = 60,
-                        endpoint = "http://example.com/callback", labels: nil
-    { name: subscription_path(sub_name),
+                        endpoint = "http://example.com/callback",
+                        labels: nil,
+                        dead_letter_topic: nil,
+                        max_delivery_attempts: nil
+    raise "dead_letter_topic is required" if max_delivery_attempts && !dead_letter_topic
+    hsh = { name: subscription_path(sub_name),
       topic: topic_path(topic_name),
       push_config: {
         push_endpoint: endpoint,
@@ -185,6 +189,11 @@ class MockPubsub < Minitest::Spec
       labels: labels,
       expiration_policy: { ttl: { seconds: 172800, nanos: 0 } }, # 2 days
     }
+    hsh[:dead_letter_policy] = {
+      dead_letter_topic: dead_letter_topic,
+      max_delivery_attempts: max_delivery_attempts
+    } if dead_letter_topic
+    hsh
   end
 
   def snapshots_hash topic_name, num_snapshots, token = nil
@@ -209,13 +218,14 @@ class MockPubsub < Minitest::Spec
     }
   end
 
-  def rec_message_hash message, id = rand(1000000)
+  def rec_message_hash message, id = rand(1000000), delivery_attempt: 10
     {
       ack_id: "ack-id-#{id}",
+      delivery_attempt: delivery_attempt,
       message: {
         data: message,
         attributes: {},
-        message_id: "msg-id-#{id}",
+        message_id: "msg-id-#{id}"
       }
     }
   end

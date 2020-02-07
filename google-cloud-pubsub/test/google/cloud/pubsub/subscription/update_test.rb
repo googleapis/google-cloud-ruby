@@ -25,7 +25,11 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     new_labels.each { |k, v| labels_map[String(k)] = String(v) }
     labels_map
   end
-  let(:sub_hash) { subscription_hash topic_name, sub_name, labels: labels }
+  let(:dead_letter_topic_name) { "topic-name-dead-letter" }
+  let(:dead_letter_topic_path) { topic_path(dead_letter_topic_name) }
+  let(:new_dead_letter_topic_name) { "topic-name-dead-letter-2" }
+  let(:new_dead_letter_topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(new_dead_letter_topic_name)), pubsub.service }
+  let(:sub_hash) { subscription_hash topic_name, sub_name, labels: labels, dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 6 }
   let(:sub_deadline) { sub_hash["ack_deadline_seconds"] }
   let(:sub_endpoint) { sub_hash["push_config"]["push_endpoint"] }
   let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.new(sub_hash) }
@@ -209,6 +213,48 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     subscription.push_config.authentication.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
     subscription.push_config.authentication.email.must_equal "admin@example.net"
     subscription.push_config.authentication.audience.must_equal "some-header-value"
+  end
+
+  it "updates dead_letter_topic" do
+    dead_letter_policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new(dead_letter_topic: new_dead_letter_topic.name, max_delivery_attempts: 6)
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new \
+      name: sub_path, dead_letter_policy: dead_letter_policy
+    update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    subscription.dead_letter_topic = new_dead_letter_topic
+
+    mock.verify
+
+    subscription.dead_letter_topic.name.must_equal new_dead_letter_topic.name
+    subscription.dead_letter_max_delivery_attempts.must_equal 6
+  end
+
+  it "updates dead_letter_max_delivery_attempts" do
+    dead_letter_policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new(dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 7)
+    update_sub = Google::Cloud::PubSub::V1::Subscription.new \
+      name: sub_path, dead_letter_policy: dead_letter_policy
+    update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
+    mock = Minitest::Mock.new
+    mock.expect :update_subscription, update_sub, [update_sub, update_mask, options: default_options]
+    subscription.service.mocked_subscriber = mock
+
+    subscription.dead_letter_max_delivery_attempts = 7
+
+    mock.verify
+
+    subscription.dead_letter_topic.name.must_equal dead_letter_topic_path
+    subscription.dead_letter_max_delivery_attempts.must_equal 7
+  end
+
+  it "raises when updating dead_letter_max_delivery_attempts if dead_letter_topic is not set" do
+    grpc = Google::Cloud::PubSub::V1::Subscription.new(subscription_hash(topic_name, sub_name))
+    subscription_without_dead_letter = Google::Cloud::PubSub::Subscription.from_grpc grpc, pubsub.service
+    assert_raises ArgumentError do
+      subscription_without_dead_letter.dead_letter_max_delivery_attempts = 7
+    end
   end
 
   describe :reference do

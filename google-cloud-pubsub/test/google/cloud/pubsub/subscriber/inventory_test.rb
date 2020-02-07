@@ -172,9 +172,9 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
     inventory.add rec_msg1_grpc
     inventory.wont_be :full?
-    inventory.total_bytesize.must_equal 56
+    inventory.total_bytesize.must_equal 58
     inventory.add rec_msg2_grpc, rec_msg3_grpc
-    inventory.total_bytesize.must_equal 168
+    inventory.total_bytesize.must_equal 174
     inventory.must_be :full?
   end
 

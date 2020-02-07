@@ -238,7 +238,6 @@ module Google
           mrd = Convert.number_to_duration options[:retention]
           labels = options[:labels]
           message_ordering = options[:message_ordering]
-
           execute do
             subscriber.create_subscription \
               name, topic,
@@ -248,6 +247,7 @@ module Google
               message_retention_duration: mrd,
               labels:                     labels,
               enable_message_ordering:    message_ordering,
+              dead_letter_policy:         dead_letter_policy(options),
               options:                    default_options
           end
         end
@@ -475,6 +475,15 @@ module Google
           # Rails' String#to_time returns nil if the string doesn't parse.
           return false if obj.to_time.nil?
           true
+        end
+
+        def dead_letter_policy options
+          return nil unless options[:dead_letter_topic_name]
+          policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new dead_letter_topic: options[:dead_letter_topic_name]
+          if options[:dead_letter_max_delivery_attempts]
+            policy.max_delivery_attempts = options[:dead_letter_max_delivery_attempts]
+          end
+          policy
         end
 
         def default_headers

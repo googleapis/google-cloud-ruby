@@ -27,6 +27,11 @@ end
 # Create shared pubsub object so we don't create new for each test
 $pubsub = Google::Cloud.new.pubsub
 
+# Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is automatically
+# created and managed by the service team in a private project.
+# Format: `service-${GCLOUD_PROJECT_NUMBER}@gcp-sa-pubsub.iam.gserviceaccount.com`
+$project_number = ENV["GCLOUD_PROJECT_NUMBER"]
+
 module Acceptance
   ##
   # Test class for running against a PubSub instance.
@@ -78,9 +83,9 @@ end
 require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
-$topic_prefix = "gcloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase
-$topic_names = 8.times.map { "#{$topic_prefix}-#{SecureRandom.hex(4)}".downcase }
-$snapshot_prefix = "gcloud-ruby-acceptance-#{t}-snapshot-#{SecureRandom.hex(4)}".downcase
+$topic_prefix = "ruby-topic-#{t}-#{SecureRandom.hex(4)}".downcase
+$topic_names = 10.times.map { "#{$topic_prefix}-#{SecureRandom.hex(4)}".downcase }
+$snapshot_prefix = "ruby-snp-#{t}-snapshot-#{SecureRandom.hex(4)}".downcase
 $snapshot_names = 3.times.map { "#{$snapshot_prefix}-#{SecureRandom.hex(4)}".downcase }
 
 def clean_up_pubsub_topics
@@ -109,4 +114,9 @@ end
 Minitest.after_run do
   clean_up_pubsub_topics
   clean_up_pubsub_snapshots
+  unless $project_number
+    puts "The Dead Letter Queue (DLQ) tests were not run. To enable, ensure that " \
+         "GCLOUD_PROJECT_NUMBER is present in the environment in order to bind IAM permissions to " \
+         "service-${GCLOUD_PROJECT_NUMBER}@gcp-sa-pubsub.iam.gserviceaccount.com"
+  end
 end

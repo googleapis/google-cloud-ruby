@@ -230,6 +230,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::ReceivedMessage#delivery_attempt" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", "projects/my-project/topics/my-topic", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::ReceivedMessage#modify_ack_deadline!" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_subscriber.expect :get_subscription, subscription_resp, ["projects/my-project/subscriptions/my-topic-sub", Hash]
@@ -313,6 +320,13 @@ YARD::Doctest.configure do |doctest|
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :streaming_pull, [].to_enum, [Enumerator, Hash]
       mock_subscriber.expect :acknowledge, nil, ["projects/my-project/subscriptions/my-topic-sub", ["2"], Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::PubSub::Subscription#dead_letter" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_subscriber.expect :get_subscription, subscription_resp("my-topic-sub", dead_letter_topic: "my-dead-letter-topic", max_delivery_attempts: 10), ["projects/my-project/subscriptions/my-topic-sub", Hash]
+      mock_subscriber.expect :update_subscription, subscription_resp, [Google::Cloud::PubSub::V1::Subscription, Google::Protobuf::FieldMask, Hash]
     end
   end
 
@@ -584,6 +598,19 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::PubSub::Topic#subscribe@Configure a Dead Letter Queues policy:" do
+    mock_pubsub do |mock_publisher, mock_subscriber|
+      mock_publisher.expect :get_topic, topic_resp("my-dead-letter-topic"), ["projects/my-project/topics/my-dead-letter-topic", Hash]
+      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-dead-letter-sub"), ["projects/my-project/subscriptions/my-dead-letter-sub", "projects/my-project/topics/my-dead-letter-topic", Hash]
+      mock_publisher.expect :get_iam_policy, policy_resp, ["projects/my-project/topics/my-dead-letter-topic", Hash]
+      mock_subscriber.expect :get_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-dead-letter-sub", Hash]
+      mock_publisher.expect :set_iam_policy, policy_resp, ["projects/my-project/topics/my-dead-letter-topic", Google::Iam::V1::Policy, Hash]
+      mock_subscriber.expect :set_iam_policy, policy_resp, ["projects/my-project/subscriptions/my-dead-letter-sub", Google::Iam::V1::Policy, Hash]
+      mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
+      mock_subscriber.expect :create_subscription, OpenStruct.new(name: "my-topic-sub"), ["projects/my-project/subscriptions/my-topic-sub", "projects/my-project/topics/my-topic", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::PubSub::Topic#subscription" do
     mock_pubsub do |mock_publisher, mock_subscriber|
       mock_publisher.expect :get_topic, topic_resp, ["projects/my-project/topics/my-topic", Hash]
@@ -698,8 +725,11 @@ end
 
 def subscription_hash topic_name, sub_name,
                       deadline = 60,
-                      endpoint = "http://example.com/callback", labels: nil
-  { name: subscription_path(sub_name),
+                      endpoint = "http://example.com/callback",
+                      labels: nil,
+                      dead_letter_topic: nil,
+                      max_delivery_attempts: nil
+  hsh = { name: subscription_path(sub_name),
     topic: topic_path(topic_name),
     push_config: {
       push_endpoint: endpoint,
@@ -713,6 +743,11 @@ def subscription_hash topic_name, sub_name,
     message_retention_duration: { seconds: 600, nanos: 900000000 }, # 600.9 seconds
     labels: labels
   }
+  hsh[:dead_letter_policy] = {
+    dead_letter_topic: topic_path(dead_letter_topic),
+    max_delivery_attempts: max_delivery_attempts
+  } if dead_letter_topic
+  hsh
 end
 
 def snapshots_hash topic_name, num_snapshots, token = nil
@@ -775,8 +810,8 @@ def paged_enum_struct response
 end
 
 
-def subscription_resp name = "my-sub"
-  Google::Cloud::PubSub::V1::Subscription.new subscription_hash "my-topic", name
+def subscription_resp name = "my-sub", dead_letter_topic: nil, max_delivery_attempts: nil
+  Google::Cloud::PubSub::V1::Subscription.new subscription_hash "my-topic", name, dead_letter_topic: dead_letter_topic, max_delivery_attempts: max_delivery_attempts
 end
 
 

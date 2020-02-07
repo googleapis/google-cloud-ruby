@@ -33,7 +33,9 @@ describe Google::Cloud::PubSub, :pubsub do
 
   let(:new_topic_name)  {  $topic_names[0] }
   let(:topic_names)     {  $topic_names[3..6] }
-  let(:reference_topic_name) {  $topic_names[7] }
+  let(:reference_topic_name) { $topic_names[7] }
+  let(:dead_letter_topic_name) { $topic_names[8] }
+  let(:dead_letter_topic_name_2) { $topic_names[9] }
   let(:labels) { { "foo" => "bar" } }
 
   before do
@@ -44,7 +46,6 @@ describe Google::Cloud::PubSub, :pubsub do
   end
 
   describe "Topic", :pubsub do
-
     it "should be listed" do
       topics = pubsub.topics.all
       topics.each do |topic|
@@ -122,14 +123,15 @@ describe Google::Cloud::PubSub, :pubsub do
 
     it "should list all subscriptions registered to the topic" do
       subscriptions = topic.subscriptions.all
-      subscriptions.count.must_equal subs.count
+      subscriptions.count.must_be :>=, subs.count
       subscriptions.each do |subscription|
         # subscriptions on topic are strings...
         subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       end
     end
 
-    it "should allow creation of a subscription with options" do
+    it "should allow create and update of subscription with options" do
+      # create
       subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600, labels: labels
       subscription.wont_be :nil?
       subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
@@ -137,8 +139,12 @@ describe Google::Cloud::PubSub, :pubsub do
       subscription.retention.must_equal 600
       subscription.labels.must_equal labels
       subscription.labels.must_be :frozen?
+
+      # update
       subscription.labels = {}
       subscription.labels.must_be :empty?
+    ensure
+      # delete
       subscription.delete
     end
 
@@ -152,21 +158,23 @@ describe Google::Cloud::PubSub, :pubsub do
       subscription.wont_be :nil?
       subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
       # No messages, should be empty
-      events = subscription.pull
-      events.must_be :empty?
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
       # Publish a new message
       msg = topic.publish "hello"
       msg.wont_be :nil?
       # Check it received the published message
-      events = pull_with_retry subscription
-      events.wont_be :empty?
-      events.count.must_equal 1
-      event = events.first
-      event.wont_be :nil?
-      event.msg.data.must_equal msg.data
-      event.msg.published_at.wont_be :nil?
+      received_messages = pull_with_retry subscription
+      received_messages.wont_be :empty?
+      received_messages.count.must_equal 1
+      received_message = received_messages.first
+      received_message.wont_be :nil?
+      received_message.delivery_attempt.must_be :nil?
+      received_message.msg.data.must_equal msg.data
+      received_message.msg.published_at.wont_be :nil?
       # Acknowledge the message
-      subscription.ack event.ack_id
+      subscription.ack received_message.ack_id
+    ensure
       # Remove the subscription
       subscription.delete
     end
@@ -177,8 +185,8 @@ describe Google::Cloud::PubSub, :pubsub do
       subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
 
       # No messages, should be empty
-      events = subscription.pull
-      events.must_be :empty?
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
       # Publish a new message
       msg = topic.publish "hello-#{rand(1000)}"
       msg.wont_be :nil?
@@ -186,60 +194,115 @@ describe Google::Cloud::PubSub, :pubsub do
       snapshot = subscription.create_snapshot labels: labels
 
       # Check it pulls the message
-      events = pull_with_retry subscription
-      events.wont_be :empty?
-      events.count.must_equal 1
-      event = events.first
-      event.wont_be :nil?
-      event.msg.data.must_equal msg.data
-      event.msg.published_at.wont_be :nil?
+      received_messages = pull_with_retry subscription
+      received_messages.wont_be :empty?
+      received_messages.count.must_equal 1
+      received_message = received_messages.first
+      received_message.wont_be :nil?
+      received_message.delivery_attempt.must_be :nil?
+      received_message.msg.data.must_equal msg.data
+      received_message.msg.published_at.wont_be :nil?
       # Acknowledge the message
-      subscription.ack event.ack_id
+      subscription.ack received_message.ack_id
 
       # No messages, should be empty
-      events = subscription.pull
-      events.must_be :empty?
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
 
       # Reset to the snapshot
       subscription.seek snapshot
 
       # Check it again pulls the message
-      events = pull_with_retry subscription
-      events.wont_be :empty?
-      events.count.must_equal 1
-      event = events.first
-      event.wont_be :nil?
-      event.msg.data.must_equal msg.data
+      received_messages = pull_with_retry subscription
+      received_messages.count.must_equal 1
+      received_message = received_messages.first
+      received_message.wont_be :nil?
+      received_message.delivery_attempt.must_be :nil?
+      received_message.msg.data.must_equal msg.data
       # Acknowledge the message
-      subscription.ack event.ack_id
+      subscription.ack received_message.ack_id
       # No messages, should be empty
-      events = subscription.pull
-      events.must_be :empty?
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
 
       # No messages, should be empty
-      events = subscription.pull
-      events.must_be :empty?
+      received_messages = subscription.pull
+      received_messages.must_be :empty?
 
       snapshot.labels.must_equal labels
       snapshot.labels.must_be :frozen?
       snapshot.labels = {}
       snapshot.labels.must_be :empty?
-
+    ensure
       # Remove the subscription
       subscription.delete
     end
 
+    if $project_number
+      it "should be able to direct messages to a dead letter topic" do
+        dead_letter_topic = retrieve_topic dead_letter_topic_name
+        dead_letter_subscription = dead_letter_topic.subscribe "#{$topic_prefix}-dead-letter-sub1"
+
+        # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is
+        # automatically created and managed by the service team in a private project.
+        service_account_email = "serviceAccount:service-#{$project_number}@gcp-sa-pubsub.iam.gserviceaccount.com"
+
+        dead_letter_topic.policy { |p| p.add "roles/pubsub.publisher", service_account_email }
+        dead_letter_subscription.policy { |p| p.add "roles/pubsub.subscriber", service_account_email }
+
+        # create
+        subscription = topic.subscribe "#{$topic_prefix}-sub6", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 6
+        subscription.dead_letter_max_delivery_attempts.must_equal 6
+        subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic.name
+
+        # update
+        subscription.dead_letter_max_delivery_attempts = 5
+        subscription.dead_letter_max_delivery_attempts.must_equal 5
+        dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
+        dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub2"
+        subscription.dead_letter_topic = dead_letter_topic_2
+        subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic_2.name
+
+        # Publish a new message
+        msg = topic.publish "dead-letter-#{rand(1000)}"
+        msg.wont_be :nil?
+
+        # Check it pulls the message
+        (1..7).each do |i|
+          received_messages = pull_with_retry subscription
+          received_messages.count.must_equal 1
+          received_message = received_messages.first
+          received_message.msg.data.must_equal msg.data
+          received_message.delivery_attempt.must_be :>, 0
+          received_message.nack!
+        end
+
+        # Check the dead letter subscription pulls the message
+        received_messages = dead_letter_subscription.pull
+        received_messages.wont_be :empty?
+        received_messages.count.must_equal 1
+        received_message = received_messages.first
+        received_message.wont_be :nil?
+        received_message.msg.data.must_equal msg.data
+        received_message.delivery_attempt.must_be :nil?
+      ensure
+        # Remove the subscription
+        subscription.delete
+        dead_letter_subscription.delete
+      end
+    end
+
     def pull_with_retry sub
-      events = []
+      received_messages = []
       retries = 0
       while retries <= 5 do
-        events = sub.pull
-        break if events.any?
+        received_messages = sub.pull
+        break if received_messages.any?
         retries += 1
         puts "the subscription does not have the message yet. sleeping for #{retries*retries} second(s) and retrying."
         sleep retries*retries
       end
-      events
+      received_messages
     end
   end
 
