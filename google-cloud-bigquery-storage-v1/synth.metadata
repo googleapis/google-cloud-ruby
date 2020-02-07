@@ -1,0 +1,125 @@
+{
+  "updateTime": "2020-02-07T23:00:34.381835Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "1b83c92462b14d67a7644e2980f723112472e03a",
+        "internalRef": "293893514"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "bigquery/storage",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": ".rubocop.yml"
+    },
+    {
+      "path": ".yardopts"
+    },
+    {
+      "path": "AUTHENTICATION.md"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "Gemfile"
+    },
+    {
+      "path": "LICENSE.md"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "Rakefile"
+    },
+    {
+      "path": "google-cloud-bigquery-storage-v1.gemspec"
+    },
+    {
+      "path": "lib/google-cloud-bigquery-storage-v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1/arrow_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1/avro_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1/big_query_read.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1/big_query_read/client.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1/big_query_read/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1/big_query_read/paths.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1/storage_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1/storage_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1/stream_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/bigquery/storage/v1/version.rb"
+    },
+    {
+      "path": "lib/google/cloud/common_resources_pb.rb"
+    },
+    {
+      "path": "proto_docs/README.md"
+    },
+    {
+      "path": "proto_docs/google/api/field_behavior.rb"
+    },
+    {
+      "path": "proto_docs/google/api/resource.rb"
+    },
+    {
+      "path": "proto_docs/google/cloud/bigquery/storage/v1/arrow.rb"
+    },
+    {
+      "path": "proto_docs/google/cloud/bigquery/storage/v1/avro.rb"
+    },
+    {
+      "path": "proto_docs/google/cloud/bigquery/storage/v1/storage.rb"
+    },
+    {
+      "path": "proto_docs/google/cloud/bigquery/storage/v1/stream.rb"
+    },
+    {
+      "path": "proto_docs/google/protobuf/timestamp.rb"
+    },
+    {
+      "path": "test/google/cloud/bigquery/storage/v1/big_query_read_test.rb"
+    }
+  ]
+}
