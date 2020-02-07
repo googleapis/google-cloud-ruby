@@ -334,7 +334,6 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
     it 'invokes update_intent without error' do
       # Create request parameters
       intent = {}
-      language_code = ''
 
       # Create expected grpc response
       name = "name3373707"
@@ -363,7 +362,6 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::UpdateIntentRequest, request)
         assert_equal(Google::Gax::to_proto(intent, Google::Cloud::Dialogflow::V2::Intent), request.intent)
-        assert_equal(language_code, request.language_code)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2.new(:update_intent, mock_method)
@@ -376,13 +374,13 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
-          response = client.update_intent(intent, language_code)
+          response = client.update_intent(intent)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.update_intent(intent, language_code) do |response, operation|
+          client.update_intent(intent) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -394,13 +392,11 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
     it 'invokes update_intent with error' do
       # Create request parameters
       intent = {}
-      language_code = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::UpdateIntentRequest, request)
         assert_equal(Google::Gax::to_proto(intent, Google::Cloud::Dialogflow::V2::Intent), request.intent)
-        assert_equal(language_code, request.language_code)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2.new(:update_intent, mock_method)
@@ -414,7 +410,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
-            client.update_intent(intent, language_code)
+            client.update_intent(intent)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -499,7 +495,6 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
     it 'invokes batch_update_intents without error' do
       # Create request parameters
       formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
-      language_code = ''
 
       # Create expected grpc response
       expected_response = {}
@@ -516,7 +511,6 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(language_code, request.language_code)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v2.new(:batch_update_intents, mock_method)
@@ -529,7 +523,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
-          response = client.batch_update_intents(formatted_parent, language_code)
+          response = client.batch_update_intents(formatted_parent)
 
           # Verify the response
           assert_equal(expected_response, response.response)
@@ -540,7 +534,6 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
     it 'invokes batch_update_intents and returns an operation error.' do
       # Create request parameters
       formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
-      language_code = ''
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
@@ -556,7 +549,6 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(language_code, request.language_code)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v2.new(:batch_update_intents, mock_method)
@@ -569,7 +561,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
           client = Google::Cloud::Dialogflow::Intents.new(version: :v2)
 
           # Call method
-          response = client.batch_update_intents(formatted_parent, language_code)
+          response = client.batch_update_intents(formatted_parent)
 
           # Verify the response
           assert(response.error?)
@@ -581,13 +573,11 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
     it 'invokes batch_update_intents with error' do
       # Create request parameters
       formatted_parent = Google::Cloud::Dialogflow::V2::IntentsClient.project_agent_path("[PROJECT]")
-      language_code = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest, request)
         assert_equal(formatted_parent, request.parent)
-        assert_equal(language_code, request.language_code)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2.new(:batch_update_intents, mock_method)
@@ -601,7 +591,7 @@ describe Google::Cloud::Dialogflow::V2::IntentsClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
-            client.batch_update_intents(formatted_parent, language_code)
+            client.batch_update_intents(formatted_parent)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
