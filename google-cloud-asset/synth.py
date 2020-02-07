@@ -18,6 +18,7 @@ import synthtool as s
 import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
+import os
 import re
 import shutil
 from subprocess import call
@@ -58,7 +59,11 @@ orgpolicy_library = gapic2.ruby_library(
 
 s.copy(orgpolicy_library / 'lib/google/cloud/orgpolicy')
 s.copy(orgpolicy_library / 'proto_docs/google/cloud/orgpolicy')
-shutil.move('proto_docs', 'lib/google/cloud/orgpolicy/v1/doc')
+os.makedirs('lib/google/cloud/orgpolicy/v1/doc/google/cloud/orgpolicy/v1', exist_ok=True)
+shutil.move(
+    'proto_docs/google/cloud/orgpolicy/v1/orgpolicy.rb',
+    'lib/google/cloud/orgpolicy/v1/doc/google/cloud/orgpolicy/v1/orgpolicy.rb'
+)
 
 # Copy common templates
 templates = gcp.CommonTemplates().ruby_library()
