@@ -39,6 +39,13 @@ describe Google::Cloud::Bigquery, :bigquery do
     job = dataset.query_job routine_sql
     job.wait_until_done!
     job.wont_be :failed?
+    job.ddl_operation_performed.must_equal "CREATE"
+    routine = job.ddl_target_routine
+    routine.must_be_kind_of Google::Cloud::Bigquery::Routine
+    routine.reference?.must_equal true
+    routine.project_id.must_equal bigquery.project
+    routine.dataset_id.must_equal dataset.dataset_id
+    routine.routine_id.must_equal routine_id
 
     # list
     dataset.routines.all.map(&:routine_id).must_include routine_id
@@ -101,7 +108,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     routine.description = new_description
     routine.refresh!
     routine.description.must_equal new_description
-  ensure
+
     # delete
     routine.delete.must_equal true
 

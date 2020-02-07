@@ -17,7 +17,7 @@ require "json"
 require "uri"
 
 describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
-  let(:job_gapi) { query_job_gapi target_table: true, statement_type: "CREATE_TABLE", num_dml_affected_rows: 50, ddl_operation_performed: "CREATE" }
+  let(:job_gapi) { query_job_gapi target_routine: true, target_table: true, statement_type: "CREATE_TABLE", num_dml_affected_rows: 50, ddl_operation_performed: "CREATE" }
   let(:job) { Google::Cloud::Bigquery::Job.from_gapi job_gapi,
                                               bigquery.service }
   let(:job_id) { job.job_id }
@@ -64,6 +64,11 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     job.statement_type.must_equal "CREATE_TABLE"
     job.ddl?.must_equal true
     job.dml?.must_equal false
+    # in real life this example does not create a routine, but test the attribute here anyway
+    job.ddl_target_routine.must_be_kind_of Google::Cloud::Bigquery::Routine
+    job.ddl_target_routine.project_id.must_equal "target_project_id"
+    job.ddl_target_routine.dataset_id.must_equal "target_dataset_id"
+    job.ddl_target_routine.routine_id.must_equal "target_routine_id"
   end
 
   it "knows its query config" do
@@ -112,9 +117,10 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     job.udfs.last.must_equal "gs://my-bucket/my-lib.js"
   end
 
-  def query_job_gapi target_table: false, statement_type: nil, num_dml_affected_rows: nil, ddl_operation_performed: nil
+  def query_job_gapi target_routine: false, target_table: false, statement_type: nil, num_dml_affected_rows: nil, ddl_operation_performed: nil
     gapi = Google::Apis::BigqueryV2::Job.from_json query_job_hash.to_json
-    gapi.statistics.query = statistics_query_gapi target_table: target_table,
+    gapi.statistics.query = statistics_query_gapi target_routine: target_routine,
+                                                  target_table: target_table,
                                                   statement_type: statement_type,
                                                   num_dml_affected_rows: num_dml_affected_rows,
                                                   ddl_operation_performed: ddl_operation_performed

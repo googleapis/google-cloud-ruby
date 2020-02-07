@@ -306,6 +306,22 @@ module Google
         end
 
         ##
+        # The DDL target routine, in reference state. (See {Routine#reference?}.)
+        # Present only for `CREATE/DROP FUNCTION/PROCEDURE` queries. (See
+        # {#statement_type}.)
+        #
+        # @return [Google::Cloud::Bigquery::Routine, nil] The DDL target routine, in
+        #   reference state.
+        #
+        def ddl_target_routine
+          return nil unless @gapi.statistics.query
+          ensure_service!
+          routine = @gapi.statistics.query.ddl_target_routine
+          return nil unless routine
+          Google::Cloud::Bigquery::Routine.new_reference_from_gapi routine, service
+        end
+
+        ##
         # The DDL target table, in reference state. (See {Table#reference?}.)
         # Present only for `CREATE/DROP TABLE/VIEW` queries. (See
         # {#statement_type}.)

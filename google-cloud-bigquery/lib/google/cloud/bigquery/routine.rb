@@ -823,14 +823,23 @@ module Google
           raise ArgumentError, "routine_id is required" unless routine_id
           raise ArgumentError, "service is required" unless service
 
+          gapi = Google::Apis::BigqueryV2::RoutineReference.new(
+            project_id: project_id,
+            dataset_id: dataset_id,
+            routine_id: routine_id
+          )
           new.tap do |r|
-            reference_gapi = Google::Apis::BigqueryV2::RoutineReference.new(
-              project_id: project_id,
-              dataset_id: dataset_id,
-              routine_id: routine_id
-            )
             r.service = service
-            r.instance_variable_set :@reference, reference_gapi
+            r.instance_variable_set :@reference, gapi
+          end
+        end
+
+        ##
+        # @private New lazy Routine object from a Google API Client object.
+        def self.new_reference_from_gapi gapi, service
+          new.tap do |b|
+            b.service = service
+            b.instance_variable_set :@reference, gapi
           end
         end
 

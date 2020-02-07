@@ -622,9 +622,9 @@ class MockBigquery < Minitest::Spec
     job_ref
   end
 
-  def query_job_resp_gapi query, job_id: nil, target_table: false, statement_type: "SELECT", num_dml_affected_rows: nil, ddl_operation_performed: nil
+  def query_job_resp_gapi query, job_id: nil, target_routine: false, target_table: false, statement_type: "SELECT", num_dml_affected_rows: nil, ddl_operation_performed: nil
     gapi = Google::Apis::BigqueryV2::Job.from_json query_job_resp_json query, job_id: job_id
-    gapi.statistics.query = statistics_query_gapi target_table: target_table, statement_type: statement_type, num_dml_affected_rows: num_dml_affected_rows, ddl_operation_performed: ddl_operation_performed
+    gapi.statistics.query = statistics_query_gapi target_routine: target_routine, target_table: target_table, statement_type: statement_type, num_dml_affected_rows: num_dml_affected_rows, ddl_operation_performed: ddl_operation_performed
     gapi
   end
 
@@ -655,7 +655,14 @@ class MockBigquery < Minitest::Spec
     hash.to_json
   end
 
-  def statistics_query_gapi target_table: false, statement_type: nil, num_dml_affected_rows: nil, ddl_operation_performed: nil
+  def statistics_query_gapi target_routine: false, target_table: false, statement_type: nil, num_dml_affected_rows: nil, ddl_operation_performed: nil
+    ddl_target_routine = if target_routine
+      Google::Apis::BigqueryV2::RoutineReference.new(
+        project_id: "target_project_id",
+        dataset_id: "target_dataset_id",
+        routine_id: "target_routine_id"
+      )
+    end
     ddl_target_table = if target_table
       Google::Apis::BigqueryV2::TableReference.new(
         project_id: "target_project_id",
@@ -667,6 +674,7 @@ class MockBigquery < Minitest::Spec
       billing_tier: 1,
       cache_hit: true,
       ddl_operation_performed: ddl_operation_performed,
+      ddl_target_routine: ddl_target_routine,
       ddl_target_table: ddl_target_table,
       num_dml_affected_rows: num_dml_affected_rows,
       query_plan: [

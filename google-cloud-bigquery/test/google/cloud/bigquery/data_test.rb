@@ -93,6 +93,7 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
     data.ddl?.must_equal false
     data.dml?.must_equal false
     data.ddl_operation_performed.must_be :nil?
+    data.ddl_target_routine.must_be :nil?
     data.ddl_target_table.must_be :nil?
     data.num_dml_affected_rows.must_be :nil?
   end

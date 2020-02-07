@@ -146,6 +146,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     # job.statement_type.must_equal "SELECT"
     job.ddl_operation_performed.must_be :nil?
     job.ddl_target_table.must_be :nil?
+    job.ddl_target_routine.must_be :nil?
   end
 
   it "should run a query job with dryrun flag" do

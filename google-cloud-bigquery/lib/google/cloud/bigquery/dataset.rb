@@ -1242,7 +1242,7 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     table_ref = job.ddl_target_table
+        #     table_ref = job.ddl_target_table # Or ddl_target_routine for CREATE/DROP FUNCTION/PROCEDURE
         #   end
         #
         # @example Execute a DML statement:
@@ -1490,7 +1490,7 @@ module Google
         #
         #   data = bigquery.query "CREATE TABLE my_table (x INT64)"
         #
-        #   table_ref = data.ddl_target_table
+        #   table_ref = data.ddl_target_table # Or ddl_target_routine for CREATE/DROP FUNCTION/PROCEDURE
         #
         # @example Execute a DML statement:
         #   require "google/cloud/bigquery"
