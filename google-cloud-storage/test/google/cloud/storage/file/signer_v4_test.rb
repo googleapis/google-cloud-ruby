@@ -22,10 +22,22 @@ class SignerV4Test < MockStorage
     account = JSON.parse File.read(account_file_path)
     credentials.issuer = account["client_email"]
     credentials.signing_key = OpenSSL::PKey::RSA.new account["private_key"]
+    @test = nil
   end
+
+  def teardown
+    if !passed? && @test
+      test = @test.first
+      puts "\ntest_#{@test.last}: #{test.description}:\n"
+      puts "test.expectedCanonicalRequest:\n\n#{test.expectedCanonicalRequest}\n\n"
+      puts "test.expectedStringToSign:\n\n#{test.expectedStringToSign}\n\n"
+    end
+  end  
 
   def self.build_test_for test, index
     define_method("test_#{index}: #{test.description}") do
+
+      @test = [test, index]
       # start: test method body
       signer = Google::Cloud::Storage::File::SignerV4.new test.bucket,
                                                           test.object,
@@ -35,7 +47,7 @@ class SignerV4Test < MockStorage
         signed_url = signer.signed_url method: test["method"],
                                        expires: test.expiration,
                                        headers: test.headers
-
+       
         signed_url.must_equal test.expectedUrl
       end
       # end: test method body
