@@ -464,7 +464,7 @@ module Google
         # @param [Boolean] enable_resource_based_routing Enable/Disable
         #   resource-based routing for data operation, by default it is
         #   disabled. Resource based routing can be enabled using the
-        #   environment `GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING` to
+        #   environment `GOOGLE_CLOUD_SPANNER_ENABLE_RESOURCE_BASED_ROUTING` to
         #   `TRUE` or `true`.
         # @return [Client] The newly created client.
         #
@@ -542,7 +542,7 @@ module Google
         # @param [Boolean] enable_resource_based_routing Enable/Disable
         #   resource-based routing for data operation, by default it
         #   is disabled. Resource based routing can be enabled using the
-        #   environment `GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING` to
+        #   environment `GOOGLE_CLOUD_SPANNER_ENABLE_RESOURCE_BASED_ROUTING` to
         #   `TRUE` or `true`.
         #
         # @return [Client] The newly created client.

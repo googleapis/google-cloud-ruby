@@ -26,7 +26,7 @@ module Google
           return true if @enable_resource_based_routing
 
           ["TRUE", "true"].include? \
-            ENV["GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING"]
+            ENV["GOOGLE_CLOUD_SPANNER_ENABLE_RESOURCE_BASED_ROUTING"]
         end
 
         protected
