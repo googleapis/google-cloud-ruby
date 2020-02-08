@@ -72,7 +72,7 @@ describe Google::Cloud::Spanner::Client, :resource_based_routing, :mock_spanner 
   end
 
   it "set service host with instance endpoint uri if resource based routing enabled using an environment variable" do
-    ENV["GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING"] = "TRUE"
+    ENV["GOOGLE_CLOUD_SPANNER_ENABLE_RESOURCE_BASED_ROUTING"] = "TRUE"
 
     get_res = Google::Spanner::Admin::Instance::V1::Instance.new \
       name: instance_path(instance_id), endpoint_uris: ["test1.host.com", "test2.host.com"]
