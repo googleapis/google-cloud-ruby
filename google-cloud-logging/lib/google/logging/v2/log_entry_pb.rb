@@ -5,6 +5,7 @@
 require 'google/protobuf'
 
 require 'google/api/monitored_resource_pb'
+require 'google/api/resource_pb'
 require 'google/logging/type/http_request_pb'
 require 'google/logging/type/log_severity_pb'
 require 'google/protobuf/any_pb'

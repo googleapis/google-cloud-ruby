@@ -461,6 +461,22 @@ module Google
                 {'name' => request.name}
               end
             )
+            @get_cmek_settings = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:get_cmek_settings),
+              defaults["get_cmek_settings"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @update_cmek_settings = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:update_cmek_settings),
+              defaults["update_cmek_settings"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
           end
 
           # Service calls
@@ -991,6 +1007,127 @@ module Google
             req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteExclusionRequest)
             @delete_exclusion.call(req, options, &block)
             nil
+          end
+
+          # Gets the Logs Router CMEK settings for the given resource.
+          #
+          # Note: CMEK for the Logs Router can currently only be configured for GCP
+          # organizations. Once configured, it applies to all projects and folders in
+          # the GCP organization.
+          #
+          # See [Enabling CMEK for Logs
+          # Router](/logging/docs/routing/managed-encryption) for more information.
+          #
+          # @param name [String]
+          #   Required. The resource for which to retrieve CMEK settings.
+          #
+          #       "projects/[PROJECT_ID]/cmekSettings"
+          #       "organizations/[ORGANIZATION_ID]/cmekSettings"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
+          #       "folders/[FOLDER_ID]/cmekSettings"
+          #
+          #   Example: `"organizations/12345/cmekSettings"`.
+          #
+          #   Note: CMEK for the Logs Router can currently only be configured for GCP
+          #   organizations. Once configured, it applies to all projects and folders in
+          #   the GCP organization.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::CmekSettings]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Logging::V2::CmekSettings]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   response = config_client.get_cmek_settings
+
+          def get_cmek_settings \
+              name: nil,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::GetCmekSettingsRequest)
+            @get_cmek_settings.call(req, options, &block)
+          end
+
+          # Updates the Logs Router CMEK settings for the given resource.
+          #
+          # Note: CMEK for the Logs Router can currently only be configured for GCP
+          # organizations. Once configured, it applies to all projects and folders in
+          # the GCP organization.
+          #
+          # {Google::Logging::V2::ConfigServiceV2::UpdateCmekSettings UpdateCmekSettings}
+          # will fail if 1) `kms_key_name` is invalid, or 2) the associated service
+          # account does not have the required
+          # `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key, or
+          # 3) access to the key is disabled.
+          #
+          # See [Enabling CMEK for Logs
+          # Router](/logging/docs/routing/managed-encryption) for more information.
+          #
+          # @param name [String]
+          #   Required. The resource name for the CMEK settings to update.
+          #
+          #       "projects/[PROJECT_ID]/cmekSettings"
+          #       "organizations/[ORGANIZATION_ID]/cmekSettings"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
+          #       "folders/[FOLDER_ID]/cmekSettings"
+          #
+          #   Example: `"organizations/12345/cmekSettings"`.
+          #
+          #   Note: CMEK for the Logs Router can currently only be configured for GCP
+          #   organizations. Once configured, it applies to all projects and folders in
+          #   the GCP organization.
+          # @param cmek_settings [Google::Logging::V2::CmekSettings | Hash]
+          #   Required. The CMEK settings to update.
+          #
+          #   See [Enabling CMEK for Logs
+          #   Router](/logging/docs/routing/managed-encryption) for more information.
+          #   A hash of the same form as `Google::Logging::V2::CmekSettings`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Optional. Field mask identifying which fields from `cmek_settings` should
+          #   be updated. A field will be overwritten if and only if it is in the update
+          #   mask. Output only fields cannot be updated.
+          #
+          #   See {Google::Protobuf::FieldMask FieldMask} for more information.
+          #
+          #   Example: `"updateMask=kmsKeyName"`
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::CmekSettings]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Logging::V2::CmekSettings]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #   response = config_client.update_cmek_settings
+
+          def update_cmek_settings \
+              name: nil,
+              cmek_settings: nil,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              cmek_settings: cmek_settings,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateCmekSettingsRequest)
+            @update_cmek_settings.call(req, options, &block)
           end
         end
       end
