@@ -168,7 +168,7 @@ module Google
           def ext_path
             path = "/#{@bucket_name}"
             path += "/#{String(@file_name)}" if @file_name && !@file_name.empty?
-            Addressable::URI.escape path
+            CGI.escape(path).gsub "%2F", "/"
           end
 
           ##
