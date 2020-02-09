@@ -24,11 +24,11 @@ describe Google::Cloud::Spanner::Client, :resource_based_routing, :mock_spanner 
 
   before do
     session.instance_variable_set :@last_updated_at, Time.now
-    ENV.delete "GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING"
+    ENV.delete "GOOGLE_CLOUD_SPANNER_ENABLE_RESOURCE_BASED_ROUTING"
   end
 
   after do
-    ENV.delete "GOOGLE_CLOUD_ENABLE_RESOURCE_BASED_ROUTING"
+    ENV.delete "GOOGLE_CLOUD_SPANNER_ENABLE_RESOURCE_BASED_ROUTING"
   end
 
 
