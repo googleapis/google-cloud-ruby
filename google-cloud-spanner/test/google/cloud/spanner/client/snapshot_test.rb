@@ -68,13 +68,13 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, options: default_options
+    spanner.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, options: default_options
     mock
   end
 
   it "can execute a simple query without any options" do
     mock = mock_builder()
-    spanner.service.mocked_service = mock
 
     results = nil
     client.snapshot do |snp|
@@ -109,7 +109,6 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
     it "can execute a simple query with the strong option" do
       mock = mock_builder()
-      spanner.service.mocked_service = mock
 
       results = nil
       client.snapshot strong: true do |snp|
@@ -133,7 +132,6 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
     it "can execute a simple query with the timestamp option (Time)" do
       mock = mock_builder()
-      spanner.service.mocked_service = mock
 
       results = nil
       client.snapshot timestamp: snapshot_time do |snp|
@@ -150,7 +148,6 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
     it "can execute a simple query with the read_timestamp option (Time)" do
       mock = mock_builder()
-      spanner.service.mocked_service = mock
 
       results = nil
       client.snapshot read_timestamp: snapshot_time do |snp|
@@ -167,7 +164,6 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
     it "can execute a simple query with the timestamp option (DateTime)" do
       mock = mock_builder()
-      spanner.service.mocked_service = mock
 
       results = nil
       client.snapshot timestamp: snapshot_datetime do |snp|
@@ -184,7 +180,6 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
     it "can execute a simple query with the read_timestamp option (DateTime)" do
       mock = mock_builder()
-      spanner.service.mocked_service = mock
 
       results = nil
       client.snapshot read_timestamp: snapshot_datetime do |snp|
@@ -207,7 +202,6 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
     it "can execute a simple query with the staleness option" do
       mock = mock_builder()
-      spanner.service.mocked_service = mock
 
       results = nil
       client.snapshot staleness: snapshot_staleness do |snp|
@@ -224,7 +218,6 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
     it "can execute a simple query with the exact_staleness option" do
       mock = mock_builder()
-      spanner.service.mocked_service = mock
 
       results = nil
       client.snapshot exact_staleness: snapshot_staleness do |snp|
@@ -242,7 +235,6 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
   it "does not allow nested snapshots" do
     mock = mock_builder()
-    spanner.service.mocked_service = mock
 
     results = nil
     results2 = nil

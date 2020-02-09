@@ -44,8 +44,8 @@ describe Google::Cloud::Spanner::Session, :keepalive, :mock_spanner do
 
   it "can call keepalive" do
     mock = Minitest::Mock.new
-    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session.path, "SELECT 1", options: default_options
     session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session.path, "SELECT 1", options: default_options
 
     session.keepalive!
 
@@ -57,9 +57,9 @@ describe Google::Cloud::Spanner::Session, :keepalive, :mock_spanner do
     def results_enum.peek
       raise GRPC::NotFound.new 5, "not found"
     end
-    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session.path, "SELECT 1", options: default_options
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session.path, "SELECT 1", options: default_options
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
 
     result = session.keepalive!
     result.must_equal false
@@ -71,9 +71,9 @@ describe Google::Cloud::Spanner::Session, :keepalive, :mock_spanner do
     def results_enum.peek
       raise GRPC::NotFound.new 5, "not found"
     end
-    MockSpannerHelper.expect_execute_streaming_sql mock, results_enum, session_labels.path, "SELECT 1", options: default_options
-    mock.expect :create_session, session_grpc_labels, [database_path(instance_id, database_id), session: Google::Spanner::V1::Session.new(labels: labels), options: default_options]
     session_labels.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_labels.path, "SELECT 1", options: default_options
+    mock.expect :create_session, session_grpc_labels, [database_path(instance_id, database_id), session: Google::Spanner::V1::Session.new(labels: labels), options: default_options]
 
     result = session_labels.keepalive!
     result.must_equal false

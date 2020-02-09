@@ -147,14 +147,12 @@ class MockSpanner < Minitest::Spec
   def paged_enum_struct response
     OpenStruct.new page: OpenStruct.new(response: response)
   end
-end
 
-class MockSpannerHelper
-  def self.expect_execute_streaming_sql mock, results_enum, session_name, sql,
+  def expect_execute_streaming_sql results_enum, session_name, sql,
                                    transaction: nil, params: nil, param_types: nil, 
                                    resume_token: nil, partition_token: nil, seqno: nil,
                                    options: nil
-    mock.expect :execute_streaming_sql, results_enum do |session, sql_query, **kargs|
+    spanner.service.mocked_service.expect :execute_streaming_sql, results_enum do |session, sql_query, **kargs|
       session == session_name &&
         sql_query == sql_query &&
         kargs[:transaction] == transaction &&
