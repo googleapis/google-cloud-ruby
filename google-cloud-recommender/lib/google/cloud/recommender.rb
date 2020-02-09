@@ -13,57 +13,37 @@
 # limitations under the License.
 
 
-require "google-cloud-billing"
+require "google-cloud-recommender"
 
 module Google
   module Cloud
     ##
-    # Allows developers to manage billing for their Google Cloud Platform projects programmatically.
-    module Billing
+    # Deliver highly personalized product recommendations at scale.
+    module Recommender
       ##
-      # Create a new `CloudBilling::Client` object.
+      # Create a new `Recommender::Client` object.
       #
       # @param version [String, Symbol] The API version to create the client instance. Optional. If not provided
       #   defaults to `:v1`, which will return an instance of
-      #   [Google::Cloud::Billing::V1::CloudBilling::Client](https://googleapis.dev/ruby/google-cloud-billing-v1/latest/Google/Cloud/Billing/V1/CloudBilling/Client.html).
+      #   [Google::Cloud::Recommender::V1::Recommender::Client](https://googleapis.dev/ruby/google-cloud-recommender-v1/latest/Google/Cloud/Recommender/V1/Recommender/Client.html).
       #
-      # @return [CloudBilling::Client] A client object for the specified version.
+      # @return [Recommender::Client] A client object for the specified version.
       #
-      def self.cloud_billing_service version: :v1beta1, &block
-        require "google/cloud/billing/#{version.to_s.downcase}"
+      def self.recommender_service version: :v1, &block
+        require "google/cloud/recommender/#{version.to_s.downcase}"
 
-        package_name = Google::Cloud::Billing
+        package_name = Google::Cloud::Recommender
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Billing.const_get package_name
-        package_module.const_get(:CloudBilling).const_get(:Client).new(&block)
+        package_module = Google::Cloud::Recommender.const_get package_name
+        package_module.const_get(:Recommender).const_get(:Client).new(&block)
       end
 
       ##
-      # Create a new `CloudCatalog::Client` object.
+      # Configure the recommender library.
       #
-      # @param version [String, Symbol] The API version to create the client instance. Optional. If not provided
-      #   defaults to `:v1`, which will return an instance of
-      #   [Google::Cloud::Billing::V1::CloudCatalog::Client](https://googleapis.dev/ruby/google-cloud-billing-v1/latest/Google/Cloud/Billing/V1/CloudCatalog/Client.html).
-      #
-      # @return [CloudCatalog::Client] A client object for the specified version.
-      #
-      def self.cloud_catalog_service version: :v1beta1, &block
-        require "google/cloud/billing/#{version.to_s.downcase}"
-
-        package_name = Google::Cloud::Billing
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
-        package_module = Google::Cloud::Billing.const_get package_name
-        package_module.const_get(:CloudCatalog).const_get(:Client).new(&block)
-      end
-
-      ##
-      # Configure the billing library.
-      #
-      # The following billing configuration parameters are supported:
+      # The following recommender configuration parameters are supported:
       #
       # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to the keyfile as a String, the contents of
       #   the keyfile as a Hash, or a Google::Auth::Credentials object.
@@ -74,12 +54,12 @@ module Google
       # * `metadata` (Hash)
       # * `retry_policy` (Hash, Proc)
       #
-      # @return [Google::Cloud::Config] The configuration object the Google::Cloud::Billing library uses.
+      # @return [Google::Cloud::Config] The configuration object the Google::Cloud::Recommender library uses.
       #
       def self.configure
-        yield Google::Cloud.configure.billing if block_given?
+        yield Google::Cloud.configure.recommender if block_given?
 
-        Google::Cloud.configure.billing
+        Google::Cloud.configure.recommender
       end
     end
   end
