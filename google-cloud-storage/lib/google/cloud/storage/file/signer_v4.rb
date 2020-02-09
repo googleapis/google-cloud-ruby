@@ -64,12 +64,14 @@ module Google
             # Request, because when you create a presigned URL, you don't know
             # the payload content because the URL is used to upload an arbitrary
             # payload. Instead, you use a constant string UNSIGNED-PAYLOAD.
+            payload = headers.key?("X-Goog-Content-SHA256") ? headers["X-Goog-Content-SHA256"] : "UNSIGNED-PAYLOAD"
+            # TODO: Also support X-Amz-Content-SHA256 payload?
             canonical_request = [method,
                                  ext_path,
                                  canonical_query_str,
                                  canonical_headers_str,
                                  signed_headers_str,
-                                 "UNSIGNED-PAYLOAD"].join("\n")
+                                 payload].join("\n")
             puts "\n\nactual:\n\n#{canonical_request}\n\n"
             # Construct string to sign
             req_sha = Digest::SHA256.hexdigest canonical_request
