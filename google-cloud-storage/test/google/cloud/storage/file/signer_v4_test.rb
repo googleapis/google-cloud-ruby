@@ -36,17 +36,18 @@ class SignerV4Test < MockStorage
 
   def self.build_test_for test, index
     define_method("test_#{index}: #{test.description}") do
-
       @test = [test, index]
       # start: test method body
       signer = Google::Cloud::Storage::File::SignerV4.new test.bucket,
                                                           test.object,
                                                           storage.service
+      query = test.query_parameters.to_h if test.query_parameters # convert from protobuf map
       Time.stub :now, SignerV4Test.timestamp_to_time(test.timestamp) do
         # method under test
         signed_url = signer.signed_url method: test["method"],
                                        expires: test.expiration,
-                                       headers: test.headers
+                                       headers: test.headers,
+                                       query: query
        
         signed_url.must_equal test.expectedUrl
       end

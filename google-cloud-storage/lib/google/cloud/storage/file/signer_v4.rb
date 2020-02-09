@@ -55,7 +55,7 @@ module Google
 
             algorithm = "GOOG4-RSA-SHA256"
             expires = determine_expires expires
-            credential = CGI.escape issuer + "/" + scope
+            credential = issuer + "/" + scope
             canonical_query_str = canonical_query query, algorithm,
                                                   credential, goog_date,
                                                   expires, signed_headers_str
@@ -70,6 +70,7 @@ module Google
                                  canonical_headers_str,
                                  signed_headers_str,
                                  "UNSIGNED-PAYLOAD"].join("\n")
+            puts "\n\nactual:\n\n#{canonical_request}\n\n"
             # Construct string to sign
             req_sha = Digest::SHA256.hexdigest canonical_request
             string_to_sign = [algorithm, goog_date, scope, req_sha].join "\n"
@@ -128,9 +129,7 @@ module Google
             canonical_headers = Hash[headers_arr]
             canonical_headers["host"] = "storage.googleapis.com"
 
-            canonical_headers = canonical_headers.sort_by do |k, _|
-              k.downcase
-            end.to_h
+            canonical_headers = canonical_headers.sort_by { |k, _| k.to_s }.to_h # TODO: replace with default sort?
             canonical_headers_str = ""
             canonical_headers.each do |k, v|
               canonical_headers_str += "#{k}:#{v}\n"
@@ -156,8 +155,9 @@ module Google
             query["X-Goog-Credential"] = credential
             query["X-Goog-Date"] = goog_date
             query["X-Goog-Expires"] = expires
-            query["X-Goog-SignedHeaders"] = CGI.escape signed_headers_str
-            query = query.sort_by { |k, _| k.to_s.downcase }.to_h
+            query["X-Goog-SignedHeaders"] = signed_headers_str
+            query = query.map { |k, v| [CGI.escape(k.to_s), CGI.escape(v.to_s)] }.to_h
+            query = query.sort_by { |k, _| k.to_s }.to_h # TODO: replace with default sort?
             canonical_query_str = ""
             query.each { |k, v| canonical_query_str += "#{k}=#{v}&" }
             canonical_query_str.chomp "&"
