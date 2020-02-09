@@ -124,16 +124,14 @@ module Google
             # Headers needs to be in alpha order.
             canonical_headers = headers || {}
             headers_arr = canonical_headers.map do |k, v|
-              [k.downcase, v.strip.gsub(/[^\S\t]+/, " ").gsub(/\t+/, "\t")]
+              [k.downcase, v.strip.gsub(/[^\S\t]+/, " ").gsub(/\t+/, " ")]
             end
             canonical_headers = Hash[headers_arr]
             canonical_headers["host"] = "storage.googleapis.com"
 
             canonical_headers = canonical_headers.sort_by { |k, _| k.to_s }.to_h # TODO: replace with default sort?
             canonical_headers_str = ""
-            canonical_headers.each do |k, v|
-              canonical_headers_str += "#{k}:#{v}\n"
-            end
+            canonical_headers.each { |k, v| canonical_headers_str += "#{k}:#{v}\n" }
             signed_headers_str = ""
             canonical_headers.each_key { |k| signed_headers_str += "#{k};" }
             signed_headers_str = signed_headers_str.chomp ";"
