@@ -29,7 +29,7 @@ module Google
       #
       # @return [CloudBilling::Client] A client object for the specified version.
       #
-      def self.cloud_billing_service version: :v1beta1, &block
+      def self.cloud_billing_service version: :v1, &block
         require "google/cloud/billing/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Billing
@@ -49,7 +49,7 @@ module Google
       #
       # @return [CloudCatalog::Client] A client object for the specified version.
       #
-      def self.cloud_catalog_service version: :v1beta1, &block
+      def self.cloud_catalog_service version: :v1, &block
         require "google/cloud/billing/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Billing
