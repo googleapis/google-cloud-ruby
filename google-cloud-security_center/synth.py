@@ -31,6 +31,7 @@ v1_library = gapic.ruby_library(
     'securitycenter', 'v1',
     artman_output_name='google-cloud-ruby/google-cloud-securitycenter'
 )
+os.makedirs(v1_library / 'lib/google/cloud/security_center/v1', exist_ok=True)
 for path in (v1_library / 'lib/google/cloud/securitycenter/v1').glob('*.rb'):
     os.rename(
         v1_library / 'lib/google/cloud/securitycenter/v1' / path.name,
@@ -45,6 +46,20 @@ s.copy(v1_library / 'LICENSE')
 s.copy(v1_library / '.gitignore')
 s.copy(v1_library / '.yardopts')
 s.copy(v1_library / 'google-cloud-security_center.gemspec', merge=ruby.merge_gemspec)
+
+v1p1beta1_library = gapic.ruby_library(
+    'securitycenter', 'v1p1beta1',
+    artman_output_name='google-cloud-ruby/google-cloud-securitycenter'
+)
+os.makedirs(v1p1beta1_library / 'lib/google/cloud/security_center/v1p1beta1', exist_ok=True)
+for path in (v1p1beta1_library / 'lib/google/cloud/securitycenter/v1p1beta1').glob('*.rb'):
+    os.rename(
+        v1p1beta1_library / 'lib/google/cloud/securitycenter/v1p1beta1' / path.name,
+        v1p1beta1_library / 'lib/google/cloud/security_center/v1p1beta1' / path.name
+    )
+s.copy(v1p1beta1_library / 'lib/google/cloud/security_center/v1p1beta1')
+s.copy(v1p1beta1_library / 'lib/google/cloud/security_center/v1p1beta1.rb')
+s.copy(v1p1beta1_library / 'test/google/cloud/security_center/v1p1beta1')
 
 # Copy common templates
 templates = gcp.CommonTemplates().ruby_library()
@@ -133,7 +148,7 @@ s.replace(
     [
       'README.md',
       'lib/google/cloud/security_center.rb',
-      'lib/google/cloud/security_center/v1.rb'
+      'lib/google/cloud/security_center/v*.rb'
     ],
     '\\[Product Documentation\\]: https://cloud\\.google\\.com/securitycenter\n',
     '[Product Documentation]: https://cloud.google.com/security-command-center/\n')
@@ -183,6 +198,14 @@ s.replace(
         f'require "google/cloud/security_center/v1/helpers"'
     ])
 )
+s.replace(
+    f'lib/google/cloud/security_center/v1p1beta1.rb',
+    f'require "google/cloud/security_center/v1p1beta1/security_center_client"',
+    '\n'.join([
+        f'require "google/cloud/security_center/v1p1beta1/security_center_client"',
+        f'require "google/cloud/security_center/v1p1beta1/helpers"'
+    ])
+)
 
 s.replace(
     'google-cloud-security_center.gemspec',
@@ -207,12 +230,12 @@ s.replace(
     '\\1Google::Cloud::SecurityCenter::VERSION'
 )
 s.replace(
-    'lib/google/cloud/security_center/v1/*_client.rb',
+    'lib/google/cloud/security_center/v*/*_client.rb',
     '(require \".*credentials\"\n)\n',
     '\\1require "google/cloud/security_center/version"\n\n'
 )
 s.replace(
-    'lib/google/cloud/security_center/v1/*_client.rb',
+    'lib/google/cloud/security_center/v*/*_client.rb',
     'Gem.loaded_specs\[.*\]\.version\.version',
     'Google::Cloud::SecurityCenter::VERSION'
 )
@@ -249,4 +272,9 @@ s.replace(
     'lib/google/cloud/security_center/v1/security_center_client.rb',
     '\nrequire "google/cloud/security_center/v1/securitycenter_service_pb"\n',
     '\nrequire "google/cloud/security_center/v1/securitycenter_service_pb"\nrequire "google/cloud/security_center/v1/run_asset_discovery_response_pb"\n'
+)
+s.replace(
+    'lib/google/cloud/security_center/v1p1beta1/security_center_client.rb',
+    '\nrequire "google/cloud/security_center/v1p1beta1/securitycenter_service_pb"\n',
+    '\nrequire "google/cloud/security_center/v1p1beta1/securitycenter_service_pb"\nrequire "google/cloud/security_center/v1/run_asset_discovery_response_pb"\n'
 )
