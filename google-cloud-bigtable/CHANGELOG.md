@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 / 2020-02-10
+
+#### Features
+
+* Add Table-level IAM Policy support
+
 ### 1.0.2 / 2020-01-23
 
 #### Documentation
