@@ -4,10 +4,6 @@
 
 #### ⚠ BREAKING CHANGES
 
-* **dialogflow:** Change language_code from a required positional argument to an optional keyword argument
-
-#### Bug Fixes
-
 * Change language_code from a required positional argument to an optional keyword argument
 
 ### 0.12.3 / 2020-02-06
