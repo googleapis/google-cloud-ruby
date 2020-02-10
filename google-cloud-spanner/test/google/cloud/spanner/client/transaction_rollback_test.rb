@@ -65,13 +65,13 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
 
   it "will rollback and not pass on the error when using Rollback" do
     mock = Minitest::Mock.new
+    spanner.service.mocked_service = mock
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
     mock.expect :rollback, nil, [session_grpc.name, transaction_id, options: default_options]
     # transaction checkin
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    spanner.service.mocked_service = mock
 
     results = nil
     timestamp = client.transaction do |tx|
@@ -93,13 +93,13 @@ describe Google::Cloud::Spanner::Client, :transaction, :rollback, :mock_spanner 
 
   it "will rollback and pass on the error" do
     mock = Minitest::Mock.new
+    spanner.service.mocked_service = mock
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
     mock.expect :rollback, nil, [session_grpc.name, transaction_id, options: default_options]
     # transaction checkin
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    spanner.service.mocked_service = mock
 
     results = nil
     assert_raises ZeroDivisionError do

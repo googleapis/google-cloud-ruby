@@ -63,13 +63,18 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
   let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
   let(:tx_opts) { Google::Spanner::V1::TransactionOptions.new read_only: snp_opts }
-
-  it "can execute a simple query without any options" do
+  
+  def mock_builder
     mock = Minitest::Mock.new
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     spanner.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, options: default_options
+    mock
+  end
+
+  it "can execute a simple query without any options" do
+    mock = mock_builder()
 
     results = nil
     client.snapshot do |snp|
@@ -103,11 +108,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new strong: true, return_read_timestamp: true }
 
     it "can execute a simple query with the strong option" do
-      mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
-      spanner.service.mocked_service = mock
+      mock = mock_builder()
 
       results = nil
       client.snapshot strong: true do |snp|
@@ -130,11 +131,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new read_timestamp: snapshot_timestamp, return_read_timestamp: true }
 
     it "can execute a simple query with the timestamp option (Time)" do
-      mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
-      spanner.service.mocked_service = mock
+      mock = mock_builder()
 
       results = nil
       client.snapshot timestamp: snapshot_time do |snp|
@@ -150,11 +147,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     end
 
     it "can execute a simple query with the read_timestamp option (Time)" do
-      mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
-      spanner.service.mocked_service = mock
+      mock = mock_builder()
 
       results = nil
       client.snapshot read_timestamp: snapshot_time do |snp|
@@ -170,11 +163,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     end
 
     it "can execute a simple query with the timestamp option (DateTime)" do
-      mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
-      spanner.service.mocked_service = mock
+      mock = mock_builder()
 
       results = nil
       client.snapshot timestamp: snapshot_datetime do |snp|
@@ -190,11 +179,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     end
 
     it "can execute a simple query with the read_timestamp option (DateTime)" do
-      mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
-      spanner.service.mocked_service = mock
+      mock = mock_builder()
 
       results = nil
       client.snapshot read_timestamp: snapshot_datetime do |snp|
@@ -216,11 +201,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new exact_staleness: duration_staleness, return_read_timestamp: true }
 
     it "can execute a simple query with the staleness option" do
-      mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
-      spanner.service.mocked_service = mock
+      mock = mock_builder()
 
       results = nil
       client.snapshot staleness: snapshot_staleness do |snp|
@@ -236,11 +217,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
     end
 
     it "can execute a simple query with the exact_staleness option" do
-      mock = Minitest::Mock.new
-      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-      mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
-      spanner.service.mocked_service = mock
+      mock = mock_builder()
 
       results = nil
       client.snapshot exact_staleness: snapshot_staleness do |snp|
@@ -257,11 +234,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
   end
 
   it "does not allow nested snapshots" do
-    mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
-    spanner.service.mocked_service = mock
+    mock = mock_builder()
 
     results = nil
     results2 = nil

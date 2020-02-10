@@ -74,12 +74,13 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
+    spanner.service.mocked_service = mock
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     # transaction checkin
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
@@ -96,7 +97,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new()
     end
     mock.expect :sleep, nil, [1.3]
-    spanner.service.mocked_service = mock
 
     client.define_singleton_method :sleep do |count|
       # call the mock to satisfy the expectation
@@ -128,12 +128,13 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
+    spanner.service.mocked_service = mock
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     # transaction checkin
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
@@ -150,7 +151,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new()
     end
     mock.expect :sleep, nil, [60]
-    spanner.service.mocked_service = mock
 
     client.define_singleton_method :sleep do |count|
       # call the mock to satisfy the expectation
@@ -182,12 +182,13 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
+    spanner.service.mocked_service = mock
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     # transaction checkin
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
@@ -204,7 +205,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
       Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Protobuf::Timestamp.new()
     end
     mock.expect :sleep, nil, [123.456]
-    spanner.service.mocked_service = mock
 
     client.define_singleton_method :sleep do |count|
       # call the mock to satisfy the expectation
@@ -236,15 +236,16 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
+    spanner.service.mocked_service = mock
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     # transaction checkin
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
@@ -268,7 +269,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     end
     mock.expect :sleep, nil, [1.3]
     mock.expect :sleep, nil, [30]
-    spanner.service.mocked_service = mock
 
     client.define_singleton_method :sleep do |count|
       # call the mock to satisfy the expectation
@@ -300,21 +300,22 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     ]
 
     mock = Minitest::Mock.new
+    spanner.service.mocked_service = mock
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
-    mock.expect :execute_streaming_sql, results_enum, [session_grpc.name, "SELECT * FROM users", transaction: tx_selector, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: 1, options: default_options]
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", transaction: tx_selector, seqno: 1, options: default_options
 
     # transaction checkin
     mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
@@ -335,7 +336,6 @@ describe Google::Cloud::Spanner::Client, :transaction, :retry, :mock_spanner do
     mock.expect :current_time, Time.now + 60, []
     mock.expect :current_time, Time.now + 90, []
     mock.expect :current_time, Time.now + 125, []
-    spanner.service.mocked_service = mock
 
     client.define_singleton_method :sleep do |count|
       # call the mock to satisfy the expectation

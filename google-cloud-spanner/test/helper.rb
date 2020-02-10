@@ -147,6 +147,23 @@ class MockSpanner < Minitest::Spec
   def paged_enum_struct response
     OpenStruct.new page: OpenStruct.new(response: response)
   end
+
+  def expect_execute_streaming_sql results_enum, session_name, sql,
+                                   transaction: nil, params: nil, param_types: nil, 
+                                   resume_token: nil, partition_token: nil, seqno: nil,
+                                   options: nil
+    spanner.service.mocked_service.expect :execute_streaming_sql, results_enum do |session, sql_query, **kargs|
+      session == session_name &&
+        sql_query == sql_query &&
+        kargs[:transaction] == transaction &&
+        kargs[:params] == params &&
+        kargs[:param_types] == param_types &&
+        kargs[:resume_token] == resume_token &&
+        kargs[:partition_token] == partition_token &&
+        kargs[:seqno] == seqno &&
+        kargs[:options] == options
+    end
+  end
 end
 
 # This is used to raise errors in an enumerator

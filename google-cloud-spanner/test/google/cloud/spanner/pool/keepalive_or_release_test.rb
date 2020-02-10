@@ -59,8 +59,8 @@ describe Google::Cloud::Spanner::Pool, :keepalive_or_release, :mock_spanner do
     pool.session_queue = [session]
 
     mock = Minitest::Mock.new
-    mock.expect :execute_streaming_sql, results_enum, [session.path, "SELECT 1", transaction: nil, params: nil, param_types: nil, resume_token: nil, partition_token: nil, seqno: nil, options: default_options]
     session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session.path, "SELECT 1", options: default_options
 
     pool.keepalive_or_release!
 
