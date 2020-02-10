@@ -153,6 +153,8 @@ google-cloud-bigtable:
 - v0.1.2
 - v0.1.1
 - v0.1.0
+google-cloud-billing-v1:
+- v0.1.0
 google-cloud-container:
 - v0.8.0
 - v0.7.0
