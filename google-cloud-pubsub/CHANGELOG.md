@@ -1,5 +1,15 @@
 # Release History
 
+### 1.3.0 / 2020-02-10
+
+#### Features
+
+* Add support for Dead Letter Topics
+  * Add `dead_letter_topic` and `dead_letter_max_delivery_attempts` to `Topic#subscribe`
+  * Add `Subscription#dead_letter_topic` and `Subscription#dead_letter_topic=`
+  * Add `Subscription#dead_letter_max_delivery_attempts` and `Subscription#dead_letter_max_delivery_attempts=`
+  * Add `ReceivedMessage#delivery_attempt`
+
 ### 1.2.2 / 2020-02-04
 
 #### Performance Improvements
