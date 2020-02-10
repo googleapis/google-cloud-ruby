@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2020-02-10
+
+#### Features
+
+* add CloudRedisClient#upgrade_instance and Instance#connect_mode (ConnectMode)
+
 ### 0.6.2 / 2020-01-23
 
 #### Documentation
