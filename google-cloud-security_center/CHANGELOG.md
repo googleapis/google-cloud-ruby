@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2020-02-10
+
+#### Features
+
+* add support for v1p1beta1
+
 ### 0.5.1 / 2020-01-23
 
 #### Bug Fixes
