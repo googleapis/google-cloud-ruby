@@ -41,33 +41,29 @@ module Google
 
           def signed_url method: "GET", expires: nil, headers: nil,
                          issuer: nil, client_email: nil, signing_key: nil,
-                         private_key: nil, query: nil
-            issuer, signer = issuer_and_signer issuer, client_email,
-                                               signing_key, private_key
+                         private_key: nil, query: nil, virtual_hosted_style: nil
+            issuer, signer = issuer_and_signer issuer, client_email, signing_key, private_key
             datetime_now = Time.now.utc
             goog_date = datetime_now.strftime "%Y%m%dT%H%M%SZ"
             datestamp = datetime_now.strftime "%Y%m%d"
             # goog4_request is not checked.
             scope = "#{datestamp}/auto/storage/goog4_request"
 
-            canonical_headers_str, signed_headers_str = \
-              canonical_and_signed_headers headers
+            canonical_headers_str, signed_headers_str = canonical_and_signed_headers headers, virtual_hosted_style
 
             algorithm = "GOOG4-RSA-SHA256"
             expires = determine_expires expires
             credential = issuer + "/" + scope
-            canonical_query_str = canonical_query query, algorithm,
-                                                  credential, goog_date,
-                                                  expires, signed_headers_str
+            canonical_query_str = canonical_query query, algorithm, credential, goog_date, expires, signed_headers_str
 
             # From AWS: You don't include a payload hash in the Canonical
             # Request, because when you create a presigned URL, you don't know
             # the payload content because the URL is used to upload an arbitrary
             # payload. Instead, you use a constant string UNSIGNED-PAYLOAD.
-            payload = headers.key?("X-Goog-Content-SHA256") ? headers["X-Goog-Content-SHA256"] : "UNSIGNED-PAYLOAD"
+            payload = headers&.key?("X-Goog-Content-SHA256") ? headers["X-Goog-Content-SHA256"] : "UNSIGNED-PAYLOAD"
             # TODO: Also support X-Amz-Content-SHA256 payload?
             canonical_request = [method,
-                                 ext_path,
+                                 ext_path(virtual_hosted_style),
                                  canonical_query_str,
                                  canonical_headers_str,
                                  signed_headers_str,
@@ -81,7 +77,7 @@ module Google
             signature = signer.call string_to_sign
 
             # Construct signed URL
-            "#{ext_url}?#{canonical_query_str}&X-Goog-Signature=#{signature}"
+            "#{ext_url virtual_hosted_style}?#{canonical_query_str}&X-Goog-Signature=#{signature}"
           end
 
           protected
@@ -89,25 +85,18 @@ module Google
           def determine_issuer issuer, client_email
             # Parse the Service Account and get client id and private key
             issuer = issuer || client_email || @service.credentials.issuer
-            unless issuer
-              raise SignedUrlUnavailable, "issuer (client_email) missing"
-            end
+            raise SignedUrlUnavailable, "issuer (client_email) missing" unless issuer
             issuer
           end
 
           def determine_signing_key signing_key, private_key
-            signing_key = signing_key || private_key ||
-                          @service.credentials.signing_key
-            unless signing_key
-              raise SignedUrlUnavailable, "signing_key (private_key) missing"
-            end
+            signing_key = signing_key || private_key || @service.credentials.signing_key
+            raise SignedUrlUnavailable, "signing_key (private_key) missing" unless signing_key
             signing_key
           end
 
           def service_account_signer signer
-            unless signer.respond_to? :sign
-              signer = OpenSSL::PKey::RSA.new signer
-            end
+            signer = OpenSSL::PKey::RSA.new signer unless signer.respond_to? :sign
             # Sign string to sign
             lambda do |string_to_sign|
               sig = signer.sign OpenSSL::Digest::SHA256.new, string_to_sign
@@ -122,14 +111,14 @@ module Google
             [issuer, signer]
           end
 
-          def canonical_and_signed_headers headers
+          def canonical_and_signed_headers headers, virtual_hosted_style
             # Headers needs to be in alpha order.
             canonical_headers = headers || {}
             headers_arr = canonical_headers.map do |k, v|
               [k.downcase, v.strip.gsub(/[^\S\t]+/, " ").gsub(/\t+/, " ")]
             end
             canonical_headers = Hash[headers_arr]
-            canonical_headers["host"] = "storage.googleapis.com"
+            canonical_headers["host"] = host_name virtual_hosted_style
 
             canonical_headers = canonical_headers.sort_by { |k, _| k.to_s }.to_h # TODO: replace with default sort?
             canonical_headers_str = ""
@@ -163,18 +152,29 @@ module Google
             canonical_query_str.chomp "&"
           end
 
+          def host_name virtual_hosted_style
+            virtual_hosted_style ? "#{@bucket_name}.storage.googleapis.com" : "storage.googleapis.com"
+          end
+
           ##
           # The URI-encoded (percent encoded) external path to the file.
-          def ext_path
-            path = "/#{@bucket_name}"
+          def ext_path virtual_hosted_style
+            path = ""
+            path += "/#{@bucket_name}" unless virtual_hosted_style
             path += "/#{String(@file_name)}" if @file_name && !@file_name.empty?
             CGI.escape(path).gsub "%2F", "/"
           end
 
           ##
           # The external url to the file.
-          def ext_url
-            "#{GOOGLEAPIS_URL}#{ext_path}"
+          def ext_url virtual_hosted_style
+            url = GOOGLEAPIS_URL.dup
+            if virtual_hosted_style
+              parts = url.split "//"
+              parts[1] = "#{@bucket_name}.#{parts[1]}"
+              url = parts.join "//"
+            end
+            "#{url}#{ext_path virtual_hosted_style}"
           end
         end
       end

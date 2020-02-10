@@ -1443,6 +1443,12 @@ module Google
         # @param [Symbol, String] version The version of the signed credential
         #   to create. Must be one of `:v2` or `:v4`. The default value is
         #   `:v2`.
+        # @param [Boolean] virtual_hosted_style Whether to use a virtual hosted-style
+        #   hostname, which adds the bucket into the host portion of the URI rather
+        #   than the path, e.g. `https://mybucket.storage.googleapis.com/...`.
+        #   For V4 signing, this also sets the `host` header in the canonicalized
+        #   extension headers to the virtual hosted-style host, unless that header is
+        #   supplied via the `headers` param. The default value is `false`.
         #
         # @return [String]
         #
@@ -1513,7 +1519,7 @@ module Google
         def signed_url path = nil, method: nil, expires: nil, content_type: nil,
                        content_md5: nil, headers: nil, issuer: nil,
                        client_email: nil, signing_key: nil, private_key: nil,
-                       query: nil, version: nil
+                       query: nil, version: nil, virtual_hosted_style: nil
           ensure_service!
           version ||= :v2
           case version.to_sym
@@ -1531,7 +1537,8 @@ module Google
                               headers: headers, issuer: issuer,
                               client_email: client_email,
                               signing_key: signing_key,
-                              private_key: private_key, query: query
+                              private_key: private_key, query: query,
+                              virtual_hosted_style: virtual_hosted_style
           else
             raise ArgumentError, "version '#{version}' not supported"
           end
