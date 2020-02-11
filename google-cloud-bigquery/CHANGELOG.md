@@ -1,5 +1,15 @@
 # Release History
 
+### 1.19.0 / 2020-02-11
+
+#### Features
+
+* Add Routine
+  * Add Dataset#create_routine
+  * Add Argument
+  * Update StandardSql classes to expose public initializer
+  * Add Data#ddl_target_routine and QueryJob#ddl_target_routine
+
 ### 1.18.1 / 2019-12-18
 
 #### Bug Fixes
