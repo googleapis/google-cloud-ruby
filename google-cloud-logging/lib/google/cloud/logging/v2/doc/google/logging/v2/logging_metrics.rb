@@ -174,7 +174,7 @@ module Google
       # The parameters to GetLogMetric.
       # @!attribute [rw] metric_name
       #   @return [String]
-      #     The resource name of the desired metric:
+      #     Required. The resource name of the desired metric:
       #
       #         "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
       class GetLogMetricRequest; end
@@ -182,21 +182,21 @@ module Google
       # The parameters to CreateLogMetric.
       # @!attribute [rw] parent
       #   @return [String]
-      #     The resource name of the project in which to create the metric:
+      #     Required. The resource name of the project in which to create the metric:
       #
       #         "projects/[PROJECT_ID]"
       #
       #     The new metric must be provided in the request.
       # @!attribute [rw] metric
       #   @return [Google::Logging::V2::LogMetric]
-      #     The new logs-based metric, which must not have an identifier that
+      #     Required. The new logs-based metric, which must not have an identifier that
       #     already exists.
       class CreateLogMetricRequest; end
 
       # The parameters to UpdateLogMetric.
       # @!attribute [rw] metric_name
       #   @return [String]
-      #     The resource name of the metric to update:
+      #     Required. The resource name of the metric to update:
       #
       #         "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
       #
@@ -205,13 +205,13 @@ module Google
       #     does not exist in `[PROJECT_ID]`, then a new metric is created.
       # @!attribute [rw] metric
       #   @return [Google::Logging::V2::LogMetric]
-      #     The updated metric.
+      #     Required. The updated metric.
       class UpdateLogMetricRequest; end
 
       # The parameters to DeleteLogMetric.
       # @!attribute [rw] metric_name
       #   @return [String]
-      #     The resource name of the metric to delete:
+      #     Required. The resource name of the metric to delete:
       #
       #         "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
       class DeleteLogMetricRequest; end

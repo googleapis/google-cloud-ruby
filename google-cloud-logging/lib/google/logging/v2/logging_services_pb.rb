@@ -34,10 +34,10 @@ module Google
           self.unmarshal_class_method = :decode
           self.service_name = 'google.logging.v2.LoggingServiceV2'
 
-          # Deletes all the log entries in a log.
-          # The log reappears if it receives new entries.
-          # Log entries written shortly before the delete operation might not be
-          # deleted.
+          # Deletes all the log entries in a log. The log reappears if it receives new
+          # entries. Log entries written shortly before the delete operation might not
+          # be deleted. Entries received after the delete operation with a timestamp
+          # before the operation will be deleted.
           rpc :DeleteLog, DeleteLogRequest, Google::Protobuf::Empty
           # Writes log entries to Logging. This API method is the
           # only way to send log entries to Logging. This method

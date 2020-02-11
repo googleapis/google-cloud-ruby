@@ -4,17 +4,21 @@
 
 require 'google/protobuf'
 
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/api/annotations_pb'
-require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.LogSink" do
     optional :name, :string, 1
     optional :destination, :string, 3
     optional :filter, :string, 5
+    optional :description, :string, 18
+    optional :disabled, :bool, 19
     optional :output_version_format, :enum, 6, "google.logging.v2.LogSink.VersionFormat"
     optional :writer_identity, :string, 8
     optional :include_children, :bool, 9
@@ -33,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.logging.v2.BigQueryOptions" do
     optional :use_partitioned_tables, :bool, 1
+    optional :uses_timestamp_column_partitioning, :bool, 3
   end
   add_message "google.logging.v2.ListSinksRequest" do
     optional :parent, :string, 1
@@ -92,6 +97,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.DeleteExclusionRequest" do
     optional :name, :string, 1
   end
+  add_message "google.logging.v2.GetCmekSettingsRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.logging.v2.UpdateCmekSettingsRequest" do
+    optional :name, :string, 1
+    optional :cmek_settings, :message, 2, "google.logging.v2.CmekSettings"
+    optional :update_mask, :message, 3, "google.protobuf.FieldMask"
+  end
+  add_message "google.logging.v2.CmekSettings" do
+    optional :name, :string, 1
+    optional :kms_key_name, :string, 2
+    optional :service_account_id, :string, 3
+  end
 end
 
 module Google
@@ -113,6 +131,9 @@ module Google
       CreateExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateExclusionRequest").msgclass
       UpdateExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateExclusionRequest").msgclass
       DeleteExclusionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteExclusionRequest").msgclass
+      GetCmekSettingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetCmekSettingsRequest").msgclass
+      UpdateCmekSettingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateCmekSettingsRequest").msgclass
+      CmekSettings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CmekSettings").msgclass
     end
   end
 end

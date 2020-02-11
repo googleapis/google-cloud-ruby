@@ -361,7 +361,7 @@ module Google
           # Gets a logs-based metric.
           #
           # @param metric_name [String]
-          #   The resource name of the desired metric:
+          #   Required. The resource name of the desired metric:
           #
           #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
           # @param options [Google::Gax::CallOptions]
@@ -393,13 +393,13 @@ module Google
           # Creates a logs-based metric.
           #
           # @param parent [String]
-          #   The resource name of the project in which to create the metric:
+          #   Required. The resource name of the project in which to create the metric:
           #
           #       "projects/[PROJECT_ID]"
           #
           #   The new metric must be provided in the request.
           # @param metric [Google::Logging::V2::LogMetric | Hash]
-          #   The new logs-based metric, which must not have an identifier that
+          #   Required. The new logs-based metric, which must not have an identifier that
           #   already exists.
           #   A hash of the same form as `Google::Logging::V2::LogMetric`
           #   can also be provided.
@@ -437,7 +437,7 @@ module Google
           # Creates or updates a logs-based metric.
           #
           # @param metric_name [String]
-          #   The resource name of the metric to update:
+          #   Required. The resource name of the metric to update:
           #
           #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
           #
@@ -445,7 +445,7 @@ module Google
           #   `name` field must be the same as `[METRIC_ID]` If the metric
           #   does not exist in `[PROJECT_ID]`, then a new metric is created.
           # @param metric [Google::Logging::V2::LogMetric | Hash]
-          #   The updated metric.
+          #   Required. The updated metric.
           #   A hash of the same form as `Google::Logging::V2::LogMetric`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -482,7 +482,7 @@ module Google
           # Deletes a logs-based metric.
           #
           # @param metric_name [String]
-          #   The resource name of the metric to delete:
+          #   Required. The resource name of the metric to delete:
           #
           #       "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
           # @param options [Google::Gax::CallOptions]
