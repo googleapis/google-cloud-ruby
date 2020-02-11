@@ -220,13 +220,14 @@ module Google
         #     end
         #   end
         #
-        def execute_query sql, params: nil, types: nil
+        def execute_query sql, params: nil, types: nil, query_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
 
           session.execute_query sql, params: params, types: types,
-                                     transaction: tx_selector
+                                     transaction: tx_selector,
+                                     query_options: query_options
         end
         alias execute execute_query
         alias query execute_query

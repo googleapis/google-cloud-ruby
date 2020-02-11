@@ -104,6 +104,9 @@ module Google
         lib_name      ||= configure.lib_name
         lib_version   ||= configure.lib_version
         query_options ||= configure.query_options
+        # Environment variables have higher order of precedence over
+        # client-level config for query options.
+        query_options = configure.query_options if configure.query_options
 
         if emulator_host
           credentials = :this_channel_is_insecure

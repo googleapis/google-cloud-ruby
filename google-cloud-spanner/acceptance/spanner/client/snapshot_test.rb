@@ -46,6 +46,23 @@ describe "Spanner Client", :snapshot, :spanner do
     end
   end
 
+  it "runs a query with query options" do
+    query_options = { optimizer_version: "latest" }
+    results = nil
+    db.snapshot do |snp|
+      snp.transaction_id.wont_be :nil?
+      snp.timestamp.wont_be :nil?
+
+      results = snp.execute_sql "SELECT * FROM accounts", query_options: query_options
+    end
+
+    results.must_be_kind_of Google::Cloud::Spanner::Results
+    results.fields.to_h.must_equal fields_hash
+    results.rows.zip(default_account_rows).each do |expected, actual|
+      assert_accounts_equal expected, actual
+    end
+  end
+
   it "runs a read" do
     results = nil
     db.snapshot do |snp|

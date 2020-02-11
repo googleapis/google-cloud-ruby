@@ -330,6 +330,22 @@ describe Google::Cloud::Spanner::Client, :execute_query, :mock_spanner do
     assert_results results
   end
 
+  it "can execute a simple query with query options" do
+    query_options = { optimizer_version: "4" }
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+    spanner.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", options: default_options, query_options: query_options
+
+    results = client.execute_query "SELECT * FROM users", query_options: query_options
+
+    shutdown_client! client
+
+    mock.verify
+
+    assert_results results
+  end
+
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
 

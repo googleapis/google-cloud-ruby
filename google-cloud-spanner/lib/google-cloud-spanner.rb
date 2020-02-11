@@ -165,6 +165,7 @@ Google::Cloud.configure.add_config! :spanner do |config|
     query_options = {}
     optimizer_version = ENV["SPANNER_OPTIMIZER_VERSION"]
     query_options[:optimizer_version] = optimizer_version if optimizer_version
+    query_options = nil if query_options.empty?
     query_options
   end
 
@@ -181,7 +182,7 @@ Google::Cloud.configure.add_config! :spanner do |config|
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :lib_name, nil, match: String, allow_nil: true
   config.add_field! :lib_version, nil, match: String, allow_nil: true
-  config.add_field! :query_options, default_query_options, match: Hash
+  config.add_field! :query_options, default_query_options, match: Hash, allow_nil: true
 end
 
 # rubocop:enable Metrics/BlockLength
