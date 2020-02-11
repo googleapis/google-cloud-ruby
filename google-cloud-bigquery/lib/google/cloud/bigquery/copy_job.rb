@@ -152,8 +152,8 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::CopyJob::Updater] A job
           #   configuration object for setting copy options.
-          def self.from_options service, source, target, **kwargs
-            job_ref = service.job_ref_from kwargs[:job_id], kwargs[:prefix]
+          def self.from_options service, source, target, options
+            job_ref = service.job_ref_from options[:job_id], options[:prefix]
             copy_cfg = Google::Apis::BigqueryV2::JobConfigurationTableCopy.new(
               source_table:      source,
               destination_table: target
@@ -162,14 +162,14 @@ module Google
               job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
                 copy:    copy_cfg,
-                dry_run: kwargs[:dryrun]
+                dry_run: options[:dryrun]
               )
             )
 
             updater = CopyJob::Updater.new req
-            updater.create = kwargs[:create]
-            updater.write  = kwargs[:write]
-            updater.labels = kwargs[:labels] if kwargs[:labels]
+            updater.create = options[:create]
+            updater.write  = options[:write]
+            updater.labels = options[:labels] if options[:labels]
             updater
           end
 
