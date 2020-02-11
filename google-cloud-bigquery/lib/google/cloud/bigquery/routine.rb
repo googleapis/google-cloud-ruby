@@ -162,7 +162,7 @@ module Google
         ##
         # The ETag hash of the routine.
         #
-        # @return [String] The ETag hash.
+        # @return [String, nil] The ETag hash, or `nil` if the object is a reference (see {#reference?}).
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -186,7 +186,8 @@ module Google
         # * `SCALAR_FUNCTION` - Non-builtin permanent scalar function.
         # * `PROCEDURE` - Stored procedure.
         #
-        # @return [String] The type of routine.
+        # @return [String, nil] The type of routine in upper case, or `nil` if the object is a reference (see
+        #   {#reference?}).
         #
         # @!group Attributes
         #
@@ -201,7 +202,7 @@ module Google
         # * `SCALAR_FUNCTION` - Non-builtin permanent scalar function.
         # * `PROCEDURE` - Stored procedure.
         #
-        # @param [String] new_routine_type The new type of the routine.
+        # @param [String] new_routine_type The new type of the routine in upper case.
         #
         # @!group Attributes
         #
@@ -214,7 +215,8 @@ module Google
         ##
         # Checks if the value of {#routine_type} is `PROCEDURE`. The default is `false`.
         #
-        # @return [Boolean] `true` when `PROCEDURE`, `false` otherwise.
+        # @return [Boolean] `true` when `PROCEDURE` and the object is not a reference (see {#reference?}), `false`
+        #   otherwise.
         #
         # @!group Attributes
         #
@@ -225,7 +227,8 @@ module Google
         ##
         # Checks if the value of {#routine_type} is `SCALAR_FUNCTION`. The default is `true`.
         #
-        # @return [Boolean] `true` when `SCALAR_FUNCTION`, `false` otherwise.
+        # @return [Boolean] `true` when `SCALAR_FUNCTION` and the object is not a reference (see {#reference?}), `false`
+        #   otherwise.
         #
         # @!group Attributes
         #
@@ -236,7 +239,7 @@ module Google
         ##
         # The time when this routine was created.
         #
-        # @return [Time, nil] The creation time.
+        # @return [Time, nil] The creation time, or `nil` if the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -248,7 +251,7 @@ module Google
         ##
         # The time when this routine was last modified.
         #
-        # @return [Time, nil] The last modified time.
+        # @return [Time, nil] The last modified time, or `nil` if the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -263,7 +266,7 @@ module Google
         # * `SQL` - SQL language.
         # * `JAVASCRIPT` - JavaScript language.
         #
-        # @return [String] The language in upper case.
+        # @return [String, nil] The language in upper case, or `nil` if the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -291,7 +294,8 @@ module Google
         ##
         # Checks if the value of {#language} is `JAVASCRIPT`. The default is `false`.
         #
-        # @return [Boolean] `true` when `JAVASCRIPT`, `false` otherwise.
+        # @return [Boolean] `true` when `JAVASCRIPT` and the object is not a reference (see {#reference?}), `false`
+        #   otherwise.
         #
         # @!group Attributes
         #
@@ -302,7 +306,8 @@ module Google
         ##
         # Checks if the value of {#language} is `SQL`. The default is `true`.
         #
-        # @return [Boolean] `true` when `SQL` or `nil`, `false` otherwise.
+        # @return [Boolean] `true` when `SQL` and the object is not a reference (see {#reference?}), `false`
+        #   otherwise.
         #
         # @!group Attributes
         #
@@ -314,7 +319,8 @@ module Google
         ##
         # The input/output arguments of the routine. Optional.
         #
-        # @return [Array<Argument>] An array of argument objects.
+        # @return [Array<Argument>, nil] An array of argument objects, or `nil` if the object is a reference (see
+        #   {#reference?}).
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -381,7 +387,8 @@ module Google
         # Then the inferred return type of Increment is automatically changed to `INT64` at query time, while the return
         # type of Decrement remains `FLOAT64`.
         #
-        # @return [Google::Cloud::Bigquery::StandardSql::DataType]
+        # @return [Google::Cloud::Bigquery::StandardSql::DataType, nil] The return type in upper case, or `nil` if the
+        #   object is a reference (see {#reference?}).
         #
         # @example
         #   require "google/cloud/bigquery"
@@ -448,7 +455,8 @@ module Google
         # {#language} is `JAVASCRIPT` ({#javascript?}).
         #
         # @return [Array<String>, nil] A frozen array of Google Cloud Storage URIs, e.g.
-        #   `["gs://cloud-samples-data/bigquery/udfs/max-value.js"]`.
+        #   `["gs://cloud-samples-data/bigquery/udfs/max-value.js"]`, or `nil` if the object is a reference (see
+        #   {#reference?}).
         #
         # @!group Attributes
         #
@@ -507,7 +515,7 @@ module Google
         # ```
         # Note that both `\n` are replaced with linebreaks.
         #
-        # @return [String] The body of the routine.
+        # @return [String, nil] The body of the routine, or `nil` if the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
@@ -553,7 +561,7 @@ module Google
         ###
         # The description of the routine if defined. Optional. [Experimental]
         #
-        # @return [String] The routine description.
+        # @return [String, nil] The routine description, or `nil` if the object is a reference (see {#reference?}).
         #
         # @example
         #   require "google/cloud/bigquery"
