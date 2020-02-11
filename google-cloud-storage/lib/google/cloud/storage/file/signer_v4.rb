@@ -41,7 +41,8 @@ module Google
 
           def signed_url method: "GET", expires: nil, headers: nil,
                          issuer: nil, client_email: nil, signing_key: nil,
-                         private_key: nil, query: nil, virtual_hosted_style: nil
+                         private_key: nil, query: nil, scheme: "https",
+                         virtual_hosted_style: nil, bucket_bound_domain: nil
             issuer, signer = issuer_and_signer issuer, client_email, signing_key, private_key
             datetime_now = Time.now.utc
             goog_date = datetime_now.strftime "%Y%m%dT%H%M%SZ"
@@ -49,7 +50,8 @@ module Google
             # goog4_request is not checked.
             scope = "#{datestamp}/auto/storage/goog4_request"
 
-            canonical_headers_str, signed_headers_str = canonical_and_signed_headers headers, virtual_hosted_style
+            canonical_headers_str, signed_headers_str = canonical_and_signed_headers \
+              headers, virtual_hosted_style, bucket_bound_domain
 
             algorithm = "GOOG4-RSA-SHA256"
             expires = determine_expires expires
@@ -63,12 +65,12 @@ module Google
             payload = headers&.key?("X-Goog-Content-SHA256") ? headers["X-Goog-Content-SHA256"] : "UNSIGNED-PAYLOAD"
             # TODO: Also support X-Amz-Content-SHA256 payload?
             canonical_request = [method,
-                                 ext_path(virtual_hosted_style),
+                                 ext_path(!(virtual_hosted_style || bucket_bound_domain)),
                                  canonical_query_str,
                                  canonical_headers_str,
                                  signed_headers_str,
                                  payload].join("\n")
-            puts "\n\nactual:\n\n#{canonical_request}\n\n"
+
             # Construct string to sign
             req_sha = Digest::SHA256.hexdigest canonical_request
             string_to_sign = [algorithm, goog_date, scope, req_sha].join "\n"
@@ -77,7 +79,8 @@ module Google
             signature = signer.call string_to_sign
 
             # Construct signed URL
-            "#{ext_url virtual_hosted_style}?#{canonical_query_str}&X-Goog-Signature=#{signature}"
+            hostname = ext_url scheme, virtual_hosted_style, bucket_bound_domain
+            "#{hostname}?#{canonical_query_str}&X-Goog-Signature=#{signature}"
           end
 
           protected
@@ -111,14 +114,18 @@ module Google
             [issuer, signer]
           end
 
-          def canonical_and_signed_headers headers, virtual_hosted_style
+          def canonical_and_signed_headers headers, virtual_hosted_style, bucket_bound_domain
+            if virtual_hosted_style && bucket_bound_domain
+              raise "virtual_hosted_style: #{virtual_hosted_style} and bucket_bound_domain: #{bucket_bound_domain} " \
+                    "params cannot both be passed together"
+            end
             # Headers needs to be in alpha order.
             canonical_headers = headers || {}
             headers_arr = canonical_headers.map do |k, v|
               [k.downcase, v.strip.gsub(/[^\S\t]+/, " ").gsub(/\t+/, " ")]
             end
             canonical_headers = Hash[headers_arr]
-            canonical_headers["host"] = host_name virtual_hosted_style
+            canonical_headers["host"] = host_name virtual_hosted_style, bucket_bound_domain
 
             canonical_headers = canonical_headers.sort_by { |k, _| k.to_s }.to_h # TODO: replace with default sort?
             canonical_headers_str = ""
@@ -152,29 +159,33 @@ module Google
             canonical_query_str.chomp "&"
           end
 
-          def host_name virtual_hosted_style
+          def host_name virtual_hosted_style, bucket_bound_domain
+            return bucket_bound_domain if bucket_bound_domain
             virtual_hosted_style ? "#{@bucket_name}.storage.googleapis.com" : "storage.googleapis.com"
           end
 
           ##
           # The URI-encoded (percent encoded) external path to the file.
-          def ext_path virtual_hosted_style
+          def ext_path path_style
             path = ""
-            path += "/#{@bucket_name}" unless virtual_hosted_style
+            path += "/#{@bucket_name}" if path_style
             path += "/#{String(@file_name)}" if @file_name && !@file_name.empty?
             CGI.escape(path).gsub "%2F", "/"
           end
 
           ##
           # The external url to the file.
-          def ext_url virtual_hosted_style
+          def ext_url scheme, virtual_hosted_style, bucket_bound_domain
             url = GOOGLEAPIS_URL.dup
             if virtual_hosted_style
               parts = url.split "//"
               parts[1] = "#{@bucket_name}.#{parts[1]}"
               url = parts.join "//"
+            elsif bucket_bound_domain
+              raise "scheme is required" unless scheme
+              url = URI "#{scheme}://#{bucket_bound_domain}"
             end
-            "#{url}#{ext_path virtual_hosted_style}"
+            "#{url}#{ext_path !(virtual_hosted_style || bucket_bound_domain)}"
           end
         end
       end

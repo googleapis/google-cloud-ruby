@@ -29,29 +29,31 @@ class SignerV4Test < MockStorage
     if !passed? && @test
       test = @test.first
       puts "\ntest_#{@test.last}: #{test.description}:\n"
-      puts "test.expectedCanonicalRequest:\n\n#{test.expectedCanonicalRequest}\n\n"
-      puts "test.expectedStringToSign:\n\n#{test.expectedStringToSign}\n\n"
+      puts "CanonicalRequest\n\nexpected:\n\n#{test.expectedCanonicalRequest}\n\n"
+      puts "StringToSign\n\nexpected:\n\n#{test.expectedStringToSign}\n\n"
     end
   end  
 
   def self.build_test_for test, index
-    # return unless index == 16
-    # focus
     define_method("test_#{index}: #{test.description}") do
       @test = [test, index]
       # start: test method body
       signer = Google::Cloud::Storage::File::SignerV4.new test.bucket,
                                                           test.object,
                                                           storage.service
+      method = test["method"] unless test["method"]&.empty?
       headers = test.headers.to_h if test.headers # convert from protobuf map
       query = test.query_parameters.to_h if test.query_parameters # convert from protobuf map
+      bucket_bound_domain = test.bucketBoundDomain unless test.bucketBoundDomain&.empty?
       Time.stub :now, SignerV4Test.timestamp_to_time(test.timestamp) do
         # method under test
-        signed_url = signer.signed_url method: test["method"],
+        signed_url = signer.signed_url method: method,
                                        expires: test.expiration,
                                        headers: headers,
                                        query: query,
-                                       virtual_hosted_style: (test.urlStyle == :VIRTUAL_HOSTED_STYLE)
+                                       scheme: test.scheme,
+                                       virtual_hosted_style: (test.urlStyle == :VIRTUAL_HOSTED_STYLE),
+                                       bucket_bound_domain: bucket_bound_domain
        
         signed_url.must_equal test.expectedUrl
       end

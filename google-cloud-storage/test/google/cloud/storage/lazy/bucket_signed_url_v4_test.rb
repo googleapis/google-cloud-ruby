@@ -137,7 +137,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :lazy, :mock_storage 
   it "allows query params to be passed in" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
-      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\nf2f6b29f677af847b40cd43a5b2b09c171a1c3b0ffd021adf6f15ece0e77e607"]
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\nce1d02ef4024da92a69e4f84100a41775c1dcc61d55729ca3054068f8b5ff01f"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
@@ -158,7 +158,7 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :lazy, :mock_storage 
   it "allows query params to be passed in as symbols" do
     Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
       signing_key_mock = Minitest::Mock.new
-      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\nade7c049b7cddfac8f7a4509c85f8012913b300e9afe5ab498eeb77fae7e5c70"]
+      signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GOOG4-RSA-SHA256\n20120101T000000Z\n20120101/auto/storage/goog4_request\nc504c40bab3dedc378faeccd57b46ab697e6aebc1bbcba14f4b01c7871e1f37b"]
       credentials.issuer = "native_client_email"
       credentials.signing_key = signing_key_mock
 
