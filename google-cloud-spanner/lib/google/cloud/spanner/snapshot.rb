@@ -118,6 +118,16 @@ module Google
         #     specified using a {Fields} object.
         #
         #   Types are optional.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   Currenty, it can support the following structure:
+        #   
+        #   ```ruby
+        #   {
+        #     optimizer_version: "3", # or, use "latest"
+        #   }
+        #   ```
+        #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
         #

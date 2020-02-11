@@ -150,6 +150,15 @@ module Google
         #   transactions.
         # @param [Integer] seqno A per-transaction sequence number used to
         #   identify this request.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   Currenty, it can support the following structure:
+        #   
+        #   ```ruby
+        #   {
+        #     optimizer_version: "3", # or, use "latest"
+        #   }
+        #   ```
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.

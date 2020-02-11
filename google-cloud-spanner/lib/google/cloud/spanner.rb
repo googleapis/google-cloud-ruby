@@ -82,6 +82,8 @@ module Google
       #   `spanner-activerecord/0.0.1` is provided custom library name and
       #   version and `gccl/1.13.1` represents the Cloud Spanner Ruby library
       #   with version.
+      # @param [Hash] query_options A hash of values to specify the custom
+      #   query options for executing SQL query.
       #
       # @return [Google::Cloud::Spanner::Project]
       #
