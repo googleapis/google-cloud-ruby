@@ -21,7 +21,7 @@ describe Google::Cloud::Bigquery::Table, :attributes, :mock_bigquery do
   let(:table_id) { "my_table" }
   let(:table_name) { "My Table" }
   let(:description) { "This is my table" }
-  let(:table_hash) { random_table_small_hash "my_table", table_id, table_name }
+  let(:table_hash) { random_table_partial_hash "my_table", table_id, table_name }
   let(:table_full_hash) { random_table_hash "my_table", table_id, table_name, description }
   let(:table_gapi) { Google::Apis::BigqueryV2::TableList::Table.from_json table_hash.to_json }
   let(:table_full_gapi) { Google::Apis::BigqueryV2::Table.from_json table_full_hash.to_json }

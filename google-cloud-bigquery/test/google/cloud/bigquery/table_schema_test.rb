@@ -60,7 +60,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:etag) { "etag123456789" }
 
   let(:rank_schema_json) do
-    <<-JSON
+    <<~JSON
       [
         {"name":"first_name","type":"STRING","mode":"REQUIRED"},
         {"name":"rank","type":"INTEGER","mode":"NULLABLE", "description":"An integer value from 1 to 100"},

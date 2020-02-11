@@ -449,7 +449,8 @@ module Google
         def feature_columns
           ensure_full_data!
           Array(@gapi_json[:featureColumns]).map do |field_gapi_json|
-            StandardSql::Field.from_gapi_json field_gapi_json
+            field_gapi = Google::Apis::BigqueryV2::StandardSqlField.from_json field_gapi_json.to_json
+            StandardSql::Field.from_gapi field_gapi
           end
         end
 
@@ -464,7 +465,8 @@ module Google
         def label_columns
           ensure_full_data!
           Array(@gapi_json[:labelColumns]).map do |field_gapi_json|
-            StandardSql::Field.from_gapi_json field_gapi_json
+            field_gapi = Google::Apis::BigqueryV2::StandardSqlField.from_json field_gapi_json.to_json
+            StandardSql::Field.from_gapi field_gapi
           end
         end
 
@@ -554,7 +556,7 @@ module Google
         #   model = dataset.model "my_model", skip_lookup: true
         #   model.exists? #=> true
         #
-        def exists? force: nil
+        def exists? force: false
           return resource_exists? if force
           # If we have a value, return it
           return @exists unless @exists.nil?
@@ -668,7 +670,7 @@ module Google
         end
 
         ##
-        # @private New lazy Model object without making an HTTP request.
+        # @private New lazy Model object without making an HTTP request, for use with the skip_lookup option.
         def self.new_reference project_id, dataset_id, model_id, service
           raise ArgumentError, "project_id is required" unless project_id
           raise ArgumentError, "dataset_id is required" unless dataset_id

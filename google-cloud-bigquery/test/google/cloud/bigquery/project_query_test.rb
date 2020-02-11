@@ -69,7 +69,7 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     bigquery.service.mocked_service = mock
 
     job_gapi = query_job_gapi ddl_query, location: nil
-    resp_gapi = query_job_resp_gapi ddl_query, job_id: job_id, target_table: true, statement_type: "CREATE_TABLE", ddl_operation_performed: "CREATE"
+    resp_gapi = query_job_resp_gapi ddl_query, job_id: job_id, target_routine: true, target_table: true, statement_type: "CREATE_TABLE", ddl_operation_performed: "CREATE"
     mock.expect :insert_job, resp_gapi, [project, job_gapi]
 
     data = bigquery.query ddl_query
@@ -85,6 +85,8 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
     data.ddl_operation_performed.must_equal "CREATE"
     data.ddl_target_table.wont_be :nil?
     data.num_dml_affected_rows.must_be :nil?
+    # in real life this example does not create a routine, but test the attribute here anyway
+    data.ddl_target_routine.wont_be :nil?
   end
 
   it "executes a DML statement" do

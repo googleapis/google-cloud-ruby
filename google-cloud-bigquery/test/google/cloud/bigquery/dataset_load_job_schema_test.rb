@@ -101,6 +101,11 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       job.time_partitioning_expiration = 86_400
       job.time_partitioning_require_filter = true
       job.clustering_fields = clustering_fields
+      expect { job.cancel }.must_raise RuntimeError
+      expect { job.rerun! }.must_raise RuntimeError
+      expect { job.reload! }.must_raise RuntimeError
+      expect { job.refresh! }.must_raise RuntimeError
+      expect { job.wait_until_done! }.must_raise RuntimeError
     end
 
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob

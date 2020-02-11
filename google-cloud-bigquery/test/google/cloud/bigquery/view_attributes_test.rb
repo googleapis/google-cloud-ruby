@@ -21,7 +21,7 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
   let(:table_id) { "my_view" }
   let(:table_name) { "My View" }
   let(:description) { "This is my view" }
-  let(:view_hash) { random_view_small_hash "my_view", table_id, table_name }
+  let(:view_hash) { random_view_partial_hash "my_view", table_id, table_name }
   let(:view_full_hash) { random_view_hash "my_view", table_id, table_name, description }
   let(:view_gapi) { Google::Apis::BigqueryV2::TableList::Table.from_json view_hash.to_json }
   let(:view_full_gapi) { Google::Apis::BigqueryV2::Table.from_json view_full_hash.to_json }

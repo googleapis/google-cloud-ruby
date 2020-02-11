@@ -76,6 +76,11 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     job = bigquery.query_job query do |j|
       j.priority = :batch
       j.cache = false
+      expect { j.cancel }.must_raise RuntimeError
+      expect { j.rerun! }.must_raise RuntimeError
+      expect { j.reload! }.must_raise RuntimeError
+      expect { j.refresh! }.must_raise RuntimeError
+      expect { j.wait_until_done! }.must_raise RuntimeError
     end
     mock.verify
 

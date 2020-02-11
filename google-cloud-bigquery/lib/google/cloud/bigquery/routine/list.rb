@@ -1,4 +1,4 @@
-# Copyright 2015 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,29 +18,23 @@ require "delegate"
 module Google
   module Cloud
     module Bigquery
-      class Table
+      class Routine
         ##
-        # Table::List is a special case Array with additional values.
+        # Routine::List is a special case Array with additional values.
         class List < DelegateClass(::Array)
           ##
           # If not empty, indicates that there are more records that match
           # the request and this value should be passed to continue.
           attr_accessor :token
 
-          # A hash of this page of results.
-          attr_accessor :etag
-
-          # Total number of tables in this collection.
-          attr_accessor :total
-
           ##
-          # @private Create a new Table::List with an array of tables.
+          # @private Create a new Routine::List with an array of routines.
           def initialize arr = []
             super arr
           end
 
           ##
-          # Whether there is a next page of tables.
+          # Whether there is a next page of routines.
           #
           # @return [Boolean]
           #
@@ -50,9 +44,9 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   tables = dataset.tables
-          #   if tables.next?
-          #     next_tables = tables.next
+          #   routines = dataset.routines
+          #   if routines.next?
+          #     next_routines = routines.next
           #   end
           #
           def next?
@@ -60,9 +54,9 @@ module Google
           end
 
           ##
-          # Retrieve the next page of tables.
+          # Retrieve the next page of routines.
           #
-          # @return [Table::List]
+          # @return [Routine::List]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -70,16 +64,16 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   tables = dataset.tables
-          #   if tables.next?
-          #     next_tables = tables.next
+          #   routines = dataset.routines
+          #   if routines.next?
+          #     next_routines = routines.next
           #   end
           #
           def next
             return nil unless next?
             ensure_service!
-            gapi = @service.list_tables @dataset_id, token: token, max: @max
-            self.class.from_gapi gapi, @service, @dataset_id, @max
+            gapi = @service.list_routines @dataset_id, token: token, max: @max, filter: @filter
+            self.class.from_gapi gapi, @service, @dataset_id, @max, filter: @filter
           end
 
           ##
@@ -94,9 +88,9 @@ module Google
           # over the results returned by a single API call.) Use with caution.
           #
           # @param [Integer] request_limit The upper limit of API requests to
-          #   make to load all tables. Default is no limit.
-          # @yield [table] The block for accessing each table.
-          # @yieldparam [Table] table The table object.
+          #   make to load all routines. Default is no limit.
+          # @yield [routine] The block for accessing each routine.
+          # @yieldparam [Routine] routine The routine object.
           #
           # @return [Enumerator]
           #
@@ -106,8 +100,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   dataset.tables.all do |table|
-          #     puts table.name
+          #   dataset.routines.all do |routine|
+          #     puts routine.routine_id
           #   end
           #
           # @example Using the enumerator by not passing a block:
@@ -116,8 +110,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   all_names = dataset.tables.all.map do |table|
-          #     table.name
+          #   all_names = dataset.routines.all.map do |routine|
+          #     routine.routine_id
           #   end
           #
           # @example Limit the number of API requests made:
@@ -126,8 +120,8 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   dataset.tables.all(request_limit: 10) do |table|
-          #     puts table.name
+          #   dataset.routines.all(request_limit: 10) do |routine|
+          #     puts routine.routine_id
           #   end
           #
           def all request_limit: nil
@@ -146,16 +140,15 @@ module Google
           end
 
           ##
-          # @private New Table::List from a response object.
-          def self.from_gapi gapi_list, service, dataset_id = nil, max = nil
-            tables = List.new(Array(gapi_list.tables).map { |gapi_object| Table.from_gapi gapi_object, service })
-            tables.instance_variable_set :@token,      gapi_list.next_page_token
-            tables.instance_variable_set :@etag,       gapi_list.etag
-            tables.instance_variable_set :@total,      gapi_list.total_items
-            tables.instance_variable_set :@service,    service
-            tables.instance_variable_set :@dataset_id, dataset_id
-            tables.instance_variable_set :@max,        max
-            tables
+          # @private New Routine::List from a response object.
+          def self.from_gapi gapi_list, service, dataset_id = nil, max = nil, filter: nil
+            routines = List.new(Array(gapi_list.routines).map { |gapi| Routine.from_gapi gapi, service })
+            routines.instance_variable_set :@token,      gapi_list.next_page_token
+            routines.instance_variable_set :@service,    service
+            routines.instance_variable_set :@dataset_id, dataset_id
+            routines.instance_variable_set :@max,        max
+            routines.instance_variable_set :@filter,     filter
+            routines
           end
 
           protected

@@ -107,6 +107,13 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Argument" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_routine, random_routine_gapi("my_dataset", "my_routine"), ["my-project", "my_dataset", Google::Apis::BigqueryV2::Routine]
+    end
+  end
+
   doctest.skip "Google::Cloud::Bigquery::Credentials" # occasionally getting "This code example is not yet mocked"
 
   # Google::Cloud::Bigquery::Data#all@Iterating each rows by passing a block:
@@ -188,6 +195,13 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_dataset, dataset_full_gapi, ["my-project", Google::Apis::BigqueryV2::Dataset]
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :patch_dataset, dataset_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Dataset, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Dataset#create_routine" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_routine, random_routine_gapi("my_dataset", "my_routine"), ["my-project", "my_dataset", Google::Apis::BigqueryV2::Routine]
     end
   end
 
@@ -290,6 +304,28 @@ YARD::Doctest.configure do |doctest|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
       mock.expect :patch_dataset, dataset_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Dataset, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Dataset#routine" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), ["my-project", "my_dataset", "my_routine"]
+    end
+  end
+
+  # Google::Cloud::Bigquery::Dataset#routines@Retrieve all routines: (See {Routine::List#all})
+  doctest.before "Google::Cloud::Bigquery::Dataset#routines" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :list_routines, list_routines_gapi("my_dataset"), ["my-project", "my_dataset", Hash]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
     end
   end
 
@@ -679,6 +715,48 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Routine" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, [String, String]
+      mock.expect :insert_routine, random_routine_gapi("my_dataset", "my_routine"), ["my-project", "my_dataset", Google::Apis::BigqueryV2::Routine]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :list_routines, list_routines_gapi("my_dataset"), [String, String, Hash]
+      mock.expect :update_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String, Object, Hash]
+      mock.expect :delete_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Routine#resource_full?" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), ["my-project", "my_dataset", "my_routine"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Routine#resource_partial?" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :list_routines, list_routines_gapi("my_dataset"), ["my-project", "my_dataset", Hash]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), ["my-project", "my_dataset", "my_routine"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Routine::List" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, [String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :get_routine, random_routine_gapi("my_dataset", "my_routine"), [String, String, String]
+      mock.expect :list_routines, list_routines_gapi("my_dataset"), [String, String, Hash]
+    end
+  end
+
   # Google::Cloud::Bigquery::Schema#record
   doctest.before "Google::Cloud::Bigquery::Schema" do
     mock_bigquery do |mock|
@@ -718,6 +796,13 @@ YARD::Doctest.configure do |doctest|
       mock.expect :insert_table, table_full_gapi, ["my-project", "my_dataset", Google::Apis::BigqueryV2::Table]
       mock.expect :patch_table, table_full_gapi, ["my-project", "my_dataset", "my_table", Google::Apis::BigqueryV2::Table, Hash]
       mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::StandardSql" do
+    mock_bigquery do |mock|
+      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
+      mock.expect :insert_routine, random_routine_gapi("my_dataset", "my_routine"), ["my-project", "my_dataset", Google::Apis::BigqueryV2::Routine]
     end
   end
 
@@ -1045,7 +1130,7 @@ def random_dataset_hash project = "my-project", id = nil, name = nil, descriptio
   }
 end
 
-def random_dataset_small_hash project = "my-project", id = nil, name = nil
+def random_dataset_partial_hash project = "my-project", id = nil, name = nil
   id ||= "my_dataset"
   name ||= "My Dataset"
 
@@ -1061,7 +1146,7 @@ def random_dataset_small_hash project = "my-project", id = nil, name = nil
 end
 
 def list_datasets_gapi count = 2, token = nil
-  datasets = count.times.map { random_dataset_small_hash }
+  datasets = count.times.map { random_dataset_partial_hash }
   hash = {"kind"=>"bigquery#datasetList", "datasets"=>datasets}
   hash["nextPageToken"] = token unless token.nil?
   Google::Apis::BigqueryV2::DatasetList.from_json hash.to_json
@@ -1120,7 +1205,7 @@ def table_full_hash project = "my-project", dataset = "my_dataset", id = nil, na
   }
 end
 
-def random_table_small_hash project = "my-project", dataset = "my_dataset", id = nil, name = nil
+def random_table_partial_hash project = "my-project", dataset = "my_dataset", id = nil, name = nil
   id ||= "my_table"
   name ||= "Table Name"
 
@@ -1156,7 +1241,7 @@ def table_data_gapi token: "token1234567890"
 end
 
 def list_tables_gapi project = "my-project", dataset = "my_dataset", count = 2, token = nil, total = nil
-  tables = count.times.map { random_table_small_hash(dataset) }
+  tables = count.times.map { random_table_partial_hash(dataset) }
   hash = {"kind" => "bigquery#tableList", "tables" => tables,
           "totalItems" => (total || count)}
   hash["nextPageToken"] = token unless token.nil?
@@ -1256,6 +1341,61 @@ def table_data_hash token: "token1234567890"
     "pageToken" => token,
     "totalRows" => "3" # String per google/google-api-ruby-client#439
   }
+end
+
+def random_routine_hash dataset, id = nil, project: "my-project", etag: "etag123456789", 
+                                            creation_time: time_millis, last_modified_time: time_millis
+  id ||= "my_routine"
+
+  h = {
+    kind: "bigquery#routine",
+    id: "#{project}:#{dataset}.#{id}",
+    selfLink: "http://googleapi/bigquery/v2/projects/#{project}/datasets/#{dataset}/routines/#{id}",
+    routineReference: {
+      projectId: project,
+      datasetId: dataset,
+      routineId: id
+    },
+    routineType: "SCALAR_FUNCTION",
+    language: "SQL",
+    arguments: [{ dataType: { typeKind: "INT64" }, name: "x", argumentKind: nil, mode: nil }],
+    returnType: { typeKind: "INT64" },
+    importedLibraries: ["gs://cloud-samples-data/bigquery/udfs/max-value.js"],
+    definitionBody: "x * 3",
+    description: "My routine description"
+  }
+  h[:etag] = etag if etag
+  h[:creationTime] = creation_time if creation_time
+  h[:lastModifiedTime] = last_modified_time if last_modified_time
+  h
+end
+
+def random_routine_partial_hash dataset, id
+  # List representation: etag, routineReference, routineType, creationTime, lastModifiedTime and language.
+  { 
+    etag: "etag123456789",
+    routineReference: {
+      projectId: "my-project",
+      datasetId: dataset,
+      routineId: id
+    },
+    routineType: "SCALAR_FUNCTION",
+    creationTime: time_millis,
+    lastModifiedTime: time_millis,
+    language: "SQL"
+  }
+end
+
+def list_routines_gapi dataset, count = 2, token = nil
+  routines = count.times.map { |i| random_routine_partial_hash dataset, "my_routine" }
+  hash = { "kind"=>"bigquery#routineList", "routines" => routines }
+  hash["nextPageToken"] = token unless token.nil?
+  Google::Apis::BigqueryV2::ListRoutinesResponse.from_json hash.to_json
+end
+
+def random_routine_gapi dataset, id = nil, project: nil
+  json = random_routine_hash(dataset, id, project: project).to_json
+  Google::Apis::BigqueryV2::Routine.from_json json
 end
 
 def query_data_gapi token: "token1234567890"

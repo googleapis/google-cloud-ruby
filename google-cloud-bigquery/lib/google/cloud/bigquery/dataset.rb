@@ -18,6 +18,7 @@ require "google/cloud/errors"
 require "google/cloud/bigquery/service"
 require "google/cloud/bigquery/table"
 require "google/cloud/bigquery/model"
+require "google/cloud/bigquery/routine"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/dataset/list"
 require "google/cloud/bigquery/dataset/access"
@@ -731,8 +732,7 @@ module Google
         #
         def tables token: nil, max: nil
           ensure_service!
-          options = { token: token, max: max }
-          gapi = service.list_tables dataset_id, options
+          gapi = service.list_tables dataset_id, token: token, max: max
           Table::List.from_gapi gapi, service, dataset_id, max
         end
 
@@ -815,6 +815,174 @@ module Google
           ensure_service!
           gapi = service.list_models dataset_id, token: token, max: max
           Model::List.from_gapi gapi, service, dataset_id, max
+        end
+
+        ##
+        # Creates a new routine. The following attributes may be set in the yielded block:
+        # {Routine::Updater#routine_type=}, {Routine::Updater#language=}, {Routine::Updater#arguments=},
+        # {Routine::Updater#return_type=}, {Routine::Updater#imported_libraries=}, {Routine::Updater#body=}, and
+        # {Routine::Updater#description=}.
+        #
+        # @param [String] routine_id The ID of the routine. The ID must contain only
+        #   letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length
+        #   is 256 characters.
+        # @yield [routine] A block for setting properties on the routine.
+        # @yieldparam [Google::Cloud::Bigquery::Routine::Updater] routine An updater to set additional properties on the
+        #   routine.
+        #
+        # @return [Google::Cloud::Bigquery::Routine] A new routine object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routine = dataset.create_routine "my_routine" do |r|
+        #     r.routine_type = "SCALAR_FUNCTION"
+        #     r.language = "SQL"
+        #     r.arguments = [
+        #       Google::Cloud::Bigquery::Argument.new(name: "x", data_type: "INT64")
+        #     ]
+        #     r.body = "x * 3"
+        #     r.description = "My routine description"
+        #   end
+        #
+        #   puts routine.routine_id
+        #
+        # @example Extended example:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   routine = dataset.create_routine "my_routine" do |r|
+        #     r.routine_type = "SCALAR_FUNCTION"
+        #     r.language = :SQL
+        #     r.body = "(SELECT SUM(IF(elem.name = \"foo\",elem.val,null)) FROM UNNEST(arr) AS elem)"
+        #     r.arguments = [
+        #       Google::Cloud::Bigquery::Argument.new(
+        #         name: "arr",
+        #         argument_kind: "FIXED_TYPE",
+        #         data_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+        #           type_kind: "ARRAY",
+        #           array_element_type: Google::Cloud::Bigquery::StandardSql::DataType.new(
+        #             type_kind: "STRUCT",
+        #             struct_type: Google::Cloud::Bigquery::StandardSql::StructType.new(
+        #               fields: [
+        #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+        #                   name: "name",
+        #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "STRING")
+        #                 ),
+        #                 Google::Cloud::Bigquery::StandardSql::Field.new(
+        #                   name: "val",
+        #                   type: Google::Cloud::Bigquery::StandardSql::DataType.new(type_kind: "INT64")
+        #                 )
+        #               ]
+        #             )
+        #           )
+        #         )
+        #       )
+        #     ]
+        #   end
+        #
+        # @!group Routine
+        #
+        def create_routine routine_id
+          ensure_service!
+          new_tb = Google::Apis::BigqueryV2::Routine.new(
+            routine_reference: Google::Apis::BigqueryV2::RoutineReference.new(
+              project_id: project_id, dataset_id: dataset_id, routine_id: routine_id
+            )
+          )
+          updater = Routine::Updater.new new_tb
+
+          yield updater if block_given?
+
+          gapi = service.insert_routine dataset_id, updater.to_gapi
+          Routine.from_gapi gapi, service
+        end
+
+        ##
+        # Retrieves an existing routine by ID.
+        #
+        # @param [String] routine_id The ID of a routine.
+        # @param [Boolean] skip_lookup Optionally create just a local reference
+        #   object without verifying that the resource exists on the BigQuery
+        #   service. Calls made on this object will raise errors if the resource
+        #   does not exist. Default is `false`. Optional.
+        #
+        # @return [Google::Cloud::Bigquery::Routine, nil] Returns `nil` if the
+        #   routine does not exist.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routine = dataset.routine "my_routine"
+        #   puts routine.routine_id
+        #
+        # @example Avoid retrieving the routine resource with `skip_lookup`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routine = dataset.routine "my_routine", skip_lookup: true
+        #
+        # @!group Routine
+        #
+        def routine routine_id, skip_lookup: nil
+          ensure_service!
+          return Routine.new_reference project_id, dataset_id, routine_id, service if skip_lookup
+          gapi = service.get_routine dataset_id, routine_id
+          Routine.from_gapi gapi, service
+        rescue Google::Cloud::NotFoundError
+          nil
+        end
+
+        ##
+        # Retrieves the list of routines belonging to the dataset.
+        #
+        # @param [String] token A previously-returned page token representing
+        #   part of the larger set of results to view.
+        # @param [Integer] max Maximum number of routines to return.
+        # @param [String] filter If set, then only the routines matching this filter are returned. The current supported
+        #   form is `routineType:`, with a {Routine#routine_type} enum value. Example: `routineType:SCALAR_FUNCTION`.
+        #
+        # @return [Array<Google::Cloud::Bigquery::Routine>] An array of routines
+        #   (See {Google::Cloud::Bigquery::Routine::List})
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routines = dataset.routines
+        #   routines.each do |routine|
+        #     puts routine.routine_id
+        #   end
+        #
+        # @example Retrieve all routines: (See {Routine::List#all})
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   routines = dataset.routines
+        #   routines.all do |routine|
+        #     puts routine.routine_id
+        #   end
+        #
+        # @!group Routine
+        #
+        def routines token: nil, max: nil, filter: nil
+          ensure_service!
+          gapi = service.list_routines dataset_id, token: token, max: max, filter: filter
+          Routine::List.from_gapi gapi, service, dataset_id, max, filter: filter
         end
 
         ##
@@ -1073,7 +1241,7 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     table_ref = job.ddl_target_table
+        #     table_ref = job.ddl_target_table # Or ddl_target_routine for CREATE/DROP FUNCTION/PROCEDURE
         #   end
         #
         # @example Execute a DML statement:
@@ -1321,7 +1489,7 @@ module Google
         #
         #   data = bigquery.query "CREATE TABLE my_table (x INT64)"
         #
-        #   table_ref = data.ddl_target_table
+        #   table_ref = data.ddl_target_table # Or ddl_target_routine for CREATE/DROP FUNCTION/PROCEDURE
         #
         # @example Execute a DML statement:
         #   require "google/cloud/bigquery"
@@ -1942,7 +2110,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #   dataset.exists? # true
         #
-        def exists? force: nil
+        def exists? force: false
           return gapi_exists? if force
           # If we have a memoized value, return it
           return @exists unless @exists.nil?
@@ -2052,7 +2220,7 @@ module Google
         end
 
         ##
-        # @private New lazy Dataset object without making an HTTP request.
+        # @private New lazy Dataset object without making an HTTP request, for use with the skip_lookup option.
         def self.new_reference project_id, dataset_id, service
           raise ArgumentError, "dataset_id is required" unless dataset_id
           new.tap do |b|
@@ -2254,10 +2422,9 @@ module Google
           rows = [rows] if rows.is_a? Hash
           raise ArgumentError, "No rows provided" if rows.empty?
           ensure_service!
-          options = { skip_invalid:   skip_invalid,
-                      ignore_unknown: ignore_unknown,
-                      insert_ids:     insert_ids }
-          gapi = service.insert_tabledata dataset_id, table_id, rows, options
+          gapi = service.insert_tabledata dataset_id, table_id, rows, skip_invalid:   skip_invalid,
+                                                                      ignore_unknown: ignore_unknown,
+                                                                      insert_ids:     insert_ids
           InsertResponse.from_gapi rows, gapi
         end
 
@@ -2454,14 +2621,14 @@ module Google
         end
 
         ##
-        # Yielded to a block to accumulate changes for a patch request.
+        # Yielded to a block to accumulate changes for a create request. See {Project#create_dataset}.
         class Updater < Dataset
           ##
-          # A list of attributes that were updated.
+          # @private A list of attributes that were updated.
           attr_reader :updates
 
           ##
-          # Create an Updater object.
+          # @private Create an Updater object.
           def initialize gapi
             @updates = []
             @gapi = gapi
@@ -2478,8 +2645,109 @@ module Google
             @access
           end
 
+          # rubocop:disable Style/MethodDefParentheses
+
           ##
-          # Make sure any access changes are saved
+          # @raise [RuntimeError] not implemented
+          def delete(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def create_table(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def create_view(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def table(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def tables(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def model(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def models(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def create_routine(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def routine(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def routines(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def query_job(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def query(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def external(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def load_job(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def load(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def reload!
+            raise "not implemented in #{self.class}"
+          end
+          alias refresh! reload!
+
+          # rubocop:enable Style/MethodDefParentheses
+
+          ##
+          # @private Make sure any access changes are saved
           def check_for_mutated_access!
             return if @access.nil?
             return unless @access.changed?
@@ -2487,6 +2755,8 @@ module Google
             patch_gapi! :access
           end
 
+          ##
+          # @private
           def to_gapi
             check_for_mutated_access!
             @gapi

@@ -527,7 +527,7 @@ module Google
         #
         #   job.wait_until_done!
         #   if !job.failed?
-        #     table_ref = job.ddl_target_table
+        #     table_ref = job.ddl_target_table # Or ddl_target_routine for CREATE/DROP FUNCTION/PROCEDURE
         #   end
         #
         # @example Execute a DML statement:
@@ -786,7 +786,7 @@ module Google
         #
         #   data = bigquery.query "CREATE TABLE `my_dataset.my_table` (x INT64)"
         #
-        #   table_ref = data.ddl_target_table
+        #   table_ref = data.ddl_target_table # Or ddl_target_routine for CREATE/DROP FUNCTION/PROCEDURE
         #
         # @example Execute a DML statement:
         #   require "google/cloud/bigquery"
@@ -1046,8 +1046,7 @@ module Google
         #
         def datasets all: nil, filter: nil, token: nil, max: nil
           ensure_service!
-          options = { all: all, filter: filter, token: token, max: max }
-          gapi = service.list_datasets options
+          gapi = service.list_datasets all: all, filter: filter, token: token, max: max
           Dataset::List.from_gapi gapi, service, all, filter, max
         end
 
@@ -1197,8 +1196,7 @@ module Google
         #
         def projects token: nil, max: nil
           ensure_service!
-          options = { token: token, max: max }
-          gapi = service.list_projects options
+          gapi = service.list_projects token: token, max: max
           Project::List.from_gapi gapi, service, max
         end
 

@@ -152,7 +152,7 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::CopyJob::Updater] A job
           #   configuration object for setting copy options.
-          def self.from_options service, source, target, options = {}
+          def self.from_options service, source, target, options
             job_ref = service.job_ref_from options[:job_id], options[:prefix]
             copy_cfg = Google::Apis::BigqueryV2::JobConfigurationTableCopy.new(
               source_table:      source,
@@ -282,6 +282,23 @@ module Google
           # @!group Attributes
           def labels= value
             @gapi.configuration.update! labels: value
+          end
+
+          def cancel
+            raise "not implemented in #{self.class}"
+          end
+
+          def rerun!
+            raise "not implemented in #{self.class}"
+          end
+
+          def reload!
+            raise "not implemented in #{self.class}"
+          end
+          alias refresh! reload!
+
+          def wait_until_done!
+            raise "not implemented in #{self.class}"
           end
 
           ##

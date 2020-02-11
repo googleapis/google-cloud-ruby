@@ -112,4 +112,20 @@ describe Google::Cloud::Bigquery, :standard_query_types, :bigquery do
     rows.count.must_equal 1
     rows.first[:value].must_equal ["foo", "bar", "baz"]
   end
+
+  it "queries a struct with no names" do
+    rows = bigquery.query "SELECT STRUCT(1, 'abc', 3.14) AS value", standard_sql: true
+
+    rows.class.must_equal Google::Cloud::Bigquery::Data
+    rows.count.must_equal 1
+    rows.first[:value].must_equal({ _field_1: 1, _field_2: "abc", _field_3: 3.14 })
+  end
+
+  it "queries a struct with duplicate names" do
+    rows = bigquery.query "SELECT STRUCT(1 AS x, 'abc' AS x, 3.14 AS x) AS value", standard_sql: true
+
+    rows.class.must_equal Google::Cloud::Bigquery::Data
+    rows.count.must_equal 1
+    rows.first[:value].must_equal({ x: 1, _field_2: "abc", _field_3: 3.14 })
+  end
 end

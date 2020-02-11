@@ -182,7 +182,7 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::ExtractJob::Updater] A job
           #   configuration object for setting query options.
-          def self.from_options service, table, storage_files, options = {}
+          def self.from_options service, table, storage_files, options
             job_ref = service.job_ref_from options[:job_id], options[:prefix]
             storage_urls = Array(storage_files).map do |url|
               url.respond_to?(:to_gs_url) ? url.to_gs_url : url
@@ -207,7 +207,7 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::ExtractJob::Updater] A job
           #   configuration object for setting query options.
-          def self.from_job_and_options request, options = {}
+          def self.from_job_and_options request, options
             updater = ExtractJob::Updater.new request
             updater.compression = options[:compression]
             updater.delimiter = options[:delimiter]
@@ -334,6 +334,23 @@ module Google
           # @!group Attributes
           def use_avro_logical_types= value
             @gapi.configuration.extract.use_avro_logical_types = value
+          end
+
+          def cancel
+            raise "not implemented in #{self.class}"
+          end
+
+          def rerun!
+            raise "not implemented in #{self.class}"
+          end
+
+          def reload!
+            raise "not implemented in #{self.class}"
+          end
+          alias refresh! reload!
+
+          def wait_until_done!
+            raise "not implemented in #{self.class}"
           end
 
           ##

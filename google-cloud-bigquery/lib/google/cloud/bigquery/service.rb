@@ -78,12 +78,10 @@ module Google
         ##
         # Lists all datasets in the specified project to which you have
         # been granted the READER dataset role.
-        def list_datasets options = {}
+        def list_datasets all: nil, filter: nil, max: nil, token: nil
           # The list operation is considered idempotent
           execute backoff: true do
-            service.list_datasets \
-              @project, all: options[:all], filter: options[:filter],
-                        max_results: options[:max], page_token: options[:token]
+            service.list_datasets @project, all: all, filter: filter, max_results: max, page_token: token
           end
         end
 
@@ -133,10 +131,10 @@ module Google
         ##
         # Lists all tables in the specified dataset.
         # Requires the READER dataset role.
-        def list_tables dataset_id, options = {}
+        def list_tables dataset_id, max: nil, token: nil
           # The list operation is considered idempotent
           execute backoff: true do
-            service.list_tables @project, dataset_id, max_results: options[:max], page_token: options[:token]
+            service.list_tables @project, dataset_id, max_results: max, page_token: token
           end
         end
 
@@ -190,26 +188,29 @@ module Google
 
         ##
         # Retrieves data from the table.
-        def list_tabledata dataset_id, table_id, options = {}
+        def list_tabledata dataset_id, table_id, max: nil, token: nil, start: nil
           # The list operation is considered idempotent
           execute backoff: true do
             json_txt = service.list_table_data \
               @project, dataset_id, table_id,
-              max_results: options.delete(:max),
-              page_token:  options.delete(:token),
-              start_index: options.delete(:start),
+              max_results: max,
+              page_token:  token,
+              start_index: start,
               options:     { skip_deserialization: true }
             JSON.parse json_txt, symbolize_names: true
           end
         end
 
-        def insert_tabledata dataset_id, table_id, rows, options = {}
+        def insert_tabledata dataset_id, table_id, rows, insert_ids: nil, ignore_unknown: nil, skip_invalid: nil
           json_rows = Array(rows).map { |row| Convert.to_json_row row }
-          insert_tabledata_json_rows dataset_id, table_id, json_rows, options
+          insert_tabledata_json_rows dataset_id, table_id, json_rows, insert_ids:     insert_ids,
+                                                                      ignore_unknown: ignore_unknown,
+                                                                      skip_invalid:   skip_invalid
         end
 
-        def insert_tabledata_json_rows dataset_id, table_id, json_rows, options = {}
-          rows_and_ids = Array(json_rows).zip Array(options[:insert_ids])
+        def insert_tabledata_json_rows dataset_id, table_id, json_rows, insert_ids: nil, ignore_unknown: nil,
+                                       skip_invalid: nil
+          rows_and_ids = Array(json_rows).zip Array(insert_ids)
           insert_rows = rows_and_ids.map do |json_row, insert_id|
             if insert_id == :skip
               { json: json_row }
@@ -224,8 +225,8 @@ module Google
 
           insert_req = {
             rows:                insert_rows,
-            ignoreUnknownValues: options[:ignore_unknown],
-            skipInvalidRows:     options[:skip_invalid]
+            ignoreUnknownValues: ignore_unknown,
+            skipInvalidRows:     skip_invalid
           }.to_json
 
           # The insertAll with insertId operation is considered idempotent
@@ -286,15 +287,65 @@ module Google
         end
 
         ##
+        # Creates a new routine in the dataset.
+        def insert_routine dataset_id, new_routine_gapi
+          execute { service.insert_routine @project, dataset_id, new_routine_gapi }
+        end
+
+        ##
+        # Lists all routines in the specified dataset.
+        # Requires the READER dataset role.
+        # Unless readMask is set in the request, only the following fields are populated:
+        #   etag, projectId, datasetId, routineId, routineType, creationTime, lastModifiedTime, and language.
+        def list_routines dataset_id, max: nil, token: nil, filter: nil
+          # The list operation is considered idempotent
+          execute backoff: true do
+            service.list_routines @project, dataset_id, max_results: max,
+                                                        page_token:  token,
+                                                        filter:      filter
+          end
+        end
+
+        ##
+        # Gets the specified routine resource by routine ID.
+        def get_routine dataset_id, routine_id
+          # The get operation is considered idempotent
+          execute backoff: true do
+            service.get_routine @project, dataset_id, routine_id
+          end
+        end
+
+        ##
+        # Updates information in an existing routine, replacing the entire routine resource.
+        def update_routine dataset_id, routine_id, new_routine_gapi
+          update_with_backoff = false
+          options = {}
+          if new_routine_gapi.etag
+            options[:header] = { "If-Match" => new_routine_gapi.etag }
+            # The update with etag operation is considered idempotent
+            update_with_backoff = true
+          end
+          execute backoff: update_with_backoff do
+            service.update_routine @project, dataset_id, routine_id, new_routine_gapi, options: options
+          end
+        end
+
+        ##
+        # Deletes the routine specified by routine_id from the dataset.
+        def delete_routine dataset_id, routine_id
+          execute { service.delete_routine @project, dataset_id, routine_id }
+        end
+
+        ##
         # Lists all jobs in the specified project to which you have
         # been granted the READER job role.
-        def list_jobs options = {}
+        def list_jobs all: nil, max: nil, token: nil, filter: nil, min_created_at: nil, max_created_at: nil
           # The list operation is considered idempotent
-          min_creation_time = Convert.time_to_millis options[:min_created_at]
-          max_creation_time = Convert.time_to_millis options[:max_created_at]
+          min_creation_time = Convert.time_to_millis min_created_at
+          max_creation_time = Convert.time_to_millis max_created_at
           execute backoff: true do
-            service.list_jobs @project, all_users: options[:all], max_results: options[:max],
-                                        page_token: options[:token], projection: "full", state_filter: options[:filter],
+            service.list_jobs @project, all_users: all, max_results: max,
+                                        page_token: token, projection: "full", state_filter: filter,
                                         min_creation_time: min_creation_time, max_creation_time: max_creation_time
           end
         end
@@ -333,15 +384,15 @@ module Google
 
         ##
         # Returns the query data for the job
-        def job_query_results job_id, options = {}
+        def job_query_results job_id, location: nil, max: nil, token: nil, start: nil, timeout: nil
           # The get operation is considered idempotent
           execute backoff: true do
             service.get_job_query_results @project, job_id,
-                                          location:    options.delete(:location),
-                                          max_results: options.delete(:max),
-                                          page_token:  options.delete(:token),
-                                          start_index: options.delete(:start),
-                                          timeout_ms:  options.delete(:timeout)
+                                          location:    location,
+                                          max_results: max,
+                                          page_token:  token,
+                                          start_index: start,
+                                          timeout_ms:  timeout
           end
         end
 
@@ -409,9 +460,9 @@ module Google
 
         ##
         # Lists all projects to which you have been granted any project role.
-        def list_projects options = {}
+        def list_projects max: nil, token: nil
           execute backoff: true do
-            service.list_projects max_results: options[:max], page_token: options[:token]
+            service.list_projects max_results: max, page_token: token
           end
         end
 
@@ -489,10 +540,10 @@ module Google
             sleep delay
           end
 
-          def initialize options = {}
-            @retries = (options[:retries] || Backoff.retries).to_i
-            @reasons = (options[:reasons] || Backoff.reasons).to_a
-            @backoff =  options[:backoff] || Backoff.backoff
+          def initialize retries: nil, reasons: nil, backoff: nil
+            @retries = (retries || Backoff.retries).to_i
+            @reasons = (reasons || Backoff.reasons).to_a
+            @backoff = backoff || Backoff.backoff
           end
 
           def execute

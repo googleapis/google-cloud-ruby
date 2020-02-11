@@ -15,8 +15,30 @@
 require "helper"
 
 describe Google::Cloud::Bigquery::StandardSql, :value do
+  describe "immutable constructors" do
+    # TODO: move these tests someplace more logical...
+    it "takes DataType as an argument" do
+      parent = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRING"
+      data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "ARRAY", array_element_type: parent
+
+      data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      data_type.type_kind.must_equal "ARRAY"
+      data_type.array_element_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      data_type.array_element_type.type_kind.must_equal "STRING"
+    end
+
+    it "takes Hash as an argument" do
+      data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "ARRAY", array_element_type: "STRING"
+
+      data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      data_type.type_kind.must_equal "ARRAY"
+      data_type.array_element_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      data_type.array_element_type.type_kind.must_equal "STRING"
+    end
+  end
+
   it "represents a INT64 field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "int_col", type: { typeKind: "INT64" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "int_col", type: "INT64"
 
     field.name.must_equal "int_col"
 
@@ -41,7 +63,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
   end
 
   it "represents a FLOAT64 field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "float_col", type: { typeKind: "FLOAT64" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "float_col", type: "FLOAT64"
 
     field.name.must_equal "float_col"
 
@@ -66,7 +88,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
   end
 
   it "represents a NUMERIC field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "num_col", type: { typeKind: "NUMERIC" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "num_col", type: "NUMERIC"
 
     field.name.must_equal "num_col"
 
@@ -91,7 +113,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
   end
 
   it "represents a BOOL field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "bool_col", type: { typeKind: "BOOL" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "bool_col", type: "BOOL"
 
     field.name.must_equal "bool_col"
 
@@ -116,7 +138,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
   end
 
   it "represents a STRING field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "str_col", type: { typeKind: "STRING" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "str_col", type: "STRING"
 
     field.name.must_equal "str_col"
 
@@ -141,7 +163,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
   end
 
   it "represents a BYTES field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "bytes_col", type: { typeKind: "BYTES" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "bytes_col", type: "BYTES"
 
     field.name.must_equal "bytes_col"
 
@@ -166,7 +188,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
   end
 
   it "represents a DATE field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "date_col", type: { typeKind: "DATE" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "date_col", type: "DATE"
 
     field.name.must_equal "date_col"
 
@@ -191,7 +213,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
   end
 
   it "represents a DATETIME field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "datetime_col", type: { typeKind: "DATETIME" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "datetime_col", type: "DATETIME"
 
     field.name.must_equal "datetime_col"
 
@@ -216,7 +238,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
   end
 
   it "represents a GEOGRAPHY field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "geo_col", type: { typeKind: "GEOGRAPHY" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "geo_col", type: "GEOGRAPHY"
 
     field.name.must_equal "geo_col"
 
@@ -241,7 +263,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
   end
 
   it "represents a TIME field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "time_col", type: { typeKind: "TIME" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "time_col", type: "TIME"
 
     field.name.must_equal "time_col"
 
@@ -266,7 +288,7 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
   end
 
   it "represents a TIMESTAMP field" do
-    field = Google::Cloud::Bigquery::StandardSql::Field.from_gapi_json({ name: "ts_col", type: { typeKind: "TIMESTAMP" } })
+    field = Google::Cloud::Bigquery::StandardSql::Field.new name: "ts_col", type: "TIMESTAMP"
 
     field.name.must_equal "ts_col"
 
