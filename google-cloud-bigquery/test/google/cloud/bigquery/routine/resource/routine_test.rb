@@ -371,4 +371,13 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     routine.update do |r|
     end
   end
+
+  it "raises from unsupported methods called on the updater" do
+    routine.update do |r|
+      expect { r.update }.must_raise RuntimeError
+      expect { r.delete }.must_raise RuntimeError
+      expect { r.reload! }.must_raise RuntimeError
+      expect { r.refresh! }.must_raise RuntimeError
+    end
+  end
 end

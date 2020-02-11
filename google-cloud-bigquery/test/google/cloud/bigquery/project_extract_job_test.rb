@@ -194,6 +194,11 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
 
     job = bigquery.extract_job table, "#{extract_url}.avro" do |j|
       j.use_avro_logical_types = true
+      expect { j.cancel }.must_raise RuntimeError
+      expect { j.rerun! }.must_raise RuntimeError
+      expect { j.reload! }.must_raise RuntimeError
+      expect { j.refresh! }.must_raise RuntimeError
+      expect { j.wait_until_done! }.must_raise RuntimeError
     end
     mock.verify
 

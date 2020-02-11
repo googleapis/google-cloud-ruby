@@ -336,5 +336,20 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     end
 
     mock.verify
-  end    
+  end 
+
+  it "raises from unsupported methods called on the updater" do
+    mock = Minitest::Mock.new
+    mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
+    routine.service.mocked_service = mock
+
+    routine.update do |r|
+      expect { r.update }.must_raise RuntimeError
+      expect { r.delete }.must_raise RuntimeError
+      expect { r.reload! }.must_raise RuntimeError
+      expect { r.refresh! }.must_raise RuntimeError
+    end
+
+    mock.verify
+  end   
 end

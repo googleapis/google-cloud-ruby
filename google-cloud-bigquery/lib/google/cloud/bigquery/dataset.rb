@@ -2621,14 +2621,14 @@ module Google
         end
 
         ##
-        # Yielded to a block to accumulate changes for a patch request.
+        # Yielded to a block to accumulate changes for a create request. See {Project#create_dataset}.
         class Updater < Dataset
           ##
-          # A list of attributes that were updated.
+          # @private A list of attributes that were updated.
           attr_reader :updates
 
           ##
-          # Create an Updater object.
+          # @private Create an Updater object.
           def initialize gapi
             @updates = []
             @gapi = gapi
@@ -2645,8 +2645,109 @@ module Google
             @access
           end
 
+          # rubocop:disable Style/MethodDefParentheses
+
           ##
-          # Make sure any access changes are saved
+          # @raise [RuntimeError] not implemented
+          def delete(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def create_table(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def create_view(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def table(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def tables(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def model(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def models(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def create_routine(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def routine(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def routines(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def query_job(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def query(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def external(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def load_job(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def load(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def reload!
+            raise "not implemented in #{self.class}"
+          end
+          alias refresh! reload!
+
+          # rubocop:enable Style/MethodDefParentheses
+
+          ##
+          # @private Make sure any access changes are saved
           def check_for_mutated_access!
             return if @access.nil?
             return unless @access.changed?
@@ -2654,6 +2755,8 @@ module Google
             patch_gapi! :access
           end
 
+          ##
+          # @private
           def to_gapi
             check_for_mutated_access!
             @gapi

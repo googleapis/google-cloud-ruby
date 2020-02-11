@@ -142,6 +142,23 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
         acl.add_writer_user "writers@example.com"
         assert acl.writer_user? "writers@example.com"
       end
+      expect { ds.delete }.must_raise RuntimeError
+      expect { ds.create_table }.must_raise RuntimeError
+      expect { ds.create_view }.must_raise RuntimeError
+      expect { ds.table }.must_raise RuntimeError
+      expect { ds.tables }.must_raise RuntimeError
+      expect { ds.model }.must_raise RuntimeError
+      expect { ds.models }.must_raise RuntimeError
+      expect { ds.create_routine }.must_raise RuntimeError
+      expect { ds.routine }.must_raise RuntimeError
+      expect { ds.routines }.must_raise RuntimeError
+      expect { ds.query_job }.must_raise RuntimeError
+      expect { ds.query }.must_raise RuntimeError
+      expect { ds.external }.must_raise RuntimeError
+      expect { ds.load_job }.must_raise RuntimeError
+      expect { ds.load }.must_raise RuntimeError
+      expect { ds.reload! }.must_raise RuntimeError
+      expect { ds.refresh! }.must_raise RuntimeError
     end
 
     mock.verify

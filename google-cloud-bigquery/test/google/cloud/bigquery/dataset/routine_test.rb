@@ -85,6 +85,10 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
       r.imported_libraries = ["gs://cloud-samples-data/bigquery/udfs/max-value.js"]
       r.body = "x * 3"
       r.description = "This is my routine"
+      expect { r.update }.must_raise RuntimeError
+      expect { r.delete }.must_raise RuntimeError
+      expect { r.reload! }.must_raise RuntimeError
+      expect { r.refresh! }.must_raise RuntimeError
     end  
 
     mock.verify

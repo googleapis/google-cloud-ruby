@@ -2507,14 +2507,14 @@ module Google
         end
 
         ##
-        # Yielded to a block to accumulate changes for a patch request.
+        # Yielded to a block to accumulate changes for a create request. See {Dataset#create_table}.
         class Updater < Table
           ##
-          # A list of attributes that were updated.
+          # @private A list of attributes that were updated.
           attr_reader :updates
 
           ##
-          # Create an Updater object.
+          # @private Create an Updater object.
           def initialize gapi
             @updates = []
             @gapi = gapi
@@ -2957,8 +2957,97 @@ module Google
             schema.record name, description: description, mode: mode, &block
           end
 
+          # rubocop:disable Style/MethodDefParentheses
+
           ##
-          # Make sure any access changes are saved
+          # @raise [RuntimeError] not implemented
+          def data(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def copy_job(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def copy(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def extract_job(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def extract(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def load_job(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def load(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def insert(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def insert_async(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def delete
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def query_job(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def query(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def external(*)
+            raise "not implemented in #{self.class}"
+          end
+
+          ##
+          # @raise [RuntimeError] not implemented
+          def reload!
+            raise "not implemented in #{self.class}"
+          end
+          alias refresh! reload!
+
+          # rubocop:enable Style/MethodDefParentheses
+
+          ##
+          # @private Make sure any access changes are saved
           def check_for_mutated_schema!
             return if @schema.nil?
             return unless @schema.changed?
@@ -2966,6 +3055,8 @@ module Google
             patch_gapi! :schema
           end
 
+          ##
+          # @private
           def to_gapi
             check_for_mutated_schema!
             @gapi

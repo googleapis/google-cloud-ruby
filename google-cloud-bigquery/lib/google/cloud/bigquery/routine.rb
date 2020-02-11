@@ -1075,6 +1075,19 @@ module Google
             @gapi.description = new_description
           end
 
+          def update
+            raise "not implemented in #{self.class}"
+          end
+
+          def delete
+            raise "not implemented in #{self.class}"
+          end
+
+          def reload!
+            raise "not implemented in #{self.class}"
+          end
+          alias refresh! reload!
+
           # rubocop:disable Style/CaseEquality
 
           # @private

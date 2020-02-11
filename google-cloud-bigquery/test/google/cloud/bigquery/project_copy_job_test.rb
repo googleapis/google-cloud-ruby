@@ -219,6 +219,11 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
 
     job = bigquery.copy_job source_table, target_table do |j|
       j.location = region
+      expect { j.cancel }.must_raise RuntimeError
+      expect { j.rerun! }.must_raise RuntimeError
+      expect { j.reload! }.must_raise RuntimeError
+      expect { j.refresh! }.must_raise RuntimeError
+      expect { j.wait_until_done! }.must_raise RuntimeError
     end
     mock.verify
 

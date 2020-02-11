@@ -284,6 +284,23 @@ module Google
             @gapi.configuration.update! labels: value
           end
 
+          def cancel
+            raise "not implemented in #{self.class}"
+          end
+
+          def rerun!
+            raise "not implemented in #{self.class}"
+          end
+
+          def reload!
+            raise "not implemented in #{self.class}"
+          end
+          alias refresh! reload!
+
+          def wait_until_done!
+            raise "not implemented in #{self.class}"
+          end
+
           ##
           # @private Returns the Google API client library version of this job.
           #

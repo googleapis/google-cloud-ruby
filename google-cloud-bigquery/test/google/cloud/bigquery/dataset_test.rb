@@ -186,6 +186,21 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     table = dataset.create_table table_id do |t|
       t.name = table_name
       t.description = table_description
+      expect { t.data }.must_raise RuntimeError
+      expect { t.copy_job }.must_raise RuntimeError
+      expect { t.copy }.must_raise RuntimeError
+      expect { t.extract_job }.must_raise RuntimeError
+      expect { t.extract }.must_raise RuntimeError
+      expect { t.load_job }.must_raise RuntimeError
+      expect { t.load }.must_raise RuntimeError
+      expect { t.insert }.must_raise RuntimeError
+      expect { t.insert_async }.must_raise RuntimeError
+      expect { t.delete }.must_raise RuntimeError
+      expect { t.query_job }.must_raise RuntimeError
+      expect { t.query }.must_raise RuntimeError
+      expect { t.external }.must_raise RuntimeError
+      expect { t.reload! }.must_raise RuntimeError
+      expect { t.refresh! }.must_raise RuntimeError
     end
 
     mock.verify
