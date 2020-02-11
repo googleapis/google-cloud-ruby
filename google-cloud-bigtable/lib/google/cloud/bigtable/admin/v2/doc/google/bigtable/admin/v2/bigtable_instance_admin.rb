@@ -20,38 +20,38 @@ module Google
         # Request message for BigtableInstanceAdmin.CreateInstance.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The unique name of the project in which to create the new instance.
-        #     Values are of the form `projects/<project>`.
+        #     Required. The unique name of the project in which to create the new instance.
+        #     Values are of the form `projects/{project}`.
         # @!attribute [rw] instance_id
         #   @return [String]
-        #     The ID to be used when referring to the new instance within its project,
+        #     Required. The ID to be used when referring to the new instance within its project,
         #     e.g., just `myinstance` rather than
         #     `projects/myproject/instances/myinstance`.
         # @!attribute [rw] instance
         #   @return [Google::Bigtable::Admin::V2::Instance]
-        #     The instance to create.
+        #     Required. The instance to create.
         #     Fields marked `OutputOnly` must be left blank.
         # @!attribute [rw] clusters
         #   @return [Hash{String => Google::Bigtable::Admin::V2::Cluster}]
-        #     The clusters to be created within the instance, mapped by desired
+        #     Required. The clusters to be created within the instance, mapped by desired
         #     cluster ID, e.g., just `mycluster` rather than
         #     `projects/myproject/instances/myinstance/clusters/mycluster`.
         #     Fields marked `OutputOnly` must be left blank.
-        #     Currently, at most two clusters can be specified.
+        #     Currently, at most four clusters can be specified.
         class CreateInstanceRequest; end
 
         # Request message for BigtableInstanceAdmin.GetInstance.
         # @!attribute [rw] name
         #   @return [String]
-        #     The unique name of the requested instance. Values are of the form
-        #     `projects/<project>/instances/<instance>`.
+        #     Required. The unique name of the requested instance. Values are of the form
+        #     `projects/{project}/instances/{instance}`.
         class GetInstanceRequest; end
 
         # Request message for BigtableInstanceAdmin.ListInstances.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The unique name of the project for which a list of instances is requested.
-        #     Values are of the form `projects/<project>`.
+        #     Required. The unique name of the project for which a list of instances is requested.
+        #     Values are of the form `projects/{project}`.
         # @!attribute [rw] page_token
         #   @return [String]
         #     DEPRECATED: This field is unused and ignored.
@@ -77,50 +77,50 @@ module Google
         # Request message for BigtableInstanceAdmin.PartialUpdateInstance.
         # @!attribute [rw] instance
         #   @return [Google::Bigtable::Admin::V2::Instance]
-        #     The Instance which will (partially) replace the current value.
+        #     Required. The Instance which will (partially) replace the current value.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     The subset of Instance fields which should be replaced.
+        #     Required. The subset of Instance fields which should be replaced.
         #     Must be explicitly set.
         class PartialUpdateInstanceRequest; end
 
         # Request message for BigtableInstanceAdmin.DeleteInstance.
         # @!attribute [rw] name
         #   @return [String]
-        #     The unique name of the instance to be deleted.
-        #     Values are of the form `projects/<project>/instances/<instance>`.
+        #     Required. The unique name of the instance to be deleted.
+        #     Values are of the form `projects/{project}/instances/{instance}`.
         class DeleteInstanceRequest; end
 
         # Request message for BigtableInstanceAdmin.CreateCluster.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The unique name of the instance in which to create the new cluster.
+        #     Required. The unique name of the instance in which to create the new cluster.
         #     Values are of the form
-        #     `projects/<project>/instances/<instance>`.
+        #     `projects/{project}/instances/{instance}`.
         # @!attribute [rw] cluster_id
         #   @return [String]
-        #     The ID to be used when referring to the new cluster within its instance,
+        #     Required. The ID to be used when referring to the new cluster within its instance,
         #     e.g., just `mycluster` rather than
         #     `projects/myproject/instances/myinstance/clusters/mycluster`.
         # @!attribute [rw] cluster
         #   @return [Google::Bigtable::Admin::V2::Cluster]
-        #     The cluster to be created.
+        #     Required. The cluster to be created.
         #     Fields marked `OutputOnly` must be left blank.
         class CreateClusterRequest; end
 
         # Request message for BigtableInstanceAdmin.GetCluster.
         # @!attribute [rw] name
         #   @return [String]
-        #     The unique name of the requested cluster. Values are of the form
-        #     `projects/<project>/instances/<instance>/clusters/<cluster>`.
+        #     Required. The unique name of the requested cluster. Values are of the form
+        #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
         class GetClusterRequest; end
 
         # Request message for BigtableInstanceAdmin.ListClusters.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The unique name of the instance for which a list of clusters is requested.
-        #     Values are of the form `projects/<project>/instances/<instance>`.
-        #     Use `<instance> = '-'` to list Clusters for all Instances in a project,
+        #     Required. The unique name of the instance for which a list of clusters is requested.
+        #     Values are of the form `projects/{project}/instances/{instance}`.
+        #     Use `{instance} = '-'` to list Clusters for all Instances in a project,
         #     e.g., `projects/myproject/instances/-`.
         # @!attribute [rw] page_token
         #   @return [String]
@@ -146,8 +146,8 @@ module Google
         # Request message for BigtableInstanceAdmin.DeleteCluster.
         # @!attribute [rw] name
         #   @return [String]
-        #     The unique name of the cluster to be deleted. Values are of the form
-        #     `projects/<project>/instances/<instance>/clusters/<cluster>`.
+        #     Required. The unique name of the cluster to be deleted. Values are of the form
+        #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
         class DeleteClusterRequest; end
 
         # The metadata for the Operation returned by CreateInstance.
@@ -201,17 +201,17 @@ module Google
         # Request message for BigtableInstanceAdmin.CreateAppProfile.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The unique name of the instance in which to create the new app profile.
+        #     Required. The unique name of the instance in which to create the new app profile.
         #     Values are of the form
-        #     `projects/<project>/instances/<instance>`.
+        #     `projects/{project}/instances/{instance}`.
         # @!attribute [rw] app_profile_id
         #   @return [String]
-        #     The ID to be used when referring to the new app profile within its
+        #     Required. The ID to be used when referring to the new app profile within its
         #     instance, e.g., just `myprofile` rather than
         #     `projects/myproject/instances/myinstance/appProfiles/myprofile`.
         # @!attribute [rw] app_profile
         #   @return [Google::Bigtable::Admin::V2::AppProfile]
-        #     The app profile to be created.
+        #     Required. The app profile to be created.
         #     Fields marked `OutputOnly` will be ignored.
         # @!attribute [rw] ignore_warnings
         #   @return [true, false]
@@ -221,22 +221,29 @@ module Google
         # Request message for BigtableInstanceAdmin.GetAppProfile.
         # @!attribute [rw] name
         #   @return [String]
-        #     The unique name of the requested app profile. Values are of the form
-        #     `projects/<project>/instances/<instance>/appProfiles/<app_profile>`.
+        #     Required. The unique name of the requested app profile. Values are of the form
+        #     `projects/{project}/instances/{instance}/appProfiles/{app_profile}`.
         class GetAppProfileRequest; end
 
         # Request message for BigtableInstanceAdmin.ListAppProfiles.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The unique name of the instance for which a list of app profiles is
+        #     Required. The unique name of the instance for which a list of app profiles is
         #     requested. Values are of the form
-        #     `projects/<project>/instances/<instance>`.
-        #     Use `<instance> = '-'` to list AppProfiles for all Instances in a project,
+        #     `projects/{project}/instances/{instance}`.
+        #     Use `{instance} = '-'` to list AppProfiles for all Instances in a project,
         #     e.g., `projects/myproject/instances/-`.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Maximum number of results per page.
-        #     CURRENTLY UNIMPLEMENTED AND IGNORED.
+        #
+        #     A page_size of zero lets the server choose the number of items to return.
+        #     A page_size which is strictly positive will return at most that many items.
+        #     A negative page_size will cause an error.
+        #
+        #     Following the first request, subsequent paginated calls are not required
+        #     to pass a page_size. If a page_size is set in subsequent calls, it must
+        #     match the page_size given in the first request.
         # @!attribute [rw] page_token
         #   @return [String]
         #     The value of `next_page_token` returned by a previous call.
@@ -262,10 +269,10 @@ module Google
         # Request message for BigtableInstanceAdmin.UpdateAppProfile.
         # @!attribute [rw] app_profile
         #   @return [Google::Bigtable::Admin::V2::AppProfile]
-        #     The app profile which will (partially) replace the current value.
+        #     Required. The app profile which will (partially) replace the current value.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     The subset of app profile fields which should be replaced.
+        #     Required. The subset of app profile fields which should be replaced.
         #     If unset, all fields will be replaced.
         # @!attribute [rw] ignore_warnings
         #   @return [true, false]
@@ -275,8 +282,8 @@ module Google
         # Request message for BigtableInstanceAdmin.DeleteAppProfile.
         # @!attribute [rw] name
         #   @return [String]
-        #     The unique name of the app profile to be deleted. Values are of the form
-        #     `projects/<project>/instances/<instance>/appProfiles/<app_profile>`.
+        #     Required. The unique name of the app profile to be deleted. Values are of the form
+        #     `projects/{project}/instances/{instance}/appProfiles/{app_profile}`.
         # @!attribute [rw] ignore_warnings
         #   @return [true, false]
         #     If true, ignore safety checks when deleting the app profile.

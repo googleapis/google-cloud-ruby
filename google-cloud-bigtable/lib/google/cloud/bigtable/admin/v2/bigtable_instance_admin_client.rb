@@ -453,23 +453,23 @@ module Google
             # Create an instance within a project.
             #
             # @param parent [String]
-            #   The unique name of the project in which to create the new instance.
-            #   Values are of the form `projects/<project>`.
+            #   Required. The unique name of the project in which to create the new instance.
+            #   Values are of the form `projects/{project}`.
             # @param instance_id [String]
-            #   The ID to be used when referring to the new instance within its project,
+            #   Required. The ID to be used when referring to the new instance within its project,
             #   e.g., just `myinstance` rather than
             #   `projects/myproject/instances/myinstance`.
             # @param instance [Google::Bigtable::Admin::V2::Instance | Hash]
-            #   The instance to create.
+            #   Required. The instance to create.
             #   Fields marked `OutputOnly` must be left blank.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::Instance`
             #   can also be provided.
             # @param clusters [Hash{String => Google::Bigtable::Admin::V2::Cluster | Hash}]
-            #   The clusters to be created within the instance, mapped by desired
+            #   Required. The clusters to be created within the instance, mapped by desired
             #   cluster ID, e.g., just `mycluster` rather than
             #   `projects/myproject/instances/myinstance/clusters/mycluster`.
             #   Fields marked `OutputOnly` must be left blank.
-            #   Currently, at most two clusters can be specified.
+            #   Currently, at most four clusters can be specified.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::Cluster`
             #   can also be provided.
             # @param options [Google::Gax::CallOptions]
@@ -546,8 +546,8 @@ module Google
             # Gets information about an instance.
             #
             # @param name [String]
-            #   The unique name of the requested instance. Values are of the form
-            #   `projects/<project>/instances/<instance>`.
+            #   Required. The unique name of the requested instance. Values are of the form
+            #   `projects/{project}/instances/{instance}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -577,8 +577,8 @@ module Google
             # Lists information about instances in a project.
             #
             # @param parent [String]
-            #   The unique name of the project for which a list of instances is requested.
-            #   Values are of the form `projects/<project>`.
+            #   Required. The unique name of the project for which a list of instances is requested.
+            #   Values are of the form `projects/{project}`.
             # @param page_token [String]
             #   DEPRECATED: This field is unused and ignored.
             # @param options [Google::Gax::CallOptions]
@@ -609,14 +609,15 @@ module Google
               @list_instances.call(req, options, &block)
             end
 
-            # Updates an instance within a project.
+            # Updates an instance within a project. This method updates only the display
+            # name and type for an Instance. To update other Instance properties, such as
+            # labels, use PartialUpdateInstance.
             #
             # @param name [String]
-            #   (`OutputOnly`)
             #   The unique name of the instance. Values are of the form
-            #   `projects/<project>/instances/[a-z][a-z0-9\\-]+[a-z0-9]`.
+            #   `projects/{project}/instances/[a-z][a-z0-9\\-]+[a-z0-9]`.
             # @param display_name [String]
-            #   The descriptive name for this instance as it appears in UIs.
+            #   Required. The descriptive name for this instance as it appears in UIs.
             #   Can be changed at any time, but should be kept globally unique
             #   to avoid confusion.
             # @param type [Google::Bigtable::Admin::V2::Instance::Type]
@@ -679,14 +680,15 @@ module Google
               @update_instance.call(req, options, &block)
             end
 
-            # Partially updates an instance within a project.
+            # Partially updates an instance within a project. This method can modify all
+            # fields of an Instance and is the preferred way to update an Instance.
             #
             # @param instance [Google::Bigtable::Admin::V2::Instance | Hash]
-            #   The Instance which will (partially) replace the current value.
+            #   Required. The Instance which will (partially) replace the current value.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::Instance`
             #   can also be provided.
             # @param update_mask [Google::Protobuf::FieldMask | Hash]
-            #   The subset of Instance fields which should be replaced.
+            #   Required. The subset of Instance fields which should be replaced.
             #   Must be explicitly set.
             #   A hash of the same form as `Google::Protobuf::FieldMask`
             #   can also be provided.
@@ -756,8 +758,8 @@ module Google
             # Delete an instance from a project.
             #
             # @param name [String]
-            #   The unique name of the instance to be deleted.
-            #   Values are of the form `projects/<project>/instances/<instance>`.
+            #   Required. The unique name of the instance to be deleted.
+            #   Values are of the form `projects/{project}/instances/{instance}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -787,15 +789,15 @@ module Google
             # Creates a cluster within an instance.
             #
             # @param parent [String]
-            #   The unique name of the instance in which to create the new cluster.
+            #   Required. The unique name of the instance in which to create the new cluster.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>`.
+            #   `projects/{project}/instances/{instance}`.
             # @param cluster_id [String]
-            #   The ID to be used when referring to the new cluster within its instance,
+            #   Required. The ID to be used when referring to the new cluster within its instance,
             #   e.g., just `mycluster` rather than
             #   `projects/myproject/instances/myinstance/clusters/mycluster`.
             # @param cluster [Google::Bigtable::Admin::V2::Cluster | Hash]
-            #   The cluster to be created.
+            #   Required. The cluster to be created.
             #   Fields marked `OutputOnly` must be left blank.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::Cluster`
             #   can also be provided.
@@ -868,8 +870,8 @@ module Google
             # Gets information about a cluster.
             #
             # @param name [String]
-            #   The unique name of the requested cluster. Values are of the form
-            #   `projects/<project>/instances/<instance>/clusters/<cluster>`.
+            #   Required. The unique name of the requested cluster. Values are of the form
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -899,9 +901,9 @@ module Google
             # Lists information about clusters in an instance.
             #
             # @param parent [String]
-            #   The unique name of the instance for which a list of clusters is requested.
-            #   Values are of the form `projects/<project>/instances/<instance>`.
-            #   Use `<instance> = '-'` to list Clusters for all Instances in a project,
+            #   Required. The unique name of the instance for which a list of clusters is requested.
+            #   Values are of the form `projects/{project}/instances/{instance}`.
+            #   Use `{instance} = '-'` to list Clusters for all Instances in a project,
             #   e.g., `projects/myproject/instances/-`.
             # @param page_token [String]
             #   DEPRECATED: This field is unused and ignored.
@@ -936,20 +938,18 @@ module Google
             # Updates a cluster within an instance.
             #
             # @param name [String]
-            #   (`OutputOnly`)
             #   The unique name of the cluster. Values are of the form
-            #   `projects/<project>/instances/<instance>/clusters/[a-z][-a-z0-9]*`.
+            #   `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
             # @param serve_nodes [Integer]
-            #   The number of nodes allocated to this cluster. More nodes enable higher
+            #   Required. The number of nodes allocated to this cluster. More nodes enable higher
             #   throughput and more consistent performance.
             # @param location [String]
             #   (`CreationOnly`)
             #   The location where this cluster's nodes and storage reside. For best
             #   performance, clients should be located as close as possible to this
             #   cluster. Currently only zones are supported, so values should be of the
-            #   form `projects/<project>/locations/<zone>`.
+            #   form `projects/{project}/locations/{zone}`.
             # @param state [Google::Bigtable::Admin::V2::Cluster::State]
-            #   (`OutputOnly`)
             #   The current state of the cluster.
             # @param default_storage_type [Google::Bigtable::Admin::V2::StorageType]
             #   (`CreationOnly`)
@@ -1025,8 +1025,8 @@ module Google
             # Deletes a cluster from an instance.
             #
             # @param name [String]
-            #   The unique name of the cluster to be deleted. Values are of the form
-            #   `projects/<project>/instances/<instance>/clusters/<cluster>`.
+            #   Required. The unique name of the cluster to be deleted. Values are of the form
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1056,15 +1056,15 @@ module Google
             # Creates an app profile within an instance.
             #
             # @param parent [String]
-            #   The unique name of the instance in which to create the new app profile.
+            #   Required. The unique name of the instance in which to create the new app profile.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>`.
+            #   `projects/{project}/instances/{instance}`.
             # @param app_profile_id [String]
-            #   The ID to be used when referring to the new app profile within its
+            #   Required. The ID to be used when referring to the new app profile within its
             #   instance, e.g., just `myprofile` rather than
             #   `projects/myproject/instances/myinstance/appProfiles/myprofile`.
             # @param app_profile [Google::Bigtable::Admin::V2::AppProfile | Hash]
-            #   The app profile to be created.
+            #   Required. The app profile to be created.
             #   Fields marked `OutputOnly` will be ignored.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::AppProfile`
             #   can also be provided.
@@ -1111,8 +1111,8 @@ module Google
             # Gets information about an app profile.
             #
             # @param name [String]
-            #   The unique name of the requested app profile. Values are of the form
-            #   `projects/<project>/instances/<instance>/appProfiles/<app_profile>`.
+            #   Required. The unique name of the requested app profile. Values are of the form
+            #   `projects/{project}/instances/{instance}/appProfiles/{app_profile}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1142,14 +1142,21 @@ module Google
             # Lists information about app profiles in an instance.
             #
             # @param parent [String]
-            #   The unique name of the instance for which a list of app profiles is
+            #   Required. The unique name of the instance for which a list of app profiles is
             #   requested. Values are of the form
-            #   `projects/<project>/instances/<instance>`.
-            #   Use `<instance> = '-'` to list AppProfiles for all Instances in a project,
+            #   `projects/{project}/instances/{instance}`.
+            #   Use `{instance} = '-'` to list AppProfiles for all Instances in a project,
             #   e.g., `projects/myproject/instances/-`.
             # @param page_size [Integer]
             #   Maximum number of results per page.
-            #   CURRENTLY UNIMPLEMENTED AND IGNORED.
+            #
+            #   A page_size of zero lets the server choose the number of items to return.
+            #   A page_size which is strictly positive will return at most that many items.
+            #   A negative page_size will cause an error.
+            #
+            #   Following the first request, subsequent paginated calls are not required
+            #   to pass a page_size. If a page_size is set in subsequent calls, it must
+            #   match the page_size given in the first request.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1197,11 +1204,11 @@ module Google
             # Updates an app profile within an instance.
             #
             # @param app_profile [Google::Bigtable::Admin::V2::AppProfile | Hash]
-            #   The app profile which will (partially) replace the current value.
+            #   Required. The app profile which will (partially) replace the current value.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::AppProfile`
             #   can also be provided.
             # @param update_mask [Google::Protobuf::FieldMask | Hash]
-            #   The subset of app profile fields which should be replaced.
+            #   Required. The subset of app profile fields which should be replaced.
             #   If unset, all fields will be replaced.
             #   A hash of the same form as `Google::Protobuf::FieldMask`
             #   can also be provided.
@@ -1275,8 +1282,8 @@ module Google
             # Deletes an app profile from an instance.
             #
             # @param name [String]
-            #   The unique name of the app profile to be deleted. Values are of the form
-            #   `projects/<project>/instances/<instance>/appProfiles/<app_profile>`.
+            #   Required. The unique name of the app profile to be deleted. Values are of the form
+            #   `projects/{project}/instances/{instance}/appProfiles/{app_profile}`.
             # @param ignore_warnings [true, false]
             #   If true, ignore safety checks when deleting the app profile.
             # @param options [Google::Gax::CallOptions]

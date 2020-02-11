@@ -19,16 +19,15 @@ module Google
       module V2
         # A collection of Bigtable {Google::Bigtable::Admin::V2::Table Tables} and
         # the resources that serve them.
-        # All tables in an instance are served from a single
-        # {Google::Bigtable::Admin::V2::Cluster Cluster}.
+        # All tables in an instance are served from all
+        # {Google::Bigtable::Admin::V2::Cluster Clusters} in the instance.
         # @!attribute [rw] name
         #   @return [String]
-        #     (`OutputOnly`)
         #     The unique name of the instance. Values are of the form
-        #     `projects/<project>/instances/[a-z][a-z0-9\\-]+[a-z0-9]`.
+        #     `projects/{project}/instances/[a-z][a-z0-9\\-]+[a-z0-9]`.
         # @!attribute [rw] display_name
         #   @return [String]
-        #     The descriptive name for this instance as it appears in UIs.
+        #     Required. The descriptive name for this instance as it appears in UIs.
         #     Can be changed at any time, but should be kept globally unique
         #     to avoid confusion.
         # @!attribute [rw] state
@@ -93,23 +92,21 @@ module Google
         # {Google::Bigtable::Admin::V2::Instance Instance}.
         # @!attribute [rw] name
         #   @return [String]
-        #     (`OutputOnly`)
         #     The unique name of the cluster. Values are of the form
-        #     `projects/<project>/instances/<instance>/clusters/[a-z][-a-z0-9]*`.
+        #     `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
         # @!attribute [rw] location
         #   @return [String]
         #     (`CreationOnly`)
         #     The location where this cluster's nodes and storage reside. For best
         #     performance, clients should be located as close as possible to this
         #     cluster. Currently only zones are supported, so values should be of the
-        #     form `projects/<project>/locations/<zone>`.
+        #     form `projects/{project}/locations/{zone}`.
         # @!attribute [rw] state
         #   @return [Google::Bigtable::Admin::V2::Cluster::State]
-        #     (`OutputOnly`)
         #     The current state of the cluster.
         # @!attribute [rw] serve_nodes
         #   @return [Integer]
-        #     The number of nodes allocated to this cluster. More nodes enable higher
+        #     Required. The number of nodes allocated to this cluster. More nodes enable higher
         #     throughput and more consistent performance.
         # @!attribute [rw] default_storage_type
         #   @return [Google::Bigtable::Admin::V2::StorageType]
@@ -165,19 +162,20 @@ module Google
         #     Optional long form description of the use case for this AppProfile.
         # @!attribute [rw] multi_cluster_routing_use_any
         #   @return [Google::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
-        #     Use a multi-cluster routing policy that may pick any cluster.
+        #     Use a multi-cluster routing policy.
         # @!attribute [rw] single_cluster_routing
         #   @return [Google::Bigtable::Admin::V2::AppProfile::SingleClusterRouting]
         #     Use a single-cluster routing policy.
         class AppProfile
-          # Read/write requests may be routed to any cluster in the instance, and will
-          # fail over to another cluster in the event of transient errors or delays.
-          # Choosing this option sacrifices read-your-writes consistency to improve
-          # availability.
+          # Read/write requests are routed to the nearest cluster in the instance, and
+          # will fail over to the nearest cluster that is available in the event of
+          # transient errors or delays. Clusters in a region are considered
+          # equidistant. Choosing this option sacrifices read-your-writes consistency
+          # to improve availability.
           class MultiClusterRoutingUseAny; end
 
           # Unconditionally routes all read/write requests to a specific cluster.
-          # This option preserves read-your-writes consistency, but does not improve
+          # This option preserves read-your-writes consistency but does not improve
           # availability.
           # @!attribute [rw] cluster_id
           #   @return [String]
