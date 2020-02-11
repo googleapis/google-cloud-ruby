@@ -732,8 +732,7 @@ module Google
         #
         def tables token: nil, max: nil
           ensure_service!
-          options = { token: token, max: max }
-          gapi = service.list_tables dataset_id, options
+          gapi = service.list_tables dataset_id, token: token, max: max
           Table::List.from_gapi gapi, service, dataset_id, max
         end
 
@@ -2423,10 +2422,9 @@ module Google
           rows = [rows] if rows.is_a? Hash
           raise ArgumentError, "No rows provided" if rows.empty?
           ensure_service!
-          options = { skip_invalid:   skip_invalid,
-                      ignore_unknown: ignore_unknown,
-                      insert_ids:     insert_ids }
-          gapi = service.insert_tabledata dataset_id, table_id, rows, options
+          gapi = service.insert_tabledata dataset_id, table_id, rows, skip_invalid:   skip_invalid,
+                                                                      ignore_unknown: ignore_unknown,
+                                                                      insert_ids:     insert_ids
           InsertResponse.from_gapi rows, gapi
         end
 

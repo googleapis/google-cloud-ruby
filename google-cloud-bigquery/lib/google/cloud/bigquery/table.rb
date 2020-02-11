@@ -1217,8 +1217,7 @@ module Google
         def data token: nil, max: nil, start: nil
           ensure_service!
           reload! unless resource_full?
-          options = { token: token, max: max, start: start }
-          data_json = service.list_tabledata dataset_id, table_id, options
+          data_json = service.list_tabledata dataset_id, table_id, token: token, max: max, start: start
           Data.from_gapi_json data_json, gapi, nil, service
         end
 

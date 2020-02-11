@@ -71,8 +71,7 @@ module Google
           def next
             return nil unless next?
             ensure_service!
-            options = { all: @hidden, filter: @filter, token: token, max: @max }
-            gapi = @service.list_datasets options
+            gapi = @service.list_datasets all: @hidden, filter: @filter, token: token, max: @max
             self.class.from_gapi gapi, @service, @hidden, @filter, @max
           end
 

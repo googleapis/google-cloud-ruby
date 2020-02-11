@@ -182,12 +182,12 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::ExtractJob::Updater] A job
           #   configuration object for setting query options.
-          def self.from_options service, table, storage_files, options = {}
-            job_ref = service.job_ref_from options[:job_id], options[:prefix]
+          def self.from_options service, table, storage_files, **kwargs
+            job_ref = service.job_ref_from kwargs[:job_id], kwargs[:prefix]
             storage_urls = Array(storage_files).map do |url|
               url.respond_to?(:to_gs_url) ? url.to_gs_url : url
             end
-            options[:format] ||= Convert.derive_source_format storage_urls.first
+            kwargs[:format] ||= Convert.derive_source_format storage_urls.first
             job = Google::Apis::BigqueryV2::Job.new(
               job_reference: job_ref,
               configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
@@ -195,11 +195,11 @@ module Google
                   destination_uris: Array(storage_urls),
                   source_table:     table
                 ),
-                dry_run: options[:dryrun]
+                dry_run: kwargs[:dryrun]
               )
             )
 
-            from_job_and_options job, options
+            from_job_and_options job, kwargs
           end
 
           ##
@@ -207,16 +207,14 @@ module Google
           #
           # @return [Google::Cloud::Bigquery::ExtractJob::Updater] A job
           #   configuration object for setting query options.
-          def self.from_job_and_options request, options = {}
+          def self.from_job_and_options request, kwargs
             updater = ExtractJob::Updater.new request
-            updater.compression = options[:compression]
-            updater.delimiter = options[:delimiter]
-            updater.format = options[:format]
-            updater.header = options[:header]
-            updater.labels = options[:labels] if options[:labels]
-            unless options[:use_avro_logical_types].nil?
-              updater.use_avro_logical_types = options[:use_avro_logical_types]
-            end
+            updater.compression = kwargs[:compression]
+            updater.delimiter = kwargs[:delimiter]
+            updater.format = kwargs[:format]
+            updater.header = kwargs[:header]
+            updater.labels = kwargs[:labels] if kwargs[:labels]
+            updater.use_avro_logical_types = kwargs[:use_avro_logical_types] unless kwargs[:use_avro_logical_types].nil?
             updater
           end
 
