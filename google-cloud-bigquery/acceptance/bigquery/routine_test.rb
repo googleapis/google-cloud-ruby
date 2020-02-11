@@ -25,7 +25,7 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
   let(:routine_id) { "routine_#{SecureRandom.hex(4)}" }
   let :routine_sql do
-    routine_sql = <<-SQL
+    routine_sql = <<~SQL
     CREATE FUNCTION `#{routine_id}`(
         arr ARRAY<STRUCT<name STRING, val INT64>>
     ) AS (

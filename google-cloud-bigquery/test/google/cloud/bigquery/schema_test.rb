@@ -106,7 +106,7 @@ describe Google::Cloud::Bigquery::Schema, :mock_bigquery do
   let(:empty_schema) { Google::Cloud::Bigquery::Schema.from_gapi }
 
   let(:kittens_schema_json) do
-    <<-JSON
+    <<~JSON
     [
         {"name":"id","type":"INTEGER","mode":"REQUIRED","description":"id description"},
         {"name":"breed","type":"STRING","mode":"REQUIRED","description":"breed description"},

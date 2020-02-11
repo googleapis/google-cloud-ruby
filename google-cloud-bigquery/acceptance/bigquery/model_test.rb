@@ -25,7 +25,7 @@ describe Google::Cloud::Bigquery, :bigquery do
   end
   let(:model_id) { "model_#{SecureRandom.hex(4)}" }
   let :model_sql do
-    model_sql = <<-MODEL_SQL
+    model_sql = <<~MODEL_SQL
     CREATE MODEL #{dataset.dataset_id}.#{model_id}
     OPTIONS (
         model_type='linear_reg',
