@@ -29,6 +29,6 @@ describe "ClusterManagerSmokeTest v1" do
     cluster_manager_client = Google::Cloud::Container.new(version: :v1)
     project_id_2 = project_id
     zone = "us-central1-a"
-    response = cluster_manager_client.list_clusters(project_id_2, zone)
+    response = cluster_manager_client.list_clusters(project_id: project_id_2, zone: zone)
   end
 end

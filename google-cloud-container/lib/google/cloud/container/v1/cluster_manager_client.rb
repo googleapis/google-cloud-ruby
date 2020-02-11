@@ -433,11 +433,11 @@ module Google
           # zones.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides, or "-" for all zones.
           #   This field has been deprecated and replaced by the parent field.
@@ -457,17 +457,11 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #   response = cluster_manager_client.list_clusters(project_id, zone)
+          #   response = cluster_manager_client.list_clusters
 
           def list_clusters \
-              project_id,
-              zone,
+              project_id: nil,
+              zone: nil,
               parent: nil,
               options: nil,
               &block
@@ -483,16 +477,16 @@ module Google
           # Gets the details of a specific cluster.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to retrieve.
+          #   Deprecated. The name of the cluster to retrieve.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to retrieve.
@@ -509,21 +503,12 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #   response = cluster_manager_client.get_cluster(project_id, zone, cluster_id)
+          #   response = cluster_manager_client.get_cluster
 
           def get_cluster \
-              project_id,
-              zone,
-              cluster_id,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
@@ -551,20 +536,20 @@ module Google
           # Finally, an entry is added to the project's global metadata indicating
           # which CIDR range the cluster is using.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the parent field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the parent field.
           # @param cluster [Google::Container::V1::Cluster | Hash]
           #   Required. A [cluster
           #   resource](/container-engine/reference/rest/v1/projects.zones.clusters)
           #   A hash of the same form as `Google::Container::V1::Cluster`
           #   can also be provided.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the parent field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the parent field.
           # @param parent [String]
           #   The parent (project and location) where the cluster will be created.
           #   Specified in the format 'projects/*/locations/*'.
@@ -581,27 +566,21 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
           #   # TODO: Initialize `cluster`:
           #   cluster = {}
-          #   response = cluster_manager_client.create_cluster(project_id, zone, cluster)
+          #   response = cluster_manager_client.create_cluster(cluster)
 
           def create_cluster \
-              project_id,
-              zone,
               cluster,
+              project_id: nil,
+              zone: nil,
               parent: nil,
               options: nil,
               &block
             req = {
+              cluster: cluster,
               project_id: project_id,
               zone: zone,
-              cluster: cluster,
               parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::CreateClusterRequest)
@@ -610,22 +589,22 @@ module Google
 
           # Updates the settings of a specific cluster.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to upgrade.
-          #   This field has been deprecated and replaced by the name field.
           # @param update [Google::Container::V1::ClusterUpdate | Hash]
           #   Required. A description of the update.
           #   A hash of the same form as `Google::Container::V1::ClusterUpdate`
           #   can also be provided.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to update.
           #   Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -642,32 +621,23 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `update`:
           #   update = {}
-          #   response = cluster_manager_client.update_cluster(project_id, zone, cluster_id, update)
+          #   response = cluster_manager_client.update_cluster(update)
 
           def update_cluster \
-              project_id,
-              zone,
-              cluster_id,
               update,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              update: update,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              update: update,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::UpdateClusterRequest)
@@ -676,21 +646,6 @@ module Google
 
           # Updates the version and/or image type for the specified node pool.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to upgrade.
-          #   This field has been deprecated and replaced by the name field.
-          # @param node_pool_id [String]
-          #   Required. Deprecated. The name of the node pool to upgrade.
-          #   This field has been deprecated and replaced by the name field.
           # @param node_version [String]
           #   Required. The Kubernetes version to change the nodes to (typically an
           #   upgrade).
@@ -705,6 +660,21 @@ module Google
           #   * "-": picks the Kubernetes master version
           # @param image_type [String]
           #   Required. The desired image type for the node pool.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
+          # @param node_pool_id [String]
+          #   Deprecated. The name of the node pool to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster, node pool) of the node pool to
           #   update. Specified in the format
@@ -722,42 +692,30 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
-          #
           #   # TODO: Initialize `node_version`:
           #   node_version = ''
           #
           #   # TODO: Initialize `image_type`:
           #   image_type = ''
-          #   response = cluster_manager_client.update_node_pool(project_id, zone, cluster_id, node_pool_id, node_version, image_type)
+          #   response = cluster_manager_client.update_node_pool(node_version, image_type)
 
           def update_node_pool \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
               node_version,
               image_type,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              node_version: node_version,
+              image_type: image_type,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
               node_pool_id: node_pool_id,
-              node_version: node_version,
-              image_type: image_type,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::UpdateNodePoolRequest)
@@ -766,25 +724,25 @@ module Google
 
           # Sets the autoscaling settings for the specified node pool.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to upgrade.
-          #   This field has been deprecated and replaced by the name field.
-          # @param node_pool_id [String]
-          #   Required. Deprecated. The name of the node pool to upgrade.
-          #   This field has been deprecated and replaced by the name field.
           # @param autoscaling [Google::Container::V1::NodePoolAutoscaling | Hash]
           #   Required. Autoscaling configuration for the node pool.
           #   A hash of the same form as `Google::Container::V1::NodePoolAutoscaling`
           #   can also be provided.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
+          # @param node_pool_id [String]
+          #   Deprecated. The name of the node pool to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster, node pool) of the node pool to set
           #   autoscaler settings. Specified in the format
@@ -802,37 +760,25 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
-          #
           #   # TODO: Initialize `autoscaling`:
           #   autoscaling = {}
-          #   response = cluster_manager_client.set_node_pool_autoscaling(project_id, zone, cluster_id, node_pool_id, autoscaling)
+          #   response = cluster_manager_client.set_node_pool_autoscaling(autoscaling)
 
           def set_node_pool_autoscaling \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
               autoscaling,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              autoscaling: autoscaling,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
               node_pool_id: node_pool_id,
-              autoscaling: autoscaling,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetNodePoolAutoscalingRequest)
@@ -841,24 +787,24 @@ module Google
 
           # Sets the logging service for a specific cluster.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to upgrade.
-          #   This field has been deprecated and replaced by the name field.
           # @param logging_service [String]
           #   Required. The logging service the cluster should use to write metrics.
           #   Currently available options:
           #
           #   * "logging.googleapis.com" - the Google Cloud Logging service
           #   * "none" - no metrics will be exported from the cluster
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to set logging.
           #   Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -875,32 +821,23 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `logging_service`:
           #   logging_service = ''
-          #   response = cluster_manager_client.set_logging_service(project_id, zone, cluster_id, logging_service)
+          #   response = cluster_manager_client.set_logging_service(logging_service)
 
           def set_logging_service \
-              project_id,
-              zone,
-              cluster_id,
               logging_service,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              logging_service: logging_service,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              logging_service: logging_service,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetLoggingServiceRequest)
@@ -909,18 +846,6 @@ module Google
 
           # Sets the monitoring service for a specific cluster.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to upgrade.
-          #   This field has been deprecated and replaced by the name field.
           # @param monitoring_service [String]
           #   Required. The monitoring service the cluster should use to write metrics.
           #   Currently available options:
@@ -929,6 +854,18 @@ module Google
           #     service with Kubernetes-native resource model
           #   * "monitoring.googleapis.com" - the Google Cloud Monitoring service
           #   * "none" - no metrics will be exported from the cluster
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to set monitoring.
           #   Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -945,32 +882,23 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `monitoring_service`:
           #   monitoring_service = ''
-          #   response = cluster_manager_client.set_monitoring_service(project_id, zone, cluster_id, monitoring_service)
+          #   response = cluster_manager_client.set_monitoring_service(monitoring_service)
 
           def set_monitoring_service \
-              project_id,
-              zone,
-              cluster_id,
               monitoring_service,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              monitoring_service: monitoring_service,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              monitoring_service: monitoring_service,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetMonitoringServiceRequest)
@@ -979,23 +907,23 @@ module Google
 
           # Sets the addons for a specific cluster.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to upgrade.
-          #   This field has been deprecated and replaced by the name field.
           # @param addons_config [Google::Container::V1::AddonsConfig | Hash]
           #   Required. The desired configurations for the various addons available to run in the
           #   cluster.
           #   A hash of the same form as `Google::Container::V1::AddonsConfig`
           #   can also be provided.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to set addons.
           #   Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -1012,32 +940,23 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `addons_config`:
           #   addons_config = {}
-          #   response = cluster_manager_client.set_addons_config(project_id, zone, cluster_id, addons_config)
+          #   response = cluster_manager_client.set_addons_config(addons_config)
 
           def set_addons_config \
-              project_id,
-              zone,
-              cluster_id,
               addons_config,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              addons_config: addons_config,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              addons_config: addons_config,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetAddonsConfigRequest)
@@ -1046,18 +965,6 @@ module Google
 
           # Sets the locations for a specific cluster.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to upgrade.
-          #   This field has been deprecated and replaced by the name field.
           # @param locations [Array<String>]
           #   Required. The desired list of Google Compute Engine
           #   [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
@@ -1066,6 +973,18 @@ module Google
           #   whether locations are being added or removed.
           #
           #   This list must always include the cluster's primary zone.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to set locations.
           #   Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -1082,32 +1001,23 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `locations`:
           #   locations = []
-          #   response = cluster_manager_client.set_locations(project_id, zone, cluster_id, locations)
+          #   response = cluster_manager_client.set_locations(locations)
 
           def set_locations \
-              project_id,
-              zone,
-              cluster_id,
               locations,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              locations: locations,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              locations: locations,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetLocationsRequest)
@@ -1116,18 +1026,6 @@ module Google
 
           # Updates the master for a specific cluster.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to upgrade.
-          #   This field has been deprecated and replaced by the name field.
           # @param master_version [String]
           #   Required. The Kubernetes version to change the master to.
           #
@@ -1139,6 +1037,18 @@ module Google
           #   * "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
           #   * "1.X.Y-gke.N": picks an explicit Kubernetes version
           #   * "-": picks the default Kubernetes version
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to update.
           #   Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -1155,32 +1065,23 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `master_version`:
           #   master_version = ''
-          #   response = cluster_manager_client.update_master(project_id, zone, cluster_id, master_version)
+          #   response = cluster_manager_client.update_master(master_version)
 
           def update_master \
-              project_id,
-              zone,
-              cluster_id,
               master_version,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              master_version: master_version,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              master_version: master_version,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::UpdateMasterRequest)
@@ -1191,24 +1092,24 @@ module Google
           # or a specific cluster, either via password generation or explicitly setting
           # the password.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to upgrade.
-          #   This field has been deprecated and replaced by the name field.
           # @param action [Google::Container::V1::SetMasterAuthRequest::Action]
           #   Required. The exact form of action to be taken on the master auth.
           # @param update [Google::Container::V1::MasterAuth | Hash]
           #   Required. A description of the update.
           #   A hash of the same form as `Google::Container::V1::MasterAuth`
           #   can also be provided.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to upgrade.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to set auth.
           #   Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -1225,37 +1126,28 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `action`:
           #   action = :UNKNOWN
           #
           #   # TODO: Initialize `update`:
           #   update = {}
-          #   response = cluster_manager_client.set_master_auth(project_id, zone, cluster_id, action, update)
+          #   response = cluster_manager_client.set_master_auth(action, update)
 
           def set_master_auth \
-              project_id,
-              zone,
-              cluster_id,
               action,
               update,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              action: action,
+              update: update,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              action: action,
-              update: update,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetMasterAuthRequest)
@@ -1273,16 +1165,16 @@ module Google
           # when the cluster was initially created.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to delete.
+          #   Deprecated. The name of the cluster to delete.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster) of the cluster to delete.
@@ -1299,21 +1191,12 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #   response = cluster_manager_client.delete_cluster(project_id, zone, cluster_id)
+          #   response = cluster_manager_client.delete_cluster
 
           def delete_cluster \
-              project_id,
-              zone,
-              cluster_id,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
@@ -1330,11 +1213,11 @@ module Google
           # Lists all operations in a project in a specific zone or all zones.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for, or `-` for
           #   all zones. This field has been deprecated and replaced by the parent field.
           # @param parent [String]
@@ -1353,17 +1236,11 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #   response = cluster_manager_client.list_operations(project_id, zone)
+          #   response = cluster_manager_client.list_operations
 
           def list_operations \
-              project_id,
-              zone,
+              project_id: nil,
+              zone: nil,
               parent: nil,
               options: nil,
               &block
@@ -1379,16 +1256,16 @@ module Google
           # Gets the specified operation.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param operation_id [String]
-          #   Required. Deprecated. The server-assigned `name` of the operation.
+          #   Deprecated. The server-assigned `name` of the operation.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, operation id) of the operation to get.
@@ -1405,21 +1282,12 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `operation_id`:
-          #   operation_id = ''
-          #   response = cluster_manager_client.get_operation(project_id, zone, operation_id)
+          #   response = cluster_manager_client.get_operation
 
           def get_operation \
-              project_id,
-              zone,
-              operation_id,
+              project_id: nil,
+              zone: nil,
+              operation_id: nil,
               name: nil,
               options: nil,
               &block
@@ -1436,15 +1304,15 @@ module Google
           # Cancels the specified operation.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
           #   This field has been deprecated and replaced by the name field.
           # @param operation_id [String]
-          #   Required. Deprecated. The server-assigned `name` of the operation.
+          #   Deprecated. The server-assigned `name` of the operation.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, operation id) of the operation to cancel.
@@ -1460,21 +1328,12 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `operation_id`:
-          #   operation_id = ''
-          #   cluster_manager_client.cancel_operation(project_id, zone, operation_id)
+          #   cluster_manager_client.cancel_operation
 
           def cancel_operation \
-              project_id,
-              zone,
-              operation_id,
+              project_id: nil,
+              zone: nil,
+              operation_id: nil,
               name: nil,
               options: nil,
               &block
@@ -1492,11 +1351,11 @@ module Google
           # Returns configuration info about the Google Kubernetes Engine service.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
@@ -1514,17 +1373,11 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #   response = cluster_manager_client.get_server_config(project_id, zone)
+          #   response = cluster_manager_client.get_server_config
 
           def get_server_config \
-              project_id,
-              zone,
+              project_id: nil,
+              zone: nil,
               name: nil,
               options: nil,
               &block
@@ -1540,16 +1393,16 @@ module Google
           # Lists the node pools for a cluster.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the parent field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the parent field.
           # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster.
+          #   Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the parent field.
           # @param parent [String]
           #   The parent (project, location, cluster id) where the node pools will be
@@ -1566,21 +1419,12 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #   response = cluster_manager_client.list_node_pools(project_id, zone, cluster_id)
+          #   response = cluster_manager_client.list_node_pools
 
           def list_node_pools \
-              project_id,
-              zone,
-              cluster_id,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               parent: nil,
               options: nil,
               &block
@@ -1597,19 +1441,19 @@ module Google
           # Retrieves the requested node pool.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster.
+          #   Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Required. Deprecated. The name of the node pool.
+          #   Deprecated. The name of the node pool.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster, node pool id) of the node pool to
@@ -1627,25 +1471,13 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
-          #   response = cluster_manager_client.get_node_pool(project_id, zone, cluster_id, node_pool_id)
+          #   response = cluster_manager_client.get_node_pool
 
           def get_node_pool \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               name: nil,
               options: nil,
               &block
@@ -1662,22 +1494,22 @@ module Google
 
           # Creates a node pool for a cluster.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://developers.google.com/console/help/new/#projectnumber).
-          #   This field has been deprecated and replaced by the parent field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the parent field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster.
-          #   This field has been deprecated and replaced by the parent field.
           # @param node_pool [Google::Container::V1::NodePool | Hash]
           #   Required. The node pool to create.
           #   A hash of the same form as `Google::Container::V1::NodePool`
           #   can also be provided.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the parent field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the parent field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the parent field.
           # @param parent [String]
           #   The parent (project, location, cluster id) where the node pool will be
           #   created. Specified in the format
@@ -1695,32 +1527,23 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `node_pool`:
           #   node_pool = {}
-          #   response = cluster_manager_client.create_node_pool(project_id, zone, cluster_id, node_pool)
+          #   response = cluster_manager_client.create_node_pool(node_pool)
 
           def create_node_pool \
-              project_id,
-              zone,
-              cluster_id,
               node_pool,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               parent: nil,
               options: nil,
               &block
             req = {
+              node_pool: node_pool,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              node_pool: node_pool,
               parent: parent
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::CreateNodePoolRequest)
@@ -1730,19 +1553,19 @@ module Google
           # Deletes a node pool from a cluster.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster.
+          #   Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Required. Deprecated. The name of the node pool to delete.
+          #   Deprecated. The name of the node pool to delete.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster, node pool id) of the node pool to
@@ -1760,25 +1583,13 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
-          #   response = cluster_manager_client.delete_node_pool(project_id, zone, cluster_id, node_pool_id)
+          #   response = cluster_manager_client.delete_node_pool
 
           def delete_node_pool \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               name: nil,
               options: nil,
               &block
@@ -1797,19 +1608,19 @@ module Google
           # This makes no changes if the last upgrade successfully completed.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to rollback.
+          #   Deprecated. The name of the cluster to rollback.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Required. Deprecated. The name of the node pool to rollback.
+          #   Deprecated. The name of the node pool to rollback.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster, node pool id) of the node poll to
@@ -1827,25 +1638,13 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
-          #   response = cluster_manager_client.rollback_node_pool_upgrade(project_id, zone, cluster_id, node_pool_id)
+          #   response = cluster_manager_client.rollback_node_pool_upgrade
 
           def rollback_node_pool_upgrade \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               name: nil,
               options: nil,
               &block
@@ -1862,25 +1661,25 @@ module Google
 
           # Sets the NodeManagement options for a node pool.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://support.google.com/cloud/answer/6158840).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to update.
-          #   This field has been deprecated and replaced by the name field.
-          # @param node_pool_id [String]
-          #   Required. Deprecated. The name of the node pool to update.
-          #   This field has been deprecated and replaced by the name field.
           # @param management [Google::Container::V1::NodeManagement | Hash]
           #   Required. NodeManagement configuration for the node pool.
           #   A hash of the same form as `Google::Container::V1::NodeManagement`
           #   can also be provided.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://support.google.com/cloud/answer/6158840).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster to update.
+          #   This field has been deprecated and replaced by the name field.
+          # @param node_pool_id [String]
+          #   Deprecated. The name of the node pool to update.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster, node pool id) of the node pool to set
           #   management properties. Specified in the format
@@ -1898,37 +1697,25 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
-          #
           #   # TODO: Initialize `management`:
           #   management = {}
-          #   response = cluster_manager_client.set_node_pool_management(project_id, zone, cluster_id, node_pool_id, management)
+          #   response = cluster_manager_client.set_node_pool_management(management)
 
           def set_node_pool_management \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
               management,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              management: management,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
               node_pool_id: node_pool_id,
-              management: management,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetNodePoolManagementRequest)
@@ -1937,18 +1724,6 @@ module Google
 
           # Sets labels on a cluster.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://developers.google.com/console/help/new/#projectnumber).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster.
-          #   This field has been deprecated and replaced by the name field.
           # @param resource_labels [Hash{String => String}]
           #   Required. The labels to set for that cluster.
           # @param label_fingerprint [String]
@@ -1958,6 +1733,18 @@ module Google
           #   labels. You must always provide an up-to-date fingerprint hash when
           #   updating or changing labels. Make a <code>get()</code> request to the
           #   resource to get the latest fingerprint.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster id) of the cluster to set labels.
           #   Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -1974,37 +1761,28 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `resource_labels`:
           #   resource_labels = {}
           #
           #   # TODO: Initialize `label_fingerprint`:
           #   label_fingerprint = ''
-          #   response = cluster_manager_client.set_labels(project_id, zone, cluster_id, resource_labels, label_fingerprint)
+          #   response = cluster_manager_client.set_labels(resource_labels, label_fingerprint)
 
           def set_labels \
-              project_id,
-              zone,
-              cluster_id,
               resource_labels,
               label_fingerprint,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              resource_labels: resource_labels,
+              label_fingerprint: label_fingerprint,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              resource_labels: resource_labels,
-              label_fingerprint: label_fingerprint,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetLabelsRequest)
@@ -2013,20 +1791,20 @@ module Google
 
           # Enables or disables the ABAC authorization mechanism on a cluster.
           #
+          # @param enabled [true, false]
+          #   Required. Whether ABAC authorization will be enabled in the cluster.
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to update.
+          #   Deprecated. The name of the cluster to update.
           #   This field has been deprecated and replaced by the name field.
-          # @param enabled [true, false]
-          #   Required. Whether ABAC authorization will be enabled in the cluster.
           # @param name [String]
           #   The name (project, location, cluster id) of the cluster to set legacy abac.
           #   Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -2043,32 +1821,23 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `enabled`:
           #   enabled = false
-          #   response = cluster_manager_client.set_legacy_abac(project_id, zone, cluster_id, enabled)
+          #   response = cluster_manager_client.set_legacy_abac(enabled)
 
           def set_legacy_abac \
-              project_id,
-              zone,
-              cluster_id,
               enabled,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              enabled: enabled,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              enabled: enabled,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetLegacyAbacRequest)
@@ -2078,16 +1847,16 @@ module Google
           # Starts master IP rotation.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster.
+          #   Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster id) of the cluster to start IP
@@ -2106,21 +1875,12 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #   response = cluster_manager_client.start_ip_rotation(project_id, zone, cluster_id)
+          #   response = cluster_manager_client.start_ip_rotation
 
           def start_ip_rotation \
-              project_id,
-              zone,
-              cluster_id,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               rotate_credentials: nil,
               options: nil,
@@ -2139,16 +1899,16 @@ module Google
           # Completes master IP rotation.
           #
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://developers.google.com/console/help/new/#projectnumber).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster.
+          #   Deprecated. The name of the cluster.
           #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster id) of the cluster to complete IP
@@ -2165,21 +1925,12 @@ module Google
           #   require "google/cloud/container"
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
-          #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #   response = cluster_manager_client.complete_ip_rotation(project_id, zone, cluster_id)
+          #   response = cluster_manager_client.complete_ip_rotation
 
           def complete_ip_rotation \
-              project_id,
-              zone,
-              cluster_id,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
@@ -2195,23 +1946,23 @@ module Google
 
           # Sets the size for a specific node pool.
           #
+          # @param node_count [Integer]
+          #   Required. The desired node count for the pool.
           # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
+          #   Deprecated. The Google Developers Console [project ID or project
           #   number](https://support.google.com/cloud/answer/6158840).
           #   This field has been deprecated and replaced by the name field.
           # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
+          #   Deprecated. The name of the Google Compute Engine
           #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
           #   resides.
           #   This field has been deprecated and replaced by the name field.
           # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster to update.
+          #   Deprecated. The name of the cluster to update.
           #   This field has been deprecated and replaced by the name field.
           # @param node_pool_id [String]
-          #   Required. Deprecated. The name of the node pool to update.
+          #   Deprecated. The name of the node pool to update.
           #   This field has been deprecated and replaced by the name field.
-          # @param node_count [Integer]
-          #   Required. The desired node count for the pool.
           # @param name [String]
           #   The name (project, location, cluster, node pool id) of the node pool to set
           #   size.
@@ -2229,37 +1980,25 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
-          #   # TODO: Initialize `node_pool_id`:
-          #   node_pool_id = ''
-          #
           #   # TODO: Initialize `node_count`:
           #   node_count = 0
-          #   response = cluster_manager_client.set_node_pool_size(project_id, zone, cluster_id, node_pool_id, node_count)
+          #   response = cluster_manager_client.set_node_pool_size(node_count)
 
           def set_node_pool_size \
-              project_id,
-              zone,
-              cluster_id,
-              node_pool_id,
               node_count,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
+              node_pool_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              node_count: node_count,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
               node_pool_id: node_pool_id,
-              node_count: node_count,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetNodePoolSizeRequest)
@@ -2268,22 +2007,22 @@ module Google
 
           # Enables or disables Network Policy for a cluster.
           #
-          # @param project_id [String]
-          #   Required. Deprecated. The Google Developers Console [project ID or project
-          #   number](https://developers.google.com/console/help/new/#projectnumber).
-          #   This field has been deprecated and replaced by the name field.
-          # @param zone [String]
-          #   Required. Deprecated. The name of the Google Compute Engine
-          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
-          #   resides.
-          #   This field has been deprecated and replaced by the name field.
-          # @param cluster_id [String]
-          #   Required. Deprecated. The name of the cluster.
-          #   This field has been deprecated and replaced by the name field.
           # @param network_policy [Google::Container::V1::NetworkPolicy | Hash]
           #   Required. Configuration options for the NetworkPolicy feature.
           #   A hash of the same form as `Google::Container::V1::NetworkPolicy`
           #   can also be provided.
+          # @param project_id [String]
+          #   Deprecated. The Google Developers Console [project ID or project
+          #   number](https://developers.google.com/console/help/new/#projectnumber).
+          #   This field has been deprecated and replaced by the name field.
+          # @param zone [String]
+          #   Deprecated. The name of the Google Compute Engine
+          #   [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
+          #   resides.
+          #   This field has been deprecated and replaced by the name field.
+          # @param cluster_id [String]
+          #   Deprecated. The name of the cluster.
+          #   This field has been deprecated and replaced by the name field.
           # @param name [String]
           #   The name (project, location, cluster id) of the cluster to set networking
           #   policy. Specified in the format 'projects/*/locations/*/clusters/*'.
@@ -2300,32 +2039,23 @@ module Google
           #
           #   cluster_manager_client = Google::Cloud::Container.new(version: :v1)
           #
-          #   # TODO: Initialize `project_id`:
-          #   project_id = ''
-          #
-          #   # TODO: Initialize `zone`:
-          #   zone = ''
-          #
-          #   # TODO: Initialize `cluster_id`:
-          #   cluster_id = ''
-          #
           #   # TODO: Initialize `network_policy`:
           #   network_policy = {}
-          #   response = cluster_manager_client.set_network_policy(project_id, zone, cluster_id, network_policy)
+          #   response = cluster_manager_client.set_network_policy(network_policy)
 
           def set_network_policy \
-              project_id,
-              zone,
-              cluster_id,
               network_policy,
+              project_id: nil,
+              zone: nil,
+              cluster_id: nil,
               name: nil,
               options: nil,
               &block
             req = {
+              network_policy: network_policy,
               project_id: project_id,
               zone: zone,
               cluster_id: cluster_id,
-              network_policy: network_policy,
               name: name
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Container::V1::SetNetworkPolicyRequest)
