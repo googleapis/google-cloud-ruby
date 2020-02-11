@@ -2111,7 +2111,7 @@ module Google
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #   dataset.exists? # true
         #
-        def exists? force: nil
+        def exists? force: false
           return gapi_exists? if force
           # If we have a memoized value, return it
           return @exists unless @exists.nil?

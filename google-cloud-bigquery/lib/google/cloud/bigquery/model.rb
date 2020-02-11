@@ -556,7 +556,7 @@ module Google
         #   model = dataset.model "my_model", skip_lookup: true
         #   model.exists? #=> true
         #
-        def exists? force: nil
+        def exists? force: false
           return resource_exists? if force
           # If we have a value, return it
           return @exists unless @exists.nil?
