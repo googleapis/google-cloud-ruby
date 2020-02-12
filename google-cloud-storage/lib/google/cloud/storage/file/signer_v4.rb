@@ -42,7 +42,8 @@ module Google
           def signed_url method: "GET", expires: nil, headers: nil,
                          issuer: nil, client_email: nil, signing_key: nil,
                          private_key: nil, query: nil, scheme: "https",
-                         virtual_hosted_style: nil, bucket_bound_domain: nil
+                         virtual_hosted_style: nil, bucket_bound_hostname: nil
+            raise ArgumentError, "method is required" unless method
             issuer, signer = issuer_and_signer issuer, client_email, signing_key, private_key
             datetime_now = Time.now.utc
             goog_date = datetime_now.strftime "%Y%m%dT%H%M%SZ"
@@ -51,7 +52,7 @@ module Google
             scope = "#{datestamp}/auto/storage/goog4_request"
 
             canonical_headers_str, signed_headers_str = canonical_and_signed_headers \
-              headers, virtual_hosted_style, bucket_bound_domain
+              headers, virtual_hosted_style, bucket_bound_hostname
 
             algorithm = "GOOG4-RSA-SHA256"
             expires = determine_expires expires
@@ -63,9 +64,9 @@ module Google
             # the payload content because the URL is used to upload an arbitrary
             # payload. Instead, you use a constant string UNSIGNED-PAYLOAD.
             payload = headers&.key?("X-Goog-Content-SHA256") ? headers["X-Goog-Content-SHA256"] : "UNSIGNED-PAYLOAD"
-            # TODO: Also support X-Amz-Content-SHA256 payload?
+
             canonical_request = [method,
-                                 ext_path(!(virtual_hosted_style || bucket_bound_domain)),
+                                 ext_path(!(virtual_hosted_style || bucket_bound_hostname)),
                                  canonical_query_str,
                                  canonical_headers_str,
                                  signed_headers_str,
@@ -79,7 +80,7 @@ module Google
             signature = signer.call string_to_sign
 
             # Construct signed URL
-            hostname = ext_url scheme, virtual_hosted_style, bucket_bound_domain
+            hostname = ext_url scheme, virtual_hosted_style, bucket_bound_hostname
             "#{hostname}?#{canonical_query_str}&X-Goog-Signature=#{signature}"
           end
 
@@ -114,20 +115,20 @@ module Google
             [issuer, signer]
           end
 
-          def canonical_and_signed_headers headers, virtual_hosted_style, bucket_bound_domain
-            if virtual_hosted_style && bucket_bound_domain
-              raise "virtual_hosted_style: #{virtual_hosted_style} and bucket_bound_domain: #{bucket_bound_domain} " \
-                    "params cannot both be passed together"
+          def canonical_and_signed_headers headers, virtual_hosted_style, bucket_bound_hostname
+            if virtual_hosted_style && bucket_bound_hostname
+              raise "virtual_hosted_style: #{virtual_hosted_style} and bucket_bound_hostname: " \
+                    "#{bucket_bound_hostname} params cannot both be passed together"
             end
-            # Headers needs to be in alpha order.
+
             canonical_headers = headers || {}
             headers_arr = canonical_headers.map do |k, v|
               [k.downcase, v.strip.gsub(/[^\S\t]+/, " ").gsub(/\t+/, " ")]
             end
             canonical_headers = Hash[headers_arr]
-            canonical_headers["host"] = host_name virtual_hosted_style, bucket_bound_domain
+            canonical_headers["host"] = host_name virtual_hosted_style, bucket_bound_hostname
 
-            canonical_headers = canonical_headers.sort_by { |k, _| k.to_s }.to_h # TODO: replace with default sort?
+            canonical_headers = canonical_headers.sort.to_h
             canonical_headers_str = ""
             canonical_headers.each { |k, v| canonical_headers_str += "#{k}:#{v}\n" }
             signed_headers_str = ""
@@ -153,14 +154,14 @@ module Google
             query["X-Goog-Expires"] = expires
             query["X-Goog-SignedHeaders"] = signed_headers_str
             query = query.map { |k, v| [CGI.escape(k.to_s), CGI.escape(v.to_s)] }.to_h
-            query = query.sort_by { |k, _| k.to_s }.to_h # TODO: replace with default sort?
+            query = query.sort.to_h
             canonical_query_str = ""
             query.each { |k, v| canonical_query_str += "#{k}=#{v}&" }
             canonical_query_str.chomp "&"
           end
 
-          def host_name virtual_hosted_style, bucket_bound_domain
-            return bucket_bound_domain if bucket_bound_domain
+          def host_name virtual_hosted_style, bucket_bound_hostname
+            return bucket_bound_hostname if bucket_bound_hostname
             virtual_hosted_style ? "#{@bucket_name}.storage.googleapis.com" : "storage.googleapis.com"
           end
 
@@ -175,17 +176,17 @@ module Google
 
           ##
           # The external url to the file.
-          def ext_url scheme, virtual_hosted_style, bucket_bound_domain
+          def ext_url scheme, virtual_hosted_style, bucket_bound_hostname
             url = GOOGLEAPIS_URL.dup
             if virtual_hosted_style
               parts = url.split "//"
               parts[1] = "#{@bucket_name}.#{parts[1]}"
               url = parts.join "//"
-            elsif bucket_bound_domain
-              raise "scheme is required" unless scheme
-              url = URI "#{scheme}://#{bucket_bound_domain}"
+            elsif bucket_bound_hostname
+              raise ArgumentError, "scheme is required" unless scheme
+              url = URI "#{scheme.to_s.downcase}://#{bucket_bound_hostname}"
             end
-            "#{url}#{ext_path !(virtual_hosted_style || bucket_bound_domain)}"
+            "#{url}#{ext_path !(virtual_hosted_style || bucket_bound_hostname)}"
           end
         end
       end

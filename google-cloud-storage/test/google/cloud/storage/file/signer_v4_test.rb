@@ -44,7 +44,7 @@ class SignerV4Test < MockStorage
       method = test["method"] unless test["method"]&.empty?
       headers = test.headers.to_h if test.headers # convert from protobuf map
       query = test.query_parameters.to_h if test.query_parameters # convert from protobuf map
-      bucket_bound_domain = test.bucketBoundDomain unless test.bucketBoundDomain&.empty?
+      bucket_bound_hostname = test.bucketBoundDomain unless test.bucketBoundDomain&.empty?
       Time.stub :now, SignerV4Test.timestamp_to_time(test.timestamp) do
         # method under test
         signed_url = signer.signed_url method: method,
@@ -53,7 +53,7 @@ class SignerV4Test < MockStorage
                                        query: query,
                                        scheme: test.scheme,
                                        virtual_hosted_style: (test.urlStyle == :VIRTUAL_HOSTED_STYLE),
-                                       bucket_bound_domain: bucket_bound_domain
+                                       bucket_bound_hostname: bucket_bound_hostname
        
         signed_url.must_equal test.expectedUrl
       end

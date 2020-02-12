@@ -522,15 +522,18 @@ module Google
         #   using the URL, but only when the file resource is missing the
         #   corresponding values. (These values can be permanently set using
         #   {File#content_disposition=} and {File#content_type=}.)
-        # @param [Symbol, String] version The version of the signed credential
-        #   to create. Must be one of `:v2` or `:v4`. The default value is
-        #   `:v2`.
+        # @param [String] scheme The URL scheme. The default value is `HTTPS`.
         # @param [Boolean] virtual_hosted_style Whether to use a virtual hosted-style
         #   hostname, which adds the bucket into the host portion of the URI rather
         #   than the path, e.g. `https://mybucket.storage.googleapis.com/...`.
         #   For V4 signing, this also sets the `host` header in the canonicalized
         #   extension headers to the virtual hosted-style host, unless that header is
         #   supplied via the `headers` param. The default value is `false`.
+        # @param [String] bucket_bound_hostname An alternate hostname which is bound
+        #   in some way to a specific bucket.
+        # @param [Symbol, String] version The version of the signed credential
+        #   to create. Must be one of `:v2` or `:v4`. The default value is
+        #   `:v2`.
         #
         # @return [String]
         #
@@ -597,10 +600,9 @@ module Google
         #   # Send the `x-goog-resumable:start` header and the content type
         #   # with the resumable upload POST request.
         #
-        def signed_url bucket, path, method: nil, expires: nil,
-                       content_type: nil, content_md5: nil, headers: nil,
-                       issuer: nil, client_email: nil, signing_key: nil,
-                       private_key: nil, query: nil, version: nil, virtual_hosted_style: nil
+        def signed_url bucket, path, method: "GET", expires: nil, content_type: nil, content_md5: nil, headers: nil,
+                       issuer: nil, client_email: nil, signing_key: nil, private_key: nil, query: nil, scheme: "HTTPS",
+                       virtual_hosted_style: nil, bucket_bound_hostname: nil, version: nil
           version ||= :v2
           case version.to_sym
           when :v2
@@ -618,8 +620,8 @@ module Google
                               headers: headers, issuer: issuer,
                               client_email: client_email,
                               signing_key: signing_key,
-                              private_key: private_key, query: query,
-                              virtual_hosted_style: virtual_hosted_style
+                              private_key: private_key, query: query, scheme: scheme,
+                              virtual_hosted_style: virtual_hosted_style, bucket_bound_hostname: bucket_bound_hostname
           else
             raise ArgumentError, "version '#{version}' not supported"
           end
