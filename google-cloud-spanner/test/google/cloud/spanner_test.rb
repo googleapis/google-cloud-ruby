@@ -125,13 +125,16 @@ describe Google::Cloud do
         "spanner-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
+
         project.must_equal "project-id"
         credentials.must_equal "spanner-credentials"
         timeout.must_be :nil?
         host.must_be :nil?
         client_config.must_be :nil?
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        keyword_args.key?(:lib_name).must_equal true
+        keyword_args.key?(:lib_version).must_equal true
+        keyword_args[:lib_name].must_be :nil?
+        keyword_args[:lib_version].must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -193,8 +196,10 @@ describe Google::Cloud do
         timeout.must_be :nil?
         host.must_be :nil?
         client_config.must_be :nil?
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        keyword_args.key?(:lib_name).must_equal true
+        keyword_args.key?(:lib_version).must_equal true
+        keyword_args[:lib_name].must_be :nil?
+        keyword_args[:lib_version].must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -223,8 +228,10 @@ describe Google::Cloud do
         timeout.must_be :nil?
         host.must_equal endpoint
         client_config.must_be :nil?
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        keyword_args.key?(:lib_name).must_equal true
+        keyword_args.key?(:lib_version).must_equal true
+        keyword_args[:lib_name].must_be :nil?
+        keyword_args[:lib_version].must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -251,8 +258,10 @@ describe Google::Cloud do
         timeout.must_be :nil?
         host.must_be :nil?
         client_config.must_be :nil?
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        keyword_args.key?(:lib_name).must_equal true
+        keyword_args.key?(:lib_version).must_equal true
+        keyword_args[:lib_name].must_be :nil?
+        keyword_args[:lib_version].must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -286,8 +295,10 @@ describe Google::Cloud do
         timeout.must_be :nil?
         host.must_be :nil?
         client_config.must_be :nil?
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        keyword_args.key?(:lib_name).must_equal true
+        keyword_args.key?(:lib_version).must_equal true
+        keyword_args[:lib_name].must_be :nil?
+        keyword_args[:lib_version].must_be :nil?
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -410,8 +421,10 @@ describe Google::Cloud do
         timeout.must_be :nil?
         host.must_be :nil?
         client_config.must_be :nil?
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        keyword_args.key?(:lib_name).must_equal true
+        keyword_args.key?(:lib_version).must_equal true
+        keyword_args[:lib_name].must_be :nil?
+        keyword_args[:lib_version].must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -450,8 +463,10 @@ describe Google::Cloud do
         timeout.must_be :nil?
         host.must_be :nil?
         client_config.must_be :nil?
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        keyword_args.key?(:lib_name).must_equal true
+        keyword_args.key?(:lib_version).must_equal true
+        keyword_args[:lib_name].must_be :nil?
+        keyword_args[:lib_version].must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -490,8 +505,10 @@ describe Google::Cloud do
         timeout.must_equal 42
         host.must_be :nil?
         client_config.must_equal spanner_client_config
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        keyword_args.key?(:lib_name).must_equal true
+        keyword_args.key?(:lib_version).must_equal true
+        keyword_args[:lib_name].must_be :nil?
+        keyword_args[:lib_version].must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -532,8 +549,10 @@ describe Google::Cloud do
         timeout.must_equal 42
         host.must_be :nil?
         client_config.must_equal spanner_client_config
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        keyword_args.key?(:lib_name).must_equal true
+        keyword_args.key?(:lib_version).must_equal true
+        keyword_args[:lib_name].must_be :nil?
+        keyword_args[:lib_version].must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -575,8 +594,10 @@ describe Google::Cloud do
         timeout.must_be :nil?
         host.must_equal endpoint
         client_config.must_be :nil?
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        keyword_args.key?(:lib_name).must_equal true
+        keyword_args.key?(:lib_version).must_equal true
+        keyword_args[:lib_name].must_be :nil?
+        keyword_args[:lib_version].must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -630,15 +651,15 @@ describe Google::Cloud do
         scope.must_be :nil?
         "spanner-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, lib_name: nil, lib_version: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
         project.must_equal "project-id"
         credentials.must_equal "spanner-credentials"
         timeout.must_be :nil?
         host.must_be :nil?
         client_config.must_be :nil?
-        lib_name.must_equal custom_lib_name
-        lib_version.must_equal custom_lib_version
-        OpenStruct.new project: project, lib_name: lib_name, lib_version: lib_version
+        keyword_args[:lib_name].must_equal custom_lib_name
+        keyword_args[:lib_version].must_equal custom_lib_version
+        OpenStruct.new project: project, lib_name: keyword_args[:lib_name], lib_version: keyword_args[:lib_version]
       }
 
       # Clear all environment variables
