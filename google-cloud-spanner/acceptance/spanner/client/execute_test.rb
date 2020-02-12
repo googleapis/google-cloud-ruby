@@ -146,32 +146,6 @@ describe "Spanner Client", :execute_sql, :spanner do
     row[:num].must_equal 42
   end
 
-  it "runs a simple query when the environment varilable of query options is set" do
-    origin_env = ENV["SPANNER_OPTIMIZER_VERSION"]
-    begin
-      ENV["SPANNER_OPTIMIZER_VERSION"] = "latest"
-      new_spanner = Google::Cloud::Spanner.new
-      new_db = new_spanner.client db.instance_id, db.database_id
-      new_db.project.service.query_options.must_equal({ optimizer_version: "latest" })
-
-      results = new_db.execute_sql "SELECT 42 AS num"
-      results.must_be_kind_of Google::Cloud::Spanner::Results
-
-      results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-      results.fields.keys.count.must_equal 1
-      results.fields[:num].must_equal :INT64
-
-      rows = results.rows.to_a # grab all from the enumerator
-      rows.count.must_equal 1
-      row = rows.first
-      row.must_be_kind_of Google::Cloud::Spanner::Data
-      row.keys.must_equal [:num]
-      row[:num].must_equal 42
-    ensure
-      ENV["SPANNER_OPTIMIZER_VERSION"] = origin_env
-    end
-  end
-
   it "runs a simple query when the client-level config of query options is set" do
     query_options = { optimizer_version: "latest" }
     new_spanner = Google::Cloud::Spanner.new query_options: query_options
@@ -191,5 +165,38 @@ describe "Spanner Client", :execute_sql, :spanner do
     row.must_be_kind_of Google::Cloud::Spanner::Data
     row.keys.must_equal [:num]
     row[:num].must_equal 42
+  end
+
+  describe "when the environment varilable of query options is set" do
+    let(:origin_env) { nil }
+
+    before do
+      origin_env = ENV["SPANNER_OPTIMIZER_VERSION"]
+      ENV["SPANNER_OPTIMIZER_VERSION"] = "latest"
+    end
+
+    after do
+      ENV["SPANNER_OPTIMIZER_VERSION"] = origin_env
+    end
+
+    it "runs a simple query " do
+      new_spanner = Google::Cloud::Spanner.new
+      new_db = new_spanner.client db.instance_id, db.database_id
+      new_db.project.service.query_options.must_equal({ optimizer_version: "latest" })
+
+      results = new_db.execute_sql "SELECT 42 AS num"
+      results.must_be_kind_of Google::Cloud::Spanner::Results
+
+      results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
+      results.fields.keys.count.must_equal 1
+      results.fields[:num].must_equal :INT64
+
+      rows = results.rows.to_a # grab all from the enumerator
+      rows.count.must_equal 1
+      row = rows.first
+      row.must_be_kind_of Google::Cloud::Spanner::Data
+      row.keys.must_equal [:num]
+      row[:num].must_equal 42
+    end
   end
 end
