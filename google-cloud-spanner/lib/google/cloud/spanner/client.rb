@@ -209,13 +209,11 @@ module Google
         #       replica has fallen behind.
         # @param [Hash] query_options A hash of values to specify the custom
         #   query options for executing SQL query. Query options are optional.
-        #   Currenty, it can support the following structure:
-        #   
-        #   ```ruby
-        #   {
-        #     optimizer_version: "3", # or, use "latest"
-        #   }
-        #   ```
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
@@ -310,6 +308,20 @@ module Google
         #     "AND active = @user_struct.active",
         #     params: { user_struct: user_data }
         #   )
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        # @example Query using query options:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   results = db.execute_query "SELECT * FROM users",
+        #                                 query_options: { optimizer_version: "latest" }
         #
         #   results.rows.each do |row|
         #     puts "User #{row[:id]} is #{row[:name]}"
