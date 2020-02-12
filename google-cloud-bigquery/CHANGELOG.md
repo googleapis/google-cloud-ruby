@@ -9,6 +9,11 @@
   * Add Argument
   * Update StandardSql classes to expose public initializer
   * Add Data#ddl_target_routine and QueryJob#ddl_target_routine
+* Allow row inserts to skip insert_id generation
+  * Streaming inserts using an insert_id are not able to be inserted as fast as inserts without an insert_id
+  * Add the ability for users to skip insert_id generation in order to speed up the inserts
+  * The default behavior continues to generate insert_id values for each row inserted
+  * Add yield documentation for Dataset#insert
 
 ### 1.18.1 / 2019-12-18
 
