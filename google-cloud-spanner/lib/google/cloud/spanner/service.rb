@@ -29,17 +29,20 @@ module Google
       # @private Represents the gRPC Spanner service, including all the API
       # methods.
       class Service
-        attr_accessor :project, :credentials, :timeout, :client_config, :host
+        attr_accessor :project, :credentials, :timeout, :client_config, :host,
+                      :lib_name, :lib_version
 
         ##
         # Creates a new Service instance.
         def initialize project, credentials, host: nil, timeout: nil,
-                       client_config: nil
+                       client_config: nil, lib_name: nil, lib_version: nil
           @project = project
           @credentials = credentials
           @host = host || V1::SpannerClient::SERVICE_ADDRESS
           @timeout = timeout
           @client_config = client_config || {}
+          @lib_name = lib_name
+          @lib_version = lib_version
         end
 
         def channel
@@ -67,7 +70,7 @@ module Google
               client_config: client_config,
               service_address: service_address,
               service_port: service_port,
-              lib_name: "gccl",
+              lib_name: lib_name_with_prefix,
               lib_version: Google::Cloud::Spanner::VERSION
             )
         end
@@ -82,7 +85,7 @@ module Google
               client_config: client_config,
               service_address: service_address,
               service_port: service_port,
-              lib_name: "gccl",
+              lib_name: lib_name_with_prefix,
               lib_version: Google::Cloud::Spanner::VERSION
             )
         end
@@ -97,7 +100,7 @@ module Google
               client_config: client_config,
               service_address: service_address,
               service_port: service_port,
-              lib_name: "gccl",
+              lib_name: lib_name_with_prefix,
               lib_version: Google::Cloud::Spanner::VERSION
             )
         end
@@ -457,6 +460,14 @@ module Google
         def service_port
           return nil if host.nil?
           URI.parse("//#{host}").port
+        end
+
+        def lib_name_with_prefix
+          return "gccl" if [nil, "gccl"].include? lib_name
+
+          value = lib_name.dup
+          value << "/#{lib_version}" if lib_version
+          value << " gccl"
         end
 
         def default_options_from_session session_name
