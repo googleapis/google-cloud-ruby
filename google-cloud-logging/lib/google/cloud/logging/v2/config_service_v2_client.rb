@@ -1062,7 +1062,7 @@ module Google
           # organizations. Once configured, it applies to all projects and folders in
           # the GCP organization.
           #
-          # {Google::Logging::V2::ConfigServiceV2::UpdateCmekSettings UpdateCmekSettings}
+          # {Google::Cloud::Logging::V2::ConfigServiceV2Client#update_cmek_settings}
           # will fail if 1) `kms_key_name` is invalid, or 2) the associated service
           # account does not have the required
           # `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key, or

@@ -143,3 +143,16 @@ s.replace(
     '\{Google::Logging::V2::ConfigServiceV2::UpdateSink sinks::update\}',
     '{Google::Logging::V2::ConfigServiceV2#update_sink}'
 )
+s.replace(
+    [
+        'lib/google/cloud/logging/v2/config_service_v2_client.rb',
+        'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_config.rb'
+    ],
+    '\{Google::Logging::V2::ConfigServiceV2::UpdateCmekSettings UpdateCmekSettings\}',
+    '{Google::Cloud::Logging::V2::ConfigServiceV2Client#update_cmek_settings}'
+)
+s.replace(
+    'lib/google/cloud/logging/v2/doc/google/logging/v2/logging_config.rb',
+    '\{Google::Logging::V2::ConfigServiceV2::GetCmekSettings GetCmekSettings\}',
+    '{Google::Cloud::Logging::V2::ConfigServiceV2Client#get_cmek_settings}'
+)
