@@ -528,9 +528,13 @@ module Google
         #   than the path, e.g. `https://mybucket.storage.googleapis.com/...`.
         #   For V4 signing, this also sets the `host` header in the canonicalized
         #   extension headers to the virtual hosted-style host, unless that header is
-        #   supplied via the `headers` param. The default value is `false`.
-        # @param [String] bucket_bound_hostname An alternate hostname which is bound
-        #   in some way to a specific bucket.
+        #   supplied via the `headers` param. The default value of `false` uses the
+        #   form of `https://storage.googleapis.com/mybucket`.
+        # @param [String] bucket_bound_hostname Use a bucket-bound hostname, which
+        #   replaces the `storage.googleapis.com` host with the name of a `CNAME`
+        #   bucket, e.g. a bucket named `gcs-subdomain.my.domain.tld`, or a Google
+        #   Cloud Load Balancer which routes to a bucket you own, e.g.
+        #   `my-load-balancer-domain.tld`.
         # @param [Symbol, String] version The version of the signed credential
         #   to create. Must be one of `:v2` or `:v4`. The default value is
         #   `:v2`.
