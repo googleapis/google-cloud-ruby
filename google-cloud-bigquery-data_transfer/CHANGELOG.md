@@ -1,5 +1,12 @@
 # Release History
 
+### 0.6.0 / 2020-02-13
+
+#### Features
+
+* Deprecate multi-pattern resource path helpers
+  * Update network configuration
+
 ### 0.5.1 / 2020-01-22
 
 #### Documentation
