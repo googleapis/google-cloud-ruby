@@ -761,6 +761,69 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
     end
   end
 
+  describe 'start_manual_transfer_runs' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#start_manual_transfer_runs."
+
+    it 'invokes start_manual_transfer_runs without error' do
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:start_manual_transfer_runs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("start_manual_transfer_runs")
+
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+
+          # Call method
+          response = client.start_manual_transfer_runs
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.start_manual_transfer_runs do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes start_manual_transfer_runs with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:start_manual_transfer_runs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDataTransferServiceCredentials_v1.new("start_manual_transfer_runs")
+
+      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.start_manual_transfer_runs
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'get_transfer_run' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#get_transfer_run."
 
@@ -1125,69 +1188,6 @@ describe Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.check_valid_creds(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'start_manual_transfer_runs' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient#start_manual_transfer_runs."
-
-    it 'invokes start_manual_transfer_runs without error' do
-      # Create expected grpc response
-      expected_response = {}
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:start_manual_transfer_runs, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials_v1.new("start_manual_transfer_runs")
-
-      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
-
-          # Call method
-          response = client.start_manual_transfer_runs
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.start_manual_transfer_runs do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes start_manual_transfer_runs with error' do
-      # Mock Grpc layer
-      mock_method = proc do
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:start_manual_transfer_runs, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockDataTransferServiceCredentials_v1.new("start_manual_transfer_runs")
-
-      Google::Cloud::Bigquery::Datatransfer::V1::DataTransferService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Bigquery::DataTransfer::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.start_manual_transfer_runs
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
