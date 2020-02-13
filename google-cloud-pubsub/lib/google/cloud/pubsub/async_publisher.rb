@@ -83,12 +83,12 @@ module Google
           @published_at = nil
           @publish_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @publish_threads
           @callback_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @callback_threads
-          @thread = Thread.new { run_background }
 
           @ordered = false
           @batches = {}
-          sleep 1
           @cond = new_cond
+
+          @thread = Thread.new { run_background }
         end
 
         ##
