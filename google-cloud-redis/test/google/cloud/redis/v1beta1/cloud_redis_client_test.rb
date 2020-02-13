@@ -419,11 +419,16 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       paths = [paths_element, paths_element_2]
       update_mask = { paths: paths }
       display_name = "UpdatedDisplayName"
+      name = "projects/<project-name>/locations/<location>/instances/<instance>"
       memory_size_gb = 4
-      instance = { display_name: display_name, memory_size_gb: memory_size_gb }
+      instance = {
+        display_name: display_name,
+        name: name,
+        memory_size_gb: memory_size_gb
+      }
 
       # Create expected grpc response
-      name = "name3373707"
+      name_2 = "name2-1052831874"
       display_name_2 = "displayName21615000987"
       location_id = "locationId552319461"
       alternative_location_id = "alternativeLocationId-718920621"
@@ -437,7 +442,7 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       authorized_network = "authorizedNetwork-1733809270"
       persistence_iam_identity = "persistenceIamIdentity1061944584"
       expected_response = {
-        name: name,
+        name: name_2,
         display_name: display_name_2,
         location_id: location_id,
         alternative_location_id: alternative_location_id,
@@ -492,8 +497,13 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       paths = [paths_element, paths_element_2]
       update_mask = { paths: paths }
       display_name = "UpdatedDisplayName"
+      name = "projects/<project-name>/locations/<location>/instances/<instance>"
       memory_size_gb = 4
-      instance = { display_name: display_name, memory_size_gb: memory_size_gb }
+      instance = {
+        display_name: display_name,
+        name: name,
+        memory_size_gb: memory_size_gb
+      }
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
@@ -538,8 +548,13 @@ describe Google::Cloud::Redis::V1beta1::CloudRedisClient do
       paths = [paths_element, paths_element_2]
       update_mask = { paths: paths }
       display_name = "UpdatedDisplayName"
+      name = "projects/<project-name>/locations/<location>/instances/<instance>"
       memory_size_gb = 4
-      instance = { display_name: display_name, memory_size_gb: memory_size_gb }
+      instance = {
+        display_name: display_name,
+        name: name,
+        memory_size_gb: memory_size_gb
+      }
 
       # Mock Grpc layer
       mock_method = proc do |request|

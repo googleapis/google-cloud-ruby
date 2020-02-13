@@ -548,8 +548,13 @@ module Google
           #   paths = [paths_element, paths_element_2]
           #   update_mask = { paths: paths }
           #   display_name = "UpdatedDisplayName"
+          #   name = "projects/<project-name>/locations/<location>/instances/<instance>"
           #   memory_size_gb = 4
-          #   instance = { display_name: display_name, memory_size_gb: memory_size_gb }
+          #   instance = {
+          #     display_name: display_name,
+          #     name: name,
+          #     memory_size_gb: memory_size_gb
+          #   }
           #
           #   # Register a callback during the method call.
           #   operation = cloud_redis_client.update_instance(update_mask, instance) do |op|

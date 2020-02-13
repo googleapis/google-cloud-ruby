@@ -418,11 +418,17 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
       paths_element_2 = "memory_size_gb"
       paths = [paths_element, paths_element_2]
       update_mask = { paths: paths }
-      display_name = "￼ instance.memory_size_gb=4"
-      instance = { display_name: display_name }
+      display_name = "UpdatedDisplayName"
+      name = "projects/<project-name>/locations/<location>/instances/<instance>"
+      memory_size_gb = 4
+      instance = {
+        display_name: display_name,
+        name: name,
+        memory_size_gb: memory_size_gb
+      }
 
       # Create expected grpc response
-      name = "name3373707"
+      name_2 = "name2-1052831874"
       display_name_2 = "displayName21615000987"
       location_id = "locationId552319461"
       alternative_location_id = "alternativeLocationId-718920621"
@@ -432,11 +438,11 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
       port = 3446913
       current_location_id = "currentLocationId1312712735"
       status_message = "statusMessage-239442758"
-      memory_size_gb = 34199707
+      memory_size_gb_2 = 1493816946
       authorized_network = "authorizedNetwork-1733809270"
       persistence_iam_identity = "persistenceIamIdentity1061944584"
       expected_response = {
-        name: name,
+        name: name_2,
         display_name: display_name_2,
         location_id: location_id,
         alternative_location_id: alternative_location_id,
@@ -446,7 +452,7 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
         port: port,
         current_location_id: current_location_id,
         status_message: status_message,
-        memory_size_gb: memory_size_gb,
+        memory_size_gb: memory_size_gb_2,
         authorized_network: authorized_network,
         persistence_iam_identity: persistence_iam_identity
       }
@@ -490,8 +496,14 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
       paths_element_2 = "memory_size_gb"
       paths = [paths_element, paths_element_2]
       update_mask = { paths: paths }
-      display_name = "￼ instance.memory_size_gb=4"
-      instance = { display_name: display_name }
+      display_name = "UpdatedDisplayName"
+      name = "projects/<project-name>/locations/<location>/instances/<instance>"
+      memory_size_gb = 4
+      instance = {
+        display_name: display_name,
+        name: name,
+        memory_size_gb: memory_size_gb
+      }
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
@@ -535,8 +547,14 @@ describe Google::Cloud::Redis::V1::CloudRedisClient do
       paths_element_2 = "memory_size_gb"
       paths = [paths_element, paths_element_2]
       update_mask = { paths: paths }
-      display_name = "￼ instance.memory_size_gb=4"
-      instance = { display_name: display_name }
+      display_name = "UpdatedDisplayName"
+      name = "projects/<project-name>/locations/<location>/instances/<instance>"
+      memory_size_gb = 4
+      instance = {
+        display_name: display_name,
+        name: name,
+        memory_size_gb: memory_size_gb
+      }
 
       # Mock Grpc layer
       mock_method = proc do |request|
