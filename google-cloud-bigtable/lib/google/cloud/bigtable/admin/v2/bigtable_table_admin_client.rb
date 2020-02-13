@@ -426,13 +426,14 @@ module Google
             # specified in the request.
             #
             # @param parent [String]
-            #   The unique name of the instance in which to create the table.
-            #   Values are of the form `projects/<project>/instances/<instance>`.
+            #   Required. The unique name of the instance in which to create the table.
+            #   Values are of the form `projects/{project}/instances/{instance}`.
             # @param table_id [String]
-            #   The name by which the new table should be referred to within the parent
-            #   instance, e.g., `foobar` rather than `<parent>/tables/foobar`.
+            #   Required. The name by which the new table should be referred to within the parent
+            #   instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+            #   Maximum 50 characters.
             # @param table [Google::Bigtable::Admin::V2::Table | Hash]
-            #   The Table to create.
+            #   Required. The Table to create.
             #   A hash of the same form as `Google::Bigtable::Admin::V2::Table`
             #   can also be provided.
             # @param initial_splits [Array<Google::Bigtable::Admin::V2::CreateTableRequest::Split | Hash>]
@@ -502,16 +503,16 @@ module Google
             # policy.
             #
             # @param parent [String]
-            #   The unique name of the instance in which to create the table.
-            #   Values are of the form `projects/<project>/instances/<instance>`.
+            #   Required. The unique name of the instance in which to create the table.
+            #   Values are of the form `projects/{project}/instances/{instance}`.
             # @param table_id [String]
-            #   The name by which the new table should be referred to within the parent
-            #   instance, e.g., `foobar` rather than `<parent>/tables/foobar`.
+            #   Required. The name by which the new table should be referred to within the parent
+            #   instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
             # @param source_snapshot [String]
-            #   The unique name of the snapshot from which to restore the table. The
+            #   Required. The unique name of the snapshot from which to restore the table. The
             #   snapshot and the table must be in the same instance.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -581,14 +582,21 @@ module Google
             # Lists all tables served from a specified instance.
             #
             # @param parent [String]
-            #   The unique name of the instance for which tables should be listed.
-            #   Values are of the form `projects/<project>/instances/<instance>`.
+            #   Required. The unique name of the instance for which tables should be listed.
+            #   Values are of the form `projects/{project}/instances/{instance}`.
             # @param view [Google::Bigtable::Admin::V2::Table::View]
             #   The view to be applied to the returned tables' fields.
-            #   Defaults to `NAME_ONLY` if unspecified; no others are currently supported.
+            #   Only NAME_ONLY view (default) and REPLICATION_VIEW are supported.
             # @param page_size [Integer]
             #   Maximum number of results per page.
-            #   CURRENTLY UNIMPLEMENTED AND IGNORED.
+            #
+            #   A page_size of zero lets the server choose the number of items to return.
+            #   A page_size which is strictly positive will return at most that many items.
+            #   A negative page_size will cause an error.
+            #
+            #   Following the first request, subsequent paginated calls are not required
+            #   to pass a page_size. If a page_size is set in subsequent calls, it must
+            #   match the page_size given in the first request.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -638,9 +646,9 @@ module Google
             # Gets metadata information about the specified table.
             #
             # @param name [String]
-            #   The unique name of the requested table.
+            #   Required. The unique name of the requested table.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/tables/<table>`.
+            #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param view [Google::Bigtable::Admin::V2::Table::View]
             #   The view to be applied to the returned table's fields.
             #   Defaults to `SCHEMA_VIEW` if unspecified.
@@ -675,9 +683,9 @@ module Google
             # Permanently deletes a specified table and all of its data.
             #
             # @param name [String]
-            #   The unique name of the table to be deleted.
+            #   Required. The unique name of the table to be deleted.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/tables/<table>`.
+            #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -710,11 +718,11 @@ module Google
             # where only some modifications have taken effect.
             #
             # @param name [String]
-            #   The unique name of the table whose families should be modified.
+            #   Required. The unique name of the table whose families should be modified.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/tables/<table>`.
+            #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification | Hash>]
-            #   Modifications to be atomically applied to the specified table's families.
+            #   Required. Modifications to be atomically applied to the specified table's families.
             #   Entries are applied in order, meaning that earlier modifications can be
             #   masked by later ones (in the case of repeated updates to the same family,
             #   for example).
@@ -756,9 +764,9 @@ module Google
             # particular prefix.
             #
             # @param name [String]
-            #   The unique name of the table on which to drop a range of rows.
+            #   Required. The unique name of the table on which to drop a range of rows.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/tables/<table>`.
+            #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param row_key_prefix [String]
             #   Delete all rows that start with this row key prefix. Prefix cannot be
             #   zero length.
@@ -800,9 +808,9 @@ module Google
             # for 90 days.
             #
             # @param name [String]
-            #   The unique name of the Table for which to create a consistency token.
+            #   Required. The unique name of the Table for which to create a consistency token.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/tables/<table>`.
+            #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -834,11 +842,11 @@ module Google
             # and the check request.
             #
             # @param name [String]
-            #   The unique name of the Table for which to check replication consistency.
+            #   Required. The unique name of the Table for which to check replication consistency.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/tables/<table>`.
+            #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param consistency_token [String]
-            #   The token created using GenerateConsistencyToken for the Table.
+            #   Required. The token created using GenerateConsistencyToken for the Table.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -870,8 +878,9 @@ module Google
               @check_consistency.call(req, options, &block)
             end
 
-            # Gets the access control policy for a table resource. Returns an empty
-            # policy if an table exists but does not have a policy set.
+            # Gets the access control policy for a resource.
+            # Returns an empty policy if the resource exists but does not have a policy
+            # set.
             #
             # @param resource [String]
             #   REQUIRED: The resource for which the policy is being requested.
@@ -909,8 +918,8 @@ module Google
               @get_iam_policy.call(req, options, &block)
             end
 
-            # Sets the access control policy on a table resource. Replaces any existing
-            # policy.
+            # Sets the access control policy on a Table or Backup resource.
+            # Replaces any existing policy.
             #
             # @param resource [String]
             #   REQUIRED: The resource for which the policy is being specified.
@@ -1006,16 +1015,16 @@ module Google
             # @param name [String]
             #   The unique name of the table to have the snapshot taken.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/tables/<table>`.
+            #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param cluster [String]
             #   The name of the cluster where the snapshot will be created in.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/clusters/<cluster>`.
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}`.
             # @param snapshot_id [String]
             #   The ID by which the new snapshot should be referred to within the parent
             #   cluster, e.g., `mysnapshot` of the form: `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
             #   rather than
-            #   `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/mysnapshot`.
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/mysnapshot`.
             # @param description [String]
             #   Description of the snapshot.
             # @param ttl [Google::Protobuf::Duration | Hash]
@@ -1107,9 +1116,9 @@ module Google
             # policy.
             #
             # @param name [String]
-            #   The unique name of the requested snapshot.
+            #   Required. The unique name of the requested snapshot.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1145,11 +1154,11 @@ module Google
             # policy.
             #
             # @param parent [String]
-            #   The unique name of the cluster for which snapshots should be listed.
+            #   Required. The unique name of the cluster for which snapshots should be listed.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/clusters/<cluster>`.
-            #   Use `<cluster> = '-'` to list snapshots for all clusters in an instance,
-            #   e.g., `projects/<project>/instances/<instance>/clusters/-`.
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}`.
+            #   Use `{cluster} = '-'` to list snapshots for all clusters in an instance,
+            #   e.g., `projects/{project}/instances/{instance}/clusters/-`.
             # @param page_size [Integer]
             #   The maximum number of resources contained in the underlying API
             #   response. If page streaming is performed per-resource, this
@@ -1209,9 +1218,9 @@ module Google
             # policy.
             #
             # @param name [String]
-            #   The unique name of the snapshot to be deleted.
+            #   Required. The unique name of the snapshot to be deleted.
             #   Values are of the form
-            #   `projects/<project>/instances/<instance>/clusters/<cluster>/snapshots/<snapshot>`.
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
