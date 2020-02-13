@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 / 2020-02-13
+
+#### Documentation
+
+* Update code samples
+
 ### 0.7.0 / 2020-02-10
 
 #### Features
