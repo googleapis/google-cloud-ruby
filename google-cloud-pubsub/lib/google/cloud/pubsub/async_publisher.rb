@@ -87,7 +87,7 @@ module Google
 
           @ordered = false
           @batches = {}
-
+          sleep 1
           @cond = new_cond
         end
 
