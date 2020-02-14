@@ -153,11 +153,18 @@ module Google
             query["X-Goog-Date"] = goog_date
             query["X-Goog-Expires"] = expires
             query["X-Goog-SignedHeaders"] = signed_headers_str
-            query = query.map { |k, v| [CGI.escape(k.to_s), CGI.escape(v.to_s)] }.to_h
+            query = query.map { |k, v| [escape_query_param(k), escape_query_param(v)] }.to_h
             query = query.sort.to_h
             canonical_query_str = ""
             query.each { |k, v| canonical_query_str += "#{k}=#{v}&" }
             canonical_query_str.chomp "&"
+          end
+
+          ##
+          # Only the characters in the regex set [A-Za-z0-9.~_-] must be left un-escaped; all others must be
+          # percent-encoded using %XX UTF-8 style.
+          def escape_query_param str
+            CGI.escape(str.to_s).gsub("%7E", "~")
           end
 
           def host_name virtual_hosted_style, bucket_bound_hostname
