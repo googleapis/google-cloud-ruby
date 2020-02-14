@@ -137,7 +137,7 @@ module Google
 
             canonical_headers = canonical_headers.sort_by(&:first).to_h
             canonical_headers_str = canonical_headers.map { |k, v| "#{k}:#{v}\n" }.join
-            signed_headers_str = canonical_headers.keys.map { |k| "#{k};" }.join.chomp ";"
+            signed_headers_str = canonical_headers.keys.join ";"
             [canonical_headers_str, signed_headers_str]
           end
 
@@ -157,7 +157,7 @@ module Google
             query["X-Goog-Expires"] = expires
             query["X-Goog-SignedHeaders"] = signed_headers_str
             query = query.map { |k, v| [escape_query_param(k), escape_query_param(v)] }.sort_by(&:first).to_h
-            query.map { |k, v| "#{k}=#{v}&" }.join.chomp "&"
+            query.map { |k, v| "#{k}=#{v}" }.join "&"
           end
 
           ##
