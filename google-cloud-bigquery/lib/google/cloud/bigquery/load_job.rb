@@ -348,7 +348,71 @@ module Google
         end
 
         ###
-        # Checks if the destination table will be time-partitioned. See
+        # Checks if the destination table will be range partitioned. See [Creating and using integer range partitioned
+        # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+        #
+        # @return [Boolean, nil] `true` when the table is range partitioned, or `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def range_partitioning?
+          !@gapi.configuration.load.range_partitioning.nil?
+        end
+
+        ###
+        # The field on which the destination table will be range partitioned, if any. The field must be a
+        # top-level `NULLABLE/REQUIRED` field. The only supported type is `INTEGER/INT64`. See
+        # [Creating and using integer range partitioned
+        # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+        #
+        # @return [Integer, nil] The partition field, if a field was configured, or `nil` if not range partitioned.
+        #
+        # @!group Attributes
+        #
+        def range_partitioning_field
+          @gapi.configuration.load.range_partitioning.field if range_partitioning?
+        end
+
+        ###
+        # The start of range partitioning, inclusive. See [Creating and using integer range partitioned
+        # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+        #
+        # @return [Integer, nil] The start of range partitioning, inclusive, or `nil` if not range partitioned.
+        #
+        # @!group Attributes
+        #
+        def range_partitioning_start
+          @gapi.configuration.load.range_partitioning.range.start if range_partitioning?
+        end
+
+        ###
+        # The width of each interval. See [Creating and using integer range partitioned
+        # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+        #
+        # @return [Integer, nil] The width of each interval, for data in range partitions, or `nil` if not range
+        #   partitioned.
+        #
+        # @!group Attributes
+        #
+        def range_partitioning_interval
+          return nil unless range_partitioning?
+          @gapi.configuration.load.range_partitioning.range.interval
+        end
+
+        ###
+        # The end of range partitioning, exclusive. See [Creating and using integer range partitioned
+        # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+        #
+        # @return [Integer, nil] The end of range partitioning, exclusive, or `nil` if not range partitioned.
+        #
+        # @!group Attributes
+        #
+        def range_partitioning_end
+          @gapi.configuration.load.range_partitioning.range.end if range_partitioning?
+        end
+
+        ###
+        # Checks if the destination table will be time partitioned. See
         # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
         # @return [Boolean, nil] `true` when the table will be time-partitioned,
@@ -361,10 +425,10 @@ module Google
         end
 
         ###
-        # The period for which the destination table will be partitioned, if
+        # The period for which the destination table will be time partitioned, if
         # any. See [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
-        # @return [String, nil] The partition type. Currently the only supported
+        # @return [String, nil] The time partition type. Currently the only supported
         #   value is "DAY", or `nil` if not present.
         #
         # @!group Attributes
@@ -374,13 +438,13 @@ module Google
         end
 
         ###
-        # The field on which the destination table will be partitioned, if any.
-        # If not set, the destination table will be partitioned by pseudo column
-        # `_PARTITIONTIME`; if set, the table will be partitioned by this field.
+        # The field on which the destination table will be time partitioned, if any.
+        # If not set, the destination table will be time partitioned by pseudo column
+        # `_PARTITIONTIME`; if set, the table will be time partitioned by this field.
         # See [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
-        # @return [String, nil] The partition field, if a field was configured.
-        #   `nil` if not partitioned or not set (partitioned by pseudo column
+        # @return [String, nil] The time partition field, if a field was configured.
+        #   `nil` if not time partitioned or not set (partitioned by pseudo column
         #   '_PARTITIONTIME').
         #
         # @!group Attributes
@@ -390,12 +454,12 @@ module Google
         end
 
         ###
-        # The expiration for the destination table partitions, if any, in
+        # The expiration for the destination table time partitions, if any, in
         # seconds. See [Partitioned
         # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
         # @return [Integer, nil] The expiration time, in seconds, for data in
-        #   partitions, or `nil` if not present.
+        #   time partitions, or `nil` if not present.
         #
         # @!group Attributes
         #
@@ -408,11 +472,11 @@ module Google
 
         ###
         # If set to true, queries over the destination table will require a
-        # partition filter that can be used for partition elimination to be
+        # time partition filter that can be used for partition elimination to be
         # specified. See [Partitioned
         # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
-        # @return [Boolean] `true` when a partition filter will be required,
+        # @return [Boolean] `true` when a time partition filter will be required,
         #   or `false` otherwise.
         #
         # @!group Attributes
@@ -1253,14 +1317,180 @@ module Google
           end
 
           ##
-          # Sets the partitioning for the destination table. See [Partitioned
+          # Sets the field on which to range partition the table. See [Creating and using integer range partitioned
+          # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+          #
+          # See {#range_partitioning_start=}, {#range_partitioning_interval=} and {#range_partitioning_end=}.
+          #
+          # You can only set range partitioning when creating a table. BigQuery does not allow you to change
+          # partitioning on an existing table.
+          #
+          # @param [Integer] field The range partition field. the destination table is partitioned by this
+          #   field. The field must be a top-level `NULLABLE/REQUIRED` field. The only supported
+          #   type is `INTEGER/INT64`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gs_url = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #     job.schema do |schema|
+          #       schema.integer "my_table_id", mode: :required
+          #       schema.string "my_table_data", mode: :required
+          #     end
+          #     job.range_partitioning_field = "my_table_id"
+          #     job.range_partitioning_start = 0
+          #     job.range_partitioning_interval = 10
+          #     job.range_partitioning_end = 100
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def range_partitioning_field= field
+            @gapi.configuration.load.range_partitioning ||= Google::Apis::BigqueryV2::RangePartitioning.new(
+              range: Google::Apis::BigqueryV2::RangePartitioning::Range.new
+            )
+            @gapi.configuration.load.range_partitioning.field = field
+          end
+
+          ##
+          # Sets the start of range partitioning, inclusive, for the destination table. See [Creating and using integer
+          # range partitioned tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+          #
+          # You can only set range partitioning when creating a table. BigQuery does not allow you to change
+          # partitioning on an existing table.
+          #
+          # See {#range_partitioning_field=}, {#range_partitioning_interval=} and {#range_partitioning_end=}.
+          #
+          # @param [Integer] range_start The start of range partitioning, inclusive.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gs_url = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #     job.schema do |schema|
+          #       schema.integer "my_table_id", mode: :required
+          #       schema.string "my_table_data", mode: :required
+          #     end
+          #     job.range_partitioning_field = "my_table_id"
+          #     job.range_partitioning_start = 0
+          #     job.range_partitioning_interval = 10
+          #     job.range_partitioning_end = 100
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def range_partitioning_start= range_start
+            @gapi.configuration.load.range_partitioning ||= Google::Apis::BigqueryV2::RangePartitioning.new(
+              range: Google::Apis::BigqueryV2::RangePartitioning::Range.new
+            )
+            @gapi.configuration.load.range_partitioning.range.start = range_start
+          end
+
+          ##
+          # Sets width of each interval for data in range partitions. See [Creating and using integer range partitioned
+          # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+          #
+          # You can only set range partitioning when creating a table. BigQuery does not allow you to change
+          # partitioning on an existing table.
+          #
+          # See {#range_partitioning_field=}, {#range_partitioning_start=} and {#range_partitioning_end=}.
+          #
+          # @param [Integer] range_interval The width of each interval, for data in partitions.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gs_url = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #     job.schema do |schema|
+          #       schema.integer "my_table_id", mode: :required
+          #       schema.string "my_table_data", mode: :required
+          #     end
+          #     job.range_partitioning_field = "my_table_id"
+          #     job.range_partitioning_start = 0
+          #     job.range_partitioning_interval = 10
+          #     job.range_partitioning_end = 100
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def range_partitioning_interval= range_interval
+            @gapi.configuration.load.range_partitioning ||= Google::Apis::BigqueryV2::RangePartitioning.new(
+              range: Google::Apis::BigqueryV2::RangePartitioning::Range.new
+            )
+            @gapi.configuration.load.range_partitioning.range.interval = range_interval
+          end
+
+          ##
+          # Sets the end of range partitioning, exclusive, for the destination table. See [Creating and using integer
+          # range partitioned tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+          #
+          # You can only set range partitioning when creating a table. BigQuery does not allow you to change
+          # partitioning on an existing table.
+          #
+          # See {#range_partitioning_start=}, {#range_partitioning_interval=} and {#range_partitioning_field=}.
+          #
+          # @param [Integer] range_end The end of range partitioning, exclusive.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gs_url = "gs://my-bucket/file-name.csv"
+          #   load_job = dataset.load_job "my_new_table", gs_url do |job|
+          #     job.schema do |schema|
+          #       schema.integer "my_table_id", mode: :required
+          #       schema.string "my_table_data", mode: :required
+          #     end
+          #     job.range_partitioning_field = "my_table_id"
+          #     job.range_partitioning_start = 0
+          #     job.range_partitioning_interval = 10
+          #     job.range_partitioning_end = 100
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def range_partitioning_end= range_end
+            @gapi.configuration.load.range_partitioning ||= Google::Apis::BigqueryV2::RangePartitioning.new(
+              range: Google::Apis::BigqueryV2::RangePartitioning::Range.new
+            )
+            @gapi.configuration.load.range_partitioning.range.end = range_end
+          end
+
+          ##
+          # Sets the time partitioning for the destination table. See [Partitioned
           # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
           #
-          # You can only set the partitioning field while creating a table.
+          # You can only set the time partitioning field while creating a table.
           # BigQuery does not allow you to change partitioning on an existing
           # table.
           #
-          # @param [String] type The partition type. Currently the only
+          # @param [String] type The time partition type. Currently the only
           #   supported value is "DAY".
           #
           # @example
@@ -1285,20 +1515,20 @@ module Google
           end
 
           ##
-          # Sets the field on which to partition the destination table. If not
-          # set, the destination table is partitioned by pseudo column
-          # `_PARTITIONTIME`; if set, the table is partitioned by this field.
+          # Sets the field on which to time partition the destination table. If not
+          # set, the destination table is time partitioned by pseudo column
+          # `_PARTITIONTIME`; if set, the table is time partitioned by this field.
           # See [Partitioned
           # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
           #
-          # The destination table must also be partitioned. See
+          # The destination table must also be time partitioned. See
           # {#time_partitioning_type=}.
           #
-          # You can only set the partitioning field while creating a table.
+          # You can only set the time partitioning field while creating a table.
           # BigQuery does not allow you to change partitioning on an existing
           # table.
           #
-          # @param [String] field The partition field. The field must be a
+          # @param [String] field The time partition field. The field must be a
           #   top-level TIMESTAMP or DATE field. Its mode must be NULLABLE or
           #   REQUIRED.
           #
@@ -1328,15 +1558,15 @@ module Google
           end
 
           ##
-          # Sets the partition expiration for the destination table. See
+          # Sets the time partition expiration for the destination table. See
           # [Partitioned
           # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
           #
-          # The destination table must also be partitioned. See
+          # The destination table must also be time partitioned. See
           # {#time_partitioning_type=}.
           #
           # @param [Integer] expiration An expiration time, in seconds,
-          #   for data in partitions.
+          #   for data in time partitions.
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1362,12 +1592,12 @@ module Google
 
           ##
           # If set to true, queries over the destination table will require a
-          # partition filter that can be used for partition elimination to be
+          # time partition filter that can be used for time partition elimination to be
           # specified. See [Partitioned
           # Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
           #
           # @param [Boolean] val Indicates if queries over the destination table
-          #   will require a partition filter. The default value is `false`.
+          #   will require a time partition filter. The default value is `false`.
           #
           # @!group Attributes
           #

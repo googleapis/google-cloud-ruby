@@ -27,6 +27,16 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:time_partitioning_gapi) do
     Google::Apis::BigqueryV2::TimePartitioning.new type: "DAY", field: "dob", expiration_ms: 5000
   end
+  let(:range_partitioning_gapi) do
+    Google::Apis::BigqueryV2::RangePartitioning.new(
+      field: "my_table_id",
+      range: Google::Apis::BigqueryV2::RangePartitioning::Range.new(
+        start: 0,
+        interval: 10,
+        end: 100
+      )
+    ) 
+  end
   let(:clustering_fields) { ["last_name", "first_name"] }
   let(:clustering_gapi) do
     Google::Apis::BigqueryV2::Clustering.new fields: clustering_fields
@@ -235,10 +245,38 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
 
     table.must_be_kind_of Google::Cloud::Bigquery::Table
     table.table_id.must_equal table_id
+    table.time_partitioning?.must_equal true
     table.time_partitioning_type.must_equal "DAY"
     table.time_partitioning_field.must_equal "dob"
     table.time_partitioning_expiration.must_equal 5
     table.clustering_fields.must_equal clustering_fields
+  end
+
+  it "creates a table with range partitioning in a block" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      range_partitioning: range_partitioning_gapi)
+    mock.expect :insert_table, insert_table, [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_table table_id do |t|
+      t.range_partitioning_field = "my_table_id"
+      t.range_partitioning_start = 0
+      t.range_partitioning_interval = 10
+      t.range_partitioning_end = 100
+    end
+
+    mock.verify
+
+    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    table.table_id.must_equal table_id
+    table.range_partitioning?.must_equal true
+    table.range_partitioning_field.must_equal "my_table_id"
+    table.range_partitioning_start.must_equal 0
+    table.range_partitioning_interval.must_equal 10
+    table.range_partitioning_end.must_equal 100
   end
 
   it "creates a table with require_partition_filter in a block" do

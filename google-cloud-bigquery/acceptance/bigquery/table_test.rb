@@ -56,6 +56,25 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
     t
   end
+  let(:range_partitioned_table_id) { "range_kittens"}
+  let(:range_partitioned_table) do
+    t = dataset.table range_partitioned_table_id
+    if t.nil?
+      t = dataset.create_table range_partitioned_table_id do |updater|
+        updater.range_partitioning_field = "my_table_id"
+        updater.range_partitioning_start = 0
+        updater.range_partitioning_interval = 10
+        updater.range_partitioning_end = 100
+        updater.clustering_fields = clustering_fields
+        updater.schema do |schema|
+          schema.integer "my_table_id",   description: "id description",   mode: :required
+          schema.string "first_name",   description: "first_name description",   mode: :required
+          schema.string "last_name",   description: "last_name description",   mode: :required
+        end
+      end
+    end
+    t
+  end
   let(:query) { "SELECT id, breed, name, dob FROM #{table.query_id}" }
   let(:rows) do
     [
@@ -95,9 +114,15 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     fresh.modified_at.must_be_kind_of Time
     fresh.table?.must_equal true
     fresh.view?.must_equal false
+    fresh.time_partitioning?.must_equal false
     fresh.time_partitioning_type.must_be_nil
     fresh.time_partitioning_field.must_be_nil
     fresh.time_partitioning_expiration.must_be_nil
+    fresh.range_partitioning?.must_equal false
+    fresh.range_partitioning_field.must_be_nil
+    fresh.range_partitioning_start.must_be_nil
+    fresh.range_partitioning_interval.must_be_nil
+    fresh.range_partitioning_end.must_be_nil
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
 
     # streaming buffer is transient, it seems it may or may not be present?
@@ -459,10 +484,20 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "allows tables to be created with time_partitioning and clustering" do
     table = time_partitioned_table
+    table.time_partitioning?.must_equal true
     table.time_partitioning_type.must_equal "DAY"
     table.time_partitioning_field.must_equal "dob"
     table.time_partitioning_expiration.must_equal seven_days
     table.clustering_fields.must_equal clustering_fields
+  end
+
+  it "allows tables to be created with range_partitioning" do
+    table = range_partitioned_table
+    table.range_partitioning?.must_equal true
+    table.range_partitioning_field.must_equal "my_table_id"
+    table.range_partitioning_start.must_equal 0
+    table.range_partitioning_interval.must_equal 10
+    table.range_partitioning_end.must_equal 100
   end
 
   it "inserts rows directly and gets its data" do
@@ -845,6 +880,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     load_job.schema.wont_be :empty?
     load_job.schema_update_options.must_be_kind_of Array
     load_job.schema_update_options.must_be :empty?
+    load_job.range_partitioning?.must_equal false
+    load_job.range_partitioning_field.must_be_nil
+    load_job.range_partitioning_start.must_be_nil
+    load_job.range_partitioning_interval.must_be_nil
+    load_job.range_partitioning_end.must_be_nil
     load_job.time_partitioning?.must_equal false
     load_job.time_partitioning_type.must_be :nil?
     load_job.time_partitioning_field.must_be :nil?

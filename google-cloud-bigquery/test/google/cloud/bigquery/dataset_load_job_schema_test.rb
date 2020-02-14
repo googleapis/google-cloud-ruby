@@ -57,6 +57,16 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
   end
 
   let(:schema_update_options) { ["ALLOW_FIELD_ADDITION", "ALLOW_FIELD_RELAXATION"] }
+  let(:range_partitioning) do
+    Google::Apis::BigqueryV2::RangePartitioning.new(
+      field: "age",
+      range: Google::Apis::BigqueryV2::RangePartitioning::Range.new(
+        start: 0,
+        interval: 10,
+        end: 100
+      )
+    ) 
+  end
   let(:time_partitioning) do
     Google::Apis::BigqueryV2::TimePartitioning.new type: "DAY", field: "dob", expiration_ms: 86_400_000, require_partition_filter: true
   end
@@ -70,7 +80,53 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     Google::Cloud::Storage::File.from_gapi gapi, storage.service
   end
 
-  it "can specify a schema in a block during load" do
+  it "can specify range partitioning and a schema in a block during load" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_reference, load_url
+    job_gapi.configuration.load.schema = table_schema_gapi
+    job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
+    job_gapi.configuration.load.schema_update_options = schema_update_options
+    job_gapi.configuration.load.range_partitioning = range_partitioning
+
+    job_resp_gapi = load_job_resp_gapi(load_url)
+    job_resp_gapi.configuration.load.schema_update_options = schema_update_options
+    job_resp_gapi.configuration.load.range_partitioning = range_partitioning
+
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+    dataset.service.mocked_service = mock
+
+    job = dataset.load_job table_id, load_file, create: :needed do |job|
+      job.schema.string "name", mode: :required
+      job.schema.integer "age"
+      job.schema.float "score", description: "A score from 0.0 to 10.0"
+      job.schema.numeric "price"
+      job.schema.boolean "active"
+      job.schema.bytes "avatar"
+      job.schema.timestamp "dob", mode: :required
+      job.schema_update_options = schema_update_options
+      job.range_partitioning_field = "age"
+      job.range_partitioning_start = 0
+      job.range_partitioning_interval = 10
+      job.range_partitioning_end = 100
+      expect { job.cancel }.must_raise RuntimeError
+      expect { job.rerun! }.must_raise RuntimeError
+      expect { job.reload! }.must_raise RuntimeError
+      expect { job.refresh! }.must_raise RuntimeError
+      expect { job.wait_until_done! }.must_raise RuntimeError
+    end
+
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.schema_update_options.must_equal schema_update_options
+    job.range_partitioning?.must_equal true
+    job.range_partitioning_field.must_equal "age"
+    job.range_partitioning_start.must_equal 0
+    job.range_partitioning_interval.must_equal 10
+    job.range_partitioning_end.must_equal 100
+
+    mock.verify
+  end
+
+  it "can specify time partitioning and a schema in a block during load" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
     job_gapi.configuration.load.schema = table_schema_gapi
@@ -143,6 +199,11 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
     job.schema_update_options.must_be_kind_of Array
     job.schema_update_options.must_be :empty?
+    job.range_partitioning?.must_equal false
+    job.range_partitioning_field.must_be_nil
+    job.range_partitioning_start.must_be_nil
+    job.range_partitioning_interval.must_be_nil
+    job.range_partitioning_end.must_be_nil
     job.time_partitioning?.must_equal false
     job.time_partitioning_type.must_be :nil?
     job.time_partitioning_field.must_be :nil?

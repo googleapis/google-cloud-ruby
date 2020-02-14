@@ -181,7 +181,32 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
   end
 
-  it "imports data from a local file and creates a new table with specified schema in a block with load_job" do
+  it "imports data from a local file and creates a new table with schema and range partitioning in a block with load_job" do
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    job = dataset.load_job "local_file_table_#{SecureRandom.hex(21)}", local_file, job_id: job_id do |job|
+      job.schema.integer   "id",    description: "id description",    mode: :required
+      job.schema.string    "breed", description: "breed description", mode: :required
+      job.schema.string    "name",  description: "name description",  mode: :required
+      job.schema.timestamp "dob",   description: "dob description",   mode: :required
+      job.schema_update_options = schema_update_options
+      job.range_partitioning_field = "id"
+      job.range_partitioning_start = 0
+      job.range_partitioning_interval = 10
+      job.range_partitioning_end = 100
+    end
+    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    job.job_id.must_equal job_id
+    job.wait_until_done!
+    job.output_rows.must_equal 3
+    job.schema_update_options.must_equal schema_update_options
+    job.range_partitioning?.must_equal true
+    job.range_partitioning_field.must_equal "id"
+    job.range_partitioning_start.must_equal 0
+    job.range_partitioning_interval.must_equal 10
+    job.range_partitioning_end.must_equal 100
+  end
+
+  it "imports data from a local file and creates a new table with schema and time partitioning in a block with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     job = dataset.load_job "local_file_table_#{SecureRandom.hex(21)}", local_file, job_id: job_id do |job|
       job.schema.integer   "id",    description: "id description",    mode: :required
@@ -209,7 +234,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     job.clustering_fields.must_equal clustering_fields
   end
 
-  it "imports data from a local file and creates a new table with specified schema as an option with load_job" do
+  it "imports data from a local file and creates a new table with schema as an option with load_job" do
     schema = bigquery.schema do |s|
       s.integer   "id",    description: "id description",    mode: :required
       s.string    "breed", description: "breed description", mode: :required
