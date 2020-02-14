@@ -888,24 +888,27 @@ module Google
         ##
         # @private
         FILTER_OPS = {
-          "<"              => :LESS_THAN,
-          "lt"             => :LESS_THAN,
-          "<="             => :LESS_THAN_OR_EQUAL,
-          "lte"            => :LESS_THAN_OR_EQUAL,
-          ">"              => :GREATER_THAN,
-          "gt"             => :GREATER_THAN,
-          ">="             => :GREATER_THAN_OR_EQUAL,
-          "gte"            => :GREATER_THAN_OR_EQUAL,
-          "="              => :EQUAL,
-          "=="             => :EQUAL,
-          "eq"             => :EQUAL,
-          "eql"            => :EQUAL,
-          "is"             => :EQUAL,
-          "array_contains" => :ARRAY_CONTAINS,
-          "array-contains" => :ARRAY_CONTAINS,
-          "include"        => :ARRAY_CONTAINS,
-          "include?"       => :ARRAY_CONTAINS,
-          "has"            => :ARRAY_CONTAINS
+          "<"                  => :LESS_THAN,
+          "lt"                 => :LESS_THAN,
+          "<="                 => :LESS_THAN_OR_EQUAL,
+          "lte"                => :LESS_THAN_OR_EQUAL,
+          ">"                  => :GREATER_THAN,
+          "gt"                 => :GREATER_THAN,
+          ">="                 => :GREATER_THAN_OR_EQUAL,
+          "gte"                => :GREATER_THAN_OR_EQUAL,
+          "="                  => :EQUAL,
+          "=="                 => :EQUAL,
+          "eq"                 => :EQUAL,
+          "eql"                => :EQUAL,
+          "is"                 => :EQUAL,
+          "array_contains"     => :ARRAY_CONTAINS,
+          "array-contains"     => :ARRAY_CONTAINS,
+          "include"            => :ARRAY_CONTAINS,
+          "include?"           => :ARRAY_CONTAINS,
+          "has"                => :ARRAY_CONTAINS,
+          "in"                 => :IN,
+          "array_contains_any" => :ARRAY_CONTAINS_ANY,
+          "array-contains-any" => :ARRAY_CONTAINS_ANY
         }.freeze
         ##
         # @private

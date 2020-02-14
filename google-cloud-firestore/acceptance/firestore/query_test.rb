@@ -39,11 +39,27 @@ describe "Query", :firestore_acceptance do
     result_snp[:foo].must_equal "bar"
   end
 
-  it "has where method with array_contains " do
+  it "has where method with array_contains" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: ["bar", "baz", "bif"]})
 
     result_snp = rand_query_col.where(:foo, :array_contains, :bif).get.first
+    result_snp[:foo].must_equal ["bar", "baz", "bif"]
+  end
+
+  it "has where method with in" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.add({foo: "bar"})
+
+    result_snp = rand_query_col.where(:foo, :in, ["bar", "baz", "bif"]).get.first
+    result_snp[:foo].must_equal "bar"
+  end
+
+  it "has where method with array_contains_any" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.add({foo: ["bar", "baz", "bif"]})
+
+    result_snp = rand_query_col.where(:foo, :array_contains_any, [:bif, :out]).get.first
     result_snp[:foo].must_equal ["bar", "baz", "bif"]
   end
 
