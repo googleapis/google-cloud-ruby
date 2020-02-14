@@ -604,28 +604,50 @@ module Google
         #   # Send the `x-goog-resumable:start` header and the content type
         #   # with the resumable upload POST request.
         #
-        def signed_url bucket, path, method: "GET", expires: nil, content_type: nil, content_md5: nil, headers: nil,
-                       issuer: nil, client_email: nil, signing_key: nil, private_key: nil, query: nil, scheme: "HTTPS",
-                       virtual_hosted_style: nil, bucket_bound_hostname: nil, version: nil
+        def signed_url bucket,
+                       path,
+                       method: "GET",
+                       expires: nil,
+                       content_type: nil,
+                       content_md5: nil,
+                       headers: nil,
+                       issuer: nil,
+                       client_email: nil,
+                       signing_key: nil,
+                       private_key: nil,
+                       query: nil,
+                       scheme: "HTTPS",
+                       virtual_hosted_style: nil,
+                       bucket_bound_hostname: nil,
+                       version: nil
           version ||= :v2
           case version.to_sym
           when :v2
             signer = File::SignerV2.new bucket, path, service
 
-            signer.signed_url method: method, expires: expires,
-                              headers: headers, content_type: content_type,
-                              content_md5: content_md5, issuer: issuer,
+            signer.signed_url method: method,
+                              expires: expires,
+                              headers: headers,
+                              content_type: content_type,
+                              content_md5: content_md5,
+                              issuer: issuer,
                               client_email: client_email,
                               signing_key: signing_key,
-                              private_key: private_key, query: query
+                              private_key: private_key,
+                              query: query
           when :v4
             signer = File::SignerV4.new bucket, path, service
-            signer.signed_url method: method, expires: expires,
-                              headers: headers, issuer: issuer,
+            signer.signed_url method: method,
+                              expires: expires,
+                              headers: headers,
+                              issuer: issuer,
                               client_email: client_email,
                               signing_key: signing_key,
-                              private_key: private_key, query: query, scheme: scheme,
-                              virtual_hosted_style: virtual_hosted_style, bucket_bound_hostname: bucket_bound_hostname
+                              private_key: private_key,
+                              query: query,
+                              scheme: scheme,
+                              virtual_hosted_style: virtual_hosted_style,
+                              bucket_bound_hostname: bucket_bound_hostname
           else
             raise ArgumentError, "version '#{version}' not supported"
           end

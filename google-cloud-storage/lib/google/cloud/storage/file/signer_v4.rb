@@ -39,10 +39,17 @@ module Google
             new bucket.name, file_name, bucket.service
           end
 
-          def signed_url method: "GET", expires: nil, headers: nil,
-                         issuer: nil, client_email: nil, signing_key: nil,
-                         private_key: nil, query: nil, scheme: "https",
-                         virtual_hosted_style: nil, bucket_bound_hostname: nil
+          def signed_url method: "GET",
+                         expires: nil,
+                         headers: nil,
+                         issuer: nil,
+                         client_email: nil,
+                         signing_key: nil,
+                         private_key: nil,
+                         query: nil,
+                         scheme: "https",
+                         virtual_hosted_style: nil,
+                         bucket_bound_hostname: nil
             raise ArgumentError, "method is required" unless method
             issuer, signer = issuer_and_signer issuer, client_email, signing_key, private_key
             datetime_now = Time.now.utc
@@ -128,12 +135,9 @@ module Google
             canonical_headers = Hash[headers_arr]
             canonical_headers["host"] = host_name virtual_hosted_style, bucket_bound_hostname
 
-            canonical_headers = canonical_headers.sort.to_h
-            canonical_headers_str = ""
-            canonical_headers.each { |k, v| canonical_headers_str += "#{k}:#{v}\n" }
-            signed_headers_str = ""
-            canonical_headers.each_key { |k| signed_headers_str += "#{k};" }
-            signed_headers_str = signed_headers_str.chomp ";"
+            canonical_headers = canonical_headers.sort_by(&:first).to_h
+            canonical_headers_str = canonical_headers.map { |k, v| "#{k}:#{v}\n" }.join
+            signed_headers_str = canonical_headers.keys.map { |k| "#{k};" }.join.chomp ";"
             [canonical_headers_str, signed_headers_str]
           end
 
@@ -145,19 +149,15 @@ module Google
             expires
           end
 
-          def canonical_query query, algorithm, credential, goog_date, expires,
-                              signed_headers_str
+          def canonical_query query, algorithm, credential, goog_date, expires, signed_headers_str
             query ||= {}
             query["X-Goog-Algorithm"] = algorithm
             query["X-Goog-Credential"] = credential
             query["X-Goog-Date"] = goog_date
             query["X-Goog-Expires"] = expires
             query["X-Goog-SignedHeaders"] = signed_headers_str
-            query = query.map { |k, v| [escape_query_param(k), escape_query_param(v)] }.to_h
-            query = query.sort.to_h
-            canonical_query_str = ""
-            query.each { |k, v| canonical_query_str += "#{k}=#{v}&" }
-            canonical_query_str.chomp "&"
+            query = query.map { |k, v| [escape_query_param(k), escape_query_param(v)] }.sort_by(&:first).to_h
+            query.map { |k, v| "#{k}=#{v}&" }.join.chomp "&"
           end
 
           ##
@@ -175,10 +175,10 @@ module Google
           ##
           # The URI-encoded (percent encoded) external path to the file.
           def ext_path path_style
-            path = ""
-            path += "/#{@bucket_name}" if path_style
-            path += "/#{String(@file_name)}" if @file_name && !@file_name.empty?
-            CGI.escape(path).gsub "%2F", "/"
+            path = []
+            path << "/#{@bucket_name}" if path_style
+            path << "/#{String(@file_name)}" if @file_name && !@file_name.empty?
+            CGI.escape(path.join).gsub "%2F", "/"
           end
 
           ##

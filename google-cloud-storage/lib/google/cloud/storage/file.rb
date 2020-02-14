@@ -1516,7 +1516,7 @@ module Google
         #   file = bucket.file "avatars/heidi/400x400.png"
         #   shared_url = file.signed_url expires: 300, # 5 minutes from now
         #                                version: :v4
-
+        #
         # @example Using the `issuer` and `signing_key` options:
         #   require "google/cloud/storage"
         #
@@ -1556,28 +1556,48 @@ module Google
         #   # Send the `x-goog-resumable:start` header and the content type
         #   # with the resumable upload POST request.
         #
-        def signed_url method: "GET", expires: nil, content_type: nil, content_md5: nil, headers: nil, issuer: nil,
-                       client_email: nil, signing_key: nil, private_key: nil, query: nil, scheme: "HTTPS",
-                       virtual_hosted_style: nil, bucket_bound_hostname: nil, version: nil
+        def signed_url method: "GET",
+                       expires: nil,
+                       content_type: nil,
+                       content_md5: nil,
+                       headers: nil,
+                       issuer: nil,
+                       client_email: nil,
+                       signing_key: nil,
+                       private_key: nil,
+                       query: nil,
+                       scheme: "HTTPS",
+                       virtual_hosted_style: nil,
+                       bucket_bound_hostname: nil,
+                       version: nil
           ensure_service!
           version ||= :v2
           case version.to_sym
           when :v2
             signer = File::SignerV2.from_file self
-            signer.signed_url method: method, expires: expires,
-                              headers: headers, content_type: content_type,
-                              content_md5: content_md5, issuer: issuer,
+            signer.signed_url method: method,
+                              expires: expires,
+                              headers: headers,
+                              content_type: content_type,
+                              content_md5: content_md5,
+                              issuer: issuer,
                               client_email: client_email,
                               signing_key: signing_key,
-                              private_key: private_key, query: query
+                              private_key: private_key,
+                              query: query
           when :v4
             signer = File::SignerV4.from_file self
-            signer.signed_url method: method, expires: expires,
-                              headers: headers, issuer: issuer,
+            signer.signed_url method: method,
+                              expires: expires,
+                              headers: headers,
+                              issuer: issuer,
                               client_email: client_email,
                               signing_key: signing_key,
-                              private_key: private_key, query: query, scheme: scheme,
-                              virtual_hosted_style: virtual_hosted_style, bucket_bound_hostname: bucket_bound_hostname
+                              private_key: private_key,
+                              query: query,
+                              scheme: scheme,
+                              virtual_hosted_style: virtual_hosted_style,
+                              bucket_bound_hostname: bucket_bound_hostname
           else
             raise ArgumentError, "version '#{version}' not supported"
           end
