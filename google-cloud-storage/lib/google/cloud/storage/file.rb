@@ -1479,6 +1479,19 @@ module Google
         #   using the URL, but only when the file resource is missing the
         #   corresponding values. (These values can be permanently set using
         #   {#content_disposition=} and {#content_type=}.)
+        # @param [String] scheme The URL scheme. The default value is `HTTPS`.
+        # @param [Boolean] virtual_hosted_style Whether to use a virtual hosted-style
+        #   hostname, which adds the bucket into the host portion of the URI rather
+        #   than the path, e.g. `https://mybucket.storage.googleapis.com/...`.
+        #   For V4 signing, this also sets the `host` header in the canonicalized
+        #   extension headers to the virtual hosted-style host, unless that header is
+        #   supplied via the `headers` param. The default value of `false` uses the
+        #   form of `https://storage.googleapis.com/mybucket`.
+        # @param [String] bucket_bound_hostname Use a bucket-bound hostname, which
+        #   replaces the `storage.googleapis.com` host with the name of a `CNAME`
+        #   bucket, e.g. a bucket named `gcs-subdomain.my.domain.tld`, or a Google
+        #   Cloud Load Balancer which routes to a bucket you own, e.g.
+        #   `my-load-balancer-domain.tld`.
         # @param [Symbol, String] version The version of the signed credential
         #   to create. Must be one of `:v2` or `:v4`. The default value is
         #   `:v2`.
@@ -1503,7 +1516,7 @@ module Google
         #   file = bucket.file "avatars/heidi/400x400.png"
         #   shared_url = file.signed_url expires: 300, # 5 minutes from now
         #                                version: :v4
-
+        #
         # @example Using the `issuer` and `signing_key` options:
         #   require "google/cloud/storage"
         #
@@ -1543,28 +1556,48 @@ module Google
         #   # Send the `x-goog-resumable:start` header and the content type
         #   # with the resumable upload POST request.
         #
-        def signed_url method: nil, expires: nil, content_type: nil,
-                       content_md5: nil, headers: nil, issuer: nil,
-                       client_email: nil, signing_key: nil, private_key: nil,
-                       query: nil, version: nil
+        def signed_url method: "GET",
+                       expires: nil,
+                       content_type: nil,
+                       content_md5: nil,
+                       headers: nil,
+                       issuer: nil,
+                       client_email: nil,
+                       signing_key: nil,
+                       private_key: nil,
+                       query: nil,
+                       scheme: "HTTPS",
+                       virtual_hosted_style: nil,
+                       bucket_bound_hostname: nil,
+                       version: nil
           ensure_service!
           version ||= :v2
           case version.to_sym
           when :v2
             signer = File::SignerV2.from_file self
-            signer.signed_url method: method, expires: expires,
-                              headers: headers, content_type: content_type,
-                              content_md5: content_md5, issuer: issuer,
+            signer.signed_url method: method,
+                              expires: expires,
+                              headers: headers,
+                              content_type: content_type,
+                              content_md5: content_md5,
+                              issuer: issuer,
                               client_email: client_email,
                               signing_key: signing_key,
-                              private_key: private_key, query: query
+                              private_key: private_key,
+                              query: query
           when :v4
             signer = File::SignerV4.from_file self
-            signer.signed_url method: method, expires: expires,
-                              headers: headers, issuer: issuer,
+            signer.signed_url method: method,
+                              expires: expires,
+                              headers: headers,
+                              issuer: issuer,
                               client_email: client_email,
                               signing_key: signing_key,
-                              private_key: private_key, query: query
+                              private_key: private_key,
+                              query: query,
+                              scheme: scheme,
+                              virtual_hosted_style: virtual_hosted_style,
+                              bucket_bound_hostname: bucket_bound_hostname
           else
             raise ArgumentError, "version '#{version}' not supported"
           end

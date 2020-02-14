@@ -19,6 +19,8 @@ Layout/SpaceAroundOperators:
   Enabled: false
 Metrics/ClassLength:
   Enabled: false
+Metrics/MethodLength:
+  Max: 40
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-storage.rb"
