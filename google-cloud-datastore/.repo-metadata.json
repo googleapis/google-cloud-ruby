@@ -1,5 +1,6 @@
 {
     "name": "datastore",
     "language": "ruby",
-    "distribution_name": "google-cloud-datastore"
+    "distribution_name": "google-cloud-datastore",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-datastore/latest"
 }

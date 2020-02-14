@@ -4,5 +4,6 @@
     "distribution_name": "google-cloud-asset",
     "module_name": "Asset",
     "module_name_credentials": "Asset::V1",
-    "env_var_prefix": "ASSET"
+    "env_var_prefix": "ASSET",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-asset/latest"
 }

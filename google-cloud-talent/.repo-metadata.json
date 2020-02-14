@@ -4,5 +4,6 @@
     "distribution_name": "google-cloud-talent",
     "module_name": "Talent",
     "module_name_credentials": "Talent::V4beta1",
-    "env_var_prefix": "TALENT"
+    "env_var_prefix": "TALENT",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-talent/latest"
 }

@@ -1,5 +1,6 @@
 {
     "name": "core",
     "language": "ruby",
-    "distribution_name": "google-cloud-core"
+    "distribution_name": "google-cloud-core",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-core/latest"
 }

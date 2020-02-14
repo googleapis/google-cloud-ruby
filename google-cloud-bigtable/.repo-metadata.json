@@ -1,5 +1,6 @@
 {
     "name": "bigtable",
     "language": "ruby",
-    "distribution_name": "google-cloud-bigtable"
+    "distribution_name": "google-cloud-bigtable",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigtable/latest"
 }

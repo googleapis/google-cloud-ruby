@@ -1,5 +1,6 @@
 {
     "name": "stackdrivercore",
     "language": "ruby",
-    "distribution_name": "stackdriver-core"
+    "distribution_name": "stackdriver-core",
+    "client_documentation": "https://googleapis.dev/ruby/stackdriver-core/latest"
 }

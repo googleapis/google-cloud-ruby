@@ -1,5 +1,6 @@
 {
     "name": "translate",
     "language": "ruby",
-    "distribution_name": "google-cloud-translate"
+    "distribution_name": "google-cloud-translate",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-translate/latest"
 }

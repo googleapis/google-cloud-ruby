@@ -1,5 +1,6 @@
 {
     "name": "clouddebugger",
     "language": "ruby",
-    "distribution_name": "google-cloud-debugger"
+    "distribution_name": "google-cloud-debugger",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-debugger/latest"
 }

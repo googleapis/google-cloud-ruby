@@ -4,5 +4,6 @@
     "distribution_name": "google-cloud-container",
     "module_name": "Container",
     "module_name_credentials": "Container::V1",
-    "env_var_prefix": "CONTAINER"
+    "env_var_prefix": "CONTAINER",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-container/latest"
 }

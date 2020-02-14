@@ -1,5 +1,6 @@
 {
     "name": "env",
     "language": "ruby",
-    "distribution_name": "google-cloud-env"
+    "distribution_name": "google-cloud-env",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-env/latest"
 }

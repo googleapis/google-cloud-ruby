@@ -4,5 +4,6 @@
     "distribution_name": "google-cloud-webrisk",
     "module_name": "Webrisk",
     "module_name_credentials": "Webrisk::V1beta1",
-    "env_var_prefix": "WEBRISK"
+    "env_var_prefix": "WEBRISK",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-webrisk/latest"
 }
