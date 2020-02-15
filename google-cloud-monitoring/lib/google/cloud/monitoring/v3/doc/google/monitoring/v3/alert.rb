@@ -23,9 +23,9 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     Required if the policy exists. The resource name for this policy. The
-      #     syntax is:
+      #     format is:
       #
-      #         projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
+      #         projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
       #
       #     `[ALERT_POLICY_ID]` is assigned by Stackdriver Monitoring when the policy
       #     is created.  When calling the
@@ -60,14 +60,14 @@ module Google
       #     OR according to the `combiner` field. If the combined conditions evaluate
       #     to true, then an incident is created. A policy can have from one to six
       #     conditions.
-      #     If |condition_time_series_uery_language| is present, it must be the only
-      #     |condition|.
+      #     If `condition_time_series_query_language` is present, it must be the only
+      #     `condition`.
       # @!attribute [rw] combiner
       #   @return [Google::Monitoring::V3::AlertPolicy::ConditionCombinerType]
       #     How to combine the results of multiple conditions to determine if an
       #     incident should be opened.
-      #     If condition_time_series_query_language is present, this must be
-      #     COMBINE_UNSPECIFIED.
+      #     If `condition_time_series_query_language` is present, this must be
+      #     `COMBINE_UNSPECIFIED`.
       # @!attribute [rw] enabled
       #   @return [Google::Protobuf::BoolValue]
       #     Whether or not the policy is enabled. On write, the default interpretation
@@ -88,9 +88,9 @@ module Google
       #     {Google::Monitoring::V3::NotificationChannel `NotificationChannel`}
       #     objects that are returned from the [`ListNotificationChannels`]
       #     [google.monitoring.v3.NotificationChannelService.ListNotificationChannels]
-      #     method. The syntax of the entries in this field is:
+      #     method. The format of the entries in this field is:
       #
-      #         projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]
+      #         projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
       # @!attribute [rw] creation_record
       #   @return [Google::Monitoring::V3::MutationRecord]
       #     A read-only record of the creation of the alerting policy. If provided
@@ -121,9 +121,9 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required if the condition exists. The unique resource name for this
-        #     condition. Its syntax is:
+        #     condition. Its format is:
         #
-        #         projects/[PROJECT_ID]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
+        #         projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
         #
         #     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
         #     condition is created as part of a new or updated alerting policy.
@@ -199,11 +199,11 @@ module Google
           #     field.
           # @!attribute [rw] denominator_filter
           #   @return [String]
-          #     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that identifies a time
-          #     series that should be used as the denominator of a ratio that will be
-          #     compared with the threshold. If a `denominator_filter` is specified,
-          #     the time series specified by the `filter` field will be used as the
-          #     numerator.
+          #     A [filter](https://cloud.google.com/monitoring/api/v3/filters) that
+          #     identifies a time series that should be used as the denominator of a
+          #     ratio that will be compared with the threshold. If a
+          #     `denominator_filter` is specified, the time series specified by the
+          #     `filter` field will be used as the numerator.
           #
           #     The filter must specify the metric type and optionally may contain
           #     restrictions on resource type, resource labels, and metric labels.
@@ -306,7 +306,7 @@ module Google
           COMBINE_UNSPECIFIED = 0
 
           # Combine conditions using the logical `AND` operator. An
-          # incident is created only if all conditions are met
+          # incident is created only if all the conditions are met
           # simultaneously. This combiner is satisfied if all conditions are
           # met, even if they are met on completely different resources.
           AND = 1

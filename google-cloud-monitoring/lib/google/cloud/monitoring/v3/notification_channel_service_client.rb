@@ -325,7 +325,7 @@ module Google
           #   Required. The REST resource name of the parent from which to retrieve
           #   the notification channel descriptors. The expected syntax is:
           #
-          #       projects/[PROJECT_ID]
+          #       projects/[PROJECT_ID_OR_NUMBER]
           #
           #   Note that this names the parent container in which to look for the
           #   descriptors; to retrieve a single descriptor by name, use the
@@ -385,8 +385,9 @@ module Google
           # are expected / permitted for a notification channel of the given type.
           #
           # @param name [String]
-          #   Required. The channel type for which to execute the request. The format is
-          #   `projects/[PROJECT_ID]/notificationChannelDescriptors/{channel_type}`.
+          #   Required. The channel type for which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[CHANNEL_TYPE]
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -416,8 +417,11 @@ module Google
           # Lists the notification channels that have been created for the project.
           #
           # @param name [String]
-          #   Required. The project on which to execute the request. The format is
-          #   `projects/[PROJECT_ID]`. That is, this names the container
+          #   Required. The project on which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
+          #
+          #   This names the container
           #   in which to look for the notification channels; it does not name a
           #   specific channel. To query a specific channel by REST resource name, use
           #   the
@@ -428,14 +432,14 @@ module Google
           #   notification channels to be included in the response.
           #
           #   For more details, see [sorting and
-          #   filtering](/monitoring/api/v3/sorting-and-filtering).
+          #   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
           # @param order_by [String]
           #   A comma-separated list of fields by which to sort the result. Supports
           #   the same set of fields as in `filter`. Entries can be prefixed with
           #   a minus sign to sort in descending rather than ascending order.
           #
           #   For more details, see [sorting and
-          #   filtering](/monitoring/api/v3/sorting-and-filtering).
+          #   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -497,8 +501,9 @@ module Google
           # that was supplied in the call to the create method.
           #
           # @param name [String]
-          #   Required. The channel for which to execute the request. The format is
-          #   `projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]`.
+          #   Required. The channel for which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -531,10 +536,10 @@ module Google
           # @param name [String]
           #   Required. The project on which to execute the request. The format is:
           #
-          #       projects/[PROJECT_ID]
+          #       projects/[PROJECT_ID_OR_NUMBER]
           #
-          #   Note that this names the container into which the channel will be
-          #   written. This does not name the newly created channel. The resulting
+          #   This names the container into which the channel will be
+          #   written, this does not name the newly created channel. The resulting
           #   channel's name will have a normalized version of this field as a prefix,
           #   but will add `/notificationChannels/[CHANNEL_ID]` to identify the channel.
           # @param notification_channel [Google::Monitoring::V3::NotificationChannel | Hash]
@@ -619,8 +624,9 @@ module Google
           # Deletes a notification channel.
           #
           # @param name [String]
-          #   Required. The channel for which to execute the request. The format is
-          #   `projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]`.
+          #   Required. The channel for which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
           # @param force [true, false]
           #   If true, the notification channel will be deleted regardless of its
           #   use in alert policies (the policies will be updated to remove the

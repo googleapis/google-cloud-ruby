@@ -45,10 +45,11 @@ module Google
           rpc :GetMetricDescriptor, GetMetricDescriptorRequest, Google::Api::MetricDescriptor
           # Creates a new metric descriptor.
           # User-created metric descriptors define
-          # [custom metrics](/monitoring/custom-metrics).
+          # [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
           rpc :CreateMetricDescriptor, CreateMetricDescriptorRequest, Google::Api::MetricDescriptor
           # Deletes a metric descriptor. Only user-created
-          # [custom metrics](/monitoring/custom-metrics) can be deleted.
+          # [custom metrics](https://cloud.google.com/monitoring/custom-metrics) can be
+          # deleted.
           rpc :DeleteMetricDescriptor, DeleteMetricDescriptorRequest, Google::Protobuf::Empty
           # Lists time series that match a filter. This method does not require a Stackdriver account.
           rpc :ListTimeSeries, ListTimeSeriesRequest, ListTimeSeriesResponse
