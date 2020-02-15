@@ -330,7 +330,7 @@ module Google
           # resource name rules</a>.
           #
           # @param name [String]
-          #   The name of the topic. It must have the format
+          #   Required. The name of the topic. It must have the format
           #   `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
           #   and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
           #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
@@ -386,11 +386,11 @@ module Google
           # topic are not modifiable.
           #
           # @param topic [Google::Cloud::PubSub::V1::Topic | Hash]
-          #   The updated topic object.
+          #   Required. The updated topic object.
           #   A hash of the same form as `Google::Cloud::PubSub::V1::Topic`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Indicates which fields in the provided topic to update. Must be specified
+          #   Required. Indicates which fields in the provided topic to update. Must be specified
           #   and non-empty. Note that if `update_mask` contains
           #   "message_storage_policy" then the new value will be determined based on the
           #   policy configured at the project or organization level. The
@@ -434,10 +434,10 @@ module Google
           # does not exist.
           #
           # @param topic [String]
-          #   The messages in the request will be published on this topic.
+          #   Required. The messages in the request will be published on this topic.
           #   Format is `projects/{project}/topics/{topic}`.
           # @param messages [Array<Google::Cloud::PubSub::V1::PubsubMessage | Hash>]
-          #   The messages to publish.
+          #   Required. The messages to publish.
           #   A hash of the same form as `Google::Cloud::PubSub::V1::PubsubMessage`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -474,7 +474,7 @@ module Google
           # Gets the configuration of a topic.
           #
           # @param topic [String]
-          #   The name of the topic to get.
+          #   Required. The name of the topic to get.
           #   Format is `projects/{project}/topics/{topic}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -505,7 +505,7 @@ module Google
           # Lists matching topics.
           #
           # @param project [String]
-          #   The name of the project in which to list topics.
+          #   Required. The name of the project in which to list topics.
           #   Format is `projects/{project-id}`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -560,7 +560,7 @@ module Google
           # Lists the names of the subscriptions on this topic.
           #
           # @param topic [String]
-          #   The name of the topic that subscriptions are attached to.
+          #   Required. The name of the topic that subscriptions are attached to.
           #   Format is `projects/{project}/topics/{topic}`.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -619,7 +619,7 @@ module Google
           # not deleted, but their `topic` field is set to `_deleted-topic_`.
           #
           # @param topic [String]
-          #   Name of the topic to delete.
+          #   Required. Name of the topic to delete.
           #   Format is `projects/{project}/topics/{topic}`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -647,8 +647,11 @@ module Google
             nil
           end
 
-          # Sets the access control policy on the specified resource. Replaces any
-          # existing policy.
+          # Sets the access control policy on the specified resource. Replaces
+          # any existing policy.
+          #
+          # Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and
+          # PERMISSION_DENIED
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.
@@ -691,9 +694,8 @@ module Google
             @set_iam_policy.call(req, options, &block)
           end
 
-          # Gets the access control policy for a resource.
-          # Returns an empty policy if the resource exists and does not have a policy
-          # set.
+          # Gets the access control policy for a resource. Returns an empty policy
+          # if the resource exists and does not have a policy set.
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being requested.
@@ -731,13 +733,13 @@ module Google
             @get_iam_policy.call(req, options, &block)
           end
 
-          # Returns permissions that a caller has on the specified resource.
-          # If the resource does not exist, this will return an empty set of
+          # Returns permissions that a caller has on the specified resource. If the
+          # resource does not exist, this will return an empty set of
           # permissions, not a NOT_FOUND error.
           #
-          # Note: This operation is designed to be used for building permission-aware
-          # UIs and command-line tools, not for authorization checking. This operation
-          # may "fail open" without warning.
+          # Note: This operation is designed to be used for building
+          # permission-aware UIs and command-line tools, not for authorization
+          # checking. This operation may "fail open" without warning.
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy detail is being requested.

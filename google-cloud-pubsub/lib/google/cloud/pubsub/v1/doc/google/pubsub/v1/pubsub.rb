@@ -29,7 +29,7 @@ module Google
       # A topic resource.
       # @!attribute [rw] name
       #   @return [String]
-      #     The name of the topic. It must have the format
+      #     Required. The name of the topic. It must have the format
       #     `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
       #     and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
       #     underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
@@ -95,17 +95,17 @@ module Google
       # Request for the GetTopic method.
       # @!attribute [rw] topic
       #   @return [String]
-      #     The name of the topic to get.
+      #     Required. The name of the topic to get.
       #     Format is `projects/{project}/topics/{topic}`.
       class GetTopicRequest; end
 
       # Request for the UpdateTopic method.
       # @!attribute [rw] topic
       #   @return [Google::Cloud::PubSub::V1::Topic]
-      #     The updated topic object.
+      #     Required. The updated topic object.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
-      #     Indicates which fields in the provided topic to update. Must be specified
+      #     Required. Indicates which fields in the provided topic to update. Must be specified
       #     and non-empty. Note that if `update_mask` contains
       #     "message_storage_policy" then the new value will be determined based on the
       #     policy configured at the project or organization level. The
@@ -115,11 +115,11 @@ module Google
       # Request for the Publish method.
       # @!attribute [rw] topic
       #   @return [String]
-      #     The messages in the request will be published on this topic.
+      #     Required. The messages in the request will be published on this topic.
       #     Format is `projects/{project}/topics/{topic}`.
       # @!attribute [rw] messages
       #   @return [Array<Google::Cloud::PubSub::V1::PubsubMessage>]
-      #     The messages to publish.
+      #     Required. The messages to publish.
       class PublishRequest; end
 
       # Response for the `Publish` method.
@@ -133,7 +133,7 @@ module Google
       # Request for the `ListTopics` method.
       # @!attribute [rw] project
       #   @return [String]
-      #     The name of the project in which to list topics.
+      #     Required. The name of the project in which to list topics.
       #     Format is `projects/{project-id}`.
       # @!attribute [rw] page_size
       #   @return [Integer]
@@ -158,7 +158,7 @@ module Google
       # Request for the `ListTopicSubscriptions` method.
       # @!attribute [rw] topic
       #   @return [String]
-      #     The name of the topic that subscriptions are attached to.
+      #     Required. The name of the topic that subscriptions are attached to.
       #     Format is `projects/{project}/topics/{topic}`.
       # @!attribute [rw] page_size
       #   @return [Integer]
@@ -210,22 +210,22 @@ module Google
       # Request for the `DeleteTopic` method.
       # @!attribute [rw] topic
       #   @return [String]
-      #     Name of the topic to delete.
+      #     Required. Name of the topic to delete.
       #     Format is `projects/{project}/topics/{topic}`.
       class DeleteTopicRequest; end
 
       # A subscription resource.
       # @!attribute [rw] name
       #   @return [String]
-      #     The name of the subscription. It must have the format
+      #     Required. The name of the subscription. It must have the format
       #     `"projects/{project}/subscriptions/{subscription}"`. `{subscription}` must
       #     start with a letter, and contain only letters (`[A-Za-z]`), numbers
       #     (`[0-9]`), dashes (`-`), underscores (`_`), periods (`.`), tildes (`~`),
       #     plus (`+`) or percent signs (`%`). It must be between 3 and 255 characters
-      #     in length, and it must not start with `"goog"`
+      #     in length, and it must not start with `"goog"`.
       # @!attribute [rw] topic
       #   @return [String]
-      #     The name of the topic from which this subscription is receiving messages.
+      #     Required. The name of the topic from which this subscription is receiving messages.
       #     Format is `projects/{project}/topics/{topic}`.
       #     The value of this field will be `_deleted-topic_` if the topic has been
       #     deleted.
@@ -438,24 +438,24 @@ module Google
       # Request for the GetSubscription method.
       # @!attribute [rw] subscription
       #   @return [String]
-      #     The name of the subscription to get.
+      #     Required. The name of the subscription to get.
       #     Format is `projects/{project}/subscriptions/{sub}`.
       class GetSubscriptionRequest; end
 
       # Request for the UpdateSubscription method.
       # @!attribute [rw] subscription
       #   @return [Google::Cloud::PubSub::V1::Subscription]
-      #     The updated subscription object.
+      #     Required. The updated subscription object.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
-      #     Indicates which fields in the provided subscription to update.
+      #     Required. Indicates which fields in the provided subscription to update.
       #     Must be specified and non-empty.
       class UpdateSubscriptionRequest; end
 
       # Request for the `ListSubscriptions` method.
       # @!attribute [rw] project
       #   @return [String]
-      #     The name of the project in which to list subscriptions.
+      #     Required. The name of the project in which to list subscriptions.
       #     Format is `projects/{project-id}`.
       # @!attribute [rw] page_size
       #   @return [Integer]
@@ -481,18 +481,18 @@ module Google
       # Request for the DeleteSubscription method.
       # @!attribute [rw] subscription
       #   @return [String]
-      #     The subscription to delete.
+      #     Required. The subscription to delete.
       #     Format is `projects/{project}/subscriptions/{sub}`.
       class DeleteSubscriptionRequest; end
 
       # Request for the ModifyPushConfig method.
       # @!attribute [rw] subscription
       #   @return [String]
-      #     The name of the subscription.
+      #     Required. The name of the subscription.
       #     Format is `projects/{project}/subscriptions/{sub}`.
       # @!attribute [rw] push_config
       #   @return [Google::Cloud::PubSub::V1::PushConfig]
-      #     The push configuration for future deliveries.
+      #     Required. The push configuration for future deliveries.
       #
       #     An empty `pushConfig` indicates that the Pub/Sub system should
       #     stop pushing messages from the given subscription and allow
@@ -503,7 +503,7 @@ module Google
       # Request for the `Pull` method.
       # @!attribute [rw] subscription
       #   @return [String]
-      #     The subscription from which messages should be pulled.
+      #     Required. The subscription from which messages should be pulled.
       #     Format is `projects/{project}/subscriptions/{sub}`.
       # @!attribute [rw] return_immediately
       #   @return [true, false]
@@ -513,7 +513,7 @@ module Google
       #     least one message is available, rather than returning no messages.
       # @!attribute [rw] max_messages
       #   @return [Integer]
-      #     The maximum number of messages to return for this request. Must be a
+      #     Required. The maximum number of messages to return for this request. Must be a
       #     positive integer. The Pub/Sub system may return fewer than the number
       #     specified.
       class PullRequest; end
@@ -530,14 +530,14 @@ module Google
       # Request for the ModifyAckDeadline method.
       # @!attribute [rw] subscription
       #   @return [String]
-      #     The name of the subscription.
+      #     Required. The name of the subscription.
       #     Format is `projects/{project}/subscriptions/{sub}`.
       # @!attribute [rw] ack_ids
       #   @return [Array<String>]
-      #     List of acknowledgment IDs.
+      #     Required. List of acknowledgment IDs.
       # @!attribute [rw] ack_deadline_seconds
       #   @return [Integer]
-      #     The new ack deadline with respect to the time this request was sent to
+      #     Required. The new ack deadline with respect to the time this request was sent to
       #     the Pub/Sub system. For example, if the value is 10, the new
       #     ack deadline will expire 10 seconds after the `ModifyAckDeadline` call
       #     was made. Specifying zero might immediately make the message available for
@@ -550,11 +550,11 @@ module Google
       # Request for the Acknowledge method.
       # @!attribute [rw] subscription
       #   @return [String]
-      #     The subscription whose message is being acknowledged.
+      #     Required. The subscription whose message is being acknowledged.
       #     Format is `projects/{project}/subscriptions/{sub}`.
       # @!attribute [rw] ack_ids
       #   @return [Array<String>]
-      #     The acknowledgment ID for the messages being acknowledged that was returned
+      #     Required. The acknowledgment ID for the messages being acknowledged that was returned
       #     by the Pub/Sub system in the `Pull` response. Must not be empty.
       class AcknowledgeRequest; end
 
@@ -563,7 +563,7 @@ module Google
       # deadline modifications from the client to the server.
       # @!attribute [rw] subscription
       #   @return [String]
-      #     The subscription for which to initialize the new stream. This must be
+      #     Required. The subscription for which to initialize the new stream. This must be
       #     provided in the first request on the stream, and must not be set in
       #     subsequent requests from client to server.
       #     Format is `projects/{project}/subscriptions/{sub}`.
@@ -596,7 +596,7 @@ module Google
       #     processing was interrupted.
       # @!attribute [rw] stream_ack_deadline_seconds
       #   @return [Integer]
-      #     The ack deadline to use for the stream. This must be provided in the
+      #     Required. The ack deadline to use for the stream. This must be provided in the
       #     first request on the stream, but it can also be updated on subsequent
       #     requests from client to server. The minimum deadline you can specify is 10
       #     seconds. The maximum deadline you can specify is 600 seconds (10 minutes).
@@ -620,7 +620,7 @@ module Google
       # Request for the `CreateSnapshot` method.
       # @!attribute [rw] name
       #   @return [String]
-      #     User-provided name for this snapshot. If the name is not provided in the
+      #     Required. User-provided name for this snapshot. If the name is not provided in the
       #     request, the server will assign a random name for this snapshot on the same
       #     project as the subscription. Note that for REST API requests, you must
       #     specify a name.  See the <a
@@ -628,7 +628,7 @@ module Google
       #     name rules</a>. Format is `projects/{project}/snapshots/{snap}`.
       # @!attribute [rw] subscription
       #   @return [String]
-      #     The subscription whose backlog the snapshot retains.
+      #     Required. The subscription whose backlog the snapshot retains.
       #     Specifically, the created snapshot is guaranteed to retain:
       #      (a) The existing backlog on the subscription. More precisely, this is
       #          defined as the messages in the subscription's backlog that are
@@ -646,10 +646,10 @@ module Google
       # Request for the UpdateSnapshot method.
       # @!attribute [rw] snapshot
       #   @return [Google::Cloud::PubSub::V1::Snapshot]
-      #     The updated snapshot object.
+      #     Required. The updated snapshot object.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
-      #     Indicates which fields in the provided snapshot to update.
+      #     Required. Indicates which fields in the provided snapshot to update.
       #     Must be specified and non-empty.
       class UpdateSnapshotRequest; end
 
@@ -686,14 +686,14 @@ module Google
       # Request for the GetSnapshot method.
       # @!attribute [rw] snapshot
       #   @return [String]
-      #     The name of the snapshot to get.
+      #     Required. The name of the snapshot to get.
       #     Format is `projects/{project}/snapshots/{snap}`.
       class GetSnapshotRequest; end
 
       # Request for the `ListSnapshots` method.
       # @!attribute [rw] project
       #   @return [String]
-      #     The name of the project in which to list snapshots.
+      #     Required. The name of the project in which to list snapshots.
       #     Format is `projects/{project-id}`.
       # @!attribute [rw] page_size
       #   @return [Integer]
@@ -718,14 +718,14 @@ module Google
       # Request for the `DeleteSnapshot` method.
       # @!attribute [rw] snapshot
       #   @return [String]
-      #     The name of the snapshot to delete.
+      #     Required. The name of the snapshot to delete.
       #     Format is `projects/{project}/snapshots/{snap}`.
       class DeleteSnapshotRequest; end
 
       # Request for the `Seek` method.
       # @!attribute [rw] subscription
       #   @return [String]
-      #     The subscription to affect.
+      #     Required. The subscription to affect.
       # @!attribute [rw] time
       #   @return [Google::Protobuf::Timestamp]
       #     The time to seek to.
