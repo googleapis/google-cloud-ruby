@@ -282,22 +282,32 @@ module Google
           # Lists the existing groups.
           #
           # @param name [String]
-          #   Required. The project whose groups are to be listed. The format is
-          #   `"projects/{project_id_or_number}"`.
+          #   Required. The project whose groups are to be listed. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
           # @param children_of_group [String]
-          #   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
-          #   Returns groups whose `parentName` field contains the group
+          #   A group name. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+          #
+          #   Returns groups whose `parent_name` field contains the group
           #   name.  If no groups have this parent, the results are empty.
           # @param ancestors_of_group [String]
-          #   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
+          #   A group name. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+          #
           #   Returns groups that are ancestors of the specified group.
           #   The groups are returned in order, starting with the immediate parent and
           #   ending with the most distant ancestor.  If the specified group has no
           #   immediate parent, the results are empty.
           # @param descendants_of_group [String]
-          #   A group name: `"projects/{project_id_or_number}/groups/{group_id}"`.
+          #   A group name. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
+          #
           #   Returns the descendants of the specified group.  This is a superset of
-          #   the results returned by the `childrenOfGroup` filter, and includes
+          #   the results returned by the `children_of_group` filter, and includes
           #   children-of-children, and so forth.
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
@@ -358,8 +368,9 @@ module Google
           # Gets a single group.
           #
           # @param name [String]
-          #   Required. The group to retrieve. The format is
-          #   `"projects/{project_id_or_number}/groups/{group_id}"`.
+          #   Required. The group to retrieve. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -389,8 +400,9 @@ module Google
           # Creates a new group.
           #
           # @param name [String]
-          #   Required. The project in which to create the group. The format is
-          #   `"projects/{project_id_or_number}"`.
+          #   Required. The project in which to create the group. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
           # @param group [Google::Monitoring::V3::Group | Hash]
           #   Required. A group definition. It is an error to define the `name` field because
           #   the system assigns the name.
@@ -474,8 +486,9 @@ module Google
           # Deletes an existing group.
           #
           # @param name [String]
-          #   Required. The group to delete. The format is
-          #   `"projects/{project_id_or_number}/groups/{group_id}"`.
+          #   Required. The group to delete. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
           # @param recursive [true, false]
           #   If this field is true, then the request means to delete a group with all
           #   its descendants. Otherwise, the request means to delete a group only when
@@ -511,8 +524,9 @@ module Google
           # Lists the monitored resources that are members of a group.
           #
           # @param name [String]
-          #   Required. The group whose members are listed. The format is
-          #   `"projects/{project_id_or_number}/groups/{group_id}"`.
+          #   Required. The group whose members are listed. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -520,13 +534,14 @@ module Google
           #   performed per-page, this determines the maximum number of
           #   resources in a page.
           # @param filter [String]
-          #   An optional [list filter](https://cloud.google.com/monitoring/api/learn_more#filtering) describing
-          #   the members to be returned.  The filter may reference the type, labels, and
-          #   metadata of monitored resources that comprise the group.
-          #   For example, to return only resources representing Compute Engine VM
-          #   instances, use this filter:
+          #   An optional [list
+          #   filter](https://cloud.google.com/monitoring/api/learn_more#filtering)
+          #   describing the members to be returned.  The filter may reference the type,
+          #   labels, and metadata of monitored resources that comprise the group. For
+          #   example, to return only resources representing Compute Engine VM instances,
+          #   use this filter:
           #
-          #       resource.type = "gce_instance"
+          #       `resource.type = "gce_instance"`
           # @param interval [Google::Monitoring::V3::TimeInterval | Hash]
           #   An optional time interval for which results should be returned. Only
           #   members that were part of the group during the specified interval are

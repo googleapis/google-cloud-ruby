@@ -19,35 +19,37 @@ module Google
       # The protocol for the `CreateAlertPolicy` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The project in which to create the alerting policy. The format is
-      #     `projects/[PROJECT_ID]`.
+      #     Required. The project in which to create the alerting policy. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]
       #
       #     Note that this field names the parent container in which the alerting
       #     policy will be written, not the name of the created policy. The alerting
       #     policy that is returned will have a name that contains a normalized
       #     representation of this name as a prefix but adds a suffix of the form
-      #     `/alertPolicies/[POLICY_ID]`, identifying the policy in the container.
+      #     `/alertPolicies/[ALERT_POLICY_ID]`, identifying the policy in the
+      #     container.
       # @!attribute [rw] alert_policy
       #   @return [Google::Monitoring::V3::AlertPolicy]
       #     Required. The requested alerting policy. You should omit the `name` field in this
       #     policy. The name will be returned in the new policy, including
-      #     a new [ALERT_POLICY_ID] value.
+      #     a new `[ALERT_POLICY_ID]` value.
       class CreateAlertPolicyRequest; end
 
       # The protocol for the `GetAlertPolicy` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The alerting policy to retrieve. The format is
+      #     Required. The alerting policy to retrieve. The format is:
       #
-      #         projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
+      #         projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
       class GetAlertPolicyRequest; end
 
       # The protocol for the `ListAlertPolicies` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The project whose alert policies are to be listed. The format is
+      #     Required. The project whose alert policies are to be listed. The format is:
       #
-      #         projects/[PROJECT_ID]
+      #         projects/[PROJECT_ID_OR_NUMBER]
       #
       #     Note that this field names the parent container in which the alerting
       #     policies to be listed are stored. To retrieve a single alerting policy
@@ -60,7 +62,7 @@ module Google
       #     alert policies to be included in the response.
       #
       #     For more details, see [sorting and
-      #     filtering](/monitoring/api/v3/sorting-and-filtering).
+      #     filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
       # @!attribute [rw] order_by
       #   @return [String]
       #     A comma-separated list of fields by which to sort the result. Supports
@@ -68,7 +70,7 @@ module Google
       #     prefixed with a minus sign to sort by the field in descending order.
       #
       #     For more details, see [sorting and
-      #     filtering](/monitoring/api/v3/sorting-and-filtering).
+      #     filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     The maximum number of results to return in a single response.
@@ -87,7 +89,7 @@ module Google
       #   @return [String]
       #     If there might be more results than were returned, then this field is set
       #     to a non-empty value. To see the additional results,
-      #     use that value as `pageToken` in the next call to this method.
+      #     use that value as `page_token` in the next call to this method.
       class ListAlertPoliciesResponse; end
 
       # The protocol for the `UpdateAlertPolicy` request.
@@ -127,7 +129,7 @@ module Google
       #   @return [String]
       #     Required. The alerting policy to delete. The format is:
       #
-      #         projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
+      #         projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
       #
       #     For more information, see {Google::Monitoring::V3::AlertPolicy AlertPolicy}.
       class DeleteAlertPolicyRequest; end

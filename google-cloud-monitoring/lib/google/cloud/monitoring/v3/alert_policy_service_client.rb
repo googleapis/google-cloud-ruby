@@ -286,9 +286,9 @@ module Google
           # Lists the existing alerting policies for the project.
           #
           # @param name [String]
-          #   Required. The project whose alert policies are to be listed. The format is
+          #   Required. The project whose alert policies are to be listed. The format is:
           #
-          #       projects/[PROJECT_ID]
+          #       projects/[PROJECT_ID_OR_NUMBER]
           #
           #   Note that this field names the parent container in which the alerting
           #   policies to be listed are stored. To retrieve a single alerting policy
@@ -300,14 +300,14 @@ module Google
           #   alert policies to be included in the response.
           #
           #   For more details, see [sorting and
-          #   filtering](/monitoring/api/v3/sorting-and-filtering).
+          #   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
           # @param order_by [String]
           #   A comma-separated list of fields by which to sort the result. Supports
           #   the same set of field references as the `filter` field. Entries can be
           #   prefixed with a minus sign to sort by the field in descending order.
           #
           #   For more details, see [sorting and
-          #   filtering](/monitoring/api/v3/sorting-and-filtering).
+          #   filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -365,9 +365,9 @@ module Google
           # Gets a single alerting policy.
           #
           # @param name [String]
-          #   Required. The alerting policy to retrieve. The format is
+          #   Required. The alerting policy to retrieve. The format is:
           #
-          #       projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
+          #       projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -397,18 +397,20 @@ module Google
           # Creates a new alerting policy.
           #
           # @param name [String]
-          #   Required. The project in which to create the alerting policy. The format is
-          #   `projects/[PROJECT_ID]`.
+          #   Required. The project in which to create the alerting policy. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
           #
           #   Note that this field names the parent container in which the alerting
           #   policy will be written, not the name of the created policy. The alerting
           #   policy that is returned will have a name that contains a normalized
           #   representation of this name as a prefix but adds a suffix of the form
-          #   `/alertPolicies/[POLICY_ID]`, identifying the policy in the container.
+          #   `/alertPolicies/[ALERT_POLICY_ID]`, identifying the policy in the
+          #   container.
           # @param alert_policy [Google::Monitoring::V3::AlertPolicy | Hash]
           #   Required. The requested alerting policy. You should omit the `name` field in this
           #   policy. The name will be returned in the new policy, including
-          #   a new [ALERT_POLICY_ID] value.
+          #   a new `[ALERT_POLICY_ID]` value.
           #   A hash of the same form as `Google::Monitoring::V3::AlertPolicy`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -447,7 +449,7 @@ module Google
           # @param name [String]
           #   Required. The alerting policy to delete. The format is:
           #
-          #       projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
+          #       projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
           #
           #   For more information, see {Google::Monitoring::V3::AlertPolicy AlertPolicy}.
           # @param options [Google::Gax::CallOptions]

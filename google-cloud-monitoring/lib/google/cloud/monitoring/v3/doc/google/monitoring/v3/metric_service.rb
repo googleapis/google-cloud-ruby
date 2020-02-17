@@ -19,15 +19,15 @@ module Google
       # The `ListMonitoredResourceDescriptors` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The project on which to execute the request. The format is
-      #     `"projects/{project_id_or_number}"`.
+      #     Required. The project on which to execute the request. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]
       # @!attribute [rw] filter
       #   @return [String]
-      #     An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
-      #     the descriptors to be returned.  The filter can reference
-      #     the descriptor's type and labels. For example, the
-      #     following filter returns only Google Compute Engine descriptors
-      #     that have an `id` label:
+      #     An optional [filter](https://cloud.google.com/monitoring/api/v3/filters)
+      #     describing the descriptors to be returned.  The filter can reference the
+      #     descriptor's type and labels. For example, the following filter returns
+      #     only Google Compute Engine descriptors that have an `id` label:
       #
       #         resource.type = starts_with("gce_") AND resource.label:id
       # @!attribute [rw] page_size
@@ -49,23 +49,26 @@ module Google
       #   @return [String]
       #     If there are more results than have been returned, then this field is set
       #     to a non-empty value.  To see the additional results,
-      #     use that value as `pageToken` in the next call to this method.
+      #     use that value as `page_token` in the next call to this method.
       class ListMonitoredResourceDescriptorsResponse; end
 
       # The `GetMonitoredResourceDescriptor` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The monitored resource descriptor to get.  The format is
-      #     `"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"`.
-      #     The `{resource_type}` is a predefined type, such as
+      #     Required. The monitored resource descriptor to get.  The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/monitoredResourceDescriptors/[RESOURCE_TYPE]
+      #
+      #     The `[RESOURCE_TYPE]` is a predefined type, such as
       #     `cloudsql_database`.
       class GetMonitoredResourceDescriptorRequest; end
 
       # The `ListMetricDescriptors` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The project on which to execute the request. The format is
-      #     `"projects/{project_id_or_number}"`.
+      #     Required. The project on which to execute the request. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]
       # @!attribute [rw] filter
       #   @return [String]
       #     If this field is empty, all custom and
@@ -95,23 +98,26 @@ module Google
       #   @return [String]
       #     If there are more results than have been returned, then this field is set
       #     to a non-empty value.  To see the additional results,
-      #     use that value as `pageToken` in the next call to this method.
+      #     use that value as `page_token` in the next call to this method.
       class ListMetricDescriptorsResponse; end
 
       # The `GetMetricDescriptor` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The metric descriptor on which to execute the request. The format is
-      #     `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
-      #     An example value of `{metric_id}` is
+      #     Required. The metric descriptor on which to execute the request. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
+      #
+      #     An example value of `[METRIC_ID]` is
       #     `"compute.googleapis.com/instance/disk/read_bytes_count"`.
       class GetMetricDescriptorRequest; end
 
       # The `CreateMetricDescriptor` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The project on which to execute the request. The format is
-      #     `"projects/{project_id_or_number}"`.
+      #     Required. The project on which to execute the request. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]
       # @!attribute [rw] metric_descriptor
       #   @return [Google::Api::MetricDescriptor]
       #     Required. The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
@@ -121,23 +127,26 @@ module Google
       # The `DeleteMetricDescriptor` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The metric descriptor on which to execute the request. The format is
-      #     `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
-      #     An example of `{metric_id}` is:
+      #     Required. The metric descriptor on which to execute the request. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
+      #
+      #     An example of `[METRIC_ID]` is:
       #     `"custom.googleapis.com/my_test_metric"`.
       class DeleteMetricDescriptorRequest; end
 
       # The `ListTimeSeries` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The project on which to execute the request. The format is
-      #     "projects/\\{project_id_or_number}".
+      #     Required. The project on which to execute the request. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]
       # @!attribute [rw] filter
       #   @return [String]
-      #     Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
-      #     series should be returned.  The filter must specify a single metric type,
-      #     and can additionally specify metric labels and other information. For
-      #     example:
+      #     Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
+      #     that specifies which time series should be returned.  The filter must
+      #     specify a single metric type, and can additionally specify metric labels
+      #     and other information. For example:
       #
       #         metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
       #             metric.labels.instance_name = "my-instance-name"
@@ -193,7 +202,7 @@ module Google
       #   @return [String]
       #     If there are more results than have been returned, then this field is set
       #     to a non-empty value.  To see the additional results,
-      #     use that value as `pageToken` in the next call to this method.
+      #     use that value as `page_token` in the next call to this method.
       # @!attribute [rw] execution_errors
       #   @return [Array<Google::Rpc::Status>]
       #     Query execution errors that may have caused the time series data returned
@@ -203,8 +212,9 @@ module Google
       # The `CreateTimeSeries` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The project on which to execute the request. The format is
-      #     `"projects/{project_id_or_number}"`.
+      #     Required. The project on which to execute the request. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]
       # @!attribute [rw] time_series
       #   @return [Array<Google::Monitoring::V3::TimeSeries>]
       #     Required. The new data to be added to a list of time series.

@@ -309,14 +309,14 @@ module Google
           # Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
           #
           # @param name [String]
-          #   Required. The project on which to execute the request. The format is
-          #   `"projects/{project_id_or_number}"`.
+          #   Required. The project on which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
           # @param filter [String]
-          #   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters) describing
-          #   the descriptors to be returned.  The filter can reference
-          #   the descriptor's type and labels. For example, the
-          #   following filter returns only Google Compute Engine descriptors
-          #   that have an `id` label:
+          #   An optional [filter](https://cloud.google.com/monitoring/api/v3/filters)
+          #   describing the descriptors to be returned.  The filter can reference the
+          #   descriptor's type and labels. For example, the following filter returns
+          #   only Google Compute Engine descriptors that have an `id` label:
           #
           #       resource.type = starts_with("gce_") AND resource.label:id
           # @param page_size [Integer]
@@ -374,9 +374,11 @@ module Google
           # Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
           #
           # @param name [String]
-          #   Required. The monitored resource descriptor to get.  The format is
-          #   `"projects/{project_id_or_number}/monitoredResourceDescriptors/{resource_type}"`.
-          #   The `{resource_type}` is a predefined type, such as
+          #   Required. The monitored resource descriptor to get.  The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/monitoredResourceDescriptors/[RESOURCE_TYPE]
+          #
+          #   The `[RESOURCE_TYPE]` is a predefined type, such as
           #   `cloudsql_database`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -407,8 +409,9 @@ module Google
           # Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
           #
           # @param name [String]
-          #   Required. The project on which to execute the request. The format is
-          #   `"projects/{project_id_or_number}"`.
+          #   Required. The project on which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
           # @param filter [String]
           #   If this field is empty, all custom and
           #   system-defined metric descriptors are returned.
@@ -473,9 +476,11 @@ module Google
           # Gets a single metric descriptor. This method does not require a Stackdriver account.
           #
           # @param name [String]
-          #   Required. The metric descriptor on which to execute the request. The format is
-          #   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
-          #   An example value of `{metric_id}` is
+          #   Required. The metric descriptor on which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
+          #
+          #   An example value of `[METRIC_ID]` is
           #   `"compute.googleapis.com/instance/disk/read_bytes_count"`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -508,8 +513,9 @@ module Google
           # [custom metrics](https://cloud.google.com/monitoring/custom-metrics).
           #
           # @param name [String]
-          #   Required. The project on which to execute the request. The format is
-          #   `"projects/{project_id_or_number}"`.
+          #   Required. The project on which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
           # @param metric_descriptor [Google::Api::MetricDescriptor | Hash]
           #   Required. The new [custom metric](https://cloud.google.com/monitoring/custom-metrics)
           #   descriptor.
@@ -547,12 +553,15 @@ module Google
           end
 
           # Deletes a metric descriptor. Only user-created
-          # [custom metrics](https://cloud.google.com/monitoring/custom-metrics) can be deleted.
+          # [custom metrics](https://cloud.google.com/monitoring/custom-metrics) can be
+          # deleted.
           #
           # @param name [String]
-          #   Required. The metric descriptor on which to execute the request. The format is
-          #   `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`.
-          #   An example of `{metric_id}` is:
+          #   Required. The metric descriptor on which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/metricDescriptors/[METRIC_ID]
+          #
+          #   An example of `[METRIC_ID]` is:
           #   `"custom.googleapis.com/my_test_metric"`.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -583,13 +592,14 @@ module Google
           # Lists time series that match a filter. This method does not require a Stackdriver account.
           #
           # @param name [String]
-          #   Required. The project on which to execute the request. The format is
-          #   "projects/\\{project_id_or_number}".
+          #   Required. The project on which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
           # @param filter [String]
-          #   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters) that specifies which time
-          #   series should be returned.  The filter must specify a single metric type,
-          #   and can additionally specify metric labels and other information. For
-          #   example:
+          #   Required. A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
+          #   that specifies which time series should be returned.  The filter must
+          #   specify a single metric type, and can additionally specify metric labels
+          #   and other information. For example:
           #
           #       metric.type = "compute.googleapis.com/instance/cpu/usage_time" AND
           #           metric.labels.instance_name = "my-instance-name"
@@ -687,8 +697,9 @@ module Google
           # included in the error response.
           #
           # @param name [String]
-          #   Required. The project on which to execute the request. The format is
-          #   `"projects/{project_id_or_number}"`.
+          #   Required. The project on which to execute the request. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
           # @param time_series [Array<Google::Monitoring::V3::TimeSeries | Hash>]
           #   Required. The new data to be added to a list of time series.
           #   Adds at most one data point to each of several time series.  The new data
