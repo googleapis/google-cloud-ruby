@@ -1,5 +1,11 @@
 # Release History
 
+### 0.35.1 / 2020-02-18
+
+#### Documentation
+
+* Update product links and reformat docs
+
 ### 0.35.0 / 2020-02-04
 
 #### Features
