@@ -1,5 +1,15 @@
 # Release History
 
+### 1.14.0 / 2020-02-18
+
+#### Features
+
+* allow custom lib name and version for telemetry purpose ([#4762](https://www.github.com/googleapis/google-cloud-ruby/issues/4762))
+  * allow custom lib name and version for telemetry purpose
+  * format docs
+  * added custom lib name and version prefix
+  * update test cases for lib name and version
+
 ### 1.13.1 / 2020-01-22
 
 #### Documentation
