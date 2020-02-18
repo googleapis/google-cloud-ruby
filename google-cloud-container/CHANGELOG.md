@@ -1,5 +1,15 @@
 # Release History
 
+### 0.9.0 / 2020-02-18
+
+#### ⚠ BREAKING CHANGES
+
+* **container:** Change deprecated but required parameters to keyword arguments in most public methods
+
+#### Features
+
+* Change deprecated but required parameters to keyword arguments in most public methods
+
 ### 0.8.1 / 2020-01-23
 
 #### Documentation
