@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.1 / 2020-02-18
+
+#### Bug Fixes
+
+* Move Thread.new to end of AsyncPublisher#initialize
+
 ### 1.3.0 / 2020-02-10
 
 #### Features
