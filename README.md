@@ -10,53 +10,49 @@ services.
 * [API documentation](https://googleapis.github.io/google-cloud-ruby/docs)
 * [google-cloud on RubyGems](https://rubygems.org/gems/google-cloud)
 
-This client supports the following Google Cloud Platform services at a [General
-Availability (GA)](#versioning) quality level:
+This client supports the following Google Cloud Platform services:
 
-* [BigQuery](#bigquery-ga) (GA)
-* [Cloud Bigtable](#cloud-bigtable-ga) (GA)
-* [Cloud Datastore](#cloud-datastore-ga) (GA)
-* [Cloud Firestore](#cloud-firestore-ga) (GA)
-* [Cloud Key Management Service](#cloud-key-management-service-ga) (GA)
-* [Stackdriver Logging](#stackdriver-logging-ga) (GA)
-* [Cloud Pub/Sub](#cloud-pubsub-ga) (GA)
-* [Cloud Spanner API](#cloud-spanner-api-ga) (GA)
-* [Cloud Storage](#cloud-storage-ga) (GA)
-* [Cloud Translation API](#cloud-translation-api-ga) (GA)
-* [Cloud Video Intelligence API](#cloud-video-intelligence-api-ga) (GA)
-
-This client supports the following Google Cloud Platform services at a
-[Beta](#versioning) quality level:
-
-* [Cloud Asset](#cloud-asset-beta) (Beta)
-* [BigQuery Data Transfer](#bigquery-data-transfer-api-beta) (Beta)
-* [Stackdriver Debugger](#stackdriver-debugger-beta) (Beta)
-* [Stackdriver Error Reporting](#stackdriver-error-reporting-beta) (Beta)
-* [Stackdriver Monitoring API](#stackdriver-monitoring-api-beta) (Beta)
-* [Stackdriver Trace](#stackdriver-trace-beta) (Beta)
-
-This client supports the following Google Cloud Platform services at an
-[Alpha](#versioning) quality level:
-
-* [Container Analysis](#container-analysis-alpha) (Alpha)
-* [Container Engine](#container-engine-alpha) (Alpha)
-* [Cloud Dataproc](#cloud-dataproc-alpha) (Alpha)
-* [Data Loss Prevention](#data-loss-prevention-alpha) (Alpha)
-* [Dialogflow API](#dialogflow-api-alpha) (Alpha)
-* [Cloud DNS](#cloud-dns-alpha) (Alpha)
-* [Cloud Natural Language API](#cloud-natural-language-api-alpha) (Alpha)
-* [Cloud OS Login](#cloud-os-login-alpha) (Alpha)
-* [Phishing Protection](#phishing-protection-alpha) (Alpha)
-* [Recaptcha Enterprise](#recaptcha-enterprise-alpha) (Alpha)
-* [Cloud Redis](#cloud-redis-api-alpha) (Alpha)
-* [Cloud Resource Manager](#cloud-resource-manager-alpha) (Alpha)
-* [Cloud Scheduler](#cloud-scheduler-alpha) (Alpha)
-* [Cloud Security Center](#cloud-security-center-alpha) (Alpha)
-* [Cloud Speech API](#cloud-speech-api-alpha) (Alpha)
-* [Cloud Talent Solutions API](#cloud-talent-solutions-api-alpha) (Alpha)
-* [Cloud Tasks API](#cloud-tasks-api-alpha) (Alpha)
-* [Cloud Text-To-Speech API](#cloud-text-to-speech-api-alpha) (Alpha)
-* [Cloud Vision API](#cloud-vision-api-alpha) (Alpha)
+* [Cloud Asset](#cloud-asset)
+* [Cloud AutoML API](#cloud-automl-api)
+* [BigQuery](#bigquery)
+* [BigQuery Data Transfer](#bigquery-data-transfer-api)
+* [Cloud Bigtable](#cloud-bigtable)
+* [Cloud Billing API](#cloud-billing-api)
+* [Container Analysis](#container-analysis)
+* [Container Engine](#container-engine)
+* [Cloud Dataproc](#cloud-dataproc)
+* [Cloud Datastore](#cloud-datastore)
+* [Stackdriver Debugger](#stackdriver-debugger)
+* [Dialogflow API](#dialogflow-api)
+* [Data Loss Prevention](#data-loss-prevention)
+* [Cloud DNS](#cloud-dns)
+* [Stackdriver Error Reporting](#stackdriver-error-reporting)
+* [Cloud Firestore](#cloud-firestore)
+* [Cloud Key Management Service](#cloud-key-management-service)
+* [Cloud Natural Language API](#cloud-natural-language-api)
+* [Stackdriver Logging](#stackdriver-logging)
+* [Stackdriver Monitoring API](#stackdriver-monitoring-api)
+* [Cloud OS Login](#cloud-os-login)
+* [Phishing Protection](#phishing-protection)
+* [Cloud Pub/Sub](#cloud-pubsub)
+* [Recaptcha Enterprise](#recaptcha-enterprise)
+* [Cloud Recommender API](#cloud-recommender-api)
+* [Cloud Redis](#cloud-redis-api)
+* [Cloud Resource Manager](#cloud-resource-manager)
+* [Cloud Scheduler](#cloud-scheduler)
+* [Secret Manager API](#secret-manager-api)
+* [Cloud Security Center](#cloud-security-center)
+* [Cloud Spanner API](#cloud-spanner-api)
+* [Cloud Speech API](#cloud-speech-api)
+* [Cloud Storage](#cloud-storage)
+* [Cloud Talent Solutions API](#cloud-talent-solutions-api)
+* [Cloud Tasks API](#cloud-tasks-api)
+* [Cloud Text-To-Speech API](#cloud-text-to-speech-api)
+* [Stackdriver Trace](#stackdriver-trace)
+* [Cloud Translation API](#cloud-translation-api)
+* [Cloud Video Intelligence API](#cloud-video-intelligence-api)
+* [Cloud Vision API](#cloud-vision-api)
+* [Web Risk API](#web-risk-api)
 
 The support for each service is distributed as a separate gem. However, for your
 convenience, the `google-cloud` gem lets you install the entire collection.
@@ -100,7 +96,7 @@ listed below for each service.
 The preview examples below demonstrate how to provide the **Project ID** and
 **Credentials JSON file path** directly in code.
 
-### Cloud Asset API (Beta)
+### Cloud Asset API
 
 - [google-cloud-asset README](google-cloud-asset/README.md)
 - [google-cloud-asset API documentation](https://googleapis.dev/ruby/google-cloud-asset/latest)
@@ -112,7 +108,19 @@ The preview examples below demonstrate how to provide the **Project ID** and
 $ gem install google-cloud-asset
 ```
 
-### BigQuery (GA)
+### Cloud AutoML API
+
+- [google-cloud-automl README](google-cloud-automl/README.md)
+- [google-cloud-automl API documentation](https://googleapis.dev/ruby/google-cloud-automl/latest)
+- [google-cloud-automl on RubyGems](https://rubygems.org/gems/google-cloud-automl/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-automl
+```
+
+### BigQuery
 
 - [google-cloud-bigquery README](google-cloud-bigquery/README.md)
 - [google-cloud-bigquery API documentation](https://googleapis.dev/ruby/google-cloud-bigquery/latest)
@@ -154,7 +162,7 @@ data.each do |row|
 end
 ```
 
-### BigQuery Data Transfer API (Beta)
+### BigQuery Data Transfer API
 
 - [google-bigquery-data_transfer README](google-cloud-bigquery-data_transfer/README.md)
 - [google-bigquery-data_transfer API documentation](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest)
@@ -189,7 +197,7 @@ data_transfer_service_client.list_data_sources(formatted_parent).each_page do |p
 end
 ```
 
-### Cloud Bigtable (GA)
+### Cloud Bigtable
 
 - [google-cloud-bigtable README](google-cloud-bigtable/README.md)
 - [google-cloud-bigtable API documentation](https://googleapis.dev/ruby/google-cloud-bigtable/latest)
@@ -222,7 +230,19 @@ entry.set_cell(
 table.mutate_row(entry)
 ```
 
-### Cloud Datastore (GA)
+### Cloud Billing API
+
+- [google-cloud-billing README](google-cloud-billing/README.md)
+- [google-cloud-billing API documentation](https://googleapis.dev/ruby/google-cloud-billing/latest)
+- [google-cloud-billing on RubyGems](https://rubygems.org/gems/google-cloud-billing/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-billing
+```
+
+### Cloud Datastore
 
 - [google-cloud-datastore README](google-cloud-datastore/README.md)
 - [google-cloud-datastore API documentation](https://googleapis.dev/ruby/google-cloud-datastore/latest)
@@ -264,7 +284,7 @@ query = datastore.query("Task").
 tasks = datastore.run query
 ```
 
-### Stackdriver Debugger (Beta)
+### Stackdriver Debugger
 
 - [google-cloud-debugger README](google-cloud-debugger/README.md)
 - [google-cloud-debugger instrumentation documentation](./google-cloud-debugger/INSTRUMENTATION.md)
@@ -286,7 +306,7 @@ debugger = Google::Cloud::Debugger.new
 debugger.start
 ```
 
-### Cloud DNS (Alpha)
+### Cloud DNS
 
 - [google-cloud-dns README](google-cloud-dns/README.md)
 - [google-cloud-dns API documentation](https://googleapis.dev/ruby/google-cloud-dns/latest)
@@ -322,7 +342,7 @@ end
 
 ```
 
-### Container Analysis (Alpha)
+### Container Analysis
 
 - [google-cloud-container_analysis README](google-cloud-container_analysis/README.md)
 - [google-cloud-container_analysis API documentation](https://googleapis.dev/ruby/google-cloud-container_analysis/latest)
@@ -348,7 +368,7 @@ results = grafeas_client.list_occurrences(parent).each do |occurrence|
 end
 ```
 
-### Container Engine (Alpha)
+### Container Engine
 
 - [google-cloud-container README](google-cloud-container/README.md)
 - [google-cloud-container API documentation](https://googleapis.dev/ruby/google-cloud-container/latest)
@@ -372,7 +392,7 @@ zone = "us-central1-a"
 response = cluster_manager_client.list_clusters(project_id_2, zone)
 ```
 
-### Cloud Dataproc (Alpha)
+### Cloud Dataproc
 
 - [google-cloud-dataproc README](google-cloud-dataproc/README.md)
 - [google-cloud-dataproc API documentation](https://googleapis.dev/ruby/google-cloud-dataproc/latest)
@@ -408,7 +428,7 @@ cluster_controller_client.list_clusters(project_id_2, region).each_page do |page
 end
 ```
 
-### Data Loss Prevention (Alpha)
+### Data Loss Prevention
 
 - [google-cloud-dlp README](google-cloud-dlp/README.md)
 - [google-cloud-dlp API documentation](https://googleapis.dev/ruby/google-cloud-dlp/latest)
@@ -436,7 +456,7 @@ items = [items_element]
 response = dlp_service_client.inspect_content(inspect_config, items)
 ```
 
-### Dialogflow API (Alpha)
+### Dialogflow API
 
 - [google-cloud-dialogflow README](google-cloud-dialogflow/README.md)
 - [google-cloud-dialogflow API documentation](https://googleapis.dev/ruby/google-cloud-dialogflow/latest)
@@ -449,7 +469,7 @@ response = dlp_service_client.inspect_content(inspect_config, items)
 $ gem install google-cloud-dialogflow
 ```
 
-### Stackdriver Error Reporting (Beta)
+### Stackdriver Error Reporting
 
 - [google-cloud-error_reporting README](google-cloud-error_reporting/README.md)
 - [google-cloud-error_reporting instrumentation documentation](./google-cloud-error_reporting/INSTRUMENTATION.md)
@@ -475,7 +495,7 @@ rescue => exception
 end
 ```
 
-### Cloud Firestore (GA)
+### Cloud Firestore
 
 - [google-cloud-firestore README](google-cloud-firestore/README.md)
 - [google-cloud-firestore API documentation](https://googleapis.dev/ruby/google-cloud-firestore/latest)
@@ -511,7 +531,7 @@ firestore.transaction do |tx|
 end
 ```
 
-### Cloud Key Management Service (GA)
+### Cloud Key Management Service
 
 - [google-cloud-kms README](google-cloud-kms/README.md)
 - [google-cloud-kms API documentation](https://googleapis.dev/ruby/google-cloud-kms/latest)
@@ -545,7 +565,7 @@ kms.list_key_rings(key_ring_parent).each do |key_ring|
 end
 ```
 
-### Stackdriver Logging (GA)
+### Stackdriver Logging
 
 - [google-cloud-logging README](google-cloud-logging/README.md)
 - [google-cloud-logging API documentation](https://googleapis.dev/ruby/google-cloud-logging/latest)
@@ -584,7 +604,7 @@ entry.resource.labels[:version_id] = "20150925t173233"
 logging.write_entries entry
 ```
 
-### Cloud Natural Language API (Alpha)
+### Cloud Natural Language API
 
 - [google-cloud-language README](google-cloud-language/README.md)
 - [google-cloud-language API documentation](https://googleapis.dev/ruby/google-cloud-language/latest)
@@ -618,7 +638,7 @@ annotation.sentences.count #=> 2
 annotation.tokens.count #=> 13
 ```
 
-### Cloud OS Login (Alpha)
+### Cloud OS Login
 
 - [google-cloud-os_login README](google-cloud-os_login/README.md)
 - [google-cloud-os_login API documentation](https://googleapis.dev/ruby/google-cloud-os_login/latest)
@@ -631,7 +651,7 @@ annotation.tokens.count #=> 13
 $ gem install google-cloud-os_login
 ```
 
-### Phishing Protection (Alpha)
+### Phishing Protection
 
 - [google-cloud-phishing_protection README](google-cloud-phishing_protection/README.md)
 - [google-cloud-phishing_protection API documentation](https://googleapis.dev/ruby/google-cloud-phishing_protection/latest)
@@ -644,7 +664,7 @@ $ gem install google-cloud-os_login
 $ gem install google-cloud-phishing_protection
 ```
 
-### Cloud Pub/Sub (GA)
+### Cloud Pub/Sub
 
 - [google-cloud-pubsub README](google-cloud-pubsub/README.md)
 - [google-cloud-pubsub API documentation](https://googleapis.dev/ruby/google-cloud-pubsub/latest)
@@ -689,7 +709,7 @@ subscriber.start
 subscriber.stop.wait!
 ```
 
-### Recaptcha Enterprise (Alpha)
+### Recaptcha Enterprise
 
 - [google-cloud-recaptcha_enterprise README](google-cloud-recaptcha_enterprise/README.md)
 - [google-cloud-recaptcha_enterprise API documentation](https://googleapis.dev/ruby/google-cloud-recaptcha_enterprise/latest)
@@ -702,7 +722,19 @@ subscriber.stop.wait!
 $ gem install google-cloud-recaptcha_enterprise
 ```
 
-### Cloud Redis API (Alpha)
+### Cloud Recommender API
+
+- [google-cloud-recommender README](google-cloud-recommender/README.md)
+- [google-cloud-automl API documentation](https://googleapis.dev/ruby/google-cloud-recommender/latest)
+- [google-cloud-recommender on RubyGems](https://rubygems.org/gems/google-cloud-recommender/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-recommender
+```
+
+### Cloud Redis API
 
 - [google-cloud-redis README](google-cloud-redis/README.md)
 - [google-cloud-redis API documentation](https://googleapis.dev/ruby/google-cloud-redis/latest)
@@ -716,7 +748,7 @@ $ gem install google-cloud-redis
 ```
 
 
-### Cloud Resource Manager (Alpha)
+### Cloud Resource Manager
 
 - [google-cloud-resource_manager README](google-cloud-resource_manager/README.md)
 - [google-cloud-resource_manager API documentation](https://googleapis.dev/ruby/google-cloud-resource_manager/latest)
@@ -751,7 +783,7 @@ end
 projects = resource_manager.projects filter: "labels.env:production"
 ```
 
-### Stackdriver Trace (Beta)
+### Stackdriver Trace
 
 - [google-cloud-trace README](google-cloud-trace/README.md)
 - [google-cloud-trace instrumentation documentation](./google-cloud-trace/INSTRUMENTATION.md)
@@ -777,7 +809,7 @@ result_set.each do |trace_record|
 end
 ```
 
-### Cloud Spanner API (GA)
+### Cloud Spanner API
 
 - [google-cloud-spanner README](google-cloud-spanner/README.md)
 - [google-cloud-spanner API documentation](https://googleapis.dev/ruby/google-cloud-spanner/latest)
@@ -808,7 +840,7 @@ db.transaction do |tx|
 end
 ```
 
-### Cloud Speech API (Alpha)
+### Cloud Speech API
 
 - [google-cloud-speech README](google-cloud-speech/README.md)
 - [google-cloud-speech API documentation](https://googleapis.dev/ruby/google-cloud-speech/latest)
@@ -837,7 +869,7 @@ result.transcript #=> "how old is the Brooklyn Bridge"
 result.confidence #=> 0.9826789498329163
 ```
 
-### Cloud Scheduler (Alpha)
+### Cloud Scheduler
 
 - [Client Library Documentation][]
 - [Product Documentation][]
@@ -893,7 +925,19 @@ module GRPC
 end
 ```
 
-### Cloud Security Center API (Alpha)
+### Secret Manager API
+
+- [google-cloud-secret_manager README](google-cloud-secret_manager/README.md)
+- [google-cloud-automl API documentation](https://googleapis.dev/ruby/google-cloud-secret_manager/latest)
+- [google-cloud-secret_manager on RubyGems](https://rubygems.org/gems/google-cloud-secret_manager/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-secret_manager
+```
+
+### Cloud Security Center API
 
 - [google-cloud-security_center README](google-cloud-security_center/README.md)
 - [google-cloud-security_center API documentation](https://googleapis.dev/ruby/google-cloud-security_center/latest)
@@ -906,7 +950,7 @@ end
 $ gem install google-cloud-security_center
 ```
 
-### Cloud Storage (GA)
+### Cloud Storage
 
 - [google-cloud-storage README](google-cloud-storage/README.md)
 - [google-cloud-storage API documentation](https://googleapis.dev/ruby/google-cloud-storage/latest)
@@ -941,7 +985,7 @@ backup = storage.bucket "task-attachment-backups"
 file.copy backup, file.name
 ```
 
-### Cloud Talent Solutions API (Alpha)
+### Cloud Talent Solutions API
 
 - [google-cloud-talent README](google-cloud-talent/README.md)
 - [google-cloud-talent API documentation](https://googleapis.dev/ruby/google-cloud-talent/latest)
@@ -979,7 +1023,7 @@ $ gem install google-cloud-talent
  end
 ```
 
-### Cloud Tasks API (Alpha)
+### Cloud Tasks API
 
 - [google-cloud-tasks README](google-cloud-tasks/README.md)
 - [google-cloud-tasks API documentation](https://googleapis.dev/ruby/google-cloud-tasks/latest)
@@ -1013,7 +1057,7 @@ $ gem install google-cloud-tasks
  end
 ```
 
-### Cloud Text To Speech API (Alpha)
+### Cloud Text To Speech API
 
 #### Quick Start
 
@@ -1037,7 +1081,7 @@ response = text_to_speech_client.synthesize_speech(input, voice, audio_config)
 File.write("example.mp3", response.audio_content, mode: "wb")
 ```
 
-### Cloud Translation API (GA)
+### Cloud Translation API
 
 - [google-cloud-translate README](google-cloud-translate/README.md)
 - [google-cloud-translate API documentation](https://googleapis.dev/ruby/google-cloud-translate/latest)
@@ -1067,7 +1111,7 @@ translation.to #=> "la"
 translation.text #=> "Salve mundi!"
 ```
 
-### Cloud Vision API (Alpha)
+### Cloud Vision API
 
 - [google-cloud-vision README](google-cloud-vision/README.md)
 - [google-cloud-vision API documentation](https://googleapis.dev/ruby/google-cloud-vision/latest)
@@ -1097,7 +1141,7 @@ requests = [requests_element]
 response = image_annotator_client.batch_annotate_images(requests)
 ```
 
-### Stackdriver Monitoring API (Beta)
+### Stackdriver Monitoring API
 
 - [google-cloud-monitoring README](google-cloud-monitoring/README.md)
 - [google-cloud-monitoring API documentation](https://googleapis.dev/ruby/google-cloud-monitoring/latest)
@@ -1133,7 +1177,7 @@ $ gem install google-cloud-monitoring
  end
 ```
 
-### Cloud Video Intelligence API (GA)
+### Cloud Video Intelligence API
 
 - [google-cloud-video_intelligence README](google-cloud-video_intelligence/README.md)
 - [google-cloud-video_intelligence API documentation](https://googleapis.dev/ruby/google-cloud-video_intelligence/latest)
@@ -1184,6 +1228,18 @@ $ gem install google-cloud-video_intelligence
  operation.wait_until_done!
 ```
 
+### Web Risk API
+
+- [google-cloud-webrisk README](google-cloud-webrisk/README.md)
+- [google-cloud-automl API documentation](https://googleapis.dev/ruby/google-cloud-webrisk/latest)
+- [google-cloud-webrisk on RubyGems](https://rubygems.org/gems/google-cloud-webrisk/)
+
+#### Quick Start
+
+```sh
+$ gem install google-cloud-webrisk
+```
+
 
 ## Supported Ruby Versions
 
@@ -1196,19 +1252,16 @@ and later. Older versions of Ruby _may_ still work, but are unsupported and not
 recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
 about the Ruby support schedule.
 
-## Versioning
+## Library Versioning
 
-This library follows [Semantic Versioning](http://semver.org/).
+The libraries in this repository follow [Semantic Versioning](http://semver.org/).
 
-Please note it is currently under active development. Any release versioned 0.x.y is subject to backwards incompatible changes at any time.
+Note that different libraries may be released at different support quality
+levels:
 
-**GA**: Libraries defined at the GA (general availability) quality level are stable. The code surface will not change in backwards-incompatible ways unless absolutely necessary (e.g. because of critical security issues) or with an extensive deprecation period. Issues and requests against GA libraries are addressed with the highest priority.
+**GA**: Libraries defined at the GA (general availability) quality level, indicated by a version number greater than or equal to 1.0, are stable. The code surface will not change in backwards-incompatible ways unless absolutely necessary (e.g. because of critical security issues), or unless accompanying a semver-major version update (such as version 1.x to 2.x.) Issues and requests against GA libraries are addressed with the highest priority.
 
-Please note that the auto-generated portions of the GA libraries (the ones in modules such as `v1` or `v2`) are considered to be of **Beta** quality, even if the libraries that wrap them are GA.
-
-**Beta**: Libraries defined at a Beta quality level are expected to be mostly stable and we're working towards their release candidate. We will address issues and requests with a higher priority.
-
-**Alpha**: Libraries defined at an Alpha quality level are still a work-in-progress and are more likely to get backwards-incompatible updates.
+**Beta**: Libraries defined at a Beta quality level, indicated by a version number less than 1.0, are expected to be mostly stable and we're working towards their release candidate. However, these libraries may get backwards-incompatible updates from time to time. We will still address issues and requests with a high priority.
 
 ## Contributing
 

@@ -1,4 +1,4 @@
-# Ruby Client for Cloud Scheduler API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Scheduler API
 
 [Cloud Scheduler API][Product Documentation]:
 Creates and manages jobs run on a regular recurring schedule.

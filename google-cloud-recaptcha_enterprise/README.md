@@ -1,4 +1,4 @@
-# Ruby Client for reCAPTCHA Enterprise API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for reCAPTCHA Enterprise API
 
 [reCAPTCHA Enterprise API][Product Documentation]:
 

@@ -22,7 +22,7 @@ module Google
         # rubocop:disable LineLength
 
         ##
-        # # Ruby Client for BigQuery Data Transfer API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
+        # # Ruby Client for BigQuery Data Transfer API
         #
         # [BigQuery Data Transfer API][Product Documentation]:
         # Schedule queries or transfer external data from SaaS applications to Google

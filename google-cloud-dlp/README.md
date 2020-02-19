@@ -1,4 +1,4 @@
-# Ruby Client for Cloud Data Loss Prevention (DLP) API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Data Loss Prevention (DLP) API
 
 [Cloud Data Loss Prevention (DLP) API][Product Documentation]:
 Provides methods for detection, risk analysis, and de-identification of

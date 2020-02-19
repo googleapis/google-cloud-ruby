@@ -102,6 +102,16 @@ s.replace(
     ])
 )
 
+# Remove legacy release level from documentation
+s.replace(
+    [
+        'README.md',
+        'lib/google/cloud/**/*.rb'
+    ],
+    '\\s+\\(\\[\\w+\\]\\(https://github\\.com/(googleapis|GoogleCloudPlatform)/google-cloud-ruby#versioning\\)\\)',
+    ''
+)
+
 # PERMANENT: Use custom credentials env variable names
 s.replace(
     'lib/google/cloud/bigquery/data_transfer/v1/credentials.rb',

@@ -119,6 +119,16 @@ s.replace(
     ])
 )
 
+# Remove legacy release level from documentation
+s.replace(
+    [
+        'README.md',
+        'lib/google/cloud/**/*.rb'
+    ],
+    '\\s+\\(\\[\\w+\\]\\(https://github\\.com/(googleapis|GoogleCloudPlatform)/google-cloud-ruby#versioning\\)\\)',
+    ''
+)
+
 # PERMANENT: Add migration guide to docs
 s.replace(
     'lib/google/cloud/vision.rb',

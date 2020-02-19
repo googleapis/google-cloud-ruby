@@ -21,7 +21,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Cloud Speech-to-Text API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Speech-to-Text API
     #
     # [Cloud Speech-to-Text API][Product Documentation]:
     # Converts audio to text by applying powerful neural network models.

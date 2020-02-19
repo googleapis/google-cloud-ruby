@@ -21,7 +21,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Web Risk API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+    # # Ruby Client for Web Risk API
     #
     # [Web Risk API][Product Documentation]:
     #

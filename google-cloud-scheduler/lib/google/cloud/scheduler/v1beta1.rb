@@ -22,7 +22,7 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Cloud Scheduler API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+      # # Ruby Client for Cloud Scheduler API
       #
       # [Cloud Scheduler API][Product Documentation]:
       # Creates and manages jobs run on a regular recurring schedule.

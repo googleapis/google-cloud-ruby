@@ -1,4 +1,4 @@
-# Ruby Client for Kubernetes Engine API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Kubernetes Engine API
 
 [Kubernetes Engine API][Product Documentation]:
 Builds and manages container-based applications, powered by the open source

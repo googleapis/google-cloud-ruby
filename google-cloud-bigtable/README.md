@@ -1,4 +1,4 @@
-# Ruby Client for Cloud Bigtable API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Bigtable API
 
 [Cloud Bigtable API][Product Documentation]:
 API for reading and writing the contents of Bigtables associated with a

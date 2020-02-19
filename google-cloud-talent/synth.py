@@ -109,6 +109,17 @@ s.replace(
         '  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.4", "< 2.0"'
     ])
 )
+
+# Remove legacy release level from documentation
+s.replace(
+    [
+        'README.md',
+        'lib/google/cloud/**/*.rb'
+    ],
+    '\\s+\\(\\[\\w+\\]\\(https://github\\.com/(googleapis|GoogleCloudPlatform)/google-cloud-ruby#versioning\\)\\)',
+    ''
+)
+
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
     'lib/google/cloud/talent/*/*_client.rb',

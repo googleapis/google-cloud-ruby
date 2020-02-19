@@ -105,6 +105,13 @@ s.replace(
     'port = service_port || self.class::DEFAULT_SERVICE_PORT'
 )
 
+# Remove legacy release level from documentation
+s.replace(
+    'lib/google/cloud/**/*.rb',
+    '\\s+\\(\\[\\w+\\]\\(https://github\\.com/(googleapis|GoogleCloudPlatform)/google-cloud-ruby#versioning\\)\\)',
+    ''
+)
+
 # https://github.com/googleapis/gapic-generator/issues/2242
 def escape_braces(match):
     expr = re.compile('^([^`]*(`[^`]*`[^`]*)*)([^`#\\$\\\\])\\{([\\w,]+)\\}')

@@ -1,4 +1,4 @@
-# Ruby Client for Cloud OS Login API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Cloud OS Login API
 
 [Cloud OS Login API][Product Documentation]:
 You can use OS Login to manage access to your VM instances using IAM roles.

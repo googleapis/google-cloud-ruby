@@ -23,7 +23,7 @@ module Google
         # rubocop:disable LineLength
 
         ##
-        # # Ruby Client for Cloud Spanner Database Admin API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+        # # Ruby Client for Cloud Spanner Database Admin API
         #
         # [Cloud Spanner Database Admin API][Product Documentation]:
         #

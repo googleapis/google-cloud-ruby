@@ -1,4 +1,4 @@
-# Ruby Client for Cloud AutoML API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Cloud AutoML API
 
 [Cloud AutoML API][Product Documentation]:
 Train high-quality custom machine learning models with minimum effort and

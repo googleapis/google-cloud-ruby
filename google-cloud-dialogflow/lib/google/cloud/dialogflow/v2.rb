@@ -30,7 +30,7 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Dialogflow API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+      # # Ruby Client for Dialogflow API
       #
       # [Dialogflow API][Product Documentation]:
       # Builds conversational interfaces (for example, chatbots, and voice-powered
