@@ -428,7 +428,7 @@ module Google
       class DeleteExclusionRequest; end
 
       # The parameters to
-      # {Google::Logging::V2::ConfigServiceV2::GetCmekSettings GetCmekSettings}.
+      # {Google::Cloud::Logging::V2::ConfigServiceV2Client#get_cmek_settings}.
       #
       # See [Enabling CMEK for Logs Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
       # for more information.
@@ -449,7 +449,7 @@ module Google
       class GetCmekSettingsRequest; end
 
       # The parameters to
-      # {Google::Logging::V2::ConfigServiceV2::UpdateCmekSettings UpdateCmekSettings}.
+      # {Google::Cloud::Logging::V2::ConfigServiceV2Client#update_cmek_settings}.
       #
       # See [Enabling CMEK for Logs Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
       # for more information.
@@ -530,7 +530,7 @@ module Google
       #     Before enabling CMEK for Logs Router, you must first assign the role
       #     `roles/cloudkms.cryptoKeyEncrypterDecrypter` to the service account that
       #     the Logs Router will use to access your Cloud KMS key. Use
-      #     {Google::Logging::V2::ConfigServiceV2::GetCmekSettings GetCmekSettings} to
+      #     {Google::Cloud::Logging::V2::ConfigServiceV2Client#get_cmek_settings} to
       #     obtain the service account ID.
       #
       #     See [Enabling CMEK for Logs
