@@ -23,7 +23,7 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Google Cloud Video Intelligence API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))
+      # # Ruby Client for Google Cloud Video Intelligence API
       #
       # [Google Cloud Video Intelligence API][Product Documentation]:
       # Detects objects, explicit content, and scene changes in videos. It also

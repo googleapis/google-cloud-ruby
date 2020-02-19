@@ -1,4 +1,4 @@
-# Ruby Client for Cloud Security Command Center API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Security Command Center API
 
 [Cloud Security Command Center API][Product Documentation]:
 Cloud Security Command Center API provides access to temporal views of

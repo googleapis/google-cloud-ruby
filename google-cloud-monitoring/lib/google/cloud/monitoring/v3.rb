@@ -28,7 +28,7 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Stackdriver Monitoring API ([Beta](https://github.com/googleapis/google-cloud-ruby#versioning))
+      # # Ruby Client for Stackdriver Monitoring API
       #
       # [Stackdriver Monitoring API][Product Documentation]:
       # Manages your Stackdriver Monitoring data and configurations. Most projects

@@ -22,7 +22,7 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Stackdriver Debugger API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+      # # Ruby Client for Stackdriver Debugger API
       #
       # [Stackdriver Debugger API][Product Documentation]:
       # Examines the call stack and variables of a running application without

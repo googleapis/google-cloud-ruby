@@ -21,7 +21,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Cloud Asset API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Asset API
     #
     # [Cloud Asset API][Product Documentation]:
     # The cloud asset API manages the history and inventory of cloud resources.

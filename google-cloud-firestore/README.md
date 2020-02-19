@@ -1,4 +1,4 @@
-# Ruby Client for Google Cloud Firestore API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Google Cloud Firestore API
 
 [Google Cloud Firestore API][Product Documentation]:
 

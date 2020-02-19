@@ -20,7 +20,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Stackdriver Trace API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+    # # Ruby Client for Stackdriver Trace API
     #
     # [Stackdriver Trace API][Product Documentation]:
     # Sends application trace data to Stackdriver Trace for viewing. Trace data is

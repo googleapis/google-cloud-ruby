@@ -136,6 +136,13 @@ s.replace(
     'CONTAINER_ANALYSIS_'
 )
 
+# Remove legacy release level from documentation
+s.replace(
+    'lib/google/cloud/**/*.rb',
+    '\\s+\\(\\[\\w+\\]\\(https://github\\.com/(googleapis|GoogleCloudPlatform)/google-cloud-ruby#versioning\\)\\)',
+    ''
+)
+
 # https://github.com/googleapis/gapic-generator/issues/2196
 s.replace(
     [

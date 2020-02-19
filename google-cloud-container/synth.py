@@ -112,6 +112,16 @@ s.replace(
     ])
 )
 
+# Remove legacy release level from documentation
+s.replace(
+    [
+        'README.md',
+        'lib/google/cloud/**/*.rb'
+    ],
+    '\\s+\\(\\[\\w+\\]\\(https://github\\.com/(googleapis|GoogleCloudPlatform)/google-cloud-ruby#versioning\\)\\)',
+    ''
+)
+
 # Fix for tests that assume protos implement to_hash
 s.replace(
     'test/google/cloud/container/v1*/cluster_manager_client_test.rb',

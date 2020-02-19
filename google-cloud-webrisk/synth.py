@@ -100,6 +100,16 @@ s.replace(
     ])
 )
 
+# Remove legacy release level from documentation
+s.replace(
+    [
+        'README.md',
+        'lib/google/cloud/**/*.rb'
+    ],
+    '\\s+\\(\\[\\w+\\]\\(https://github\\.com/(googleapis|GoogleCloudPlatform)/google-cloud-ruby#versioning\\)\\)',
+    ''
+)
+
 # https://github.com/googleapis/gapic-generator/issues/2243
 s.replace(
     f'lib/google/cloud/webrisk/v1beta1/*_client.rb',

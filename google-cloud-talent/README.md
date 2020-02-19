@@ -1,4 +1,4 @@
-# Ruby Client for Cloud Talent Solution API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Talent Solution API
 
 [Cloud Talent Solution API][Product Documentation]:
 Cloud Talent Solution provides the capability to create, read, update, and

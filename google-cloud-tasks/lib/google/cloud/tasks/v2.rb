@@ -22,7 +22,7 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Cloud Tasks API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))
+      # # Ruby Client for Cloud Tasks API
       #
       # [Cloud Tasks API][Product Documentation]:
       # Manages the execution of large numbers of distributed requests.

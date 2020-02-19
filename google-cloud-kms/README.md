@@ -1,4 +1,4 @@
-# Ruby Client for Cloud Key Management Service (KMS) API ([GA](https://github.com/googleapis/google-cloud-ruby#versioning))
+# Ruby Client for Cloud Key Management Service (KMS) API
 
 [Cloud Key Management Service (KMS) API][Product Documentation]:
 Manages keys and performs cryptographic operations in a central cloud

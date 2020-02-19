@@ -20,7 +20,7 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Cloud Translation API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+      # # Ruby Client for Cloud Translation API
       #
       # [Cloud Translation API][Product Documentation]:
       # Integrates text translation into your website or application.

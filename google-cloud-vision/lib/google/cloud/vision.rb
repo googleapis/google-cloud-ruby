@@ -21,7 +21,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Cloud Vision API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+    # # Ruby Client for Cloud Vision API
     #
     # [Cloud Vision API][Product Documentation]:
     # Integrates Google Vision features, including image labeling, face, logo,

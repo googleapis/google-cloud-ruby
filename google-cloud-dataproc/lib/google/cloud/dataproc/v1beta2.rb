@@ -27,7 +27,7 @@ module Google
       # rubocop:disable LineLength
 
       ##
-      # # Ruby Client for Google Cloud Dataproc API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
+      # # Ruby Client for Google Cloud Dataproc API
       #
       # [Google Cloud Dataproc API][Product Documentation]:
       # Manages Hadoop-based clusters and jobs on Google Cloud Platform.
