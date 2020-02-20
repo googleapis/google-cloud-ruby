@@ -19,6 +19,7 @@ Metrics/CyclomaticComplexity:
 Metrics/LineLength:
   Exclude:
     - "lib/google/cloud/recommender/v1/recommender/*.rb"
+    - "google-cloud-recommender-v1.gemspec"
 Metrics/MethodLength:
   Exclude:
     - "lib/google/cloud/recommender/v1/recommender/*.rb"

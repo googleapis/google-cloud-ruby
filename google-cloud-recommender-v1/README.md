@@ -4,7 +4,7 @@ google-cloud-recommender-v1 is the official library for Recommender V1 API.
 
 recommender.googleapis.com
 
-https://github.com/googleapis/googleapis
+https://github.com/googleapis/google-cloud-ruby
 
 ## Installation
 
