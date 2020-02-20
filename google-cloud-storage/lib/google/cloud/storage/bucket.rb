@@ -1669,13 +1669,24 @@ module Google
         #
         def post_object path, policy: nil, issuer: nil,
                         client_email: nil, signing_key: nil,
-                        private_key: nil
+                        private_key: nil, version: nil
           ensure_service!
+          version ||= :v2
+          case version.to_sym
+          when :v2
 
-          signer = File::SignerV2.from_bucket self, path
-          signer.post_object issuer: issuer, client_email: client_email,
-                             signing_key: signing_key, private_key: private_key,
-                             policy: policy
+            signer = File::SignerV2.from_bucket self, path
+            signer.post_object issuer: issuer, client_email: client_email,
+                              signing_key: signing_key, private_key: private_key,
+                              policy: policy
+          when :v4
+            signer = File::SignerV4.from_bucket self, path
+            signer.post_object issuer: issuer, client_email: client_email,
+                              signing_key: signing_key, private_key: private_key,
+                              policy: policy
+          else
+            raise ArgumentError, "version '#{version}' not supported"
+          end
         end
 
         ##

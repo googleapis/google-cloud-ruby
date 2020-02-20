@@ -39,6 +39,66 @@ module Google
             new bucket.name, file_name, bucket.service
           end
 
+          ##
+          # The external path to the file, URI-encoded.
+          # Will not URI encode the special `${filename}` variable.
+          # "You can also use the ${filename} variable..."
+          # https://cloud.google.com/storage/docs/xml-api/post-object
+          #
+          def post_object_ext_path
+            path = "/#{@bucket_name}/#{@file_name}"
+            escaped = Addressable::URI.escape path
+            special_var = "${filename}"
+            # Restore the unencoded `${filename}` variable, if present.
+            if path.include? special_var
+              return escaped.gsub "$%7Bfilename%7D", special_var
+            end
+            escaped
+          end
+
+          def generate_signature signing_key, data
+            puts "\n\nsigning_key:\n\n#{signing_key}\n\n"
+            unless signing_key.respond_to? :sign
+              signing_key = OpenSSL::PKey::RSA.new signing_key
+            end
+            signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
+            puts "\n\nsignature pre hex:\n\n#{signature}\n\n"
+            hex_signature = signature.unpack('H*').first
+            puts "\n\nhex_signature:\n\n#{hex_signature}\n\n"
+            hex_signature.force_encoding("utf-8")
+          end
+
+          def post_object issuer: nil, client_email: nil, signing_key: nil, private_key: nil, policy: nil
+            fields = {
+              "key" => @file_name,
+              "x-goog-algorithm" => "GOOG4-RSA-SHA256"
+            }
+
+            p = policy || {}
+            raise "Policy must be given in a Hash" unless p.is_a? Hash
+
+            i = determine_issuer issuer, client_email
+            s = determine_signing_key signing_key, private_key
+
+            raise SignedUrlUnavailable unless i && s
+            fields["x-goog-credential"] = "#{i}/#{Time.now.utc.strftime "%Y%m%d"}/auto/storage/goog4_request"
+            fields["x-goog-date"] = Time.now.utc.strftime "%Y%m%dT%H%M%SZ"
+
+            policy_str = p.to_json #JSON.generate(p, space: " ").gsub ",", ", "
+            puts "\n\nRuby policy_str:\n\n#{policy_str}\n\n"
+            policy = Base64.strict_encode64(policy_str)
+
+            puts "\n\nRuby policy:\n\n#{policy}\n\n"
+
+            signature = generate_signature s, policy
+
+            fields[:GoogleAccessId] = i
+            fields["x-goog-signature"] = signature
+            fields["policy"] = policy
+
+            Google::Cloud::Storage::PostObject.new "#{GOOGLEAPIS_URL}/#{@bucket_name}/", fields
+          end
+
           def signed_url method: "GET",
                          expires: nil,
                          headers: nil,
