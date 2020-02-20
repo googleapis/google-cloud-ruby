@@ -4,7 +4,7 @@ google-cloud-billing-v1 is the official library for Billing V1 API.
 
 Allows developers to manage billing for their Google Cloud Platform projects programmatically.
 
-https://github.com/googleapis/googleapis
+https://github.com/googleapis/google-cloud-ruby
 
 ## Installation
 
