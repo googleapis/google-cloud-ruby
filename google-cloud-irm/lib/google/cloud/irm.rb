@@ -21,7 +21,7 @@ module Google
     # rubocop:disable LineLength
 
     ##
-    # # Ruby Client for Stackdriver Incident Response & Management API
+    # # Ruby Client for Stackdriver Incident Response & Management API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
     #
     # [Stackdriver Incident Response & Management API][Product Documentation]:
     #
