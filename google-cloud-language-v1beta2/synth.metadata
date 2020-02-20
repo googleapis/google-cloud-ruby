@@ -1,5 +1,5 @@
 {
-  "updateTime": "2020-02-20T19:30:51.351318Z",
+  "updateTime": "2020-02-20T19:31:15.763139Z",
   "sources": [
     {
       "git": {
@@ -13,8 +13,7 @@
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
         "sha": "203740c78ac69ee07c3bf6be7408048751f618f8",
-        "internalRef": "296256388",
-        "log": "203740c78ac69ee07c3bf6be7408048751f618f8\nAdd StackdriverLoggingConfig field to Cloud Tasks v2 API.\n\nPiperOrigin-RevId: 296256388\n\ne4117d5e9ed8bbca28da4a60a94947ca51cb2083\nCreate a Bazel BUILD file for the google.actions.type export.\n\nPiperOrigin-RevId: 296212567\n\n"
+        "internalRef": "296256388"
       }
     }
   ],
@@ -23,7 +22,7 @@
       "client": {
         "source": "googleapis",
         "apiName": "language",
-        "apiVersion": "v1",
+        "apiVersion": "v1beta2",
         "language": "ruby",
         "generator": "gapic-generator-ruby"
       }
