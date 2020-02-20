@@ -23,6 +23,7 @@ Metrics/LineLength:
   Exclude:
     - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
     - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
+    - "google-cloud-billing-v1.gemspec"
 Metrics/MethodLength:
   Exclude:
     - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
