@@ -4,7 +4,7 @@ google-cloud-secret_manager-v1beta1 is the official library for Secret Manager V
 
 Stores, manages, and secures access to application secrets.
 
-https://github.com/googleapis/googleapis
+https://github.com/googleapis/google-cloud-ruby
 
 ## Installation
 
