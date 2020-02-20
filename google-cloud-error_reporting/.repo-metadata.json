@@ -1,5 +1,6 @@
 {
     "name": "clouderrorreporting",
     "language": "ruby",
-    "distribution_name": "google-cloud-error_reporting"
+    "distribution_name": "google-cloud-error_reporting",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-error_reporting/latest"
 }

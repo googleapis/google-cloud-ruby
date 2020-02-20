@@ -4,5 +4,6 @@
     "distribution_name": "google-cloud-dlp",
     "module_name": "Dlp",
     "module_name_credentials": "Dlp::V2",
-    "env_var_prefix": "DLP"
+    "env_var_prefix": "DLP",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-dlp/latest"
 }

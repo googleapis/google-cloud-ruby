@@ -1,5 +1,6 @@
 {
     "name": "dns",
     "language": "ruby",
-    "distribution_name": "google-cloud-dns"
+    "distribution_name": "google-cloud-dns",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-dns/latest"
 }

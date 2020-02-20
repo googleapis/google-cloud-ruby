@@ -4,5 +4,6 @@
     "distribution_name": "google-cloud-redis",
     "module_name": "Redis",
     "module_name_credentials": "Redis::V1",
-    "env_var_prefix": "REDIS"
+    "env_var_prefix": "REDIS",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-redis/latest"
 }

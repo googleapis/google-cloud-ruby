@@ -1,5 +1,6 @@
 {
     "name": "firestore",
     "language": "ruby",
-    "distribution_name": "google-cloud-firestore"
+    "distribution_name": "google-cloud-firestore",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-firestore/latest"
 }

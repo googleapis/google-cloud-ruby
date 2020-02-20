@@ -4,5 +4,6 @@
     "distribution_name": "google-cloud-speech",
     "module_name": "Speech",
     "module_name_credentials": "Speech::V1",
-    "env_var_prefix": "SPEECH"
+    "env_var_prefix": "SPEECH",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-speech/latest"
 }

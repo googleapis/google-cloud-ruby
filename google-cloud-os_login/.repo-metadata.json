@@ -4,5 +4,6 @@
     "distribution_name": "google-cloud-os_login",
     "module_name": "OsLogin",
     "module_name_credentials": "OsLogin::V1",
-    "env_var_prefix": "OS_LOGIN"
+    "env_var_prefix": "OS_LOGIN",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-os_login/latest"
 }

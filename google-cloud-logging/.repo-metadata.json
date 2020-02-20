@@ -1,5 +1,6 @@
 {
     "name": "logging",
     "language": "ruby",
-    "distribution_name": "google-cloud-logging"
+    "distribution_name": "google-cloud-logging",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-logging/latest"
 }

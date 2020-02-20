@@ -4,5 +4,6 @@
     "distribution_name": "google-cloud-recommender",
     "module_name": "Recommender",
     "module_name_credentials": "Recommender::V1",
-    "env_var_prefix": "RECOMMENDER"
+    "env_var_prefix": "RECOMMENDER",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-recommender/latest"
 }

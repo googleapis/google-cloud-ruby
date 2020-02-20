@@ -4,5 +4,6 @@
   "distribution_name": "google-cloud-automl",
   "module_name": "AutoML",
   "module_name_credentials": "AutoML::V1beta1",
-  "env_var_prefix": "AUTOML"
+  "env_var_prefix": "AUTOML",
+  "client_documentation": "https://googleapis.dev/ruby/google-cloud-automl/latest"
 }
