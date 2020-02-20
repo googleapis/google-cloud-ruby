@@ -19,7 +19,7 @@ require "pathname"
 # rubocop:disable LineLength
 
 ##
-# # Ruby Client for Container Analysis API
+# # Ruby Client for Container Analysis API ([Alpha](https://github.com/googleapis/google-cloud-ruby#versioning))
 #
 # [Container Analysis API][Product Documentation]:
 # An implementation of the Grafeas API, which stores, and enables querying and
