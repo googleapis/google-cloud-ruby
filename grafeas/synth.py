@@ -134,7 +134,7 @@ s.replace(
 s.replace(
     [
         'README.md',
-        'lib/google/cloud/**/*.rb'
+        'lib/**/*.rb'
     ],
     '\\s+\\(\\[\\w+\\]\\(https://github\\.com/(googleapis|GoogleCloudPlatform)/google-cloud-ruby#versioning\\)\\)',
     ''
