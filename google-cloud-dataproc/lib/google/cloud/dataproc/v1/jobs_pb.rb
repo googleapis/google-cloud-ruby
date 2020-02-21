@@ -7,6 +7,7 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -93,6 +94,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :query_list, :message, 2, "google.cloud.dataproc.v1.QueryList"
     end
   end
+  add_message "google.cloud.dataproc.v1.SparkRJob" do
+    optional :main_r_file_uri, :string, 1
+    repeated :args, :string, 2
+    repeated :file_uris, :string, 3
+    repeated :archive_uris, :string, 4
+    map :properties, :string, :string, 5
+    optional :logging_config, :message, 6, "google.cloud.dataproc.v1.LoggingConfig"
+  end
+  add_message "google.cloud.dataproc.v1.PrestoJob" do
+    optional :continue_on_failure, :bool, 3
+    optional :output_format, :string, 4
+    repeated :client_tags, :string, 5
+    map :properties, :string, :string, 6
+    optional :logging_config, :message, 7, "google.cloud.dataproc.v1.LoggingConfig"
+    oneof :queries do
+      optional :query_file_uri, :string, 1
+      optional :query_list, :message, 2, "google.cloud.dataproc.v1.QueryList"
+    end
+  end
   add_message "google.cloud.dataproc.v1.JobPlacement" do
     optional :cluster_name, :string, 1
     optional :cluster_uuid, :string, 2
@@ -159,7 +179,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :pyspark_job, :message, 5, "google.cloud.dataproc.v1.PySparkJob"
       optional :hive_job, :message, 6, "google.cloud.dataproc.v1.HiveJob"
       optional :pig_job, :message, 7, "google.cloud.dataproc.v1.PigJob"
+      optional :spark_r_job, :message, 21, "google.cloud.dataproc.v1.SparkRJob"
       optional :spark_sql_job, :message, 12, "google.cloud.dataproc.v1.SparkSqlJob"
+      optional :presto_job, :message, 23, "google.cloud.dataproc.v1.PrestoJob"
     end
   end
   add_message "google.cloud.dataproc.v1.JobScheduling" do
@@ -226,6 +248,8 @@ module Google
         HiveJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.HiveJob").msgclass
         SparkSqlJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SparkSqlJob").msgclass
         PigJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.PigJob").msgclass
+        SparkRJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SparkRJob").msgclass
+        PrestoJob = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.PrestoJob").msgclass
         JobPlacement = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.JobPlacement").msgclass
         JobStatus = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.JobStatus").msgclass
         JobStatus::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.JobStatus.State").enummodule

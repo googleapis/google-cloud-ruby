@@ -289,6 +289,67 @@ module Google
         #     Optional. The runtime log config for job execution.
         class PigJob; end
 
+        # A Dataproc job for running
+        # [Apache SparkR](https://spark.apache.org/docs/latest/sparkr.html)
+        # applications on YARN.
+        # @!attribute [rw] main_r_file_uri
+        #   @return [String]
+        #     Required. The HCFS URI of the main R file to use as the driver.
+        #     Must be a .R file.
+        # @!attribute [rw] args
+        #   @return [Array<String>]
+        #     Optional. The arguments to pass to the driver.  Do not include arguments,
+        #     such as `--conf`, that can be set as job properties, since a collision may
+        #     occur that causes an incorrect job submission.
+        # @!attribute [rw] file_uris
+        #   @return [Array<String>]
+        #     Optional. HCFS URIs of files to be copied to the working directory of
+        #     R drivers and distributed tasks. Useful for naively parallel tasks.
+        # @!attribute [rw] archive_uris
+        #   @return [Array<String>]
+        #     Optional. HCFS URIs of archives to be extracted in the working directory of
+        #     Spark drivers and tasks. Supported file types:
+        #     .jar, .tar, .tar.gz, .tgz, and .zip.
+        # @!attribute [rw] properties
+        #   @return [Hash{String => String}]
+        #     Optional. A mapping of property names to values, used to configure SparkR.
+        #     Properties that conflict with values set by the Dataproc API may be
+        #     overwritten. Can include properties set in
+        #     /etc/spark/conf/spark-defaults.conf and classes in user code.
+        # @!attribute [rw] logging_config
+        #   @return [Google::Cloud::Dataproc::V1::LoggingConfig]
+        #     Optional. The runtime log config for job execution.
+        class SparkRJob; end
+
+        # A Dataproc job for running [Presto](https://prestosql.io/) queries
+        # @!attribute [rw] query_file_uri
+        #   @return [String]
+        #     The HCFS URI of the script that contains SQL queries.
+        # @!attribute [rw] query_list
+        #   @return [Google::Cloud::Dataproc::V1::QueryList]
+        #     A list of queries.
+        # @!attribute [rw] continue_on_failure
+        #   @return [true, false]
+        #     Optional. Whether to continue executing queries if a query fails.
+        #     The default value is `false`. Setting to `true` can be useful when
+        #     executing independent parallel queries.
+        # @!attribute [rw] output_format
+        #   @return [String]
+        #     Optional. The format in which query output will be displayed. See the
+        #     Presto documentation for supported output formats
+        # @!attribute [rw] client_tags
+        #   @return [Array<String>]
+        #     Optional. Presto client tags to attach to this query
+        # @!attribute [rw] properties
+        #   @return [Hash{String => String}]
+        #     Optional. A mapping of property names to values. Used to set Presto
+        #     [session properties](https://prestodb.io/docs/current/sql/set-session.html)
+        #     Equivalent to using the --session flag in the Presto CLI
+        # @!attribute [rw] logging_config
+        #   @return [Google::Cloud::Dataproc::V1::LoggingConfig]
+        #     Optional. The runtime log config for job execution.
+        class PrestoJob; end
+
         # Dataproc job config.
         # @!attribute [rw] cluster_name
         #   @return [String]
@@ -460,22 +521,28 @@ module Google
         #     run the job.
         # @!attribute [rw] hadoop_job
         #   @return [Google::Cloud::Dataproc::V1::HadoopJob]
-        #     Job is a Hadoop job.
+        #     Optional. Job is a Hadoop job.
         # @!attribute [rw] spark_job
         #   @return [Google::Cloud::Dataproc::V1::SparkJob]
-        #     Job is a Spark job.
+        #     Optional. Job is a Spark job.
         # @!attribute [rw] pyspark_job
         #   @return [Google::Cloud::Dataproc::V1::PySparkJob]
-        #     Job is a Pyspark job.
+        #     Optional. Job is a PySpark job.
         # @!attribute [rw] hive_job
         #   @return [Google::Cloud::Dataproc::V1::HiveJob]
-        #     Job is a Hive job.
+        #     Optional. Job is a Hive job.
         # @!attribute [rw] pig_job
         #   @return [Google::Cloud::Dataproc::V1::PigJob]
-        #     Job is a Pig job.
+        #     Optional. Job is a Pig job.
+        # @!attribute [rw] spark_r_job
+        #   @return [Google::Cloud::Dataproc::V1::SparkRJob]
+        #     Optional. Job is a SparkR job.
         # @!attribute [rw] spark_sql_job
         #   @return [Google::Cloud::Dataproc::V1::SparkSqlJob]
-        #     Job is a SparkSql job.
+        #     Optional. Job is a SparkSql job.
+        # @!attribute [rw] presto_job
+        #   @return [Google::Cloud::Dataproc::V1::PrestoJob]
+        #     Optional. Job is a Presto job.
         # @!attribute [rw] status
         #   @return [Google::Cloud::Dataproc::V1::JobStatus]
         #     Output only. The job status. Additional application-specific

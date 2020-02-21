@@ -404,7 +404,7 @@ module Google
           # The {Google::Longrunning::Operation#metadata Operation#metadata} will be
           # [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
           # Also see [Using
-          # WorkflowMetadata](/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
+          # WorkflowMetadata](https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
           #
           # On successful completion,
           # {Google::Longrunning::Operation#response Operation#response} will be
@@ -522,7 +522,7 @@ module Google
           # The {Google::Longrunning::Operation#metadata Operation#metadata} will be
           # [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
           # Also see [Using
-          # WorkflowMetadata](/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
+          # WorkflowMetadata](https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
           #
           # On successful completion,
           # {Google::Longrunning::Operation#response Operation#response} will be

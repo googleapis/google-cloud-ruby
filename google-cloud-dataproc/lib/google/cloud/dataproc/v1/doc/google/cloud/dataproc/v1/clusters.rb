@@ -113,6 +113,9 @@ module Google
         # @!attribute [rw] security_config
         #   @return [Google::Cloud::Dataproc::V1::SecurityConfig]
         #     Optional. Security settings for the cluster.
+        # @!attribute [rw] lifecycle_config
+        #   @return [Google::Cloud::Dataproc::V1::LifecycleConfig]
+        #     Optional. Lifecycle setting for the cluster.
         class ClusterConfig; end
 
         # Autoscaling Policy config associated with the cluster.
@@ -220,9 +223,12 @@ module Google
         #     The Compute Engine metadata entries to add to all instances (see
         #     [Project and instance
         #     metadata](https://cloud.google.com/compute/docs/storing-retrieving-metadata#project_and_instance_metadata)).
+        # @!attribute [rw] reservation_affinity
+        #   @return [Google::Cloud::Dataproc::V1::ReservationAffinity]
+        #     Optional. Reservation Affinity for consuming Zonal reservation.
         class GceClusterConfig; end
 
-        # Optional. The config settings for Compute Engine resources in
+        # The config settings for Compute Engine resources in
         # an instance group, such as a master or worker group.
         # @!attribute [rw] num_instances
         #   @return [Integer]
@@ -337,7 +343,10 @@ module Google
         # @!attribute [rw] execution_timeout
         #   @return [Google::Protobuf::Duration]
         #     Optional. Amount of time executable has to complete. Default is
-        #     10 minutes. Cluster creation fails with an explanatory error message (the
+        #     10 minutes (see JSON representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        #
+        #     Cluster creation fails with an explanatory error message (the
         #     name of the executable that caused the error and the exceeded timeout
         #     period) if the executable is not completed at end of the timeout period.
         class NodeInitializationAction; end
@@ -351,7 +360,8 @@ module Google
         #     Optional. Output only. Details of cluster's state.
         # @!attribute [rw] state_start_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Output only. Time when this state was entered.
+        #     Output only. Time when this state was entered (see JSON representation of
+        #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [rw] substate
         #   @return [Google::Cloud::Dataproc::V1::ClusterStatus::Substate]
         #     Output only. Additional state information that includes
@@ -508,6 +518,32 @@ module Google
         #     Optional. The set of components to activate on the cluster.
         class SoftwareConfig; end
 
+        # Specifies the cluster auto-delete schedule configuration.
+        # @!attribute [rw] idle_delete_ttl
+        #   @return [Google::Protobuf::Duration]
+        #     Optional. The duration to keep the cluster alive while idling (when no jobs
+        #     are running). Passing this threshold will cause the cluster to be
+        #     deleted. Minimum value is 10 minutes; maximum value is 14 days (see JSON
+        #     representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
+        # @!attribute [rw] auto_delete_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Optional. The time when cluster will be auto-deleted (see JSON representation of
+        #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        # @!attribute [rw] auto_delete_ttl
+        #   @return [Google::Protobuf::Duration]
+        #     Optional. The lifetime duration of cluster. The cluster will be
+        #     auto-deleted at the end of this period. Minimum value is 10 minutes;
+        #     maximum value is 14 days (see JSON representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        # @!attribute [rw] idle_start_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Output only. The time when cluster became idle (most recent job finished)
+        #     and became eligible for deletion due to idleness (see JSON representation
+        #     of
+        #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        class LifecycleConfig; end
+
         # Contains cluster daemon metrics, such as HDFS and YARN stats.
         #
         # **Beta Feature**: This report is available for testing purposes only. It may
@@ -567,7 +603,8 @@ module Google
         #     interrupting jobs in progress. Timeout specifies how long to wait for jobs
         #     in progress to finish before forcefully removing nodes (and potentially
         #     interrupting jobs). Default timeout is 0 (for forceful decommission), and
-        #     the maximum allowed timeout is 1 day.
+        #     the maximum allowed timeout is 1 day. (see JSON representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         #
         #     Only supported on Dataproc image versions 1.2 and higher.
         # @!attribute [rw] update_mask
@@ -749,6 +786,33 @@ module Google
         #     The output report is a plain text file with a summary of collected
         #     diagnostics.
         class DiagnoseClusterResults; end
+
+        # Reservation Affinity for consuming Zonal reservation.
+        # @!attribute [rw] consume_reservation_type
+        #   @return [Google::Cloud::Dataproc::V1::ReservationAffinity::Type]
+        #     Optional. Type of reservation to consume
+        # @!attribute [rw] key
+        #   @return [String]
+        #     Optional. Corresponds to the label key of reservation resource.
+        # @!attribute [rw] values
+        #   @return [Array<String>]
+        #     Optional. Corresponds to the label values of reservation resource.
+        class ReservationAffinity
+          # Indicates whether to consume capacity from an reservation or not.
+          module Type
+            TYPE_UNSPECIFIED = 0
+
+            # Do not consume from any allocated capacity.
+            NO_RESERVATION = 1
+
+            # Consume any reservation available.
+            ANY_RESERVATION = 2
+
+            # Must consume from a specific reservation. Must specify key value fields
+            # for specifying the reservations.
+            SPECIFIC_RESERVATION = 3
+          end
+        end
       end
     end
   end
