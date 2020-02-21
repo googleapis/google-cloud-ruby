@@ -113,6 +113,11 @@ module Google
         #
         #     Purge time will be truncated to the nearest microsecond. Purge
         #     time will be unset if the queue has never been purged.
+        # @!attribute [rw] stackdriver_logging_config
+        #   @return [Google::Cloud::Tasks::V2::StackdriverLoggingConfig]
+        #     Configuration options for writing logs to
+        #     [Stackdriver Logging](https://cloud.google.com/logging/docs/). If this
+        #     field is unset, then no logs are written.
         class Queue
           # State of the queue.
           module State
@@ -327,6 +332,16 @@ module Google
         #     [max_doublings in
         #     queue.yaml/xml](https://cloud.google.com/appengine/docs/standard/python/config/queueref#retry_parameters).
         class RetryConfig; end
+
+        # Configuration options for writing logs to
+        # [Stackdriver Logging](https://cloud.google.com/logging/docs/).
+        # @!attribute [rw] sampling_ratio
+        #   @return [Float]
+        #     Specifies the fraction of operations to write to
+        #     [Stackdriver Logging](https://cloud.google.com/logging/docs/).
+        #     This field may contain any value between 0.0 and 1.0, inclusive.
+        #     0.0 is the default and means that no operations are logged.
+        class StackdriverLoggingConfig; end
       end
     end
   end

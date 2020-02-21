@@ -16,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :retry_config, :message, 4, "google.cloud.tasks.v2.RetryConfig"
     optional :state, :enum, 5, "google.cloud.tasks.v2.Queue.State"
     optional :purge_time, :message, 6, "google.protobuf.Timestamp"
+    optional :stackdriver_logging_config, :message, 9, "google.cloud.tasks.v2.StackdriverLoggingConfig"
   end
   add_enum "google.cloud.tasks.v2.Queue.State" do
     value :STATE_UNSPECIFIED, 0
@@ -35,6 +36,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :max_backoff, :message, 4, "google.protobuf.Duration"
     optional :max_doublings, :int32, 5
   end
+  add_message "google.cloud.tasks.v2.StackdriverLoggingConfig" do
+    optional :sampling_ratio, :double, 1
+  end
 end
 
 module Google
@@ -45,6 +49,7 @@ module Google
         Queue::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2.Queue.State").enummodule
         RateLimits = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2.RateLimits").msgclass
         RetryConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2.RetryConfig").msgclass
+        StackdriverLoggingConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.tasks.v2.StackdriverLoggingConfig").msgclass
       end
     end
   end
