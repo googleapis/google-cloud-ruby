@@ -146,22 +146,16 @@ module Google
         #     or hyphen. Must consist of between 3 and 50 characters.
         # @!attribute [rw] hadoop_job
         #   @return [Google::Cloud::Dataproc::V1::HadoopJob]
-        #     Job is a Hadoop job.
         # @!attribute [rw] spark_job
         #   @return [Google::Cloud::Dataproc::V1::SparkJob]
-        #     Job is a Spark job.
         # @!attribute [rw] pyspark_job
         #   @return [Google::Cloud::Dataproc::V1::PySparkJob]
-        #     Job is a Pyspark job.
         # @!attribute [rw] hive_job
         #   @return [Google::Cloud::Dataproc::V1::HiveJob]
-        #     Job is a Hive job.
         # @!attribute [rw] pig_job
         #   @return [Google::Cloud::Dataproc::V1::PigJob]
-        #     Job is a Pig job.
         # @!attribute [rw] spark_sql_job
         #   @return [Google::Cloud::Dataproc::V1::SparkSqlJob]
-        #     Job is a SparkSql job.
         # @!attribute [rw] labels
         #   @return [Hash{String => String}]
         #     Optional. The labels to associate with this job.

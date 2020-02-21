@@ -401,7 +401,8 @@ module Google
           #   interrupting jobs in progress. Timeout specifies how long to wait for jobs
           #   in progress to finish before forcefully removing nodes (and potentially
           #   interrupting jobs). Default timeout is 0 (for forceful decommission), and
-          #   the maximum allowed timeout is 1 day.
+          #   the maximum allowed timeout is 1 day. (see JSON representation of
+          #   [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
           #
           #   Only supported on Dataproc image versions 1.2 and higher.
           #   A hash of the same form as `Google::Protobuf::Duration`
