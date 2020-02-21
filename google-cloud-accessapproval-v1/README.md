@@ -2,9 +2,9 @@
 
 google-cloud-accessapproval-v1 is the official library for Access Approval API V1 API.
 
-accessapproval.googleapis.com
+An API for controlling access to data by Google personnel.
 
-https://github.com/googleapis/googleapis
+https://github.com/googleapis/google-cloud-ruby
 
 ## Installation
 

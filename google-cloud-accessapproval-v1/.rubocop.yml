@@ -19,6 +19,7 @@ Metrics/CyclomaticComplexity:
 Metrics/LineLength:
   Exclude:
     - "lib/google/cloud/accessapproval/v1/access_approval/*.rb"
+    - "google-cloud-accessapproval-v1.gemspec"
 Metrics/MethodLength:
   Exclude:
     - "lib/google/cloud/accessapproval/v1/access_approval/*.rb"

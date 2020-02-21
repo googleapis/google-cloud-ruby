@@ -1,4 +1,5 @@
 {
     "language": "ruby",
-    "distribution_name": "google-cloud-accessapproval-v1"
+    "distribution_name": "google-cloud-accessapproval-v1",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-accessapproval-v1/latest"
 }
