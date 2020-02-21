@@ -91,12 +91,6 @@ module Google
             self::GRPC_INTERCEPTORS = SecurityCenterClient::GRPC_INTERCEPTORS
           end
 
-          ASSET_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "organizations/{organization}/assets/{asset}"
-          )
-
-          private_constant :ASSET_PATH_TEMPLATE
-
           ASSET_SECURITY_MARKS_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}/assets/{asset}/securityMarks"
           )
@@ -127,30 +121,15 @@ module Google
 
           private_constant :ORGANIZATION_SETTINGS_PATH_TEMPLATE
 
-          ORGANIZATION_SOURCES_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "organizations/{organization}/sources/-"
-          )
-
-          private_constant :ORGANIZATION_SOURCES_PATH_TEMPLATE
-
           SOURCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}/sources/{source}"
           )
 
           private_constant :SOURCE_PATH_TEMPLATE
 
-          # Returns a fully-qualified asset resource name string.
-          # @param organization [String]
-          # @param asset [String]
-          # @return [String]
-          def self.asset_path organization, asset
-            ASSET_PATH_TEMPLATE.render(
-              :"organization" => organization,
-              :"asset" => asset
-            )
-          end
-
           # Returns a fully-qualified asset_security_marks resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param organization [String]
           # @param asset [String]
           # @return [String]
@@ -175,6 +154,8 @@ module Google
           end
 
           # Returns a fully-qualified finding_security_marks resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param organization [String]
           # @param source [String]
           # @param finding [String]
@@ -201,15 +182,6 @@ module Google
           # @return [String]
           def self.organization_settings_path organization
             ORGANIZATION_SETTINGS_PATH_TEMPLATE.render(
-              :"organization" => organization
-            )
-          end
-
-          # Returns a fully-qualified organization_sources resource name string.
-          # @param organization [String]
-          # @return [String]
-          def self.organization_sources_path organization
-            ORGANIZATION_SOURCES_PATH_TEMPLATE.render(
               :"organization" => organization
             )
           end
@@ -608,8 +580,10 @@ module Google
           #   require "google/cloud/security_center"
           #
           #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
-          #   formatted_resource = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
-          #   response = security_center_client.get_iam_policy(formatted_resource)
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
+          #   response = security_center_client.get_iam_policy(resource)
 
           def get_iam_policy \
               resource,
@@ -1583,11 +1557,13 @@ module Google
           #   require "google/cloud/security_center"
           #
           #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
-          #   formatted_resource = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `policy`:
           #   policy = {}
-          #   response = security_center_client.set_iam_policy(formatted_resource, policy)
+          #   response = security_center_client.set_iam_policy(resource, policy)
 
           def set_iam_policy \
               resource,
@@ -1624,11 +1600,13 @@ module Google
           #   require "google/cloud/security_center"
           #
           #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
-          #   formatted_resource = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `permissions`:
           #   permissions = []
-          #   response = security_center_client.test_iam_permissions(formatted_resource, permissions)
+          #   response = security_center_client.test_iam_permissions(resource, permissions)
 
           def test_iam_permissions \
               resource,
