@@ -1,0 +1,131 @@
+{
+  "updateTime": "2020-02-21T18:01:31.143444Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "7f910bcc4fc4704947ccfd3ceed015d16b9e00c2",
+        "internalRef": "296451205"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "iot",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ],
+  "newFiles": [
+    {
+      "path": ".gitignore"
+    },
+    {
+      "path": ".repo-metadata.json"
+    },
+    {
+      "path": ".rubocop.yml"
+    },
+    {
+      "path": ".yardopts"
+    },
+    {
+      "path": "AUTHENTICATION.md"
+    },
+    {
+      "path": "CHANGELOG.md"
+    },
+    {
+      "path": "Gemfile"
+    },
+    {
+      "path": "LICENSE.md"
+    },
+    {
+      "path": "README.md"
+    },
+    {
+      "path": "Rakefile"
+    },
+    {
+      "path": "google-cloud-iot-v1.gemspec"
+    },
+    {
+      "path": "lib/google-cloud-iot-v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/common_resources_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/iot/v1.rb"
+    },
+    {
+      "path": "lib/google/cloud/iot/v1/device_manager.rb"
+    },
+    {
+      "path": "lib/google/cloud/iot/v1/device_manager/client.rb"
+    },
+    {
+      "path": "lib/google/cloud/iot/v1/device_manager/credentials.rb"
+    },
+    {
+      "path": "lib/google/cloud/iot/v1/device_manager/paths.rb"
+    },
+    {
+      "path": "lib/google/cloud/iot/v1/device_manager_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/iot/v1/device_manager_services_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/iot/v1/resources_pb.rb"
+    },
+    {
+      "path": "lib/google/cloud/iot/v1/version.rb"
+    },
+    {
+      "path": "proto_docs/README.md"
+    },
+    {
+      "path": "proto_docs/google/api/field_behavior.rb"
+    },
+    {
+      "path": "proto_docs/google/api/resource.rb"
+    },
+    {
+      "path": "proto_docs/google/cloud/iot/v1/device_manager.rb"
+    },
+    {
+      "path": "proto_docs/google/cloud/iot/v1/resources.rb"
+    },
+    {
+      "path": "proto_docs/google/iam/v1/iam_policy.rb"
+    },
+    {
+      "path": "proto_docs/google/iam/v1/policy.rb"
+    },
+    {
+      "path": "proto_docs/google/protobuf/any.rb"
+    },
+    {
+      "path": "proto_docs/google/protobuf/empty.rb"
+    },
+    {
+      "path": "proto_docs/google/protobuf/field_mask.rb"
+    },
+    {
+      "path": "proto_docs/google/protobuf/timestamp.rb"
+    },
+    {
+      "path": "proto_docs/google/rpc/status.rb"
+    },
+    {
+      "path": "test/google/cloud/iot/v1/device_manager_test.rb"
+    }
+  ]
+}
