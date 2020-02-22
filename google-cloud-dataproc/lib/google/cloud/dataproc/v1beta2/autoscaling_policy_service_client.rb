@@ -34,7 +34,7 @@ module Google
     module Dataproc
       module V1beta2
         # The API interface for managing autoscaling policies in the
-        # Google Cloud Dataproc API.
+        # Cloud Dataproc API.
         #
         # @!attribute [r] autoscaling_policy_service_stub
         #   @return [Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Stub]
