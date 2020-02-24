@@ -1,5 +1,15 @@
 # Release History
 
+### 0.9.0 / 2020-02-24
+
+#### Features
+
+* Add SparkRJob, PrestoJob, LifecycleConfig and ReservationAffinity
+  * Add ClusterConfig#lifecycle_config (LifecycleConfig)
+  * Add GceClusterConfig#reservation_affinity (ReservationAffinity)
+  * Add SparkRJob
+  * Add PrestoJob
+
 ### 0.8.0 / 2020-02-04
 
 #### Features
