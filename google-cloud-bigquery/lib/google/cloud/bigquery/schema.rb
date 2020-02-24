@@ -232,8 +232,8 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.table "my_table" do |table|
-        #     table.schema.load File.read("path/to/schema.json")
+        #   table = dataset.table "my_table" do |t|
+        #     t.schema.load File.read("path/to/schema.json")
         #   end
         #
         def load source

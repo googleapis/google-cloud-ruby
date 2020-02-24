@@ -278,12 +278,12 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.create_table "my_table" do |table|
-        #     table.schema do |schema|
+        #   table = dataset.create_table "my_table" do |t|
+        #     t.schema do |schema|
         #       schema.timestamp "dob", mode: :required
         #     end
-        #     table.time_partitioning_type  = "DAY"
-        #     table.time_partitioning_field = "dob"
+        #     t.time_partitioning_type  = "DAY"
+        #     t.time_partitioning_field = "dob"
         #   end
         #
         # @!group Attributes
@@ -335,12 +335,12 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.create_table "my_table" do |table|
-        #     table.schema do |schema|
+        #   table = dataset.create_table "my_table" do |t|
+        #     t.schema do |schema|
         #       schema.timestamp "dob", mode: :required
         #     end
-        #     table.time_partitioning_type  = "DAY"
-        #     table.time_partitioning_field = "dob"
+        #     t.time_partitioning_type  = "DAY"
+        #     t.time_partitioning_field = "dob"
         #   end
         #
         # @!group Attributes
@@ -389,13 +389,13 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.create_table "my_table" do |table|
-        #     table.schema do |schema|
+        #   table = dataset.create_table "my_table" do |t|
+        #     t.schema do |schema|
         #       schema.timestamp "dob", mode: :required
         #     end
-        #     table.time_partitioning_type = "DAY"
-        #     table.time_partitioning_field = "dob"
-        #     table.time_partitioning_expiration = 86_400
+        #     t.time_partitioning_type = "DAY"
+        #     t.time_partitioning_field = "dob"
+        #     t.time_partitioning_expiration = 86_400
         #   end
         #
         # @!group Attributes
@@ -441,8 +441,8 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
-        #   table = dataset.create_table "my_table" do |table|
-        #     table.require_partition_filter = true
+        #   table = dataset.create_table "my_table" do |t|
+        #     t.require_partition_filter = true
         #   end
         #
         # @!group Attributes
@@ -2626,15 +2626,15 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   table = dataset.create_table "my_table" do |table|
-          #     table.schema do |schema|
+          #   table = dataset.create_table "my_table" do |t|
+          #     t.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
           #     end
-          #     table.range_partitioning_field = "my_table_id"
-          #     table.range_partitioning_start = 0
-          #     table.range_partitioning_interval = 10
-          #     table.range_partitioning_end = 100
+          #     t.range_partitioning_field = "my_table_id"
+          #     t.range_partitioning_start = 0
+          #     t.range_partitioning_interval = 10
+          #     t.range_partitioning_end = 100
           #   end
           #
           # @!group Attributes
@@ -2666,15 +2666,15 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   table = dataset.create_table "my_table" do |table|
-          #     table.schema do |schema|
+          #   table = dataset.create_table "my_table" do |t|
+          #     t.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
           #     end
-          #     table.range_partitioning_field = "my_table_id"
-          #     table.range_partitioning_start = 0
-          #     table.range_partitioning_interval = 10
-          #     table.range_partitioning_end = 100
+          #     t.range_partitioning_field = "my_table_id"
+          #     t.range_partitioning_start = 0
+          #     t.range_partitioning_interval = 10
+          #     t.range_partitioning_end = 100
           #   end
           #
           # @!group Attributes
@@ -2706,15 +2706,15 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   table = dataset.create_table "my_table" do |table|
-          #     table.schema do |schema|
+          #   table = dataset.create_table "my_table" do |t|
+          #     t.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
           #     end
-          #     table.range_partitioning_field = "my_table_id"
-          #     table.range_partitioning_start = 0
-          #     table.range_partitioning_interval = 10
-          #     table.range_partitioning_end = 100
+          #     t.range_partitioning_field = "my_table_id"
+          #     t.range_partitioning_start = 0
+          #     t.range_partitioning_interval = 10
+          #     t.range_partitioning_end = 100
           #   end
           #
           # @!group Attributes
@@ -2746,15 +2746,15 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #
-          #   table = dataset.create_table "my_table" do |table|
-          #     table.schema do |schema|
+          #   table = dataset.create_table "my_table" do |t|
+          #     t.schema do |schema|
           #       schema.integer "my_table_id", mode: :required
           #       schema.string "my_table_data", mode: :required
           #     end
-          #     table.range_partitioning_field = "my_table_id"
-          #     table.range_partitioning_start = 0
-          #     table.range_partitioning_interval = 10
-          #     table.range_partitioning_end = 100
+          #     t.range_partitioning_field = "my_table_id"
+          #     t.range_partitioning_start = 0
+          #     t.range_partitioning_interval = 10
+          #     t.range_partitioning_end = 100
           #   end
           #
           # @!group Attributes
@@ -2799,15 +2799,15 @@ module Google
           #
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
-          #   table = dataset.create_table "my_table" do |table|
-          #     table.schema do |schema|
+          #   table = dataset.create_table "my_table" do |t|
+          #     t.schema do |schema|
           #       schema.timestamp "dob", mode: :required
           #       schema.string "first_name", mode: :required
           #       schema.string "last_name", mode: :required
           #     end
-          #     table.time_partitioning_type  = "DAY"
-          #     table.time_partitioning_field = "dob"
-          #     table.clustering_fields = ["last_name", "first_name"]
+          #     t.time_partitioning_type  = "DAY"
+          #     t.time_partitioning_field = "dob"
+          #     t.clustering_fields = ["last_name", "first_name"]
           #   end
           #
           # @!group Attributes
