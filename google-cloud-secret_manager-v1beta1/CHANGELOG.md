@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.2 / 2020-02-24
+
+#### Documentation
+
+* Update homepage in README and gemspec
+
 ### 0.2.1 / 2020-02-06
 
 #### Documentation
