@@ -149,6 +149,13 @@ s.replace(
     'assert_equal(labels, request.labels.to_h)'
 )
 
+# Remove legacy release level from documentation
+s.replace(
+    'lib/google/cloud/**/*.rb',
+    '\\s+\\(\\[\\w+\\]\\(https://github\\.com/(googleapis|GoogleCloudPlatform)/google-cloud-ruby#versioning\\)\\)',
+    ''
+)
+
 # https://github.com/googleapis/gapic-generator/issues/2232
 s.replace(
     [
