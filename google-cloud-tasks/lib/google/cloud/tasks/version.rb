@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Tasks
-      VERSION = "1.3.5".freeze
+      VERSION = "1.4.0".freeze
     end
   end
 end
