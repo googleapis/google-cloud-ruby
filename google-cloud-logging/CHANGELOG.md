@@ -1,5 +1,11 @@
 # Release History
 
+### 1.9.5 / 2020-02-24
+
+#### Documentation
+
+* Fix doc links to Cmek methods in lower-level client
+
 ### 1.9.4 / 2020-01-23
 
 #### Documentation
