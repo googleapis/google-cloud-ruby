@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 / 2020-02-24
+
+#### Features
+
+* Add Queue#stackdriver_logging_config (StackdriverLoggingConfig)
+
 ### 1.3.5 / 2020-02-06
 
 #### Performance Improvements
