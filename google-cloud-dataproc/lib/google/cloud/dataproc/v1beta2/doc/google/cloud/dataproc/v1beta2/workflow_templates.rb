@@ -17,7 +17,7 @@ module Google
   module Cloud
     module Dataproc
       module V1beta2
-        # A Cloud Dataproc workflow template resource.
+        # A Dataproc workflow template resource.
         # @!attribute [rw] id
         #   @return [String]
         #     Required. The template id.
@@ -153,22 +153,16 @@ module Google
         #     or hyphen. Must consist of between 3 and 50 characters.
         # @!attribute [rw] hadoop_job
         #   @return [Google::Cloud::Dataproc::V1beta2::HadoopJob]
-        #     Job is a Hadoop job.
         # @!attribute [rw] spark_job
         #   @return [Google::Cloud::Dataproc::V1beta2::SparkJob]
-        #     Job is a Spark job.
         # @!attribute [rw] pyspark_job
         #   @return [Google::Cloud::Dataproc::V1beta2::PySparkJob]
-        #     Job is a Pyspark job.
         # @!attribute [rw] hive_job
         #   @return [Google::Cloud::Dataproc::V1beta2::HiveJob]
-        #     Job is a Hive job.
         # @!attribute [rw] pig_job
         #   @return [Google::Cloud::Dataproc::V1beta2::PigJob]
-        #     Job is a Pig job.
         # @!attribute [rw] spark_sql_job
         #   @return [Google::Cloud::Dataproc::V1beta2::SparkSqlJob]
-        #     Job is a SparkSql job.
         # @!attribute [rw] labels
         #   @return [Hash{String => String}]
         #     Optional. The labels to associate with this job.
@@ -286,7 +280,7 @@ module Google
         #     Required. List of allowed values for the parameter.
         class ValueValidation; end
 
-        # A Cloud Dataproc workflow template resource.
+        # A Dataproc workflow template resource.
         # @!attribute [rw] template
         #   @return [String]
         #     Output only. The resource name of the workflow template as described

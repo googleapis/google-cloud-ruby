@@ -28,7 +28,7 @@ module Google
         #     unique. Names of deleted clusters can be reused.
         # @!attribute [rw] config
         #   @return [Google::Cloud::Dataproc::V1beta2::ClusterConfig]
-        #     Required. The cluster config. Note that Cloud Dataproc may set
+        #     Required. The cluster config. Note that Dataproc may set
         #     default values, and values may change when clusters are updated.
         # @!attribute [rw] labels
         #   @return [Hash{String => String}]
@@ -47,7 +47,7 @@ module Google
         #     Output only. The previous cluster status.
         # @!attribute [rw] cluster_uuid
         #   @return [String]
-        #     Output only. A cluster UUID (Unique Universal Identifier). Cloud Dataproc
+        #     Output only. A cluster UUID (Unique Universal Identifier). Dataproc
         #     generates this value when it creates the cluster.
         # @!attribute [rw] metrics
         #   @return [Google::Cloud::Dataproc::V1beta2::ClusterMetrics]
@@ -60,14 +60,14 @@ module Google
         # The cluster config.
         # @!attribute [rw] config_bucket
         #   @return [String]
-        #     Optional. A Google Cloud Storage bucket used to stage job
+        #     Optional. A Cloud Storage bucket used to stage job
         #     dependencies, config files, and job driver console output.
         #     If you do not specify a staging bucket, Cloud
         #     Dataproc will determine a Cloud Storage location (US,
-        #     ASIA, or EU) for your cluster's staging bucket according to the Google
+        #     ASIA, or EU) for your cluster's staging bucket according to the
         #     Compute Engine zone where your cluster is deployed, and then create
         #     and manage this project-level, per-location bucket (see
-        #     [Cloud Dataproc staging
+        #     [Dataproc staging
         #     bucket](/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
         # @!attribute [rw] gce_cluster_config
         #   @return [Google::Cloud::Dataproc::V1beta2::GceClusterConfig]
@@ -143,7 +143,7 @@ module Google
         #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]`
         #     * `projects/[project_id]/locations/[dataproc_region]/autoscalingPolicies/[policy_id]`
         #
-        #     Note that the policy must be in the same project and Cloud Dataproc region.
+        #     Note that the policy must be in the same project and Dataproc region.
         class AutoscalingConfig; end
 
         # Encryption settings for the cluster.
@@ -159,7 +159,7 @@ module Google
         #   @return [String]
         #     Optional. The zone where the Compute Engine cluster will be located.
         #     On a create request, it is required in the "global" region. If omitted
-        #     in a non-global Cloud Dataproc region, the service will pick a zone in the
+        #     in a non-global Dataproc region, the service will pick a zone in the
         #     corresponding Compute Engine region. On a get request, zone will always be
         #     present.
         #
@@ -201,17 +201,17 @@ module Google
         #     configured to be accessible without external IP addresses.
         # @!attribute [rw] service_account
         #   @return [String]
-        #     Optional. The service account of the instances. Defaults to the default
-        #     Compute Engine service account. Custom service accounts need
-        #     permissions equivalent to the following IAM roles:
+        #     Optional. The [Dataproc service
+        #     account](/dataproc/docs/concepts/configuring-clusters/service-accounts#service_accounts_in_cloud_dataproc)
+        #     (also see [VM Data Plane
+        #     identity](/dataproc/docs/concepts/iam/dataproc-principals#vm_service_account_data_plane_identity))
+        #     used by Dataproc cluster VM instances to access Google Cloud Platform
+        #     services.
         #
-        #     * roles/logging.logWriter
-        #     * roles/storage.objectAdmin
-        #
-        #     (see
-        #     https://cloud.google.com/compute/docs/access/service-accounts#custom_service_accounts
-        #     for more information).
-        #     Example: `[account_id]@[project_id].iam.gserviceaccount.com`
+        #     If not specified, the
+        #     [Compute Engine default service
+        #     account](/compute/docs/access/service-accounts#default_service_account)
+        #     is used.
         # @!attribute [rw] service_account_scopes
         #   @return [Array<String>]
         #     Optional. The URIs of service account scopes to be included in
@@ -250,7 +250,7 @@ module Google
         #     For master instance groups, must be set to 1.
         # @!attribute [rw] instance_names
         #   @return [Array<String>]
-        #     Output only. The list of instance names. Cloud Dataproc derives the names
+        #     Output only. The list of instance names. Dataproc derives the names
         #     from `cluster_name`, `num_instances`, and the instance group.
         # @!attribute [rw] image_uri
         #   @return [String]
@@ -267,7 +267,7 @@ module Google
         #     * `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
         #     * `n1-standard-2`
         #
-        #     **Auto Zone Exception**: If you are using the Cloud Dataproc
+        #     **Auto Zone Exception**: If you are using the Dataproc
         #     [Auto Zone
         #     Placement](/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
         #     feature, you must use the short name of the machine type
@@ -291,7 +291,7 @@ module Google
         # @!attribute [rw] min_cpu_platform
         #   @return [String]
         #     Specifies the minimum cpu platform for the Instance Group.
-        #     See [Cloud Dataproc&rarr;Minimum CPU Platform]
+        #     See [Dataproc&rarr;Minimum CPU Platform]
         #     (/dataproc/docs/concepts/compute/dataproc-min-cpu).
         class InstanceGroupConfig; end
 
@@ -319,7 +319,7 @@ module Google
         #     * `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
         #     * `nvidia-tesla-k80`
         #
-        #     **Auto Zone Exception**: If you are using the Cloud Dataproc
+        #     **Auto Zone Exception**: If you are using the Dataproc
         #     [Auto Zone
         #     Placement](/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
         #     feature, you must use the short name of the accelerator type
@@ -351,25 +351,27 @@ module Google
         # Specifies the cluster auto-delete schedule configuration.
         # @!attribute [rw] idle_delete_ttl
         #   @return [Google::Protobuf::Duration]
-        #     Optional. The duration to keep the cluster alive while idling.
-        #     Passing this threshold will cause the cluster to be
-        #     deleted. Valid range: **[10m, 14d]**.
-        #
-        #     Example: **"10m"**, the minimum value, to delete the
-        #     cluster when it has had no jobs running for 10 minutes.
+        #     Optional. The duration to keep the cluster alive while idling (when no jobs
+        #     are running). Passing this threshold will cause the cluster to be
+        #     deleted. Minimum value is 10 minutes; maximum value is 14 days (see JSON
+        #     representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
         # @!attribute [rw] auto_delete_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Optional. The time when cluster will be auto-deleted.
+        #     Optional. The time when cluster will be auto-deleted. (see JSON representation of
+        #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [rw] auto_delete_ttl
         #   @return [Google::Protobuf::Duration]
         #     Optional. The lifetime duration of cluster. The cluster will be
-        #     auto-deleted at the end of this period. Valid range: **[10m, 14d]**.
-        #
-        #     Example: **"1d"**, to delete the cluster 1 day after its creation..
+        #     auto-deleted at the end of this period. Minimum value is 10 minutes;
+        #     maximum value is 14 days (see JSON representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [rw] idle_start_time
         #   @return [Google::Protobuf::Timestamp]
         #     Output only. The time when cluster became idle (most recent job finished)
-        #     and became eligible for deletion due to idleness.
+        #     and became eligible for deletion due to idleness (see JSON representation
+        #     of
+        #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         class LifecycleConfig; end
 
         # Security related configuration, including encryption, Kerberos, etc.
@@ -455,7 +457,10 @@ module Google
         # @!attribute [rw] execution_timeout
         #   @return [Google::Protobuf::Duration]
         #     Optional. Amount of time executable has to complete. Default is
-        #     10 minutes. Cluster creation fails with an explanatory error message (the
+        #     10 minutes (see JSON representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        #
+        #     Cluster creation fails with an explanatory error message (the
         #     name of the executable that caused the error and the exceeded timeout
         #     period) if the executable is not completed at end of the timeout period.
         class NodeInitializationAction; end
@@ -469,7 +474,8 @@ module Google
         #     Output only. Optional details of cluster's state.
         # @!attribute [rw] state_start_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Output only. Time when this state was entered.
+        #     Output only. Time when this state was entered (see JSON representation of
+        #     [Timestamp](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         # @!attribute [rw] substate
         #   @return [Google::Cloud::Dataproc::V1beta2::ClusterStatus::Substate]
         #     Output only. Additional state information that includes
@@ -509,7 +515,7 @@ module Google
             UNHEALTHY = 1
 
             # The agent-reported status is out of date (may occur if
-            # Cloud Dataproc loses communication with Agent).
+            # Dataproc loses communication with Agent).
             #
             # Applies to RUNNING state.
             STALE_STATUS = 2
@@ -520,7 +526,7 @@ module Google
         # @!attribute [rw] image_version
         #   @return [String]
         #     Optional. The version of software inside the cluster. It must be one of the
-        #     supported [Cloud Dataproc
+        #     supported [Dataproc
         #     Versions](/dataproc/docs/concepts/versioning/dataproc-versions#supported_cloud_dataproc_versions),
         #     such as "1.2" (including a subminor version, such as "1.2.29"), or the
         #     ["preview"
@@ -570,7 +576,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] cluster
         #   @return [Google::Cloud::Dataproc::V1beta2::Cluster]
         #     Required. The cluster to create.
@@ -596,7 +602,7 @@ module Google
         #     cluster belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] cluster_name
         #   @return [String]
         #     Required. The cluster name.
@@ -610,7 +616,8 @@ module Google
         #     interrupting jobs in progress. Timeout specifies how long to wait for jobs
         #     in progress to finish before forcefully removing nodes (and potentially
         #     interrupting jobs). Default timeout is 0 (for forceful decommission), and
-        #     the maximum allowed timeout is 1 day.
+        #     the maximum allowed timeout is 1 day (see JSON representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
         #
         #     Only supported on Dataproc image versions 1.2 and higher.
         # @!attribute [rw] update_mask
@@ -697,7 +704,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] cluster_name
         #   @return [String]
         #     Required. The cluster name.
@@ -727,7 +734,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] cluster_name
         #   @return [String]
         #     Required. The cluster name.
@@ -740,7 +747,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] filter
         #   @return [String]
         #     Optional.  A filter constraining the clusters to list. Filters are
@@ -788,7 +795,7 @@ module Google
         #     belongs to.
         # @!attribute [rw] region
         #   @return [String]
-        #     Required. The Cloud Dataproc region in which to handle the request.
+        #     Required. The Dataproc region in which to handle the request.
         # @!attribute [rw] cluster_name
         #   @return [String]
         #     Required. The cluster name.
