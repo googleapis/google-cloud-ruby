@@ -2616,7 +2616,7 @@ module Google
           # You can only set range partitioning when creating a table as in the example below. BigQuery does not allow
           # you to change partitioning on an existing table.
           #
-          # @param [Integer] field The range partition field. The table is partitioned by this
+          # @param [String] field The range partition field. The table is partitioned by this
           #   field. The field must be a top-level `NULLABLE/REQUIRED` field. The only supported
           #   type is `INTEGER/INT64`.
           #

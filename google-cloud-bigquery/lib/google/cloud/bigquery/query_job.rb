@@ -414,7 +414,7 @@ module Google
         # Checks if the destination table will be range partitioned. See [Creating and using integer range partitioned
         # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
         #
-        # @return [Boolean, nil] `true` when the table is range partitioned, or `false` otherwise.
+        # @return [Boolean] `true` when the table is range partitioned, or `false` otherwise.
         #
         # @!group Attributes
         #
@@ -428,7 +428,7 @@ module Google
         # [Creating and using integer range partitioned
         # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
         #
-        # @return [Integer, nil] The partition field, if a field was configured, or `nil` if not range partitioned.
+        # @return [String, nil] The partition field, if a field was configured, or `nil` if not range partitioned.
         #
         # @!group Attributes
         #
@@ -458,8 +458,7 @@ module Google
         # @!group Attributes
         #
         def range_partitioning_interval
-          return nil unless range_partitioning?
-          @gapi.configuration.query.range_partitioning.range.interval
+          @gapi.configuration.query.range_partitioning.range.interval if range_partitioning?
         end
 
         ###
@@ -1101,7 +1100,7 @@ module Google
           # You can only set range partitioning when creating a table. BigQuery does not allow you to change
           # partitioning on an existing table.
           #
-          # @param [Integer] field The range partition field. the destination table is partitioned by this
+          # @param [String] field The range partition field. the destination table is partitioned by this
           #   field. The field must be a top-level `NULLABLE/REQUIRED` field. The only supported
           #   type is `INTEGER/INT64`.
           #
