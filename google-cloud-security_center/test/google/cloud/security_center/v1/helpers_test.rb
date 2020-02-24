@@ -37,19 +37,6 @@ end
 describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
   let(:mock_credentials) { HelperMockSecurityCenterCredentials_v1.new }
 
-  describe "the asset_path instance method" do
-    it "correctly calls Google::Cloud::SecurityCenter::V1::SecurityCenterClient.asset_path" do
-      Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::SecurityCenter.new version: :v1
-        parameters = client.method("asset_path").parameters.map { |arg| arg.last.to_s }
-        assert_equal(
-          client.asset_path(*parameters),
-          Google::Cloud::SecurityCenter::V1::SecurityCenterClient.asset_path(*parameters)
-        )
-      end
-    end
-  end
-
   describe "the asset_security_marks_path instance method" do
     it "correctly calls Google::Cloud::SecurityCenter::V1::SecurityCenterClient.asset_security_marks_path" do
       Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
@@ -110,19 +97,6 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
         assert_equal(
           client.organization_settings_path(*parameters),
           Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_settings_path(*parameters)
-        )
-      end
-    end
-  end
-
-  describe "the organization_sources_path instance method" do
-    it "correctly calls Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_sources_path" do
-      Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
-        client = Google::Cloud::SecurityCenter.new version: :v1
-        parameters = client.method("organization_sources_path").parameters.map { |arg| arg.last.to_s }
-        assert_equal(
-          client.organization_sources_path(*parameters),
-          Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_sources_path(*parameters)
         )
       end
     end

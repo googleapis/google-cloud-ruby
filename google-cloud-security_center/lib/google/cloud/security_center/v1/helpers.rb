@@ -18,14 +18,6 @@ module Google
       module V1
         class SecurityCenterClient
 
-          # Alias for Google::Cloud::SecurityCenter::V1::SecurityCenterClient.asset_path.
-          # @param organization [String]
-          # @param asset [String]
-          # @return [String]
-          def asset_path organization, asset
-            self.class.asset_path organization, asset
-          end
-          
           # Alias for Google::Cloud::SecurityCenter::V1::SecurityCenterClient.asset_security_marks_path.
           # @param organization [String]
           # @param asset [String]
@@ -64,13 +56,6 @@ module Google
           # @return [String]
           def organization_settings_path organization
             self.class.organization_settings_path organization
-          end
-          
-          # Alias for Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_sources_path.
-          # @param organization [String]
-          # @return [String]
-          def organization_sources_path organization
-            self.class.organization_sources_path organization
           end
           
           # Alias for Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path.
