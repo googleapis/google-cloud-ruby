@@ -30,7 +30,7 @@ Gem::Specification.new do |gem|
     https://googleapis.dev/ruby/google-cloud-translate/v2.0.0/file.CHANGELOG.html#2_0_0___2019-10-28
   POSTINSTALL
 
-  gem.add_dependency "faraday", "~> 0.13"
+  gem.add_dependency "faraday", ">= 0.17.3", "< 2.0"
   gem.add_dependency "google-cloud-core", "~> 1.2"
   gem.add_dependency "google-gax", "~> 1.8"
   gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"
