@@ -111,6 +111,13 @@ s.replace(
     'port = service_port || self.class::DEFAULT_SERVICE_PORT'
 )
 
+# Ensure simplecov is required
+s.replace(
+    'test/**/*.rb',
+    '\n\nrequire "minitest/autorun"\n',
+    '\n\nrequire "simplecov"\nrequire "minitest/autorun"\n'
+)
+
 # Remove legacy release level from documentation
 s.replace(
     [

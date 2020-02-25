@@ -181,6 +181,13 @@ s.replace(
     ])
 )
 
+# Ensure simplecov is required
+s.replace(
+    ['test/**/*.rb', 'acceptance/**/*.rb'],
+    '\n\nrequire "minitest/autorun"\n',
+    '\n\nrequire "simplecov"\nrequire "minitest/autorun"\n'
+)
+
 # Remove legacy release level from documentation
 s.replace(
     [
