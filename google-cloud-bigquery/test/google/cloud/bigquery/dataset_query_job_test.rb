@@ -26,6 +26,16 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
                                                   bigquery.service }
   let(:labels) { { "foo" => "bar" } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
+  let(:range_partitioning) do
+    Google::Apis::BigqueryV2::RangePartitioning.new(
+      field: "my_table_id",
+      range: Google::Apis::BigqueryV2::RangePartitioning::Range.new(
+        start: 0,
+        interval: 10,
+        end: 100
+      )
+    ) 
+  end
   let(:time_partitioning) do
     Google::Apis::BigqueryV2::TimePartitioning.new type: "DAY", field: "dob", expiration_ms: 86_400_000, require_partition_filter: true
   end
@@ -102,6 +112,11 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     mock.verify
 
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.range_partitioning?.must_equal false
+    job.range_partitioning_field.must_be_nil
+    job.range_partitioning_start.must_be_nil
+    job.range_partitioning_interval.must_be_nil
+    job.range_partitioning_end.must_be_nil
     job.time_partitioning?.must_equal false
     job.time_partitioning_type.must_be :nil?
     job.time_partitioning_field.must_be :nil?
@@ -109,6 +124,40 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job.time_partitioning_require_filter?.must_equal false
     job.clustering?.must_equal false
     job.clustering_fields.must_be :nil?
+  end
+
+  it "queries the data with range_partitioning" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query
+    job_gapi.configuration.query.default_dataset = Google::Apis::BigqueryV2::DatasetReference.new(
+        project_id: project,
+        dataset_id: dataset_id
+    )
+    job_gapi.configuration.query.destination_table = Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project,
+        dataset_id: dataset_id,
+        table_id:   table_id
+    )
+    job_gapi.configuration.query.range_partitioning = range_partitioning
+
+    mock.expect :insert_job, job_gapi, [project, job_gapi]
+
+    job = dataset.query_job query, table: table do |j|
+      j.range_partitioning_field = "my_table_id"
+      j.range_partitioning_start = 0
+      j.range_partitioning_interval = 10
+      j.range_partitioning_end = 100
+    end
+    mock.verify
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.range_partitioning?.must_equal true
+    job.range_partitioning_field.must_equal "my_table_id"
+    job.range_partitioning_start.must_equal 0
+    job.range_partitioning_interval.must_equal 10
+    job.range_partitioning_end.must_equal 100
   end
 
   it "queries the data with time_partitioning and clustering" do

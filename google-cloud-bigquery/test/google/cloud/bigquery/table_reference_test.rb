@@ -64,6 +64,11 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     table.table_ref.dataset_id.must_equal dataset_id
     table.table_ref.project_id.must_equal project
 
+    table.range_partitioning?.must_be_nil
+    table.range_partitioning_field.must_be_nil
+    table.range_partitioning_start.must_be_nil
+    table.range_partitioning_interval.must_be_nil
+    table.range_partitioning_end.must_be_nil
     table.time_partitioning?.must_be_nil
     table.time_partitioning_type.must_be_nil
     table.time_partitioning_field.must_be_nil

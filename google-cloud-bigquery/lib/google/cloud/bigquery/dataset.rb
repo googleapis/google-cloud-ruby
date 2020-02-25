@@ -555,6 +555,40 @@ module Google
         #     end
         #   end
         #
+        # @example With time partitioning and clustering.
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   table = dataset.create_table "my_table" do |t|
+        #     t.schema do |schema|
+        #       schema.timestamp "dob", mode: :required
+        #       schema.string "first_name", mode: :required
+        #       schema.string "last_name", mode: :required
+        #     end
+        #     t.time_partitioning_type  = "DAY"
+        #     t.time_partitioning_field = "dob"
+        #     t.clustering_fields = ["last_name", "first_name"]
+        #   end
+        #
+        # @example With range partitioning.
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   table = dataset.create_table "my_table" do |t|
+        #     t.schema do |schema|
+        #       schema.integer "my_table_id", mode: :required
+        #       schema.string "my_table_data", mode: :required
+        #     end
+        #     t.range_partitioning_field = "my_table_id"
+        #     t.range_partitioning_start = 0
+        #     t.range_partitioning_interval = 10
+        #     t.range_partitioning_end = 100
+        #   end
+        #
         # @!group Table
         #
         def create_table table_id, name: nil, description: nil

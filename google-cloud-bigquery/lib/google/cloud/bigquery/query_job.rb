@@ -411,6 +411,69 @@ module Google
         end
 
         ###
+        # Checks if the destination table will be range partitioned. See [Creating and using integer range partitioned
+        # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+        #
+        # @return [Boolean] `true` when the table is range partitioned, or `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def range_partitioning?
+          !@gapi.configuration.query.range_partitioning.nil?
+        end
+
+        ###
+        # The field on which the destination table will be range partitioned, if any. The field must be a
+        # top-level `NULLABLE/REQUIRED` field. The only supported type is `INTEGER/INT64`. See
+        # [Creating and using integer range partitioned
+        # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+        #
+        # @return [String, nil] The partition field, if a field was configured, or `nil` if not range partitioned.
+        #
+        # @!group Attributes
+        #
+        def range_partitioning_field
+          @gapi.configuration.query.range_partitioning.field if range_partitioning?
+        end
+
+        ###
+        # The start of range partitioning, inclusive. See [Creating and using integer range partitioned
+        # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+        #
+        # @return [Integer, nil] The start of range partitioning, inclusive, or `nil` if not range partitioned.
+        #
+        # @!group Attributes
+        #
+        def range_partitioning_start
+          @gapi.configuration.query.range_partitioning.range.start if range_partitioning?
+        end
+
+        ###
+        # The width of each interval. See [Creating and using integer range partitioned
+        # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+        #
+        # @return [Integer, nil] The width of each interval, for data in range partitions, or `nil` if not range
+        #   partitioned.
+        #
+        # @!group Attributes
+        #
+        def range_partitioning_interval
+          @gapi.configuration.query.range_partitioning.range.interval if range_partitioning?
+        end
+
+        ###
+        # The end of range partitioning, exclusive. See [Creating and using integer range partitioned
+        # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+        #
+        # @return [Integer, nil] The end of range partitioning, exclusive, or `nil` if not range partitioned.
+        #
+        # @!group Attributes
+        #
+        def range_partitioning_end
+          @gapi.configuration.query.range_partitioning.range.end if range_partitioning?
+        end
+
+        ###
         # Checks if the destination table will be time-partitioned. See
         # [Partitioned Tables](https://cloud.google.com/bigquery/docs/partitioned-tables).
         #
@@ -1026,6 +1089,164 @@ module Google
           # @!group Attributes
           def encryption= val
             @gapi.configuration.query.update! destination_encryption_configuration: val.to_gapi
+          end
+
+          ##
+          # Sets the field on which to range partition the table. See [Creating and using integer range partitioned
+          # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+          #
+          # See {#range_partitioning_start=}, {#range_partitioning_interval=} and {#range_partitioning_end=}.
+          #
+          # You can only set range partitioning when creating a table. BigQuery does not allow you to change
+          # partitioning on an existing table.
+          #
+          # @param [String] field The range partition field. the destination table is partitioned by this
+          #   field. The field must be a top-level `NULLABLE/REQUIRED` field. The only supported
+          #   type is `INTEGER/INT64`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   destination_table = dataset.table "my_destination_table",
+          #                                     skip_lookup: true
+          #
+          #   job = bigquery.query_job "SELECT num FROM UNNEST(GENERATE_ARRAY(0, 99)) AS num" do |job|
+          #     job.table = destination_table
+          #     job.range_partitioning_field = "num"
+          #     job.range_partitioning_start = 0
+          #     job.range_partitioning_interval = 10
+          #     job.range_partitioning_end = 100
+          #   end
+          #
+          #   job.wait_until_done!
+          #   job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def range_partitioning_field= field
+            @gapi.configuration.query.range_partitioning ||= Google::Apis::BigqueryV2::RangePartitioning.new(
+              range: Google::Apis::BigqueryV2::RangePartitioning::Range.new
+            )
+            @gapi.configuration.query.range_partitioning.field = field
+          end
+
+          ##
+          # Sets the start of range partitioning, inclusive, for the destination table. See [Creating and using integer
+          # range partitioned tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+          #
+          # You can only set range partitioning when creating a table. BigQuery does not allow you to change
+          # partitioning on an existing table.
+          #
+          # See {#range_partitioning_field=}, {#range_partitioning_interval=} and {#range_partitioning_end=}.
+          #
+          # @param [Integer] range_start The start of range partitioning, inclusive.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   destination_table = dataset.table "my_destination_table",
+          #                                     skip_lookup: true
+          #
+          #   job = bigquery.query_job "SELECT num FROM UNNEST(GENERATE_ARRAY(0, 99)) AS num" do |job|
+          #     job.table = destination_table
+          #     job.range_partitioning_field = "num"
+          #     job.range_partitioning_start = 0
+          #     job.range_partitioning_interval = 10
+          #     job.range_partitioning_end = 100
+          #   end
+          #
+          #   job.wait_until_done!
+          #   job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def range_partitioning_start= range_start
+            @gapi.configuration.query.range_partitioning ||= Google::Apis::BigqueryV2::RangePartitioning.new(
+              range: Google::Apis::BigqueryV2::RangePartitioning::Range.new
+            )
+            @gapi.configuration.query.range_partitioning.range.start = range_start
+          end
+
+          ##
+          # Sets width of each interval for data in range partitions. See [Creating and using integer range partitioned
+          # tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+          #
+          # You can only set range partitioning when creating a table. BigQuery does not allow you to change
+          # partitioning on an existing table.
+          #
+          # See {#range_partitioning_field=}, {#range_partitioning_start=} and {#range_partitioning_end=}.
+          #
+          # @param [Integer] range_interval The width of each interval, for data in partitions.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   destination_table = dataset.table "my_destination_table",
+          #                                     skip_lookup: true
+          #
+          #   job = bigquery.query_job "SELECT num FROM UNNEST(GENERATE_ARRAY(0, 99)) AS num" do |job|
+          #     job.table = destination_table
+          #     job.range_partitioning_field = "num"
+          #     job.range_partitioning_start = 0
+          #     job.range_partitioning_interval = 10
+          #     job.range_partitioning_end = 100
+          #   end
+          #
+          #   job.wait_until_done!
+          #   job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def range_partitioning_interval= range_interval
+            @gapi.configuration.query.range_partitioning ||= Google::Apis::BigqueryV2::RangePartitioning.new(
+              range: Google::Apis::BigqueryV2::RangePartitioning::Range.new
+            )
+            @gapi.configuration.query.range_partitioning.range.interval = range_interval
+          end
+
+          ##
+          # Sets the end of range partitioning, exclusive, for the destination table. See [Creating and using integer
+          # range partitioned tables](https://cloud.google.com/bigquery/docs/creating-integer-range-partitions).
+          #
+          # You can only set range partitioning when creating a table. BigQuery does not allow you to change
+          # partitioning on an existing table.
+          #
+          # See {#range_partitioning_start=}, {#range_partitioning_interval=} and {#range_partitioning_field=}.
+          #
+          # @param [Integer] range_end The end of range partitioning, exclusive.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   destination_table = dataset.table "my_destination_table",
+          #                                     skip_lookup: true
+          #
+          #   job = bigquery.query_job "SELECT num FROM UNNEST(GENERATE_ARRAY(0, 99)) AS num" do |job|
+          #     job.table = destination_table
+          #     job.range_partitioning_field = "num"
+          #     job.range_partitioning_start = 0
+          #     job.range_partitioning_interval = 10
+          #     job.range_partitioning_end = 100
+          #   end
+          #
+          #   job.wait_until_done!
+          #   job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def range_partitioning_end= range_end
+            @gapi.configuration.query.range_partitioning ||= Google::Apis::BigqueryV2::RangePartitioning.new(
+              range: Google::Apis::BigqueryV2::RangePartitioning::Range.new
+            )
+            @gapi.configuration.query.range_partitioning.range.end = range_end
           end
 
           ##

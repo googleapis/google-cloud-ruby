@@ -127,6 +127,11 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.job_id.must_equal job_id
     job.user_email.wont_be_nil
 
+    job.range_partitioning?.must_equal false
+    job.range_partitioning_field.must_be_nil
+    job.range_partitioning_start.must_be_nil
+    job.range_partitioning_interval.must_be_nil
+    job.range_partitioning_end.must_be_nil
     job.time_partitioning?.must_equal false
     job.time_partitioning_type.must_be :nil?
     job.time_partitioning_field.must_be :nil?
