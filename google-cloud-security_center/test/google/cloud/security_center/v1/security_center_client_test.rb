@@ -69,6 +69,320 @@ end
 
 describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
 
+  describe 'get_iam_policy' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#get_iam_policy."
+
+    it 'invokes get_iam_policy without error' do
+      # Create request parameters
+      resource = ''
+
+      # Create expected grpc response
+      version = 351608024
+      etag = "21"
+      expected_response = { version: version, etag: etag }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::Policy)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
+        assert_equal(resource, request.resource)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("get_iam_policy")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          response = client.get_iam_policy(resource)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_iam_policy(resource) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_iam_policy with error' do
+      # Create request parameters
+      resource = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
+        assert_equal(resource, request.resource)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("get_iam_policy")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.get_iam_policy(resource)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'group_assets' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#group_assets."
+
+    it 'invokes group_assets without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
+      group_by = ''
+
+      # Create expected grpc response
+      next_page_token = ""
+      total_size = 705419236
+      group_by_results_element = {}
+      group_by_results = [group_by_results_element]
+      expected_response = {
+        next_page_token: next_page_token,
+        total_size: total_size,
+        group_by_results: group_by_results
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::SecurityCenter::V1::GroupAssetsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::GroupAssetsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(group_by, request.group_by)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:group_assets, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("group_assets")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          response = client.group_assets(formatted_parent, group_by)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.group_by_results.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes group_assets with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
+      group_by = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::GroupAssetsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(group_by, request.group_by)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:group_assets, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("group_assets")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.group_assets(formatted_parent, group_by)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'group_findings' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#group_findings."
+
+    it 'invokes group_findings without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
+      group_by = ''
+
+      # Create expected grpc response
+      next_page_token = ""
+      total_size = 705419236
+      group_by_results_element = {}
+      group_by_results = [group_by_results_element]
+      expected_response = {
+        next_page_token: next_page_token,
+        total_size: total_size,
+        group_by_results: group_by_results
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::SecurityCenter::V1::GroupFindingsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::GroupFindingsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(group_by, request.group_by)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:group_findings, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("group_findings")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          response = client.group_findings(formatted_parent, group_by)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.group_by_results.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes group_findings with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
+      group_by = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::GroupFindingsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(group_by, request.group_by)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:group_findings, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("group_findings")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.group_findings(formatted_parent, group_by)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'test_iam_permissions' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#test_iam_permissions."
+
+    it 'invokes test_iam_permissions without error' do
+      # Create request parameters
+      resource = ''
+      permissions = []
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::TestIamPermissionsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
+        assert_equal(resource, request.resource)
+        assert_equal(permissions, request.permissions)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("test_iam_permissions")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          response = client.test_iam_permissions(resource, permissions)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.test_iam_permissions(resource, permissions) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes test_iam_permissions with error' do
+      # Create request parameters
+      resource = ''
+      permissions = []
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
+        assert_equal(resource, request.resource)
+        assert_equal(permissions, request.permissions)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("test_iam_permissions")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.test_iam_permissions(resource, permissions)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'create_source' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#create_source."
 
@@ -257,81 +571,6 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
     end
   end
 
-  describe 'get_iam_policy' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#get_iam_policy."
-
-    it 'invokes get_iam_policy without error' do
-      # Create request parameters
-      resource = ''
-
-      # Create expected grpc response
-      version = 351608024
-      etag = "21"
-      expected_response = { version: version, etag: etag }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::Policy)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(resource, request.resource)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockSecurityCenterCredentials_v1.new("get_iam_policy")
-
-      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
-        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::SecurityCenter.new(version: :v1)
-
-          # Call method
-          response = client.get_iam_policy(resource)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.get_iam_policy(resource) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes get_iam_policy with error' do
-      # Create request parameters
-      resource = ''
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(resource, request.resource)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockSecurityCenterCredentials_v1.new("get_iam_policy")
-
-      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
-        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::SecurityCenter.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.get_iam_policy(resource)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
   describe 'get_organization_settings' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#get_organization_settings."
 
@@ -478,168 +717,6 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.get_source(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'group_assets' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#group_assets."
-
-    it 'invokes group_assets without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
-      group_by = ''
-
-      # Create expected grpc response
-      next_page_token = ""
-      total_size = 705419236
-      group_by_results_element = {}
-      group_by_results = [group_by_results_element]
-      expected_response = {
-        next_page_token: next_page_token,
-        total_size: total_size,
-        group_by_results: group_by_results
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::SecurityCenter::V1::GroupAssetsResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::SecurityCenter::V1::GroupAssetsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(group_by, request.group_by)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:group_assets, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockSecurityCenterCredentials_v1.new("group_assets")
-
-      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
-        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::SecurityCenter.new(version: :v1)
-
-          # Call method
-          response = client.group_assets(formatted_parent, group_by)
-
-          # Verify the response
-          assert(response.instance_of?(Google::Gax::PagedEnumerable))
-          assert_equal(expected_response, response.page.response)
-          assert_nil(response.next_page)
-          assert_equal(expected_response.group_by_results.to_a, response.to_a)
-        end
-      end
-    end
-
-    it 'invokes group_assets with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
-      group_by = ''
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::SecurityCenter::V1::GroupAssetsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(group_by, request.group_by)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:group_assets, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockSecurityCenterCredentials_v1.new("group_assets")
-
-      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
-        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::SecurityCenter.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.group_assets(formatted_parent, group_by)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'group_findings' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#group_findings."
-
-    it 'invokes group_findings without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
-      group_by = ''
-
-      # Create expected grpc response
-      next_page_token = ""
-      total_size = 705419236
-      group_by_results_element = {}
-      group_by_results = [group_by_results_element]
-      expected_response = {
-        next_page_token: next_page_token,
-        total_size: total_size,
-        group_by_results: group_by_results
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::SecurityCenter::V1::GroupFindingsResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::SecurityCenter::V1::GroupFindingsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(group_by, request.group_by)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:group_findings, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockSecurityCenterCredentials_v1.new("group_findings")
-
-      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
-        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::SecurityCenter.new(version: :v1)
-
-          # Call method
-          response = client.group_findings(formatted_parent, group_by)
-
-          # Verify the response
-          assert(response.instance_of?(Google::Gax::PagedEnumerable))
-          assert_equal(expected_response, response.page.response)
-          assert_nil(response.next_page)
-          assert_equal(expected_response.group_by_results.to_a, response.to_a)
-        end
-      end
-    end
-
-    it 'invokes group_findings with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
-      group_by = ''
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::SecurityCenter::V1::GroupFindingsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(group_by, request.group_by)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:group_findings, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockSecurityCenterCredentials_v1.new("group_findings")
-
-      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
-        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::SecurityCenter.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.group_findings(formatted_parent, group_by)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1161,83 +1238,6 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.set_iam_policy(resource, policy)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'test_iam_permissions' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#test_iam_permissions."
-
-    it 'invokes test_iam_permissions without error' do
-      # Create request parameters
-      resource = ''
-      permissions = []
-
-      # Create expected grpc response
-      expected_response = {}
-      expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::TestIamPermissionsResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(resource, request.resource)
-        assert_equal(permissions, request.permissions)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockSecurityCenterCredentials_v1.new("test_iam_permissions")
-
-      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
-        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::SecurityCenter.new(version: :v1)
-
-          # Call method
-          response = client.test_iam_permissions(resource, permissions)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.test_iam_permissions(resource, permissions) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes test_iam_permissions with error' do
-      # Create request parameters
-      resource = ''
-      permissions = []
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(resource, request.resource)
-        assert_equal(permissions, request.permissions)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockSecurityCenterCredentials_v1.new("test_iam_permissions")
-
-      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
-        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::SecurityCenter.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.test_iam_permissions(resource, permissions)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
