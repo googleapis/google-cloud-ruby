@@ -423,7 +423,7 @@ describe Google::Cloud do
             spanner = Google::Cloud::Spanner.new query_options: {optimizer_version: "4"}
             spanner.must_be_kind_of Google::Cloud::Spanner::Project
             spanner.project.must_equal "project-id"
-            spanner.query_options[:optimizer_version].must_equal "3"
+            spanner.query_options[:optimizer_version].must_equal optimizer_version
           end
         end
       end
