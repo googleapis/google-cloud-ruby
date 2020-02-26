@@ -130,7 +130,7 @@ describe "Spanner Client", :execute_sql, :spanner do
   end
 
   it "runs a simple query with query options" do
-    query_options = { optimizer_version: "latest" }
+    query_options = { optimizer_version: "1" }
     results = db.execute_sql "SELECT 42 AS num", query_options: query_options
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -147,10 +147,10 @@ describe "Spanner Client", :execute_sql, :spanner do
   end
 
   it "runs a simple query when the client-level config of query options is set" do
-    query_options = { optimizer_version: "latest" }
+    query_options = { optimizer_version: "1" }
     new_spanner = Google::Cloud::Spanner.new query_options: query_options
     new_db = new_spanner.client db.instance_id, db.database_id
-    new_db.project.service.query_options.must_equal({ optimizer_version: "latest" })
+    new_db.project.service.query_options.must_equal({ optimizer_version: "1" })
 
     results = new_db.execute_sql "SELECT 42 AS num"
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -167,12 +167,12 @@ describe "Spanner Client", :execute_sql, :spanner do
     row[:num].must_equal 42
   end
 
-  describe "when the environment varilable of query options is set" do
+  describe "when the environment variable of query options is set" do
     let(:origin_env) { nil }
 
     before do
       origin_env = ENV["SPANNER_OPTIMIZER_VERSION"]
-      ENV["SPANNER_OPTIMIZER_VERSION"] = "latest"
+      ENV["SPANNER_OPTIMIZER_VERSION"] = "1"
     end
 
     after do
@@ -182,7 +182,7 @@ describe "Spanner Client", :execute_sql, :spanner do
     it "runs a simple query " do
       new_spanner = Google::Cloud::Spanner.new
       new_db = new_spanner.client db.instance_id, db.database_id
-      new_db.project.service.query_options.must_equal({ optimizer_version: "latest" })
+      new_db.project.service.query_options.must_equal({ optimizer_version: "1" })
 
       results = new_db.execute_sql "SELECT 42 AS num"
       results.must_be_kind_of Google::Cloud::Spanner::Results

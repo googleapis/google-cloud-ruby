@@ -235,8 +235,8 @@ module Google
         #   db = spanner.client "my-instance", "my-database"
         #
         #   db.snapshot do |snp|
-        #     results = snp.execute_query "SELECT * FROM users",
-        #                                 query_options: { optimizer_version: "latest" }
+        #     results = snp.execute_query \
+        #       "SELECT * FROM users", query_options: { optimizer_version: "1" }
         #
         #     results.rows.each do |row|
         #       puts "User #{row[:id]} is #{row[:name]}"
