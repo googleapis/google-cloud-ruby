@@ -357,12 +357,26 @@ describe Google::Cloud do
       end
     end
 
-<<<<<<< HEAD
     it "uses provided lib name and lib version" do
       lib_name = "spanner-ruby"
       lib_version = "1.0.0"
 
-=======
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+            spanner = Google::Cloud::Spanner.new lib_name: lib_name, lib_version: lib_version
+            spanner.must_be_kind_of Google::Cloud::Spanner::Project
+            spanner.project.must_equal "project-id"
+            spanner.service.lib_name.must_equal lib_name
+            spanner.service.lib_version.must_equal lib_version
+            spanner.service.send(:lib_name_with_prefix).must_equal "#{lib_name}/#{lib_version} gccl"
+          end
+        end
+      end
+    end
+
     it "uses SPANNER_OPTIMIZER_VERSION environment variable" do
       optimizer_version = "4"
       optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? optimizer_version : nil }
@@ -373,39 +387,12 @@ describe Google::Cloud do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud::Spanner.new
             query_options = {optimizer_version: optimizer_version}
-            spanner.service.query_options.must_equal query_options
+            spanner.query_options.must_equal query_options
           end
         end
       end
     end
 
-    it "allows query_options to be set" do
-      query_options = {optimizer_version: "4"}
->>>>>>> e82f4f6eb... Add unit tests and integration tests.
-      # Clear all environment variables
-      ENV.stub :[], nil do
-        # Get project_id from Google Compute Engine
-        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
-          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
-<<<<<<< HEAD
-            spanner = Google::Cloud::Spanner.new lib_name: lib_name, lib_version: lib_version
-            spanner.must_be_kind_of Google::Cloud::Spanner::Project
-            spanner.project.must_equal "project-id"
-            spanner.service.lib_name.must_equal lib_name
-            spanner.service.lib_version.must_equal lib_version
-            spanner.service.send(:lib_name_with_prefix).must_equal "#{lib_name}/#{lib_version} gccl"
-=======
-            spanner = Google::Cloud::Spanner.new query_options: query_options
-            spanner.must_be_kind_of Google::Cloud::Spanner::Project
-            spanner.project.must_equal "project-id"
-            spanner.service.query_options.must_equal query_options
->>>>>>> e82f4f6eb... Add unit tests and integration tests.
-          end
-        end
-      end
-    end
-
-<<<<<<< HEAD
     it "uses provided lib name only" do
       lib_name = "spanner-ruby"
 
@@ -420,7 +407,11 @@ describe Google::Cloud do
             spanner.service.lib_name.must_equal lib_name
             spanner.service.lib_version.must_be :nil?
             spanner.service.send(:lib_name_with_prefix).must_equal "#{lib_name} gccl"
-=======
+          end
+        end
+      end
+    end
+
     it "follows that environment variables have higher order of precedence over client-level config for query options" do
       optimizer_version = "3"
       optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? optimizer_version : nil }
@@ -432,7 +423,7 @@ describe Google::Cloud do
             spanner = Google::Cloud::Spanner.new query_options: {optimizer_version: "4"}
             spanner.must_be_kind_of Google::Cloud::Spanner::Project
             spanner.project.must_equal "project-id"
-            spanner.service.query_options[:optimizer_version].must_equal "3"
+            spanner.query_options[:optimizer_version].must_equal "3"
           end
         end
       end
@@ -460,7 +451,6 @@ describe Google::Cloud do
                 kargs[:query_options] == {optimizer_version: query_level_version}
             end
             spanner.service.execute_streaming_sql "session-1", "SELECT * FROM users", query_options: {optimizer_version: query_level_version}
->>>>>>> e82f4f6eb... Add unit tests and integration tests.
           end
         end
       end
@@ -757,7 +747,7 @@ describe Google::Cloud do
             Google::Cloud::Spanner::Credentials.stub :new, default_credentials do
               spanner = Google::Cloud::Spanner.new
               spanner.project.must_equal "project-id"
-              spanner.service.query_options.must_equal query_options
+              spanner.query_options.must_equal query_options
             end
           end
         end

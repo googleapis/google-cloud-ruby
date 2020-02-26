@@ -53,12 +53,13 @@ module Google
         ##
         # @private Creates a new Spanner Client instance.
         def initialize project, instance_id, database_id, session_labels: nil,
-                       pool_opts: {}
+                       pool_opts: {}, query_options: nil
           @project = project
           @instance_id = instance_id
           @database_id = database_id
           @session_labels = session_labels
           @pool = Pool.new self, pool_opts
+          @query_options = query_options
         end
 
         # The unique identifier for the project.
@@ -336,6 +337,7 @@ module Google
 
           single_use_tx = single_use_transaction single_use
           results = nil
+          query_options = @query_options if query_options.nil?
           @pool.with_session do |session|
             results = session.execute_query \
               sql, params: params, types: types, transaction: single_use_tx,
@@ -1016,6 +1018,7 @@ module Google
           @pool.with_transaction do |tx|
             begin
               Thread.current[:transaction_id] = tx.transaction_id
+              tx.query_options = @query_options if !@query_options.nil?
               yield tx
               commit_resp = @project.service.commit \
                 tx.session.path, tx.mutations, transaction_id: tx.transaction_id
@@ -1122,6 +1125,7 @@ module Google
                               staleness: (staleness || exact_staleness)
               Thread.current[:transaction_id] = snp_grpc.id
               snp = Snapshot.from_grpc snp_grpc, session
+              snp.query_options = @query_options if !@query_options.nil?
               yield snp if block_given?
             ensure
               Thread.current[:transaction_id] = nil

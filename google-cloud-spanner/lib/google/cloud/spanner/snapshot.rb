@@ -42,7 +42,7 @@ module Google
       #
       class Snapshot
         # @private The Session object.
-        attr_accessor :session
+        attr_accessor :session, :query_options
 
         ##
         # Identifier of the transaction results were run in.
@@ -247,7 +247,7 @@ module Google
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
-
+          query_options = @query_options if query_options.nil?
           session.execute_query sql, params: params, types: types,
                                      transaction: tx_selector,
                                      query_options: query_options

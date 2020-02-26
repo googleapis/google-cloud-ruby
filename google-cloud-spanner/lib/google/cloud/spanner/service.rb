@@ -30,13 +30,12 @@ module Google
       # methods.
       class Service
         attr_accessor :project, :credentials, :timeout, :client_config, :host,
-                      :lib_name, :lib_version, :query_options
+                      :lib_name, :lib_version
 
         ##
         # Creates a new Service instance.
         def initialize project, credentials, host: nil, timeout: nil,
-                       client_config: nil, lib_name: nil, lib_version: nil,
-                       query_options: nil
+                       client_config: nil, lib_name: nil, lib_version: nil
           @project = project
           @credentials = credentials
           @host = host || V1::SpannerClient::SERVICE_ADDRESS
@@ -44,7 +43,6 @@ module Google
           @client_config = client_config || {}
           @lib_name = lib_name
           @lib_version = lib_version
-          @query_options = query_options
         end
 
         def channel
@@ -308,7 +306,6 @@ module Google
                                   partition_token: nil, seqno: nil,
                                   query_options: nil
           opts = default_options_from_session session_name
-          query_options = @query_options if query_options.nil?
           execute do
             service.execute_streaming_sql \
               session_name, sql, transaction: transaction,

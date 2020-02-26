@@ -75,7 +75,7 @@ module Google
       #
       class Transaction
         # @private The Session object.
-        attr_accessor :session
+        attr_accessor :session, :query_options
 
         def initialize
           @commit = Commit.new
@@ -280,7 +280,7 @@ module Google
           @seqno += 1
 
           params, types = Convert.to_input_params_and_types params, types
-
+          query_options = @query_options if query_options.nil?
           session.execute_query sql, params: params, types: types,
                                      transaction: tx_selector, seqno: @seqno,
                                      query_options: query_options

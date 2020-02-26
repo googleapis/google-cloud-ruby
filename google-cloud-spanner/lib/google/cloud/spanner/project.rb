@@ -68,12 +68,13 @@ module Google
       class Project
         ##
         # @private The Service object.
-        attr_accessor :service
+        attr_accessor :service, :query_options
 
         ##
         # @private Creates a new Spanner Project instance.
-        def initialize service
+        def initialize service, query_options: nil
           @service = service
+          @query_options = query_options
         end
 
         ##
@@ -470,12 +471,15 @@ module Google
         #     end
         #   end
         #
-        def client instance_id, database_id, pool: {}, labels: nil
+        def client instance_id, database_id, pool: {}, labels: nil,
+                   query_options: nil
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          query_options = @query_options if query_options.nil?
           Client.new self, instance_id, database_id,
                      session_labels: labels,
-                     pool_opts: valid_session_pool_options(pool)
+                     pool_opts: valid_session_pool_options(pool),
+                     query_options: query_options
         end
 
         ##
