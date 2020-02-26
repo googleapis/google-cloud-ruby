@@ -747,7 +747,7 @@ module Google
           # After the operation completes,
           # {Google::Longrunning::Operation#response Operation#response}
           # contains
-          # [Empty](https://cloud.google.comgoogle.protobuf.Empty).
+          # {Google::Protobuf::Empty Empty}.
           #
           # @param project_id [String]
           #   Required. The ID of the Google Cloud Platform project that the cluster

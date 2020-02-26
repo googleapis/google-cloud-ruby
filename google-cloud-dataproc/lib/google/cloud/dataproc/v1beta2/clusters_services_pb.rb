@@ -57,7 +57,7 @@ module Google
             # After the operation completes,
             # [Operation.response][google.longrunning.Operation.response]
             # contains
-            # [Empty](google.protobuf.Empty).
+            # [Empty][google.protobuf.Empty].
             rpc :DiagnoseCluster, DiagnoseClusterRequest, Google::Longrunning::Operation
           end
 
