@@ -62,6 +62,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :query_mode, :enum, 7, "google.spanner.v1.ExecuteSqlRequest.QueryMode"
     optional :partition_token, :bytes, 8
     optional :seqno, :int64, 9
+    optional :query_options, :message, 10, "google.spanner.v1.ExecuteSqlRequest.QueryOptions"
+  end
+  add_message "google.spanner.v1.ExecuteSqlRequest.QueryOptions" do
+    optional :optimizer_version, :string, 1
   end
   add_enum "google.spanner.v1.ExecuteSqlRequest.QueryMode" do
     value :NORMAL, 0
@@ -155,6 +159,7 @@ module Google
       ListSessionsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ListSessionsResponse").msgclass
       DeleteSessionRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.DeleteSessionRequest").msgclass
       ExecuteSqlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest").msgclass
+      ExecuteSqlRequest::QueryOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryOptions").msgclass
       ExecuteSqlRequest::QueryMode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteSqlRequest.QueryMode").enummodule
       ExecuteBatchDmlRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlRequest").msgclass
       ExecuteBatchDmlRequest::Statement = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.v1.ExecuteBatchDmlRequest.Statement").msgclass
