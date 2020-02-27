@@ -98,6 +98,13 @@ module Google
           @project.database instance_id, database_id
         end
 
+        # A hash of values to specify the custom
+        # query options for executing SQL query.
+        # @return [Hash]
+        def query_options
+          @query_options
+        end
+
         ##
         # Executes a SQL query.
         #

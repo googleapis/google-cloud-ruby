@@ -148,9 +148,9 @@ describe "Spanner Client", :execute_sql, :spanner do
 
   it "runs a simple query when the client-level config of query options is set" do
     query_options = { optimizer_version: "1" }
-    new_spanner = Google::Cloud::Spanner.new query_options: query_options
-    new_db = new_spanner.client db.instance_id, db.database_id
-    new_db.project.service.query_options.must_equal({ optimizer_version: "1" })
+    new_spanner = Google::Cloud::Spanner.new
+    new_db = new_spanner.client db.instance_id, db.database_id, query_options: query_options
+    new_db.query_options.must_equal({ optimizer_version: "1" })
 
     results = new_db.execute_sql "SELECT 42 AS num"
     results.must_be_kind_of Google::Cloud::Spanner::Results
@@ -182,7 +182,7 @@ describe "Spanner Client", :execute_sql, :spanner do
     it "runs a simple query " do
       new_spanner = Google::Cloud::Spanner.new
       new_db = new_spanner.client db.instance_id, db.database_id
-      new_db.project.service.query_options.must_equal({ optimizer_version: "1" })
+      new_db.project.query_options.must_equal({ optimizer_version: "1" })
 
       results = new_db.execute_sql "SELECT 42 AS num"
       results.must_be_kind_of Google::Cloud::Spanner::Results
