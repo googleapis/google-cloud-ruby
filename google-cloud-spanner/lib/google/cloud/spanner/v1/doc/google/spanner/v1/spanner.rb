@@ -25,8 +25,7 @@ module Google
       #     The session to create.
       class CreateSessionRequest; end
 
-      # The request for
-      # {Google::Spanner::V1::Spanner::BatchCreateSessions BatchCreateSessions}.
+      # The request for {Google::Spanner::V1::Spanner::BatchCreateSessions BatchCreateSessions}.
       # @!attribute [rw] database
       #   @return [String]
       #     Required. The database in which the new sessions are created.
@@ -39,12 +38,10 @@ module Google
       #     The API may return fewer than the requested number of sessions. If a
       #     specific number of sessions are desired, the client can make additional
       #     calls to BatchCreateSessions (adjusting
-      #     {Google::Spanner::V1::BatchCreateSessionsRequest#session_count session_count}
-      #     as necessary).
+      #     {Google::Spanner::V1::BatchCreateSessionsRequest#session_count session_count} as necessary).
       class BatchCreateSessionsRequest; end
 
-      # The response for
-      # {Google::Spanner::V1::Spanner::BatchCreateSessions BatchCreateSessions}.
+      # The response for {Google::Spanner::V1::Spanner::BatchCreateSessions BatchCreateSessions}.
       # @!attribute [rw] session
       #   @return [Array<Google::Spanner::V1::Session>]
       #     The freshly created sessions.
@@ -92,8 +89,7 @@ module Google
       # @!attribute [rw] page_token
       #   @return [String]
       #     If non-empty, `page_token` should contain a
-      #     {Google::Spanner::V1::ListSessionsResponse#next_page_token next_page_token}
-      #     from a previous
+      #     {Google::Spanner::V1::ListSessionsResponse#next_page_token next_page_token} from a previous
       #     {Google::Spanner::V1::ListSessionsResponse ListSessionsResponse}.
       # @!attribute [rw] filter
       #   @return [String]
@@ -116,8 +112,8 @@ module Google
       # @!attribute [rw] next_page_token
       #   @return [String]
       #     `next_page_token` can be sent in a subsequent
-      #     {Google::Spanner::V1::Spanner::ListSessions ListSessions} call to fetch more
-      #     of the matching sessions.
+      #     {Google::Spanner::V1::Spanner::ListSessions ListSessions} call to fetch more of the matching
+      #     sessions.
       class ListSessionsResponse; end
 
       # The request for {Google::Spanner::V1::Spanner::DeleteSession DeleteSession}.
@@ -164,8 +160,7 @@ module Google
       #   @return [Hash{String => Google::Spanner::V1::Type}]
       #     It is not always possible for Cloud Spanner to infer the right SQL type
       #     from a JSON value.  For example, values of type `BYTES` and values
-      #     of type `STRING` both appear in
-      #     {Google::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
+      #     of type `STRING` both appear in {Google::Spanner::V1::ExecuteSqlRequest#params params} as JSON strings.
       #
       #     In these cases, `param_types` can be used to specify the exact
       #     SQL type for some or all of the SQL statement parameters. See the
@@ -175,18 +170,15 @@ module Google
       #   @return [String]
       #     If this request is resuming a previously interrupted SQL statement
       #     execution, `resume_token` should be copied from the last
-      #     {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the
-      #     interruption. Doing this enables the new SQL statement execution to resume
-      #     where the last one left off. The rest of the request parameters must
-      #     exactly match the request that yielded this token.
+      #     {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
+      #     enables the new SQL statement execution to resume where the last one left
+      #     off. The rest of the request parameters must exactly match the
+      #     request that yielded this token.
       # @!attribute [rw] query_mode
       #   @return [Google::Spanner::V1::ExecuteSqlRequest::QueryMode]
       #     Used to control the amount of debugging information returned in
-      #     {Google::Spanner::V1::ResultSetStats ResultSetStats}. If
-      #     {Google::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is
-      #     set, {Google::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
-      #     be set to
-      #     {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode::NORMAL}.
+      #     {Google::Spanner::V1::ResultSetStats ResultSetStats}. If {Google::Spanner::V1::ExecuteSqlRequest#partition_token partition_token} is set, {Google::Spanner::V1::ExecuteSqlRequest#query_mode query_mode} can only
+      #     be set to {Google::Spanner::V1::ExecuteSqlRequest::QueryMode::NORMAL QueryMode::NORMAL}.
       # @!attribute [rw] partition_token
       #   @return [String]
       #     If present, results will be restricted to the specified partition
@@ -205,7 +197,31 @@ module Google
       #     handled requests will yield the same response as the first execution.
       #
       #     Required for DML statements. Ignored for queries.
+      # @!attribute [rw] query_options
+      #   @return [Google::Spanner::V1::ExecuteSqlRequest::QueryOptions]
+      #     Query optimizer configuration to use for the given query.
       class ExecuteSqlRequest
+        # Query optimizer configuration.
+        # @!attribute [rw] optimizer_version
+        #   @return [String]
+        #     An option to control the selection of optimizer version.
+        #
+        #     This parameter allows individual queries to pick different query
+        #     optimizer versions.
+        #
+        #     Specifying "latest" as a value instructs Cloud Spanner to use the
+        #     latest supported query optimizer version. If not specified, Cloud Spanner
+        #     uses optimizer version set at the database level options. Any other
+        #     positive integer (from the list of supported optimizer versions)
+        #     overrides the default optimizer version for query execution.
+        #     The list of supported optimizer versions can be queried from
+        #     SPANNER_SYS.SUPPORTED_OPTIMIZER_VERSIONS. Executing a SQL statement
+        #     with an invalid optimizer version will fail with a syntax error
+        #     (`INVALID_ARGUMENT`) status.
+        #
+        #     The `optimizer_version` statement hint has precedence over this setting.
+        class QueryOptions; end
+
         # Mode in which the statement must be processed.
         module QueryMode
           # The default mode. Only the statement results are returned.
@@ -234,17 +250,17 @@ module Google
       #     transaction.
       # @!attribute [rw] statements
       #   @return [Array<Google::Spanner::V1::ExecuteBatchDmlRequest::Statement>]
-      #     Required. The list of statements to execute in this batch. Statements are
-      #     executed serially, such that the effects of statement `i` are visible to
-      #     statement `i+1`. Each statement must be a DML statement. Execution stops at
-      #     the first failed statement; the remaining statements are not executed.
+      #     Required. The list of statements to execute in this batch. Statements are executed
+      #     serially, such that the effects of statement `i` are visible to statement
+      #     `i+1`. Each statement must be a DML statement. Execution stops at the
+      #     first failed statement; the remaining statements are not executed.
       #
       #     Callers must provide at least one statement.
       # @!attribute [rw] seqno
       #   @return [Integer]
-      #     Required. A per-transaction sequence number used to identify this request.
-      #     This field makes each request idempotent such that if the request is
-      #     received multiple times, at most one will succeed.
+      #     Required. A per-transaction sequence number used to identify this request. This field
+      #     makes each request idempotent such that if the request is received multiple
+      #     times, at most one will succeed.
       #
       #     The sequence number must be monotonically increasing within the
       #     transaction. If a request arrives for the first time with an out-of-order
@@ -273,9 +289,7 @@ module Google
         #   @return [Hash{String => Google::Spanner::V1::Type}]
         #     It is not always possible for Cloud Spanner to infer the right SQL type
         #     from a JSON value.  For example, values of type `BYTES` and values
-        #     of type `STRING` both appear in
-        #     {Google::Spanner::V1::ExecuteBatchDmlRequest::Statement#params params} as
-        #     JSON strings.
+        #     of type `STRING` both appear in {Google::Spanner::V1::ExecuteBatchDmlRequest::Statement#params params} as JSON strings.
         #
         #     In these cases, `param_types` can be used to specify the exact
         #     SQL type for some or all of the SQL statement parameters. See the
@@ -284,48 +298,39 @@ module Google
         class Statement; end
       end
 
-      # The response for
-      # {Google::Spanner::V1::Spanner::ExecuteBatchDml ExecuteBatchDml}. Contains a list
-      # of {Google::Spanner::V1::ResultSet ResultSet} messages, one for each DML
-      # statement that has successfully executed, in the same order as the statements
-      # in the request. If a statement fails, the status in the response body
-      # identifies the cause of the failure.
+      # The response for {Google::Spanner::V1::Spanner::ExecuteBatchDml ExecuteBatchDml}. Contains a list
+      # of {Google::Spanner::V1::ResultSet ResultSet} messages, one for each DML statement that has successfully
+      # executed, in the same order as the statements in the request. If a statement
+      # fails, the status in the response body identifies the cause of the failure.
       #
       # To check for DML statements that failed, use the following approach:
       #
-      # 1. Check the status in the response message. The
-      # {Google::Rpc::Code} enum
+      # 1. Check the status in the response message. The {Google::Rpc::Code} enum
       #    value `OK` indicates that all statements were executed successfully.
       # 2. If the status was not `OK`, check the number of result sets in the
-      #    response. If the response contains `N`
-      #    {Google::Spanner::V1::ResultSet ResultSet} messages, then statement `N+1` in
-      #    the request failed.
+      #    response. If the response contains `N` {Google::Spanner::V1::ResultSet ResultSet} messages, then
+      #    statement `N+1` in the request failed.
       #
       # Example 1:
       #
       # * Request: 5 DML statements, all executed successfully.
-      # * Response: 5 {Google::Spanner::V1::ResultSet ResultSet} messages, with the
-      #   status `OK`.
+      # * Response: 5 {Google::Spanner::V1::ResultSet ResultSet} messages, with the status `OK`.
       #
       # Example 2:
       #
       # * Request: 5 DML statements. The third statement has a syntax error.
-      # * Response: 2 {Google::Spanner::V1::ResultSet ResultSet} messages, and a syntax
-      #   error (`INVALID_ARGUMENT`)
-      #   status. The number of {Google::Spanner::V1::ResultSet ResultSet} messages
-      #   indicates that the third statement failed, and the fourth and fifth
-      #   statements were not executed.
+      # * Response: 2 {Google::Spanner::V1::ResultSet ResultSet} messages, and a syntax error (`INVALID_ARGUMENT`)
+      #   status. The number of {Google::Spanner::V1::ResultSet ResultSet} messages indicates that the third
+      #   statement failed, and the fourth and fifth statements were not executed.
       # @!attribute [rw] result_sets
       #   @return [Array<Google::Spanner::V1::ResultSet>]
-      #     One {Google::Spanner::V1::ResultSet ResultSet} for each statement in the
-      #     request that ran successfully, in the same order as the statements in the
-      #     request. Each {Google::Spanner::V1::ResultSet ResultSet} does not contain any
-      #     rows. The {Google::Spanner::V1::ResultSetStats ResultSetStats} in each
-      #     {Google::Spanner::V1::ResultSet ResultSet} contain the number of rows
-      #     modified by the statement.
+      #     One {Google::Spanner::V1::ResultSet ResultSet} for each statement in the request that ran successfully,
+      #     in the same order as the statements in the request. Each {Google::Spanner::V1::ResultSet ResultSet} does
+      #     not contain any rows. The {Google::Spanner::V1::ResultSetStats ResultSetStats} in each {Google::Spanner::V1::ResultSet ResultSet} contain
+      #     the number of rows modified by the statement.
       #
-      #     Only the first {Google::Spanner::V1::ResultSet ResultSet} in the response
-      #     contains valid {Google::Spanner::V1::ResultSetMetadata ResultSetMetadata}.
+      #     Only the first {Google::Spanner::V1::ResultSet ResultSet} in the response contains valid
+      #     {Google::Spanner::V1::ResultSetMetadata ResultSetMetadata}.
       # @!attribute [rw] status
       #   @return [Google::Rpc::Status]
       #     If all DML statements are executed successfully, the status is `OK`.
@@ -364,16 +369,15 @@ module Google
       #     transactions are not.
       # @!attribute [rw] sql
       #   @return [String]
-      #     Required. The query request to generate partitions for. The request will
-      #     fail if the query is not root partitionable. The query plan of a root
+      #     Required. The query request to generate partitions for. The request will fail if
+      #     the query is not root partitionable. The query plan of a root
       #     partitionable query has a single distributed union operator. A distributed
       #     union operator conceptually divides one or more tables into multiple
       #     splits, remotely evaluates a subquery independently on each split, and
       #     then unions all results.
       #
       #     This must not contain DML commands, such as INSERT, UPDATE, or
-      #     DELETE. Use
-      #     {Google::Spanner::V1::Spanner::ExecuteStreamingSql ExecuteStreamingSql} with a
+      #     DELETE. Use {Google::Spanner::V1::Spanner::ExecuteStreamingSql ExecuteStreamingSql} with a
       #     PartitionedDml transaction for large, partition-friendly DML operations.
       # @!attribute [rw] params
       #   @return [Google::Protobuf::Struct]
@@ -393,8 +397,7 @@ module Google
       #   @return [Hash{String => Google::Spanner::V1::Type}]
       #     It is not always possible for Cloud Spanner to infer the right SQL type
       #     from a JSON value.  For example, values of type `BYTES` and values
-      #     of type `STRING` both appear in
-      #     {Google::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
+      #     of type `STRING` both appear in {Google::Spanner::V1::PartitionQueryRequest#params params} as JSON strings.
       #
       #     In these cases, `param_types` can be used to specify the exact
       #     SQL type for some or all of the SQL query parameters. See the
@@ -418,24 +421,18 @@ module Google
       #     Required. The name of the table in the database to be read.
       # @!attribute [rw] index
       #   @return [String]
-      #     If non-empty, the name of an index on
-      #     {Google::Spanner::V1::PartitionReadRequest#table table}. This index is used
-      #     instead of the table primary key when interpreting
-      #     {Google::Spanner::V1::PartitionReadRequest#key_set key_set} and sorting
-      #     result rows. See {Google::Spanner::V1::PartitionReadRequest#key_set key_set}
-      #     for further information.
+      #     If non-empty, the name of an index on {Google::Spanner::V1::PartitionReadRequest#table table}. This index is
+      #     used instead of the table primary key when interpreting {Google::Spanner::V1::PartitionReadRequest#key_set key_set}
+      #     and sorting result rows. See {Google::Spanner::V1::PartitionReadRequest#key_set key_set} for further information.
       # @!attribute [rw] columns
       #   @return [Array<String>]
-      #     The columns of {Google::Spanner::V1::PartitionReadRequest#table table} to be
-      #     returned for each row matching this request.
+      #     The columns of {Google::Spanner::V1::PartitionReadRequest#table table} to be returned for each row matching
+      #     this request.
       # @!attribute [rw] key_set
       #   @return [Google::Spanner::V1::KeySet]
       #     Required. `key_set` identifies the rows to be yielded. `key_set` names the
-      #     primary keys of the rows in
-      #     {Google::Spanner::V1::PartitionReadRequest#table table} to be yielded, unless
-      #     {Google::Spanner::V1::PartitionReadRequest#index index} is present. If
-      #     {Google::Spanner::V1::PartitionReadRequest#index index} is present, then
-      #     {Google::Spanner::V1::PartitionReadRequest#key_set key_set} instead names
+      #     primary keys of the rows in {Google::Spanner::V1::PartitionReadRequest#table table} to be yielded, unless {Google::Spanner::V1::PartitionReadRequest#index index}
+      #     is present. If {Google::Spanner::V1::PartitionReadRequest#index index} is present, then {Google::Spanner::V1::PartitionReadRequest#key_set key_set} instead names
       #     index keys in {Google::Spanner::V1::PartitionReadRequest#index index}.
       #
       #     It is not an error for the `key_set` to name rows that do not
@@ -478,31 +475,24 @@ module Google
       #     Required. The name of the table in the database to be read.
       # @!attribute [rw] index
       #   @return [String]
-      #     If non-empty, the name of an index on
-      #     {Google::Spanner::V1::ReadRequest#table table}. This index is used instead of
-      #     the table primary key when interpreting
-      #     {Google::Spanner::V1::ReadRequest#key_set key_set} and sorting result rows.
-      #     See {Google::Spanner::V1::ReadRequest#key_set key_set} for further
-      #     information.
+      #     If non-empty, the name of an index on {Google::Spanner::V1::ReadRequest#table table}. This index is
+      #     used instead of the table primary key when interpreting {Google::Spanner::V1::ReadRequest#key_set key_set}
+      #     and sorting result rows. See {Google::Spanner::V1::ReadRequest#key_set key_set} for further information.
       # @!attribute [rw] columns
       #   @return [Array<String>]
-      #     Required. The columns of {Google::Spanner::V1::ReadRequest#table table} to be
-      #     returned for each row matching this request.
+      #     Required. The columns of {Google::Spanner::V1::ReadRequest#table table} to be returned for each row matching
+      #     this request.
       # @!attribute [rw] key_set
       #   @return [Google::Spanner::V1::KeySet]
       #     Required. `key_set` identifies the rows to be yielded. `key_set` names the
-      #     primary keys of the rows in {Google::Spanner::V1::ReadRequest#table table} to
-      #     be yielded, unless {Google::Spanner::V1::ReadRequest#index index} is present.
-      #     If {Google::Spanner::V1::ReadRequest#index index} is present, then
-      #     {Google::Spanner::V1::ReadRequest#key_set key_set} instead names index keys
-      #     in {Google::Spanner::V1::ReadRequest#index index}.
+      #     primary keys of the rows in {Google::Spanner::V1::ReadRequest#table table} to be yielded, unless {Google::Spanner::V1::ReadRequest#index index}
+      #     is present. If {Google::Spanner::V1::ReadRequest#index index} is present, then {Google::Spanner::V1::ReadRequest#key_set key_set} instead names
+      #     index keys in {Google::Spanner::V1::ReadRequest#index index}.
       #
-      #     If the {Google::Spanner::V1::ReadRequest#partition_token partition_token}
-      #     field is empty, rows are yielded in table primary key order (if
-      #     {Google::Spanner::V1::ReadRequest#index index} is empty) or index key order
-      #     (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).  If the
-      #     {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is
-      #     not empty, rows will be yielded in an unspecified order.
+      #     If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is empty, rows are yielded
+      #     in table primary key order (if {Google::Spanner::V1::ReadRequest#index index} is empty) or index key order
+      #     (if {Google::Spanner::V1::ReadRequest#index index} is non-empty).  If the {Google::Spanner::V1::ReadRequest#partition_token partition_token} field is not
+      #     empty, rows will be yielded in an unspecified order.
       #
       #     It is not an error for the `key_set` to name rows that do not
       #     exist in the database. Read yields nothing for nonexistent rows.
@@ -515,9 +505,9 @@ module Google
       #   @return [String]
       #     If this request is resuming a previously interrupted read,
       #     `resume_token` should be copied from the last
-      #     {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the
-      #     interruption. Doing this enables the new read to resume where the last read
-      #     left off. The rest of the request parameters must exactly match the request
+      #     {Google::Spanner::V1::PartialResultSet PartialResultSet} yielded before the interruption. Doing this
+      #     enables the new read to resume where the last read left off. The
+      #     rest of the request parameters must exactly match the request
       #     that yielded this token.
       # @!attribute [rw] partition_token
       #   @return [String]
@@ -527,8 +517,7 @@ module Google
       #     PartitionReadRequest message used to create this partition_token.
       class ReadRequest; end
 
-      # The request for
-      # {Google::Spanner::V1::Spanner::BeginTransaction BeginTransaction}.
+      # The request for {Google::Spanner::V1::Spanner::BeginTransaction BeginTransaction}.
       # @!attribute [rw] session
       #   @return [String]
       #     Required. The session in which the transaction runs.

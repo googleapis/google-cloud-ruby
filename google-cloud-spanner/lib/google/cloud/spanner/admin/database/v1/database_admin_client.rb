@@ -375,8 +375,8 @@ module Google
               # have a name of the format `<database_name>/operations/<operation_id>` and
               # can be used to track preparation of the database. The
               # {Google::Longrunning::Operation#metadata metadata} field type is
-              # {Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata CreateDatabaseMetadata}.
-              # The {Google::Longrunning::Operation#response response} field type is
+              # {Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata CreateDatabaseMetadata}. The
+              # {Google::Longrunning::Operation#response response} field type is
               # {Google::Spanner::Admin::Database::V1::Database Database}, if successful.
               #
               # @param parent [String]
@@ -493,8 +493,7 @@ module Google
               # the format `<database_name>/operations/<operation_id>` and can be used to
               # track execution of the schema change(s). The
               # {Google::Longrunning::Operation#metadata metadata} field type is
-              # {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata UpdateDatabaseDdlMetadata}.
-              # The operation has no response.
+              # {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlMetadata UpdateDatabaseDdlMetadata}.  The operation has no response.
               #
               # @param database [String]
               #   Required. The database to update.
@@ -508,20 +507,18 @@ module Google
               #
               #   Specifying an explicit operation ID simplifies determining
               #   whether the statements were executed in the event that the
-              #   {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl}
-              #   call is replayed, or the return value is otherwise lost: the
-              #   {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database database}
-              #   and `operation_id` fields can be combined to form the
+              #   {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl} call is replayed,
+              #   or the return value is otherwise lost: the {Google::Spanner::Admin::Database::V1::UpdateDatabaseDdlRequest#database database} and
+              #   `operation_id` fields can be combined to form the
               #   {Google::Longrunning::Operation#name name} of the resulting
-              #   {Google::Longrunning::Operation longrunning::Operation}:
-              #   `<database>/operations/<operation_id>`.
+              #   {Google::Longrunning::Operation longrunning::Operation}: `<database>/operations/<operation_id>`.
               #
               #   `operation_id` should be unique within the database, and must be
               #   a valid identifier: `[a-z][a-z0-9_]*`. Note that
               #   automatically-generated operation IDs always begin with an
               #   underscore. If the named operation already exists,
-              #   {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl}
-              #   returns `ALREADY_EXISTS`.
+              #   {Google::Spanner::Admin::Database::V1::DatabaseAdmin::UpdateDatabaseDdl UpdateDatabaseDdl} returns
+              #   `ALREADY_EXISTS`.
               # @param options [Google::Gax::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout,
               #   retries, etc.

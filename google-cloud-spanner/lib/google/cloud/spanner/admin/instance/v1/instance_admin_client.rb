@@ -526,9 +526,9 @@ module Google
               #   Required. The name of the requested instance. Values are of the form
               #   `projects/<project>/instances/<instance>`.
               # @param field_mask [Google::Protobuf::FieldMask | Hash]
-              #   If field_mask is present, specifies the subset of [][google.spanner.admin.instance.v1.Instance] fields that
+              #   If field_mask is present, specifies the subset of {Google::Spanner::Admin::Instance::V1::Instance Instance} fields that
               #   should be returned.
-              #   If absent, all [][google.spanner.admin.instance.v1.Instance] fields are returned.
+              #   If absent, all {Google::Spanner::Admin::Instance::V1::Instance Instance} fields are returned.
               #   A hash of the same form as `Google::Protobuf::FieldMask`
               #   can also be provided.
               # @param options [Google::Gax::CallOptions]
@@ -715,13 +715,13 @@ module Google
               #
               # @param instance [Google::Spanner::Admin::Instance::V1::Instance | Hash]
               #   Required. The instance to update, which must always include the instance
-              #   name.  Otherwise, only fields mentioned in [][google.spanner.admin.instance.v1.UpdateInstanceRequest.field_mask] need be included.
+              #   name.  Otherwise, only fields mentioned in {Google::Spanner::Admin::Instance::V1::UpdateInstanceRequest#field_mask field_mask} need be included.
               #   A hash of the same form as `Google::Spanner::Admin::Instance::V1::Instance`
               #   can also be provided.
               # @param field_mask [Google::Protobuf::FieldMask | Hash]
-              #   Required. A mask specifying which fields in [][google.spanner.admin.instance.v1.UpdateInstanceRequest.instance] should be updated.
+              #   Required. A mask specifying which fields in {Google::Spanner::Admin::Instance::V1::Instance Instance} should be updated.
               #   The field mask must always be specified; this prevents any future fields in
-              #   [][google.spanner.admin.instance.v1.Instance] from being erased accidentally by clients that do not know
+              #   {Google::Spanner::Admin::Instance::V1::Instance Instance} from being erased accidentally by clients that do not know
               #   about them.
               #   A hash of the same form as `Google::Protobuf::FieldMask`
               #   can also be provided.
