@@ -475,7 +475,8 @@ module Google
                    query_options: nil
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
-          query_options = @query_options if query_options.nil?
+          # Configs set by environment variables take over client-level configs.
+          query_options = @query_options if !@query_options.nil?
           Client.new self, instance_id, database_id,
                      session_labels: labels,
                      pool_opts: valid_session_pool_options(pool),
