@@ -453,6 +453,13 @@ module Google
         #   * Label values must be between 0 and 63 characters long and must
         #     conform to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
         #   * No more than 64 labels can be associated with a given resource.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
         #
         # @return [Client] The newly created client.
         #
@@ -476,7 +483,10 @@ module Google
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
           # Configs set by environment variables take over client-level configs.
-          query_options = @query_options if !@query_options.nil?
+          if !@query_options.nil?
+            query_options = query_options.nil? ? \
+              @query_options : query_options.merge(@query_options)
+          end
           Client.new self, instance_id, database_id,
                      session_labels: labels,
                      pool_opts: valid_session_pool_options(pool),

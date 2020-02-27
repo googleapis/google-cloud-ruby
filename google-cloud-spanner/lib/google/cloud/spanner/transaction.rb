@@ -280,7 +280,11 @@ module Google
           @seqno += 1
 
           params, types = Convert.to_input_params_and_types params, types
-          query_options = @query_options if query_options.nil?
+          if query_options.nil?
+            query_options = @query_options
+          else
+            query_options = @query_options.merge(query_options) if !@query_options.nil?
+          end
           session.execute_query sql, params: params, types: types,
                                      transaction: tx_selector, seqno: @seqno,
                                      query_options: query_options

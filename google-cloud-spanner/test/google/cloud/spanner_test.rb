@@ -448,7 +448,8 @@ describe Google::Cloud do
       let(:commit_time) { Time.now }
       let(:commit_resp) { Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Cloud::Spanner::Convert.time_to_timestamp(commit_time) }
       let(:expect_query_optimizer_version) { "4" }
-      def mock_builder
+      def mock_builder query_options: nil
+        query_options = {optimizer_version: expect_query_optimizer_version} if query_options.nil?
         # Mock an instance of V1::SpannerClient
         mock = Minitest::Mock.new
         mock.expect :batch_create_sessions, batch_create_sessions_grpc, [
@@ -457,7 +458,7 @@ describe Google::Cloud do
         mock.expect :execute_streaming_sql, results_enum do |session, sql_query, **kargs|
           session == session_grpc.name &&
             sql_query == "SELECT * FROM users" &&
-            kargs[:query_options] == {optimizer_version: expect_query_optimizer_version}
+            kargs[:query_options] == query_options
         end
         mock
       end
@@ -530,6 +531,53 @@ describe Google::Cloud do
             end
 
             mock = mock_builder()
+            spanner.service.mocked_service = mock
+            mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts_read_write, options: default_options]
+            mock.expect :commit, commit_resp, [session_grpc.name, [], transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
+            client.transaction do |tx|
+              tx.execute_query "SELECT * FROM users", query_options: { optimizer_version: expect_query_optimizer_version }
+            end
+          end
+        end
+      end
+
+      it "follows that environment variable configs overwrites client-level configs" do
+        expect_query_options = { optimizer_version: expect_query_optimizer_version, another_field: "test" }
+        optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? expect_query_optimizer_version : nil }
+        # Clear all environment variables, except SPANNER_OPTIMIZER_VERSION
+        ENV.stub :[], optimizer_version_check do
+          # Get project_id from Google Compute Engine
+          Google::Cloud.stub :env, OpenStruct.new(project_id: project_id) do
+            Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+              spanner = Google::Cloud::Spanner.new
+              spanner.service.mocked_service = mock_builder query_options: expect_query_options
+              
+              client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, query_options: { optimizer_version: "3", another_field: "test"}
+              client.execute_query "SELECT * FROM users"
+            end
+          end
+        end
+      end
+
+      it "follows that query-level configs overwrites client-level configs" do
+        expect_query_options = { optimizer_version: expect_query_optimizer_version, another_field: "test" }
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: project_id) do
+          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+            spanner = Google::Cloud::Spanner.new
+
+            spanner.service.mocked_service = mock_builder query_options: expect_query_options
+            client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, query_options: { optimizer_version: "3", another_field: "test" }
+            client.execute_query "SELECT * FROM users", query_options: { optimizer_version: expect_query_optimizer_version }
+
+            mock = mock_builder query_options: expect_query_options
+            spanner.service.mocked_service = mock
+            mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts_read_only, options: default_options]
+            client.snapshot do |snp|
+              snp.execute_query "SELECT * FROM users", query_options: { optimizer_version: expect_query_optimizer_version }
+            end
+
+            mock = mock_builder query_options: expect_query_options
             spanner.service.mocked_service = mock
             mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts_read_write, options: default_options]
             mock.expect :commit, commit_resp, [session_grpc.name, [], transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
