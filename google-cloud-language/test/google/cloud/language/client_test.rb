@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,18 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "simplecov"
-require "minitest/autorun"
-require "minitest/spec"
-
+require "helper"
 require "google/cloud/language"
+require "gapic/common"
+require "gapic/grpc"
 
-describe "LanguageServiceSmokeTest v1" do
-  it "runs one smoke test with analyze_sentiment" do
-    language_service_client = Google::Cloud::Language.language_service version: :v1
-    document = { content: "Hello, world!", type: :PLAIN_TEXT }
-    response = language_service_client.analyze_sentiment document: document
-    response.document_sentiment.score.must_be_kind_of Numeric
-    response.language.must_equal "en"
+describe Google::Cloud::Language do
+  it "constructs a language client with the default version" do
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Language.language_service do |config|
+        config.credentials = grpc_channel
+      end
+      client.must_be_kind_of Google::Cloud::Language::V1::LanguageService::Client
+    end
   end
 end

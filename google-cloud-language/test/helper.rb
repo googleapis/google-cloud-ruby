@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,17 +13,8 @@
 # limitations under the License.
 
 require "simplecov"
+
+gem "minitest"
 require "minitest/autorun"
-require "minitest/spec"
-
-require "google/cloud/language"
-
-describe "LanguageServiceSmokeTest v1" do
-  it "runs one smoke test with analyze_sentiment" do
-    language_service_client = Google::Cloud::Language.language_service version: :v1
-    document = { content: "Hello, world!", type: :PLAIN_TEXT }
-    response = language_service_client.analyze_sentiment document: document
-    response.document_sentiment.score.must_be_kind_of Numeric
-    response.language.must_equal "en"
-  end
-end
+require "minitest/focus"
+require "minitest/rg"

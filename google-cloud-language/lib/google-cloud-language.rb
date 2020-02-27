@@ -24,7 +24,7 @@ require "google/cloud/config"
 require "googleauth"
 
 # Set the default configuration
-Google::Cloud.configure.add_config! :recommender do |config|
+Google::Cloud.configure.add_config! :language do |config|
   config.add_field! :credentials,  nil, match: [String, Hash, Google::Auth::Credentials]
   config.add_field! :lib_name,     nil, match: String
   config.add_field! :lib_version,  nil, match: String
