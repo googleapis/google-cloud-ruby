@@ -463,7 +463,8 @@ describe Google::Cloud do
         mock
       end
 
-      it "follows that environment variables take over client-level config" do	
+      it "follows that environment variable configs overwrite client-level configs" do
+        expect_query_options = { optimizer_version: expect_query_optimizer_version, another_field: "test" }
         optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? expect_query_optimizer_version : nil }
         # Clear all environment variables, except SPANNER_OPTIMIZER_VERSION
         ENV.stub :[], optimizer_version_check do
@@ -471,16 +472,16 @@ describe Google::Cloud do
           Google::Cloud.stub :env, OpenStruct.new(project_id: project_id) do
             Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
               spanner = Google::Cloud::Spanner.new
-              spanner.service.mocked_service = mock_builder()
+              spanner.service.mocked_service = mock_builder query_options: expect_query_options
               
-              client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, query_options: { optimizer_version: "3" }
+              client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, query_options: { optimizer_version: "3", another_field: "test"}
               client.execute_query "SELECT * FROM users"
             end
           end
         end
       end
 
-      it "follows that query-level config take over environment variables" do
+      it "follows that query-level configs overwrite environment variable configs" do
         env_var_version = "3"
         optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? env_var_version : nil }
         # Clear all environment variables, except SPANNER_OPTIMIZER_VERSION
@@ -513,53 +514,7 @@ describe Google::Cloud do
         end
       end
 
-      it "follows that query-level config take over client-level config" do
-        # Get project_id from Google Compute Engine
-        Google::Cloud.stub :env, OpenStruct.new(project_id: project_id) do
-          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
-            spanner = Google::Cloud::Spanner.new
-
-            spanner.service.mocked_service = mock_builder()
-            client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, query_options: { optimizer_version: "3" }
-            client.execute_query "SELECT * FROM users", query_options: { optimizer_version: expect_query_optimizer_version }
-
-            mock = mock_builder()
-            spanner.service.mocked_service = mock
-            mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts_read_only, options: default_options]
-            client.snapshot do |snp|
-              snp.execute_query "SELECT * FROM users", query_options: { optimizer_version: expect_query_optimizer_version }
-            end
-
-            mock = mock_builder()
-            spanner.service.mocked_service = mock
-            mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts_read_write, options: default_options]
-            mock.expect :commit, commit_resp, [session_grpc.name, [], transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
-            client.transaction do |tx|
-              tx.execute_query "SELECT * FROM users", query_options: { optimizer_version: expect_query_optimizer_version }
-            end
-          end
-        end
-      end
-
-      it "follows that environment variable configs overwrites client-level configs" do
-        expect_query_options = { optimizer_version: expect_query_optimizer_version, another_field: "test" }
-        optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? expect_query_optimizer_version : nil }
-        # Clear all environment variables, except SPANNER_OPTIMIZER_VERSION
-        ENV.stub :[], optimizer_version_check do
-          # Get project_id from Google Compute Engine
-          Google::Cloud.stub :env, OpenStruct.new(project_id: project_id) do
-            Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
-              spanner = Google::Cloud::Spanner.new
-              spanner.service.mocked_service = mock_builder query_options: expect_query_options
-              
-              client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, query_options: { optimizer_version: "3", another_field: "test"}
-              client.execute_query "SELECT * FROM users"
-            end
-          end
-        end
-      end
-
-      it "follows that query-level configs overwrites client-level configs" do
+      it "follows that query-level configs overwrite client-level configs" do
         expect_query_options = { optimizer_version: expect_query_optimizer_version, another_field: "test" }
         # Get project_id from Google Compute Engine
         Google::Cloud.stub :env, OpenStruct.new(project_id: project_id) do
