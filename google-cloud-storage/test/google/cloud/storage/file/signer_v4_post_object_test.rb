@@ -59,24 +59,19 @@ class SignerV4PostObjectTest < MockStorage
   end
 
   def self.bucket_test_for description, input, output, index
-    return unless index == 0
+    return unless [4].include? index
     focus
     define_method("test_bucket_#{index}: #{description}") do
     @test_data = ["bucket", index, description, output.expectedDecodedPolicy]
       bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(input.bucket).to_json
       bucket = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service
-      policy = {
-        "conditions" => [
-          {"key" => "test-object"},
-            {"x-goog-date" => "20200123T043530Z"},
-            {"x-goog-credential" => "test-iam-credentials@dummy-project-id.iam.gserviceaccount.com/20200123/auto/storage/goog4_request"},
-            {"x-goog-algorithm" => "GOOG4-RSA-SHA256"}
-          ],
-        "expiration" => "2020-01-23T04:35:40Z"
-      }
+
       Time.stub :now, timestamp_to_time(input.timestamp) do
         # sut
-        post_object = bucket.post_object input.object, issuer: credentials.issuer, policy: policy, version: :v4
+        post_object = bucket.post_object input.object, issuer: credentials.issuer,
+                                                       expires: input.expiration,
+                                                       conditions: {"success_action_status" => input.conditions.successActionStatus},
+                                                       version: :v4
 
         post_object.url.must_equal output.url
         post_object.fields["key"].must_equal output.fields["key"]
