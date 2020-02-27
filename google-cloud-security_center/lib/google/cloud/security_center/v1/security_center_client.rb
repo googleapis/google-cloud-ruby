@@ -318,44 +318,12 @@ module Google
               &Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.method(:new)
             )
 
-            @create_source = Google::Gax.create_api_call(
-              @security_center_stub.method(:create_source),
-              defaults["create_source"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
-            @create_finding = Google::Gax.create_api_call(
-              @security_center_stub.method(:create_finding),
-              defaults["create_finding"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
             @get_iam_policy = Google::Gax.create_api_call(
               @security_center_stub.method(:get_iam_policy),
               defaults["get_iam_policy"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'resource' => request.resource}
-              end
-            )
-            @get_organization_settings = Google::Gax.create_api_call(
-              @security_center_stub.method(:get_organization_settings),
-              defaults["get_organization_settings"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @get_source = Google::Gax.create_api_call(
-              @security_center_stub.method(:get_source),
-              defaults["get_source"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
               end
             )
             @group_assets = Google::Gax.create_api_call(
@@ -372,6 +340,46 @@ module Google
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
+              end
+            )
+            @test_iam_permissions = Google::Gax.create_api_call(
+              @security_center_stub.method(:test_iam_permissions),
+              defaults["test_iam_permissions"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'resource' => request.resource}
+              end
+            )
+            @create_source = Google::Gax.create_api_call(
+              @security_center_stub.method(:create_source),
+              defaults["create_source"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @create_finding = Google::Gax.create_api_call(
+              @security_center_stub.method(:create_finding),
+              defaults["create_finding"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @get_organization_settings = Google::Gax.create_api_call(
+              @security_center_stub.method(:get_organization_settings),
+              defaults["get_organization_settings"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @get_source = Google::Gax.create_api_call(
+              @security_center_stub.method(:get_source),
+              defaults["get_source"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
               end
             )
             @list_assets = Google::Gax.create_api_call(
@@ -422,14 +430,6 @@ module Google
                 {'resource' => request.resource}
               end
             )
-            @test_iam_permissions = Google::Gax.create_api_call(
-              @security_center_stub.method(:test_iam_permissions),
-              defaults["test_iam_permissions"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'resource' => request.resource}
-              end
-            )
             @update_finding = Google::Gax.create_api_call(
               @security_center_stub.method(:update_finding),
               defaults["update_finding"],
@@ -465,98 +465,6 @@ module Google
           end
 
           # Service calls
-
-          # Creates a source.
-          #
-          # @param parent [String]
-          #   Required. Resource name of the new source's parent. Its format should be
-          #   "organizations/[organization_id]".
-          # @param source [Google::Cloud::SecurityCenter::V1::Source | Hash]
-          #   Required. The Source being created, only the display_name and description will be
-          #   used. All other fields will be ignored.
-          #   A hash of the same form as `Google::Cloud::SecurityCenter::V1::Source`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::SecurityCenter::V1::Source]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::SecurityCenter::V1::Source]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/security_center"
-          #
-          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
-          #   formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
-          #
-          #   # TODO: Initialize `source`:
-          #   source = {}
-          #   response = security_center_client.create_source(formatted_parent, source)
-
-          def create_source \
-              parent,
-              source,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              source: source
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::CreateSourceRequest)
-            @create_source.call(req, options, &block)
-          end
-
-          # Creates a finding. The corresponding source must exist for finding creation
-          # to succeed.
-          #
-          # @param parent [String]
-          #   Required. Resource name of the new finding's parent. Its format should be
-          #   "organizations/[organization_id]/sources/[source_id]".
-          # @param finding_id [String]
-          #   Required. Unique identifier provided by the client within the parent scope.
-          #   It must be alphanumeric and less than or equal to 32 characters and
-          #   greater than 0 characters in length.
-          # @param finding [Google::Cloud::SecurityCenter::V1::Finding | Hash]
-          #   Required. The Finding being created. The name and security_marks will be ignored as
-          #   they are both output only fields on this resource.
-          #   A hash of the same form as `Google::Cloud::SecurityCenter::V1::Finding`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::SecurityCenter::V1::Finding]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::SecurityCenter::V1::Finding]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/security_center"
-          #
-          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
-          #   formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
-          #
-          #   # TODO: Initialize `finding_id`:
-          #   finding_id = ''
-          #
-          #   # TODO: Initialize `finding`:
-          #   finding = {}
-          #   response = security_center_client.create_finding(formatted_parent, finding_id, finding)
-
-          def create_finding \
-              parent,
-              finding_id,
-              finding,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              finding_id: finding_id,
-              finding: finding
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::CreateFindingRequest)
-            @create_finding.call(req, options, &block)
-          end
 
           # Gets the access control policy on the specified Source.
           #
@@ -596,68 +504,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Iam::V1::GetIamPolicyRequest)
             @get_iam_policy.call(req, options, &block)
-          end
-
-          # Gets the settings for an organization.
-          #
-          # @param name [String]
-          #   Required. Name of the organization to get organization settings for. Its format is
-          #   "organizations/[organization_id]/organizationSettings".
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::SecurityCenter::V1::OrganizationSettings]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::SecurityCenter::V1::OrganizationSettings]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/security_center"
-          #
-          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
-          #   formatted_name = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_settings_path("[ORGANIZATION]")
-          #   response = security_center_client.get_organization_settings(formatted_name)
-
-          def get_organization_settings \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest)
-            @get_organization_settings.call(req, options, &block)
-          end
-
-          # Gets a source.
-          #
-          # @param name [String]
-          #   Required. Relative resource name of the source. Its format is
-          #   "organizations/[organization_id]/source/[source_id]".
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::SecurityCenter::V1::Source]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::SecurityCenter::V1::Source]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/security_center"
-          #
-          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
-          #   formatted_name = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
-          #   response = security_center_client.get_source(formatted_name)
-
-          def get_source \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::GetSourceRequest)
-            @get_source.call(req, options, &block)
           end
 
           # Filters an organization's assets and  groups them by their specified
@@ -1005,6 +851,203 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::GroupFindingsRequest)
             @group_findings.call(req, options, &block)
+          end
+
+          # Returns the permissions that a caller has on the specified source.
+          #
+          # @param resource [String]
+          #   REQUIRED: The resource for which the policy detail is being requested.
+          #   See the operation documentation for the appropriate value for this field.
+          # @param permissions [Array<String>]
+          #   The set of permissions to check for the `resource`. Permissions with
+          #   wildcards (such as '*' or 'storage.*') are not allowed. For more
+          #   information see
+          #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Iam::V1::TestIamPermissionsResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Iam::V1::TestIamPermissionsResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/security_center"
+          #
+          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
+          #
+          #   # TODO: Initialize `permissions`:
+          #   permissions = []
+          #   response = security_center_client.test_iam_permissions(resource, permissions)
+
+          def test_iam_permissions \
+              resource,
+              permissions,
+              options: nil,
+              &block
+            req = {
+              resource: resource,
+              permissions: permissions
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Iam::V1::TestIamPermissionsRequest)
+            @test_iam_permissions.call(req, options, &block)
+          end
+
+          # Creates a source.
+          #
+          # @param parent [String]
+          #   Required. Resource name of the new source's parent. Its format should be
+          #   "organizations/[organization_id]".
+          # @param source [Google::Cloud::SecurityCenter::V1::Source | Hash]
+          #   Required. The Source being created, only the display_name and description will be
+          #   used. All other fields will be ignored.
+          #   A hash of the same form as `Google::Cloud::SecurityCenter::V1::Source`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::SecurityCenter::V1::Source]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::SecurityCenter::V1::Source]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/security_center"
+          #
+          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
+          #   formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
+          #
+          #   # TODO: Initialize `source`:
+          #   source = {}
+          #   response = security_center_client.create_source(formatted_parent, source)
+
+          def create_source \
+              parent,
+              source,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              source: source
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::CreateSourceRequest)
+            @create_source.call(req, options, &block)
+          end
+
+          # Creates a finding. The corresponding source must exist for finding creation
+          # to succeed.
+          #
+          # @param parent [String]
+          #   Required. Resource name of the new finding's parent. Its format should be
+          #   "organizations/[organization_id]/sources/[source_id]".
+          # @param finding_id [String]
+          #   Required. Unique identifier provided by the client within the parent scope.
+          #   It must be alphanumeric and less than or equal to 32 characters and
+          #   greater than 0 characters in length.
+          # @param finding [Google::Cloud::SecurityCenter::V1::Finding | Hash]
+          #   Required. The Finding being created. The name and security_marks will be ignored as
+          #   they are both output only fields on this resource.
+          #   A hash of the same form as `Google::Cloud::SecurityCenter::V1::Finding`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::SecurityCenter::V1::Finding]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::SecurityCenter::V1::Finding]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/security_center"
+          #
+          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
+          #   formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
+          #
+          #   # TODO: Initialize `finding_id`:
+          #   finding_id = ''
+          #
+          #   # TODO: Initialize `finding`:
+          #   finding = {}
+          #   response = security_center_client.create_finding(formatted_parent, finding_id, finding)
+
+          def create_finding \
+              parent,
+              finding_id,
+              finding,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              finding_id: finding_id,
+              finding: finding
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::CreateFindingRequest)
+            @create_finding.call(req, options, &block)
+          end
+
+          # Gets the settings for an organization.
+          #
+          # @param name [String]
+          #   Required. Name of the organization to get organization settings for. Its format is
+          #   "organizations/[organization_id]/organizationSettings".
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::SecurityCenter::V1::OrganizationSettings]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::SecurityCenter::V1::OrganizationSettings]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/security_center"
+          #
+          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
+          #   formatted_name = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_settings_path("[ORGANIZATION]")
+          #   response = security_center_client.get_organization_settings(formatted_name)
+
+          def get_organization_settings \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::GetOrganizationSettingsRequest)
+            @get_organization_settings.call(req, options, &block)
+          end
+
+          # Gets a source.
+          #
+          # @param name [String]
+          #   Required. Relative resource name of the source. Its format is
+          #   "organizations/[organization_id]/source/[source_id]".
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::SecurityCenter::V1::Source]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::SecurityCenter::V1::Source]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/security_center"
+          #
+          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
+          #   formatted_name = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path("[ORGANIZATION]", "[SOURCE]")
+          #   response = security_center_client.get_source(formatted_name)
+
+          def get_source \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::GetSourceRequest)
+            @get_source.call(req, options, &block)
           end
 
           # Lists an organization's assets.
@@ -1576,49 +1619,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Iam::V1::SetIamPolicyRequest)
             @set_iam_policy.call(req, options, &block)
-          end
-
-          # Returns the permissions that a caller has on the specified source.
-          #
-          # @param resource [String]
-          #   REQUIRED: The resource for which the policy detail is being requested.
-          #   See the operation documentation for the appropriate value for this field.
-          # @param permissions [Array<String>]
-          #   The set of permissions to check for the `resource`. Permissions with
-          #   wildcards (such as '*' or 'storage.*') are not allowed. For more
-          #   information see
-          #   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Iam::V1::TestIamPermissionsResponse]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Iam::V1::TestIamPermissionsResponse]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/security_center"
-          #
-          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
-          #
-          #   # TODO: Initialize `resource`:
-          #   resource = ''
-          #
-          #   # TODO: Initialize `permissions`:
-          #   permissions = []
-          #   response = security_center_client.test_iam_permissions(resource, permissions)
-
-          def test_iam_permissions \
-              resource,
-              permissions,
-              options: nil,
-              &block
-            req = {
-              resource: resource,
-              permissions: permissions
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Iam::V1::TestIamPermissionsRequest)
-            @test_iam_permissions.call(req, options, &block)
           end
 
           # Creates or updates a finding. The corresponding source must exist for a
