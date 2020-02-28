@@ -303,6 +303,14 @@ module Google
                 {'parent' => request.parent}
               end
             )
+            @get_validation_result = Google::Gax.create_api_call(
+              @agents_stub.method(:get_validation_result),
+              defaults["get_validation_result"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
           end
 
           # Service calls
@@ -752,6 +760,45 @@ module Google
             )
             operation.on_done { |operation| yield(operation) } if block_given?
             operation
+          end
+
+          # Gets agent validation result. Agent validation is performed during
+          # training time and is updated automatically when training is completed.
+          #
+          # @param parent [String]
+          #   Required. The project that the agent is associated with.
+          #   Format: `projects/<Project ID>`.
+          # @param language_code [String]
+          #   Optional. The language for which you want a validation result. If not
+          #   specified, the agent's default language is used. [Many
+          #   languages](https://cloud.google.com/dialogflow/docs/reference/language)
+          #   are supported. Note: languages must be enabled in the agent before they can
+          #   be used.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dialogflow::V2::ValidationResult]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Dialogflow::V2::ValidationResult]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dialogflow"
+          #
+          #   agents_client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
+          #   response = agents_client.get_validation_result
+
+          def get_validation_result \
+              parent: nil,
+              language_code: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              language_code: language_code
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::GetValidationResultRequest)
+            @get_validation_result.call(req, options, &block)
           end
         end
       end

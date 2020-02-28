@@ -227,6 +227,20 @@ module Google
         #   @return [String]
         #     Zip compressed raw byte content for agent.
         class RestoreAgentRequest; end
+
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::GetValidationResult Agents::GetValidationResult}.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Required. The project that the agent is associated with.
+        #     Format: `projects/<Project ID>`.
+        # @!attribute [rw] language_code
+        #   @return [String]
+        #     Optional. The language for which you want a validation result. If not
+        #     specified, the agent's default language is used. [Many
+        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
+        #     are supported. Note: languages must be enabled in the agent before they can
+        #     be used.
+        class GetValidationResultRequest; end
       end
     end
   end

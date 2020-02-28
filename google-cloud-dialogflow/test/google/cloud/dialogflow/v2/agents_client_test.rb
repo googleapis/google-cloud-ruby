@@ -838,4 +838,67 @@ describe Google::Cloud::Dialogflow::V2::AgentsClient do
       end
     end
   end
+
+  describe 'get_validation_result' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dialogflow::V2::AgentsClient#get_validation_result."
+
+    it 'invokes get_validation_result without error' do
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Dialogflow::V2::ValidationResult)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:get_validation_result, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAgentsCredentials_v2.new("get_validation_result")
+
+      Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
+
+          # Call method
+          response = client.get_validation_result
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_validation_result do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_validation_result with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:get_validation_result, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAgentsCredentials_v2.new("get_validation_result")
+
+      Google::Cloud::Dialogflow::V2::Agents::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dialogflow::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dialogflow::Agents.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.get_validation_result
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
 end

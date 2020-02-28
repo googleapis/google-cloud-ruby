@@ -13,6 +13,7 @@ require 'google/cloud/dialogflow/v2/context_pb'
 require 'google/cloud/dialogflow/v2/intent_pb'
 require 'google/cloud/dialogflow/v2/session_entity_type_pb'
 require 'google/protobuf/duration_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/struct_pb'
 require 'google/rpc/status_pb'
 require 'google/type/latlng_pb'
@@ -22,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :query_params, :message, 2, "google.cloud.dialogflow.v2.QueryParameters"
     optional :query_input, :message, 3, "google.cloud.dialogflow.v2.QueryInput"
     optional :output_audio_config, :message, 4, "google.cloud.dialogflow.v2.OutputAudioConfig"
+    optional :output_audio_config_mask, :message, 7, "google.protobuf.FieldMask"
     optional :input_audio, :bytes, 5
   end
   add_message "google.cloud.dialogflow.v2.DetectIntentResponse" do
@@ -70,6 +72,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :query_input, :message, 3, "google.cloud.dialogflow.v2.QueryInput"
     optional :single_utterance, :bool, 4
     optional :output_audio_config, :message, 5, "google.cloud.dialogflow.v2.OutputAudioConfig"
+    optional :output_audio_config_mask, :message, 7, "google.protobuf.FieldMask"
     optional :input_audio, :bytes, 6
   end
   add_message "google.cloud.dialogflow.v2.StreamingDetectIntentResponse" do

@@ -29,7 +29,7 @@ module Google
         #     ID must not exceed 36 bytes.
         # @!attribute [rw] query_params
         #   @return [Google::Cloud::Dialogflow::V2::QueryParameters]
-        #     Optional. The parameters of this query.
+        #     The parameters of this query.
         # @!attribute [rw] query_input
         #   @return [Google::Cloud::Dialogflow::V2::QueryInput]
         #     Required. The input specification. It can be set to:
@@ -42,12 +42,20 @@ module Google
         #     3.  an event that specifies which intent to trigger.
         # @!attribute [rw] output_audio_config
         #   @return [Google::Cloud::Dialogflow::V2::OutputAudioConfig]
-        #     Optional. Instructs the speech synthesizer how to generate the output
+        #     Instructs the speech synthesizer how to generate the output
         #     audio. If this field is not set and agent-level speech synthesizer is not
         #     configured, no output audio is generated.
+        # @!attribute [rw] output_audio_config_mask
+        #   @return [Google::Protobuf::FieldMask]
+        #     Mask for {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
+        #     request-level config should override speech synthesizer settings defined at
+        #     agent-level.
+        #
+        #     If unspecified or empty, {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
+        #     config in its entirety.
         # @!attribute [rw] input_audio
         #   @return [String]
-        #     Optional. The natural language speech audio to be processed. This field
+        #     The natural language speech audio to be processed. This field
         #     should be populated iff `query_input` is set to an input audio config.
         #     A single request can contain up to 1 minute of speech audio data.
         class DetectIntentRequest; end
@@ -80,33 +88,33 @@ module Google
         # Represents the parameters of the conversational query.
         # @!attribute [rw] time_zone
         #   @return [String]
-        #     Optional. The time zone of this conversational query from the
+        #     The time zone of this conversational query from the
         #     [time zone database](https://www.iana.org/time-zones), e.g.,
         #     America/New_York, Europe/Paris. If not provided, the time zone specified in
         #     agent settings is used.
         # @!attribute [rw] geo_location
         #   @return [Google::Type::LatLng]
-        #     Optional. The geo location of this conversational query.
+        #     The geo location of this conversational query.
         # @!attribute [rw] contexts
         #   @return [Array<Google::Cloud::Dialogflow::V2::Context>]
-        #     Optional. The collection of contexts to be activated before this query is
+        #     The collection of contexts to be activated before this query is
         #     executed.
         # @!attribute [rw] reset_contexts
         #   @return [true, false]
-        #     Optional. Specifies whether to delete all contexts in the current session
+        #     Specifies whether to delete all contexts in the current session
         #     before the new ones are activated.
         # @!attribute [rw] session_entity_types
         #   @return [Array<Google::Cloud::Dialogflow::V2::SessionEntityType>]
-        #     Optional. Additional session entity types to replace or extend developer
+        #     Additional session entity types to replace or extend developer
         #     entity types with. The entity synonyms apply to all languages and persist
         #     for the session of this query.
         # @!attribute [rw] payload
         #   @return [Google::Protobuf::Struct]
-        #     Optional. This field can be used to pass custom data into the webhook
+        #     This field can be used to pass custom data into the webhook
         #     associated with the agent. Arbitrary JSON objects are supported.
         # @!attribute [rw] sentiment_analysis_request_config
         #   @return [Google::Cloud::Dialogflow::V2::SentimentAnalysisRequestConfig]
-        #     Optional. Configures the type of sentiment analysis to perform. If not
+        #     Configures the type of sentiment analysis to perform. If not
         #     provided, sentiment analysis is not performed.
         class QueryParameters; end
 
@@ -263,7 +271,7 @@ module Google
         #     ID must not exceed 36 characters.
         # @!attribute [rw] query_params
         #   @return [Google::Cloud::Dialogflow::V2::QueryParameters]
-        #     Optional. The parameters of this query.
+        #     The parameters of this query.
         # @!attribute [rw] query_input
         #   @return [Google::Cloud::Dialogflow::V2::QueryInput]
         #     Required. The input specification. It can be set to:
@@ -276,7 +284,7 @@ module Google
         #     3.  an event that specifies which intent to trigger.
         # @!attribute [rw] single_utterance
         #   @return [true, false]
-        #     Optional. Please use {Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig#single_utterance} instead.
+        #     Please use {Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig#single_utterance} instead.
         #     If `false` (default), recognition does not cease until
         #     the client closes the stream. If `true`, the recognizer will detect a
         #     single spoken utterance in input audio. Recognition ceases when it detects
@@ -286,12 +294,20 @@ module Google
         #     This setting is ignored when `query_input` is a piece of text or an event.
         # @!attribute [rw] output_audio_config
         #   @return [Google::Cloud::Dialogflow::V2::OutputAudioConfig]
-        #     Optional. Instructs the speech synthesizer how to generate the output
+        #     Instructs the speech synthesizer how to generate the output
         #     audio. If this field is not set and agent-level speech synthesizer is not
         #     configured, no output audio is generated.
+        # @!attribute [rw] output_audio_config_mask
+        #   @return [Google::Protobuf::FieldMask]
+        #     Mask for {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
+        #     request-level config should override speech synthesizer settings defined at
+        #     agent-level.
+        #
+        #     If unspecified or empty, {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
+        #     config in its entirety.
         # @!attribute [rw] input_audio
         #   @return [String]
-        #     Optional. The input audio content to be recognized. Must be sent if
+        #     The input audio content to be recognized. Must be sent if
         #     `query_input` was set to a streaming input audio config. The complete audio
         #     over all streaming messages must not exceed 1 minute.
         class StreamingDetectIntentRequest; end
@@ -441,7 +457,7 @@ module Google
         #     Required. The unique identifier of the event.
         # @!attribute [rw] parameters
         #   @return [Google::Protobuf::Struct]
-        #     Optional. The collection of parameters associated with the event.
+        #     The collection of parameters associated with the event.
         # @!attribute [rw] language_code
         #   @return [String]
         #     Required. The language of this query. See [Language
@@ -453,7 +469,7 @@ module Google
         # Configures the types of sentiment analysis to perform.
         # @!attribute [rw] analyze_query_text_sentiment
         #   @return [true, false]
-        #     Optional. Instructs the service to perform sentiment analysis on
+        #     Instructs the service to perform sentiment analysis on
         #     `query_text`. If not provided, sentiment analysis is not performed on
         #     `query_text`.
         class SentimentAnalysisRequestConfig; end
