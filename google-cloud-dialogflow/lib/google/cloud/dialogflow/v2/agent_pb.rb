@@ -8,6 +8,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/dialogflow/v2/validation_result_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
@@ -89,6 +90,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :agent_content, :bytes, 3
     end
   end
+  add_message "google.cloud.dialogflow.v2.GetValidationResultRequest" do
+    optional :parent, :string, 1
+    optional :language_code, :string, 3
+  end
 end
 
 module Google
@@ -109,6 +114,7 @@ module Google
         ExportAgentResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ExportAgentResponse").msgclass
         ImportAgentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ImportAgentRequest").msgclass
         RestoreAgentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.RestoreAgentRequest").msgclass
+        GetValidationResultRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.GetValidationResultRequest").msgclass
       end
     end
   end

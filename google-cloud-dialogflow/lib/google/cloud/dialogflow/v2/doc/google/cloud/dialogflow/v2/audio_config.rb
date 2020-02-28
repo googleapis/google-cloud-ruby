@@ -198,14 +198,14 @@ module Google
         #     Required. Audio encoding of the synthesized audio content.
         # @!attribute [rw] sample_rate_hertz
         #   @return [Integer]
-        #     Optional. The synthesis sample rate (in hertz) for this audio. If not
+        #     The synthesis sample rate (in hertz) for this audio. If not
         #     provided, then the synthesizer will use the default sample rate based on
         #     the audio encoding. If this is different from the voice's natural sample
         #     rate, then the synthesizer will honor this request by converting to the
         #     desired sample rate (which might result in worse audio quality).
         # @!attribute [rw] synthesize_speech_config
         #   @return [Google::Cloud::Dialogflow::V2::SynthesizeSpeechConfig]
-        #     Optional. Configuration of how speech should be synthesized.
+        #     Configuration of how speech should be synthesized.
         class OutputAudioConfig; end
 
         # Audio encoding of the audio content sent in the conversational query request.

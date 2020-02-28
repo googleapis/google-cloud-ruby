@@ -228,17 +228,26 @@ module Google
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::QueryInput`
           #   can also be provided.
           # @param query_params [Google::Cloud::Dialogflow::V2::QueryParameters | Hash]
-          #   Optional. The parameters of this query.
+          #   The parameters of this query.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::QueryParameters`
           #   can also be provided.
           # @param output_audio_config [Google::Cloud::Dialogflow::V2::OutputAudioConfig | Hash]
-          #   Optional. Instructs the speech synthesizer how to generate the output
+          #   Instructs the speech synthesizer how to generate the output
           #   audio. If this field is not set and agent-level speech synthesizer is not
           #   configured, no output audio is generated.
           #   A hash of the same form as `Google::Cloud::Dialogflow::V2::OutputAudioConfig`
           #   can also be provided.
+          # @param output_audio_config_mask [Google::Protobuf::FieldMask | Hash]
+          #   Mask for {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
+          #   request-level config should override speech synthesizer settings defined at
+          #   agent-level.
+          #
+          #   If unspecified or empty, {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
+          #   config in its entirety.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
           # @param input_audio [String]
-          #   Optional. The natural language speech audio to be processed. This field
+          #   The natural language speech audio to be processed. This field
           #   should be populated iff `query_input` is set to an input audio config.
           #   A single request can contain up to 1 minute of speech audio data.
           # @param options [Google::Gax::CallOptions]
@@ -264,6 +273,7 @@ module Google
               query_input,
               query_params: nil,
               output_audio_config: nil,
+              output_audio_config_mask: nil,
               input_audio: nil,
               options: nil,
               &block
@@ -272,6 +282,7 @@ module Google
               query_input: query_input,
               query_params: query_params,
               output_audio_config: output_audio_config,
+              output_audio_config_mask: output_audio_config_mask,
               input_audio: input_audio
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Dialogflow::V2::DetectIntentRequest)
