@@ -86,12 +86,15 @@ module Google
 
             p = {}
             p["conditions"] = [
+              ["starts-with","$acl","public"],
               {"key" => @file_name},
               {"x-goog-date" => goog_date},
               {"x-goog-credential" => goog_credential},
               {"x-goog-algorithm" => "GOOG4-RSA-SHA256"}
             ]
+            puts "\n\nconditions:\n\n#{conditions}\n\n"
             p["conditions"].unshift conditions if conditions
+            puts "\n\np[\"conditions\"]:\n\n#{p["conditions"]}\n\n"
             #raise "expires is required" unless expires
             p["expiration"] = (datetime_now + expires).strftime "%Y-%m-%dT%H:%M:%SZ"
             fields["x-goog-credential"] = goog_credential

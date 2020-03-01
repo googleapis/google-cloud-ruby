@@ -59,7 +59,7 @@ class SignerV4PostObjectTest < MockStorage
   end
 
   def self.bucket_test_for description, input, output, index
-    return unless [4].include? index
+    return unless [1].include? index
     focus
     define_method("test_bucket_#{index}: #{description}") do
     @test_data = ["bucket", index, description, output.expectedDecodedPolicy]
@@ -70,7 +70,7 @@ class SignerV4PostObjectTest < MockStorage
         # sut
         post_object = bucket.post_object input.object, issuer: credentials.issuer,
                                                        expires: input.expiration,
-                                                       conditions: {"success_action_status" => input.conditions.successActionStatus},
+                                                       conditions: conditions(input.conditions),
                                                        version: :v4
 
         post_object.url.must_equal output.url
@@ -81,6 +81,15 @@ class SignerV4PostObjectTest < MockStorage
         post_object.fields["policy"].must_equal output.fields["policy"]
         post_object.fields["x-goog-signature"].must_equal output.fields["x-goog-signature"]
       end
+    end
+  end
+
+  def conditions policy_conditions
+    return nil unless policy_conditions
+    if !policy_conditions.successActionStatus.empty?
+      {"success_action_status" => policy_conditions.successActionStatus}
+    elsif policy_conditions.matches
+      policy_conditions.matches.map { |m| m.expression.to_a }.first
     end
   end
 
