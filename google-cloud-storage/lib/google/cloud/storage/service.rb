@@ -181,7 +181,7 @@ module Google
         ##
         # Creates a new default ACL.
         def insert_default_acl bucket_name, entity, role, user_project: nil
-          param  = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
+          param = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**param)
           execute do
             service.insert_default_object_access_control \

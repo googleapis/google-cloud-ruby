@@ -1254,22 +1254,27 @@ module Google
                         storage_class: nil, encryption_key: nil, kms_key: nil,
                         temporary_hold: nil, event_based_hold: nil
           ensure_service!
-          options = { acl: File::Acl.predefined_rule_for(acl), md5: md5,
-                      cache_control: cache_control, content_type: content_type,
-                      content_disposition: content_disposition, crc32c: crc32c,
-                      content_encoding: content_encoding, metadata: metadata,
-                      content_language: content_language, key: encryption_key,
-                      kms_key: kms_key,
-                      storage_class: storage_class_for(storage_class),
-                      temporary_hold: temporary_hold,
-                      event_based_hold: event_based_hold,
-                      user_project: user_project }
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path
           path ||= file if file.is_a? String
           raise ArgumentError, "must provide path" if path.nil?
 
-          gapi = service.insert_file name, file, path, **options
+
+          gapi = service.insert_file name, file, path, acl: File::Acl.predefined_rule_for(acl),
+                                                       md5: md5,
+                                                       cache_control: cache_control,
+                                                       content_type: content_type,
+                                                       content_disposition: content_disposition,
+                                                       crc32c: crc32c,
+                                                       content_encoding: content_encoding,
+                                                       metadata: metadata,
+                                                       content_language: content_language,
+                                                       key: encryption_key,
+                                                       kms_key: kms_key,
+                                                       storage_class: storage_class_for(storage_class),
+                                                       temporary_hold: temporary_hold,
+                                                       event_based_hold: event_based_hold,
+                                                       user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
         alias upload_file create_file
@@ -1368,9 +1373,6 @@ module Google
             raise ArgumentError, "must provide at least two source files"
           end
 
-          options = { acl: File::Acl.predefined_rule_for(acl),
-                      key: encryption_key,
-                      user_project: user_project }
           destination_gapi = nil
           if block_given?
             destination_gapi = API::Object.new
@@ -1378,8 +1380,11 @@ module Google
             yield updater
             updater.check_for_changed_metadata!
           end
-          gapi = service.compose_file name, sources, destination,
-                                      destination_gapi, **options
+
+          acl_rule = File::Acl.predefined_rule_for acl
+          gapi = service.compose_file name, sources, destination, destination_gapi, acl: acl_rule,
+                                                                                    key: encryption_key,
+                                                                                    user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
         alias compose_file compose
@@ -2159,11 +2164,12 @@ module Google
         def create_notification topic, custom_attrs: nil, event_types: nil,
                                 prefix: nil, payload: nil
           ensure_service!
-          options = { custom_attrs: custom_attrs, event_types: event_types,
-                      prefix: prefix, payload: payload,
-                      user_project: user_project }
 
-          gapi = service.insert_notification name, topic, **options
+          gapi = service.insert_notification name, topic, custom_attrs: custom_attrs,
+                                                          event_types: event_types,
+                                                          prefix: prefix,
+                                                          payload: payload,
+                                                          user_project: user_project
           Notification.from_gapi name, gapi, service, user_project: user_project
         end
         alias new_notification create_notification
@@ -2249,7 +2255,7 @@ module Google
           patch_args = Hash[attributes.map do |attr|
             [attr, @gapi.send(attr)]
           end]
-          patch_gapi = API::Bucket.new **patch_args
+          patch_gapi = API::Bucket.new(**patch_args)
           @gapi = service.patch_bucket name, patch_gapi,
                                        user_project: user_project
           @lazy = nil

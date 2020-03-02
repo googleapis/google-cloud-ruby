@@ -1766,7 +1766,7 @@ module Google
           # Sending nil metadata results in an Apiary runtime error:
           # NoMethodError: undefined method `each' for nil:NilClass
           attr_params.reject! { |k, v| k == :metadata && v.nil? }
-          Google::Apis::StorageV1::Object.new **attr_params
+          Google::Apis::StorageV1::Object.new(**attr_params)
         end
 
         protected
