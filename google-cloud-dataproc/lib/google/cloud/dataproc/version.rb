@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Dataproc
-      VERSION = "0.9.0".freeze
+      VERSION = "0.9.1".freeze
     end
   end
 end
