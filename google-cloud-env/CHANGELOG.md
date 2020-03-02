@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.1 / 2020-03-02
+
+#### Bug Fixes
+
+* support faraday 1.x
+
 ### 1.3.0 / 2019-10-23
 
 Now requires Ruby 2.4 or later.
