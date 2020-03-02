@@ -1,5 +1,12 @@
 # Release History
 
+### 0.9.1 / 2020-03-02
+
+#### Documentation
+
+* Update formatting
+* Update product branding
+
 ### 0.9.0 / 2020-02-24
 
 #### Features
