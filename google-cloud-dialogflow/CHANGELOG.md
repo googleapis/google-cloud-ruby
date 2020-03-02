@@ -1,5 +1,13 @@
 # Release History
 
+### 0.14.0 / 2020-03-02
+
+#### Features
+
+* Add AgentsClient#get_validation_result (ValidationResult)
+  * Add DetectIntentRequest#output_audio_config_mask (FieldMask)
+  * Add StreamingDetectIntentRequest#output_audio_config_mask (FieldMask)
+
 ### 0.13.0 / 2020-02-10
 
 #### ⚠ BREAKING CHANGES
