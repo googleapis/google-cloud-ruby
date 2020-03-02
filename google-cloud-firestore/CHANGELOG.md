@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 / 2020-03-02
+
+#### Features
+
+* Add IN and ARRAY_CONTAINS_ANY query operators
+
 ### 1.2.4 / 2020-01-23
 
 #### Documentation
