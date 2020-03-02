@@ -1,5 +1,11 @@
 # Release History
 
+### 2.1.2 / 2020-03-02
+
+#### Bug Fixes
+
+* support faraday 1.x
+
 ### 2.1.1 / 2020-01-23
 
 #### Documentation
