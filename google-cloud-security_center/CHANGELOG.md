@@ -1,5 +1,15 @@
 # Release History
 
+### 0.7.0 / 2020-03-02
+
+#### ⚠ BREAKING CHANGES
+
+* **security_center:** Remove unused resource path helpers
+
+#### Bug Fixes
+
+* Remove unused resource path helpers
+
 ### 0.6.0 / 2020-02-10
 
 #### Features
