@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Firestore
-      VERSION = "1.2.4".freeze
+      VERSION = "1.3.0".freeze
     end
   end
 end
