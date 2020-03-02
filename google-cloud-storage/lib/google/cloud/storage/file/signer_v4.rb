@@ -61,7 +61,7 @@ module Google
               signing_key = OpenSSL::PKey::RSA.new signing_key
             end
             signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
-            signature.unpack('H*').first.force_encoding("utf-8")
+            signature.unpack("H*").first.force_encoding("utf-8")
           end
 
           def post_object expires: nil,
@@ -77,25 +77,26 @@ module Google
 
             raise SignedUrlUnavailable unless i && s
 
-            goog_credential = "#{i}/#{datetime_now.strftime "%Y%m%d"}/auto/storage/goog4_request"
+            goog_credential = "#{i}/#{datetime_now.strftime '%Y%m%d'}/auto/storage/goog4_request"
             goog_date = datetime_now.strftime "%Y%m%dT%H%M%SZ"
-            fields = {
+            fields ||= {}
+            fields.merge(
               "key" => @file_name,
               "x-goog-algorithm" => "GOOG4-RSA-SHA256"
-            }
+            )
 
             p = {}
             p["conditions"] = [
-              ["starts-with","$acl","public"],
-              {"key" => @file_name},
-              {"x-goog-date" => goog_date},
-              {"x-goog-credential" => goog_credential},
-              {"x-goog-algorithm" => "GOOG4-RSA-SHA256"}
+              ["starts-with", "$acl", "public"],
+              { "key" => @file_name },
+              { "x-goog-date" => goog_date },
+              { "x-goog-credential" => goog_credential },
+              { "x-goog-algorithm" => "GOOG4-RSA-SHA256" }
             ]
             puts "\n\nconditions:\n\n#{conditions}\n\n"
             p["conditions"].unshift conditions if conditions
-            puts "\n\np[\"conditions\"]:\n\n#{p["conditions"]}\n\n"
-            #raise "expires is required" unless expires
+            puts "\n\np[\"conditions\"]:\n\n#{p['conditions']}\n\n"
+            raise "expires is required" unless expires
             p["expiration"] = (datetime_now + expires).strftime "%Y-%m-%dT%H:%M:%SZ"
             fields["x-goog-credential"] = goog_credential
             fields["x-goog-date"] = goog_date
