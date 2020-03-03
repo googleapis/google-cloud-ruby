@@ -42,7 +42,7 @@ gem "google-cloud-video_intelligence",
 gem "google-cloud-vision", path: "../google-cloud-vision"
 gem "stackdriver-core", path: "../stackdriver-core"
 
-gem "rake", "~> 12.3"
+gem "rake"
 
 # Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
 # See https://github.com/googleapis/google-cloud-ruby/issues/4110
