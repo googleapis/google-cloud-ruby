@@ -20,22 +20,22 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::CreateDataset AutoML::CreateDataset}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The resource name of the project to create the dataset for.
+        #     Required. The resource name of the project to create the dataset for.
         # @!attribute [rw] dataset
         #   @return [Google::Cloud::AutoML::V1beta1::Dataset]
-        #     The dataset to create.
+        #     Required. The dataset to create.
         class CreateDatasetRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::GetDataset AutoML::GetDataset}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the dataset to retrieve.
+        #     Required. The resource name of the dataset to retrieve.
         class GetDatasetRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::ListDatasets AutoML::ListDatasets}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The resource name of the project from which to list datasets.
+        #     Required. The resource name of the project from which to list datasets.
         # @!attribute [rw] filter
         #   @return [String]
         #     An expression for filtering the results of the request.
@@ -70,7 +70,7 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::UpdateDataset AutoML::UpdateDataset}
         # @!attribute [rw] dataset
         #   @return [Google::Cloud::AutoML::V1beta1::Dataset]
-        #     The dataset which replaces the resource on the server.
+        #     Required. The dataset which replaces the resource on the server.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     The update mask applies to the resource.
@@ -79,7 +79,7 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::DeleteDataset AutoML::DeleteDataset}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the dataset to delete.
+        #     Required. The resource name of the dataset to delete.
         class DeleteDatasetRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::ImportData AutoML::ImportData}.
@@ -105,13 +105,13 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::GetAnnotationSpec AutoML::GetAnnotationSpec}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the annotation spec to retrieve.
+        #     Required. The resource name of the annotation spec to retrieve.
         class GetAnnotationSpecRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::GetTableSpec AutoML::GetTableSpec}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the table spec to retrieve.
+        #     Required. The resource name of the table spec to retrieve.
         # @!attribute [rw] field_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
@@ -120,7 +120,7 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::ListTableSpecs AutoML::ListTableSpecs}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The resource name of the dataset to list table specs from.
+        #     Required. The resource name of the dataset to list table specs from.
         # @!attribute [rw] field_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
@@ -152,7 +152,7 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::UpdateTableSpec AutoML::UpdateTableSpec}
         # @!attribute [rw] table_spec
         #   @return [Google::Cloud::AutoML::V1beta1::TableSpec]
-        #     The table spec which replaces the resource on the server.
+        #     Required. The table spec which replaces the resource on the server.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     The update mask applies to the resource.
@@ -161,7 +161,7 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::GetColumnSpec AutoML::GetColumnSpec}.
         # @!attribute [rw] name
         #   @return [String]
-        #     The resource name of the column spec to retrieve.
+        #     Required. The resource name of the column spec to retrieve.
         # @!attribute [rw] field_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
@@ -170,7 +170,7 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::ListColumnSpecs AutoML::ListColumnSpecs}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The resource name of the table spec to list column specs from.
+        #     Required. The resource name of the table spec to list column specs from.
         # @!attribute [rw] field_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Mask specifying which fields to read.
@@ -202,7 +202,7 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::UpdateColumnSpec AutoML::UpdateColumnSpec}
         # @!attribute [rw] column_spec
         #   @return [Google::Cloud::AutoML::V1beta1::ColumnSpec]
-        #     The column spec which replaces the resource on the server.
+        #     Required. The column spec which replaces the resource on the server.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     The update mask applies to the resource.
@@ -211,22 +211,22 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::CreateModel AutoML::CreateModel}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the parent project where the model is being created.
+        #     Required. Resource name of the parent project where the model is being created.
         # @!attribute [rw] model
         #   @return [Google::Cloud::AutoML::V1beta1::Model]
-        #     The model to create.
+        #     Required. The model to create.
         class CreateModelRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::GetModel AutoML::GetModel}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the model.
+        #     Required. Resource name of the model.
         class GetModelRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::ListModels AutoML::ListModels}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the project, from which to list the models.
+        #     Required. Resource name of the project, from which to list the models.
         # @!attribute [rw] filter
         #   @return [String]
         #     An expression for filtering the results of the request.
@@ -262,7 +262,7 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::DeleteModel AutoML::DeleteModel}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the model being deleted.
+        #     Required. Resource name of the model being deleted.
         class DeleteModelRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::DeployModel AutoML::DeployModel}.
@@ -274,13 +274,13 @@ module Google
         #     Model deployment metadata specific to Image Classification.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the model to deploy.
+        #     Required. Resource name of the model to deploy.
         class DeployModelRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::UndeployModel AutoML::UndeployModel}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name of the model to undeploy.
+        #     Required. Resource name of the model to undeploy.
         class UndeployModelRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}.
@@ -307,13 +307,13 @@ module Google
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::GetModelEvaluation AutoML::GetModelEvaluation}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Resource name for the model evaluation.
+        #     Required. Resource name for the model evaluation.
         class GetModelEvaluationRequest; end
 
         # Request message for {Google::Cloud::AutoML::V1beta1::AutoML::ListModelEvaluations AutoML::ListModelEvaluations}.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Resource name of the model to list the model evaluations for.
+        #     Required. Resource name of the model to list the model evaluations for.
         #     If modelId is set as "-", this will list model evaluations from across all
         #     models of the parent location.
         # @!attribute [rw] filter

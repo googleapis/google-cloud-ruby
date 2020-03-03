@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/resource_pb'
 require 'google/cloud/automl/v1beta1/image_pb'
 require 'google/cloud/automl/v1beta1/tables_pb'
 require 'google/cloud/automl/v1beta1/text_pb'

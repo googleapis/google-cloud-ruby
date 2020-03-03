@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/resource_pb'
 require 'google/cloud/automl/v1beta1/classification_pb'
 require 'google/cloud/automl/v1beta1/detection_pb'
 require 'google/cloud/automl/v1beta1/regression_pb'

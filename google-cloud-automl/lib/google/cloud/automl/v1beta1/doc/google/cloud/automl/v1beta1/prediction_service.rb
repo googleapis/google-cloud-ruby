@@ -17,11 +17,10 @@ module Google
   module Cloud
     module AutoML
       module V1beta1
-        # Request message for
-        # {Google::Cloud::AutoML::V1beta1::PredictionService::Predict PredictionService::Predict}.
+        # Request message for {Google::Cloud::AutoML::V1beta1::PredictionService::Predict PredictionService::Predict}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Name of the model requested to serve the prediction.
+        #     Required. Name of the model requested to serve the prediction.
         # @!attribute [rw] payload
         #   @return [Google::Cloud::AutoML::V1beta1::ExamplePayload]
         #     Required. Payload to perform a prediction on. The payload must match the
@@ -45,17 +44,12 @@ module Google
         #       boxes will be returned in the response. Default is 100, the
         #       requested value may be limited by server.
         #     * For Tables:
-        #       `feature_importance` - (boolean) Whether
-        #
-        #     [feature_importance][[google.cloud.automl.v1beta1.TablesModelColumnInfo.feature_importance]
-        #            should be populated in the returned
-        #
-        #     [TablesAnnotation(-s)][[google.cloud.automl.v1beta1.TablesAnnotation].
-        #            The default is false.
+        #       feature_imp<span>ortan</span>ce - (boolean) Whether feature importance
+        #       should be populated in the returned TablesAnnotation.
+        #       The default is false.
         class PredictRequest; end
 
-        # Response message for
-        # {Google::Cloud::AutoML::V1beta1::PredictionService::Predict PredictionService::Predict}.
+        # Response message for {Google::Cloud::AutoML::V1beta1::PredictionService::Predict PredictionService::Predict}.
         # @!attribute [rw] payload
         #   @return [Array<Google::Cloud::AutoML::V1beta1::AnnotationPayload>]
         #     Prediction result.
@@ -86,11 +80,10 @@ module Google
         #       from the previous Natural Language Sentiment Analysis API.
         class PredictResponse; end
 
-        # Request message for
-        # {Google::Cloud::AutoML::V1beta1::PredictionService::BatchPredict PredictionService::BatchPredict}.
+        # Request message for {Google::Cloud::AutoML::V1beta1::PredictionService::BatchPredict PredictionService::BatchPredict}.
         # @!attribute [rw] name
         #   @return [String]
-        #     Name of the model requested to serve the batch prediction.
+        #     Required. Name of the model requested to serve the batch prediction.
         # @!attribute [rw] input_config
         #   @return [Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig]
         #     Required. The input configuration for batch prediction.
@@ -100,7 +93,7 @@ module Google
         #     be written.
         # @!attribute [rw] params
         #   @return [Hash{String => String}]
-        #     Additional domain-specific parameters for the predictions, any string must
+        #     Required. Additional domain-specific parameters for the predictions, any string must
         #     be up to 25000 characters long.
         #
         #     * For Text Classification:
@@ -125,6 +118,7 @@ module Google
         #       requested value may be limited by server.
         #
         #     * For Video Classification :
+        #
         #       `score_threshold` - (float) A value from 0.0 to 1.0. When the model
         #       makes predictions for a video, it will only produce results that
         #       have at least this confidence score. The default is 0.5.
@@ -152,7 +146,14 @@ module Google
         #       metrics provided to describe that quality. The default is
         #       "false".
         #
+        #     * For Tables:
+        #
+        #       feature_imp<span>ortan</span>ce - (boolean) Whether feature importance
+        #       should be populated in the returned TablesAnnotations. The
+        #       default is false.
+        #
         #     * For Video Object Tracking:
+        #
         #       `score_threshold` - (float) When Model detects objects on video frames,
         #       it will only produce bounding boxes which have at least this
         #       confidence score. Value in 0 to 1 range, default is 0.5.
@@ -166,8 +167,7 @@ module Google
 
         # Result of the Batch Predict. This message is returned in
         # {Google::Longrunning::Operation#response response} of the operation returned
-        # by the
-        # {Google::Cloud::AutoML::V1beta1::PredictionService::BatchPredict PredictionService::BatchPredict}.
+        # by the {Google::Cloud::AutoML::V1beta1::PredictionService::BatchPredict PredictionService::BatchPredict}.
         # @!attribute [rw] metadata
         #   @return [Hash{String => String}]
         #     Additional domain-specific prediction response metadata.

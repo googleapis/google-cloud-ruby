@@ -4,10 +4,11 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/automl/v1beta1/annotation_spec_pb'
 require 'google/cloud/automl/v1beta1/classification_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.automl.v1beta1.ImageClassificationDatasetMetadata" do
     optional :classification_type, :enum, 1, "google.cloud.automl.v1beta1.ClassificationType"

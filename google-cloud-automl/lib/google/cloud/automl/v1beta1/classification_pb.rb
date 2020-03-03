@@ -4,8 +4,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/cloud/automl/v1beta1/temporal_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.automl.v1beta1.ClassificationAnnotation" do
     optional :score, :float, 1
