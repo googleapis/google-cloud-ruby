@@ -72,6 +72,10 @@ module Google
               "page_token",
               "next_page_token",
               "list_findings_results"),
+            "list_notification_configs" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "notification_configs"),
             "list_sources" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
@@ -109,6 +113,12 @@ module Google
 
           private_constant :FINDING_SECURITY_MARKS_PATH_TEMPLATE
 
+          NOTIFICATION_CONFIG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/notificationConfigs/{notification_config}"
+          )
+
+          private_constant :NOTIFICATION_CONFIG_PATH_TEMPLATE
+
           ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}"
           )
@@ -126,6 +136,12 @@ module Google
           )
 
           private_constant :SOURCE_PATH_TEMPLATE
+
+          TOPIC_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/topics/{topic}"
+          )
+
+          private_constant :TOPIC_PATH_TEMPLATE
 
           # Returns a fully-qualified asset_security_marks resource name string.
           # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
@@ -168,6 +184,17 @@ module Google
             )
           end
 
+          # Returns a fully-qualified notification_config resource name string.
+          # @param organization [String]
+          # @param notification_config [String]
+          # @return [String]
+          def self.notification_config_path organization, notification_config
+            NOTIFICATION_CONFIG_PATH_TEMPLATE.render(
+              :"organization" => organization,
+              :"notification_config" => notification_config
+            )
+          end
+
           # Returns a fully-qualified organization resource name string.
           # @param organization [String]
           # @return [String]
@@ -194,6 +221,17 @@ module Google
             SOURCE_PATH_TEMPLATE.render(
               :"organization" => organization,
               :"source" => source
+            )
+          end
+
+          # Returns a fully-qualified topic resource name string.
+          # @param project [String]
+          # @param topic [String]
+          # @return [String]
+          def self.topic_path project, topic
+            TOPIC_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"topic" => topic
             )
           end
 
@@ -366,6 +404,30 @@ module Google
                 {'parent' => request.parent}
               end
             )
+            @create_notification_config = Google::Gax.create_api_call(
+              @security_center_stub.method(:create_notification_config),
+              defaults["create_notification_config"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @delete_notification_config = Google::Gax.create_api_call(
+              @security_center_stub.method(:delete_notification_config),
+              defaults["delete_notification_config"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @get_notification_config = Google::Gax.create_api_call(
+              @security_center_stub.method(:get_notification_config),
+              defaults["get_notification_config"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @get_organization_settings = Google::Gax.create_api_call(
               @security_center_stub.method(:get_organization_settings),
               defaults["get_organization_settings"],
@@ -393,6 +455,14 @@ module Google
             @list_findings = Google::Gax.create_api_call(
               @security_center_stub.method(:list_findings),
               defaults["list_findings"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @list_notification_configs = Google::Gax.create_api_call(
+              @security_center_stub.method(:list_notification_configs),
+              defaults["list_notification_configs"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
@@ -436,6 +506,14 @@ module Google
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'finding.name' => request.finding.name}
+              end
+            )
+            @update_notification_config = Google::Gax.create_api_call(
+              @security_center_stub.method(:update_notification_config),
+              defaults["update_notification_config"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'notification_config.name' => request.notification_config.name}
               end
             )
             @update_organization_settings = Google::Gax.create_api_call(
@@ -513,9 +591,9 @@ module Google
           #   Required. Name of the organization to groupBy. Its format is
           #   "organizations/[organization_id]".
           # @param group_by [String]
-          #   Required. Expression that defines what assets fields to use for grouping. The string
-          #   value should follow SQL syntax: comma separated list of fields. For
-          #   example:
+          #   Required. Expression that defines what assets fields to use for grouping.
+          #   The string value should follow SQL syntax: comma separated list of fields.
+          #   For example:
           #   "security_center_properties.resource_project,security_center_properties.project".
           #
           #   The following fields are supported when compare_duration is not set:
@@ -698,9 +776,9 @@ module Google
           #   all sources provide a source_id of `-`. For example:
           #   organizations/{organization_id}/sources/-
           # @param group_by [String]
-          #   Required. Expression that defines what assets fields to use for grouping (including
-          #   `state_change`). The string value should follow SQL syntax: comma separated
-          #   list of fields. For example: "parent,resource_name".
+          #   Required. Expression that defines what assets fields to use for grouping
+          #   (including `state_change`). The string value should follow SQL syntax:
+          #   comma separated list of fields. For example: "parent,resource_name".
           #
           #   The following fields are supported:
           #
@@ -777,12 +855,18 @@ module Google
           #
           #   Possible "state_change" values when compare_duration is specified:
           #
-          #   * "CHANGED":   indicates that the finding was present at the start of
-          #     compare_duration, but changed its state at read_time.
-          #   * "UNCHANGED": indicates that the finding was present at the start of
-          #     compare_duration and did not change state at read_time.
-          #   * "ADDED":     indicates that the finding was not present at the start
-          #     of compare_duration, but was present at read_time.
+          #   * "CHANGED":   indicates that the finding was present and matched the given
+          #     filter at the start of compare_duration, but changed its
+          #     state at read_time.
+          #   * "UNCHANGED": indicates that the finding was present and matched the given
+          #     filter at the start of compare_duration and did not change
+          #     state at read_time.
+          #   * "ADDED":     indicates that the finding did not match the given filter or
+          #     was not present at the start of compare_duration, but was
+          #     present at read_time.
+          #   * "REMOVED":   indicates that the finding was present and matched the
+          #     filter at the start of compare_duration, but did not match
+          #     the filter at read_time.
           #
           #   If compare_duration is not specified, then the only possible state_change
           #   is "UNUSED",  which will be the state_change set for all findings present
@@ -902,8 +986,8 @@ module Google
           #   Required. Resource name of the new source's parent. Its format should be
           #   "organizations/[organization_id]".
           # @param source [Google::Cloud::SecurityCenter::V1::Source | Hash]
-          #   Required. The Source being created, only the display_name and description will be
-          #   used. All other fields will be ignored.
+          #   Required. The Source being created, only the display_name and description
+          #   will be used. All other fields will be ignored.
           #   A hash of the same form as `Google::Cloud::SecurityCenter::V1::Source`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -948,8 +1032,8 @@ module Google
           #   It must be alphanumeric and less than or equal to 32 characters and
           #   greater than 0 characters in length.
           # @param finding [Google::Cloud::SecurityCenter::V1::Finding | Hash]
-          #   Required. The Finding being created. The name and security_marks will be ignored as
-          #   they are both output only fields on this resource.
+          #   Required. The Finding being created. The name and security_marks will be
+          #   ignored as they are both output only fields on this resource.
           #   A hash of the same form as `Google::Cloud::SecurityCenter::V1::Finding`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -988,11 +1072,125 @@ module Google
             @create_finding.call(req, options, &block)
           end
 
+          # Creates a notification config.
+          #
+          # @param parent [String]
+          #   Required. Resource name of the new notification config's parent. Its format
+          #   is "organizations/[organization_id]".
+          # @param config_id [String]
+          #   Required.
+          #   Unique identifier provided by the client within the parent scope.
+          #   It must be between 1 and 128 characters, and contains alphanumeric
+          #   characters, underscores or hyphens only.
+          # @param notification_config [Google::Cloud::SecurityCenter::V1::NotificationConfig | Hash]
+          #   Required. The notification config being created. The name and the service
+          #   account will be ignored as they are both output only fields on this
+          #   resource.
+          #   A hash of the same form as `Google::Cloud::SecurityCenter::V1::NotificationConfig`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::SecurityCenter::V1::NotificationConfig]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::SecurityCenter::V1::NotificationConfig]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/security_center"
+          #
+          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
+          #   formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
+          #
+          #   # TODO: Initialize `config_id`:
+          #   config_id = ''
+          #
+          #   # TODO: Initialize `notification_config`:
+          #   notification_config = {}
+          #   response = security_center_client.create_notification_config(formatted_parent, config_id, notification_config)
+
+          def create_notification_config \
+              parent,
+              config_id,
+              notification_config,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              config_id: config_id,
+              notification_config: notification_config
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest)
+            @create_notification_config.call(req, options, &block)
+          end
+
+          # Deletes a notification config.
+          #
+          # @param name [String]
+          #   Required. Name of the notification config to delete. Its format is
+          #   "organizations/[organization_id]/notificationConfigs/[config_id]".
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/security_center"
+          #
+          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
+          #   formatted_name = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.notification_config_path("[ORGANIZATION]", "[NOTIFICATION_CONFIG]")
+          #   security_center_client.delete_notification_config(formatted_name)
+
+          def delete_notification_config \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest)
+            @delete_notification_config.call(req, options, &block)
+            nil
+          end
+
+          # Gets a notification config.
+          #
+          # @param name [String]
+          #   Required. Name of the notification config to get. Its format is
+          #   "organizations/[organization_id]/notificationConfigs/[config_id]".
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::SecurityCenter::V1::NotificationConfig]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::SecurityCenter::V1::NotificationConfig]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/security_center"
+          #
+          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
+          #   formatted_name = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.notification_config_path("[ORGANIZATION]", "[NOTIFICATION_CONFIG]")
+          #   response = security_center_client.get_notification_config(formatted_name)
+
+          def get_notification_config \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest)
+            @get_notification_config.call(req, options, &block)
+          end
+
           # Gets the settings for an organization.
           #
           # @param name [String]
-          #   Required. Name of the organization to get organization settings for. Its format is
-          #   "organizations/[organization_id]/organizationSettings".
+          #   Required. Name of the organization to get organization settings for. Its
+          #   format is "organizations/[organization_id]/organizationSettings".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1169,9 +1367,8 @@ module Google
           #   A hash of the same form as `Google::Protobuf::Duration`
           #   can also be provided.
           # @param field_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional. A field mask to specify the ListAssetsResult fields to be listed in the
-          #   response.
-          #   An empty field mask will list all fields.
+          #   Optional. A field mask to specify the ListAssetsResult fields to be listed
+          #   in the response. An empty field mask will list all fields.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param page_size [Integer]
@@ -1329,12 +1526,18 @@ module Google
           #
           #   Possible "state_change" values when compare_duration is specified:
           #
-          #   * "CHANGED":   indicates that the finding was present at the start of
-          #     compare_duration, but changed its state at read_time.
-          #   * "UNCHANGED": indicates that the finding was present at the start of
-          #     compare_duration and did not change state at read_time.
-          #   * "ADDED":     indicates that the finding was not present at the start
-          #     of compare_duration, but was present at read_time.
+          #   * "CHANGED":   indicates that the finding was present and matched the given
+          #     filter at the start of compare_duration, but changed its
+          #     state at read_time.
+          #   * "UNCHANGED": indicates that the finding was present and matched the given
+          #     filter at the start of compare_duration and did not change
+          #     state at read_time.
+          #   * "ADDED":     indicates that the finding did not match the given filter or
+          #     was not present at the start of compare_duration, but was
+          #     present at read_time.
+          #   * "REMOVED":   indicates that the finding was present and matched the
+          #     filter at the start of compare_duration, but did not match
+          #     the filter at read_time.
           #
           #   If compare_duration is not specified, then the only possible state_change
           #   is "UNUSED", which will be the state_change set for all findings present at
@@ -1342,8 +1545,8 @@ module Google
           #   A hash of the same form as `Google::Protobuf::Duration`
           #   can also be provided.
           # @param field_mask [Google::Protobuf::FieldMask | Hash]
-          #   Optional. A field mask to specify the Finding fields to be listed in the response.
-          #   An empty field mask will list all fields.
+          #   Optional. A field mask to specify the Finding fields to be listed in the
+          #   response. An empty field mask will list all fields.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
           #   can also be provided.
           # @param page_size [Integer]
@@ -1406,11 +1609,66 @@ module Google
             @list_findings.call(req, options, &block)
           end
 
+          # Lists notification configs.
+          #
+          # @param parent [String]
+          #   Required. Name of the organization to list notification configs.
+          #   Its format is "organizations/[organization_id]".
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::SecurityCenter::V1::NotificationConfig>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::SecurityCenter::V1::NotificationConfig>]
+          #   An enumerable of Google::Cloud::SecurityCenter::V1::NotificationConfig instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/security_center"
+          #
+          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
+          #   formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
+          #
+          #   # Iterate over all results.
+          #   security_center_client.list_notification_configs(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   security_center_client.list_notification_configs(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_notification_configs \
+              parent,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest)
+            @list_notification_configs.call(req, options, &block)
+          end
+
           # Lists all sources belonging to an organization.
           #
           # @param parent [String]
-          #   Required. Resource name of the parent of sources to list. Its format should be
-          #   "organizations/[organization_id]".
+          #   Required. Resource name of the parent of sources to list. Its format should
+          #   be "organizations/[organization_id]".
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -1469,8 +1727,8 @@ module Google
           # error.
           #
           # @param parent [String]
-          #   Required. Name of the organization to run asset discovery for. Its format is
-          #   "organizations/[organization_id]".
+          #   Required. Name of the organization to run asset discovery for. Its format
+          #   is "organizations/[organization_id]".
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1625,8 +1883,8 @@ module Google
           # finding creation to succeed.
           #
           # @param finding [Google::Cloud::SecurityCenter::V1::Finding | Hash]
-          #   Required. The finding resource to update or create if it does not already exist.
-          #   parent, security_marks, and update_time will be ignored.
+          #   Required. The finding resource to update or create if it does not already
+          #   exist. parent, security_marks, and update_time will be ignored.
           #
           #   In the case of creation, the finding id portion of the name must be
           #   alphanumeric and less than or equal to 32 characters and greater than 0
@@ -1671,6 +1929,48 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::UpdateFindingRequest)
             @update_finding.call(req, options, &block)
+          end
+
+          # Updates a notification config.
+          #
+          # @param notification_config [Google::Cloud::SecurityCenter::V1::NotificationConfig | Hash]
+          #   Required. The notification config to update.
+          #   A hash of the same form as `Google::Cloud::SecurityCenter::V1::NotificationConfig`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   The FieldMask to use when updating the notification config.
+          #
+          #   If empty all mutable fields will be updated.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::SecurityCenter::V1::NotificationConfig]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::SecurityCenter::V1::NotificationConfig]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/security_center"
+          #
+          #   security_center_client = Google::Cloud::SecurityCenter.new(version: :v1)
+          #
+          #   # TODO: Initialize `notification_config`:
+          #   notification_config = {}
+          #   response = security_center_client.update_notification_config(notification_config)
+
+          def update_notification_config \
+              notification_config,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              notification_config: notification_config,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest)
+            @update_notification_config.call(req, options, &block)
           end
 
           # Updates an organization's settings.

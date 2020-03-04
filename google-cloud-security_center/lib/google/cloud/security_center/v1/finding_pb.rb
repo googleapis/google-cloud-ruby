@@ -4,12 +4,12 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/security_center/v1/security_marks_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.securitycenter.v1.Finding" do
     optional :name, :string, 1

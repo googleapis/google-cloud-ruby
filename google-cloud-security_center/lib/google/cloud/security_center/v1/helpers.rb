@@ -44,6 +44,14 @@ module Google
             self.class.finding_security_marks_path organization, source, finding
           end
           
+          # Alias for Google::Cloud::SecurityCenter::V1::SecurityCenterClient.notification_config_path.
+          # @param organization [String]
+          # @param notification_config [String]
+          # @return [String]
+          def notification_config_path organization, notification_config
+            self.class.notification_config_path organization, notification_config
+          end
+          
           # Alias for Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path.
           # @param organization [String]
           # @return [String]
@@ -64,6 +72,14 @@ module Google
           # @return [String]
           def source_path organization, source
             self.class.source_path organization, source
+          end
+          
+          # Alias for Google::Cloud::SecurityCenter::V1::SecurityCenterClient.topic_path.
+          # @param project [String]
+          # @param topic [String]
+          # @return [String]
+          def topic_path project, topic
+            self.class.topic_path project, topic
           end
         end
       end

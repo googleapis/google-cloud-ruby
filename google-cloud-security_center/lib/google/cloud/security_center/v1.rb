@@ -15,6 +15,7 @@
 
 require "google/cloud/security_center/v1/security_center_client"
 require "google/cloud/security_center/v1/helpers"
+require "google/cloud/security_center/v1/notification_message_pb"
 require "google/cloud/security_center/v1/run_asset_discovery_response_pb"
 
 module Google
