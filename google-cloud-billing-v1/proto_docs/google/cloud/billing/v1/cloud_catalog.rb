@@ -198,9 +198,9 @@ module Google
 
         # Represents the aggregation level and interval for pricing of a single SKU.
         # @!attribute [rw] aggregation_level
-        #   @return [ENUM(AggregationLevel)]
+        #   @return [Google::Cloud::Billing::V1::AggregationInfo::AggregationLevel]
         # @!attribute [rw] aggregation_interval
-        #   @return [ENUM(AggregationInterval)]
+        #   @return [Google::Cloud::Billing::V1::AggregationInfo::AggregationInterval]
         # @!attribute [rw] aggregation_count
         #   @return [Integer]
         #     The number of intervals to aggregate over.
