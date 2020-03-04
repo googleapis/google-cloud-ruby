@@ -51,7 +51,7 @@ module Google
     #
     # The JSON representation for `Value` is JSON value.
     # @!attribute [rw] null_value
-    #   @return [ENUM(NullValue)]
+    #   @return [Google::Protobuf::NullValue]
     #     Represents a null value.
     # @!attribute [rw] number_value
     #   @return [Float]
