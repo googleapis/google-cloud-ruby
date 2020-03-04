@@ -122,7 +122,7 @@ module Google
       # One delta entry for Binding. Each individual change (only one member in each
       # entry) to a binding will be a separate entry.
       # @!attribute [rw] action
-      #   @return [ENUM(Action)]
+      #   @return [Google::Iam::V1::BindingDelta::Action]
       #     The action that was performed on a Binding.
       #     Required
       # @!attribute [rw] role
