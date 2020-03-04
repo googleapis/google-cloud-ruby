@@ -11,6 +11,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/security_center/v1/asset_pb'
 require 'google/cloud/security_center/v1/finding_pb'
+require 'google/cloud/security_center/v1/notification_config_pb'
 require 'google/cloud/security_center/v1/organization_settings_pb'
 require 'google/cloud/security_center/v1/security_marks_pb'
 require 'google/cloud/security_center/v1/source_pb'
@@ -28,9 +29,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :finding_id, :string, 2
     optional :finding, :message, 3, "google.cloud.securitycenter.v1.Finding"
   end
+  add_message "google.cloud.securitycenter.v1.CreateNotificationConfigRequest" do
+    optional :parent, :string, 1
+    optional :config_id, :string, 2
+    optional :notification_config, :message, 3, "google.cloud.securitycenter.v1.NotificationConfig"
+  end
   add_message "google.cloud.securitycenter.v1.CreateSourceRequest" do
     optional :parent, :string, 1
     optional :source, :message, 2, "google.cloud.securitycenter.v1.Source"
+  end
+  add_message "google.cloud.securitycenter.v1.DeleteNotificationConfigRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.cloud.securitycenter.v1.GetNotificationConfigRequest" do
+    optional :name, :string, 1
   end
   add_message "google.cloud.securitycenter.v1.GetOrganizationSettingsRequest" do
     optional :name, :string, 1
@@ -71,6 +83,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.securitycenter.v1.GroupResult" do
     map :properties, :string, :message, 1, "google.protobuf.Value"
     optional :count, :int64, 2
+  end
+  add_message "google.cloud.securitycenter.v1.ListNotificationConfigsRequest" do
+    optional :parent, :string, 1
+    optional :page_token, :string, 2
+    optional :page_size, :int32, 3
+  end
+  add_message "google.cloud.securitycenter.v1.ListNotificationConfigsResponse" do
+    repeated :notification_configs, :message, 1, "google.cloud.securitycenter.v1.NotificationConfig"
+    optional :next_page_token, :string, 2
   end
   add_message "google.cloud.securitycenter.v1.ListSourcesRequest" do
     optional :parent, :string, 1
@@ -154,6 +175,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :finding, :message, 1, "google.cloud.securitycenter.v1.Finding"
     optional :update_mask, :message, 2, "google.protobuf.FieldMask"
   end
+  add_message "google.cloud.securitycenter.v1.UpdateNotificationConfigRequest" do
+    optional :notification_config, :message, 1, "google.cloud.securitycenter.v1.NotificationConfig"
+    optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+  end
   add_message "google.cloud.securitycenter.v1.UpdateOrganizationSettingsRequest" do
     optional :organization_settings, :message, 1, "google.cloud.securitycenter.v1.OrganizationSettings"
     optional :update_mask, :message, 2, "google.protobuf.FieldMask"
@@ -171,7 +196,10 @@ end
 
 module Google::Cloud::SecurityCenter::V1
   CreateFindingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CreateFindingRequest").msgclass
+  CreateNotificationConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CreateNotificationConfigRequest").msgclass
   CreateSourceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CreateSourceRequest").msgclass
+  DeleteNotificationConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.DeleteNotificationConfigRequest").msgclass
+  GetNotificationConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GetNotificationConfigRequest").msgclass
   GetOrganizationSettingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GetOrganizationSettingsRequest").msgclass
   GetSourceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GetSourceRequest").msgclass
   GroupAssetsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GroupAssetsRequest").msgclass
@@ -179,6 +207,8 @@ module Google::Cloud::SecurityCenter::V1
   GroupFindingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GroupFindingsRequest").msgclass
   GroupFindingsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GroupFindingsResponse").msgclass
   GroupResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.GroupResult").msgclass
+  ListNotificationConfigsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListNotificationConfigsRequest").msgclass
+  ListNotificationConfigsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListNotificationConfigsResponse").msgclass
   ListSourcesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListSourcesRequest").msgclass
   ListSourcesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListSourcesResponse").msgclass
   ListAssetsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ListAssetsRequest").msgclass
@@ -193,6 +223,7 @@ module Google::Cloud::SecurityCenter::V1
   SetFindingStateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.SetFindingStateRequest").msgclass
   RunAssetDiscoveryRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.RunAssetDiscoveryRequest").msgclass
   UpdateFindingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateFindingRequest").msgclass
+  UpdateNotificationConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateNotificationConfigRequest").msgclass
   UpdateOrganizationSettingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateOrganizationSettingsRequest").msgclass
   UpdateSourceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateSourceRequest").msgclass
   UpdateSecurityMarksRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.UpdateSecurityMarksRequest").msgclass

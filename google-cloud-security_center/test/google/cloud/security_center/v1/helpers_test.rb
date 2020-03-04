@@ -77,6 +77,19 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
     end
   end
 
+  describe "the notification_config_path instance method" do
+    it "correctly calls Google::Cloud::SecurityCenter::V1::SecurityCenterClient.notification_config_path" do
+      Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::SecurityCenter.new version: :v1
+        parameters = client.method("notification_config_path").parameters.map { |arg| arg.last.to_s }
+        assert_equal(
+          client.notification_config_path(*parameters),
+          Google::Cloud::SecurityCenter::V1::SecurityCenterClient.notification_config_path(*parameters)
+        )
+      end
+    end
+  end
+
   describe "the organization_path instance method" do
     it "correctly calls Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path" do
       Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
@@ -111,6 +124,19 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
         assert_equal(
           client.source_path(*parameters),
           Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path(*parameters)
+        )
+      end
+    end
+  end
+
+  describe "the topic_path instance method" do
+    it "correctly calls Google::Cloud::SecurityCenter::V1::SecurityCenterClient.topic_path" do
+      Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::SecurityCenter.new version: :v1
+        parameters = client.method("topic_path").parameters.map { |arg| arg.last.to_s }
+        assert_equal(
+          client.topic_path(*parameters),
+          Google::Cloud::SecurityCenter::V1::SecurityCenterClient.topic_path(*parameters)
         )
       end
     end

@@ -29,9 +29,27 @@ module Google
         #     greater than 0 characters in length.
         # @!attribute [rw] finding
         #   @return [Google::Cloud::SecurityCenter::V1::Finding]
-        #     Required. The Finding being created. The name and security_marks will be ignored as
-        #     they are both output only fields on this resource.
+        #     Required. The Finding being created. The name and security_marks will be
+        #     ignored as they are both output only fields on this resource.
         class CreateFindingRequest; end
+
+        # Request message for creating a notification config.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Required. Resource name of the new notification config's parent. Its format
+        #     is "organizations/[organization_id]".
+        # @!attribute [rw] config_id
+        #   @return [String]
+        #     Required.
+        #     Unique identifier provided by the client within the parent scope.
+        #     It must be between 1 and 128 characters, and contains alphanumeric
+        #     characters, underscores or hyphens only.
+        # @!attribute [rw] notification_config
+        #   @return [Google::Cloud::SecurityCenter::V1::NotificationConfig]
+        #     Required. The notification config being created. The name and the service
+        #     account will be ignored as they are both output only fields on this
+        #     resource.
+        class CreateNotificationConfigRequest; end
 
         # Request message for creating a source.
         # @!attribute [rw] parent
@@ -40,15 +58,29 @@ module Google
         #     "organizations/[organization_id]".
         # @!attribute [rw] source
         #   @return [Google::Cloud::SecurityCenter::V1::Source]
-        #     Required. The Source being created, only the display_name and description will be
-        #     used. All other fields will be ignored.
+        #     Required. The Source being created, only the display_name and description
+        #     will be used. All other fields will be ignored.
         class CreateSourceRequest; end
+
+        # Request message for deleting a notification config.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. Name of the notification config to delete. Its format is
+        #     "organizations/[organization_id]/notificationConfigs/[config_id]".
+        class DeleteNotificationConfigRequest; end
+
+        # Request message for getting a notification config.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. Name of the notification config to get. Its format is
+        #     "organizations/[organization_id]/notificationConfigs/[config_id]".
+        class GetNotificationConfigRequest; end
 
         # Request message for getting organization settings.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. Name of the organization to get organization settings for. Its format is
-        #     "organizations/[organization_id]/organizationSettings".
+        #     Required. Name of the organization to get organization settings for. Its
+        #     format is "organizations/[organization_id]/organizationSettings".
         class GetOrganizationSettingsRequest; end
 
         # Request message for getting a source.
@@ -123,9 +155,9 @@ module Google
         #     For example, `resource_properties.size = 100` is a valid filter string.
         # @!attribute [rw] group_by
         #   @return [String]
-        #     Required. Expression that defines what assets fields to use for grouping. The string
-        #     value should follow SQL syntax: comma separated list of fields. For
-        #     example:
+        #     Required. Expression that defines what assets fields to use for grouping.
+        #     The string value should follow SQL syntax: comma separated list of fields.
+        #     For example:
         #     "security_center_properties.resource_project,security_center_properties.project".
         #
         #     The following fields are supported when compare_duration is not set:
@@ -259,9 +291,9 @@ module Google
         #     For example, `source_properties.size = 100` is a valid filter string.
         # @!attribute [rw] group_by
         #   @return [String]
-        #     Required. Expression that defines what assets fields to use for grouping (including
-        #     `state_change`). The string value should follow SQL syntax: comma separated
-        #     list of fields. For example: "parent,resource_name".
+        #     Required. Expression that defines what assets fields to use for grouping
+        #     (including `state_change`). The string value should follow SQL syntax:
+        #     comma separated list of fields. For example: "parent,resource_name".
         #
         #     The following fields are supported:
         #
@@ -294,12 +326,18 @@ module Google
         #
         #     Possible "state_change" values when compare_duration is specified:
         #
-        #     * "CHANGED":   indicates that the finding was present at the start of
-        #       compare_duration, but changed its state at read_time.
-        #     * "UNCHANGED": indicates that the finding was present at the start of
-        #       compare_duration and did not change state at read_time.
-        #     * "ADDED":     indicates that the finding was not present at the start
-        #       of compare_duration, but was present at read_time.
+        #     * "CHANGED":   indicates that the finding was present and matched the given
+        #       filter at the start of compare_duration, but changed its
+        #       state at read_time.
+        #     * "UNCHANGED": indicates that the finding was present and matched the given
+        #       filter at the start of compare_duration and did not change
+        #       state at read_time.
+        #     * "ADDED":     indicates that the finding did not match the given filter or
+        #       was not present at the start of compare_duration, but was
+        #       present at read_time.
+        #     * "REMOVED":   indicates that the finding was present and matched the
+        #       filter at the start of compare_duration, but did not match
+        #       the filter at read_time.
         #
         #     If compare_duration is not specified, then the only possible state_change
         #     is "UNUSED",  which will be the state_change set for all findings present
@@ -345,11 +383,37 @@ module Google
         #     Total count of resources for the given properties.
         class GroupResult; end
 
+        # Request message for listing notification configs.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Required. Name of the organization to list notification configs.
+        #     Its format is "organizations/[organization_id]".
+        # @!attribute [rw] page_token
+        #   @return [String]
+        #     The value returned by the last `ListNotificationConfigsResponse`; indicates
+        #     that this is a continuation of a prior `ListNotificationConfigs` call, and
+        #     that the system should return the next page of data.
+        # @!attribute [rw] page_size
+        #   @return [Integer]
+        #     The maximum number of results to return in a single response. Default is
+        #     10, minimum is 1, maximum is 1000.
+        class ListNotificationConfigsRequest; end
+
+        # Response message for listing notification configs.
+        # @!attribute [rw] notification_configs
+        #   @return [Array<Google::Cloud::SecurityCenter::V1::NotificationConfig>]
+        #     Notification configs belonging to the requested parent.
+        # @!attribute [rw] next_page_token
+        #   @return [String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results.
+        class ListNotificationConfigsResponse; end
+
         # Request message for listing sources.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required. Resource name of the parent of sources to list. Its format should be
-        #     "organizations/[organization_id]".
+        #     Required. Resource name of the parent of sources to list. Its format should
+        #     be "organizations/[organization_id]".
         # @!attribute [rw] page_token
         #   @return [String]
         #     The value returned by the last `ListSourcesResponse`; indicates
@@ -491,9 +555,8 @@ module Google
         #     read_time.
         # @!attribute [rw] field_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Optional. A field mask to specify the ListAssetsResult fields to be listed in the
-        #     response.
-        #     An empty field mask will list all fields.
+        #     Optional. A field mask to specify the ListAssetsResult fields to be listed
+        #     in the response. An empty field mask will list all fields.
         # @!attribute [rw] page_token
         #   @return [String]
         #     The value returned by the last `ListAssetsResponse`; indicates
@@ -644,20 +707,26 @@ module Google
         #
         #     Possible "state_change" values when compare_duration is specified:
         #
-        #     * "CHANGED":   indicates that the finding was present at the start of
-        #       compare_duration, but changed its state at read_time.
-        #     * "UNCHANGED": indicates that the finding was present at the start of
-        #       compare_duration and did not change state at read_time.
-        #     * "ADDED":     indicates that the finding was not present at the start
-        #       of compare_duration, but was present at read_time.
+        #     * "CHANGED":   indicates that the finding was present and matched the given
+        #       filter at the start of compare_duration, but changed its
+        #       state at read_time.
+        #     * "UNCHANGED": indicates that the finding was present and matched the given
+        #       filter at the start of compare_duration and did not change
+        #       state at read_time.
+        #     * "ADDED":     indicates that the finding did not match the given filter or
+        #       was not present at the start of compare_duration, but was
+        #       present at read_time.
+        #     * "REMOVED":   indicates that the finding was present and matched the
+        #       filter at the start of compare_duration, but did not match
+        #       the filter at read_time.
         #
         #     If compare_duration is not specified, then the only possible state_change
         #     is "UNUSED", which will be the state_change set for all findings present at
         #     read_time.
         # @!attribute [rw] field_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Optional. A field mask to specify the Finding fields to be listed in the response.
-        #     An empty field mask will list all fields.
+        #     Optional. A field mask to specify the Finding fields to be listed in the
+        #     response. An empty field mask will list all fields.
         # @!attribute [rw] page_token
         #   @return [String]
         #     The value returned by the last `ListFindingsResponse`; indicates
@@ -763,15 +832,15 @@ module Google
         # Request message for running asset discovery for an organization.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required. Name of the organization to run asset discovery for. Its format is
-        #     "organizations/[organization_id]".
+        #     Required. Name of the organization to run asset discovery for. Its format
+        #     is "organizations/[organization_id]".
         class RunAssetDiscoveryRequest; end
 
         # Request message for updating or creating a finding.
         # @!attribute [rw] finding
         #   @return [Google::Cloud::SecurityCenter::V1::Finding]
-        #     Required. The finding resource to update or create if it does not already exist.
-        #     parent, security_marks, and update_time will be ignored.
+        #     Required. The finding resource to update or create if it does not already
+        #     exist. parent, security_marks, and update_time will be ignored.
         #
         #     In the case of creation, the finding id portion of the name must be
         #     alphanumeric and less than or equal to 32 characters and greater than 0
@@ -786,6 +855,17 @@ module Google
         #     be added/updated by using "source_properties.<property key>" in the field
         #     mask.
         class UpdateFindingRequest; end
+
+        # Request message for updating a notification config.
+        # @!attribute [rw] notification_config
+        #   @return [Google::Cloud::SecurityCenter::V1::NotificationConfig]
+        #     Required. The notification config to update.
+        # @!attribute [rw] update_mask
+        #   @return [Google::Protobuf::FieldMask]
+        #     The FieldMask to use when updating the notification config.
+        #
+        #     If empty all mutable fields will be updated.
+        class UpdateNotificationConfigRequest; end
 
         # Request message for updating an organization's settings.
         # @!attribute [rw] organization_settings

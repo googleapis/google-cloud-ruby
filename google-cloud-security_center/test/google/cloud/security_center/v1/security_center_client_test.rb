@@ -571,6 +571,259 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
     end
   end
 
+  describe 'create_notification_config' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#create_notification_config."
+
+    it 'invokes create_notification_config without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
+      config_id = ''
+      notification_config = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      description = "description-1724546052"
+      pubsub_topic = "pubsubTopic-338126829"
+      service_account = "serviceAccount-1948028253"
+      expected_response = {
+        name: name,
+        description: description,
+        pubsub_topic: pubsub_topic,
+        service_account: service_account
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::SecurityCenter::V1::NotificationConfig)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(config_id, request.config_id)
+        assert_equal(Google::Gax::to_proto(notification_config, Google::Cloud::SecurityCenter::V1::NotificationConfig), request.notification_config)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_notification_config, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("create_notification_config")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          response = client.create_notification_config(
+            formatted_parent,
+            config_id,
+            notification_config
+          )
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_notification_config(
+            formatted_parent,
+            config_id,
+            notification_config
+          ) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes create_notification_config with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
+      config_id = ''
+      notification_config = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::CreateNotificationConfigRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(config_id, request.config_id)
+        assert_equal(Google::Gax::to_proto(notification_config, Google::Cloud::SecurityCenter::V1::NotificationConfig), request.notification_config)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_notification_config, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("create_notification_config")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.create_notification_config(
+              formatted_parent,
+              config_id,
+              notification_config
+            )
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'delete_notification_config' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#delete_notification_config."
+
+    it 'invokes delete_notification_config without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.notification_config_path("[ORGANIZATION]", "[NOTIFICATION_CONFIG]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_notification_config, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("delete_notification_config")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          response = client.delete_notification_config(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_notification_config(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_notification_config with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.notification_config_path("[ORGANIZATION]", "[NOTIFICATION_CONFIG]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_notification_config, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("delete_notification_config")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.delete_notification_config(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_notification_config' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#get_notification_config."
+
+    it 'invokes get_notification_config without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.notification_config_path("[ORGANIZATION]", "[NOTIFICATION_CONFIG]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      description = "description-1724546052"
+      pubsub_topic = "pubsubTopic-338126829"
+      service_account = "serviceAccount-1948028253"
+      expected_response = {
+        name: name_2,
+        description: description,
+        pubsub_topic: pubsub_topic,
+        service_account: service_account
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::SecurityCenter::V1::NotificationConfig)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_notification_config, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("get_notification_config")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          response = client.get_notification_config(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_notification_config(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_notification_config with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.notification_config_path("[ORGANIZATION]", "[NOTIFICATION_CONFIG]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::GetNotificationConfigRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_notification_config, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("get_notification_config")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.get_notification_config(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'get_organization_settings' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#get_organization_settings."
 
@@ -871,6 +1124,78 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_findings(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_notification_configs' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#list_notification_configs."
+
+    it 'invokes list_notification_configs without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
+
+      # Create expected grpc response
+      next_page_token = ""
+      notification_configs_element = {}
+      notification_configs = [notification_configs_element]
+      expected_response = { next_page_token: next_page_token, notification_configs: notification_configs }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::SecurityCenter::V1::ListNotificationConfigsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_notification_configs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("list_notification_configs")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          response = client.list_notification_configs(formatted_parent)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.notification_configs.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes list_notification_configs with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::SecurityCenter::V1::SecurityCenterClient.organization_path("[ORGANIZATION]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::ListNotificationConfigsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_notification_configs, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("list_notification_configs")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.list_notification_configs(formatted_parent)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1322,6 +1647,88 @@ describe Google::Cloud::SecurityCenter::V1::SecurityCenterClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.update_finding(finding)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'update_notification_config' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::SecurityCenter::V1::SecurityCenterClient#update_notification_config."
+
+    it 'invokes update_notification_config without error' do
+      # Create request parameters
+      notification_config = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      description = "description-1724546052"
+      pubsub_topic = "pubsubTopic-338126829"
+      service_account = "serviceAccount-1948028253"
+      expected_response = {
+        name: name,
+        description: description,
+        pubsub_topic: pubsub_topic,
+        service_account: service_account
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::SecurityCenter::V1::NotificationConfig)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest, request)
+        assert_equal(Google::Gax::to_proto(notification_config, Google::Cloud::SecurityCenter::V1::NotificationConfig), request.notification_config)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_notification_config, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("update_notification_config")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          response = client.update_notification_config(notification_config)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_notification_config(notification_config) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes update_notification_config with error' do
+      # Create request parameters
+      notification_config = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest, request)
+        assert_equal(Google::Gax::to_proto(notification_config, Google::Cloud::SecurityCenter::V1::NotificationConfig), request.notification_config)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_notification_config, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockSecurityCenterCredentials_v1.new("update_notification_config")
+
+      Google::Cloud::SecurityCenter::V1::SecurityCenter::Stub.stub(:new, mock_stub) do
+        Google::Cloud::SecurityCenter::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::SecurityCenter.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.update_notification_config(notification_config)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
