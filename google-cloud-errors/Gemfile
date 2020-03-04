@@ -5,7 +5,7 @@ gemspec
 gem "google-api-client", "~> 0.36"
 gem "google-gax", "~> 1.8"
 
-gem "rake", "~> 12.3"
+gem "rake"
 
 # Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
 # See https://github.com/googleapis/google-cloud-ruby/issues/4110

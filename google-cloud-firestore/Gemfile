@@ -6,7 +6,7 @@ gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-cloud-errors", path: "../google-cloud-errors"
 
-gem "rake", "~> 12.3"
+gem "rake"
 
 gem "stackprof" unless Gem.win_platform?
 
