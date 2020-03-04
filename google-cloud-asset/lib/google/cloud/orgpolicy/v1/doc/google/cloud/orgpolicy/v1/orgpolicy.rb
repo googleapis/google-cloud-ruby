@@ -100,7 +100,7 @@ module Google
           #     List of values denied at this resource. Can only be set if `all_values`
           #     is set to `ALL_VALUES_UNSPECIFIED`.
           # @!attribute [rw] all_values
-          #   @return [ENUM(AllValues)]
+          #   @return [Google::Cloud::OrgPolicy::V1::Policy::ListPolicy::AllValues]
           #     The policy all_values state.
           # @!attribute [rw] suggested_value
           #   @return [String]
