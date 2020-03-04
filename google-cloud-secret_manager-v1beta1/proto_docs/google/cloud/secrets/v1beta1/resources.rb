@@ -81,7 +81,7 @@ module Google
         #     Only present if [state][google.cloud.secrets.v1beta1.SecretVersion.state] is
         #     [DESTROYED][google.cloud.secrets.v1beta1.SecretVersion.State.DESTROYED].
         # @!attribute [r] state
-        #   @return [ENUM(State)]
+        #   @return [Google::Cloud::SecretManager::V1beta1::SecretVersion::State]
         #     Output only. The current state of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
         class SecretVersion
           include Google::Protobuf::MessageExts
