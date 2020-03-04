@@ -4,15 +4,16 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/cloud/automl/v1beta1/classification_pb'
 require 'google/cloud/automl/v1beta1/column_spec_pb'
 require 'google/cloud/automl/v1beta1/data_items_pb'
 require 'google/cloud/automl/v1beta1/data_stats_pb'
 require 'google/cloud/automl/v1beta1/ranges_pb'
+require 'google/cloud/automl/v1beta1/regression_pb'
 require 'google/cloud/automl/v1beta1/temporal_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.automl.v1beta1.TablesDatasetMetadata" do
     optional :primary_table_spec_id, :string, 1
@@ -40,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :prediction_interval, :message, 4, "google.cloud.automl.v1beta1.DoubleRange"
     optional :value, :message, 2, "google.protobuf.Value"
     repeated :tables_model_column_info, :message, 3, "google.cloud.automl.v1beta1.TablesModelColumnInfo"
+    optional :baseline_score, :float, 5
   end
   add_message "google.cloud.automl.v1beta1.TablesModelColumnInfo" do
     optional :column_spec_name, :string, 1

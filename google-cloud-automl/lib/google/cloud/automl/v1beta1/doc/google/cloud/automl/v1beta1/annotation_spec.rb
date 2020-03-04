@@ -26,10 +26,8 @@ module Google
         #     'projects/\\{project_id}/locations/\\{location_id}/datasets/\\{dataset_id}/annotationSpecs/\\{annotation_spec_id}'
         # @!attribute [rw] display_name
         #   @return [String]
-        #     Required.
-        #     The name of the annotation spec to show in the interface. The name can be
+        #     Required. The name of the annotation spec to show in the interface. The name can be
         #     up to 32 characters long and must match the regexp `[a-zA-Z0-9_]+`.
-        #     (_), and ASCII digits 0-9.
         # @!attribute [rw] example_count
         #   @return [Integer]
         #     Output only. The number of examples in the parent dataset

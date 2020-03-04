@@ -39,11 +39,9 @@ module Google
         #     characters long.
         # @!attribute [rw] mime_type
         #   @return [String]
-        #     Optional. The format of
-        #     {Google::Cloud::AutoML::V1beta1::TextSnippet#content content}. Currently the
-        #     only two allowed values are "text/html" and "text/plain". If left blank,
-        #     the format is automatically determined from the type of the uploaded
-        #     {Google::Cloud::AutoML::V1beta1::TextSnippet#content content}.
+        #     Optional. The format of {Google::Cloud::AutoML::V1beta1::TextSnippet#content content}. Currently the only two allowed
+        #     values are "text/html" and "text/plain". If left blank, the format is
+        #     automatically determined from the type of the uploaded {Google::Cloud::AutoML::V1beta1::TextSnippet#content content}.
         # @!attribute [rw] content_uri
         #   @return [String]
         #     Output only. HTTP URI where you can download the content.
@@ -94,23 +92,19 @@ module Google
         #   @return [Integer]
         #     Number of pages in the document.
         class Document
-          # Describes the layout information of a
-          # {Google::Cloud::AutoML::V1beta1::Document::Layout#text_segment text_segment} in
-          # the document.
+          # Describes the layout information of a {Google::Cloud::AutoML::V1beta1::Document::Layout#text_segment text_segment} in the document.
           # @!attribute [rw] text_segment
           #   @return [Google::Cloud::AutoML::V1beta1::TextSegment]
           #     Text Segment that represents a segment in
           #     {Google::Cloud::AutoML::V1beta1::Document#document_text document_text}.
           # @!attribute [rw] page_number
           #   @return [Integer]
-          #     Page number of the
-          #     {Google::Cloud::AutoML::V1beta1::Document::Layout#text_segment text_segment}
-          #     in the original document, starts from 1.
+          #     Page number of the {Google::Cloud::AutoML::V1beta1::Document::Layout#text_segment text_segment} in the original document, starts
+          #     from 1.
           # @!attribute [rw] bounding_poly
           #   @return [Google::Cloud::AutoML::V1beta1::BoundingPoly]
-          #     The position of the
-          #     {Google::Cloud::AutoML::V1beta1::Document::Layout#text_segment text_segment}
-          #     in the page. Contains exactly 4
+          #     The position of the {Google::Cloud::AutoML::V1beta1::Document::Layout#text_segment text_segment} in the page.
+          #     Contains exactly 4
           #
           #     {Google::Cloud::AutoML::V1beta1::BoundingPoly#normalized_vertices normalized_vertices}
           #     and they are connected by edges in the order provided, which will
@@ -120,9 +114,7 @@ module Google
           #     Coordinates are based on top-left as point (0,0).
           # @!attribute [rw] text_segment_type
           #   @return [Google::Cloud::AutoML::V1beta1::Document::Layout::TextSegmentType]
-          #     The type of the
-          #     {Google::Cloud::AutoML::V1beta1::Document::Layout#text_segment text_segment}
-          #     in document.
+          #     The type of the {Google::Cloud::AutoML::V1beta1::Document::Layout#text_segment text_segment} in document.
           class Layout
             # The type of TextSegment in the context of the original document.
             module TextSegmentType

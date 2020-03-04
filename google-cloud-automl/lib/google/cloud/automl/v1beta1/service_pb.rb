@@ -5,6 +5,9 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/automl/v1beta1/annotation_payload_pb'
 require 'google/cloud/automl/v1beta1/annotation_spec_pb'
 require 'google/cloud/automl/v1beta1/column_spec_pb'
@@ -17,7 +20,6 @@ require 'google/cloud/automl/v1beta1/operations_pb'
 require 'google/cloud/automl/v1beta1/table_spec_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.automl.v1beta1.CreateDatasetRequest" do
     optional :parent, :string, 1

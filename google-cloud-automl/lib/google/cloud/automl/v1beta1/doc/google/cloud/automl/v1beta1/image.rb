@@ -54,38 +54,34 @@ module Google
         #       This is the default value.
         #     * `mobile-low-latency-1` - A model that, in addition to providing
         #       prediction via AutoML API, can also be exported (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
-        #       and used on a mobile or edge device with TensorFlow
-        #       afterwards. Expected to have low latency, but may have lower
-        #       prediction quality than other models.
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile or edge device
+        #       with TensorFlow afterwards. Expected to have low latency, but
+        #       may have lower prediction quality than other models.
         #     * `mobile-versatile-1` - A model that, in addition to providing
         #       prediction via AutoML API, can also be exported (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
-        #       and used on a mobile or edge device with TensorFlow
-        #       afterwards.
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile or edge device
+        #       with TensorFlow afterwards.
         #     * `mobile-high-accuracy-1` - A model that, in addition to providing
         #       prediction via AutoML API, can also be exported (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
-        #       and used on a mobile or edge device with TensorFlow
-        #       afterwards.  Expected to have a higher latency, but should
-        #       also have a higher prediction quality than other models.
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile or edge device
+        #       with TensorFlow afterwards.  Expected to have a higher
+        #       latency, but should also have a higher prediction quality
+        #       than other models.
         #     * `mobile-core-ml-low-latency-1` - A model that, in addition to providing
         #       prediction via AutoML API, can also be exported (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
-        #       and used on a mobile device with Core ML afterwards. Expected
-        #       to have low latency, but may have lower prediction quality
-        #       than other models.
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile device with Core
+        #       ML afterwards. Expected to have low latency, but may have
+        #       lower prediction quality than other models.
         #     * `mobile-core-ml-versatile-1` - A model that, in addition to providing
         #       prediction via AutoML API, can also be exported (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
-        #       and used on a mobile device with Core ML afterwards.
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile device with Core
+        #       ML afterwards.
         #     * `mobile-core-ml-high-accuracy-1` - A model that, in addition to
         #       providing prediction via AutoML API, can also be exported
-        #       (see
-        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel})
-        #       and used on a mobile device with Core ML afterwards. Expected
-        #       to have a higher latency, but should also have a higher
-        #       prediction quality than other models.
+        #       (see {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile device with
+        #       Core ML afterwards.  Expected to have a higher latency, but
+        #       should also have a higher prediction quality than other
+        #       models.
         # @!attribute [rw] node_qps
         #   @return [Float]
         #     Output only. An approximate number of online prediction QPS that can
@@ -108,6 +104,21 @@ module Google
         #     * `cloud-low-latency-1` -  A model to be used via prediction
         #       calls to AutoML API. Expected to have low latency, but may
         #       have lower prediction quality than other models.
+        #     * `mobile-low-latency-1` - A model that, in addition to providing
+        #       prediction via AutoML API, can also be exported (see
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile or edge device
+        #       with TensorFlow afterwards. Expected to have low latency, but
+        #       may have lower prediction quality than other models.
+        #     * `mobile-versatile-1` - A model that, in addition to providing
+        #       prediction via AutoML API, can also be exported (see
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile or edge device
+        #       with TensorFlow afterwards.
+        #     * `mobile-high-accuracy-1` - A model that, in addition to providing
+        #       prediction via AutoML API, can also be exported (see
+        #       {Google::Cloud::AutoML::V1beta1::AutoML::ExportModel AutoML::ExportModel}) and used on a mobile or edge device
+        #       with TensorFlow afterwards.  Expected to have a higher
+        #       latency, but should also have a higher prediction quality
+        #       than other models.
         # @!attribute [rw] node_count
         #   @return [Integer]
         #     Output only. The number of nodes this model is deployed on. A node is an

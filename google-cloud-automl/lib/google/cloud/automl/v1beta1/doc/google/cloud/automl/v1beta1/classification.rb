@@ -140,10 +140,7 @@ module Google
           #     for each example.
           # @!attribute [rw] f1_score_at1
           #   @return [Float]
-          #     Output only. The harmonic mean of
-          #     {Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics::ConfidenceMetricsEntry#recall_at1 recall_at1}
-          #     and
-          #     {Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics::ConfidenceMetricsEntry#precision_at1 precision_at1}.
+          #     Output only. The harmonic mean of {Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics::ConfidenceMetricsEntry#recall_at1 recall_at1} and {Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics::ConfidenceMetricsEntry#precision_at1 precision_at1}.
           # @!attribute [rw] true_positive_count
           #   @return [Integer]
           #     Output only. The number of model created labels that match a ground truth
@@ -193,9 +190,7 @@ module Google
             #     Output only. Value of the specific cell in the confusion matrix.
             #     The number of values each row has (i.e. the length of the row) is equal
             #     to the length of the `annotation_spec_id` field or, if that one is not
-            #     populated, length of the
-            #     {Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics::ConfusionMatrix#display_name display_name}
-            #     field.
+            #     populated, length of the {Google::Cloud::AutoML::V1beta1::ClassificationEvaluationMetrics::ConfusionMatrix#display_name display_name} field.
             class Row; end
           end
         end

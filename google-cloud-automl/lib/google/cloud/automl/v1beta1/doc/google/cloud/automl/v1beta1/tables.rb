@@ -228,6 +228,15 @@ module Google
         #
         #     {Google::Cloud::AutoML::V1beta1::TablesModelColumnInfo#column_display_name column_display_name}
         #     would be populated, then this whole field is not.
+        # @!attribute [rw] baseline_score
+        #   @return [Float]
+        #     Output only. Stores the prediction score for the baseline example, which
+        #     is defined as the example with all values set to their baseline values.
+        #     This is used as part of the Sampled Shapley explanation of the model's
+        #     prediction. This field is populated only when feature importance is
+        #     requested. For regression models, this holds the baseline prediction for
+        #     the baseline example. For classification models, this holds the baseline
+        #     prediction for the baseline example for the argmax class.
         class TablesAnnotation; end
 
         # An information specific to given column and Tables Model, in context

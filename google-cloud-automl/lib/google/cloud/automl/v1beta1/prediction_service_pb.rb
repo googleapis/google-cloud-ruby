@@ -6,6 +6,8 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
+require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/automl/v1beta1/annotation_payload_pb'
 require 'google/cloud/automl/v1beta1/data_items_pb'
 require 'google/cloud/automl/v1beta1/io_pb'

@@ -565,9 +565,9 @@ module Google
           # Creates a dataset.
           #
           # @param parent [String]
-          #   The resource name of the project to create the dataset for.
+          #   Required. The resource name of the project to create the dataset for.
           # @param dataset [Google::Cloud::AutoML::V1beta1::Dataset | Hash]
-          #   The dataset to create.
+          #   Required. The dataset to create.
           #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::Dataset`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -604,7 +604,7 @@ module Google
           # Updates a dataset.
           #
           # @param dataset [Google::Cloud::AutoML::V1beta1::Dataset | Hash]
-          #   The dataset which replaces the resource on the server.
+          #   Required. The dataset which replaces the resource on the server.
           #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::Dataset`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
@@ -644,7 +644,7 @@ module Google
           # Gets a dataset.
           #
           # @param name [String]
-          #   The resource name of the dataset to retrieve.
+          #   Required. The resource name of the dataset to retrieve.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -674,7 +674,7 @@ module Google
           # Lists datasets in a project.
           #
           # @param parent [String]
-          #   The resource name of the project from which to list datasets.
+          #   Required. The resource name of the project from which to list datasets.
           # @param filter [String]
           #   An expression for filtering the results of the request.
           #
@@ -742,7 +742,7 @@ module Google
           # {Google::Longrunning::Operation#metadata metadata} field.
           #
           # @param name [String]
-          #   The resource name of the dataset to delete.
+          #   Required. The resource name of the dataset to delete.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -956,9 +956,9 @@ module Google
           # a global evaluation, and one evaluation for each annotation spec.
           #
           # @param parent [String]
-          #   Resource name of the parent project where the model is being created.
+          #   Required. Resource name of the parent project where the model is being created.
           # @param model [Google::Cloud::AutoML::V1beta1::Model | Hash]
-          #   The model to create.
+          #   Required. The model to create.
           #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::Model`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
@@ -1025,7 +1025,7 @@ module Google
           # Gets a model.
           #
           # @param name [String]
-          #   Resource name of the model.
+          #   Required. Resource name of the model.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1055,7 +1055,7 @@ module Google
           # Lists models.
           #
           # @param parent [String]
-          #   Resource name of the project, from which to list the models.
+          #   Required. Resource name of the project, from which to list the models.
           # @param filter [String]
           #   An expression for filtering the results of the request.
           #
@@ -1125,7 +1125,7 @@ module Google
           # {Google::Longrunning::Operation#metadata metadata} field.
           #
           # @param name [String]
-          #   Resource name of the model being deleted.
+          #   Required. Resource name of the model being deleted.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1189,13 +1189,14 @@ module Google
           # {Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata#node_number node_number})
           #  will reset the deployment state without pausing the model's availability.
           #
-          # Only applicable for Text Classification, Image Object Detection and Tables; all other domains manage deployment automatically.
+          # Only applicable for Text Classification, Image Object Detection , Tables, and Image Segmentation; all other domains manage
+          # deployment automatically.
           #
           # Returns an empty response in the
           # {Google::Longrunning::Operation#response response} field when it completes.
           #
           # @param name [String]
-          #   Resource name of the model to deploy.
+          #   Required. Resource name of the model to deploy.
           # @param image_object_detection_model_deployment_metadata [Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata | Hash]
           #   Model deployment metadata specific to Image Object Detection.
           #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata`
@@ -1273,7 +1274,7 @@ module Google
           # {Google::Longrunning::Operation#response response} field when it completes.
           #
           # @param name [String]
-          #   Resource name of the model to undeploy.
+          #   Required. Resource name of the model to undeploy.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1333,7 +1334,7 @@ module Google
           # Gets a model evaluation.
           #
           # @param name [String]
-          #   Resource name for the model evaluation.
+          #   Required. Resource name for the model evaluation.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1522,7 +1523,7 @@ module Google
           # Lists model evaluations.
           #
           # @param parent [String]
-          #   Resource name of the model to list the model evaluations for.
+          #   Required. Resource name of the model to list the model evaluations for.
           #   If modelId is set as "-", this will list model evaluations from across all
           #   models of the parent location.
           # @param filter [String]
@@ -1592,7 +1593,7 @@ module Google
           # Gets an annotation spec.
           #
           # @param name [String]
-          #   The resource name of the annotation spec to retrieve.
+          #   Required. The resource name of the annotation spec to retrieve.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1622,7 +1623,7 @@ module Google
           # Gets a table spec.
           #
           # @param name [String]
-          #   The resource name of the table spec to retrieve.
+          #   Required. The resource name of the table spec to retrieve.
           # @param field_mask [Google::Protobuf::FieldMask | Hash]
           #   Mask specifying which fields to read.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -1658,7 +1659,7 @@ module Google
           # Lists table specs in a dataset.
           #
           # @param parent [String]
-          #   The resource name of the dataset to list table specs from.
+          #   Required. The resource name of the dataset to list table specs from.
           # @param field_mask [Google::Protobuf::FieldMask | Hash]
           #   Mask specifying which fields to read.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -1722,7 +1723,7 @@ module Google
           # Updates a table spec.
           #
           # @param table_spec [Google::Cloud::AutoML::V1beta1::TableSpec | Hash]
-          #   The table spec which replaces the resource on the server.
+          #   Required. The table spec which replaces the resource on the server.
           #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::TableSpec`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
@@ -1762,7 +1763,7 @@ module Google
           # Gets a column spec.
           #
           # @param name [String]
-          #   The resource name of the column spec to retrieve.
+          #   Required. The resource name of the column spec to retrieve.
           # @param field_mask [Google::Protobuf::FieldMask | Hash]
           #   Mask specifying which fields to read.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -1798,7 +1799,7 @@ module Google
           # Lists column specs in a table spec.
           #
           # @param parent [String]
-          #   The resource name of the table spec to list column specs from.
+          #   Required. The resource name of the table spec to list column specs from.
           # @param field_mask [Google::Protobuf::FieldMask | Hash]
           #   Mask specifying which fields to read.
           #   A hash of the same form as `Google::Protobuf::FieldMask`
@@ -1862,7 +1863,7 @@ module Google
           # Updates a column spec.
           #
           # @param column_spec [Google::Cloud::AutoML::V1beta1::ColumnSpec | Hash]
-          #   The column spec which replaces the resource on the server.
+          #   Required. The column spec which replaces the resource on the server.
           #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::ColumnSpec`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
