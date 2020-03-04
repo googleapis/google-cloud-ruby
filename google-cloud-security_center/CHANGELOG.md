@@ -1,5 +1,16 @@
 # Release History
 
+### 0.8.0 / 2020-03-04
+
+#### Features
+
+* Add NotificationConfig
+  * Add SecurityCenter#create_notification_config
+  * Add SecurityCenter#delete_notification_config
+  * Add SecurityCenter#get_notification_config
+  * Add SecurityCenter#list_notification_configs
+  * Add SecurityCenter#update_notification_config
+
 ### 0.7.0 / 2020-03-02
 
 #### ⚠ BREAKING CHANGES
