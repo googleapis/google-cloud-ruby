@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2020-03-04
+
+#### Features
+
+* Add TablesAnnotation#baseline_score
+
 ### 0.5.1 / 2020-01-22
 
 #### Documentation
