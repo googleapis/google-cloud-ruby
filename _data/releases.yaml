@@ -645,6 +645,7 @@ google-cloud-secret_manager-v1beta1:
 - v0.2.0
 - v0.1.0
 google-cloud-security_center:
+- v0.8.0
 - v0.7.0
 - v0.6.0
 - v0.5.1
