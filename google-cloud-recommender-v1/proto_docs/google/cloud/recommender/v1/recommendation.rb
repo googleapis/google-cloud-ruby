@@ -216,7 +216,7 @@ module Google
 
         # Contains the impact a recommendation can have for a given category.
         # @!attribute [rw] category
-        #   @return [ENUM(Category)]
+        #   @return [Google::Cloud::Recommender::V1::Impact::Category]
         #     Category that is being targeted.
         # @!attribute [rw] cost_projection
         #   @return [Google::Cloud::Recommender::V1::CostProjection]
@@ -246,7 +246,7 @@ module Google
 
         # Information for state. Contains state and metadata.
         # @!attribute [rw] state
-        #   @return [ENUM(State)]
+        #   @return [Google::Cloud::Recommender::V1::RecommendationStateInfo::State]
         #     The state of the recommendation, Eg ACTIVE, SUCCEEDED, FAILED.
         # @!attribute [rw] state_metadata
         #   @return [Google::Protobuf::Map{String => String}]

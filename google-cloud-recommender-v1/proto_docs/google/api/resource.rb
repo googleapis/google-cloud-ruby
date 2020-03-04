@@ -165,7 +165,7 @@ module Google
     #     Optional. The field on the resource that designates the resource name
     #     field. If omitted, this is assumed to be "name".
     # @!attribute [rw] history
-    #   @return [ENUM(History)]
+    #   @return [Google::Api::ResourceDescriptor::History]
     #     Optional. The historical or future-looking state of the resource pattern.
     #
     #     Example:
