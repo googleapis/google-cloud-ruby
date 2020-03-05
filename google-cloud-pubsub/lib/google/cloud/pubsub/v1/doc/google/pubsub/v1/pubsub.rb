@@ -105,8 +105,8 @@ module Google
       #     Required. The updated topic object.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
-      #     Required. Indicates which fields in the provided topic to update. Must be specified
-      #     and non-empty. Note that if `update_mask` contains
+      #     Required. Indicates which fields in the provided topic to update. Must be
+      #     specified and non-empty. Note that if `update_mask` contains
       #     "message_storage_policy" then the new value will be determined based on the
       #     policy configured at the project or organization level. The
       #     `message_storage_policy` must not be set in the `topic` provided above.
@@ -184,7 +184,7 @@ module Google
       # Request for the `ListTopicSnapshots` method.
       # @!attribute [rw] topic
       #   @return [String]
-      #     The name of the topic that snapshots are attached to.
+      #     Required. The name of the topic that snapshots are attached to.
       #     Format is `projects/{project}/topics/{topic}`.
       # @!attribute [rw] page_size
       #   @return [Integer]
@@ -225,10 +225,9 @@ module Google
       #     in length, and it must not start with `"goog"`.
       # @!attribute [rw] topic
       #   @return [String]
-      #     Required. The name of the topic from which this subscription is receiving messages.
-      #     Format is `projects/{project}/topics/{topic}`.
-      #     The value of this field will be `_deleted-topic_` if the topic has been
-      #     deleted.
+      #     Required. The name of the topic from which this subscription is receiving
+      #     messages. Format is `projects/{project}/topics/{topic}`. The value of this
+      #     field will be `_deleted-topic_` if the topic has been deleted.
       # @!attribute [rw] push_config
       #   @return [Google::Cloud::PubSub::V1::PushConfig]
       #     If push delivery is used with this subscription, this field is
@@ -507,14 +506,17 @@ module Google
       #     Format is `projects/{project}/subscriptions/{sub}`.
       # @!attribute [rw] return_immediately
       #   @return [true, false]
-      #     If this field set to true, the system will respond immediately even if
-      #     it there are no messages available to return in the `Pull` response.
-      #     Otherwise, the system may wait (for a bounded amount of time) until at
-      #     least one message is available, rather than returning no messages.
+      #     Optional. If this field set to true, the system will respond immediately
+      #     even if it there are no messages available to return in the `Pull`
+      #     response. Otherwise, the system may wait (for a bounded amount of time)
+      #     until at least one message is available, rather than returning no messages.
+      #     Warning: setting this field to `true` is discouraged because it adversely
+      #     impacts the performance of `Pull` operations. We recommend that users do
+      #     not set this field.
       # @!attribute [rw] max_messages
       #   @return [Integer]
-      #     Required. The maximum number of messages to return for this request. Must be a
-      #     positive integer. The Pub/Sub system may return fewer than the number
+      #     Required. The maximum number of messages to return for this request. Must
+      #     be a positive integer. The Pub/Sub system may return fewer than the number
       #     specified.
       class PullRequest; end
 
@@ -537,10 +539,10 @@ module Google
       #     Required. List of acknowledgment IDs.
       # @!attribute [rw] ack_deadline_seconds
       #   @return [Integer]
-      #     Required. The new ack deadline with respect to the time this request was sent to
-      #     the Pub/Sub system. For example, if the value is 10, the new
-      #     ack deadline will expire 10 seconds after the `ModifyAckDeadline` call
-      #     was made. Specifying zero might immediately make the message available for
+      #     Required. The new ack deadline with respect to the time this request was
+      #     sent to the Pub/Sub system. For example, if the value is 10, the new ack
+      #     deadline will expire 10 seconds after the `ModifyAckDeadline` call was
+      #     made. Specifying zero might immediately make the message available for
       #     delivery to another subscriber client. This typically results in an
       #     increase in the rate of message redeliveries (that is, duplicates).
       #     The minimum deadline you can specify is 0 seconds.
@@ -554,8 +556,9 @@ module Google
       #     Format is `projects/{project}/subscriptions/{sub}`.
       # @!attribute [rw] ack_ids
       #   @return [Array<String>]
-      #     Required. The acknowledgment ID for the messages being acknowledged that was returned
-      #     by the Pub/Sub system in the `Pull` response. Must not be empty.
+      #     Required. The acknowledgment ID for the messages being acknowledged that
+      #     was returned by the Pub/Sub system in the `Pull` response. Must not be
+      #     empty.
       class AcknowledgeRequest; end
 
       # Request for the `StreamingPull` streaming RPC method. This request is used to
@@ -563,8 +566,8 @@ module Google
       # deadline modifications from the client to the server.
       # @!attribute [rw] subscription
       #   @return [String]
-      #     Required. The subscription for which to initialize the new stream. This must be
-      #     provided in the first request on the stream, and must not be set in
+      #     Required. The subscription for which to initialize the new stream. This
+      #     must be provided in the first request on the stream, and must not be set in
       #     subsequent requests from client to server.
       #     Format is `projects/{project}/subscriptions/{sub}`.
       # @!attribute [rw] ack_ids
@@ -596,8 +599,8 @@ module Google
       #     processing was interrupted.
       # @!attribute [rw] stream_ack_deadline_seconds
       #   @return [Integer]
-      #     Required. The ack deadline to use for the stream. This must be provided in the
-      #     first request on the stream, but it can also be updated on subsequent
+      #     Required. The ack deadline to use for the stream. This must be provided in
+      #     the first request on the stream, but it can also be updated on subsequent
       #     requests from client to server. The minimum deadline you can specify is 10
       #     seconds. The maximum deadline you can specify is 600 seconds (10 minutes).
       # @!attribute [rw] client_id
@@ -620,10 +623,10 @@ module Google
       # Request for the `CreateSnapshot` method.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. User-provided name for this snapshot. If the name is not provided in the
-      #     request, the server will assign a random name for this snapshot on the same
-      #     project as the subscription. Note that for REST API requests, you must
-      #     specify a name.  See the <a
+      #     Required. User-provided name for this snapshot. If the name is not provided
+      #     in the request, the server will assign a random name for this snapshot on
+      #     the same project as the subscription. Note that for REST API requests, you
+      #     must specify a name.  See the <a
       #     href="https://cloud.google.com/pubsub/docs/admin#resource_names"> resource
       #     name rules</a>. Format is `projects/{project}/snapshots/{snap}`.
       # @!attribute [rw] subscription
