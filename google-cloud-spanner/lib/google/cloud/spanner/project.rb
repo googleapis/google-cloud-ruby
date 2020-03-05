@@ -483,9 +483,10 @@ module Google
           # Convert from possible Google::Protobuf::Map
           labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
           # Configs set by environment variables take over client-level configs.
-          if !@query_options.nil?
-            query_options = query_options.nil? ? \
-              @query_options : query_options.merge(@query_options)
+          if query_options.nil?
+            query_options = @query_options
+          else
+            query_options = query_options.merge @query_options unless @query_options.nil?
           end
           Client.new self, instance_id, database_id,
                      session_labels: labels,

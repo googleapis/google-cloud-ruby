@@ -99,8 +99,7 @@ module Google
       #
       def self.new project_id: nil, credentials: nil, scope: nil, timeout: nil,
                    client_config: nil, endpoint: nil, project: nil, keyfile: nil,
-                   emulator_host: nil, lib_name: nil, lib_version: nil,
-                   query_options: nil
+                   emulator_host: nil, lib_name: nil, lib_version: nil
         project_id    ||= (project || default_project_id)
         scope         ||= configure.scope
         timeout       ||= configure.timeout
@@ -110,7 +109,6 @@ module Google
         emulator_host ||= configure.emulator_host
         lib_name      ||= configure.lib_name
         lib_version   ||= configure.lib_version
-        query_options ||= configure.query_options
 
         if emulator_host
           credentials = :this_channel_is_insecure
@@ -132,9 +130,9 @@ module Google
           Spanner::Service.new(
             project_id, credentials,
             host: endpoint, timeout: timeout, client_config: client_config,
-            lib_name: lib_name, lib_version: lib_version,
+            lib_name: lib_name, lib_version: lib_version
           ),
-          query_options: configure.query_options,
+          query_options: configure.query_options
         )
       end
 

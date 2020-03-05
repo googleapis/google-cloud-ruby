@@ -348,7 +348,7 @@ module Google
           if query_options.nil?
             query_options = @query_options
           else
-            query_options = @query_options.merge(query_options) if !@query_options.nil?
+            query_options = @query_options.merge query_options unless @query_options.nil?
           end
           @pool.with_session do |session|
             results = session.execute_query \
@@ -1030,7 +1030,7 @@ module Google
           @pool.with_transaction do |tx|
             begin
               Thread.current[:transaction_id] = tx.transaction_id
-              tx.query_options = @query_options if !@query_options.nil?
+              tx.query_options = @query_options unless @query_options.nil?
               yield tx
               commit_resp = @project.service.commit \
                 tx.session.path, tx.mutations, transaction_id: tx.transaction_id
@@ -1137,7 +1137,7 @@ module Google
                               staleness: (staleness || exact_staleness)
               Thread.current[:transaction_id] = snp_grpc.id
               snp = Snapshot.from_grpc snp_grpc, session
-              snp.query_options = @query_options if !@query_options.nil?
+              snp.query_options = @query_options unless @query_options.nil?
               yield snp if block_given?
             ensure
               Thread.current[:transaction_id] = nil
