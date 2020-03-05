@@ -1078,6 +1078,8 @@ module Google
         ##
         # Retrieves the list of jobs belonging to the project.
         #
+        # @param [String] parent_job_id If set, retrieve only child jobs of the
+        #   specified parent. Optional.
         # @param [Boolean] all Whether to display jobs owned by all users in the
         #   project. The default is `false`. Optional.
         # @param [String] token A previously-returned page token representing
@@ -1144,13 +1146,24 @@ module Google
         #     # process job
         #   end
         #
-        def jobs all: nil, token: nil, max: nil, filter: nil,
-                 min_created_at: nil, max_created_at: nil
+        def jobs all: nil,
+                 token: nil,
+                 max: nil,
+                 filter: nil,
+                 min_created_at: nil,
+                 max_created_at: nil,
+                 parent_job_id: nil
           ensure_service!
-          options = { all: all, token: token, max: max, filter: filter, min_created_at: min_created_at,
-                      max_created_at: max_created_at }
-          gapi = service.list_jobs options
-          Job::List.from_gapi gapi, service, options
+          options = {
+            parent_job_id: parent_job_id,
+            all: all,
+            token: token,
+            max: max, filter: filter,
+            min_created_at: min_created_at,
+            max_created_at: max_created_at
+          }
+          gapi = service.list_jobs(**options)
+          Job::List.from_gapi gapi, service, **options
         end
 
         ##

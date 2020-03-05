@@ -198,6 +198,24 @@ module Google
         end
 
         ##
+        # The number of child jobs executed.
+        #
+        # @return [Integer] The number of child jobs executed.
+        #
+        def num_child_jobs
+          @gapi.statistics.num_child_jobs || 0
+        end
+
+        ##
+        # If this is a child job, the id of the parent.
+        #
+        # @return [String, nil] The ID of the parent job, or `nil` if not a child job.
+        #
+        def parent_job_id
+          @gapi.statistics.parent_job_id
+        end
+
+        ##
         # The configuration for the job. Returns a hash.
         #
         # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API

@@ -135,10 +135,43 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.wait_until_done!
     job.wont_be :failed?
+    job.num_child_jobs.must_equal 0
+    job.parent_job_id.must_be :nil?
 
     job.time_partitioning_type.must_equal "DAY"
     job.time_partitioning_field.must_equal "dob"
     job.clustering?.must_equal true
     job.clustering_fields.must_equal ["name"]
+  end
+focus
+  it "sends query results to a clustered destination table" do
+    multi_statement_sql = <<~SQL
+    -- Declare a variable to hold names as an array.
+    DECLARE top_names ARRAY<STRING>;
+    -- Build an array of the top 100 names from the year 2017.
+    SET top_names = (
+    SELECT ARRAY_AGG(name ORDER BY number DESC LIMIT 100)
+    FROM `bigquery-public-data.usa_names.usa_1910_current`
+    WHERE year = 2017
+    );
+    -- Which names appear as words in Shakespeare's plays?
+    SELECT
+    name AS shakespeare_name
+    FROM UNNEST(top_names) AS name
+    WHERE name IN (
+    SELECT word
+    FROM `bigquery-public-data.samples.shakespeare`
+    );
+    SQL
+    job = bigquery.query_job multi_statement_sql
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.wait_until_done!
+    job.wont_be :failed?
+    job.num_child_jobs.must_equal 2
+    job.parent_job_id.must_be :nil?
+
+    child_jobs = bigquery.jobs parent_job_id: job.job_id
+    child_jobs.count.must_equal 2
   end
 end
