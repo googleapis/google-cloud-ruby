@@ -1592,9 +1592,11 @@ module Google
         #
         # @param [String] path Path to the file in Google Cloud Storage.
         # @param [Hash] policy The security policy that describes what
-        #   can and cannot be uploaded in the form. When provided,
-        #   the PostObject fields will include a Signature based on the JSON
-        #   representation of this Hash and the same policy in Base64 format.
+        #   can and cannot be uploaded in the form. Only used if the `version`
+        #   is `:v2`.When provided, the PostObject fields will include a Signature
+        #   based on the JSON representation of this Hash and the same policy in
+        #   Base64 format.
+        #
         #   If you do not provide a security policy, requests are considered
         #   to be anonymous and will only work with buckets that have granted
         #   WRITE or FULL_CONTROL permission to anonymous users.
@@ -1606,6 +1608,27 @@ module Google
         #   Private Key.
         # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
         #   Private Key.
+        # @param [Integer] expires The number of seconds until the URL expires.
+        #   Only used if the `version` is `:v4`. The default is 604800 (7 days).
+        # @param [Hash] fields User-supplied form fields such as `acl`,
+        #   `cache-control`, `success_action_status`, and `success_action_redirect`.
+        #   Only used if the `version` is `:v4`.
+        # @param [Array<Hash|Array>] conditions User-supplied policy conditions.
+        #   Only used if the `version` is `:v4`.
+        # @param [String] scheme The URL scheme. Only used if the `version` is `:v4`.
+        #    The default value is `HTTPS`.
+        # @param [Boolean] virtual_hosted_style Whether to use a virtual hosted-style
+        #   hostname, which adds the bucket into the host portion of the URI rather
+        #   than the path, e.g. `https://mybucket.storage.googleapis.com/...`.
+        #   Only used if the `version` is `:v4`. The default value of `false` uses the
+        #   form of `https://storage.googleapis.com/mybucket`.
+        # @param [String] bucket_bound_hostname Use a bucket-bound hostname, which
+        #   replaces the `storage.googleapis.com` host with the name of a `CNAME`
+        #   bucket, e.g. a bucket named `gcs-subdomain.my.domain.tld`, or a Google
+        #   Cloud Load Balancer which routes to a bucket you own, e.g.
+        #   `my-load-balancer-domain.tld`. Only used if the `version` is `:v4`.
+        # @param [Symbol, String] version The version of the signed credential
+        #   to create. Must be one of `:v2` or `:v4`. The default value is `:v2`.
         #
         # @return [PostObject]
         #
@@ -1673,9 +1696,9 @@ module Google
                         client_email: nil,
                         signing_key: nil,
                         private_key: nil,
+                        expires: nil,
                         fields: nil,
                         conditions: nil,
-                        expires: nil,
                         scheme: "https",
                         virtual_hosted_style: nil,
                         bucket_bound_hostname: nil,
@@ -1697,9 +1720,9 @@ module Google
                                client_email: client_email,
                                signing_key: signing_key,
                                private_key: private_key,
+                               expires: expires,
                                fields: fields,
                                conditions: conditions,
-                               expires: expires,
                                scheme: scheme,
                                virtual_hosted_style: virtual_hosted_style,
                                bucket_bound_hostname: bucket_bound_hostname

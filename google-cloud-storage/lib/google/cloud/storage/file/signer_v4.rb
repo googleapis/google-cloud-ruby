@@ -64,41 +64,28 @@ module Google
             signature.unpack("H*").first.force_encoding("utf-8")
           end
 
-          def post_object expires: nil,
-                          issuer: nil,
+          def post_object issuer: nil,
                           client_email: nil,
                           signing_key: nil,
                           private_key: nil,
+                          expires: nil,
                           fields: nil,
                           conditions: nil,
                           scheme: "https",
                           virtual_hosted_style: nil,
                           bucket_bound_hostname: nil
-            datetime_now = Time.now.utc
             i = determine_issuer issuer, client_email
             s = determine_signing_key signing_key, private_key
-
             raise SignedUrlUnavailable unless i && s
 
-            goog_credential = "#{i}/#{datetime_now.strftime '%Y%m%d'}/auto/storage/goog4_request"
-            goog_date = datetime_now.strftime "%Y%m%dT%H%M%SZ"
-            fields ||= {}
-            base_conditions = [
-              { "key" => @file_name },
-              { "x-goog-date" => goog_date },
-              { "x-goog-credential" => goog_credential },
-              { "x-goog-algorithm" => "GOOG4-RSA-SHA256" }
-            ]
-
+            now = Time.now.utc
+            base_fields = required_fields i, now
             p = {}
-            p["conditions"] = policy_conditions base_conditions, conditions, fields
-            raise "expires is required" unless expires
-            p["expiration"] = (datetime_now + expires).strftime "%Y-%m-%dT%H:%M:%SZ"
+            p["conditions"] = policy_conditions base_fields, conditions, fields
+            expires ||= 60*60*24
+            p["expiration"] = (now + expires).strftime "%Y-%m-%dT%H:%M:%SZ"
 
-            fields["key"] = @file_name
-            fields["x-goog-algorithm"] = "GOOG4-RSA-SHA256"
-            fields["x-goog-credential"] = goog_credential
-            fields["x-goog-date"] = goog_date
+            fields.merge! base_fields
 
             policy_str = p.to_json
             policy = Base64.strict_encode64(policy_str).force_encoding("utf-8")
@@ -111,10 +98,21 @@ module Google
             Google::Cloud::Storage::PostObject.new hostname, fields
           end
 
-          def policy_conditions base_conditions, user_conditions, user_fields
+          def required_fields issuer, time
+            {
+              "key" => @file_name,
+              "x-goog-date" => time.strftime("%Y%m%dT%H%M%SZ"),
+              "x-goog-credential" => "#{issuer}/#{time.strftime '%Y%m%d'}/auto/storage/goog4_request",
+              "x-goog-algorithm" => "GOOG4-RSA-SHA256"
+            }
+          end
+
+          def policy_conditions base_fields, user_conditions, user_fields
+            # Convert each pair in base_fields hash to a single-entry hash in an array.
+            base_conditions = base_fields.to_a.map { |f| Hash[*f] }
             # Add user-provided conditions to the head of the conditions array.
             base_conditions.unshift user_conditions if user_conditions && !user_conditions.empty?
-            unless user_fields.empty?
+            if user_fields
               # Convert each pair in fields hash to a single-entry hash and add it to the head of the conditions array.
               user_fields.to_a.each { |f| base_conditions.unshift Hash[*f] }
             end
