@@ -1676,6 +1676,9 @@ module Google
                         fields: nil,
                         conditions: nil,
                         expires: nil,
+                        scheme: "https",
+                        virtual_hosted_style: nil,
+                        bucket_bound_hostname: nil,
                         version: nil
           ensure_service!
           version ||= :v2
@@ -1683,14 +1686,23 @@ module Google
           when :v2
 
             signer = File::SignerV2.from_bucket self, path
-            signer.post_object issuer: issuer, client_email: client_email,
-                              signing_key: signing_key, private_key: private_key,
-                              policy: policy
+            signer.post_object issuer: issuer,
+                               client_email: client_email,
+                               signing_key: signing_key,
+                               private_key: private_key,
+                               policy: policy
           when :v4
             signer = File::SignerV4.from_bucket self, path
-            signer.post_object issuer: issuer, client_email: client_email,
-                               signing_key: signing_key, private_key: private_key,
-                               fields: fields, conditions: conditions, expires: expires
+            signer.post_object issuer: issuer,
+                               client_email: client_email,
+                               signing_key: signing_key,
+                               private_key: private_key,
+                               fields: fields,
+                               conditions: conditions,
+                               expires: expires,
+                               scheme: scheme,
+                               virtual_hosted_style: virtual_hosted_style,
+                               bucket_bound_hostname: bucket_bound_hostname
           else
             raise ArgumentError, "version '#{version}' not supported"
           end

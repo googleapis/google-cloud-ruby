@@ -70,7 +70,10 @@ module Google
                           signing_key: nil,
                           private_key: nil,
                           fields: nil,
-                          conditions: nil
+                          conditions: nil,
+                          scheme: "https",
+                          virtual_hosted_style: nil,
+                          bucket_bound_hostname: nil
             datetime_now = Time.now.utc
             i = determine_issuer issuer, client_email
             s = determine_signing_key signing_key, private_key
@@ -80,38 +83,42 @@ module Google
             goog_credential = "#{i}/#{datetime_now.strftime '%Y%m%d'}/auto/storage/goog4_request"
             goog_date = datetime_now.strftime "%Y%m%dT%H%M%SZ"
             fields ||= {}
-            fields.merge(
-              "key" => @file_name,
-              "x-goog-algorithm" => "GOOG4-RSA-SHA256"
-            )
-
-            p = {}
-            p["conditions"] = [
-              ["starts-with", "$acl", "public"],
+            base_conditions = [
               { "key" => @file_name },
               { "x-goog-date" => goog_date },
               { "x-goog-credential" => goog_credential },
               { "x-goog-algorithm" => "GOOG4-RSA-SHA256" }
             ]
-            puts "\n\nconditions:\n\n#{conditions}\n\n"
-            p["conditions"].unshift conditions if conditions
-            puts "\n\np[\"conditions\"]:\n\n#{p['conditions']}\n\n"
+
+            p = {}
+            p["conditions"] = policy_conditions base_conditions, conditions, fields
             raise "expires is required" unless expires
             p["expiration"] = (datetime_now + expires).strftime "%Y-%m-%dT%H:%M:%SZ"
+
+            fields["key"] = @file_name
+            fields["x-goog-algorithm"] = "GOOG4-RSA-SHA256"
             fields["x-goog-credential"] = goog_credential
             fields["x-goog-date"] = goog_date
 
             policy_str = p.to_json
-            puts "\n\nRuby policy_str:\n\n#{policy_str}\n\n"
             policy = Base64.strict_encode64(policy_str).force_encoding("utf-8")
-
             signature = generate_signature s, policy
 
-            fields[:GoogleAccessId] = i
             fields["x-goog-signature"] = signature
             fields["policy"] = policy
+            url = ext_url scheme, virtual_hosted_style, bucket_bound_hostname
+            hostname = "#{url}#{bucket_path path_style?(virtual_hosted_style, bucket_bound_hostname)}"
+            Google::Cloud::Storage::PostObject.new hostname, fields
+          end
 
-            Google::Cloud::Storage::PostObject.new "#{GOOGLEAPIS_URL}/#{@bucket_name}/", fields
+          def policy_conditions base_conditions, user_conditions, user_fields
+            # Add user-provided conditions to the head of the conditions array.
+            base_conditions.unshift user_conditions if user_conditions && !user_conditions.empty?
+            unless user_fields.empty?
+              # Convert each pair in fields hash to a single-entry hash and add it to the head of the conditions array.
+              user_fields.to_a.each { |f| base_conditions.unshift Hash[*f] }
+            end
+            base_conditions
           end
 
           def signed_url method: "GET",
@@ -148,7 +155,7 @@ module Google
             payload = headers&.key?("X-Goog-Content-SHA256") ? headers["X-Goog-Content-SHA256"] : "UNSIGNED-PAYLOAD"
 
             canonical_request = [method,
-                                 ext_path(!(virtual_hosted_style || bucket_bound_hostname)),
+                                 file_path(!(virtual_hosted_style || bucket_bound_hostname)),
                                  canonical_query_str,
                                  canonical_headers_str,
                                  signed_headers_str,
@@ -162,11 +169,16 @@ module Google
             signature = signer.call string_to_sign
 
             # Construct signed URL
-            hostname = ext_url scheme, virtual_hosted_style, bucket_bound_hostname
+            hostname = signed_url_hostname scheme, virtual_hosted_style, bucket_bound_hostname
             "#{hostname}?#{canonical_query_str}&X-Goog-Signature=#{signature}"
           end
 
           protected
+
+          def signed_url_hostname scheme, virtual_hosted_style, bucket_bound_hostname
+            url = ext_url scheme, virtual_hosted_style, bucket_bound_hostname
+            "#{url}#{file_path path_style?(virtual_hosted_style, bucket_bound_hostname)}"
+          end
 
           def determine_issuer issuer, client_email
             # Parse the Service Account and get client id and private key
@@ -249,11 +261,17 @@ module Google
 
           ##
           # The URI-encoded (percent encoded) external path to the file.
-          def ext_path path_style
+          def file_path path_style
             path = []
             path << "/#{@bucket_name}" if path_style
             path << "/#{String(@file_name)}" if @file_name && !@file_name.empty?
             CGI.escape(path.join).gsub "%2F", "/"
+          end
+
+          ##
+          # The external path to the bucket, with trailing slash.
+          def bucket_path path_style
+            return "/#{@bucket_name}/" if path_style
           end
 
           ##
@@ -263,12 +281,17 @@ module Google
             if virtual_hosted_style
               parts = url.split "//"
               parts[1] = "#{@bucket_name}.#{parts[1]}"
-              url = parts.join "//"
+              parts.join "//"
             elsif bucket_bound_hostname
               raise ArgumentError, "scheme is required" unless scheme
-              url = URI "#{scheme.to_s.downcase}://#{bucket_bound_hostname}"
+              URI "#{scheme.to_s.downcase}://#{bucket_bound_hostname}"
+            else
+              url
             end
-            "#{url}#{ext_path !(virtual_hosted_style || bucket_bound_hostname)}"
+          end
+
+          def path_style? virtual_hosted_style, bucket_bound_hostname
+            !(virtual_hosted_style || bucket_bound_hostname)
           end
         end
       end

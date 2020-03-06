@@ -97,7 +97,7 @@ class SignerV4Test < MockStorage
     method = test["method"] unless test["method"]&.empty?
     headers = test.headers.to_h if test.headers
     query = test.query_parameters.to_h if test.query_parameters
-    bucket_bound_hostname = test.bucketBoundDomain unless test.bucketBoundDomain&.empty?
+    bucket_bound_hostname = test.bucketBoundHostname unless test.bucketBoundHostname&.empty?
     {
       method: method,
       expires: test.expiration,

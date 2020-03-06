@@ -59,18 +59,22 @@ class SignerV4PostObjectTest < MockStorage
   end
 
   def self.bucket_test_for description, input, output, index
-    return unless [1].include? index
-    focus
+    #return unless (0..8).include? index
     define_method("test_bucket_#{index}: #{description}") do
     @test_data = ["bucket", index, description, output.expectedDecodedPolicy]
       bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(input.bucket).to_json
       bucket = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service
+      bucket_bound_hostname = input.bucketBoundHostname unless input.bucketBoundHostname&.empty?
 
       Time.stub :now, timestamp_to_time(input.timestamp) do
         # sut
         post_object = bucket.post_object input.object, issuer: credentials.issuer,
                                                        expires: input.expiration,
-                                                       conditions: conditions(input.conditions),
+                                                       fields: input.fields.to_h,
+                                                       conditions: conditions_array(input.conditions),
+                                                       scheme: input.scheme,
+                                                       virtual_hosted_style: (input.urlStyle == :VIRTUAL_HOSTED_STYLE),
+                                                       bucket_bound_hostname: bucket_bound_hostname,
                                                        version: :v4
 
         post_object.url.must_equal output.url
@@ -84,14 +88,21 @@ class SignerV4PostObjectTest < MockStorage
     end
   end
 
-  def conditions policy_conditions
-    return nil unless policy_conditions
-    if !policy_conditions.successActionStatus.empty?
-      {"success_action_status" => policy_conditions.successActionStatus}
-    elsif policy_conditions.matches
-      policy_conditions.matches.map { |m| m.expression.to_a }.first
+  def fields_array fields
+    return nil unless fields
+    [{"acl":"public-read"},{"cache-control":"public,max-age=86400"}]
+  end
+
+  def conditions_array conditions
+    return nil unless conditions
+    if !conditions.startsWith&.empty?
+      ["starts-with"] + conditions.startsWith
+    elsif !conditions&.contentLengthRange&.empty?
+      ["content-length-range"] + conditions.contentLengthRange
     end
   end
+
+  
 
   def self.file_test_for description, input, output, index
     define_method("test_file_#{index}: #{description}") do
@@ -117,8 +128,8 @@ end
 file_path = File.expand_path "../../../../../conformance/v1/v4_signatures.json", __dir__
 test_file = Google::Cloud::Conformance::Storage::V1::TestFile.decode_json File.read(file_path)
 test_file.post_policy_v4_tests.each_with_index do |test, index|
-  SignerV4PostObjectTest.signer_v4_test_for test.description, test.policyInput, test.policyOutput, index
-  SignerV4PostObjectTest.project_test_for test.description, test.policyInput, test.policyOutput, index
+  # SignerV4PostObjectTest.signer_v4_test_for test.description, test.policyInput, test.policyOutput, index
+  # SignerV4PostObjectTest.project_test_for test.description, test.policyInput, test.policyOutput, index
   SignerV4PostObjectTest.bucket_test_for test.description, test.policyInput, test.policyOutput, index
-  SignerV4PostObjectTest.file_test_for test.description, test.policyInput, test.policyOutput, index
+  # SignerV4PostObjectTest.file_test_for test.description, test.policyInput, test.policyOutput, index
 end
