@@ -1592,10 +1592,9 @@ module Google
         #
         # @param [String] path Path to the file in Google Cloud Storage.
         # @param [Hash] policy The security policy that describes what
-        #   can and cannot be uploaded in the form. Only used if the `version`
-        #   is `:v2`.When provided, the PostObject fields will include a Signature
-        #   based on the JSON representation of this Hash and the same policy in
-        #   Base64 format.
+        #   can and cannot be uploaded in the form. When provided, the PostObject
+        #   fields will include a Signature based on the JSON representation of
+        #   this Hash and the same policy in Base64 format.
         #
         #   If you do not provide a security policy, requests are considered
         #   to be anonymous and will only work with buckets that have granted
@@ -1608,27 +1607,6 @@ module Google
         #   Private Key.
         # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
         #   Private Key.
-        # @param [Integer] expires The number of seconds until the URL expires.
-        #   Only used if the `version` is `:v4`. The default is 604800 (7 days).
-        # @param [Hash] fields User-supplied form fields such as `acl`,
-        #   `cache-control`, `success_action_status`, and `success_action_redirect`.
-        #   Only used if the `version` is `:v4`.
-        # @param [Array<Hash|Array>] conditions User-supplied policy conditions.
-        #   Only used if the `version` is `:v4`.
-        # @param [String] scheme The URL scheme. Only used if the `version` is `:v4`.
-        #    The default value is `HTTPS`.
-        # @param [Boolean] virtual_hosted_style Whether to use a virtual hosted-style
-        #   hostname, which adds the bucket into the host portion of the URI rather
-        #   than the path, e.g. `https://mybucket.storage.googleapis.com/...`.
-        #   Only used if the `version` is `:v4`. The default value of `false` uses the
-        #   form of `https://storage.googleapis.com/mybucket`.
-        # @param [String] bucket_bound_hostname Use a bucket-bound hostname, which
-        #   replaces the `storage.googleapis.com` host with the name of a `CNAME`
-        #   bucket, e.g. a bucket named `gcs-subdomain.my.domain.tld`, or a Google
-        #   Cloud Load Balancer which routes to a bucket you own, e.g.
-        #   `my-load-balancer-domain.tld`. Only used if the `version` is `:v4`.
-        # @param [Symbol, String] version The version of the signed credential
-        #   to create. Must be one of `:v2` or `:v4`. The default value is `:v2`.
         #
         # @return [PostObject]
         #
@@ -1695,40 +1673,98 @@ module Google
                         issuer: nil,
                         client_email: nil,
                         signing_key: nil,
-                        private_key: nil,
-                        expires: nil,
-                        fields: nil,
-                        conditions: nil,
-                        scheme: "https",
-                        virtual_hosted_style: nil,
-                        bucket_bound_hostname: nil,
-                        version: nil
+                        private_key: nil
           ensure_service!
-          version ||= :v2
-          case version.to_sym
-          when :v2
+          signer = File::SignerV2.from_bucket self, path
+          signer.post_object issuer: issuer,
+                             client_email: client_email,
+                             signing_key: signing_key,
+                             private_key: private_key,
+                             policy: policy
+        end
 
-            signer = File::SignerV2.from_bucket self, path
-            signer.post_object issuer: issuer,
-                               client_email: client_email,
-                               signing_key: signing_key,
-                               private_key: private_key,
-                               policy: policy
-          when :v4
-            signer = File::SignerV4.from_bucket self, path
-            signer.post_object issuer: issuer,
-                               client_email: client_email,
-                               signing_key: signing_key,
-                               private_key: private_key,
-                               expires: expires,
-                               fields: fields,
-                               conditions: conditions,
-                               scheme: scheme,
-                               virtual_hosted_style: virtual_hosted_style,
-                               bucket_bound_hostname: bucket_bound_hostname
-          else
-            raise ArgumentError, "version '#{version}' not supported"
-          end
+        ##
+        # Generate a PostObject that includes the fields and url to
+        # upload objects via html forms.
+        #
+        # Generating a PostObject requires service account credentials,
+        # either by connecting with a service account when calling
+        # {Google::Cloud.storage}, or by passing in the service account
+        # `issuer` and `signing_key` values. Although the private key can
+        # be passed as a string for convenience, creating and storing
+        # an instance of # `OpenSSL::PKey::RSA` is more efficient
+        # when making multiple calls to `post_object`.
+        #
+        # A {SignedUrlUnavailable} is raised if the service account credentials
+        # are missing. Service account credentials are acquired by following the
+        # steps in [Service Account Authentication](
+        # https://cloud.google.com/storage/docs/authentication#service_accounts).
+        #
+        # @see https://cloud.google.com/storage/docs/xml-api/post-object
+        #
+        # @param [String] path Path to the file in Google Cloud Storage.
+        # @param [String] issuer Service Account's Client Email.
+        # @param [String] client_email Service Account's Client Email.
+        # @param [OpenSSL::PKey::RSA, String] signing_key Service Account's
+        #   Private Key.
+        # @param [OpenSSL::PKey::RSA, String] private_key Service Account's
+        #   Private Key.
+        # @param [Integer] expires The number of seconds until the URL expires.
+        #   The default is 604800 (7 days).
+        # @param [Hash] fields User-supplied form fields such as `acl`,
+        #   `cache-control`, `success_action_status`, and `success_action_redirect`.
+        # @param [Array<Hash|Array>] conditions User-supplied policy conditions.
+        # @param [String] scheme The URL scheme. The default value is `HTTPS`.
+        # @param [Boolean] virtual_hosted_style Whether to use a virtual hosted-style
+        #   hostname, which adds the bucket into the host portion of the URI rather
+        #   than the path, e.g. `https://mybucket.storage.googleapis.com/...`.
+        #   The default value of `false` uses the
+        #   form of `https://storage.googleapis.com/mybucket`.
+        # @param [String] bucket_bound_hostname Use a bucket-bound hostname, which
+        #   replaces the `storage.googleapis.com` host with the name of a `CNAME`
+        #   bucket, e.g. a bucket named `gcs-subdomain.my.domain.tld`, or a Google
+        #   Cloud Load Balancer which routes to a bucket you own, e.g.
+        #   `my-load-balancer-domain.tld`.
+        #
+        # @return [PostObject]
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   conditions = [["starts-with","$acl","public"]]
+        #   post = bucket.post_object_v4 "avatars/heidi/400x400.png", expires: 10, conditions: conditions
+        #
+        #   post.url #=> "https://storage.googleapis.com/my-todo-app/"
+        #   post.fields["key"] #=> "my-todo-app/avatars/heidi/400x400.png"
+        #   post.fields["x-goog-signature"] #=> "ABC...XYZ="
+        #   post.fields["policy"] #=> "ABC...XYZ="
+        #
+        def post_object_v4 path,
+                           issuer: nil,
+                           client_email: nil,
+                           signing_key: nil,
+                           private_key: nil,
+                           expires: nil,
+                           fields: nil,
+                           conditions: nil,
+                           scheme: "https",
+                           virtual_hosted_style: nil,
+                           bucket_bound_hostname: nil
+          ensure_service!
+          signer = File::SignerV4.from_bucket self, path
+          signer.post_object issuer: issuer,
+                             client_email: client_email,
+                             signing_key: signing_key,
+                             private_key: private_key,
+                             expires: expires,
+                             fields: fields,
+                             conditions: conditions,
+                             scheme: scheme,
+                             virtual_hosted_style: virtual_hosted_style,
+                             bucket_bound_hostname: bucket_bound_hostname
         end
 
         ##

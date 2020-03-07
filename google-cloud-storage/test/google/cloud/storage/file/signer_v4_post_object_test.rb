@@ -64,14 +64,13 @@ class SignerV4PostObjectTest < MockStorage
 
       Time.stub :now, timestamp_to_time(input.timestamp) do
         # sut
-        post_object = bucket.post_object input.object, issuer: credentials.issuer,
-                                                       expires: input.expiration,
-                                                       fields: input.fields.to_h,
-                                                       conditions: conditions_array(input.conditions),
-                                                       scheme: input.scheme,
-                                                       virtual_hosted_style: (input.urlStyle == :VIRTUAL_HOSTED_STYLE),
-                                                       bucket_bound_hostname: bucket_bound_hostname,
-                                                       version: :v4
+        post_object = bucket.post_object_v4 input.object, issuer: credentials.issuer,
+                                                          expires: input.expiration,
+                                                          fields: input.fields.to_h,
+                                                          conditions: conditions_array(input.conditions),
+                                                          scheme: input.scheme,
+                                                          virtual_hosted_style: (input.urlStyle == :VIRTUAL_HOSTED_STYLE),
+                                                          bucket_bound_hostname: bucket_bound_hostname
 
         post_object.url.must_equal output.url
         assert_fields output.fields, post_object.fields

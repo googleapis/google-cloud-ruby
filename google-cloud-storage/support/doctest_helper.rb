@@ -52,14 +52,34 @@ module Google
           # no-op stub, but ensures that calls match this copied signature
         end
 
-        def post_object path, policy: nil, issuer: nil,
-                        client_email: nil, signing_key: nil,
+        def post_object path,
+                        policy: nil,
+                        issuer: nil,
+                        client_email: nil,
+                        signing_key: nil,
                         private_key: nil
           Google::Cloud::Storage::PostObject.new "https://storage.googleapis.com",
             { key: "my-todo-app/avatars/heidi/400x400.png",
               GoogleAccessId: "0123456789@gserviceaccount.com",
               signature: "ABC...XYZ=",
               policy: "ABC...XYZ=" }
+        end
+
+        def post_object_v4 path,
+                           issuer: nil,
+                           client_email: nil,
+                           signing_key: nil,
+                           private_key: nil,
+                           expires: nil,
+                           fields: nil,
+                           conditions: nil,
+                           scheme: "https",
+                           virtual_hosted_style: nil,
+                           bucket_bound_hostname: nil
+          Google::Cloud::Storage::PostObject.new "https://storage.googleapis.com/my-todo-app/",
+            { "key" => "my-todo-app/avatars/heidi/400x400.png",
+              "x-goog-signature" => "ABC...XYZ=",
+              "policy" => "ABC...XYZ=" }
         end
       end
       class File
