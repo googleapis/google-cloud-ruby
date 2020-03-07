@@ -72,29 +72,11 @@ module Google
           ].freeze
 
 
-          BILLING_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "billingAccounts/{billing_account}"
-          )
-
-          private_constant :BILLING_PATH_TEMPLATE
-
-          FOLDER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "folders/{folder}"
-          )
-
-          private_constant :FOLDER_PATH_TEMPLATE
-
-          METRIC_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+          LOG_METRIC_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/metrics/{metric}"
           )
 
-          private_constant :METRIC_PATH_TEMPLATE
-
-          ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "organizations/{organization}"
-          )
-
-          private_constant :ORGANIZATION_PATH_TEMPLATE
+          private_constant :LOG_METRIC_PATH_TEMPLATE
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
@@ -102,41 +84,14 @@ module Google
 
           private_constant :PROJECT_PATH_TEMPLATE
 
-          # Returns a fully-qualified billing resource name string.
-          # @param billing_account [String]
-          # @return [String]
-          def self.billing_path billing_account
-            BILLING_PATH_TEMPLATE.render(
-              :"billing_account" => billing_account
-            )
-          end
-
-          # Returns a fully-qualified folder resource name string.
-          # @param folder [String]
-          # @return [String]
-          def self.folder_path folder
-            FOLDER_PATH_TEMPLATE.render(
-              :"folder" => folder
-            )
-          end
-
-          # Returns a fully-qualified metric resource name string.
+          # Returns a fully-qualified log_metric resource name string.
           # @param project [String]
           # @param metric [String]
           # @return [String]
-          def self.metric_path project, metric
-            METRIC_PATH_TEMPLATE.render(
+          def self.log_metric_path project, metric
+            LOG_METRIC_PATH_TEMPLATE.render(
               :"project" => project,
               :"metric" => metric
-            )
-          end
-
-          # Returns a fully-qualified organization resource name string.
-          # @param organization [String]
-          # @return [String]
-          def self.organization_path organization
-            ORGANIZATION_PATH_TEMPLATE.render(
-              :"organization" => organization
             )
           end
 
@@ -376,7 +331,7 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   metrics_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
-          #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
+          #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.log_metric_path("[PROJECT]", "[METRIC]")
           #   response = metrics_client.get_log_metric(formatted_metric_name)
 
           def get_log_metric \
@@ -460,7 +415,7 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   metrics_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
-          #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
+          #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.log_metric_path("[PROJECT]", "[METRIC]")
           #
           #   # TODO: Initialize `metric`:
           #   metric = {}
@@ -496,7 +451,7 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   metrics_client = Google::Cloud::Logging::V2::MetricsServiceV2Client.new
-          #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.metric_path("[PROJECT]", "[METRIC]")
+          #   formatted_metric_name = Google::Cloud::Logging::V2::MetricsServiceV2Client.log_metric_path("[PROJECT]", "[METRIC]")
           #   metrics_client.delete_log_metric(formatted_metric_name)
 
           def delete_log_metric \

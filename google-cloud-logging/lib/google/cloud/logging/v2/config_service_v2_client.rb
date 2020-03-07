@@ -53,6 +53,10 @@ module Google
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
+            "list_buckets" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "buckets"),
             "list_sinks" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
@@ -76,29 +80,11 @@ module Google
           ].freeze
 
 
-          BILLING_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+          BILLING_ACCOUNT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "billingAccounts/{billing_account}"
           )
 
-          private_constant :BILLING_PATH_TEMPLATE
-
-          BILLING_EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "billingAccounts/{billing_account}/exclusions/{exclusion}"
-          )
-
-          private_constant :BILLING_EXCLUSION_PATH_TEMPLATE
-
-          BILLING_SINK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "billingAccounts/{billing_account}/sinks/{sink}"
-          )
-
-          private_constant :BILLING_SINK_PATH_TEMPLATE
-
-          EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/exclusions/{exclusion}"
-          )
-
-          private_constant :EXCLUSION_PATH_TEMPLATE
+          private_constant :BILLING_ACCOUNT_PATH_TEMPLATE
 
           FOLDER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "folders/{folder}"
@@ -106,35 +92,11 @@ module Google
 
           private_constant :FOLDER_PATH_TEMPLATE
 
-          FOLDER_EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "folders/{folder}/exclusions/{exclusion}"
-          )
-
-          private_constant :FOLDER_EXCLUSION_PATH_TEMPLATE
-
-          FOLDER_SINK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "folders/{folder}/sinks/{sink}"
-          )
-
-          private_constant :FOLDER_SINK_PATH_TEMPLATE
-
           ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}"
           )
 
           private_constant :ORGANIZATION_PATH_TEMPLATE
-
-          ORGANIZATION_EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "organizations/{organization}/exclusions/{exclusion}"
-          )
-
-          private_constant :ORGANIZATION_EXCLUSION_PATH_TEMPLATE
-
-          ORGANIZATION_SINK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "organizations/{organization}/sinks/{sink}"
-          )
-
-          private_constant :ORGANIZATION_SINK_PATH_TEMPLATE
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
@@ -142,51 +104,12 @@ module Google
 
           private_constant :PROJECT_PATH_TEMPLATE
 
-          SINK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/sinks/{sink}"
-          )
-
-          private_constant :SINK_PATH_TEMPLATE
-
-          # Returns a fully-qualified billing resource name string.
+          # Returns a fully-qualified billing_account resource name string.
           # @param billing_account [String]
           # @return [String]
-          def self.billing_path billing_account
-            BILLING_PATH_TEMPLATE.render(
+          def self.billing_account_path billing_account
+            BILLING_ACCOUNT_PATH_TEMPLATE.render(
               :"billing_account" => billing_account
-            )
-          end
-
-          # Returns a fully-qualified billing_exclusion resource name string.
-          # @param billing_account [String]
-          # @param exclusion [String]
-          # @return [String]
-          def self.billing_exclusion_path billing_account, exclusion
-            BILLING_EXCLUSION_PATH_TEMPLATE.render(
-              :"billing_account" => billing_account,
-              :"exclusion" => exclusion
-            )
-          end
-
-          # Returns a fully-qualified billing_sink resource name string.
-          # @param billing_account [String]
-          # @param sink [String]
-          # @return [String]
-          def self.billing_sink_path billing_account, sink
-            BILLING_SINK_PATH_TEMPLATE.render(
-              :"billing_account" => billing_account,
-              :"sink" => sink
-            )
-          end
-
-          # Returns a fully-qualified exclusion resource name string.
-          # @param project [String]
-          # @param exclusion [String]
-          # @return [String]
-          def self.exclusion_path project, exclusion
-            EXCLUSION_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"exclusion" => exclusion
             )
           end
 
@@ -199,28 +122,6 @@ module Google
             )
           end
 
-          # Returns a fully-qualified folder_exclusion resource name string.
-          # @param folder [String]
-          # @param exclusion [String]
-          # @return [String]
-          def self.folder_exclusion_path folder, exclusion
-            FOLDER_EXCLUSION_PATH_TEMPLATE.render(
-              :"folder" => folder,
-              :"exclusion" => exclusion
-            )
-          end
-
-          # Returns a fully-qualified folder_sink resource name string.
-          # @param folder [String]
-          # @param sink [String]
-          # @return [String]
-          def self.folder_sink_path folder, sink
-            FOLDER_SINK_PATH_TEMPLATE.render(
-              :"folder" => folder,
-              :"sink" => sink
-            )
-          end
-
           # Returns a fully-qualified organization resource name string.
           # @param organization [String]
           # @return [String]
@@ -230,45 +131,12 @@ module Google
             )
           end
 
-          # Returns a fully-qualified organization_exclusion resource name string.
-          # @param organization [String]
-          # @param exclusion [String]
-          # @return [String]
-          def self.organization_exclusion_path organization, exclusion
-            ORGANIZATION_EXCLUSION_PATH_TEMPLATE.render(
-              :"organization" => organization,
-              :"exclusion" => exclusion
-            )
-          end
-
-          # Returns a fully-qualified organization_sink resource name string.
-          # @param organization [String]
-          # @param sink [String]
-          # @return [String]
-          def self.organization_sink_path organization, sink
-            ORGANIZATION_SINK_PATH_TEMPLATE.render(
-              :"organization" => organization,
-              :"sink" => sink
-            )
-          end
-
           # Returns a fully-qualified project resource name string.
           # @param project [String]
           # @return [String]
           def self.project_path project
             PROJECT_PATH_TEMPLATE.render(
               :"project" => project
-            )
-          end
-
-          # Returns a fully-qualified sink resource name string.
-          # @param project [String]
-          # @param sink [String]
-          # @return [String]
-          def self.sink_path project, sink
-            SINK_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"sink" => sink
             )
           end
 
@@ -381,6 +249,30 @@ module Google
               &Google::Logging::V2::ConfigServiceV2::Stub.method(:new)
             )
 
+            @list_buckets = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:list_buckets),
+              defaults["list_buckets"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @get_bucket = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:get_bucket),
+              defaults["get_bucket"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @update_bucket = Google::Gax.create_api_call(
+              @config_service_v2_stub.method(:update_bucket),
+              defaults["update_bucket"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @list_sinks = Google::Gax.create_api_call(
               @config_service_v2_stub.method(:list_sinks),
               defaults["list_sinks"],
@@ -481,6 +373,188 @@ module Google
 
           # Service calls
 
+          # Lists buckets (Beta).
+          #
+          # @param parent [String]
+          #   Required. The parent resource whose buckets are to be listed:
+          #
+          #       "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+          #       "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
+          #       "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
+          #
+          #   Note: The locations portion of the resource must be specified, but
+          #   supplying the character `-` in place of [LOCATION_ID] will return all
+          #   buckets.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Logging::V2::LogBucket>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Logging::V2::LogBucket>]
+          #   An enumerable of Google::Logging::V2::LogBucket instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #
+          #   # TODO: Initialize `parent`:
+          #   parent = ''
+          #
+          #   # Iterate over all results.
+          #   config_client.list_buckets(parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   config_client.list_buckets(parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_buckets \
+              parent,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::ListBucketsRequest)
+            @list_buckets.call(req, options, &block)
+          end
+
+          # Gets a bucket (Beta).
+          #
+          # @param name [String]
+          #   Required. The resource name of the bucket:
+          #
+          #       "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+          #       "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+          #       "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+          #
+          #   Example:
+          #   `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogBucket]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Logging::V2::LogBucket]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = config_client.get_bucket(name)
+
+          def get_bucket \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::GetBucketRequest)
+            @get_bucket.call(req, options, &block)
+          end
+
+          # Updates a bucket. This method replaces the following fields in the
+          # existing bucket with values from the new bucket: `retention_period`
+          #
+          # If the retention period is decreased and the bucket is locked,
+          # FAILED_PRECONDITION will be returned.
+          #
+          # If the bucket has a LifecycleState of DELETE_REQUESTED, FAILED_PRECONDITION
+          # will be returned.
+          #
+          # A buckets region may not be modified after it is created.
+          # This method is in Beta.
+          #
+          # @param name [String]
+          #   Required. The full resource name of the bucket to update.
+          #
+          #       "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+          #       "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+          #       "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+          #
+          #   Example:
+          #   `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`. Also
+          #   requires permission "resourcemanager.projects.updateLiens" to set the
+          #   locked property
+          # @param bucket [Google::Logging::V2::LogBucket | Hash]
+          #   Required. The updated bucket.
+          #   A hash of the same form as `Google::Logging::V2::LogBucket`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Required. Field mask that specifies the fields in `bucket` that need an update. A
+          #   bucket field will be overwritten if, and only if, it is in the update
+          #   mask. `name` and output only fields cannot be updated.
+          #
+          #   For a detailed `FieldMask` definition, see
+          #   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+          #
+          #   Example: `updateMask=retention_days`.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Logging::V2::LogBucket]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Logging::V2::LogBucket]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #
+          #   # TODO: Initialize `bucket`:
+          #   bucket = {}
+          #
+          #   # TODO: Initialize `update_mask`:
+          #   update_mask = {}
+          #   response = config_client.update_bucket(name, bucket, update_mask)
+
+          def update_bucket \
+              name,
+              bucket,
+              update_mask,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              bucket: bucket,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::UpdateBucketRequest)
+            @update_bucket.call(req, options, &block)
+          end
+
           # Lists sinks.
           #
           # @param parent [String]
@@ -563,8 +637,10 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
-          #   response = config_client.get_sink(formatted_sink_name)
+          #
+          #   # TODO: Initialize `sink_name`:
+          #   sink_name = ''
+          #   response = config_client.get_sink(sink_name)
 
           def get_sink \
               sink_name,
@@ -648,8 +724,8 @@ module Google
           # `unique_writer_identity` field.
           #
           # @param sink_name [String]
-          #   Required. The full resource name of the sink to update, including the
-          #   parent resource and the sink identifier:
+          #   Required. The full resource name of the sink to update, including the parent
+          #   resource and the sink identifier:
           #
           #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
           #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
@@ -658,8 +734,8 @@ module Google
           #
           #   Example: `"projects/my-project-id/sinks/my-sink-id"`.
           # @param sink [Google::Logging::V2::LogSink | Hash]
-          #   Required. The updated sink, whose name is the same identifier that appears
-          #   as part of `sink_name`.
+          #   Required. The updated sink, whose name is the same identifier that appears as part
+          #   of `sink_name`.
           #   A hash of the same form as `Google::Logging::V2::LogSink`
           #   can also be provided.
           # @param unique_writer_identity [true, false]
@@ -703,11 +779,13 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
+          #
+          #   # TODO: Initialize `sink_name`:
+          #   sink_name = ''
           #
           #   # TODO: Initialize `sink`:
           #   sink = {}
-          #   response = config_client.update_sink(formatted_sink_name, sink)
+          #   response = config_client.update_sink(sink_name, sink)
 
           def update_sink \
               sink_name,
@@ -730,8 +808,8 @@ module Google
           # service account is also deleted.
           #
           # @param sink_name [String]
-          #   Required. The full resource name of the sink to delete, including the
-          #   parent resource and the sink identifier:
+          #   Required. The full resource name of the sink to delete, including the parent
+          #   resource and the sink identifier:
           #
           #       "projects/[PROJECT_ID]/sinks/[SINK_ID]"
           #       "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
@@ -750,8 +828,10 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #   formatted_sink_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.sink_path("[PROJECT]", "[SINK]")
-          #   config_client.delete_sink(formatted_sink_name)
+          #
+          #   # TODO: Initialize `sink_name`:
+          #   sink_name = ''
+          #   config_client.delete_sink(sink_name)
 
           def delete_sink \
               sink_name,
@@ -847,8 +927,10 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
-          #   response = config_client.get_exclusion(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = config_client.get_exclusion(name)
 
           def get_exclusion \
               name,
@@ -922,13 +1004,13 @@ module Google
           #
           #   Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
           # @param exclusion [Google::Logging::V2::LogExclusion | Hash]
-          #   Required. New values for the existing exclusion. Only the fields specified
-          #   in `update_mask` are relevant.
+          #   Required. New values for the existing exclusion. Only the fields specified in
+          #   `update_mask` are relevant.
           #   A hash of the same form as `Google::Logging::V2::LogExclusion`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Required. A non-empty list of fields to change in the existing exclusion.
-          #   New values for the fields are taken from the corresponding fields in the
+          #   Required. A non-empty list of fields to change in the existing exclusion. New values
+          #   for the fields are taken from the corresponding fields in the
           #   {Google::Logging::V2::LogExclusion LogExclusion} included in this request. Fields not mentioned in
           #   `update_mask` are not changed and are ignored in the request.
           #
@@ -948,14 +1030,16 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
           #
           #   # TODO: Initialize `exclusion`:
           #   exclusion = {}
           #
           #   # TODO: Initialize `update_mask`:
           #   update_mask = {}
-          #   response = config_client.update_exclusion(formatted_name, exclusion, update_mask)
+          #   response = config_client.update_exclusion(name, exclusion, update_mask)
 
           def update_exclusion \
               name,
@@ -994,8 +1078,10 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #   formatted_name = Google::Cloud::Logging::V2::ConfigServiceV2Client.exclusion_path("[PROJECT]", "[EXCLUSION]")
-          #   config_client.delete_exclusion(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   config_client.delete_exclusion(name)
 
           def delete_exclusion \
               name,
@@ -1043,10 +1129,13 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #   response = config_client.get_cmek_settings
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = config_client.get_cmek_settings(name)
 
           def get_cmek_settings \
-              name: nil,
+              name,
               options: nil,
               &block
             req = {
@@ -1113,11 +1202,17 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #   response = config_client.update_cmek_settings
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #
+          #   # TODO: Initialize `cmek_settings`:
+          #   cmek_settings = {}
+          #   response = config_client.update_cmek_settings(name, cmek_settings)
 
           def update_cmek_settings \
-              name: nil,
-              cmek_settings: nil,
+              name,
+              cmek_settings,
               update_mask: nil,
               options: nil,
               &block

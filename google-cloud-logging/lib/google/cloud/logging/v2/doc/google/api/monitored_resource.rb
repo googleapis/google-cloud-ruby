@@ -81,28 +81,5 @@ module Google
     #     resource descriptor. For example, Compute Engine VM instances use the
     #     labels `"project_id"`, `"instance_id"`, and `"zone"`.
     class MonitoredResource; end
-
-    # Auxiliary metadata for a {Google::Api::MonitoredResource MonitoredResource} object.
-    # {Google::Api::MonitoredResource MonitoredResource} objects contain the minimum set of information to
-    # uniquely identify a monitored resource instance. There is some other useful
-    # auxiliary metadata. Monitoring and Logging use an ingestion
-    # pipeline to extract metadata for cloud resources of all types, and store
-    # the metadata in this message.
-    # @!attribute [rw] system_labels
-    #   @return [Google::Protobuf::Struct]
-    #     Output only. Values for predefined system metadata labels.
-    #     System labels are a kind of metadata extracted by Google, including
-    #     "machine_image", "vpc", "subnet_id",
-    #     "security_group", "name", etc.
-    #     System label values can be only strings, Boolean values, or a list of
-    #     strings. For example:
-    #
-    #         { "name": "my-test-instance",
-    #           "security_group": ["a", "b", "c"],
-    #           "spot_instance": false }
-    # @!attribute [rw] user_labels
-    #   @return [Hash{String => String}]
-    #     Output only. A map of user-defined metadata labels.
-    class MonitoredResourceMetadata; end
   end
 end

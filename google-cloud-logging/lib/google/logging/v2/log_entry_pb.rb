@@ -4,6 +4,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/monitored_resource_pb'
 require 'google/api/resource_pb'
 require 'google/logging/type/http_request_pb'
@@ -23,7 +24,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :insert_id, :string, 4
     optional :http_request, :message, 7, "google.logging.type.HttpRequest"
     map :labels, :string, :string, 11
-    optional :metadata, :message, 25, "google.api.MonitoredResourceMetadata"
     optional :operation, :message, 15, "google.logging.v2.LogEntryOperation"
     optional :trace, :string, 22
     optional :span_id, :string, 27

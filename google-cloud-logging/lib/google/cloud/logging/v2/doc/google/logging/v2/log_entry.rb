@@ -26,9 +26,9 @@ module Google
       #         "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
       #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
       #
-      #     A project number may optionally be used in place of PROJECT_ID. The project
-      #     number is translated to its corresponding PROJECT_ID internally and the
-      #     `log_name` field will contain PROJECT_ID in queries and exports.
+      #     A project number may be used in place of PROJECT_ID. The project number is
+      #     translated to its corresponding PROJECT_ID internally and the `log_name`
+      #     field will contain PROJECT_ID in queries and exports.
       #
       #     `[LOG_ID]` must be URL-encoded within `log_name`. Example:
       #     `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
@@ -67,12 +67,11 @@ module Google
       #     expressed as a JSON object.
       # @!attribute [rw] timestamp
       #   @return [Google::Protobuf::Timestamp]
-      #     Optional. The time the event described by the log entry occurred.  This
-      #     time is used to compute the log entry's age and to enforce the logs
-      #     retention period. If this field is omitted in a new log entry, then Logging
-      #     assigns it the current time.  Timestamps have nanosecond accuracy, but
-      #     trailing zeros in the fractional seconds might be omitted when the
-      #     timestamp is displayed.
+      #     Optional. The time the event described by the log entry occurred. This time is used
+      #     to compute the log entry's age and to enforce the logs retention period.
+      #     If this field is omitted in a new log entry, then Logging assigns it the
+      #     current time. Timestamps have nanosecond accuracy, but trailing zeros in
+      #     the fractional seconds might be omitted when the timestamp is displayed.
       #
       #     Incoming log entries should have timestamps that are no more than the [logs
       #     retention period](/logging/quotas) in the past, and no more than 24 hours
@@ -84,12 +83,11 @@ module Google
       #     Output only. The time the log entry was received by Logging.
       # @!attribute [rw] severity
       #   @return [Google::Logging::Type::LogSeverity]
-      #     Optional. The severity of the log entry. The default value is
-      #     `LogSeverity.DEFAULT`.
+      #     Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`.
       # @!attribute [rw] insert_id
       #   @return [String]
-      #     Optional. A unique identifier for the log entry. If you provide a value,
-      #     then Logging considers other log entries in the same project, with the same
+      #     Optional. A unique identifier for the log entry. If you provide a value, then
+      #     Logging considers other log entries in the same project, with the same
       #     `timestamp`, and with the same `insert_id` to be duplicates which are
       #     removed in a single query result. However, there are no guarantees of
       #     de-duplication in the export of logs.
@@ -101,32 +99,21 @@ module Google
       #     the same `log_name` and `timestamp` values.
       # @!attribute [rw] http_request
       #   @return [Google::Logging::Type::HttpRequest]
-      #     Optional. Information about the HTTP request associated with this log
-      #     entry, if applicable.
+      #     Optional. Information about the HTTP request associated with this log entry, if
+      #     applicable.
       # @!attribute [rw] labels
       #   @return [Hash{String => String}]
       #     Optional. A set of user-defined (key, value) data that provides additional
       #     information about the log entry.
-      # @!attribute [rw] metadata
-      #   @return [Google::Api::MonitoredResourceMetadata]
-      #     Deprecated. Output only. Additional metadata about the monitored resource.
-      #
-      #     Only `k8s_container`, `k8s_pod`, and `k8s_node` MonitoredResources have
-      #     this field populated for GKE versions older than 1.12.6. For GKE versions
-      #     1.12.6 and above, the `metadata` field has been deprecated. The Kubernetes
-      #     pod labels that used to be in `metadata.userLabels` will now be present in
-      #     the `labels` field with a key prefix of `k8s-pod/`. The Stackdriver system
-      #     labels that were present in the `metadata.systemLabels` field will no
-      #     longer be available in the LogEntry.
       # @!attribute [rw] operation
       #   @return [Google::Logging::V2::LogEntryOperation]
       #     Optional. Information about an operation associated with the log entry, if
       #     applicable.
       # @!attribute [rw] trace
       #   @return [String]
-      #     Optional. Resource name of the trace associated with the log entry, if any.
-      #     If it contains a relative resource name, the name is assumed to be relative
-      #     to `//tracing.googleapis.com`. Example:
+      #     Optional. Resource name of the trace associated with the log entry, if any. If it
+      #     contains a relative resource name, the name is assumed to be relative to
+      #     `//tracing.googleapis.com`. Example:
       #     `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
       # @!attribute [rw] span_id
       #   @return [String]
@@ -134,7 +121,7 @@ module Google
       #
       #     For Trace spans, this is the same format that the Trace API v2 uses: a
       #     16-character hexadecimal encoding of an 8-byte array, such as
-      #     <code>"000000000000004a"</code>.
+      #     `000000000000004a`.
       # @!attribute [rw] trace_sampled
       #   @return [true, false]
       #     Optional. The sampling decision of the trace associated with the log entry.
@@ -146,8 +133,7 @@ module Google
       #     request correlation identifier. The default is False.
       # @!attribute [rw] source_location
       #   @return [Google::Logging::V2::LogEntrySourceLocation]
-      #     Optional. Source code location information associated with the log entry,
-      #     if any.
+      #     Optional. Source code location information associated with the log entry, if any.
       class LogEntry; end
 
       # Additional information about a potentially long-running operation with which
