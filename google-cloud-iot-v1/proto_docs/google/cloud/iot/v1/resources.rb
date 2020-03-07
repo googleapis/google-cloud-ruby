@@ -100,7 +100,7 @@ module Google
         #     [Output only] The state most recently received from the device. If no state
         #     has been reported, this field is not present.
         # @!attribute [rw] log_level
-        #   @return [ENUM(LogLevel)]
+        #   @return [Google::Cloud::Iot::V1::LogLevel]
         #     **Beta Feature**
         #
         #     The logging verbosity for device activity. If unspecified,
@@ -138,10 +138,10 @@ module Google
 
         # Gateway-related configuration and state.
         # @!attribute [rw] gateway_type
-        #   @return [ENUM(GatewayType)]
+        #   @return [Google::Cloud::Iot::V1::GatewayType]
         #     Indicates whether the device is a gateway.
         # @!attribute [rw] gateway_auth_method
-        #   @return [ENUM(GatewayAuthMethod)]
+        #   @return [Google::Cloud::Iot::V1::GatewayAuthMethod]
         #     Indicates how to authorize and/or authenticate devices to access the
         #     gateway.
         # @!attribute [rw] last_accessed_gateway_id
@@ -190,7 +190,7 @@ module Google
         #   @return [Google::Cloud::Iot::V1::HttpConfig]
         #     The DeviceService (HTTP) configuration for this device registry.
         # @!attribute [rw] log_level
-        #   @return [ENUM(LogLevel)]
+        #   @return [Google::Cloud::Iot::V1::LogLevel]
         #     **Beta Feature**
         #
         #     The default logging verbosity for activity from devices in this registry.
@@ -215,7 +215,7 @@ module Google
 
         # The configuration of MQTT for a device registry.
         # @!attribute [rw] mqtt_enabled_state
-        #   @return [ENUM(MqttState)]
+        #   @return [Google::Cloud::Iot::V1::MqttState]
         #     If enabled, allows connections using the MQTT protocol. Otherwise, MQTT
         #     connections to this registry will fail.
         class MqttConfig
@@ -225,7 +225,7 @@ module Google
 
         # The configuration of the HTTP bridge for a device registry.
         # @!attribute [rw] http_enabled_state
-        #   @return [ENUM(HttpState)]
+        #   @return [Google::Cloud::Iot::V1::HttpState]
         #     If enabled, allows devices to use DeviceService via the HTTP protocol.
         #     Otherwise, any requests to DeviceService will fail for this registry.
         class HttpConfig
@@ -294,7 +294,7 @@ module Google
 
         # A public key certificate format and data.
         # @!attribute [rw] format
-        #   @return [ENUM(PublicKeyCertificateFormat)]
+        #   @return [Google::Cloud::Iot::V1::PublicKeyCertificateFormat]
         #     The certificate format.
         # @!attribute [rw] certificate
         #   @return [String]
@@ -333,7 +333,7 @@ module Google
 
         # A public key format and data.
         # @!attribute [rw] format
-        #   @return [ENUM(PublicKeyFormat)]
+        #   @return [Google::Cloud::Iot::V1::PublicKeyFormat]
         #     The format of the key.
         # @!attribute [rw] key
         #   @return [String]

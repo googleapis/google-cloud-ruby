@@ -208,7 +208,7 @@ module Google
 
         # Options for limiting the list based on gateway type and associations.
         # @!attribute [rw] gateway_type
-        #   @return [ENUM(GatewayType)]
+        #   @return [Google::Cloud::Iot::V1::GatewayType]
         #     If `GATEWAY` is specified, only gateways are returned. If `NON_GATEWAY`
         #     is specified, only non-gateway devices are returned. If
         #     `GATEWAY_TYPE_UNSPECIFIED` is specified, all devices are returned.
