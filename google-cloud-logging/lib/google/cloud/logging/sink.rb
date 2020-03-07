@@ -25,10 +25,7 @@ module Google
       # a sink, new log entries are exported. Stackdriver Logging does not send
       # previously-ingested log entries to the sink's destination.
       #
-      # A logs filter controls which log entries are exported. Sinks can have a
-      # start time and an end time; these can be used to place log entries from
-      # an exact time range into a particular destination.  If both `start_at`
-      # and `end_at` are present, then `start_at` must be less than `end_at`.
+      # A logs filter controls which log entries are exported.
       #
       # Before creating the sink, ensure that you have granted
       # `cloud-logs@google.com` permission to write logs to the destination. See

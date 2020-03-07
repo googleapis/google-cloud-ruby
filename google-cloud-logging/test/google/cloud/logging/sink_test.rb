@@ -73,8 +73,6 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
   it "can save itself" do
     now = Time.now
     now_grpc = Google::Protobuf::Timestamp.new(seconds: now.to_i, nanos: now.nsec)
-    sink_grpc.start_time = nil
-    sink_grpc.end_time = now_grpc
 
     new_sink_destination = "storage.googleapis.com/new-sink-bucket"
     new_sink_filter = "logName:syslog AND severity>=WARN"
