@@ -25,7 +25,7 @@ module Google
         #     supported, which must be specified in the following format:
         #     `gs://bucket-id/object-id` (other URI formats return
         #     {Google::Rpc::Code::INVALID_ARGUMENT}). For
-        #     more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris). A video
+        #     more information, see [Request URIs](https://cloud.google.com/storage/docs/request-endpoints). A video
         #     URI may include wildcards in `object-id`, and thus identify multiple
         #     videos. Supported wildcards: '*' to match 0 or more characters;
         #     '?' to match 1 character. If unset, the input video should be embedded
@@ -48,7 +48,7 @@ module Google
         #     URIs are supported, which must be specified in the following format:
         #     `gs://bucket-id/object-id` (other URI formats return
         #     {Google::Rpc::Code::INVALID_ARGUMENT}). For
-        #     more information, see [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+        #     more information, see [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
         # @!attribute [rw] location_id
         #   @return [String]
         #     Optional. Cloud region where annotation should take place. Supported cloud
