@@ -37,7 +37,18 @@ module Google
             attr_reader :language_service_stub
 
             ##
-            # Configuration for the LanguageService Client API.
+            # Configure the LanguageService Client class.
+            #
+            # See {Google::Cloud::Language::V1beta2::LanguageService::Client::Configuration}
+            # for a description of the configuration fields.
+            #
+            # ## Example
+            #
+            # To modify the configuration for all LanguageService clients:
+            #
+            #     Google::Cloud::Language::V1beta2::LanguageService::Client.configure do |config|
+            #       config.timeout = 10_000
+            #     end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -66,6 +77,9 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
+            # See {Google::Cloud::Language::V1beta2::LanguageService::Client::Configuration}
+            # for a description of the configuration fields.
+            #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
             #
@@ -77,9 +91,23 @@ module Google
             end
 
             ##
-            # Create a new Client client object.
+            # Create a new LanguageService client object.
             #
-            # @yield [config] Configure the Client client.
+            # ## Examples
+            #
+            # To create a new LanguageService client with the default
+            # configuration:
+            #
+            #     client = Google::Cloud::Language::V1beta2::LanguageService::Client.new
+            #
+            # To create a new LanguageService client with a custom
+            # configuration:
+            #
+            #     client = Google::Cloud::Language::V1beta2::LanguageService::Client.new do |config|
+            #       config.timeout = 10_000
+            #     end
+            #
+            # @yield [config] Configure the LanguageService client.
             # @yieldparam config [Client::Configuration]
             #
             def initialize
@@ -101,7 +129,7 @@ module Google
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
-
+              @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
               @language_service_stub = Gapic::ServiceStub.new(
                 Google::Cloud::Language::V1beta2::LanguageService::Stub,
@@ -126,7 +154,7 @@ module Google
             # @overload analyze_sentiment(document: nil, encoding_type: nil)
             #   @param document [Google::Cloud::Language::V1beta2::Document | Hash]
             #     Required. Input document.
-            #   @param encoding_type [ENUM(EncodingType)]
+            #   @param encoding_type [Google::Cloud::Language::V1beta2::EncodingType]
             #     The encoding type used by the API to calculate sentence offsets for the
             #     sentence sentiment.
             #
@@ -150,10 +178,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.analyze_sentiment.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Language::V1beta2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               options.apply_defaults timeout:      @config.rpcs.analyze_sentiment.timeout,
                                      metadata:     metadata,
@@ -185,7 +214,7 @@ module Google
             # @overload analyze_entities(document: nil, encoding_type: nil)
             #   @param document [Google::Cloud::Language::V1beta2::Document | Hash]
             #     Required. Input document.
-            #   @param encoding_type [ENUM(EncodingType)]
+            #   @param encoding_type [Google::Cloud::Language::V1beta2::EncodingType]
             #     The encoding type used by the API to calculate offsets.
             #
             #
@@ -208,10 +237,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.analyze_entities.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Language::V1beta2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               options.apply_defaults timeout:      @config.rpcs.analyze_entities.timeout,
                                      metadata:     metadata,
@@ -241,7 +271,7 @@ module Google
             # @overload analyze_entity_sentiment(document: nil, encoding_type: nil)
             #   @param document [Google::Cloud::Language::V1beta2::Document | Hash]
             #     Required. Input document.
-            #   @param encoding_type [ENUM(EncodingType)]
+            #   @param encoding_type [Google::Cloud::Language::V1beta2::EncodingType]
             #     The encoding type used by the API to calculate offsets.
             #
             #
@@ -264,10 +294,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.analyze_entity_sentiment.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Language::V1beta2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               options.apply_defaults timeout:      @config.rpcs.analyze_entity_sentiment.timeout,
                                      metadata:     metadata,
@@ -299,7 +330,7 @@ module Google
             # @overload analyze_syntax(document: nil, encoding_type: nil)
             #   @param document [Google::Cloud::Language::V1beta2::Document | Hash]
             #     Required. Input document.
-            #   @param encoding_type [ENUM(EncodingType)]
+            #   @param encoding_type [Google::Cloud::Language::V1beta2::EncodingType]
             #     The encoding type used by the API to calculate offsets.
             #
             #
@@ -322,10 +353,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.analyze_syntax.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Language::V1beta2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               options.apply_defaults timeout:      @config.rpcs.analyze_syntax.timeout,
                                      metadata:     metadata,
@@ -374,10 +406,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.classify_text.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Language::V1beta2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               options.apply_defaults timeout:      @config.rpcs.classify_text.timeout,
                                      metadata:     metadata,
@@ -409,7 +442,7 @@ module Google
             #     Required. Input document.
             #   @param features [Google::Cloud::Language::V1beta2::AnnotateTextRequest::Features | Hash]
             #     Required. The enabled features.
-            #   @param encoding_type [ENUM(EncodingType)]
+            #   @param encoding_type [Google::Cloud::Language::V1beta2::EncodingType]
             #     The encoding type used by the API to calculate offsets.
             #
             #
@@ -432,10 +465,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.annotate_text.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Language::V1beta2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               options.apply_defaults timeout:      @config.rpcs.annotate_text.timeout,
                                      metadata:     metadata,
@@ -453,6 +487,81 @@ module Google
 
             ##
             # Configuration class for the LanguageService API.
+            #
+            # This class represents the configuration for LanguageService,
+            # providing control over timeouts, retry behavior, logging, transport
+            # parameters, and other low-level controls. Certain parameters can also be
+            # applied individually to specific RPCs. See
+            # {Google::Cloud::Language::V1beta2::LanguageService::Client::Configuration::Rpcs}
+            # for a list of RPCs that can be configured independently.
+            #
+            # Configuration can be applied globally to all clients, or to a single client
+            # on construction.
+            #
+            # # Examples
+            #
+            # To modify the global config, setting the timeout for analyze_sentiment
+            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #
+            #     Google::Cloud::Language::V1beta2::LanguageService::Client.configure do |config|
+            #       config.timeout = 10_000
+            #       config.rpcs.analyze_sentiment.timeout = 20_000
+            #     end
+            #
+            # To apply the above configuration only to a new client:
+            #
+            #     client = Google::Cloud::Language::V1beta2::LanguageService::Client.new do |config|
+            #       config.timeout = 10_000
+            #       config.rpcs.analyze_sentiment.timeout = 20_000
+            #     end
+            #
+            # @!attribute [rw] endpoint
+            #   The hostname or hostname:port of the service endpoint.
+            #   Defaults to `"language.googleapis.com"`.
+            #   @return [String]
+            # @!attribute [rw] credentials
+            #   Credentials to send with calls. You may provide any of the following types:
+            #    *  (`String`) The path to a service account key file in JSON format
+            #    *  (`Hash`) A service account key as a Hash
+            #    *  (`Google::Auth::Credentials`) A googleauth credentials object
+            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
+            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
+            #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
+            #    *  (`nil`) indicating no credentials
+            #   @return [Object]
+            # @!attribute [rw] scope
+            #   The OAuth scopes
+            #   @return [Array<String>]
+            # @!attribute [rw] lib_name
+            #   The library name as recorded in instrumentation and logging
+            #   @return [String]
+            # @!attribute [rw] lib_version
+            #   The library version as recorded in instrumentation and logging
+            #   @return [String]
+            # @!attribute [rw] channel_args
+            #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
+            #   `GRPC::Core::Channel` object is provided as the credential.
+            #   @return [Hash]
+            # @!attribute [rw] interceptors
+            #   An array of interceptors that are run before calls are executed.
+            #   @return [Array<GRPC::ClientInterceptor>]
+            # @!attribute [rw] timeout
+            #   The call timeout in milliseconds.
+            #   @return [Numeric]
+            # @!attribute [rw] metadata
+            #   Additional gRPC headers to be sent with the call.
+            #   @return [Hash{Symbol=>String}]
+            # @!attribute [rw] retry_policy
+            #   The retry policy. The value is a hash with the following keys:
+            #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+            #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+            #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+            #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+            #       trigger a retry.
+            #   @return [Hash]
+            #
             class Configuration
               extend Gapic::Config
 
@@ -471,12 +580,17 @@ module Google
               config_attr :metadata,     nil, Hash, nil
               config_attr :retry_policy, nil, Hash, Proc, nil
 
+              # @private
               def initialize parent_config = nil
                 @parent_config = parent_config unless parent_config.nil?
 
                 yield self if block_given?
               end
 
+              ##
+              # Configurations for individual RPCs
+              # @return [Rpcs]
+              #
               def rpcs
                 @rpcs ||= begin
                   parent_rpcs = nil
@@ -487,14 +601,54 @@ module Google
 
               ##
               # Configuration RPC class for the LanguageService API.
+              #
+              # Includes fields providing the configuration for each RPC in this service.
+              # Each configuration object is of type `Gapic::Config::Method` and includes
+              # the following configuration fields:
+              #
+              #  *  `timeout` (*type:* `Numeric`) - The call timeout in milliseconds
+              #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional gRPC headers
+              #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
+              #     include the following keys:
+              #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+              #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+              #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+              #         trigger a retry.
+              #
               class Rpcs
+                ##
+                # RPC-specific configuration for `analyze_sentiment`
+                # @return [Gapic::Config::Method]
+                #
                 attr_reader :analyze_sentiment
+                ##
+                # RPC-specific configuration for `analyze_entities`
+                # @return [Gapic::Config::Method]
+                #
                 attr_reader :analyze_entities
+                ##
+                # RPC-specific configuration for `analyze_entity_sentiment`
+                # @return [Gapic::Config::Method]
+                #
                 attr_reader :analyze_entity_sentiment
+                ##
+                # RPC-specific configuration for `analyze_syntax`
+                # @return [Gapic::Config::Method]
+                #
                 attr_reader :analyze_syntax
+                ##
+                # RPC-specific configuration for `classify_text`
+                # @return [Gapic::Config::Method]
+                #
                 attr_reader :classify_text
+                ##
+                # RPC-specific configuration for `annotate_text`
+                # @return [Gapic::Config::Method]
+                #
                 attr_reader :annotate_text
 
+                # @private
                 def initialize parent_rpcs = nil
                   analyze_sentiment_config = parent_rpcs&.analyze_sentiment if parent_rpcs&.respond_to? :analyze_sentiment
                   @analyze_sentiment = Gapic::Config::Method.new analyze_sentiment_config
