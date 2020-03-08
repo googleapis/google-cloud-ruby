@@ -31,8 +31,11 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
+    subscriber.max_outstanding_messages.must_equal 1000
     subscriber.inventory_bytesize.must_equal 100000000
+    subscriber.max_outstanding_bytes.must_equal 100000000
     subscriber.inventory_extension.must_equal 3600
+    subscriber.max_total_lease_duration.must_equal 3600
   end
 
   it "will set deadline while creating a Subscriber" do
@@ -45,8 +48,11 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
+    subscriber.max_outstanding_messages.must_equal 1000
     subscriber.inventory_bytesize.must_equal 100000000
+    subscriber.max_outstanding_bytes.must_equal 100000000
     subscriber.inventory_extension.must_equal 3600
+    subscriber.max_total_lease_duration.must_equal 3600
   end
 
   it "will set deadline while creating a Subscriber" do
@@ -59,8 +65,11 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
+    subscriber.max_outstanding_messages.must_equal 1000
     subscriber.inventory_bytesize.must_equal 100000000
+    subscriber.max_outstanding_bytes.must_equal 100000000
     subscriber.inventory_extension.must_equal 3600
+    subscriber.max_total_lease_duration.must_equal 3600
   end
 
   it "will set inventory (deprecated) while creating a Subscriber" do
@@ -73,11 +82,31 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 500
     subscriber.inventory_limit.must_equal 500
+    subscriber.max_outstanding_messages.must_equal 500
     subscriber.inventory_bytesize.must_equal 100000000
+    subscriber.max_outstanding_bytes.must_equal 100000000
     subscriber.inventory_extension.must_equal 3600
+    subscriber.max_total_lease_duration.must_equal 3600
   end
 
-  it "will set inventory while creating a Subscriber" do
+  it "will set inventory max_outstanding_messages while creating a Subscriber" do
+    subscriber = subscription.listen(inventory: { max_outstanding_messages: 500 }) do |msg|
+      puts msg.msg_id
+    end
+    subscriber.must_be_kind_of Google::Cloud::PubSub::Subscriber
+    subscriber.subscription_name.must_equal subscription.name
+    subscriber.deadline.must_equal 60
+    subscriber.streams.must_equal 2
+    subscriber.inventory.must_equal 500
+    subscriber.inventory_limit.must_equal 500
+    subscriber.max_outstanding_messages.must_equal 500
+    subscriber.inventory_bytesize.must_equal 100000000
+    subscriber.max_outstanding_bytes.must_equal 100000000
+    subscriber.inventory_extension.must_equal 3600
+    subscriber.max_total_lease_duration.must_equal 3600
+  end
+
+  it "will set inventory limit alias while creating a Subscriber" do
     subscriber = subscription.listen(inventory: { limit: 500 }) do |msg|
       puts msg.msg_id
     end
@@ -87,11 +116,31 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 500
     subscriber.inventory_limit.must_equal 500
+    subscriber.max_outstanding_messages.must_equal 500
     subscriber.inventory_bytesize.must_equal 100000000
+    subscriber.max_outstanding_bytes.must_equal 100000000
     subscriber.inventory_extension.must_equal 3600
+    subscriber.max_total_lease_duration.must_equal 3600
   end
 
-  it "will set inventory while creating a Subscriber" do
+  it "will set inventory max_outstanding_bytes while creating a Subscriber" do
+    subscriber = subscription.listen(inventory: { max_outstanding_bytes: 50_000 }) do |msg|
+      puts msg.msg_id
+    end
+    subscriber.must_be_kind_of Google::Cloud::PubSub::Subscriber
+    subscriber.subscription_name.must_equal subscription.name
+    subscriber.deadline.must_equal 60
+    subscriber.streams.must_equal 2
+    subscriber.inventory.must_equal 1000
+    subscriber.inventory_limit.must_equal 1000
+    subscriber.max_outstanding_messages.must_equal 1000
+    subscriber.inventory_bytesize.must_equal 50_000
+    subscriber.max_outstanding_bytes.must_equal 50_000
+    subscriber.inventory_extension.must_equal 3600
+    subscriber.max_total_lease_duration.must_equal 3600
+  end
+
+  it "will set inventory bytesize alias while creating a Subscriber" do
     subscriber = subscription.listen(inventory: { bytesize: 50_000 }) do |msg|
       puts msg.msg_id
     end
@@ -101,11 +150,31 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
+    subscriber.max_outstanding_messages.must_equal 1000
     subscriber.inventory_bytesize.must_equal 50_000
+    subscriber.max_outstanding_bytes.must_equal 50_000
     subscriber.inventory_extension.must_equal 3600
+    subscriber.max_total_lease_duration.must_equal 3600
   end
 
-  it "will set inventory while creating a Subscriber" do
+  it "will set inventory max_total_lease_duration while creating a Subscriber" do
+    subscriber = subscription.listen(inventory: { max_total_lease_duration: 7_200 }) do |msg|
+      puts msg.msg_id
+    end
+    subscriber.must_be_kind_of Google::Cloud::PubSub::Subscriber
+    subscriber.subscription_name.must_equal subscription.name
+    subscriber.deadline.must_equal 60
+    subscriber.streams.must_equal 2
+    subscriber.inventory.must_equal 1000
+    subscriber.inventory_limit.must_equal 1000
+    subscriber.max_outstanding_messages.must_equal 1000
+    subscriber.inventory_bytesize.must_equal 100000000
+    subscriber.max_outstanding_bytes.must_equal 100000000
+    subscriber.inventory_extension.must_equal 7200
+    subscriber.max_total_lease_duration.must_equal 7200
+  end
+
+  it "will set inventory extension alias while creating a Subscriber" do
     subscriber = subscription.listen(inventory: { extension: 7_200 }) do |msg|
       puts msg.msg_id
     end
@@ -115,7 +184,10 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     subscriber.streams.must_equal 2
     subscriber.inventory.must_equal 1000
     subscriber.inventory_limit.must_equal 1000
+    subscriber.max_outstanding_messages.must_equal 1000
     subscriber.inventory_bytesize.must_equal 100000000
+    subscriber.max_outstanding_bytes.must_equal 100000000
     subscriber.inventory_extension.must_equal 7200
+    subscriber.max_total_lease_duration.must_equal 7200
   end
 end

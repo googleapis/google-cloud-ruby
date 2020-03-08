@@ -82,11 +82,7 @@ module Google
           @subscription_name = subscription_name
           @deadline = deadline || 60
           @streams = streams || 2
-          @inventory = inventory
-          @inventory = { limit: @inventory } unless inventory.is_a? Hash
-          @inventory[:limit] = Integer(@inventory[:limit] || 1000)
-          @inventory[:bytesize] = Integer(@inventory[:bytesize] || 100_000_000)
-          @inventory[:extension] = Integer(@inventory[:extension] || 3600)
+          coerce_inventory inventory
           @message_ordering = message_ordering
           @callback_threads = Integer(threads[:callback] || 8)
           @push_threads = Integer(threads[:push] || 4)
@@ -283,31 +279,37 @@ module Google
 
         ##
         # The number of received messages to be collected by subscriber. Default is 1,000.
-        def inventory_limit
-          @inventory[:limit]
+        def max_outstanding_messages
+          @inventory[:max_outstanding_messages]
         end
-        # @deprecated Use {#inventory_limit}.
-        alias inventory inventory_limit
+        # @deprecated Use {#max_outstanding_messages}.
+        alias inventory_limit max_outstanding_messages
+        # @deprecated Use {#max_outstanding_messages}.
+        alias inventory max_outstanding_messages
 
         ##
-        # The total bytesize of received messages to be collected by subscriber. Default is 100,000,000 (100MB).
-        def inventory_bytesize
-          @inventory[:bytesize]
+        # The total byte size of received messages to be collected by subscriber. Default is 100,000,000 (100MB).
+        def max_outstanding_bytes
+          @inventory[:max_outstanding_bytes]
         end
+        # @deprecated Use {#max_outstanding_bytes}.
+        alias inventory_bytesize max_outstanding_bytes
 
         ##
         # The number of seconds that received messages can be held awaiting processing. Default is 3,600 (1 hour).
-        def inventory_extension
-          @inventory[:extension]
+        def max_total_lease_duration
+          @inventory[:max_total_lease_duration]
         end
+        # @deprecated Use {#max_total_lease_duration}.
+        alias inventory_extension max_total_lease_duration
 
         ##
         # @private
         def stream_inventory
           {
-            limit:     @inventory[:limit].fdiv(@streams).ceil,
-            bytesize:  @inventory[:bytesize].fdiv(@streams).ceil,
-            extension: @inventory[:extension]
+            limit:     @inventory[:max_outstanding_messages].fdiv(@streams).ceil,
+            bytesize:  @inventory[:max_outstanding_bytes].fdiv(@streams).ceil,
+            extension: @inventory[:max_total_lease_duration]
           }
         end
 
@@ -334,6 +336,21 @@ module Google
         end
 
         protected
+
+        def coerce_inventory inventory
+          @inventory = inventory
+          if @inventory.is_a? Hash
+            # Support deprecated field names
+            @inventory[:max_outstanding_messages] = @inventory[:limit] if @inventory[:limit]
+            @inventory[:max_outstanding_bytes] = @inventory[:bytesize] if @inventory[:bytesize]
+            @inventory[:max_total_lease_duration] = @inventory[:extension] if @inventory[:extension]
+          else
+            @inventory = { max_outstanding_messages: @inventory }
+          end
+          @inventory[:max_outstanding_messages] = Integer(@inventory[:max_outstanding_messages] || 1000)
+          @inventory[:max_outstanding_bytes] = Integer(@inventory[:max_outstanding_bytes] || 100_000_000)
+          @inventory[:max_total_lease_duration] = Integer(@inventory[:max_total_lease_duration] || 3600)
+        end
 
         def default_error_callbacks
           # This is memoized to reduce calls to the configuration.

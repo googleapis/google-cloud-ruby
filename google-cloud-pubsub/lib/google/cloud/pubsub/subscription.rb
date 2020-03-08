@@ -693,11 +693,12 @@ module Google
         #
         #   Hash keys and values may include the following:
         #
-        #     * `:limit` (Integer) The number of received messages to be collected by subscriber. Default is 1,000.
-        #     * `:bytesize` (Integer) The total bytesize of received messages to be collected by subscriber. Default is
-        #       100,000,000 (100MB).
-        #     * `:extension` (Integer) The number of seconds that received messages can be held awaiting processing.
-        #       Default is 3,600 (1 hour).
+        #     * `:max_outstanding_messages` (or `:limit`) [Integer] The number of received messages to be collected by
+        #       subscriber. Default is 1,000.
+        #     * `:max_outstanding_bytes` (or `:bytesize`) [Integer] The total byte size of received messages to be
+        #       collected by subscriber. Default is 100,000,000 (100MB).
+        #     * `:max_total_lease_duration` (or `:extension`) [Integer] The number of seconds that received messages can
+        #       be held awaiting processing. Default is 3,600 (1 hour).
         # @param [Hash] threads The number of threads to create to handle
         #   concurrent calls by each stream opened by the subscriber. Optional.
         #
