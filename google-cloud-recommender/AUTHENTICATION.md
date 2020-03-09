@@ -26,7 +26,7 @@ export RECOMMENDER_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/recommender"
 
-client = Google::Cloud::Recommender.new
+client = Google::Cloud::Recommender.recommender_service
 ```
 
 ## Credential Lookup
@@ -49,7 +49,7 @@ code.
 
 When running on Google Cloud Platform (GCP), including Google Compute Engine (GCE),
 Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions
-(GCF) and Cloud Run, the **Project ID** and **Credentials** and are discovered
+(GCF) and Cloud Run, the **Credentials** and are discovered
 automatically. Code should be written as if already authenticated.
 
 ### Environment Variables
@@ -63,7 +63,8 @@ environment variable, or the **Credentials JSON** itself can be stored for
 environments such as Docker containers where writing files is difficult or not
 encouraged.
 
-The environment variables that google-cloud-recommender checks for credentials are configured on `Google::Cloud::Recommender::V1::Recommender::Credentials`:
+The environment variables that google-cloud-recommender checks for credentials
+are configured on `Google::Cloud::Recommender::V1::Recommender::Credentials`:
 
 1. `RECOMMENDER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `RECOMMENDER_KEYFILE` - Path to JSON file, or JSON contents
@@ -76,17 +77,18 @@ require "google/cloud/recommender"
 
 ENV["RECOMMENDER_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Recommender.new
+client = Google::Cloud::Recommender.recommender_service
 ```
 
 ### Configuration
 
-The **Credentials JSON** can be configured instead of placing them in environment variables. Either on an individual client initialization:
+The **Credentials JSON** can be configured instead of placing them in
+environment variables. Either on an individual client initialization:
 
 ```ruby
 require "google/cloud/recommender"
 
-client = Google::Cloud::Recommender.new do |config|
+client = Google::Cloud::Recommender.recommender_service do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -100,7 +102,7 @@ Google::Cloud::Recommender.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Recommender.new
+client = Google::Cloud::Recommender.recommender_service
 ```
 
 ### Cloud SDK
@@ -138,15 +140,15 @@ environments](#google-cloud-platform-environments), you need a Google
 Developers service account.
 
 1. Visit the [Google Developers Console][dev-console].
-1. Create a new project or click on an existing project.
-1. Activate the slide-out navigation tray and select **API Manager**. From
+2. Create a new project or click on an existing project.
+3. Activate the slide-out navigation tray and select **API Manager**. From
    here, you will enable the APIs that your application requires.
 
    ![Enable the APIs that your application requires][enable-apis]
 
    *Note: You may need to enable billing in order to use these services.*
 
-1. Select **Credentials** from the side navigation.
+4. Select **Credentials** from the side navigation.
 
    You should see a screen like one of the following.
 
@@ -165,8 +167,3 @@ Developers service account.
 
    The key file you download will be used by this library to authenticate API
    requests and should be stored in a secure location.
-
-## Troubleshooting
-
-If you're having trouble authenticating you can ask for help by following the
-{file:TROUBLESHOOTING.md Troubleshooting Guide}.
