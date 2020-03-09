@@ -49,7 +49,7 @@ code.
 
 When running on Google Cloud Platform (GCP), including Google Compute Engine (GCE),
 Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions
-(GCF) and Cloud Run, the **Credentials** and are discovered
+(GCF) and Cloud Run, the **Credentials** are discovered
 automatically. Code should be written as if already authenticated.
 
 ### Environment Variables
