@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.2 / 2020-03-09
+
+#### Documentation
+
+* Update documentation in the lower-level client
+
 ### 1.3.1 / 2020-02-18
 
 #### Bug Fixes
