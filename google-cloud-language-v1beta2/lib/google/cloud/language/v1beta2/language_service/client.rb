@@ -64,7 +64,57 @@ module Google
                                   break parent_const.configure if parent_const&.respond_to? :configure
                                   namespace.pop
                                 end
-                Client::Configuration.new parent_config
+                default_config = Client::Configuration.new parent_config
+
+                default_config.rpcs.analyze_sentiment.timeout = 600.0
+                default_config.rpcs.analyze_sentiment.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.analyze_entities.timeout = 600.0
+                default_config.rpcs.analyze_entities.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.analyze_entity_sentiment.timeout = 600.0
+                default_config.rpcs.analyze_entity_sentiment.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.analyze_syntax.timeout = 600.0
+                default_config.rpcs.analyze_syntax.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.classify_text.timeout = 600.0
+                default_config.rpcs.classify_text.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.annotate_text.timeout = 600.0
+                default_config.rpcs.annotate_text.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config
               end
               yield @configure if block_given?
               @configure
