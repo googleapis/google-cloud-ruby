@@ -98,27 +98,6 @@ module Google
             Google::Cloud::Storage::PostObject.new hostname, fields
           end
 
-          def required_fields issuer, time
-            {
-              "key" => @file_name,
-              "x-goog-date" => time.strftime("%Y%m%dT%H%M%SZ"),
-              "x-goog-credential" => "#{issuer}/#{time.strftime '%Y%m%d'}/auto/storage/goog4_request",
-              "x-goog-algorithm" => "GOOG4-RSA-SHA256"
-            }
-          end
-
-          def policy_conditions base_fields, user_conditions, user_fields
-            # Convert each pair in base_fields hash to a single-entry hash in an array.
-            base_conditions = base_fields.to_a.map { |f| Hash[*f] }
-            # Add user-provided conditions to the head of the conditions array.
-            base_conditions.unshift user_conditions if user_conditions && !user_conditions.empty?
-            if user_fields
-              # Convert each pair in fields hash to a single-entry hash and add it to the head of the conditions array.
-              user_fields.to_a.each { |f| base_conditions.unshift Hash[*f] }
-            end
-            base_conditions
-          end
-
           def signed_url method: "GET",
                          expires: nil,
                          headers: nil,
@@ -172,6 +151,27 @@ module Google
           end
 
           protected
+
+          def required_fields issuer, time
+            {
+              "key" => @file_name,
+              "x-goog-date" => time.strftime("%Y%m%dT%H%M%SZ"),
+              "x-goog-credential" => "#{issuer}/#{time.strftime '%Y%m%d'}/auto/storage/goog4_request",
+              "x-goog-algorithm" => "GOOG4-RSA-SHA256"
+            }
+          end
+
+          def policy_conditions base_fields, user_conditions, user_fields
+            # Convert each pair in base_fields hash to a single-entry hash in an array.
+            base_conditions = base_fields.to_a.map { |f| Hash[*f] }
+            # Add user-provided conditions to the head of the conditions array.
+            base_conditions.unshift user_conditions if user_conditions && !user_conditions.empty?
+            if user_fields
+              # Convert each pair in fields hash to a single-entry hash and add it to the head of the conditions array.
+              user_fields.to_a.each { |f| base_conditions.unshift Hash[*f] }
+            end
+            base_conditions
+          end
 
           def signed_url_hostname scheme, virtual_hosted_style, bucket_bound_hostname
             url = ext_url scheme, virtual_hosted_style, bucket_bound_hostname

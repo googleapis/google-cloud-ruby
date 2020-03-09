@@ -76,10 +76,15 @@ module Google
                            scheme: "https",
                            virtual_hosted_style: nil,
                            bucket_bound_hostname: nil
-          Google::Cloud::Storage::PostObject.new "https://storage.googleapis.com/my-todo-app/",
-            { "key" => "my-todo-app/avatars/heidi/400x400.png",
-              "x-goog-signature" => "ABC...XYZ=",
-              "policy" => "ABC...XYZ=" }
+          fields = {
+            "key" => "my-todo-app/avatars/heidi/400x400.png",
+            "policy" => "ABC...XYZ",
+            "x-goog-algorithm" => "GOOG4-RSA-SHA256",
+            "x-goog-credential" => "cred@pid.iam.gserviceaccount.com/20200123/auto/storage/goog4_request",
+            "x-goog-date" => "20200128T000000Z",
+            "x-goog-signature" => "4893a0e...cd82",
+          }
+          Google::Cloud::Storage::PostObject.new "https://storage.googleapis.com/my-todo-app/", fields
         end
       end
       class File

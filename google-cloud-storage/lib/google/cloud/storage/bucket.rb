@@ -1693,7 +1693,7 @@ module Google
         # `issuer` and `signing_key` values. Although the private key can
         # be passed as a string for convenience, creating and storing
         # an instance of # `OpenSSL::PKey::RSA` is more efficient
-        # when making multiple calls to `post_object`.
+        # when making multiple calls to `post_object_v4`.
         #
         # A {SignedUrlUnavailable} is raised if the service account credentials
         # are missing. Service account credentials are acquired by following the
@@ -1739,8 +1739,11 @@ module Google
         #
         #   post.url #=> "https://storage.googleapis.com/my-todo-app/"
         #   post.fields["key"] #=> "my-todo-app/avatars/heidi/400x400.png"
-        #   post.fields["x-goog-signature"] #=> "ABC...XYZ="
-        #   post.fields["policy"] #=> "ABC...XYZ="
+        #   post.fields["policy"] #=> "ABC...XYZ"
+        #   post.fields["x-goog-algorithm"] #=> "GOOG4-RSA-SHA256"
+        #   post.fields["x-goog-credential"] #=> "cred@pid.iam.gserviceaccount.com/20200123/auto/storage/goog4_request"
+        #   post.fields["x-goog-date"] #=> "20200128T000000Z"
+        #   post.fields["x-goog-signature"] #=> "4893a0e...cd82"
         #
         def post_object_v4 path,
                            issuer: nil,
