@@ -340,10 +340,11 @@ module Google
         def coerce_inventory inventory
           @inventory = inventory
           if @inventory.is_a? Hash
+            @inventory = @inventory.dup
             # Support deprecated field names
-            @inventory[:max_outstanding_messages] = @inventory[:limit] if @inventory[:limit]
-            @inventory[:max_outstanding_bytes] = @inventory[:bytesize] if @inventory[:bytesize]
-            @inventory[:max_total_lease_duration] = @inventory[:extension] if @inventory[:extension]
+            @inventory[:max_outstanding_messages] ||= @inventory.delete :limit
+            @inventory[:max_outstanding_bytes] ||= @inventory.delete :bytesize
+            @inventory[:max_total_lease_duration] ||= @inventory.delete :extension
           else
             @inventory = { max_outstanding_messages: @inventory }
           end
