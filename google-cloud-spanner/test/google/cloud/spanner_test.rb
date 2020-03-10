@@ -429,7 +429,10 @@ describe Google::Cloud do
           },
           values: [
             { string_value: "1" }
-          ]
+          ],
+          stats: {
+            row_count_lower_bound: 1
+          }
         }
       end
       let(:results_grpc) { Google::Spanner::V1::PartialResultSet.new results_hash }
@@ -441,6 +444,7 @@ describe Google::Cloud do
       let(:snp_opts) { Google::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
       let(:tx_opts_read_only) { Google::Spanner::V1::TransactionOptions.new read_only: snp_opts }
       let(:tx_opts_read_write) { Google::Spanner::V1::TransactionOptions.new(read_write: Google::Spanner::V1::TransactionOptions::ReadWrite.new) }
+      let(:pdml_tx_opts) { Google::Spanner::V1::TransactionOptions.new(partitioned_dml: Google::Spanner::V1::TransactionOptions::PartitionedDml.new) }
       let(:timestamp) { Google::Protobuf::Timestamp.new seconds: 1412262083, nanos: 45123456 }
       let(:transaction_grpc) { Google::Spanner::V1::Transaction.new id: transaction_id, read_timestamp: timestamp }
       let(:batch_create_sessions_grpc) { Google::Spanner::V1::BatchCreateSessionsResponse.new session: [session_grpc] }
@@ -448,8 +452,9 @@ describe Google::Cloud do
       let(:commit_time) { Time.now }
       let(:commit_resp) { Google::Spanner::V1::CommitResponse.new commit_timestamp: Google::Cloud::Spanner::Convert.time_to_timestamp(commit_time) }
       let(:expect_query_optimizer_version) { "4" }
-      def mock_builder query_options: nil
+      def mock_builder sql: nil, query_options: nil
         query_options = {optimizer_version: expect_query_optimizer_version} if query_options.nil?
+        sql = "SELECT * FROM users" if sql.nil?
         # Mock an instance of V1::SpannerClient
         mock = Minitest::Mock.new
         mock.expect :batch_create_sessions, batch_create_sessions_grpc, [
@@ -457,10 +462,24 @@ describe Google::Cloud do
         ]
         mock.expect :execute_streaming_sql, results_enum do |session, sql_query, **kargs|
           session == session_grpc.name &&
-            sql_query == "SELECT * FROM users" &&
+            sql_query == sql &&
             kargs[:query_options] == query_options
         end
         mock
+      end
+
+      it "works for `client.execute_query` with client-level configs" do
+        expect_query_options = { optimizer_version: expect_query_optimizer_version }
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: project_id) do
+          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+            spanner = Google::Cloud::Spanner.new
+
+            spanner.service.mocked_service = mock_builder
+            client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, query_options: expect_query_options
+            client.execute_query "SELECT * FROM users"
+          end
+        end
       end
 
       it "follows that environment variable configs overwrite client-level configs" do
@@ -482,8 +501,7 @@ describe Google::Cloud do
       end
 
       it "follows that query-level configs overwrite environment variable configs" do
-        env_var_version = "3"
-        optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? env_var_version : nil }
+        optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? "3" : nil }
         # Clear all environment variables, except SPANNER_OPTIMIZER_VERSION
         ENV.stub :[], optimizer_version_check do
           # Get project_id from Google Compute Engine
@@ -538,6 +556,65 @@ describe Google::Cloud do
             mock.expect :commit, commit_resp, [session_grpc.name, [], transaction_id: transaction_id, single_use_transaction: nil, options: default_options]
             client.transaction do |tx|
               tx.execute_query "SELECT * FROM users", query_options: { optimizer_version: expect_query_optimizer_version }
+            end
+          end
+        end
+      end
+
+      it "works for `client.execute_partition_update` with client-level configs" do
+        expect_query_options = { optimizer_version: expect_query_optimizer_version }
+        # Get project_id from Google Compute Engine
+        Google::Cloud.stub :env, OpenStruct.new(project_id: project_id) do
+          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+            spanner = Google::Cloud::Spanner.new
+
+            mock = mock_builder sql: "UPDATE users SET active = true"
+            spanner.service.mocked_service = mock
+            mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, pdml_tx_opts, options: default_options]
+            
+            client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, query_options: expect_query_options
+            client.execute_partition_update "UPDATE users SET active = true"
+          end
+        end
+      end
+
+      it "works for `client.execute_partition_update` that environment variable configs overwrite client-level configs" do
+        expect_query_options = { optimizer_version: expect_query_optimizer_version, another_field: "test" }
+        optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? expect_query_optimizer_version : nil }
+        # Clear all environment variables, except SPANNER_OPTIMIZER_VERSION
+        ENV.stub :[], optimizer_version_check do
+          # Get project_id from Google Compute Engine
+          Google::Cloud.stub :env, OpenStruct.new(project_id: project_id) do
+            Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+              spanner = Google::Cloud::Spanner.new
+
+              mock = mock_builder sql: "UPDATE users SET active = true", query_options: expect_query_options
+              spanner.service.mocked_service = mock
+              mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, pdml_tx_opts, options: default_options]
+              
+              client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, query_options: { optimizer_version: "3", another_field: "test" }
+              client.execute_partition_update "UPDATE users SET active = true"
+            end
+          end
+        end
+      end
+
+      it "works for `client.execute_partition_update` that query-level configs overwrite environment variable and client-level configs" do
+        expect_query_options = { optimizer_version: expect_query_optimizer_version, another_field: "test" }
+        optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? "3" : nil }
+        # Clear all environment variables, except SPANNER_OPTIMIZER_VERSION
+        ENV.stub :[], optimizer_version_check do
+          # Get project_id from Google Compute Engine
+          Google::Cloud.stub :env, OpenStruct.new(project_id: project_id) do
+            Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+              spanner = Google::Cloud::Spanner.new
+
+              mock = mock_builder sql: "UPDATE users SET active = true", query_options: expect_query_options
+              spanner.service.mocked_service = mock
+              mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, pdml_tx_opts, options: default_options]
+              
+              client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, query_options: { optimizer_version: "2", another_field: "test" }
+              client.execute_partition_update "UPDATE users SET active = true", query_options: { optimizer_version: expect_query_optimizer_version }
             end
           end
         end

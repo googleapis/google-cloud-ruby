@@ -344,7 +344,6 @@ module Google
 
           single_use_tx = single_use_transaction single_use
           results = nil
-          query_options = @query_options if query_options.nil?
           if query_options.nil?
             query_options = @query_options
           else
@@ -480,6 +479,14 @@ module Google
         #   value in `params`. In these cases, the `types` hash can be used to
         #   specify the exact SQL type for some or all of the SQL query
         #   parameters.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
+        #
         #
         #   The keys of the hash should be query string parameter placeholders,
         #   minus the "@". The values of the hash should be Cloud Spanner type
@@ -518,16 +525,32 @@ module Google
         #    "UPDATE users SET friends = NULL WHERE active = @active",
         #    params: { active: false }
         #
-        def execute_partition_update sql, params: nil, types: nil
+        # @example Query using query options:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   row_count = db.execute_partition_update \
+        #    "UPDATE users SET friends = NULL WHERE active = false",
+        #    query_options: { optimizer_version: "1" }
+        def execute_partition_update sql, params: nil, types: nil,
+          query_options: query_options
           ensure_service!
 
           params, types = Convert.to_input_params_and_types params, types
-
+          if query_options.nil?
+            query_options = @query_options
+          else
+            query_options = @query_options.merge query_options unless @query_options.nil?
+          end
+          
           results = nil
           @pool.with_session do |session|
             results = session.execute_query \
               sql, params: params, types: types,
-                   transaction: pdml_transaction(session)
+              transaction: pdml_transaction(session),
+              query_options: query_options
           end
           # Stream all PartialResultSet to get ResultSetStats
           results.rows.to_a
