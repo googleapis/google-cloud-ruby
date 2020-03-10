@@ -14,9 +14,8 @@
 
 
 ##
-# This file is here to be autorequired by bundler, so that the .langage and
-# #langage methods can be available, but the library and all dependencies
-# won't be loaded until required and used.
+# This file is here to be autorequired by bundler, but the library and all
+# dependencies won't be loaded until required and used.
 
 
 gem "google-cloud-core"
@@ -24,7 +23,7 @@ require "google/cloud" unless defined? Google::Cloud.new
 require "google/cloud/config"
 require "googleauth"
 
-# Set the default langage configuration
+# Set the default configuration
 Google::Cloud.configure.add_config! :billing do |config|
   config.add_field! :credentials,  nil, match: [String, Hash, Google::Auth::Credentials]
   config.add_field! :lib_name,     nil, match: String

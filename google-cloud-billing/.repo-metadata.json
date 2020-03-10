@@ -2,8 +2,5 @@
     "name": "billing",
     "language": "ruby",
     "distribution_name": "google-cloud-billing",
-    "module_name": "Billing",
-    "module_name_credentials": "Billing::V1",
-    "env_var_prefix": "BILLING",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-billing/latest"
 }

@@ -2,8 +2,5 @@
     "name": "secret_manager",
     "language": "ruby",
     "distribution_name": "google-cloud-secret_manager",
-    "module_name": "SecretManager",
-    "module_name_credentials": "SecretManager::V1beta1",
-    "env_var_prefix": "SECRET_MANAGER",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-secret_manager/latest"
 }
