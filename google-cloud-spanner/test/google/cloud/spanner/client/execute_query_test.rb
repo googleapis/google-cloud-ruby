@@ -346,7 +346,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :mock_spanner do
     assert_results results
   end
 
-  it "can execute a simple query with query options (environment variable or client-level)" do
+  it "can execute a simple query with query options (client-level)" do
     expect_query_options = { optimizer_version: "4" }
     new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: expect_query_options
     mock = Minitest::Mock.new
@@ -356,24 +356,7 @@ describe Google::Cloud::Spanner::Client, :execute_query, :mock_spanner do
 
     results = new_client.execute_query "SELECT * FROM users"
 
-    shutdown_client! new_client
-
-    mock.verify
-
-    assert_results results
-  end
-
-  it "can execute a simple query with query options that query-level configs merge over environment variable or client-level configs" do
-    expect_query_options = { optimizer_version: "2", another_field: "test" }
-    new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: { optimizer_version: "1", another_field: "test" }
-    mock = Minitest::Mock.new
-    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
-    spanner.service.mocked_service = mock
-    expect_execute_streaming_sql results_enum, session_grpc.name, "SELECT * FROM users", options: default_options, query_options: expect_query_options
-
-    results = new_client.execute_query "SELECT * FROM users", query_options: { optimizer_version: "2" }
-
-    shutdown_client! new_client
+    shutdown_client! client
 
     mock.verify
 

@@ -96,4 +96,30 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
     end
     batch_snapshot.close
   end
+
+  it "queries all by default with query options" do
+    batch_snapshot = batch_client.batch_snapshot
+    serialized_snapshot = batch_snapshot.dump
+
+    sql = "SELECT s.id, s.bool FROM stuffs AS s WHERE s.id = 2 AND s.bool = false"
+    query_options = { optimizer_version: "1" }
+    partitions = batch_snapshot.partition_query sql, query_options: query_options
+    partitions.each do |partition|
+      partition.execute.partition_token.wont_be_nil
+      partition.execute.sql.must_equal sql
+
+      partition = batch_client.load_partition partition.dump
+
+      partition.execute.partition_token.wont_be_nil
+      partition.execute.sql.must_equal sql
+
+      new_batch_snapshot = batch_client.load_batch_snapshot serialized_snapshot
+      results = new_batch_snapshot.execute_partition partition
+      results.must_be_kind_of Google::Cloud::Spanner::Results
+      unless results.fields.to_a.empty? # With so little data, just one partition should get the entire result set
+        results.rows.map(&:to_h).must_equal [{:id=>2, :bool=>false}]
+      end
+    end
+    batch_snapshot.close
+  end
 end

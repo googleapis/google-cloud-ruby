@@ -340,6 +340,34 @@ describe Google::Cloud do
       end
     end
 
+    it "can create a new client with query options (client-level)" do
+      expect_query_options = { optimizer_version: "2", another_field: "test" }
+      Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+        Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+          credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+          new_spanner = Google::Cloud::Spanner.new
+          new_client = new_spanner.client "instance-id", "database-id", pool: { min: 0 }, query_options: expect_query_options
+          new_client.query_options.must_equal expect_query_options
+        end
+      end
+    end
+
+    it "can create a new client with query options that environment variables should merge over client-level configs" do
+      expect_query_options = { optimizer_version: "2", another_field: "test" }
+      optimizer_version_check = ->(name) { (name == "SPANNER_OPTIMIZER_VERSION") ? "2" : nil }
+      # Clear all environment variables, except SPANNER_OPTIMIZER_VERSION	
+      ENV.stub :[], optimizer_version_check do
+        Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+          Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
+            credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
+            new_spanner = Google::Cloud::Spanner.new
+            new_client = new_spanner.client "instance-id", "database-id", pool: { min: 0 }, query_options: { optimizer_version: "1", another_field: "test" }
+            new_client.query_options.must_equal expect_query_options
+          end
+        end
+      end
+    end
+
     it "allows emulator_host to be set" do
       emulator_host = "localhost:4567"
       # Clear all environment variables
