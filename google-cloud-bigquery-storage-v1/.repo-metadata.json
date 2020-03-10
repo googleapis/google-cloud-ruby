@@ -1,4 +1,5 @@
 {
     "language": "ruby",
-    "distribution_name": "google-cloud-bigquery-storage-v1"
+    "distribution_name": "google-cloud-bigquery-storage-v1",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery-storage-v1/latest"
 }

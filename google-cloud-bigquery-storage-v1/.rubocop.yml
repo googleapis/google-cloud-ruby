@@ -19,6 +19,7 @@ Metrics/CyclomaticComplexity:
 Metrics/LineLength:
   Exclude:
     - "lib/google/cloud/bigquery/storage/v1/big_query_read/*.rb"
+    - "google-cloud-bigquery-storage-v1.gemspec"
 Metrics/MethodLength:
   Exclude:
     - "lib/google/cloud/bigquery/storage/v1/big_query_read/*.rb"

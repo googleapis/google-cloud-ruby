@@ -4,7 +4,7 @@ google-cloud-bigquery-storage-v1 is the official library for BigQuery Storage V1
 
 The BigQuery Storage API provides fast access to BigQuery managed storage.
 
-https://github.com/googleapis/googleapis
+https://github.com/googleapis/google-cloud-ruby
 
 ## Installation
 

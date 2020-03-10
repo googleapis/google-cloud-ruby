@@ -33,7 +33,7 @@ module Google
           #     requests to read this Session will return errors. The expire_time is
           #     automatically assigned and currently cannot be specified or updated.
           # @!attribute [rw] data_format
-          #   @return [ENUM(DataFormat)]
+          #   @return [Google::Cloud::Bigquery::Storage::V1::DataFormat]
           #     Immutable. Data format of the output data.
           # @!attribute [r] avro_schema
           #   @return [Google::Cloud::Bigquery::Storage::V1::AvroSchema]
@@ -82,8 +82,7 @@ module Google
             # @!attribute [rw] row_restriction
             #   @return [String]
             #     SQL text filtering statement, similar to a WHERE clause in a query.
-            #     Currently, only a single predicate that is a comparison between a column
-            #     and a constant value is supported. Aggregates are not supported.
+            #     Aggregates are not supported.
             #
             #     Examples: "int_field > 5"
             #               "date_field = CAST('2014-9-27' as DATE)"
