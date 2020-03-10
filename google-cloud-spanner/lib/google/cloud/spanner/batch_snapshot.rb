@@ -170,6 +170,13 @@ module Google
         #   partitions to return. For example, this may be set to the number of
         #   workers available. This is only a hint and may provide different
         #   results based on the request.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
         #
         # @return [Array<Google::Cloud::Spanner::Partition>] The partitions
         #   created by the query partition.
@@ -192,7 +199,8 @@ module Google
         #   batch_snapshot.close
         #
         def partition_query sql, params: nil, types: nil,
-                            partition_size_bytes: nil, max_partitions: nil
+                            partition_size_bytes: nil, max_partitions: nil,
+                            query_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
@@ -201,7 +209,11 @@ module Google
             sql, tx_selector, params: params, types: types,
                               partition_size_bytes: partition_size_bytes,
                               max_partitions: max_partitions
-
+          if query_options.nil?
+            query_options = @query_options
+          else
+            query_options = @query_options.merge query_options unless @query_options.nil?
+          end
           results.partitions.map do |grpc|
             # Convert partition protos to execute sql request protos
             execute_sql_grpc = Google::Spanner::V1::ExecuteSqlRequest.new(
@@ -211,7 +223,8 @@ module Google
                 params: params,
                 param_types: types,
                 transaction: tx_selector,
-                partition_token: grpc.partition_token
+                partition_token: grpc.partition_token,
+                query_options: query_options
               }.delete_if { |_, v| v.nil? }
             )
             Partition.from_execute_sql_grpc execute_sql_grpc
@@ -694,12 +707,20 @@ module Google
         end
 
         def execute_partition_query partition
+          query_options = partition.execute.query_options
+          if query_options.nil?
+            query_options = @query_options
+          else
+            query_options = query_options.to_h
+            query_options = @query_options.merge query_options unless @query_options.nil?
+          end
           session.execute_query \
             partition.execute.sql,
             params: partition.execute.params,
             types: partition.execute.param_types.to_h,
             transaction: partition.execute.transaction,
-            partition_token: partition.execute.partition_token
+            partition_token: partition.execute.partition_token,
+            query_options: query_options
         end
 
         def execute_partition_read partition

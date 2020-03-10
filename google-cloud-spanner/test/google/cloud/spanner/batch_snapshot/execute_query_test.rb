@@ -297,7 +297,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_query, :mock_spanner do
     assert_results results
   end
 
-  it "can execute a simple query with query options (environment variable or client-level) " do
+  it "can execute a simple query with query options (environment variable or client-level)" do
     expect_query_options = { optimizer_version: "1" }
     new_batch_snapshot = Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session, query_options: expect_query_options
 
@@ -312,7 +312,7 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_query, :mock_spanner do
     assert_results results
   end
 
-  it "can execute a simple query with query options that query-level configs merge over environment variable or client-level configs " do
+  it "can execute a simple query with query options that query-level configs merge over environment variable or client-level configs" do
     expect_query_options = { optimizer_version: "2", another_field: "test" }
     new_batch_snapshot = Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session, query_options: { optimizer_version: "1", another_field: "test" }
 
