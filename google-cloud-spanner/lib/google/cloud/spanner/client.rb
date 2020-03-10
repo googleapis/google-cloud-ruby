@@ -344,11 +344,6 @@ module Google
 
           single_use_tx = single_use_transaction single_use
           results = nil
-          if query_options.nil?
-            query_options = @query_options
-          else
-            query_options = @query_options.merge query_options unless @query_options.nil?
-          end
           @pool.with_session do |session|
             results = session.execute_query \
               sql, params: params, types: types, transaction: single_use_tx,
@@ -539,11 +534,6 @@ module Google
           ensure_service!
 
           params, types = Convert.to_input_params_and_types params, types
-          if query_options.nil?
-            query_options = @query_options
-          else
-            query_options = @query_options.merge query_options unless @query_options.nil?
-          end
           results = nil
           @pool.with_session do |session|
             results = session.execute_query \
@@ -1157,7 +1147,7 @@ module Google
                               timestamp: (timestamp || read_timestamp),
                               staleness: (staleness || exact_staleness)
               Thread.current[:transaction_id] = snp_grpc.id
-              snp = Snapshot.from_grpc snp_grpc, session, query_options: @query_options
+              snp = Snapshot.from_grpc snp_grpc, session
               yield snp if block_given?
             ensure
               Thread.current[:transaction_id] = nil

@@ -278,7 +278,11 @@ module Google
         def execute_query sql, params: nil, types: nil, transaction: nil,
                           partition_token: nil, seqno: nil, query_options: nil
           ensure_service!
-
+          if query_options.nil?
+            query_options = @query_options
+          else
+            query_options = @query_options.merge query_options unless @query_options.nil?
+          end
           results = Results.execute_query service, path, sql,
                                           params: params,
                                           types: types,
@@ -657,7 +661,7 @@ module Google
         # Creates a new transaction object every time.
         def create_transaction
           tx_grpc = service.begin_transaction path
-          Transaction.from_grpc tx_grpc, self, query_options: @query_options
+          Transaction.from_grpc tx_grpc, self
         end
 
         ##

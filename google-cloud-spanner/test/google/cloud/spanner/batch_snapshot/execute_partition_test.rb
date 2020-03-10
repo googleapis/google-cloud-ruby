@@ -321,34 +321,6 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     assert_results results
   end
 
-  it "can execute a simple query with query options (environment variable or client-level)" do
-    expect_query_options = { optimizer_version: "1" }
-    new_batch_snapshot = Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session, query_options: expect_query_options
-    mock = Minitest::Mock.new
-    new_batch_snapshot.session.service.mocked_service = mock
-    expect_execute_streaming_sql results_enum, session.path, sql, transaction: tx_selector, param_types: {}, partition_token: partition_token, options: default_options, query_options: expect_query_options
-
-    results = new_batch_snapshot.execute_partition partition(sql: sql)
-
-    mock.verify
-
-    assert_results results
-  end
-
-  it "can execute a simple query with query options that query-level configs merge over environment variable or client-level configs" do
-    expect_query_options = { optimizer_version: "2" }
-    new_batch_snapshot = Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session, query_options: { optimizer_version: "1" }
-    mock = Minitest::Mock.new
-    new_batch_snapshot.session.service.mocked_service = mock
-    expect_execute_streaming_sql results_enum, session.path, sql, transaction: tx_selector, param_types: {}, partition_token: partition_token, options: default_options, query_options: expect_query_options
-
-    results = new_batch_snapshot.execute_partition partition(sql: sql, query_options: expect_query_options)
-
-    mock.verify
-
-    assert_results results
-  end
-
   def partition table: nil, keys: nil, columns: nil, index: nil, sql: nil,
                 params: nil, param_types: nil, query_options: nil
     if table

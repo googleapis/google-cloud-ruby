@@ -65,15 +65,11 @@ module Google
         # @private The Session object.
         attr_reader :session
 
-        # @private The hash of query options.
-        attr_reader :query_options
-
         ##
         # @private Creates a BatchSnapshot object.
-        def initialize grpc, session, query_options: nil
+        def initialize grpc, session
           @grpc = grpc
           @session = session
-          @query_options = query_options
         end
 
         ##
@@ -209,11 +205,6 @@ module Google
             sql, tx_selector, params: params, types: types,
                               partition_size_bytes: partition_size_bytes,
                               max_partitions: max_partitions
-          if query_options.nil?
-            query_options = @query_options
-          else
-            query_options = @query_options.merge query_options unless @query_options.nil?
-          end
           results.partitions.map do |grpc|
             # Convert partition protos to execute sql request protos
             execute_sql_grpc = Google::Spanner::V1::ExecuteSqlRequest.new(
@@ -562,11 +553,6 @@ module Google
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
-          if query_options.nil?
-            query_options = @query_options
-          else
-            query_options = @query_options.merge query_options unless @query_options.nil?
-          end
 
           session.execute_query sql, params: params, types: types,
                                 transaction: tx_selector,
@@ -674,7 +660,7 @@ module Google
         ##
         # @private Loads the serialized batch snapshot. See
         # {BatchClient#load_batch_snapshot}.
-        def self.load data, service: nil
+        def self.load data, service: nil, query_options: nil
           data = JSON.parse data, symbolize_names: true unless data.is_a? Hash
 
           session_grpc = Google::Spanner::V1::Session.decode \
@@ -682,14 +668,14 @@ module Google
           transaction_grpc = Google::Spanner::V1::Transaction.decode \
             Base64.decode64(data[:transaction])
 
-          from_grpc transaction_grpc, Session.from_grpc(session_grpc, service, query_options: @query_options)
+          from_grpc transaction_grpc, Session.from_grpc(session_grpc, service, query_options: query_options)
         end
 
         ##
         # @private Creates a new BatchSnapshot instance from a
         # Google::Spanner::V1::Transaction.
-        def self.from_grpc grpc, session, query_options: nil
-          new grpc, session, query_options: query_options
+        def self.from_grpc grpc, session
+          new grpc, session
         end
 
         protected
@@ -708,12 +694,7 @@ module Google
 
         def execute_partition_query partition
           query_options = partition.execute.query_options
-          if query_options.nil?
-            query_options = @query_options
-          else
-            query_options = query_options.to_h
-            query_options = @query_options.merge query_options unless @query_options.nil?
-          end
+          query_options = query_options.to_h unless query_options.nil?
           session.execute_query \
             partition.execute.sql,
             params: partition.execute.params,

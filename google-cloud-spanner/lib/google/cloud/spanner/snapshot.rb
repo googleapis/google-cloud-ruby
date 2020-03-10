@@ -44,9 +44,6 @@ module Google
         # @private The Session object.
         attr_accessor :session
 
-        # @private The hash of query.
-        attr_accessor :query_options
-
         ##
         # Identifier of the transaction results were run in.
         # @return [String] The transaction id.
@@ -250,11 +247,6 @@ module Google
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
-          if query_options.nil?
-            query_options = @query_options
-          else
-            query_options = @query_options.merge query_options unless @query_options.nil?
-          end
           session.execute_query sql, params: params, types: types,
                                      transaction: tx_selector,
                                      query_options: query_options
@@ -423,11 +415,10 @@ module Google
         ##
         # @private Creates a new Snapshot instance from a
         # Google::Spanner::V1::Transaction.
-        def self.from_grpc grpc, session, query_options: nil
+        def self.from_grpc grpc, session
           new.tap do |s|
             s.instance_variable_set :@grpc,    grpc
             s.instance_variable_set :@session, session
-            s.instance_variable_set :@query_options, query_options
           end
         end
 

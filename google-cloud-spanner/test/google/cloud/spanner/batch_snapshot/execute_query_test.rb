@@ -297,36 +297,6 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_query, :mock_spanner do
     assert_results results
   end
 
-  it "can execute a simple query with query options (environment variable or client-level)" do
-    expect_query_options = { optimizer_version: "1" }
-    new_batch_snapshot = Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session, query_options: expect_query_options
-
-    mock = Minitest::Mock.new
-    new_batch_snapshot.session.service.mocked_service = mock
-    expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", transaction: tx_selector, options: default_options, query_options: expect_query_options
-
-    results = new_batch_snapshot.execute_query "SELECT * FROM users"
-
-    mock.verify
-
-    assert_results results
-  end
-
-  it "can execute a simple query with query options that query-level configs merge over environment variable or client-level configs" do
-    expect_query_options = { optimizer_version: "2", another_field: "test" }
-    new_batch_snapshot = Google::Cloud::Spanner::BatchSnapshot.from_grpc transaction_grpc, session, query_options: { optimizer_version: "1", another_field: "test" }
-
-    mock = Minitest::Mock.new
-    new_batch_snapshot.session.service.mocked_service = mock
-    expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", transaction: tx_selector, options: default_options, query_options: expect_query_options
-
-    results = new_batch_snapshot.execute_query "SELECT * FROM users", query_options: { optimizer_version: "2" }
-
-    mock.verify
-
-    assert_results results
-  end
-
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
 

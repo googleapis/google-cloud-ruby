@@ -261,34 +261,6 @@ describe Google::Cloud::Spanner::Snapshot, :execute_query, :mock_spanner do
     assert_results results
   end
 
-  it "can execute a simple query with query options (snapshot-level)" do
-    expect_query_options = { optimizer_version: "4" }
-    new_snapshot = Google::Cloud::Spanner::Snapshot.from_grpc transaction_grpc, session, query_options: expect_query_options
-    mock = Minitest::Mock.new
-    session.service.mocked_service = mock
-    expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", transaction: tx_selector, options: default_options, query_options: expect_query_options
-
-    results = new_snapshot.execute_query "SELECT * FROM users"
-
-    mock.verify
-
-    assert_results results
-  end
-
-  it "can execute a simple query with query options that query-level configs merge over snapshot-level configs" do
-    expect_query_options = { optimizer_version: "2", another_field: "test" }
-    new_snapshot = Google::Cloud::Spanner::Snapshot.from_grpc transaction_grpc, session, query_options: { optimizer_version: "1", another_field: "test" }
-    mock = Minitest::Mock.new
-    session.service.mocked_service = mock
-    expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", transaction: tx_selector, options: default_options, query_options: expect_query_options
-
-    results = new_snapshot.execute_query "SELECT * FROM users", query_options: { optimizer_version: "2" }
-
-    mock.verify
-
-    assert_results results
-  end
-
   def assert_results results
     results.must_be_kind_of Google::Cloud::Spanner::Results
 
