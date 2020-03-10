@@ -535,7 +535,7 @@ module Google
         #    "UPDATE users SET friends = NULL WHERE active = false",
         #    query_options: { optimizer_version: "1" }
         def execute_partition_update sql, params: nil, types: nil,
-          query_options: query_options
+                                     query_options: nil
           ensure_service!
 
           params, types = Convert.to_input_params_and_types params, types
@@ -544,7 +544,6 @@ module Google
           else
             query_options = @query_options.merge query_options unless @query_options.nil?
           end
-          
           results = nil
           @pool.with_session do |session|
             results = session.execute_query \

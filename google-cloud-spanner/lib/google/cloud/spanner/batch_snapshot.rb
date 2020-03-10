@@ -551,7 +551,7 @@ module Google
         #   batch_snapshot = batch_client.batch_snapshot
         #
         #   results = batch_snapshot.execute_query \
-        #      "SELECT * FROM users", 
+        #      "SELECT * FROM users",
         #      query_options: { optimizer_version: "1" }
         #
         #   results.rows.each do |row|
