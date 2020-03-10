@@ -682,7 +682,7 @@ module Google
           transaction_grpc = Google::Spanner::V1::Transaction.decode \
             Base64.decode64(data[:transaction])
 
-          from_grpc transaction_grpc, Session.from_grpc(session_grpc, service)
+          from_grpc transaction_grpc, Session.from_grpc(session_grpc, service, query_options: @query_options)
         end
 
         ##

@@ -1052,7 +1052,6 @@ module Google
           @pool.with_transaction do |tx|
             begin
               Thread.current[:transaction_id] = tx.transaction_id
-              tx.query_options = @query_options unless @query_options.nil?
               yield tx
               commit_resp = @project.service.commit \
                 tx.session.path, tx.mutations, transaction_id: tx.transaction_id
@@ -1158,8 +1157,7 @@ module Google
                               timestamp: (timestamp || read_timestamp),
                               staleness: (staleness || exact_staleness)
               Thread.current[:transaction_id] = snp_grpc.id
-              snp = Snapshot.from_grpc snp_grpc, session
-              snp.query_options = @query_options unless @query_options.nil?
+              snp = Snapshot.from_grpc snp_grpc, session, query_options: @query_options
               yield snp if block_given?
             ensure
               Thread.current[:transaction_id] = nil
@@ -1352,7 +1350,7 @@ module Google
               project_id, instance_id, database_id
             ),
             labels: @session_labels
-          Session.from_grpc grpc, @project.service
+          Session.from_grpc grpc, @project.service, query_options: @query_options
         end
 
         ##
@@ -1381,7 +1379,7 @@ module Google
             ),
             session_count,
             labels: @session_labels
-          resp.session.map { |grpc| Session.from_grpc grpc, @project.service }
+          resp.session.map { |grpc| Session.from_grpc grpc, @project.service, query_options: @query_options }
         end
 
         # @private

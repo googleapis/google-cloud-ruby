@@ -49,10 +49,15 @@ module Google
         # @private The gRPC Service object.
         attr_accessor :service
 
+        ##
+        # @private The hash of query options.
+        attr_accessor :query_options
+
         # @private Creates a new Session instance.
-        def initialize grpc, service
+        def initialize grpc, service, query_options: nil
           @grpc = grpc
           @service = service
+          @query_options = query_options
         end
 
         # The unique identifier for the project.
@@ -652,7 +657,7 @@ module Google
         # Creates a new transaction object every time.
         def create_transaction
           tx_grpc = service.begin_transaction path
-          Transaction.from_grpc tx_grpc, self
+          Transaction.from_grpc tx_grpc, self, query_options: @query_options
         end
 
         ##
@@ -710,8 +715,8 @@ module Google
         ##
         # @private Creates a new Session instance from a
         # Google::Spanner::V1::Session.
-        def self.from_grpc grpc, service
-          new grpc, service
+        def self.from_grpc grpc, service, query_options: nil
+          new grpc, service, query_options: query_options
         end
 
         ##

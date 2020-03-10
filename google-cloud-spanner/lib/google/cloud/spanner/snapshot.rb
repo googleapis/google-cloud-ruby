@@ -42,7 +42,10 @@ module Google
       #
       class Snapshot
         # @private The Session object.
-        attr_accessor :session, :query_options
+        attr_accessor :session
+
+        # @private The hash of query.
+        attr_accessor :query_options
 
         ##
         # Identifier of the transaction results were run in.
@@ -420,10 +423,11 @@ module Google
         ##
         # @private Creates a new Snapshot instance from a
         # Google::Spanner::V1::Transaction.
-        def self.from_grpc grpc, session
+        def self.from_grpc grpc, session, query_options: nil
           new.tap do |s|
             s.instance_variable_set :@grpc,    grpc
             s.instance_variable_set :@session, session
+            s.instance_variable_set :@query_options, query_options
           end
         end
 
