@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 / 2020-03-10
+
+#### Documentation
+
+* Update enum return type to full module namespace
+
 ### 0.7.0 / 2020-02-04
 
 #### Features
