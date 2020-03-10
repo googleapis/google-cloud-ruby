@@ -29,7 +29,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "google-style", "~> 1.24.0"
   gem.add_development_dependency "minitest", "~> 5.10"
-  gem.add_development_dependency "rake", "~> 12.0"
+  gem.add_development_dependency "rake", ">= 12.0"
   gem.add_development_dependency "redcarpet", "~> 3.0"
   gem.add_development_dependency "simplecov", "~> 0.18"
   gem.add_development_dependency "yard", "~> 0.9"
