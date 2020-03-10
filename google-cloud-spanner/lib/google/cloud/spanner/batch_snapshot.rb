@@ -65,11 +65,15 @@ module Google
         # @private The Session object.
         attr_reader :session
 
+        # @private The hash of query options.
+        attr_reader :query_options
+
         ##
         # @private Creates a BatchSnapshot object.
-        def initialize grpc, session
+        def initialize grpc, session, query_options: nil
           @grpc = grpc
           @session = session
+          @query_options = query_options
         end
 
         ##
@@ -415,6 +419,14 @@ module Google
         #     specified using a {Fields} object.
         #
         #   Types are optional.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
+        #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
         #
@@ -518,13 +530,34 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def execute_query sql, params: nil, types: nil
+        # @example Query using query options:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #   batch_snapshot = batch_client.batch_snapshot
+        #
+        #   results = batch_snapshot.execute_query \
+        #      "SELECT * FROM users", 
+        #      query_options: { optimizer_version: "1" }
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        def execute_query sql, params: nil, types: nil, query_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
+          if query_options.nil?
+            query_options = @query_options
+          else
+            query_options = @query_options.merge query_options unless @query_options.nil?
+          end
 
           session.execute_query sql, params: params, types: types,
-                                     transaction: tx_selector
+                                transaction: tx_selector,
+                                query_options: query_options
         end
         alias execute execute_query
         alias query execute_query
@@ -642,8 +675,8 @@ module Google
         ##
         # @private Creates a new BatchSnapshot instance from a
         # Google::Spanner::V1::Transaction.
-        def self.from_grpc grpc, session
-          new grpc, session
+        def self.from_grpc grpc, session, query_options: nil
+          new grpc, session, query_options: query_options
         end
 
         protected

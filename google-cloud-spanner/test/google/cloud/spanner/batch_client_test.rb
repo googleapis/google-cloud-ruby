@@ -234,6 +234,53 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
     end
   end
 
+  describe :query_options do
+    it "creates a batch_snapshot with the query options (client-level)" do
+      expect_query_options = { optimizer_version: "1" }
+      new_batch_client = spanner.batch_client instance_id, database_id, query_options: expect_query_options
+      mock = Minitest::Mock.new
+      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      spanner.service.mocked_service = mock
+
+      batch_snapshot = new_batch_client.batch_snapshot
+
+      mock.verify
+
+      batch_snapshot.query_options.must_equal expect_query_options
+    end
+
+    it "creates a batch_snapshot with the query options (snapshot-level)" do
+      expect_query_options = { optimizer_version: "1" }
+      mock = Minitest::Mock.new
+      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      spanner.service.mocked_service = mock
+
+      batch_snapshot = batch_client.batch_snapshot query_options: expect_query_options
+
+      mock.verify
+
+      batch_snapshot.query_options.must_equal expect_query_options
+    end
+
+    it "creates a batch_snapshot that snapshot-level configs merge over client-level configs" do
+      expect_query_options = { optimizer_version: "2", another_field: "test" }
+      new_batch_client = spanner.batch_client instance_id, database_id, query_options: { optimizer_version: "1", another_field: "test" }
+
+      mock = Minitest::Mock.new
+      mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+      mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, tx_opts, options: default_options]
+      spanner.service.mocked_service = mock
+
+      batch_snapshot = new_batch_client.batch_snapshot query_options: { optimizer_version: "2" }
+
+      mock.verify
+
+      batch_snapshot.query_options.must_equal expect_query_options
+    end
+  end
+
   it "loads a batch_snapshot (hash)" do
     batch_snapshot = batch_client.load_batch_snapshot batch_tx_hash
 

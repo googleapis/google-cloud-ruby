@@ -65,11 +65,13 @@ module Google
       class BatchClient
         ##
         # @private Creates a new Spanner BatchClient instance.
-        def initialize project, instance_id, database_id, session_labels: nil
+        def initialize project, instance_id, database_id, session_labels: nil,
+                       query_options: nil
           @project = project
           @instance_id = instance_id
           @database_id = database_id
           @session_labels = session_labels
+          @query_options = query_options
         end
 
         # The unique identifier for the project.
@@ -142,6 +144,13 @@ module Google
         #   timestamp negotiation overhead of single-use `staleness`. (See
         #   [TransactionOptions](https://cloud.google.com/spanner/docs/reference/rpc/google.spanner.v1#transactionoptions).)
         # @param [Numeric] exact_staleness Same as `staleness`.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
         #
         # @yield [snapshot] The block for reading and writing data.
         # @yieldparam [Google::Cloud::Spanner::Snapshot] snapshot The Snapshot
@@ -176,7 +185,8 @@ module Google
         #     new_partition
         #
         def batch_snapshot strong: nil, timestamp: nil, read_timestamp: nil,
-                           staleness: nil, exact_staleness: nil
+                           staleness: nil, exact_staleness: nil,
+                           query_options: nil
           validate_snapshot_args! strong: strong, timestamp: timestamp,
                                   read_timestamp: read_timestamp,
                                   staleness: staleness,
@@ -188,7 +198,13 @@ module Google
             snp_session.path, strong: strong,
                               timestamp: (timestamp || read_timestamp),
                               staleness: (staleness || exact_staleness)
-          BatchSnapshot.from_grpc snp_grpc, snp_session
+          if query_options.nil?
+            query_options = @query_options
+          else
+            query_options = @query_options.merge query_options unless @query_options.nil?
+          end
+          BatchSnapshot.from_grpc snp_grpc, snp_session,
+                                  query_options: query_options
         end
 
         ##
