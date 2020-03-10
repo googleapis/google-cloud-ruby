@@ -67,7 +67,9 @@ module Google
                                   break parent_const.configure if parent_const&.respond_to? :configure
                                   namespace.pop
                                 end
-                Client::Configuration.new parent_config
+                default_config = Client::Configuration.new parent_config
+
+                default_config
               end
               yield @configure if block_given?
               @configure
