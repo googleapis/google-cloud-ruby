@@ -11,10 +11,6 @@
 
 * Update Request URIs link
 
-#### Documentation
-
-* Update Request URIs link
-
 ### 2.0.3 / 2020-02-04
 
 #### Documentation
