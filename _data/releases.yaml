@@ -802,6 +802,7 @@ google-cloud-talent:
 - v0.3.0
 - v0.1.0
 google-cloud-tasks:
+- v1.5.0
 - v1.4.0
 - v1.3.5
 - v1.3.4
