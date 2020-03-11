@@ -4,7 +4,7 @@
 
 #### Features
 
-* Add Range Partitioning ()
+* Add Range Partitioning
   * Add range partitioning methods to Table and Table::Updater
   * Add range partitioning methods to LoadJob
   * Add range partitioning methods to QueryJob
