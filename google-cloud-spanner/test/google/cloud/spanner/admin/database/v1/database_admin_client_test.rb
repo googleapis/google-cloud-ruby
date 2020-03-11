@@ -823,4 +823,526 @@ describe Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient do
       end
     end
   end
+
+  describe 'create_backup' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#create_backup."
+
+    it 'invokes create_backup without error' do
+      # Create expected grpc response
+      name = "name3373707"
+      done = true
+      expected_response = { name: name, done: done }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Longrunning::Operation)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("create_backup")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          response = client.create_backup
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_backup do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes create_backup with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("create_backup")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.create_backup
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_backup' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#get_backup."
+
+    it 'invokes get_backup without error' do
+      # Create expected grpc response
+      database = "database1789464955"
+      name = "name3373707"
+      size_bytes = 1796325715
+      expected_response = {
+        database: database,
+        name: name,
+        size_bytes: size_bytes
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Database::V1::Backup)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("get_backup")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          response = client.get_backup
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_backup do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_backup with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:get_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("get_backup")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.get_backup
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'update_backup' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#update_backup."
+
+    it 'invokes update_backup without error' do
+      # Create expected grpc response
+      database = "database1789464955"
+      name = "name3373707"
+      size_bytes = 1796325715
+      expected_response = {
+        database: database,
+        name: name,
+        size_bytes: size_bytes
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Database::V1::Backup)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("update_backup")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          response = client.update_backup
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_backup do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes update_backup with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("update_backup")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.update_backup
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'delete_backup' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#delete_backup."
+
+    it 'invokes delete_backup without error' do
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("delete_backup")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          response = client.delete_backup
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_backup do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_backup with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("delete_backup")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.delete_backup
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_backups' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#list_backups."
+
+    it 'invokes list_backups without error' do
+      # Create expected grpc response
+      next_page_token = "nextPageToken-1530815211"
+      expected_response = { next_page_token: next_page_token }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Database::V1::ListBackupsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_backups, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_backups")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          response = client.list_backups
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_backups do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes list_backups with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_backups, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_backups")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.list_backups
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'restore_database' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#restore_database."
+
+    it 'invokes restore_database without error' do
+      # Create expected grpc response
+      name = "name3373707"
+      done = true
+      expected_response = { name: name, done: done }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Longrunning::Operation)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:restore_database, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("restore_database")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          response = client.restore_database
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.restore_database do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes restore_database with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:restore_database, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("restore_database")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.restore_database
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_database_operations' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#list_database_operations."
+
+    it 'invokes list_database_operations without error' do
+      # Create expected grpc response
+      next_page_token = "nextPageToken-1530815211"
+      expected_response = { next_page_token: next_page_token }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_database_operations, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_database_operations")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          response = client.list_database_operations
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_database_operations do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes list_database_operations with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_database_operations, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_database_operations")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.list_database_operations
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_backup_operations' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient#list_backup_operations."
+
+    it 'invokes list_backup_operations without error' do
+      # Create expected grpc response
+      next_page_token = "nextPageToken-1530815211"
+      expected_response = { next_page_token: next_page_token }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Spanner::Admin::Database::V1::ListBackupOperationsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_backup_operations, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_backup_operations")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          response = client.list_backup_operations
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.list_backup_operations do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes list_backup_operations with error' do
+      # Mock Grpc layer
+      mock_method = proc do
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:list_backup_operations, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDatabaseAdminCredentials_v1.new("list_backup_operations")
+
+      Google::Spanner::Admin::Database::V1::DatabaseAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Spanner::Admin::Database::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Spanner::Admin::Database.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.list_backup_operations
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
 end
