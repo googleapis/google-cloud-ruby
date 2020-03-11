@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Redis
-      VERSION = "0.7.1".freeze
+      VERSION = "0.8.0".freeze
     end
   end
 end
