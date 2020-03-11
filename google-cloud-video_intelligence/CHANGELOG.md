@@ -4,8 +4,6 @@
 
 #### Features
 
-#### Features
-
 * Add logo recognition annotations
 * Add separate project setting for quota/billing
 
