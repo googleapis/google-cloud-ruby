@@ -1,0 +1,24 @@
+{
+  "updateTime": "2020-03-11T01:57:36.086115Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "eced64c3f122421350b4aca68a28e89121d20db8",
+        "internalRef": "300193634"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "servicedirectory",
+        "apiVersion": "v1beta1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
