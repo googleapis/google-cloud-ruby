@@ -78,7 +78,7 @@ module Google
                     retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
                   }
 
-                  default_config.rpcs.read_rows.timeout = 86400.0
+                  default_config.rpcs.read_rows.timeout = 86_400.0
                   default_config.rpcs.read_rows.retry_policy = {
                     initial_delay: 0.1,
                     max_delay:     60.0,
