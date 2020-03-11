@@ -296,6 +296,67 @@ module Google
         #     All video frames where a face was detected.
         class FaceAnnotation; end
 
+        # For tracking related features.
+        # An object at time_offset with attributes, and located with
+        # normalized_bounding_box.
+        # @!attribute [rw] normalized_bounding_box
+        #   @return [Google::Cloud::VideoIntelligence::V1::NormalizedBoundingBox]
+        #     Normalized Bounding box in a frame, where the object is located.
+        # @!attribute [rw] time_offset
+        #   @return [Google::Protobuf::Duration]
+        #     Time-offset, relative to the beginning of the video,
+        #     corresponding to the video frame for this object.
+        # @!attribute [rw] attributes
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1::DetectedAttribute>]
+        #     Optional. The attributes of the object in the bounding box.
+        # @!attribute [rw] landmarks
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1::DetectedLandmark>]
+        #     Optional. The detected landmarks.
+        class TimestampedObject; end
+
+        # A track of an object instance.
+        # @!attribute [rw] segment
+        #   @return [Google::Cloud::VideoIntelligence::V1::VideoSegment]
+        #     Video segment of a track.
+        # @!attribute [rw] timestamped_objects
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1::TimestampedObject>]
+        #     The object with timestamp and attributes per frame in the track.
+        # @!attribute [rw] attributes
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1::DetectedAttribute>]
+        #     Optional. Attributes in the track level.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     Optional. The confidence score of the tracked object.
+        class Track; end
+
+        # A generic detected attribute represented by name in string format.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The name of the attribute, i.e. glasses, dark_glasses, mouth_open etc.
+        #     A full list of supported type names will be provided in the document.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     Detected attribute confidence. Range [0, 1].
+        # @!attribute [rw] value
+        #   @return [String]
+        #     Text value of the detection result. For example, the value for "HairColor"
+        #     can be "black", "blonde", etc.
+        class DetectedAttribute; end
+
+        # A generic detected landmark represented by name in string format and a 2D
+        # location.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The name of this landmark, i.e. left_hand, right_shoulder.
+        # @!attribute [rw] point
+        #   @return [Google::Cloud::VideoIntelligence::V1::NormalizedVertex]
+        #     The 2D point of the detected landmark using the normalized image
+        #     coordindate system. The normalized coordinates have the range from 0 to 1.
+        # @!attribute [rw] confidence
+        #   @return [Float]
+        #     The confidence score of the detected landmark. Range [0, 1].
+        class DetectedLandmark; end
+
         # Annotation results for a single video.
         # @!attribute [rw] input_uri
         #   @return [String]
@@ -351,6 +412,9 @@ module Google
         # @!attribute [rw] object_annotations
         #   @return [Array<Google::Cloud::VideoIntelligence::V1::ObjectTrackingAnnotation>]
         #     Annotations for list of objects detected and tracked in video.
+        # @!attribute [rw] logo_recognition_annotations
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1::LogoRecognitionAnnotation>]
+        #     Annotations for list of logos detected, tracked and recognized in video.
         # @!attribute [rw] error
         #   @return [Google::Rpc::Status]
         #     If set, indicates an error. Note that for a single `AnnotateVideoRequest`
@@ -639,6 +703,21 @@ module Google
         #     Streaming mode: it can only be one ObjectTrackingFrame message in frames.
         class ObjectTrackingAnnotation; end
 
+        # Annotation corresponding to one detected, tracked and recognized logo class.
+        # @!attribute [rw] entity
+        #   @return [Google::Cloud::VideoIntelligence::V1::Entity]
+        #     Entity category information to specify the logo class that all the logo
+        #     tracks within this LogoRecognitionAnnotation are recognized as.
+        # @!attribute [rw] tracks
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1::Track>]
+        #     All logo tracks where the recognized logo appears. Each track corresponds
+        #     to one logo instance appearing in consecutive frames.
+        # @!attribute [rw] segments
+        #   @return [Array<Google::Cloud::VideoIntelligence::V1::VideoSegment>]
+        #     All video segments where the recognized logo appears. There might be
+        #     multiple instances of the same logo class appearing in one VideoSegment.
+        class LogoRecognitionAnnotation; end
+
         # Video annotation feature.
         module Feature
           # Unspecified.
@@ -664,6 +743,9 @@ module Google
 
           # Object detection and tracking.
           OBJECT_TRACKING = 9
+
+          # Logo detection, tracking, and recognition.
+          LOGO_RECOGNITION = 12
         end
 
         # Label detection mode.

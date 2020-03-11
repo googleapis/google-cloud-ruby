@@ -155,6 +155,9 @@ module Google
             google_api_client.freeze
 
             headers = { :"x-goog-api-client" => google_api_client }
+            if credentials.respond_to?(:quota_project_id) && credentials.quota_project_id
+              headers[:"x-goog-user-project"] = credentials.quota_project_id
+            end
             headers.merge!(metadata) unless metadata.nil?
             client_config_file = Pathname.new(__dir__).join(
               "video_intelligence_service_client_config.json"

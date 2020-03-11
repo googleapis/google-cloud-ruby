@@ -1,0 +1,35 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "lib/**/*_pb.rb"
+    - "proto_docs/**/*"
+    - "test/**/*"
+
+Metrics/AbcSize:
+  Exclude:
+    - "lib/google/cloud/language/v1beta2/language_service/*.rb"
+Metrics/ClassLength:
+  Exclude:
+    - "lib/google/cloud/language/v1beta2/language_service/*.rb"
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/google/cloud/language/v1beta2/language_service/*.rb"
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/language/v1beta2/language_service/*.rb"
+    - "google-cloud-language-v1beta2.gemspec"
+Metrics/MethodLength:
+  Exclude:
+    - "lib/google/cloud/language/v1beta2/language_service/*.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/google/cloud/language/v1beta2/language_service/*.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-language-v1beta2.rb"
+Style/CaseEquality:
+  Exclude:
+    - "lib/google/cloud/language/v1beta2/language_service/*.rb"
+    - "lib/google/cloud/language/v1beta2.rb"

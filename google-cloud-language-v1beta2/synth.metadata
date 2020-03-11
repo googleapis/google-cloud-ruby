@@ -1,0 +1,25 @@
+{
+  "updateTime": "2020-03-09T19:58:20.276976Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "8f631c4c70a60a9c7da3749511ee4ad432b62898",
+        "internalRef": "299885195",
+        "log": "8f631c4c70a60a9c7da3749511ee4ad432b62898\nbuild(google/maps/roads/v1op): move go to monorepo pattern\n\nPiperOrigin-RevId: 299885195\n\nd66816518844ebbf63504c9e8dfc7133921dd2cd\nbuild(google/maps/roads/v1op): Add bazel build files to generate clients.\n\nPiperOrigin-RevId: 299851148\n\n"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "language",
+        "apiVersion": "v1beta2",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
