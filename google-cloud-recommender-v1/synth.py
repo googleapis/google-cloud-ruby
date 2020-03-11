@@ -31,6 +31,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Recommender V1",
         "ruby-cloud-summary": "recommender.googleapis.com",
         "ruby-cloud-env-prefix": "RECOMMENDER",
+        "ruby-cloud-grpc-service-config": "google/cloud/recommender/v1/recommender_grpc_service_config.json",
     }
 )
 

@@ -31,6 +31,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Secret Manager V1beta1",
         "ruby-cloud-summary": "Stores, manages, and secures access to application secrets.",
         "ruby-cloud-env-prefix": "SECRET_MANAGER",
+        "ruby-cloud-grpc-service-config": "google/cloud/secrets/v1beta1/secretmanager_grpc_service_config.json",
     }
 )
 
