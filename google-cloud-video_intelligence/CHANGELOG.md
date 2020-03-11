@@ -1,5 +1,17 @@
 # Release History
 
+### 2.1.0 / 2020-03-11
+
+#### Features
+
+* support for logo recognition and project setting for quota/billing
+  * Add logo recognition annotations
+  * Add separate project setting for quota/billing
+
+#### Documentation
+
+* Update Request URIs link
+
 ### 2.0.3 / 2020-02-04
 
 #### Documentation
