@@ -1,5 +1,11 @@
 # Release History
 
+### 0.38.0 / 2020-03-11
+
+#### Features
+
+* support separate project setting for quota/billing
+
 ### 0.37.3 / 2020-02-04
 
 #### Documentation
