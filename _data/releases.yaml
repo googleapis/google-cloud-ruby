@@ -598,6 +598,7 @@ google-cloud-recaptcha_enterprise:
 google-cloud-recommender-v1:
 - v0.1.0
 google-cloud-redis:
+- v0.8.0
 - v0.7.1
 - v0.7.0
 - v0.6.2
