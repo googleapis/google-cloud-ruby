@@ -16,6 +16,40 @@
 module Google
   module Logging
     module V2
+      # Describes a repository of logs (Beta).
+      # @!attribute [rw] name
+      #   @return [String]
+      #     The resource name of the bucket.
+      #     For example:
+      #     "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
+      #     supported locations are:
+      #       "global"
+      #       "us-central1"
+      #
+      #     For the location of `global` it is unspecified where logs are actually
+      #     stored.
+      #     Once a bucket has been created, the location can not be changed.
+      # @!attribute [rw] description
+      #   @return [String]
+      #     Describes this bucket.
+      # @!attribute [rw] create_time
+      #   @return [Google::Protobuf::Timestamp]
+      #     Output only. The creation timestamp of the bucket. This is not set for any of the
+      #     default buckets.
+      # @!attribute [rw] update_time
+      #   @return [Google::Protobuf::Timestamp]
+      #     Output only. The last update timestamp of the bucket.
+      # @!attribute [rw] retention_days
+      #   @return [Integer]
+      #     Logs will be retained by default for this amount of time, after which they
+      #     will automatically be deleted. The minimum retention period is 1 day.
+      #     If this value is set to zero at bucket creation time, the default time of
+      #     30 days will be used.
+      # @!attribute [rw] lifecycle_state
+      #   @return [Google::Logging::V2::LifecycleState]
+      #     Output only. The bucket lifecycle state.
+      class LogBucket; end
+
       # Describes a sink used to export log entries to one of the following
       # destinations in any project: a Cloud Storage bucket, a BigQuery dataset, or a
       # Cloud Pub/Sub topic. A logs filter controls which log entries are exported.
@@ -23,11 +57,11 @@ module Google
       # folder.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The client-assigned sink identifier, unique within the
-      #     project. Example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are
-      #     limited to 100 characters and can include only the following characters:
-      #     upper and lower-case alphanumeric characters, underscores, hyphens, and
-      #     periods. First character has to be alphanumeric.
+      #     Required. The client-assigned sink identifier, unique within the project. Example:
+      #     `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
+      #     characters and can include only the following characters: upper and
+      #     lower-case alphanumeric characters, underscores, hyphens, and periods.
+      #     First character has to be alphanumeric.
       # @!attribute [rw] destination
       #   @return [String]
       #     Required. The export destination:
@@ -61,13 +95,11 @@ module Google
       #     entries. The v2 format is used by default and cannot be changed.
       # @!attribute [rw] writer_identity
       #   @return [String]
-      #     Output only. An IAM identity&mdash;a service account or group&mdash;under
-      #     which Logging writes the exported log entries to the sink's destination.
-      #     This field is set by
-      #     {Google::Logging::V2::ConfigServiceV2#create_sink}
-      #     and
-      #     {Google::Logging::V2::ConfigServiceV2#update_sink}
-      #     based on the value of `unique_writer_identity` in those methods.
+      #     Output only. An IAM identity–a service account or group&mdash;under which Logging
+      #     writes the exported log entries to the sink's destination. This field is
+      #     set by {Google::Logging::V2::ConfigServiceV2#create_sink} and
+      #     {Google::Logging::V2::ConfigServiceV2#update_sink} based on the
+      #     value of `unique_writer_identity` in those methods.
       #
       #     Until you grant this identity write-access to the destination, log entry
       #     exports from this sink will fail. For more information,
@@ -103,12 +135,6 @@ module Google
       #     Output only. The last update timestamp of the sink.
       #
       #     This field may not be present for older sinks.
-      # @!attribute [rw] start_time
-      #   @return [Google::Protobuf::Timestamp]
-      #     Do not use. This field is ignored.
-      # @!attribute [rw] end_time
-      #   @return [Google::Protobuf::Timestamp]
-      #     Do not use. This field is ignored.
       class LogSink
         # Available log entry formats. Log entries can be written to
         # Logging in either format and can be exported in either format.
@@ -144,6 +170,86 @@ module Google
       #     meaning and will be false. Legacy sinks using partitioned tables will have
       #     this field set to false.
       class BigQueryOptions; end
+
+      # The parameters to `ListBuckets` (Beta).
+      # @!attribute [rw] parent
+      #   @return [String]
+      #     Required. The parent resource whose buckets are to be listed:
+      #
+      #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
+      #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]"
+      #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]"
+      #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]"
+      #
+      #     Note: The locations portion of the resource must be specified, but
+      #     supplying the character `-` in place of [LOCATION_ID] will return all
+      #     buckets.
+      # @!attribute [rw] page_token
+      #   @return [String]
+      #     Optional. If present, then retrieve the next batch of results from the
+      #     preceding call to this method. `pageToken` must be the value of
+      #     `nextPageToken` from the previous response. The values of other method
+      #     parameters should be identical to those in the previous call.
+      # @!attribute [rw] page_size
+      #   @return [Integer]
+      #     Optional. The maximum number of results to return from this request.
+      #     Non-positive values are ignored. The presence of `nextPageToken` in the
+      #     response indicates that more results might be available.
+      class ListBucketsRequest; end
+
+      # The response from ListBuckets (Beta).
+      # @!attribute [rw] buckets
+      #   @return [Array<Google::Logging::V2::LogBucket>]
+      #     A list of buckets.
+      # @!attribute [rw] next_page_token
+      #   @return [String]
+      #     If there might be more results than appear in this response, then
+      #     `nextPageToken` is included. To get the next set of results, call the same
+      #     method again using the value of `nextPageToken` as `pageToken`.
+      class ListBucketsResponse; end
+
+      # The parameters to `UpdateBucket` (Beta).
+      # @!attribute [rw] name
+      #   @return [String]
+      #     Required. The full resource name of the bucket to update.
+      #
+      #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+      #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+      #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+      #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+      #
+      #     Example:
+      #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`. Also
+      #     requires permission "resourcemanager.projects.updateLiens" to set the
+      #     locked property
+      # @!attribute [rw] bucket
+      #   @return [Google::Logging::V2::LogBucket]
+      #     Required. The updated bucket.
+      # @!attribute [rw] update_mask
+      #   @return [Google::Protobuf::FieldMask]
+      #     Required. Field mask that specifies the fields in `bucket` that need an update. A
+      #     bucket field will be overwritten if, and only if, it is in the update
+      #     mask. `name` and output only fields cannot be updated.
+      #
+      #     For a detailed `FieldMask` definition, see
+      #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
+      #
+      #     Example: `updateMask=retention_days`.
+      class UpdateBucketRequest; end
+
+      # The parameters to `GetBucket` (Beta).
+      # @!attribute [rw] name
+      #   @return [String]
+      #     Required. The resource name of the bucket:
+      #
+      #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+      #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+      #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+      #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+      #
+      #     Example:
+      #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`.
+      class GetBucketRequest; end
 
       # The parameters to `ListSinks`.
       # @!attribute [rw] parent
@@ -224,8 +330,8 @@ module Google
       # The parameters to `UpdateSink`.
       # @!attribute [rw] sink_name
       #   @return [String]
-      #     Required. The full resource name of the sink to update, including the
-      #     parent resource and the sink identifier:
+      #     Required. The full resource name of the sink to update, including the parent
+      #     resource and the sink identifier:
       #
       #         "projects/[PROJECT_ID]/sinks/[SINK_ID]"
       #         "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
@@ -235,8 +341,8 @@ module Google
       #     Example: `"projects/my-project-id/sinks/my-sink-id"`.
       # @!attribute [rw] sink
       #   @return [Google::Logging::V2::LogSink]
-      #     Required. The updated sink, whose name is the same identifier that appears
-      #     as part of `sink_name`.
+      #     Required. The updated sink, whose name is the same identifier that appears as part
+      #     of `sink_name`.
       # @!attribute [rw] unique_writer_identity
       #   @return [true, false]
       #     Optional. See {Google::Logging::V2::ConfigServiceV2#create_sink}
@@ -271,8 +377,8 @@ module Google
       # The parameters to `DeleteSink`.
       # @!attribute [rw] sink_name
       #   @return [String]
-      #     Required. The full resource name of the sink to delete, including the
-      #     parent resource and the sink identifier:
+      #     Required. The full resource name of the sink to delete, including the parent
+      #     resource and the sink identifier:
       #
       #         "projects/[PROJECT_ID]/sinks/[SINK_ID]"
       #         "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
@@ -290,10 +396,10 @@ module Google
       # apply to child resources, and that you can't exclude audit log entries.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. A client-assigned identifier, such as
-      #     `"load-balancer-exclusion"`. Identifiers are limited to 100 characters and
-      #     can include only letters, digits, underscores, hyphens, and periods.
-      #     First character has to be alphanumeric.
+      #     Required. A client-assigned identifier, such as `"load-balancer-exclusion"`.
+      #     Identifiers are limited to 100 characters and can include only letters,
+      #     digits, underscores, hyphens, and periods. First character has to be
+      #     alphanumeric.
       # @!attribute [rw] description
       #   @return [String]
       #     Optional. A description of this exclusion.
@@ -401,12 +507,12 @@ module Google
       #     Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
       # @!attribute [rw] exclusion
       #   @return [Google::Logging::V2::LogExclusion]
-      #     Required. New values for the existing exclusion. Only the fields specified
-      #     in `update_mask` are relevant.
+      #     Required. New values for the existing exclusion. Only the fields specified in
+      #     `update_mask` are relevant.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
-      #     Required. A non-empty list of fields to change in the existing exclusion.
-      #     New values for the fields are taken from the corresponding fields in the
+      #     Required. A non-empty list of fields to change in the existing exclusion. New values
+      #     for the fields are taken from the corresponding fields in the
       #     {Google::Logging::V2::LogExclusion LogExclusion} included in this request. Fields not mentioned in
       #     `update_mask` are not changed and are ignored in the request.
       #
@@ -495,7 +601,7 @@ module Google
       # for more information.
       # @!attribute [rw] name
       #   @return [String]
-      #     Output Only. The resource name of the CMEK settings.
+      #     Output only. The resource name of the CMEK settings.
       # @!attribute [rw] kms_key_name
       #   @return [String]
       #     The resource name for the configured Cloud KMS key.
@@ -524,8 +630,8 @@ module Google
       #     Router](/logging/docs/routing/managed-encryption) for more information.
       # @!attribute [rw] service_account_id
       #   @return [String]
-      #     Output Only. The service account that will be used by the Logs Router to
-      #     access your Cloud KMS key.
+      #     Output only. The service account that will be used by the Logs Router to access your
+      #     Cloud KMS key.
       #
       #     Before enabling CMEK for Logs Router, you must first assign the role
       #     `roles/cloudkms.cryptoKeyEncrypterDecrypter` to the service account that
@@ -536,6 +642,19 @@ module Google
       #     See [Enabling CMEK for Logs
       #     Router](/logging/docs/routing/managed-encryption) for more information.
       class CmekSettings; end
+
+      # LogBucket lifecycle states (Beta).
+      module LifecycleState
+        # Unspecified state.  This is only used/useful for distinguishing
+        # unset values.
+        LIFECYCLE_STATE_UNSPECIFIED = 0
+
+        # The normal and active state.
+        ACTIVE = 1
+
+        # The bucket has been marked for deletion by the user.
+        DELETE_REQUESTED = 2
+      end
     end
   end
 end

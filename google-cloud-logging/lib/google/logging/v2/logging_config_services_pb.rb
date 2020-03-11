@@ -34,6 +34,22 @@ module Google
           self.unmarshal_class_method = :decode
           self.service_name = 'google.logging.v2.ConfigServiceV2'
 
+          # Lists buckets (Beta).
+          rpc :ListBuckets, ListBucketsRequest, ListBucketsResponse
+          # Gets a bucket (Beta).
+          rpc :GetBucket, GetBucketRequest, LogBucket
+          # Updates a bucket. This method replaces the following fields in the
+          # existing bucket with values from the new bucket: `retention_period`
+          #
+          # If the retention period is decreased and the bucket is locked,
+          # FAILED_PRECONDITION will be returned.
+          #
+          # If the bucket has a LifecycleState of DELETE_REQUESTED, FAILED_PRECONDITION
+          # will be returned.
+          #
+          # A buckets region may not be modified after it is created.
+          # This method is in Beta.
+          rpc :UpdateBucket, UpdateBucketRequest, LogBucket
           # Lists sinks.
           rpc :ListSinks, ListSinksRequest, ListSinksResponse
           # Gets a sink.

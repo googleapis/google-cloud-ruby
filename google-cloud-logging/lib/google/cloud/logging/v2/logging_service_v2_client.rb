@@ -69,18 +69,6 @@ module Google
 
           private_constant :PAGE_DESCRIPTORS
 
-          BUNDLE_DESCRIPTORS = {
-            "write_log_entries" => Google::Gax::BundleDescriptor.new(
-              "entries",
-              [
-                "logName",
-                "resource",
-                "labels"
-              ])
-          }.freeze
-
-          private_constant :BUNDLE_DESCRIPTORS
-
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
@@ -92,17 +80,11 @@ module Google
           ].freeze
 
 
-          BILLING_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+          BILLING_ACCOUNT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "billingAccounts/{billing_account}"
           )
 
-          private_constant :BILLING_PATH_TEMPLATE
-
-          BILLING_LOG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "billingAccounts/{billing_account}/logs/{log}"
-          )
-
-          private_constant :BILLING_LOG_PATH_TEMPLATE
+          private_constant :BILLING_ACCOUNT_PATH_TEMPLATE
 
           FOLDER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "folders/{folder}"
@@ -110,29 +92,11 @@ module Google
 
           private_constant :FOLDER_PATH_TEMPLATE
 
-          FOLDER_LOG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "folders/{folder}/logs/{log}"
-          )
-
-          private_constant :FOLDER_LOG_PATH_TEMPLATE
-
-          LOG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/logs/{log}"
-          )
-
-          private_constant :LOG_PATH_TEMPLATE
-
           ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}"
           )
 
           private_constant :ORGANIZATION_PATH_TEMPLATE
-
-          ORGANIZATION_LOG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "organizations/{organization}/logs/{log}"
-          )
-
-          private_constant :ORGANIZATION_LOG_PATH_TEMPLATE
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
@@ -140,23 +104,12 @@ module Google
 
           private_constant :PROJECT_PATH_TEMPLATE
 
-          # Returns a fully-qualified billing resource name string.
+          # Returns a fully-qualified billing_account resource name string.
           # @param billing_account [String]
           # @return [String]
-          def self.billing_path billing_account
-            BILLING_PATH_TEMPLATE.render(
+          def self.billing_account_path billing_account
+            BILLING_ACCOUNT_PATH_TEMPLATE.render(
               :"billing_account" => billing_account
-            )
-          end
-
-          # Returns a fully-qualified billing_log resource name string.
-          # @param billing_account [String]
-          # @param log [String]
-          # @return [String]
-          def self.billing_log_path billing_account, log
-            BILLING_LOG_PATH_TEMPLATE.render(
-              :"billing_account" => billing_account,
-              :"log" => log
             )
           end
 
@@ -169,45 +122,12 @@ module Google
             )
           end
 
-          # Returns a fully-qualified folder_log resource name string.
-          # @param folder [String]
-          # @param log [String]
-          # @return [String]
-          def self.folder_log_path folder, log
-            FOLDER_LOG_PATH_TEMPLATE.render(
-              :"folder" => folder,
-              :"log" => log
-            )
-          end
-
-          # Returns a fully-qualified log resource name string.
-          # @param project [String]
-          # @param log [String]
-          # @return [String]
-          def self.log_path project, log
-            LOG_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"log" => log
-            )
-          end
-
           # Returns a fully-qualified organization resource name string.
           # @param organization [String]
           # @return [String]
           def self.organization_path organization
             ORGANIZATION_PATH_TEMPLATE.render(
               :"organization" => organization
-            )
-          end
-
-          # Returns a fully-qualified organization_log resource name string.
-          # @param organization [String]
-          # @param log [String]
-          # @return [String]
-          def self.organization_log_path organization, log
-            ORGANIZATION_LOG_PATH_TEMPLATE.render(
-              :"organization" => organization,
-              :"log" => log
             )
           end
 
@@ -308,7 +228,6 @@ module Google
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
-                bundle_descriptors: BUNDLE_DESCRIPTORS,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
                 metadata: headers
@@ -394,8 +313,10 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   logging_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
-          #   formatted_log_name = Google::Cloud::Logging::V2::LoggingServiceV2Client.log_path("[PROJECT]", "[LOG]")
-          #   logging_client.delete_log(formatted_log_name)
+          #
+          #   # TODO: Initialize `log_name`:
+          #   log_name = ''
+          #   logging_client.delete_log(log_name)
 
           def delete_log \
               log_name,
@@ -457,10 +378,10 @@ module Google
           #       "projects/my-project-id/logs/syslog"
           #       "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
           #
-          #   The permission <code>logging.logEntries.create</code> is needed on each
-          #   project, organization, billing account, or folder that is receiving
-          #   new log entries, whether the resource is specified in
-          #   <code>logName</code> or in an individual log entry.
+          #   The permission `logging.logEntries.create` is needed on each project,
+          #   organization, billing account, or folder that is receiving new log
+          #   entries, whether the resource is specified in `logName` or in an
+          #   individual log entry.
           # @param resource [Google::Api::MonitoredResource | Hash]
           #   Optional. A default monitored resource object that is assigned to all log
           #   entries in `entries` that do not specify a value for `resource`. Example:
@@ -540,10 +461,6 @@ module Google
           #
           #
           #   Projects listed in the `project_ids` field are added to this list.
-          # @param project_ids [Array<String>]
-          #   Deprecated. Use `resource_names` instead.  One or more project identifiers
-          #   or project numbers from which to retrieve log entries.  Example:
-          #   `"my-project-1A"`.
           # @param filter [String]
           #   Optional. A filter that chooses which log entries to return.  See [Advanced
           #   Logs Queries](/logging/docs/view/advanced-queries).  Only log entries that
@@ -600,7 +517,6 @@ module Google
 
           def list_log_entries \
               resource_names,
-              project_ids: nil,
               filter: nil,
               order_by: nil,
               page_size: nil,
@@ -608,7 +524,6 @@ module Google
               &block
             req = {
               resource_names: resource_names,
-              project_ids: project_ids,
               filter: filter,
               order_by: order_by,
               page_size: page_size
