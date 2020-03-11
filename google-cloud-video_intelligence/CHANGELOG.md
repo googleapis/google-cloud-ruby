@@ -4,9 +4,14 @@
 
 #### Features
 
-* support for logo recognition and project setting for quota/billing
-  * Add logo recognition annotations
-  * Add separate project setting for quota/billing
+#### Features
+
+* Add logo recognition annotations
+* Add separate project setting for quota/billing
+
+#### Documentation
+
+* Update Request URIs link
 
 #### Documentation
 
