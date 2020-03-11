@@ -13,6 +13,14 @@ require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.logging.v2.LogBucket" do
+    optional :name, :string, 1
+    optional :description, :string, 3
+    optional :create_time, :message, 4, "google.protobuf.Timestamp"
+    optional :update_time, :message, 5, "google.protobuf.Timestamp"
+    optional :retention_days, :int32, 11
+    optional :lifecycle_state, :enum, 12, "google.logging.v2.LifecycleState"
+  end
   add_message "google.logging.v2.LogSink" do
     optional :name, :string, 1
     optional :destination, :string, 3
@@ -24,8 +32,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :include_children, :bool, 9
     optional :create_time, :message, 13, "google.protobuf.Timestamp"
     optional :update_time, :message, 14, "google.protobuf.Timestamp"
-    optional :start_time, :message, 10, "google.protobuf.Timestamp"
-    optional :end_time, :message, 11, "google.protobuf.Timestamp"
     oneof :options do
       optional :bigquery_options, :message, 12, "google.logging.v2.BigQueryOptions"
     end
@@ -38,6 +44,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.logging.v2.BigQueryOptions" do
     optional :use_partitioned_tables, :bool, 1
     optional :uses_timestamp_column_partitioning, :bool, 3
+  end
+  add_message "google.logging.v2.ListBucketsRequest" do
+    optional :parent, :string, 1
+    optional :page_token, :string, 2
+    optional :page_size, :int32, 3
+  end
+  add_message "google.logging.v2.ListBucketsResponse" do
+    repeated :buckets, :message, 1, "google.logging.v2.LogBucket"
+    optional :next_page_token, :string, 2
+  end
+  add_message "google.logging.v2.UpdateBucketRequest" do
+    optional :name, :string, 1
+    optional :bucket, :message, 2, "google.logging.v2.LogBucket"
+    optional :update_mask, :message, 4, "google.protobuf.FieldMask"
+  end
+  add_message "google.logging.v2.GetBucketRequest" do
+    optional :name, :string, 1
   end
   add_message "google.logging.v2.ListSinksRequest" do
     optional :parent, :string, 1
@@ -110,14 +133,24 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :kms_key_name, :string, 2
     optional :service_account_id, :string, 3
   end
+  add_enum "google.logging.v2.LifecycleState" do
+    value :LIFECYCLE_STATE_UNSPECIFIED, 0
+    value :ACTIVE, 1
+    value :DELETE_REQUESTED, 2
+  end
 end
 
 module Google
   module Logging
     module V2
+      LogBucket = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogBucket").msgclass
       LogSink = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink").msgclass
       LogSink::VersionFormat = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink.VersionFormat").enummodule
       BigQueryOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.BigQueryOptions").msgclass
+      ListBucketsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListBucketsRequest").msgclass
+      ListBucketsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListBucketsResponse").msgclass
+      UpdateBucketRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateBucketRequest").msgclass
+      GetBucketRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetBucketRequest").msgclass
       ListSinksRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListSinksRequest").msgclass
       ListSinksResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListSinksResponse").msgclass
       GetSinkRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetSinkRequest").msgclass
@@ -134,6 +167,7 @@ module Google
       GetCmekSettingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetCmekSettingsRequest").msgclass
       UpdateCmekSettingsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateCmekSettingsRequest").msgclass
       CmekSettings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CmekSettings").msgclass
+      LifecycleState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LifecycleState").enummodule
     end
   end
 end

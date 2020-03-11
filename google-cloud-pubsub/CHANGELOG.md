@@ -1,5 +1,20 @@
 # Release History
 
+### 1.4.0 / 2020-03-11
+
+#### Features
+
+*  Rename Subscriber inventory methods and params
+  * Rename Subscriber#inventory_limit to #max_outstanding_messages
+  * Rename Subscriber#bytesize to #max_outstanding_bytes
+  * Rename Subscriber#extension to #max_total_lease_duration
+  * Add deprecated aliases for the original methods
+* Support separate project setting for quota/billing
+
+#### Documentation
+
+* Update documentation in the lower-level client
+
 ### 1.3.1 / 2020-02-18
 
 #### Bug Fixes

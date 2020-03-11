@@ -82,31 +82,22 @@ module Google
 
             # Suggest job titles for jobs autocomplete.
             #
-            # For
-            # {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::JOB_TITLE CompletionType::JOB_TITLE}
-            # type, only open jobs with the same
-            # {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes}
-            # are returned.
+            # For {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::JOB_TITLE CompletionType::JOB_TITLE} type, only open jobs with the same
+            # {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes} are returned.
             JOB_TITLE = 1
 
             # Suggest company names for jobs autocomplete.
             #
-            # For
-            # {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMPANY_NAME CompletionType::COMPANY_NAME}
-            # type, only companies having open jobs with the same
-            # {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes}
-            # are returned.
+            # For {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMPANY_NAME CompletionType::COMPANY_NAME} type,
+            # only companies having open jobs with the same {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes} are
+            # returned.
             COMPANY_NAME = 2
 
             # Suggest both job titles and company names for jobs autocomplete.
             #
-            # For
-            # {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED CompletionType::COMBINED}
-            # type, only open jobs with the same
-            # {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes}
-            # or companies having open jobs with the same
-            # {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes}
-            # are returned.
+            # For {Google::Cloud::Talent::V4beta1::CompleteQueryRequest::CompletionType::COMBINED CompletionType::COMBINED} type, only open jobs with the same
+            # {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes} or companies having open jobs with the same
+            # {Google::Cloud::Talent::V4beta1::CompleteQueryRequest#language_codes language_codes} are returned.
             COMBINED = 3
           end
         end

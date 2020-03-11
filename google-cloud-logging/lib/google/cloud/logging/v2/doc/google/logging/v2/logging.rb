@@ -49,10 +49,10 @@ module Google
       #         "projects/my-project-id/logs/syslog"
       #         "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
       #
-      #     The permission <code>logging.logEntries.create</code> is needed on each
-      #     project, organization, billing account, or folder that is receiving
-      #     new log entries, whether the resource is specified in
-      #     <code>logName</code> or in an individual log entry.
+      #     The permission `logging.logEntries.create` is needed on each project,
+      #     organization, billing account, or folder that is receiving new log
+      #     entries, whether the resource is specified in `logName` or in an
+      #     individual log entry.
       # @!attribute [rw] resource
       #   @return [Google::Api::MonitoredResource]
       #     Optional. A default monitored resource object that is assigned to all log
@@ -109,15 +109,9 @@ module Google
       class WriteLogEntriesRequest; end
 
       # Result returned from WriteLogEntries.
-      # empty
       class WriteLogEntriesResponse; end
 
       # The parameters to `ListLogEntries`.
-      # @!attribute [rw] project_ids
-      #   @return [Array<String>]
-      #     Deprecated. Use `resource_names` instead.  One or more project identifiers
-      #     or project numbers from which to retrieve log entries.  Example:
-      #     `"my-project-1A"`.
       # @!attribute [rw] resource_names
       #   @return [Array<String>]
       #     Required. Names of one or more parent resources from which to

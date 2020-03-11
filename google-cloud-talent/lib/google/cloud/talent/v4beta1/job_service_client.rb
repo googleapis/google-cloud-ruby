@@ -853,8 +853,6 @@ module Google
           #
           #   The maximum allowed value is 5000. Otherwise an error is thrown.
           #
-          #   The maximum allowed value is 5000. Otherwise an error is thrown.
-          #
           #   For example, 0 means to  return results starting from the first matching
           #   job, and 10 means to return from the 11th job. This can be used for
           #   pagination, (for example, pageSize = 10 and offset = 10 means to return
@@ -1170,8 +1168,6 @@ module Google
           #   An integer that specifies the current offset (that is, starting result
           #   location, amongst the jobs deemed by the API as relevant) in search
           #   results. This field is only considered if {Google::Cloud::Talent::V4beta1::SearchJobsRequest#page_token page_token} is unset.
-          #
-          #   The maximum allowed value is 5000. Otherwise an error is thrown.
           #
           #   The maximum allowed value is 5000. Otherwise an error is thrown.
           #

@@ -42,17 +42,13 @@ module Google
         #     For example, "projects/foo/tenants/bar/profiles/baz".
         # @!attribute [rw] job
         #   @return [String]
-        #     One of either a job or a company is required.
-        #
-        #     Resource name of the job which the candidate applied for.
+        #     Required. Resource name of the job which the candidate applied for.
         #
         #     The format is
         #     "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For example,
         #     "projects/foo/tenants/bar/jobs/baz".
         # @!attribute [rw] company
         #   @return [String]
-        #     One of either a job or a company is required.
-        #
         #     Resource name of the company which the candidate applied for.
         #
         #     The format is
@@ -63,8 +59,8 @@ module Google
         #     The application date.
         # @!attribute [rw] stage
         #   @return [Google::Cloud::Talent::V4beta1::Application::ApplicationStage]
-        #     Required. What is the most recent stage of the application (that is, new, screen,
-        #     send cv, hired, finished work)?  This field is intentionally not
+        #     Required. What is the most recent stage of the application (that is, new,
+        #     screen, send cv, hired, finished work)?  This field is intentionally not
         #     comprehensive of every possible status, but instead, represents statuses
         #     that would be used to indicate to the ML models good / bad matches.
         # @!attribute [rw] state
