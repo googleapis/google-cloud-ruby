@@ -1,5 +1,15 @@
 # Release History
 
+### 0.8.0 / 2020-03-11
+
+#### Features
+
+* Support separate project setting for quota/billing
+
+#### Documentation
+
+* Update enum return type to full module namespace
+
 ### 0.7.0 / 2020-02-04
 
 #### Features
