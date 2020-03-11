@@ -1,5 +1,14 @@
 # Release History
 
+### 1.20.0 / 2020-03-11
+
+#### Features
+
+* Add Range Partitioning ()
+  * Add range partitioning methods to Table and Table::Updater
+  * Add range partitioning methods to LoadJob
+  * Add range partitioning methods to QueryJob
+
 ### 1.19.0 / 2020-02-11
 
 #### Features
