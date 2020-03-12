@@ -67,7 +67,45 @@ module Google
                                   break parent_const.configure if parent_const&.respond_to? :configure
                                   namespace.pop
                                 end
-                Client::Configuration.new parent_config
+                default_config = Client::Configuration.new parent_config
+
+                default_config.rpcs.list_secrets.timeout = 60.0
+
+                default_config.rpcs.create_secret.timeout = 60.0
+
+                default_config.rpcs.add_secret_version.timeout = 60.0
+
+                default_config.rpcs.get_secret.timeout = 60.0
+
+                default_config.rpcs.update_secret.timeout = 60.0
+
+                default_config.rpcs.delete_secret.timeout = 60.0
+
+                default_config.rpcs.list_secret_versions.timeout = 60.0
+
+                default_config.rpcs.get_secret_version.timeout = 60.0
+
+                default_config.rpcs.access_secret_version.timeout = 60.0
+                default_config.rpcs.access_secret_version.retry_policy = {
+                  initial_delay: 1.0,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "UNKNOWN"]
+                }
+
+                default_config.rpcs.disable_secret_version.timeout = 60.0
+
+                default_config.rpcs.enable_secret_version.timeout = 60.0
+
+                default_config.rpcs.destroy_secret_version.timeout = 60.0
+
+                default_config.rpcs.set_iam_policy.timeout = 60.0
+
+                default_config.rpcs.get_iam_policy.timeout = 60.0
+
+                default_config.rpcs.test_iam_permissions.timeout = 60.0
+
+                default_config
               end
               yield @configure if block_given?
               @configure
