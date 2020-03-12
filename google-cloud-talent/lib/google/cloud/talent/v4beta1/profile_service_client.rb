@@ -54,14 +54,14 @@ module Google
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
-            "list_profiles" => Google::Gax::PageDescriptor.new(
-              "page_token",
-              "next_page_token",
-              "profiles"),
             "search_profiles" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "summarized_profiles")
+              "summarized_profiles"),
+            "list_profiles" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "profiles")
           }.freeze
 
           private_constant :PAGE_DESCRIPTORS
@@ -222,6 +222,22 @@ module Google
               &Google::Cloud::Talent::V4beta1::ProfileService::Stub.method(:new)
             )
 
+            @delete_profile = Google::Gax.create_api_call(
+              @profile_service_stub.method(:delete_profile),
+              defaults["delete_profile"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @search_profiles = Google::Gax.create_api_call(
+              @profile_service_stub.method(:search_profiles),
+              defaults["search_profiles"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
             @list_profiles = Google::Gax.create_api_call(
               @profile_service_stub.method(:list_profiles),
               defaults["list_profiles"],
@@ -254,231 +270,9 @@ module Google
                 {'profile.name' => request.profile.name}
               end
             )
-            @delete_profile = Google::Gax.create_api_call(
-              @profile_service_stub.method(:delete_profile),
-              defaults["delete_profile"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @search_profiles = Google::Gax.create_api_call(
-              @profile_service_stub.method(:search_profiles),
-              defaults["search_profiles"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
           end
 
           # Service calls
-
-          # Lists profiles by filter. The order is unspecified.
-          #
-          # @param parent [String]
-          #   Required. The resource name of the tenant under which the profile is created.
-          #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-          #   "projects/foo/tenants/bar".
-          # @param filter [String]
-          #   The filter string specifies the profiles to be enumerated.
-          #
-          #   Supported operator: =, AND
-          #
-          #   The field(s) eligible for filtering are:
-          #
-          #   * `externalId`
-          #   * `groupId`
-          #
-          #   externalId and groupId cannot be specified at the same time. If both
-          #   externalId and groupId are provided, the API will return a bad request
-          #   error.
-          #
-          #   Sample Query:
-          #
-          #   * externalId = "externalId-1"
-          #   * groupId = "groupId-1"
-          # @param page_size [Integer]
-          #   The maximum number of resources contained in the underlying API
-          #   response. If page streaming is performed per-resource, this
-          #   parameter does not affect the return value. If page streaming is
-          #   performed per-page, this determines the maximum number of
-          #   resources in a page.
-          # @param read_mask [Google::Protobuf::FieldMask | Hash]
-          #   A field mask to specify the profile fields to be listed in response.
-          #   All fields are listed if it is unset.
-          #
-          #   Valid values are:
-          #
-          #   * name
-          #   A hash of the same form as `Google::Protobuf::FieldMask`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::Profile>]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::Profile>]
-          #   An enumerable of Google::Cloud::Talent::V4beta1::Profile instances.
-          #   See Google::Gax::PagedEnumerable documentation for other
-          #   operations such as per-page iteration or access to the response
-          #   object.
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/talent"
-          #
-          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-          #
-          #   # Iterate over all results.
-          #   profile_client.list_profiles(formatted_parent).each do |element|
-          #     # Process element.
-          #   end
-          #
-          #   # Or iterate over results one page at a time.
-          #   profile_client.list_profiles(formatted_parent).each_page do |page|
-          #     # Process each page at a time.
-          #     page.each do |element|
-          #       # Process element.
-          #     end
-          #   end
-
-          def list_profiles \
-              parent,
-              filter: nil,
-              page_size: nil,
-              read_mask: nil,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              filter: filter,
-              page_size: page_size,
-              read_mask: read_mask
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::ListProfilesRequest)
-            @list_profiles.call(req, options, &block)
-          end
-
-          # Creates and returns a new profile.
-          #
-          # @param parent [String]
-          #   Required. The name of the tenant this profile belongs to.
-          #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-          #   "projects/foo/tenants/bar".
-          # @param profile [Google::Cloud::Talent::V4beta1::Profile | Hash]
-          #   Required. The profile to be created.
-          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Profile`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Talent::V4beta1::Profile]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Talent::V4beta1::Profile]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/talent"
-          #
-          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-          #
-          #   # TODO: Initialize `profile`:
-          #   profile = {}
-          #   response = profile_client.create_profile(formatted_parent, profile)
-
-          def create_profile \
-              parent,
-              profile,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              profile: profile
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::CreateProfileRequest)
-            @create_profile.call(req, options, &block)
-          end
-
-          # Gets the specified profile.
-          #
-          # @param name [String]
-          #   Required. Resource name of the profile to get.
-          #
-          #   The format is
-          #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
-          #   example, "projects/foo/tenants/bar/profiles/baz".
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Talent::V4beta1::Profile]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Talent::V4beta1::Profile]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/talent"
-          #
-          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
-          #   response = profile_client.get_profile(formatted_name)
-
-          def get_profile \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::GetProfileRequest)
-            @get_profile.call(req, options, &block)
-          end
-
-          # Updates the specified profile and returns the updated result.
-          #
-          # @param profile [Google::Cloud::Talent::V4beta1::Profile | Hash]
-          #   Required. Profile to be updated.
-          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Profile`
-          #   can also be provided.
-          # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   A field mask to specify the profile fields to update.
-          #
-          #   A full update is performed if it is unset.
-          #   A hash of the same form as `Google::Protobuf::FieldMask`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Talent::V4beta1::Profile]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Talent::V4beta1::Profile]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/talent"
-          #
-          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-          #
-          #   # TODO: Initialize `profile`:
-          #   profile = {}
-          #   response = profile_client.update_profile(profile)
-
-          def update_profile \
-              profile,
-              update_mask: nil,
-              options: nil,
-              &block
-            req = {
-              profile: profile,
-              update_mask: update_mask
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::UpdateProfileRequest)
-            @update_profile.call(req, options, &block)
-          end
 
           # Deletes the specified profile.
           # Prerequisite: The profile has no associated applications or assignments
@@ -757,6 +551,212 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::SearchProfilesRequest)
             @search_profiles.call(req, options, &block)
+          end
+
+          # Lists profiles by filter. The order is unspecified.
+          #
+          # @param parent [String]
+          #   Required. The resource name of the tenant under which the profile is created.
+          #
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenants/bar".
+          # @param filter [String]
+          #   The filter string specifies the profiles to be enumerated.
+          #
+          #   Supported operator: =, AND
+          #
+          #   The field(s) eligible for filtering are:
+          #
+          #   * `externalId`
+          #   * `groupId`
+          #
+          #   externalId and groupId cannot be specified at the same time. If both
+          #   externalId and groupId are provided, the API will return a bad request
+          #   error.
+          #
+          #   Sample Query:
+          #
+          #   * externalId = "externalId-1"
+          #   * groupId = "groupId-1"
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param read_mask [Google::Protobuf::FieldMask | Hash]
+          #   A field mask to specify the profile fields to be listed in response.
+          #   All fields are listed if it is unset.
+          #
+          #   Valid values are:
+          #
+          #   * name
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::Profile>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Talent::V4beta1::Profile>]
+          #   An enumerable of Google::Cloud::Talent::V4beta1::Profile instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/talent"
+          #
+          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+          #
+          #   # Iterate over all results.
+          #   profile_client.list_profiles(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   profile_client.list_profiles(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_profiles \
+              parent,
+              filter: nil,
+              page_size: nil,
+              read_mask: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              filter: filter,
+              page_size: page_size,
+              read_mask: read_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::ListProfilesRequest)
+            @list_profiles.call(req, options, &block)
+          end
+
+          # Creates and returns a new profile.
+          #
+          # @param parent [String]
+          #   Required. The name of the tenant this profile belongs to.
+          #
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenants/bar".
+          # @param profile [Google::Cloud::Talent::V4beta1::Profile | Hash]
+          #   Required. The profile to be created.
+          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Profile`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Talent::V4beta1::Profile]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Talent::V4beta1::Profile]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/talent"
+          #
+          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+          #
+          #   # TODO: Initialize `profile`:
+          #   profile = {}
+          #   response = profile_client.create_profile(formatted_parent, profile)
+
+          def create_profile \
+              parent,
+              profile,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              profile: profile
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::CreateProfileRequest)
+            @create_profile.call(req, options, &block)
+          end
+
+          # Gets the specified profile.
+          #
+          # @param name [String]
+          #   Required. Resource name of the profile to get.
+          #
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}". For
+          #   example, "projects/foo/tenants/bar/profiles/baz".
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Talent::V4beta1::Profile]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Talent::V4beta1::Profile]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/talent"
+          #
+          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+          #   formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
+          #   response = profile_client.get_profile(formatted_name)
+
+          def get_profile \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::GetProfileRequest)
+            @get_profile.call(req, options, &block)
+          end
+
+          # Updates the specified profile and returns the updated result.
+          #
+          # @param profile [Google::Cloud::Talent::V4beta1::Profile | Hash]
+          #   Required. Profile to be updated.
+          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Profile`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   A field mask to specify the profile fields to update.
+          #
+          #   A full update is performed if it is unset.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Talent::V4beta1::Profile]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Talent::V4beta1::Profile]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/talent"
+          #
+          #   profile_client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+          #
+          #   # TODO: Initialize `profile`:
+          #   profile = {}
+          #   response = profile_client.update_profile(profile)
+
+          def update_profile \
+              profile,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              profile: profile,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::UpdateProfileRequest)
+            @update_profile.call(req, options, &block)
           end
         end
       end

@@ -120,6 +120,8 @@ module Google
           private_constant :TENANT_PATH_TEMPLATE
 
           # Returns a fully-qualified company resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param tenant [String]
           # @param company [String]
@@ -133,6 +135,8 @@ module Google
           end
 
           # Returns a fully-qualified company_without_tenant resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param company [String]
           # @return [String]
@@ -144,6 +148,8 @@ module Google
           end
 
           # Returns a fully-qualified job resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param tenant [String]
           # @param jobs [String]
@@ -157,6 +163,8 @@ module Google
           end
 
           # Returns a fully-qualified job_without_tenant resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param jobs [String]
           # @return [String]
@@ -311,9 +319,25 @@ module Google
               &Google::Cloud::Talent::V4beta1::JobService::Stub.method(:new)
             )
 
+            @delete_job = Google::Gax.create_api_call(
+              @job_service_stub.method(:delete_job),
+              defaults["delete_job"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @create_job = Google::Gax.create_api_call(
               @job_service_stub.method(:create_job),
               defaults["create_job"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @batch_create_jobs = Google::Gax.create_api_call(
+              @job_service_stub.method(:batch_create_jobs),
+              defaults["batch_create_jobs"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
@@ -335,17 +359,9 @@ module Google
                 {'job.name' => request.job.name}
               end
             )
-            @delete_job = Google::Gax.create_api_call(
-              @job_service_stub.method(:delete_job),
-              defaults["delete_job"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @list_jobs = Google::Gax.create_api_call(
-              @job_service_stub.method(:list_jobs),
-              defaults["list_jobs"],
+            @batch_update_jobs = Google::Gax.create_api_call(
+              @job_service_stub.method(:batch_update_jobs),
+              defaults["batch_update_jobs"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
@@ -354,6 +370,14 @@ module Google
             @batch_delete_jobs = Google::Gax.create_api_call(
               @job_service_stub.method(:batch_delete_jobs),
               defaults["batch_delete_jobs"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @list_jobs = Google::Gax.create_api_call(
+              @job_service_stub.method(:list_jobs),
+              defaults["list_jobs"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
@@ -375,25 +399,51 @@ module Google
                 {'parent' => request.parent}
               end
             )
-            @batch_create_jobs = Google::Gax.create_api_call(
-              @job_service_stub.method(:batch_create_jobs),
-              defaults["batch_create_jobs"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
-            @batch_update_jobs = Google::Gax.create_api_call(
-              @job_service_stub.method(:batch_update_jobs),
-              defaults["batch_update_jobs"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
           end
 
           # Service calls
+
+          # Deletes the specified job.
+          #
+          # Typically, the job becomes unsearchable within 10 seconds, but it may take
+          # up to 5 minutes.
+          #
+          # @param name [String]
+          #   Required. The resource name of the job to be deleted.
+          #
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
+          #   example, "projects/foo/tenants/bar/jobs/baz".
+          #
+          #   If tenant id is unspecified, the default tenant is used. For
+          #   example, "projects/foo/jobs/bar".
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/talent"
+          #
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   job_client.delete_job(name)
+
+          def delete_job \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::DeleteJobRequest)
+            @delete_job.call(req, options, &block)
+            nil
+          end
 
           # Creates a new job.
           #
@@ -422,7 +472,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `job`:
           #   job = {}
@@ -439,6 +489,79 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::CreateJobRequest)
             @create_job.call(req, options, &block)
+          end
+
+          # Begins executing a batch create jobs operation.
+          #
+          # @param parent [String]
+          #   Required. The resource name of the tenant under which the job is created.
+          #
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created. For example, "projects/foo".
+          # @param jobs [Array<Google::Cloud::Talent::V4beta1::Job | Hash>]
+          #   Required. The jobs to be created.
+          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Job`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/talent"
+          #
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize `jobs`:
+          #   jobs = []
+          #
+          #   # Register a callback during the method call.
+          #   operation = job_client.batch_create_jobs(formatted_parent, jobs) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def batch_create_jobs \
+              parent,
+              jobs,
+              options: nil
+            req = {
+              parent: parent,
+              jobs: jobs
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest)
+            operation = Google::Gax::Operation.new(
+              @batch_create_jobs.call(req, options),
+              @operations_client,
+              Google::Cloud::Talent::V4beta1::JobOperationResult,
+              Google::Cloud::Talent::V4beta1::BatchOperationMetadata,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
           end
 
           # Retrieves the specified job, whose status is OPEN or recently EXPIRED
@@ -465,8 +588,10 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[TENANT]", "[JOBS]")
-          #   response = job_client.get_job(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = job_client.get_job(name)
 
           def get_job \
               name,
@@ -528,20 +653,118 @@ module Google
             @update_job.call(req, options, &block)
           end
 
-          # Deletes the specified job.
+          # Begins executing a batch update jobs operation.
           #
-          # Typically, the job becomes unsearchable within 10 seconds, but it may take
-          # up to 5 minutes.
+          # @param parent [String]
+          #   Required. The resource name of the tenant under which the job is created.
           #
-          # @param name [String]
-          #   Required. The resource name of the job to be deleted.
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created. For example, "projects/foo".
+          # @param jobs [Array<Google::Cloud::Talent::V4beta1::Job | Hash>]
+          #   Required. The jobs to be updated.
+          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Job`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Strongly recommended for the best service experience. Be aware that it will
+          #   also increase latency when checking the status of a batch operation.
           #
-          #   The format is
-          #   "projects/{project_id}/tenants/{tenant_id}/jobs/{job_id}". For
-          #   example, "projects/foo/tenants/bar/jobs/baz".
+          #   If {Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest#update_mask update_mask} is provided, only the specified fields in
+          #   {Google::Cloud::Talent::V4beta1::Job Job} are updated. Otherwise all the fields are updated.
           #
-          #   If tenant id is unspecified, the default tenant is used. For
-          #   example, "projects/foo/jobs/bar".
+          #   A field mask to restrict the fields that are updated. Only
+          #   top level fields of {Google::Cloud::Talent::V4beta1::Job Job} are supported.
+          #
+          #   If {Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest#update_mask update_mask} is provided, The {Google::Cloud::Talent::V4beta1::Job Job} inside
+          #   {Google::Cloud::Talent::V4beta1::JobOperationResult::JobResult JobResult}
+          #   will only contains fields that is updated, plus the Id of the Job.
+          #   Otherwise,  {Google::Cloud::Talent::V4beta1::Job Job} will include all fields, which can yield a very
+          #   large response.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/talent"
+          #
+          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize `jobs`:
+          #   jobs = []
+          #
+          #   # Register a callback during the method call.
+          #   operation = job_client.batch_update_jobs(formatted_parent, jobs) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def batch_update_jobs \
+              parent,
+              jobs,
+              update_mask: nil,
+              options: nil
+            req = {
+              parent: parent,
+              jobs: jobs,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest)
+            operation = Google::Gax::Operation.new(
+              @batch_update_jobs.call(req, options),
+              @operations_client,
+              Google::Cloud::Talent::V4beta1::JobOperationResult,
+              Google::Cloud::Talent::V4beta1::BatchOperationMetadata,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
+          end
+
+          # Deletes a list of {Google::Cloud::Talent::V4beta1::Job Job}s by filter.
+          #
+          # @param parent [String]
+          #   Required. The resource name of the tenant under which the job is created.
+          #
+          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
+          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
+          #   is created. For example, "projects/foo".
+          # @param filter [String]
+          #   Required. The filter string specifies the jobs to be deleted.
+          #
+          #   Supported operator: =, AND
+          #
+          #   The fields eligible for filtering are:
+          #
+          #   * `companyName` (Required)
+          #   * `requisitionId` (Required)
+          #
+          #   Sample Query: companyName = "projects/foo/companies/bar" AND
+          #   requisitionId = "req-1"
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -553,18 +776,23 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[TENANT]", "[JOBS]")
-          #   job_client.delete_job(formatted_name)
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize `filter`:
+          #   filter = ''
+          #   job_client.batch_delete_jobs(formatted_parent, filter)
 
-          def delete_job \
-              name,
+          def batch_delete_jobs \
+              parent,
+              filter,
               options: nil,
               &block
             req = {
-              name: name
+              parent: parent,
+              filter: filter
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::DeleteJobRequest)
-            @delete_job.call(req, options, &block)
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::BatchDeleteJobsRequest)
+            @batch_delete_jobs.call(req, options, &block)
             nil
           end
 
@@ -621,7 +849,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `filter`:
           #   filter = ''
@@ -654,57 +882,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::ListJobsRequest)
             @list_jobs.call(req, options, &block)
-          end
-
-          # Deletes a list of {Google::Cloud::Talent::V4beta1::Job Job}s by filter.
-          #
-          # @param parent [String]
-          #   Required. The resource name of the tenant under which the job is created.
-          #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
-          #   is created. For example, "projects/foo".
-          # @param filter [String]
-          #   Required. The filter string specifies the jobs to be deleted.
-          #
-          #   Supported operator: =, AND
-          #
-          #   The fields eligible for filtering are:
-          #
-          #   * `companyName` (Required)
-          #   * `requisitionId` (Required)
-          #
-          #   Sample Query: companyName = "projects/foo/companies/bar" AND
-          #   requisitionId = "req-1"
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/talent"
-          #
-          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-          #
-          #   # TODO: Initialize `filter`:
-          #   filter = ''
-          #   job_client.batch_delete_jobs(formatted_parent, filter)
-
-          def batch_delete_jobs \
-              parent,
-              filter,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              filter: filter
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::BatchDeleteJobsRequest)
-            @batch_delete_jobs.call(req, options, &block)
-            nil
           end
 
           # Searches for jobs using the provided {Google::Cloud::Talent::V4beta1::SearchJobsRequest SearchJobsRequest}.
@@ -965,7 +1142,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `request_metadata`:
           #   request_metadata = {}
@@ -1283,7 +1460,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `request_metadata`:
           #   request_metadata = {}
@@ -1336,171 +1513,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::SearchJobsRequest)
             @search_jobs_for_alert.call(req, options, &block)
-          end
-
-          # Begins executing a batch create jobs operation.
-          #
-          # @param parent [String]
-          #   Required. The resource name of the tenant under which the job is created.
-          #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
-          #   is created. For example, "projects/foo".
-          # @param jobs [Array<Google::Cloud::Talent::V4beta1::Job | Hash>]
-          #   Required. The jobs to be created.
-          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Job`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @return [Google::Gax::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/talent"
-          #
-          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-          #
-          #   # TODO: Initialize `jobs`:
-          #   jobs = []
-          #
-          #   # Register a callback during the method call.
-          #   operation = job_client.batch_create_jobs(formatted_parent, jobs) do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Or use the return value to register a callback.
-          #   operation.on_done do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Manually reload the operation.
-          #   operation.reload!
-          #
-          #   # Or block until the operation completes, triggering callbacks on
-          #   # completion.
-          #   operation.wait_until_done!
-
-          def batch_create_jobs \
-              parent,
-              jobs,
-              options: nil
-            req = {
-              parent: parent,
-              jobs: jobs
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest)
-            operation = Google::Gax::Operation.new(
-              @batch_create_jobs.call(req, options),
-              @operations_client,
-              Google::Cloud::Talent::V4beta1::JobOperationResult,
-              Google::Cloud::Talent::V4beta1::BatchOperationMetadata,
-              call_options: options
-            )
-            operation.on_done { |operation| yield(operation) } if block_given?
-            operation
-          end
-
-          # Begins executing a batch update jobs operation.
-          #
-          # @param parent [String]
-          #   Required. The resource name of the tenant under which the job is created.
-          #
-          #   The format is "projects/{project_id}/tenants/{tenant_id}". For example,
-          #   "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
-          #   is created. For example, "projects/foo".
-          # @param jobs [Array<Google::Cloud::Talent::V4beta1::Job | Hash>]
-          #   Required. The jobs to be updated.
-          #   A hash of the same form as `Google::Cloud::Talent::V4beta1::Job`
-          #   can also be provided.
-          # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Strongly recommended for the best service experience. Be aware that it will
-          #   also increase latency when checking the status of a batch operation.
-          #
-          #   If {Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest#update_mask update_mask} is provided, only the specified fields in
-          #   {Google::Cloud::Talent::V4beta1::Job Job} are updated. Otherwise all the fields are updated.
-          #
-          #   A field mask to restrict the fields that are updated. Only
-          #   top level fields of {Google::Cloud::Talent::V4beta1::Job Job} are supported.
-          #
-          #   If {Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest#update_mask update_mask} is provided, The {Google::Cloud::Talent::V4beta1::Job Job} inside
-          #   {Google::Cloud::Talent::V4beta1::JobOperationResult::JobResult JobResult}
-          #   will only contains fields that is updated, plus the Id of the Job.
-          #   Otherwise,  {Google::Cloud::Talent::V4beta1::Job Job} will include all fields, which can yield a very
-          #   large response.
-          #   A hash of the same form as `Google::Protobuf::FieldMask`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @return [Google::Gax::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/talent"
-          #
-          #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::JobServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-          #
-          #   # TODO: Initialize `jobs`:
-          #   jobs = []
-          #
-          #   # Register a callback during the method call.
-          #   operation = job_client.batch_update_jobs(formatted_parent, jobs) do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Or use the return value to register a callback.
-          #   operation.on_done do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Manually reload the operation.
-          #   operation.reload!
-          #
-          #   # Or block until the operation completes, triggering callbacks on
-          #   # completion.
-          #   operation.wait_until_done!
-
-          def batch_update_jobs \
-              parent,
-              jobs,
-              update_mask: nil,
-              options: nil
-            req = {
-              parent: parent,
-              jobs: jobs,
-              update_mask: update_mask
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest)
-            operation = Google::Gax::Operation.new(
-              @batch_update_jobs.call(req, options),
-              @operations_client,
-              Google::Cloud::Talent::V4beta1::JobOperationResult,
-              Google::Cloud::Talent::V4beta1::BatchOperationMetadata,
-              call_options: options
-            )
-            operation.on_done { |operation| yield(operation) } if block_given?
-            operation
           end
         end
       end
