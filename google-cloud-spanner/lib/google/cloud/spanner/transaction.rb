@@ -345,6 +345,13 @@ module Google
         #     `[:INT64]`.
         #   * {Fields} - Nested Structs are specified by providing a Fields
         #     object.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
         #
         # @return [Integer] The exact number of rows that were modified.
         #
@@ -373,8 +380,22 @@ module Google
         #     )
         #   end
         #
-        def execute_update sql, params: nil, types: nil
-          results = execute_query sql, params: params, types: types
+        # @example Update using query options
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.transaction do |tx|
+        #     row_count = tx.execute_update(
+        #       "UPDATE users SET name = 'Charlie' WHERE id = 1",
+        #       query_options: { optimizer_version: "1" }
+        #     )
+        #   end
+        #
+        def execute_update sql, params: nil, types: nil, query_options: nil
+          results = execute_query sql, params: params, types: types,
+                                  query_options: query_options
           # Stream all PartialResultSet to get ResultSetStats
           results.rows.to_a
           # Raise an error if there is not a row count returned
