@@ -26,6 +26,23 @@ module Google
             self.class.application_path project, tenant, profile, application
           end
         
+          # Alias for Google::Cloud::Talent::V4beta1::ApplicationServiceClient.company_path.
+          # @param project [String]
+          # @param tenant [String]
+          # @param company [String]
+          # @return [String]
+          def company_path project, tenant, company
+            self.class.company_path project, tenant, company
+          end
+        
+          # Alias for Google::Cloud::Talent::V4beta1::ApplicationServiceClient.company_without_tenant_path.
+          # @param project [String]
+          # @param company [String]
+          # @return [String]
+          def company_without_tenant_path project, company
+            self.class.company_without_tenant_path project, company
+          end
+        
           # Alias for Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path.
           # @param project [String]
           # @param tenant [String]

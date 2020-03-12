@@ -68,6 +68,158 @@ end
 
 describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
 
+  describe 'delete_profile' do
+    custom_error = CustomTestError_v4beta1.new "Custom test error for Google::Cloud::Talent::V4beta1::ProfileServiceClient#delete_profile."
+
+    it 'invokes delete_profile without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Talent::V4beta1::DeleteProfileRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v4beta1.new(:delete_profile, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProfileServiceCredentials_v4beta1.new("delete_profile")
+
+      Google::Cloud::Talent::V4beta1::ProfileService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+
+          # Call method
+          response = client.delete_profile(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_profile(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_profile with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Talent::V4beta1::DeleteProfileRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v4beta1.new(:delete_profile, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProfileServiceCredentials_v4beta1.new("delete_profile")
+
+      Google::Cloud::Talent::V4beta1::ProfileService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
+            client.delete_profile(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'search_profiles' do
+    custom_error = CustomTestError_v4beta1.new "Custom test error for Google::Cloud::Talent::V4beta1::ProfileServiceClient#search_profiles."
+
+    it 'invokes search_profiles without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+      request_metadata = {}
+
+      # Create expected grpc response
+      estimated_total_size = 1882144769
+      next_page_token = ""
+      result_set_id = "resultSetId-770306950"
+      summarized_profiles_element = {}
+      summarized_profiles = [summarized_profiles_element]
+      expected_response = {
+        estimated_total_size: estimated_total_size,
+        next_page_token: next_page_token,
+        result_set_id: result_set_id,
+        summarized_profiles: summarized_profiles
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Talent::V4beta1::SearchProfilesResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Talent::V4beta1::SearchProfilesRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(request_metadata, Google::Cloud::Talent::V4beta1::RequestMetadata), request.request_metadata)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v4beta1.new(:search_profiles, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProfileServiceCredentials_v4beta1.new("search_profiles")
+
+      Google::Cloud::Talent::V4beta1::ProfileService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+
+          # Call method
+          response = client.search_profiles(formatted_parent, request_metadata)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.summarized_profiles.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes search_profiles with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+      request_metadata = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::Talent::V4beta1::SearchProfilesRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(request_metadata, Google::Cloud::Talent::V4beta1::RequestMetadata), request.request_metadata)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v4beta1.new(:search_profiles, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockProfileServiceCredentials_v4beta1.new("search_profiles")
+
+      Google::Cloud::Talent::V4beta1::ProfileService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
+            client.search_profiles(formatted_parent, request_metadata)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'list_profiles' do
     custom_error = CustomTestError_v4beta1.new "Custom test error for Google::Cloud::Talent::V4beta1::ProfileServiceClient#list_profiles."
 
@@ -399,158 +551,6 @@ describe Google::Cloud::Talent::V4beta1::ProfileServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
             client.update_profile(profile)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'delete_profile' do
-    custom_error = CustomTestError_v4beta1.new "Custom test error for Google::Cloud::Talent::V4beta1::ProfileServiceClient#delete_profile."
-
-    it 'invokes delete_profile without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Talent::V4beta1::DeleteProfileRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: nil)
-      end
-      mock_stub = MockGrpcClientStub_v4beta1.new(:delete_profile, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProfileServiceCredentials_v4beta1.new("delete_profile")
-
-      Google::Cloud::Talent::V4beta1::ProfileService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-
-          # Call method
-          response = client.delete_profile(formatted_name)
-
-          # Verify the response
-          assert_nil(response)
-
-          # Call method with block
-          client.delete_profile(formatted_name) do |response, operation|
-            # Verify the response
-            assert_nil(response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes delete_profile with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Talent::V4beta1::ProfileServiceClient.profile_path("[PROJECT]", "[TENANT]", "[PROFILE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Talent::V4beta1::DeleteProfileRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v4beta1.new(:delete_profile, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProfileServiceCredentials_v4beta1.new("delete_profile")
-
-      Google::Cloud::Talent::V4beta1::ProfileService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
-            client.delete_profile(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'search_profiles' do
-    custom_error = CustomTestError_v4beta1.new "Custom test error for Google::Cloud::Talent::V4beta1::ProfileServiceClient#search_profiles."
-
-    it 'invokes search_profiles without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-      request_metadata = {}
-
-      # Create expected grpc response
-      estimated_total_size = 1882144769
-      next_page_token = ""
-      result_set_id = "resultSetId-770306950"
-      summarized_profiles_element = {}
-      summarized_profiles = [summarized_profiles_element]
-      expected_response = {
-        estimated_total_size: estimated_total_size,
-        next_page_token: next_page_token,
-        result_set_id: result_set_id,
-        summarized_profiles: summarized_profiles
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::Talent::V4beta1::SearchProfilesResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Talent::V4beta1::SearchProfilesRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(request_metadata, Google::Cloud::Talent::V4beta1::RequestMetadata), request.request_metadata)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v4beta1.new(:search_profiles, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProfileServiceCredentials_v4beta1.new("search_profiles")
-
-      Google::Cloud::Talent::V4beta1::ProfileService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-
-          # Call method
-          response = client.search_profiles(formatted_parent, request_metadata)
-
-          # Verify the response
-          assert(response.instance_of?(Google::Gax::PagedEnumerable))
-          assert_equal(expected_response, response.page.response)
-          assert_nil(response.next_page)
-          assert_equal(expected_response.summarized_profiles.to_a, response.to_a)
-        end
-      end
-    end
-
-    it 'invokes search_profiles with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::Talent::V4beta1::ProfileServiceClient.tenant_path("[PROJECT]", "[TENANT]")
-      request_metadata = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::Talent::V4beta1::SearchProfilesRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(request_metadata, Google::Cloud::Talent::V4beta1::RequestMetadata), request.request_metadata)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v4beta1.new(:search_profiles, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockProfileServiceCredentials_v4beta1.new("search_profiles")
-
-      Google::Cloud::Talent::V4beta1::ProfileService::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Talent::ProfileService.new(version: :v4beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
-            client.search_profiles(formatted_parent, request_metadata)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
