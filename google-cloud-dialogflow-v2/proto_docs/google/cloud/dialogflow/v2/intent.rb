@@ -783,57 +783,57 @@ module Google
               # similar to the JSON message shown here. For more information, see
               # [Actions on Google Webhook
               # Format](https://developers.google.com/actions/dialogflow/webhook)
-              # <pre>\\\{
+              # <pre>{
               #   "expectUserResponse": true,
               #   "isSsml": false,
               #   "noInputPrompts": [],
-              #   "richResponse": \\\{
+              #   "richResponse": {
               #     "items": [
-              #       \\\{
-              #         "simpleResponse": \\\{
+              #       {
+              #         "simpleResponse": {
               #           "displayText": "hi",
               #           "textToSpeech": "hello"
-              #         \}
-              #       \}
+              #         }
+              #       }
               #     ],
               #     "suggestions": [
-              #       \\\{
+              #       {
               #         "title": "Say this"
-              #       \},
-              #       \\\{
+              #       },
+              #       {
               #         "title": "or this"
-              #       \}
+              #       }
               #     ]
-              #   \},
-              #   "systemIntent": \\\{
-              #     "data": \\\{
+              #   },
+              #   "systemIntent": {
+              #     "data": {
               #       "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
-              #       "listSelect": \\\{
+              #       "listSelect": {
               #         "items": [
-              #           \\\{
-              #             "optionInfo": \\\{
+              #           {
+              #             "optionInfo": {
               #               "key": "key1",
               #               "synonyms": [
               #                 "key one"
               #               ]
-              #             \},
+              #             },
               #             "title": "must not be empty, but unique"
-              #           \},
-              #           \\\{
-              #             "optionInfo": \\\{
+              #           },
+              #           {
+              #             "optionInfo": {
               #               "key": "key2",
               #               "synonyms": [
               #                 "key two"
               #               ]
-              #             \},
+              #             },
               #             "title": "must not be empty, but unique"
-              #           \}
+              #           }
               #         ]
-              #       \}
-              #     \},
+              #       }
+              #     },
               #     "intent": "actions.intent.OPTION"
-              #   \}
-              # \}</pre>
+              #   }
+              # }</pre>
               ACTIONS_ON_GOOGLE = 8
 
               # Google Hangouts.

@@ -117,12 +117,12 @@ module Google
     # Example:
     #
     #   rpc LongRunningRecognize(LongRunningRecognizeRequest)
-    #       returns (google.longrunning.Operation) \\\{
-    #     option (google.longrunning.operation_info) = \\\{
+    #       returns (google.longrunning.Operation) {
+    #     option (google.longrunning.operation_info) = {
     #       response_type: "LongRunningRecognizeResponse"
     #       metadata_type: "LongRunningRecognizeMetadata"
-    #     \};
-    #   \}
+    #     };
+    #   }
     # @!attribute [rw] response_type
     #   @return [String]
     #     Required. The message name of the primary return type for this

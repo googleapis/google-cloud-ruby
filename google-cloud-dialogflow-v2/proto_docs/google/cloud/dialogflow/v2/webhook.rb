@@ -54,7 +54,7 @@ module Google
         # To avoid this error:
         #
         # - Use `""` for empty strings
-        # - Use `\\\{\}` or `null` for empty objects
+        # - Use `{}` or `null` for empty objects
         # - Use `[]` or `null` for empty arrays
         #
         # For more information, see the
@@ -82,20 +82,20 @@ module Google
         #     information, see
         #     [Actions on Google Webhook
         #     Format](https://developers.google.com/actions/dialogflow/webhook)
-        #     <pre>\\\{
-        #       "google": \\\{
+        #     <pre>{
+        #       "google": {
         #         "expectUserResponse": true,
-        #         "richResponse": \\\{
+        #         "richResponse": {
         #           "items": [
-        #             \\\{
-        #               "simpleResponse": \\\{
+        #             {
+        #               "simpleResponse": {
         #                 "textToSpeech": "this is a simple response"
-        #               \}
-        #             \}
+        #               }
+        #             }
         #           ]
-        #         \}
-        #       \}
-        #     \}</pre>
+        #         }
+        #       }
+        #     }</pre>
         # @!attribute [rw] output_contexts
         #   @return [Array<Google::Cloud::Dialogflow::V2::Context>]
         #     Optional. The collection of output contexts. This value is passed directly
@@ -135,11 +135,11 @@ module Google
         #     agent may provide additional information in the payload.
         #
         #     In particular for the Telephony Gateway this field has the form:
-        #     <pre>\\\{
-        #      "telephony": \\\{
+        #     <pre>{
+        #      "telephony": {
         #        "caller_id": "+18558363987"
-        #      \}
-        #     \}</pre>
+        #      }
+        #     }</pre>
         #     Note: The caller ID field (`caller_id`) will be redacted for Standard
         #     Edition agents and populated with the caller ID in [E.164
         #     format](https://en.wikipedia.org/wiki/E.164) for Enterprise Edition agents.
