@@ -230,11 +230,12 @@ module Google
           ##
           # @private
           def to_gapi
-            Google::Apis::StorageV1::Policy::Binding.new({
+            params = {
               role: @role,
               members: @members,
               condition: @condition&.to_gapi
-            }.delete_if { |_, v| v.nil? })
+            }.delete_if { |_, v| v.nil? }
+            Google::Apis::StorageV1::Policy::Binding.new(**params)
           end
         end
       end

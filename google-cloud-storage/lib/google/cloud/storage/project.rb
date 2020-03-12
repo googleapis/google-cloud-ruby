@@ -357,10 +357,11 @@ module Google
                           logging_bucket: nil, logging_prefix: nil,
                           website_main: nil, website_404: nil, versioning: nil,
                           requester_pays: nil, user_project: nil
-          new_bucket = Google::Apis::StorageV1::Bucket.new({
+          params = {
             name: bucket_name,
             location: location
-          }.delete_if { |_, v| v.nil? })
+          }.delete_if { |_, v| v.nil? }
+          new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
           storage_class = storage_class_for storage_class
           updater = Bucket::Updater.new(new_bucket).tap do |b|
             b.logging_bucket = logging_bucket unless logging_bucket.nil?

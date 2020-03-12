@@ -1766,7 +1766,7 @@ module Google
           # Sending nil metadata results in an Apiary runtime error:
           # NoMethodError: undefined method `each' for nil:NilClass
           attr_params.reject! { |k, v| k == :metadata && v.nil? }
-          Google::Apis::StorageV1::Object.new attr_params
+          Google::Apis::StorageV1::Object.new(**attr_params)
         end
 
         protected
@@ -1817,12 +1817,12 @@ module Google
                       user_project: user_project }.delete_if { |_k, v| v.nil? }
 
           resp = service.rewrite_file \
-            bucket, name, new_bucket, new_name, updated_gapi, options
+            bucket, name, new_bucket, new_name, updated_gapi, **options
           until resp.done
             sleep 1
             retry_options = options.merge token: resp.rewrite_token
             resp = service.rewrite_file \
-              bucket, name, new_bucket, new_name, updated_gapi, retry_options
+              bucket, name, new_bucket, new_name, updated_gapi, **retry_options
           end
           resp.resource
         end

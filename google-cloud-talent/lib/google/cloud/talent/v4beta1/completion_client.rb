@@ -85,6 +85,8 @@ module Google
           private_constant :TENANT_PATH_TEMPLATE
 
           # Returns a fully-qualified company resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param tenant [String]
           # @param company [String]
@@ -98,6 +100,8 @@ module Google
           end
 
           # Returns a fully-qualified company_without_tenant resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param company [String]
           # @return [String]
@@ -302,7 +306,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   completion_client = Google::Cloud::Talent::Completion.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::CompletionClient.tenant_path("[PROJECT]", "[TENANT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::CompletionClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `query`:
           #   query = ''

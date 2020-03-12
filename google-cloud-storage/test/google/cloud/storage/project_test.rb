@@ -33,7 +33,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
                          origin: ["http://example.org", "https://example.org"],
                          http_method: ["*"],
                          response_header: ["X-My-Custom-Header"] }] }
-  let(:bucket_cors_gapi) { bucket_cors.map { |c| Google::Apis::StorageV1::Bucket::CorsConfiguration.new c } }
+  let(:bucket_cors_gapi) { bucket_cors.map { |c| Google::Apis::StorageV1::Bucket::CorsConfiguration.new **c } }
   let(:kms_key) { "path/to/encryption_key_name" }
   let(:bucket_retention_period) { 86400 }
 
@@ -765,7 +765,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
       versioning: versioning, logging: logging, website: website,
       cors_configurations: cors, billing: billing, lifecycle: lifecycle
     }.delete_if { |_, v| v.nil? }
-    Google::Apis::StorageV1::Bucket.new options
+    Google::Apis::StorageV1::Bucket.new **options
   end
 
   def find_bucket_gapi name = nil

@@ -1,5 +1,15 @@
 # Release History
 
+### 0.9.0 / 2020-03-11
+
+#### Features
+
+* Support separate project setting for quota/billing
+
+#### Documentation
+
+* Update description of update field mask
+
 ### 0.8.3 / 2020-01-23
 
 #### Performance Improvements
