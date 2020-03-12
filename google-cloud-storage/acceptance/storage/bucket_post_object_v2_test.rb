@@ -16,7 +16,7 @@ require "storage_helper"
 require 'net/http'
 require 'uri'
 
-describe Google::Cloud::Storage::Bucket, :post_object, :storage do
+describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
   let(:bucket_name) { $bucket_names.first }
   let :bucket do
     storage.bucket(bucket_name) ||
@@ -34,27 +34,26 @@ describe Google::Cloud::Storage::Bucket, :post_object, :storage do
     }
   end
 
-  it "generates a signed post object" do
+  it "generates a signed post object V2" do
     file_name = "logo-#{SecureRandom.hex(4).downcase}.jpg"
 
     bucket.file(file_name).must_be :nil?
 
-    signed_post = bucket.post_object file_name, policy: policy
-
-    http = Net::HTTP.new(uri.host, uri.port)
+    post_object = bucket.post_object file_name, policy: policy
+    http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
-    request = Net::HTTP::Post.new(uri.request_uri)
+    request = Net::HTTP::Post.new post_object.url
 
     form_data = [
       ['file', File.open(data)],
-      ['key', signed_post.fields[:key]],
-      ['GoogleAccessId', signed_post.fields[:GoogleAccessId]],
-      ['policy', signed_post.fields[:policy]],
-      ['signature', signed_post.fields[:signature]]
+      ['key', post_object.fields[:key]],
+      ['GoogleAccessId', post_object.fields[:GoogleAccessId]],
+      ['policy', post_object.fields[:policy]],
+      ['signature', post_object.fields[:signature]]
     ]
     request.set_form form_data, 'multipart/form-data'
 
-    response = http.request(request)
+    response = http.request request
 
     response.code.must_equal "204"
     bucket.file(file_name).wont_be :nil?
@@ -67,22 +66,22 @@ describe Google::Cloud::Storage::Bucket, :post_object, :storage do
 
     bucket.file(data_file).must_be :nil?
 
-    signed_post = bucket.post_object special_key, policy: policy
+    post_object = bucket.post_object special_key, policy: policy
 
-    http = Net::HTTP.new(uri.host, uri.port)
+    http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
-    request = Net::HTTP::Post.new(uri.request_uri)
+    request = Net::HTTP::Post.new post_object.url
 
     form_data = [
       ['file', File.open(data)],
-      ['key', signed_post.fields[:key]],
-      ['GoogleAccessId', signed_post.fields[:GoogleAccessId]],
-      ['policy', signed_post.fields[:policy]],
-      ['signature', signed_post.fields[:signature]]
+      ['key', post_object.fields[:key]],
+      ['GoogleAccessId', post_object.fields[:GoogleAccessId]],
+      ['policy', post_object.fields[:policy]],
+      ['signature', post_object.fields[:signature]]
     ]
     request.set_form form_data, 'multipart/form-data'
 
-    response = http.request(request)
+    response = http.request request
 
     response.code.must_equal "204"
     bucket.file(data_file).wont_be :nil?

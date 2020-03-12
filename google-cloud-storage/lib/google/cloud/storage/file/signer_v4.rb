@@ -84,7 +84,7 @@ module Google
             p["conditions"] = policy_conditions base_fields, conditions, fields
             expires ||= 60*60*24
             p["expiration"] = (now + expires).strftime "%Y-%m-%dT%H:%M:%SZ"
-
+            fields ||= {}
             fields.merge! base_fields
 
             policy_str = p.to_json
