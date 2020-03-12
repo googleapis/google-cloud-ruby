@@ -31,7 +31,7 @@ module Google
         #     Required. The Resource ID must be 1-63 characters long, and comply with
         #     <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
         #     Specifically, the name must be 1-63 characters long and match the regular
-        #     expression `[a-z](?:[-a-z0-9]\\\{0,61\}[a-z0-9])?` which means the first
+        #     expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
         #     character must be a lowercase letter, and all following characters must
         #     be a dash, lowercase letter, or digit, except the last character, which
         #     cannot be a dash.
@@ -85,7 +85,7 @@ module Google
         #
         #     General order by string syntax:
         #     <field> (<asc|desc>) (,)
-        #     <field> allows values \\\{"name"\}
+        #     <field> allows values {"name"}
         #     <asc/desc> ascending or descending order by <field>. If this is left
         #     blank, "asc" is used.
         #     Note that an empty order_by string result in default order, which is order
@@ -147,7 +147,7 @@ module Google
         #     Required. The Resource ID must be 1-63 characters long, and comply with
         #     <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
         #     Specifically, the name must be 1-63 characters long and match the regular
-        #     expression `[a-z](?:[-a-z0-9]\\\{0,61\}[a-z0-9])?` which means the first
+        #     expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
         #     character must be a lowercase letter, and all following characters must
         #     be a dash, lowercase letter, or digit, except the last character, which
         #     cannot be a dash.
@@ -258,7 +258,7 @@ module Google
         #     Required. The Resource ID must be 1-63 characters long, and comply with
         #     <a href="https://www.ietf.org/rfc/rfc1035.txt" target="_blank">RFC1035</a>.
         #     Specifically, the name must be 1-63 characters long and match the regular
-        #     expression `[a-z](?:[-a-z0-9]\\\{0,61\}[a-z0-9])?` which means the first
+        #     expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first
         #     character must be a lowercase letter, and all following characters must
         #     be a dash, lowercase letter, or digit, except the last character, which
         #     cannot be a dash.

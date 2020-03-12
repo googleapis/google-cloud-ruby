@@ -23,11 +23,11 @@ module Google
     # empty messages in your APIs. A typical example is to use it as the request
     # or the response type of an API method. For instance:
     #
-    #     service Foo \\\{
+    #     service Foo {
     #       rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
-    #     \}
+    #     }
     #
-    # The JSON representation for `Empty` is empty JSON object `\\\{\}`.
+    # The JSON representation for `Empty` is empty JSON object `{}`.
     class Empty
       include Google::Protobuf::MessageExts
       extend Google::Protobuf::MessageExts::ClassMethods
