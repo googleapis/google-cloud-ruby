@@ -30,7 +30,7 @@ library = gapic.ruby_library(
         "ruby-cloud-gem-name": "google-cloud-access_approval-v1",
         "ruby-cloud-title": "Access Approval API V1",
         "ruby-cloud-summary": "An API for controlling access to data by Google personnel.",
-        "ruby-cloud-env-prefix": "ACCESSAPPROVAL",
+        "ruby-cloud-env-prefix": "ACCESS_APPROVAL",
     }
 )
 

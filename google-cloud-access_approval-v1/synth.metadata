@@ -1,5 +1,15 @@
 {
-  "updateTime": "2020-03-07T00:04:55.969027Z",
+  "updateTime": "2020-03-13T23:56:08.840534Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "8386761d09819b665b6a6e1e6d6ff884bc8ff781",
+        "internalRef": "300843960"
+      }
+    }
+  ],
   "destinations": [
     {
       "client": {
@@ -9,92 +19,6 @@
         "language": "ruby",
         "generator": "gapic-generator-ruby"
       }
-    }
-  ],
-  "newFiles": [
-    {
-      "path": ".gitignore"
-    },
-    {
-      "path": ".repo-metadata.json"
-    },
-    {
-      "path": ".rubocop.yml"
-    },
-    {
-      "path": ".yardopts"
-    },
-    {
-      "path": "AUTHENTICATION.md"
-    },
-    {
-      "path": "CHANGELOG.md"
-    },
-    {
-      "path": "Gemfile"
-    },
-    {
-      "path": "LICENSE.md"
-    },
-    {
-      "path": "README.md"
-    },
-    {
-      "path": "Rakefile"
-    },
-    {
-      "path": "google-cloud-access_approval-v1.gemspec"
-    },
-    {
-      "path": "lib/google-cloud-access_approval-v1.rb"
-    },
-    {
-      "path": "lib/google/cloud/access_approval/v1.rb"
-    },
-    {
-      "path": "lib/google/cloud/access_approval/v1/access_approval.rb"
-    },
-    {
-      "path": "lib/google/cloud/access_approval/v1/access_approval/client.rb"
-    },
-    {
-      "path": "lib/google/cloud/access_approval/v1/access_approval/credentials.rb"
-    },
-    {
-      "path": "lib/google/cloud/access_approval/v1/version.rb"
-    },
-    {
-      "path": "lib/google/cloud/accessapproval/v1/accessapproval_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/accessapproval/v1/accessapproval_services_pb.rb"
-    },
-    {
-      "path": "lib/google/cloud/common_resources_pb.rb"
-    },
-    {
-      "path": "proto_docs/README.md"
-    },
-    {
-      "path": "proto_docs/google/api/field_behavior.rb"
-    },
-    {
-      "path": "proto_docs/google/api/resource.rb"
-    },
-    {
-      "path": "proto_docs/google/cloud/accessapproval/v1/accessapproval.rb"
-    },
-    {
-      "path": "proto_docs/google/protobuf/empty.rb"
-    },
-    {
-      "path": "proto_docs/google/protobuf/field_mask.rb"
-    },
-    {
-      "path": "proto_docs/google/protobuf/timestamp.rb"
-    },
-    {
-      "path": "test/google/cloud/access_approval/v1/access_approval_test.rb"
     }
   ]
 }

@@ -64,7 +64,9 @@ module Google
                                   break parent_const.configure if parent_const&.respond_to? :configure
                                   namespace.pop
                                 end
-                Client::Configuration.new parent_config
+                default_config = Client::Configuration.new parent_config
+
+                default_config
               end
               yield @configure if block_given?
               @configure
@@ -129,7 +131,7 @@ module Google
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
-
+              @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
               @access_approval_stub = Gapic::ServiceStub.new(
                 Google::Cloud::AccessApproval::V1::AccessApproval::Stub,
@@ -157,8 +159,8 @@ module Google
             #
             # @overload list_approval_requests(parent: nil, filter: nil, page_size: nil, page_token: nil)
             #   @param parent [String]
-            #     The parent resource. This may be "projects/\\\{project_id\}",
-            #     "folders/\\\{folder_id\}", or "organizations/\\\{organization_id\}".
+            #     The parent resource. This may be "projects/\\{project_id}",
+            #     "folders/\\{folder_id}", or "organizations/\\{organization_id}".
             #   @param filter [String]
             #     A filter on the type of approval requests to retrieve. Must be one of the
             #     following values:
@@ -194,10 +196,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_approval_requests.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::AccessApproval::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "parent" => request.parent
@@ -253,10 +256,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_approval_request.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::AccessApproval::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -319,10 +323,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.approve_approval_request.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::AccessApproval::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -395,10 +400,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.dismiss_approval_request.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::AccessApproval::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -453,10 +459,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_access_approval_settings.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::AccessApproval::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -524,10 +531,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.update_access_approval_settings.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::AccessApproval::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "settings.name" => request.settings.name
@@ -592,10 +600,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.delete_access_approval_settings.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::AccessApproval::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name

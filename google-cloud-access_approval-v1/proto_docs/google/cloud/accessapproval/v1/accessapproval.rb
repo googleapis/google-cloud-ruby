@@ -135,7 +135,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     The resource name of the request. Format is
-        #     "\\\{projects|folders|organizations\}/\\\{id\}/approvalRequests/\\\{approval_request_id\}".
+        #     "{projects|folders|organizations}/\\{id}/approvalRequests/\\{approval_request_id}".
         # @!attribute [rw] requested_resource_name
         #   @return [String]
         #     The resource for which approval is being requested. The format of the
@@ -202,9 +202,9 @@ module Google
         #   @return [String]
         #     The resource name of the settings. Format is one of:
         #     <ol>
-        #       <li>"projects/\\\{project_id\}/accessApprovalSettings"</li>
-        #       <li>"folders/\\\{folder_id\}/accessApprovalSettings"</li>
-        #       <li>"organizations/\\\{organization_id\}/accessApprovalSettings"</li>
+        #       <li>"projects/\\{project_id}/accessApprovalSettings"</li>
+        #       <li>"folders/\\{folder_id}/accessApprovalSettings"</li>
+        #       <li>"organizations/\\{organization_id}/accessApprovalSettings"</li>
         #     <ol>
         # @!attribute [rw] notification_emails
         #   @return [Array<String>]
@@ -240,8 +240,8 @@ module Google
         # Request to list approval requests.
         # @!attribute [rw] parent
         #   @return [String]
-        #     The parent resource. This may be "projects/\\\{project_id\}",
-        #     "folders/\\\{folder_id\}", or "organizations/\\\{organization_id\}".
+        #     The parent resource. This may be "projects/\\{project_id}",
+        #     "folders/\\{folder_id}", or "organizations/\\{organization_id}".
         # @!attribute [rw] filter
         #   @return [String]
         #     A filter on the type of approval requests to retrieve. Must be one of the
