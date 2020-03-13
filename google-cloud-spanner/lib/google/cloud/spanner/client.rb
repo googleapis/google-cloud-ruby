@@ -53,12 +53,13 @@ module Google
         ##
         # @private Creates a new Spanner Client instance.
         def initialize project, instance_id, database_id, session_labels: nil,
-                       pool_opts: {}
+                       pool_opts: {}, query_options: nil
           @project = project
           @instance_id = instance_id
           @database_id = database_id
           @session_labels = session_labels
           @pool = Pool.new self, pool_opts
+          @query_options = query_options
         end
 
         # The unique identifier for the project.
@@ -95,6 +96,13 @@ module Google
         # @return [Database]
         def database
           @project.database instance_id, database_id
+        end
+
+        # A hash of values to specify the custom query options for executing
+        # SQL query.
+        # @return [Hash]
+        def query_options
+          @query_options
         end
 
         ##
@@ -207,6 +215,13 @@ module Google
         #       Useful for reading the freshest data available at a nearby
         #       replica, while bounding the possible staleness if the local
         #       replica has fallen behind.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
@@ -306,7 +321,22 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def execute_query sql, params: nil, types: nil, single_use: nil
+        # @example Query using query options:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   results = db.execute_query \
+        #     "SELECT * FROM users", query_options: { optimizer_version: "1" }
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        def execute_query sql, params: nil, types: nil, single_use: nil,
+                          query_options: nil
           validate_single_use_args! single_use
           ensure_service!
 
@@ -316,7 +346,8 @@ module Google
           results = nil
           @pool.with_session do |session|
             results = session.execute_query \
-              sql, params: params, types: types, transaction: single_use_tx
+              sql, params: params, types: types, transaction: single_use_tx,
+              query_options: query_options
           end
           results
         end
@@ -443,6 +474,14 @@ module Google
         #   value in `params`. In these cases, the `types` hash can be used to
         #   specify the exact SQL type for some or all of the SQL query
         #   parameters.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
+        #
         #
         #   The keys of the hash should be query string parameter placeholders,
         #   minus the "@". The values of the hash should be Cloud Spanner type
@@ -481,16 +520,26 @@ module Google
         #    "UPDATE users SET friends = NULL WHERE active = @active",
         #    params: { active: false }
         #
-        def execute_partition_update sql, params: nil, types: nil
+        # @example Query using query options:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   row_count = db.execute_partition_update \
+        #    "UPDATE users SET friends = NULL WHERE active = false",
+        #    query_options: { optimizer_version: "1" }
+        def execute_partition_update sql, params: nil, types: nil,
+                                     query_options: nil
           ensure_service!
 
           params, types = Convert.to_input_params_and_types params, types
-
           results = nil
           @pool.with_session do |session|
             results = session.execute_query \
               sql, params: params, types: types,
-                   transaction: pdml_transaction(session)
+              transaction: pdml_transaction(session),
+              query_options: query_options
           end
           # Stream all PartialResultSet to get ResultSetStats
           results.rows.to_a
@@ -1291,7 +1340,7 @@ module Google
               project_id, instance_id, database_id
             ),
             labels: @session_labels
-          Session.from_grpc grpc, @project.service
+          Session.from_grpc grpc, @project.service, query_options: @query_options
         end
 
         ##
@@ -1320,7 +1369,7 @@ module Google
             ),
             session_count,
             labels: @session_labels
-          resp.session.map { |grpc| Session.from_grpc grpc, @project.service }
+          resp.session.map { |grpc| Session.from_grpc grpc, @project.service, query_options: @query_options }
         end
 
         # @private

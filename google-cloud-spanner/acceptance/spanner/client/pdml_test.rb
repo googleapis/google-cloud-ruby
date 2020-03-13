@@ -39,4 +39,16 @@ describe "Spanner Client", :pdml, :spanner do
     post_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE", single_use: { strong: true }
     post_results.rows.count.must_equal 3
   end
+
+  it "executes a simple Partitioned DML statement with query options" do
+    prior_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE"
+    prior_results.rows.count.must_equal 2
+
+    query_options = { optimizer_version: "1" }
+    pdml_row_count = db.execute_partition_update "UPDATE accounts a SET a.active = TRUE WHERE a.active = FALSE", query_options: query_options
+    pdml_row_count.must_equal 1
+
+    post_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE", single_use: { strong: true }
+    post_results.rows.count.must_equal 3
+  end
 end

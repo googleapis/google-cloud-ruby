@@ -166,6 +166,13 @@ module Google
         #   partitions to return. For example, this may be set to the number of
         #   workers available. This is only a hint and may provide different
         #   results based on the request.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
         #
         # @return [Array<Google::Cloud::Spanner::Partition>] The partitions
         #   created by the query partition.
@@ -188,7 +195,8 @@ module Google
         #   batch_snapshot.close
         #
         def partition_query sql, params: nil, types: nil,
-                            partition_size_bytes: nil, max_partitions: nil
+                            partition_size_bytes: nil, max_partitions: nil,
+                            query_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
@@ -197,7 +205,6 @@ module Google
             sql, tx_selector, params: params, types: types,
                               partition_size_bytes: partition_size_bytes,
                               max_partitions: max_partitions
-
           results.partitions.map do |grpc|
             # Convert partition protos to execute sql request protos
             execute_sql_grpc = Google::Spanner::V1::ExecuteSqlRequest.new(
@@ -207,7 +214,8 @@ module Google
                 params: params,
                 param_types: types,
                 transaction: tx_selector,
-                partition_token: grpc.partition_token
+                partition_token: grpc.partition_token,
+                query_options: query_options
               }.delete_if { |_, v| v.nil? }
             )
             Partition.from_execute_sql_grpc execute_sql_grpc
@@ -415,6 +423,14 @@ module Google
         #     specified using a {Fields} object.
         #
         #   Types are optional.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
+        #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
         #
@@ -518,13 +534,29 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
-        def execute_query sql, params: nil, types: nil
+        # @example Query using query options:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   batch_client = spanner.batch_client "my-instance", "my-database"
+        #   batch_snapshot = batch_client.batch_snapshot
+        #
+        #   results = batch_snapshot.execute_query \
+        #      "SELECT * FROM users",
+        #      query_options: { optimizer_version: "1" }
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
+        def execute_query sql, params: nil, types: nil, query_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
 
           session.execute_query sql, params: params, types: types,
-                                     transaction: tx_selector
+                                transaction: tx_selector,
+                                query_options: query_options
         end
         alias execute execute_query
         alias query execute_query
@@ -628,7 +660,7 @@ module Google
         ##
         # @private Loads the serialized batch snapshot. See
         # {BatchClient#load_batch_snapshot}.
-        def self.load data, service: nil
+        def self.load data, service: nil, query_options: nil
           data = JSON.parse data, symbolize_names: true unless data.is_a? Hash
 
           session_grpc = Google::Spanner::V1::Session.decode \
@@ -636,7 +668,7 @@ module Google
           transaction_grpc = Google::Spanner::V1::Transaction.decode \
             Base64.decode64(data[:transaction])
 
-          from_grpc transaction_grpc, Session.from_grpc(session_grpc, service)
+          from_grpc transaction_grpc, Session.from_grpc(session_grpc, service, query_options: query_options)
         end
 
         ##
@@ -661,12 +693,15 @@ module Google
         end
 
         def execute_partition_query partition
+          query_options = partition.execute.query_options
+          query_options = query_options.to_h unless query_options.nil?
           session.execute_query \
             partition.execute.sql,
             params: partition.execute.params,
             types: partition.execute.param_types.to_h,
             transaction: partition.execute.transaction,
-            partition_token: partition.execute.partition_token
+            partition_token: partition.execute.partition_token,
+            query_options: query_options
         end
 
         def execute_partition_read partition

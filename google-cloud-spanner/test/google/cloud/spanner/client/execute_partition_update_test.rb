@@ -247,4 +247,51 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
   end
+
+  it "can execute a PDML statement with query options" do
+    expect_query_options = { optimizer_version: "1" }
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, pdml_tx_opts, options: default_options]
+    spanner.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = true", transaction: tx_selector, options: default_options, query_options: expect_query_options
+
+    row_count = client.execute_partition_update "UPDATE users SET active = true", query_options: expect_query_options
+
+    mock.verify
+
+    row_count.must_equal 1
+  end
+
+  it "can execute a PDML statement with query options (environment variable or client-level)" do
+    expect_query_options = { optimizer_version: "1" }
+    new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: expect_query_options
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, pdml_tx_opts, options: default_options]
+    spanner.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = true", transaction: tx_selector, options: default_options, query_options: expect_query_options
+
+    row_count = new_client.execute_partition_update "UPDATE users SET active = true"
+
+    mock.verify
+
+    row_count.must_equal 1
+  end
+
+  it "can execute a PDML statement with query options that query-level configs merge over environment variable or client-level configs" do
+    expect_query_options = { optimizer_version: "2", another_field: "test" }
+    new_client = spanner.client instance_id, database_id, pool: { min: 0 }, query_options: { optimizer_version: "1", another_field: "test" }
+    mock = Minitest::Mock.new
+    mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
+    mock.expect :begin_transaction, transaction_grpc, [session_grpc.name, pdml_tx_opts, options: default_options]
+    spanner.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = true", transaction: tx_selector, options: default_options, query_options: expect_query_options
+
+    row_count = new_client.execute_partition_update "UPDATE users SET active = true", query_options: { optimizer_version: "2" }
+
+    mock.verify
+
+    row_count.must_equal 1
+  end
 end

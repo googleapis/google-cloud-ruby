@@ -390,6 +390,22 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     assert_partitions deserialized_partitions
   end
 
+  it "can execute a simple query with query options (query-level)" do
+    expect_query_options = { optimizer_version: "1" }
+    mock = Minitest::Mock.new
+    sql = "SELECT * FROM users"
+    mock.expect :partition_query, partitions_resp, [session.path, sql, transaction: tx_selector, params: nil, param_types: nil, partition_options: nil, options: default_options]
+    batch_snapshot.session.service.mocked_service = mock
+
+    partitions = batch_snapshot.partition_query sql, query_options: expect_query_options
+
+    mock.verify
+
+    partitions.each do |p|
+      p.execute.query_options.to_h.must_equal expect_query_options
+    end
+  end
+
   def assert_partitions partitions, sql = "SELECT * FROM users", params: nil, types: nil
     partitions.must_be_kind_of Array
     partitions.wont_be :empty?

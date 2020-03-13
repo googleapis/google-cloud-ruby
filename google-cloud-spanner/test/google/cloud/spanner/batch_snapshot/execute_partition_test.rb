@@ -308,8 +308,21 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
     assert_results results
   end
 
+  it "can execute a simple query with query options" do
+    expect_query_options = { optimizer_version: "1" }
+    mock = Minitest::Mock.new
+    batch_snapshot.session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session.path, sql, transaction: tx_selector, param_types: {}, partition_token: partition_token, options: default_options, query_options: expect_query_options
+
+    results = batch_snapshot.execute_partition partition(sql: sql, query_options: expect_query_options)
+
+    mock.verify
+
+    assert_results results
+  end
+
   def partition table: nil, keys: nil, columns: nil, index: nil, sql: nil,
-                params: nil, param_types: nil
+                params: nil, param_types: nil, query_options: nil
     if table
       columns = Array(columns).map(&:to_s)
       keys = Google::Cloud::Spanner::Convert.to_key_set keys
@@ -337,7 +350,8 @@ describe Google::Cloud::Spanner::BatchSnapshot, :execute_partition, :mock_spanne
           params: params,
           param_types: param_types,
           transaction: tx_selector,
-          partition_token: partition_token
+          partition_token: partition_token,
+          query_options: query_options
         }.delete_if { |_, v| v.nil? }
       )
 

@@ -144,6 +144,8 @@ module Google
   end
 end
 
+# rubocop:disable Metrics/BlockLength
+
 # Set the default spanner configuration
 Google::Cloud.configure.add_config! :spanner do |config|
   default_project = Google::Cloud::Config.deferred do
@@ -159,6 +161,14 @@ Google::Cloud.configure.add_config! :spanner do |config|
     ENV["SPANNER_EMULATOR_HOST"]
   end
 
+  default_query_options = Google::Cloud::Config.deferred do
+    query_options = {}
+    optimizer_version = ENV["SPANNER_OPTIMIZER_VERSION"]
+    query_options[:optimizer_version] = optimizer_version if optimizer_version
+    query_options = nil if query_options.empty?
+    query_options
+  end
+
   config.add_field! :project_id, default_project, match: String, allow_nil: true
   config.add_alias! :project, :project_id
   config.add_field! :credentials, default_creds,
@@ -172,4 +182,7 @@ Google::Cloud.configure.add_config! :spanner do |config|
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :lib_name, nil, match: String, allow_nil: true
   config.add_field! :lib_version, nil, match: String, allow_nil: true
+  config.add_field! :query_options, default_query_options, match: Hash, allow_nil: true
 end
+
+# rubocop:enable Metrics/BlockLength
