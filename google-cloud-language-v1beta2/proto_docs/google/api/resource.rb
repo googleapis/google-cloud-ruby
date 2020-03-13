@@ -27,110 +27,110 @@ module Google
     #
     # Example:
     #
-    #     message Topic \\\{
+    #     message Topic {
     #       // Indicates this message defines a resource schema.
-    #       // Declares the resource type in the format of \\\{service\}/\\\{kind\}.
-    #       // For Kubernetes resources, the format is \\\{api group\}/\\\{kind\}.
-    #       option (google.api.resource) = \\\{
+    #       // Declares the resource type in the format of {service}/{kind}.
+    #       // For Kubernetes resources, the format is {api group}/{kind}.
+    #       option (google.api.resource) = {
     #         type: "pubsub.googleapis.com/Topic"
-    #         name_descriptor: \\\{
-    #           pattern: "projects/\\\{project\}/topics/\\\{topic\}"
+    #         name_descriptor: {
+    #           pattern: "projects/{project}/topics/{topic}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Project"
-    #           parent_name_extractor: "projects/\\\{project\}"
-    #         \}
-    #       \};
-    #     \}
+    #           parent_name_extractor: "projects/{project}"
+    #         }
+    #       };
+    #     }
     #
     # The ResourceDescriptor Yaml config will look like:
     #
     #    resources:
     #    - type: "pubsub.googleapis.com/Topic"
     #      name_descriptor:
-    #        - pattern: "projects/\\\{project\}/topics/\\\{topic\}"
+    #        - pattern: "projects/\\{project}/topics/\\{topic}"
     #          parent_type: "cloudresourcemanager.googleapis.com/Project"
-    #          parent_name_extractor: "projects/\\\{project\}"
+    #          parent_name_extractor: "projects/\\{project}"
     #
     # Sometimes, resources have multiple patterns, typically because they can
     # live under multiple parents.
     #
     # Example:
     #
-    #     message LogEntry \\\{
-    #       option (google.api.resource) = \\\{
+    #     message LogEntry {
+    #       option (google.api.resource) = {
     #         type: "logging.googleapis.com/LogEntry"
-    #         name_descriptor: \\\{
-    #           pattern: "projects/\\\{project\}/logs/\\\{log\}"
+    #         name_descriptor: {
+    #           pattern: "projects/{project}/logs/{log}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Project"
-    #           parent_name_extractor: "projects/\\\{project\}"
-    #         \}
-    #         name_descriptor: \\\{
-    #           pattern: "folders/\\\{folder\}/logs/\\\{log\}"
+    #           parent_name_extractor: "projects/{project}"
+    #         }
+    #         name_descriptor: {
+    #           pattern: "folders/{folder}/logs/{log}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Folder"
-    #           parent_name_extractor: "folders/\\\{folder\}"
-    #         \}
-    #         name_descriptor: \\\{
-    #           pattern: "organizations/\\\{organization\}/logs/\\\{log\}"
+    #           parent_name_extractor: "folders/{folder}"
+    #         }
+    #         name_descriptor: {
+    #           pattern: "organizations/{organization}/logs/{log}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Organization"
-    #           parent_name_extractor: "organizations/\\\{organization\}"
-    #         \}
-    #         name_descriptor: \\\{
-    #           pattern: "billingAccounts/\\\{billing_account\}/logs/\\\{log\}"
+    #           parent_name_extractor: "organizations/{organization}"
+    #         }
+    #         name_descriptor: {
+    #           pattern: "billingAccounts/{billing_account}/logs/{log}"
     #           parent_type: "billing.googleapis.com/BillingAccount"
-    #           parent_name_extractor: "billingAccounts/\\\{billing_account\}"
-    #         \}
-    #       \};
-    #     \}
+    #           parent_name_extractor: "billingAccounts/{billing_account}"
+    #         }
+    #       };
+    #     }
     #
     # The ResourceDescriptor Yaml config will look like:
     #
     #     resources:
     #     - type: 'logging.googleapis.com/LogEntry'
     #       name_descriptor:
-    #         - pattern: "projects/\\\{project\}/logs/\\\{log\}"
+    #         - pattern: "projects/{project}/logs/{log}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Project"
-    #           parent_name_extractor: "projects/\\\{project\}"
-    #         - pattern: "folders/\\\{folder\}/logs/\\\{log\}"
+    #           parent_name_extractor: "projects/{project}"
+    #         - pattern: "folders/{folder}/logs/{log}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Folder"
-    #           parent_name_extractor: "folders/\\\{folder\}"
-    #         - pattern: "organizations/\\\{organization\}/logs/\\\{log\}"
+    #           parent_name_extractor: "folders/{folder}"
+    #         - pattern: "organizations/{organization}/logs/{log}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Organization"
-    #           parent_name_extractor: "organizations/\\\{organization\}"
-    #         - pattern: "billingAccounts/\\\{billing_account\}/logs/\\\{log\}"
+    #           parent_name_extractor: "organizations/{organization}"
+    #         - pattern: "billingAccounts/{billing_account}/logs/{log}"
     #           parent_type: "billing.googleapis.com/BillingAccount"
-    #           parent_name_extractor: "billingAccounts/\\\{billing_account\}"
+    #           parent_name_extractor: "billingAccounts/{billing_account}"
     #
     # For flexible resources, the resource name doesn't contain parent names, but
     # the resource itself has parents for policy evaluation.
     #
     # Example:
     #
-    #     message Shelf \\\{
-    #       option (google.api.resource) = \\\{
+    #     message Shelf {
+    #       option (google.api.resource) = {
     #         type: "library.googleapis.com/Shelf"
-    #         name_descriptor: \\\{
-    #           pattern: "shelves/\\\{shelf\}"
+    #         name_descriptor: {
+    #           pattern: "shelves/{shelf}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Project"
-    #         \}
-    #         name_descriptor: \\\{
-    #           pattern: "shelves/\\\{shelf\}"
+    #         }
+    #         name_descriptor: {
+    #           pattern: "shelves/{shelf}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Folder"
-    #         \}
-    #       \};
-    #     \}
+    #         }
+    #       };
+    #     }
     #
     # The ResourceDescriptor Yaml config will look like:
     #
     #     resources:
     #     - type: 'library.googleapis.com/Shelf'
     #       name_descriptor:
-    #         - pattern: "shelves/\\\{shelf\}"
+    #         - pattern: "shelves/{shelf}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Project"
-    #         - pattern: "shelves/\\\{shelf\}"
+    #         - pattern: "shelves/{shelf}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Folder"
     # @!attribute [rw] type
     #   @return [String]
     #     The resource type. It must be in the format of
-    #     \\\{service_name\}/\\\{resource_type_kind\}. The `resource_type_kind` must be
+    #     \\{service_name}/\\{resource_type_kind}. The `resource_type_kind` must be
     #     singular and must not include version numbers.
     #
     #     Example: `storage.googleapis.com/Bucket`
@@ -147,14 +147,14 @@ module Google
     #     The path pattern must follow the syntax, which aligns with HTTP binding
     #     syntax:
     #
-    #         Template = Segment \\\{ "/" Segment \} ;
+    #         Template = Segment { "/" Segment } ;
     #         Segment = LITERAL | Variable ;
-    #         Variable = "\\\{" LITERAL "\}" ;
+    #         Variable = "{" LITERAL "}" ;
     #
     #     Examples:
     #
-    #         - "projects/\\\{project\}/topics/\\\{topic\}"
-    #         - "projects/\\\{project\}/knowledgeBases/\\\{knowledge_base\}"
+    #         - "projects/\\{project}/topics/\\{topic}"
+    #         - "projects/\\{project}/knowledgeBases/\\{knowledge_base}"
     #
     #     The components in braces correspond to the IDs for each resource in the
     #     hierarchy. It is expected that, if multiple patterns are provided,
@@ -172,19 +172,19 @@ module Google
     #
     #         // The InspectTemplate message originally only supported resource
     #         // names with organization, and project was added later.
-    #         message InspectTemplate \\\{
-    #           option (google.api.resource) = \\\{
+    #         message InspectTemplate {
+    #           option (google.api.resource) = {
     #             type: "dlp.googleapis.com/InspectTemplate"
     #             pattern:
-    #             "organizations/\\\{organization\}/inspectTemplates/\\\{inspect_template\}"
-    #             pattern: "projects/\\\{project\}/inspectTemplates/\\\{inspect_template\}"
+    #             "organizations/{organization}/inspectTemplates/{inspect_template}"
+    #             pattern: "projects/{project}/inspectTemplates/{inspect_template}"
     #             history: ORIGINALLY_SINGLE_PATTERN
-    #           \};
-    #         \}
+    #           };
+    #         }
     # @!attribute [rw] plural
     #   @return [String]
     #     The plural name used in the resource name, such as 'projects' for
-    #     the name of 'projects/\\\{project\}'. It is the same concept of the `plural`
+    #     the name of 'projects/\\{project}'. It is the same concept of the `plural`
     #     field in k8s CRD spec
     #     https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
     # @!attribute [rw] singular
@@ -221,11 +221,11 @@ module Google
     #
     #     Example:
     #
-    #         message Subscription \\\{
-    #           string topic = 2 [(google.api.resource_reference) = \\\{
+    #         message Subscription {
+    #           string topic = 2 [(google.api.resource_reference) = {
     #             type: "pubsub.googleapis.com/Topic"
-    #           \}];
-    #         \}
+    #           }];
+    #         }
     # @!attribute [rw] child_type
     #   @return [String]
     #     The resource type of a child collection that the annotated field
@@ -234,11 +234,11 @@ module Google
     #
     #     Example:
     #
-    #       message ListLogEntriesRequest \\\{
-    #         string parent = 1 [(google.api.resource_reference) = \\\{
+    #       message ListLogEntriesRequest {
+    #         string parent = 1 [(google.api.resource_reference) = {
     #           child_type: "logging.googleapis.com/LogEntry"
-    #         \};
-    #       \}
+    #         };
+    #       }
     class ResourceReference
       include Google::Protobuf::MessageExts
       extend Google::Protobuf::MessageExts::ClassMethods
