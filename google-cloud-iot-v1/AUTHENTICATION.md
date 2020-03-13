@@ -1,16 +1,17 @@
 # Authentication
 
-In general, the google-cloud-iot-v1 library uses [Service
-Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
-credentials to connect to Google Cloud services. When running within [Google
-Cloud Platform environments](#google-cloud-platform-environments)
-the credentials will be discovered automatically. When running on other
+In general, the google-cloud-iot-v1 library uses
+[Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
+credentials to connect to Google Cloud services. When running within
+[Google Cloud Platform environments](#google-cloud-platform-environments) the
+credentials will be discovered automatically. When running on other
 environments, the Service Account credentials can be specified by providing the
-path to the [JSON
-keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys) for
-the account (or the JSON itself) in [environment
-variables](#environment-variables). Additionally, Cloud SDK credentials can also
-be discovered automatically, but this is only recommended during development.
+path to the
+[JSON keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys)
+for the account (or the JSON itself) in
+[environment variables](#environment-variables). Additionally, Cloud SDK
+credentials can also be discovered automatically, but this is only recommended
+during development.
 
 ## Quickstart
 
@@ -46,23 +47,24 @@ without **Service Account Credentials** directly in code.
 
 ### Google Cloud Platform environments
 
-When running on Google Cloud Platform (GCP), including Google Compute Engine (GCE),
-Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions
-(GCF) and Cloud Run, **Credentials** and are discovered
-automatically. Code should be written as if already authenticated.
+When running on Google Cloud Platform (GCP), including Google Compute Engine
+(GCE), Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud
+Functions (GCF) and Cloud Run, **Credentials** are discovered automatically.
+Code should be written as if already authenticated.
 
 ### Environment Variables
 
-The **Credentials JSON** can be placed in environment
-variables instead of declaring them directly in code. Each service has its own
-environment variable, allowing for different service accounts to be used for
-different services. (See the READMEs for the individual service gems for
-details.) The path to the **Credentials JSON** file can be stored in the
-environment variable, or the **Credentials JSON** itself can be stored for
-environments such as Docker containers where writing files is difficult or not
-encouraged.
+The **Credentials JSON** can be placed in environment variables instead of
+declaring them directly in code. Each service has its own environment variable,
+allowing for different service accounts to be used for different services. (See
+the READMEs for the individual service gems for details.) The path to the
+**Credentials JSON** file can be stored in the environment variable, or the
+**Credentials JSON** itself can be stored for environments such as Docker
+containers where writing files is difficult or not encouraged.
 
-The environment variables that google-cloud-iot-v1 checks for credentials are configured on the service Credentials class (such as {Google::Cloud::Iot::V1::DeviceManager::Credentials}):
+The environment variables that google-cloud-iot-v1
+checks for credentials are configured on the service Credentials class (such as
+{Google::Cloud::Iot::V1::DeviceManager::Credentials}):
 
 1. `IOT_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `IOT_KEYFILE` - Path to JSON file, or JSON contents
@@ -80,7 +82,8 @@ client = Google::Cloud::Iot::V1::DeviceManager::Client.new
 
 ### Configuration
 
-The **Credentials JSON** can be configured instead of placing them in environment variables. Either on an individual client initialization:
+The **Credentials JSON** can be configured instead of placing them in
+environment variables. Either on an individual client initialization:
 
 ```ruby
 require "google/cloud/iot/v1"
@@ -137,15 +140,15 @@ environments](#google-cloud-platform-environments), you need a Google
 Developers service account.
 
 1. Visit the [Google Developers Console][dev-console].
-1. Create a new project or click on an existing project.
-1. Activate the slide-out navigation tray and select **API Manager**. From
+2. Create a new project or click on an existing project.
+3. Activate the slide-out navigation tray and select **API Manager**. From
    here, you will enable the APIs that your application requires.
 
    ![Enable the APIs that your application requires][enable-apis]
 
    *Note: You may need to enable billing in order to use these services.*
 
-1. Select **Credentials** from the side navigation.
+4. Select **Credentials** from the side navigation.
 
    You should see a screen like one of the following.
 

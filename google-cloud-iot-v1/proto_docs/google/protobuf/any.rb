@@ -31,18 +31,18 @@ module Google
     #     Any any;
     #     any.PackFrom(foo);
     #     ...
-    #     if (any.UnpackTo(&foo)) \\\{
+    #     if (any.UnpackTo(&foo)) {
     #       ...
-    #     \}
+    #     }
     #
     # Example 2: Pack and unpack a message in Java.
     #
     #     Foo foo = ...;
     #     Any any = Any.pack(foo);
     #     ...
-    #     if (any.is(Foo.class)) \\\{
+    #     if (any.is(Foo.class)) {
     #       foo = any.unpack(Foo.class);
-    #     \}
+    #     }
     #
     #  Example 3: Pack and unpack a message in Python.
     #
@@ -56,13 +56,13 @@ module Google
     #
     #  Example 4: Pack and unpack a message in Go
     #
-    #      foo := &pb.Foo\\\{...\}
+    #      foo := &pb.Foo{...}
     #      any, err := ptypes.MarshalAny(foo)
     #      ...
-    #      foo := &pb.Foo\\\{\}
-    #      if err := ptypes.UnmarshalAny(any, foo); err != nil \\\{
+    #      foo := &pb.Foo{}
+    #      if err := ptypes.UnmarshalAny(any, foo); err != nil {
     #        ...
-    #      \}
+    #      }
     #
     # The pack methods provided by protobuf library will by default use
     # 'type.googleapis.com/full.type.name' as the type URL and the unpack
@@ -78,26 +78,26 @@ module Google
     # additional field `@type` which contains the type URL. Example:
     #
     #     package google.profile;
-    #     message Person \\\{
+    #     message Person {
     #       string first_name = 1;
     #       string last_name = 2;
-    #     \}
+    #     }
     #
-    #     \\\{
+    #     {
     #       "@type": "type.googleapis.com/google.profile.Person",
     #       "firstName": <string>,
     #       "lastName": <string>
-    #     \}
+    #     }
     #
     # If the embedded message type is well-known and has a custom JSON
     # representation, that representation will be embedded adding a field
     # `value` which holds the custom JSON in addition to the `@type`
     # field. Example (for message [google.protobuf.Duration][]):
     #
-    #     \\\{
+    #     {
     #       "@type": "type.googleapis.com/google.protobuf.Duration",
     #       "value": "1.212s"
-    #     \}
+    #     }
     # @!attribute [rw] type_url
     #   @return [String]
     #     A URL/resource name that uniquely identifies the type of the serialized

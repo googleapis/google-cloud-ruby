@@ -31,6 +31,7 @@ library = gapic.ruby_library(
         "ruby-cloud-title": "Cloud IoT API V1",
         "ruby-cloud-summary": "Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform.",
         "ruby-cloud-env-prefix": "IOT",
+        "ruby-cloud-grpc-service-config": "google/cloud/iot/v1/cloudiot_grpc_service_config.json",
     }
 )
 

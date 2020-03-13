@@ -130,7 +130,7 @@ module Google
         #   @return [String]
         #     Required. The name of the device. For example,
         #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-        #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+        #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
         # @!attribute [rw] field_mask
         #   @return [Google::Protobuf::FieldMask]
         #     The fields of the `Device` resource to be returned in the response. If the
@@ -146,7 +146,7 @@ module Google
         #     Required. The new values for the device. The `id` and `num_id` fields must
         #     be empty, and the field `name` must specify the name path. For example,
         #     `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
-        #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+        #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Required. Only updates the `device` fields indicated by this mask.
@@ -163,7 +163,7 @@ module Google
         #   @return [String]
         #     Required. The name of the device. For example,
         #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-        #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+        #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
         class DeleteDeviceRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -247,7 +247,7 @@ module Google
         #   @return [String]
         #     Required. The name of the device. For example,
         #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-        #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+        #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
         # @!attribute [rw] version_to_update
         #   @return [Integer]
         #     The version number to update. If this value is zero, it will not check the
@@ -268,7 +268,7 @@ module Google
         #   @return [String]
         #     Required. The name of the device. For example,
         #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-        #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+        #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
         # @!attribute [rw] num_versions
         #   @return [Integer]
         #     The number of versions to list. Versions are listed in decreasing order of
@@ -294,7 +294,7 @@ module Google
         #   @return [String]
         #     Required. The name of the device. For example,
         #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-        #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+        #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
         # @!attribute [rw] num_states
         #   @return [Integer]
         #     The number of states to list. States are listed in descending order of
@@ -320,15 +320,15 @@ module Google
         #   @return [String]
         #     Required. The name of the device. For example,
         #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-        #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+        #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
         # @!attribute [rw] binary_data
         #   @return [String]
         #     Required. The command data to send to the device.
         # @!attribute [rw] subfolder
         #   @return [String]
         #     Optional subfolder for the command. If empty, the command will be delivered
-        #     to the /devices/\\\{device-id\}/commands topic, otherwise it will be delivered
-        #     to the /devices/\\\{device-id\}/commands/\\\{subfolder\} topic. Multi-level
+        #     to the /devices/{device-id}/commands topic, otherwise it will be delivered
+        #     to the /devices/{device-id}/commands/\\{subfolder} topic. Multi-level
         #     subfolders are allowed. This field must not have more than 256 characters,
         #     and must not contain any MQTT wildcards ("+" or "#") or null characters.
         class SendCommandToDeviceRequest

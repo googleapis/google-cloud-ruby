@@ -30,7 +30,7 @@ module Google
         #   @return [String]
         #     The resource path name. For example,
         #     `projects/p1/locations/us-central1/registries/registry0/devices/dev0` or
-        #     `projects/p1/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+        #     `projects/p1/locations/us-central1/registries/registry0/devices/{num_id}`.
         #     When `name` is populated as a response from the service, it always ends
         #     in the device numeric ID.
         # @!attribute [rw] num_id

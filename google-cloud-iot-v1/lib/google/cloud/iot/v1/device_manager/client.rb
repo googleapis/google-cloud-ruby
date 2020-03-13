@@ -67,7 +67,107 @@ module Google
                                   break parent_const.configure if parent_const&.respond_to? :configure
                                   namespace.pop
                                 end
-                Client::Configuration.new parent_config
+                default_config = Client::Configuration.new parent_config
+
+                default_config.rpcs.create_device_registry.timeout = 120.0
+
+                default_config.rpcs.get_device_registry.timeout = 120.0
+                default_config.rpcs.get_device_registry.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.update_device_registry.timeout = 120.0
+
+                default_config.rpcs.delete_device_registry.timeout = 120.0
+                default_config.rpcs.delete_device_registry.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.list_device_registries.timeout = 120.0
+                default_config.rpcs.list_device_registries.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.create_device.timeout = 120.0
+
+                default_config.rpcs.get_device.timeout = 120.0
+                default_config.rpcs.get_device.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.update_device.timeout = 120.0
+
+                default_config.rpcs.delete_device.timeout = 120.0
+                default_config.rpcs.delete_device.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.list_devices.timeout = 120.0
+                default_config.rpcs.list_devices.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.modify_cloud_to_device_config.timeout = 120.0
+                default_config.rpcs.modify_cloud_to_device_config.retry_policy = {
+                  initial_delay: 1.0,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED", "RESOURCE_EXHAUSTED"]
+                }
+
+                default_config.rpcs.list_device_config_versions.timeout = 120.0
+                default_config.rpcs.list_device_config_versions.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.list_device_states.timeout = 120.0
+                default_config.rpcs.list_device_states.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+                }
+
+                default_config.rpcs.set_iam_policy.timeout = 120.0
+
+                default_config.rpcs.get_iam_policy.timeout = 120.0
+
+                default_config.rpcs.test_iam_permissions.timeout = 120.0
+
+                default_config.rpcs.send_command_to_device.timeout = 120.0
+                default_config.rpcs.send_command_to_device.retry_policy = {
+                  initial_delay: 1.0,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "DEADLINE_EXCEEDED", "RESOURCE_EXHAUSTED"]
+                }
+
+                default_config.rpcs.bind_device_to_gateway.timeout = 120.0
+
+                default_config.rpcs.unbind_device_from_gateway.timeout = 120.0
+
+                default_config
               end
               yield @configure if block_given?
               @configure
@@ -132,7 +232,7 @@ module Google
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
-
+              @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
               @device_manager_stub = Gapic::ServiceStub.new(
                 Google::Cloud::Iot::V1::DeviceManager::Stub,
@@ -183,10 +283,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.create_device_registry.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "parent" => request.parent
@@ -242,10 +343,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_device_registry.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -308,10 +410,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.update_device_registry.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "device_registry.name" => request.device_registry.name
@@ -367,10 +470,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.delete_device_registry.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -435,10 +539,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_device_registries.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "parent" => request.parent
@@ -500,10 +605,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.create_device.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "parent" => request.parent
@@ -538,7 +644,7 @@ module Google
             #   @param name [String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-            #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+            #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
             #   @param field_mask [Google::Protobuf::FieldMask | Hash]
             #     The fields of the `Device` resource to be returned in the response. If the
             #     field mask is unset or empty, all fields are returned.
@@ -563,10 +669,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_device.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -602,7 +709,7 @@ module Google
             #     Required. The new values for the device. The `id` and `num_id` fields must
             #     be empty, and the field `name` must specify the name path. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
-            #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+            #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
             #   @param update_mask [Google::Protobuf::FieldMask | Hash]
             #     Required. Only updates the `device` fields indicated by this mask.
             #     The field mask must not be empty, and it must not contain fields that
@@ -629,10 +736,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.update_device.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "device.name" => request.device.name
@@ -667,7 +775,7 @@ module Google
             #   @param name [String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-            #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+            #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -689,10 +797,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.delete_device.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -769,10 +878,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_devices.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "parent" => request.parent
@@ -812,7 +922,7 @@ module Google
             #   @param name [String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-            #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+            #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
             #   @param version_to_update [Integer]
             #     The version number to update. If this value is zero, it will not check the
             #     version number of the server and will always update the current version;
@@ -842,10 +952,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.modify_cloud_to_device_config.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -882,7 +993,7 @@ module Google
             #   @param name [String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-            #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+            #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
             #   @param num_versions [Integer]
             #     The number of versions to list. Versions are listed in decreasing order of
             #     the version number. The maximum number of versions retained is 10. If this
@@ -908,10 +1019,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_device_config_versions.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -948,7 +1060,7 @@ module Google
             #   @param name [String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-            #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+            #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
             #   @param num_states [Integer]
             #     The number of states to list. States are listed in descending order of
             #     update time. The maximum number of states retained is 10. If this
@@ -974,10 +1086,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.list_device_states.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -1014,7 +1127,7 @@ module Google
             #   @param resource [String]
             #     REQUIRED: The resource for which the policy is being specified.
             #     `resource` is usually specified as a path. For example, a Project
-            #     resource is specified as `projects/\\\{project\}`.
+            #     resource is specified as `projects/{project}`.
             #   @param policy [Google::Iam::V1::Policy | Hash]
             #     REQUIRED: The complete policy to be applied to the `resource`. The size of
             #     the policy is limited to a few 10s of KB. An empty policy is a
@@ -1041,10 +1154,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "resource" => request.resource
@@ -1083,7 +1197,7 @@ module Google
             #   @param resource [String]
             #     REQUIRED: The resource for which the policy is being requested.
             #     `resource` is usually specified as a path. For example, a Project
-            #     resource is specified as `projects/\\\{project\}`.
+            #     resource is specified as `projects/{project}`.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1105,10 +1219,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "resource" => request.resource
@@ -1147,7 +1262,7 @@ module Google
             #   @param resource [String]
             #     REQUIRED: The resource for which the policy detail is being requested.
             #     `resource` is usually specified as a path. For example, a Project
-            #     resource is specified as `projects/\\\{project\}`.
+            #     resource is specified as `projects/{project}`.
             #   @param permissions [Array<String>]
             #     The set of permissions to check for the `resource`. Permissions with
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more
@@ -1174,10 +1289,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "resource" => request.resource
@@ -1204,9 +1320,9 @@ module Google
             # to receive commands, it must:
             # 1) be connected to Cloud IoT Core using the MQTT protocol, and
             # 2) be subscribed to the group of MQTT topics specified by
-            #    /devices/\\\{device-id\}/commands/#. This subscription will receive commands
-            #    at the top-level topic /devices/\\\{device-id\}/commands as well as commands
-            #    for subfolders, like /devices/\\\{device-id\}/commands/subfolder.
+            #    /devices/{device-id}/commands/#. This subscription will receive commands
+            #    at the top-level topic /devices/{device-id}/commands as well as commands
+            #    for subfolders, like /devices/{device-id}/commands/subfolder.
             #    Note that subscribing to specific subfolders is not supported.
             # If the command could not be delivered to the device, this method will
             # return an error; in particular, if the device is not subscribed, this
@@ -1220,9 +1336,9 @@ module Google
             #     to receive commands, it must:
             #     1) be connected to Cloud IoT Core using the MQTT protocol, and
             #     2) be subscribed to the group of MQTT topics specified by
-            #        /devices/\\\{device-id\}/commands/#. This subscription will receive commands
-            #        at the top-level topic /devices/\\\{device-id\}/commands as well as commands
-            #        for subfolders, like /devices/\\\{device-id\}/commands/subfolder.
+            #        /devices/{device-id}/commands/#. This subscription will receive commands
+            #        at the top-level topic /devices/{device-id}/commands as well as commands
+            #        for subfolders, like /devices/{device-id}/commands/subfolder.
             #        Note that subscribing to specific subfolders is not supported.
             #     If the command could not be delivered to the device, this method will
             #     return an error; in particular, if the device is not subscribed, this
@@ -1236,13 +1352,13 @@ module Google
             #   @param name [String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
-            #     `projects/p0/locations/us-central1/registries/registry0/devices/\\\{num_id\}`.
+            #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
             #   @param binary_data [String]
             #     Required. The command data to send to the device.
             #   @param subfolder [String]
             #     Optional subfolder for the command. If empty, the command will be delivered
-            #     to the /devices/\\\{device-id\}/commands topic, otherwise it will be delivered
-            #     to the /devices/\\\{device-id\}/commands/\\\{subfolder\} topic. Multi-level
+            #     to the /devices/{device-id}/commands topic, otherwise it will be delivered
+            #     to the /devices/{device-id}/commands/\\{subfolder} topic. Multi-level
             #     subfolders are allowed. This field must not have more than 256 characters,
             #     and must not contain any MQTT wildcards ("+" or "#") or null characters.
             #
@@ -1266,10 +1382,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.send_command_to_device.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "name" => request.name
@@ -1332,10 +1449,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.bind_device_to_gateway.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "parent" => request.parent
@@ -1398,10 +1516,11 @@ module Google
               # Customize the options with defaults
               metadata = @config.rpcs.unbind_device_from_gateway.metadata.to_h
 
-              # Set x-goog-api-client header
+              # Set x-goog-api-client and x-goog-user-project headers
               metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {
                 "parent" => request.parent
