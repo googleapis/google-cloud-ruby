@@ -77,9 +77,9 @@ module Google
     #
     # In JSON format, the Timestamp type is encoded as a string in the
     # [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
-    # format is "\\\{year\}-\\\{month\}-\\\{day\}T\\\{hour\}:\\\{min\}:\\\{sec\}[.\\\{frac_sec\}]Z"
-    # where \\\{year\} is always expressed using four digits while \\\{month\}, \\\{day\},
-    # \\\{hour\}, \\\{min\}, and \\\{sec\} are zero-padded to two digits each. The fractional
+    # format is "\\{year}-\\{month}-\\{day}T\\{hour}:\\{min}:\\{sec}[.\\{frac_sec}]Z"
+    # where \\{year} is always expressed using four digits while \\{month}, \\{day},
+    # \\{hour}, \\{min}, and \\{sec} are zero-padded to two digits each. The fractional
     # seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution),
     # are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone
     # is required. A proto3 JSON serializer should always use UTC (as indicated by
