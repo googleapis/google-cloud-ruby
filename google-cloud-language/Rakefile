@@ -105,6 +105,36 @@ namespace :acceptance do
   end
 end
 
+task :samples do
+  Rake::Task["samples:test_latest"].invoke
+end
+
+namespace :samples do
+  task :test_latest do
+    Dir.chdir "samples" do
+      Bundler.with_clean_env do
+        `bundle update`
+        start_time = Time.now
+        run_task "samples_test_latest"
+        end_time = Time.now
+        puts "tests took #{(end_time - start_time).to_i} seconds"
+      end
+    end
+  end
+
+  task :test_master do
+    raise "Not Implemented"
+  end
+
+  def run_task task
+    Rake::TestTask.new task do |t|
+      t.test_files = FileList["**/*_test.rb"]
+      t.warning = false
+    end
+    Rake::Task[task].invoke
+  end
+end
+
 require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
