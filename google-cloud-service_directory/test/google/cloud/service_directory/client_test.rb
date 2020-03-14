@@ -20,12 +20,21 @@ require "gapic/grpc"
 describe Google::Cloud::ServiceDirectory do
   let(:grpc_channel) { GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure }
 
-  it "constructs a secret manager service client with the default version" do
+  it "constructs a lookup service client with the default version" do
     Gapic::ServiceStub.stub :new, :stub do
       client = Google::Cloud::ServiceDirectory.lookup_service do |config|
         config.credentials = grpc_channel
       end
       client.must_be_kind_of Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client
+    end
+  end
+
+  it "constructs a registration service client with the default version" do
+    Gapic::ServiceStub.stub :new, :stub do
+      client = Google::Cloud::ServiceDirectory.registration_service do |config|
+        config.credentials = grpc_channel
+      end
+      client.must_be_kind_of Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client
     end
   end
 end
