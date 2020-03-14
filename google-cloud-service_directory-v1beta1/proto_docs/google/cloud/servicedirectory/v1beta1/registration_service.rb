@@ -85,7 +85,7 @@ module Google
         #
         #     General order by string syntax:
         #     <field> (<asc|desc>) (,)
-        #     <field> allows values {"name"}
+        #     <field> allows values \\{"name"}
         #     <asc/desc> ascending or descending order by <field>. If this is left
         #     blank, "asc" is used.
         #     Note that an empty order_by string result in default order, which is order
