@@ -3,7 +3,7 @@
 [Cloud Natural Language API][Product Documentation]:
 Provides natural language understanding technologies, such as sentiment
 analysis, entity recognition, entity sentiment analysis, and other text
-annotations, to developers.
+annotations.
 - [Client Library Documentation][]
 - [Product Documentation][]
 
@@ -30,7 +30,16 @@ $ gem install google-cloud-language
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-language/latest
+[V1 Client Documentation]: https://googleapis.dev/ruby/google-cloud-language-v1/latest
+[V1beta2 Client Documentation]: https://googleapis.dev/ruby/google-cloud-language-v1beta2/latest
 [Product Documentation]: https://cloud.google.com/natural-language
+
+## Migrating from 0.x versions
+
+The 1.0 release of the google-cloud-language client is a significant upgrade
+based on a next-gen code generator. If you have used earlier versions of this
+library, there have been a number of changes that may require updates to
+calling code. See the MIGRATING.md document for more information.
 
 ## Enabling Logging
 
