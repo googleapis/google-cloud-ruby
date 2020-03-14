@@ -20,6 +20,8 @@ function set_failed_status {
 }
 
 source ~/.rvm/scripts/rvm
+command curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+command curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
 rvm get head --auto-dotfiles
 
 versions=(<%= ruby_versions.join " " %>)
@@ -32,7 +34,7 @@ if [[ $JOB_TYPE = "presubmit" ]]; then
     else
         version=${versions[<%= ruby_versions.size - 1 %>]}
         if [[ $rvm_versions != *$version* ]]; then
-          rvm install $version
+            rvm install $version
         fi
         rvm use $version@global --default
         gem update --system
