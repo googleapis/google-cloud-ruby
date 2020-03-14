@@ -110,6 +110,8 @@ module Google
           end
 
           # Returns a fully-qualified topic resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param topic [String]
           # @return [String]
@@ -678,11 +680,13 @@ module Google
           #   require "google/cloud/pubsub"
           #
           #   publisher_client = Google::Cloud::PubSub::Publisher.new(version: :v1)
-          #   formatted_resource = Google::Cloud::PubSub::V1::PublisherClient.topic_path("[PROJECT]", "[TOPIC]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `policy`:
           #   policy = {}
-          #   response = publisher_client.set_iam_policy(formatted_resource, policy)
+          #   response = publisher_client.set_iam_policy(resource, policy)
 
           def set_iam_policy \
               resource,
@@ -720,8 +724,10 @@ module Google
           #   require "google/cloud/pubsub"
           #
           #   publisher_client = Google::Cloud::PubSub::Publisher.new(version: :v1)
-          #   formatted_resource = Google::Cloud::PubSub::V1::PublisherClient.topic_path("[PROJECT]", "[TOPIC]")
-          #   response = publisher_client.get_iam_policy(formatted_resource)
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
+          #   response = publisher_client.get_iam_policy(resource)
 
           def get_iam_policy \
               resource,
@@ -764,11 +770,13 @@ module Google
           #   require "google/cloud/pubsub"
           #
           #   publisher_client = Google::Cloud::PubSub::Publisher.new(version: :v1)
-          #   formatted_resource = Google::Cloud::PubSub::V1::PublisherClient.topic_path("[PROJECT]", "[TOPIC]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `permissions`:
           #   permissions = []
-          #   response = publisher_client.test_iam_permissions(formatted_resource, permissions)
+          #   response = publisher_client.test_iam_permissions(resource, permissions)
 
           def test_iam_permissions \
               resource,

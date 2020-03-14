@@ -306,7 +306,40 @@ module Google
       #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
       #     API might be changed in backward-incompatible ways and is not recommended
       #     for production use. It is not subject to any SLA or deprecation policy.
+      # @!attribute [rw] retry_policy
+      #   @return [Google::Cloud::PubSub::V1::RetryPolicy]
+      #     A policy that specifies how Cloud Pub/Sub retries message delivery for this
+      #     subscription.
+      #
+      #     If not set, the default retry policy is applied. This generally implies
+      #     that messages will be retried as soon as possible for healthy subscribers.
+      #     RetryPolicy will be triggered on NACKs or acknowledgement deadline
+      #     exceeded events for a given message.
+      #     <b>EXPERIMENTAL:</b> This API might be changed in backward-incompatible
+      #     ways and is not recommended for production use. It is not subject to any
+      #     SLA or deprecation policy.
       class Subscription; end
+
+      # A policy that specifies how Cloud Pub/Sub retries message delivery.
+      #
+      # Retry delay will be exponential based on provided minimum and maximum
+      # backoffs. https://en.wikipedia.org/wiki/Exponential_backoff.
+      #
+      # RetryPolicy will be triggered on NACKs or acknowledgement deadline exceeded
+      # events for a given message.
+      #
+      # Retry Policy is implemented on a best effort basis. At times, the delay
+      # between consecutive deliveries may not match the configuration. That is,
+      # delay can be more or less than configured backoff.
+      # @!attribute [rw] minimum_backoff
+      #   @return [Google::Protobuf::Duration]
+      #     The minimum delay between consecutive deliveries of a given message.
+      #     Value should be between 0 and 600 seconds. Defaults to 10 seconds.
+      # @!attribute [rw] maximum_backoff
+      #   @return [Google::Protobuf::Duration]
+      #     The maximum delay between consecutive deliveries of a given message.
+      #     Value should be between 0 and 600 seconds. Defaults to 600 seconds.
+      class RetryPolicy; end
 
       # Dead lettering is done on a best effort basis. The same message might be
       # dead lettered multiple times.
