@@ -129,7 +129,7 @@ module Google
           #     `constraints/serviceuser.services`, which has a `constraint_type` of
           #     `list_constraint`, and with `constraint_default` set to `ALLOW`.
           #     Suppose that at the Organization level, a `Policy` is applied that
-          #     restricts the allowed API activations to {`E1`, `E2`}. Then, if a
+          #     restricts the allowed API activations to \\{`E1`, `E2`}. Then, if a
           #     `Policy` is applied to a project below the Organization that has
           #     `inherit_from_parent` set to `false` and field all_values set to DENY,
           #     then an attempt to activate any API will be denied.
@@ -139,33 +139,33 @@ module Google
           #
           #     Example 1 (no inherited values):
           #       `organizations/foo` has a `Policy` with values:
-          #         {allowed_values: "E1" allowed_values:"E2"}
+          #         \\{allowed_values: "E1" allowed_values:"E2"}
           #       `projects/bar` has `inherit_from_parent` `false` and values:
-          #         {allowed_values: "E3" allowed_values: "E4"}
+          #         \\{allowed_values: "E3" allowed_values: "E4"}
           #     The accepted values at `organizations/foo` are `E1`, `E2`.
           #     The accepted values at `projects/bar` are `E3`, and `E4`.
           #
           #     Example 2 (inherited values):
           #       `organizations/foo` has a `Policy` with values:
-          #         {allowed_values: "E1" allowed_values:"E2"}
+          #         \\{allowed_values: "E1" allowed_values:"E2"}
           #       `projects/bar` has a `Policy` with values:
-          #         {value: "E3" value: "E4" inherit_from_parent: true}
+          #         \\{value: "E3" value: "E4" inherit_from_parent: true}
           #     The accepted values at `organizations/foo` are `E1`, `E2`.
           #     The accepted values at `projects/bar` are `E1`, `E2`, `E3`, and `E4`.
           #
           #     Example 3 (inheriting both allowed and denied values):
           #       `organizations/foo` has a `Policy` with values:
-          #         {allowed_values: "E1" allowed_values: "E2"}
+          #         \\{allowed_values: "E1" allowed_values: "E2"}
           #       `projects/bar` has a `Policy` with:
-          #         {denied_values: "E1"}
+          #         \\{denied_values: "E1"}
           #     The accepted values at `organizations/foo` are `E1`, `E2`.
           #     The value accepted at `projects/bar` is `E2`.
           #
           #     Example 4 (RestoreDefault):
           #       `organizations/foo` has a `Policy` with values:
-          #         {allowed_values: "E1" allowed_values:"E2"}
+          #         \\{allowed_values: "E1" allowed_values:"E2"}
           #       `projects/bar` has a `Policy` with values:
-          #         {RestoreDefault: {}}
+          #         \\{RestoreDefault: \\{}}
           #     The accepted values at `organizations/foo` are `E1`, `E2`.
           #     The accepted values at `projects/bar` are either all or none depending on
           #     the value of `constraint_default` (if `ALLOW`, all; if
@@ -180,28 +180,28 @@ module Google
           #
           #     Example 6 (ListConstraint allowing all):
           #       `organizations/foo` has a `Policy` with values:
-          #         {allowed_values: "E1" allowed_values: "E2"}
+          #         \\{allowed_values: "E1" allowed_values: "E2"}
           #       `projects/bar` has a `Policy` with:
-          #         {all: ALLOW}
+          #         \\{all: ALLOW}
           #     The accepted values at `organizations/foo` are `E1`, E2`.
           #     Any value is accepted at `projects/bar`.
           #
           #     Example 7 (ListConstraint allowing none):
           #       `organizations/foo` has a `Policy` with values:
-          #         {allowed_values: "E1" allowed_values: "E2"}
+          #         \\{allowed_values: "E1" allowed_values: "E2"}
           #       `projects/bar` has a `Policy` with:
-          #         {all: DENY}
+          #         \\{all: DENY}
           #     The accepted values at `organizations/foo` are `E1`, E2`.
           #     No value is accepted at `projects/bar`.
           #
           #     Example 10 (allowed and denied subtrees of Resource Manager hierarchy):
           #     Given the following resource hierarchy
-          #       O1->{F1, F2}; F1->\\{P1}; F2->{P2, P3},
+          #       O1->\\{F1, F2}; F1->\\{P1}; F2->\\{P2, P3},
           #       `organizations/foo` has a `Policy` with values:
-          #         {allowed_values: "under:organizations/O1"}
+          #         \\{allowed_values: "under:organizations/O1"}
           #       `projects/bar` has a `Policy` with:
-          #         {allowed_values: "under:projects/P3"}
-          #         {denied_values: "under:folders/F2"}
+          #         \\{allowed_values: "under:projects/P3"}
+          #         \\{denied_values: "under:folders/F2"}
           #     The accepted values at `organizations/foo` are `organizations/O1`,
           #       `folders/F1`, `folders/F2`, `projects/P1`, `projects/P2`,
           #       `projects/P3`.
@@ -259,24 +259,24 @@ module Google
           #
           #     Example 1 (nearest `Constraint` wins):
           #       `organizations/foo` has a `Policy` with:
-          #         {enforced: false}
+          #         \\{enforced: false}
           #       `projects/bar` has no `Policy` set.
           #     The constraint at `projects/bar` and `organizations/foo` will not be
           #     enforced.
           #
           #     Example 2 (enforcement gets replaced):
           #       `organizations/foo` has a `Policy` with:
-          #         {enforced: false}
+          #         \\{enforced: false}
           #       `projects/bar` has a `Policy` with:
-          #         {enforced: true}
+          #         \\{enforced: true}
           #     The constraint at `organizations/foo` is not enforced.
           #     The constraint at `projects/bar` is enforced.
           #
           #     Example 3 (RestoreDefault):
           #       `organizations/foo` has a `Policy` with:
-          #         {enforced: true}
+          #         \\{enforced: true}
           #       `projects/bar` has a `Policy` with:
-          #         {RestoreDefault: {}}
+          #         \\{RestoreDefault: \\{}}
           #     The constraint at `organizations/foo` is enforced.
           #     The constraint at `projects/bar` is not enforced, because
           #     `constraint_default` for the `Constraint` is `ALLOW`.
