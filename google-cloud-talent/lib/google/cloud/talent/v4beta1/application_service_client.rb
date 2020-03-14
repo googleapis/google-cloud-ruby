@@ -76,6 +76,18 @@ module Google
 
           private_constant :APPLICATION_PATH_TEMPLATE
 
+          COMPANY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}/companies/{company}"
+          )
+
+          private_constant :COMPANY_PATH_TEMPLATE
+
+          COMPANY_WITHOUT_TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/companies/{company}"
+          )
+
+          private_constant :COMPANY_WITHOUT_TENANT_PATH_TEMPLATE
+
           PROFILE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/tenants/{tenant}/profiles/{profile}"
           )
@@ -94,6 +106,34 @@ module Google
               :"tenant" => tenant,
               :"profile" => profile,
               :"application" => application
+            )
+          end
+
+          # Returns a fully-qualified company resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
+          # @param project [String]
+          # @param tenant [String]
+          # @param company [String]
+          # @return [String]
+          def self.company_path project, tenant, company
+            COMPANY_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"tenant" => tenant,
+              :"company" => company
+            )
+          end
+
+          # Returns a fully-qualified company_without_tenant resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
+          # @param project [String]
+          # @param company [String]
+          # @return [String]
+          def self.company_without_tenant_path project, company
+            COMPANY_WITHOUT_TENANT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"company" => company
             )
           end
 
@@ -222,6 +262,14 @@ module Google
               &Google::Cloud::Talent::V4beta1::ApplicationService::Stub.method(:new)
             )
 
+            @delete_application = Google::Gax.create_api_call(
+              @application_service_stub.method(:delete_application),
+              defaults["delete_application"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @create_application = Google::Gax.create_api_call(
               @application_service_stub.method(:create_application),
               defaults["create_application"],
@@ -246,14 +294,6 @@ module Google
                 {'application.name' => request.application.name}
               end
             )
-            @delete_application = Google::Gax.create_api_call(
-              @application_service_stub.method(:delete_application),
-              defaults["delete_application"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
             @list_applications = Google::Gax.create_api_call(
               @application_service_stub.method(:list_applications),
               defaults["list_applications"],
@@ -265,6 +305,40 @@ module Google
           end
 
           # Service calls
+
+          # Deletes specified application.
+          #
+          # @param name [String]
+          #   Required. The resource name of the application to be deleted.
+          #
+          #   The format is
+          #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}".
+          #   For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/talent"
+          #
+          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
+          #   formatted_name = Google::Cloud::Talent::V4beta1::ApplicationServiceClient.application_path("[PROJECT]", "[TENANT]", "[PROFILE]", "[APPLICATION]")
+          #   application_client.delete_application(formatted_name)
+
+          def delete_application \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::DeleteApplicationRequest)
+            @delete_application.call(req, options, &block)
+            nil
+          end
 
           # Creates a new application entity.
           #
@@ -387,40 +461,6 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::UpdateApplicationRequest)
             @update_application.call(req, options, &block)
-          end
-
-          # Deletes specified application.
-          #
-          # @param name [String]
-          #   Required. The resource name of the application to be deleted.
-          #
-          #   The format is
-          #   "projects/{project_id}/tenants/{tenant_id}/profiles/{profile_id}/applications/{application_id}".
-          #   For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/talent"
-          #
-          #   application_client = Google::Cloud::Talent::ApplicationService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::ApplicationServiceClient.application_path("[PROJECT]", "[TENANT]", "[PROFILE]", "[APPLICATION]")
-          #   application_client.delete_application(formatted_name)
-
-          def delete_application \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Talent::V4beta1::DeleteApplicationRequest)
-            @delete_application.call(req, options, &block)
-            nil
           end
 
           # Lists all applications associated with the profile.

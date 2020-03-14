@@ -26,7 +26,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     The resource name of the billing account. The resource name has the form
-        #     `billingAccounts/\\\{billing_account_id\}`. For example,
+        #     `billingAccounts/{billing_account_id}`. For example,
         #     `billingAccounts/012345-567890-ABCDEF` would be the resource name for
         #     billing account `012345-567890-ABCDEF`.
         # @!attribute [r] open
@@ -56,7 +56,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     The resource name for the `ProjectBillingInfo`; has the form
-        #     `projects/\\\{project_id\}/billingInfo`. For example, the resource name for the
+        #     `projects/{project_id}/billingInfo`. For example, the resource name for the
         #     billing information for project `tokyo-rain-123` would be
         #     `projects/tokyo-rain-123/billingInfo`. This field is read-only.
         # @!attribute [rw] project_id

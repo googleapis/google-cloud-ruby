@@ -242,10 +242,12 @@ module Google
 
         def self.execute_query service, session_path, sql, params: nil,
                                types: nil, transaction: nil,
-                               partition_token: nil, seqno: nil
+                               partition_token: nil, seqno: nil,
+                               query_options: nil
           execute_query_options = {
             transaction: transaction, params: params, types: types,
-            partition_token: partition_token, seqno: seqno
+            partition_token: partition_token, seqno: seqno,
+            query_options: query_options
           }
           enum = service.execute_streaming_sql session_path, sql,
                                                execute_query_options

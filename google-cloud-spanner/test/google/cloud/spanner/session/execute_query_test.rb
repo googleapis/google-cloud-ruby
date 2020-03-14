@@ -231,6 +231,47 @@ describe Google::Cloud::Spanner::Session, :execute_query, :mock_spanner do
     assert_results results
   end
 
+  it "can execute a simple query with query options" do
+    expect_query_options = { optimizer_version: "4" }
+    mock = Minitest::Mock.new
+    session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", options: default_options, query_options: expect_query_options
+
+    results = session.execute_query "SELECT * FROM users", query_options: expect_query_options
+
+    mock.verify
+
+    assert_results results
+  end
+
+  it "can execute a simple query with query options (session-level)" do
+    expect_query_options = { optimizer_version: "4" }
+    session = Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service, query_options: expect_query_options
+    mock = Minitest::Mock.new
+    session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", options: default_options, query_options: expect_query_options
+
+    results = session.execute_query "SELECT * FROM users"
+
+    mock.verify
+
+    assert_results results
+  end
+
+  it "can execute a simple query with query options that query-level configs merge over session-level configs" do
+    expect_query_options = { optimizer_version: "2", another_field: "test" }
+    session = Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service, query_options: { optimizer_version: "1", another_field: "test" }
+    mock = Minitest::Mock.new
+    session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session.path, "SELECT * FROM users", options: default_options, query_options: expect_query_options
+
+    results = session.execute_query "SELECT * FROM users", query_options: { optimizer_version: "2" }
+
+    mock.verify
+
+    assert_results results
+  end
+
   def params_types params, types = nil
     Google::Cloud::Spanner::Convert.to_input_params_and_types params, types
   end

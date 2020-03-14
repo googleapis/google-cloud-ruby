@@ -49,10 +49,15 @@ module Google
         # @private The gRPC Service object.
         attr_accessor :service
 
+        ##
+        # @private The hash of query options.
+        attr_accessor :query_options
+
         # @private Creates a new Session instance.
-        def initialize grpc, service
+        def initialize grpc, service, query_options: nil
           @grpc = grpc
           @service = service
+          @query_options = query_options
         end
 
         # The unique identifier for the project.
@@ -150,6 +155,13 @@ module Google
         #   transactions.
         # @param [Integer] seqno A per-transaction sequence number used to
         #   identify this request.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
         #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
@@ -249,16 +261,35 @@ module Google
         #     puts "User #{row[:id]} is #{row[:name]}"
         #   end
         #
+        # @example Query using query options:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   results = db.execute_query \
+        #     "SELECT * FROM users", query_options: { optimizer_version: "1" }
+        #
+        #   results.rows.each do |row|
+        #     puts "User #{row[:id]} is #{row[:name]}"
+        #   end
+        #
         def execute_query sql, params: nil, types: nil, transaction: nil,
-                          partition_token: nil, seqno: nil
+                          partition_token: nil, seqno: nil, query_options: nil
           ensure_service!
-
+          if query_options.nil?
+            query_options = @query_options
+          else
+            query_options = @query_options.merge query_options unless @query_options.nil?
+          end
           results = Results.execute_query service, path, sql,
                                           params: params,
                                           types: types,
                                           transaction: transaction,
                                           partition_token: partition_token,
-                                          seqno: seqno
+                                          seqno: seqno,
+                                          query_options: query_options
           @last_updated_at = Time.now
           results
         end
@@ -688,8 +719,8 @@ module Google
         ##
         # @private Creates a new Session instance from a
         # Google::Spanner::V1::Session.
-        def self.from_grpc grpc, service
-          new grpc, service
+        def self.from_grpc grpc, service, query_options: nil
+          new grpc, service, query_options: query_options
         end
 
         ##

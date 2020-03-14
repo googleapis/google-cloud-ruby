@@ -67,7 +67,83 @@ module Google
                                   break parent_const.configure if parent_const&.respond_to? :configure
                                   namespace.pop
                                 end
-                Client::Configuration.new parent_config
+                default_config = Client::Configuration.new parent_config
+
+                default_config.rpcs.get_billing_account.timeout = 60.0
+                default_config.rpcs.get_billing_account.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config.rpcs.list_billing_accounts.timeout = 60.0
+                default_config.rpcs.list_billing_accounts.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config.rpcs.update_billing_account.timeout = 60.0
+                default_config.rpcs.update_billing_account.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config.rpcs.create_billing_account.timeout = 60.0
+
+                default_config.rpcs.list_project_billing_info.timeout = 60.0
+                default_config.rpcs.list_project_billing_info.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config.rpcs.get_project_billing_info.timeout = 60.0
+                default_config.rpcs.get_project_billing_info.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config.rpcs.update_project_billing_info.timeout = 60.0
+                default_config.rpcs.update_project_billing_info.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config.rpcs.get_iam_policy.timeout = 60.0
+                default_config.rpcs.get_iam_policy.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config.rpcs.set_iam_policy.timeout = 60.0
+                default_config.rpcs.set_iam_policy.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config.rpcs.test_iam_permissions.timeout = 60.0
+                default_config.rpcs.test_iam_permissions.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["DEADLINE_EXCEEDED", "UNAVAILABLE"]
+                }
+
+                default_config
               end
               yield @configure if block_given?
               @configure
@@ -709,7 +785,7 @@ module Google
             #   @param resource [String]
             #     REQUIRED: The resource for which the policy is being requested.
             #     `resource` is usually specified as a path. For example, a Project
-            #     resource is specified as `projects/\\\{project\}`.
+            #     resource is specified as `projects/{project}`.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -778,7 +854,7 @@ module Google
             #   @param resource [String]
             #     REQUIRED: The resource for which the policy is being specified.
             #     `resource` is usually specified as a path. For example, a Project
-            #     resource is specified as `projects/\\\{project\}`.
+            #     resource is specified as `projects/{project}`.
             #   @param policy [Google::Iam::V1::Policy | Hash]
             #     REQUIRED: The complete policy to be applied to the `resource`. The size of
             #     the policy is limited to a few 10s of KB. An empty policy is a
@@ -848,7 +924,7 @@ module Google
             #   @param resource [String]
             #     REQUIRED: The resource for which the policy detail is being requested.
             #     `resource` is usually specified as a path. For example, a Project
-            #     resource is specified as `projects/\\\{project\}`.
+            #     resource is specified as `projects/{project}`.
             #   @param permissions [Array<String>]
             #     The set of permissions to check for the `resource`. Permissions with
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more

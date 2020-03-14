@@ -58,6 +58,35 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
     end
   end
 
+  describe "the company_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::ApplicationServiceClient.company_path" do
+      Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+        project = "project"
+        tenant = "tenant"
+        company = "company"
+        client = Google::Cloud::Talent::ApplicationService.new version: :v4beta1
+        assert_equal(
+          client.company_path(project, tenant, company),
+          Google::Cloud::Talent::V4beta1::ApplicationServiceClient.company_path(project, tenant, company)
+        )
+      end
+    end
+  end
+
+  describe "the company_without_tenant_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::ApplicationServiceClient.company_without_tenant_path" do
+      Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+        project = "project"
+        company = "company"
+        client = Google::Cloud::Talent::ApplicationService.new version: :v4beta1
+        assert_equal(
+          client.company_without_tenant_path(project, company),
+          Google::Cloud::Talent::V4beta1::ApplicationServiceClient.company_without_tenant_path(project, company)
+        )
+      end
+    end
+  end
+
   describe "the profile_path instance method" do
     it "correctly calls Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do

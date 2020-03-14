@@ -217,4 +217,17 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
   end
+
+  it "can execute a DML query with query options" do
+    expect_query_options = { optimizer_version: "4" }
+    mock = Minitest::Mock.new
+    session.service.mocked_service = mock
+    expect_execute_streaming_sql results_enum, session_grpc.name, "UPDATE users SET active = true", transaction: tx_selector, seqno: 1, options: default_options, query_options: expect_query_options
+
+    row_count = transaction.execute_update "UPDATE users SET active = true", query_options: expect_query_options
+
+    mock.verify
+
+    row_count.must_equal 1
+  end
 end

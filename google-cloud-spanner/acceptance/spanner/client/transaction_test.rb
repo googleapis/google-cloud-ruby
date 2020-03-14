@@ -187,6 +187,14 @@ describe "Spanner Client", :transaction, :spanner do
     results.rows.first[:reputation].must_equal original_val + 2
   end
 
+  it "can execute sql with query options" do
+    query_options = { optimizer_version: "latest" }
+    db.transaction do |tx|
+      tx_results = tx.execute_sql query_reputation, query_options: query_options
+      tx_results.rows.first[:reputation].must_equal 63.5
+    end
+  end
+
   def read_and_update db
     db.transaction do |tx|
       tx_results = tx.read "accounts", [:reputation], keys: 1, limit: 1

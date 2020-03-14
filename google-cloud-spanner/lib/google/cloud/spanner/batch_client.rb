@@ -65,11 +65,13 @@ module Google
       class BatchClient
         ##
         # @private Creates a new Spanner BatchClient instance.
-        def initialize project, instance_id, database_id, session_labels: nil
+        def initialize project, instance_id, database_id, session_labels: nil,
+                       query_options: nil
           @project = project
           @instance_id = instance_id
           @database_id = database_id
           @session_labels = session_labels
+          @query_options = query_options
         end
 
         # The unique identifier for the project.
@@ -231,7 +233,7 @@ module Google
         def load_batch_snapshot serialized_snapshot
           ensure_service!
 
-          BatchSnapshot.load serialized_snapshot, service: @project.service
+          BatchSnapshot.load serialized_snapshot, service: @project.service, query_options: @query_options
         end
 
         ##
@@ -409,7 +411,7 @@ module Google
               project_id, instance_id, database_id
             ),
             labels: @session_labels
-          Session.from_grpc grpc, @project.service
+          Session.from_grpc grpc, @project.service, query_options: @query_options
         end
 
         ##

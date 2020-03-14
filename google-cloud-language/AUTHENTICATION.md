@@ -1,16 +1,17 @@
 # Authentication
 
-In general, the google-cloud-language library uses [Service
-Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
-credentials to connect to Google Cloud services. When running within [Google
-Cloud Platform environments](#google-cloud-platform-environments)
+In general, the google-cloud-language library uses
+[Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
+credentials to connect to Google Cloud services. When running within
+[Google Cloud Platform environments](#google-cloud-platform-environments)
 the credentials will be discovered automatically. When running on other
 environments, the Service Account credentials can be specified by providing the
-path to the [JSON
-keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys) for
-the account (or the JSON itself) in [environment
-variables](#environment-variables). Additionally, Cloud SDK credentials can also
-be discovered automatically, but this is only recommended during development.
+path to the
+[JSON keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys)
+for the account (or the JSON itself) in
+[environment variables](#environment-variables).
+Additionally, Cloud SDK credentials can also be discovered automatically, but
+this is only recommended during development.
 
 ## Quickstart
 
@@ -26,23 +27,14 @@ export LANGUAGE_CREDENTIALS=/path/to/json`
 ```ruby
 require "google/cloud/language"
 
-client = Google::Cloud::Language.new
+client = Google::Cloud::Language.language_service
 ```
 
 ## Project and Credential Lookup
 
 The google-cloud-language library aims to make authentication
 as simple as possible, and provides several mechanisms to configure your system
-without providing **Project ID** and **Service Account Credentials** directly in
-code.
-
-**Project ID** is discovered in the following order:
-
-1. Specify project ID in method arguments
-2. Specify project ID in configuration
-3. Discover project ID in environment variables
-4. Discover GCP project ID
-5. Discover project ID in credentials JSON
+without providing **Service Account Credentials** directly in code.
 
 **Credentials** are discovered in the following order:
 
@@ -57,26 +49,21 @@ code.
 
 When running on Google Cloud Platform (GCP), including Google Compute Engine (GCE),
 Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions
-(GCF) and Cloud Run, the **Project ID** and **Credentials** and are discovered
-automatically. Code should be written as if already authenticated.
+(GCF) and Cloud Run, the **Credentials** and are discovered automatically. Code
+should be written as if already authenticated.
 
 ### Environment Variables
 
-The **Project ID** and **Credentials JSON** can be placed in environment
-variables instead of declaring them directly in code. Each service has its own
-environment variable, allowing for different service accounts to be used for
-different services. (See the READMEs for the individual service gems for
-details.) The path to the **Credentials JSON** file can be stored in the
-environment variable, or the **Credentials JSON** itself can be stored for
-environments such as Docker containers where writing files is difficult or not
-encouraged.
+The **Credentials JSON** can be placed in environment variables instead of
+declaring them directly in code. Each service has its own environment variable,
+allowing for different service accounts to be used for  different services.
+(See the READMEs for the individual service gems for details.) The path to the
+**Credentials JSON** file can be stored in the environment variable, or the
+**Credentials JSON** itself can be stored for environments such as Docker
+containers where writing files is difficult or not encouraged.
 
-The environment variables that google-cloud-language checks for project ID are:
-
-1. `LANGUAGE_PROJECT`
-2. `GOOGLE_CLOUD_PROJECT`
-
-The environment variables that google-cloud-language checks for credentials are configured on {Google::Cloud::Language::V1::Credentials}:
+The environment variables that google-cloud-language checks for credentials are
+configured on the service Credentials class.
 
 1. `LANGUAGE_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `LANGUAGE_KEYFILE` - Path to JSON file, or JSON contents
@@ -87,25 +74,35 @@ The environment variables that google-cloud-language checks for credentials are 
 ```ruby
 require "google/cloud/language"
 
-ENV["LANGUAGE_PROJECT"]     = "my-project-id"
 ENV["LANGUAGE_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Language.new
+client = Google::Cloud::Language.language_service
 ```
 
 ### Configuration
 
-The **Project ID** and **Credentials JSON** can be configured instead of placing them in environment variables or providing them as arguments.
+The **Credentials JSON** can be configured instead of placing them in
+environment variables or providing them as arguments. You can set credentials
+on individual client initialization:
+
+```ruby
+require "google/cloud/language"
+
+client = Google::Cloud::Language.language_service do |config|
+  config.credentials = "path/to/keyfile.json"
+end
+```
+
+Or globally for all clients:
 
 ```ruby
 require "google/cloud/language"
 
 Google::Cloud::Language.configure do |config|
-  config.project_id  = "my-project-id"
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Language.new
+client = Google::Cloud::Language.language_service
 ```
 
 ### Cloud SDK
@@ -134,24 +131,24 @@ To configure your system for this, simply:
 
 ## Creating a Service Account
 
-Google Cloud requires a **Project ID** and **Service Account Credentials** to
-connect to the APIs. You will use the **Project ID** and **JSON key file** to
-connect to most services with google-cloud-language.
+Google Cloud requires **Service Account Credentials** to connect to the APIs.
+You will use the **JSON key file** to connect to most services with
+google-cloud-language.
 
-If you are not running this client within [Google Cloud Platform
-environments](#google-cloud-platform-environments), you need a Google
-Developers service account.
+If you are not running this client within
+[Google Cloud Platform environments](#google-cloud-platform-environments),
+you need a Google Developers service account.
 
 1. Visit the [Google Developers Console][dev-console].
-1. Create a new project or click on an existing project.
-1. Activate the slide-out navigation tray and select **API Manager**. From
+2. Create a new project or click on an existing project.
+3. Activate the slide-out navigation tray and select **API Manager**. From
    here, you will enable the APIs that your application requires.
 
    ![Enable the APIs that your application requires][enable-apis]
 
    *Note: You may need to enable billing in order to use these services.*
 
-1. Select **Credentials** from the side navigation.
+4. Select **Credentials** from the side navigation.
 
    You should see a screen like one of the following.
 
@@ -170,8 +167,3 @@ Developers service account.
 
    The key file you download will be used by this library to authenticate API
    requests and should be stored in a secure location.
-
-## Troubleshooting
-
-If you're having trouble authenticating you can ask for help by following the
-{file:TROUBLESHOOTING.md Troubleshooting Guide}.
