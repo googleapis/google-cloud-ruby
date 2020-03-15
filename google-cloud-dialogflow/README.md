@@ -31,6 +31,13 @@ $ gem install google-cloud-dialogflow
 [Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-dialogflow/latest
 [Product Documentation]: https://cloud.google.com/dialogflow
 
+## Migrating from 0.x versions
+
+The 1.0 release of the google-cloud-dialogflow client is a significant upgrade
+based on a next-gen code generator. If you have used earlier versions of this
+library, there have been a number of changes that may require updates to
+calling code. See the MIGRATING.md document for more information.
+
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.

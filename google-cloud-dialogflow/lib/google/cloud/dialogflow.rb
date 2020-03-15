@@ -12,536 +12,274 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-require "google/gax"
-require "pathname"
+require "google-cloud-dialogflow"
 
 module Google
   module Cloud
-    # rubocop:disable LineLength
-
     ##
     # # Ruby Client for Dialogflow API
     #
-    # [Dialogflow API][Product Documentation]:
-    # Builds conversational interfaces (for example, chatbots, and voice-powered
-    # apps and devices).
-    # - [Product Documentation][]
-    #
-    # ## Quick Start
-    # In order to use this library, you first need to go through the following
-    # steps:
-    #
-    # 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-    # 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-    # 3. [Enable the Dialogflow API.](https://console.cloud.google.com/apis/library/dialogflow.googleapis.com)
-    # 4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-dialogflow/latest/file.AUTHENTICATION.html)
-    #
-    # ### Installation
-    # ```
-    # $ gem install google-cloud-dialogflow
-    # ```
-    #
-    # ### Next Steps
-    # - Read the [Dialogflow API Product documentation][Product Documentation]
-    #   to learn more about the product and see How-to Guides.
-    # - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
-    #   to see the full list of Cloud APIs that we cover.
-    #
-    # [Product Documentation]: https://cloud.google.com/dialogflow
-    #
-    # ## Enabling Logging
-    #
-    # To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-    # The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
-    # or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
-    # that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
-    # and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
-    #
-    # Configuring a Ruby stdlib logger:
-    #
-    # ```ruby
-    # require "logger"
-    #
-    # module MyLogger
-    #   LOGGER = Logger.new $stderr, level: Logger::WARN
-    #   def logger
-    #     LOGGER
-    #   end
-    # end
-    #
-    # # Define a gRPC module-level logger method before grpc/logconfig.rb loads.
-    # module GRPC
-    #   extend MyLogger
-    # end
-    # ```
-    #
     module Dialogflow
-      # rubocop:enable LineLength
+      ##
+      # Create a new `Agents::Client` object.
+      #
+      # Agents are best described as Natural Language Understanding (NLU) modules
+      # that transform user requests into actionable data. You can include agents
+      # in your app, product, or service to determine user intent and respond to the
+      # user in a natural way.
+      #
+      # After you create an agent, you can add Intents, Contexts, Entity Types,
+      # Webhooks, and so on to manage the flow of a conversation and match user
+      # input to predefined intents and actions.
+      #
+      # You can create an agent using both Dialogflow Standard Edition and
+      # Dialogflow Enterprise Edition. For details, see
+      # [Dialogflow Editions](https://cloud.google.com/dialogflow/docs/editions).
+      #
+      # You can save your agent for backup or versioning by exporting the agent by
+      # using the `export_agent` method. You can import a saved
+      # agent by using the `import_agent` method.
+      #
+      # Dialogflow provides several
+      # [prebuilt agents](https://cloud.google.com/dialogflow/docs/agents-prebuilt)
+      # for common conversation scenarios such as determining a date and time,
+      # converting currency, and so on.
+      #
+      # For more information about agents, see the
+      # [Dialogflow documentation](https://cloud.google.com/dialogflow/docs/agents-overview).
+      #
+      # @param version [String, Symbol] The API version to create the client instance.
+      #   Optional. If not provided defaults to `:v2`, which will return an instance of
+      #   [Google::Cloud::Dialogflow::V2::Agents::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest/Google/Cloud/Dialogflow/V2/Agents/Client.html).
+      #
+      # @return [Agents::Client] A client object for the specified version.
+      #
+      def self.agents version: :v2, &block
+        require "google/cloud/dialogflow/#{version.to_s.downcase}"
 
-      FILE_DIR = File.realdirpath(Pathname.new(__FILE__).join("..").join("dialogflow"))
-
-      AVAILABLE_VERSIONS = Dir["#{FILE_DIR}/*"]
-        .select { |file| File.directory?(file) }
-        .select { |dir| Google::Gax::VERSION_MATCHER.match(File.basename(dir)) }
-        .select { |dir| File.exist?(dir + ".rb") }
-        .map { |dir| File.basename(dir) }
-
-      module Agents
-        ##
-        # Agents are best described as Natural Language Understanding (NLU) modules
-        # that transform user requests into actionable data. You can include agents
-        # in your app, product, or service to determine user intent and respond to the
-        # user in a natural way.
-        #
-        # After you create an agent, you can add {Google::Cloud::Dialogflow::V2::Intents Intents}, {Google::Cloud::Dialogflow::V2::Contexts Contexts},
-        # {Google::Cloud::Dialogflow::V2::EntityTypes Entity Types}, {Google::Cloud::Dialogflow::V2::WebhookRequest Webhooks}, and so on to
-        # manage the flow of a conversation and match user input to predefined intents
-        # and actions.
-        #
-        # You can create an agent using both Dialogflow Standard Edition and
-        # Dialogflow Enterprise Edition. For details, see
-        # [Dialogflow
-        # Editions](https://cloud.google.com/dialogflow/docs/editions).
-        #
-        # You can save your agent for backup or versioning by exporting the agent by
-        # using the {Google::Cloud::Dialogflow::V2::Agents::ExportAgent ExportAgent} method. You can import a saved
-        # agent by using the {Google::Cloud::Dialogflow::V2::Agents::ImportAgent ImportAgent} method.
-        #
-        # Dialogflow provides several
-        # [prebuilt
-        # agents](https://cloud.google.com/dialogflow/docs/agents-prebuilt)
-        # for common conversation scenarios such as determining a date and time,
-        # converting currency, and so on.
-        #
-        # For more information about agents, see the
-        # [Dialogflow
-        # documentation](https://cloud.google.com/dialogflow/docs/agents-overview).
-        #
-        # @param version [Symbol, String]
-        #   The major version of the service to be used. By default :v2
-        #   is used.
-        # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
-        #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-        #     Provides the means for authenticating requests made by the client. This parameter can
-        #     be many types.
-        #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-        #     authenticating requests made by this client.
-        #     A `String` will be treated as the path to the keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `GRPC::Core::Channel` will be used to make calls through.
-        #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-        #     should already be composed with a `GRPC::Core::CallCredentials` object.
-        #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-        #     metadata for requests, generally, to give OAuth credentials.
-        #   @param scopes [Array<String>]
-        #     The OAuth scopes for this service. This parameter is ignored if
-        #     an updater_proc is supplied.
-        #   @param client_config [Hash]
-        #     A Hash for call options for each method. See
-        #     Google::Gax#construct_settings for the structure of
-        #     this data. Falls back to the default config if not specified
-        #     or the specified config is missing data points.
-        #   @param timeout [Numeric]
-        #     The default timeout, in seconds, for calls made through this client.
-        #   @param metadata [Hash]
-        #     Default metadata to be sent with each request. This can be overridden on a per call basis.
-        #   @param service_address [String]
-        #     Override for the service hostname, or `nil` to leave as the default.
-        #   @param service_port [Integer]
-        #     Override for the service port, or `nil` to leave as the default.
-        #   @param exception_transformer [Proc]
-        #     An optional proc that intercepts any exceptions raised during an API call to inject
-        #     custom error handling.
-        def self.new(*args, version: :v2, **kwargs)
-          unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
-            raise "The version: #{version} is not available. The available versions " \
-              "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
-          end
-
-          require "#{FILE_DIR}/#{version.to_s.downcase}"
-          version_module = Google::Cloud::Dialogflow
-            .constants
-            .select {|sym| sym.to_s.downcase == version.to_s.downcase}
-            .first
-          Google::Cloud::Dialogflow.const_get(version_module)::Agents.new(*args, **kwargs)
-        end
+        package_name = Google::Cloud::Dialogflow
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Dialogflow.const_get package_name
+        package_module.const_get(:Agents).const_get(:Client).new(&block)
       end
 
-      module Contexts
-        ##
-        # A context represents additional information included with user input or with
-        # an intent returned by the Dialogflow API. Contexts are helpful for
-        # differentiating user input which may be vague or have a different meaning
-        # depending on additional details from your application such as user setting
-        # and preferences, previous user input, where the user is in your application,
-        # geographic location, and so on.
-        #
-        # You can include contexts as input parameters of a
-        # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) request,
-        # or as output contexts included in the returned intent.
-        # Contexts expire when an intent is matched, after the number of `DetectIntent`
-        # requests specified by the `lifespan_count` parameter, or after 20 minutes
-        # if no intents are matched for a `DetectIntent` request.
-        #
-        # For more information about contexts, see the
-        # [Dialogflow
-        # documentation](https://cloud.google.com/dialogflow/docs/contexts-overview).
-        #
-        # @param version [Symbol, String]
-        #   The major version of the service to be used. By default :v2
-        #   is used.
-        # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
-        #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-        #     Provides the means for authenticating requests made by the client. This parameter can
-        #     be many types.
-        #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-        #     authenticating requests made by this client.
-        #     A `String` will be treated as the path to the keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `GRPC::Core::Channel` will be used to make calls through.
-        #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-        #     should already be composed with a `GRPC::Core::CallCredentials` object.
-        #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-        #     metadata for requests, generally, to give OAuth credentials.
-        #   @param scopes [Array<String>]
-        #     The OAuth scopes for this service. This parameter is ignored if
-        #     an updater_proc is supplied.
-        #   @param client_config [Hash]
-        #     A Hash for call options for each method. See
-        #     Google::Gax#construct_settings for the structure of
-        #     this data. Falls back to the default config if not specified
-        #     or the specified config is missing data points.
-        #   @param timeout [Numeric]
-        #     The default timeout, in seconds, for calls made through this client.
-        #   @param metadata [Hash]
-        #     Default metadata to be sent with each request. This can be overridden on a per call basis.
-        #   @param service_address [String]
-        #     Override for the service hostname, or `nil` to leave as the default.
-        #   @param service_port [Integer]
-        #     Override for the service port, or `nil` to leave as the default.
-        #   @param exception_transformer [Proc]
-        #     An optional proc that intercepts any exceptions raised during an API call to inject
-        #     custom error handling.
-        def self.new(*args, version: :v2, **kwargs)
-          unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
-            raise "The version: #{version} is not available. The available versions " \
-              "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
-          end
+      ##
+      # Create a new `Contexts::Client` object.
+      #
+      # A context represents additional information included with user input or with
+      # an intent returned by the Dialogflow API. Contexts are helpful for
+      # differentiating user input which may be vague or have a different meaning
+      # depending on additional details from your application such as user setting
+      # and preferences, previous user input, where the user is in your application,
+      # geographic location, and so on.
+      #
+      # You can include contexts as input parameters of a `DetectIntent` (or
+      # `StreamingDetectIntent`) request, or as output contexts included in the returned intent.
+      # Contexts expire when an intent is matched, after the number of `DetectIntent`
+      # requests specified by the `lifespan_count` parameter, or after 20 minutes
+      # if no intents are matched for a `DetectIntent` request.
+      #
+      # For more information about contexts, see the
+      # [Dialogflow documentation](https://cloud.google.com/dialogflow/docs/contexts-overview).
+      #
+      # @param version [String, Symbol] The API version to create the client instance.
+      #   Optional. If not provided defaults to `:v2`, which will return an instance of
+      #   [Google::Cloud::Dialogflow::V2::Contexts::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest/Google/Cloud/Dialogflow/V2/Contexts/Client.html).
+      #
+      # @return [Contexts::Client] A client object for the specified version.
+      #
+      def self.contexts version: :v2, &block
+        require "google/cloud/dialogflow/#{version.to_s.downcase}"
 
-          require "#{FILE_DIR}/#{version.to_s.downcase}"
-          version_module = Google::Cloud::Dialogflow
-            .constants
-            .select {|sym| sym.to_s.downcase == version.to_s.downcase}
-            .first
-          Google::Cloud::Dialogflow.const_get(version_module)::Contexts.new(*args, **kwargs)
-        end
+        package_name = Google::Cloud::Dialogflow
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Dialogflow.const_get package_name
+        package_module.const_get(:Contexts).const_get(:Client).new(&block)
       end
 
-      module EntityTypes
-        ##
-        # Entities are extracted from user input and represent parameters that are
-        # meaningful to your application. For example, a date range, a proper name
-        # such as a geographic location or landmark, and so on. Entities represent
-        # actionable data for your application.
-        #
-        # When you define an entity, you can also include synonyms that all map to
-        # that entity. For example, "soft drink", "soda", "pop", and so on.
-        #
-        # There are three types of entities:
-        #
-        # * **System** - entities that are defined by the Dialogflow API for common
-        #   data types such as date, time, currency, and so on. A system entity is
-        #   represented by the `EntityType` type.
-        #
-        # * **Custom** - entities that are defined by you that represent
-        #   actionable data that is meaningful to your application. For example,
-        #   you could define a `pizza.sauce` entity for red or white pizza sauce,
-        #   a `pizza.cheese` entity for the different types of cheese on a pizza,
-        #   a `pizza.topping` entity for different toppings, and so on. A custom
-        #   entity is represented by the `EntityType` type.
-        #
-        # * **User** - entities that are built for an individual user such as
-        #   favorites, preferences, playlists, and so on. A user entity is
-        #   represented by the {Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
-        #
-        # For more information about entity types, see the
-        # [Dialogflow
-        # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
-        #
-        # @param version [Symbol, String]
-        #   The major version of the service to be used. By default :v2
-        #   is used.
-        # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
-        #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-        #     Provides the means for authenticating requests made by the client. This parameter can
-        #     be many types.
-        #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-        #     authenticating requests made by this client.
-        #     A `String` will be treated as the path to the keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `GRPC::Core::Channel` will be used to make calls through.
-        #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-        #     should already be composed with a `GRPC::Core::CallCredentials` object.
-        #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-        #     metadata for requests, generally, to give OAuth credentials.
-        #   @param scopes [Array<String>]
-        #     The OAuth scopes for this service. This parameter is ignored if
-        #     an updater_proc is supplied.
-        #   @param client_config [Hash]
-        #     A Hash for call options for each method. See
-        #     Google::Gax#construct_settings for the structure of
-        #     this data. Falls back to the default config if not specified
-        #     or the specified config is missing data points.
-        #   @param timeout [Numeric]
-        #     The default timeout, in seconds, for calls made through this client.
-        #   @param metadata [Hash]
-        #     Default metadata to be sent with each request. This can be overridden on a per call basis.
-        #   @param service_address [String]
-        #     Override for the service hostname, or `nil` to leave as the default.
-        #   @param service_port [Integer]
-        #     Override for the service port, or `nil` to leave as the default.
-        #   @param exception_transformer [Proc]
-        #     An optional proc that intercepts any exceptions raised during an API call to inject
-        #     custom error handling.
-        def self.new(*args, version: :v2, **kwargs)
-          unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
-            raise "The version: #{version} is not available. The available versions " \
-              "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
-          end
+      ##
+      # Create a new `EntityTypes::Client` object.
+      #
+      # Entities are extracted from user input and represent parameters that are
+      # meaningful to your application. For example, a date range, a proper name
+      # such as a geographic location or landmark, and so on. Entities represent
+      # actionable data for your application.
+      #
+      # When you define an entity, you can also include synonyms that all map to
+      # that entity. For example, "soft drink", "soda", "pop", and so on.
+      #
+      # There are three types of entities:
+      #
+      # * **System** - entities that are defined by the Dialogflow API for common
+      #   data types such as date, time, currency, and so on. A system entity is
+      #   represented by the `EntityType` type.
+      #
+      # * **Custom** - entities that are defined by you that represent
+      #   actionable data that is meaningful to your application. For example,
+      #   you could define a `pizza.sauce` entity for red or white pizza sauce,
+      #   a `pizza.cheese` entity for the different types of cheese on a pizza,
+      #   a `pizza.topping` entity for different toppings, and so on. A custom
+      #   entity is represented by the `EntityType` type.
+      #
+      # * **User** - entities that are built for an individual user such as
+      #   favorites, preferences, playlists, and so on. A user entity is
+      #   represented by the `SessionEntityType` type.
+      #
+      # For more information about entity types, see the
+      # [Dialogflow documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
+      #
+      # @param version [String, Symbol] The API version to create the client instance.
+      #   Optional. If not provided defaults to `:v2`, which will return an instance of
+      #   [Google::Cloud::Dialogflow::V2::EntityTypes::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest/Google/Cloud/Dialogflow/V2/EntityTypes/Client.html).
+      #
+      # @return [EntityTypes::Client] A client object for the specified version.
+      #
+      def self.entity_types version: :v2, &block
+        require "google/cloud/dialogflow/#{version.to_s.downcase}"
 
-          require "#{FILE_DIR}/#{version.to_s.downcase}"
-          version_module = Google::Cloud::Dialogflow
-            .constants
-            .select {|sym| sym.to_s.downcase == version.to_s.downcase}
-            .first
-          Google::Cloud::Dialogflow.const_get(version_module)::EntityTypes.new(*args, **kwargs)
-        end
+        package_name = Google::Cloud::Dialogflow
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Dialogflow.const_get package_name
+        package_module.const_get(:EntityTypes).const_get(:Client).new(&block)
       end
 
-      module Intents
-        ##
-        # An intent represents a mapping between input from a user and an action to
-        # be taken by your application. When you pass user input to the
-        # {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) method, the
-        # Dialogflow API analyzes the input and searches
-        # for a matching intent. If no match is found, the Dialogflow API returns a
-        # fallback intent (`is_fallback` = true).
-        #
-        # You can provide additional information for the Dialogflow API to use to
-        # match user input to an intent by adding the following to your intent.
-        #
-        # * **Contexts** - provide additional context for intent analysis. For
-        #   example, if an intent is related to an object in your application that
-        #   plays music, you can provide a context to determine when to match the
-        #   intent if the user input is "turn it off". You can include a context
-        #   that matches the intent when there is previous user input of
-        #   "play music", and not when there is previous user input of
-        #   "turn on the light".
-        #
-        # * **Events** - allow for matching an intent by using an event name
-        #   instead of user input. Your application can provide an event name and
-        #   related parameters to the Dialogflow API to match an intent. For
-        #   example, when your application starts, you can send a welcome event
-        #   with a user name parameter to the Dialogflow API to match an intent with
-        #   a personalized welcome message for the user.
-        #
-        # * **Training phrases** - provide examples of user input to train the
-        #   Dialogflow API agent to better match intents.
-        #
-        # For more information about intents, see the
-        # [Dialogflow
-        # documentation](https://cloud.google.com/dialogflow/docs/intents-overview).
-        #
-        # @param version [Symbol, String]
-        #   The major version of the service to be used. By default :v2
-        #   is used.
-        # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
-        #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-        #     Provides the means for authenticating requests made by the client. This parameter can
-        #     be many types.
-        #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-        #     authenticating requests made by this client.
-        #     A `String` will be treated as the path to the keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `GRPC::Core::Channel` will be used to make calls through.
-        #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-        #     should already be composed with a `GRPC::Core::CallCredentials` object.
-        #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-        #     metadata for requests, generally, to give OAuth credentials.
-        #   @param scopes [Array<String>]
-        #     The OAuth scopes for this service. This parameter is ignored if
-        #     an updater_proc is supplied.
-        #   @param client_config [Hash]
-        #     A Hash for call options for each method. See
-        #     Google::Gax#construct_settings for the structure of
-        #     this data. Falls back to the default config if not specified
-        #     or the specified config is missing data points.
-        #   @param timeout [Numeric]
-        #     The default timeout, in seconds, for calls made through this client.
-        #   @param metadata [Hash]
-        #     Default metadata to be sent with each request. This can be overridden on a per call basis.
-        #   @param service_address [String]
-        #     Override for the service hostname, or `nil` to leave as the default.
-        #   @param service_port [Integer]
-        #     Override for the service port, or `nil` to leave as the default.
-        #   @param exception_transformer [Proc]
-        #     An optional proc that intercepts any exceptions raised during an API call to inject
-        #     custom error handling.
-        def self.new(*args, version: :v2, **kwargs)
-          unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
-            raise "The version: #{version} is not available. The available versions " \
-              "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
-          end
+      ##
+      # Create a new `Intents::Client` object.
+      #
+      # An intent represents a mapping between input from a user and an action to
+      # be taken by your application. When you pass user input to the `DetectIntent`
+      # (or `StreamingDetectIntent`) method, the Dialogflow API analyzes the input and
+      # searches for a matching intent. If no match is found, the Dialogflow API returns
+      # a fallback intent (`is_fallback` = true).
+      #
+      # You can provide additional information for the Dialogflow API to use to
+      # match user input to an intent by adding the following to your intent.
+      #
+      # * **Contexts** - provide additional context for intent analysis. For
+      #   example, if an intent is related to an object in your application that
+      #   plays music, you can provide a context to determine when to match the
+      #   intent if the user input is "turn it off". You can include a context
+      #   that matches the intent when there is previous user input of
+      #   "play music", and not when there is previous user input of
+      #   "turn on the light".
+      #
+      # * **Events** - allow for matching an intent by using an event name
+      #   instead of user input. Your application can provide an event name and
+      #   related parameters to the Dialogflow API to match an intent. For
+      #   example, when your application starts, you can send a welcome event
+      #   with a user name parameter to the Dialogflow API to match an intent with
+      #   a personalized welcome message for the user.
+      #
+      # * **Training phrases** - provide examples of user input to train the
+      #   Dialogflow API agent to better match intents.
+      #
+      # For more information about intents, see the
+      # [Dialogflow documentation](https://cloud.google.com/dialogflow/docs/intents-overview).
+      #
+      # @param version [String, Symbol] The API version to create the client instance.
+      #   Optional. If not provided defaults to `:v2`, which will return an instance of
+      #   [Google::Cloud::Dialogflow::V2::Intents::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest/Google/Cloud/Dialogflow/V2/Intents/Client.html).
+      #
+      # @return [Intents::Client] A client object for the specified version.
+      #
+      def self.intents version: :v2, &block
+        require "google/cloud/dialogflow/#{version.to_s.downcase}"
 
-          require "#{FILE_DIR}/#{version.to_s.downcase}"
-          version_module = Google::Cloud::Dialogflow
-            .constants
-            .select {|sym| sym.to_s.downcase == version.to_s.downcase}
-            .first
-          Google::Cloud::Dialogflow.const_get(version_module)::Intents.new(*args, **kwargs)
-        end
+        package_name = Google::Cloud::Dialogflow
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Dialogflow.const_get package_name
+        package_module.const_get(:Intents).const_get(:Client).new(&block)
       end
 
-      module SessionEntityTypes
-        ##
-        # Entities are extracted from user input and represent parameters that are
-        # meaningful to your application. For example, a date range, a proper name
-        # such as a geographic location or landmark, and so on. Entities represent
-        # actionable data for your application.
-        #
-        # Session entity types are referred to as **User** entity types and are
-        # entities that are built for an individual user such as
-        # favorites, preferences, playlists, and so on. You can redefine a session
-        # entity type at the session level.
-        #
-        # Session entity methods do not work with Google Assistant integration.
-        # Contact Dialogflow support if you need to use session entities
-        # with Google Assistant integration.
-        #
-        # For more information about entity types, see the
-        # [Dialogflow
-        # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
-        #
-        # @param version [Symbol, String]
-        #   The major version of the service to be used. By default :v2
-        #   is used.
-        # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
-        #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-        #     Provides the means for authenticating requests made by the client. This parameter can
-        #     be many types.
-        #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-        #     authenticating requests made by this client.
-        #     A `String` will be treated as the path to the keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `GRPC::Core::Channel` will be used to make calls through.
-        #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-        #     should already be composed with a `GRPC::Core::CallCredentials` object.
-        #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-        #     metadata for requests, generally, to give OAuth credentials.
-        #   @param scopes [Array<String>]
-        #     The OAuth scopes for this service. This parameter is ignored if
-        #     an updater_proc is supplied.
-        #   @param client_config [Hash]
-        #     A Hash for call options for each method. See
-        #     Google::Gax#construct_settings for the structure of
-        #     this data. Falls back to the default config if not specified
-        #     or the specified config is missing data points.
-        #   @param timeout [Numeric]
-        #     The default timeout, in seconds, for calls made through this client.
-        #   @param metadata [Hash]
-        #     Default metadata to be sent with each request. This can be overridden on a per call basis.
-        #   @param service_address [String]
-        #     Override for the service hostname, or `nil` to leave as the default.
-        #   @param service_port [Integer]
-        #     Override for the service port, or `nil` to leave as the default.
-        #   @param exception_transformer [Proc]
-        #     An optional proc that intercepts any exceptions raised during an API call to inject
-        #     custom error handling.
-        def self.new(*args, version: :v2, **kwargs)
-          unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
-            raise "The version: #{version} is not available. The available versions " \
-              "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
-          end
+      ##
+      # Create a new `SessionEntityTypes::Client` object.
+      #
+      # Entities are extracted from user input and represent parameters that are
+      # meaningful to your application. For example, a date range, a proper name
+      # such as a geographic location or landmark, and so on. Entities represent
+      # actionable data for your application.
+      #
+      # Session entity types are referred to as **User** entity types and are
+      # entities that are built for an individual user such as
+      # favorites, preferences, playlists, and so on. You can redefine a session
+      # entity type at the session level.
+      #
+      # Session entity methods do not work with Google Assistant integration.
+      # Contact Dialogflow support if you need to use session entities
+      # with Google Assistant integration.
+      #
+      # For more information about entity types, see the
+      # [Dialogflow documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
+      #
+      # @param version [String, Symbol] The API version to create the client instance.
+      #   Optional. If not provided defaults to `:v2`, which will return an instance of
+      #   [Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest/Google/Cloud/Dialogflow/V2/SessionEntityTypes/Client.html).
+      #
+      # @return [SessionEntityTypes::Client] A client object for the specified version.
+      #
+      def self.session_entity_types version: :v2, &block
+        require "google/cloud/dialogflow/#{version.to_s.downcase}"
 
-          require "#{FILE_DIR}/#{version.to_s.downcase}"
-          version_module = Google::Cloud::Dialogflow
-            .constants
-            .select {|sym| sym.to_s.downcase == version.to_s.downcase}
-            .first
-          Google::Cloud::Dialogflow.const_get(version_module)::SessionEntityTypes.new(*args, **kwargs)
-        end
+        package_name = Google::Cloud::Dialogflow
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Dialogflow.const_get package_name
+        package_module.const_get(:SessionEntityTypes).const_get(:Client).new(&block)
       end
 
-      module Sessions
-        ##
-        # A session represents an interaction with a user. You retrieve user input
-        # and pass it to the {Google::Cloud::Dialogflow::V2::Sessions::DetectIntent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::StreamingDetectIntent StreamingDetectIntent}) method to determine
-        # user intent and respond.
-        #
-        # @param version [Symbol, String]
-        #   The major version of the service to be used. By default :v2
-        #   is used.
-        # @overload new(version:, credentials:, scopes:, client_config:, timeout:)
-        #   @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-        #     Provides the means for authenticating requests made by the client. This parameter can
-        #     be many types.
-        #     A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-        #     authenticating requests made by this client.
-        #     A `String` will be treated as the path to the keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-        #     credentials for this client.
-        #     A `GRPC::Core::Channel` will be used to make calls through.
-        #     A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-        #     should already be composed with a `GRPC::Core::CallCredentials` object.
-        #     A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-        #     metadata for requests, generally, to give OAuth credentials.
-        #   @param scopes [Array<String>]
-        #     The OAuth scopes for this service. This parameter is ignored if
-        #     an updater_proc is supplied.
-        #   @param client_config [Hash]
-        #     A Hash for call options for each method. See
-        #     Google::Gax#construct_settings for the structure of
-        #     this data. Falls back to the default config if not specified
-        #     or the specified config is missing data points.
-        #   @param timeout [Numeric]
-        #     The default timeout, in seconds, for calls made through this client.
-        #   @param metadata [Hash]
-        #     Default metadata to be sent with each request. This can be overridden on a per call basis.
-        #   @param service_address [String]
-        #     Override for the service hostname, or `nil` to leave as the default.
-        #   @param service_port [Integer]
-        #     Override for the service port, or `nil` to leave as the default.
-        #   @param exception_transformer [Proc]
-        #     An optional proc that intercepts any exceptions raised during an API call to inject
-        #     custom error handling.
-        def self.new(*args, version: :v2, **kwargs)
-          unless AVAILABLE_VERSIONS.include?(version.to_s.downcase)
-            raise "The version: #{version} is not available. The available versions " \
-              "are: [#{AVAILABLE_VERSIONS.join(", ")}]"
-          end
+      ##
+      # Create a new `Sessions::Client` object.
+      #
+      # A session represents an interaction with a user. You retrieve user input
+      # and pass it to the `DetectIntent` (or `StreamingDetectIntent`) method to determine
+      # user intent and respond.
+      #
+      # @param version [String, Symbol] The API version to create the client instance.
+      #   Optional. If not provided defaults to `:v2`, which will return an instance of
+      #   [Google::Cloud::Dialogflow::V2::Sessions::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest/Google/Cloud/Dialogflow/V2/Sessions/Client.html).
+      #
+      # @return [Sessions::Client] A client object for the specified version.
+      #
+      def self.sessions version: :v2, &block
+        require "google/cloud/dialogflow/#{version.to_s.downcase}"
 
-          require "#{FILE_DIR}/#{version.to_s.downcase}"
-          version_module = Google::Cloud::Dialogflow
-            .constants
-            .select {|sym| sym.to_s.downcase == version.to_s.downcase}
-            .first
-          Google::Cloud::Dialogflow.const_get(version_module)::Sessions.new(*args, **kwargs)
-        end
+        package_name = Google::Cloud::Dialogflow
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Dialogflow.const_get package_name
+        package_module.const_get(:Sessions).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Configure the dialogflow library.
+      #
+      # The following configuration parameters are supported:
+      #
+      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to the keyfile as a String, the contents of
+      #   the keyfile as a Hash, or a Google::Auth::Credentials object.
+      # * `lib_name` (String)
+      # * `lib_version` (String)
+      # * `interceptors` (Array)
+      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `metadata` (Hash)
+      # * `retry_policy` (Hash, Proc)
+      #
+      # @return [Google::Cloud::Config] The configuration object the Google::Cloud::Dialogflow library uses.
+      #
+      def self.configure
+        yield Google::Cloud.configure.dialogflow if block_given?
+
+        Google::Cloud.configure.dialogflow
       end
     end
   end
