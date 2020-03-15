@@ -81,6 +81,16 @@ Google::Cloud::Language::V1::LanguageService::Client.configure do |config|
 end
 ```
 
+You can also set certain configuration defaults for all Language versions
+globally:
+
+```
+Google::Cloud::Language.configure do |config|
+  config.credentials = "/path/to/credentials.json"
+  config.timeout = 10_000
+end
+```
+
 ### Creating Clients
 
 In older releases, to create a client object, you would use the
@@ -133,7 +143,7 @@ response = client.analyze_sentiment document, encoding_type: encoding
 
 New:
 ```
-client = Google::Cloud::Language.new
+client = Google::Cloud::Language.language_service
 
 document = {
   content: "I love API calls!",
@@ -150,7 +160,7 @@ as a hash or as a protocol buffer.
 
 New:
 ```
-client = Google::Cloud::Language.new
+client = Google::Cloud::Language.language_service
 
 request = Google::Cloud::Language::V1::AnalyzeSentimentRequest.new(
   document: {
@@ -184,7 +194,7 @@ response = client.analyze_sentiment document, options: options
 
 New:
 ```
-client = Google::Cloud::Language.new
+client = Google::Cloud::Language.language_service
 
 document = {
   content: "I love API calls!",
