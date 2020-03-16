@@ -135,7 +135,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     The resource name of the request. Format is
-        #     "{projects|folders|organizations}/\\{id}/approvalRequests/\\{approval_request_id}".
+        #     "\\{projects|folders|organizations}/\\{id}/approvalRequests/\\{approval_request_id}".
         # @!attribute [rw] requested_resource_name
         #   @return [String]
         #     The resource for which approval is being requested. The format of the
