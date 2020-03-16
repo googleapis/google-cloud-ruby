@@ -1,5 +1,12 @@
 # Release History
 
+### 0.8.1 / 2020-03-16
+
+#### Documentation
+
+* remove some spurious backslash escaping from inline documentation
+* several corrections to brace escaping in documentation
+
 ### 0.8.0 / 2020-03-11
 
 #### Features
