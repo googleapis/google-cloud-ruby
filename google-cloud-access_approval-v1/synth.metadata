@@ -1,0 +1,24 @@
+{
+  "updateTime": "2020-03-16T20:53:54.460753Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "1976b9981e2900c8172b7d34b4220bdb18c5db42",
+        "internalRef": "301205325"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "accessapproval",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
