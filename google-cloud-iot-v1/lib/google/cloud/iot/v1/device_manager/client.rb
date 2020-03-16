@@ -1320,9 +1320,9 @@ module Google
             # to receive commands, it must:
             # 1) be connected to Cloud IoT Core using the MQTT protocol, and
             # 2) be subscribed to the group of MQTT topics specified by
-            #    /devices/{device-id}/commands/#. This subscription will receive commands
-            #    at the top-level topic /devices/{device-id}/commands as well as commands
-            #    for subfolders, like /devices/{device-id}/commands/subfolder.
+            #    /devices/\\{device-id}/commands/#. This subscription will receive commands
+            #    at the top-level topic /devices/\\{device-id}/commands as well as commands
+            #    for subfolders, like /devices/\\{device-id}/commands/subfolder.
             #    Note that subscribing to specific subfolders is not supported.
             # If the command could not be delivered to the device, this method will
             # return an error; in particular, if the device is not subscribed, this
@@ -1336,9 +1336,9 @@ module Google
             #     to receive commands, it must:
             #     1) be connected to Cloud IoT Core using the MQTT protocol, and
             #     2) be subscribed to the group of MQTT topics specified by
-            #        /devices/{device-id}/commands/#. This subscription will receive commands
-            #        at the top-level topic /devices/{device-id}/commands as well as commands
-            #        for subfolders, like /devices/{device-id}/commands/subfolder.
+            #        /devices/\\{device-id}/commands/#. This subscription will receive commands
+            #        at the top-level topic /devices/\\{device-id}/commands as well as commands
+            #        for subfolders, like /devices/\\{device-id}/commands/subfolder.
             #        Note that subscribing to specific subfolders is not supported.
             #     If the command could not be delivered to the device, this method will
             #     return an error; in particular, if the device is not subscribed, this
@@ -1357,8 +1357,8 @@ module Google
             #     Required. The command data to send to the device.
             #   @param subfolder [String]
             #     Optional subfolder for the command. If empty, the command will be delivered
-            #     to the /devices/{device-id}/commands topic, otherwise it will be delivered
-            #     to the /devices/{device-id}/commands/\\{subfolder} topic. Multi-level
+            #     to the /devices/\\{device-id}/commands topic, otherwise it will be delivered
+            #     to the /devices/\\{device-id}/commands/\\{subfolder} topic. Multi-level
             #     subfolders are allowed. This field must not have more than 256 characters,
             #     and must not contain any MQTT wildcards ("+" or "#") or null characters.
             #
