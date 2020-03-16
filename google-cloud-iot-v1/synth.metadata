@@ -1,0 +1,25 @@
+{
+  "updateTime": "2020-03-16T20:55:49.024489Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "1976b9981e2900c8172b7d34b4220bdb18c5db42",
+        "internalRef": "301205325",
+        "log": "1976b9981e2900c8172b7d34b4220bdb18c5db42\nCloud DLP api update. Adds missing fields to Finding and adds support for hybrid jobs.\n\nPiperOrigin-RevId: 301205325\n\nae78682c05e864d71223ce22532219813b0245ac\nfix: several sample code blocks in comments are now properly indented for markdown\n\nPiperOrigin-RevId: 301185150\n\ndcd171d04bda5b67db13049320f97eca3ace3731\nPublish Media Translation API V1Beta1\n\nPiperOrigin-RevId: 301180096\n\nff1713453b0fbc5a7544a1ef6828c26ad21a370e\nAdd protos and BUILD rules for v1 API.\n\nPiperOrigin-RevId: 301179394\n\n"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "iot",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}

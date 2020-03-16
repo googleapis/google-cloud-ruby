@@ -1,0 +1,35 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "lib/**/*_pb.rb"
+    - "proto_docs/**/*"
+    - "test/**/*"
+
+Metrics/AbcSize:
+  Exclude:
+    - "lib/google/cloud/iot/v1/device_manager/*.rb"
+Metrics/ClassLength:
+  Exclude:
+    - "lib/google/cloud/iot/v1/device_manager/*.rb"
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/google/cloud/iot/v1/device_manager/*.rb"
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/iot/v1/device_manager/*.rb"
+    - "google-cloud-iot-v1.gemspec"
+Metrics/MethodLength:
+  Exclude:
+    - "lib/google/cloud/iot/v1/device_manager/*.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/google/cloud/iot/v1/device_manager/*.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-iot-v1.rb"
+Style/CaseEquality:
+  Exclude:
+    - "lib/google/cloud/iot/v1/device_manager/*.rb"
+    - "lib/google/cloud/iot/v1.rb"
