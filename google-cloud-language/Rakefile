@@ -111,6 +111,10 @@ end
 
 namespace :samples do
   task :test_latest do
+    raise "Not Implemented"
+  end
+
+  task :test_master do
     Dir.chdir "samples" do
       Bundler.with_clean_env do
         `bundle update`
@@ -120,10 +124,6 @@ namespace :samples do
         puts "tests took #{(end_time - start_time).to_i} seconds"
       end
     end
-  end
-
-  task :test_master do
-    raise "Not Implemented"
   end
 
   def run_task task
@@ -167,6 +167,8 @@ namespace :ci do
     Rake::Task[:ci].invoke
     header "google-cloud-language acceptance", "*"
     Rake::Task[:acceptance].invoke
+    header "google-cloud-language samples acceptance", "*"
+    Rake::Task[:samples:test_master].invoke
   end
   task :a do
     # This is a handy shortcut to save typing

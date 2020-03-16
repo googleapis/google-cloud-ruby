@@ -1,4 +1,4 @@
-# Copyright 2016 Google, Inc
+# Copyright 2020 Google, LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
 
 source "https://rubygems.org"
 
-gem "google-cloud-language"
+gem "google-cloud-language", path: "../../google-cloud-language"
 
 group :test do
-  gem "google-cloud-storage"
+  gem "google-cloud-storage", path: "../../google-cloud-storage"
   gem "minitest", "~> 5.11.3"
 end
