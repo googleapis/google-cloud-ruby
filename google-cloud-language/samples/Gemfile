@@ -15,6 +15,8 @@
 source "https://rubygems.org"
 
 gem "google-cloud-language", path: "../../google-cloud-language"
+gem "google-cloud-language-v1", path: "../../google-cloud-language-v1"
+gem "google-cloud-language-v1beta2", path: "../../google-cloud-language-v1beta2"
 
 group :test do
   gem "google-cloud-storage", path: "../../google-cloud-storage"
