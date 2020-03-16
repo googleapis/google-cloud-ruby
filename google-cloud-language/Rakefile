@@ -168,7 +168,7 @@ namespace :ci do
     header "google-cloud-language acceptance", "*"
     Rake::Task[:acceptance].invoke
     header "google-cloud-language samples acceptance", "*"
-    Rake::Task[:samples:test_master].invoke
+    Rake::Task["samples:test_master"].invoke
   end
   task :a do
     # This is a handy shortcut to save typing
