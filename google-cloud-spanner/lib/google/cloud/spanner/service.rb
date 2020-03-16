@@ -303,7 +303,8 @@ module Google
 
         def execute_streaming_sql session_name, sql, transaction: nil,
                                   params: nil, types: nil, resume_token: nil,
-                                  partition_token: nil, seqno: nil
+                                  partition_token: nil, seqno: nil,
+                                  query_options: nil
           opts = default_options_from_session session_name
           execute do
             service.execute_streaming_sql \
@@ -313,6 +314,7 @@ module Google
                                  resume_token: resume_token,
                                  partition_token: partition_token,
                                  seqno: seqno,
+                                 query_options: query_options,
                                  options: opts
           end
         end

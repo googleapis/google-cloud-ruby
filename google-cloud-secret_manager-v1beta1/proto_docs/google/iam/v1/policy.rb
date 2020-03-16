@@ -31,9 +31,9 @@ module Google
       #
       # **Example**
       #
-      #     \\\{
+      #     {
       #       "bindings": [
-      #         \\\{
+      #         {
       #           "role": "roles/owner",
       #           "members": [
       #             "user:mike@example.com",
@@ -41,13 +41,13 @@ module Google
       #             "domain:google.com",
       #             "serviceAccount:my-other-app@appspot.gserviceaccount.com",
       #           ]
-      #         \},
-      #         \\\{
+      #         },
+      #         {
       #           "role": "roles/viewer",
       #           "members": ["user:sean@example.com"]
-      #         \}
+      #         }
       #       ]
-      #     \}
+      #     }
       #
       # For a description of IAM and its features, see the
       # [IAM developer's guide](https://cloud.google.com/iam).
@@ -93,17 +93,17 @@ module Google
       #     * `allAuthenticatedUsers`: A special identifier that represents anyone
       #        who is authenticated with a Google account or a service account.
       #
-      #     * `user:\\\{emailid\}`: An email address that represents a specific Google
+      #     * `user:{emailid}`: An email address that represents a specific Google
       #        account. For example, `alice@gmail.com` or `joe@example.com`.
       #
       #
-      #     * `serviceAccount:\\\{emailid\}`: An email address that represents a service
+      #     * `serviceAccount:{emailid}`: An email address that represents a service
       #        account. For example, `my-other-app@appspot.gserviceaccount.com`.
       #
-      #     * `group:\\\{emailid\}`: An email address that represents a Google group.
+      #     * `group:{emailid}`: An email address that represents a Google group.
       #        For example, `admins@example.com`.
       #
-      #     * `domain:\\\{domain\}`: A Google Apps domain name that represents all the
+      #     * `domain:{domain}`: A Google Apps domain name that represents all the
       #        users of that domain. For example, `google.com` or `example.com`.
       class Binding
         include Google::Protobuf::MessageExts

@@ -145,18 +145,18 @@ module Google
         #     This is intended to be an exact match per filter. To perform advanced
         #     matching, use path_value_matchers.
         #
-        #     * Example: \\\{
+        #     * Example: {
         #       "/versions/*/name" : "it-123"
         #       "/versions/*/targetSize/percent": 20
-        #      \}
-        #     * Example: \\\{
+        #      }
+        #     * Example: {
         #       "/bindings/*/role": "roles/admin"
         #       "/bindings/*/condition" : null
-        #      \}
-        #     * Example: \\\{
+        #      }
+        #     * Example: {
         #       "/bindings/*/role": "roles/admin"
         #       "/bindings/*/members/*" : ["x@google.com", "y@google.com"]
-        #      \}
+        #      }
         #     When both path_filters and path_value_matchers are set, an implicit AND
         #     must be performed.
         # @!attribute [rw] path_value_matchers

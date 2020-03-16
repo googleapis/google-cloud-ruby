@@ -3,8 +3,6 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "google-cloud-language.gemspec"
-    - "lib/google/**/*"
     - "Rakefile"
     - "test/**/*"
     - "acceptance/**/*"
@@ -13,3 +11,7 @@ Metrics/BlockLength:
     - "samples/acceptance/*.rb"
 Documentation:
   Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - lib/google-cloud-language.rb

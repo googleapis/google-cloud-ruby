@@ -67,7 +67,45 @@ module Google
                                   break parent_const.configure if parent_const&.respond_to? :configure
                                   namespace.pop
                                 end
-                Client::Configuration.new parent_config
+                default_config = Client::Configuration.new parent_config
+
+                default_config.rpcs.list_secrets.timeout = 60.0
+
+                default_config.rpcs.create_secret.timeout = 60.0
+
+                default_config.rpcs.add_secret_version.timeout = 60.0
+
+                default_config.rpcs.get_secret.timeout = 60.0
+
+                default_config.rpcs.update_secret.timeout = 60.0
+
+                default_config.rpcs.delete_secret.timeout = 60.0
+
+                default_config.rpcs.list_secret_versions.timeout = 60.0
+
+                default_config.rpcs.get_secret_version.timeout = 60.0
+
+                default_config.rpcs.access_secret_version.timeout = 60.0
+                default_config.rpcs.access_secret_version.retry_policy = {
+                  initial_delay: 1.0,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE", "UNKNOWN"]
+                }
+
+                default_config.rpcs.disable_secret_version.timeout = 60.0
+
+                default_config.rpcs.enable_secret_version.timeout = 60.0
+
+                default_config.rpcs.destroy_secret_version.timeout = 60.0
+
+                default_config.rpcs.set_iam_policy.timeout = 60.0
+
+                default_config.rpcs.get_iam_policy.timeout = 60.0
+
+                default_config.rpcs.test_iam_permissions.timeout = 60.0
+
+                default_config
               end
               yield @configure if block_given?
               @configure
@@ -947,7 +985,7 @@ module Google
             #   @param resource [String]
             #     REQUIRED: The resource for which the policy is being specified.
             #     `resource` is usually specified as a path. For example, a Project
-            #     resource is specified as `projects/\\\{project\}`.
+            #     resource is specified as `projects/{project}`.
             #   @param policy [Google::Iam::V1::Policy | Hash]
             #     REQUIRED: The complete policy to be applied to the `resource`. The size of
             #     the policy is limited to a few 10s of KB. An empty policy is a
@@ -1015,7 +1053,7 @@ module Google
             #   @param resource [String]
             #     REQUIRED: The resource for which the policy is being requested.
             #     `resource` is usually specified as a path. For example, a Project
-            #     resource is specified as `projects/\\\{project\}`.
+            #     resource is specified as `projects/{project}`.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1088,7 +1126,7 @@ module Google
             #   @param resource [String]
             #     REQUIRED: The resource for which the policy detail is being requested.
             #     `resource` is usually specified as a path. For example, a Project
-            #     resource is specified as `projects/\\\{project\}`.
+            #     resource is specified as `projects/{project}`.
             #   @param permissions [Array<String>]
             #     The set of permissions to check for the `resource`. Permissions with
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more

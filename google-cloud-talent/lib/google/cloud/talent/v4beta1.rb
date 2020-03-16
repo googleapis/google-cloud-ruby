@@ -13,14 +13,14 @@
 # limitations under the License.
 
 
+require "google/cloud/talent/v4beta1/tenant_service_client"
+require "google/cloud/talent/v4beta1/profile_service_client"
+require "google/cloud/talent/v4beta1/event_service_client"
 require "google/cloud/talent/v4beta1/application_service_client"
 require "google/cloud/talent/v4beta1/helpers"
 require "google/cloud/talent/v4beta1/company_service_client"
-require "google/cloud/talent/v4beta1/completion_client"
-require "google/cloud/talent/v4beta1/event_service_client"
 require "google/cloud/talent/v4beta1/job_service_client"
-require "google/cloud/talent/v4beta1/profile_service_client"
-require "google/cloud/talent/v4beta1/tenant_service_client"
+require "google/cloud/talent/v4beta1/completion_client"
 require "google/cloud/talent/v4beta1/common_pb"
 require "google/cloud/talent/v4beta1/job_service_pb"
 
@@ -87,6 +87,199 @@ module Google
       #
       module V4beta1
         # rubocop:enable LineLength
+
+        module TenantService
+          ##
+          # A service that handles tenant management, including CRUD and enumeration.
+          #
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
+          #   A Hash for call options for each method. See
+          #   Google::Gax#construct_settings for the structure of
+          #   this data. Falls back to the default config if not specified
+          #   or the specified config is missing data points.
+          # @param timeout [Numeric]
+          #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param service_address [String]
+          #   Override for the service hostname, or `nil` to leave as the default.
+          # @param service_port [Integer]
+          #   Override for the service port, or `nil` to leave as the default.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
+          def self.new \
+              credentials: nil,
+              scopes: nil,
+              client_config: nil,
+              timeout: nil,
+              metadata: nil,
+              service_address: nil,
+              service_port: nil,
+              exception_transformer: nil,
+              lib_name: nil,
+              lib_version: nil
+            kwargs = {
+              credentials: credentials,
+              scopes: scopes,
+              client_config: client_config,
+              timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
+              lib_name: lib_name,
+              service_address: service_address,
+              service_port: service_port,
+              lib_version: lib_version
+            }.select { |_, v| v != nil }
+            Google::Cloud::Talent::V4beta1::TenantServiceClient.new(**kwargs)
+          end
+        end
+
+        module ProfileService
+          ##
+          # A service that handles profile management, including profile CRUD,
+          # enumeration and search.
+          #
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
+          #   A Hash for call options for each method. See
+          #   Google::Gax#construct_settings for the structure of
+          #   this data. Falls back to the default config if not specified
+          #   or the specified config is missing data points.
+          # @param timeout [Numeric]
+          #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param service_address [String]
+          #   Override for the service hostname, or `nil` to leave as the default.
+          # @param service_port [Integer]
+          #   Override for the service port, or `nil` to leave as the default.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
+          def self.new \
+              credentials: nil,
+              scopes: nil,
+              client_config: nil,
+              timeout: nil,
+              metadata: nil,
+              service_address: nil,
+              service_port: nil,
+              exception_transformer: nil,
+              lib_name: nil,
+              lib_version: nil
+            kwargs = {
+              credentials: credentials,
+              scopes: scopes,
+              client_config: client_config,
+              timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
+              lib_name: lib_name,
+              service_address: service_address,
+              service_port: service_port,
+              lib_version: lib_version
+            }.select { |_, v| v != nil }
+            Google::Cloud::Talent::V4beta1::ProfileServiceClient.new(**kwargs)
+          end
+        end
+
+        module Event
+          ##
+          # A service handles client event report.
+          #
+          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
+          #   Provides the means for authenticating requests made by the client. This parameter can
+          #   be many types.
+          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
+          #   authenticating requests made by this client.
+          #   A `String` will be treated as the path to the keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
+          #   credentials for this client.
+          #   A `GRPC::Core::Channel` will be used to make calls through.
+          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
+          #   should already be composed with a `GRPC::Core::CallCredentials` object.
+          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
+          #   metadata for requests, generally, to give OAuth credentials.
+          # @param scopes [Array<String>]
+          #   The OAuth scopes for this service. This parameter is ignored if
+          #   an updater_proc is supplied.
+          # @param client_config [Hash]
+          #   A Hash for call options for each method. See
+          #   Google::Gax#construct_settings for the structure of
+          #   this data. Falls back to the default config if not specified
+          #   or the specified config is missing data points.
+          # @param timeout [Numeric]
+          #   The default timeout, in seconds, for calls made through this client.
+          # @param metadata [Hash]
+          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
+          # @param service_address [String]
+          #   Override for the service hostname, or `nil` to leave as the default.
+          # @param service_port [Integer]
+          #   Override for the service port, or `nil` to leave as the default.
+          # @param exception_transformer [Proc]
+          #   An optional proc that intercepts any exceptions raised during an API call to inject
+          #   custom error handling.
+          def self.new \
+              credentials: nil,
+              scopes: nil,
+              client_config: nil,
+              timeout: nil,
+              metadata: nil,
+              service_address: nil,
+              service_port: nil,
+              exception_transformer: nil,
+              lib_name: nil,
+              lib_version: nil
+            kwargs = {
+              credentials: credentials,
+              scopes: scopes,
+              client_config: client_config,
+              timeout: timeout,
+              metadata: metadata,
+              exception_transformer: exception_transformer,
+              lib_name: lib_name,
+              service_address: service_address,
+              service_port: service_port,
+              lib_version: lib_version
+            }.select { |_, v| v != nil }
+            Google::Cloud::Talent::V4beta1::EventServiceClient.new(**kwargs)
+          end
+        end
 
         module ApplicationService
           ##
@@ -217,134 +410,6 @@ module Google
           end
         end
 
-        module Completion
-          ##
-          # A service handles auto completion.
-          #
-          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-          #   Provides the means for authenticating requests made by the client. This parameter can
-          #   be many types.
-          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-          #   authenticating requests made by this client.
-          #   A `String` will be treated as the path to the keyfile to be used for the construction of
-          #   credentials for this client.
-          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-          #   credentials for this client.
-          #   A `GRPC::Core::Channel` will be used to make calls through.
-          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-          #   should already be composed with a `GRPC::Core::CallCredentials` object.
-          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-          #   metadata for requests, generally, to give OAuth credentials.
-          # @param scopes [Array<String>]
-          #   The OAuth scopes for this service. This parameter is ignored if
-          #   an updater_proc is supplied.
-          # @param client_config [Hash]
-          #   A Hash for call options for each method. See
-          #   Google::Gax#construct_settings for the structure of
-          #   this data. Falls back to the default config if not specified
-          #   or the specified config is missing data points.
-          # @param timeout [Numeric]
-          #   The default timeout, in seconds, for calls made through this client.
-          # @param metadata [Hash]
-          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
-          # @param service_address [String]
-          #   Override for the service hostname, or `nil` to leave as the default.
-          # @param service_port [Integer]
-          #   Override for the service port, or `nil` to leave as the default.
-          # @param exception_transformer [Proc]
-          #   An optional proc that intercepts any exceptions raised during an API call to inject
-          #   custom error handling.
-          def self.new \
-              credentials: nil,
-              scopes: nil,
-              client_config: nil,
-              timeout: nil,
-              metadata: nil,
-              service_address: nil,
-              service_port: nil,
-              exception_transformer: nil,
-              lib_name: nil,
-              lib_version: nil
-            kwargs = {
-              credentials: credentials,
-              scopes: scopes,
-              client_config: client_config,
-              timeout: timeout,
-              metadata: metadata,
-              exception_transformer: exception_transformer,
-              lib_name: lib_name,
-              service_address: service_address,
-              service_port: service_port,
-              lib_version: lib_version
-            }.select { |_, v| v != nil }
-            Google::Cloud::Talent::V4beta1::CompletionClient.new(**kwargs)
-          end
-        end
-
-        module Event
-          ##
-          # A service handles client event report.
-          #
-          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-          #   Provides the means for authenticating requests made by the client. This parameter can
-          #   be many types.
-          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-          #   authenticating requests made by this client.
-          #   A `String` will be treated as the path to the keyfile to be used for the construction of
-          #   credentials for this client.
-          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-          #   credentials for this client.
-          #   A `GRPC::Core::Channel` will be used to make calls through.
-          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-          #   should already be composed with a `GRPC::Core::CallCredentials` object.
-          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-          #   metadata for requests, generally, to give OAuth credentials.
-          # @param scopes [Array<String>]
-          #   The OAuth scopes for this service. This parameter is ignored if
-          #   an updater_proc is supplied.
-          # @param client_config [Hash]
-          #   A Hash for call options for each method. See
-          #   Google::Gax#construct_settings for the structure of
-          #   this data. Falls back to the default config if not specified
-          #   or the specified config is missing data points.
-          # @param timeout [Numeric]
-          #   The default timeout, in seconds, for calls made through this client.
-          # @param metadata [Hash]
-          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
-          # @param service_address [String]
-          #   Override for the service hostname, or `nil` to leave as the default.
-          # @param service_port [Integer]
-          #   Override for the service port, or `nil` to leave as the default.
-          # @param exception_transformer [Proc]
-          #   An optional proc that intercepts any exceptions raised during an API call to inject
-          #   custom error handling.
-          def self.new \
-              credentials: nil,
-              scopes: nil,
-              client_config: nil,
-              timeout: nil,
-              metadata: nil,
-              service_address: nil,
-              service_port: nil,
-              exception_transformer: nil,
-              lib_name: nil,
-              lib_version: nil
-            kwargs = {
-              credentials: credentials,
-              scopes: scopes,
-              client_config: client_config,
-              timeout: timeout,
-              metadata: metadata,
-              exception_transformer: exception_transformer,
-              lib_name: lib_name,
-              service_address: service_address,
-              service_port: service_port,
-              lib_version: lib_version
-            }.select { |_, v| v != nil }
-            Google::Cloud::Talent::V4beta1::EventServiceClient.new(**kwargs)
-          end
-        end
-
         module JobService
           ##
           # A service handles job management, including job CRUD, enumeration and search.
@@ -409,10 +474,9 @@ module Google
           end
         end
 
-        module ProfileService
+        module Completion
           ##
-          # A service that handles profile management, including profile CRUD,
-          # enumeration and search.
+          # A service handles auto completion.
           #
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
@@ -470,71 +534,7 @@ module Google
               service_port: service_port,
               lib_version: lib_version
             }.select { |_, v| v != nil }
-            Google::Cloud::Talent::V4beta1::ProfileServiceClient.new(**kwargs)
-          end
-        end
-
-        module TenantService
-          ##
-          # A service that handles tenant management, including CRUD and enumeration.
-          #
-          # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
-          #   Provides the means for authenticating requests made by the client. This parameter can
-          #   be many types.
-          #   A `Google::Auth::Credentials` uses a the properties of its represented keyfile for
-          #   authenticating requests made by this client.
-          #   A `String` will be treated as the path to the keyfile to be used for the construction of
-          #   credentials for this client.
-          #   A `Hash` will be treated as the contents of a keyfile to be used for the construction of
-          #   credentials for this client.
-          #   A `GRPC::Core::Channel` will be used to make calls through.
-          #   A `GRPC::Core::ChannelCredentials` for the setting up the RPC client. The channel credentials
-          #   should already be composed with a `GRPC::Core::CallCredentials` object.
-          #   A `Proc` will be used as an updater_proc for the Grpc channel. The proc transforms the
-          #   metadata for requests, generally, to give OAuth credentials.
-          # @param scopes [Array<String>]
-          #   The OAuth scopes for this service. This parameter is ignored if
-          #   an updater_proc is supplied.
-          # @param client_config [Hash]
-          #   A Hash for call options for each method. See
-          #   Google::Gax#construct_settings for the structure of
-          #   this data. Falls back to the default config if not specified
-          #   or the specified config is missing data points.
-          # @param timeout [Numeric]
-          #   The default timeout, in seconds, for calls made through this client.
-          # @param metadata [Hash]
-          #   Default metadata to be sent with each request. This can be overridden on a per call basis.
-          # @param service_address [String]
-          #   Override for the service hostname, or `nil` to leave as the default.
-          # @param service_port [Integer]
-          #   Override for the service port, or `nil` to leave as the default.
-          # @param exception_transformer [Proc]
-          #   An optional proc that intercepts any exceptions raised during an API call to inject
-          #   custom error handling.
-          def self.new \
-              credentials: nil,
-              scopes: nil,
-              client_config: nil,
-              timeout: nil,
-              metadata: nil,
-              service_address: nil,
-              service_port: nil,
-              exception_transformer: nil,
-              lib_name: nil,
-              lib_version: nil
-            kwargs = {
-              credentials: credentials,
-              scopes: scopes,
-              client_config: client_config,
-              timeout: timeout,
-              metadata: metadata,
-              exception_transformer: exception_transformer,
-              lib_name: lib_name,
-              service_address: service_address,
-              service_port: service_port,
-              lib_version: lib_version
-            }.select { |_, v| v != nil }
-            Google::Cloud::Talent::V4beta1::TenantServiceClient.new(**kwargs)
+            Google::Cloud::Talent::V4beta1::CompletionClient.new(**kwargs)
           end
         end
       end

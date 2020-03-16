@@ -246,7 +246,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   event_client = Google::Cloud::Talent::Event.new(version: :v4beta1)
-          #   formatted_parent = Google::Cloud::Talent::V4beta1::EventServiceClient.tenant_path("[PROJECT]", "[TENANT]")
+          #   formatted_parent = Google::Cloud::Talent::V4beta1::EventServiceClient.project_path("[PROJECT]")
           #
           #   # TODO: Initialize `client_event`:
           #   client_event = {}

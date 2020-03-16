@@ -86,7 +86,8 @@ module Google
             #
             # The Cloud Spanner Database Admin API can be used to create, drop, and
             # list databases. It also enables updating the schema of pre-existing
-            # databases.
+            # databases. It can be also used to create, delete and list backups for a
+            # database and to restore from an existing backup.
             #
             # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
             #   Provides the means for authenticating requests made by the client. This parameter can

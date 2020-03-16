@@ -118,6 +118,14 @@ module Google
         #     specified using a {Fields} object.
         #
         #   Types are optional.
+        # @param [Hash] query_options A hash of values to specify the custom
+        #   query options for executing SQL query. Query options are optional.
+        #   The following settings can be provided:
+        #
+        #   * `:optimizer_version` (String) The version of optimizer to use.
+        #     Empty to use database default. "latest" to use the latest
+        #     available optimizer version.
+        #
         # @return [Google::Cloud::Spanner::Results] The results of the query
         #   execution.
         #
@@ -220,13 +228,28 @@ module Google
         #     end
         #   end
         #
-        def execute_query sql, params: nil, types: nil
+        # @example Query using query options:
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   db = spanner.client "my-instance", "my-database"
+        #
+        #   db.snapshot do |snp|
+        #     results = snp.execute_query \
+        #       "SELECT * FROM users", query_options: { optimizer_version: "1" }
+        #
+        #     results.rows.each do |row|
+        #       puts "User #{row[:id]} is #{row[:name]}"
+        #     end
+        #   end
+        #
+        def execute_query sql, params: nil, types: nil, query_options: nil
           ensure_session!
 
           params, types = Convert.to_input_params_and_types params, types
-
           session.execute_query sql, params: params, types: types,
-                                     transaction: tx_selector
+                                     transaction: tx_selector,
+                                     query_options: query_options
         end
         alias execute execute_query
         alias query execute_query
