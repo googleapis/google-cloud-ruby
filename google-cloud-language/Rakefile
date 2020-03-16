@@ -117,21 +117,10 @@ namespace :samples do
   task :test_master do
     Dir.chdir "samples" do
       Bundler.with_clean_env do
-        `bundle update`
-        start_time = Time.now
-        run_task "samples_test_latest"
-        end_time = Time.now
-        puts "tests took #{(end_time - start_time).to_i} seconds"
+        sh "bundle update"
+        sh "bundle exec rake test_master"
       end
     end
-  end
-
-  def run_task task
-    Rake::TestTask.new task do |t|
-      t.test_files = FileList["**/*_test.rb"]
-      t.warning = false
-    end
-    Rake::Task[task].invoke
   end
 end
 

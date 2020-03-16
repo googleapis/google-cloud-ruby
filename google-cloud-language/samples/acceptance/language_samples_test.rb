@@ -180,10 +180,4 @@ describe "Language Snippets" do
       assert_includes out, "Computers & Electronics"
     end
   end
-
-  describe "fails" do
-    it "raises" do
-      raise "nooooo"
-    end
-  end
 end
