@@ -1,5 +1,19 @@
 # Release History
 
+### 0.10.0 / 2020-03-16
+
+#### Features
+
+* update path helpers
+  * Add ApplicationServiceClient.company_without_tenant_path
+  * Add ApplicationServiceClient.company_path
+  * Add CompletionClient.project_path
+  * Add EventServiceClient.project_path
+  * Add JobServiceClient.project_path
+  * Deprecate CompletionClient.tenant_path
+  * Deprecate EventServiceClient.tenant_path
+  * Deprecate JobServiceClient.tenant_path
+
 ### 0.9.0 / 2020-03-11
 
 #### Features
