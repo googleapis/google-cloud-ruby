@@ -530,6 +530,22 @@ module Google
                 {'name' => request.name}
               end
             )
+            @finish_dlp_job = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:finish_dlp_job),
+              defaults["finish_dlp_job"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @hybrid_inspect_dlp_job = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:hybrid_inspect_dlp_job),
+              defaults["hybrid_inspect_dlp_job"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @list_job_triggers = Google::Gax.create_api_call(
               @dlp_service_stub.method(:list_job_triggers),
               defaults["list_job_triggers"],
@@ -549,6 +565,14 @@ module Google
             @delete_job_trigger = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_job_trigger),
               defaults["delete_job_trigger"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @hybrid_inspect_job_trigger = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:hybrid_inspect_job_trigger),
+              defaults["hybrid_inspect_job_trigger"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'name' => request.name}
@@ -1003,8 +1027,8 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param name [String]
-          #   Required. Resource name of organization and inspectTemplate to be updated, for
-          #   example `organizations/433245324/inspectTemplates/432452342` or
+          #   Required. Resource name of organization and inspectTemplate to be updated,
+          #   for example `organizations/433245324/inspectTemplates/432452342` or
           #   projects/project-id/inspectTemplates/432452342.
           # @param inspect_template [Google::Privacy::Dlp::V2::InspectTemplate | Hash]
           #   New InspectTemplate value.
@@ -1048,8 +1072,8 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param name [String]
-          #   Required. Resource name of the organization and inspectTemplate to be read, for
-          #   example `organizations/433245324/inspectTemplates/432452342` or
+          #   Required. Resource name of the organization and inspectTemplate to be read,
+          #   for example `organizations/433245324/inspectTemplates/432452342` or
           #   projects/project-id/inspectTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1157,9 +1181,9 @@ module Google
           # See https://cloud.google.com/dlp/docs/creating-templates to learn more.
           #
           # @param name [String]
-          #   Required. Resource name of the organization and inspectTemplate to be deleted, for
-          #   example `organizations/433245324/inspectTemplates/432452342` or
-          #   projects/project-id/inspectTemplates/432452342.
+          #   Required. Resource name of the organization and inspectTemplate to be
+          #   deleted, for example `organizations/433245324/inspectTemplates/432452342`
+          #   or projects/project-id/inspectTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1243,8 +1267,9 @@ module Google
           # more.
           #
           # @param name [String]
-          #   Required. Resource name of organization and deidentify template to be updated, for
-          #   example `organizations/433245324/deidentifyTemplates/432452342` or
+          #   Required. Resource name of organization and deidentify template to be
+          #   updated, for example
+          #   `organizations/433245324/deidentifyTemplates/432452342` or
           #   projects/project-id/deidentifyTemplates/432452342.
           # @param deidentify_template [Google::Privacy::Dlp::V2::DeidentifyTemplate | Hash]
           #   New DeidentifyTemplate value.
@@ -1289,9 +1314,9 @@ module Google
           # more.
           #
           # @param name [String]
-          #   Required. Resource name of the organization and deidentify template to be read, for
-          #   example `organizations/433245324/deidentifyTemplates/432452342` or
-          #   projects/project-id/deidentifyTemplates/432452342.
+          #   Required. Resource name of the organization and deidentify template to be
+          #   read, for example `organizations/433245324/deidentifyTemplates/432452342`
+          #   or projects/project-id/deidentifyTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -1401,8 +1426,9 @@ module Google
           # more.
           #
           # @param name [String]
-          #   Required. Resource name of the organization and deidentify template to be deleted,
-          #   for example `organizations/433245324/deidentifyTemplates/432452342` or
+          #   Required. Resource name of the organization and deidentify template to be
+          #   deleted, for example
+          #   `organizations/433245324/deidentifyTemplates/432452342` or
           #   projects/project-id/deidentifyTemplates/432452342.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -1702,6 +1728,84 @@ module Google
             nil
           end
 
+          # Finish a running hybrid DlpJob. Triggers the finalization steps and running
+          # of any enabled actions that have not yet run.
+          # Early access feature is in a pre-release state and might change or have
+          # limited support. For more information, see
+          # https://cloud.google.com/products#product-launch-stages.
+          #
+          # @param name [String]
+          #   Required. The name of the DlpJob resource to be cancelled.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
+          #   dlp_client.finish_dlp_job(formatted_name)
+
+          def finish_dlp_job \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::FinishDlpJobRequest)
+            @finish_dlp_job.call(req, options, &block)
+            nil
+          end
+
+          # Inspect hybrid content and store findings to a job.
+          # To review the findings inspect the job. Inspection will occur
+          # asynchronously.
+          # Early access feature is in a pre-release state and might change or have
+          # limited support. For more information, see
+          # https://cloud.google.com/products#product-launch-stages.
+          #
+          # @param name [String]
+          #   Required. Resource name of the job to execute a hybrid inspect on, for
+          #   example `projects/dlp-test-project/dlpJob/53234423`.
+          # @param hybrid_item [Google::Privacy::Dlp::V2::HybridContentItem | Hash]
+          #   The item to inspect.
+          #   A hash of the same form as `Google::Privacy::Dlp::V2::HybridContentItem`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::HybridInspectResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Privacy::Dlp::V2::HybridInspectResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = dlp_client.hybrid_inspect_dlp_job(name)
+
+          def hybrid_inspect_dlp_job \
+              name,
+              hybrid_item: nil,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              hybrid_item: hybrid_item
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::HybridInspectDlpJobRequest)
+            @hybrid_inspect_dlp_job.call(req, options, &block)
+          end
+
           # Lists job triggers.
           # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
@@ -1873,6 +1977,50 @@ module Google
             nil
           end
 
+          # Inspect hybrid content and store findings to a trigger. The inspection
+          # will be processed asynchronously. To review the findings monitor the
+          # jobs within the trigger.
+          # Early access feature is in a pre-release state and might change or have
+          # limited support. For more information, see
+          # https://cloud.google.com/products#product-launch-stages.
+          #
+          # @param name [String]
+          #   Required. Resource name of the trigger to execute a hybrid inspect on, for
+          #   example `projects/dlp-test-project/jobTriggers/53234423`.
+          # @param hybrid_item [Google::Privacy::Dlp::V2::HybridContentItem | Hash]
+          #   The item to inspect.
+          #   A hash of the same form as `Google::Privacy::Dlp::V2::HybridContentItem`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::HybridInspectResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Privacy::Dlp::V2::HybridInspectResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = dlp_client.hybrid_inspect_job_trigger(name)
+
+          def hybrid_inspect_job_trigger \
+              name,
+              hybrid_item: nil,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              hybrid_item: hybrid_item
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::HybridInspectJobTriggerRequest)
+            @hybrid_inspect_job_trigger.call(req, options, &block)
+          end
+
           # Updates a job trigger.
           # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
           #
@@ -2024,8 +2172,8 @@ module Google
           # learn more.
           #
           # @param name [String]
-          #   Required. Resource name of organization and storedInfoType to be updated, for
-          #   example `organizations/433245324/storedInfoTypes/432452342` or
+          #   Required. Resource name of organization and storedInfoType to be updated,
+          #   for example `organizations/433245324/storedInfoTypes/432452342` or
           #   projects/project-id/storedInfoTypes/432452342.
           # @param config [Google::Privacy::Dlp::V2::StoredInfoTypeConfig | Hash]
           #   Updated configuration for the storedInfoType. If not provided, a new
@@ -2072,8 +2220,8 @@ module Google
           # learn more.
           #
           # @param name [String]
-          #   Required. Resource name of the organization and storedInfoType to be read, for
-          #   example `organizations/433245324/storedInfoTypes/432452342` or
+          #   Required. Resource name of the organization and storedInfoType to be read,
+          #   for example `organizations/433245324/storedInfoTypes/432452342` or
           #   projects/project-id/storedInfoTypes/432452342.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
@@ -2185,8 +2333,8 @@ module Google
           # learn more.
           #
           # @param name [String]
-          #   Required. Resource name of the organization and storedInfoType to be deleted, for
-          #   example `organizations/433245324/storedInfoTypes/432452342` or
+          #   Required. Resource name of the organization and storedInfoType to be
+          #   deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
           #   projects/project-id/storedInfoTypes/432452342.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,

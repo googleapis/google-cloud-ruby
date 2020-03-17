@@ -383,8 +383,11 @@ module Google
         #     Complete BigQuery table reference.
         # @!attribute [rw] identifying_fields
         #   @return [Array<Google::Privacy::Dlp::V2::FieldId>]
-        #     References to fields uniquely identifying rows within the table.
-        #     Nested fields in the format, like `person.birthdate.year`, are allowed.
+        #     Table fields that may uniquely identify a row within the table. When
+        #     `actions.saveFindings.outputConfig.table` is specified, the values of
+        #     columns specified here are available in the output table under
+        #     `location.content_locations.record_location.record_key.id_values`. Nested
+        #     fields such as `person.birthdate.year` are allowed.
         # @!attribute [rw] rows_limit
         #   @return [Integer]
         #     Max number of rows to scan. If the table has more rows than this value, the
@@ -422,13 +425,19 @@ module Google
         # Shared message indicating Cloud storage type.
         # @!attribute [rw] datastore_options
         #   @return [Google::Privacy::Dlp::V2::DatastoreOptions]
-        #     Google Cloud Datastore options specification.
+        #     Google Cloud Datastore options.
         # @!attribute [rw] cloud_storage_options
         #   @return [Google::Privacy::Dlp::V2::CloudStorageOptions]
-        #     Google Cloud Storage options specification.
+        #     Google Cloud Storage options.
         # @!attribute [rw] big_query_options
         #   @return [Google::Privacy::Dlp::V2::BigQueryOptions]
-        #     BigQuery options specification.
+        #     BigQuery options.
+        # @!attribute [rw] hybrid_options
+        #   @return [Google::Privacy::Dlp::V2::HybridOptions]
+        #     Hybrid inspection options.
+        #     Early access feature is in a pre-release state and might change or have
+        #     limited support. For more information, see
+        #     https://cloud.google.com/products#product-launch-stages.
         # @!attribute [rw] timespan_config
         #   @return [Google::Privacy::Dlp::V2::StorageConfig::TimespanConfig]
         class StorageConfig
@@ -466,14 +475,53 @@ module Google
           class TimespanConfig; end
         end
 
+        # Configuration to control jobs where the content being inspected is outside
+        # of Google Cloud Platform.
+        # @!attribute [rw] description
+        #   @return [String]
+        #     A short description of where the data is coming from. Will be stored once
+        #     in the job. 256 max length.
+        # @!attribute [rw] required_finding_label_keys
+        #   @return [Array<String>]
+        #     These are labels that each inspection request must include within their
+        #     'finding_labels' map. Request may contain others, but any missing one of
+        #     these will be rejected.
+        #
+        #     Label keys must be between 1 and 63 characters long and must conform
+        #     to the following regular expression: \[a-z\](https://cloud.google.com\[-a-z0-9\]*\[a-z0-9\])?.
+        #
+        #     No more than 10 keys can be required.
+        # @!attribute [rw] labels
+        #   @return [Hash{String => String}]
+        #     To organize findings, these labels will be added to each finding.
+        #
+        #     Label keys must be between 1 and 63 characters long and must conform
+        #     to the following regular expression: \[a-z\](https://cloud.google.com\[-a-z0-9\]*\[a-z0-9\])?.
+        #
+        #     Label values must be between 0 and 63 characters long and must conform
+        #     to the regular expression (\[a-z\](https://cloud.google.com\[-a-z0-9\]*\[a-z0-9\])?)?.
+        #
+        #     No more than 10 labels can be associated with a given finding.
+        #
+        #     Example: <code>"environment" : "production"</code>
+        #     Example: <code>"pipeline" : "etl"</code>
+        # @!attribute [rw] table_options
+        #   @return [Google::Privacy::Dlp::V2::TableOptions]
+        #     If the container is a table, additional information to make findings
+        #     meaningful such as the columns that are primary keys.
+        class HybridOptions; end
+
         # Row key for identifying a record in BigQuery table.
         # @!attribute [rw] table_reference
         #   @return [Google::Privacy::Dlp::V2::BigQueryTable]
         #     Complete BigQuery table reference.
         # @!attribute [rw] row_number
         #   @return [Integer]
-        #     Absolute number of the row from the beginning of the table at the time
-        #     of scanning.
+        #     Row number inferred at the time the table was scanned. This value is
+        #     nondeterministic, cannot be queried, and may be null for inspection
+        #     jobs. To locate findings within a table, specify
+        #     `inspect_job.storage_config.big_query_options.identifying_fields` in
+        #     `CreateDlpJobRequest`.
         class BigQueryKey; end
 
         # Record key for a finding in Cloud Datastore.
@@ -535,7 +583,7 @@ module Google
         # @!attribute [rw] id_values
         #   @return [Array<String>]
         #     Values of identifying columns in the given row. Order of values matches
-        #     the order of field identifiers specified in the scanning request.
+        #     the order of `identifying_fields` specified in the scanning request.
         class RecordKey; end
 
         # Message defining the location of a BigQuery table. A table is uniquely
@@ -573,6 +621,15 @@ module Google
         #   @return [Google::Privacy::Dlp::V2::FieldId]
         #     Composite key indicating which field contains the entity identifier.
         class EntityId; end
+
+        # Instructions regarding the table content being inspected.
+        # @!attribute [rw] identifying_fields
+        #   @return [Array<Google::Privacy::Dlp::V2::FieldId>]
+        #     The columns that are the primary keys for table objects included in
+        #     ContentItem. A copy of this cell's value will stored alongside alongside
+        #     each finding so that the finding can be traced to the specific row it came
+        #     from. No more than 3 may be provided.
+        class TableOptions; end
 
         # Definitions of file type groups to scan.
         module FileType

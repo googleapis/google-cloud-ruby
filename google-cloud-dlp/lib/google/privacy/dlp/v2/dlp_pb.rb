@@ -91,17 +91,24 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :findings_truncated, :bool, 2
   end
   add_message "google.privacy.dlp.v2.Finding" do
+    optional :name, :string, 14
     optional :quote, :string, 1
     optional :info_type, :message, 2, "google.privacy.dlp.v2.InfoType"
     optional :likelihood, :enum, 3, "google.privacy.dlp.v2.Likelihood"
     optional :location, :message, 4, "google.privacy.dlp.v2.Location"
     optional :create_time, :message, 6, "google.protobuf.Timestamp"
     optional :quote_info, :message, 7, "google.privacy.dlp.v2.QuoteInfo"
+    optional :resource_name, :string, 8
+    optional :trigger_name, :string, 9
+    map :labels, :string, :string, 10
+    optional :job_create_time, :message, 11, "google.protobuf.Timestamp"
+    optional :job_name, :string, 13
   end
   add_message "google.privacy.dlp.v2.Location" do
     optional :byte_range, :message, 1, "google.privacy.dlp.v2.Range"
     optional :codepoint_range, :message, 2, "google.privacy.dlp.v2.Range"
     repeated :content_locations, :message, 7, "google.privacy.dlp.v2.ContentLocation"
+    optional :container, :message, 8, "google.privacy.dlp.v2.Container"
   end
   add_message "google.privacy.dlp.v2.ContentLocation" do
     optional :container_name, :string, 1
@@ -123,6 +130,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.privacy.dlp.v2.TableLocation" do
     optional :row_index, :int64, 1
+  end
+  add_message "google.privacy.dlp.v2.Container" do
+    optional :type, :string, 1
+    optional :project_id, :string, 2
+    optional :full_path, :string, 3
+    optional :root_path, :string, 4
+    optional :relative_path, :string, 5
+    optional :update_time, :message, 6, "google.protobuf.Timestamp"
+    optional :version, :string, 7
   end
   add_message "google.privacy.dlp.v2.Range" do
     optional :start, :int64, 1
@@ -228,6 +244,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :processed_bytes, :int64, 1
     optional :total_estimated_bytes, :int64, 2
     repeated :info_type_stats, :message, 3, "google.privacy.dlp.v2.InfoTypeStats"
+    optional :hybrid_stats, :message, 7, "google.privacy.dlp.v2.HybridInspectStatistics"
+  end
+  add_message "google.privacy.dlp.v2.HybridInspectStatistics" do
+    optional :processed_count, :int64, 1
+    optional :aborted_count, :int64, 2
+    optional :pending_count, :int64, 3
   end
   add_message "google.privacy.dlp.v2.InfoTypeDescription" do
     optional :name, :string, 1
@@ -432,10 +454,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :offset_minutes, :int32, 1
   end
   add_message "google.privacy.dlp.v2.DeidentifyConfig" do
+    optional :transformation_error_handling, :message, 3, "google.privacy.dlp.v2.TransformationErrorHandling"
     oneof :transformation do
       optional :info_type_transformations, :message, 1, "google.privacy.dlp.v2.InfoTypeTransformations"
       optional :record_transformations, :message, 2, "google.privacy.dlp.v2.RecordTransformations"
     end
+  end
+  add_message "google.privacy.dlp.v2.TransformationErrorHandling" do
+    oneof :mode do
+      optional :throw_error, :message, 1, "google.privacy.dlp.v2.TransformationErrorHandling.ThrowError"
+      optional :leave_untransformed, :message, 2, "google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed"
+    end
+  end
+  add_message "google.privacy.dlp.v2.TransformationErrorHandling.ThrowError" do
+  end
+  add_message "google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed" do
   end
   add_message "google.privacy.dlp.v2.PrimitiveTransformation" do
     oneof :transformation do
@@ -625,6 +658,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :recurrence_period_duration, :message, 1, "google.protobuf.Duration"
     end
   end
+  add_message "google.privacy.dlp.v2.Manual" do
+  end
   add_message "google.privacy.dlp.v2.InspectTemplate" do
     optional :name, :string, 1
     optional :display_name, :string, 2
@@ -662,6 +697,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.privacy.dlp.v2.JobTrigger.Trigger" do
     oneof :trigger do
       optional :schedule, :message, 1, "google.privacy.dlp.v2.Schedule"
+      optional :manual, :message, 2, "google.privacy.dlp.v2.Manual"
     end
   end
   add_enum "google.privacy.dlp.v2.JobTrigger.Status" do
@@ -790,6 +826,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :DONE, 3
     value :CANCELED, 4
     value :FAILED, 5
+    value :ACTIVE, 6
   end
   add_message "google.privacy.dlp.v2.GetDlpJobRequest" do
     optional :name, :string, 1
@@ -808,6 +845,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :next_page_token, :string, 2
   end
   add_message "google.privacy.dlp.v2.CancelDlpJobRequest" do
+    optional :name, :string, 1
+  end
+  add_message "google.privacy.dlp.v2.FinishDlpJobRequest" do
     optional :name, :string, 1
   end
   add_message "google.privacy.dlp.v2.DeleteDlpJobRequest" do
@@ -856,6 +896,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :description, :string, 2
     oneof :type do
       optional :large_custom_dictionary, :message, 3, "google.privacy.dlp.v2.LargeCustomDictionaryConfig"
+      optional :dictionary, :message, 4, "google.privacy.dlp.v2.CustomInfoType.Dictionary"
+      optional :regex, :message, 5, "google.privacy.dlp.v2.CustomInfoType.Regex"
     end
   end
   add_message "google.privacy.dlp.v2.StoredInfoTypeStats" do
@@ -902,6 +944,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.privacy.dlp.v2.DeleteStoredInfoTypeRequest" do
     optional :name, :string, 1
+  end
+  add_message "google.privacy.dlp.v2.HybridInspectJobTriggerRequest" do
+    optional :name, :string, 1
+    optional :hybrid_item, :message, 3, "google.privacy.dlp.v2.HybridContentItem"
+  end
+  add_message "google.privacy.dlp.v2.HybridInspectDlpJobRequest" do
+    optional :name, :string, 1
+    optional :hybrid_item, :message, 3, "google.privacy.dlp.v2.HybridContentItem"
+  end
+  add_message "google.privacy.dlp.v2.HybridContentItem" do
+    optional :item, :message, 1, "google.privacy.dlp.v2.ContentItem"
+    optional :finding_details, :message, 2, "google.privacy.dlp.v2.HybridFindingDetails"
+  end
+  add_message "google.privacy.dlp.v2.HybridFindingDetails" do
+    optional :container_details, :message, 1, "google.privacy.dlp.v2.Container"
+    optional :file_offset, :int64, 2
+    optional :row_offset, :int64, 3
+    optional :table_options, :message, 4, "google.privacy.dlp.v2.TableOptions"
+    map :labels, :string, :string, 5
+  end
+  add_message "google.privacy.dlp.v2.HybridInspectResponse" do
   end
   add_enum "google.privacy.dlp.v2.RelationalOperator" do
     value :RELATIONAL_OPERATOR_UNSPECIFIED, 0
@@ -966,6 +1029,7 @@ module Google
         DocumentLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DocumentLocation").msgclass
         RecordLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RecordLocation").msgclass
         TableLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TableLocation").msgclass
+        Container = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Container").msgclass
         Range = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Range").msgclass
         ImageLocation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ImageLocation").msgclass
         BoundingBox = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.BoundingBox").msgclass
@@ -985,6 +1049,7 @@ module Google
         InspectDataSourceDetails = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectDataSourceDetails").msgclass
         InspectDataSourceDetails::RequestedOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectDataSourceDetails.RequestedOptions").msgclass
         InspectDataSourceDetails::Result = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectDataSourceDetails.Result").msgclass
+        HybridInspectStatistics = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.HybridInspectStatistics").msgclass
         InfoTypeDescription = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeDescription").msgclass
         ListInfoTypesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListInfoTypesRequest").msgclass
         ListInfoTypesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListInfoTypesResponse").msgclass
@@ -1024,6 +1089,9 @@ module Google
         DateTime = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DateTime").msgclass
         DateTime::TimeZone = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DateTime.TimeZone").msgclass
         DeidentifyConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DeidentifyConfig").msgclass
+        TransformationErrorHandling = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TransformationErrorHandling").msgclass
+        TransformationErrorHandling::ThrowError = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TransformationErrorHandling.ThrowError").msgclass
+        TransformationErrorHandling::LeaveUntransformed = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TransformationErrorHandling.LeaveUntransformed").msgclass
         PrimitiveTransformation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.PrimitiveTransformation").msgclass
         TimePartConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TimePartConfig").msgclass
         TimePartConfig::TimePart = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TimePartConfig.TimePart").enummodule
@@ -1060,6 +1128,7 @@ module Google
         TransformationSummary::SummaryResult = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TransformationSummary.SummaryResult").msgclass
         TransformationSummary::TransformationResultCode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TransformationSummary.TransformationResultCode").enummodule
         Schedule = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Schedule").msgclass
+        Manual = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Manual").msgclass
         InspectTemplate = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectTemplate").msgclass
         DeidentifyTemplate = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DeidentifyTemplate").msgclass
         Error = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.Error").msgclass
@@ -1094,6 +1163,7 @@ module Google
         ListDlpJobsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListDlpJobsRequest").msgclass
         ListDlpJobsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListDlpJobsResponse").msgclass
         CancelDlpJobRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CancelDlpJobRequest").msgclass
+        FinishDlpJobRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.FinishDlpJobRequest").msgclass
         DeleteDlpJobRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DeleteDlpJobRequest").msgclass
         CreateDeidentifyTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CreateDeidentifyTemplateRequest").msgclass
         UpdateDeidentifyTemplateRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest").msgclass
@@ -1113,6 +1183,11 @@ module Google
         ListStoredInfoTypesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListStoredInfoTypesRequest").msgclass
         ListStoredInfoTypesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListStoredInfoTypesResponse").msgclass
         DeleteStoredInfoTypeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DeleteStoredInfoTypeRequest").msgclass
+        HybridInspectJobTriggerRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.HybridInspectJobTriggerRequest").msgclass
+        HybridInspectDlpJobRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.HybridInspectDlpJobRequest").msgclass
+        HybridContentItem = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.HybridContentItem").msgclass
+        HybridFindingDetails = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.HybridFindingDetails").msgclass
+        HybridInspectResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.HybridInspectResponse").msgclass
         RelationalOperator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RelationalOperator").enummodule
         MatchingType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.MatchingType").enummodule
         ContentOption = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ContentOption").enummodule

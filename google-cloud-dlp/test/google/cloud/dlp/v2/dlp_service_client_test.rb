@@ -1537,6 +1537,148 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
     end
   end
 
+  describe 'finish_dlp_job' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#finish_dlp_job."
+
+    it 'invokes finish_dlp_job without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::FinishDlpJobRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:finish_dlp_job, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("finish_dlp_job")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          response = client.finish_dlp_job(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.finish_dlp_job(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes finish_dlp_job with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::FinishDlpJobRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:finish_dlp_job, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("finish_dlp_job")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.finish_dlp_job(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'hybrid_inspect_dlp_job' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#hybrid_inspect_dlp_job."
+
+    it 'invokes hybrid_inspect_dlp_job without error' do
+      # Create request parameters
+      name = ''
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Privacy::Dlp::V2::HybridInspectResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::HybridInspectDlpJobRequest, request)
+        assert_equal(name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:hybrid_inspect_dlp_job, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("hybrid_inspect_dlp_job")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          response = client.hybrid_inspect_dlp_job(name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.hybrid_inspect_dlp_job(name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes hybrid_inspect_dlp_job with error' do
+      # Create request parameters
+      name = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::HybridInspectDlpJobRequest, request)
+        assert_equal(name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:hybrid_inspect_dlp_job, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("hybrid_inspect_dlp_job")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.hybrid_inspect_dlp_job(name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'list_job_triggers' do
     custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#list_job_triggers."
 
@@ -1749,6 +1891,79 @@ describe Google::Cloud::Dlp::V2::DlpServiceClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.delete_job_trigger(name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'hybrid_inspect_job_trigger' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Dlp::V2::DlpServiceClient#hybrid_inspect_job_trigger."
+
+    it 'invokes hybrid_inspect_job_trigger without error' do
+      # Create request parameters
+      name = ''
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Privacy::Dlp::V2::HybridInspectResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::HybridInspectJobTriggerRequest, request)
+        assert_equal(name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:hybrid_inspect_job_trigger, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("hybrid_inspect_job_trigger")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          response = client.hybrid_inspect_job_trigger(name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.hybrid_inspect_job_trigger(name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes hybrid_inspect_job_trigger with error' do
+      # Create request parameters
+      name = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Privacy::Dlp::V2::HybridInspectJobTriggerRequest, request)
+        assert_equal(name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:hybrid_inspect_job_trigger, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockDlpServiceCredentials_v2.new("hybrid_inspect_job_trigger")
+
+      Google::Privacy::Dlp::V2::DlpService::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Dlp::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Dlp.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.hybrid_inspect_job_trigger(name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
