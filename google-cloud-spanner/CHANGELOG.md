@@ -1,5 +1,13 @@
 # Release History
 
+### 1.15.0 / 2020-03-15
+
+#### Features
+
+* Added support for query options ([#4907](https://www.github.com/googleapis/google-cloud-ruby/issues/4907))
+  * Added support for specifying the query optimizer version.
+* Support separate project setting for quota/billing
+
 ### 1.14.0 / 2020-02-18
 
 #### Features
