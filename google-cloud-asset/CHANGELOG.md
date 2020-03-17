@@ -4,8 +4,7 @@
 
 #### Documentation
 
-* remove some spurious backslash escaping from inline documentation
-* several corrections to brace escaping in documentation
+* Several corrections to brace escaping in documentation
 
 ### 0.8.0 / 2020-03-11
 
