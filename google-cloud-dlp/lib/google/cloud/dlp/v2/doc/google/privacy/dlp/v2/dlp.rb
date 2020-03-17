@@ -115,7 +115,7 @@ module Google
           # @!attribute [rw] max_findings_per_item
           #   @return [Integer]
           #     Max number of findings that will be returned for each item scanned.
-          #     When set within `InspectDataSourceRequest`,
+          #     When set within `InspectJobConfig`,
           #     the maximum returned is 2000 regardless if this is set higher.
           #     When set within `InspectContentRequest`, this field is ignored.
           # @!attribute [rw] max_findings_per_request
@@ -224,6 +224,11 @@ module Google
         class InspectResult; end
 
         # Represents a piece of potentially sensitive content.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Resource name in format
+        #     projects/\\{project}/locations/\\{location}/findings/\\{finding}
+        #     Populated only when viewing persisted findings.
         # @!attribute [rw] quote
         #   @return [String]
         #     The content that was found. Even if the content is not textual, it
@@ -249,6 +254,32 @@ module Google
         #     Contains data parsed from quotes. Only populated if include_quote was set
         #     to true and a supported infoType was requested. Currently supported
         #     infoTypes: DATE, DATE_OF_BIRTH and TIME.
+        # @!attribute [rw] resource_name
+        #   @return [String]
+        #     The job that stored the finding.
+        # @!attribute [rw] trigger_name
+        #   @return [String]
+        #     Job trigger name, if applicable, for this finding.
+        # @!attribute [rw] labels
+        #   @return [Hash{String => String}]
+        #     The labels associated with this `InspectFinding`.
+        #
+        #     Label keys must be between 1 and 63 characters long and must conform
+        #     to the following regular expression: \[a-z\](https://cloud.google.com\[-a-z0-9\]*\[a-z0-9\])?.
+        #
+        #     Label values must be between 0 and 63 characters long and must conform
+        #     to the regular expression (\[a-z\](https://cloud.google.com\[-a-z0-9\]*\[a-z0-9\])?)?.
+        #
+        #     No more than 10 labels can be associated with a given finding.
+        #
+        #     Example: <code>"environment" : "production"</code>
+        #     Example: <code>"pipeline" : "etl"</code>
+        # @!attribute [rw] job_create_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Time the job started that produced this finding.
+        # @!attribute [rw] job_name
+        #   @return [String]
+        #     The job that stored the finding.
         class Finding; end
 
         # Specifies the location of the finding.
@@ -268,9 +299,13 @@ module Google
         #   @return [Array<Google::Privacy::Dlp::V2::ContentLocation>]
         #     List of nested objects pointing to the precise location of the finding
         #     within the file or record.
+        # @!attribute [rw] container
+        #   @return [Google::Privacy::Dlp::V2::Container]
+        #     Information about the container where this finding occurred, if available.
         class Location; end
 
-        # Findings container location data.
+        # Precise location of the finding within a document, record, image, or metadata
+        # container.
         # @!attribute [rw] container_name
         #   @return [String]
         #     Name of the container where the finding is located.
@@ -328,6 +363,49 @@ module Google
         #   @return [Integer]
         #     The zero-based index of the row where the finding is located.
         class TableLocation; end
+
+        # Represents a container that may contain DLP findings.
+        # Examples of a container include a file, table, or database record.
+        # @!attribute [rw] type
+        #   @return [String]
+        #     Container type, for example BigQuery or Google Cloud Storage.
+        # @!attribute [rw] project_id
+        #   @return [String]
+        #     Project where the finding was found.
+        #     Can be different from the project that owns the finding.
+        # @!attribute [rw] full_path
+        #   @return [String]
+        #     A string representation of the full container name.
+        #     Examples:
+        #     * BigQuery: 'Project:DataSetId.TableId'
+        #     * Google Cloud Storage: 'gs://Bucket/folders/filename.txt'
+        # @!attribute [rw] root_path
+        #   @return [String]
+        #     The root of the container.
+        #     Examples:
+        #     * For BigQuery table `project_id:dataset_id.table_id`, the root is
+        #       `dataset_id`
+        #     * For Google Cloud Storage file `gs://bucket/folder/filename.txt`, the root
+        #       is `gs://bucket`
+        # @!attribute [rw] relative_path
+        #   @return [String]
+        #     The rest of the path after the root.
+        #     Examples:
+        #     * For BigQuery table `project_id:dataset_id.table_id`, the relative path is
+        #       `table_id`
+        #     * Google Cloud Storage file `gs://bucket/folder/filename.txt`, the relative
+        #       path is `folder/filename.txt`
+        # @!attribute [rw] update_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Findings container modification timestamp, if applicable.
+        #     For Google Cloud Storage contains last file modification timestamp.
+        #     For BigQuery table contains last_modified_time property.
+        #     For Datastore - not populated.
+        # @!attribute [rw] version
+        #   @return [String]
+        #     Findings container version, if available
+        #     ("generation" for Google Cloud Storage).
+        class Container; end
 
         # Generic half-open interval [start, end)
         # @!attribute [rw] start
@@ -582,8 +660,10 @@ module Google
         #     If unspecified, then all available columns will be used for a new table or
         #     an (existing) table with no schema, and no changes will be made to an
         #     existing table that has a schema.
+        #     Only for use with external storage.
         class OutputStorageConfig
           # Predefined schemas for storing findings.
+          # Only for use with external storage.
           module OutputSchema
             # Unused.
             OUTPUT_SCHEMA_UNSPECIFIED = 0
@@ -644,8 +724,31 @@ module Google
           #   @return [Array<Google::Privacy::Dlp::V2::InfoTypeStats>]
           #     Statistics of how many instances of each info type were found during
           #     inspect job.
+          # @!attribute [rw] hybrid_stats
+          #   @return [Google::Privacy::Dlp::V2::HybridInspectStatistics]
+          #     Statistics related to the processing of hybrid inspect.
+          #     Early access feature is in a pre-release state and might change or have
+          #     limited support. For more information, see
+          #     https://cloud.google.com/products#product-launch-stages.
           class Result; end
         end
+
+        # Statistics related to processing hybrid inspect requests.s
+        # @!attribute [rw] processed_count
+        #   @return [Integer]
+        #     The number of hybrid inspection requests processed within this job.
+        # @!attribute [rw] aborted_count
+        #   @return [Integer]
+        #     The number of hybrid inspection requests aborted because the job ran
+        #     out of quota or was ended before they could be processed.
+        # @!attribute [rw] pending_count
+        #   @return [Integer]
+        #     The number of hybrid requests currently being processed. Only populated
+        #     when called via method `getDlpJob`.
+        #     A burst of traffic may cause hybrid inspect requests to be enqueued.
+        #     Processing will take place as quickly as possible, but resource limitations
+        #     may impact how long a request is enqueued for.
+        class HybridInspectStatistics; end
 
         # InfoType description.
         # @!attribute [rw] name
@@ -736,8 +839,8 @@ module Google
         #     Required. Quasi-identifier columns.
         # @!attribute [rw] relative_frequency
         #   @return [Google::Privacy::Dlp::V2::FieldId]
-        #     Required. The relative frequency column must contain a floating-point number
-        #     between 0 and 1 (inclusive). Null values are assumed to be zero.
+        #     Required. The relative frequency column must contain a floating-point
+        #     number between 0 and 1 (inclusive). Null values are assumed to be zero.
         class StatisticalTable
           # A quasi-identifier column has a custom_tag, used to know which column
           # in the data corresponds to which column in the statistical model.
@@ -831,8 +934,8 @@ module Google
           # extrapolating from the distribution of values in the input dataset.
           # @!attribute [rw] quasi_ids
           #   @return [Array<Google::Privacy::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField>]
-          #     Required. Fields considered to be quasi-identifiers. No two columns can have the
-          #     same tag.
+          #     Required. Fields considered to be quasi-identifiers. No two columns can
+          #     have the same tag.
           # @!attribute [rw] region_code
           #   @return [String]
           #     ISO 3166-1 alpha-2 region code to use in the statistical modeling.
@@ -881,8 +984,8 @@ module Google
             #     Required. Quasi-identifier columns.
             # @!attribute [rw] relative_frequency
             #   @return [Google::Privacy::Dlp::V2::FieldId]
-            #     Required. The relative frequency column must contain a floating-point number
-            #     between 0 and 1 (inclusive). Null values are assumed to be zero.
+            #     Required. The relative frequency column must contain a floating-point
+            #     number between 0 and 1 (inclusive). Null values are assumed to be zero.
             class AuxiliaryTable
               # A quasi-identifier column has a custom_tag, used to know which column
               # in the data corresponds to which column in the statistical model.
@@ -902,8 +1005,8 @@ module Google
           # knowing the attack dataset, so we use a statistical model instead.
           # @!attribute [rw] quasi_ids
           #   @return [Array<Google::Privacy::Dlp::V2::QuasiId>]
-          #     Required. Fields considered to be quasi-identifiers. No two fields can have the
-          #     same tag.
+          #     Required. Fields considered to be quasi-identifiers. No two fields can
+          #     have the same tag.
           # @!attribute [rw] region_code
           #   @return [String]
           #     ISO 3166-1 alpha-2 region code to use in the statistical modeling.
@@ -1249,7 +1352,36 @@ module Google
         #     Treat the dataset as structured. Transformations can be applied to
         #     specific locations within structured datasets, such as transforming
         #     a column within a table.
+        # @!attribute [rw] transformation_error_handling
+        #   @return [Google::Privacy::Dlp::V2::TransformationErrorHandling]
+        #     Mode for handling transformation errors. If left unspecified, the default
+        #     mode is `TransformationErrorHandling.ThrowError`.
         class DeidentifyConfig; end
+
+        # How to handle transformation errors during de-identification. A
+        # transformation error occurs when the requested transformation is incompatible
+        # with the data. For example, trying to de-identify an IP address using a
+        # `DateShift` transformation would result in a transformation error, since date
+        # info cannot be extracted from an IP address.
+        # Information about any incompatible transformations, and how they were
+        # handled, is returned in the response as part of the
+        # `TransformationOverviews`.
+        # @!attribute [rw] throw_error
+        #   @return [Google::Privacy::Dlp::V2::TransformationErrorHandling::ThrowError]
+        #     Throw an error
+        # @!attribute [rw] leave_untransformed
+        #   @return [Google::Privacy::Dlp::V2::TransformationErrorHandling::LeaveUntransformed]
+        #     Ignore errors
+        class TransformationErrorHandling
+          # Throw an error and fail the request when a transformation error occurs.
+          class ThrowError; end
+
+          # Skips the data without modifying it if the requested transformation would
+          # cause an error. For example, if a `DateShift` transformation were applied
+          # an an IP address, this mode would leave the IP address unchanged in the
+          # response.
+          class LeaveUntransformed; end
+        end
 
         # A rule for transforming a value.
         # @!attribute [rw] replace_config
@@ -1487,18 +1619,18 @@ module Google
         # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
         # @!attribute [rw] lower_bound
         #   @return [Google::Privacy::Dlp::V2::Value]
-        #     Required. Lower bound value of buckets. All values less than `lower_bound` are
-        #     grouped together into a single bucket; for example if `lower_bound` = 10,
-        #     then all values less than 10 are replaced with the value “-10”.
+        #     Required. Lower bound value of buckets. All values less than `lower_bound`
+        #     are grouped together into a single bucket; for example if `lower_bound` =
+        #     10, then all values less than 10 are replaced with the value “-10”.
         # @!attribute [rw] upper_bound
         #   @return [Google::Privacy::Dlp::V2::Value]
-        #     Required. Upper bound value of buckets. All values greater than upper_bound are
-        #     grouped together into a single bucket; for example if `upper_bound` = 89,
-        #     then all values greater than 89 are replaced with the value “89+”.
+        #     Required. Upper bound value of buckets. All values greater than upper_bound
+        #     are grouped together into a single bucket; for example if `upper_bound` =
+        #     89, then all values greater than 89 are replaced with the value “89+”.
         # @!attribute [rw] bucket_size
         #   @return [Float]
-        #     Required. Size of each bucket (except for minimum and maximum buckets). So if
-        #     `lower_bound` = 10, `upper_bound` = 89, and `bucket_size` = 10, then the
+        #     Required. Size of each bucket (except for minimum and maximum buckets). So
+        #     if `lower_bound` = 10, `upper_bound` = 89, and `bucket_size` = 10, then the
         #     following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
         #     60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works.
         class FixedSizeBucketingConfig; end
@@ -1686,14 +1818,15 @@ module Google
         # to learn more.
         # @!attribute [rw] upper_bound_days
         #   @return [Integer]
-        #     Required. Range of shift in days. Actual shift will be selected at random within this
-        #     range (inclusive ends). Negative means shift to earlier in time. Must not
-        #     be more than 365250 days (1000 years) each direction.
+        #     Required. Range of shift in days. Actual shift will be selected at random
+        #     within this range (inclusive ends). Negative means shift to earlier in
+        #     time. Must not be more than 365250 days (1000 years) each direction.
         #
         #     For example, 3 means shift date to at most 3 days into the future.
         # @!attribute [rw] lower_bound_days
         #   @return [Integer]
-        #     Required. For example, -5 means shift date to at most 5 days back in the past.
+        #     Required. For example, -5 means shift date to at most 5 days back in the
+        #     past.
         # @!attribute [rw] context
         #   @return [Google::Privacy::Dlp::V2::FieldId]
         #     Points to the field that contains the context, for example, an entity id.
@@ -1909,6 +2042,10 @@ module Google
         #     to 1 day and can be no longer than 60 days.
         class Schedule; end
 
+        # Job trigger option for hybrid jobs. Jobs must be manually created
+        # and finished.
+        class Manual; end
+
         # The inspectTemplate contains a configuration (set of types of sensitive data
         # to be detected) to be used anywhere you otherwise would normally specify
         # InspectConfig. See https://cloud.google.com/dlp/docs/concepts-templates
@@ -1996,8 +2133,8 @@ module Google
         #     a single Schedule trigger and must have at least one object.
         # @!attribute [rw] errors
         #   @return [Array<Google::Privacy::Dlp::V2::Error>]
-        #     Output only. A stream of errors encountered when the trigger was activated. Repeated
-        #     errors may result in the JobTrigger automatically being paused.
+        #     Output only. A stream of errors encountered when the trigger was activated.
+        #     Repeated errors may result in the JobTrigger automatically being paused.
         #     Will return the last 100 errors. Whenever the JobTrigger is modified
         #     this list will be cleared.
         # @!attribute [rw] create_time
@@ -2017,6 +2154,12 @@ module Google
           # @!attribute [rw] schedule
           #   @return [Google::Privacy::Dlp::V2::Schedule]
           #     Create a job on a repeating basis based on the elapse of time.
+          # @!attribute [rw] manual
+          #   @return [Google::Privacy::Dlp::V2::Manual]
+          #     For use with hybrid jobs. Jobs must be manually created and finished.
+          #     Early access feature is in a pre-release state and might change or have
+          #     limited support. For more information, see
+          #     https://cloud.google.com/products#product-launch-stages.
           class Trigger; end
 
           # Whether the trigger is currently active. If PAUSED or CANCELLED, no jobs
@@ -2140,8 +2283,8 @@ module Google
         # Request message for UpdateInspectTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. Resource name of organization and inspectTemplate to be updated, for
-        #     example `organizations/433245324/inspectTemplates/432452342` or
+        #     Required. Resource name of organization and inspectTemplate to be updated,
+        #     for example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         # @!attribute [rw] inspect_template
         #   @return [Google::Privacy::Dlp::V2::InspectTemplate]
@@ -2154,8 +2297,8 @@ module Google
         # Request message for GetInspectTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. Resource name of the organization and inspectTemplate to be read, for
-        #     example `organizations/433245324/inspectTemplates/432452342` or
+        #     Required. Resource name of the organization and inspectTemplate to be read,
+        #     for example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         class GetInspectTemplateRequest; end
 
@@ -2206,9 +2349,9 @@ module Google
         # Request message for DeleteInspectTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. Resource name of the organization and inspectTemplate to be deleted, for
-        #     example `organizations/433245324/inspectTemplates/432452342` or
-        #     projects/project-id/inspectTemplates/432452342.
+        #     Required. Resource name of the organization and inspectTemplate to be
+        #     deleted, for example `organizations/433245324/inspectTemplates/432452342`
+        #     or projects/project-id/inspectTemplates/432452342.
         class DeleteInspectTemplateRequest; end
 
         # Request message for CreateJobTrigger.
@@ -2409,7 +2552,7 @@ module Google
         #   @return [Array<Google::Privacy::Dlp::V2::Error>]
         #     A stream of errors encountered running the job.
         class DlpJob
-          # Possible states of a job.
+          # Possible states of a job. New items may be added.
           module JobState
             # Unused.
             JOB_STATE_UNSPECIFIED = 0
@@ -2417,7 +2560,8 @@ module Google
             # The job has not yet started.
             PENDING = 1
 
-            # The job is currently running.
+            # The job is currently running. Once a job has finished it will transition
+            # to FAILED or DONE.
             RUNNING = 2
 
             # The job is no longer running.
@@ -2428,6 +2572,12 @@ module Google
 
             # The job had an error and did not complete.
             FAILED = 5
+
+            # The job is currently accepting findings via hybridInspect.
+            # A hybrid job in ACTIVE state may continue to have findings added to it
+            # through calling of hybridInspect. After the job has finished no more
+            # calls to hybridInspect may be made. ACTIVE jobs can transition to DONE.
+            ACTIVE = 6
           end
         end
 
@@ -2516,6 +2666,12 @@ module Google
         #     Required. The name of the DlpJob resource to be cancelled.
         class CancelDlpJobRequest; end
 
+        # The request message for finishing a DLP hybrid job.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. The name of the DlpJob resource to be cancelled.
+        class FinishDlpJobRequest; end
+
         # The request message for deleting a DLP job.
         # @!attribute [rw] name
         #   @return [String]
@@ -2545,8 +2701,9 @@ module Google
         # Request message for UpdateDeidentifyTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. Resource name of organization and deidentify template to be updated, for
-        #     example `organizations/433245324/deidentifyTemplates/432452342` or
+        #     Required. Resource name of organization and deidentify template to be
+        #     updated, for example
+        #     `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         # @!attribute [rw] deidentify_template
         #   @return [Google::Privacy::Dlp::V2::DeidentifyTemplate]
@@ -2559,9 +2716,9 @@ module Google
         # Request message for GetDeidentifyTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. Resource name of the organization and deidentify template to be read, for
-        #     example `organizations/433245324/deidentifyTemplates/432452342` or
-        #     projects/project-id/deidentifyTemplates/432452342.
+        #     Required. Resource name of the organization and deidentify template to be
+        #     read, for example `organizations/433245324/deidentifyTemplates/432452342`
+        #     or projects/project-id/deidentifyTemplates/432452342.
         class GetDeidentifyTemplateRequest; end
 
         # Request message for ListDeidentifyTemplates.
@@ -2612,8 +2769,9 @@ module Google
         # Request message for DeleteDeidentifyTemplate.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. Resource name of the organization and deidentify template to be deleted,
-        #     for example `organizations/433245324/deidentifyTemplates/432452342` or
+        #     Required. Resource name of the organization and deidentify template to be
+        #     deleted, for example
+        #     `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         class DeleteDeidentifyTemplateRequest; end
 
@@ -2655,6 +2813,12 @@ module Google
         # @!attribute [rw] large_custom_dictionary
         #   @return [Google::Privacy::Dlp::V2::LargeCustomDictionaryConfig]
         #     StoredInfoType where findings are defined by a dictionary of phrases.
+        # @!attribute [rw] dictionary
+        #   @return [Google::Privacy::Dlp::V2::CustomInfoType::Dictionary]
+        #     Store dictionary-based CustomInfoType.
+        # @!attribute [rw] regex
+        #   @return [Google::Privacy::Dlp::V2::CustomInfoType::Regex]
+        #     Store regular expression-based StoredInfoType.
         class StoredInfoTypeConfig; end
 
         # Statistics for a StoredInfoType.
@@ -2733,8 +2897,8 @@ module Google
         # Request message for UpdateStoredInfoType.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. Resource name of organization and storedInfoType to be updated, for
-        #     example `organizations/433245324/storedInfoTypes/432452342` or
+        #     Required. Resource name of organization and storedInfoType to be updated,
+        #     for example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         # @!attribute [rw] config
         #   @return [Google::Privacy::Dlp::V2::StoredInfoTypeConfig]
@@ -2749,8 +2913,8 @@ module Google
         # Request message for GetStoredInfoType.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. Resource name of the organization and storedInfoType to be read, for
-        #     example `organizations/433245324/storedInfoTypes/432452342` or
+        #     Required. Resource name of the organization and storedInfoType to be read,
+        #     for example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         class GetStoredInfoTypeRequest; end
 
@@ -2802,10 +2966,84 @@ module Google
         # Request message for DeleteStoredInfoType.
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. Resource name of the organization and storedInfoType to be deleted, for
-        #     example `organizations/433245324/storedInfoTypes/432452342` or
+        #     Required. Resource name of the organization and storedInfoType to be
+        #     deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         class DeleteStoredInfoTypeRequest; end
+
+        # Request to search for potentially sensitive info in a custom location.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. Resource name of the trigger to execute a hybrid inspect on, for
+        #     example `projects/dlp-test-project/jobTriggers/53234423`.
+        # @!attribute [rw] hybrid_item
+        #   @return [Google::Privacy::Dlp::V2::HybridContentItem]
+        #     The item to inspect.
+        class HybridInspectJobTriggerRequest; end
+
+        # Request to search for potentially sensitive info in a custom location.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. Resource name of the job to execute a hybrid inspect on, for
+        #     example `projects/dlp-test-project/dlpJob/53234423`.
+        # @!attribute [rw] hybrid_item
+        #   @return [Google::Privacy::Dlp::V2::HybridContentItem]
+        #     The item to inspect.
+        class HybridInspectDlpJobRequest; end
+
+        # An individual hybrid item to inspect. Will be stored temporarily during
+        # processing.
+        # @!attribute [rw] item
+        #   @return [Google::Privacy::Dlp::V2::ContentItem]
+        #     The item to inspect.
+        # @!attribute [rw] finding_details
+        #   @return [Google::Privacy::Dlp::V2::HybridFindingDetails]
+        #     Supplementary information that will be added to each finding.
+        class HybridContentItem; end
+
+        # Populate to associate additional data with each finding.
+        # @!attribute [rw] container_details
+        #   @return [Google::Privacy::Dlp::V2::Container]
+        #     Details about the container where the content being inspected is from.
+        # @!attribute [rw] file_offset
+        #   @return [Integer]
+        #     Offset in bytes of the line, from the beginning of the file, where the
+        #     finding  is located. Populate if the item being scanned is only part of a
+        #     bigger item, such as a shard of a file and you want to track the absolute
+        #     position of the finding.
+        # @!attribute [rw] row_offset
+        #   @return [Integer]
+        #     Offset of the row for tables. Populate if the row(s) being scanned are
+        #     part of a bigger dataset and you want to keep track of their absolute
+        #     position.
+        # @!attribute [rw] table_options
+        #   @return [Google::Privacy::Dlp::V2::TableOptions]
+        #     If the container is a table, additional information to make findings
+        #     meaningful such as the columns that are primary keys. If not known ahead
+        #     of time, can also be set within each inspect hybrid call and the two
+        #     will be merged. Note that identifying_fields will only be stored to
+        #     BigQuery, and only if the BigQuery action has been included.
+        # @!attribute [rw] labels
+        #   @return [Hash{String => String}]
+        #     Labels to represent user provided metadata about the data being inspected.
+        #     If configured by the job, some key values may be required.
+        #     The labels associated with `Finding`'s produced by hybrid
+        #     inspection.
+        #
+        #     Label keys must be between 1 and 63 characters long and must conform
+        #     to the following regular expression: \[a-z\](https://cloud.google.com\[-a-z0-9\]*\[a-z0-9\])?.
+        #
+        #     Label values must be between 0 and 63 characters long and must conform
+        #     to the regular expression (\[a-z\](https://cloud.google.com\[-a-z0-9\]*\[a-z0-9\])?)?.
+        #
+        #     No more than 10 labels can be associated with a given finding.
+        #
+        #     Example: <code>"environment" : "production"</code>
+        #     Example: <code>"pipeline" : "etl"</code>
+        class HybridFindingDetails; end
+
+        # Quota exceeded errors will be thrown once quota has been met.
+        class HybridInspectResponse; end
 
         # Options describing which parts of the provided content should be scanned.
         module ContentOption
