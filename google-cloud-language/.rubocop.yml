@@ -3,9 +3,12 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "test/**/*"
     - "Rakefile"
-
+    - "test/**/*"
+    - "acceptance/**/*"
+Metrics/BlockLength:
+  Exclude:
+    - "samples/acceptance/*.rb"
 Documentation:
   Enabled: false
 

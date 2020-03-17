@@ -105,6 +105,25 @@ namespace :acceptance do
   end
 end
 
+task :samples do
+  Rake::Task["samples:test_latest"].invoke
+end
+
+namespace :samples do
+  task :test_latest do
+    raise "Not Implemented"
+  end
+
+  task :test_master do
+    Dir.chdir "samples" do
+      Bundler.with_clean_env do
+        sh "bundle update"
+        sh "bundle exec rake test_master"
+      end
+    end
+  end
+end
+
 require "yard"
 require "yard/rake/yardoc_task"
 YARD::Rake::YardocTask.new
@@ -137,6 +156,8 @@ namespace :ci do
     Rake::Task[:ci].invoke
     header "google-cloud-language acceptance", "*"
     Rake::Task[:acceptance].invoke
+    header "google-cloud-language samples acceptance", "*"
+    Rake::Task["samples:test_master"].invoke
   end
   task :a do
     # This is a handy shortcut to save typing
