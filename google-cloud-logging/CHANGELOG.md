@@ -1,5 +1,29 @@
 # Release History
 
+### 1.10.0 / 2020-03-16
+
+#### Features
+
+* support separate project setting for quota/billing
+
+#### Low-level interface updates
+
+* Add LogBucket
+* Add ConfigServiceV2Client#list_buckets
+* Add ConfigServiceV2Client#get_bucket
+* Add ConfigServiceV2Client#update_bucket
+* Add LifecycleState enum
+* Change name to positional param in ConfigServiceV2Client#get_cmek_settings
+* Change name and cmek_settings to positional params in ConfigServiceV2Client#update_cmek_settings
+* Remove billing, folder, and organization path helpers from ConfigServiceV2Client
+* Remove LogEntry#metadata
+* Remove previously deprecated project_ids from LoggingServiceV2Client#list_log_entries
+* Remove log_path helpers from LoggingServiceV2Client
+* Rename ConfigServiceV2Client#billing_path to #billing_account_path
+* Rename LoggingServiceV2Client#billing_path to #billing_account_path
+* Rename MetricsServiceV2Client#metric_path to #log_metric_path
+* Update network configuration settings
+
 ### 1.9.5 / 2020-02-24
 
 #### Documentation
