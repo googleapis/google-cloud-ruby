@@ -4,13 +4,8 @@
 
 #### Features
 
-* support query options ([#4907](https://www.github.com/googleapis/google-cloud-ruby/issues/4907))
-  * Add the support for query optimizer versioning.
-  * Implement partial overwriting for query options.
-  * Add query_options to client.execute_partition_update.
-  * Add query_options to batch_snapshot.execute_query.
-  * Add query_options to execute_partition_query and partition_query.
-  * Add the support of query options to transaction.execute_update.
+* Added support for query options ([#4907](https://www.github.com/googleapis/google-cloud-ruby/issues/4907))
+  * Added support for specifying the query optimizer version.
 * Support separate project setting for quota/billing
 
 ### 1.14.0 / 2020-02-18
