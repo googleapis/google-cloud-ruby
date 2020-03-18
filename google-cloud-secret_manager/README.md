@@ -21,14 +21,14 @@ $ gem install google-cloud-secret_manager
 
 ### Next Steps
 - Read the [Client Library Documentation][] for the Secret Manager API, and the underlying
-  [V1beta1 Client Documentation][] to see other available methods on the client.
+  [V1 Client Documentation][] to see other available methods on the client.
 - Read the [Secret Manager API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
 - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.
 
 [Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-secret_manager/latest
-[V1beta1 Client Documentation]: https://googleapis.dev/ruby/google-cloud-secret_manager-v1beta1/latest
+[V1 Client Documentation]: https://googleapis.dev/ruby/google-cloud-secret_manager-v1/latest
 [Product Documentation]: https://cloud.google.com/secret-manager
 
 ## Enabling Logging

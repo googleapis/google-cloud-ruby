@@ -25,12 +25,12 @@ module Google
       # Create a new `SecretManagerService::Client` object.
       #
       # @param version [String, Symbol] The API version to create the client instance. Optional. If not provided
-      #   defaults to `:v1beta1`, which will return an instance of
-      #   [Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client](https://googleapis.dev/ruby/google-cloud-secret_manager-v1beta1/latest/Google/Cloud/SecretManager/V1beta1/SecretManagerService/Client.html).
+      #   defaults to `:v1`, which will return an instance of
+      #   [Google::Cloud::SecretManager::V1::SecretManagerService::Client](https://googleapis.dev/ruby/google-cloud-secret_manager-v1/latest/Google/Cloud/SecretManager/V1/SecretManagerService/Client.html).
       #
       # @return [SecretManagerService::Client] A client object for the specified version.
       #
-      def self.secret_manager_service version: :v1beta1, &block
+      def self.secret_manager_service version: :v1, &block
         require "google/cloud/secret_manager/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::SecretManager

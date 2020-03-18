@@ -25,7 +25,7 @@ describe Google::Cloud::SecretManager do
       client = Google::Cloud::SecretManager.secret_manager_service do |config|
         config.credentials = grpc_channel
       end
-      client.must_be_kind_of Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client
+      client.must_be_kind_of Google::Cloud::SecretManager::V1::SecretManagerService::Client
     end
   end
 end
