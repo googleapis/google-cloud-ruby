@@ -188,6 +188,39 @@ def classify_text_from_cloud_storage_file storage_path:
   # [END language_classify_gcs]
 end
 
+def analyze_entity_sentiment text_content:
+  # [START language_entity_sentiment_text]
+  # text_content = "Text to analyze"
+
+  require "google/cloud/language"
+
+  language = Google::Cloud::Language.language_service
+
+  document = { content: text_content, type: :PLAIN_TEXT }
+  response = language.analyze_entity_sentiment document: document
+
+  response.entities.each do |entity|
+    puts "Entity: #{entity.name} Sentiment: #{entity.sentiment.score}"
+  end
+  # [END language_entity_sentiment_text]
+end
+
+def analyze_entity_sentiment_from_storage_file storage_path:
+  # [START language_entity_sentiment_gcs]
+  # storage_path = "Path to file in Google Cloud Storage, eg. gs://bucket/file"
+
+  require "google/cloud/language"
+
+  language = Google::Cloud::Language.language_service
+
+  document = { gcs_content_uri: storage_path, type: :PLAIN_TEXT }
+  response = language.analyze_entity_sentiment document: document
+
+  response.entities.each do |entity|
+    puts "Entity: #{entity.name} Sentiment: #{entity.sentiment.score}"
+  end
+  # [END language_entity_sentiment_gcs]
+end
 
 if $PROGRAM_NAME == __FILE__
 

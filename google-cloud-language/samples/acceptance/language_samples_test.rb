@@ -22,6 +22,7 @@ describe "Language Snippets" do
   let(:negative_text) { "I hate it. I am mad, annoyed, and irritated." }
   let(:entities_text) { "Alice wrote a book. Bob likes the book." }
   let(:syntax_text)   { "I am Fox Tall. The porcupine stole my pickup truck." }
+  let(:entities_sentiment_text) { "Plums are great. Prunes are bad." }
   let :classification_text do
     "Google, headquartered in Mountain View, unveiled the new Android phone "  \
     "at the Consumer Electronic Show Sundar Pichai said in his keynote that"  \
@@ -178,6 +179,32 @@ describe "Language Snippets" do
       end
 
       assert_includes out, "Computers & Electronics"
+    end
+  end
+
+  describe "analyze_entity_sentiment" do
+    it "analyzes the sentiment for each entity in a text" do
+      out, _err = capture_io do
+        analyze_entity_sentiment text_content: entities_sentiment_text
+      end
+      assert_match(/Entity: Plums Sentiment: \d\.\d+/, out)
+      assert_match(/Entity: Prunes Sentiment: -\d\.\d+/, out)
+    end
+  end
+
+  describe "analyze_entity_sentiment_from_storage_file" do
+    after do
+      delete_bucket_helper bucket.name
+    end
+
+    it "analyzes the sentiment for each entity in a storage file" do
+      create_file_and_upload bucket.name, "entity_sentiment.txt", entities_sentiment_text
+
+      out, _err = capture_io do
+        analyze_entity_sentiment_from_storage_file storage_path: "gs://#{bucket.name}/entity_sentiment.txt"
+      end
+      assert_match(/Entity: Plums Sentiment: \d\.\d+/, out)
+      assert_match(/Entity: Prunes Sentiment: -\d\.\d+/, out)
     end
   end
 end
