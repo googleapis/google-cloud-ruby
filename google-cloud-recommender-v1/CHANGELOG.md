@@ -2,10 +2,11 @@
 
 ### 0.1.2 / 2020-03-18
 
-#### Documentation
-
+* Support separate project setting for quota/billing
+* Include the correct default timeout and retry settings
+* Eliminate some Ruby 2.7 keyword argument warnings
 * Add Configuration docs and update enum return types
-* remove some spurious backslash escaping from code samples in inline documentation
+* Fix various formatting issues in inline documentation
 
 ### 0.1.1 / 2020-02-24
 
