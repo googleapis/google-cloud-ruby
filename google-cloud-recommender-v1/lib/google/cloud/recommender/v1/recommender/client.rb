@@ -219,7 +219,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Recommender::V1::ListRecommendationsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_recommendations.metadata.to_h
@@ -281,7 +281,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Recommender::V1::GetRecommendationRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_recommendation.metadata.to_h
@@ -365,7 +365,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.mark_recommendation_claimed.metadata.to_h
@@ -449,7 +449,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Recommender::V1::MarkRecommendationSucceededRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.mark_recommendation_succeeded.metadata.to_h
@@ -533,7 +533,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.mark_recommendation_failed.metadata.to_h
