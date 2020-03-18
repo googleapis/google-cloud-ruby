@@ -1,5 +1,12 @@
 # Release History
 
+### 0.3.0 / 2020-03-18
+
+* Support separate project setting for quota/billing
+* Include the correct default timeout and retry settings
+* Eliminate some Ruby 2.7 keyword argument warnings
+* Fix some formatting issues in the inline documentation
+
 ### 0.2.3 / 2020-03-04
 
 #### Documentation
