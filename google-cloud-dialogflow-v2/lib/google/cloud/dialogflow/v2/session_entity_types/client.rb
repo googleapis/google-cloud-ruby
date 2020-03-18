@@ -217,7 +217,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_session_entity_types.metadata.to_h
@@ -287,7 +287,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_session_entity_type.metadata.to_h
@@ -363,7 +363,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_session_entity_type.metadata.to_h
@@ -434,7 +434,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_session_entity_type.metadata.to_h
@@ -503,7 +503,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_session_entity_type.metadata.to_h

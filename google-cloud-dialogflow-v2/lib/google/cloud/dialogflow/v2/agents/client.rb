@@ -239,7 +239,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::GetAgentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_agent.metadata.to_h
@@ -300,7 +300,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::SetAgentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_agent.metadata.to_h
@@ -360,7 +360,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::DeleteAgentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_agent.metadata.to_h
@@ -437,7 +437,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::SearchAgentsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.search_agents.metadata.to_h
@@ -472,13 +472,13 @@ module Google
             ##
             # Trains the specified agent.
             #
-            # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload train_agent(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::TrainAgentRequest | Hash]
             #     Trains the specified agent.
             #
-            #     Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            #     Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -502,7 +502,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::TrainAgentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.train_agent.metadata.to_h
@@ -526,7 +526,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :train_agent, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -537,13 +537,13 @@ module Google
             ##
             # Exports the specified agent to a ZIP file.
             #
-            # Operation <response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse]>
+            # Operation <response: {Google::Cloud::Dialogflow::V2::ExportAgentResponse ExportAgentResponse}>
             #
             # @overload export_agent(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::ExportAgentRequest | Hash]
             #     Exports the specified agent to a ZIP file.
             #
-            #     Operation <response: [ExportAgentResponse][google.cloud.dialogflow.v2.ExportAgentResponse]>
+            #     Operation <response: {Google::Cloud::Dialogflow::V2::ExportAgentResponse ExportAgentResponse}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -572,7 +572,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::ExportAgentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.export_agent.metadata.to_h
@@ -596,7 +596,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :export_agent, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -611,7 +611,7 @@ module Google
             # Intents and entity types with the same name are replaced with the new
             # versions from ImportAgentRequest.
             #
-            # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload import_agent(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::ImportAgentRequest | Hash]
@@ -621,7 +621,7 @@ module Google
             #     Intents and entity types with the same name are replaced with the new
             #     versions from ImportAgentRequest.
             #
-            #     Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            #     Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -650,7 +650,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::ImportAgentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.import_agent.metadata.to_h
@@ -674,7 +674,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :import_agent, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -688,7 +688,7 @@ module Google
             # Replaces the current agent version with a new one. All the intents and
             # entity types in the older version are deleted.
             #
-            # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload restore_agent(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::RestoreAgentRequest | Hash]
@@ -697,7 +697,7 @@ module Google
             #     Replaces the current agent version with a new one. All the intents and
             #     entity types in the older version are deleted.
             #
-            #     Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            #     Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -726,7 +726,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::RestoreAgentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.restore_agent.metadata.to_h
@@ -750,7 +750,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @agents_stub.call_rpc :restore_agent, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -795,7 +795,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::GetValidationResultRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_validation_result.metadata.to_h

@@ -217,7 +217,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::ListContextsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_contexts.metadata.to_h
@@ -278,7 +278,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::GetContextRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_context.metadata.to_h
@@ -344,7 +344,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::CreateContextRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_context.metadata.to_h
@@ -405,7 +405,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::UpdateContextRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_context.metadata.to_h
@@ -465,7 +465,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::DeleteContextRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_context.metadata.to_h
@@ -525,7 +525,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_all_contexts.metadata.to_h

@@ -51,11 +51,11 @@ module Google
         #     configured, no output audio is generated.
         # @!attribute [rw] output_audio_config_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Mask for [output_audio_config][google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config] indicating which settings in this
+        #     Mask for {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
         #     request-level config should override speech synthesizer settings defined at
         #     agent-level.
         #
-        #     If unspecified or empty, [output_audio_config][google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config] replaces the agent-level
+        #     If unspecified or empty, {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
         #     config in its entirety.
         # @!attribute [rw] input_audio
         #   @return [String]
@@ -251,26 +251,26 @@ module Google
         end
 
         # The top-level message sent by the client to the
-        # [Sessions.StreamingDetectIntent][google.cloud.dialogflow.v2.Sessions.StreamingDetectIntent] method.
+        # {Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent Sessions.StreamingDetectIntent} method.
         #
         # Multiple request messages should be sent in order:
         #
         # 1.  The first message must contain
-        # [session][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.session],
-        #     [query_input][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.query_input] plus optionally
-        #     [query_params][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.query_params]. If the client
+        # {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#session session},
+        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input} plus optionally
+        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params query_params}. If the client
         #     wants to receive an audio response, it should also contain
-        #     [output_audio_config][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config].
+        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config}.
         #     The message must not contain
-        #     [input_audio][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.input_audio].
-        # 2.  If [query_input][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.query_input] was set to
-        #     [query_input.audio_config][google.cloud.dialogflow.v2.InputAudioConfig], all subsequent
+        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio}.
+        # 2.  If {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input} was set to
+        #     {Google::Cloud::Dialogflow::V2::InputAudioConfig query_input.audio_config}, all subsequent
         #     messages must contain
-        #     [input_audio][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.input_audio] to continue with
+        #     {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio} to continue with
         #     Speech recognition.
         #     If you decide to rather detect an intent from text input after you
         #     already started Speech recognition, please send a message with
-        #     [query_input.text][google.cloud.dialogflow.v2.QueryInput.text].
+        #     {Google::Cloud::Dialogflow::V2::QueryInput#text query_input.text}.
         #
         #     However, note that:
         #
@@ -303,7 +303,7 @@ module Google
         #     3.  an event that specifies which intent to trigger.
         # @!attribute [rw] single_utterance
         #   @return [Boolean]
-        #     Please use [InputAudioConfig.single_utterance][google.cloud.dialogflow.v2.InputAudioConfig.single_utterance] instead.
+        #     Please use {Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig.single_utterance} instead.
         #     If `false` (default), recognition does not cease until
         #     the client closes the stream. If `true`, the recognizer will detect a
         #     single spoken utterance in input audio. Recognition ceases when it detects
@@ -318,11 +318,11 @@ module Google
         #     configured, no output audio is generated.
         # @!attribute [rw] output_audio_config_mask
         #   @return [Google::Protobuf::FieldMask]
-        #     Mask for [output_audio_config][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config] indicating which settings in this
+        #     Mask for {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
         #     request-level config should override speech synthesizer settings defined at
         #     agent-level.
         #
-        #     If unspecified or empty, [output_audio_config][google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config] replaces the agent-level
+        #     If unspecified or empty, {Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
         #     config in its entirety.
         # @!attribute [rw] input_audio
         #   @return [String]
@@ -433,7 +433,7 @@ module Google
         # @!attribute [rw] speech_word_info
         #   @return [Array<Google::Cloud::Dialogflow::V2::SpeechWordInfo>]
         #     Word-specific information for the words recognized by Speech in
-        #     [transcript][google.cloud.dialogflow.v2.StreamingRecognitionResult.transcript]. Populated if and only if `message_type` = `TRANSCRIPT` and
+        #     {Google::Cloud::Dialogflow::V2::StreamingRecognitionResult#transcript transcript}. Populated if and only if `message_type` = `TRANSCRIPT` and
         #     [InputAudioConfig.enable_word_info] is set.
         # @!attribute [rw] speech_end_offset
         #   @return [Google::Protobuf::Duration]
