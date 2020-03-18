@@ -15,6 +15,8 @@
 
 require "google/cloud/spanner/database/job"
 require "google/cloud/spanner/database/list"
+require "google/cloud/spanner/database/restore_info"
+require "google/cloud/spanner/backup"
 require "google/cloud/spanner/policy"
 
 module Google
@@ -112,6 +114,13 @@ module Google
         # @return [Boolean]
         def ready?
           state == :READY
+        end
+
+        ##
+        # The database is fully created from backup and optimizing.
+        # @return [Boolean]
+        def ready_optimizing?
+          state == :READY_OPTIMIZING
         end
 
         ##
@@ -218,6 +227,257 @@ module Google
           ensure_service!
           service.drop_database instance_id, database_id
           true
+        end
+
+
+        # @private
+        DATBASE_OPERATION_METADAT_FILTER_TEMPLATE = [
+          "(metadata.@type:CreateDatabaseMetadata AND " \
+          "metadata.database:%<database_id>s)",
+          "(metadata.@type:RestoreDatabaseMetadata AND "\
+          "metadata.name:%<database_id>s)",
+          "(metadata.@type:UpdateDatabaseDdl AND "\
+          "metadata.database:%<database_id>s)"
+        ].join(" OR ")
+
+        ##
+        # Retrieves the list of database operations for the given database.
+        #
+        # @param filter [String]
+        #   A filter expression that filters what operations are returned in the
+        #   response.
+        #
+        #   The response returns a list of
+        #   {Google::Longrunning::Operation long-running operations} whose names
+        #   are prefixed by a database name within the specified instance.
+        #   The long-running operation
+        #   {Google::Longrunning::Operation#metadata metadata} field type
+        #   `metadata.type_url` describes the type of the metadata.
+        #
+        #   The filter expression must specify the field name,
+        #   a comparison operator, and the value that you want to use for
+        #   filtering. The value must be a string, a number, or a boolean.
+        #   The comparison operator must be
+        #   <, >, <=, >=, !=, =, or :. Colon ':' represents a HAS operator
+        #   which is roughly synonymous with equality. Filter rules are case
+        #   insensitive.
+        #
+        #   The long-running operation fields eligible for filtering are:
+        #     * `name` --> The name of the long-running operation
+        #     * `done` --> False if the operation is in progress, else true.
+        #     * `metadata.type_url` (using filter string `metadata.@type`) and
+        #       fields in `metadata.value` (using filter string
+        #       `metadata.<field_name>`, where <field_name> is a field in
+        #       metadata.value) are eligible for filtering.
+        #     * `error` --> Error associated with the long-running operation.
+        #     * `response.type_url` (using filter string `response.@type`) and
+        #       fields in `response.value` (using filter string
+        #       `response.<field_name>`, where <field_name> is a field in
+        #       response.value)are eligible for filtering.
+        #
+        #     To filter on multiple expressions, provide each separate
+        #     expression within parentheses. By default, each expression
+        #     is an AND expression. However, you can include AND, OR, and NOT
+        #     expressions explicitly.
+        #
+        #   Some examples of using filters are:
+        #
+        #     * `done:true` --> The operation is complete.
+        #     * `(metadata.@type:type.googleapis.com/google.spanner.admin.\
+        #       database.v1.RestoreDatabaseMetadata)
+        #       AND (metadata.source_type:BACKUP)
+        #       AND (metadata.backup_info.backup:backup_howl)
+        #       AND (metadata.name:restored_howl)
+        #       AND (metadata.progress.start_time < \"2018-03-28T14:50:00Z\")
+        #       AND (error:*)`
+        #       --> Return RestoreDatabase operations from backups whose name
+        #       contains "backup_howl", where the created database name
+        #       contains the string "restored_howl", the start_time of the
+        #       restore operation is before 2018-03-28T14:50:00Z,
+        #       and the operation returned an error.
+        # @param page_size [Integer]
+        #   The maximum number of resources contained in the underlying API
+        #   response. If page streaming is performed per-resource, this
+        #   parameter does not affect the return value. If page streaming is
+        #   performed per-page, this determines the maximum number of
+        #   resources in a page.
+        #
+        # @return [Array<Google::Cloud::Spanner::Database::Job>] List
+        #   representing the long-running, asynchronous processing
+        #   of a database operations.
+        #   (See {Google::Cloud::Spanner::Database::Job::List})
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   database = spanner.database "my-instance", "my-database"
+        #
+        #   jobs = database.database_operations
+        #   jobs.each do |job|
+        #     if job.error?
+        #       p job.error
+        #     else
+        #       p job.database.database_id
+        #     end
+        #   end
+        #
+        # @example Retrieve all
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   database = spanner.database "my-instance", "my-database"
+        #
+        #   jobs = database.database_operations
+        #   jobs.all do |job|
+        #     if job.error?
+        #       p job.error
+        #     else
+        #       puts job.database.database_id
+        #     end
+        #   end
+        #
+        # @example List by page size
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   database = spanner.database "my-instance", "my-database"
+        #
+        #   jobs = database.database_operations page_size: 10
+        #   jobs.each do |job|
+        #     if job.error?
+        #       p job.error
+        #     else
+        #       puts job.database.database_id
+        #     end
+        #   end
+        #
+        # @example Filter and list
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #
+        #   database = spanner.database "my-instance", "my-database"
+        #
+        #   jobs = database.database_operations filter: "done:true"
+        #   jobs.each do |job|
+        #     if job.error?
+        #       p job.error
+        #     else
+        #       puts job.database.database_id
+        #     end
+        #   end
+        #
+        def database_operations filter: nil, page_size: nil
+          database_filter = format(
+            DATBASE_OPERATION_METADAT_FILTER_TEMPLATE,
+            database_id: database_id
+          )
+
+          if filter
+            database_filter = format(
+              "(%<filter>s) AND (%<database_filter>s)",
+              filter: filter, database_filter: database_filter
+            )
+          end
+
+          grpc = service.list_database_operations \
+            instance_id,
+            filter: database_filter,
+            page_size: page_size
+          Database::Job::List.from_grpc grpc, service
+        end
+
+        ##
+        # Creates a database backup.
+        #
+        # @param [String] backup_id The unique identifier for the backup.
+        #   Values are of the form `[a-z][a-z0-9_\-]*[a-z0-9]` and must be
+        #   between 2 and 60 characters in length. Required.
+        # @param [Time] expire_time The expiration time of the backup, with
+        #   microseconds granularity that must be at least 6 hours and at most
+        #   366 days from the time the request is received. Required.
+        #   Once the `expire_time` has passed, Cloud Spanner will delete the
+        #   backup and free the resources used by the backup. Required.
+        # @return [Google::Cloud::Spanner::Backup::Job] The job representing
+        #   the long-running, asynchronous processing of a backup create
+        #   operation.
+        #
+        # @example Create backup with expiration time
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   database = spanner.database "my-instance", "my-database"
+        #
+        #   job = database.create_backup "my-backup", Time.now + 36000
+        #
+        #   job.done? #=> false
+        #   job.reload! # API call
+        #   job.done? #=> true
+        #
+        #   if job.error?
+        #     status = job.error
+        #   else
+        #     backup = job.backup
+        #   end
+        #
+        def create_backup backup_id, expire_time
+          ensure_service!
+          grpc = service.create_backup \
+            instance_id,
+            database_id,
+            backup_id,
+            expire_time
+          Backup::Job.from_grpc grpc, service
+        end
+
+        ##
+        # Retrieves backups belonging to the database.
+        #
+        # @param [Integer] page_size Optional. Number of backups to be returned
+        #   in the response. If 0 or less, defaults to the server's maximum
+        #   allowed page size.
+        # @return [Array<Google::Cloud::Spanner::Backup>] Enumerable list of
+        #   backups. (See {Google::Cloud::Spanner::Backup::List})
+        #
+        # @example
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   database = spanner.database "my-instance", "my-database"
+        #
+        #   database.backups.all.each do |backup|
+        #     puts backup.backup_id
+        #   end
+        #
+        # @example List backups by page size
+        #   require "google/cloud/spanner"
+        #
+        #   spanner = Google::Cloud::Spanner.new
+        #   database = spanner.database "my-instance", "my-database"
+        #
+        #   database.backups(page_size: 5).all.each do |backup|
+        #     puts backup.backup_id
+        #   end
+        #
+        def backups page_size: nil
+          ensure_service!
+          grpc = service.list_backups \
+            instance_id,
+            filter: "database:#{database_id}",
+            page_size: page_size
+          Backup::List.from_grpc grpc, service
+        end
+
+        # Information about the source used to restore the database.
+        #
+        # @return [Google::Cloud::Spanner::Database::RestoreInfo, nil]
+        def restore_info
+          return nil unless @grpc.restore_info
+          RestoreInfo.from_grpc @grpc.restore_info
         end
 
         ##

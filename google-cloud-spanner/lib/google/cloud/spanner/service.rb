@@ -448,6 +448,77 @@ module Google
           end
         end
 
+        def create_backup instance_id, database_id, backup_id, expire_time
+          backup = {
+            database: database_path(instance_id, database_id),
+            expire_time: expire_time
+          }
+          execute do
+            databases.create_backup \
+              instance_path(instance_id),
+              backup_id,
+              backup
+          end
+        end
+
+        def get_backup instance_id, backup_id
+          execute do
+            databases.get_backup backup_path(instance_id, backup_id)
+          end
+        end
+
+        def update_backup backup, update_mask
+          execute do
+            databases.update_backup backup, update_mask
+          end
+        end
+
+        def delete_backup instance_id, backup_id
+          execute do
+            databases.delete_backup backup_path(instance_id, backup_id)
+          end
+        end
+
+        def list_backups instance_id, filter: nil, page_size: nil
+          execute do
+            databases.list_backups \
+              instance_path(instance_id),
+              filter,
+              page_size: page_size
+          end
+        end
+
+        def list_database_operations instance_id, filter: nil, page_size: nil
+          execute do
+            databases.list_database_operations \
+              instance_path(instance_id),
+              filter,
+              page_size: page_size
+          end
+        end
+
+        def list_backup_operations instance_id, filter: nil, page_size: nil
+          execute do
+            databases.list_backup_operations \
+              instance_path(instance_id),
+              filter,
+              page_size: page_size
+          end
+        end
+
+        def restore_database \
+          backup_instance_id,
+          backup_id,
+          database_instance_id,
+          database_id
+          execute do
+            databases.restore_database \
+              instance_path(database_instance_id),
+              database_id,
+              backup: backup_path(backup_instance_id, backup_id)
+          end
+        end
+
         def inspect
           "#{self.class}(#{@project})"
         end
@@ -515,6 +586,12 @@ module Google
         def session_path instance_id, database_id, session_id
           V1::SpannerClient.session_path(
             project, instance_id, database_id, session_id
+          )
+        end
+
+        def backup_path instance_id, backup_id
+          Admin::Database::V1::DatabaseAdminClient.backup_path(
+            project, instance_id, backup_id
           )
         end
 

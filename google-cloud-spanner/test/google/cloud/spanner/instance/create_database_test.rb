@@ -18,7 +18,6 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:instance_grpc) { Google::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id) }
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
-
   let(:job_grpc) do
     Google::Longrunning::Operation.new(
       name: "1234567890",
@@ -29,13 +28,11 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
     )
   end
   let(:database_grpc) do
-    Google::Spanner::Admin::Database::V1::Database.new \
+    Google::Spanner::Admin::Database::V1::Database.new(
       name: "projects/bustling-kayak-91516/instances/my-new-instance",
-      config: "projects/my-project/instanceConfigs/regional-us-central1",
-      display_name: "My New Instance",
-      node_count: 1,
       state: :READY,
-      labels: {}
+      create_time: Time.now
+    )
   end
   let(:job_grpc_done) do
     Google::Longrunning::Operation.new(
@@ -46,8 +43,8 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
       ),
       done: true,
       response: Google::Protobuf::Any.new(
-        type_url: "type.googleapis.com/google.spanner.admin.database.v1.database",
-        value: Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
+        type_url: "type.googleapis.com/google.spanner.admin.database.v1.Database",
+        value: database_grpc.to_proto
       )
     )
   end

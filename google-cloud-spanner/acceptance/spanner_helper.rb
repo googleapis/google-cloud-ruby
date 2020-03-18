@@ -18,6 +18,7 @@ gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
+
 require "google/cloud/spanner"
 
 # define SecureRandom.int64
@@ -256,9 +257,9 @@ $spanner_database_id = "gcruby-#{Date.today.strftime "%y%m%d"}-#{SecureRandom.he
 fixture = Object.new
 fixture.extend Acceptance::SpannerTest::Fixtures
 
-instance = $spanner.instance "google-cloud-ruby-tests"
+instance = $spanner.instance $spanner_instance_id
 instance ||= begin
-  inst_job = $spanner.create_instance "google-cloud-ruby-tests", name: "google-cloud-ruby-tests", config: "regional-us-central1", nodes: 1
+  inst_job = $spanner.create_instance $spanner_instance_id, name: "google-cloud-ruby-tests", config: "regional-us-central1", nodes: 1
   inst_job.wait_until_done!
   fail GRPC::BadStatus.new(inst_job.error.code, inst_job.error.message) if inst_job.error?
   inst_job.instance
@@ -274,8 +275,22 @@ $spanner_client = $spanner.client $spanner_instance_id, $spanner_database_id
 def clean_up_spanner_objects
   puts "Cleaning up instances and databases after spanner tests."
   $spanner.instance($spanner_instance_id).database($spanner_database_id).drop
+
   puts "Closing the Spanner Client."
   $spanner_client.close
+
+  puts "Cleaning up instances databases and backups after spanner tests."
+  instance = $spanner.instance($spanner_instance_id)
+
+  # Delete test database backups.
+  instance.backups(filter: "name:#{$spanner_database_id}").all.each do |backup|
+    backup.delete
+  end
+
+  # Delete test restored database.
+  instance.database($spanner_database_id).drop
+  restored_db = instance.database("restore-#{$spanner_database_id}")
+  restored_db.drop if restored_db
 rescue => e
   puts "Error while cleaning up instances and databases after spanner tests.\n\n#{e}"
 end

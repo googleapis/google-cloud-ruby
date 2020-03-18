@@ -17,7 +17,20 @@ require "helper"
 describe Google::Cloud::Spanner::Instance, :mock_spanner do
   let(:instance_id) { "my-instance-id" }
   let(:database_id) { "my-database-id" }
-  let(:database_grpc) { Google::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id) }
+  let(:backup_id) { "my-backup-id" }
+  let(:source_database_id) { "my-backup-source-database-id" }
+  let(:restore_info) do
+    restore_info_hash source_type: 'BACKUP', backup_info: backup_info_hash(
+      instance_id: instance_id,
+      backup_id: backup_id,
+      create_time: Time.now,
+      source_database_id: source_database_id
+    )
+  end
+  let(:database_grpc) do
+    Google::Spanner::Admin::Database::V1::Database.new \
+      database_hash(instance_id: instance_id, database_id: database_id, restore_info: restore_info)
+  end
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
 
   it "knows the identifiers" do
@@ -29,5 +42,20 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
     database.state.must_equal :READY
     database.must_be :ready?
     database.wont_be :creating?
+
+    restore_info = database.restore_info
+    restore_info.must_be_kind_of Google::Cloud::Spanner::Database::RestoreInfo
+    restore_info.source_type.must_equal :BACKUP
+    restore_info.must_be :source_backup?
+
+    backup_info = restore_info.backup_info
+    backup_info.must_be_kind_of Google::Cloud::Spanner::Database::BackupInfo
+    backup_info.project_id.must_equal project
+    backup_info.instance_id.must_equal instance_id
+    backup_info.backup_id.must_equal backup_id
+    backup_info.source_database_project_id.must_equal project
+    backup_info.source_database_instance_id.must_equal instance_id
+    backup_info.source_database_id.must_equal source_database_id
+    backup_info.create_time.must_be_kind_of Time
   end
 end

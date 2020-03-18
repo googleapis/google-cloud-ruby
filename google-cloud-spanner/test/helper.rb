@@ -113,11 +113,49 @@ class MockSpanner < Minitest::Spec
     { databases: 3.times.map { database_hash(instance_id: instance_id) } }
   end
 
-  def database_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}", state: "READY"
+  def database_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}",
+                    state: "READY", restore_info: {}
     {
       name: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
-      state: state
+      state: state,
+      restore_info: restore_info
     }
+  end
+
+  def restore_info_hash source_type: "BACKUP", backup_info: {}
+    {
+      source_type: source_type,
+      backup_info: backup_info
+    }
+  end
+
+  def backup_info_hash instance_id: "my-instance-id", backup_id: "my-backup-id",
+                       create_time: Time.now, source_database_id: "my-backup-source-database-id"
+    {
+      backup: "projects/#{project}/instances/#{instance_id}/backups/#{backup_id}",
+      create_time: create_time,
+      source_database: "projects/#{project}/instances/#{instance_id}/databases/#{source_database_id}"
+    }
+  end
+
+  def backup_hash instance_id: "my-instance-id", database_id: "database-#{rand(9999)}",
+                  backup_id: "backup-#{rand(9999)}", state: "READY", expire_time: Time.now + 36000,
+                  create_time: Time.now, size_bytes: 1024, referencing_databases: ["db1"]
+    {
+      name: "projects/#{project}/instances/#{instance_id}/backups/#{backup_id}",
+      database: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
+      state: state,
+      expire_time: expire_time,
+      create_time: create_time,
+      size_bytes: size_bytes,
+      referencing_databases: referencing_databases.map do |database|
+        "projects/#{project}/instances/#{instance_id}/databases/#{database}"
+      end
+    }
+  end
+
+  def backups_hash instance_id: "my-instance-id"
+    { backups: 3.times.map { backup_hash instance_id: instance_id } }
   end
 
   def project_path
@@ -144,6 +182,11 @@ class MockSpanner < Minitest::Spec
   def session_path instance_id, database_id, session_id
     Google::Cloud::Spanner::V1::SpannerClient.session_path(
       project, instance_id, database_id, session_id)
+  end
+
+  def backup_path instance, backup
+    Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdminClient.backup_path(
+      project, instance, backup)
   end
 
   def paged_enum_struct response
@@ -187,5 +230,25 @@ class RaiseableEnumerator
 
   def inspect
     "<#{self.class}>"
+  end
+end
+
+class MockPagedEnumerable
+  def initialize responses = []
+    @responses = responses
+    @current_index = 0
+  end
+
+  def response
+    @responses[@current_index]
+  end
+
+  def next_page?
+    response.next_page_token != ""
+  end
+
+  def next_page
+    @current_index += 1
+    response
   end
 end
