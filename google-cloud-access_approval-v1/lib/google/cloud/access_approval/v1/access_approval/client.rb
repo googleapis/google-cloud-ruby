@@ -191,7 +191,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_approval_requests.metadata.to_h
@@ -251,7 +251,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_approval_request.metadata.to_h
@@ -318,7 +318,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.approve_approval_request.metadata.to_h
@@ -395,7 +395,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.dismiss_approval_request.metadata.to_h
@@ -454,7 +454,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_access_approval_settings.metadata.to_h
@@ -526,7 +526,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_access_approval_settings.metadata.to_h
@@ -595,7 +595,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_access_approval_settings.metadata.to_h
