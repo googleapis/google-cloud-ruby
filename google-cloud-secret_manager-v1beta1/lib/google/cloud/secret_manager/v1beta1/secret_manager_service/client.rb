@@ -184,25 +184,25 @@ module Google
             # Service calls
 
             ##
-            # Lists [Secrets][google.cloud.secrets.v1beta1.Secret].
+            # Lists {Google::Cloud::SecretManager::V1beta1::Secret Secrets}.
             #
             # @overload list_secrets(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::ListSecretsRequest | Hash]
-            #     Lists [Secrets][google.cloud.secrets.v1beta1.Secret].
+            #     Lists {Google::Cloud::SecretManager::V1beta1::Secret Secrets}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_secrets(parent: nil, page_size: nil, page_token: nil)
             #   @param parent [String]
             #     Required. The resource name of the project associated with the
-            #     [Secrets][google.cloud.secrets.v1beta1.Secret], in the format `projects/*`.
+            #     {Google::Cloud::SecretManager::V1beta1::Secret Secrets}, in the format `projects/*`.
             #   @param page_size [Integer]
             #     Optional. The maximum number of results to be returned in a single page. If
             #     set to 0, the server decides the number of results to return. If the
             #     number is greater than 25000, it is capped at 25000.
             #   @param page_token [String]
             #     Optional. Pagination token, returned earlier via
-            #     [ListSecretsResponse.next_page_token][google.cloud.secrets.v1beta1.ListSecretsResponse.next_page_token].
+            #     {Google::Cloud::SecretManager::V1beta1::ListSecretsResponse#next_page_token ListSecretsResponse.next_page_token}.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -219,7 +219,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::ListSecretsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_secrets.metadata.to_h
@@ -252,22 +252,22 @@ module Google
             end
 
             ##
-            # Creates a new [Secret][google.cloud.secrets.v1beta1.Secret] containing no [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion].
+            # Creates a new {Google::Cloud::SecretManager::V1beta1::Secret Secret} containing no {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions}.
             #
             # @overload create_secret(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::CreateSecretRequest | Hash]
-            #     Creates a new [Secret][google.cloud.secrets.v1beta1.Secret] containing no [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion].
+            #     Creates a new {Google::Cloud::SecretManager::V1beta1::Secret Secret} containing no {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_secret(parent: nil, secret_id: nil, secret: nil)
             #   @param parent [String]
             #     Required. The resource name of the project to associate with the
-            #     [Secret][google.cloud.secrets.v1beta1.Secret], in the format `projects/*`.
+            #     {Google::Cloud::SecretManager::V1beta1::Secret Secret}, in the format `projects/*`.
             #   @param secret_id [String]
             #     Required. This must be unique within the project.
             #   @param secret [Google::Cloud::SecretManager::V1beta1::Secret | Hash]
-            #     A [Secret][google.cloud.secrets.v1beta1.Secret] with initial field values.
+            #     A {Google::Cloud::SecretManager::V1beta1::Secret Secret} with initial field values.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -284,7 +284,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::CreateSecretRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_secret.metadata.to_h
@@ -316,22 +316,22 @@ module Google
             end
 
             ##
-            # Creates a new [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] containing secret data and attaches
-            # it to an existing [Secret][google.cloud.secrets.v1beta1.Secret].
+            # Creates a new {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} containing secret data and attaches
+            # it to an existing {Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #
             # @overload add_secret_version(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::AddSecretVersionRequest | Hash]
-            #     Creates a new [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] containing secret data and attaches
-            #     it to an existing [Secret][google.cloud.secrets.v1beta1.Secret].
+            #     Creates a new {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} containing secret data and attaches
+            #     it to an existing {Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload add_secret_version(parent: nil, payload: nil)
             #   @param parent [String]
-            #     Required. The resource name of the [Secret][google.cloud.secrets.v1beta1.Secret] to associate with the
-            #     [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] in the format `projects/*/secrets/*`.
+            #     Required. The resource name of the {Google::Cloud::SecretManager::V1beta1::Secret Secret} to associate with the
+            #     {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the format `projects/*/secrets/*`.
             #   @param payload [Google::Cloud::SecretManager::V1beta1::SecretPayload | Hash]
-            #     Required. The secret payload of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            #     Required. The secret payload of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -348,7 +348,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::AddSecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.add_secret_version.metadata.to_h
@@ -380,17 +380,17 @@ module Google
             end
 
             ##
-            # Gets metadata for a given [Secret][google.cloud.secrets.v1beta1.Secret].
+            # Gets metadata for a given {Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #
             # @overload get_secret(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::GetSecretRequest | Hash]
-            #     Gets metadata for a given [Secret][google.cloud.secrets.v1beta1.Secret].
+            #     Gets metadata for a given {Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_secret(name: nil)
             #   @param name [String]
-            #     Required. The resource name of the [Secret][google.cloud.secrets.v1beta1.Secret], in the format `projects/*/secrets/*`.
+            #     Required. The resource name of the {Google::Cloud::SecretManager::V1beta1::Secret Secret}, in the format `projects/*/secrets/*`.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -407,7 +407,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::GetSecretRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_secret.metadata.to_h
@@ -439,17 +439,17 @@ module Google
             end
 
             ##
-            # Updates metadata of an existing [Secret][google.cloud.secrets.v1beta1.Secret].
+            # Updates metadata of an existing {Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #
             # @overload update_secret(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::UpdateSecretRequest | Hash]
-            #     Updates metadata of an existing [Secret][google.cloud.secrets.v1beta1.Secret].
+            #     Updates metadata of an existing {Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_secret(secret: nil, update_mask: nil)
             #   @param secret [Google::Cloud::SecretManager::V1beta1::Secret | Hash]
-            #     Required. [Secret][google.cloud.secrets.v1beta1.Secret] with updated field values.
+            #     Required. {Google::Cloud::SecretManager::V1beta1::Secret Secret} with updated field values.
             #   @param update_mask [Google::Protobuf::FieldMask | Hash]
             #     Required. Specifies the fields to be updated.
             #
@@ -468,7 +468,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::UpdateSecretRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_secret.metadata.to_h
@@ -500,17 +500,17 @@ module Google
             end
 
             ##
-            # Deletes a [Secret][google.cloud.secrets.v1beta1.Secret].
+            # Deletes a {Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #
             # @overload delete_secret(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::DeleteSecretRequest | Hash]
-            #     Deletes a [Secret][google.cloud.secrets.v1beta1.Secret].
+            #     Deletes a {Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_secret(name: nil)
             #   @param name [String]
-            #     Required. The resource name of the [Secret][google.cloud.secrets.v1beta1.Secret] to delete in the format
+            #     Required. The resource name of the {Google::Cloud::SecretManager::V1beta1::Secret Secret} to delete in the format
             #     `projects/*/secrets/*`.
             #
             #
@@ -528,7 +528,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::DeleteSecretRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_secret.metadata.to_h
@@ -560,20 +560,20 @@ module Google
             end
 
             ##
-            # Lists [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion]. This call does not return secret
+            # Lists {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions}. This call does not return secret
             # data.
             #
             # @overload list_secret_versions(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::ListSecretVersionsRequest | Hash]
-            #     Lists [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion]. This call does not return secret
+            #     Lists {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions}. This call does not return secret
             #     data.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_secret_versions(parent: nil, page_size: nil, page_token: nil)
             #   @param parent [String]
-            #     Required. The resource name of the [Secret][google.cloud.secrets.v1beta1.Secret] associated with the
-            #     [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion] to list, in the format
+            #     Required. The resource name of the {Google::Cloud::SecretManager::V1beta1::Secret Secret} associated with the
+            #     {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions} to list, in the format
             #     `projects/*/secrets/*`.
             #   @param page_size [Integer]
             #     Optional. The maximum number of results to be returned in a single page. If
@@ -598,7 +598,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::ListSecretVersionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_secret_versions.metadata.to_h
@@ -631,26 +631,26 @@ module Google
             end
 
             ##
-            # Gets metadata for a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            # Gets metadata for a {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
             # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            # [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            # {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
             # @overload get_secret_version(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::GetSecretVersionRequest | Hash]
-            #     Gets metadata for a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            #     Gets metadata for a {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
             #     `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            #     [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            #     {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_secret_version(name: nil)
             #   @param name [String]
-            #     Required. The resource name of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] in the format
+            #     Required. The resource name of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the format
             #     `projects/*/secrets/*/versions/*`.
             #     `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            #     [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            #     {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -667,7 +667,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::GetSecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_secret_version.metadata.to_h
@@ -699,23 +699,23 @@ module Google
             end
 
             ##
-            # Accesses a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion]. This call returns the secret data.
+            # Accesses a {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}. This call returns the secret data.
             #
             # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            # [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            # {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
             # @overload access_secret_version(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::AccessSecretVersionRequest | Hash]
-            #     Accesses a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion]. This call returns the secret data.
+            #     Accesses a {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}. This call returns the secret data.
             #
             #     `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            #     [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            #     {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload access_secret_version(name: nil)
             #   @param name [String]
-            #     Required. The resource name of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] in the format
+            #     Required. The resource name of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} in the format
             #     `projects/*/secrets/*/versions/*`.
             #
             #
@@ -733,7 +733,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::AccessSecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.access_secret_version.metadata.to_h
@@ -765,23 +765,23 @@ module Google
             end
 
             ##
-            # Disables a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            # Disables a {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
-            # Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
-            # [DISABLED][google.cloud.secrets.v1beta1.SecretVersion.State.DISABLED].
+            # Sets the {Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
+            # {Google::Cloud::SecretManager::V1beta1::SecretVersion::State::DISABLED DISABLED}.
             #
             # @overload disable_secret_version(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::DisableSecretVersionRequest | Hash]
-            #     Disables a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            #     Disables a {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
-            #     Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
-            #     [DISABLED][google.cloud.secrets.v1beta1.SecretVersion.State.DISABLED].
+            #     Sets the {Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
+            #     {Google::Cloud::SecretManager::V1beta1::SecretVersion::State::DISABLED DISABLED}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload disable_secret_version(name: nil)
             #   @param name [String]
-            #     Required. The resource name of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to disable in the format
+            #     Required. The resource name of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to disable in the format
             #     `projects/*/secrets/*/versions/*`.
             #
             #
@@ -799,7 +799,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::DisableSecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.disable_secret_version.metadata.to_h
@@ -831,23 +831,23 @@ module Google
             end
 
             ##
-            # Enables a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            # Enables a {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
-            # Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
-            # [ENABLED][google.cloud.secrets.v1beta1.SecretVersion.State.ENABLED].
+            # Sets the {Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
+            # {Google::Cloud::SecretManager::V1beta1::SecretVersion::State::ENABLED ENABLED}.
             #
             # @overload enable_secret_version(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::EnableSecretVersionRequest | Hash]
-            #     Enables a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            #     Enables a {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
-            #     Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
-            #     [ENABLED][google.cloud.secrets.v1beta1.SecretVersion.State.ENABLED].
+            #     Sets the {Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
+            #     {Google::Cloud::SecretManager::V1beta1::SecretVersion::State::ENABLED ENABLED}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload enable_secret_version(name: nil)
             #   @param name [String]
-            #     Required. The resource name of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to enable in the format
+            #     Required. The resource name of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to enable in the format
             #     `projects/*/secrets/*/versions/*`.
             #
             #
@@ -865,7 +865,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::EnableSecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.enable_secret_version.metadata.to_h
@@ -897,25 +897,25 @@ module Google
             end
 
             ##
-            # Destroys a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            # Destroys a {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
-            # Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
-            # [DESTROYED][google.cloud.secrets.v1beta1.SecretVersion.State.DESTROYED] and irrevocably destroys the
+            # Sets the {Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
+            # {Google::Cloud::SecretManager::V1beta1::SecretVersion::State::DESTROYED DESTROYED} and irrevocably destroys the
             # secret data.
             #
             # @overload destroy_secret_version(request, options = nil)
             #   @param request [Google::Cloud::SecretManager::V1beta1::DestroySecretVersionRequest | Hash]
-            #     Destroys a [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion].
+            #     Destroys a {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}.
             #
-            #     Sets the [state][google.cloud.secrets.v1beta1.SecretVersion.state] of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to
-            #     [DESTROYED][google.cloud.secrets.v1beta1.SecretVersion.State.DESTROYED] and irrevocably destroys the
+            #     Sets the {Google::Cloud::SecretManager::V1beta1::SecretVersion#state state} of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to
+            #     {Google::Cloud::SecretManager::V1beta1::SecretVersion::State::DESTROYED DESTROYED} and irrevocably destroys the
             #     secret data.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload destroy_secret_version(name: nil)
             #   @param name [String]
-            #     Required. The resource name of the [SecretVersion][google.cloud.secrets.v1beta1.SecretVersion] to destroy in the format
+            #     Required. The resource name of the {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion} to destroy in the format
             #     `projects/*/secrets/*/versions/*`.
             #
             #
@@ -933,7 +933,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1beta1::DestroySecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.destroy_secret_version.metadata.to_h
@@ -968,16 +968,16 @@ module Google
             # Sets the access control policy on the specified secret. Replaces any
             # existing policy.
             #
-            # Permissions on [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion] are enforced according
-            # to the policy set on the associated [Secret][google.cloud.secrets.v1beta1.Secret].
+            # Permissions on {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions} are enforced according
+            # to the policy set on the associated {Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #
             # @overload set_iam_policy(request, options = nil)
             #   @param request [Google::Iam::V1::SetIamPolicyRequest | Hash]
             #     Sets the access control policy on the specified secret. Replaces any
             #     existing policy.
             #
-            #     Permissions on [SecretVersions][google.cloud.secrets.v1beta1.SecretVersion] are enforced according
-            #     to the policy set on the associated [Secret][google.cloud.secrets.v1beta1.Secret].
+            #     Permissions on {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersions} are enforced according
+            #     to the policy set on the associated {Google::Cloud::SecretManager::V1beta1::Secret Secret}.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -1007,7 +1007,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::SetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
@@ -1070,7 +1070,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::GetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
@@ -1148,7 +1148,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::TestIamPermissionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
