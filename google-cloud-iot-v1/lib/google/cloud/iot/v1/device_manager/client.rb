@@ -278,7 +278,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::CreateDeviceRegistryRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_device_registry.metadata.to_h
@@ -338,7 +338,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::GetDeviceRegistryRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_device_registry.metadata.to_h
@@ -405,7 +405,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_device_registry.metadata.to_h
@@ -465,7 +465,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_device_registry.metadata.to_h
@@ -534,7 +534,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::ListDeviceRegistriesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_device_registries.metadata.to_h
@@ -600,7 +600,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::CreateDeviceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_device.metadata.to_h
@@ -664,7 +664,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::GetDeviceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_device.metadata.to_h
@@ -731,7 +731,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::UpdateDeviceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_device.metadata.to_h
@@ -792,7 +792,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::DeleteDeviceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_device.metadata.to_h
@@ -873,7 +873,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::ListDevicesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_devices.metadata.to_h
@@ -947,7 +947,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.modify_cloud_to_device_config.metadata.to_h
@@ -1014,7 +1014,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_device_config_versions.metadata.to_h
@@ -1081,7 +1081,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::ListDeviceStatesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_device_states.metadata.to_h
@@ -1149,7 +1149,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::SetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
@@ -1214,7 +1214,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::GetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
@@ -1284,7 +1284,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::TestIamPermissionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
@@ -1377,7 +1377,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::SendCommandToDeviceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.send_command_to_device.metadata.to_h
@@ -1444,7 +1444,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::BindDeviceToGatewayRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.bind_device_to_gateway.metadata.to_h
@@ -1511,7 +1511,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.unbind_device_from_gateway.metadata.to_h
