@@ -100,8 +100,8 @@ module Google
         #     the same session do not necessarily need to specify the same language.
         # @!attribute [rw] enable_word_info
         #   @return [Boolean]
-        #     Optional. If `true`, Dialogflow returns [SpeechWordInfo][google.cloud.dialogflow.v2.SpeechWordInfo] in
-        #     [StreamingRecognitionResult][google.cloud.dialogflow.v2.StreamingRecognitionResult] with information about the recognized speech
+        #     Optional. If `true`, Dialogflow returns {Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
+        #     {Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult} with information about the recognized speech
         #     words, e.g. start and end time offsets. If false or unspecified, Speech
         #     doesn't return any word-level information.
         # @!attribute [rw] phrase_hints
@@ -161,12 +161,12 @@ module Google
         #   @return [String]
         #     Optional. The name of the voice. If not set, the service will choose a
         #     voice based on the other parameters such as language_code and
-        #     [ssml_gender][google.cloud.dialogflow.v2.VoiceSelectionParams.ssml_gender].
+        #     {Google::Cloud::Dialogflow::V2::VoiceSelectionParams#ssml_gender ssml_gender}.
         # @!attribute [rw] ssml_gender
         #   @return [Google::Cloud::Dialogflow::V2::SsmlVoiceGender]
         #     Optional. The preferred gender of the voice. If not set, the service will
         #     choose a voice based on the other parameters such as language_code and
-        #     [name][google.cloud.dialogflow.v2.VoiceSelectionParams.name]. Note that this is only a preference, not requirement. If a
+        #     {Google::Cloud::Dialogflow::V2::VoiceSelectionParams#name name}. Note that this is only a preference, not requirement. If a
         #     voice of the appropriate gender is not available, the synthesizer should
         #     substitute a voice with a different gender rather than failing the request.
         class VoiceSelectionParams
@@ -308,7 +308,7 @@ module Google
           # Use an enhanced model variant:
           #
           # * If an enhanced variant does not exist for the given
-          #   [model][google.cloud.dialogflow.v2.InputAudioConfig.model] and request language, Dialogflow falls
+          #   {Google::Cloud::Dialogflow::V2::InputAudioConfig#model model} and request language, Dialogflow falls
           #   back to the standard variant.
           #
           #   The [Cloud Speech

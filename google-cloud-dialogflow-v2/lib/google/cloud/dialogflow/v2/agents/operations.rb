@@ -144,7 +144,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Longrunning::ListOperationsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_operations.metadata.to_h
@@ -209,7 +209,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Longrunning::GetOperationRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_operation.metadata.to_h
@@ -233,7 +233,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @operations_stub.call_rpc :get_operation, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -275,7 +275,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Longrunning::DeleteOperationRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_operation.metadata.to_h
@@ -311,11 +311,11 @@ module Google
             # makes a best effort to cancel the operation, but success is not
             # guaranteed.  If the server doesn't support this method, it returns
             # `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-            # [Operations.GetOperation][google.longrunning.Operations.GetOperation] or
+            # Operations.GetOperation or
             # other methods to check whether the cancellation succeeded or whether the
             # operation completed despite cancellation. On successful cancellation,
             # the operation is not deleted; instead, it becomes an operation with
-            # an [Operation.error][google.longrunning.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
+            # an {Google::Longrunning::Operation#error Operation.error} value with a {Google::Rpc::Status#code google.rpc.Status.code} of 1,
             # corresponding to `Code.CANCELLED`.
             #
             # @overload cancel_operation(request, options = nil)
@@ -324,11 +324,11 @@ module Google
             #     makes a best effort to cancel the operation, but success is not
             #     guaranteed.  If the server doesn't support this method, it returns
             #     `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-            #     [Operations.GetOperation][google.longrunning.Operations.GetOperation] or
+            #     Operations.GetOperation or
             #     other methods to check whether the cancellation succeeded or whether the
             #     operation completed despite cancellation. On successful cancellation,
             #     the operation is not deleted; instead, it becomes an operation with
-            #     an [Operation.error][google.longrunning.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
+            #     an {Google::Longrunning::Operation#error Operation.error} value with a {Google::Rpc::Status#code google.rpc.Status.code} of 1,
             #     corresponding to `Code.CANCELLED`.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
@@ -352,7 +352,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Longrunning::CancelOperationRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.cancel_operation.metadata.to_h

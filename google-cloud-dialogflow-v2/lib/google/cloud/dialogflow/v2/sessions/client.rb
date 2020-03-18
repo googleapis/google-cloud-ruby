@@ -189,11 +189,11 @@ module Google
             #     audio. If this field is not set and agent-level speech synthesizer is not
             #     configured, no output audio is generated.
             #   @param output_audio_config_mask [Google::Protobuf::FieldMask | Hash]
-            #     Mask for [output_audio_config][google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config] indicating which settings in this
+            #     Mask for {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
             #     request-level config should override speech synthesizer settings defined at
             #     agent-level.
             #
-            #     If unspecified or empty, [output_audio_config][google.cloud.dialogflow.v2.DetectIntentRequest.output_audio_config] replaces the agent-level
+            #     If unspecified or empty, {Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
             #     config in its entirety.
             #   @param input_audio [String]
             #     The natural language speech audio to be processed. This field
@@ -215,7 +215,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::DetectIntentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.detect_intent.metadata.to_h
@@ -275,7 +275,7 @@ module Google
               end
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.streaming_detect_intent.metadata.to_h

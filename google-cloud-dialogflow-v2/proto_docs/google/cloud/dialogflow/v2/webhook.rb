@@ -49,7 +49,7 @@ module Google
         # The response message for a webhook call.
         #
         # This response is validated by the Dialogflow server. If validation fails,
-        # an error will be returned in the [QueryResult.diagnostic_info][google.cloud.dialogflow.v2.QueryResult.diagnostic_info] field.
+        # an error will be returned in the {Google::Cloud::Dialogflow::V2::QueryResult#diagnostic_info QueryResult.diagnostic_info} field.
         # Setting JSON fields to an empty value with the wrong type is a common error.
         # To avoid this error:
         #

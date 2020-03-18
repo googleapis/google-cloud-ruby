@@ -243,7 +243,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::ListEntityTypesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_entity_types.metadata.to_h
@@ -311,7 +311,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::GetEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_entity_type.metadata.to_h
@@ -380,7 +380,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_entity_type.metadata.to_h
@@ -448,7 +448,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_entity_type.metadata.to_h
@@ -508,7 +508,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_entity_type.metadata.to_h
@@ -542,13 +542,13 @@ module Google
             ##
             # Updates/Creates multiple entity types in the specified agent.
             #
-            # Operation <response: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse]>
+            # Operation <response: {Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesResponse BatchUpdateEntityTypesResponse}>
             #
             # @overload batch_update_entity_types(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest | Hash]
             #     Updates/Creates multiple entity types in the specified agent.
             #
-            #     Operation <response: [BatchUpdateEntityTypesResponse][google.cloud.dialogflow.v2.BatchUpdateEntityTypesResponse]>
+            #     Operation <response: {Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesResponse BatchUpdateEntityTypesResponse}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -588,7 +588,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_update_entity_types.metadata.to_h
@@ -612,7 +612,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :batch_update_entity_types, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -623,13 +623,13 @@ module Google
             ##
             # Deletes entity types in the specified agent.
             #
-            # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload batch_delete_entity_types(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest | Hash]
             #     Deletes entity types in the specified agent.
             #
-            #     Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            #     Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -656,7 +656,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_delete_entity_types.metadata.to_h
@@ -680,7 +680,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :batch_delete_entity_types, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -691,13 +691,13 @@ module Google
             ##
             # Creates multiple new entities in the specified entity type.
             #
-            # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload batch_create_entities(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest | Hash]
             #     Creates multiple new entities in the specified entity type.
             #
-            #     Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            #     Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -730,7 +730,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_create_entities.metadata.to_h
@@ -754,7 +754,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :batch_create_entities, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -768,7 +768,7 @@ module Google
             # specified in the request.
             #
             #
-            # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload batch_update_entities(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest | Hash]
@@ -777,7 +777,7 @@ module Google
             #     specified in the request.
             #
             #
-            #     Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            #     Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -812,7 +812,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_update_entities.metadata.to_h
@@ -836,7 +836,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :batch_update_entities, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -848,14 +848,14 @@ module Google
             # Deletes entities in the specified entity type.
             #
             #
-            # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload batch_delete_entities(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest | Hash]
             #     Deletes entities in the specified entity type.
             #
             #
-            #     Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            #     Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -890,7 +890,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_delete_entities.metadata.to_h
@@ -914,7 +914,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :batch_delete_entities, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end

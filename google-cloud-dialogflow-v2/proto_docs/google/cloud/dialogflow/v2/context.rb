@@ -53,7 +53,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Contexts.ListContexts][google.cloud.dialogflow.v2.Contexts.ListContexts].
+        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#list_contexts Contexts.ListContexts}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to list all contexts from.
@@ -70,7 +70,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for [Contexts.ListContexts][google.cloud.dialogflow.v2.Contexts.ListContexts].
+        # The response message for {Google::Cloud::Dialogflow::V2::Contexts::Client#list_contexts Contexts.ListContexts}.
         # @!attribute [rw] contexts
         #   @return [Array<Google::Cloud::Dialogflow::V2::Context>]
         #     The list of contexts. There will be a maximum number of items
@@ -84,7 +84,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Contexts.GetContext][google.cloud.dialogflow.v2.Contexts.GetContext].
+        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#get_context Contexts.GetContext}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the context. Format:
@@ -94,7 +94,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Contexts.CreateContext][google.cloud.dialogflow.v2.Contexts.CreateContext].
+        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#create_context Contexts.CreateContext}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to create a context for.
@@ -107,7 +107,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Contexts.UpdateContext][google.cloud.dialogflow.v2.Contexts.UpdateContext].
+        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#update_context Contexts.UpdateContext}.
         # @!attribute [rw] context
         #   @return [Google::Cloud::Dialogflow::V2::Context]
         #     Required. The context to update.
@@ -119,7 +119,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Contexts.DeleteContext][google.cloud.dialogflow.v2.Contexts.DeleteContext].
+        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#delete_context Contexts.DeleteContext}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the context to delete. Format:
@@ -129,7 +129,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Contexts.DeleteAllContexts][google.cloud.dialogflow.v2.Contexts.DeleteAllContexts].
+        # The request message for {Google::Cloud::Dialogflow::V2::Contexts::Client#delete_all_contexts Contexts.DeleteAllContexts}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the session to delete all contexts from. Format:

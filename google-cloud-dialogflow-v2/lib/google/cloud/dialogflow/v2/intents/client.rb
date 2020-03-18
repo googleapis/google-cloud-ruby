@@ -233,7 +233,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::ListIntentsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_intents.metadata.to_h
@@ -303,7 +303,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::GetIntentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_intent.metadata.to_h
@@ -374,7 +374,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::CreateIntentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_intent.metadata.to_h
@@ -444,7 +444,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::UpdateIntentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_intent.metadata.to_h
@@ -505,7 +505,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::DeleteIntentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_intent.metadata.to_h
@@ -539,13 +539,13 @@ module Google
             ##
             # Updates/Creates multiple intents in the specified agent.
             #
-            # Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
+            # Operation <response: {Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse BatchUpdateIntentsResponse}>
             #
             # @overload batch_update_intents(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest | Hash]
             #     Updates/Creates multiple intents in the specified agent.
             #
-            #     Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
+            #     Operation <response: {Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse BatchUpdateIntentsResponse}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -586,7 +586,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_update_intents.metadata.to_h
@@ -610,7 +610,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :batch_update_intents, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -621,13 +621,13 @@ module Google
             ##
             # Deletes intents in the specified agent.
             #
-            # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload batch_delete_intents(request, options = nil)
             #   @param request [Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest | Hash]
             #     Deletes intents in the specified agent.
             #
-            #     Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            #     Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
@@ -654,7 +654,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_delete_intents.metadata.to_h
@@ -678,7 +678,7 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :batch_delete_intents, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end

@@ -129,7 +129,7 @@ module Google
           end
         end
 
-        # The request message for [Agents.GetAgent][google.cloud.dialogflow.v2.Agents.GetAgent].
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::Client#get_agent Agents.GetAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to fetch is associated with.
@@ -139,7 +139,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Agents.SetAgent][google.cloud.dialogflow.v2.Agents.SetAgent].
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::Client#set_agent Agents.SetAgent}.
         # @!attribute [rw] agent
         #   @return [Google::Cloud::Dialogflow::V2::Agent]
         #     Required. The agent to update.
@@ -151,7 +151,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Agents.DeleteAgent][google.cloud.dialogflow.v2.Agents.DeleteAgent].
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::Client#delete_agent Agents.DeleteAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to delete is associated with.
@@ -161,7 +161,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Agents.SearchAgents][google.cloud.dialogflow.v2.Agents.SearchAgents].
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::Client#search_agents Agents.SearchAgents}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project to list agents from.
@@ -178,7 +178,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for [Agents.SearchAgents][google.cloud.dialogflow.v2.Agents.SearchAgents].
+        # The response message for {Google::Cloud::Dialogflow::V2::Agents::Client#search_agents Agents.SearchAgents}.
         # @!attribute [rw] agents
         #   @return [Array<Google::Cloud::Dialogflow::V2::Agent>]
         #     The list of agents. There will be a maximum number of items returned based
@@ -192,7 +192,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Agents.TrainAgent][google.cloud.dialogflow.v2.Agents.TrainAgent].
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::Client#train_agent Agents.TrainAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to train is associated with.
@@ -202,7 +202,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent].
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::Client#export_agent Agents.ExportAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to export is associated with.
@@ -218,7 +218,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for [Agents.ExportAgent][google.cloud.dialogflow.v2.Agents.ExportAgent].
+        # The response message for {Google::Cloud::Dialogflow::V2::Agents::Client#export_agent Agents.ExportAgent}.
         # @!attribute [rw] agent_uri
         #   @return [String]
         #     The URI to a file containing the exported agent. This field is populated
@@ -231,7 +231,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Agents.ImportAgent][google.cloud.dialogflow.v2.Agents.ImportAgent].
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::Client#import_agent Agents.ImportAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to import is associated with.
@@ -248,7 +248,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Agents.RestoreAgent][google.cloud.dialogflow.v2.Agents.RestoreAgent].
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::Client#restore_agent Agents.RestoreAgent}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent to restore is associated with.
@@ -265,7 +265,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [Agents.GetValidationResult][google.cloud.dialogflow.v2.Agents.GetValidationResult].
+        # The request message for {Google::Cloud::Dialogflow::V2::Agents::Client#get_validation_result Agents.GetValidationResult}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The project that the agent is associated with.
