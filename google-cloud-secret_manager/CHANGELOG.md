@@ -1,5 +1,10 @@
 # Release History
 
+### 0.3.0 / 2020-03-18
+
+* Uses v1 of the service by default
+* Minor documentation fixes
+
 ### 0.2.1 / 2020-02-06
 
 #### Documentation
