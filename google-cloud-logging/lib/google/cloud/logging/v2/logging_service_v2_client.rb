@@ -69,6 +69,18 @@ module Google
 
           private_constant :PAGE_DESCRIPTORS
 
+          BUNDLE_DESCRIPTORS = {
+            "write_log_entries" => Google::Gax::BundleDescriptor.new(
+              "entries",
+              [
+                "logName",
+                "resource",
+                "labels"
+              ])
+          }.freeze
+
+          private_constant :BUNDLE_DESCRIPTORS
+
           # The scopes needed to make gRPC calls to all of the methods defined in
           # this service.
           ALL_SCOPES = [
@@ -231,6 +243,7 @@ module Google
                 client_config,
                 Google::Gax::Grpc::STATUS_CODE_NAMES,
                 timeout,
+                bundle_descriptors: BUNDLE_DESCRIPTORS,
                 page_descriptors: PAGE_DESCRIPTORS,
                 errors: Google::Gax::Grpc::API_ERRORS,
                 metadata: headers
@@ -252,6 +265,11 @@ module Google
               &Google::Logging::V2::LoggingServiceV2::Stub.method(:new)
             )
 
+            @write_log_entries = Google::Gax.create_api_call(
+              @logging_service_v2_stub.method(:write_log_entries),
+              defaults["write_log_entries"],
+              exception_transformer: exception_transformer
+            )
             @delete_log = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:delete_log),
               defaults["delete_log"],
@@ -259,11 +277,6 @@ module Google
               params_extractor: proc do |request|
                 {'log_name' => request.log_name}
               end
-            )
-            @write_log_entries = Google::Gax.create_api_call(
-              @logging_service_v2_stub.method(:write_log_entries),
-              defaults["write_log_entries"],
-              exception_transformer: exception_transformer
             )
             @list_log_entries = Google::Gax.create_api_call(
               @logging_service_v2_stub.method(:list_log_entries),
@@ -286,52 +299,6 @@ module Google
           end
 
           # Service calls
-
-          # Deletes all the log entries in a log. The log reappears if it receives new
-          # entries. Log entries written shortly before the delete operation might not
-          # be deleted. Entries received after the delete operation with a timestamp
-          # before the operation will be deleted.
-          #
-          # @param log_name [String]
-          #   Required. The resource name of the log to delete:
-          #
-          #       "projects/[PROJECT_ID]/logs/[LOG_ID]"
-          #       "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-          #       "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
-          #       "folders/[FOLDER_ID]/logs/[LOG_ID]"
-          #
-          #   `[LOG_ID]` must be URL-encoded. For example,
-          #   `"projects/my-project-id/logs/syslog"`,
-          #   `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
-          #   For more information about log names, see
-          #   {Google::Logging::V2::LogEntry LogEntry}.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/logging/v2"
-          #
-          #   logging_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
-          #
-          #   # TODO: Initialize `log_name`:
-          #   log_name = ''
-          #   logging_client.delete_log(log_name)
-
-          def delete_log \
-              log_name,
-              options: nil,
-              &block
-            req = {
-              log_name: log_name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteLogRequest)
-            @delete_log.call(req, options, &block)
-            nil
-          end
 
           # Writes log entries to Logging. This API method is the
           # only way to send log entries to Logging. This method
@@ -447,6 +414,52 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Logging::V2::WriteLogEntriesRequest)
             @write_log_entries.call(req, options, &block)
+          end
+
+          # Deletes all the log entries in a log. The log reappears if it receives new
+          # entries. Log entries written shortly before the delete operation might not
+          # be deleted. Entries received after the delete operation with a timestamp
+          # before the operation will be deleted.
+          #
+          # @param log_name [String]
+          #   Required. The resource name of the log to delete:
+          #
+          #       "projects/[PROJECT_ID]/logs/[LOG_ID]"
+          #       "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
+          #       "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
+          #       "folders/[FOLDER_ID]/logs/[LOG_ID]"
+          #
+          #   `[LOG_ID]` must be URL-encoded. For example,
+          #   `"projects/my-project-id/logs/syslog"`,
+          #   `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+          #   For more information about log names, see
+          #   {Google::Logging::V2::LogEntry LogEntry}.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/logging/v2"
+          #
+          #   logging_client = Google::Cloud::Logging::V2::LoggingServiceV2Client.new
+          #
+          #   # TODO: Initialize `log_name`:
+          #   log_name = ''
+          #   logging_client.delete_log(log_name)
+
+          def delete_log \
+              log_name,
+              options: nil,
+              &block
+            req = {
+              log_name: log_name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Logging::V2::DeleteLogRequest)
+            @delete_log.call(req, options, &block)
+            nil
           end
 
           # Lists log entries.  Use this method to retrieve log entries that originated
