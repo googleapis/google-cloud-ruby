@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ServiceDirectory
       module V1beta1
-        # The request message for [RegistrationService.CreateNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.CreateNamespace].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_namespace RegistrationService.CreateNamespace}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the project and location the namespace
@@ -43,7 +43,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.ListNamespaces][google.cloud.servicedirectory.v1beta1.RegistrationService.ListNamespaces].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces RegistrationService.ListNamespaces}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the project and location whose namespaces we'd like to
@@ -95,7 +95,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for [RegistrationService.ListNamespaces][google.cloud.servicedirectory.v1beta1.RegistrationService.ListNamespaces].
+        # The response message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_namespaces RegistrationService.ListNamespaces}.
         # @!attribute [rw] namespaces
         #   @return [Array<Google::Cloud::ServiceDirectory::V1beta1::Namespace>]
         #     The list of namespaces.
@@ -108,7 +108,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.GetNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.GetNamespace].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_namespace RegistrationService.GetNamespace}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the namespace to retrieve.
@@ -117,7 +117,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.UpdateNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.UpdateNamespace].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_namespace RegistrationService.UpdateNamespace}.
         # @!attribute [rw] namespace
         #   @return [Google::Cloud::ServiceDirectory::V1beta1::Namespace]
         #     Required. The updated namespace.
@@ -129,7 +129,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.DeleteNamespace][google.cloud.servicedirectory.v1beta1.RegistrationService.DeleteNamespace].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_namespace RegistrationService.DeleteNamespace}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the namespace to delete.
@@ -138,7 +138,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.CreateService][google.cloud.servicedirectory.v1beta1.RegistrationService.CreateService].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_service RegistrationService.CreateService}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the namespace this service will belong to.
@@ -159,7 +159,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.ListServices][google.cloud.servicedirectory.v1beta1.RegistrationService.ListServices].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services RegistrationService.ListServices}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the namespace whose services we'd
@@ -204,7 +204,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for [RegistrationService.ListServices][google.cloud.servicedirectory.v1beta1.RegistrationService.ListServices].
+        # The response message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_services RegistrationService.ListServices}.
         # @!attribute [rw] services
         #   @return [Array<Google::Cloud::ServiceDirectory::V1beta1::Service>]
         #     The list of services.
@@ -217,7 +217,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.GetService][google.cloud.servicedirectory.v1beta1.RegistrationService.GetService].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_service RegistrationService.GetService}.
         # This should not be used for looking up a service. Insead, use the `resolve`
         # method as it will contain all endpoints and associated metadata.
         # @!attribute [rw] name
@@ -228,7 +228,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.UpdateService][google.cloud.servicedirectory.v1beta1.RegistrationService.UpdateService].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_service RegistrationService.UpdateService}.
         # @!attribute [rw] service
         #   @return [Google::Cloud::ServiceDirectory::V1beta1::Service]
         #     Required. The updated service.
@@ -240,7 +240,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.DeleteService][google.cloud.servicedirectory.v1beta1.RegistrationService.DeleteService].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_service RegistrationService.DeleteService}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the service to delete.
@@ -249,7 +249,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.CreateEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.CreateEndpoint].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#create_endpoint RegistrationService.CreateEndpoint}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the service that this endpoint provides.
@@ -270,7 +270,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.ListEndpoints][google.cloud.servicedirectory.v1beta1.RegistrationService.ListEndpoints].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The resource name of the service whose endpoints we'd like to
@@ -317,7 +317,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for [RegistrationService.ListEndpoints][google.cloud.servicedirectory.v1beta1.RegistrationService.ListEndpoints].
+        # The response message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#list_endpoints RegistrationService.ListEndpoints}.
         # @!attribute [rw] endpoints
         #   @return [Array<Google::Cloud::ServiceDirectory::V1beta1::Endpoint>]
         #     The list of endpoints.
@@ -330,7 +330,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.GetEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.GetEndpoint].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#get_endpoint RegistrationService.GetEndpoint}.
         # This should not be used to lookup endpoints at runtime. Instead, use
         # the `resolve` method.
         # @!attribute [rw] name
@@ -341,7 +341,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.UpdateEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.UpdateEndpoint].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_endpoint RegistrationService.UpdateEndpoint}.
         # @!attribute [rw] endpoint
         #   @return [Google::Cloud::ServiceDirectory::V1beta1::Endpoint]
         #     Required. The updated endpoint.
@@ -353,7 +353,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [RegistrationService.DeleteEndpoint][google.cloud.servicedirectory.v1beta1.RegistrationService.DeleteEndpoint].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#delete_endpoint RegistrationService.DeleteEndpoint}.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the endpoint to delete.

@@ -23,7 +23,7 @@ module Google
       module V1beta1
         # An individual service. A service contains a name and optional metadata.
         # A service must exist before
-        # [endpoints][google.cloud.servicedirectory.v1beta1.Endpoint] can be
+        # {Google::Cloud::ServiceDirectory::V1beta1::Endpoint endpoints} can be
         # added to it.
         # @!attribute [rw] name
         #   @return [String]

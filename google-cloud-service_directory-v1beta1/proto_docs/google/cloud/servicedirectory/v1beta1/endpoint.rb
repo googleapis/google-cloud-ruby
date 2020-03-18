@@ -22,7 +22,7 @@ module Google
     module ServiceDirectory
       module V1beta1
         # An individual endpoint that provides a
-        # [service][google.cloud.servicedirectory.v1beta1.Service]. The service must
+        # {Google::Cloud::ServiceDirectory::V1beta1::Service service}. The service must
         # already exist to create an endpoint.
         # @!attribute [rw] name
         #   @return [String]

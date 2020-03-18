@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ServiceDirectory
       module V1beta1
-        # The request message for [LookupService.ResolveService][google.cloud.servicedirectory.v1beta1.LookupService.ResolveService].
+        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client#resolve_service LookupService.ResolveService}.
         # Looks up a service by its name, returns the service and its endpoints.
         # @!attribute [rw] name
         #   @return [String]
@@ -56,7 +56,7 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for [LookupService.ResolveService][google.cloud.servicedirectory.v1beta1.LookupService.ResolveService].
+        # The response message for {Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client#resolve_service LookupService.ResolveService}.
         # @!attribute [rw] service
         #   @return [Google::Cloud::ServiceDirectory::V1beta1::Service]
         class ResolveServiceResponse

@@ -194,7 +194,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::CreateNamespaceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_namespace.metadata.to_h
@@ -292,7 +292,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::ListNamespacesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_namespaces.metadata.to_h
@@ -352,7 +352,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::GetNamespaceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_namespace.metadata.to_h
@@ -413,7 +413,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::UpdateNamespaceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_namespace.metadata.to_h
@@ -474,7 +474,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::DeleteNamespaceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_namespace.metadata.to_h
@@ -543,7 +543,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::CreateServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_service.metadata.to_h
@@ -634,7 +634,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::ListServicesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_services.metadata.to_h
@@ -694,7 +694,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::GetServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_service.metadata.to_h
@@ -755,7 +755,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_service.metadata.to_h
@@ -816,7 +816,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::DeleteServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_service.metadata.to_h
@@ -885,7 +885,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::CreateEndpointRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_endpoint.metadata.to_h
@@ -978,7 +978,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::ListEndpointsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_endpoints.metadata.to_h
@@ -1038,7 +1038,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::GetEndpointRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_endpoint.metadata.to_h
@@ -1099,7 +1099,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::UpdateEndpointRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_endpoint.metadata.to_h
@@ -1158,7 +1158,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::DeleteEndpointRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_endpoint.metadata.to_h
@@ -1219,7 +1219,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::GetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
@@ -1285,7 +1285,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::SetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
@@ -1351,7 +1351,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::TestIamPermissionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
