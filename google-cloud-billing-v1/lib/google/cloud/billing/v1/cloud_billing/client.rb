@@ -254,7 +254,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::GetBillingAccountRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_billing_account.metadata.to_h
@@ -329,7 +329,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::ListBillingAccountsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_billing_accounts.metadata.to_h
@@ -398,7 +398,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::UpdateBillingAccountRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_billing_account.metadata.to_h
@@ -478,7 +478,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::CreateBillingAccountRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_billing_account.metadata.to_h
@@ -545,7 +545,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::ListProjectBillingInfoRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_project_billing_info.metadata.to_h
@@ -612,7 +612,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::GetProjectBillingInfoRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_project_billing_info.metadata.to_h
@@ -735,7 +735,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::UpdateProjectBillingInfoRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_project_billing_info.metadata.to_h
@@ -802,7 +802,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::GetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
@@ -876,7 +876,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::SetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
@@ -946,7 +946,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::TestIamPermissionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
