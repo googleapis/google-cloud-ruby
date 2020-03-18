@@ -1,10 +1,11 @@
 ## Migrating to google-cloud-dialogflow 1.0
 
 The 1.0 release of the google-cloud-dialogflow client is a significant upgrade
-based on a next-gen code generator. If you have used earlier versions of this
-library, there have been a number of significant changes that may require
-updates to calling code. This document will describe the changes that have been
-made, and what you need to do to update your usage.
+based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
+and includes substantial interface changes. Existing code written for earlier
+versions of this library will likely require updates to use this version.
+This document describes the changes that have been made, and what you need to
+do to update your usage.
 
 To summarize:
 
@@ -13,45 +14,47 @@ To summarize:
     V2 of the Dialogflow service, and the gem `google-cloud-dialogflow` now
     simply provides a convenience wrapper. See
     [Library Structure](#library-structure) for more info.
- *  This library uses a new configuration mechanism giving you closer control
+ *  The library uses a new configuration mechanism giving you closer control
     over endpoint address, network timeouts, and retry. See
     [Client Configuration](#client-configuration) for more info. Furthermore,
     when creating a client object, you can customize its configuration in a
     block rather than passing arguments to the constructor. See
     [Creating Clients](#creating-clients) for more info.
- *  Previously, methods typically had at least one positional argument. Now,
-    all arguments are keyword arguments. Additionally, you can pass a proto
-    request object instead of separate arguments. See
+ *  Previously, positional arguments were used to indicate required arguments.
+    Now, all method arguments are keyword arguments, with documentation that
+    specifies whether they are required or optional. Additionally, you can pass
+    a proto request object instead of separate arguments. See
     [Passing Arguments](#passing-arguments) for more info.
  *  Previously, some client classes included class methods for constructing
-    resource paths. These paths are now instance methods, and are also
-    available in a separate paths module. See
+    resource paths. These paths are now instance methods on the client objects,
+    and are also available in a separate paths module. See
     [Resource Path Helpers](#resource-path-helpers) for more info.
  *  Some classes have moved into different namespaces. See
     [Class Namespaces](#class-namespaces) for more info.
 
 ### Library Structure
 
-Older 0.x releases of the `google-cloud-dialogflow` gem were all-in-one gems that
-included potentially multiple clients for multiple versions of the Dialogflow
-service. Factory methods such as `Google::Cloud::Dialogflow::Agents.new()` would
-return you client instances such as `Google::Cloud::Dialogflow::V2::AgentsClient`.
-These classes were all defined in the same gem.
+Older 0.x releases of the `google-cloud-dialogflow` gem were all-in-one gems
+that included potentially multiple clients for multiple versions of the
+Dialogflow service. Factory methods such as `Google::Cloud::Dialogflow::Agents.new`
+would return you instances of client classes such as
+`Google::Cloud::Dialogflow::V2::AgentsClient`. These classes were all defined
+in the same gem.
 
 With the 1.0 release, the `google-cloud-dialogflow` gem still provides factory
 methods for obtaining clients. (The method signatures will have changed. See
 [Creating Clients](#creating-clients) for details.) However, the actual client
-classes have been moved into separate gems, on per service version. Currently,
+classes have been moved into separate gems, one per service version. Currently,
 Dialogflow has one version, V2. The
 `Google::Cloud::Dialogflow::V2::Agents::Client` class, along with its
-helpers and data types, are now part of the `google-cloud-dialogflow-v2` gem.
+helpers and data types, is now part of the `google-cloud-dialogflow-v2` gem.
 
 For normal usage, you can continue to install the `google-cloud-dialogflow` gem
-and continue to use factory methods to create clients. This will remain the
-easiest way to use the Dialogflow client. However, you may alternatively
-choose to install only one of the versioned gems. For example, if you know you
-will only use `V2` of the service, you can install `google-cloud-dialogflow-v2`
-by itself, and construct instances of the
+(which will bring in the versioned client gems as dependencies) and continue to
+use factory methods to create clients. However, you may alternatively choose to
+install only one of the versioned gems. For example, if you know you will only
+use `V2` of the service, you can install `google-cloud-dialogflow-v2` by
+itself, and construct instances of the
 `Google::Cloud::Dialogflow::V2::Agents::Client` client class directly.
 
 ### Client Configuration
@@ -61,9 +64,10 @@ low-level behavior of the client (such as credentials, timeouts, or
 instrumentation), you would pass a variety of keyword arguments to the client
 constructor. It was also extremely difficult to customize the default settings.
 
-With the 1.0 release, a configuration interface provides access to these
-parameters, both global defaults and per-client settings. For example, to set
-global credentials and default timeout for all Dialogflow V2 sessions clients:
+With the 1.0 release, a configuration interface provides control over these
+parameters, including defaults for all instances of a client, and settings for
+each specific client instance. For example, to set default credentials and
+timeout for all Dialogflow V2 sessions clients:
 
 ```
 Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
@@ -81,7 +85,7 @@ Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
 end
 ```
 
-You can also set certain configuration defaults for all Dialogflow versions and
+Defaults for certain configurations can be set for all Dialogflow versions and
 services globally:
 
 ```
@@ -91,6 +95,9 @@ Google::Cloud::Dialogflow.configure do |config|
 end
 ```
 
+Finally, you can override the configuration for each client instance. See the
+next section on [Creating Clients](#creating-clients) for details.
+
 ### Creating Clients
 
 In older releases, to create a client object, you would use the `new` method
@@ -99,8 +106,8 @@ of modules under `Google::Cloud::Dialogflow`. For example, you might call
 select a service version and to configure parameters such as credentials and
 timeouts.
 
-Wiht the 1.0 release, use named class methods of `Google::Cloud::Dialogflow` to
-create a client object. For example, `Google::Cloud::Dialogflow.sessions()`.
+With the 1.0 release, use named class methods of `Google::Cloud::Dialogflow` to
+create a client object. For example, `Google::Cloud::Dialogflow.sessions`.
 You may select a service version using the `:version` keyword argument.
 However, other configuration parameters should be set in a configuration block
 when you create the client.
@@ -123,7 +130,7 @@ set some configuration parameters, then the default configuration is used. See
 
 ### Passing Arguments
 
-In older releases, certain required arguments would be passed as positional
+In older releases, required arguments would be passed as positional method
 arguments, while most optional arguments would be passed as keyword arguments.
 
 With the 1.0 release, all RPC arguments are passed as keyword arguments,
@@ -205,18 +212,20 @@ response = client.detect_intent(
 
 ### Resource Path Helpers
 
-The client library includes helper methods for the generating resource path
+The client library includes helper methods for generating the resource path
 strings passed to many calls. These helpers have changed in two ways:
 
 * In older releases, they are _class_ methods on the client class. In the 1.0
   release, they are _instance_ methods on the client. They are also available
   on a separate paths module that you can include elsewhere for convenience.
 * In older releases, arguments to a resource path helper are passed as
-  positional arguments. In the 1.0 release, they are passed as named keyword
-  arguments. Some helpers also cover several related paths, with different sets
-  of arguments. The class reference documentation provides details.
+  _positional_ arguments. In the 1.0 release, they are passed as named _keyword_
+  arguments. Some helpers also support different sets of arguments, each set
+  corresponding to a different type of path.
 
-Here is example usage under older releases:
+Following is an example invoving using a resource path helper.
+
+Old:
 ```
 client = Google::Cloud::Dialogflow::Sessions.new
 
@@ -229,18 +238,20 @@ query = { text: { text: "book a meeting room", language_code: "en-US" } }
 response = client.detect_intent session, query
 ```
 
-Here is the corresponding code in the 1.0 client:
+New:
 ```
 client = Google::Cloud::Dialogflow.sessions
 
-# Call the helper on the client instance
+# Call the helper on the client instance, and use keyword arguments
 session = client.session_path project: "my-project", session: "my-session"
 
 query = { text: { text: "book a meeting room", language_code: "en-US" } }
 response = client.detect_intent session: session, query_input: query
 ```
 
-An alternative usage of the 1.0 client involving including the paths module:
+In the 1.0 client, you can also use the paths module as a convenience module.
+
+New:
 ```
 # Bring the session_path method into the current class
 include Google::Cloud::Dialogflow::V2::Sessions::Paths
@@ -266,9 +277,11 @@ In the 1.0 release, the client object is of a different class:
 Note that most users will use the factory methods such as
 `Google::Cloud::Dialogflow.agents` to create instances of the client object,
 so you may not need to reference the actual class directly.
+See [Creating Clients](#creating-clients).
 
 In older releases, the credentials object was of class
 `Google::Cloud::Dialogflow::V2::Credentials`.
 In the 1.0 release, each service has its own credentials class, e.g.
 `Google::Cloud::Dialogflow::V2::Agents::Credentials`.
 Again, most users will not need to reference this class directly.
+See [Client Configuration](#client-configuration).
