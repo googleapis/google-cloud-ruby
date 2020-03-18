@@ -2,9 +2,10 @@
 
 ### 0.2.4 / 2020-03-18
 
-#### Documentation
-
-* remove some spurious backslash escaping from code samples in inline documentation
+* Support separate project setting for quota/billing
+* Include the correct default timeout and retry settings
+* Eliminate some Ruby 2.7 keyword argument warnings
+* Remove some spurious backslash escaping from code samples in inline documentation
 
 ### 0.2.3 / 2020-03-04
 
