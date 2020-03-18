@@ -220,7 +220,7 @@ module Google
               # @overload create_read_session(parent: nil, read_session: nil, max_stream_count: nil)
               #   @param parent [String]
               #     Required. The request project that owns the session, in the form of
-              #     `projects/\\\{project_id\}`.
+              #     `projects/{project_id}`.
               #   @param read_session [Google::Cloud::Bigquery::Storage::V1::ReadSession | Hash]
               #     Required. Session to be created.
               #   @param max_stream_count [Integer]
@@ -248,7 +248,7 @@ module Google
                 request = Gapic::Protobuf.coerce request, to: Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_read_session.metadata.to_h
@@ -323,7 +323,7 @@ module Google
                 request = Gapic::Protobuf.coerce request, to: Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.read_rows.metadata.to_h
@@ -412,7 +412,7 @@ module Google
                 request = Gapic::Protobuf.coerce request, to: Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.split_read_stream.metadata.to_h

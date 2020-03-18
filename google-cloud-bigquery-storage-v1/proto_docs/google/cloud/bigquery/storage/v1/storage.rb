@@ -26,7 +26,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [String]
           #     Required. The request project that owns the session, in the form of
-          #     `projects/\\\{project_id\}`.
+          #     `projects/{project_id}`.
           # @!attribute [rw] read_session
           #   @return [Google::Cloud::Bigquery::Storage::V1::ReadSession]
           #     Required. Session to be created.

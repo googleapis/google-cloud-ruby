@@ -26,7 +26,7 @@ module Google
           # @!attribute [r] name
           #   @return [String]
           #     Output only. Unique identifier for the session, in the form
-          #     `projects/\\\{project_id\}/locations/\\\{location\}/sessions/\\\{session_id\}`.
+          #     `projects/{project_id}/locations/{location}/sessions/{session_id}`.
           # @!attribute [r] expire_time
           #   @return [Google::Protobuf::Timestamp]
           #     Output only. Time at which the session becomes invalid. After this time, subsequent
@@ -44,7 +44,7 @@ module Google
           # @!attribute [rw] table
           #   @return [String]
           #     Immutable. Table that this ReadSession is reading from, in the form
-          #     `projects/\\\{project_id\}/datasets/\\\{dataset_id\}/tables/\\\{table_id\}
+          #     `projects/{project_id}/datasets/{dataset_id}/tables/{table_id}`
           # @!attribute [rw] table_modifiers
           #   @return [Google::Cloud::Bigquery::Storage::V1::ReadSession::TableModifiers]
           #     Optional. Any modifiers which are applied when reading from the specified table.
@@ -101,7 +101,7 @@ module Google
           # @!attribute [r] name
           #   @return [String]
           #     Output only. Name of the stream, in the form
-          #     `projects/\\\{project_id\}/locations/\\\{location\}/sessions/\\\{session_id\}/streams/\\\{stream_id\}`.
+          #     `projects/{project_id}/locations/{location}/sessions/{session_id}/streams/{stream_id}`.
           class ReadStream
             include Google::Protobuf::MessageExts
             extend Google::Protobuf::MessageExts::ClassMethods
