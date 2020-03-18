@@ -303,6 +303,7 @@ google-cloud-dialogflow:
 - v0.2.0
 - v0.1.0
 google-cloud-dlp:
+- v0.15.0
 - v0.13.2
 - v0.13.1
 - v0.13.0
