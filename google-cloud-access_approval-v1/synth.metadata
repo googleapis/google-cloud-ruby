@@ -1,12 +1,13 @@
 {
-  "updateTime": "2020-03-16T20:53:54.460753Z",
+  "updateTime": "2020-03-18T10:36:56.346465Z",
   "sources": [
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1976b9981e2900c8172b7d34b4220bdb18c5db42",
-        "internalRef": "301205325"
+        "sha": "430375af011f8c7a5174884f0d0e539c6ffa7675",
+        "internalRef": "301538851",
+        "log": "430375af011f8c7a5174884f0d0e539c6ffa7675\ndocs: add missing closing backtick\n\nPiperOrigin-RevId: 301538851\n\n0e9f1f60ded9ad1c2e725e37719112f5b487ab65\nbazel: Use latest release of gax_java\n\nPiperOrigin-RevId: 301480457\n\n5058c1c96d0ece7f5301a154cf5a07b2ad03a571\nUpdate GAPIC v2 with batching parameters for Logging API\n\nPiperOrigin-RevId: 301443847\n\n64ab9744073de81fec1b3a6a931befc8a90edf90\nFix: Introduce location-based organization/folder/billing-account resources\nChore: Update copyright years\n\nPiperOrigin-RevId: 301373760\n\n23d5f09e670ebb0c1b36214acf78704e2ecfc2ac\nUpdate field_behavior annotations in V1 and V2.\n\nPiperOrigin-RevId: 301337970\n\nb2cf37e7fd62383a811aa4d54d013ecae638851d\nData Catalog V1 API\n\nPiperOrigin-RevId: 301282503\n\n"
       }
     }
   ],
