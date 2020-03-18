@@ -222,7 +222,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Language::V1::AnalyzeSentimentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.analyze_sentiment.metadata.to_h
@@ -281,7 +281,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Language::V1::AnalyzeEntitiesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.analyze_entities.metadata.to_h
@@ -307,12 +307,12 @@ module Google
             end
 
             ##
-            # Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
+            # Finds entities, similar to {Google::Cloud::Language::V1::LanguageService::Client#analyze_entities AnalyzeEntities} in the text and analyzes
             # sentiment associated with each entity and its mentions.
             #
             # @overload analyze_entity_sentiment(request, options = nil)
             #   @param request [Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest | Hash]
-            #     Finds entities, similar to [AnalyzeEntities][google.cloud.language.v1.LanguageService.AnalyzeEntities] in the text and analyzes
+            #     Finds entities, similar to {Google::Cloud::Language::V1::LanguageService::Client#analyze_entities AnalyzeEntities} in the text and analyzes
             #     sentiment associated with each entity and its mentions.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
@@ -338,7 +338,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Language::V1::AnalyzeEntitySentimentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.analyze_entity_sentiment.metadata.to_h
@@ -397,7 +397,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Language::V1::AnalyzeSyntaxRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.analyze_syntax.metadata.to_h
@@ -450,7 +450,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Language::V1::ClassifyTextRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.classify_text.metadata.to_h
@@ -509,7 +509,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Language::V1::AnnotateTextRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.annotate_text.metadata.to_h
