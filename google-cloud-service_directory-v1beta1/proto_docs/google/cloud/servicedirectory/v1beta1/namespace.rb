@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ServiceDirectory
       module V1beta1
-        # A container for [services][google.cloud.servicedirectory.v1beta1.Service].
+        # A container for {Google::Cloud::ServiceDirectory::V1beta1::Service services}.
         # Namespaces allow administrators to group services together and define
         # permissions for a collection of services.
         # @!attribute [rw] name

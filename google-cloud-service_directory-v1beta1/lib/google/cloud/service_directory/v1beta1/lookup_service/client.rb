@@ -156,13 +156,13 @@ module Google
             # Service calls
 
             ##
-            # Returns a [service][google.cloud.servicedirectory.v1beta1.Service] and its
+            # Returns a {Google::Cloud::ServiceDirectory::V1beta1::Service service} and its
             # associated endpoints.
             # Resolving a service is not considered an active developer method.
             #
             # @overload resolve_service(request, options = nil)
             #   @param request [Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest | Hash]
-            #     Returns a [service][google.cloud.servicedirectory.v1beta1.Service] and its
+            #     Returns a {Google::Cloud::ServiceDirectory::V1beta1::Service service} and its
             #     associated endpoints.
             #     Resolving a service is not considered an active developer method.
             #   @param options [Gapic::CallOptions, Hash]
@@ -210,7 +210,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.resolve_service.metadata.to_h
