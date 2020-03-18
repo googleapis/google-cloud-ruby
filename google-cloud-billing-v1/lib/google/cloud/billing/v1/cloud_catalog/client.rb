@@ -183,7 +183,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::ListServicesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_services.metadata.to_h
@@ -262,7 +262,7 @@ module Google
               request = Gapic::Protobuf.coerce request, to: Google::Cloud::Billing::V1::ListSkusRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new options.to_h if options.respond_to? :to_h
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_skus.metadata.to_h
