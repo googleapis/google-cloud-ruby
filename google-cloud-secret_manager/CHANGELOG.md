@@ -1,5 +1,15 @@
 # Release History
 
+### 0.3.0 / 2020-03-18
+
+#### Features
+
+* use v1 of the service by default
+
+#### Documentation
+
+* several fixes to docs of umbrella veneers for microgenerated clients
+
 ### 0.2.1 / 2020-02-06
 
 #### Documentation
