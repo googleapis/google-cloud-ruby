@@ -86,17 +86,41 @@ module Google
 
           private_constant :BILLING_ACCOUNT_PATH_TEMPLATE
 
+          BILLING_ACCOUNT_LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "billingAccounts/{billing_account}/locations/{location}"
+          )
+
+          private_constant :BILLING_ACCOUNT_LOCATION_PATH_TEMPLATE
+
           FOLDER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "folders/{folder}"
           )
 
           private_constant :FOLDER_PATH_TEMPLATE
 
+          FOLDER_LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "folders/{folder}/locations/{location}"
+          )
+
+          private_constant :FOLDER_LOCATION_PATH_TEMPLATE
+
+          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}"
+          )
+
+          private_constant :LOCATION_PATH_TEMPLATE
+
           ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}"
           )
 
           private_constant :ORGANIZATION_PATH_TEMPLATE
+
+          ORGANIZATION_LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/locations/{location}"
+          )
+
+          private_constant :ORGANIZATION_LOCATION_PATH_TEMPLATE
 
           PROJECT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}"
@@ -113,6 +137,17 @@ module Google
             )
           end
 
+          # Returns a fully-qualified billing_account_location resource name string.
+          # @param billing_account [String]
+          # @param location [String]
+          # @return [String]
+          def self.billing_account_location_path billing_account, location
+            BILLING_ACCOUNT_LOCATION_PATH_TEMPLATE.render(
+              :"billing_account" => billing_account,
+              :"location" => location
+            )
+          end
+
           # Returns a fully-qualified folder resource name string.
           # @param folder [String]
           # @return [String]
@@ -122,12 +157,45 @@ module Google
             )
           end
 
+          # Returns a fully-qualified folder_location resource name string.
+          # @param folder [String]
+          # @param location [String]
+          # @return [String]
+          def self.folder_location_path folder, location
+            FOLDER_LOCATION_PATH_TEMPLATE.render(
+              :"folder" => folder,
+              :"location" => location
+            )
+          end
+
+          # Returns a fully-qualified location resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @return [String]
+          def self.location_path project, location
+            LOCATION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location
+            )
+          end
+
           # Returns a fully-qualified organization resource name string.
           # @param organization [String]
           # @return [String]
           def self.organization_path organization
             ORGANIZATION_PATH_TEMPLATE.render(
               :"organization" => organization
+            )
+          end
+
+          # Returns a fully-qualified organization_location resource name string.
+          # @param organization [String]
+          # @param location [String]
+          # @return [String]
+          def self.organization_location_path organization, location
+            ORGANIZATION_LOCATION_PATH_TEMPLATE.render(
+              :"organization" => organization,
+              :"location" => location
             )
           end
 
@@ -411,17 +479,15 @@ module Google
           #   require "google/cloud/logging/v2"
           #
           #   config_client = Google::Cloud::Logging::V2::ConfigServiceV2Client.new
-          #
-          #   # TODO: Initialize `parent`:
-          #   parent = ''
+          #   formatted_parent = Google::Cloud::Logging::V2::ConfigServiceV2Client.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # Iterate over all results.
-          #   config_client.list_buckets(parent).each do |element|
+          #   config_client.list_buckets(formatted_parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   config_client.list_buckets(parent).each_page do |page|
+          #   config_client.list_buckets(formatted_parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
