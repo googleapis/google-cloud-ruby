@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.4 / 2020-03-18
+
+#### Documentation
+
+* remove some spurious backslash escaping from code samples in inline documentation
+
 ### 0.2.3 / 2020-03-04
 
 #### Documentation
