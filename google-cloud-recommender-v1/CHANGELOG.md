@@ -1,5 +1,12 @@
 # Release History
 
+### 0.1.2 / 2020-03-18
+
+#### Documentation
+
+* Add Configuration docs and update enum return types
+* remove some spurious backslash escaping from code samples in inline documentation
+
 ### 0.1.1 / 2020-02-24
 
 #### Documentation
