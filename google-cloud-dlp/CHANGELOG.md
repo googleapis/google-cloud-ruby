@@ -1,5 +1,15 @@
 # Release History
 
+### 0.15.0 / 2020-03-18
+
+#### Features
+
+* Support for hybrid DLP jobs
+  * Add StorageConfig#hybrid_options field
+  * Add DlpServiceClient#finish_dlp_job call
+  * Add DlpServiceClient#hybrid_inspect_dlp_job call
+  * Add DlpServiceClient#hybrid_inspect_job_trigger call
+
 ### 0.14.0 / 2020-03-11
 
 #### Features
