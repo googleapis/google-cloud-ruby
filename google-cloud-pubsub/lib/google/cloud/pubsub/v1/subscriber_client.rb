@@ -134,6 +134,8 @@ module Google
           end
 
           # Returns a fully-qualified topic resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param topic [String]
           # @return [String]
@@ -515,6 +517,19 @@ module Google
           #   for production use. It is not subject to any SLA or deprecation policy.
           #   A hash of the same form as `Google::Cloud::PubSub::V1::DeadLetterPolicy`
           #   can also be provided.
+          # @param retry_policy [Google::Cloud::PubSub::V1::RetryPolicy | Hash]
+          #   A policy that specifies how Cloud Pub/Sub retries message delivery for this
+          #   subscription.
+          #
+          #   If not set, the default retry policy is applied. This generally implies
+          #   that messages will be retried as soon as possible for healthy subscribers.
+          #   RetryPolicy will be triggered on NACKs or acknowledgement deadline
+          #   exceeded events for a given message.
+          #   <b>EXPERIMENTAL:</b> This API might be changed in backward-incompatible
+          #   ways and is not recommended for production use. It is not subject to any
+          #   SLA or deprecation policy.
+          #   A hash of the same form as `Google::Cloud::PubSub::V1::RetryPolicy`
+          #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -542,6 +557,7 @@ module Google
               enable_message_ordering: nil,
               expiration_policy: nil,
               dead_letter_policy: nil,
+              retry_policy: nil,
               options: nil,
               &block
             req = {
@@ -554,7 +570,8 @@ module Google
               labels: labels,
               enable_message_ordering: enable_message_ordering,
               expiration_policy: expiration_policy,
-              dead_letter_policy: dead_letter_policy
+              dead_letter_policy: dead_letter_policy,
+              retry_policy: retry_policy
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::Subscription)
             @create_subscription.call(req, options, &block)
@@ -1279,11 +1296,13 @@ module Google
           #   require "google/cloud/pubsub"
           #
           #   subscriber_client = Google::Cloud::PubSub::Subscriber.new(version: :v1)
-          #   formatted_resource = Google::Cloud::PubSub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `policy`:
           #   policy = {}
-          #   response = subscriber_client.set_iam_policy(formatted_resource, policy)
+          #   response = subscriber_client.set_iam_policy(resource, policy)
 
           def set_iam_policy \
               resource,
@@ -1321,8 +1340,10 @@ module Google
           #   require "google/cloud/pubsub"
           #
           #   subscriber_client = Google::Cloud::PubSub::Subscriber.new(version: :v1)
-          #   formatted_resource = Google::Cloud::PubSub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
-          #   response = subscriber_client.get_iam_policy(formatted_resource)
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
+          #   response = subscriber_client.get_iam_policy(resource)
 
           def get_iam_policy \
               resource,
@@ -1365,11 +1386,13 @@ module Google
           #   require "google/cloud/pubsub"
           #
           #   subscriber_client = Google::Cloud::PubSub::Subscriber.new(version: :v1)
-          #   formatted_resource = Google::Cloud::PubSub::V1::SubscriberClient.subscription_path("[PROJECT]", "[SUBSCRIPTION]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `permissions`:
           #   permissions = []
-          #   response = subscriber_client.test_iam_permissions(formatted_resource, permissions)
+          #   response = subscriber_client.test_iam_permissions(resource, permissions)
 
           def test_iam_permissions \
               resource,
