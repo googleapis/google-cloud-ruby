@@ -37,9 +37,10 @@ $ gem install google-cloud-language
 ## Migrating from 0.x versions
 
 The 1.0 release of the google-cloud-language client is a significant upgrade
-based on a next-gen code generator. If you have used earlier versions of this
-library, there have been a number of changes that may require updates to
-calling code. See the MIGRATING.md document for more information.
+based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
+and includes substantial interface changes. Existing code written for earlier
+versions of this library will likely require updates to use this version.
+See the {file:MIGRATING.md MIGRATING.md} document for more information.
 
 ## Enabling Logging
 
