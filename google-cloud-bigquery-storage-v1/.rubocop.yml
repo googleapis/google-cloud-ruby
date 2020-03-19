@@ -33,3 +33,5 @@ Style/CaseEquality:
   Exclude:
     - "lib/google/cloud/bigquery/storage/v1/big_query_read/*.rb"
     - "lib/google/cloud/bigquery/storage/v1.rb"
+Style/ModuleFunction:
+  Enabled: false
