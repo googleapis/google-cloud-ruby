@@ -14,12 +14,14 @@
 
 source "https://rubygems.org"
 
-gem "google-cloud-language", path: "../../google-cloud-language"
-gem "google-cloud-language-v1", path: "../../google-cloud-language-v1"
-gem "google-cloud-language-v1beta2", path: "../../google-cloud-language-v1beta2"
+master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
+
+gem "google-cloud-language", path: master ? "../../google-cloud-language" : nil
+gem "google-cloud-language-v1", path: master ? "../../google-cloud-language-v1" : nil
+gem "google-cloud-language-v1beta2", path: master ? "../../google-cloud-language-v1beta2" : nil
 
 group :test do
-  gem "google-cloud-storage", path: "../../google-cloud-storage"
+  gem "google-cloud-storage", path: master ? "../../google-cloud-storage" : nil
   gem "minitest", "~> 5.11.3"
   gem "rake"
 end

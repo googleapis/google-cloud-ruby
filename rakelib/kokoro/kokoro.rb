@@ -51,6 +51,29 @@ class Kokoro < Command
     release_please if @should_release && @updated
   end
 
+  def samples_latest
+    unless Dir.entries(@gem).include? "samples"
+      return header "No samples for #{@gem}. Exiting"
+    end
+    run_ci do
+      run "bundle exec rake samples:latest", 3600
+    end
+  end
+
+  def samples_master
+    unless Dir.entries(@gem).include? "samples"
+      return header "No samples for #{@gem}. Exiting"
+    end
+    run_ci do
+      if @updated
+        header "Gem Updated - Running samples tests against master"
+        run "bundle exec rake samples:master", 3600
+      else
+        header "Gem Unchanged - Skipping Samples tests"
+      end
+    end
+  end
+
   def nightly
     run_ci do
       run "bundle exec rake ci:acceptance", 3600

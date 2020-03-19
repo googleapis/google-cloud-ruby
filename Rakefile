@@ -558,6 +558,16 @@ namespace :kokoro do
     exit kokoro.exit_status
   end
 
+  task :samples_latest do
+    kokoro.samples_latest
+    exit kokoro.exit_status
+  end
+
+  task :samples_master do
+    kokoro.samples_master
+    exit kokoro.exit_status
+  end
+
   desc "Runs post-build logic on kokoro."
   task :post do
     kokoro.post

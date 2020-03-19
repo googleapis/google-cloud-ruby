@@ -110,13 +110,20 @@ task :samples do
 end
 
 namespace :samples do
-  task :test_latest do
-    raise "Not Implemented"
-  end
-
-  task :test_master do
+  task :latest do
     Dir.chdir "samples" do
       Bundler.with_clean_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+        sh "bundle update"
+        sh "bundle exec rake test_master"
+      end
+    end
+  end
+
+  task :master do
+    Dir.chdir "samples" do
+      Bundler.with_clean_env do
+        ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
         sh "bundle update"
         sh "bundle exec rake test_master"
       end

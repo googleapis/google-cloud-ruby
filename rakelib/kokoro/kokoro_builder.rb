@@ -27,8 +27,6 @@ class KokoroBuilder < Command
     end
   end
 
-  private
-
   def from_template template, output, gem: nil, base: nil
     File.open output, "w" do |f|
       config = ERB.new File.read(template)
@@ -39,8 +37,10 @@ class KokoroBuilder < Command
   def build_kokoro_configs
     gems.each do |gem|
       name = gem.split("google-cloud-").last
+      build_types = [:continuous, :nightly]
+      build_types += [:samples_latest, :samples_master] unless name =~ /-v\d\w*$/
       [:linux, :windows, :osx].each do |os_version|
-        [:continuous, :nightly].each do |build_type|
+        build_types.each do |build_type|
           from_template "./.kokoro/templates/#{os_version}.cfg.erb",
                         "./.kokoro/#{build_type}/#{os_version}/#{name}.cfg",
                         gem: gem
