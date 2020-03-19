@@ -42,6 +42,8 @@ module Google
 
               "projects/#{project}/agent/sessions/#{session}/contexts/#{context}"
             end
+
+            extend self
           end
         end
       end

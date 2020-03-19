@@ -51,6 +51,8 @@ module Google
             def project_path project:
               "projects/#{project}"
             end
+
+            extend self
           end
         end
       end

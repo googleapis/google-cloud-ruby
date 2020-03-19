@@ -73,6 +73,8 @@ module Google
 
               "projects/#{project}/agent/intents/#{intent}"
             end
+
+            extend self
           end
         end
       end

@@ -68,3 +68,5 @@ Style/CaseEquality:
     - "lib/google/cloud/dialogflow/v2/session_entity_types/*.rb"
     - "lib/google/cloud/dialogflow/v2/sessions/*.rb"
     - "lib/google/cloud/dialogflow/v2.rb"
+Style/ModuleFunction:
+  Enabled: false

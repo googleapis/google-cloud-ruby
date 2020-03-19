@@ -54,6 +54,8 @@ module Google
 
               "projects/#{project}/agent/entityTypes/#{entity_type}"
             end
+
+            extend self
           end
         end
       end

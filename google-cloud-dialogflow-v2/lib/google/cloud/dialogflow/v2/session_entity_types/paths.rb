@@ -61,6 +61,8 @@ module Google
 
               "projects/#{project}/agent/sessions/#{session}/entityTypes/#{entity_type}"
             end
+
+            extend self
           end
         end
       end
