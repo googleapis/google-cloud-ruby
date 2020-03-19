@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.1 / 2020-03-19
+
+#### Bug Fixes
+
+* Restore billing, folder, and organization path helpers in low-level interface
+
 ### 1.10.0 / 2020-03-16
 
 #### Features
