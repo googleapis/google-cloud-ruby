@@ -37,6 +37,8 @@ module Google
             def billing_account_path billing_account:
               "billingAccounts/#{billing_account}"
             end
+
+            extend self
           end
         end
       end
