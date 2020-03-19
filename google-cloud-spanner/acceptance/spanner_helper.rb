@@ -288,7 +288,6 @@ def clean_up_spanner_objects
   end
 
   # Delete test restored database.
-  instance.database($spanner_database_id).drop
   restored_db = instance.database("restore-#{$spanner_database_id}")
   restored_db.drop if restored_db
 rescue => e
