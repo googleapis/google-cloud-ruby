@@ -1422,4 +1422,565 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       end
     end
   end
+
+  describe 'create_backup' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#create_backup."
+
+    it 'invokes create_backup without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
+      backup_id = ''
+      backup = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      source_table = "sourceTable1670858410"
+      size_bytes = 1796325715
+      expected_response = {
+        name: name,
+        source_table: source_table,
+        size_bytes: size_bytes
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Backup)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/create_backup_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::CreateBackupRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(backup_id, request.backup_id)
+        assert_equal(Google::Gax::to_proto(backup, Google::Bigtable::Admin::V2::Backup), request.backup)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:create_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("create_backup")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.create_backup(
+            formatted_parent,
+            backup_id,
+            backup
+          )
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes create_backup and returns an operation error.' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
+      backup_id = ''
+      backup = {}
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#create_backup.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/create_backup_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::CreateBackupRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(backup_id, request.backup_id)
+        assert_equal(Google::Gax::to_proto(backup, Google::Bigtable::Admin::V2::Backup), request.backup)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:create_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("create_backup")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.create_backup(
+            formatted_parent,
+            backup_id,
+            backup
+          )
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes create_backup with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
+      backup_id = ''
+      backup = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::CreateBackupRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(backup_id, request.backup_id)
+        assert_equal(Google::Gax::to_proto(backup, Google::Bigtable::Admin::V2::Backup), request.backup)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:create_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("create_backup")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.create_backup(
+              formatted_parent,
+              backup_id,
+              backup
+            )
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_backup' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#get_backup."
+
+    it 'invokes get_backup without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.backup_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[BACKUP]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      source_table = "sourceTable1670858410"
+      size_bytes = 1796325715
+      expected_response = {
+        name: name_2,
+        source_table: source_table,
+        size_bytes: size_bytes
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Backup)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::GetBackupRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:get_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("get_backup")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.get_backup(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_backup(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_backup with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.backup_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[BACKUP]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::GetBackupRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:get_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("get_backup")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.get_backup(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_backups' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#list_backups."
+
+    it 'invokes list_backups without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
+
+      # Create expected grpc response
+      next_page_token = ""
+      backups_element = {}
+      backups = [backups_element]
+      expected_response = { next_page_token: next_page_token, backups: backups }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::ListBackupsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::ListBackupsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:list_backups, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("list_backups")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.list_backups(formatted_parent)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.backups.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes list_backups with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::ListBackupsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:list_backups, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("list_backups")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.list_backups(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'update_backup' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#update_backup."
+
+    it 'invokes update_backup without error' do
+      # Create request parameters
+      backup = {}
+      update_mask = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      source_table = "sourceTable1670858410"
+      size_bytes = 1796325715
+      expected_response = {
+        name: name,
+        source_table: source_table,
+        size_bytes: size_bytes
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Backup)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::UpdateBackupRequest, request)
+        assert_equal(Google::Gax::to_proto(backup, Google::Bigtable::Admin::V2::Backup), request.backup)
+        assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:update_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("update_backup")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.update_backup(backup, update_mask)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_backup(backup, update_mask) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes update_backup with error' do
+      # Create request parameters
+      backup = {}
+      update_mask = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::UpdateBackupRequest, request)
+        assert_equal(Google::Gax::to_proto(backup, Google::Bigtable::Admin::V2::Backup), request.backup)
+        assert_equal(Google::Gax::to_proto(update_mask, Google::Protobuf::FieldMask), request.update_mask)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:update_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("update_backup")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.update_backup(backup, update_mask)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'delete_backup' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#delete_backup."
+
+    it 'invokes delete_backup without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.backup_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[BACKUP]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::DeleteBackupRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:delete_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("delete_backup")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.delete_backup(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_backup(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_backup with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.backup_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[BACKUP]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::DeleteBackupRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:delete_backup, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("delete_backup")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.delete_backup(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'restore_table' do
+    custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#restore_table."
+
+    it 'invokes restore_table without error' do
+      # Create request parameters
+      parent = ''
+
+      # Create expected grpc response
+      name = "name3373707"
+      expected_response = { name: name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Table)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/restore_table_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::RestoreTableRequest, request)
+        assert_equal(parent, request.parent)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:restore_table, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("restore_table")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.restore_table(parent)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes restore_table and returns an operation error.' do
+      # Create request parameters
+      parent = ''
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#restore_table.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/restore_table_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::RestoreTableRequest, request)
+        assert_equal(parent, request.parent)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:restore_table, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("restore_table")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          response = client.restore_table(parent)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes restore_table with error' do
+      # Create request parameters
+      parent = ''
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Bigtable::Admin::V2::RestoreTableRequest, request)
+        assert_equal(parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v2.new(:restore_table, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockBigtableTableAdminCredentials_v2.new("restore_table")
+
+      Google::Bigtable::Admin::V2::BigtableTableAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Bigtable::Admin::V2::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
+            client.restore_table(parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
 end

@@ -17,6 +17,16 @@ module Google
   module Bigtable
     module Admin
       module V2
+        # Information about a table restore.
+        # @!attribute [rw] source_type
+        #   @return [Google::Bigtable::Admin::V2::RestoreSourceType]
+        #     The type of the restore source.
+        # @!attribute [rw] backup_info
+        #   @return [Google::Bigtable::Admin::V2::BackupInfo]
+        #     Information about the backup used to restore the table. The backup
+        #     may no longer exist.
+        class RestoreInfo; end
+
         # A collection of user data indexed by row, column, and timestamp.
         # Each table is served using the resources of its parent cluster.
         # @!attribute [rw] name
@@ -43,6 +53,10 @@ module Google
         #     this table. Timestamps not matching the granularity will be rejected.
         #     If unspecified at creation time, the value will be set to `MILLIS`.
         #     Views: `SCHEMA_VIEW`, `FULL`.
+        # @!attribute [rw] restore_info
+        #   @return [Google::Bigtable::Admin::V2::RestoreInfo]
+        #     Output only. If this table was restored from another data source (e.g. a
+        #     backup), this field will be populated with information about the restore.
         class Table
           # The state of a table's data in a particular cluster.
           # @!attribute [rw] replication_state
@@ -71,6 +85,11 @@ module Google
               # replication delay, reads may not immediately reflect the state of the
               # table in other clusters.
               READY = 4
+
+              # The table is fully created and ready for use after a restore, and is
+              # being optimized for performance. When optimizations are complete, the
+              # table will transition to `READY` state.
+              READY_OPTIMIZING = 5
             end
           end
 
@@ -162,16 +181,17 @@ module Google
         #     Output only. The source table at the time the snapshot was taken.
         # @!attribute [rw] data_size_bytes
         #   @return [Integer]
-        #     Output only. The size of the data in the source table at the time the snapshot was
-        #     taken. In some cases, this value may be computed asynchronously via a
-        #     background process and a placeholder of 0 will be used in the meantime.
+        #     Output only. The size of the data in the source table at the time the
+        #     snapshot was taken. In some cases, this value may be computed
+        #     asynchronously via a background process and a placeholder of 0 will be used
+        #     in the meantime.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
         #     Output only. The time when the snapshot is created.
         # @!attribute [rw] delete_time
         #   @return [Google::Protobuf::Timestamp]
-        #     Output only. The time when the snapshot will be deleted. The maximum amount of time a
-        #     snapshot can stay active is 365 days. If 'ttl' is not specified,
+        #     Output only. The time when the snapshot will be deleted. The maximum amount
+        #     of time a snapshot can stay active is 365 days. If 'ttl' is not specified,
         #     the default maximum of 365 days will be used.
         # @!attribute [rw] state
         #   @return [Google::Bigtable::Admin::V2::Snapshot::State]
@@ -193,6 +213,89 @@ module Google
             # table while it is being created.
             CREATING = 2
           end
+        end
+
+        # A backup of a Cloud Bigtable table.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Output only. A globally unique identifier for the backup which cannot be
+        #     changed. Values are of the form
+        #     `projects/{project}/instances/{instance}/clusters/{cluster}/
+        #        backups/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
+        #     The final segment of the name must be between 1 and 50 characters
+        #     in length.
+        #
+        #     The backup is stored in the cluster identified by the prefix of the backup
+        #     name of the form
+        #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
+        # @!attribute [rw] source_table
+        #   @return [String]
+        #     Required. Immutable. Name of the table from which this backup was created.
+        #     This needs to be in the same instance as the backup. Values are of the form
+        #     `projects/{project}/instances/{instance}/tables/{source_table}`.
+        # @!attribute [rw] expire_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Required. The expiration time of the backup, with microseconds
+        #     granularity that must be at least 6 hours and at most 30 days
+        #     from the time the request is received. Once the `expire_time`
+        #     has passed, Cloud Bigtable will delete the backup and free the
+        #     resources used by the backup.
+        # @!attribute [rw] start_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Output only. `start_time` is the time that the backup was started
+        #     (i.e. approximately the time the
+        #     {Google::Bigtable::Admin::V2::BigtableTableAdmin::CreateBackup CreateBackup}
+        #     request is received).  The row data in this backup will be no older than
+        #     this timestamp.
+        # @!attribute [rw] end_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Output only. `end_time` is the time that the backup was finished. The row
+        #     data in the backup will be no newer than this timestamp.
+        # @!attribute [rw] size_bytes
+        #   @return [Integer]
+        #     Output only. Size of the backup in bytes.
+        # @!attribute [rw] state
+        #   @return [Google::Bigtable::Admin::V2::Backup::State]
+        #     Output only. The current state of the backup.
+        class Backup
+          # Indicates the current state of the backup.
+          module State
+            # Not specified.
+            STATE_UNSPECIFIED = 0
+
+            # The pending backup is still being created. Operations on the
+            # backup may fail with `FAILED_PRECONDITION` in this state.
+            CREATING = 1
+
+            # The backup is complete and ready for use.
+            READY = 2
+          end
+        end
+
+        # Information about a backup.
+        # @!attribute [rw] backup
+        #   @return [String]
+        #     Output only. Name of the backup.
+        # @!attribute [rw] start_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Output only. The time that the backup was started. Row data in the backup
+        #     will be no older than this timestamp.
+        # @!attribute [rw] end_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Output only. This time that the backup was finished. Row data in the
+        #     backup will be no newer than this timestamp.
+        # @!attribute [rw] source_table
+        #   @return [String]
+        #     Output only. Name of the table the backup was created from.
+        class BackupInfo; end
+
+        # Indicates the type of the restore source.
+        module RestoreSourceType
+          # No restore associated.
+          RESTORE_SOURCE_TYPE_UNSPECIFIED = 0
+
+          # A backup was used as the source of the restore.
+          BACKUP = 1
         end
       end
     end
