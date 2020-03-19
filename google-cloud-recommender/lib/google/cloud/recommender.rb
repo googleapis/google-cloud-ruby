@@ -43,18 +43,30 @@ module Google
       ##
       # Configure the recommender library.
       #
-      # The following recommender configuration parameters are supported:
+      # The following configuration parameters are supported:
       #
-      # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to the keyfile as a String, the contents of
-      #   the keyfile as a Hash, or a Google::Auth::Credentials object.
-      # * `lib_name` (String)
-      # * `lib_version` (String)
-      # * `interceptors` (Array)
-      # * `timeout` - (Integer) Default timeout to use in requests.
-      # * `metadata` (Hash)
-      # * `retry_policy` (Hash, Proc)
+      # * `credentials` (*type:* `String, Hash, Google::Auth::Credentials`) -
+      #   The path to the keyfile as a String, the contents of the keyfile as a
+      #   Hash, or a Google::Auth::Credentials object.
+      # * `lib_name` (*type:* `String`) -
+      #   The library name as recorded in instrumentation and logging.
+      # * `lib_version` (*type:* `String`) -
+      #   The library version as recorded in instrumentation and logging.
+      # * `interceptors` (*type:* `Array<GRPC::ClientInterceptor>`) -
+      #   An array of interceptors that are run before calls are executed.
+      # * `timeout` (*type:* `Integer`) -
+      #   Default timeout in milliseconds.
+      # * `metadata` (*type:* `Hash{Symbol=>String}`) -
+      #   Additional gRPC headers to be sent with the call.
+      # * `retry_policy` (*type:* `Hash`) -
+      #   The retry policy. The value is a hash with the following keys:
+      #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+      #     * `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+      #     * `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+      #     * `:retry_codes` (*type:* `Array<String>`) -
+      #       The error codes that should trigger a retry.
       #
-      # @return [Google::Cloud::Config] The configuration object the Google::Cloud::Recommender library uses.
+      # @return [Google::Cloud::Config] The default configuration used by this library
       #
       def self.configure
         yield Google::Cloud.configure.recommender if block_given?
