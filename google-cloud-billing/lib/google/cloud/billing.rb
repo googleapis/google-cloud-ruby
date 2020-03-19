@@ -69,15 +69,15 @@ module Google
       #   The path to the keyfile as a String, the contents of the keyfile as a
       #   Hash, or a Google::Auth::Credentials object.
       # * `lib_name` (*type:* `String`) -
-      #   The library name as recorded in instrumentation and logging
+      #   The library name as recorded in instrumentation and logging.
       # * `lib_version` (*type:* `String`) -
-      #   The library version as recorded in instrumentation and logging
+      #   The library version as recorded in instrumentation and logging.
       # * `interceptors` (*type:* `Array<GRPC::ClientInterceptor>`) -
-      #   An array of interceptors that are run before calls are executed
+      #   An array of interceptors that are run before calls are executed.
       # * `timeout` (*type:* `Integer`) -
       #   Default timeout in milliseconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call
+      #   Additional gRPC headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
