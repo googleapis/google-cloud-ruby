@@ -97,6 +97,8 @@ module Google
 
                 "projects/#{project}/datasets/#{dataset}/tables/#{table}"
               end
+
+              extend self
             end
           end
         end
