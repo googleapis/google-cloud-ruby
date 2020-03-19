@@ -37,15 +37,10 @@ class KokoroBuilder < Command
   def build_kokoro_configs
     gems.each do |gem|
       name = gem.split("google-cloud-").last
+      build_types = [:continuous, :nightly]
+      build_types += [:samples_latest, :samples_master] if name =~ /-v\d/
       [:linux, :windows, :osx].each do |os_version|
-        [:continuous, :nightly].each do |build_type|
-          from_template "./.kokoro/templates/#{os_version}.cfg.erb",
-                        "./.kokoro/#{build_type}/#{os_version}/#{name}.cfg",
-                        gem: gem
-        end
-        next unless name =~ /-v\d/
-
-        [:samples_latest, :samples_master].each do |build_type|
+        build_types.each do |build_type|
           from_template "./.kokoro/templates/#{os_version}.cfg.erb",
                         "./.kokoro/#{build_type}/#{os_version}/#{name}.cfg",
                         gem: gem
