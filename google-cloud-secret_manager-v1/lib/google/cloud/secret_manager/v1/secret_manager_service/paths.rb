@@ -73,6 +73,8 @@ module Google
 
               "projects/#{project}/secrets/#{secret}/versions/#{secret_version}"
             end
+
+            extend self
           end
         end
       end
