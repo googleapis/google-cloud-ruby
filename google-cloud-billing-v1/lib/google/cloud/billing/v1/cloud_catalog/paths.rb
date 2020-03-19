@@ -37,6 +37,8 @@ module Google
             def service_path service:
               "services/#{service}"
             end
+
+            extend self
           end
         end
       end

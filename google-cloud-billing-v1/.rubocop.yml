@@ -40,3 +40,5 @@ Style/CaseEquality:
     - "lib/google/cloud/billing/v1/cloud_billing/*.rb"
     - "lib/google/cloud/billing/v1/cloud_catalog/*.rb"
     - "lib/google/cloud/billing/v1.rb"
+Style/ModuleFunction:
+  Enabled: false
