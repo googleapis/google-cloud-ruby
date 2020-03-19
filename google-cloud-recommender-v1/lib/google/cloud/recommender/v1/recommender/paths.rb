@@ -63,6 +63,8 @@ module Google
 
               "projects/#{project}/locations/#{location}/recommenders/#{recommender}"
             end
+
+            extend self
           end
         end
       end

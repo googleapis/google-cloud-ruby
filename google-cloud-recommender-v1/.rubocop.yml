@@ -33,3 +33,5 @@ Style/CaseEquality:
   Exclude:
     - "lib/google/cloud/recommender/v1/recommender/*.rb"
     - "lib/google/cloud/recommender/v1.rb"
+Style/ModuleFunction:
+  Enabled: false
