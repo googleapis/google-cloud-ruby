@@ -11,3 +11,7 @@ AllCops:
 
 Documentation:
   Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - lib/google-cloud-dialogflow.rb

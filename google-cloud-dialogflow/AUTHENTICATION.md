@@ -1,16 +1,17 @@
 # Authentication
 
-In general, the google-cloud-dialogflow library uses [Service
-Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
-credentials to connect to Google Cloud services. When running within [Google
-Cloud Platform environments](#google-cloud-platform-environments)
+In general, the google-cloud-dialogflow library uses
+[Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
+credentials to connect to Google Cloud services. When running within
+[Google Cloud Platform environments](#google-cloud-platform-environments)
 the credentials will be discovered automatically. When running on other
 environments, the Service Account credentials can be specified by providing the
-path to the [JSON
-keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys) for
-the account (or the JSON itself) in [environment
-variables](#environment-variables). Additionally, Cloud SDK credentials can also
-be discovered automatically, but this is only recommended during development.
+path to the
+[JSON keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys)
+for the account (or the JSON itself) in
+[environment variables](#environment-variables).
+Additionally, Cloud SDK credentials can also be discovered automatically, but
+this is only recommended during development.
 
 ## Quickstart
 
@@ -26,23 +27,14 @@ export DIALOGFLOW_CREDENTIALS=/path/to/json`
 ```ruby
 require "google/cloud/dialogflow"
 
-client = Google::Cloud::Dialogflow::Agents.new
+client = Google::Cloud::Dialogflow.agents
 ```
 
-## Project and Credential Lookup
+## Credential Lookup
 
 The google-cloud-dialogflow library aims to make authentication
 as simple as possible, and provides several mechanisms to configure your system
-without providing **Project ID** and **Service Account Credentials** directly in
-code.
-
-**Project ID** is discovered in the following order:
-
-1. Specify project ID in method arguments
-2. Specify project ID in configuration
-3. Discover project ID in environment variables
-4. Discover GCP project ID
-5. Discover project ID in credentials JSON
+without providing **Service Account Credentials** directly in code.
 
 **Credentials** are discovered in the following order:
 
@@ -57,12 +49,12 @@ code.
 
 When running on Google Cloud Platform (GCP), including Google Compute Engine (GCE),
 Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud Functions
-(GCF) and Cloud Run, the **Project ID** and **Credentials** and are discovered
+(GCF) and Cloud Run, the **Credentials** are discovered
 automatically. Code should be written as if already authenticated.
 
 ### Environment Variables
 
-The **Project ID** and **Credentials JSON** can be placed in environment
+The **Credentials JSON** can be placed in environment
 variables instead of declaring them directly in code. Each service has its own
 environment variable, allowing for different service accounts to be used for
 different services. (See the READMEs for the individual service gems for
@@ -71,12 +63,8 @@ environment variable, or the **Credentials JSON** itself can be stored for
 environments such as Docker containers where writing files is difficult or not
 encouraged.
 
-The environment variables that google-cloud-dialogflow checks for project ID are:
-
-1. `DIALOGFLOW_PROJECT`
-2. `GOOGLE_CLOUD_PROJECT`
-
-The environment variables that google-cloud-dialogflow checks for credentials are configured on {Google::Cloud::Dialogflow::V2::Credentials}:
+The environment variables that google-cloud-dialogflow checks for credentials are
+configured on {Google::Cloud::Dialogflow::V2::Credentials}:
 
 1. `DIALOGFLOW_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `DIALOGFLOW_KEYFILE` - Path to JSON file, or JSON contents
@@ -90,22 +78,32 @@ require "google/cloud/dialogflow"
 ENV["DIALOGFLOW_PROJECT"]     = "my-project-id"
 ENV["DIALOGFLOW_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Dialogflow::Agents.new
+client = Google::Cloud::Dialogflow.agents
 ```
 
 ### Configuration
 
-The **Project ID** and **Credentials JSON** can be configured instead of placing them in environment variables or providing them as arguments.
+The **Credentials JSON** can be configured instead of placing them in environment
+variables. You can set credentials on individual client initialization:
+
+```ruby
+require "google/cloud/dialogflow"
+
+client = Google::Cloud::Dialogflow.agents do |config|
+  config.credentials = "path/to/keyfile.json"
+end
+```
+
+Or globally for all clients:
 
 ```ruby
 require "google/cloud/dialogflow"
 
 Google::Cloud::Dialogflow.configure do |config|
-  config.project_id  = "my-project-id"
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Dialogflow::Agents.new
+client = Google::Cloud::Dialogflow.agents
 ```
 
 ### Cloud SDK
@@ -134,13 +132,13 @@ To configure your system for this, simply:
 
 ## Creating a Service Account
 
-Google Cloud requires a **Project ID** and **Service Account Credentials** to
-connect to the APIs. You will use the **Project ID** and **JSON key file** to
+Google Cloud requires **Service Account Credentials** to
+connect to the APIs. You will use the **JSON key file** to
 connect to most services with google-cloud-dialogflow.
 
-If you are not running this client within [Google Cloud Platform
-environments](#google-cloud-platform-environments), you need a Google
-Developers service account.
+If you are not running this client within
+[Google Cloud Platform environments](#google-cloud-platform-environments),
+you need a Google Developers service account.
 
 1. Visit the [Google Developers Console][dev-console].
 1. Create a new project or click on an existing project.
@@ -170,8 +168,3 @@ Developers service account.
 
    The key file you download will be used by this library to authenticate API
    requests and should be stored in a secure location.
-
-## Troubleshooting
-
-If you're having trouble authenticating you can ask for help by following the
-{file:TROUBLESHOOTING.md Troubleshooting Guide}.
