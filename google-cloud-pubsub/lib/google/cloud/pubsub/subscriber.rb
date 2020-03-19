@@ -104,6 +104,7 @@ module Google
         # received messages.
         #
         # @return [Subscriber] returns self so calls can be chained.
+        #
         def start
           start_pool = synchronize do
             @started = true
@@ -129,6 +130,7 @@ module Google
         # received messages have been processed or released.
         #
         # @return [Subscriber] returns self so calls can be chained.
+        #
         def stop
           stop_pool = synchronize do
             @started = false
@@ -158,6 +160,7 @@ module Google
         #   subscriber is fully stopped. Default will block indefinitely.
         #
         # @return [Subscriber] returns self so calls can be chained.
+        #
         def wait! timeout = nil
           wait_pool = synchronize do
             @stream_pool.map do |stream|
@@ -190,6 +193,7 @@ module Google
         # Whether the subscriber has been started.
         #
         # @return [boolean] `true` when started, `false` otherwise.
+        #
         def started?
           synchronize { @started }
         end
@@ -198,6 +202,7 @@ module Google
         # Whether the subscriber has been stopped.
         #
         # @return [boolean] `true` when stopped, `false` otherwise.
+        #
         def stopped?
           synchronize { @stopped }
         end
@@ -279,6 +284,9 @@ module Google
 
         ##
         # The number of received messages to be collected by subscriber. Default is 1,000.
+        #
+        # @return [Integer] The maximum number of messages.
+        #
         def max_outstanding_messages
           @inventory[:max_outstanding_messages]
         end
@@ -289,6 +297,9 @@ module Google
 
         ##
         # The total byte size of received messages to be collected by subscriber. Default is 100,000,000 (100MB).
+        #
+        # @return [Integer] The maximum number of bytes.
+        #
         def max_outstanding_bytes
           @inventory[:max_outstanding_bytes]
         end
@@ -297,6 +308,9 @@ module Google
 
         ##
         # The number of seconds that received messages can be held awaiting processing. Default is 3,600 (1 hour).
+        #
+        # @return [Integer] The maximum number of seconds.
+        #
         def max_total_lease_duration
           @inventory[:max_total_lease_duration]
         end
@@ -304,12 +318,23 @@ module Google
         alias inventory_extension max_total_lease_duration
 
         ##
+        # The maximum amount of time in seconds for a single lease extension attempt. Bounds the delay before a message
+        # redelivery if the subscriber fails to extend the deadline. Default is 0 (disabled).
+        #
+        # @return [Integer] The maximum number of seconds.
+        #
+        def max_duration_per_lease_extension
+          @inventory[:max_duration_per_lease_extension]
+        end
+
+        ##
         # @private
         def stream_inventory
           {
-            limit:     @inventory[:max_outstanding_messages].fdiv(@streams).ceil,
-            bytesize:  @inventory[:max_outstanding_bytes].fdiv(@streams).ceil,
-            extension: @inventory[:max_total_lease_duration]
+            limit:                            @inventory[:max_outstanding_messages].fdiv(@streams).ceil,
+            bytesize:                         @inventory[:max_outstanding_bytes].fdiv(@streams).ceil,
+            extension:                        @inventory[:max_total_lease_duration],
+            max_duration_per_lease_extension: @inventory[:max_duration_per_lease_extension]
           }
         end
 
@@ -351,6 +376,7 @@ module Google
           @inventory[:max_outstanding_messages] = Integer(@inventory[:max_outstanding_messages] || 1000)
           @inventory[:max_outstanding_bytes] = Integer(@inventory[:max_outstanding_bytes] || 100_000_000)
           @inventory[:max_total_lease_duration] = Integer(@inventory[:max_total_lease_duration] || 3600)
+          @inventory[:max_duration_per_lease_extension] = Integer(@inventory[:max_duration_per_lease_extension] || 0)
         end
 
         def default_error_callbacks

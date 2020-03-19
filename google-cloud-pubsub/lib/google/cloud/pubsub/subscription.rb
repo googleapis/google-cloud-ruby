@@ -699,6 +699,9 @@ module Google
         #       subscriber. Default is 100,000,000 (100MB). (Note: replaces `:bytesize`, which is deprecated.)
         #     * `:max_total_lease_duration` [Integer] The number of seconds that received messages can be held awaiting
         #       processing. Default is 3,600 (1 hour). (Note: replaces `:extension`, which is deprecated.)
+        #     * `:max_duration_per_lease_extension` [Integer] The maximum amount of time in seconds for a single lease
+        #       extension attempt. Bounds the delay before a message redelivery if the subscriber fails to extend the
+        #       deadline. Default is 0 (disabled).
         # @param [Hash] threads The number of threads to create to handle
         #   concurrent calls by each stream opened by the subscriber. Optional.
         #
@@ -766,6 +769,25 @@ module Google
         #     # messsages with the same ordering_key are received
         #     # in the order in which they were published.
         #     received_message.acknowledge!
+        #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop.wait!
+        #
+        # @example Set the maximum amount of time before redelivery if the subscriber fails to extend the deadline:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #
+        #   subscriber = sub.listen inventory: { max_duration_per_lease_extension: 20 } do |received_message|
+        #     # Process message very slowly with possibility of failure.
+        #     process rec_message.data # takes minutes
+        #     rec_message.acknowledge!
         #   end
         #
         #   # Start background threads that will call block passed to listen.

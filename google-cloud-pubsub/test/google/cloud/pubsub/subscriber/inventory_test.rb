@@ -156,7 +156,7 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
   it "knows its count limit" do
     subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 2, bytesize: 100_000, extension: 3600
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 2, bytesize: 100_000, extension: 3600, max_duration_per_lease_extension: 0
 
     inventory.add rec_msg1_grpc
     inventory.wont_be :full?
@@ -168,7 +168,7 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
   it "knows its bytesize limit" do
     subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100, extension: 3600
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100, extension: 3600, max_duration_per_lease_extension: 0
 
     inventory.add rec_msg1_grpc
     inventory.wont_be :full?
@@ -180,7 +180,7 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
   it "removes expired items" do
     subscriber_mock = Minitest::Mock.new
-    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100_000, extension: 3600
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100_000, extension: 3600, max_duration_per_lease_extension: 0
 
     expired_time = Time.now - 7200
 
@@ -194,5 +194,12 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
     inventory.remove_expired!
 
     inventory.ack_ids.must_equal ["ack-id-1112", "ack-id-1113"]
+  end
+
+  it "knows its max_duration_per_lease_extension limit" do
+    subscriber_mock = Minitest::Mock.new
+    inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100, extension: 3600, max_duration_per_lease_extension: 10
+
+    inventory.max_duration_per_lease_extension.must_equal 10
   end
 end

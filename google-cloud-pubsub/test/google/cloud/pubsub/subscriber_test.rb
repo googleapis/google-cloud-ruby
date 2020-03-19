@@ -37,7 +37,8 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
     subscriber.max_outstanding_bytes.must_equal 100_000_000
     subscriber.inventory_extension.must_equal 3600
     subscriber.max_total_lease_duration.must_equal 3600
-    subscriber.stream_inventory.must_equal({limit: 250, bytesize: 12500000, extension: 3600})
+    subscriber.max_duration_per_lease_extension.must_equal 0
+    subscriber.stream_inventory.must_equal({limit: 250, bytesize: 12500000, max_duration_per_lease_extension: 0, extension: 3600})
     subscriber.callback_threads.must_equal callback_threads
     subscriber.push_threads.must_equal push_threads
 
