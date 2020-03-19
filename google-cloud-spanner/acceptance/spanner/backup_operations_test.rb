@@ -21,7 +21,6 @@ describe "Spanner Database Backup Operations", :spanner do
   let(:backup_id) { "#{$spanner_database_id}-ops" }
   let(:expire_time) { Time.now + 36000 }
 
-  focus
   it "list backup operations" do
     instance = spanner.instance instance_id
     instance.wont_be :nil?
