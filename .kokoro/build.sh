@@ -42,6 +42,17 @@ elif [ "$JOB_TYPE" = "continuous" ]; then
         rbenv global "$version"
         (bundle update && bundle exec rake kokoro:continuous) || set_failed_status
     done
+elif [ "$JOB_TYPE" = "samples_latest" ]; then
+    for version in "${versions[@]}"; do
+        rbenv global "$version"
+        (bundle update && bundle exec rake kokoro:samples_latest) || set_failed_status
+    done
+elif [ "$JOB_TYPE" = "samples_master" ]; then
+    git fetch --depth=10000
+    for version in "${versions[@]}"; do
+        rbenv global "$version"
+        (bundle update && bundle exec rake kokoro:samples_master) || set_failed_status
+    done
 elif [ "$JOB_TYPE" = "release" ]; then
     export DOCS_CREDENTIALS=${KOKORO_KEYSTORE_DIR}/73713_docuploader_service_account
     git fetch --depth=10000
