@@ -80,6 +80,8 @@ module Google
 
               "projects/#{project}/locations/#{location}/registries/#{registry}"
             end
+
+            extend self
           end
         end
       end

@@ -33,3 +33,5 @@ Style/CaseEquality:
   Exclude:
     - "lib/google/cloud/iot/v1/device_manager/*.rb"
     - "lib/google/cloud/iot/v1.rb"
+Style/ModuleFunction:
+  Enabled: false
