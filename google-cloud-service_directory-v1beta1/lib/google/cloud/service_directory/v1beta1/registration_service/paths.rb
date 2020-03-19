@@ -103,6 +103,8 @@ module Google
 
               "projects/#{project}/locations/#{location}/namespaces/#{namespace}/services/#{service}"
             end
+
+            extend self
           end
         end
       end
