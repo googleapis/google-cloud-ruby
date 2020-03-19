@@ -25,8 +25,8 @@ module Google
         #     Values are of the form `projects/{project}/instances/{instance}`.
         # @!attribute [rw] table_id
         #   @return [String]
-        #     Required. The name by which the new table should be referred to within the parent
-        #     instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+        #     Required. The name by which the new table should be referred to within the
+        #     parent instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
         #     Maximum 50 characters.
         # @!attribute [rw] table
         #   @return [Google::Bigtable::Admin::V2::Table]
@@ -70,13 +70,13 @@ module Google
         #     Values are of the form `projects/{project}/instances/{instance}`.
         # @!attribute [rw] table_id
         #   @return [String]
-        #     Required. The name by which the new table should be referred to within the parent
-        #     instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+        #     Required. The name by which the new table should be referred to within the
+        #     parent instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
         # @!attribute [rw] source_snapshot
         #   @return [String]
-        #     Required. The unique name of the snapshot from which to restore the table. The
-        #     snapshot and the table must be in the same instance.
-        #     Values are of the form
+        #     Required. The unique name of the snapshot from which to restore the table.
+        #     The snapshot and the table must be in the same instance. Values are of the
+        #     form
         #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
         class CreateTableFromSnapshotRequest; end
 
@@ -100,8 +100,8 @@ module Google
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::ListTables}
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required. The unique name of the instance for which tables should be listed.
-        #     Values are of the form `projects/{project}/instances/{instance}`.
+        #     Required. The unique name of the instance for which tables should be
+        #     listed. Values are of the form `projects/{project}/instances/{instance}`.
         # @!attribute [rw] view
         #   @return [Google::Bigtable::Admin::V2::Table::View]
         #     The view to be applied to the returned tables' fields.
@@ -165,10 +165,10 @@ module Google
         #     `projects/{project}/instances/{instance}/tables/{table}`.
         # @!attribute [rw] modifications
         #   @return [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
-        #     Required. Modifications to be atomically applied to the specified table's families.
-        #     Entries are applied in order, meaning that earlier modifications can be
-        #     masked by later ones (in the case of repeated updates to the same family,
-        #     for example).
+        #     Required. Modifications to be atomically applied to the specified table's
+        #     families. Entries are applied in order, meaning that earlier modifications
+        #     can be masked by later ones (in the case of repeated updates to the same
+        #     family, for example).
         class ModifyColumnFamiliesRequest
           # A create, update, or delete of a particular column family.
           # @!attribute [rw] id
@@ -193,8 +193,8 @@ module Google
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::GenerateConsistencyToken}
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. The unique name of the Table for which to create a consistency token.
-        #     Values are of the form
+        #     Required. The unique name of the Table for which to create a consistency
+        #     token. Values are of the form
         #     `projects/{project}/instances/{instance}/tables/{table}`.
         class GenerateConsistencyTokenRequest; end
 
@@ -209,8 +209,8 @@ module Google
         # {Google::Bigtable::Admin::V2::BigtableTableAdmin::CheckConsistency}
         # @!attribute [rw] name
         #   @return [String]
-        #     Required. The unique name of the Table for which to check replication consistency.
-        #     Values are of the form
+        #     Required. The unique name of the Table for which to check replication
+        #     consistency. Values are of the form
         #     `projects/{project}/instances/{instance}/tables/{table}`.
         # @!attribute [rw] consistency_token
         #   @return [String]
@@ -234,19 +234,19 @@ module Google
         # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] name
         #   @return [String]
-        #     The unique name of the table to have the snapshot taken.
+        #     Required. The unique name of the table to have the snapshot taken.
         #     Values are of the form
         #     `projects/{project}/instances/{instance}/tables/{table}`.
         # @!attribute [rw] cluster
         #   @return [String]
-        #     The name of the cluster where the snapshot will be created in.
+        #     Required. The name of the cluster where the snapshot will be created in.
         #     Values are of the form
         #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
         # @!attribute [rw] snapshot_id
         #   @return [String]
-        #     The ID by which the new snapshot should be referred to within the parent
-        #     cluster, e.g., `mysnapshot` of the form: `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
-        #     rather than
+        #     Required. The ID by which the new snapshot should be referred to within the
+        #     parent cluster, e.g., `mysnapshot` of the form:
+        #     `[_a-zA-Z0-9][-_.a-zA-Z0-9]*` rather than
         #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/mysnapshot`.
         # @!attribute [rw] ttl
         #   @return [Google::Protobuf::Duration]
@@ -282,8 +282,8 @@ module Google
         # for production use. It is not subject to any SLA or deprecation policy.
         # @!attribute [rw] parent
         #   @return [String]
-        #     Required. The unique name of the cluster for which snapshots should be listed.
-        #     Values are of the form
+        #     Required. The unique name of the cluster for which snapshots should be
+        #     listed. Values are of the form
         #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
         #     Use `{cluster} = '-'` to list snapshots for all clusters in an instance,
         #     e.g., `projects/{project}/instances/{instance}/clusters/-`.
@@ -361,6 +361,226 @@ module Google
         #   @return [Google::Protobuf::Timestamp]
         #     The time at which the operation failed or was completed successfully.
         class CreateTableFromSnapshotMetadata; end
+
+        # The request for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::CreateBackup CreateBackup}.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Required. This must be one of the clusters in the instance in which this
+        #     table is located. The backup will be stored in this cluster. Values are
+        #     of the form `projects/{project}/instances/{instance}/clusters/{cluster}`.
+        # @!attribute [rw] backup_id
+        #   @return [String]
+        #     Required. The id of the backup to be created. The `backup_id` along with
+        #     the parent `parent` are combined as \\{parent}/backups/\\{backup_id} to create
+        #     the full backup name, of the form:
+        #     `projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup_id}`.
+        #     This string must be between 1 and 50 characters in length and match the
+        #     regex [_a-zA-Z0-9][-_.a-zA-Z0-9]*.
+        # @!attribute [rw] backup
+        #   @return [Google::Bigtable::Admin::V2::Backup]
+        #     Required. The backup to create.
+        class CreateBackupRequest; end
+
+        # Metadata type for the operation returned by
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::CreateBackup CreateBackup}.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     The name of the backup being created.
+        # @!attribute [rw] source_table
+        #   @return [String]
+        #     The name of the table the backup is created from.
+        # @!attribute [rw] start_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     The time at which this operation started.
+        # @!attribute [rw] end_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     If set, the time at which this operation finished or was cancelled.
+        class CreateBackupMetadata; end
+
+        # The request for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::GetBackup GetBackup}.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. Name of the backup.
+        #     Values are of the form
+        #     `projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}`.
+        class GetBackupRequest; end
+
+        # The request for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::UpdateBackup UpdateBackup}.
+        # @!attribute [rw] backup
+        #   @return [Google::Bigtable::Admin::V2::Backup]
+        #     Required. The backup to update. `backup.name`, and the fields to be updated
+        #     as specified by `update_mask` are required. Other fields are ignored.
+        #     Update is only supported for the following fields:
+        #     * `backup.expire_time`.
+        # @!attribute [rw] update_mask
+        #   @return [Google::Protobuf::FieldMask]
+        #     Required. A mask specifying which fields (e.g. `expire_time`) in the
+        #     Backup resource should be updated. This mask is relative to the Backup
+        #     resource, not to the request message. The field mask must always be
+        #     specified; this prevents any future fields from being erased accidentally
+        #     by clients that do not know about them.
+        class UpdateBackupRequest; end
+
+        # The request for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::DeleteBackup DeleteBackup}.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Required. Name of the backup to delete.
+        #     Values are of the form
+        #     `projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}`.
+        class DeleteBackupRequest; end
+
+        # The request for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::ListBackups ListBackups}.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Required. The cluster to list backups from. Values are of the
+        #     form `projects/{project}/instances/{instance}/clusters/{cluster}`.
+        #     Use `{cluster} = '-'` to list backups for all clusters in an instance,
+        #     e.g., `projects/{project}/instances/{instance}/clusters/-`.
+        # @!attribute [rw] filter
+        #   @return [String]
+        #     A filter expression that filters backups listed in the response.
+        #     The expression must specify the field name, a comparison operator,
+        #     and the value that you want to use for filtering. The value must be a
+        #     string, a number, or a boolean. The comparison operator must be
+        #     <, >, <=, >=, !=, =, or :. Colon ‘:’ represents a HAS operator which is
+        #     roughly synonymous with equality. Filter rules are case insensitive.
+        #
+        #     The fields eligible for filtering are:
+        #     * `name`
+        #       * `source_table`
+        #       * `state`
+        #       * `start_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+        #       * `end_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+        #       * `expire_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+        #       * `size_bytes`
+        #
+        #       To filter on multiple expressions, provide each separate expression within
+        #       parentheses. By default, each expression is an AND expression. However,
+        #       you can include AND, OR, and NOT expressions explicitly.
+        #
+        #     Some examples of using filters are:
+        #
+        #     * `name:"exact"` --> The backup's name is the string "exact".
+        #       * `name:howl` --> The backup's name contains the string "howl".
+        #       * `source_table:prod`
+        #         --> The source_table's name contains the string "prod".
+        #       * `state:CREATING` --> The backup is pending creation.
+        #       * `state:READY` --> The backup is fully created and ready for use.
+        #       * `(name:howl) AND (start_time < \"2018-03-28T14:50:00Z\")`
+        #         --> The backup name contains the string "howl" and start_time
+        #         of the backup is before 2018-03-28T14:50:00Z.
+        #       * `size_bytes > 10000000000` --> The backup's size is greater than 10GB
+        # @!attribute [rw] order_by
+        #   @return [String]
+        #     An expression for specifying the sort order of the results of the request.
+        #     The string value should specify one or more fields in
+        #     {Google::Bigtable::Admin::V2::Backup Backup}. The full syntax is described at
+        #     https://aip.dev/132#ordering.
+        #
+        #     Fields supported are:
+        #     * name
+        #       * source_table
+        #         * expire_time
+        #       * start_time
+        #         * end_time
+        #       * size_bytes
+        #         * state
+        #
+        #         For example, "start_time". The default sorting order is ascending.
+        #         To specify descending order for the field, a suffix " desc" should
+        #         be appended to the field name. For example, "start_time desc".
+        #         Redundant space characters in the syntax are insigificant.
+        #
+        #       If order_by is empty, results will be sorted by `start_time` in descending
+        #       order starting from the most recently created backup.
+        # @!attribute [rw] page_size
+        #   @return [Integer]
+        #     Number of backups to be returned in the response. If 0 or
+        #     less, defaults to the server's maximum allowed page size.
+        # @!attribute [rw] page_token
+        #   @return [String]
+        #     If non-empty, `page_token` should contain a
+        #     {Google::Bigtable::Admin::V2::ListBackupsResponse#next_page_token next_page_token}
+        #     from a previous
+        #     {Google::Bigtable::Admin::V2::ListBackupsResponse ListBackupsResponse} to the
+        #     same `parent` and with the same `filter`.
+        class ListBackupsRequest; end
+
+        # The response for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::ListBackups ListBackups}.
+        # @!attribute [rw] backups
+        #   @return [Array<Google::Bigtable::Admin::V2::Backup>]
+        #     The list of matching backups.
+        # @!attribute [rw] next_page_token
+        #   @return [String]
+        #     `next_page_token` can be sent in a subsequent
+        #     {Google::Bigtable::Admin::V2::BigtableTableAdmin::ListBackups ListBackups} call
+        #     to fetch more of the matching backups.
+        class ListBackupsResponse; end
+
+        # The request for
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::RestoreTable RestoreTable}.
+        # @!attribute [rw] parent
+        #   @return [String]
+        #     Required. The name of the instance in which to create the restored
+        #     table. This instance must be the parent of the source backup. Values are
+        #     of the form `projects/<project>/instances/<instance>`.
+        # @!attribute [rw] table_id
+        #   @return [String]
+        #     Required. The id of the table to create and restore to. This
+        #     table must not already exist. The `table_id` appended to
+        #     `parent` forms the full table name of the form
+        #     `projects/<project>/instances/<instance>/tables/<table_id>`.
+        # @!attribute [rw] backup
+        #   @return [String]
+        #     Name of the backup from which to restore. Values are of the form
+        #     `projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>`.
+        class RestoreTableRequest; end
+
+        # Metadata type for the long-running operation returned by
+        # {Google::Bigtable::Admin::V2::BigtableTableAdmin::RestoreTable RestoreTable}.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Name of the table being created and restored to.
+        # @!attribute [rw] source_type
+        #   @return [Google::Bigtable::Admin::V2::RestoreSourceType]
+        #     The type of the restore source.
+        # @!attribute [rw] backup_info
+        #   @return [Google::Bigtable::Admin::V2::BackupInfo]
+        # @!attribute [rw] optimize_table_operation_name
+        #   @return [String]
+        #     If exists, the name of the long-running operation that will be used to
+        #     track the post-restore optimization process to optimize the performance of
+        #     the restored table. The metadata type of the long-running operation is
+        #     \\{OptimizeRestoreTableMetadata}. The response type is
+        #     {Google::Protobuf::Empty Empty}. This long-running operation may be
+        #     automatically created by the system if applicable after the
+        #     RestoreTable long-running operation completes successfully. This operation
+        #     may not be created if the table is already optimized or the restore was
+        #     not successful.
+        # @!attribute [rw] progress
+        #   @return [Google::Bigtable::Admin::V2::OperationProgress]
+        #     The progress of the
+        #     {Google::Bigtable::Admin::V2::BigtableTableAdmin::RestoreTable RestoreTable}
+        #     operation.
+        class RestoreTableMetadata; end
+
+        # Metadata type for the long-running operation used to track the progress
+        # of optimizations performed on a newly restored table. This long-running
+        # operation is automatically created by the system after the successful
+        # completion of a table restore, and cannot be cancelled.
+        # @!attribute [rw] name
+        #   @return [String]
+        #     Name of the restored table being optimized.
+        # @!attribute [rw] progress
+        #   @return [Google::Bigtable::Admin::V2::OperationProgress]
+        #     The progress of the post-restore optimizations.
+        class OptimizeRestoredTableMetadata; end
       end
     end
   end

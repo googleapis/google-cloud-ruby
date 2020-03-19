@@ -10,11 +10,18 @@ require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "google.bigtable.admin.v2.RestoreInfo" do
+    optional :source_type, :enum, 1, "google.bigtable.admin.v2.RestoreSourceType"
+    oneof :source_info do
+      optional :backup_info, :message, 2, "google.bigtable.admin.v2.BackupInfo"
+    end
+  end
   add_message "google.bigtable.admin.v2.Table" do
     optional :name, :string, 1
     map :cluster_states, :string, :message, 2, "google.bigtable.admin.v2.Table.ClusterState"
     map :column_families, :string, :message, 3, "google.bigtable.admin.v2.ColumnFamily"
     optional :granularity, :enum, 4, "google.bigtable.admin.v2.Table.TimestampGranularity"
+    optional :restore_info, :message, 6, "google.bigtable.admin.v2.RestoreInfo"
   end
   add_message "google.bigtable.admin.v2.Table.ClusterState" do
     optional :replication_state, :enum, 1, "google.bigtable.admin.v2.Table.ClusterState.ReplicationState"
@@ -25,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :PLANNED_MAINTENANCE, 2
     value :UNPLANNED_MAINTENANCE, 3
     value :READY, 4
+    value :READY_OPTIMIZING, 5
   end
   add_enum "google.bigtable.admin.v2.Table.TimestampGranularity" do
     value :TIMESTAMP_GRANULARITY_UNSPECIFIED, 0
@@ -68,12 +76,37 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :READY, 1
     value :CREATING, 2
   end
+  add_message "google.bigtable.admin.v2.Backup" do
+    optional :name, :string, 1
+    optional :source_table, :string, 2
+    optional :expire_time, :message, 3, "google.protobuf.Timestamp"
+    optional :start_time, :message, 4, "google.protobuf.Timestamp"
+    optional :end_time, :message, 5, "google.protobuf.Timestamp"
+    optional :size_bytes, :int64, 6
+    optional :state, :enum, 7, "google.bigtable.admin.v2.Backup.State"
+  end
+  add_enum "google.bigtable.admin.v2.Backup.State" do
+    value :STATE_UNSPECIFIED, 0
+    value :CREATING, 1
+    value :READY, 2
+  end
+  add_message "google.bigtable.admin.v2.BackupInfo" do
+    optional :backup, :string, 1
+    optional :start_time, :message, 2, "google.protobuf.Timestamp"
+    optional :end_time, :message, 3, "google.protobuf.Timestamp"
+    optional :source_table, :string, 4
+  end
+  add_enum "google.bigtable.admin.v2.RestoreSourceType" do
+    value :RESTORE_SOURCE_TYPE_UNSPECIFIED, 0
+    value :BACKUP, 1
+  end
 end
 
 module Google
   module Bigtable
     module Admin
       module V2
+        RestoreInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreInfo").msgclass
         Table = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table").msgclass
         Table::ClusterState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table.ClusterState").msgclass
         Table::ClusterState::ReplicationState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Table.ClusterState.ReplicationState").enummodule
@@ -85,6 +118,10 @@ module Google
         GcRule::Union = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GcRule.Union").msgclass
         Snapshot = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Snapshot").msgclass
         Snapshot::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Snapshot.State").enummodule
+        Backup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Backup").msgclass
+        Backup::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Backup.State").enummodule
+        BackupInfo = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.BackupInfo").msgclass
+        RestoreSourceType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.RestoreSourceType").enummodule
       end
     end
   end

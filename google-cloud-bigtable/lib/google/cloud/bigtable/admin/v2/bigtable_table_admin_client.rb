@@ -67,7 +67,11 @@ module Google
               "list_snapshots" => Google::Gax::PageDescriptor.new(
                 "page_token",
                 "next_page_token",
-                "snapshots")
+                "snapshots"),
+              "list_backups" => Google::Gax::PageDescriptor.new(
+                "page_token",
+                "next_page_token",
+                "backups")
             }.freeze
 
             private_constant :PAGE_DESCRIPTORS
@@ -92,6 +96,12 @@ module Google
               self::GRPC_INTERCEPTORS = BigtableTableAdminClient::GRPC_INTERCEPTORS
             end
 
+            BACKUP_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}"
+            )
+
+            private_constant :BACKUP_PATH_TEMPLATE
+
             CLUSTER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}/instances/{instance}/clusters/{cluster}"
             )
@@ -115,6 +125,21 @@ module Google
             )
 
             private_constant :TABLE_PATH_TEMPLATE
+
+            # Returns a fully-qualified backup resource name string.
+            # @param project [String]
+            # @param instance [String]
+            # @param cluster [String]
+            # @param backup [String]
+            # @return [String]
+            def self.backup_path project, instance, cluster, backup
+              BACKUP_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"instance" => instance,
+                :"cluster" => cluster,
+                :"backup" => backup
+              )
+            end
 
             # Returns a fully-qualified cluster resource name string.
             # @param project [String]
@@ -420,6 +445,54 @@ module Google
                   {'name' => request.name}
                 end
               )
+              @create_backup = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:create_backup),
+                defaults["create_backup"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
+              )
+              @get_backup = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:get_backup),
+                defaults["get_backup"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
+              )
+              @list_backups = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:list_backups),
+                defaults["list_backups"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
+              )
+              @update_backup = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:update_backup),
+                defaults["update_backup"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'backup.name' => request.backup.name}
+                end
+              )
+              @delete_backup = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:delete_backup),
+                defaults["delete_backup"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
+              )
+              @restore_table = Google::Gax.create_api_call(
+                @bigtable_table_admin_stub.method(:restore_table),
+                defaults["restore_table"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'parent' => request.parent}
+                end
+              )
             end
 
             # Service calls
@@ -432,8 +505,8 @@ module Google
             #   Required. The unique name of the instance in which to create the table.
             #   Values are of the form `projects/{project}/instances/{instance}`.
             # @param table_id [String]
-            #   Required. The name by which the new table should be referred to within the parent
-            #   instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+            #   Required. The name by which the new table should be referred to within the
+            #   parent instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
             #   Maximum 50 characters.
             # @param table [Google::Bigtable::Admin::V2::Table | Hash]
             #   Required. The Table to create.
@@ -509,12 +582,12 @@ module Google
             #   Required. The unique name of the instance in which to create the table.
             #   Values are of the form `projects/{project}/instances/{instance}`.
             # @param table_id [String]
-            #   Required. The name by which the new table should be referred to within the parent
-            #   instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+            #   Required. The name by which the new table should be referred to within the
+            #   parent instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
             # @param source_snapshot [String]
-            #   Required. The unique name of the snapshot from which to restore the table. The
-            #   snapshot and the table must be in the same instance.
-            #   Values are of the form
+            #   Required. The unique name of the snapshot from which to restore the table.
+            #   The snapshot and the table must be in the same instance. Values are of the
+            #   form
             #   `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -585,8 +658,8 @@ module Google
             # Lists all tables served from a specified instance.
             #
             # @param parent [String]
-            #   Required. The unique name of the instance for which tables should be listed.
-            #   Values are of the form `projects/{project}/instances/{instance}`.
+            #   Required. The unique name of the instance for which tables should be
+            #   listed. Values are of the form `projects/{project}/instances/{instance}`.
             # @param view [Google::Bigtable::Admin::V2::Table::View]
             #   The view to be applied to the returned tables' fields.
             #   Only NAME_ONLY view (default) and REPLICATION_VIEW are supported.
@@ -725,10 +798,10 @@ module Google
             #   Values are of the form
             #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param modifications [Array<Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification | Hash>]
-            #   Required. Modifications to be atomically applied to the specified table's families.
-            #   Entries are applied in order, meaning that earlier modifications can be
-            #   masked by later ones (in the case of repeated updates to the same family,
-            #   for example).
+            #   Required. Modifications to be atomically applied to the specified table's
+            #   families. Entries are applied in order, meaning that earlier modifications
+            #   can be masked by later ones (in the case of repeated updates to the same
+            #   family, for example).
             #   A hash of the same form as `Google::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification`
             #   can also be provided.
             # @param options [Google::Gax::CallOptions]
@@ -811,8 +884,8 @@ module Google
             # for 90 days.
             #
             # @param name [String]
-            #   Required. The unique name of the Table for which to create a consistency token.
-            #   Values are of the form
+            #   Required. The unique name of the Table for which to create a consistency
+            #   token. Values are of the form
             #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
@@ -845,8 +918,8 @@ module Google
             # and the check request.
             #
             # @param name [String]
-            #   Required. The unique name of the Table for which to check replication consistency.
-            #   Values are of the form
+            #   Required. The unique name of the Table for which to check replication
+            #   consistency. Values are of the form
             #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param consistency_token [String]
             #   Required. The token created using GenerateConsistencyToken for the Table.
@@ -1016,17 +1089,17 @@ module Google
             # policy.
             #
             # @param name [String]
-            #   The unique name of the table to have the snapshot taken.
+            #   Required. The unique name of the table to have the snapshot taken.
             #   Values are of the form
             #   `projects/{project}/instances/{instance}/tables/{table}`.
             # @param cluster [String]
-            #   The name of the cluster where the snapshot will be created in.
+            #   Required. The name of the cluster where the snapshot will be created in.
             #   Values are of the form
             #   `projects/{project}/instances/{instance}/clusters/{cluster}`.
             # @param snapshot_id [String]
-            #   The ID by which the new snapshot should be referred to within the parent
-            #   cluster, e.g., `mysnapshot` of the form: `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
-            #   rather than
+            #   Required. The ID by which the new snapshot should be referred to within the
+            #   parent cluster, e.g., `mysnapshot` of the form:
+            #   `[_a-zA-Z0-9][-_.a-zA-Z0-9]*` rather than
             #   `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/mysnapshot`.
             # @param description [String]
             #   Description of the snapshot.
@@ -1157,8 +1230,8 @@ module Google
             # policy.
             #
             # @param parent [String]
-            #   Required. The unique name of the cluster for which snapshots should be listed.
-            #   Values are of the form
+            #   Required. The unique name of the cluster for which snapshots should be
+            #   listed. Values are of the form
             #   `projects/{project}/instances/{instance}/clusters/{cluster}`.
             #   Use `{cluster} = '-'` to list snapshots for all clusters in an instance,
             #   e.g., `projects/{project}/instances/{instance}/clusters/-`.
@@ -1248,6 +1321,410 @@ module Google
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::DeleteSnapshotRequest)
               @delete_snapshot.call(req, options, &block)
               nil
+            end
+
+            # Starts creating a new Cloud Bigtable Backup. The returned backup
+            # {Google::Longrunning::Operation long-running operation} can be used to
+            # track creation of the backup. The
+            # {Google::Longrunning::Operation#metadata metadata} field type is
+            # {Google::Bigtable::Admin::V2::CreateBackupMetadata CreateBackupMetadata}. The
+            # {Google::Longrunning::Operation#response response} field type is
+            # {Google::Bigtable::Admin::V2::Backup Backup}, if successful. Cancelling the
+            # returned operation will stop the creation and delete the backup.
+            #
+            # @param parent [String]
+            #   Required. This must be one of the clusters in the instance in which this
+            #   table is located. The backup will be stored in this cluster. Values are
+            #   of the form `projects/{project}/instances/{instance}/clusters/{cluster}`.
+            # @param backup_id [String]
+            #   Required. The id of the backup to be created. The `backup_id` along with
+            #   the parent `parent` are combined as \\{parent}/backups/\\{backup_id} to create
+            #   the full backup name, of the form:
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup_id}`.
+            #   This string must be between 1 and 50 characters in length and match the
+            #   regex [_a-zA-Z0-9][-_.a-zA-Z0-9]*.
+            # @param backup [Google::Bigtable::Admin::V2::Backup | Hash]
+            #   Required. The backup to create.
+            #   A hash of the same form as `Google::Bigtable::Admin::V2::Backup`
+            #   can also be provided.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Gax::Operation]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+            #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
+            #
+            #   # TODO: Initialize `backup_id`:
+            #   backup_id = ''
+            #
+            #   # TODO: Initialize `backup`:
+            #   backup = {}
+            #
+            #   # Register a callback during the method call.
+            #   operation = bigtable_table_admin_client.create_backup(formatted_parent, backup_id, backup) do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Or use the return value to register a callback.
+            #   operation.on_done do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Manually reload the operation.
+            #   operation.reload!
+            #
+            #   # Or block until the operation completes, triggering callbacks on
+            #   # completion.
+            #   operation.wait_until_done!
+
+            def create_backup \
+                parent,
+                backup_id,
+                backup,
+                options: nil
+              req = {
+                parent: parent,
+                backup_id: backup_id,
+                backup: backup
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::CreateBackupRequest)
+              operation = Google::Gax::Operation.new(
+                @create_backup.call(req, options),
+                @operations_client,
+                Google::Bigtable::Admin::V2::Backup,
+                Google::Bigtable::Admin::V2::CreateBackupMetadata,
+                call_options: options
+              )
+              operation.on_done { |operation| yield(operation) } if block_given?
+              operation
+            end
+
+            # Gets metadata on a pending or completed Cloud Bigtable Backup.
+            #
+            # @param name [String]
+            #   Required. Name of the backup.
+            #   Values are of the form
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}`.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Bigtable::Admin::V2::Backup]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @return [Google::Bigtable::Admin::V2::Backup]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.backup_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[BACKUP]")
+            #   response = bigtable_table_admin_client.get_backup(formatted_name)
+
+            def get_backup \
+                name,
+                options: nil,
+                &block
+              req = {
+                name: name
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::GetBackupRequest)
+              @get_backup.call(req, options, &block)
+            end
+
+            # Lists Cloud Bigtable backups. Returns both completed and pending
+            # backups.
+            #
+            # @param parent [String]
+            #   Required. The cluster to list backups from. Values are of the
+            #   form `projects/{project}/instances/{instance}/clusters/{cluster}`.
+            #   Use `{cluster} = '-'` to list backups for all clusters in an instance,
+            #   e.g., `projects/{project}/instances/{instance}/clusters/-`.
+            # @param filter [String]
+            #   A filter expression that filters backups listed in the response.
+            #   The expression must specify the field name, a comparison operator,
+            #   and the value that you want to use for filtering. The value must be a
+            #   string, a number, or a boolean. The comparison operator must be
+            #   <, >, <=, >=, !=, =, or :. Colon ‘:’ represents a HAS operator which is
+            #   roughly synonymous with equality. Filter rules are case insensitive.
+            #
+            #   The fields eligible for filtering are:
+            #   * `name`
+            #     * `source_table`
+            #     * `state`
+            #     * `start_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+            #     * `end_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+            #     * `expire_time` (and values are of the format YYYY-MM-DDTHH:MM:SSZ)
+            #     * `size_bytes`
+            #
+            #     To filter on multiple expressions, provide each separate expression within
+            #     parentheses. By default, each expression is an AND expression. However,
+            #     you can include AND, OR, and NOT expressions explicitly.
+            #
+            #   Some examples of using filters are:
+            #
+            #   * `name:"exact"` --> The backup's name is the string "exact".
+            #     * `name:howl` --> The backup's name contains the string "howl".
+            #     * `source_table:prod`
+            #       --> The source_table's name contains the string "prod".
+            #     * `state:CREATING` --> The backup is pending creation.
+            #     * `state:READY` --> The backup is fully created and ready for use.
+            #     * `(name:howl) AND (start_time < \"2018-03-28T14:50:00Z\")`
+            #       --> The backup name contains the string "howl" and start_time
+            #       of the backup is before 2018-03-28T14:50:00Z.
+            #     * `size_bytes > 10000000000` --> The backup's size is greater than 10GB
+            # @param order_by [String]
+            #   An expression for specifying the sort order of the results of the request.
+            #   The string value should specify one or more fields in
+            #   {Google::Bigtable::Admin::V2::Backup Backup}. The full syntax is described at
+            #   https://aip.dev/132#ordering.
+            #
+            #   Fields supported are:
+            #   * name
+            #     * source_table
+            #       * expire_time
+            #     * start_time
+            #       * end_time
+            #     * size_bytes
+            #       * state
+            #
+            #       For example, "start_time". The default sorting order is ascending.
+            #       To specify descending order for the field, a suffix " desc" should
+            #       be appended to the field name. For example, "start_time desc".
+            #       Redundant space characters in the syntax are insigificant.
+            #
+            #     If order_by is empty, results will be sorted by `start_time` in descending
+            #     order starting from the most recently created backup.
+            # @param page_size [Integer]
+            #   The maximum number of resources contained in the underlying API
+            #   response. If page streaming is performed per-resource, this
+            #   parameter does not affect the return value. If page streaming is
+            #   performed per-page, this determines the maximum number of
+            #   resources in a page.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Backup>]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @return [Google::Gax::PagedEnumerable<Google::Bigtable::Admin::V2::Backup>]
+            #   An enumerable of Google::Bigtable::Admin::V2::Backup instances.
+            #   See Google::Gax::PagedEnumerable documentation for other
+            #   operations such as per-page iteration or access to the response
+            #   object.
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+            #   formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
+            #
+            #   # Iterate over all results.
+            #   bigtable_table_admin_client.list_backups(formatted_parent).each do |element|
+            #     # Process element.
+            #   end
+            #
+            #   # Or iterate over results one page at a time.
+            #   bigtable_table_admin_client.list_backups(formatted_parent).each_page do |page|
+            #     # Process each page at a time.
+            #     page.each do |element|
+            #       # Process element.
+            #     end
+            #   end
+
+            def list_backups \
+                parent,
+                filter: nil,
+                order_by: nil,
+                page_size: nil,
+                options: nil,
+                &block
+              req = {
+                parent: parent,
+                filter: filter,
+                order_by: order_by,
+                page_size: page_size
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::ListBackupsRequest)
+              @list_backups.call(req, options, &block)
+            end
+
+            # Updates a pending or completed Cloud Bigtable Backup.
+            #
+            # @param backup [Google::Bigtable::Admin::V2::Backup | Hash]
+            #   Required. The backup to update. `backup.name`, and the fields to be updated
+            #   as specified by `update_mask` are required. Other fields are ignored.
+            #   Update is only supported for the following fields:
+            #   * `backup.expire_time`.
+            #   A hash of the same form as `Google::Bigtable::Admin::V2::Backup`
+            #   can also be provided.
+            # @param update_mask [Google::Protobuf::FieldMask | Hash]
+            #   Required. A mask specifying which fields (e.g. `expire_time`) in the
+            #   Backup resource should be updated. This mask is relative to the Backup
+            #   resource, not to the request message. The field mask must always be
+            #   specified; this prevents any future fields from being erased accidentally
+            #   by clients that do not know about them.
+            #   A hash of the same form as `Google::Protobuf::FieldMask`
+            #   can also be provided.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result [Google::Bigtable::Admin::V2::Backup]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @return [Google::Bigtable::Admin::V2::Backup]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+            #
+            #   # TODO: Initialize `backup`:
+            #   backup = {}
+            #
+            #   # TODO: Initialize `update_mask`:
+            #   update_mask = {}
+            #   response = bigtable_table_admin_client.update_backup(backup, update_mask)
+
+            def update_backup \
+                backup,
+                update_mask,
+                options: nil,
+                &block
+              req = {
+                backup: backup,
+                update_mask: update_mask
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::UpdateBackupRequest)
+              @update_backup.call(req, options, &block)
+            end
+
+            # Deletes a pending or completed Cloud Bigtable backup.
+            #
+            # @param name [String]
+            #   Required. Name of the backup to delete.
+            #   Values are of the form
+            #   `projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup}`.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result []
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.backup_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[BACKUP]")
+            #   bigtable_table_admin_client.delete_backup(formatted_name)
+
+            def delete_backup \
+                name,
+                options: nil,
+                &block
+              req = {
+                name: name
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::DeleteBackupRequest)
+              @delete_backup.call(req, options, &block)
+              nil
+            end
+
+            # Create a new table by restoring from a completed backup. The new table
+            # must be in the same instance as the instance containing the backup. The
+            # returned table {Google::Longrunning::Operation long-running operation} can
+            # be used to track the progress of the operation, and to cancel it. The
+            # {Google::Longrunning::Operation#metadata metadata} field type is
+            # {Google::Bigtable::Admin::RestoreTableMetadata RestoreTableMetadata}. The
+            # {Google::Longrunning::Operation#response response} type is
+            # {Google::Bigtable::Admin::V2::Table Table}, if successful.
+            #
+            # @param parent [String]
+            #   Required. The name of the instance in which to create the restored
+            #   table. This instance must be the parent of the source backup. Values are
+            #   of the form `projects/<project>/instances/<instance>`.
+            # @param table_id [String]
+            #   Required. The id of the table to create and restore to. This
+            #   table must not already exist. The `table_id` appended to
+            #   `parent` forms the full table name of the form
+            #   `projects/<project>/instances/<instance>/tables/<table_id>`.
+            # @param backup [String]
+            #   Name of the backup from which to restore. Values are of the form
+            #   `projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>`.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Gax::Operation]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/bigtable/admin"
+            #
+            #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
+            #
+            #   # TODO: Initialize `parent`:
+            #   parent = ''
+            #
+            #   # Register a callback during the method call.
+            #   operation = bigtable_table_admin_client.restore_table(parent) do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Or use the return value to register a callback.
+            #   operation.on_done do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Manually reload the operation.
+            #   operation.reload!
+            #
+            #   # Or block until the operation completes, triggering callbacks on
+            #   # completion.
+            #   operation.wait_until_done!
+
+            def restore_table \
+                parent,
+                table_id: nil,
+                backup: nil,
+                options: nil
+              req = {
+                parent: parent,
+                table_id: table_id,
+                backup: backup
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::RestoreTableRequest)
+              operation = Google::Gax::Operation.new(
+                @restore_table.call(req, options),
+                @operations_client,
+                Google::Bigtable::Admin::V2::Table,
+                Google::Bigtable::Admin::V2::RestoreTableMetadata,
+                call_options: options
+              )
+              operation.on_done { |operation| yield(operation) } if block_given?
+              operation
             end
           end
         end

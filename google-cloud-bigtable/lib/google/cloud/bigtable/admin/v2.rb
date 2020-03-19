@@ -16,6 +16,7 @@
 require "google/cloud/bigtable/admin/v2/bigtable_instance_admin_client"
 require "google/cloud/bigtable/admin/v2/bigtable_table_admin_client"
 require "google/bigtable/admin/v2/bigtable_instance_admin_pb"
+require "google/bigtable/admin/v2/table_pb"
 require "google/bigtable/admin/v2/bigtable_table_admin_pb"
 
 module Google
