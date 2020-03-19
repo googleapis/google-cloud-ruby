@@ -33,3 +33,5 @@ Style/CaseEquality:
   Exclude:
     - "lib/google/cloud/access_approval/v1/access_approval/*.rb"
     - "lib/google/cloud/access_approval/v1.rb"
+Style/ModuleFunction:
+  Enabled: false
