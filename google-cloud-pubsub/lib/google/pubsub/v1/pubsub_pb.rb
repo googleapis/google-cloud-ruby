@@ -83,6 +83,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     map :labels, :string, :string, 9
     optional :enable_message_ordering, :bool, 10
     optional :expiration_policy, :message, 11, "google.pubsub.v1.ExpirationPolicy"
+    optional :filter, :string, 12
     optional :dead_letter_policy, :message, 13, "google.pubsub.v1.DeadLetterPolicy"
     optional :retry_policy, :message, 14, "google.pubsub.v1.RetryPolicy"
   end

@@ -503,6 +503,14 @@ module Google
           #   value for `expiration_policy.ttl` is 1 day.
           #   A hash of the same form as `Google::Cloud::PubSub::V1::ExpirationPolicy`
           #   can also be provided.
+          # @param filter [String]
+          #   An expression written in the Cloud Pub/Sub filter language. If non-empty,
+          #   then only `PubsubMessage`s whose `attributes` field matches the filter are
+          #   delivered on this subscription. If empty, then no messages are filtered
+          #   out.
+          #   <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+          #   API might be changed in backward-incompatible ways and is not recommended
+          #   for production use. It is not subject to any SLA or deprecation policy.
           # @param dead_letter_policy [Google::Cloud::PubSub::V1::DeadLetterPolicy | Hash]
           #   A policy that specifies the conditions for dead lettering messages in
           #   this subscription. If dead_letter_policy is not set, dead lettering
@@ -556,6 +564,7 @@ module Google
               labels: nil,
               enable_message_ordering: nil,
               expiration_policy: nil,
+              filter: nil,
               dead_letter_policy: nil,
               retry_policy: nil,
               options: nil,
@@ -570,6 +579,7 @@ module Google
               labels: labels,
               enable_message_ordering: enable_message_ordering,
               expiration_policy: expiration_policy,
+              filter: filter,
               dead_letter_policy: dead_letter_policy,
               retry_policy: retry_policy
             }.delete_if { |_, v| v.nil? }

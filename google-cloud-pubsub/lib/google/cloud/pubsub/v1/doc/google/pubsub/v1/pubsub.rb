@@ -293,6 +293,15 @@ module Google
       #     operations on the subscription. If `expiration_policy` is not set, a
       #     *default policy* with `ttl` of 31 days will be used. The minimum allowed
       #     value for `expiration_policy.ttl` is 1 day.
+      # @!attribute [rw] filter
+      #   @return [String]
+      #     An expression written in the Cloud Pub/Sub filter language. If non-empty,
+      #     then only `PubsubMessage`s whose `attributes` field matches the filter are
+      #     delivered on this subscription. If empty, then no messages are filtered
+      #     out.
+      #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
+      #     API might be changed in backward-incompatible ways and is not recommended
+      #     for production use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] dead_letter_policy
       #   @return [Google::Cloud::PubSub::V1::DeadLetterPolicy]
       #     A policy that specifies the conditions for dead lettering messages in
