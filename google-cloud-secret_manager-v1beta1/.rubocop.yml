@@ -33,3 +33,5 @@ Style/CaseEquality:
   Exclude:
     - "lib/google/cloud/secret_manager/v1beta1/secret_manager_service/*.rb"
     - "lib/google/cloud/secret_manager/v1beta1.rb"
+Style/ModuleFunction:
+  Enabled: false
