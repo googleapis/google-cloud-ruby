@@ -235,7 +235,7 @@ module Google
         # @param [String] instance_id The name of the instance in which to
         #   create the restored database. This instance must be in the same
         #   project and have the same instance configuration as the instance
-        #   containing the source backup. Optional.  Default value is same as a
+        #   containing the source backup. Optional. Default value is same as a
         #   backup instance.
         # @return [Database] Restored database.
         #
