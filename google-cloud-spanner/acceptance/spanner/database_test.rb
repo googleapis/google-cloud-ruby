@@ -44,8 +44,7 @@ describe "Spanner Databases", :spanner do
     job2.wait_until_done!
 
     job2.must_be :done?
-    job2.database.wont_be :nil?
-    job2.database.must_be_kind_of Google::Cloud::Spanner::Database
+    job2.database.must_be :nil?
 
     database.drop
     spanner.database(instance_id, database_id).must_be :nil?

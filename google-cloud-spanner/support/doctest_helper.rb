@@ -77,6 +77,8 @@ YARD::Doctest.configure do |doctest|
   doctest.skip "Google::Cloud::Spanner::Transaction#save"
   doctest.skip "Google::Cloud::Spanner::Instance::Job#refresh!"
   doctest.skip "Google::Cloud::Spanner::Database::Job#refresh!"
+  doctest.skip "Google::Cloud::Spanner::Backup::Job#refresh!"
+  doctest.skip "Google::Cloud::Spanner::Backup::Restore::Job#refresh!"
 
   doctest.before "Google::Cloud#spanner" do
     mock_spanner do |mock, mock_instances, mock_databases|
@@ -170,6 +172,24 @@ YARD::Doctest.configure do |doctest|
     mock_spanner do |mock, mock_instances, mock_databases|
       mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
       mock_instances.expect :delete_instance, nil, ["projects/my-project/instances/my-instance"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Instance#database_operations" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
+      mock_databases.expect :list_database_operations, database_operations_resp, ["projects/my-project/instances/my-instance", nil, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Instance#database_operations@Filter and list" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
+      mock_databases.expect :list_database_operations, database_operations_resp, ["projects/my-project/instances/my-instance", String, Hash]
     end
   end
 
@@ -603,6 +623,24 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Spanner::Database#database_operations" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
+      mock_databases.expect :list_database_operations, database_operations_resp, ["projects/my-project/instances/my-instance", String, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Database#database_operations@Filter and list" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
+      mock_databases.expect :list_database_operations, database_operations_resp, ["projects/my-project/instances/my-instance", String, Hash]
+    end
+  end
+
   # Database::List
 
   doctest.before "Google::Cloud::Spanner::Database::List" do
@@ -813,6 +851,189 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  # Backup
+
+  doctest.before "Google::Cloud::Spanner::Database#create_backup" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
+      mock_databases.expect :create_backup, create_backup_resp(client: mock_client), ["projects/my-project/instances/my-instance", "my-backup", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Instance#backup" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Instance#backup@Will return `nil` if backup does not exist." do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, nil, ["projects/my-project/instances/my-instance/backups/non-existing-backup"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Instance#backups" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :list_backups, backups_resp(token: "token"), ["projects/my-project/instances/my-instance", nil, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Instance#backups@Filter and list backups" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :list_backups, backups_resp(token: "token"), ["projects/my-project/instances/my-instance", String, Hash]
+      mock_databases.expect :list_backups, backups_resp, ["projects/my-project/instances/my-instance", String, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Database#backups" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_databases.expect :get_database, OpenStruct.new(database_hash), ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_databases.expect :list_backups, backups_resp(token: "token"), ["projects/my-project/instances/my-instance", String, Hash]
+      mock_databases.expect :list_backups, backups_resp, ["projects/my-project/instances/my-instance", String, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Backup" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {:options=>nil}]
+      mock_databases.expect :create_backup, create_backup_resp(client: mock_client), ["projects/my-project/instances/my-instance", "my-backup", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Backup#expire_time=" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :update_backup, backup_resp, [Google::Spanner::Admin::Database::V1::Backup, Google::Protobuf::FieldMask]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Backup#delete" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :delete_backup, nil, ["projects/my-project/instances/my-instance/backups/my-backup"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Backup#referencing_databases" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp(referencing_databases: ["my-database"]), ["projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :get_database, database_resp(database_id: "my-database"), ["projects/my-project/instances/my-instance/databases/my-database"]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Backup::Job#cancel" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_databases.expect :get_database, database_resp, ["projects/my-project/instances/my-instance/databases/my-database"]
+      mock_client.expect :cancel_operation, nil, ["1234567890"]
+      mock_databases.expect :create_backup, create_backup_resp(client: mock_client), ["projects/my-project/instances/my-instance", "my-backup", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Backup#restore" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :restore_database, create_backup_restore_resp(client: mock_client), [
+        "projects/my-project/instances/my-instance",
+        "my-restored-database",
+        { backup: "projects/my-project/instances/my-instance/backups/my-backup"}
+      ]
+      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {options: nil}]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Backup#restore@Restore database in provided instance id" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :restore_database, create_backup_restore_resp(client: mock_client), [
+        "projects/my-project/instances/other-instance",
+        "my-restored-database",
+        { backup: "projects/my-project/instances/my-instance/backups/my-backup"}
+      ]
+      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {options: nil}]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Backup::Restore::Job" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :get_backup, backup_resp, ["projects/my-project/instances/my-instance/backups/my-backup"]
+      mock_databases.expect :restore_database, create_backup_restore_resp(client: mock_client), [
+        "projects/my-project/instances/my-instance",
+        "my-restored-database",
+        { backup: "projects/my-project/instances/my-instance/backups/my-backup" }
+      ]
+      mock_client.expect :get_operation, OpenStruct.new(done: true), ["1234567890", {options:nil}]
+    end
+  end
+
+  # Backup::List
+
+  doctest.before "Google::Cloud::Spanner::Backup::List" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :list_backups, backups_resp(token: "token"), ["projects/my-project/instances/my-instance", nil, Hash]
+      mock_databases.expect :list_backups, backups_resp, ["projects/my-project/instances/my-instance", nil, Hash]
+    end
+  end
+
+  # Database::Job::List
+
+  doctest.before "Google::Cloud::Spanner::Database::Job::List" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
+      mock_databases.expect :list_database_operations, database_operations_resp, ["projects/my-project/instances/my-instance", nil, Hash]
+    end
+  end
+
+  # Backup::Job::List
+
+  doctest.before "Google::Cloud::Spanner::Backup::Job::List" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
+      mock_databases.expect :list_backup_operations, backup_operations_resp, ["projects/my-project/instances/my-instance", nil, Hash]
+    end
+  end
+
+  # Instance - backup operations
+
+  doctest.before "Google::Cloud::Spanner::Instance#backup_operations" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
+      mock_databases.expect :list_backup_operations, backup_operations_resp, ["projects/my-project/instances/my-instance", nil, Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Spanner::Instance#backup_operations@Filter and list" do
+    mock_spanner do |mock, mock_instances, mock_databases|
+      mock_client = Minitest::Mock.new
+      mock_instances.expect :get_instance, OpenStruct.new(instance_hash), ["projects/my-project/instances/my-instance"]
+      mock_databases.expect :instance_variable_get, mock_client, ["@operations_client"]
+      mock_databases.expect :list_backup_operations, backup_operations_resp, ["projects/my-project/instances/my-instance", String, Hash]
+    end
+  end
 end
 
 # Stubs
@@ -837,23 +1058,23 @@ def instance_hash name: "my-instance", nodes: 1, state: "READY", labels: {}
   }
 end
 
-def job_grpc
+def job_grpc type_url, value: ""
   Google::Longrunning::Operation.new(
     name: "1234567890",
     metadata: {
-      type_url: "google.spanner.admin.database.v1.UpdateDatabaseDdlRequest",
-      value: ""
+      type_url: type_url,
+      value: value
     }
   )
 end
 
 def create_instance_resp client: nil
   Google::Gax::Operation.new(
-                 job_grpc,
-                 client,
-                 Google::Spanner::Admin::Instance::V1::Instance,
-                 Google::Spanner::Admin::Instance::V1::CreateInstanceMetadata
-               )
+    job_grpc("google.spanner.admin.database.v1.UpdateDatabaseDdlRequest"),
+    client,
+    Google::Spanner::Admin::Instance::V1::Instance,
+    Google::Spanner::Admin::Instance::V1::CreateInstanceMetadata
+  )
 end
 
 def instance_configs_hash
@@ -861,10 +1082,10 @@ def instance_configs_hash
     instance_configs: [
       { name: "projects/#{project}/instanceConfigs/regional-europe-west1",
         display_name: "EU West 1"},
-      { name: "projects/#{project}/instanceConfigs/regional-us-west1",
-        display_name: "US West 1"},
-      { name: "projects/#{project}/instanceConfigs/regional-us-central1",
-        display_name: "US Central 1"}
+        { name: "projects/#{project}/instanceConfigs/regional-us-west1",
+          display_name: "US West 1"},
+          { name: "projects/#{project}/instanceConfigs/regional-us-central1",
+            display_name: "US Central 1"}
     ]
   }
 end
@@ -908,11 +1129,11 @@ end
 
 def create_database_resp client: nil
   Google::Gax::Operation.new(
-                 job_grpc,
-                 client,
-                 Google::Spanner::Admin::Database::V1::Database,
-                 Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
-               )
+    job_grpc("google.spanner.admin.database.v1.CreateDatabaseRequest"),
+    client,
+    Google::Spanner::Admin::Database::V1::Database,
+    Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
+  )
 end
 
 def databases_hash instance_id: "my-instance"
@@ -955,7 +1176,7 @@ def policy_hash
       members: [
         "user:viewer@example.com",
         "serviceAccount:1234567890@developer.gserviceaccount.com"
-       ]
+      ]
     }]
   }
 end
@@ -969,7 +1190,6 @@ def test_permissions_res permissions: ["spanner.instances.get"]
     permissions: permissions
   )
 end
-
 
 def paged_enum_struct response
   OpenStruct.new page: OpenStruct.new(response: response)
@@ -1057,4 +1277,110 @@ end
 
 def commit_resp
   Google::Spanner::V1::CommitResponse.new commit_timestamp: commit_timestamp
+end
+
+def backup_hash \
+    instance_id: "my-instance",
+    database_id: "my_databse",
+    backup_id: "my-backup",
+    state: "READY",
+    referencing_databases: ["db1"]
+  {
+    name: "projects/#{project}/instances/#{instance_id}/backups/#{backup_id}",
+    database: "projects/#{project}/instances/#{instance_id}/databases/#{database_id}",
+    state: state,
+    referencing_databases: referencing_databases.map do |database|
+      "projects/#{project}/instances/#{instance_id}/databases/#{database}"
+    end
+  }
+end
+
+def backups_hash instance_id: "my-instance"
+  { backups: [backup_hash(instance_id: instance_id)] }
+end
+
+def create_backup_resp client: nil
+  Google::Gax::Operation.new(
+    job_grpc("google.spanner.admin.database.v1.CreateBackupRequest"),
+    client,
+    Google::Spanner::Admin::Database::V1::Backup,
+    Google::Spanner::Admin::Database::V1::CreateBackupMetadata
+  )
+end
+
+def backup_resp instance_id: "my-instance", database_id: "my-database", backup_id: "my-backup", referencing_databases: ["db1"]
+  Google::Spanner::Admin::Database::V1::Backup.new backup_hash(
+    instance_id: instance_id,
+    database_id: database_id,
+    backup_id: backup_id,
+    referencing_databases: referencing_databases
+  )
+end
+
+def backups_resp token: nil
+  h = backups_hash
+  h[:next_page_token] = token if token
+  response = Google::Spanner::Admin::Database::V1::ListBackupsResponse.new h
+  OpenStruct.new response: response
+end
+
+def backup_operation_grpc
+  Google::Longrunning::Operation.new({
+    name: "1234567890",
+    metadata: Google::Protobuf::Any.new(
+      type_url: "google.spanner.admin.database.v1.CreateBackupMetadata",
+      value: Google::Spanner::Admin::Database::V1::CreateBackupMetadata.new.to_proto
+    ),
+    done: true,
+    response: Google::Protobuf::Any.new(
+      type_url: "google.spanner.admin.database.v1.Backup",
+      value: Google::Spanner::Admin::Database::V1::Backup.new(backup_hash).to_proto
+    )
+  })
+end
+
+def backup_operations_hash
+  { operations: [backup_operation_grpc] }
+end
+
+def backup_operations_resp token: nil
+  h = backup_operations_hash
+  h[:next_page_token] = token if token
+  response = Google::Spanner::Admin::Database::V1::ListBackupOperationsResponse.new h
+  OpenStruct.new response: response
+end
+
+def database_operation_grpc
+  Google::Longrunning::Operation.new(
+    name: "1234567890",
+    metadata: Google::Protobuf::Any.new(
+      type_url: "google.spanner.admin.database.v1.CreateDatabaseMetadata",
+      value: Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata.new.to_proto
+    ),
+    done: true,
+    response: Google::Protobuf::Any.new(
+      type_url: "google.spanner.admin.database.v1.Database",
+      value: Google::Spanner::Admin::Database::V1::Database.new(database_hash).to_proto
+    )
+  )
+end
+
+def database_operations_hash
+  { operations: [database_operation_grpc] }
+end
+
+def database_operations_resp token: nil
+  h = database_operations_hash
+  h[:next_page_token] = token if token
+  response = Google::Spanner::Admin::Database::V1::ListDatabaseOperationsResponse.new h
+  OpenStruct.new response: response
+end
+
+def create_backup_restore_resp client: nil
+  Google::Gax::Operation.new(
+    job_grpc("google.spanner.admin.database.v1.RestoreDatabaseRequest"),
+    client,
+    Google::Spanner::Admin::Database::V1::Database,
+    Google::Spanner::Admin::Database::V1::RestoreDatabaseMetadata
+  )
 end

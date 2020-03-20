@@ -1,4 +1,4 @@
-# Copyright 2016 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,20 +14,20 @@
 
 
 require "google/cloud/spanner/status"
-require "google/cloud/spanner/database/job/list"
+require "google/cloud/spanner/backup/job/list"
 
 module Google
   module Cloud
     module Spanner
-      class Database
+      class Backup
         ##
         # # Job
         #
         # A resource representing the long-running, asynchronous processing of
-        # a database create or update operation. The job can be refreshed to
-        # retrieve the database object once the operation has been completed.
+        # backup creation. The job can be refreshed to retrieve the backup
+        # object once the operation has been completed.
         #
-        # See {Project#create_database} and {Database#update}.
+        # See {Google::Cloud::Spanner::Database#create_backup}
         #
         # @see https://cloud.google.com/spanner/reference/rpc/google.longrunning#google.longrunning.Operation
         #   Long-running Operation
@@ -37,8 +37,9 @@ module Google
         #
         #   spanner = Google::Cloud::Spanner.new
         #
-        #   job = spanner.create_database "my-instance",
-        #                                 "my-new-database"
+        #   database = spanner.database "my-instance", "my-database"
+        #   expire_time = Time.now + 36000
+        #   job = database.create_backup "my-backup", expire_time: expire_time
         #
         #   job.done? #=> false
         #   job.reload! # API call
@@ -47,7 +48,7 @@ module Google
         #   if job.error?
         #     status = job.error
         #   else
-        #     database = job.database
+        #     backup = job.backup
         #   end
         #
         class Job
@@ -60,16 +61,16 @@ module Google
           attr_accessor :service
 
           ##
-          # @private Creates a new Database::Job instance.
+          # @private Creates a new Backup::Job instance.
           def initialize
             @grpc = nil
             @service = nil
           end
 
           ##
-          # The database that is the object of the operation.
+          # The backup is the object of the operation.
           #
-          # @return [Google::Cloud::Spanner::Database, nil] The database, or
+          # @return [Backup, nil] The backup, or
           #   `nil` if the operation is not complete.
           #
           # @example
@@ -77,24 +78,23 @@ module Google
           #
           #   spanner = Google::Cloud::Spanner.new
           #
-          #   job = spanner.create_database "my-instance",
-          #                                 "my-new-database"
+          #   database = spanner.database "my-instance", "my-database"
+          #   expire_time = Time.now + 36000
+          #   job = database.create_backup "my-backup", expire_time: expire_time
           #
           #   job.done? #=> false
           #   job.reload!
           #   job.done? #=> true
-          #   database = job.database
+          #   backup = job.backup
           #
-          def database
+          def backup
             return nil unless done?
             return nil unless @grpc.grpc_op.result == :response
-            return nil unless @grpc.results.instance_of? \
-              Google::Spanner::Admin::Database::V1::Database
-            Database.from_grpc @grpc.results, service
+            Backup.from_grpc @grpc.results, service
           end
 
           ##
-          # Checks if the processing of the database operation is complete.
+          # Checks if the processing of the backup operation is complete.
           #
           # @return [boolean] `true` when complete, `false` otherwise.
           #
@@ -103,8 +103,9 @@ module Google
           #
           #   spanner = Google::Cloud::Spanner.new
           #
-          #   job = spanner.create_database "my-instance",
-          #                                 "my-new-database"
+          #   database = spanner.database "my-instance", "my-database"
+          #   expire_time = Time.now + 36000
+          #   job = database.create_backup "my-backup", expire_time: expire_time
           #
           #   job.done? #=> false
           #
@@ -113,7 +114,7 @@ module Google
           end
 
           ##
-          # Checks if the processing of the database operation has errored.
+          # Checks if the processing of the backup operation has errored.
           #
           # @return [boolean] `true` when errored, `false` otherwise.
           #
@@ -122,8 +123,9 @@ module Google
           #
           #   spanner = Google::Cloud::Spanner.new
           #
-          #   job = spanner.create_database "my-instance",
-          #                                 "my-new-database"
+          #   database = spanner.database "my-instance", "my-database"
+          #   expire_time = Time.now + 36000
+          #   job = database.create_backup "my-backup", expire_time: expire_time
           #
           #   job.error? #=> false
           #
@@ -143,8 +145,9 @@ module Google
           #
           #   spanner = Google::Cloud::Spanner.new
           #
-          #   job = spanner.create_database "my-instance",
-          #                                 "my-new-database"
+          #   database = spanner.database "my-instance", "my-database"
+          #   expire_time = Time.now + 36000
+          #   job = database.create_backup "my-backup", expire_time: expire_time
           #
           #   job.error? # true
           #
@@ -157,9 +160,9 @@ module Google
 
           ##
           # Reloads the job with current data from the long-running,
-          # asynchronous processing of a database operation.
+          # asynchronous processing of a backup operation.
           #
-          # @return [Google::Cloud::Spanner::Database::Job] The same job
+          # @return [Google::Cloud::Spanner::Backup::Job] The same job
           #   instance.
           #
           # @example
@@ -167,8 +170,9 @@ module Google
           #
           #   spanner = Google::Cloud::Spanner.new
           #
-          #   job = spanner.create_database "my-instance",
-          #                                 "my-new-database"
+          #   database = spanner.database "my-instance", "my-database"
+          #   expire_time = Time.now + 36000
+          #   job = database.create_backup "my-backup", expire_time: expire_time
           #
           #   job.done? #=> false
           #   job.reload! # API call
@@ -189,8 +193,9 @@ module Google
           #
           #   spanner = Google::Cloud::Spanner.new
           #
-          #   job = spanner.create_database "my-instance",
-          #                                 "my-new-database"
+          #   database = spanner.database "my-instance", "my-database"
+          #   expire_time = Time.now + 36000
+          #   job = database.create_backup "my-backup", expire_time: expire_time
           #
           #   job.done? #=> false
           #   job.wait_until_done!
@@ -201,7 +206,61 @@ module Google
           end
 
           ##
-          # @private New Database::Job from a Google::Gax::Operation object.
+          # Cancel the backup job.
+          #
+          # @example
+          #   require "google/cloud/spanner"
+          #
+          #   spanner = Google::Cloud::Spanner.new
+          #
+          #   database = spanner.database "my-instance", "my-database"
+          #   expire_time = Time.now + 36000
+          #   job = database.create_backup "my-backup", expire_time: expire_time
+          #
+          #   job.done? #=> false
+          #   job.cancel
+          #
+          def cancel
+            @grpc.cancel
+          end
+
+          ##
+          # The operation progress in percentage.
+          #
+          # @return [Integer]
+          def progress_percent
+            @grpc.metadata.progress.progress_percent
+          end
+
+          ##
+          # The operation start time.
+          #
+          # @return [Time, nil]
+          def start_time
+            return nil unless @grpc.metadata.progress.start_time
+            Convert.timestamp_to_time @grpc.metadata.progress.start_time
+          end
+
+          ##
+          # The operation end time.
+          #
+          # @return [Time, nil]
+          def end_time
+            return nil unless @grpc.metadata.progress.end_time
+            Convert.timestamp_to_time @grpc.metadata.progress.end_time
+          end
+
+          ##
+          # The operation canceled time.
+          #
+          # @return [Time, nil]
+          def cancel_time
+            return nil unless @grpc.metadata.cancel_time
+            Convert.timestamp_to_time @grpc.metadata.cancel_time
+          end
+
+          ##
+          # @private New Backup::Job from a Google::Gax::Operation object.
           def self.from_grpc grpc, service
             new.tap do |job|
               job.instance_variable_set :@grpc, grpc
