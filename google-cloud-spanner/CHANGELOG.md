@@ -1,5 +1,12 @@
 # Release History
 
+### 1.16.0 / 2020-03-20
+
+#### Features
+
+* database backup and restore  ([#5053](https://www.github.com/googleapis/google-cloud-ruby/issues/5053))
+  * backup and restore apis, tests and docs
+
 ### 1.15.0 / 2020-03-15
 
 #### Features
