@@ -694,6 +694,7 @@ google-cloud-security_center:
 google-cloud-service_directory-v1beta1:
 - v0.1.0
 google-cloud-spanner:
+- v1.16.0
 - v1.15.0
 - v1.13.1
 - v1.13.0
