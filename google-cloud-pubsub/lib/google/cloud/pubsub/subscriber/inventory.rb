@@ -30,14 +30,15 @@ module Google
 
           include MonitorMixin
 
-          attr_reader :stream, :limit, :bytesize, :extension
+          attr_reader :stream, :limit, :bytesize, :extension, :max_duration_per_lease_extension
 
-          def initialize stream, limit:, bytesize:, extension:
+          def initialize stream, limit:, bytesize:, extension:, max_duration_per_lease_extension:
             super()
             @stream = stream
             @limit = limit
             @bytesize = bytesize
             @extension = extension
+            @max_duration_per_lease_extension = max_duration_per_lease_extension
             @inventory = {}
             @wait_cond = new_cond
           end
@@ -152,7 +153,9 @@ module Google
           end
 
           def calc_delay
-            (stream.subscriber.deadline - 3) * rand(0.8..0.9)
+            delay = (stream.subscriber.deadline - 3) * rand(0.8..0.9)
+            delay = [delay, max_duration_per_lease_extension].min if max_duration_per_lease_extension.positive?
+            delay
           end
         end
       end
