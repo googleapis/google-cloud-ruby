@@ -4,8 +4,7 @@
 
 #### Features
 
-* database backup and restore  ([#5053](https://www.github.com/googleapis/google-cloud-ruby/issues/5053))
-  * backup and restore apis, tests and docs
+* Added support for backing up and restoring databases  ([#5053](https://www.github.com/googleapis/google-cloud-ruby/issues/5053))
 
 ### 1.15.0 / 2020-03-15
 
