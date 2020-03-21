@@ -1,5 +1,4 @@
 {
-    "name": "billing",
     "language": "ruby",
     "distribution_name": "google-cloud-billing",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-billing/latest"
