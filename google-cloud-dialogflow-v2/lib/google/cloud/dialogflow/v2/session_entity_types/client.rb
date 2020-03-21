@@ -195,7 +195,11 @@ module Google
             # @overload list_session_entity_types(parent: nil, page_size: nil, page_token: nil)
             #   @param parent [String]
             #     Required. The session to list all session entity types from.
-            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+            #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+            #     sessions/<Session ID>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #   @param page_size [Integer]
             #     Optional. The maximum number of items to return in a single page. By
             #     default 100 and at most 1000.
@@ -270,7 +274,11 @@ module Google
             #   @param name [String]
             #     Required. The name of the session entity type. Format:
             #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-            #     Display Name>`.
+            #     Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+            #     ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+            #     Name>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -344,7 +352,11 @@ module Google
             # @overload create_session_entity_type(parent: nil, session_entity_type: nil)
             #   @param parent [String]
             #     Required. The session to create a session entity type for.
-            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+            #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+            #     sessions/<Session ID>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #   @param session_entity_type [Google::Cloud::Dialogflow::V2::SessionEntityType | Hash]
             #     Required. The session entity type to create.
             #
@@ -413,9 +425,7 @@ module Google
             #
             # @overload update_session_entity_type(session_entity_type: nil, update_mask: nil)
             #   @param session_entity_type [Google::Cloud::Dialogflow::V2::SessionEntityType | Hash]
-            #     Required. The entity type to update. Format:
-            #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-            #     Display Name>`.
+            #     Required. The session entity type to update.
             #   @param update_mask [Google::Protobuf::FieldMask | Hash]
             #     Optional. The mask to control which fields get updated.
             #
@@ -486,7 +496,11 @@ module Google
             #   @param name [String]
             #     Required. The name of the entity type to delete. Format:
             #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-            #     Display Name>`.
+            #     Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+            #     ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+            #     Name>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
