@@ -4,14 +4,19 @@ inherit_gem:
 AllCops:
   Exclude:
     - "google-cloud-dialogflow.gemspec"
-    - "lib/google/**/*"
     - "Rakefile"
-    - "test/**/*"
     - "acceptance/**/*"
+    - "test/**/*"
 
+Bundler/OrderedGems:
+  Enabled: false
 Documentation:
   Enabled: false
 
+Metrics/BlockLength:
+  Exclude:
+    - "samples/acceptance/*.rb"
+
 Naming/FileName:
   Exclude:
-    - lib/google-cloud-dialogflow.rb
+    - "lib/google-cloud-dialogflow.rb"
