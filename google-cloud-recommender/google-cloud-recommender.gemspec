@@ -9,21 +9,21 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-recommender is the official library for the Recommender API."
+  gem.description   = "Recommender is a service on Google Cloud that provides usage recommendations for Cloud products and services."
   gem.summary       = "API Client library for the Recommender API"
-  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-recommender"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +
-                      ["README.md", "AUTHENTICATION.md", "LICENSE", ".yardopts"]
+                      ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 2.4"
 
   gem.add_dependency "google-cloud-core", "~> 1.5"
-  gem.add_dependency "google-cloud-recommender-v1", "~> 0.0"
+  gem.add_dependency "google-cloud-recommender-v1", "~> 0.1"
 
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "google-style", "~> 1.24.0"

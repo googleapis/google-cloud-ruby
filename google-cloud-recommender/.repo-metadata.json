@@ -1,5 +1,4 @@
 {
-    "name": "recommender",
     "language": "ruby",
     "distribution_name": "google-cloud-recommender",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-recommender/latest"
