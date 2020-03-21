@@ -1,38 +1,38 @@
-# Ruby Client for Cloud Natural Language API
+# Ruby Client for the Cloud Natural Language API
 
-[Cloud Natural Language API][Product Documentation]:
-Provides natural language understanding technologies, such as sentiment
-analysis, entity recognition, entity sentiment analysis, and other text
-annotations.
-- [Client Library Documentation][]
-- [Product Documentation][]
+API Client library for the Cloud Natural Language API
+
+Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations.
+
+Actual client classes for the various versions of this API are defined in
+_versioned_ client gems, with names of the form `google-cloud-language-v*`.
+The gem `google-cloud-language` is a convenience wrapper library that brings the
+verisoned gems in as dependencies, and provides high-level methods for
+constructing clients.
+
+View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-language/latest)
+for this library, google-cloud-language, to see the convenience methods for
+constructing client objects. Reference documentation for the client objects
+themselves can be found in the client library documentation for the versioned
+client gems:
+[google-cloud-language-v1](https://googleapis.dev/ruby/google-cloud-language-v1/latest),
+[google-cloud-language-v1beta2](https://googleapis.dev/ruby/google-cloud-language-v1beta2/latest).
+
+See also the [Product Documentation](https://cloud.google.com/natural-language)
+for more usage information.
 
 ## Quick Start
-In order to use this library, you first need to go through the following
-steps:
 
-1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Cloud Natural Language API.](https://console.cloud.google.com/apis/library/language.googleapis.com)
-4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-language/latest/file.AUTHENTICATION.html)
-
-### Installation
 ```
 $ gem install google-cloud-language
 ```
 
-### Next Steps
-- Read the [Client Library Documentation][] for Cloud Natural Language API
-  to see other available methods on the client.
-- Read the [Cloud Natural Language API Product documentation][Product Documentation]
-  to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
-  to see the full list of Cloud APIs that we cover.
+In order to use this library, you first need to go through the following steps:
 
-[Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-language/latest
-[V1 Client Documentation]: https://googleapis.dev/ruby/google-cloud-language-v1/latest
-[V1beta2 Client Documentation]: https://googleapis.dev/ruby/google-cloud-language-v1beta2/latest
-[Product Documentation]: https://cloud.google.com/natural-language
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+1. [Enable the API.](https://console.cloud.google.com/apis/library/language.googleapis.com)
+1. {file:AUTHENTICATION.md Set up authentication.}
 
 ## Migrating from 0.x versions
 
@@ -45,7 +45,7 @@ See the {file:MIGRATING.md MIGRATING.md} document for more information.
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
 or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
 that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.

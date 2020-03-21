@@ -9,22 +9,22 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-language is the official library for Cloud Natural Language API."
-  gem.summary       = "API Client library for Cloud Natural Language API"
-  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-language"
+  gem.description   = "Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations."
+  gem.summary       = "API Client library for the Cloud Natural Language API"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
   gem.platform      = Gem::Platform::RUBY
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +
-                      ["README.md", "AUTHENTICATION.md", "MIGRATING.md", "LICENSE", ".yardopts"]
+                      ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts", "MIGRATING.md"]
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 2.4"
 
   gem.add_dependency "google-cloud-core", "~> 1.5"
-  gem.add_dependency "google-cloud-language-v1", "~> 0.0"
-  gem.add_dependency "google-cloud-language-v1beta2", "~> 0.0"
+  gem.add_dependency "google-cloud-language-v1", "~> 0.1"
+  gem.add_dependency "google-cloud-language-v1beta2", "~> 0.1"
 
   gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "google-style", "~> 1.24.0"
