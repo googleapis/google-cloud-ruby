@@ -1,0 +1,24 @@
+{
+  "updateTime": "2020-03-21T22:05:34.513510Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "0be7105dc52590fa9a24e784052298ae37ce53aa",
+        "internalRef": "302154871"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "bigquery/storage",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
