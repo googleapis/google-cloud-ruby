@@ -116,6 +116,47 @@ module Google
 
         Google::Cloud.configure.bigquery
       end
+      
+      BACKSLASH = '\\'.freeze
+      QUOTED_BACKSLASH = '\\\\\\'.freeze
+      BACKTICK = '`'.freeze
+      QUOTED_BACKTICK = '\`'.freeze
+      SINGLE_QUOTE = %q(').freeze
+      QUOTED_SINGLE_QUOTE = "\\\\'".freeze
+
+      ##
+      # Quote idents
+      #
+      def self.quote_ident(v)
+        case v
+        when Numeric
+          raise "Can't have numeric identifiers"
+        when Symbol
+          v = v.to_s
+        end
+        BACKTICK + v.gsub(BACKSLASH, QUOTED_BACKSLASH).gsub(BACKTICK, QUOTED_BACKTICK) + BACKTICK
+      end
+
+      ##
+      # Quote literals
+      #
+      def self.quote_literal(v)
+        case v
+        when Numeric
+          v
+        when NilClass
+          'NULL'
+        when TrueClass, FalseClass
+          v.to_s
+        when Date, DateTime, Time
+          SINGLE_QUOTE + v.iso8601 + SINGLE_QUOTE
+        when Symbol, String
+          SINGLE_QUOTE + v.to_s.gsub(BACKSLASH, QUOTED_BACKSLASH).gsub(SINGLE_QUOTE, QUOTED_SINGLE_QUOTE) + SINGLE_QUOTE
+        else
+          raise "Unsupported type for quote_literal #{v.class}"
+        end
+      end
+
 
       ##
       # @private Resolve project.
