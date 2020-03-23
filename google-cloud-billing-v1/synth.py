@@ -29,7 +29,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-billing-v1",
         "ruby-cloud-title": "Billing V1",
-        "ruby-cloud-summary": "Allows developers to manage billing for their Google Cloud Platform projects programmatically.",
+        "ruby-cloud-description": "Allows developers to manage billing for their Google Cloud Platform projects programmatically.",
         "ruby-cloud-env-prefix": "BILLING",
         "ruby-cloud-grpc-service-config": "google/cloud/billing/v1/cloud_billing_grpc_service_config.json;google/cloud/billing/v1/cloud_catalog_grpc_service_config.json",
     }
