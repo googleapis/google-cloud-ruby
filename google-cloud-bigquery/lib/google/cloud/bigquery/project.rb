@@ -1078,26 +1078,28 @@ module Google
         ##
         # Retrieves the list of jobs belonging to the project.
         #
-        # @param [String] parent_job_id If set, retrieve only child jobs of the
-        #   specified parent. Optional.
         # @param [Boolean] all Whether to display jobs owned by all users in the
         #   project. The default is `false`. Optional.
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view. Optional.
         # @param [Integer] max Maximum number of jobs to return. Optional.
         # @param [String] filter A filter for job state. Optional.
-        # @param [Time] min_created_at Min value for {Job#created_at}. When
-        #   provided, only jobs created after or at this time are returned.
-        #   Optional.
-        # @param [Time] max_created_at Max value for {Job#created_at}. When
-        #   provided, only jobs created before or at this time are returned.
-        #   Optional.
         #
         #   Acceptable values are:
         #
         #   * `done` - Finished jobs
         #   * `pending` - Pending jobs
         #   * `running` - Running jobs
+        # @param [Time] min_created_at Min value for {Job#created_at}. When
+        #   provided, only jobs created after or at this time are returned.
+        #   Optional.
+        # @param [Time] max_created_at Max value for {Job#created_at}. When
+        #   provided, only jobs created before or at this time are returned.
+        #   Optional.
+        # @param [Google::Cloud::Bigquery::Job, String] parent_job A job
+        #   object or a job ID. If set, retrieve only child jobs of the
+        #   specified parent. Optional. See {Job#job_id}, {Job#num_child_jobs},
+        #   and {Job#parent_job_id}.
         #
         # @return [Array<Google::Cloud::Bigquery::Job>] (See
         #   {Google::Cloud::Bigquery::Job::List})
@@ -1152,10 +1154,11 @@ module Google
                  filter: nil,
                  min_created_at: nil,
                  max_created_at: nil,
-                 parent_job_id: nil
+                 parent_job: nil
           ensure_service!
+          parent_job = parent_job.job_id if parent_job.is_a? Job
           options = {
-            parent_job_id: parent_job_id,
+            parent_job_id: parent_job,
             all: all,
             token: token,
             max: max, filter: filter,

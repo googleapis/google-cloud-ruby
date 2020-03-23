@@ -143,7 +143,7 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.clustering?.must_equal true
     job.clustering_fields.must_equal ["name"]
   end
-focus
+
   it "sends query results to a clustered destination table" do
     multi_statement_sql = <<~SQL
     -- Declare a variable to hold names as an array.
@@ -171,7 +171,7 @@ focus
     job.num_child_jobs.must_equal 2
     job.parent_job_id.must_be :nil?
 
-    child_jobs = bigquery.jobs parent_job_id: job.job_id
+    child_jobs = bigquery.jobs parent_job: job
     child_jobs.count.must_equal 2
   end
 end
