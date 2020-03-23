@@ -39,31 +39,6 @@ module Google
             new bucket.name, file_name, bucket.service
           end
 
-          ##
-          # The external path to the file, URI-encoded.
-          # Will not URI encode the special `${filename}` variable.
-          # "You can also use the ${filename} variable..."
-          # https://cloud.google.com/storage/docs/xml-api/post-object
-          #
-          def post_object_ext_path
-            path = "/#{@bucket_name}/#{@file_name}"
-            escaped = Addressable::URI.escape path
-            special_var = "${filename}"
-            # Restore the unencoded `${filename}` variable, if present.
-            if path.include? special_var
-              return escaped.gsub "$%7Bfilename%7D", special_var
-            end
-            escaped
-          end
-
-          def generate_signature signing_key, data
-            unless signing_key.respond_to? :sign
-              signing_key = OpenSSL::PKey::RSA.new signing_key
-            end
-            signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
-            signature.unpack("H*").first.force_encoding("utf-8")
-          end
-
           def post_object issuer: nil,
                           client_email: nil,
                           signing_key: nil,
@@ -88,12 +63,12 @@ module Google
             fields.merge! base_fields
 
             policy_str = p.to_json
-            policy = Base64.strict_encode64(policy_str).force_encoding("utf-8")
+            policy = Base64.strict_encode64(policy_str).force_encoding "utf-8"
             signature = generate_signature s, policy
 
             fields["x-goog-signature"] = signature
             fields["policy"] = policy
-            url = ext_url scheme, virtual_hosted_style, bucket_bound_hostname
+            url = post_object_ext_url scheme, virtual_hosted_style, bucket_bound_hostname
             hostname = "#{url}#{bucket_path path_style?(virtual_hosted_style, bucket_bound_hostname)}"
             Google::Cloud::Storage::PostObject.new hostname, fields
           end
@@ -290,6 +265,47 @@ module Google
 
           def path_style? virtual_hosted_style, bucket_bound_hostname
             !(virtual_hosted_style || bucket_bound_hostname)
+          end
+
+          ##
+          # The external path to the file, URI-encoded.
+          # Will not URI encode the special `${filename}` variable.
+          # "You can also use the ${filename} variable..."
+          # https://cloud.google.com/storage/docs/xml-api/post-object
+          #
+          def post_object_ext_path
+            path = "/#{@bucket_name}/#{@file_name}"
+            escaped = Addressable::URI.escape path
+            special_var = "${filename}"
+            # Restore the unencoded `${filename}` variable, if present.
+            if path.include? special_var
+              return escaped.gsub "$%7Bfilename%7D", special_var
+            end
+            escaped
+          end
+
+          ##
+          # The external url to the file.
+          def post_object_ext_url scheme, virtual_hosted_style, bucket_bound_hostname
+            url = GOOGLEAPIS_URL.dup
+            if virtual_hosted_style
+              parts = url.split "//"
+              parts[1] = "#{@bucket_name}.#{parts[1]}/"
+              parts.join "//"
+            elsif bucket_bound_hostname
+              raise ArgumentError, "scheme is required" unless scheme
+              URI "#{scheme.to_s.downcase}://#{bucket_bound_hostname}/"
+            else
+              url
+            end
+          end
+
+          def generate_signature signing_key, data
+            unless signing_key.respond_to? :sign
+              signing_key = OpenSSL::PKey::RSA.new signing_key
+            end
+            signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
+            signature.unpack("H*").first.force_encoding "utf-8"
           end
         end
       end

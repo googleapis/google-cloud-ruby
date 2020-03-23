@@ -305,7 +305,7 @@
         "timestamp": "2020-01-23T04:35:30Z"
       },
       "policyOutput": {
-        "url": "https://rsaposttest-1579902670-h3q7wvodjor6bc7y.storage.googleapis.com",
+        "url": "https://rsaposttest-1579902670-h3q7wvodjor6bc7y.storage.googleapis.com/",
         "fields" : {
           "key": "test-object",
           "x-goog-algorithm": "GOOG4-RSA-SHA256",
@@ -329,7 +329,7 @@
         "timestamp": "2020-01-23T04:35:30Z"
       },
       "policyOutput": {
-        "url": "https://mydomain.tld",
+        "url": "https://mydomain.tld/",
         "fields" : {
           "key": "test-object",
           "x-goog-algorithm": "GOOG4-RSA-SHA256",
@@ -353,7 +353,7 @@
         "timestamp": "2020-01-23T04:35:30Z"
       },
       "policyOutput": {
-        "url": "http://mydomain.tld",
+        "url": "http://mydomain.tld/",
         "fields" : {
           "key": "test-object",
           "x-goog-algorithm": "GOOG4-RSA-SHA256",
