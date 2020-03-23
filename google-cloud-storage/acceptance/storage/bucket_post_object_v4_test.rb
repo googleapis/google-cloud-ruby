@@ -29,15 +29,11 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
   it "generates a signed post object v4 simple" do
     post_object = bucket.post_object_v4 "test-object", expires: 10
 
-    form_data = [
-      ["file", File.open(data)],
-      ["key", post_object.fields["key"]],
-      ["x-goog-algorithm", post_object.fields["x-goog-algorithm"]],
-      ["x-goog-credential", post_object.fields["x-goog-credential"]],
-      ["x-goog-date", post_object.fields["x-goog-date"]],
-      ["x-goog-signature", post_object.fields["x-goog-signature"]],
-      ["policy", post_object.fields["policy"]]
-    ]
+    form_data = [['file', File.open(data)]]
+
+    post_object.fields.each do |key, value|
+      form_data.push [key, value]
+    end
 
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
@@ -47,21 +43,23 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
     response = http.request request
 
     response.code.must_equal "204"
-    bucket.file(post_object.fields["key"]).wont_be :nil?
+    file = bucket.file(post_object.fields["key"])
+    file.wont_be :nil?
+    Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = file.download tmpfile
+      File.read(downloaded.path, mode: "rb").must_equal File.read(data, mode: "rb")
+    end
   end
 
   it "generates a signed post object v4 virtual hosted style" do
     post_object = bucket.post_object_v4 "test-object", expires: 10, virtual_hosted_style: true
 
-    form_data = [
-      ["file", File.open(data)],
-      ["key", post_object.fields["key"]],
-      ["x-goog-algorithm", post_object.fields["x-goog-algorithm"]],
-      ["x-goog-credential", post_object.fields["x-goog-credential"]],
-      ["x-goog-date", post_object.fields["x-goog-date"]],
-      ["x-goog-signature", post_object.fields["x-goog-signature"]],
-      ["policy", post_object.fields["policy"]]
-    ]
+    form_data = [['file', File.open(data)]]
+
+    post_object.fields.each do |key, value|
+      form_data.push [key, value]
+    end
 
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
@@ -70,7 +68,13 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
 
     response = http.request request
     response.code.must_equal "204"
-    bucket.file(post_object.fields["key"]).wont_be :nil?
+    file = bucket.file(post_object.fields["key"])
+    file.wont_be :nil?
+    Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = file.download tmpfile
+      File.read(downloaded.path, mode: "rb").must_equal File.read(data, mode: "rb")
+    end
   end
 
   it "generates a signed post object v4 with acl and cache-control file headers" do
@@ -80,17 +84,11 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
     }
     post_object = bucket.post_object_v4 "test-object", expires: 10, fields: fields
 
-    form_data = [
-      ["file", File.open(data)],
-      ["key", post_object.fields["key"]],
-      ["acl", post_object.fields["acl"]],
-      ["cache-control", post_object.fields["cache-control"]],
-      ["x-goog-algorithm", post_object.fields["x-goog-algorithm"]],
-      ["x-goog-credential", post_object.fields["x-goog-credential"]],
-      ["x-goog-date", post_object.fields["x-goog-date"]],
-      ["x-goog-signature", post_object.fields["x-goog-signature"]],
-      ["policy", post_object.fields["policy"]]
-    ]
+    form_data = [['file', File.open(data)]]
+
+    post_object.fields.each do |key, value|
+      form_data.push [key, value]
+    end
 
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
@@ -99,7 +97,13 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
 
     response = http.request request
     response.code.must_equal "204"
-    bucket.file(post_object.fields["key"]).wont_be :nil?
+    file = bucket.file(post_object.fields["key"])
+    file.wont_be :nil?
+    Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = file.download tmpfile
+      File.read(downloaded.path, mode: "rb").must_equal File.read(data, mode: "rb")
+    end
   end
 
   it "generates a signed post object v4 with success_action_status" do
@@ -108,16 +112,11 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
     }
     post_object = bucket.post_object_v4 "test-object", expires: 10, fields: fields
 
-    form_data = [
-      ["file", File.open(data)],
-      ["key", post_object.fields["key"]],
-      ["success_action_status", post_object.fields["success_action_status"]],
-      ["x-goog-algorithm", post_object.fields["x-goog-algorithm"]],
-      ["x-goog-credential", post_object.fields["x-goog-credential"]],
-      ["x-goog-date", post_object.fields["x-goog-date"]],
-      ["x-goog-signature", post_object.fields["x-goog-signature"]],
-      ["policy", post_object.fields["policy"]]
-    ]
+    form_data = [['file', File.open(data)]]
+
+    post_object.fields.each do |key, value|
+      form_data.push [key, value]
+    end
 
     http = Net::HTTP.new uri.host, uri.port
     http.use_ssl = true
@@ -126,7 +125,13 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
 
     response = http.request request
     response.code.must_equal "200"
-    bucket.file(post_object.fields["key"]).wont_be :nil?
+    file = bucket.file(post_object.fields["key"])
+    file.wont_be :nil?
+    Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = file.download tmpfile
+      File.read(downloaded.path, mode: "rb").must_equal File.read(data, mode: "rb")
+    end
   end
 
   def timestamp_to_time timestamp
