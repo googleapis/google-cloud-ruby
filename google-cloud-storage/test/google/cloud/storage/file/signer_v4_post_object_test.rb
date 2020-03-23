@@ -55,7 +55,8 @@ class SignerV4PostObjectTest < MockStorage
   end
 
   def self.bucket_test_for description, input, output, index
-    #return unless (0..8).include? index
+    return unless [9].include? index
+    focus
     define_method("test_bucket_#{index}: #{description}") do
       @test_data = ["bucket", index, description, output.expectedDecodedPolicy]
       bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(input.bucket).to_json
