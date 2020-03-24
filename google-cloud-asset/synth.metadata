@@ -1,35 +1,12 @@
 {
-  "updateTime": "2020-03-14T10:38:04.514291Z",
+  "updateTime": "2020-03-24T02:46:37.547558Z",
   "sources": [
     {
-      "generator": {
-        "name": "artman",
-        "version": "1.1.0",
-        "dockerImage": "googleapis/artman@sha256:f54b7644a1d2e7a37b23f5c0dfe9bba473e41c675002a507a244389e27487ca9"
-      }
-    },
-    {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8386761d09819b665b6a6e1e6d6ff884bc8ff781",
-        "internalRef": "300843960"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8386761d09819b665b6a6e1e6d6ff884bc8ff781",
-        "internalRef": "300843960",
-        "log": "8386761d09819b665b6a6e1e6d6ff884bc8ff781\nfeat: chromeos/modlab publish protos and config for Chrome OS Moblab API.\n\nPiperOrigin-RevId: 300843960\n\nb2e2bc62fab90e6829e62d3d189906d9b79899e4\nUpdates to GCS gRPC API spec:\n\n1. Changed GetIamPolicy and TestBucketIamPermissions to use wrapper messages around google.iam.v1 IAM requests messages, and added CommonRequestParams. This lets us support RequesterPays buckets.\n2. Added a metadata field to GetObjectMediaResponse, to support resuming an object media read safely (by extracting the generation of the object being read, and using it in the resumed read request).\n\nPiperOrigin-RevId: 300817706\n\n7fd916ce12335cc9e784bb9452a8602d00b2516c\nAdd deprecated_collections field for backward-compatiblity in PHP and monolith-generated Python and Ruby clients.\n\nGenerate TopicName class in Java which covers the functionality of both ProjectTopicName and DeletedTopicName. Introduce breaking changes to be fixed by synth.py.\n\nDelete default retry parameters.\n\nRetry codes defs can be deleted once # https://github.com/googleapis/gapic-generator/issues/3137 is fixed.\n\nPiperOrigin-RevId: 300813135\n\n047d3a8ac7f75383855df0166144f891d7af08d9\nfix!: google/rpc refactor ErrorInfo.type to ErrorInfo.reason and comment updates.\n\nPiperOrigin-RevId: 300773211\n\nfae4bb6d5aac52aabe5f0bb4396466c2304ea6f6\nAdding RetryPolicy to pubsub.proto\n\nPiperOrigin-RevId: 300769420\n\n"
-      }
-    },
-    {
-      "template": {
-        "name": "ruby_library",
-        "origin": "synthtool.gcp",
-        "version": "2020.2.4"
+        "sha": "078f222366ed344509a48f2f084944ef61476613",
+        "internalRef": "302529186"
       }
     }
   ],
@@ -38,26 +15,6 @@
       "client": {
         "source": "googleapis",
         "apiName": "asset",
-        "apiVersion": "v1",
-        "language": "ruby",
-        "generator": "gapic",
-        "config": "google/cloud/asset/artman_cloudasset_v1.yaml"
-      }
-    },
-    {
-      "client": {
-        "source": "googleapis",
-        "apiName": "asset",
-        "apiVersion": "v1beta1",
-        "language": "ruby",
-        "generator": "gapic",
-        "config": "google/cloud/asset/artman_cloudasset_v1beta1.yaml"
-      }
-    },
-    {
-      "client": {
-        "source": "googleapis",
-        "apiName": "orgpolicy",
         "apiVersion": "v1",
         "language": "ruby",
         "generator": "gapic-generator-ruby"
