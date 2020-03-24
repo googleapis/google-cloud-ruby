@@ -26,13 +26,32 @@ require "google/cloud/dialogflow/v2/session_entity_type_pb"
 require "google/cloud/dialogflow/v2/session_entity_types/credentials"
 require "google/cloud/dialogflow/v2/session_entity_types/paths"
 
-
 module Google
   module Cloud
     module Dialogflow
       module V2
         module SessionEntityTypes
-          # Service that implements SessionEntityTypes API.
+          ##
+          # Client for the SessionEntityTypes service.
+          #
+          # Entities are extracted from user input and represent parameters that are
+          # meaningful to your application. For example, a date range, a proper name
+          # such as a geographic location or landmark, and so on. Entities represent
+          # actionable data for your application.
+          #
+          # Session entity types are referred to as **User** entity types and are
+          # entities that are built for an individual user such as
+          # favorites, preferences, playlists, and so on. You can redefine a session
+          # entity type at the session level.
+          #
+          # Session entity methods do not work with Google Assistant integration.
+          # Contact Dialogflow support if you need to use session entities
+          # with Google Assistant integration.
+          #
+          # For more information about entity types, see the
+          # [Dialogflow
+          # documentation](https://cloud.google.com/dialogflow/docs/entities-overview).
+          #
           class Client
             include Paths
 
@@ -195,7 +214,11 @@ module Google
             # @overload list_session_entity_types(parent: nil, page_size: nil, page_token: nil)
             #   @param parent [String]
             #     Required. The session to list all session entity types from.
-            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+            #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+            #     sessions/<Session ID>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #   @param page_size [Integer]
             #     Optional. The maximum number of items to return in a single page. By
             #     default 100 and at most 1000.
@@ -270,7 +293,11 @@ module Google
             #   @param name [String]
             #     Required. The name of the session entity type. Format:
             #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-            #     Display Name>`.
+            #     Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+            #     ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+            #     Name>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -344,7 +371,11 @@ module Google
             # @overload create_session_entity_type(parent: nil, session_entity_type: nil)
             #   @param parent [String]
             #     Required. The session to create a session entity type for.
-            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+            #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+            #     sessions/<Session ID>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #   @param session_entity_type [Google::Cloud::Dialogflow::V2::SessionEntityType | Hash]
             #     Required. The session entity type to create.
             #
@@ -413,9 +444,7 @@ module Google
             #
             # @overload update_session_entity_type(session_entity_type: nil, update_mask: nil)
             #   @param session_entity_type [Google::Cloud::Dialogflow::V2::SessionEntityType | Hash]
-            #     Required. The entity type to update. Format:
-            #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-            #     Display Name>`.
+            #     Required. The session entity type to update.
             #   @param update_mask [Google::Protobuf::FieldMask | Hash]
             #     Optional. The mask to control which fields get updated.
             #
@@ -486,7 +515,11 @@ module Google
             #   @param name [String]
             #     Required. The name of the entity type to delete. Format:
             #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-            #     Display Name>`.
+            #     Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+            #     ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+            #     Name>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
