@@ -1,6 +1,6 @@
 # Access Approval API V1
 
-google-cloud-access_approval-v1 is the official library for Access Approval API V1 API.
+API Client library for the Access Approval API V1 API
 
 An API for controlling access to data by Google personnel.
 

@@ -1,0 +1,40 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "google-cloud-asset-v1beta1.gemspec"
+    - "lib/**/*_pb.rb"
+    - "proto_docs/**/*"
+    - "test/**/*"
+    - "acceptance/**/*"
+    - "Rakefile"
+
+Metrics/AbcSize:
+  Exclude:
+    - "lib/google/cloud/asset/v1beta1/asset_service/*.rb"
+Metrics/ClassLength:
+  Exclude:
+    - "lib/google/cloud/asset/v1beta1/asset_service/*.rb"
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/google/cloud/asset/v1beta1/asset_service/*.rb"
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/asset/v1beta1/asset_service/*.rb"
+    - "google-cloud-asset-v1beta1.gemspec"
+Metrics/MethodLength:
+  Exclude:
+    - "lib/google/cloud/asset/v1beta1/asset_service/*.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/google/cloud/asset/v1beta1/asset_service/*.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-asset-v1beta1.rb"
+Style/CaseEquality:
+  Exclude:
+    - "lib/google/cloud/asset/v1beta1/asset_service/*.rb"
+    - "lib/google/cloud/asset/v1beta1.rb"
+Style/ModuleFunction:
+  Enabled: false

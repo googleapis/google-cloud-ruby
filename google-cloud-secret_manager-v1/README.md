@@ -1,8 +1,8 @@
 # Secret Manager V1
 
-google-cloud-secret_manager-v1 is the official library for Secret Manager V1 API.
+API Client library for the Secret Manager V1 API
 
-Stores, manages, and secures access to application secrets.
+Secret Manager is a secure and convenient storage system for API keys, passwords, certificates, and other sensitive data. Secret Manager provides a central place and single source of truth to manage, access, and audit secrets across Google Cloud.
 
 https://github.com/googleapis/google-cloud-ruby
 

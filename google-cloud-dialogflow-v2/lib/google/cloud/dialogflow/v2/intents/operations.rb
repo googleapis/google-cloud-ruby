@@ -23,7 +23,6 @@ require "google/cloud/dialogflow/v2/version"
 require "google/cloud/dialogflow/v2/intents/client"
 require "google/longrunning/operations_pb"
 
-
 module Google
   module Cloud
     module Dialogflow

@@ -3,11 +3,20 @@ inherit_gem:
 
 AllCops:
   Exclude:
+    - "google-cloud-service_directory.gemspec"
+    - "Rakefile"
+    - "acceptance/**/*"
     - "test/**/*"
 
+Bundler/OrderedGems:
+  Enabled: false
 Documentation:
   Enabled: false
 
+Metrics/BlockLength:
+  Exclude:
+    - "samples/acceptance/*.rb"
+
 Naming/FileName:
   Exclude:
-    - lib/google-cloud-service_directory.rb
+    - "lib/google-cloud-service_directory.rb"

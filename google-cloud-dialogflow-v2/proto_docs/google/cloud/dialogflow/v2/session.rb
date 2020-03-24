@@ -27,10 +27,14 @@ module Google
         # @!attribute [rw] session
         #   @return [String]
         #     Required. The name of the session this query is sent to. Format:
-        #     `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
-        #     caller to choose an appropriate session ID. It can be a random number or
-        #     some type of user identifier (preferably hashed). The length of the session
-        #     ID must not exceed 36 bytes.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>`, or
+        #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+        #     ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+        #     default 'draft' environment. If `User ID` is not specified, we are using
+        #     "-". It's up to the API caller to choose an appropriate `Session ID` and
+        #     `User Id`. They can be a random number or some type of user and session
+        #     identifiers (preferably hashed). The length of the `Session ID` and
+        #     `User ID` must not exceed 36 characters.
         # @!attribute [rw] query_params
         #   @return [Google::Cloud::Dialogflow::V2::QueryParameters]
         #     The parameters of this query.
@@ -284,10 +288,14 @@ module Google
         #   @return [String]
         #     Required. The name of the session the query is sent to.
         #     Format of the session name:
-        #     `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
-        #     caller to choose an appropriate `Session ID`. It can be a random number or
-        #     some type of user identifier (preferably hashed). The length of the session
-        #     ID must not exceed 36 characters.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>`, or
+        #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+        #     ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+        #     default 'draft' environment. If `User ID` is not specified, we are using
+        #     "-". It's up to the API caller to choose an appropriate `Session ID` and
+        #     `User Id`. They can be a random number or some type of user and session
+        #     identifiers (preferably hashed). The length of the `Session ID` and
+        #     `User ID` must not exceed 36 characters.
         # @!attribute [rw] query_params
         #   @return [Google::Cloud::Dialogflow::V2::QueryParameters]
         #     The parameters of this query.

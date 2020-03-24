@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-iot-v1 is the official library for Cloud IoT API V1 API."
-  gem.summary       = "Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform."
+  gem.description   = "Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform."
+  gem.summary       = "API Client library for the Cloud IoT API V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

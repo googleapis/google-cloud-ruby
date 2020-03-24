@@ -18,7 +18,6 @@
 
 require "googleauth"
 
-
 module Google
   module Cloud
     module ServiceDirectory
