@@ -26,13 +26,18 @@ require "google/cloud/billing/v1/cloud_catalog_pb"
 require "google/cloud/billing/v1/cloud_catalog/credentials"
 require "google/cloud/billing/v1/cloud_catalog/paths"
 
-
 module Google
   module Cloud
     module Billing
       module V1
         module CloudCatalog
-          # Service that implements CloudCatalog API.
+          ##
+          # Client for the CloudCatalog service.
+          #
+          # A catalog of Google Cloud Platform services and SKUs.
+          # Provides pricing information and metadata on Google Cloud Platform services
+          # and SKUs.
+          #
           class Client
             include Paths
 

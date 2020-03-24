@@ -26,13 +26,16 @@ require "google/cloud/billing/v1/cloud_billing_pb"
 require "google/cloud/billing/v1/cloud_billing/credentials"
 require "google/cloud/billing/v1/cloud_billing/paths"
 
-
 module Google
   module Cloud
     module Billing
       module V1
         module CloudBilling
-          # Service that implements CloudBilling API.
+          ##
+          # Client for the CloudBilling service.
+          #
+          # Retrieves GCP Console billing accounts and associates them with projects.
+          #
           class Client
             include Paths
 
