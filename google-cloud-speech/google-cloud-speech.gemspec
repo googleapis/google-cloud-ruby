@@ -1,6 +1,7 @@
 # -*- ruby -*-
 # encoding: utf-8
-require File.expand_path("../lib/google/cloud/speech/version", __FILE__)
+
+require File.expand_path("lib/google/cloud/speech/version", __dir__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-speech"
@@ -8,32 +9,30 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-speech is the official library for Cloud Speech-to-Text API."
-  gem.summary       = "API Client library for Cloud Speech-to-Text API"
-  gem.homepage      = "https://github.com/googleapis/googleapis"
+  gem.description   = "Google Speech-to-Text enables developers to convert audio to text by applying powerful neural network models in an easy-to-use API. The API recognizes more than 120 languages and variants to support your global user base. You can enable voice command-and-control, transcribe audio from call centers, and more. It can process real-time streaming or prerecorded audio, using Google's machine learning technology."
+  gem.summary       = "API Client library for the Cloud Speech-to-Text API"
+  gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
-
-  gem.post_install_message =
-    "The 0.30.0 release introduced breaking changes relative to the "\
-    "previous release, 0.29.0. For more details and instructions to migrate "\
-    "your code, please visit the migration guide: "\
-    "https://cloud.google.com/speech-to-text/docs/ruby-client-migration."
 
   gem.platform      = Gem::Platform::RUBY
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +
-                      ["README.md", "AUTHENTICATION.md", "LICENSE", ".yardopts"]
+                      ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts", "MIGRATING.md"]
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 2.4"
 
-  gem.add_dependency "google-gax", "~> 1.8"
-  gem.add_dependency "googleapis-common-protos", ">= 1.3.9", "< 2.0"
-  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.4", "< 2.0"
+  gem.add_dependency "google-cloud-core", "~> 1.5"
+  gem.add_dependency "google-cloud-speech-v1", "~> 0.0"
+  gem.add_dependency "google-cloud-speech-v1p1beta1", "~> 0.0"
 
-  gem.add_development_dependency "minitest", "~> 5.10"
-  gem.add_development_dependency "redcarpet", "~> 3.0"
+  gem.add_development_dependency "autotest-suffix", "~> 1.1"
   gem.add_development_dependency "google-style", "~> 1.24.0"
+  gem.add_development_dependency "minitest", "~> 5.10"
+  gem.add_development_dependency "minitest-autotest", "~> 1.0"
+  gem.add_development_dependency "minitest-focus", "~> 1.1"
+  gem.add_development_dependency "minitest-rg", "~> 5.2"
+  gem.add_development_dependency "redcarpet", "~> 3.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"
 end
