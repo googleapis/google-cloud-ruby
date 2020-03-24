@@ -27,7 +27,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-service_directory",
         "ruby-cloud-title": "Service Directory",
-        "ruby-cloud-description": "Service directory is the single place to register, browse, and resolve application services.",
+        "ruby-cloud-description": "Service Directory is the single place to register, browse, and resolve application services.",
         "ruby-cloud-env-prefix": "SERVICE_DIRECTORY",
         "ruby-cloud-wrapper-of": "v1beta1:0.1",
         "ruby-cloud-product-url": "https://cloud.google.com/service-directory",
