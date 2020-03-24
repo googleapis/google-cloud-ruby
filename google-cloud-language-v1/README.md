@@ -1,6 +1,6 @@
 # Natural Language V1
 
-google-cloud-language-v1 is the official library for Natural Language V1 API.
+API Client library for the Natural Language V1 API
 
 Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations.
 

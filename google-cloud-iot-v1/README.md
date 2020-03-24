@@ -1,6 +1,6 @@
 # Cloud IoT API V1
 
-google-cloud-iot-v1 is the official library for Cloud IoT API V1 API.
+API Client library for the Cloud IoT API V1 API
 
 Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform.
 

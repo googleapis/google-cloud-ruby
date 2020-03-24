@@ -34,7 +34,7 @@ client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
 
 The google-cloud-secret_manager-v1beta1 library aims to make authentication
 as simple as possible, and provides several mechanisms to configure your system
-without **Service Account Credentials** directly in code.
+without requiring **Service Account Credentials** directly in code.
 
 **Credentials** are discovered in the following order:
 
@@ -135,9 +135,9 @@ Google Cloud requires **Service Account Credentials** to
 connect to the APIs. You will use the **JSON key file** to
 connect to most services with google-cloud-secret_manager-v1beta1.
 
-If you are not running this client within [Google Cloud Platform
-environments](#google-cloud-platform-environments), you need a Google
-Developers service account.
+If you are not running this client within
+[Google Cloud Platform environments](#google-cloud-platform-environments), you
+need a Google Developers service account.
 
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.

@@ -1,6 +1,6 @@
 # Natural Language V1beta2
 
-google-cloud-language-v1beta2 is the official library for Natural Language V1beta2 API.
+API Client library for the Natural Language V1beta2 API
 
 Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations.
 

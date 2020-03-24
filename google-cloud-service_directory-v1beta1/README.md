@@ -1,6 +1,6 @@
 # Service Directory V1beta1
 
-google-cloud-service_directory-v1beta1 is the official library for Service Directory V1beta1 API.
+API Client library for the Service Directory V1beta1 API
 
 Service directory is the single place to register, browse, and resolve application services.
 

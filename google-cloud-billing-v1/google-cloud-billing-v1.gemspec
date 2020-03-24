@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-billing-v1 is the official library for Billing V1 API."
-  gem.summary       = "Allows developers to manage billing for their Google Cloud Platform projects programmatically."
+  gem.description   = "Allows developers to manage billing for their Google Cloud Platform projects programmatically."
+  gem.summary       = "API Client library for the Billing V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

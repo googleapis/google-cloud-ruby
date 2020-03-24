@@ -26,13 +26,33 @@ require "google/cloud/dialogflow/v2/context_pb"
 require "google/cloud/dialogflow/v2/contexts/credentials"
 require "google/cloud/dialogflow/v2/contexts/paths"
 
-
 module Google
   module Cloud
     module Dialogflow
       module V2
         module Contexts
-          # Service that implements Contexts API.
+          ##
+          # Client for the Contexts service.
+          #
+          # A context represents additional information included with user input or with
+          # an intent returned by the Dialogflow API. Contexts are helpful for
+          # differentiating user input which may be vague or have a different meaning
+          # depending on additional details from your application such as user setting
+          # and preferences, previous user input, where the user is in your application,
+          # geographic location, and so on.
+          #
+          # You can include contexts as input parameters of a
+          # {Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
+          # {Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) request,
+          # or as output contexts included in the returned intent.
+          # Contexts expire when an intent is matched, after the number of `DetectIntent`
+          # requests specified by the `lifespan_count` parameter, or after 20 minutes
+          # if no intents are matched for a `DetectIntent` request.
+          #
+          # For more information about contexts, see the
+          # [Dialogflow
+          # documentation](https://cloud.google.com/dialogflow/docs/contexts-overview).
+          #
           class Client
             include Paths
 
@@ -195,7 +215,11 @@ module Google
             # @overload list_contexts(parent: nil, page_size: nil, page_token: nil)
             #   @param parent [String]
             #     Required. The session to list all contexts from.
-            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+            #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+            #     ID>/sessions/<Session ID>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #   @param page_size [Integer]
             #     Optional. The maximum number of items to return in a single page. By
             #     default 100 and at most 1000.
@@ -261,7 +285,11 @@ module Google
             # @overload get_context(name: nil)
             #   @param name [String]
             #     Required. The name of the context. Format:
-            #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+            #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+            #     or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+            #     ID>/sessions/<Session ID>/contexts/<Context ID>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -325,7 +353,11 @@ module Google
             # @overload create_context(parent: nil, context: nil)
             #   @param parent [String]
             #     Required. The session to create a context for.
-            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+            #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+            #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+            #     ID>/sessions/<Session ID>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #   @param context [Google::Cloud::Dialogflow::V2::Context | Hash]
             #     Required. The context to create.
             #
@@ -448,7 +480,11 @@ module Google
             # @overload delete_context(name: nil)
             #   @param name [String]
             #     Required. The name of the context to delete. Format:
-            #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+            #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+            #     or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+            #     ID>/sessions/<Session ID>/contexts/<Context ID>`.
+            #     If `Environment ID` is not specified, we assume default 'draft'
+            #     environment. If `User ID` is not specified, we assume default '-' user.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -508,7 +544,11 @@ module Google
             # @overload delete_all_contexts(parent: nil)
             #   @param parent [String]
             #     Required. The name of the session to delete all contexts from. Format:
-            #     `projects/<Project ID>/agent/sessions/<Session ID>`.
+            #     `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
+            #     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+            #     ID>`.
+            #     If `Environment ID` is not specified we assume default 'draft' environment.
+            #     If `User ID` is not specified, we assume default '-' user.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation
