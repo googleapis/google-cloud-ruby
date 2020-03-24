@@ -20,20 +20,18 @@ require "minitest/spec"
 
 require "google/cloud/speech"
 
-describe "SpeechSmokeTest v1" do
-  it "runs one smoke test with recognize" do
-
-    speech_client = Google::Cloud::Speech.new(version: :v1)
-    language_code = "en-US"
-    sample_rate_hertz = 44100
-    encoding = :FLAC
+class SpeechSmokeTest < Minitest::Test
+  def test_recognize
+    speech_client = Google::Cloud::Speech.speech
     config = {
-      language_code: language_code,
-      sample_rate_hertz: sample_rate_hertz,
-      encoding: encoding
+      language_code: "en-US",
+      sample_rate_hertz: 44100,
+      encoding: :FLAC
     }
-    uri = "gs://cloud-samples-data/speech/brooklyn_bridge.flac"
-    audio = { uri: uri }
-    response = speech_client.recognize(config, audio)
+    audio = {
+      uri: "gs://cloud-samples-data/speech/brooklyn_bridge.flac"
+    }
+    response = speech_client.recognize config: config, audio: audio
+    refute_equal 0, response.results.size
   end
 end
