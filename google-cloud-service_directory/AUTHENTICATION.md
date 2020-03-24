@@ -9,9 +9,9 @@ environments, the Service Account credentials can be specified by providing the
 path to the
 [JSON keyfile](https://cloud.google.com/iam/docs/managing-service-account-keys)
 for the account (or the JSON itself) in
-[environment variables](#environment-variables).
-Additionally, Cloud SDK credentials can also be discovered automatically, but
-this is only recommended during development.
+[environment variables](#environment-variables). Additionally, Cloud SDK
+credentials can also be discovered automatically, but this is only recommended
+during development.
 
 ## Quickstart
 
@@ -34,7 +34,7 @@ client = Google::Cloud::ServiceDirectory.lookup_service
 
 The google-cloud-service_directory library aims to make authentication
 as simple as possible, and provides several mechanisms to configure your system
-without providing **Service Account Credentials** directly in code.
+without requiring **Service Account Credentials** directly in code.
 
 **Credentials** are discovered in the following order:
 
@@ -49,8 +49,8 @@ without providing **Service Account Credentials** directly in code.
 
 When running on Google Cloud Platform (GCP), including Google Compute Engine
 (GCE), Google Kubernetes Engine (GKE), Google App Engine (GAE), Google Cloud
-Functions (GCF) and Cloud Run, the **Credentials** are discovered
-automatically. Code should be written as if already authenticated.
+Functions (GCF) and Cloud Run, **Credentials** are discovered automatically.
+Code should be written as if already authenticated.
 
 ### Environment Variables
 
@@ -62,9 +62,9 @@ the READMEs for the individual service gems for details.) The path to the
 **Credentials JSON** itself can be stored for environments such as Docker
 containers where writing files is difficult or not encouraged.
 
-The environment variables that google-cloud-service_directory checks for
-credentials are configured on
-`Google::Cloud::ServiceDirectory::V1beta1::LookupService::Credentials`:
+The environment variables that google-cloud-service_directory
+checks for credentials are configured on the service Credentials class (such as
+`Google::Cloud::ServiceDirectory::V1beta1::LookupService::Credentials`):
 
 1. `SERVICE_DIRECTORY_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SERVICE_DIRECTORY_KEYFILE` - Path to JSON file, or JSON contents
@@ -135,9 +135,9 @@ Google Cloud requires **Service Account Credentials** to
 connect to the APIs. You will use the **JSON key file** to
 connect to most services with google-cloud-service_directory.
 
-If you are not running this client within [Google Cloud Platform
-environments](#google-cloud-platform-environments), you need a Google
-Developers service account.
+If you are not running this client within
+[Google Cloud Platform environments](#google-cloud-platform-environments), you
+need a Google Developers service account.
 
 1. Visit the [Google Developers Console][dev-console].
 2. Create a new project or click on an existing project.
