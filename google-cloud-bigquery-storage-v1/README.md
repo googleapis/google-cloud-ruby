@@ -1,6 +1,6 @@
 # BigQuery Storage V1
 
-google-cloud-bigquery-storage-v1 is the official library for BigQuery Storage V1 API.
+API Client library for the BigQuery Storage V1 API
 
 The BigQuery Storage API provides fast access to BigQuery managed storage.
 
