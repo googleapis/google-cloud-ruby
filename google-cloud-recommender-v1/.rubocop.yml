@@ -3,9 +3,12 @@ inherit_gem:
 
 AllCops:
   Exclude:
+    - "google-cloud-recommender-v1.gemspec"
     - "lib/**/*_pb.rb"
     - "proto_docs/**/*"
     - "test/**/*"
+    - "acceptance/**/*"
+    - "Rakefile"
 
 Metrics/AbcSize:
   Exclude:
