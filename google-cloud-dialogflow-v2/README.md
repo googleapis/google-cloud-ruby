@@ -1,8 +1,8 @@
 # Dialogflow V2
 
-google-cloud-dialogflow-v2 is the official library for Dialogflow V2 API.
+API Client library for the Dialogflow V2 API
 
-Creates conversational experiences across devices and platforms.
+Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business.
 
 https://github.com/googleapis/google-cloud-ruby
 

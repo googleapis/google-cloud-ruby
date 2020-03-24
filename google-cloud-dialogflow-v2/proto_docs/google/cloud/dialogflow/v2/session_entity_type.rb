@@ -32,7 +32,11 @@ module Google
         #   @return [String]
         #     Required. The unique identifier of this session entity type. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-        #     Display Name>`.
+        #     Display Name>`, or `projects/<Project ID>/agent/environments/<Environment
+        #     ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+        #     Name>`.
+        #     If `Environment ID` is not specified, we assume default 'draft'
+        #     environment. If `User ID` is not specified, we assume default '-' user.
         #
         #     `<Entity Type Display Name>` must be the display name of an existing entity
         #     type in the same agent that will be overridden or supplemented.
@@ -74,7 +78,11 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to list all session entity types from.
-        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+        #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+        #     sessions/<Session ID>`.
+        #     If `Environment ID` is not specified, we assume default 'draft'
+        #     environment. If `User ID` is not specified, we assume default '-' user.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional. The maximum number of items to return in a single page. By
@@ -106,7 +114,11 @@ module Google
         #   @return [String]
         #     Required. The name of the session entity type. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-        #     Display Name>`.
+        #     Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+        #     ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+        #     Name>`.
+        #     If `Environment ID` is not specified, we assume default 'draft'
+        #     environment. If `User ID` is not specified, we assume default '-' user.
         class GetSessionEntityTypeRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -116,7 +128,11 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to create a session entity type for.
-        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+        #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
+        #     sessions/<Session ID>`.
+        #     If `Environment ID` is not specified, we assume default 'draft'
+        #     environment. If `User ID` is not specified, we assume default '-' user.
         # @!attribute [rw] session_entity_type
         #   @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
         #     Required. The session entity type to create.
@@ -128,9 +144,7 @@ module Google
         # The request message for {Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client#update_session_entity_type SessionEntityTypes.UpdateSessionEntityType}.
         # @!attribute [rw] session_entity_type
         #   @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
-        #     Required. The entity type to update. Format:
-        #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-        #     Display Name>`.
+        #     Required. The session entity type to update.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.
@@ -144,7 +158,11 @@ module Google
         #   @return [String]
         #     Required. The name of the entity type to delete. Format:
         #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
-        #     Display Name>`.
+        #     Display Name>` or `projects/<Project ID>/agent/environments/<Environment
+        #     ID>/users/<User ID>/sessions/<Session ID>/entityTypes/<Entity Type Display
+        #     Name>`.
+        #     If `Environment ID` is not specified, we assume default 'draft'
+        #     environment. If `User ID` is not specified, we assume default '-' user.
         class DeleteSessionEntityTypeRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
