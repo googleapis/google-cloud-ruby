@@ -26,13 +26,16 @@ require "google/cloud/servicedirectory/v1beta1/lookup_service_pb"
 require "google/cloud/service_directory/v1beta1/lookup_service/credentials"
 require "google/cloud/service_directory/v1beta1/lookup_service/paths"
 
-
 module Google
   module Cloud
     module ServiceDirectory
       module V1beta1
         module LookupService
-          # Service that implements LookupService API.
+          ##
+          # Client for the LookupService service.
+          #
+          # Service Directory API for looking up service data at runtime.
+          #
           class Client
             include Paths
 

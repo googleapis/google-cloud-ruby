@@ -26,13 +26,19 @@ require "google/cloud/dialogflow/v2/session_pb"
 require "google/cloud/dialogflow/v2/sessions/credentials"
 require "google/cloud/dialogflow/v2/sessions/paths"
 
-
 module Google
   module Cloud
     module Dialogflow
       module V2
         module Sessions
-          # Service that implements Sessions API.
+          ##
+          # Client for the Sessions service.
+          #
+          # A session represents an interaction with a user. You retrieve user input
+          # and pass it to the {Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
+          # {Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) method to determine
+          # user intent and respond.
+          #
           class Client
             include Paths
 
@@ -169,10 +175,14 @@ module Google
             # @overload detect_intent(session: nil, query_params: nil, query_input: nil, output_audio_config: nil, output_audio_config_mask: nil, input_audio: nil)
             #   @param session [String]
             #     Required. The name of the session this query is sent to. Format:
-            #     `projects/<Project ID>/agent/sessions/<Session ID>`. It's up to the API
-            #     caller to choose an appropriate session ID. It can be a random number or
-            #     some type of user identifier (preferably hashed). The length of the session
-            #     ID must not exceed 36 bytes.
+            #     `projects/<Project ID>/agent/sessions/<Session ID>`, or
+            #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+            #     ID>/sessions/<Session ID>`. If `Environment ID` is not specified, we assume
+            #     default 'draft' environment. If `User ID` is not specified, we are using
+            #     "-". It's up to the API caller to choose an appropriate `Session ID` and
+            #     `User Id`. They can be a random number or some type of user and session
+            #     identifiers (preferably hashed). The length of the `Session ID` and
+            #     `User ID` must not exceed 36 characters.
             #   @param query_params [Google::Cloud::Dialogflow::V2::QueryParameters | Hash]
             #     The parameters of this query.
             #   @param query_input [Google::Cloud::Dialogflow::V2::QueryInput | Hash]

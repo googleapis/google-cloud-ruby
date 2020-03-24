@@ -26,13 +26,19 @@ require "google/cloud/recommender/v1/recommender_service_pb"
 require "google/cloud/recommender/v1/recommender/credentials"
 require "google/cloud/recommender/v1/recommender/paths"
 
-
 module Google
   module Cloud
     module Recommender
       module V1
         module Recommender
-          # Service that implements Recommender API.
+          ##
+          # Client for the Recommender service.
+          #
+          # Provides recommendations for cloud customers for various categories like
+          # performance optimization, cost savings, reliability, feature discovery, etc.
+          # These recommendations are generated automatically based on analysis of user
+          # resources, configuration and monitoring metrics.
+          #
           class Client
             include Paths
 

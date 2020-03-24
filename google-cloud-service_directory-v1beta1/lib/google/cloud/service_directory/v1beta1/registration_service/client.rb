@@ -26,13 +26,30 @@ require "google/cloud/servicedirectory/v1beta1/registration_service_pb"
 require "google/cloud/service_directory/v1beta1/registration_service/credentials"
 require "google/cloud/service_directory/v1beta1/registration_service/paths"
 
-
 module Google
   module Cloud
     module ServiceDirectory
       module V1beta1
         module RegistrationService
-          # Service that implements RegistrationService API.
+          ##
+          # Client for the RegistrationService service.
+          #
+          # Service Directory API for registering services. It defines the following
+          # resource model:
+          #
+          # - The API has a collection of
+          # {Google::Cloud::ServiceDirectory::V1beta1::Namespace Namespace}
+          # resources, named `projects/*/locations/*/namespaces/*`.
+          #
+          # - Each Namespace has a collection of
+          # {Google::Cloud::ServiceDirectory::V1beta1::Service Service} resources, named
+          # `projects/*/locations/*/namespaces/*/services/*`.
+          #
+          # - Each Service has a collection of
+          # {Google::Cloud::ServiceDirectory::V1beta1::Endpoint Endpoint}
+          # resources, named
+          # `projects/*/locations/*/namespaces/*/services/*/endpoints/*`.
+          #
           class Client
             include Paths
 

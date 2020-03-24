@@ -25,13 +25,17 @@ require "google/cloud/language/v1/version"
 require "google/cloud/language/v1/language_service_pb"
 require "google/cloud/language/v1/language_service/credentials"
 
-
 module Google
   module Cloud
     module Language
       module V1
         module LanguageService
-          # Service that implements LanguageService API.
+          ##
+          # Client for the LanguageService service.
+          #
+          # Provides text analysis operations such as sentiment analysis and entity
+          # recognition.
+          #
           class Client
             # @private
             attr_reader :language_service_stub

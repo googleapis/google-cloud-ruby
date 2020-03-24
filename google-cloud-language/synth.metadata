@@ -1,0 +1,25 @@
+{
+  "updateTime": "2020-03-24T00:05:39.201341Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "078f222366ed344509a48f2f084944ef61476613",
+        "internalRef": "302529186",
+        "log": "078f222366ed344509a48f2f084944ef61476613\nFix containeranalysis v1beta1 assembly target name\n\nPiperOrigin-RevId: 302529186\n\n"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "language",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
