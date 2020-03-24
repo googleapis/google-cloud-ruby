@@ -43,15 +43,72 @@ namespace :test do
   end
 end
 
+desc "Runs the smoke tests."
+Rake::TestTask.new :smoke_test do |t|
+  t.test_files = FileList["acceptance/**/*smoke_test.rb"]
+  t.warning = false
+end
+
+namespace :smoke_test do
+  desc "Runs smoke tests with coverage."
+  task :coverage do
+    require "simplecov"
+    SimpleCov.start do
+      command_name "google-cloud-secret_manager-v1"
+      track_files "lib/**/*.rb"
+      add_filter "test/"
+    end
+
+    Rake::Task[:smoke_test].invoke
+  end
+end
+
 # Acceptance tests
 desc "Run the google-cloud-secret_manager-v1 acceptance tests."
-task :acceptance do
-  puts "The google-cloud-secret_manager-v1 gem does not have acceptance tests."
+task :acceptance, :project, :keyfile do |t, args|
+  project = args[:project]
+  project ||=
+    ENV["SECRET_MANAGER_TEST_PROJECT"] ||
+    ENV["GCLOUD_TEST_PROJECT"]
+  keyfile = args[:keyfile]
+  keyfile ||=
+    ENV["SECRET_MANAGER_TEST_KEYFILE"] ||
+    ENV["GCLOUD_TEST_KEYFILE"]
+  if keyfile
+    keyfile = File.read keyfile
+  else
+    keyfile ||=
+      ENV["SECRET_MANAGER_TEST_KEYFILE_JSON"] ||
+      ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  end
+  if project.nil? || keyfile.nil?
+    fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SECRET_MANAGER_TEST_PROJECT=test123 SECRET_MANAGER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
+  end
+  require "google/cloud/secret_manager/v1/secret_manager_service/credentials"
+  Google::Cloud::SecretManager::V1::SecretManagerService::Credentials.env_vars.each do |path|
+    ENV[path] = nil
+  end
+  ENV["SECRET_MANAGER_PROJECT"] = project
+  ENV["SECRET_MANAGER_TEST_PROJECT"] = project
+  ENV["SECRET_MANAGER_KEYFILE_JSON"] = keyfile
+
+  Rake::Task["acceptance:run"].invoke
 end
 
 namespace :acceptance do
+  task :run do
+    if File.directory? "acceptance"
+      Rake::Task[:smoke_test].invoke
+    else
+      puts "The google-cloud-secret_manager-v1 gem has no acceptance tests."
+    end
+  end
+
+  desc "Run acceptance tests with coverage."
   task :coverage do
   end
+
+  desc "Run acceptance cleanup."
   task :cleanup do
   end
 end
@@ -79,9 +136,21 @@ task :ci do
 end
 
 namespace :ci do
+  desc "Run the CI build, with smoke tests."
+  task :smoke_test do
+    Rake::Task[:ci].invoke
+    header "google-cloud-secret_manager-v1 smoke_test", "*"
+    Rake::Task[:smoke_test].invoke
+  end
+  desc "Run the CI build, with acceptance tests."
   task :acceptance do
+    Rake::Task[:ci].invoke
+    header "google-cloud-secret_manager-v1 acceptance", "*"
+    Rake::Task[:acceptance].invoke
   end
   task :a do
+    # This is a handy shortcut to save typing
+    Rake::Task["ci:acceptance"].invoke
   end
 end
 
