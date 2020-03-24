@@ -1,40 +1,42 @@
-# Ruby Client for Billing API
+# Ruby Client for the Billing API
 
-[Billing API][Product Documentation]:
+API Client library for the Billing API
+
 Allows developers to manage billing for their Google Cloud Platform projects programmatically.
-- [Client Library Documentation][]
-- [Product Documentation][]
+
+Actual client classes for the various versions of this API are defined in
+_versioned_ client gems, with names of the form `google-cloud-billing-v*`.
+The gem `google-cloud-billing` is a convenience wrapper library that brings the
+verisoned gems in as dependencies, and provides high-level methods for
+constructing clients.
+
+View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-billing/latest)
+for this library, google-cloud-billing, to see the convenience methods for
+constructing client objects. Reference documentation for the client objects
+themselves can be found in the client library documentation for the versioned
+client gems:
+[google-cloud-billing-v1](https://googleapis.dev/ruby/google-cloud-billing-v1/latest).
+
+See also the [Product Documentation](https://cloud.google.com/billing)
+for more usage information.
 
 ## Quick Start
-In order to use this library, you first need to go through the following
-steps:
 
-1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Billing API.](https://console.cloud.google.com/apis/library/cloudbilling.googleapis.com)
-4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-secret_manager/latest/file.AUTHENTICATION.html)
-
-### Installation
 ```
 $ gem install google-cloud-billing
 ```
 
-### Next Steps
-- Read the [Client Library Documentation][] for the Billing API, and the underlying
-  [V1 Client Documentation][] to see other available methods on the client.
-- Read the [Billing API Product documentation][Product Documentation]
-  to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
-  to see the full list of Cloud APIs that we cover.
+In order to use this library, you first need to go through the following steps:
 
-[Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-billing/latest
-[V1beta1 Client Documentation]: https://googleapis.dev/ruby/google-cloud-billing-v1/latest
-[Product Documentation]: https://cloud.google.com/billing
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+1. [Enable the API.](https://console.cloud.google.com/apis/library/cloudbilling.googleapis.com)
+1. {file:AUTHENTICATION.md Set up authentication.}
 
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
 or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
 that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
