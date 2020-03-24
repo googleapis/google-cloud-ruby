@@ -71,6 +71,7 @@ gem "google-cloud-service_directory-v1beta1", path: "google-cloud-service_direct
 gem "google-cloud-spanner", path: "google-cloud-spanner"
 gem "google-cloud-speech", path: "google-cloud-speech"
 gem "google-cloud-speech-v1", path: "google-cloud-speech-v1"
+gem "google-cloud-speech-v1p1beta1", path: "google-cloud-speech-v1p1beta1"
 gem "google-cloud-storage", path: "google-cloud-storage"
 gem "google-cloud-talent", path: "google-cloud-talent"
 gem "google-cloud-tasks", path: "google-cloud-tasks"
