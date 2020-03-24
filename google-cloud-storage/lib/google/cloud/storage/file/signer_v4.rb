@@ -63,6 +63,7 @@ module Google
             fields.merge! base_fields
 
             policy_str = p.to_json
+            puts "\n\npolicy_str:\n\n#{policy_str}\n\n"
             policy = Base64.strict_encode64(policy_str).force_encoding "utf-8"
             signature = generate_signature s, policy
 
