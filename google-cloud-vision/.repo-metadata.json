@@ -1,9 +1,5 @@
 {
-    "name": "vision",
     "language": "ruby",
     "distribution_name": "google-cloud-vision",
-    "module_name": "Vision",
-    "module_name_credentials": "Vision::V1",
-    "env_var_prefix": "VISION",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-vision/latest"
 }
