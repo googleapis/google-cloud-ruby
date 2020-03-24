@@ -1,6 +1,6 @@
 # Ruby Client for the BigQuery Storage API
 
-google-cloud-bigquery-storage is the official library for the BigQuery Storage API.
+API Client library for the BigQuery Storage API
 
 The BigQuery Storage API provides fast access to BigQuery managed storage.
 

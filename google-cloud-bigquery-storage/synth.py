@@ -24,11 +24,10 @@ logging.basicConfig(level=logging.DEBUG)
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
     "bigquery/storage", "v1",
-    generator_version="0.2.0",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-bigquery-storage",
         "ruby-cloud-title": "BigQuery Storage",
-        "ruby-cloud-summary": "The BigQuery Storage API provides fast access to BigQuery managed storage.",
+        "ruby-cloud-description": "The BigQuery Storage API provides fast access to BigQuery managed storage.",
         "ruby-cloud-env-prefix": "BIGQUERY_STORAGE",
         "ruby-cloud-wrapper-of": "v1:0.0",
         "ruby-cloud-product-url": "https://cloud.google.com/bigquery/docs/reference/storage",
