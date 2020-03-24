@@ -26,13 +26,16 @@ require "google/cloud/iot/v1/device_manager_pb"
 require "google/cloud/iot/v1/device_manager/credentials"
 require "google/cloud/iot/v1/device_manager/paths"
 
-
 module Google
   module Cloud
     module Iot
       module V1
         module DeviceManager
-          # Service that implements DeviceManager API.
+          ##
+          # Client for the DeviceManager service.
+          #
+          # Internet of Things (IoT) service. Securely connect and manage IoT devices.
+          #
           class Client
             include Paths
 
