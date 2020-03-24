@@ -26,14 +26,19 @@ require "google/cloud/bigquery/storage/v1/storage_pb"
 require "google/cloud/bigquery/storage/v1/big_query_read/credentials"
 require "google/cloud/bigquery/storage/v1/big_query_read/paths"
 
-
 module Google
   module Cloud
     module Bigquery
       module Storage
         module V1
           module BigQueryRead
-            # Service that implements BigQueryRead API.
+            ##
+            # Client for the BigQueryRead service.
+            #
+            # BigQuery Read API.
+            #
+            # The Read API can be used to read data from BigQuery.
+            #
             class Client
               include Paths
 
