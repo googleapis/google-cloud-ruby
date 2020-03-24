@@ -1,65 +1,51 @@
-# Ruby Client for Cloud Vision API
+# Ruby Client for the Cloud Vision API
 
-[Cloud Vision API][Product Documentation]:
-Integrates Google Vision features, including image labeling, face, logo,
-and landmark detection, optical character recognition (OCR), and detection
-of explicit content, into applications.
-- [Client Library Documentation][]
-- [Product Documentation][]
+API Client library for the Cloud Vision API
+
+Cloud Vision API allows developers to easily integrate vision detection features within applications, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content.
+
+Actual client classes for the various versions of this API are defined in
+_versioned_ client gems, with names of the form `google-cloud-vision-v*`.
+The gem `google-cloud-vision` is a convenience wrapper library that brings the
+verisoned gems in as dependencies, and provides high-level methods for
+constructing clients.
+
+View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-vision/latest)
+for this library, google-cloud-vision, to see the convenience methods for
+constructing client objects. Reference documentation for the client objects
+themselves can be found in the client library documentation for the versioned
+client gems:
+[google-cloud-vision-v1](https://googleapis.dev/ruby/google-cloud-vision-v1/latest),
+[google-cloud-vision-v1p3beta1](https://googleapis.dev/ruby/google-cloud-vision-v1p3beta1/latest).
+
+See also the [Product Documentation](https://cloud.google.com/vision)
+for more usage information.
 
 ## Quick Start
-In order to use this library, you first need to go through the following
-steps:
 
-1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Cloud Vision API.](https://console.cloud.google.com/apis/library/vision.googleapis.com)
-4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-vision/latest/file.AUTHENTICATION.html)
-
-### Installation
 ```
 $ gem install google-cloud-vision
 ```
 
-### Migration Guide
+In order to use this library, you first need to go through the following steps:
 
-The 0.32.0 release introduced breaking changes relative to the previous release,
-0.31.0. For more details and instructions to migrate your code, please visit the
-[migration
-guide](https://cloud.google.com/vision/docs/ruby-client-migration).
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+1. [Enable the API.](https://console.cloud.google.com/apis/library/vision.googleapis.com)
+1. {file:AUTHENTICATION.md Set up authentication.}
 
-### Preview
-#### ImageAnnotatorClient
-```rb
-require "google/cloud/vision"
+## Migrating from 0.x versions
 
-image_annotator_client = Google::Cloud::Vision::ImageAnnotator.new
-gcs_image_uri = "gs://cloud-samples-data/vision/face_detection/celebrity_recognition/sergey.jpg"
-source = { gcs_image_uri: gcs_image_uri }
-image = { source: source }
-type = :FACE_DETECTION
-features_element = { type: type }
-features = [features_element]
-requests_element = { image: image, features: features }
-requests = [requests_element]
-response = image_annotator_client.batch_annotate_images(requests)
-```
-
-### Next Steps
-- Read the [Client Library Documentation][] for Cloud Vision API
-  to see other available methods on the client.
-- Read the [Cloud Vision API Product documentation][Product Documentation]
-  to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
-  to see the full list of Cloud APIs that we cover.
-
-[Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-vision/latest
-[Product Documentation]: https://cloud.google.com/vision
+The 1.0 release of the google-cloud-vision client is a significant upgrade
+based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
+and includes substantial interface changes. Existing code written for earlier
+versions of this library will likely require updates to use this version.
+See the {file:MIGRATING.md MIGRATING.md} document for more information.
 
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
 or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
 that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.

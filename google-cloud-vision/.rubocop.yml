@@ -3,16 +3,20 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "acceptance/**/*"
-    - "support/**/*"
     - "google-cloud-vision.gemspec"
     - "Rakefile"
-    - "lib/google/cloud/vision.rb"
-    - "lib/google/cloud/vision/v1.rb"
-    - "lib/google/cloud/vision/v1/**/*"
-    - "lib/google/cloud/vision/v1p3beta1.rb"
-    - "lib/google/cloud/vision/v1p3beta1/**/*"
+    - "acceptance/**/*"
     - "test/**/*"
 
+Bundler/OrderedGems:
+  Enabled: false
 Documentation:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "samples/acceptance/*.rb"
+
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-vision.rb"
