@@ -49,14 +49,17 @@ class SignerV4PostObjectTest < MockStorage
                                          bucket_bound_hostname: bucket_bound_hostname
 
         post_object.url.must_equal output.url
-        assert_fields output.fields, post_object.fields
+        post_object.fields["key"].must_equal output.fields["key"]
+        post_object.fields["x-goog-algorithm"].must_equal output.fields["x-goog-algorithm"]
+        post_object.fields["x-goog-credential"].must_equal output.fields["x-goog-credential"]
+        post_object.fields["x-goog-date"].must_equal output.fields["x-goog-date"]
+        post_object.fields["policy"].must_equal output.fields["policy"]
+        post_object.fields["x-goog-signature"].must_equal output.fields["x-goog-signature"]
       end
     end
   end
 
   def self.bucket_test_for description, input, output, index
-    return unless [9].include? index
-    focus
     define_method("test_bucket_#{index}: #{description}") do
       @test_data = ["bucket", index, description, output.expectedDecodedPolicy]
       bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(input.bucket).to_json
@@ -74,18 +77,14 @@ class SignerV4PostObjectTest < MockStorage
                                                           bucket_bound_hostname: bucket_bound_hostname
 
         post_object.url.must_equal output.url
-        assert_fields output.fields, post_object.fields
+        post_object.fields["key"].must_equal output.fields["key"]
+        post_object.fields["x-goog-algorithm"].must_equal output.fields["x-goog-algorithm"]
+        post_object.fields["x-goog-credential"].must_equal output.fields["x-goog-credential"]
+        post_object.fields["x-goog-date"].must_equal output.fields["x-goog-date"]
+        post_object.fields["policy"].must_equal output.fields["policy"]
+        post_object.fields["x-goog-signature"].must_equal output.fields["x-goog-signature"]
       end
     end
-  end
-
-  def assert_fields expected, actual
-    actual["key"].must_equal expected["key"]
-    actual["x-goog-algorithm"].must_equal expected["x-goog-algorithm"]
-    actual["x-goog-credential"].must_equal expected["x-goog-credential"]
-    actual["x-goog-date"].must_equal expected["x-goog-date"]
-    actual["policy"].must_equal expected["policy"]
-    actual["x-goog-signature"].must_equal expected["x-goog-signature"]
   end
 
   def fields_array fields

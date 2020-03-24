@@ -63,9 +63,6 @@ module Google
             fields.merge! base_fields
 
             policy_str = p.to_json
-            puts "\n\npolicy_str:\n\n#{policy_str}\n\n"
-# {"conditions":[{"x-goog-meta":"$test-object-é-metadata"},{"success_action_redirect":"http://www.google.com/"},{"key":"$test-object-é"},{"x-goog-date":"20200123T043530Z"},{"x-goog-credential":"test-iam-credentials@dummy-project-id.iam.gserviceaccount.com/20200123/auto/storage/goog4_request"},{"x-goog-algorithm":"GOOG4-RSA-SHA256"}],"expiration":"2020-01-23T04:35:40Z"}
-# {"conditions":[{"success_action_redirect":"http://www.google.com/"},{"key":"$test-object-é"},{"x-goog-date":"20200123T043530Z"},{"x-goog-credential":"test-iam-credentials@dummy-project-id.iam.gserviceaccount.com/20200123/auto/storage/goog4_request"},{"x-goog-algorithm":"GOOG4-RSA-SHA256"}],"expiration":"2020-01-23T04:35:40Z","x-goog-meta":"$test-object-é-metadata"}
             policy = Base64.strict_encode64(policy_str).force_encoding "utf-8"
             signature = generate_signature s, policy
 
