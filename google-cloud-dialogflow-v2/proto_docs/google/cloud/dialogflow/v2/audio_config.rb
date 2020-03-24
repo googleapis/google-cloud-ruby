@@ -100,13 +100,13 @@ module Google
         #     the same session do not necessarily need to specify the same language.
         # @!attribute [rw] enable_word_info
         #   @return [Boolean]
-        #     Optional. If `true`, Dialogflow returns {Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
+        #     If `true`, Dialogflow returns {Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
         #     {Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult} with information about the recognized speech
         #     words, e.g. start and end time offsets. If false or unspecified, Speech
         #     doesn't return any word-level information.
         # @!attribute [rw] phrase_hints
         #   @return [Array<String>]
-        #     Optional. A list of strings containing words and phrases that the speech
+        #     A list of strings containing words and phrases that the speech
         #     recognizer should recognize with higher likelihood.
         #
         #     See [the Cloud Speech
@@ -118,14 +118,14 @@ module Google
         #     treat the [phrase_hints]() as a single additional [SpeechContext]().
         # @!attribute [rw] speech_contexts
         #   @return [Array<Google::Cloud::Dialogflow::V2::SpeechContext>]
-        #     Optional. Context information to assist speech recognition.
+        #     Context information to assist speech recognition.
         #
         #     See [the Cloud Speech
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints)
         #     for more details.
         # @!attribute [rw] model
         #   @return [String]
-        #     Optional. Which Speech model to select for the given request. Select the
+        #     Which Speech model to select for the given request. Select the
         #     model best suited to your domain to get best results. If a model is not
         #     explicitly specified, then we auto-select a model based on the parameters
         #     in the InputAudioConfig.
@@ -138,10 +138,10 @@ module Google
         #     for more details.
         # @!attribute [rw] model_variant
         #   @return [Google::Cloud::Dialogflow::V2::SpeechModelVariant]
-        #     Optional. Which variant of the [Speech model][google.cloud.dialogflow.v2.InputAudioConfig.model] to use.
+        #     Which variant of the [Speech model][google.cloud.dialogflow.v2.InputAudioConfig.model] to use.
         # @!attribute [rw] single_utterance
         #   @return [Boolean]
-        #     Optional. If `false` (default), recognition does not cease until the
+        #     If `false` (default), recognition does not cease until the
         #     client closes the stream.
         #     If `true`, the recognizer will detect a single spoken utterance in input
         #     audio. Recognition ceases when it detects the audio's voice has

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-service_directory-v1beta1 is the official library for Service Directory V1beta1 API."
-  gem.summary       = "Service directory is the single place to register, browse, and resolve application services."
+  gem.description   = "Service directory is the single place to register, browse, and resolve application services."
+  gem.summary       = "API Client library for the Service Directory V1beta1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

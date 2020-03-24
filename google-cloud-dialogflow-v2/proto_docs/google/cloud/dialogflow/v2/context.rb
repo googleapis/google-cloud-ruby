@@ -25,10 +25,15 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The unique identifier of the context. Format:
-        #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`,
+        #     or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+        #     ID>/sessions/<Session ID>/contexts/<Context ID>`.
         #
         #     The `Context ID` is always converted to lowercase, may only contain
-        #     characters in [a-zA-Z0-9_-%] and may be at most 250 bytes long.
+        #     characters in a-zA-Z0-9_-% and may be at most 250 bytes long.
+        #
+        #     If `Environment ID` is not specified, we assume default 'draft'
+        #     environment. If `User ID` is not specified, we assume default '-' user.
         #
         #     The following context names are reserved for internal use by Dialogflow.
         #     You should not use these contexts or create contexts with these names:
@@ -57,7 +62,11 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to list all contexts from.
-        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+        #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+        #     ID>/sessions/<Session ID>`.
+        #     If `Environment ID` is not specified, we assume default 'draft'
+        #     environment. If `User ID` is not specified, we assume default '-' user.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional. The maximum number of items to return in a single page. By
@@ -88,7 +97,11 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the context. Format:
-        #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+        #     or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+        #     ID>/sessions/<Session ID>/contexts/<Context ID>`.
+        #     If `Environment ID` is not specified, we assume default 'draft'
+        #     environment. If `User ID` is not specified, we assume default '-' user.
         class GetContextRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -98,7 +111,11 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The session to create a context for.
-        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>`.
+        #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
+        #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+        #     ID>/sessions/<Session ID>`.
+        #     If `Environment ID` is not specified, we assume default 'draft'
+        #     environment. If `User ID` is not specified, we assume default '-' user.
         # @!attribute [rw] context
         #   @return [Google::Cloud::Dialogflow::V2::Context]
         #     Required. The context to create.
@@ -123,7 +140,11 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The name of the context to delete. Format:
-        #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>/contexts/<Context ID>`
+        #     or `projects/<Project ID>/agent/environments/<Environment ID>/users/<User
+        #     ID>/sessions/<Session ID>/contexts/<Context ID>`.
+        #     If `Environment ID` is not specified, we assume default 'draft'
+        #     environment. If `User ID` is not specified, we assume default '-' user.
         class DeleteContextRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -133,7 +154,11 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the session to delete all contexts from. Format:
-        #     `projects/<Project ID>/agent/sessions/<Session ID>`.
+        #     `projects/<Project ID>/agent/sessions/<Session ID>` or `projects/<Project
+        #     ID>/agent/environments/<Environment ID>/users/<User ID>/sessions/<Session
+        #     ID>`.
+        #     If `Environment ID` is not specified we assume default 'draft' environment.
+        #     If `User ID` is not specified, we assume default '-' user.
         class DeleteAllContextsRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods

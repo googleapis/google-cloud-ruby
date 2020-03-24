@@ -29,7 +29,7 @@ library = gapic.ruby_library(
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-dialogflow-v2",
         "ruby-cloud-title": "Dialogflow V2",
-        "ruby-cloud-summary": "Creates conversational experiences across devices and platforms.",
+        "ruby-cloud-description": "Dialogflow is an end-to-end, build-once deploy-everywhere development suite for creating conversational interfaces for websites, mobile applications, popular messaging platforms, and IoT devices. You can use it to build interfaces (such as chatbots and conversational IVR) that enable natural and rich interactions between your users and your business.",
         "ruby-cloud-env-prefix": "DIALOGFLOW",
         "ruby-cloud-grpc-service-config": "google/cloud/dialogflow/v2/dialogflow_grpc_service_config.json",
     }

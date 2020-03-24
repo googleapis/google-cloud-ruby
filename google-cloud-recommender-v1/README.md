@@ -1,8 +1,8 @@
 # Recommender V1
 
-google-cloud-recommender-v1 is the official library for Recommender V1 API.
+API Client library for the Recommender V1 API
 
-recommender.googleapis.com
+Recommender is a service on Google Cloud that provides usage recommendations for Cloud products and services.
 
 https://github.com/googleapis/google-cloud-ruby
 

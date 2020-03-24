@@ -26,13 +26,22 @@ require "google/cloud/secretmanager/v1/service_pb"
 require "google/cloud/secret_manager/v1/secret_manager_service/credentials"
 require "google/cloud/secret_manager/v1/secret_manager_service/paths"
 
-
 module Google
   module Cloud
     module SecretManager
       module V1
         module SecretManagerService
-          # Service that implements SecretManagerService API.
+          ##
+          # Client for the SecretManagerService service.
+          #
+          # Secret Manager Service
+          #
+          # Manages secrets and operations using those secrets. Implements a REST
+          # model with the following objects:
+          #
+          # * {Google::Cloud::SecretManager::V1::Secret Secret}
+          # * {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}
+          #
           class Client
             include Paths
 

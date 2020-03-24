@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-access_approval-v1 is the official library for Access Approval API V1 API."
-  gem.summary       = "An API for controlling access to data by Google personnel."
+  gem.description   = "An API for controlling access to data by Google personnel."
+  gem.summary       = "API Client library for the Access Approval API V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
