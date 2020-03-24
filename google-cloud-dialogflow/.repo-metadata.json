@@ -1,5 +1,4 @@
 {
-    "name": "dialogflow",
     "language": "ruby",
     "distribution_name": "google-cloud-dialogflow",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-dialogflow/latest"

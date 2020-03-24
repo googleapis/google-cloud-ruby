@@ -223,7 +223,7 @@ strings passed to many calls. These helpers have changed in two ways:
   arguments. Some helpers also support different sets of arguments, each set
   corresponding to a different type of path.
 
-Following is an example invoving using a resource path helper.
+Following is an example involving using a resource path helper.
 
 Old:
 ```
@@ -264,7 +264,8 @@ def foo
 
   query = { text: { text: "book a meeting room", language_code: "en-US" } }
   response = client.detect_intent session: session, query_input: query
-  # Do something with response
+
+  # Do something with response...
 end
 ```
 
