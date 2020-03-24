@@ -1,5 +1,19 @@
 # Release History
 
+### 0.37.0 / 2020-03-24
+
+#### ⚠ BREAKING CHANGES
+
+* **language:** use clients created by the new generator
+
+#### Features
+
+* use clients created by the new generator
+
+#### Documentation
+
+* fix a few errors in the language migration guide
+
 ### 0.36.0 / 2020-03-11
 
 #### Features
