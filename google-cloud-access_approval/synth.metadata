@@ -1,0 +1,25 @@
+{
+  "updateTime": "2020-03-24T20:05:03.201060Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "36c0febd0fa7267ab66d14408eec2afd1b6bec4e",
+        "internalRef": "302639621",
+        "log": "36c0febd0fa7267ab66d14408eec2afd1b6bec4e\nUpdate GAPIC configurations to v2 .yaml.\n\nPiperOrigin-RevId: 302639621\n\n"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "accessapproval",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}

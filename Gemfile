@@ -19,6 +19,7 @@ gem "actionpack", "~> 5.0"
 gem "railties", "~> 5.0"
 gem "rack", ">= 0.1"
 
+gem "google-cloud-access_approval", path: "google-cloud-access_approval"
 gem "google-cloud-access_approval-v1", path: "google-cloud-access_approval-v1"
 gem "google-cloud-core", path: "google-cloud-core"
 gem "google-cloud-env", path: "google-cloud-env"
