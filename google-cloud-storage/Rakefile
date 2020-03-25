@@ -125,6 +125,40 @@ namespace :acceptance do
   end
 end
 
+task :samples do
+  Rake::Task["samples:latest"].invoke
+end
+
+namespace :samples do
+  task :latest do
+    if File.directory? "samples"
+      Dir.chdir "samples" do
+        Bundler.with_clean_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
+          sh "bundle update"
+          sh "bundle exec rake test"
+        end
+      end
+    else
+      puts "The google-cloud-language gem has no samples to test."
+    end
+  end
+
+  task :master do
+    if File.directory? "samples"
+      Dir.chdir "samples" do
+        Bundler.with_clean_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
+          sh "bundle update"
+          sh "bundle exec rake test"
+        end
+      end
+    else
+      puts "The google-cloud-language gem has no samples to test."
+    end
+  end
+end
+
 desc "Run yard-doctest example tests."
 task :doctest do
   sh "bundle exec yard config load_plugins true && bundle exec yard doctest"
