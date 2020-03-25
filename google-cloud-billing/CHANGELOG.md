@@ -4,7 +4,9 @@
 
 #### Documentation
 
-* provide more detailed docs for service-wide config
+* Expands documentation for service-wide config objects
+* Expands documentation for client classes
+* Numerous formatting fixes
 
 ### 0.1.1 / 2020-03-18
 
