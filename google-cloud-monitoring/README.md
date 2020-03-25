@@ -1,12 +1,12 @@
-# Ruby Client for Stackdriver Monitoring API
+# Ruby Client for Cloud Monitoring API
 
-[Stackdriver Monitoring API][Product Documentation]:
-Manages your Stackdriver Monitoring data and configurations. Most projects
-must be associated with a Stackdriver account, with a few exceptions as
-noted on the individual method pages. The table entries below are
-presented in alphabetical order, not in order of common use. For
-explanations of the concepts found in the table entries, read the
-[Stackdriver Monitoring documentation](/monitoring/docs).
+[Cloud Monitoring API][Product Documentation]:
+Manages your Cloud Monitoring data and configurations. Most projects must
+be associated with a Workspace, with a few exceptions as noted on the
+individual method pages. The table entries below are presented in
+alphabetical order, not in order of common use. For explanations of the
+concepts found in the table entries, read the [Cloud Monitoring
+documentation](/monitoring/docs).
 - [Client Library Documentation][]
 - [Product Documentation][]
 
@@ -16,7 +16,7 @@ steps:
 
 1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
 2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Stackdriver Monitoring API.](https://console.cloud.google.com/apis/library/monitoring.googleapis.com)
+3. [Enable the Cloud Monitoring API.](https://console.cloud.google.com/apis/library/monitoring.googleapis.com)
 4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-monitoring/latest/file.AUTHENTICATION.html)
 
 ### Installation
@@ -47,9 +47,9 @@ end
 ```
 
 ### Next Steps
-- Read the [Client Library Documentation][] for Stackdriver Monitoring API
+- Read the [Client Library Documentation][] for Cloud Monitoring API
   to see other available methods on the client.
-- Read the [Stackdriver Monitoring API Product documentation][Product Documentation]
+- Read the [Cloud Monitoring API Product documentation][Product Documentation]
   to learn more about the product and see How-to Guides.
 - View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
   to see the full list of Cloud APIs that we cover.

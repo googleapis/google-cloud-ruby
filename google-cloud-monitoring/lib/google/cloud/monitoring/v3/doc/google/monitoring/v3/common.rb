@@ -89,7 +89,7 @@ module Google
       # representative data can be more easily graphed and comprehended, and the
       # individual time series data is still available for later drilldown. For more
       # details, see [Aggregating Time
-      # Series](/monitoring/api/v3/metrics#aggregating_time_series).
+      # Series](https://cloud.google.com/monitoring/api/v3/metrics#aggregating_time_series).
       # @!attribute [rw] alignment_period
       #   @return [Google::Protobuf::Duration]
       #     The `alignment_period` specifies a time interval, in seconds, that is used

@@ -157,6 +157,11 @@ module Google
         #   @return [Google::Monitoring::V3::AlertPolicy::Condition::MetricAbsence]
         #     A condition that checks that a time series continues to
         #     receive new data points.
+        # @!attribute [rw] condition_time_series_query_language
+        #   @return [Google::Monitoring::V3::AlertPolicy::Condition::TimeSeriesQueryLanguageCondition]
+        #     A condition that uses the time series query language format to define
+        #     alerts.
+        #     If set, no other conditions can be present.
         class Condition
           # Specifies how many time series must fail a predicate to trigger a
           # condition. If not specified, then a `{count: 1}` trigger is used.
@@ -179,8 +184,8 @@ module Google
           #
           #     The filter is similar to the one that is specified in the
           #     [`ListTimeSeries`
-          #     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
-          #     call is useful to verify the time series that will be retrieved /
+          #     request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)
+          #     (that call is useful to verify the time series that will be retrieved /
           #     processed) and must specify the metric type and optionally may contain
           #     restrictions on resource type, resource labels, and metric labels.
           #     This field may not exceed 2048 Unicode characters in length.
@@ -194,8 +199,8 @@ module Google
           #     are applied in the order specified.
           #
           #     This field is similar to the one in the [`ListTimeSeries`
-          #     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-          #     is advisable to use the `ListTimeSeries` method when debugging this
+          #     request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+          #     It is advisable to use the `ListTimeSeries` method when debugging this
           #     field.
           # @!attribute [rw] denominator_filter
           #   @return [String]
@@ -265,8 +270,8 @@ module Google
           #
           #     The filter is similar to the one that is specified in the
           #     [`ListTimeSeries`
-          #     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list) (that
-          #     call is useful to verify the time series that will be retrieved /
+          #     request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)
+          #     (that call is useful to verify the time series that will be retrieved /
           #     processed) and must specify the metric type and optionally may contain
           #     restrictions on resource type, resource labels, and metric labels.
           #     This field may not exceed 2048 Unicode characters in length.
@@ -280,8 +285,8 @@ module Google
           #     are applied in the order specified.
           #
           #     This field is similar to the one in the [`ListTimeSeries`
-          #     request](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list). It
-          #     is advisable to use the `ListTimeSeries` method when debugging this
+          #     request](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).
+          #     It is advisable to use the `ListTimeSeries` method when debugging this
           #     field.
           # @!attribute [rw] duration
           #   @return [Google::Protobuf::Duration]
@@ -298,6 +303,20 @@ module Google
           #     condition will trigger if the comparison is true for any of the
           #     time series that have been identified by `filter` and `aggregations`.
           class MetricAbsence; end
+
+          # A condition type that allows alert policies to be defined using the
+          # time series query language.
+          # @!attribute [rw] query
+          #   @return [String]
+          #     A query in the time series query language format that generates time
+          #     series indicating points in time that the condition should be
+          #     considered active.
+          # @!attribute [rw] summary
+          #   @return [String]
+          #     A short explanation of what the query represents. For example:
+          #
+          #       "Error ratio exceeds 15% for >5% of servers in >2 regions"
+          class TimeSeriesQueryLanguageCondition; end
         end
 
         # Operators for combining conditions.

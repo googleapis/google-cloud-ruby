@@ -279,8 +279,9 @@ module Google
           # (leaving out any invalid configurations).
           #
           # @param parent [String]
-          #   Required. The project whose Uptime check configurations are listed. The format
-          #     is `projects/[PROJECT_ID]`.
+          #   Required. The project whose Uptime check configurations are listed. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
           # @param page_size [Integer]
           #   The maximum number of resources contained in the underlying API
           #   response. If page streaming is performed per-resource, this
@@ -334,8 +335,9 @@ module Google
           # Gets a single Uptime check configuration.
           #
           # @param name [String]
-          #   Required. The Uptime check configuration to retrieve. The format
-          #     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+          #   Required. The Uptime check configuration to retrieve. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
@@ -365,8 +367,9 @@ module Google
           # Creates a new Uptime check configuration.
           #
           # @param parent [String]
-          #   Required. The project in which to create the Uptime check. The format
-          #     is `projects/[PROJECT_ID]`.
+          #   Required. The project in which to create the Uptime check. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]
           # @param uptime_check_config [Google::Monitoring::V3::UptimeCheckConfig | Hash]
           #   Required. The new Uptime check configuration.
           #   A hash of the same form as `Google::Monitoring::V3::UptimeCheckConfig`
@@ -463,8 +466,9 @@ module Google
           # other dependent configs that would be rendered invalid by the deletion.
           #
           # @param name [String]
-          #   Required. The Uptime check configuration to delete. The format
-          #     is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+          #   Required. The Uptime check configuration to delete. The format is:
+          #
+          #       projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.

@@ -19,6 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :app_engine, :message, 7, "google.monitoring.v3.Service.AppEngine"
       optional :cloud_endpoints, :message, 8, "google.monitoring.v3.Service.CloudEndpoints"
       optional :cluster_istio, :message, 9, "google.monitoring.v3.Service.ClusterIstio"
+      optional :mesh_istio, :message, 10, "google.monitoring.v3.Service.MeshIstio"
     end
   end
   add_message "google.monitoring.v3.Service.Custom" do
@@ -32,6 +33,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.monitoring.v3.Service.ClusterIstio" do
     optional :location, :string, 1
     optional :cluster_name, :string, 2
+    optional :service_namespace, :string, 3
+    optional :service_name, :string, 4
+  end
+  add_message "google.monitoring.v3.Service.MeshIstio" do
+    optional :mesh_uid, :string, 1
     optional :service_namespace, :string, 3
     optional :service_name, :string, 4
   end
@@ -123,6 +129,7 @@ module Google
       Service::AppEngine = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.AppEngine").msgclass
       Service::CloudEndpoints = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.CloudEndpoints").msgclass
       Service::ClusterIstio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.ClusterIstio").msgclass
+      Service::MeshIstio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.MeshIstio").msgclass
       Service::Telemetry = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.Telemetry").msgclass
       ServiceLevelObjective = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceLevelObjective").msgclass
       ServiceLevelObjective::View = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceLevelObjective.View").enummodule
