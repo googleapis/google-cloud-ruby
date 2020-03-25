@@ -32,6 +32,7 @@ def quickstart
 
   puts "Text: #{text}"
   puts "Score: #{sentiment.score}, #{sentiment.magnitude}"
+  # [END language_quickstart]
 end
 
 quickstart if $PROGRAM_NAME == __FILE__
