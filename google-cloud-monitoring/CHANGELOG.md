@@ -1,5 +1,13 @@
 # Release History
 
+### 0.37.0 / 2020-03-25
+
+#### Features
+
+* Add TimeSeriesQueryLanguageCondition and MeshIstio
+  * Add Condition#condition_time_series_query_language (TimeSeriesQueryLanguageCondition)
+  * Add Service::MeshIstio
+
 ### 0.36.0 / 2020-03-11
 
 #### Features
