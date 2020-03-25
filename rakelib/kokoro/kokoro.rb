@@ -205,6 +205,7 @@ class Kokoro < Command
   def verify_in_gemfile gem = nil
     gem ||= @gem
     return if Bundler.environment.gems.map(&:name).include? gem
+    return if ["gcloud", "google-cloud"].include? gem
     header_2 "#{gem} does not appear in the top-level Gemfile. Please add it."
     @failed = true
   end
