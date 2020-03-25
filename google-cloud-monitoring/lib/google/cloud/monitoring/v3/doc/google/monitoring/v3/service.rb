@@ -19,12 +19,13 @@ module Google
       # A `Service` is a discrete, autonomous, and network-accessible unit, designed
       # to solve an individual concern
       # ([Wikipedia](https://en.wikipedia.org/wiki/Service-orientation)). In
-      # Stackdriver Monitoring, a `Service` acts as the root resource under which
+      # Cloud Monitoring, a `Service` acts as the root resource under which
       # operational aspects of the service are accessible.
       # @!attribute [rw] name
       #   @return [String]
-      #     Resource name for this Service. Of the form
-      #     `projects/{project_id}/services/{service_id}`.
+      #     Resource name for this Service. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
       # @!attribute [rw] display_name
       #   @return [String]
       #     Name used for UI elements listing this Service.
@@ -40,6 +41,9 @@ module Google
       # @!attribute [rw] cluster_istio
       #   @return [Google::Monitoring::V3::Service::ClusterIstio]
       #     Type used for Istio services that live in a Kubernetes cluster.
+      # @!attribute [rw] mesh_istio
+      #   @return [Google::Monitoring::V3::Service::MeshIstio]
+      #     Type used for Istio services scoped to an Istio mesh.
       # @!attribute [rw] telemetry
       #   @return [Google::Monitoring::V3::Service::Telemetry]
       #     Configuration for how to query telemetry on a Service.
@@ -64,7 +68,8 @@ module Google
         #     resource: https://cloud.google.com/monitoring/api/resources#tag_api
         class CloudEndpoints; end
 
-        # Istio service. Learn more at http://istio.io.
+        # Istio service scoped to a single Kubernetes cluster. Learn more at
+        # http://istio.io.
         # @!attribute [rw] location
         #   @return [String]
         #     The location of the Kubernetes cluster in which this Istio service is
@@ -85,6 +90,21 @@ module Google
         #     `destination_service_name` metric label in Istio metrics.
         class ClusterIstio; end
 
+        # Istio service scoped to an Istio mesh
+        # @!attribute [rw] mesh_uid
+        #   @return [String]
+        #     Identifier for the mesh in which this Istio service is defined.
+        #     Corresponds to the `mesh_uid` metric label in Istio metrics.
+        # @!attribute [rw] service_namespace
+        #   @return [String]
+        #     The namespace of the Istio service underlying this service. Corresponds
+        #     to the `destination_service_namespace` metric label in Istio metrics.
+        # @!attribute [rw] service_name
+        #   @return [String]
+        #     The name of the Istio service underlying this service. Corresponds to the
+        #     `destination_service_name` metric label in Istio metrics.
+        class MeshIstio; end
+
         # Configuration for how to query telemetry on a Service.
         # @!attribute [rw] resource_name
         #   @return [String]
@@ -101,9 +121,9 @@ module Google
       # "99.5% of requests in each calendar month return successfully."
       # @!attribute [rw] name
       #   @return [String]
-      #     Resource name for this `ServiceLevelObjective`.
-      #     Of the form
-      #     `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
+      #     Resource name for this `ServiceLevelObjective`. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
       # @!attribute [rw] display_name
       #   @return [String]
       #     Name used for UI elements listing this SLO.

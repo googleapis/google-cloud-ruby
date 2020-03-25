@@ -22,9 +22,9 @@ module Google
       #   @return [String]
       #     A unique resource name for this InternalChecker. The format is:
       #
-      #       `projects/[PROJECT_ID]/internalCheckers/[INTERNAL_CHECKER_ID]`.
+      #         projects/[PROJECT_ID_OR_NUMBER]/internalCheckers/[INTERNAL_CHECKER_ID]
       #
-      #     `[PROJECT_ID]` is the Stackdriver Workspace project for the
+      #     `[PROJECT_ID_OR_NUMBER]` is the Stackdriver Workspace project for the
       #     Uptime check config associated with the internal checker.
       # @!attribute [rw] display_name
       #   @return [String]
@@ -76,7 +76,7 @@ module Google
       #   @return [String]
       #     A unique resource name for this Uptime check configuration. The format is:
       #
-      #       `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+      #          projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
       #
       #     This field should be omitted when creating the Uptime check configuration;
       #     on create, the resource name is assigned by the server and included in the
@@ -148,7 +148,8 @@ module Google
         # @!attribute [rw] group_id
         #   @return [String]
         #     The group of resources being monitored. Should be only the `[GROUP_ID]`,
-        #     and not the full-path `projects/[PROJECT_ID]/groups/[GROUP_ID]`.
+        #     and not the full-path
+        #     `projects/[PROJECT_ID_OR_NUMBER]/groups/[GROUP_ID]`.
         # @!attribute [rw] resource_type
         #   @return [Google::Monitoring::V3::GroupResourceType]
         #     The resource type of the group members.

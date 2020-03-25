@@ -19,8 +19,9 @@ module Google
       # The protocol for the `ListUptimeCheckConfigs` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Required. The project whose Uptime check configurations are listed. The format
-      #       is `projects/[PROJECT_ID]`.
+      #     Required. The project whose Uptime check configurations are listed. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]
       # @!attribute [rw] page_size
       #   @return [Integer]
       #     The maximum number of results to return in a single response. The server
@@ -54,15 +55,17 @@ module Google
       # The protocol for the `GetUptimeCheckConfig` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The Uptime check configuration to retrieve. The format
-      #       is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+      #     Required. The Uptime check configuration to retrieve. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
       class GetUptimeCheckConfigRequest; end
 
       # The protocol for the `CreateUptimeCheckConfig` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Required. The project in which to create the Uptime check. The format
-      #       is `projects/[PROJECT_ID]`.
+      #     Required. The project in which to create the Uptime check. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]
       # @!attribute [rw] uptime_check_config
       #   @return [Google::Monitoring::V3::UptimeCheckConfig]
       #     Required. The new Uptime check configuration.
@@ -93,8 +96,9 @@ module Google
       # The protocol for the `DeleteUptimeCheckConfig` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. The Uptime check configuration to delete. The format
-      #       is `projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID]`.
+      #     Required. The Uptime check configuration to delete. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/uptimeCheckConfigs/[UPTIME_CHECK_ID]
       class DeleteUptimeCheckConfigRequest; end
 
       # The protocol for the `ListUptimeCheckIps` request.

@@ -21,9 +21,9 @@ module Google
       # must be specified to configure channels of a given type.
       # @!attribute [rw] name
       #   @return [String]
-      #     The full REST resource name for this descriptor. The syntax is:
+      #     The full REST resource name for this descriptor. The format is:
       #
-      #         projects/[PROJECT_ID]/notificationChannelDescriptors/[TYPE]
+      #         projects/[PROJECT_ID_OR_NUMBER]/notificationChannelDescriptors/[TYPE]
       #
       #     In the above, `[TYPE]` is the value of the `type` field.
       # @!attribute [rw] type
@@ -64,9 +64,9 @@ module Google
       #     value of the {Google::Monitoring::V3::NotificationChannelDescriptor#type NotificationChannelDescriptor#type} field.
       # @!attribute [rw] name
       #   @return [String]
-      #     The full REST resource name for this channel. The syntax is:
+      #     The full REST resource name for this channel. The format is:
       #
-      #         projects/[PROJECT_ID]/notificationChannels/[CHANNEL_ID]
+      #         projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
       #
       #     The `[CHANNEL_ID]` is automatically assigned by the server on creation.
       # @!attribute [rw] display_name

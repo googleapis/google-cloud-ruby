@@ -86,6 +86,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :status, :message, 1, "google.rpc.Status"
     optional :point_count, :int32, 2
   end
+  add_message "google.monitoring.v3.QueryTimeSeriesRequest" do
+    optional :name, :string, 1
+    optional :query, :string, 7
+    optional :page_size, :int32, 9
+    optional :page_token, :string, 10
+  end
+  add_message "google.monitoring.v3.QueryTimeSeriesResponse" do
+    optional :time_series_descriptor, :message, 8, "google.monitoring.v3.TimeSeriesDescriptor"
+    repeated :time_series_data, :message, 9, "google.monitoring.v3.TimeSeriesData"
+    optional :next_page_token, :string, 10
+    repeated :partial_errors, :message, 11, "google.rpc.Status"
+  end
+  add_message "google.monitoring.v3.QueryErrorList" do
+    repeated :errors, :message, 1, "google.monitoring.v3.QueryError"
+    optional :error_summary, :string, 2
+  end
 end
 
 module Google
@@ -106,6 +122,9 @@ module Google
       CreateTimeSeriesError = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesError").msgclass
       CreateTimeSeriesSummary = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesSummary").msgclass
       CreateTimeSeriesSummary::Error = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesSummary.Error").msgclass
+      QueryTimeSeriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryTimeSeriesRequest").msgclass
+      QueryTimeSeriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryTimeSeriesResponse").msgclass
+      QueryErrorList = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryErrorList").msgclass
     end
   end
 end

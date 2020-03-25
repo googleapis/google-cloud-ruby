@@ -19,12 +19,13 @@ module Google
       # The `CreateService` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Required. Resource name of the parent workspace.
-      #     Of the form `projects/{project_id}`.
+      #     Required. Resource name of the parent workspace. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]
       # @!attribute [rw] service_id
       #   @return [String]
       #     Optional. The Service id to use for this Service. If omitted, an id will be
-      #     generated instead. Must match the pattern [a-z0-9\-]+
+      #     generated instead. Must match the pattern `[a-z0-9\-]+`
       # @!attribute [rw] service
       #   @return [Google::Monitoring::V3::Service]
       #     Required. The `Service` to create.
@@ -33,15 +34,19 @@ module Google
       # The `GetService` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. Resource name of the `Service`.
-      #     Of the form `projects/{project_id}/services/{service_id}`.
+      #     Required. Resource name of the `Service`. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
       class GetServiceRequest; end
 
       # The `ListServices` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Required. Resource name of the parent `Workspace`.
-      #     Of the form `projects/{project_id}`.
+      #     Required. Resource name of the parent containing the listed services, either a
+      #     project or a Monitoring Workspace. The formats are:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]
+      #         workspaces/[HOST_PROJECT_ID_OR_NUMBER]
       # @!attribute [rw] filter
       #   @return [String]
       #     A filter specifying what `Service`s to return. The filter currently
@@ -78,7 +83,7 @@ module Google
       #   @return [String]
       #     If there are more results than have been returned, then this field is set
       #     to a non-empty value.  To see the additional results,
-      #     use that value as `pageToken` in the next call to this method.
+      #     use that value as `page_token` in the next call to this method.
       class ListServicesResponse; end
 
       # The `UpdateService` request.
@@ -94,20 +99,22 @@ module Google
       # The `DeleteService` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. Resource name of the `Service` to delete.
-      #     Of the form `projects/{project_id}/services/{service_id}`.
+      #     Required. Resource name of the `Service` to delete. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
       class DeleteServiceRequest; end
 
       # The `CreateServiceLevelObjective` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Required. Resource name of the parent `Service`.
-      #     Of the form `projects/{project_id}/services/{service_id}`.
+      #     Required. Resource name of the parent `Service`. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
       # @!attribute [rw] service_level_objective_id
       #   @return [String]
       #     Optional. The ServiceLevelObjective id to use for this
       #     ServiceLevelObjective. If omitted, an id will be generated instead. Must
-      #     match the pattern [a-z0-9\-]+
+      #     match the pattern `[a-z0-9\-]+`
       # @!attribute [rw] service_level_objective
       #   @return [Google::Monitoring::V3::ServiceLevelObjective]
       #     Required. The `ServiceLevelObjective` to create.
@@ -118,9 +125,9 @@ module Google
       # The `GetServiceLevelObjective` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. Resource name of the `ServiceLevelObjective` to get.
-      #     Of the form
-      #     `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
+      #     Required. Resource name of the `ServiceLevelObjective` to get. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
       # @!attribute [rw] view
       #   @return [Google::Monitoring::V3::ServiceLevelObjective::View]
       #     View of the `ServiceLevelObjective` to return. If `DEFAULT`, return the
@@ -132,8 +139,11 @@ module Google
       # The `ListServiceLevelObjectives` request.
       # @!attribute [rw] parent
       #   @return [String]
-      #     Required. Resource name of the parent `Service`.
-      #     Of the form `projects/{project_id}/services/{service_id}`.
+      #     Required. Resource name of the parent containing the listed SLOs, either a
+      #     project or a Monitoring Workspace. The formats are:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
+      #         workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
       # @!attribute [rw] filter
       #   @return [String]
       #     A filter specifying what `ServiceLevelObjective`s to return.
@@ -162,7 +172,7 @@ module Google
       #   @return [String]
       #     If there are more results than have been returned, then this field is set
       #     to a non-empty value.  To see the additional results,
-      #     use that value as `pageToken` in the next call to this method.
+      #     use that value as `page_token` in the next call to this method.
       class ListServiceLevelObjectivesResponse; end
 
       # The `UpdateServiceLevelObjective` request.
@@ -178,9 +188,9 @@ module Google
       # The `DeleteServiceLevelObjective` request.
       # @!attribute [rw] name
       #   @return [String]
-      #     Required. Resource name of the `ServiceLevelObjective` to delete.
-      #     Of the form
-      #     `projects/{project_id}/services/{service_id}/serviceLevelObjectives/{slo_name}`.
+      #     Required. Resource name of the `ServiceLevelObjective` to delete. The format is:
+      #
+      #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
       class DeleteServiceLevelObjectiveRequest; end
     end
   end

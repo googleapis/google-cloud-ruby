@@ -309,7 +309,7 @@ module Google
 
           # Service calls
 
-          # Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
+          # Lists monitored resource descriptors that match a filter. This method does not require a Workspace.
           #
           # @param name [String]
           #   Required. The project on which to execute the request. The format is:
@@ -374,7 +374,7 @@ module Google
             @list_monitored_resource_descriptors.call(req, options, &block)
           end
 
-          # Gets a single monitored resource descriptor. This method does not require a Stackdriver account.
+          # Gets a single monitored resource descriptor. This method does not require a Workspace.
           #
           # @param name [String]
           #   Required. The monitored resource descriptor to get.  The format is:
@@ -409,7 +409,7 @@ module Google
             @get_monitored_resource_descriptor.call(req, options, &block)
           end
 
-          # Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
+          # Lists metric descriptors that match a filter. This method does not require a Workspace.
           #
           # @param name [String]
           #   Required. The project on which to execute the request. The format is:
@@ -476,7 +476,7 @@ module Google
             @list_metric_descriptors.call(req, options, &block)
           end
 
-          # Gets a single metric descriptor. This method does not require a Stackdriver account.
+          # Gets a single metric descriptor. This method does not require a Workspace.
           #
           # @param name [String]
           #   Required. The metric descriptor on which to execute the request. The format is:
@@ -592,7 +592,7 @@ module Google
             nil
           end
 
-          # Lists time series that match a filter. This method does not require a Stackdriver account.
+          # Lists time series that match a filter. This method does not require a Workspace.
           #
           # @param name [String]
           #   Required. The project on which to execute the request. The format is:
