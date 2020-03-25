@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.0 / 2020-03-25
+
+#### Features
+
+* Add max_duration_per_lease_extension to Subscription#listen and Subscriber
+
 ### 1.4.0 / 2020-03-11
 
 #### Features
