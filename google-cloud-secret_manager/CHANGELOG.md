@@ -1,5 +1,13 @@
 # Release History
 
+### 0.3.1 / 2020-03-25
+
+#### Documentation
+
+* Expands documentation for service-wide config objects
+* Expands documentation for client classes
+* Numerous formatting fixes
+
 ### 0.3.0 / 2020-03-18
 
 * Uses v1 of the service by default
