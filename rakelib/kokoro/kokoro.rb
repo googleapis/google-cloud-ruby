@@ -196,7 +196,10 @@ class Kokoro < Command
         run "bundle update"
         load_env_vars unless local
         windows_acceptance_fix unless local
+        start_time = Time.now
         yield
+        end_time = Time.now
+        puts "#{gem} tests took #{(end_time - start_time).to_i} seconds"
       end
     end
     verify_in_gemfile gem unless local
