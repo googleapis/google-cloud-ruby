@@ -14,6 +14,7 @@
 
 require "helper"
 
+# Conforms to the usage of `Google::Cloud::Translate::V2::Service#sign_http_request!`
 class FakeClient
   def expires_within? _
     false
