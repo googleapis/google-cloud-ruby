@@ -66,7 +66,6 @@ module Google
           # is considered dismissed.
           #
           # If a request is not approved or dismissed, we call it pending.
-          # LINT.IfChange
           #
           class Client
             # @private
