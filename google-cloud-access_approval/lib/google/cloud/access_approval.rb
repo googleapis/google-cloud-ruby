@@ -67,7 +67,6 @@ module Google
       # is considered dismissed.
       #
       # If a request is not approved or dismissed, we call it pending.
-      # LINT.IfChange
       #
       # @param version [String, Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
