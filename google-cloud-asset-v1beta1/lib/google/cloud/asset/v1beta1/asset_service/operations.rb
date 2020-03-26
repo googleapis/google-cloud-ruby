@@ -414,7 +414,7 @@ module Google
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
-            #   Defaults to `"localhost"`.
+            #   Defaults to `"cloudasset.googleapis.com"`.
             #   @return [String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
@@ -462,7 +462,7 @@ module Google
             class Configuration
               extend Gapic::Config
 
-              config_attr :endpoint,     "localhost", String
+              config_attr :endpoint,     "cloudasset.googleapis.com", String
               config_attr :credentials,  nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
