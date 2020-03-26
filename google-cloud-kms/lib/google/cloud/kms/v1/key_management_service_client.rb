@@ -101,12 +101,6 @@ module Google
 
           private_constant :CRYPTO_KEY_PATH_TEMPLATE
 
-          CRYPTO_KEY_PATH_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key_path=**}"
-          )
-
-          private_constant :CRYPTO_KEY_PATH_PATH_TEMPLATE
-
           CRYPTO_KEY_VERSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}"
           )
@@ -147,18 +141,8 @@ module Google
           end
 
           # Returns a fully-qualified crypto_key_path resource name string.
-          # @param project [String]
-          # @param location [String]
-          # @param key_ring [String]
-          # @param crypto_key_path [String]
-          # @return [String]
           def self.crypto_key_path_path project, location, key_ring, crypto_key_path
-            CRYPTO_KEY_PATH_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"location" => location,
-              :"key_ring" => key_ring,
-              :"crypto_key_path" => crypto_key_path
-            )
+            "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key_path}"
           end
 
           # Returns a fully-qualified crypto_key_version resource name string.
@@ -1374,11 +1358,13 @@ module Google
           #   require "google/cloud/kms"
           #
           #   key_management_client = Google::Cloud::Kms.new(version: :v1)
-          #   formatted_name = Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path("[PROJECT]", "[LOCATION]", "[KEY_RING]", "[CRYPTO_KEY_PATH]")
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
           #
           #   # TODO: Initialize `plaintext`:
           #   plaintext = ''
-          #   response = key_management_client.encrypt(formatted_name, plaintext)
+          #   response = key_management_client.encrypt(name, plaintext)
 
           def encrypt \
               name,
@@ -1702,11 +1688,13 @@ module Google
           #   require "google/cloud/kms"
           #
           #   key_management_client = Google::Cloud::Kms.new(version: :v1)
-          #   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `policy`:
           #   policy = {}
-          #   response = key_management_client.set_iam_policy(formatted_resource, policy)
+          #   response = key_management_client.set_iam_policy(resource, policy)
 
           def set_iam_policy \
               resource,
@@ -1744,8 +1732,10 @@ module Google
           #   require "google/cloud/kms"
           #
           #   key_management_client = Google::Cloud::Kms.new(version: :v1)
-          #   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
-          #   response = key_management_client.get_iam_policy(formatted_resource)
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
+          #   response = key_management_client.get_iam_policy(resource)
 
           def get_iam_policy \
               resource,
@@ -1788,11 +1778,13 @@ module Google
           #   require "google/cloud/kms"
           #
           #   key_management_client = Google::Cloud::Kms.new(version: :v1)
-          #   formatted_resource = Google::Cloud::Kms::V1::KeyManagementServiceClient.key_ring_path("[PROJECT]", "[LOCATION]", "[KEY_RING]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `permissions`:
           #   permissions = []
-          #   response = key_management_client.test_iam_permissions(formatted_resource, permissions)
+          #   response = key_management_client.test_iam_permissions(resource, permissions)
 
           def test_iam_permissions \
               resource,
