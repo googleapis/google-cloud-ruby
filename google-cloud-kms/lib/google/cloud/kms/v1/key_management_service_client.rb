@@ -140,6 +140,11 @@ module Google
             )
           end
 
+          # Returns a fully-qualified crypto_key_path resource name string.
+          def self.crypto_key_path_path project, location, key_ring, crypto_key_path
+            "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key_path}"
+          end
+
           # Returns a fully-qualified crypto_key_version resource name string.
           # @param project [String]
           # @param location [String]

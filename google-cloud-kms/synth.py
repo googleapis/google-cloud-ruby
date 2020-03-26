@@ -266,5 +266,12 @@ s.replace(
     'dev/ruby/google-cloud-kms/latest'
 )
 
+# Temporarily add a deprecated path helper
+s.replace(
+    'lib/google/cloud/kms/v1/key_management_service_client.rb',
+    '\n          # Returns a fully-qualified crypto_key_version resource name string.\n',
+    '\n          # Returns a fully-qualified crypto_key_path resource name string.\n          def self.crypto_key_path_path project, location, key_ring, crypto_key_path\n            "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key_path}"\n          end\n\n          # Returns a fully-qualified crypto_key_version resource name string.\n'
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
