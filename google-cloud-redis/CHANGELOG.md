@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.1 / 2020-03-26
+
+#### Documentation
+
+* Document Redis 5.0 options
+
 ### 0.8.0 / 2020-03-11
 
 #### Features
