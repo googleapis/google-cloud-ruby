@@ -51,19 +51,6 @@ describe Google::Cloud::Kms::V1::KeyManagementServiceClient do
     end
   end
 
-  describe "the crypto_key_path_path instance method" do
-    it "correctly calls Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path" do
-      Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do
-        parameters = Google::Cloud::Kms::V1::KeyManagementServiceClient.method("crypto_key_path_path").parameters.map { |arg| arg.last.to_s }
-        client = Google::Cloud::Kms.new version: :v1
-        assert_equal(
-          client.crypto_key_path_path(*parameters),
-          Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path(*parameters)
-        )
-      end
-    end
-  end
-
   describe "the crypto_key_version_path instance method" do
     it "correctly calls Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path" do
       Google::Cloud::Kms::V1::Credentials.stub(:default, mock_credentials) do

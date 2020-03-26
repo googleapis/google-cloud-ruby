@@ -26,16 +26,6 @@
             self.class.crypto_key_path project, location, key_ring, crypto_key
           end
           
-          # Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_path_path.
-          # @param project [String]
-          # @param location [String]
-          # @param key_ring [String]
-          # @param crypto_key_path [String]
-          # @return [String]
-          def crypto_key_path_path project, location, key_ring, crypto_key_path
-            self.class.crypto_key_path_path project, location, key_ring, crypto_key_path
-          end
-          
           # Alias for Google::Cloud::Kms::V1::KeyManagementServiceClient.crypto_key_version_path.
           # @param project [String]
           # @param location [String]
