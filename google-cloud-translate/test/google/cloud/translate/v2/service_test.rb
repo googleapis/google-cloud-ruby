@@ -14,9 +14,20 @@
 
 require "helper"
 
+# Conforms to the usage of `Google::Cloud::Translate::V2::Service#sign_http_request!`
+class FakeClient
+  def expires_within? _
+    false
+  end
+
+  def generate_authenticated_request request:
+  end
+end
+
 describe Google::Cloud::Translate::V2::Service, :service do
   let(:project) { "test" }
-  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:quota_project) { "test2" }
+  let(:credentials) { OpenStruct.new client: FakeClient.new, quota_project_id: quota_project }
   let(:service) { Google::Cloud::Translate::V2::Service.new(project, credentials, retries: 1) }
   let(:mock_http) { MockHttp.new }
 
@@ -105,5 +116,13 @@ describe Google::Cloud::Translate::V2::Service, :service do
     end
 
     mock_http.request_count.must_equal(2)
+  end
+
+  it "sends x-goog-user-project header" do
+    mock_http.stub_response(200, "{}")
+    service.stub(:http, mock_http) do
+      service.detect("hello")
+      mock_http.last_request.headers["x-goog-user-project"].must_equal(quota_project)
+    end
   end
 end
