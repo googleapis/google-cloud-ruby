@@ -1,6 +1,7 @@
 require "bundler/setup"
 require "fileutils"
 require "json"
+require "net/http"
 require "open3"
 
 require_relative "command.rb"
@@ -20,6 +21,7 @@ class Kokoro < Command
     @tag            = nil
     @updated        = @updated_gems.include? @gem
     @should_release = ENV.fetch("OS", "") == "linux" && RUBY_VERSION == @ruby_versions.sort.last
+    @pr_number      = ENV["KOKORO_GITHUB_PULL_REQUEST_NUMBER"]
   end
 
   def build
@@ -140,7 +142,15 @@ class Kokoro < Command
     return false unless @gem && @should_release
 
     gem_search = `gem search #{gem}`
-    gem_search.include?(gem)
+    gem_search.include?(gem) || pr_title.include? "Release"
+  end
+
+  def pr_title
+    net = Net::HTTP.new("api.github.com", 443)
+    net.use_ssl = true
+    response = net.get "/repos/googleapis/google-cloud-ruby/pulls/#{@pr_number}"
+    parsed = JSON.parse response.body
+    parsed["title"]
   end
 
   def header str, token = "#"
