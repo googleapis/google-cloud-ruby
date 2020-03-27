@@ -216,6 +216,54 @@ module Google
         end
 
         ##
+        # The statistics including stack frames for a child job of a script.
+        #
+        # @return [Google::Cloud::Bigquery::Job::ScriptStatistics, nil] The script statistics, or `nil` if the job is
+        #   not a child job.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   multi_statement_sql = <<~SQL
+        #   -- Declare a variable to hold names as an array.
+        #   DECLARE top_names ARRAY<STRING>;
+        #   -- Build an array of the top 100 names from the year 2017.
+        #   SET top_names = (
+        #   SELECT ARRAY_AGG(name ORDER BY number DESC LIMIT 100)
+        #   FROM `bigquery-public-data.usa_names.usa_1910_current`
+        #   WHERE year = 2017
+        #   );
+        #   -- Which names appear as words in Shakespeare's plays?
+        #   SELECT
+        #   name AS shakespeare_name
+        #   FROM UNNEST(top_names) AS name
+        #   WHERE name IN (
+        #   SELECT word
+        #   FROM `bigquery-public-data.samples.shakespeare`
+        #   );
+        #   SQL
+        #
+        #   job = bigquery.query_job multi_statement_sql
+        #
+        #   job.wait_until_done!
+        #
+        #   child_jobs = bigquery.jobs parent_job: job
+        #
+        #   child_jobs.each do |child_job|
+        #     script_statistics = child_job.script_statistics
+        #     puts script_statistics.evaluation_kind
+        #     script_statistics.stack_frames.each do |stack_frame|
+        #       puts stack_frame.text
+        #     end
+        #   end
+        #
+        def script_statistics
+          ScriptStatistics.from_gapi @gapi.statistics.script_statistics if @gapi.statistics.script_statistics
+        end
+
+        ##
         # The configuration for the job. Returns a hash.
         #
         # @see https://cloud.google.com/bigquery/docs/reference/v2/jobs Jobs API
@@ -438,6 +486,138 @@ module Google
             QueryJob
           else
             Job
+          end
+        end
+
+        ##
+        # Represents statistics for a child job of a script.
+        #
+        # @attr_reader [String] evaluation_kind Indicates the type of child job. Possible values include `STATEMENT` and
+        #   `EXPRESSION`.
+        # @attr_reader [Array<Google::Cloud::Bigquery::Job::ScriptStackFrame>] stack_frames Stack trace where the
+        #   current evaluation happened. Shows line/column/procedure name of each frame on the stack at the point where
+        #   the current evaluation happened. The leaf frame is first, the primary script is last.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   multi_statement_sql = <<~SQL
+        #   -- Declare a variable to hold names as an array.
+        #   DECLARE top_names ARRAY<STRING>;
+        #   -- Build an array of the top 100 names from the year 2017.
+        #   SET top_names = (
+        #   SELECT ARRAY_AGG(name ORDER BY number DESC LIMIT 100)
+        #   FROM `bigquery-public-data.usa_names.usa_1910_current`
+        #   WHERE year = 2017
+        #   );
+        #   -- Which names appear as words in Shakespeare's plays?
+        #   SELECT
+        #   name AS shakespeare_name
+        #   FROM UNNEST(top_names) AS name
+        #   WHERE name IN (
+        #   SELECT word
+        #   FROM `bigquery-public-data.samples.shakespeare`
+        #   );
+        #   SQL
+        #
+        #   job = bigquery.query_job multi_statement_sql
+        #
+        #   job.wait_until_done!
+        #
+        #   child_jobs = bigquery.jobs parent_job: job
+        #
+        #   child_jobs.each do |child_job|
+        #     script_statistics = child_job.script_statistics
+        #     puts script_statistics.evaluation_kind
+        #     script_statistics.stack_frames.each do |stack_frame|
+        #       puts stack_frame.text
+        #     end
+        #   end
+        #
+        class ScriptStatistics
+          attr_reader :evaluation_kind, :stack_frames
+
+          ##
+          # @private Creates a new ScriptStatistics instance.
+          def initialize evaluation_kind, stack_frames
+            @evaluation_kind = evaluation_kind
+            @stack_frames = stack_frames
+          end
+
+          ##
+          # @private New ScriptStatistics from a statistics.script_statistics object.
+          def self.from_gapi gapi
+            frames = Array(gapi.stack_frames).map { |g| ScriptStackFrame.from_gapi g }
+            new gapi.evaluation_kind, frames
+          end
+        end
+
+        ##
+        # Represents a stack frame showing the line/column/procedure name where the current evaluation happened.
+        #
+        # @attr_reader [Integer] start_line One-based start line.
+        # @attr_reader [Integer] start_column One-based start column.
+        # @attr_reader [Integer] end_line One-based end line.
+        # @attr_reader [Integer] end_column One-based end column.
+        # @attr_reader [String] text Text of the current statement/expression.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   multi_statement_sql = <<~SQL
+        #   -- Declare a variable to hold names as an array.
+        #   DECLARE top_names ARRAY<STRING>;
+        #   -- Build an array of the top 100 names from the year 2017.
+        #   SET top_names = (
+        #   SELECT ARRAY_AGG(name ORDER BY number DESC LIMIT 100)
+        #   FROM `bigquery-public-data.usa_names.usa_1910_current`
+        #   WHERE year = 2017
+        #   );
+        #   -- Which names appear as words in Shakespeare's plays?
+        #   SELECT
+        #   name AS shakespeare_name
+        #   FROM UNNEST(top_names) AS name
+        #   WHERE name IN (
+        #   SELECT word
+        #   FROM `bigquery-public-data.samples.shakespeare`
+        #   );
+        #   SQL
+        #
+        #   job = bigquery.query_job multi_statement_sql
+        #
+        #   job.wait_until_done!
+        #
+        #   child_jobs = bigquery.jobs parent_job: job
+        #
+        #   child_jobs.each do |child_job|
+        #     script_statistics = child_job.script_statistics
+        #     puts script_statistics.evaluation_kind
+        #     script_statistics.stack_frames.each do |stack_frame|
+        #       puts stack_frame.text
+        #     end
+        #   end
+        #
+        class ScriptStackFrame
+          attr_reader :start_line, :start_column, :end_line, :end_column, :text
+
+          ##
+          # @private Creates a new ScriptStackFrame instance.
+          def initialize start_line, start_column, end_line, end_column, text
+            @start_line = start_line
+            @start_column = start_column
+            @end_line = end_line
+            @end_column = end_column
+            @text = text
+          end
+
+          ##
+          # @private New ScriptStackFrame from a statistics.script_statistics[].stack_frames element.
+          def self.from_gapi gapi
+            new gapi.start_line, gapi.start_column, gapi.end_line, gapi.end_column, gapi.text
           end
         end
 

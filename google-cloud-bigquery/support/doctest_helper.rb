@@ -524,20 +524,31 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
+  doctest.before "Google::Cloud::Bigquery::Job#script_statistics" do
+    mock_bigquery do |mock|
+      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
+      mock.expect :list_jobs, list_jobs_gapi, ["my-project", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Job::ScriptStatistics" do
+    mock_bigquery do |mock|
+      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
+      mock.expect :list_jobs, list_jobs_gapi, ["my-project", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Bigquery::Job::ScriptStackFrame" do
+    mock_bigquery do |mock|
+      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
+      mock.expect :list_jobs, list_jobs_gapi, ["my-project", Hash]
+    end
+  end
+
   doctest.before "Google::Cloud::Bigquery::LoadJob" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
-    end
-  end
-
-  doctest.before "Google::Cloud::Bigquery::QueryJob" do
-    mock_bigquery do |mock|
-      mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
-      mock.expect :get_table, table_full_gapi, ["my-project", "my_dataset", "my_table"]
-      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
-      mock.expect :get_job_query_results, query_data_gapi, ["my-project", "1234567890", Hash]
-      mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "target_dataset_id", "target_table_id", Hash]
     end
   end
 
@@ -619,6 +630,7 @@ YARD::Doctest.configure do |doctest|
   # Google::Cloud::Bigquery::Project#jobs@Retrieve only running jobs using the `filter` optional arg:
   doctest.before "Google::Cloud::Bigquery::Project#jobs" do
     mock_bigquery do |mock|
+      mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
       mock.expect :list_jobs, list_jobs_gapi, ["my-project", Hash]
     end
   end
@@ -698,13 +710,14 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  # Google::Cloud::Bigquery::QueryJob#data
+  # Google::Cloud::Bigquery::QueryJob
   doctest.before "Google::Cloud::Bigquery::QueryJob" do
     mock_bigquery do |mock|
       mock.expect :get_dataset, dataset_full_gapi, ["my-project", "my_dataset"]
       mock.expect :insert_job, query_job_gapi, ["my-project", Google::Apis::BigqueryV2::Job]
       mock.expect :get_job_query_results, query_data_gapi(token: nil), ["my-project", "1234567890", Hash]
       mock.expect :list_table_data, table_data_gapi(token: nil).to_json, ["my-project", "target_dataset_id", "target_table_id", Hash]
+      mock.expect :list_jobs, list_jobs_gapi, ["my-project", Hash]
     end
   end
 
@@ -1533,7 +1546,19 @@ def random_job_hash id = "1234567890", state = "done"
     "statistics" => {
       "creationTime" => time_millis,
       "startTime" => time_millis,
-      "endTime" => time_millis
+      "endTime" => time_millis,
+      "scriptStatistics": {
+        "evaluationKind" => "EXPRESSION",
+        "stackFrames" => [
+          {
+            "startLine": 5,
+            "startColumn": 29,
+            "endLine": 9,
+            "endColumn": 14,
+            "text": "QUERY TEXT"
+          }
+        ],
+      }
     },
     "user_email" => "user@example.com"
   }

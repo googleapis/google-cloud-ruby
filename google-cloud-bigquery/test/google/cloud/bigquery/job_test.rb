@@ -58,6 +58,8 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     job.labels.must_equal labels
     job.labels.must_be :frozen?
     job.user_email.must_equal "user@example.com"
+    job.num_child_jobs.must_equal 2
+    job.parent_job_id.must_equal "2222222222"
   end
 
   it "knows its state" do
@@ -143,6 +145,20 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     job.statistics["creationTime"].wont_be :nil?
     job.stats.must_be_kind_of Hash
     job.stats["creationTime"].wont_be :nil?
+  end
+
+  it "knows its script statistics" do
+    job.script_statistics.must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
+    job.script_statistics.evaluation_kind.must_equal "EXPRESSION"
+    job.script_statistics.stack_frames.wont_be :nil?
+    job.script_statistics.stack_frames.must_be_kind_of Array
+    job.script_statistics.stack_frames.count.must_equal 1
+    job.script_statistics.stack_frames[0].must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
+    job.script_statistics.stack_frames[0].start_line.must_equal 5
+    job.script_statistics.stack_frames[0].start_column.must_equal 29
+    job.script_statistics.stack_frames[0].end_line.must_equal 9
+    job.script_statistics.stack_frames[0].end_column.must_equal 14
+    job.script_statistics.stack_frames[0].text.must_equal "QUERY TEXT"
   end
 
   it "knows its error info if it has not failed" do

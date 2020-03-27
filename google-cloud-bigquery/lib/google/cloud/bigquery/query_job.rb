@@ -48,6 +48,44 @@ module Google
       #     puts job.data.first
       #   end
       #
+      # @example With multiple statements and child jobs:
+      #   require "google/cloud/bigquery"
+      #
+      #   bigquery = Google::Cloud::Bigquery.new
+      #
+      #   multi_statement_sql = <<~SQL
+      #   -- Declare a variable to hold names as an array.
+      #   DECLARE top_names ARRAY<STRING>;
+      #   -- Build an array of the top 100 names from the year 2017.
+      #   SET top_names = (
+      #   SELECT ARRAY_AGG(name ORDER BY number DESC LIMIT 100)
+      #   FROM `bigquery-public-data.usa_names.usa_1910_current`
+      #   WHERE year = 2017
+      #   );
+      #   -- Which names appear as words in Shakespeare's plays?
+      #   SELECT
+      #   name AS shakespeare_name
+      #   FROM UNNEST(top_names) AS name
+      #   WHERE name IN (
+      #   SELECT word
+      #   FROM `bigquery-public-data.samples.shakespeare`
+      #   );
+      #   SQL
+      #
+      #   job = bigquery.query_job multi_statement_sql
+      #
+      #   job.wait_until_done!
+      #
+      #   child_jobs = bigquery.jobs parent_job: job
+      #
+      #   child_jobs.each do |child_job|
+      #     script_statistics = child_job.script_statistics
+      #     puts script_statistics.evaluation_kind
+      #     script_statistics.stack_frames.each do |stack_frame|
+      #       puts stack_frame.text
+      #     end
+      #   end
+      #
       class QueryJob < Job
         ##
         # Checks if the priority for the query is `BATCH`.

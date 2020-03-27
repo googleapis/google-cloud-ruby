@@ -579,7 +579,21 @@ class MockBigquery < Minitest::Spec
       "statistics" => {
         "creationTime" => time_millis,
         "startTime" => time_millis,
-        "endTime" => time_millis
+        "endTime" => time_millis,
+        "numChildJobs" => 2,
+        "parentJobId" => "2222222222",
+        "scriptStatistics": {
+          "evaluationKind" => "EXPRESSION",
+          "stackFrames" => [
+            {
+              "startLine": 5,
+              "startColumn": 29,
+              "endLine": 9,
+              "endColumn": 14,
+              "text": "QUERY TEXT"
+            }
+          ],
+        }
       },
       "user_email" => "user@example.com"
     }
