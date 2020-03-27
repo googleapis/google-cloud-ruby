@@ -143,8 +143,8 @@ class Kokoro < Command
   def should_link_check?
     return false unless @gem && @should_release
 
-    gem_search = `gem search #{gem}`
-    gem_search.include?(gem)
+    gem_search = `gem search #{@gem}`
+    gem_search.include?(@gem)
   end
 
   def autorelease_pending?
