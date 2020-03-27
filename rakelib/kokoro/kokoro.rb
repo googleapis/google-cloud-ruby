@@ -34,6 +34,7 @@ class Kokoro < Command
     @updated_gems.each do |gem|
       run_ci gem do
         run "bundle exec rake ci", 1800
+        local_docs_test
       end
     end
   end
@@ -43,9 +44,11 @@ class Kokoro < Command
       if @updated
         header "Gem Updated - Running Acceptance"
         run "bundle exec rake ci:acceptance", 3600
+        local_docs_test
       else
         header "Gem Unchanged - Skipping Acceptance"
         run "bundle exec rake ci", 3600
+        local_docs_test
       end
     end
     release_please if @should_release && @updated
@@ -77,6 +80,7 @@ class Kokoro < Command
   def nightly
     run_ci do
       run "bundle exec rake ci:acceptance", 3600
+      local_docs_test
     end
     release_please if @should_release
   end
@@ -125,6 +129,12 @@ class Kokoro < Command
       end
     end
     broken_links
+  end
+
+  def local_docs_test
+    run "bundle exec rake yard"
+    broken_links = check_links ["doc"], ".", ""
+    puts_broken_links broken_links
   end
 
   def header str, token = "#"
