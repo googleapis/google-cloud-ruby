@@ -20,6 +20,7 @@ class Kokoro < Command
     @tag            = nil
     @updated        = @updated_gems.include? @gem
     @should_release = ENV.fetch("OS", "") == "linux" && RUBY_VERSION == @ruby_versions.sort.last
+    @commit_hash    = ENV["KOKORO_GIT_COMMIT"]
   end
 
   def build
@@ -131,11 +132,19 @@ class Kokoro < Command
   end
 
   def local_docs_test
-    if @should_release
-      run "bundle exec rake yard"
-      broken_links = check_links ["doc"], ".", ""
-      puts_broken_links broken_links
-    end
+    return unless should_link_check?
+
+    run "bundle exec rake yard"
+    broken_links = check_links ["doc"], ".", ""
+    puts_broken_links broken_links
+  end
+
+  def should_link_check?
+    return false unless @gem && @should_release
+
+    commit_message = `git log --format=%B -n 1 #{@commit_hash}`
+    gem_search = `gem search #{gem}`
+    gem_search.include?(gem) || commit_message.include?("Release")
   end
 
   def header str, token = "#"

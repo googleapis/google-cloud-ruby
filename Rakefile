@@ -568,6 +568,10 @@ namespace :kokoro do
     exit kokoro.exit_status
   end
 
+  task :thingy do
+    kokoro.should_link_check?
+  end
+
   desc "Runs post-build logic on kokoro."
   task :post do
     kokoro.post
