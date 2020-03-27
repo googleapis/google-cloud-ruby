@@ -87,6 +87,35 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
     end
   end
 
+  describe "the job_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::ApplicationServiceClient.job_path" do
+      Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+        project = "project"
+        tenant = "tenant"
+        job = "job"
+        client = Google::Cloud::Talent::ApplicationService.new version: :v4beta1
+        assert_equal(
+          client.job_path(project, tenant, job),
+          Google::Cloud::Talent::V4beta1::ApplicationServiceClient.job_path(project, tenant, job)
+        )
+      end
+    end
+  end
+
+  describe "the job_without_tenant_path instance method" do
+    it "correctly calls Google::Cloud::Talent::V4beta1::ApplicationServiceClient.job_without_tenant_path" do
+      Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
+        project = "project"
+        job = "job"
+        client = Google::Cloud::Talent::ApplicationService.new version: :v4beta1
+        assert_equal(
+          client.job_without_tenant_path(project, job),
+          Google::Cloud::Talent::V4beta1::ApplicationServiceClient.job_without_tenant_path(project, job)
+        )
+      end
+    end
+  end
+
   describe "the profile_path instance method" do
     it "correctly calls Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
@@ -200,11 +229,11 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
         project = "project"
         tenant = "tenant"
-        jobs = "jobs"
+        job = "job"
         client = Google::Cloud::Talent::JobService.new version: :v4beta1
         assert_equal(
-          client.job_path(project, tenant, jobs),
-          Google::Cloud::Talent::V4beta1::JobServiceClient.job_path(project, tenant, jobs)
+          client.job_path(project, tenant, job),
+          Google::Cloud::Talent::V4beta1::JobServiceClient.job_path(project, tenant, job)
         )
       end
     end
@@ -214,11 +243,11 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
     it "correctly calls Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
         project = "project"
-        jobs = "jobs"
+        job = "job"
         client = Google::Cloud::Talent::JobService.new version: :v4beta1
         assert_equal(
-          client.job_without_tenant_path(project, jobs),
-          Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path(project, jobs)
+          client.job_without_tenant_path(project, job),
+          Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path(project, job)
         )
       end
     end

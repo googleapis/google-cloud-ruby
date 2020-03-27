@@ -88,6 +88,18 @@ module Google
 
           private_constant :COMPANY_WITHOUT_TENANT_PATH_TEMPLATE
 
+          JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/tenants/{tenant}/jobs/{job}"
+          )
+
+          private_constant :JOB_PATH_TEMPLATE
+
+          JOB_WITHOUT_TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/jobs/{job}"
+          )
+
+          private_constant :JOB_WITHOUT_TENANT_PATH_TEMPLATE
+
           PROFILE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/tenants/{tenant}/profiles/{profile}"
           )
@@ -134,6 +146,34 @@ module Google
             COMPANY_WITHOUT_TENANT_PATH_TEMPLATE.render(
               :"project" => project,
               :"company" => company
+            )
+          end
+
+          # Returns a fully-qualified job resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
+          # @param project [String]
+          # @param tenant [String]
+          # @param job [String]
+          # @return [String]
+          def self.job_path project, tenant, job
+            JOB_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"tenant" => tenant,
+              :"job" => job
+            )
+          end
+
+          # Returns a fully-qualified job_without_tenant resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
+          # @param project [String]
+          # @param job [String]
+          # @return [String]
+          def self.job_without_tenant_path project, job
+            JOB_WITHOUT_TENANT_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"job" => job
             )
           end
 

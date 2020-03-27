@@ -96,13 +96,13 @@ module Google
           private_constant :COMPANY_WITHOUT_TENANT_PATH_TEMPLATE
 
           JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/tenants/{tenant}/jobs/{jobs}"
+            "projects/{project}/tenants/{tenant}/jobs/{job}"
           )
 
           private_constant :JOB_PATH_TEMPLATE
 
           JOB_WITHOUT_TENANT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/jobs/{jobs}"
+            "projects/{project}/jobs/{job}"
           )
 
           private_constant :JOB_WITHOUT_TENANT_PATH_TEMPLATE
@@ -152,13 +152,13 @@ module Google
           # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param tenant [String]
-          # @param jobs [String]
+          # @param job [String]
           # @return [String]
-          def self.job_path project, tenant, jobs
+          def self.job_path project, tenant, job
             JOB_PATH_TEMPLATE.render(
               :"project" => project,
               :"tenant" => tenant,
-              :"jobs" => jobs
+              :"job" => job
             )
           end
 
@@ -166,12 +166,12 @@ module Google
           # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
           # This helper function will be deleted in the next major version.
           # @param project [String]
-          # @param jobs [String]
+          # @param job [String]
           # @return [String]
-          def self.job_without_tenant_path project, jobs
+          def self.job_without_tenant_path project, job
             JOB_WITHOUT_TENANT_PATH_TEMPLATE.render(
               :"project" => project,
-              :"jobs" => jobs
+              :"job" => job
             )
           end
 
@@ -428,10 +428,8 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #
-          #   # TODO: Initialize `name`:
-          #   name = ''
-          #   job_client.delete_job(name)
+          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path("[PROJECT]", "[JOB]")
+          #   job_client.delete_job(formatted_name)
 
           def delete_job \
               name,
@@ -588,10 +586,8 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #
-          #   # TODO: Initialize `name`:
-          #   name = ''
-          #   response = job_client.get_job(name)
+          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path("[PROJECT]", "[JOB]")
+          #   response = job_client.get_job(formatted_name)
 
           def get_job \
               name,
