@@ -37,7 +37,7 @@ class Kokoro < Command
       run_ci gem do
         run "bundle exec rake ci", 1800
         local_docs_test if should_link_check? || (
-          pr_title.include?("Release") && @should_release
+          autorelease_pending? && @should_release
         )
       end
     end
@@ -147,12 +147,12 @@ class Kokoro < Command
     gem_search.include?(gem)
   end
 
-  def pr_title
+  def autorelease_pending?
     net = Net::HTTP.new("api.github.com", 443)
     net.use_ssl = true
-    response = net.get "/repos/googleapis/google-cloud-ruby/pulls/#{@pr_number}"
+    response = net.get "/repos/googleapis/google-cloud-ruby/pulls/#{pr_number}"
     parsed = JSON.parse response.body
-    parsed["title"]
+    parsed["labels"].any? { |label| label["name"] == "autorelease: pending" }
   end
 
   def header str, token = "#"
