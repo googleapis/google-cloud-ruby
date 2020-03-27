@@ -194,10 +194,10 @@ s.replace(
     ])
 )
 
-# Correct README url
+# Correct product url
 s.replace(
-    'README.md',
-    'https://cloud.google.com/talent',
+    ['lib/**/*.rb', 'README.md'],
+    'https://cloud.google.com/talent$',
     'https://cloud.google.com/talent-solution'
 )
 
@@ -255,6 +255,13 @@ s.replace(
     'README.md',
     'github.io/google-cloud-ruby/#/docs/google-cloud-talent/latest/.*$',
     'dev/ruby/google-cloud-talent/latest'
+)
+
+# https://cldr.unicode.org is invalid
+s.replace(
+    "lib/**/filters.rb",
+    'https://cldr.unicode.org',
+    'http://cldr.unicode.org'
 )
 
 # Generate the helper methods

@@ -248,3 +248,10 @@ s.replace(
     'github.io/google-cloud-ruby/#/docs/google-cloud-redis/latest/.*$',
     'dev/ruby/google-cloud-redis/latest'
 )
+
+# http://redis.io/topics/config is 404ing
+s.replace(
+    'lib/**/cloud_redis.rb',
+    'http://redis.io/topics/config',
+    'https://redis.io/topics/config'
+)
