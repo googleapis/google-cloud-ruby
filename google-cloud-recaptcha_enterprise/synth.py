@@ -277,7 +277,7 @@ s.replace(
 )
 
 s.replace(
-    'README.md',
+    ['lib/**/*.rb', 'README.md'],
     'https://cloud.google.com/recaptchaenterprise',
     'https://cloud.google.com/recaptcha-enterprise'
 )

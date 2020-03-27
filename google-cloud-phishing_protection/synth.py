@@ -278,7 +278,7 @@ s.replace(
 )
 
 s.replace(
-    'README.md',
+    ['README.md', 'lib/**/*.rb'],
     'https://cloud.google.com/phishingprotection',
     'https://cloud.google.com/phishing-protection'
 )
