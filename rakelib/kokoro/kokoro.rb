@@ -35,7 +35,7 @@ class Kokoro < Command
     @updated_gems.each do |gem|
       run_ci gem do
         run "bundle exec rake ci", 1800
-        local_docs_test
+        local_docs_test if should_link_check?
       end
     end
   end
@@ -49,7 +49,7 @@ class Kokoro < Command
         header "Gem Unchanged - Skipping Acceptance"
         run "bundle exec rake ci", 3600
       end
-      local_docs_test
+      local_docs_test if @should_release
     end
     release_please if @should_release && @updated
   end
@@ -132,8 +132,6 @@ class Kokoro < Command
   end
 
   def local_docs_test
-    return unless should_link_check?
-
     run "bundle exec rake yard"
     broken_links = check_links ["doc"], ".", ""
     puts_broken_links broken_links
