@@ -20,7 +20,6 @@ class Kokoro < Command
     @tag            = nil
     @updated        = @updated_gems.include? @gem
     @should_release = ENV.fetch("OS", "") == "linux" && RUBY_VERSION == @ruby_versions.sort.last
-    @commit_hash    = ENV["KOKORO_GIT_COMMIT"]
   end
 
   def build
@@ -49,7 +48,7 @@ class Kokoro < Command
         header "Gem Unchanged - Skipping Acceptance"
         run "bundle exec rake ci", 3600
       end
-      local_docs_test if @should_release
+      local_docs_test if should_link_check?
     end
     release_please if @should_release && @updated
   end
@@ -140,9 +139,8 @@ class Kokoro < Command
   def should_link_check?
     return false unless @gem && @should_release
 
-    commit_message = `git log --format=%B -n 1 #{@commit_hash}`
     gem_search = `gem search #{gem}`
-    gem_search.include?(gem) || commit_message.include?("Release")
+    gem_search.include?(gem)
   end
 
   def header str, token = "#"
