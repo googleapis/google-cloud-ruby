@@ -150,7 +150,7 @@ class Kokoro < Command
   def autorelease_pending?
     net = Net::HTTP.new("api.github.com", 443)
     net.use_ssl = true
-    response = net.get "/repos/googleapis/google-cloud-ruby/pulls/#{pr_number}"
+    response = net.get "/repos/googleapis/google-cloud-ruby/pulls/#{@pr_number}"
     parsed = JSON.parse response.body
     parsed["labels"].any? { |label| label["name"] == "autorelease: pending" }
   end
