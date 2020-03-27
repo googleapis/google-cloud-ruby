@@ -36,7 +36,7 @@ class Kokoro < Command
     @updated_gems.each do |gem|
       run_ci gem do
         run "bundle exec rake ci", 1800
-        local_docs_test if should_link_check?
+        local_docs_test if should_link_check? && pr_title.include? "Release"
       end
     end
   end
@@ -142,7 +142,7 @@ class Kokoro < Command
     return false unless @gem && @should_release
 
     gem_search = `gem search #{gem}`
-    gem_search.include?(gem) || pr_title.include? "Release"
+    gem_search.include?(gem)
   end
 
   def pr_title
