@@ -74,12 +74,12 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes delete_job without error' do
       # Create request parameters
-      name = ''
+      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path("[PROJECT]", "[JOB]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Talent::V4beta1::DeleteJobRequest, request)
-        assert_equal(name, request.name)
+        assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub_v4beta1.new(:delete_job, mock_method)
@@ -92,13 +92,13 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          response = client.delete_job(name)
+          response = client.delete_job(formatted_name)
 
           # Verify the response
           assert_nil(response)
 
           # Call method with block
-          client.delete_job(name) do |response, operation|
+          client.delete_job(formatted_name) do |response, operation|
             # Verify the response
             assert_nil(response)
             refute_nil(operation)
@@ -109,12 +109,12 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes delete_job with error' do
       # Create request parameters
-      name = ''
+      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path("[PROJECT]", "[JOB]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Talent::V4beta1::DeleteJobRequest, request)
-        assert_equal(name, request.name)
+        assert_equal(formatted_name, request.name)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v4beta1.new(:delete_job, mock_method)
@@ -128,7 +128,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
-            client.delete_job(name)
+            client.delete_job(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -372,7 +372,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes get_job without error' do
       # Create request parameters
-      name = ''
+      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path("[PROJECT]", "[JOB]")
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
@@ -406,7 +406,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Talent::V4beta1::GetJobRequest, request)
-        assert_equal(name, request.name)
+        assert_equal(formatted_name, request.name)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v4beta1.new(:get_job, mock_method)
@@ -419,13 +419,13 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
           client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
 
           # Call method
-          response = client.get_job(name)
+          response = client.get_job(formatted_name)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_job(name) do |response, operation|
+          client.get_job(formatted_name) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -436,12 +436,12 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
     it 'invokes get_job with error' do
       # Create request parameters
-      name = ''
+      formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path("[PROJECT]", "[JOB]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Talent::V4beta1::GetJobRequest, request)
-        assert_equal(name, request.name)
+        assert_equal(formatted_name, request.name)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v4beta1.new(:get_job, mock_method)
@@ -455,7 +455,7 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v4beta1 do
-            client.get_job(name)
+            client.get_job(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

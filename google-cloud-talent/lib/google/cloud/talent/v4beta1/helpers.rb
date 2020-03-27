@@ -43,6 +43,23 @@ module Google
             self.class.company_without_tenant_path project, company
           end
         
+          # Alias for Google::Cloud::Talent::V4beta1::ApplicationServiceClient.job_path.
+          # @param project [String]
+          # @param tenant [String]
+          # @param job [String]
+          # @return [String]
+          def job_path project, tenant, job
+            self.class.job_path project, tenant, job
+          end
+        
+          # Alias for Google::Cloud::Talent::V4beta1::ApplicationServiceClient.job_without_tenant_path.
+          # @param project [String]
+          # @param job [String]
+          # @return [String]
+          def job_without_tenant_path project, job
+            self.class.job_without_tenant_path project, job
+          end
+        
           # Alias for Google::Cloud::Talent::V4beta1::ApplicationServiceClient.profile_path.
           # @param project [String]
           # @param tenant [String]
@@ -108,18 +125,18 @@ module Google
           # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.job_path.
           # @param project [String]
           # @param tenant [String]
-          # @param jobs [String]
+          # @param job [String]
           # @return [String]
-          def job_path project, tenant, jobs
-            self.class.job_path project, tenant, jobs
+          def job_path project, tenant, job
+            self.class.job_path project, tenant, job
           end
         
           # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path.
           # @param project [String]
-          # @param jobs [String]
+          # @param job [String]
           # @return [String]
-          def job_without_tenant_path project, jobs
-            self.class.job_without_tenant_path project, jobs
+          def job_without_tenant_path project, job
+            self.class.job_without_tenant_path project, job
           end
         
           # Alias for Google::Cloud::Talent::V4beta1::JobServiceClient.project_path.
