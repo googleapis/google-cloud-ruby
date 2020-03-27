@@ -79,7 +79,7 @@ class Kokoro < Command
   def nightly
     run_ci do
       run "bundle exec rake ci:acceptance", 3600
-      local_docs_test
+      local_docs_test if should_link_check?
     end
     release_please if @should_release
   end
