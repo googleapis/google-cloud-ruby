@@ -136,7 +136,7 @@ class Kokoro < Command
 
   def local_docs_test
     run "bundle exec rake yard"
-    broken_links = check_links ["doc"], ".", ""
+    broken_links = check_links ["doc"], ".", " -r"
     puts_broken_links broken_links
   end
 
@@ -144,7 +144,7 @@ class Kokoro < Command
     return false unless @gem && @should_release
 
     gem_search = `gem search #{@gem}`
-    gem_search.include?(@gem)
+    gem_search.include? @gem
   end
 
   def autorelease_pending?
