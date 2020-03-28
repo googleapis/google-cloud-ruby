@@ -1,6 +1,7 @@
 require "bundler/setup"
 require "fileutils"
 require "json"
+require "net/http"
 require "open3"
 
 require_relative "command.rb"
@@ -20,6 +21,7 @@ class Kokoro < Command
     @tag            = nil
     @updated        = @updated_gems.include? @gem
     @should_release = ENV.fetch("OS", "") == "linux" && RUBY_VERSION == @ruby_versions.sort.last
+    @pr_number      = ENV["KOKORO_GITHUB_PULL_REQUEST_NUMBER"]
   end
 
   def build
@@ -34,6 +36,9 @@ class Kokoro < Command
     @updated_gems.each do |gem|
       run_ci gem do
         run "bundle exec rake ci", 1800
+        local_docs_test if should_link_check? gem || (
+          autorelease_pending? && @should_release
+        )
       end
     end
   end
@@ -47,6 +52,7 @@ class Kokoro < Command
         header "Gem Unchanged - Skipping Acceptance"
         run "bundle exec rake ci", 3600
       end
+      local_docs_test if should_link_check?
     end
     release_please if @should_release && @updated
   end
@@ -77,6 +83,7 @@ class Kokoro < Command
   def nightly
     run_ci do
       run "bundle exec rake ci:acceptance", 3600
+      local_docs_test if should_link_check?
     end
     release_please if @should_release
   end
@@ -125,6 +132,28 @@ class Kokoro < Command
       end
     end
     broken_links
+  end
+
+  def local_docs_test
+    run "bundle exec rake yard"
+    broken_links = check_links ["doc"], ".", " -r"
+    puts_broken_links broken_links
+  end
+
+  def should_link_check? gem = nil
+    gem ||= @gem
+    return false unless gem && @should_release
+
+    gem_search = `gem search #{gem}`
+    gem_search.include? gem
+  end
+
+  def autorelease_pending?
+    net = Net::HTTP.new("api.github.com", 443)
+    net.use_ssl = true
+    response = net.get "/repos/googleapis/google-cloud-ruby/pulls/#{@pr_number}"
+    parsed = JSON.parse response.body
+    parsed["labels"].any? { |label| label["name"] == "autorelease: pending" }
   end
 
   def header str, token = "#"
