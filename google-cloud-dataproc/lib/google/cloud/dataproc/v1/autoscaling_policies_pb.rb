@@ -5,11 +5,11 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
-require 'google/api/client_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.dataproc.v1.AutoscalingPolicy" do
     optional :id, :string, 1

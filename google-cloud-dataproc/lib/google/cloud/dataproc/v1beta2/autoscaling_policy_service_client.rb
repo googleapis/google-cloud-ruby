@@ -69,11 +69,11 @@ module Google
           ].freeze
 
 
-          AUTOSCALING_POLICY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}"
+          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}"
           )
 
-          private_constant :AUTOSCALING_POLICY_PATH_TEMPLATE
+          private_constant :LOCATION_PATH_TEMPLATE
 
           REGION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/regions/{region}"
@@ -81,16 +81,14 @@ module Google
 
           private_constant :REGION_PATH_TEMPLATE
 
-          # Returns a fully-qualified autoscaling_policy resource name string.
+          # Returns a fully-qualified location resource name string.
           # @param project [String]
-          # @param region [String]
-          # @param autoscaling_policy [String]
+          # @param location [String]
           # @return [String]
-          def self.autoscaling_policy_path project, region, autoscaling_policy
-            AUTOSCALING_POLICY_PATH_TEMPLATE.render(
+          def self.location_path project, location
+            LOCATION_PATH_TEMPLATE.render(
               :"project" => project,
-              :"region" => region,
-              :"autoscaling_policy" => autoscaling_policy
+              :"location" => location
             )
           end
 
@@ -290,7 +288,7 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
-          #   formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.region_path("[PROJECT]", "[REGION]")
+          #   formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # TODO: Initialize `policy`:
           #   policy = {}
@@ -371,8 +369,10 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
-          #   formatted_name = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.autoscaling_policy_path("[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]")
-          #   response = autoscaling_policy_client.get_autoscaling_policy(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = autoscaling_policy_client.get_autoscaling_policy(name)
 
           def get_autoscaling_policy \
               name,
@@ -420,7 +420,7 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
-          #   formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.region_path("[PROJECT]", "[REGION]")
+          #   formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # Iterate over all results.
           #   autoscaling_policy_client.list_autoscaling_policies(formatted_parent).each do |element|
@@ -473,8 +473,10 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
-          #   formatted_name = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.autoscaling_policy_path("[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]")
-          #   autoscaling_policy_client.delete_autoscaling_policy(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   autoscaling_policy_client.delete_autoscaling_policy(name)
 
           def delete_autoscaling_policy \
               name,

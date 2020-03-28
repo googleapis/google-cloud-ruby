@@ -75,17 +75,28 @@ module Google
             self::GRPC_INTERCEPTORS = WorkflowTemplateServiceClient::GRPC_INTERCEPTORS
           end
 
+          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}"
+          )
+
+          private_constant :LOCATION_PATH_TEMPLATE
+
           REGION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/regions/{region}"
           )
 
           private_constant :REGION_PATH_TEMPLATE
 
-          WORKFLOW_TEMPLATE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/regions/{region}/workflowTemplates/{workflow_template}"
-          )
-
-          private_constant :WORKFLOW_TEMPLATE_PATH_TEMPLATE
+          # Returns a fully-qualified location resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @return [String]
+          def self.location_path project, location
+            LOCATION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location
+            )
+          end
 
           # Returns a fully-qualified region resource name string.
           # @param project [String]
@@ -95,19 +106,6 @@ module Google
             REGION_PATH_TEMPLATE.render(
               :"project" => project,
               :"region" => region
-            )
-          end
-
-          # Returns a fully-qualified workflow_template resource name string.
-          # @param project [String]
-          # @param region [String]
-          # @param workflow_template [String]
-          # @return [String]
-          def self.workflow_template_path project, region, workflow_template
-            WORKFLOW_TEMPLATE_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"region" => region,
-              :"workflow_template" => workflow_template
             )
           end
 
@@ -324,7 +322,7 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1)
-          #   formatted_parent = Google::Cloud::Dataproc::V1::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
+          #   formatted_parent = Google::Cloud::Dataproc::V1::WorkflowTemplateServiceClient.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # TODO: Initialize `template`:
           #   template = {}
@@ -376,8 +374,10 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1)
-          #   formatted_name = Google::Cloud::Dataproc::V1::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
-          #   response = workflow_template_client.get_workflow_template(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = workflow_template_client.get_workflow_template(name)
 
           def get_workflow_template \
               name,
@@ -453,10 +453,12 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1)
-          #   formatted_name = Google::Cloud::Dataproc::V1::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
           #
           #   # Register a callback during the method call.
-          #   operation = workflow_template_client.instantiate_workflow_template(formatted_name) do |op|
+          #   operation = workflow_template_client.instantiate_workflow_template(name) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
@@ -565,7 +567,7 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1)
-          #   formatted_parent = Google::Cloud::Dataproc::V1::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
+          #   formatted_parent = Google::Cloud::Dataproc::V1::WorkflowTemplateServiceClient.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # TODO: Initialize `template`:
           #   template = {}
@@ -691,7 +693,7 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1)
-          #   formatted_parent = Google::Cloud::Dataproc::V1::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
+          #   formatted_parent = Google::Cloud::Dataproc::V1::WorkflowTemplateServiceClient.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # Iterate over all results.
           #   workflow_template_client.list_workflow_templates(formatted_parent).each do |element|
@@ -747,8 +749,10 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   workflow_template_client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1)
-          #   formatted_name = Google::Cloud::Dataproc::V1::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
-          #   workflow_template_client.delete_workflow_template(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   workflow_template_client.delete_workflow_template(name)
 
           def delete_workflow_template \
               name,

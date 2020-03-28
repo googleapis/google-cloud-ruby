@@ -820,7 +820,7 @@ module Google
               @diagnose_cluster.call(req, options),
               @operations_client,
               Google::Protobuf::Empty,
-              Google::Cloud::Dataproc::V1beta2::DiagnoseClusterResults,
+              Google::Cloud::Dataproc::V1beta2::ClusterOperationMetadata,
               call_options: options
             )
             operation.on_done { |operation| yield(operation) } if block_given?
