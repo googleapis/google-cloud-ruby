@@ -36,7 +36,7 @@ class Kokoro < Command
     @updated_gems.each do |gem|
       run_ci gem do
         run "bundle exec rake ci", 1800
-        local_docs_test if should_link_check? || (
+        local_docs_test if should_link_check? gem || (
           autorelease_pending? && @should_release
         )
       end
@@ -140,11 +140,12 @@ class Kokoro < Command
     puts_broken_links broken_links
   end
 
-  def should_link_check?
-    return false unless @gem && @should_release
+  def should_link_check? gem = nil
+    gem ||= @gem
+    return false unless gem && @should_release
 
-    gem_search = `gem search #{@gem}`
-    gem_search.include? @gem
+    gem_search = `gem search #{gem}`
+    gem_search.include? gem
   end
 
   def autorelease_pending?
