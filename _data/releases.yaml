@@ -915,6 +915,7 @@ google-cloud-trace:
 - v0.22.0
 - v0.21.0
 google-cloud-translate:
+- v2.3.0
 - v2.2.0
 - v2.1.2
 - v2.1.0
