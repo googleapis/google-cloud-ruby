@@ -122,7 +122,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
       end
 
       downloaded = file.download tmpfile
-      _(downloaded).must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
 
       mock.verify
     end
