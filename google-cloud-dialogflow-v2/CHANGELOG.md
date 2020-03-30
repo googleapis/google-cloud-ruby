@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.1 / 2020-03-28
+
+#### Bug Fixes
+
+* set correct endpoint for long-running operations client.
+
 ### 0.2.0 / 2020-03-25
 
 #### Features
