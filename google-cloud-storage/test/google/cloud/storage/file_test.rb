@@ -171,7 +171,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file.download tmpfile
-      _(downloaded).must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
       _(tmpfile.read).must_equal data
 
       mock.verify
@@ -223,7 +223,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file.download tmpfile, skip_decompress: true
-      _(downloaded).must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
       _(tmpfile.read).must_equal gzipped_data
 
       mock.verify
@@ -247,7 +247,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file.download tmpfile.path
-      _(downloaded).must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
 
       mock.verify
     end
@@ -270,7 +270,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file_user_project.download tmpfile
-      _(downloaded).must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
 
       mock.verify
     end
