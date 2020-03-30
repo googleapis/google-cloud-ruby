@@ -20,7 +20,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
   let(:anonymous_storage) { Google::Cloud::Storage.anonymous }
 
   it "raises when creating a bucket without authentication" do
-    stub = Object.new
+    stub = self
     def stub.insert_bucket *args
       _(args.first).must_be_nil # project
       raise Google::Apis::AuthorizationError.new("unauthorized", status_code: 401)
@@ -31,7 +31,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
   end
 
   it "raises when listing buckets without authentication" do
-    stub = Object.new
+    stub = self
     def stub.list_buckets *args
       _(args.first).must_be_nil # project
       raise Google::Apis::AuthorizationError.new("unauthorized", status_code: 401)
