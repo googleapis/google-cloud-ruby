@@ -1,5 +1,11 @@
 # Release History
 
+### 2.3.0 / 2020-03-28
+
+#### Features
+
+* send quota project header in the V2 client
+
 ### 2.2.0 / 2020-03-11
 
 #### Features
