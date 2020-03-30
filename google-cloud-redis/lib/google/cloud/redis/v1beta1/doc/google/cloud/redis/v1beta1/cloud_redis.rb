@@ -89,7 +89,7 @@ module Google
         # @!attribute [rw] redis_configs
         #   @return [Hash{String => String}]
         #     Optional. Redis configuration parameters, according to
-        #     http://redis.io/topics/config. Currently, the only supported parameters
+        #     https://redis.io/topics/config. Currently, the only supported parameters
         #     are:
         #
         #      Redis version 3.2 and newer:
