@@ -196,7 +196,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file.download tmpfile
-      _(downloaded).must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
 
       mock.verify
     end
@@ -219,7 +219,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file.download tmpfile.path
-      _(downloaded).must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
 
       mock.verify
     end
@@ -242,7 +242,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file_user_project.download tmpfile
-      _(downloaded).must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
 
       mock.verify
     end
