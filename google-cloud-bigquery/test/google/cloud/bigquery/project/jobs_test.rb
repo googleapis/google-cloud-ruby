@@ -24,12 +24,14 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   let(:max_time) { Time.now }
   let(:min_millis) { Google::Cloud::Bigquery::Convert.time_to_millis min_time }
   let(:max_millis) { Google::Cloud::Bigquery::Convert.time_to_millis max_time }
+  let(:parent_job) { Google::Cloud::Bigquery::Job.from_gapi query_job_gapi("select * from my_table"), bigquery.service }
+  let(:parent_job_id) { parent_job.job_id }
 
 
   it "lists jobs" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs
@@ -43,7 +45,7 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "lists jobs with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: 3, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: 3, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs max: 3
@@ -59,7 +61,7 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "lists jobs with filter set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs filter: "running"
@@ -75,7 +77,7 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "lists jobs with only min_created_at set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs min_created_at: min_time
@@ -91,7 +93,7 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "lists jobs with only max_created_at set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: max_millis, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs max_created_at: max_time
@@ -107,7 +109,7 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "lists jobs with created_at set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: max_millis, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs min_created_at: min_time, max_created_at: max_time
@@ -120,10 +122,42 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
     jobs.token.must_equal "next_page_token"
   end
 
+  it "lists jobs with parent_job set to a string" do
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: parent_job_id]
+    bigquery.service.mocked_service = mock
+
+    jobs = bigquery.jobs parent_job: parent_job_id
+
+    mock.verify
+
+    jobs.count.must_equal 3
+    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    jobs.token.wont_be :nil?
+    jobs.token.must_equal "next_page_token"
+  end
+
+  it "lists jobs with parent_job set to a job" do
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: parent_job_id]
+    bigquery.service.mocked_service = mock
+
+    jobs = bigquery.jobs parent_job: parent_job
+
+    mock.verify
+
+    jobs.count.must_equal 3
+    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    jobs.token.wont_be :nil?
+    jobs.token.must_equal "next_page_token"
+  end
+
   it "lists jobs with filter and created_at set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: min_millis, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: min_millis, max_creation_time: max_millis, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs filter: "running", min_created_at: min_time, max_created_at: max_time
@@ -139,9 +173,9 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "paginates jobs" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(2),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     first_jobs = bigquery.jobs
@@ -162,9 +196,9 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "paginates jobs using next? and next" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(2),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     first_jobs = bigquery.jobs
@@ -184,9 +218,9 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "paginates jobs with next? and next and filter set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(2),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: "running", min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: "running", min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     first_jobs = bigquery.jobs filter: "running"
@@ -206,9 +240,9 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "paginates jobs with next? and next and created_at set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: max_millis, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(2),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: max_millis, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     first_jobs = bigquery.jobs min_created_at: min_time, max_created_at: max_time
@@ -225,12 +259,34 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
     second_jobs.next?.must_equal false
   end
 
+  it "paginates jobs with next? and next and parent_job_id set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: parent_job_id]
+    mock.expect :list_jobs, list_jobs_gapi(2),
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: parent_job_id]
+    bigquery.service.mocked_service = mock
+
+    first_jobs = bigquery.jobs parent_job: parent_job_id
+    second_jobs = first_jobs.next
+
+    mock.verify
+
+    first_jobs.count.must_equal 3
+    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    first_jobs.next?.must_equal true
+
+    second_jobs.count.must_equal 2
+    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    second_jobs.next?.must_equal false
+  end
+
   it "paginates jobs with next? and next and filter and created_at set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: min_millis, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: min_millis, max_creation_time: max_millis, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(2),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: "running", min_creation_time: min_millis, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: "running", min_creation_time: min_millis, max_creation_time: max_millis, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     first_jobs = bigquery.jobs filter: "running", min_created_at: min_time, max_created_at: max_time
@@ -250,9 +306,9 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "paginates jobs with all" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(2),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs.all.to_a
@@ -266,9 +322,9 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "paginates jobs with all and filter set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(2),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: "running", min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: "running", min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs(filter: "running").all.to_a
@@ -282,9 +338,9 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "paginates jobs with all and created_at set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: max_millis, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(2),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: min_millis, max_creation_time: max_millis, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs(min_created_at: min_time, max_created_at: max_time).all.to_a
@@ -295,12 +351,28 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
     jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 
+  it "paginates jobs with all and parent_job_id set" do
+    mock = Minitest::Mock.new
+    mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: parent_job_id]
+    mock.expect :list_jobs, list_jobs_gapi(2),
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: parent_job_id]
+    bigquery.service.mocked_service = mock
+
+    jobs = bigquery.jobs(parent_job: parent_job_id).all.to_a
+
+    mock.verify
+
+    jobs.count.must_equal 5
+    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+  end
+
   it "paginates jobs with all and filter and created_at set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: min_millis, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: "running", min_creation_time: min_millis, max_creation_time: max_millis, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(2),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: "running", min_creation_time: min_millis, max_creation_time: max_millis]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: "running", min_creation_time: min_millis, max_creation_time: max_millis, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs(filter: "running", min_created_at: min_time, max_created_at: max_time).all.to_a
@@ -314,9 +386,9 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "iterates jobs with all using Enumerator" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(3, "second_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs.all.take(5)
@@ -330,9 +402,9 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
   it "iterates jobs with all with request_limit set" do
     mock = Minitest::Mock.new
     mock.expect :list_jobs, list_jobs_gapi(3, "next_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: nil, projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     mock.expect :list_jobs, list_jobs_gapi(3, "second_page_token"),
-      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil]
+      [project, all_users: nil, max_results: nil, page_token: "next_page_token", projection: "full", state_filter: nil, min_creation_time: nil, max_creation_time: nil, parent_job_id: nil]
     bigquery.service.mocked_service = mock
 
     jobs = bigquery.jobs.all(request_limit: 1).to_a

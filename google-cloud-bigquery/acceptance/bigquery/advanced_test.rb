@@ -109,6 +109,66 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     assert_equal -Float::INFINITY, row[:negative_infinity]
   end
 
+  it "executes SQL with multiple statements and creates child jobs with script_statistics" do
+    multi_statement_sql = <<~SQL
+      -- Declare a variable to hold names as an array.
+      DECLARE top_names ARRAY<STRING>;
+      -- Build an array of the top 100 names from the year 2017.
+      SET top_names = (
+      SELECT ARRAY_AGG(name ORDER BY number DESC LIMIT 100)
+      FROM `bigquery-public-data.usa_names.usa_1910_current`
+      WHERE year = 2017
+      );
+      -- Which names appear as words in Shakespeare's plays?
+      SELECT
+      name AS shakespeare_name
+      FROM UNNEST(top_names) AS name
+      WHERE name IN (
+      SELECT word
+      FROM `bigquery-public-data.samples.shakespeare`
+      );
+    SQL
+
+    job = bigquery.query_job multi_statement_sql
+
+    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    job.wait_until_done!
+    job.wont_be :failed?
+    job.num_child_jobs.must_equal 2
+    job.parent_job_id.must_be :nil?
+
+    job.script_statistics.must_be :nil?
+
+    child_jobs = bigquery.jobs parent_job: job
+    child_jobs.count.must_equal 2
+
+    child_jobs[0].parent_job_id.must_equal job.job_id
+    child_jobs[0].script_statistics.must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
+    child_jobs[0].script_statistics.evaluation_kind.must_equal "STATEMENT"
+    child_jobs[0].script_statistics.stack_frames.wont_be :nil?
+    child_jobs[0].script_statistics.stack_frames.must_be_kind_of Array
+    child_jobs[0].script_statistics.stack_frames.count.must_equal 1
+    child_jobs[0].script_statistics.stack_frames[0].must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
+    child_jobs[0].script_statistics.stack_frames[0].start_line.must_equal 10
+    child_jobs[0].script_statistics.stack_frames[0].start_column.must_equal 1
+    child_jobs[0].script_statistics.stack_frames[0].end_line.must_equal 16
+    child_jobs[0].script_statistics.stack_frames[0].end_column.must_equal 2
+    child_jobs[0].script_statistics.stack_frames[0].text.length.must_be :>, 0
+
+    child_jobs[1].parent_job_id.must_equal job.job_id
+    child_jobs[1].script_statistics.must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
+    child_jobs[1].script_statistics.evaluation_kind.must_equal "EXPRESSION"
+    child_jobs[1].script_statistics.stack_frames.wont_be :nil?
+    child_jobs[1].script_statistics.stack_frames.must_be_kind_of Array
+    child_jobs[1].script_statistics.stack_frames.count.must_equal 1
+    child_jobs[1].script_statistics.stack_frames[0].must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
+    child_jobs[1].script_statistics.stack_frames[0].start_line.must_equal 4
+    child_jobs[1].script_statistics.stack_frames[0].start_column.must_equal 17
+    child_jobs[1].script_statistics.stack_frames[0].end_line.must_equal 8
+    child_jobs[1].script_statistics.stack_frames[0].end_column.must_equal 2
+    child_jobs[1].script_statistics.stack_frames[0].text.length.must_be :>, 0
+  end
+
   def assert_rows_equal returned_row, example_row
     returned_row[:id].must_equal example_row[:id]
     returned_row[:name].must_equal example_row[:name]

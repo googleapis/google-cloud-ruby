@@ -135,6 +135,8 @@ describe Google::Cloud::Bigquery, :bigquery do
     job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.wait_until_done!
     job.wont_be :failed?
+    job.num_child_jobs.must_equal 0
+    job.parent_job_id.must_be :nil?
 
     job.time_partitioning_type.must_equal "DAY"
     job.time_partitioning_field.must_equal "dob"

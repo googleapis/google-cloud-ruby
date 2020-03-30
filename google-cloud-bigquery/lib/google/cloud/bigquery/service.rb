@@ -339,14 +339,16 @@ module Google
         ##
         # Lists all jobs in the specified project to which you have
         # been granted the READER job role.
-        def list_jobs all: nil, max: nil, token: nil, filter: nil, min_created_at: nil, max_created_at: nil
+        def list_jobs all: nil, token: nil, max: nil, filter: nil, min_created_at: nil, max_created_at: nil,
+                      parent_job_id: nil
           # The list operation is considered idempotent
           min_creation_time = Convert.time_to_millis min_created_at
           max_creation_time = Convert.time_to_millis max_created_at
           execute backoff: true do
             service.list_jobs @project, all_users: all, max_results: max,
                                         page_token: token, projection: "full", state_filter: filter,
-                                        min_creation_time: min_creation_time, max_creation_time: max_creation_time
+                                        min_creation_time: min_creation_time, max_creation_time: max_creation_time,
+                                        parent_job_id: parent_job_id
           end
         end
 

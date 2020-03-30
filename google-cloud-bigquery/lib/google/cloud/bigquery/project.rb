@@ -1084,18 +1084,22 @@ module Google
         #   part of the larger set of results to view. Optional.
         # @param [Integer] max Maximum number of jobs to return. Optional.
         # @param [String] filter A filter for job state. Optional.
-        # @param [Time] min_created_at Min value for {Job#created_at}. When
-        #   provided, only jobs created after or at this time are returned.
-        #   Optional.
-        # @param [Time] max_created_at Max value for {Job#created_at}. When
-        #   provided, only jobs created before or at this time are returned.
-        #   Optional.
         #
         #   Acceptable values are:
         #
         #   * `done` - Finished jobs
         #   * `pending` - Pending jobs
         #   * `running` - Running jobs
+        # @param [Time] min_created_at Min value for {Job#created_at}. When
+        #   provided, only jobs created after or at this time are returned.
+        #   Optional.
+        # @param [Time] max_created_at Max value for {Job#created_at}. When
+        #   provided, only jobs created before or at this time are returned.
+        #   Optional.
+        # @param [Google::Cloud::Bigquery::Job, String] parent_job A job
+        #   object or a job ID. If set, retrieve only child jobs of the
+        #   specified parent. Optional. See {Job#job_id}, {Job#num_child_jobs},
+        #   and {Job#parent_job_id}.
         #
         # @return [Array<Google::Cloud::Bigquery::Job>] (See
         #   {Google::Cloud::Bigquery::Job::List})
@@ -1144,13 +1148,63 @@ module Google
         #     # process job
         #   end
         #
-        def jobs all: nil, token: nil, max: nil, filter: nil,
-                 min_created_at: nil, max_created_at: nil
+        # @example Retrieve child jobs by setting `parent_job`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   multi_statement_sql = <<~SQL
+        #     -- Declare a variable to hold names as an array.
+        #     DECLARE top_names ARRAY<STRING>;
+        #     -- Build an array of the top 100 names from the year 2017.
+        #     SET top_names = (
+        #     SELECT ARRAY_AGG(name ORDER BY number DESC LIMIT 100)
+        #     FROM `bigquery-public-data.usa_names.usa_1910_current`
+        #     WHERE year = 2017
+        #     );
+        #     -- Which names appear as words in Shakespeare's plays?
+        #     SELECT
+        #     name AS shakespeare_name
+        #     FROM UNNEST(top_names) AS name
+        #     WHERE name IN (
+        #     SELECT word
+        #     FROM `bigquery-public-data.samples.shakespeare`
+        #     );
+        #   SQL
+        #
+        #   job = bigquery.query_job multi_statement_sql
+        #
+        #   job.wait_until_done!
+        #
+        #   child_jobs = bigquery.jobs parent_job: job
+        #
+        #   child_jobs.each do |child_job|
+        #     script_statistics = child_job.script_statistics
+        #     puts script_statistics.evaluation_kind
+        #     script_statistics.stack_frames.each do |stack_frame|
+        #       puts stack_frame.text
+        #     end
+        #   end
+        #
+        def jobs all: nil,
+                 token: nil,
+                 max: nil,
+                 filter: nil,
+                 min_created_at: nil,
+                 max_created_at: nil,
+                 parent_job: nil
           ensure_service!
-          options = { all: all, token: token, max: max, filter: filter, min_created_at: min_created_at,
-                      max_created_at: max_created_at }
-          gapi = service.list_jobs options
-          Job::List.from_gapi gapi, service, options
+          parent_job = parent_job.job_id if parent_job.is_a? Job
+          options = {
+            parent_job_id: parent_job,
+            all: all,
+            token: token,
+            max: max, filter: filter,
+            min_created_at: min_created_at,
+            max_created_at: max_created_at
+          }
+          gapi = service.list_jobs(**options)
+          Job::List.from_gapi gapi, service, **options
         end
 
         ##
