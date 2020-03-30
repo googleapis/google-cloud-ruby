@@ -27,9 +27,9 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name, skip_lookup: true
-    bucket.name.must_equal bucket_name
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.readers.wont_be :empty?
+    _(bucket.name).must_equal bucket_name
+    _(bucket.default_acl.owners).wont_be  :empty?
+    _(bucket.default_acl.readers).wont_be :empty?
 
     mock.verify
   end
@@ -43,9 +43,9 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name, skip_lookup: true, user_project: true
-    bucket.name.must_equal bucket_name
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.readers.wont_be :empty?
+    _(bucket.name).must_equal bucket_name
+    _(bucket.default_acl.owners).wont_be  :empty?
+    _(bucket.default_acl.readers).wont_be :empty?
 
     mock.verify
   end
@@ -74,14 +74,14 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name, skip_lookup: true
-    bucket.name.must_equal bucket_name
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.readers.wont_be :empty?
+    _(bucket.name).must_equal bucket_name
+    _(bucket.default_acl.owners).wont_be  :empty?
+    _(bucket.default_acl.readers).wont_be :empty?
 
     bucket.default_acl.add_reader reader_entity
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.readers.wont_be :empty?
-    bucket.default_acl.readers.must_include reader_entity
+    _(bucket.default_acl.owners).wont_be  :empty?
+    _(bucket.default_acl.readers).wont_be :empty?
+    _(bucket.default_acl.readers).must_include reader_entity
 
     mock.verify
   end
@@ -110,14 +110,14 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name, skip_lookup: true, user_project: true
-    bucket.name.must_equal bucket_name
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.readers.wont_be :empty?
+    _(bucket.name).must_equal bucket_name
+    _(bucket.default_acl.owners).wont_be  :empty?
+    _(bucket.default_acl.readers).wont_be :empty?
 
     bucket.default_acl.add_reader reader_entity
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.readers.wont_be :empty?
-    bucket.default_acl.readers.must_include reader_entity
+    _(bucket.default_acl.owners).wont_be  :empty?
+    _(bucket.default_acl.readers).wont_be :empty?
+    _(bucket.default_acl.readers).must_include reader_entity
 
     mock.verify
   end
@@ -135,14 +135,14 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name, skip_lookup: true
-    bucket.name.must_equal bucket_name
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.readers.wont_be :empty?
+    _(bucket.name).must_equal bucket_name
+    _(bucket.default_acl.owners).wont_be  :empty?
+    _(bucket.default_acl.readers).wont_be :empty?
 
     reader_entity = bucket.default_acl.readers.first
     bucket.default_acl.delete reader_entity
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.readers.must_be :empty?
+    _(bucket.default_acl.owners).wont_be  :empty?
+    _(bucket.default_acl.readers).must_be :empty?
 
     mock.verify
   end
@@ -160,14 +160,14 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name, skip_lookup: true, user_project: true
-    bucket.name.must_equal bucket_name
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.readers.wont_be :empty?
+    _(bucket.name).must_equal bucket_name
+    _(bucket.default_acl.owners).wont_be  :empty?
+    _(bucket.default_acl.readers).wont_be :empty?
 
     reader_entity = bucket.default_acl.readers.first
     bucket.default_acl.delete reader_entity
-    bucket.default_acl.owners.wont_be  :empty?
-    bucket.default_acl.readers.must_be :empty?
+    _(bucket.default_acl.owners).wont_be  :empty?
+    _(bucket.default_acl.readers).must_be :empty?
 
     mock.verify
   end

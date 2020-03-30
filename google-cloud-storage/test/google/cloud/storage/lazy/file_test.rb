@@ -62,27 +62,27 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
   it "knows its attributes" do
     file_hash = {}
-    file.id.must_be :nil?
-    file.name.must_equal file_name
-    file.created_at.must_be :nil?
-    file.api_url.must_be :nil?
-    file.media_url.must_be :nil?
-    file.public_url.must_equal "https://storage.googleapis.com/#{bucket_name}/#{file_name}"
-    file.public_url(protocol: :http).must_equal "http://storage.googleapis.com/#{file.bucket}/#{file.name}"
-    file.url.must_equal file.public_url
+    _(file.id).must_be :nil?
+    _(file.name).must_equal file_name
+    _(file.created_at).must_be :nil?
+    _(file.api_url).must_be :nil?
+    _(file.media_url).must_be :nil?
+    _(file.public_url).must_equal "https://storage.googleapis.com/#{bucket_name}/#{file_name}"
+    _(file.public_url(protocol: :http)).must_equal "http://storage.googleapis.com/#{file.bucket}/#{file.name}"
+    _(file.url).must_equal file.public_url
 
-    file.md5.must_be :nil?
-    file.crc32c.must_be :nil?
-    file.etag.must_be :nil?
+    _(file.md5).must_be :nil?
+    _(file.crc32c).must_be :nil?
+    _(file.etag).must_be :nil?
 
-    file.cache_control.must_be :nil?
-    file.content_disposition.must_be :nil?
-    file.content_encoding.must_be :nil?
-    file.content_language.must_be :nil?
-    file.content_type.must_be :nil?
+    _(file.cache_control).must_be :nil?
+    _(file.content_disposition).must_be :nil?
+    _(file.content_encoding).must_be :nil?
+    _(file.content_language).must_be :nil?
+    _(file.content_type).must_be :nil?
 
-    file.metadata.must_be_kind_of Hash
-    file.metadata.must_be :empty?
+    _(file.metadata).must_be_kind_of Hash
+    _(file.metadata).must_be :empty?
   end
 
   it "can delete itself" do
@@ -102,7 +102,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.generation.must_be :nil?
+    _(file.generation).must_be :nil?
     file.delete generation: true
 
     mock.verify
@@ -115,7 +115,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     file.service.mocked_service = mock
 
     file.gapi.generation = 1234567892
-    file.generation.must_equal 1234567892
+    _(file.generation).must_equal 1234567892
     file.delete generation: true
 
     mock.verify
@@ -149,7 +149,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.generation.must_be :nil?
+    _(file_user_project.generation).must_be :nil?
     file_user_project.delete generation: true
 
     mock.verify
@@ -162,7 +162,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     file_user_project.service.mocked_service = mock
 
     file_user_project.gapi.generation = 1234567893
-    file_user_project.generation.must_equal 1234567893
+    _(file_user_project.generation).must_equal 1234567893
     file_user_project.delete generation: true
 
     mock.verify
@@ -196,7 +196,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file.download tmpfile
-      downloaded.must_be_kind_of File
+      _(downloaded).must_be_kind_of File
 
       mock.verify
     end
@@ -219,7 +219,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file.download tmpfile.path
-      downloaded.must_be_kind_of File
+      _(downloaded).must_be_kind_of File
 
       mock.verify
     end
@@ -242,7 +242,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file_user_project.download tmpfile
-      downloaded.must_be_kind_of File
+      _(downloaded).must_be_kind_of File
 
       mock.verify
     end
@@ -261,7 +261,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     bucket.service.mocked_service = mock
 
     downloaded = file.download
-    downloaded.must_be_kind_of StringIO
+    _(downloaded).must_be_kind_of StringIO
 
     mock.verify
   end
@@ -280,8 +280,8 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
 
     downloadio = StringIO.new
     downloaded = file.download downloadio
-    downloaded.must_be_kind_of StringIO
-    downloadio.must_equal downloadio # should be the same object
+    _(downloaded).must_be_kind_of StringIO
+    _(downloadio).must_equal downloadio # should be the same object
 
     mock.verify
   end
@@ -303,7 +303,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       bucket.service.mocked_service = mock
 
       downloaded = file.download tmpfile, encryption_key: encryption_key
-      downloaded.path.must_equal tmpfile.path
+      _(downloaded.path).must_equal tmpfile.path
 
       mock.verify
     end
@@ -545,7 +545,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     file_user_project.service.mocked_service = mock
 
     copied = file_user_project.copy "new-file.ext"
-    copied.user_project.must_equal true
+    _(copied.user_project).must_equal true
 
     mock.verify
   end
@@ -650,7 +650,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     end
 
     copied = file_user_project.copy "new-file.ext"
-    copied.user_project.must_equal true
+    _(copied.user_project).must_equal true
 
     mock.verify
   end
@@ -741,7 +741,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
       f.metadata["score"] = "10"
       f.storage_class = :nearline
     end
-    copied.user_project.must_equal true
+    _(copied.user_project).must_equal true
 
     mock.verify
   end
@@ -757,7 +757,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     file.service.mocked_service = mock
 
     updated = file.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
-    updated.name.must_equal file.name
+    _(updated.name).must_equal file.name
 
     mock.verify
   end
@@ -773,8 +773,8 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     file_user_project.service.mocked_service = mock
 
     updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
-    updated.name.must_equal file_user_project.name
-    updated.user_project.must_equal true
+    _(updated.name).must_equal file_user_project.name
+    _(updated.user_project).must_equal true
 
     mock.verify
   end
@@ -790,7 +790,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     file.service.mocked_service = mock
 
     updated = file.rotate new_encryption_key: encryption_key
-    updated.name.must_equal file.name
+    _(updated.name).must_equal file.name
 
     mock.verify
   end
@@ -806,7 +806,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     file.service.mocked_service = mock
 
     updated = file.rotate encryption_key: source_encryption_key
-    updated.name.must_equal file.name
+    _(updated.name).must_equal file.name
 
     mock.verify
   end
@@ -830,7 +830,7 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     end
 
     updated = file.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
-    updated.name.must_equal file.name
+    _(updated.name).must_equal file.name
 
     mock.verify
   end
@@ -854,8 +854,8 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     end
 
     updated = file_user_project.rotate encryption_key: source_encryption_key, new_encryption_key: encryption_key
-    updated.name.must_equal file_user_project.name
-    updated.user_project.must_equal true
+    _(updated.name).must_equal file_user_project.name
+    _(updated.user_project).must_equal true
 
     mock.verify
   end
@@ -873,9 +873,9 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     file.service.mocked_service = mock
 
     file = bucket.file file_name
-    file.generation.must_equal 1234567891
+    _(file.generation).must_equal 1234567891
     file.reload!
-    file.generation.must_equal 1234567892
+    _(file.generation).must_equal 1234567892
 
     mock.verify
   end
@@ -893,9 +893,9 @@ describe Google::Cloud::Storage::File, :lazy, :mock_storage do
     file.service.mocked_service = mock
 
     file = bucket_user_project.file file_name
-    file.generation.must_equal 1234567891
+    _(file.generation).must_equal 1234567891
     file.reload!
-    file.generation.must_equal 1234567892
+    _(file.generation).must_equal 1234567892
 
     mock.verify
   end

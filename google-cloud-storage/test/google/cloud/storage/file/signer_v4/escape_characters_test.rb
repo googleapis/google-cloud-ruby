@@ -19,51 +19,51 @@ describe Google::Cloud::Storage::File::SignerV4, :escape_characters do
 
   it "escapes special unicode character é" do
     str = signer_v4.escape_characters "é"
-    str.must_equal '\u00e9'
+    _(str).must_equal '\u00e9'
   end
 
   it "escapes a backslash" do
     str = signer_v4.escape_characters "\\"
-    str.must_equal '\\'
+    _(str).must_equal '\\'
   end
 
   it "escapes a backspace" do
     str = signer_v4.escape_characters "\b"
-    str.must_equal '\b'
+    _(str).must_equal '\b'
   end
 
   it "escapes a form feed" do
     str = signer_v4.escape_characters "\f"
-    str.must_equal '\f'
+    _(str).must_equal '\f'
   end
 
   it "escapes a new line" do
     str = signer_v4.escape_characters "\n"
-    str.must_equal '\n'
+    _(str).must_equal '\n'
   end
 
   it "escapes a carriage return" do
     str = signer_v4.escape_characters "\r"
-    str.must_equal '\r'
+    _(str).must_equal '\r'
   end
 
   it "escapes a horizontal tab" do
     str = signer_v4.escape_characters "\t"
-    str.must_equal '\t'
+    _(str).must_equal '\t'
   end
 
   it "escapes a vertical tab" do
     str = signer_v4.escape_characters "\v"
-    str.must_equal '\v'
+    _(str).must_equal '\v'
   end
 
   it "escapes a dollar symbol" do
     str = signer_v4.escape_characters "$"
-    str.must_equal '$'
+    _(str).must_equal '$'
   end
 
   it "escapes only special characters in a string" do
     str = signer_v4.escape_characters "{\"x-goog-meta\":\"$test-object-é-meta\\data\b\f\n\r\t\v\"},"
-    str.must_equal '{"x-goog-meta":"$test-object-\u00e9-meta\\data\b\f\n\r\t\v"},'
+    _(str).must_equal '{"x-goog-meta":"$test-object-\u00e9-meta\\data\b\f\n\r\t\v"},'
   end
 end

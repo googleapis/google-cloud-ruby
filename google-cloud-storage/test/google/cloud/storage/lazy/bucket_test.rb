@@ -143,7 +143,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     new_file_contents = StringIO.new "Hello world"
 
     err = expect { bucket.create_file new_file_contents }.must_raise ArgumentError
-    err.message.must_equal "must provide path"
+    _(err.message).must_equal "must provide path"
   end
 
   it "creates a file with predefined acl" do
@@ -307,7 +307,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
       bucket_user_project.service.mocked_service = mock
 
       created = bucket_user_project.create_file tmpfile, new_file_name
-      created.user_project.must_equal true
+      _(created.user_project).must_equal true
 
       mock.verify
     end
@@ -321,7 +321,7 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     err = expect {
       bucket.create_file bad_file_path
     }.must_raise ArgumentError
-    err.message.must_match bad_file_path
+    _(err.message).must_match bad_file_path
   end
 
   it "lists files" do
@@ -337,10 +337,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.size.must_equal num_files
+    _(files.size).must_equal num_files
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -357,10 +357,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.size.must_equal num_files
+    _(files.size).must_equal num_files
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -375,13 +375,13 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 3
-    files.prefixes.wont_be :empty?
-    files.prefixes.must_include "/prefix/path1/"
-    files.prefixes.must_include "/prefix/path2/"
+    _(files.count).must_equal 3
+    _(files.prefixes).wont_be :empty?
+    _(files.prefixes).must_include "/prefix/path1/"
+    _(files.prefixes).must_include "/prefix/path2/"
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -396,13 +396,13 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 3
-    files.prefixes.wont_be :empty?
-    files.prefixes.must_include "/prefix/path1/"
-    files.prefixes.must_include "/prefix/path2/"
+    _(files.count).must_equal 3
+    _(files.prefixes).wont_be :empty?
+    _(files.prefixes).must_include "/prefix/path1/"
+    _(files.prefixes).must_include "/prefix/path2/"
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -417,12 +417,12 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 3
-    files.token.wont_be :nil?
-    files.token.must_equal "next_page_token"
+    _(files.count).must_equal 3
+    _(files.token).wont_be :nil?
+    _(files.token).must_equal "next_page_token"
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -437,10 +437,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 3
+    _(files.count).must_equal 3
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -457,10 +457,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.size.must_equal num_files
+    _(files.size).must_equal num_files
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_equal true
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_equal true
     end
   end
 
@@ -478,19 +478,19 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    first_files.count.must_equal 3
-    first_files.token.wont_be :nil?
-    first_files.token.must_equal "next_page_token"
+    _(first_files.count).must_equal 3
+    _(first_files.token).wont_be :nil?
+    _(first_files.token).must_equal "next_page_token"
     first_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
 
-    second_files.count.must_equal 2
-    second_files.token.must_be :nil?
+    _(second_files.count).must_equal 2
+    _(second_files.token).must_be :nil?
     second_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -508,18 +508,18 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    first_files.count.must_equal 3
-    first_files.next?.must_equal true
+    _(first_files.count).must_equal 3
+    _(first_files.next?).must_equal true
     first_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
 
-    second_files.count.must_equal 2
-    second_files.next?.must_equal false
+    _(second_files.count).must_equal 2
+    _(second_files.next?).must_equal false
     second_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -537,18 +537,18 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    first_files.count.must_equal 3
-    first_files.next?.must_equal true
+    _(first_files.count).must_equal 3
+    _(first_files.next?).must_equal true
     first_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
 
-    second_files.count.must_equal 2
-    second_files.next?.must_equal false
+    _(second_files.count).must_equal 2
+    _(second_files.next?).must_equal false
     second_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -566,18 +566,18 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    first_files.count.must_equal 3
-    first_files.next?.must_equal true
+    _(first_files.count).must_equal 3
+    _(first_files.next?).must_equal true
     first_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
 
-    second_files.count.must_equal 2
-    second_files.next?.must_equal false
+    _(second_files.count).must_equal 2
+    _(second_files.next?).must_equal false
     second_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -595,18 +595,18 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    first_files.count.must_equal 3
-    first_files.next?.must_equal true
+    _(first_files.count).must_equal 3
+    _(first_files.next?).must_equal true
     first_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
 
-    second_files.count.must_equal 2
-    second_files.next?.must_equal false
+    _(second_files.count).must_equal 2
+    _(second_files.next?).must_equal false
     second_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -624,18 +624,18 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    first_files.count.must_equal 3
-    first_files.next?.must_equal true
+    _(first_files.count).must_equal 3
+    _(first_files.next?).must_equal true
     first_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
 
-    second_files.count.must_equal 2
-    second_files.next?.must_equal false
+    _(second_files.count).must_equal 2
+    _(second_files.next?).must_equal false
     second_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -653,19 +653,19 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    first_files.count.must_equal 3
-    first_files.token.wont_be :nil?
-    first_files.token.must_equal "next_page_token"
+    _(first_files.count).must_equal 3
+    _(first_files.token).wont_be :nil?
+    _(first_files.token).must_equal "next_page_token"
     first_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_equal true
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_equal true
     end
 
-    second_files.count.must_equal 2
-    second_files.token.must_be :nil?
+    _(second_files.count).must_equal 2
+    _(second_files.token).must_be :nil?
     first_files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_equal true
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_equal true
     end
   end
 
@@ -682,10 +682,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 5
+    _(files.count).must_equal 5
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -702,10 +702,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 5
+    _(files.count).must_equal 5
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -722,10 +722,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 5
+    _(files.count).must_equal 5
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -742,10 +742,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 5
+    _(files.count).must_equal 5
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -762,10 +762,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 5
+    _(files.count).must_equal 5
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -782,10 +782,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 5
+    _(files.count).must_equal 5
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -802,10 +802,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 6
+    _(files.count).must_equal 6
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -822,10 +822,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    files.count.must_equal 6
+    _(files.count).must_equal 6
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_equal true
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_equal true
     end
   end
 
@@ -842,9 +842,9 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.user_project.must_be :nil?
-    file.wont_be :lazy?
+    _(file.name).must_equal file_name
+    _(file.user_project).must_be :nil?
+    _(file).wont_be :lazy?
   end
 
   it "finds a file with find_file alias" do
@@ -860,9 +860,9 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.user_project.must_be :nil?
-    file.wont_be :lazy?
+    _(file.name).must_equal file_name
+    _(file.user_project).must_be :nil?
+    _(file).wont_be :lazy?
   end
 
   it "finds a file with generation" do
@@ -879,9 +879,9 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.user_project.must_be :nil?
-    file.wont_be :lazy?
+    _(file.name).must_equal file_name
+    _(file.user_project).must_be :nil?
+    _(file).wont_be :lazy?
   end
 
   it "finds a file with customer-supplied encryption key" do
@@ -897,9 +897,9 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.user_project.must_be :nil?
-    file.wont_be :lazy?
+    _(file.name).must_equal file_name
+    _(file.user_project).must_be :nil?
+    _(file).wont_be :lazy?
   end
 
   it "finds a file with user_project set to true" do
@@ -915,9 +915,9 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.user_project.must_equal true
-    file.wont_be :lazy?
+    _(file.name).must_equal file_name
+    _(file.user_project).must_equal true
+    _(file).wont_be :lazy?
   end
 
   it "finds a file with skip_lookup" do
@@ -931,10 +931,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.generation.must_be :nil?
-    file.user_project.must_be :nil?
-    file.must_be :lazy?
+    _(file.name).must_equal file_name
+    _(file.generation).must_be :nil?
+    _(file.user_project).must_be :nil?
+    _(file).must_be :lazy?
   end
 
   it "finds a file with skip_lookup and find_file alias" do
@@ -948,10 +948,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.generation.must_be :nil?
-    file.user_project.must_be :nil?
-    file.must_be :lazy?
+    _(file.name).must_equal file_name
+    _(file.generation).must_be :nil?
+    _(file.user_project).must_be :nil?
+    _(file).must_be :lazy?
   end
 
   it "finds a file with generation and skip_lookup" do
@@ -966,10 +966,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.generation.must_equal generation
-    file.user_project.must_be :nil?
-    file.must_be :lazy?
+    _(file.name).must_equal file_name
+    _(file.generation).must_equal generation
+    _(file.user_project).must_be :nil?
+    _(file).must_be :lazy?
   end
 
   it "finds a file with user_project and skip_lookupset to true" do
@@ -983,10 +983,10 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.generation.must_be :nil?
-    file.user_project.must_equal true
-    file.must_be :lazy?
+    _(file.name).must_equal file_name
+    _(file.generation).must_be :nil?
+    _(file.user_project).must_equal true
+    _(file).must_be :lazy?
   end
 
   it "can reload itself" do
@@ -1002,11 +1002,11 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     bucket.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name
-    bucket.api_url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
+    _(bucket.api_url).must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
 
     bucket.reload!
 
-    bucket.api_url.must_equal "#{new_url_root}/b/#{bucket_name}"
+    _(bucket.api_url).must_equal "#{new_url_root}/b/#{bucket_name}"
     mock.verify
   end
 
@@ -1023,11 +1023,11 @@ describe Google::Cloud::Storage::Bucket, :lazy, :mock_storage do
     bucket_user_project.service.mocked_service = mock
 
     bucket = storage.bucket bucket_name, user_project: true
-    bucket.api_url.must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
+    _(bucket.api_url).must_equal "https://www.googleapis.com/storage/v1/b/#{bucket_name}"
 
     bucket.reload!
 
-    bucket.api_url.must_equal "#{new_url_root}/b/#{bucket_name}"
+    _(bucket.api_url).must_equal "#{new_url_root}/b/#{bucket_name}"
     mock.verify
   end
 

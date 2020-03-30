@@ -46,23 +46,23 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
   let(:hmac_key_user_project) { Google::Cloud::Storage::HmacKey.from_gapi hmac_key_gapi, storage.service, user_project: true }
 
   it "knows its attributes" do
-    hmac_key.secret.must_equal hmac_key_gapi.secret
+    _(hmac_key.secret).must_equal hmac_key_gapi.secret
 
-    hmac_key.access_id.must_equal hmac_key_metadata_gapi.access_id
-    hmac_key.api_url.must_equal hmac_key_metadata_gapi.self_link
-    hmac_key.created_at.must_equal hmac_key_metadata_gapi.time_created
-    hmac_key.etag.must_equal hmac_key_metadata_gapi.etag
-    hmac_key.id.must_equal hmac_key_metadata_gapi.id
-    hmac_key.project_id.must_equal hmac_key_metadata_gapi.project_id
-    hmac_key.service_account_email.must_equal hmac_key_metadata_gapi.service_account_email
-    hmac_key.state.must_equal hmac_key_metadata_gapi.state
-    hmac_key.updated_at.must_equal hmac_key_metadata_gapi.updated
+    _(hmac_key.access_id).must_equal hmac_key_metadata_gapi.access_id
+    _(hmac_key.api_url).must_equal hmac_key_metadata_gapi.self_link
+    _(hmac_key.created_at).must_equal hmac_key_metadata_gapi.time_created
+    _(hmac_key.etag).must_equal hmac_key_metadata_gapi.etag
+    _(hmac_key.id).must_equal hmac_key_metadata_gapi.id
+    _(hmac_key.project_id).must_equal hmac_key_metadata_gapi.project_id
+    _(hmac_key.service_account_email).must_equal hmac_key_metadata_gapi.service_account_email
+    _(hmac_key.state).must_equal hmac_key_metadata_gapi.state
+    _(hmac_key.updated_at).must_equal hmac_key_metadata_gapi.updated
   end
 
   it "exposes state query methods" do
-    hmac_key.active?.must_equal true
-    hmac_key.inactive?.must_equal false
-    hmac_key.deleted?.must_equal false
+    _(hmac_key.active?).must_equal true
+    _(hmac_key.inactive?).must_equal false
+    _(hmac_key.deleted?).must_equal false
   end
 
   it "can delete itself" do

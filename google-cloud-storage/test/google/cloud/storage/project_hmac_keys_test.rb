@@ -46,8 +46,8 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_key.must_be_kind_of Google::Cloud::Storage::HmacKey
-    hmac_key.service_account_email.must_equal service_account_email
+    _(hmac_key).must_be_kind_of Google::Cloud::Storage::HmacKey
+    _(hmac_key.service_account_email).must_equal service_account_email
   end
 
   it "creates an HMAC key with project_id set to another project ID" do
@@ -60,8 +60,8 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_key.must_be_kind_of Google::Cloud::Storage::HmacKey
-    hmac_key.project_id.must_equal other_project_id
+    _(hmac_key).must_be_kind_of Google::Cloud::Storage::HmacKey
+    _(hmac_key.project_id).must_equal other_project_id
   end
 
   it "creates an HMAC key with user_project set to another project ID" do
@@ -73,8 +73,8 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_key.must_be_kind_of Google::Cloud::Storage::HmacKey
-    hmac_key.user_project.must_equal other_project_id
+    _(hmac_key).must_be_kind_of Google::Cloud::Storage::HmacKey
+    _(hmac_key.user_project).must_equal other_project_id
   end
 
   it "lists HMAC keys" do
@@ -86,7 +86,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_keys.size.must_equal 3
+    _(hmac_keys.size).must_equal 3
   end
 
   it "lists HMAC keys with project_id set to another project ID" do
@@ -98,7 +98,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_keys.size.must_equal 3
+    _(hmac_keys.size).must_equal 3
   end
 
   it "lists HMAC keys with service_account_email, show_deleted_keys and user_project options" do
@@ -110,7 +110,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_keys.size.must_equal 3
+    _(hmac_keys.size).must_equal 3
   end
 
   it "paginates HMAC keys with token and max" do
@@ -126,12 +126,12 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_keys_1.size.must_equal 3
-    hmac_keys_1.token.wont_be :nil?
-    hmac_keys_1.token.must_equal "next_page_token"
+    _(hmac_keys_1.size).must_equal 3
+    _(hmac_keys_1.token).wont_be :nil?
+    _(hmac_keys_1.token).must_equal "next_page_token"
 
-    hmac_keys_2.count.must_equal 3
-    hmac_keys_2.token.must_be :nil?
+    _(hmac_keys_2.count).must_equal 3
+    _(hmac_keys_2.token).must_be :nil?
   end
 
   it "paginates HMAC keys with next? and next" do
@@ -147,13 +147,13 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_keys_1.size.must_equal 3
-    hmac_keys_1.next?.must_equal true
-    hmac_keys_1.token.must_equal "next_page_token"
+    _(hmac_keys_1.size).must_equal 3
+    _(hmac_keys_1.next?).must_equal true
+    _(hmac_keys_1.token).must_equal "next_page_token"
 
-    hmac_keys_2.count.must_equal 3
-    hmac_keys_2.token.must_be :nil?
-    hmac_keys_2.next?.must_equal false
+    _(hmac_keys_2.count).must_equal 3
+    _(hmac_keys_2.token).must_be :nil?
+    _(hmac_keys_2.next?).must_equal false
   end
 
   it "paginates HMAC keys with all" do
@@ -168,7 +168,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_keys.size.must_equal 6
+    _(hmac_keys.size).must_equal 6
   end
 
   it "iterates HMAC keys with all using Enumerator" do
@@ -183,7 +183,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_keys.size.must_equal 5
+    _(hmac_keys.size).must_equal 5
   end
 
   it "iterates HMAC keys with all and request_limit and user_project set to another project ID" do
@@ -198,7 +198,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_keys.size.must_equal 6
+    _(hmac_keys.size).must_equal 6
   end
 
   it "finds an HMAC key" do
@@ -210,7 +210,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_key.access_id.must_equal access_id
+    _(hmac_key.access_id).must_equal access_id
   end
 
   it "finds an HMAC key with project_id set to another project ID" do
@@ -223,7 +223,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_key.project_id.must_equal other_project_id
+    _(hmac_key.project_id).must_equal other_project_id
   end
 
   it "finds an HMAC key with user_project set to another project ID" do
@@ -235,6 +235,6 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
     mock.verify
 
-    hmac_key.user_project.must_equal other_project_id
+    _(hmac_key.user_project).must_equal other_project_id
   end
 end

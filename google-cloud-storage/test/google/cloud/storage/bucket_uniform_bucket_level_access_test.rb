@@ -22,8 +22,8 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :mock_sto
   let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
 
   it "knows its uniform_bucket_level_access attrs" do
-    bucket.uniform_bucket_level_access?.must_equal false
-    bucket.uniform_bucket_level_access_locked_at.must_be :nil?
+    _(bucket.uniform_bucket_level_access?).must_equal false
+    _(bucket.uniform_bucket_level_access_locked_at).must_be :nil?
   end
 
   it "updates its uniform_bucket_level_access" do
@@ -32,12 +32,12 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :mock_sto
                 [bucket_name, patch_bucket_gapi(uniform_bucket_level_access: true), predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
     bucket.service.mocked_service = mock
 
-    bucket.uniform_bucket_level_access?.must_equal false
+    _(bucket.uniform_bucket_level_access?).must_equal false
 
     bucket.uniform_bucket_level_access = true
 
-    bucket.uniform_bucket_level_access?.must_equal true
-    bucket.uniform_bucket_level_access_locked_at.must_be_kind_of DateTime
+    _(bucket.uniform_bucket_level_access?).must_equal true
+    _(bucket.uniform_bucket_level_access_locked_at).must_be_kind_of DateTime
 
     mock.verify
   end
@@ -49,19 +49,19 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :mock_sto
 
     bucket_user_project.service.mocked_service = mock
 
-    bucket_user_project.uniform_bucket_level_access?.must_equal false
+    _(bucket_user_project.uniform_bucket_level_access?).must_equal false
 
     bucket_user_project.uniform_bucket_level_access = true
 
-    bucket_user_project.uniform_bucket_level_access?.must_equal true
-    bucket_user_project.uniform_bucket_level_access_locked_at.must_be_kind_of DateTime
+    _(bucket_user_project.uniform_bucket_level_access?).must_equal true
+    _(bucket_user_project.uniform_bucket_level_access_locked_at).must_be_kind_of DateTime
 
     mock.verify
   end
 
   it "knows its DEPRECATED policy_only attrs" do
-    bucket.policy_only?.must_equal false
-    bucket.policy_only_locked_at.must_be :nil?
+    _(bucket.policy_only?).must_equal false
+    _(bucket.policy_only_locked_at).must_be :nil?
   end
 
   it "updates its DEPRECATED policy_only" do
@@ -70,12 +70,12 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :mock_sto
                 [bucket_name, patch_bucket_gapi(uniform_bucket_level_access: true), predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
     bucket.service.mocked_service = mock
 
-    bucket.policy_only?.must_equal false
+    _(bucket.policy_only?).must_equal false
 
     bucket.policy_only = true
 
-    bucket.policy_only?.must_equal true
-    bucket.policy_only_locked_at.must_be_kind_of DateTime
+    _(bucket.policy_only?).must_equal true
+    _(bucket.policy_only_locked_at).must_be_kind_of DateTime
 
     mock.verify
   end
@@ -87,12 +87,12 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :mock_sto
 
     bucket_user_project.service.mocked_service = mock
 
-    bucket_user_project.policy_only?.must_equal false
+    _(bucket_user_project.policy_only?).must_equal false
 
     bucket_user_project.policy_only = true
 
-    bucket_user_project.policy_only?.must_equal true
-    bucket_user_project.policy_only_locked_at.must_be_kind_of DateTime
+    _(bucket_user_project.policy_only?).must_equal true
+    _(bucket_user_project.policy_only_locked_at).must_be_kind_of DateTime
 
     mock.verify
   end

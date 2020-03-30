@@ -34,21 +34,21 @@ describe Google::Cloud::Storage::PolicyV1, :mock_storage do
   let(:policy) { Google::Cloud::Storage::PolicyV1.from_gapi policy_gapi_v1 }
 
   it "knows its attributes" do
-    policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
-    policy.etag.must_equal etag
-    policy.version.must_equal 1
+    _(policy).must_be_kind_of Google::Cloud::Storage::PolicyV1
+    _(policy.etag).must_equal etag
+    _(policy.version).must_equal 1
   end
 
   it "knows its roles" do
-    policy.roles.keys.sort.must_equal ["roles/viewer"]
-    policy.roles.values.sort.must_equal [["allUsers"]]
+    _(policy.roles.keys.sort).must_equal ["roles/viewer"]
+    _(policy.roles.values.sort).must_equal [["allUsers"]]
   end
 
   it "returns an empty array for missing role" do
     role = policy.role "roles/does-not-exist"
-    role.must_be_kind_of Array
-    role.must_be :empty?
-    role.frozen?.must_equal false
+    _(role).must_be_kind_of Array
+    _(role).must_be :empty?
+    _(role.frozen?).must_equal false
   end
 
   it "creates from an empty Google::Apis::StorageV1::Policy object" do
@@ -56,9 +56,9 @@ describe Google::Cloud::Storage::PolicyV1, :mock_storage do
 
     policy = Google::Cloud::Storage::PolicyV1.from_gapi gapi
 
-    policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
-    policy.etag.must_be :nil?
-    policy.version.must_equal 1
-    policy.roles.must_be :empty?
+    _(policy).must_be_kind_of Google::Cloud::Storage::PolicyV1
+    _(policy.etag).must_be :nil?
+    _(policy.version).must_equal 1
+    _(policy.roles).must_be :empty?
   end
 end

@@ -44,14 +44,14 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock.verify
 
-    notification.wont_be_nil
-    notification.id.must_equal notification_id
-    notification.custom_attrs.must_equal custom_attrs
-    notification.event_types.must_equal event_types
-    notification.prefix.must_equal filename_prefix
-    notification.payload.must_equal payload
-    notification.topic.must_equal topic_name_full_path
-    notification.user_project.must_be :nil?
+    _(notification).wont_be_nil
+    _(notification.id).must_equal notification_id
+    _(notification.custom_attrs).must_equal custom_attrs
+    _(notification.event_types).must_equal event_types
+    _(notification.prefix).must_equal filename_prefix
+    _(notification.payload).must_equal payload
+    _(notification.topic).must_equal topic_name_full_path
+    _(notification.user_project).must_be :nil?
   end
 
   it "creates a notification with a boolean payload" do
@@ -68,7 +68,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock.verify
 
-    notification.payload.must_equal "JSON_API_V1"
+    _(notification.payload).must_equal "JSON_API_V1"
   end
 
   it "creates a notification with a array of symbols event type" do
@@ -85,7 +85,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock.verify
 
-    notification.event_types.must_equal event_types
+    _(notification.event_types).must_equal event_types
   end
 
   it "creates a notification with a single symbol event type" do
@@ -102,7 +102,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock.verify
 
-    notification.event_types.must_equal event_types
+    _(notification.event_types).must_equal event_types
   end
 
   it "creates a notification with new_notification alias" do
@@ -128,7 +128,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock.verify
 
-    notification.user_project.must_equal true
+    _(notification.user_project).must_equal true
   end
 
   it "lists notifications" do
@@ -144,10 +144,10 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock.verify
 
-    notifications.size.must_equal num_notifications
+    _(notifications.size).must_equal num_notifications
     notifications.each do |notification|
-      notification.must_be_kind_of Google::Cloud::Storage::Notification
-      notification.user_project.must_be :nil?
+      _(notification).must_be_kind_of Google::Cloud::Storage::Notification
+      _(notification.user_project).must_be :nil?
     end
   end
 
@@ -175,10 +175,10 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock.verify
 
-    notifications.size.must_equal num_notifications
+    _(notifications.size).must_equal num_notifications
     notifications.each do |notification|
-      notification.must_be_kind_of Google::Cloud::Storage::Notification
-      notification.user_project.must_equal true
+      _(notification).must_be_kind_of Google::Cloud::Storage::Notification
+      _(notification.user_project).must_equal true
     end
   end
 
@@ -195,13 +195,13 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock.verify
 
-    notification.id.must_equal notification_id
-    notification.custom_attrs.must_equal custom_attrs
-    notification.event_types.must_equal event_types
-    notification.prefix.must_equal filename_prefix
-    notification.payload.must_equal payload
-    notification.topic.must_equal topic_name_full_path
-    notification.user_project.must_be :nil?
+    _(notification.id).must_equal notification_id
+    _(notification.custom_attrs).must_equal custom_attrs
+    _(notification.event_types).must_equal event_types
+    _(notification.prefix).must_equal filename_prefix
+    _(notification.payload).must_equal payload
+    _(notification.topic).must_equal topic_name_full_path
+    _(notification.user_project).must_be :nil?
   end
 
   it "finds a notification with find_notification alias" do
@@ -231,7 +231,7 @@ describe Google::Cloud::Storage::Bucket, :notification, :mock_storage do
 
     mock.verify
 
-    notification.user_project.must_equal true
+    _(notification.user_project).must_equal true
   end
 
   def minimal_notification_gapi
