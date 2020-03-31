@@ -69,14 +69,14 @@ module Google
               "page_token",
               "next_page_token",
               "deidentify_templates"),
-            "list_dlp_jobs" => Google::Gax::PageDescriptor.new(
-              "page_token",
-              "next_page_token",
-              "jobs"),
             "list_job_triggers" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
               "job_triggers"),
+            "list_dlp_jobs" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "jobs"),
             "list_stored_info_types" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
@@ -92,11 +92,35 @@ module Google
           ].freeze
 
 
+          DEIDENTIFY_TEMPLATE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/deidentifyTemplates/{deidentify_template}"
+          )
+
+          private_constant :DEIDENTIFY_TEMPLATE_PATH_TEMPLATE
+
           DLP_JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/dlpJobs/{dlp_job}"
           )
 
           private_constant :DLP_JOB_PATH_TEMPLATE
+
+          INSPECT_TEMPLATE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/inspectTemplates/{inspect_template}"
+          )
+
+          private_constant :INSPECT_TEMPLATE_PATH_TEMPLATE
+
+          JOB_TRIGGER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/jobTriggers/{job_trigger}"
+          )
+
+          private_constant :JOB_TRIGGER_PATH_TEMPLATE
+
+          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}"
+          )
+
+          private_constant :LOCATION_PATH_TEMPLATE
 
           ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}"
@@ -115,6 +139,12 @@ module Google
           )
 
           private_constant :ORGANIZATION_INSPECT_TEMPLATE_PATH_TEMPLATE
+
+          ORGANIZATION_LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/locations/{location}"
+          )
+
+          private_constant :ORGANIZATION_LOCATION_PATH_TEMPLATE
 
           ORGANIZATION_STORED_INFO_TYPE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}/storedInfoTypes/{stored_info_type}"
@@ -152,6 +182,23 @@ module Google
 
           private_constant :PROJECT_STORED_INFO_TYPE_PATH_TEMPLATE
 
+          STORED_INFO_TYPE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/storedInfoTypes/{stored_info_type}"
+          )
+
+          private_constant :STORED_INFO_TYPE_PATH_TEMPLATE
+
+          # Returns a fully-qualified deidentify_template resource name string.
+          # @param organization [String]
+          # @param deidentify_template [String]
+          # @return [String]
+          def self.deidentify_template_path organization, deidentify_template
+            DEIDENTIFY_TEMPLATE_PATH_TEMPLATE.render(
+              :"organization" => organization,
+              :"deidentify_template" => deidentify_template
+            )
+          end
+
           # Returns a fully-qualified dlp_job resource name string.
           # @param project [String]
           # @param dlp_job [String]
@@ -160,6 +207,39 @@ module Google
             DLP_JOB_PATH_TEMPLATE.render(
               :"project" => project,
               :"dlp_job" => dlp_job
+            )
+          end
+
+          # Returns a fully-qualified inspect_template resource name string.
+          # @param organization [String]
+          # @param inspect_template [String]
+          # @return [String]
+          def self.inspect_template_path organization, inspect_template
+            INSPECT_TEMPLATE_PATH_TEMPLATE.render(
+              :"organization" => organization,
+              :"inspect_template" => inspect_template
+            )
+          end
+
+          # Returns a fully-qualified job_trigger resource name string.
+          # @param project [String]
+          # @param job_trigger [String]
+          # @return [String]
+          def self.job_trigger_path project, job_trigger
+            JOB_TRIGGER_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"job_trigger" => job_trigger
+            )
+          end
+
+          # Returns a fully-qualified location resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @return [String]
+          def self.location_path project, location
+            LOCATION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location
             )
           end
 
@@ -173,6 +253,8 @@ module Google
           end
 
           # Returns a fully-qualified organization_deidentify_template resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param organization [String]
           # @param deidentify_template [String]
           # @return [String]
@@ -184,6 +266,8 @@ module Google
           end
 
           # Returns a fully-qualified organization_inspect_template resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param organization [String]
           # @param inspect_template [String]
           # @return [String]
@@ -194,7 +278,20 @@ module Google
             )
           end
 
+          # Returns a fully-qualified organization_location resource name string.
+          # @param organization [String]
+          # @param location [String]
+          # @return [String]
+          def self.organization_location_path organization, location
+            ORGANIZATION_LOCATION_PATH_TEMPLATE.render(
+              :"organization" => organization,
+              :"location" => location
+            )
+          end
+
           # Returns a fully-qualified organization_stored_info_type resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param organization [String]
           # @param stored_info_type [String]
           # @return [String]
@@ -215,6 +312,8 @@ module Google
           end
 
           # Returns a fully-qualified project_deidentify_template resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param deidentify_template [String]
           # @return [String]
@@ -226,6 +325,8 @@ module Google
           end
 
           # Returns a fully-qualified project_inspect_template resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param inspect_template [String]
           # @return [String]
@@ -237,6 +338,8 @@ module Google
           end
 
           # Returns a fully-qualified project_job_trigger resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param job_trigger [String]
           # @return [String]
@@ -248,12 +351,25 @@ module Google
           end
 
           # Returns a fully-qualified project_stored_info_type resource name string.
+          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
+          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param stored_info_type [String]
           # @return [String]
           def self.project_stored_info_type_path project, stored_info_type
             PROJECT_STORED_INFO_TYPE_PATH_TEMPLATE.render(
               :"project" => project,
+              :"stored_info_type" => stored_info_type
+            )
+          end
+
+          # Returns a fully-qualified stored_info_type resource name string.
+          # @param organization [String]
+          # @param stored_info_type [String]
+          # @return [String]
+          def self.stored_info_type_path organization, stored_info_type
+            STORED_INFO_TYPE_PATH_TEMPLATE.render(
+              :"organization" => organization,
               :"stored_info_type" => stored_info_type
             )
           end
@@ -490,6 +606,54 @@ module Google
                 {'name' => request.name}
               end
             )
+            @create_job_trigger = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:create_job_trigger),
+              defaults["create_job_trigger"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @update_job_trigger = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:update_job_trigger),
+              defaults["update_job_trigger"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @hybrid_inspect_job_trigger = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:hybrid_inspect_job_trigger),
+              defaults["hybrid_inspect_job_trigger"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @get_job_trigger = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:get_job_trigger),
+              defaults["get_job_trigger"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @list_job_triggers = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:list_job_triggers),
+              defaults["list_job_triggers"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @delete_job_trigger = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:delete_job_trigger),
+              defaults["delete_job_trigger"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
             @create_dlp_job = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_dlp_job),
               defaults["create_dlp_job"],
@@ -530,70 +694,6 @@ module Google
                 {'name' => request.name}
               end
             )
-            @finish_dlp_job = Google::Gax.create_api_call(
-              @dlp_service_stub.method(:finish_dlp_job),
-              defaults["finish_dlp_job"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @hybrid_inspect_dlp_job = Google::Gax.create_api_call(
-              @dlp_service_stub.method(:hybrid_inspect_dlp_job),
-              defaults["hybrid_inspect_dlp_job"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @list_job_triggers = Google::Gax.create_api_call(
-              @dlp_service_stub.method(:list_job_triggers),
-              defaults["list_job_triggers"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
-            @get_job_trigger = Google::Gax.create_api_call(
-              @dlp_service_stub.method(:get_job_trigger),
-              defaults["get_job_trigger"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @delete_job_trigger = Google::Gax.create_api_call(
-              @dlp_service_stub.method(:delete_job_trigger),
-              defaults["delete_job_trigger"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @hybrid_inspect_job_trigger = Google::Gax.create_api_call(
-              @dlp_service_stub.method(:hybrid_inspect_job_trigger),
-              defaults["hybrid_inspect_job_trigger"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @update_job_trigger = Google::Gax.create_api_call(
-              @dlp_service_stub.method(:update_job_trigger),
-              defaults["update_job_trigger"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @create_job_trigger = Google::Gax.create_api_call(
-              @dlp_service_stub.method(:create_job_trigger),
-              defaults["create_job_trigger"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
             @create_stored_info_type = Google::Gax.create_api_call(
               @dlp_service_stub.method(:create_stored_info_type),
               defaults["create_stored_info_type"],
@@ -629,6 +729,22 @@ module Google
             @delete_stored_info_type = Google::Gax.create_api_call(
               @dlp_service_stub.method(:delete_stored_info_type),
               defaults["delete_stored_info_type"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @hybrid_inspect_dlp_job = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:hybrid_inspect_dlp_job),
+              defaults["hybrid_inspect_dlp_job"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @finish_dlp_job = Google::Gax.create_api_call(
+              @dlp_service_stub.method(:finish_dlp_job),
+              defaults["finish_dlp_job"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'name' => request.name}
@@ -680,11 +796,10 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #   response = dlp_client.inspect_content(formatted_parent)
+          #   response = dlp_client.inspect_content
 
           def inspect_content \
-              parent,
+              parent: nil,
               inspect_config: nil,
               item: nil,
               inspect_template_name: nil,
@@ -743,11 +858,10 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #   response = dlp_client.redact_image(formatted_parent)
+          #   response = dlp_client.redact_image
 
           def redact_image \
-              parent,
+              parent: nil,
               location_id: nil,
               inspect_config: nil,
               image_redaction_configs: nil,
@@ -821,11 +935,10 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #   response = dlp_client.deidentify_content(formatted_parent)
+          #   response = dlp_client.deidentify_content
 
           def deidentify_content \
-              parent,
+              parent: nil,
               deidentify_config: nil,
               inspect_config: nil,
               item: nil,
@@ -1003,12 +1116,15 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
-          #   response = dlp_client.create_inspect_template(formatted_parent)
+          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize `inspect_template`:
+          #   inspect_template = {}
+          #   response = dlp_client.create_inspect_template(formatted_parent, inspect_template)
 
           def create_inspect_template \
               parent,
-              inspect_template: nil,
+              inspect_template,
               template_id: nil,
               location_id: nil,
               options: nil,
@@ -1087,10 +1203,11 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   response = dlp_client.get_inspect_template
+          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.organization_inspect_template_path("[ORGANIZATION]", "[INSPECT_TEMPLATE]")
+          #   response = dlp_client.get_inspect_template(formatted_name)
 
           def get_inspect_template \
-              name: nil,
+              name,
               options: nil,
               &block
             req = {
@@ -1145,7 +1262,7 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
+          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
           #   dlp_client.list_inspect_templates(formatted_parent).each do |element|
@@ -1242,12 +1359,15 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
-          #   response = dlp_client.create_deidentify_template(formatted_parent)
+          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize `deidentify_template`:
+          #   deidentify_template = {}
+          #   response = dlp_client.create_deidentify_template(formatted_parent, deidentify_template)
 
           def create_deidentify_template \
               parent,
-              deidentify_template: nil,
+              deidentify_template,
               template_id: nil,
               location_id: nil,
               options: nil,
@@ -1389,7 +1509,7 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
+          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
           #   dlp_client.list_deidentify_templates(formatted_parent).each do |element|
@@ -1453,6 +1573,314 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeleteDeidentifyTemplateRequest)
             @delete_deidentify_template.call(req, options, &block)
+            nil
+          end
+
+          # Creates a job trigger to run DLP actions such as scanning storage for
+          # sensitive information on a set schedule.
+          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+          #
+          # @param parent [String]
+          #   Required. The parent resource name, for example projects/my-project-id.
+          # @param job_trigger [Google::Privacy::Dlp::V2::JobTrigger | Hash]
+          #   Required. The JobTrigger to create.
+          #   A hash of the same form as `Google::Privacy::Dlp::V2::JobTrigger`
+          #   can also be provided.
+          # @param trigger_id [String]
+          #   The trigger id can contain uppercase and lowercase letters,
+          #   numbers, and hyphens; that is, it must match the regular
+          #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
+          #   characters. Can be empty to allow the system to generate one.
+          # @param location_id [String]
+          #   The geographic location to store the job trigger. Reserved for
+          #   future extensions.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::JobTrigger]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Privacy::Dlp::V2::JobTrigger]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize `job_trigger`:
+          #   job_trigger = {}
+          #   response = dlp_client.create_job_trigger(formatted_parent, job_trigger)
+
+          def create_job_trigger \
+              parent,
+              job_trigger,
+              trigger_id: nil,
+              location_id: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              job_trigger: job_trigger,
+              trigger_id: trigger_id,
+              location_id: location_id
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateJobTriggerRequest)
+            @create_job_trigger.call(req, options, &block)
+          end
+
+          # Updates a job trigger.
+          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+          #
+          # @param name [String]
+          #   Required. Resource name of the project and the triggeredJob, for example
+          #   `projects/dlp-test-project/jobTriggers/53234423`.
+          # @param job_trigger [Google::Privacy::Dlp::V2::JobTrigger | Hash]
+          #   New JobTrigger value.
+          #   A hash of the same form as `Google::Privacy::Dlp::V2::JobTrigger`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   Mask to control which fields get updated.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::JobTrigger]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Privacy::Dlp::V2::JobTrigger]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.project_job_trigger_path("[PROJECT]", "[JOB_TRIGGER]")
+          #   response = dlp_client.update_job_trigger(formatted_name)
+
+          def update_job_trigger \
+              name,
+              job_trigger: nil,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              job_trigger: job_trigger,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::UpdateJobTriggerRequest)
+            @update_job_trigger.call(req, options, &block)
+          end
+
+          # Inspect hybrid content and store findings to a trigger. The inspection
+          # will be processed asynchronously. To review the findings monitor the
+          # jobs within the trigger.
+          # Early access feature is in a pre-release state and might change or have
+          # limited support. For more information, see
+          # https://cloud.google.com/products#product-launch-stages.
+          #
+          # @param name [String]
+          #   Required. Resource name of the trigger to execute a hybrid inspect on, for
+          #   example `projects/dlp-test-project/jobTriggers/53234423`.
+          # @param hybrid_item [Google::Privacy::Dlp::V2::HybridContentItem | Hash]
+          #   The item to inspect.
+          #   A hash of the same form as `Google::Privacy::Dlp::V2::HybridContentItem`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::HybridInspectResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Privacy::Dlp::V2::HybridInspectResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.project_job_trigger_path("[PROJECT]", "[JOB_TRIGGER]")
+          #   response = dlp_client.hybrid_inspect_job_trigger(formatted_name)
+
+          def hybrid_inspect_job_trigger \
+              name,
+              hybrid_item: nil,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              hybrid_item: hybrid_item
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::HybridInspectJobTriggerRequest)
+            @hybrid_inspect_job_trigger.call(req, options, &block)
+          end
+
+          # Gets a job trigger.
+          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+          #
+          # @param name [String]
+          #   Required. Resource name of the project and the triggeredJob, for example
+          #   `projects/dlp-test-project/jobTriggers/53234423`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::JobTrigger]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Privacy::Dlp::V2::JobTrigger]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.project_job_trigger_path("[PROJECT]", "[JOB_TRIGGER]")
+          #   response = dlp_client.get_job_trigger(formatted_name)
+
+          def get_job_trigger \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::GetJobTriggerRequest)
+            @get_job_trigger.call(req, options, &block)
+          end
+
+          # Lists job triggers.
+          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+          #
+          # @param parent [String]
+          #   Required. The parent resource name, for example `projects/my-project-id`.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param order_by [String]
+          #   Comma separated list of triggeredJob fields to order by,
+          #   followed by `asc` or `desc` postfix. This list is case-insensitive,
+          #   default sorting order is ascending, redundant space characters are
+          #   insignificant.
+          #
+          #   Example: `name asc,update_time, create_time desc`
+          #
+          #   Supported fields are:
+          #
+          #   * `create_time`: corresponds to time the JobTrigger was created.
+          #   * `update_time`: corresponds to time the JobTrigger was last updated.
+          #   * `last_run_time`: corresponds to the last time the JobTrigger ran.
+          #   * `name`: corresponds to JobTrigger's name.
+          #   * `display_name`: corresponds to JobTrigger's display name.
+          #   * `status`: corresponds to JobTrigger's status.
+          # @param filter [String]
+          #   Allows filtering.
+          #
+          #   Supported syntax:
+          #
+          #   * Filter expressions are made up of one or more restrictions.
+          #   * Restrictions can be combined by `AND` or `OR` logical operators. A
+          #     sequence of restrictions implicitly uses `AND`.
+          #   * A restriction has the form of `{field} {operator} {value}`.
+          #   * Supported fields/values for inspect jobs:
+          #     * `status` - HEALTHY|PAUSED|CANCELLED
+          #       * `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+          #       * 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
+          #         quotation marks. Nanoseconds are ignored.
+          #       * 'error_count' - Number of errors that have occurred while running.
+          #     * The operator must be `=` or `!=` for status and inspected_storage.
+          #
+          #     Examples:
+          #
+          #   * inspected_storage = cloud_storage AND status = HEALTHY
+          #   * inspected_storage = cloud_storage OR inspected_storage = bigquery
+          #   * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
+          #   * last_run_time > \"2017-12-12T00:00:00+00:00\"
+          #
+          #   The length of this field should be no more than 500 characters.
+          # @param location_id [String]
+          #   The geographic location where job triggers will be retrieved from.
+          #   Use `-` for all locations. Reserved for future extensions.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::JobTrigger>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::JobTrigger>]
+          #   An enumerable of Google::Privacy::Dlp::V2::JobTrigger instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
+          #
+          #   # Iterate over all results.
+          #   dlp_client.list_job_triggers(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   dlp_client.list_job_triggers(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_job_triggers \
+              parent,
+              page_size: nil,
+              order_by: nil,
+              filter: nil,
+              location_id: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              page_size: page_size,
+              order_by: order_by,
+              filter: filter,
+              location_id: location_id
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListJobTriggersRequest)
+            @list_job_triggers.call(req, options, &block)
+          end
+
+          # Deletes a job trigger.
+          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
+          #
+          # @param name [String]
+          #   Required. Resource name of the project and the triggeredJob, for example
+          #   `projects/dlp-test-project/jobTriggers/53234423`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.project_job_trigger_path("[PROJECT]", "[JOB_TRIGGER]")
+          #   dlp_client.delete_job_trigger(formatted_name)
+
+          def delete_job_trigger \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeleteJobTriggerRequest)
+            @delete_job_trigger.call(req, options, &block)
             nil
           end
 
@@ -1646,8 +2074,10 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
-          #   response = dlp_client.get_dlp_job(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = dlp_client.get_dlp_job(name)
 
           def get_dlp_job \
               name,
@@ -1679,8 +2109,10 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
-          #   dlp_client.delete_dlp_job(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   dlp_client.delete_dlp_job(name)
 
           def delete_dlp_job \
               name,
@@ -1713,8 +2145,10 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
-          #   dlp_client.cancel_dlp_job(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   dlp_client.cancel_dlp_job(name)
 
           def cancel_dlp_job \
               name,
@@ -1726,393 +2160,6 @@ module Google
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CancelDlpJobRequest)
             @cancel_dlp_job.call(req, options, &block)
             nil
-          end
-
-          # Finish a running hybrid DlpJob. Triggers the finalization steps and running
-          # of any enabled actions that have not yet run.
-          # Early access feature is in a pre-release state and might change or have
-          # limited support. For more information, see
-          # https://cloud.google.com/products#product-launch-stages.
-          #
-          # @param name [String]
-          #   Required. The name of the DlpJob resource to be cancelled.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/dlp"
-          #
-          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.dlp_job_path("[PROJECT]", "[DLP_JOB]")
-          #   dlp_client.finish_dlp_job(formatted_name)
-
-          def finish_dlp_job \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::FinishDlpJobRequest)
-            @finish_dlp_job.call(req, options, &block)
-            nil
-          end
-
-          # Inspect hybrid content and store findings to a job.
-          # To review the findings inspect the job. Inspection will occur
-          # asynchronously.
-          # Early access feature is in a pre-release state and might change or have
-          # limited support. For more information, see
-          # https://cloud.google.com/products#product-launch-stages.
-          #
-          # @param name [String]
-          #   Required. Resource name of the job to execute a hybrid inspect on, for
-          #   example `projects/dlp-test-project/dlpJob/53234423`.
-          # @param hybrid_item [Google::Privacy::Dlp::V2::HybridContentItem | Hash]
-          #   The item to inspect.
-          #   A hash of the same form as `Google::Privacy::Dlp::V2::HybridContentItem`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Privacy::Dlp::V2::HybridInspectResponse]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Privacy::Dlp::V2::HybridInspectResponse]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/dlp"
-          #
-          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #
-          #   # TODO: Initialize `name`:
-          #   name = ''
-          #   response = dlp_client.hybrid_inspect_dlp_job(name)
-
-          def hybrid_inspect_dlp_job \
-              name,
-              hybrid_item: nil,
-              options: nil,
-              &block
-            req = {
-              name: name,
-              hybrid_item: hybrid_item
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::HybridInspectDlpJobRequest)
-            @hybrid_inspect_dlp_job.call(req, options, &block)
-          end
-
-          # Lists job triggers.
-          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
-          #
-          # @param parent [String]
-          #   Required. The parent resource name, for example `projects/my-project-id`.
-          # @param page_size [Integer]
-          #   The maximum number of resources contained in the underlying API
-          #   response. If page streaming is performed per-resource, this
-          #   parameter does not affect the return value. If page streaming is
-          #   performed per-page, this determines the maximum number of
-          #   resources in a page.
-          # @param order_by [String]
-          #   Comma separated list of triggeredJob fields to order by,
-          #   followed by `asc` or `desc` postfix. This list is case-insensitive,
-          #   default sorting order is ascending, redundant space characters are
-          #   insignificant.
-          #
-          #   Example: `name asc,update_time, create_time desc`
-          #
-          #   Supported fields are:
-          #
-          #   * `create_time`: corresponds to time the JobTrigger was created.
-          #   * `update_time`: corresponds to time the JobTrigger was last updated.
-          #   * `last_run_time`: corresponds to the last time the JobTrigger ran.
-          #   * `name`: corresponds to JobTrigger's name.
-          #   * `display_name`: corresponds to JobTrigger's display name.
-          #   * `status`: corresponds to JobTrigger's status.
-          # @param filter [String]
-          #   Allows filtering.
-          #
-          #   Supported syntax:
-          #
-          #   * Filter expressions are made up of one or more restrictions.
-          #   * Restrictions can be combined by `AND` or `OR` logical operators. A
-          #     sequence of restrictions implicitly uses `AND`.
-          #   * A restriction has the form of `{field} {operator} {value}`.
-          #   * Supported fields/values for inspect jobs:
-          #     * `status` - HEALTHY|PAUSED|CANCELLED
-          #       * `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
-          #       * 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
-          #         quotation marks. Nanoseconds are ignored.
-          #       * 'error_count' - Number of errors that have occurred while running.
-          #     * The operator must be `=` or `!=` for status and inspected_storage.
-          #
-          #     Examples:
-          #
-          #   * inspected_storage = cloud_storage AND status = HEALTHY
-          #   * inspected_storage = cloud_storage OR inspected_storage = bigquery
-          #   * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
-          #   * last_run_time > \"2017-12-12T00:00:00+00:00\"
-          #
-          #   The length of this field should be no more than 500 characters.
-          # @param location_id [String]
-          #   The geographic location where job triggers will be retrieved from.
-          #   Use `-` for all locations. Reserved for future extensions.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::JobTrigger>]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Privacy::Dlp::V2::JobTrigger>]
-          #   An enumerable of Google::Privacy::Dlp::V2::JobTrigger instances.
-          #   See Google::Gax::PagedEnumerable documentation for other
-          #   operations such as per-page iteration or access to the response
-          #   object.
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/dlp"
-          #
-          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #
-          #   # Iterate over all results.
-          #   dlp_client.list_job_triggers(formatted_parent).each do |element|
-          #     # Process element.
-          #   end
-          #
-          #   # Or iterate over results one page at a time.
-          #   dlp_client.list_job_triggers(formatted_parent).each_page do |page|
-          #     # Process each page at a time.
-          #     page.each do |element|
-          #       # Process element.
-          #     end
-          #   end
-
-          def list_job_triggers \
-              parent,
-              page_size: nil,
-              order_by: nil,
-              filter: nil,
-              location_id: nil,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              page_size: page_size,
-              order_by: order_by,
-              filter: filter,
-              location_id: location_id
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::ListJobTriggersRequest)
-            @list_job_triggers.call(req, options, &block)
-          end
-
-          # Gets a job trigger.
-          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
-          #
-          # @param name [String]
-          #   Required. Resource name of the project and the triggeredJob, for example
-          #   `projects/dlp-test-project/jobTriggers/53234423`.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Privacy::Dlp::V2::JobTrigger]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Privacy::Dlp::V2::JobTrigger]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/dlp"
-          #
-          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.project_job_trigger_path("[PROJECT]", "[JOB_TRIGGER]")
-          #   response = dlp_client.get_job_trigger(formatted_name)
-
-          def get_job_trigger \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::GetJobTriggerRequest)
-            @get_job_trigger.call(req, options, &block)
-          end
-
-          # Deletes a job trigger.
-          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
-          #
-          # @param name [String]
-          #   Required. Resource name of the project and the triggeredJob, for example
-          #   `projects/dlp-test-project/jobTriggers/53234423`.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result []
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/dlp"
-          #
-          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #
-          #   # TODO: Initialize `name`:
-          #   name = ''
-          #   dlp_client.delete_job_trigger(name)
-
-          def delete_job_trigger \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeleteJobTriggerRequest)
-            @delete_job_trigger.call(req, options, &block)
-            nil
-          end
-
-          # Inspect hybrid content and store findings to a trigger. The inspection
-          # will be processed asynchronously. To review the findings monitor the
-          # jobs within the trigger.
-          # Early access feature is in a pre-release state and might change or have
-          # limited support. For more information, see
-          # https://cloud.google.com/products#product-launch-stages.
-          #
-          # @param name [String]
-          #   Required. Resource name of the trigger to execute a hybrid inspect on, for
-          #   example `projects/dlp-test-project/jobTriggers/53234423`.
-          # @param hybrid_item [Google::Privacy::Dlp::V2::HybridContentItem | Hash]
-          #   The item to inspect.
-          #   A hash of the same form as `Google::Privacy::Dlp::V2::HybridContentItem`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Privacy::Dlp::V2::HybridInspectResponse]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Privacy::Dlp::V2::HybridInspectResponse]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/dlp"
-          #
-          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #
-          #   # TODO: Initialize `name`:
-          #   name = ''
-          #   response = dlp_client.hybrid_inspect_job_trigger(name)
-
-          def hybrid_inspect_job_trigger \
-              name,
-              hybrid_item: nil,
-              options: nil,
-              &block
-            req = {
-              name: name,
-              hybrid_item: hybrid_item
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::HybridInspectJobTriggerRequest)
-            @hybrid_inspect_job_trigger.call(req, options, &block)
-          end
-
-          # Updates a job trigger.
-          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
-          #
-          # @param name [String]
-          #   Required. Resource name of the project and the triggeredJob, for example
-          #   `projects/dlp-test-project/jobTriggers/53234423`.
-          # @param job_trigger [Google::Privacy::Dlp::V2::JobTrigger | Hash]
-          #   New JobTrigger value.
-          #   A hash of the same form as `Google::Privacy::Dlp::V2::JobTrigger`
-          #   can also be provided.
-          # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   Mask to control which fields get updated.
-          #   A hash of the same form as `Google::Protobuf::FieldMask`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Privacy::Dlp::V2::JobTrigger]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Privacy::Dlp::V2::JobTrigger]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/dlp"
-          #
-          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_name = Google::Cloud::Dlp::V2::DlpServiceClient.project_job_trigger_path("[PROJECT]", "[JOB_TRIGGER]")
-          #   response = dlp_client.update_job_trigger(formatted_name)
-
-          def update_job_trigger \
-              name,
-              job_trigger: nil,
-              update_mask: nil,
-              options: nil,
-              &block
-            req = {
-              name: name,
-              job_trigger: job_trigger,
-              update_mask: update_mask
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::UpdateJobTriggerRequest)
-            @update_job_trigger.call(req, options, &block)
-          end
-
-          # Creates a job trigger to run DLP actions such as scanning storage for
-          # sensitive information on a set schedule.
-          # See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
-          #
-          # @param parent [String]
-          #   Required. The parent resource name, for example projects/my-project-id.
-          # @param job_trigger [Google::Privacy::Dlp::V2::JobTrigger | Hash]
-          #   Required. The JobTrigger to create.
-          #   A hash of the same form as `Google::Privacy::Dlp::V2::JobTrigger`
-          #   can also be provided.
-          # @param trigger_id [String]
-          #   The trigger id can contain uppercase and lowercase letters,
-          #   numbers, and hyphens; that is, it must match the regular
-          #   expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
-          #   characters. Can be empty to allow the system to generate one.
-          # @param location_id [String]
-          #   The geographic location to store the job trigger. Reserved for
-          #   future extensions.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Privacy::Dlp::V2::JobTrigger]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Privacy::Dlp::V2::JobTrigger]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/dlp"
-          #
-          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
-          #   response = dlp_client.create_job_trigger(formatted_parent)
-
-          def create_job_trigger \
-              parent,
-              job_trigger: nil,
-              trigger_id: nil,
-              location_id: nil,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              job_trigger: job_trigger,
-              trigger_id: trigger_id,
-              location_id: location_id
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::CreateJobTriggerRequest)
-            @create_job_trigger.call(req, options, &block)
           end
 
           # Creates a pre-built stored infoType to be used for inspection.
@@ -2146,12 +2193,15 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
-          #   response = dlp_client.create_stored_info_type(formatted_parent)
+          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
+          #
+          #   # TODO: Initialize `config`:
+          #   config = {}
+          #   response = dlp_client.create_stored_info_type(formatted_parent, config)
 
           def create_stored_info_type \
               parent,
-              config: nil,
+              config,
               stored_info_type_id: nil,
               location_id: nil,
               options: nil,
@@ -2296,7 +2346,7 @@ module Google
           #   require "google/cloud/dlp"
           #
           #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
-          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.organization_path("[ORGANIZATION]")
+          #   formatted_parent = Google::Cloud::Dlp::V2::DlpServiceClient.project_path("[PROJECT]")
           #
           #   # Iterate over all results.
           #   dlp_client.list_stored_info_types(formatted_parent).each do |element|
@@ -2359,6 +2409,86 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::DeleteStoredInfoTypeRequest)
             @delete_stored_info_type.call(req, options, &block)
+            nil
+          end
+
+          # Inspect hybrid content and store findings to a job.
+          # To review the findings inspect the job. Inspection will occur
+          # asynchronously.
+          # Early access feature is in a pre-release state and might change or have
+          # limited support. For more information, see
+          # https://cloud.google.com/products#product-launch-stages.
+          #
+          # @param name [String]
+          #   Required. Resource name of the job to execute a hybrid inspect on, for
+          #   example `projects/dlp-test-project/dlpJob/53234423`.
+          # @param hybrid_item [Google::Privacy::Dlp::V2::HybridContentItem | Hash]
+          #   The item to inspect.
+          #   A hash of the same form as `Google::Privacy::Dlp::V2::HybridContentItem`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Privacy::Dlp::V2::HybridInspectResponse]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Privacy::Dlp::V2::HybridInspectResponse]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = dlp_client.hybrid_inspect_dlp_job(name)
+
+          def hybrid_inspect_dlp_job \
+              name,
+              hybrid_item: nil,
+              options: nil,
+              &block
+            req = {
+              name: name,
+              hybrid_item: hybrid_item
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::HybridInspectDlpJobRequest)
+            @hybrid_inspect_dlp_job.call(req, options, &block)
+          end
+
+          # Finish a running hybrid DlpJob. Triggers the finalization steps and running
+          # of any enabled actions that have not yet run.
+          # Early access feature is in a pre-release state and might change or have
+          # limited support. For more information, see
+          # https://cloud.google.com/products#product-launch-stages.
+          #
+          # @param name [String]
+          #   Required. The name of the DlpJob resource to be cancelled.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result []
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dlp"
+          #
+          #   dlp_client = Google::Cloud::Dlp.new(version: :v2)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   dlp_client.finish_dlp_job(name)
+
+          def finish_dlp_job \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Privacy::Dlp::V2::FinishDlpJobRequest)
+            @finish_dlp_job.call(req, options, &block)
             nil
           end
         end
