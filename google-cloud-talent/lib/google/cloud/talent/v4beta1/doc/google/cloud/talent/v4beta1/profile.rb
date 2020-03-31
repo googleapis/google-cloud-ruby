@@ -305,7 +305,7 @@ module Google
         #     so on.)
         # @!attribute [rw] preferred_name
         #   @return [String]
-        #     Preferred name for the person. This field is ignored if {Google::Cloud::Talent::V4beta1::PersonName#structured_name structured_name}
+        #     Preferred name for the person. This field is ignored if `structured_name`
         #     is provided.
         #
         #     Number of characters allowed is 100.

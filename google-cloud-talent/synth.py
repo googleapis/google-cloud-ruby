@@ -264,5 +264,14 @@ s.replace(
     'http://cldr.unicode.org'
 )
 
+# YARD 0.9.24 crashes when trying to resolve this particular link.
+# Work around it by disabling the link.
+# See https://github.com/googleapis/google-cloud-ruby/issues/5187
+s.replace(
+    'lib/**/profile.rb',
+    '\\{Google::Cloud::Talent::V4beta1::PersonName#structured_name structured_name\\}',
+    '`structured_name`'
+)
+
 # Generate the helper methods
 call(f'bundle update && bundle exec rake generate_partials TALENT_SERVICES={",".join(services)}', shell=True)
