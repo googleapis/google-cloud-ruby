@@ -92,6 +92,12 @@ module Google
 
           private_constant :BILLING_ACCOUNT_LOCATION_PATH_TEMPLATE
 
+          CMEK_SETTINGS_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/cmekSettings"
+          )
+
+          private_constant :CMEK_SETTINGS_PATH_TEMPLATE
+
           FOLDER_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "folders/{folder}"
           )
@@ -109,6 +115,24 @@ module Google
           )
 
           private_constant :LOCATION_PATH_TEMPLATE
+
+          LOG_BUCKET_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}/buckets/{bucket}"
+          )
+
+          private_constant :LOG_BUCKET_PATH_TEMPLATE
+
+          LOG_EXCLUSION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/exclusions/{exclusion}"
+          )
+
+          private_constant :LOG_EXCLUSION_PATH_TEMPLATE
+
+          LOG_SINK_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/sinks/{sink}"
+          )
+
+          private_constant :LOG_SINK_PATH_TEMPLATE
 
           ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}"
@@ -148,6 +172,15 @@ module Google
             )
           end
 
+          # Returns a fully-qualified cmek_settings resource name string.
+          # @param project [String]
+          # @return [String]
+          def self.cmek_settings_path project
+            CMEK_SETTINGS_PATH_TEMPLATE.render(
+              :"project" => project
+            )
+          end
+
           # Returns a fully-qualified folder resource name string.
           # @param folder [String]
           # @return [String]
@@ -176,6 +209,41 @@ module Google
             LOCATION_PATH_TEMPLATE.render(
               :"project" => project,
               :"location" => location
+            )
+          end
+
+          # Returns a fully-qualified log_bucket resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @param bucket [String]
+          # @return [String]
+          def self.log_bucket_path project, location, bucket
+            LOG_BUCKET_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location,
+              :"bucket" => bucket
+            )
+          end
+
+          # Returns a fully-qualified log_exclusion resource name string.
+          # @param project [String]
+          # @param exclusion [String]
+          # @return [String]
+          def self.log_exclusion_path project, exclusion
+            LOG_EXCLUSION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"exclusion" => exclusion
+            )
+          end
+
+          # Returns a fully-qualified log_sink resource name string.
+          # @param project [String]
+          # @param sink [String]
+          # @return [String]
+          def self.log_sink_path project, sink
+            LOG_SINK_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"sink" => sink
             )
           end
 
