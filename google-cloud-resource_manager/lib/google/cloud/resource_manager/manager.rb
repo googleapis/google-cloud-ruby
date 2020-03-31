@@ -71,7 +71,7 @@ module Google
         #   * `NAME:howl` - Equivalent to above.
         #   * `labels.color:*` - The project has the label color.
         #   * `labels.color:red` - The project's label color has the value red.
-        #   * <code>labels.color:red labels.size:big</code> - The project's
+        #   * `labels.color:red labels.size:big` - The project's
         #     label color has the value red and its label size has the value
         #     big.
         # @param [String] token A previously-returned page token representing
@@ -160,11 +160,11 @@ module Google
         #
         #   Label keys must be between 1 and 63 characters long and must conform
         #   to the following regular expression:
-        #   <code>[a-z]([-a-z0-9]*[a-z0-9])?</code>.
+        #   `[a-z]([-a-z0-9]*[a-z0-9])?`.
         #
         #   Label values must be between 0 and 63 characters long and must
         #   conform to the regular expression
-        #   <code>([a-z]([-a-z0-9]*[a-z0-9])?)?</code>.
+        #   `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
         #
         #   No more than 256 labels can be associated with a given resource.
         # @param [Resource] parent A parent Resource. Optional.
