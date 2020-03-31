@@ -70,7 +70,7 @@ module Google
 
 
           COMPANY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/tenants/{tenant}/companies/{company}"
+            "projects/{project}/companies/{company}"
           )
 
           private_constant :COMPANY_PATH_TEMPLATE
@@ -94,16 +94,12 @@ module Google
           private_constant :TENANT_PATH_TEMPLATE
 
           # Returns a fully-qualified company resource name string.
-          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
-          # This helper function will be deleted in the next major version.
           # @param project [String]
-          # @param tenant [String]
           # @param company [String]
           # @return [String]
-          def self.company_path project, tenant, company
+          def self.company_path project, company
             COMPANY_PATH_TEMPLATE.render(
               :"project" => project,
-              :"tenant" => tenant,
               :"company" => company
             )
           end
