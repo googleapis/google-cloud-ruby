@@ -1,5 +1,15 @@
 # Release History
 
+### 1.21.0 / 2020-03-31
+
+#### Features
+
+* Add Job#parent_job_id and Job#script_statistics
+  * Add parent_job to Project#jobs
+  * Add Job#num_child_jobs
+  * Add Job#parent_job_id
+  * Add Job#script_statistics
+
 ### 1.20.0 / 2020-03-11
 
 #### Features
