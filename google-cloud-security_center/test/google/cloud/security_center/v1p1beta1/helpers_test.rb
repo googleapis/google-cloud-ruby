@@ -90,6 +90,19 @@ describe Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenterClient do
     end
   end
 
+  describe "the security_marks_path instance method" do
+    it "correctly calls Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenterClient.security_marks_path" do
+      Google::Cloud::SecurityCenter::V1p1beta1::Credentials.stub(:default, mock_credentials) do
+        client = Google::Cloud::SecurityCenter.new version: :v1p1beta1
+        parameters = client.method("security_marks_path").parameters.map { |arg| arg.last.to_s }
+        assert_equal(
+          client.security_marks_path(*parameters),
+          Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenterClient.security_marks_path(*parameters)
+        )
+      end
+    end
+  end
+
   describe "the source_path instance method" do
     it "correctly calls Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenterClient.source_path" do
       Google::Cloud::SecurityCenter::V1p1beta1::Credentials.stub(:default, mock_credentials) do
