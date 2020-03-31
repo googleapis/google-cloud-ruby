@@ -36,6 +36,9 @@ class Kokoro < Command
     @updated_gems.each do |gem|
       run_ci gem do
         run "bundle exec rake ci", 1800
+        # TODO: Remove date requirement
+        require "date"
+        next unless Date.today > Date.new(2020, 4, 7)
         local_docs_test if should_link_check? gem || (
           autorelease_pending? && @should_release
         )
