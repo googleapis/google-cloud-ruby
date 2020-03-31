@@ -74,7 +74,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes create_workflow_template without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.location_path("[PROJECT]", "[LOCATION]")
       template = {}
 
       # Create expected grpc response
@@ -122,7 +122,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes create_workflow_template with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.location_path("[PROJECT]", "[LOCATION]")
       template = {}
 
       # Mock Grpc layer
@@ -158,7 +158,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes get_workflow_template without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
+      name = ''
 
       # Create expected grpc response
       id = "id3355"
@@ -174,7 +174,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::GetWorkflowTemplateRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:get_workflow_template, mock_method)
@@ -187,13 +187,13 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          response = client.get_workflow_template(formatted_name)
+          response = client.get_workflow_template(name)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_workflow_template(formatted_name) do |response, operation|
+          client.get_workflow_template(name) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -204,12 +204,12 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes get_workflow_template with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
+      name = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::GetWorkflowTemplateRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:get_workflow_template, mock_method)
@@ -223,7 +223,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
-            client.get_workflow_template(formatted_name)
+            client.get_workflow_template(name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -238,7 +238,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes instantiate_workflow_template without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
+      name = ''
 
       # Create expected grpc response
       expected_response = {}
@@ -254,7 +254,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::InstantiateWorkflowTemplateRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:instantiate_workflow_template, mock_method)
@@ -267,7 +267,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          response = client.instantiate_workflow_template(formatted_name)
+          response = client.instantiate_workflow_template(name)
 
           # Verify the response
           assert_equal(expected_response, response.response)
@@ -277,7 +277,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes instantiate_workflow_template and returns an operation error.' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
+      name = ''
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
@@ -292,7 +292,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::InstantiateWorkflowTemplateRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:instantiate_workflow_template, mock_method)
@@ -305,7 +305,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          response = client.instantiate_workflow_template(formatted_name)
+          response = client.instantiate_workflow_template(name)
 
           # Verify the response
           assert(response.error?)
@@ -316,12 +316,12 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes instantiate_workflow_template with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
+      name = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::InstantiateWorkflowTemplateRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:instantiate_workflow_template, mock_method)
@@ -335,7 +335,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
-            client.instantiate_workflow_template(formatted_name)
+            client.instantiate_workflow_template(name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -350,7 +350,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes instantiate_inline_workflow_template without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.location_path("[PROJECT]", "[LOCATION]")
       template = {}
 
       # Create expected grpc response
@@ -391,7 +391,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes instantiate_inline_workflow_template and returns an operation error.' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.location_path("[PROJECT]", "[LOCATION]")
       template = {}
 
       # Create expected grpc response
@@ -432,7 +432,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes instantiate_inline_workflow_template with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.location_path("[PROJECT]", "[LOCATION]")
       template = {}
 
       # Mock Grpc layer
@@ -548,7 +548,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes list_workflow_templates without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.location_path("[PROJECT]", "[LOCATION]")
 
       # Create expected grpc response
       next_page_token = ""
@@ -586,7 +586,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes list_workflow_templates with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.location_path("[PROJECT]", "[LOCATION]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -620,12 +620,12 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes delete_workflow_template without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
+      name = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::DeleteWorkflowTemplateRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:delete_workflow_template, mock_method)
@@ -638,13 +638,13 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
           client = Google::Cloud::Dataproc::WorkflowTemplateService.new(version: :v1beta2)
 
           # Call method
-          response = client.delete_workflow_template(formatted_name)
+          response = client.delete_workflow_template(name)
 
           # Verify the response
           assert_nil(response)
 
           # Call method with block
-          client.delete_workflow_template(formatted_name) do |response, operation|
+          client.delete_workflow_template(name) do |response, operation|
             # Verify the response
             assert_nil(response)
             refute_nil(operation)
@@ -655,12 +655,12 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
     it 'invokes delete_workflow_template with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient.workflow_template_path("[PROJECT]", "[REGION]", "[WORKFLOW_TEMPLATE]")
+      name = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::DeleteWorkflowTemplateRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:delete_workflow_template, mock_method)
@@ -674,7 +674,7 @@ describe Google::Cloud::Dataproc::V1beta2::WorkflowTemplateServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
-            client.delete_workflow_template(formatted_name)
+            client.delete_workflow_template(name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

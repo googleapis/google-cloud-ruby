@@ -73,7 +73,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
     it 'invokes create_autoscaling_policy without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.location_path("[PROJECT]", "[LOCATION]")
       policy = {}
 
       # Create expected grpc response
@@ -116,7 +116,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
     it 'invokes create_autoscaling_policy with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.location_path("[PROJECT]", "[LOCATION]")
       policy = {}
 
       # Mock Grpc layer
@@ -227,7 +227,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
     it 'invokes get_autoscaling_policy without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.autoscaling_policy_path("[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]")
+      name = ''
 
       # Create expected grpc response
       id = "id3355"
@@ -238,7 +238,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::GetAutoscalingPolicyRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:get_autoscaling_policy, mock_method)
@@ -251,13 +251,13 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
           client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
-          response = client.get_autoscaling_policy(formatted_name)
+          response = client.get_autoscaling_policy(name)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_autoscaling_policy(formatted_name) do |response, operation|
+          client.get_autoscaling_policy(name) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -268,12 +268,12 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
     it 'invokes get_autoscaling_policy with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.autoscaling_policy_path("[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]")
+      name = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::GetAutoscalingPolicyRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:get_autoscaling_policy, mock_method)
@@ -287,7 +287,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
-            client.get_autoscaling_policy(formatted_name)
+            client.get_autoscaling_policy(name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -302,7 +302,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
     it 'invokes list_autoscaling_policies without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.location_path("[PROJECT]", "[LOCATION]")
 
       # Create expected grpc response
       next_page_token = ""
@@ -340,7 +340,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
     it 'invokes list_autoscaling_policies with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.region_path("[PROJECT]", "[REGION]")
+      formatted_parent = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.location_path("[PROJECT]", "[LOCATION]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -374,12 +374,12 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
     it 'invokes delete_autoscaling_policy without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.autoscaling_policy_path("[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]")
+      name = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::DeleteAutoscalingPolicyRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:delete_autoscaling_policy, mock_method)
@@ -392,13 +392,13 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
           client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1beta2)
 
           # Call method
-          response = client.delete_autoscaling_policy(formatted_name)
+          response = client.delete_autoscaling_policy(name)
 
           # Verify the response
           assert_nil(response)
 
           # Call method with block
-          client.delete_autoscaling_policy(formatted_name) do |response, operation|
+          client.delete_autoscaling_policy(name) do |response, operation|
             # Verify the response
             assert_nil(response)
             refute_nil(operation)
@@ -409,12 +409,12 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
     it 'invokes delete_autoscaling_policy with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient.autoscaling_policy_path("[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]")
+      name = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Dataproc::V1beta2::DeleteAutoscalingPolicyRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:delete_autoscaling_policy, mock_method)
@@ -428,7 +428,7 @@ describe Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyServiceClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
-            client.delete_autoscaling_policy(formatted_name)
+            client.delete_autoscaling_policy(name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

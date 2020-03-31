@@ -70,10 +70,16 @@ module Google
 
 
           AUTOSCALING_POLICY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/regions/{region}/autoscalingPolicies/{autoscaling_policy}"
+            "projects/{project}/locations/{location}/autoscalingPolicies/{autoscaling_policy}"
           )
 
           private_constant :AUTOSCALING_POLICY_PATH_TEMPLATE
+
+          LOCATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/locations/{location}"
+          )
+
+          private_constant :LOCATION_PATH_TEMPLATE
 
           REGION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "projects/{project}/regions/{region}"
@@ -83,14 +89,25 @@ module Google
 
           # Returns a fully-qualified autoscaling_policy resource name string.
           # @param project [String]
-          # @param region [String]
+          # @param location [String]
           # @param autoscaling_policy [String]
           # @return [String]
-          def self.autoscaling_policy_path project, region, autoscaling_policy
+          def self.autoscaling_policy_path project, location, autoscaling_policy
             AUTOSCALING_POLICY_PATH_TEMPLATE.render(
               :"project" => project,
-              :"region" => region,
+              :"location" => location,
               :"autoscaling_policy" => autoscaling_policy
+            )
+          end
+
+          # Returns a fully-qualified location resource name string.
+          # @param project [String]
+          # @param location [String]
+          # @return [String]
+          def self.location_path project, location
+            LOCATION_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"location" => location
             )
           end
 
@@ -217,20 +234,20 @@ module Google
               &Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Stub.method(:new)
             )
 
-            @create_autoscaling_policy = Google::Gax.create_api_call(
-              @autoscaling_policy_service_stub.method(:create_autoscaling_policy),
-              defaults["create_autoscaling_policy"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
             @update_autoscaling_policy = Google::Gax.create_api_call(
               @autoscaling_policy_service_stub.method(:update_autoscaling_policy),
               defaults["update_autoscaling_policy"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'policy.name' => request.policy.name}
+              end
+            )
+            @create_autoscaling_policy = Google::Gax.create_api_call(
+              @autoscaling_policy_service_stub.method(:create_autoscaling_policy),
+              defaults["create_autoscaling_policy"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
               end
             )
             @get_autoscaling_policy = Google::Gax.create_api_call(
@@ -260,54 +277,6 @@ module Google
           end
 
           # Service calls
-
-          # Creates new autoscaling policy.
-          #
-          # @param parent [String]
-          #   Required. The "resource name" of the region or location, as described
-          #   in https://cloud.google.com/apis/design/resource_names.
-          #
-          #   * For `projects.regions.autoscalingPolicies.create`, the resource name
-          #     of the region has the following format:
-          #     `projects/{project_id}/regions/{region}`
-          #
-          #   * For `projects.locations.autoscalingPolicies.create`, the resource name
-          #     of the location has the following format:
-          #     `projects/{project_id}/locations/{location}`
-          # @param policy [Google::Cloud::Dataproc::V1::AutoscalingPolicy | Hash]
-          #   The autoscaling policy to create.
-          #   A hash of the same form as `Google::Cloud::Dataproc::V1::AutoscalingPolicy`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/dataproc"
-          #
-          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1)
-          #   formatted_parent = Google::Cloud::Dataproc::V1::AutoscalingPolicyServiceClient.region_path("[PROJECT]", "[REGION]")
-          #
-          #   # TODO: Initialize `policy`:
-          #   policy = {}
-          #   response = autoscaling_policy_client.create_autoscaling_policy(formatted_parent, policy)
-
-          def create_autoscaling_policy \
-              parent,
-              policy,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              policy: policy
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest)
-            @create_autoscaling_policy.call(req, options, &block)
-          end
 
           # Updates (replaces) autoscaling policy.
           #
@@ -346,6 +315,51 @@ module Google
             @update_autoscaling_policy.call(req, options, &block)
           end
 
+          # Creates new autoscaling policy.
+          #
+          # @param parent [String]
+          #   Required. The "resource name" of the region or location, as described
+          #   in https://cloud.google.com/apis/design/resource_names.
+          #
+          #   * For `projects.regions.autoscalingPolicies.create`, the resource name
+          #     of the region has the following format:
+          #     `projects/{project_id}/regions/{region}`
+          #
+          #   * For `projects.locations.autoscalingPolicies.create`, the resource name
+          #     of the location has the following format:
+          #     `projects/{project_id}/locations/{location}`
+          # @param policy [Google::Cloud::Dataproc::V1::AutoscalingPolicy | Hash]
+          #   The autoscaling policy to create.
+          #   A hash of the same form as `Google::Cloud::Dataproc::V1::AutoscalingPolicy`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/dataproc"
+          #
+          #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1)
+          #   formatted_parent = Google::Cloud::Dataproc::V1::AutoscalingPolicyServiceClient.location_path("[PROJECT]", "[LOCATION]")
+          #   response = autoscaling_policy_client.create_autoscaling_policy(formatted_parent)
+
+          def create_autoscaling_policy \
+              parent,
+              policy: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              policy: policy
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest)
+            @create_autoscaling_policy.call(req, options, &block)
+          end
+
           # Retrieves autoscaling policy.
           #
           # @param name [String]
@@ -371,8 +385,10 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1)
-          #   formatted_name = Google::Cloud::Dataproc::V1::AutoscalingPolicyServiceClient.autoscaling_policy_path("[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]")
-          #   response = autoscaling_policy_client.get_autoscaling_policy(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = autoscaling_policy_client.get_autoscaling_policy(name)
 
           def get_autoscaling_policy \
               name,
@@ -420,7 +436,7 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1)
-          #   formatted_parent = Google::Cloud::Dataproc::V1::AutoscalingPolicyServiceClient.region_path("[PROJECT]", "[REGION]")
+          #   formatted_parent = Google::Cloud::Dataproc::V1::AutoscalingPolicyServiceClient.location_path("[PROJECT]", "[LOCATION]")
           #
           #   # Iterate over all results.
           #   autoscaling_policy_client.list_autoscaling_policies(formatted_parent).each do |element|
@@ -473,8 +489,10 @@ module Google
           #   require "google/cloud/dataproc"
           #
           #   autoscaling_policy_client = Google::Cloud::Dataproc::AutoscalingPolicyService.new(version: :v1)
-          #   formatted_name = Google::Cloud::Dataproc::V1::AutoscalingPolicyServiceClient.autoscaling_policy_path("[PROJECT]", "[REGION]", "[AUTOSCALING_POLICY]")
-          #   autoscaling_policy_client.delete_autoscaling_policy(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   autoscaling_policy_client.delete_autoscaling_policy(name)
 
           def delete_autoscaling_policy \
               name,
