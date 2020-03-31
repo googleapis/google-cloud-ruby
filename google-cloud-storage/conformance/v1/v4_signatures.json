@@ -513,14 +513,14 @@
         "fields" : {
           "key": "$test-object-é",
           "success_action_redirect": "http://www.google.com/",
+          "x-goog-meta": "$test-object-é-metadata",
           "x-goog-algorithm": "GOOG4-RSA-SHA256",
           "x-goog-credential": "test-iam-credentials@dummy-project-id.iam.gserviceaccount.com/20200123/auto/storage/goog4_request",
           "x-goog-date": "20200123T043530Z",
-          "x-goog-meta": "$test-object-é-metadata",
-          "x-goog-signature": "5e62f731d1e5e0935c9157dd059b61d7a9076f0dc953f60534486fdef2f74e54b41c2c35cb441b2fa36e0b93aae0a8b61ae73d003772238e8792415356eb1bf61c8e01043b8d44941e6d535d27e516b89f4055e65ebd0127a92a38f90ccc350a31ae9796567b6585f988c6aa78708ab4969a574c73da0b7eba77af2467bcd5852a8ac712c0abeee85034507cc602543493c9570f1922590cfea66c823ab03740bc64c321320b577d6c0a704f9832c5da8c5a9ba89437e1d0022924802b9d5bb7918f1cc5927666d9a34284c6e11242b3244e51080e751fcf55d871d0e749c04e71e64aba145e07da9dbcba6374865b4446033fb2f15ff0c297c8896ddb1b4688",
-          "policy": "eyJjb25kaXRpb25zIjpbeyJ4LWdvb2ctbWV0YSI6IiR0ZXN0LW9iamVjdC1cdTAwZTktbWV0YWRhdGEifSx7InN1Y2Nlc3NfYWN0aW9uX3JlZGlyZWN0IjoiaHR0cDovL3d3dy5nb29nbGUuY29tLyJ9LHsia2V5IjoiJHRlc3Qtb2JqZWN0LVx1MDBlOSJ9LHsieC1nb29nLWRhdGUiOiIyMDIwMDEyM1QwNDM1MzBaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6InRlc3QtaWFtLWNyZWRlbnRpYWxzQGR1bW15LXByb2plY3QtaWQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20vMjAyMDAxMjMvYXV0by9zdG9yYWdlL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyMC0wMS0yM1QwNDozNTo0MFoifQ=="
+          "x-goog-signature": "05eb19ea4ece513cbb2bc6a92c9bc82de6be46943fb4703df3f7b26e6033f90a194e2444e6c3166e9585ca468b5727702aa2696e5cca54677c047f7734119ea0d635404d6a5e577b737ffd5414059cd1b508aa99cfad592d9228f1bf47d7df3ffd73bcae6af6d8d83f7f50b4ccbf6e6c0798d2d9923a7e18c8888e2519fcf09d174b7015581a7de021964eeb9d27293213686d80d825332819c4e98d4ab2c5237f352840993e22a02a41d827ce6a4a294e84a33bf051519fdcbf982f2ad932f58714608c4b5a1f89d5e322d194f5e29fa4160fce771008320ac4e659adeead36aa07fe26a96e52e809436b7bd169256d6613c135148fdee6926caaef65817dc2",
+          "policy": "eyJjb25kaXRpb25zIjpbeyJzdWNjZXNzX2FjdGlvbl9yZWRpcmVjdCI6Imh0dHA6Ly93d3cuZ29vZ2xlLmNvbS8ifSx7IngtZ29vZy1tZXRhIjoiJHRlc3Qtb2JqZWN0LVx1MDBlOS1tZXRhZGF0YSJ9LHsia2V5IjoiJHRlc3Qtb2JqZWN0LVx1MDBlOSJ9LHsieC1nb29nLWRhdGUiOiIyMDIwMDEyM1QwNDM1MzBaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6InRlc3QtaWFtLWNyZWRlbnRpYWxzQGR1bW15LXByb2plY3QtaWQuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb20vMjAyMDAxMjMvYXV0by9zdG9yYWdlL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyMC0wMS0yM1QwNDozNTo0MFoifQ=="
         },
-        "expectedDecodedPolicy": "{\"conditions\":[{\"x-goog-meta\":\"$test-object-\u00e9-metadata\"},{\"success_action_redirect\":\"http://www.google.com/\"},{\"key\":\"$test-object-\u00e9\"},{\"x-goog-date\":\"20200123T043530Z\"},{\"x-goog-credential\":\"test-iam-credentials@dummy-project-id.iam.gserviceaccount.com/20200123/auto/storage/goog4_request\"},{\"x-goog-algorithm\":\"GOOG4-RSA-SHA256\"}],\"expiration\":\"2020-01-23T04:35:40Z\"}"
+        "expectedDecodedPolicy": "{\"conditions\":[{\"success_action_redirect\":\"http://www.google.com/\"},{\"x-goog-meta\":\"$test-object-\u00e9-metadata\"},{\"key\":\"$test-object-\u00e9\"},{\"x-goog-date\":\"20200123T043530Z\"},{\"x-goog-credential\":\"test-iam-credentials@dummy-project-id.iam.gserviceaccount.com/20200123/auto/storage/goog4_request\"},{\"x-goog-algorithm\":\"GOOG4-RSA-SHA256\"}],\"expiration\":\"2020-01-23T04:35:40Z\"}"
       }
     }
   ]
