@@ -104,6 +104,12 @@ module Google
 
           private_constant :FOLDER_PATH_TEMPLATE
 
+          LOG_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "projects/{project}/logs/{log}"
+          )
+
+          private_constant :LOG_PATH_TEMPLATE
+
           ORGANIZATION_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}"
           )
@@ -131,6 +137,17 @@ module Google
           def self.folder_path folder
             FOLDER_PATH_TEMPLATE.render(
               :"folder" => folder
+            )
+          end
+
+          # Returns a fully-qualified log resource name string.
+          # @param project [String]
+          # @param log [String]
+          # @return [String]
+          def self.log_path project, log
+            LOG_PATH_TEMPLATE.render(
+              :"project" => project,
+              :"log" => log
             )
           end
 
