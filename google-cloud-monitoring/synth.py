@@ -267,3 +267,16 @@ s.replace(
     'github.io/google-cloud-ruby/#/docs/google-cloud-monitoring/latest/.*$',
     'dev/ruby/google-cloud-monitoring/latest'
 )
+
+# Temporary: Remove docs for the obsolete ServiceTier module which contain
+# broken links.
+s.replace(
+    'lib/**/common.rb',
+    '(\n      #[^\n]*)+\n      module ServiceTier\n',
+    '\n      # Obsolete.\n      module ServiceTier\n'
+)
+s.replace(
+    'lib/**/common.rb',
+    '(\n        #[^\n]*)+\n        SERVICE_TIER_',
+    '\n        # Obsolete.\n        SERVICE_TIER_'
+)
