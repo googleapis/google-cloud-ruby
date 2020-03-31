@@ -62,12 +62,11 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
     it "correctly calls Google::Cloud::Talent::V4beta1::ApplicationServiceClient.company_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
         project = "project"
-        tenant = "tenant"
         company = "company"
         client = Google::Cloud::Talent::ApplicationService.new version: :v4beta1
         assert_equal(
-          client.company_path(project, tenant, company),
-          Google::Cloud::Talent::V4beta1::ApplicationServiceClient.company_path(project, tenant, company)
+          client.company_path(project, company),
+          Google::Cloud::Talent::V4beta1::ApplicationServiceClient.company_path(project, company)
         )
       end
     end
@@ -91,12 +90,11 @@ describe Google::Cloud::Talent::V4beta1::ApplicationServiceClient do
     it "correctly calls Google::Cloud::Talent::V4beta1::ApplicationServiceClient.job_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
         project = "project"
-        tenant = "tenant"
         job = "job"
         client = Google::Cloud::Talent::ApplicationService.new version: :v4beta1
         assert_equal(
-          client.job_path(project, tenant, job),
-          Google::Cloud::Talent::V4beta1::ApplicationServiceClient.job_path(project, tenant, job)
+          client.job_path(project, job),
+          Google::Cloud::Talent::V4beta1::ApplicationServiceClient.job_path(project, job)
         )
       end
     end
@@ -139,12 +137,11 @@ describe Google::Cloud::Talent::V4beta1::CompanyServiceClient do
     it "correctly calls Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
         project = "project"
-        tenant = "tenant"
         company = "company"
         client = Google::Cloud::Talent::CompanyService.new version: :v4beta1
         assert_equal(
-          client.company_path(project, tenant, company),
-          Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path(project, tenant, company)
+          client.company_path(project, company),
+          Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path(project, company)
         )
       end
     end
@@ -199,12 +196,11 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
     it "correctly calls Google::Cloud::Talent::V4beta1::JobServiceClient.company_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
         project = "project"
-        tenant = "tenant"
         company = "company"
         client = Google::Cloud::Talent::JobService.new version: :v4beta1
         assert_equal(
-          client.company_path(project, tenant, company),
-          Google::Cloud::Talent::V4beta1::JobServiceClient.company_path(project, tenant, company)
+          client.company_path(project, company),
+          Google::Cloud::Talent::V4beta1::JobServiceClient.company_path(project, company)
         )
       end
     end
@@ -228,12 +224,11 @@ describe Google::Cloud::Talent::V4beta1::JobServiceClient do
     it "correctly calls Google::Cloud::Talent::V4beta1::JobServiceClient.job_path" do
       Google::Cloud::Talent::V4beta1::Credentials.stub(:default, mock_credentials) do
         project = "project"
-        tenant = "tenant"
         job = "job"
         client = Google::Cloud::Talent::JobService.new version: :v4beta1
         assert_equal(
-          client.job_path(project, tenant, job),
-          Google::Cloud::Talent::V4beta1::JobServiceClient.job_path(project, tenant, job)
+          client.job_path(project, job),
+          Google::Cloud::Talent::V4beta1::JobServiceClient.job_path(project, job)
         )
       end
     end

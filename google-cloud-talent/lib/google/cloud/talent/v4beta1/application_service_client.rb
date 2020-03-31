@@ -77,7 +77,7 @@ module Google
           private_constant :APPLICATION_PATH_TEMPLATE
 
           COMPANY_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/tenants/{tenant}/companies/{company}"
+            "projects/{project}/companies/{company}"
           )
 
           private_constant :COMPANY_PATH_TEMPLATE
@@ -89,7 +89,7 @@ module Google
           private_constant :COMPANY_WITHOUT_TENANT_PATH_TEMPLATE
 
           JOB_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/tenants/{tenant}/jobs/{job}"
+            "projects/{project}/jobs/{job}"
           )
 
           private_constant :JOB_PATH_TEMPLATE
@@ -122,16 +122,12 @@ module Google
           end
 
           # Returns a fully-qualified company resource name string.
-          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
-          # This helper function will be deleted in the next major version.
           # @param project [String]
-          # @param tenant [String]
           # @param company [String]
           # @return [String]
-          def self.company_path project, tenant, company
+          def self.company_path project, company
             COMPANY_PATH_TEMPLATE.render(
               :"project" => project,
-              :"tenant" => tenant,
               :"company" => company
             )
           end
@@ -150,16 +146,12 @@ module Google
           end
 
           # Returns a fully-qualified job resource name string.
-          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
-          # This helper function will be deleted in the next major version.
           # @param project [String]
-          # @param tenant [String]
           # @param job [String]
           # @return [String]
-          def self.job_path project, tenant, job
+          def self.job_path project, job
             JOB_PATH_TEMPLATE.render(
               :"project" => project,
-              :"tenant" => tenant,
               :"job" => job
             )
           end
