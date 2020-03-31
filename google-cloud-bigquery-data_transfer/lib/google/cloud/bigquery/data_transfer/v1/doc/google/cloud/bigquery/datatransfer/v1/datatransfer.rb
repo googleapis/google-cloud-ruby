@@ -184,6 +184,11 @@ module Google
               # Return an authorization code for a given Google+ page that can then be
               # exchanged for a refresh token on the backend.
               GOOGLE_PLUS_AUTHORIZATION_CODE = 2
+
+              # Use First Party Client OAuth. First Party Client OAuth doesn't require a
+              # refresh token to get an offline access token. Instead, it uses a
+              # client-signed JWT assertion to retrieve an access token.
+              FIRST_PARTY_OAUTH = 3
             end
 
             # Represents how the data source supports data auto refresh.
