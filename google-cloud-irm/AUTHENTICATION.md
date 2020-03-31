@@ -170,8 +170,3 @@ Developers service account.
 
    The key file you download will be used by this library to authenticate API
    requests and should be stored in a secure location.
-
-## Troubleshooting
-
-If you're having trouble authenticating you can ask for help by following the
-{file:TROUBLESHOOTING.md Troubleshooting Guide}.
