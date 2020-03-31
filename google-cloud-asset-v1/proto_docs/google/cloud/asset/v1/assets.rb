@@ -21,90 +21,122 @@ module Google
   module Cloud
     module Asset
       module V1
-        # Temporal asset. In addition to the asset, the temporal asset includes the
-        # status of the asset and valid from and to time of it.
+        # An asset in Google Cloud and its temporal metadata, including the time window
+        # when it was observed and its status during that window.
         # @!attribute [rw] window
         #   @return [Google::Cloud::Asset::V1::TimeWindow]
         #     The time window when the asset data and state was observed.
         # @!attribute [rw] deleted
         #   @return [Boolean]
-        #     If the asset is deleted or not.
+        #     Whether the asset has been deleted or not.
         # @!attribute [rw] asset
         #   @return [Google::Cloud::Asset::V1::Asset]
-        #     Asset.
+        #     An asset in Google Cloud.
         class TemporalAsset
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A time window of (start_time, end_time].
+        # A time window specified by its "start_time" and "end_time".
         # @!attribute [rw] start_time
         #   @return [Google::Protobuf::Timestamp]
         #     Start time of the time window (exclusive).
         # @!attribute [rw] end_time
         #   @return [Google::Protobuf::Timestamp]
-        #     End time of the time window (inclusive).
-        #     Current timestamp if not specified.
+        #     End time of the time window (inclusive). If not specified, the current
+        #     timestamp is used instead.
         class TimeWindow
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Cloud asset. This includes all Google Cloud Platform resources,
-        # Cloud IAM policies, and other non-GCP assets.
+        # An asset in Google Cloud. An asset can be any resource in the Google Cloud
+        # [resource
+        # hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
+        # a resource outside the Google Cloud resource hierarchy (such as Google
+        # Kubernetes Engine clusters and objects), or a Cloud IAM policy.
         # @!attribute [rw] name
         #   @return [String]
         #     The full name of the asset. For example:
-        #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
+        #     "//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1"
+        #
         #     See [Resource
-        #     Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+        #     names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
         #     for more information.
         # @!attribute [rw] asset_type
         #   @return [String]
-        #     Type of the asset. Example: "compute.googleapis.com/Disk".
+        #     The type of the asset. For example: "compute.googleapis.com/Disk"
+        #
+        #     See [Supported asset
+        #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+        #     for more information.
         # @!attribute [rw] resource
         #   @return [Google::Cloud::Asset::V1::Resource]
-        #     Representation of the resource.
+        #     A representation of the resource.
         # @!attribute [rw] iam_policy
         #   @return [Google::Iam::V1::Policy]
-        #     Representation of the actual Cloud IAM policy set on a cloud resource. For
-        #     each resource, there must be at most one Cloud IAM policy set on it.
+        #     A representation of the Cloud IAM policy set on a Google Cloud resource.
+        #     There can be a maximum of one Cloud IAM policy set on any given resource.
+        #     In addition, Cloud IAM policies inherit their granted access scope from any
+        #     policies set on parent resources in the resource hierarchy. Therefore, the
+        #     effectively policy is the union of both the policy set on this resource
+        #     and each policy set on all of the resource's ancestry resource levels in
+        #     the hierarchy. See
+        #     [this topic](https://cloud.google.com/iam/docs/policies#inheritance) for
+        #     more information.
+        # @!attribute [rw] org_policy
+        #   @return [Array<Google::Cloud::OrgPolicy::V1::Policy>]
+        #     A representation of an [organization
+        #     policy](https://cloud.google.com/resource-manager/docs/organization-policy/overview#organization_policy).
+        #     There can be more than one organization policy with different constraints
+        #     set on a given resource.
+        # @!attribute [rw] access_policy
+        #   @return [Google::Identity::AccessContextManager::V1::AccessPolicy]
+        # @!attribute [rw] access_level
+        #   @return [Google::Identity::AccessContextManager::V1::AccessLevel]
+        # @!attribute [rw] service_perimeter
+        #   @return [Google::Identity::AccessContextManager::V1::ServicePerimeter]
         # @!attribute [rw] ancestors
         #   @return [Array<String>]
-        #     Asset's ancestry path in Cloud Resource Manager (CRM) hierarchy,
-        #     represented as a list of relative resource names. Ancestry path starts with
-        #     the closest CRM ancestor and ends at root. If the asset is a CRM
-        #     project/folder/organization, this starts from the asset itself.
+        #     The ancestry path of an asset in Google Cloud [resource
+        #     hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
+        #     represented as a list of relative resource names. An ancestry path starts
+        #     with the closest ancestor in the hierarchy and ends at root. If the asset
+        #     is a project, folder, or organization, the ancestry path starts from the
+        #     asset itself.
         #
-        #     Example: ["projects/123456789", "folders/5432", "organizations/1234"]
+        #     For example: `["projects/123456789", "folders/5432", "organizations/1234"]`
         class Asset
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Representation of a cloud resource.
+        # A representation of a Google Cloud resource.
         # @!attribute [rw] version
         #   @return [String]
-        #     The API version. Example: "v1".
+        #     The API version. For example: "v1"
         # @!attribute [rw] discovery_document_uri
         #   @return [String]
         #     The URL of the discovery document containing the resource's JSON schema.
         #     For example:
-        #     `"https://www.googleapis.com/discovery/v1/apis/compute/v1/rest"`.
-        #     It will be left unspecified for resources without a discovery-based API,
-        #     such as Cloud Bigtable.
+        #     "https://www.googleapis.com/discovery/v1/apis/compute/v1/rest"
+        #
+        #     This value is unspecified for resources that do not have an API based on a
+        #     discovery document, such as Cloud Bigtable.
         # @!attribute [rw] discovery_name
         #   @return [String]
-        #     The JSON schema name listed in the discovery document.
-        #     Example: "Project". It will be left unspecified for resources (such as
-        #     Cloud Bigtable) without a discovery-based API.
+        #     The JSON schema name listed in the discovery document. For example:
+        #     "Project"
+        #
+        #     This value is unspecified for resources that do not have an API based on a
+        #     discovery document, such as Cloud Bigtable.
         # @!attribute [rw] resource_url
         #   @return [String]
-        #     The REST URL for accessing the resource. An HTTP GET operation using this
-        #     URL returns the resource itself.
-        #     Example:
-        #     `https://cloudresourcemanager.googleapis.com/v1/projects/my-project-123`.
-        #     It will be left unspecified for resources without a REST API.
+        #     The REST URL for accessing the resource. An HTTP `GET` request using this
+        #     URL returns the resource itself. For example:
+        #     "https://cloudresourcemanager.googleapis.com/v1/projects/my-project-123"
+        #
+        #     This value is unspecified for resources without a REST API.
         # @!attribute [rw] parent
         #   @return [String]
         #     The full name of the immediate parent of this resource. See
@@ -112,16 +144,17 @@ module Google
         #     Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
         #     for more information.
         #
-        #     For GCP assets, it is the parent resource defined in the [Cloud IAM policy
+        #     For Google Cloud assets, this value is the parent resource defined in the
+        #     [Cloud IAM policy
         #     hierarchy](https://cloud.google.com/iam/docs/overview#policy_hierarchy).
         #     For example:
-        #     `"//cloudresourcemanager.googleapis.com/projects/my_project_123"`.
+        #     "//cloudresourcemanager.googleapis.com/projects/my_project_123"
         #
-        #     For third-party assets, it is up to the users to define.
+        #     For third-party assets, this field may be set differently.
         # @!attribute [rw] data
         #   @return [Google::Protobuf::Struct]
-        #     The content of the resource, in which some sensitive fields are scrubbed
-        #     away and may not be present.
+        #     The content of the resource, in which some sensitive fields are removed
+        #     and may not be present.
         class Resource
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods

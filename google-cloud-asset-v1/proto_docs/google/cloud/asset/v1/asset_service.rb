@@ -31,10 +31,10 @@ module Google
         # @!attribute [rw] read_time
         #   @return [Google::Protobuf::Timestamp]
         #     Timestamp to take an asset snapshot. This can only be set to a timestamp
-        #     between 2018-10-02 UTC (inclusive) and the current time. If not specified,
-        #     the current time will be used. Due to delays in resource data collection
-        #     and indexing, there is a volatile window during which running the same
-        #     query may get different results.
+        #     between the current time and the current time minus 35 days (inclusive).
+        #     If not specified, the current time will be used. Due to delays in resource
+        #     data collection and indexing, there is a volatile window during which
+        #     running the same query may get different results.
         # @!attribute [rw] asset_types
         #   @return [Array<String>]
         #     A list of asset types of which to take a snapshot for. For example:
@@ -94,11 +94,11 @@ module Google
         # @!attribute [rw] read_time_window
         #   @return [Google::Cloud::Asset::V1::TimeWindow]
         #     Optional. The time window for the asset history. Both start_time and
-        #     end_time are optional and if set, it must be after 2018-10-02 UTC. If
-        #     end_time is not set, it is default to current timestamp. If start_time is
-        #     not set, the snapshot of the assets at end_time will be returned. The
-        #     returned results contain all temporal assets whose time window overlap with
-        #     read_time_window.
+        #     end_time are optional and if set, it must be after the current time minus
+        #     35 days. If end_time is not set, it is default to current timestamp.
+        #     If start_time is not set, the snapshot of the assets at end_time will be
+        #     returned. The returned results contain all temporal assets whose time
+        #     window overlap with read_time_window.
         class BatchGetAssetsHistoryRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -242,7 +242,7 @@ module Google
         #     Required. The BigQuery dataset in format
         #     "projects/projectId/datasets/datasetId", to which the snapshot result
         #     should be exported. If this dataset does not exist, the export call returns
-        #     an error.
+        #     an INVALID_ARGUMENT error.
         # @!attribute [rw] table
         #   @return [String]
         #     Required. The BigQuery table to which the snapshot result should be
@@ -252,17 +252,17 @@ module Google
         #   @return [Boolean]
         #     If the destination table already exists and this flag is `TRUE`, the
         #     table will be overwritten by the contents of assets snapshot. If the flag
-        #     is not set and the destination table already exists, the export call
-        #     returns an error.
+        #     is `FALSE` or unset and the destination table already exists, the export
+        #     call returns an INVALID_ARGUMEMT error.
         class BigQueryDestination
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Cloud Pubsub destination.
+        # A Pub/Sub destination.
         # @!attribute [rw] topic
         #   @return [String]
-        #     The name of the Cloud Pub/Sub topic to publish to.
+        #     The name of the Pub/Sub topic to publish to.
         #     For example: `projects/PROJECT_ID/topics/TOPIC_ID`.
         class PubsubDestination
           include Google::Protobuf::MessageExts
@@ -272,7 +272,7 @@ module Google
         # Output configuration for asset feed destination.
         # @!attribute [rw] pubsub_destination
         #   @return [Google::Cloud::Asset::V1::PubsubDestination]
-        #     Destination on Cloud Pubsub.
+        #     Destination on Pub/Sub.
         class FeedOutputConfig
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -282,7 +282,7 @@ module Google
         # An asset feed filter controls what updates are exported.
         # The asset feed must be created within a project, organization, or
         # folder. Supported destinations are:
-        # Cloud Pub/Sub topics.
+        # Pub/Sub topics.
         # @!attribute [rw] name
         #   @return [String]
         #     Required. The format will be
@@ -307,10 +307,11 @@ module Google
         #     A list of types of the assets to receive updates. You must specify either
         #     or both of asset_names and asset_types. Only asset updates matching
         #     specified asset_names and asset_types are exported to the feed.
-        #     For example:
-        #     "compute.googleapis.com/Disk" See [Introduction to Cloud Asset
-        #     Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
-        #     for all supported asset types.
+        #     For example: `"compute.googleapis.com/Disk"`
+        #
+        #     See [this
+        #     topic](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
+        #     for a list of all supported asset types.
         # @!attribute [rw] content_type
         #   @return [Google::Cloud::Asset::V1::ContentType]
         #     Asset content type. If not specified, no content but the asset name and
