@@ -72,10 +72,6 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient#set_iam_policy."
 
     it 'invokes set_iam_policy without error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient.note_path("[PROJECT]", "[NOTE]")
-      policy = {}
-
       # Create expected grpc response
       version = 351608024
       etag = "21"
@@ -83,10 +79,7 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
       expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::Policy)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:set_iam_policy, mock_method)
@@ -99,13 +92,13 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
           client = Google::Cloud::ContainerAnalysis.new(version: :v1)
 
           # Call method
-          response = client.set_iam_policy(formatted_resource, policy)
+          response = client.set_iam_policy
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.set_iam_policy(formatted_resource, policy) do |response, operation|
+          client.set_iam_policy do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -115,15 +108,8 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
     end
 
     it 'invokes set_iam_policy with error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient.note_path("[PROJECT]", "[NOTE]")
-      policy = {}
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:set_iam_policy, mock_method)
@@ -137,7 +123,7 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.set_iam_policy(formatted_resource, policy)
+            client.set_iam_policy
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -151,9 +137,6 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient#get_iam_policy."
 
     it 'invokes get_iam_policy without error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient.note_path("[PROJECT]", "[NOTE]")
-
       # Create expected grpc response
       version = 351608024
       etag = "21"
@@ -161,9 +144,7 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
       expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::Policy)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
@@ -176,13 +157,13 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
           client = Google::Cloud::ContainerAnalysis.new(version: :v1)
 
           # Call method
-          response = client.get_iam_policy(formatted_resource)
+          response = client.get_iam_policy
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_iam_policy(formatted_resource) do |response, operation|
+          client.get_iam_policy do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -192,13 +173,8 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
     end
 
     it 'invokes get_iam_policy with error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient.note_path("[PROJECT]", "[NOTE]")
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:get_iam_policy, mock_method)
@@ -212,7 +188,7 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.get_iam_policy(formatted_resource)
+            client.get_iam_policy
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -226,19 +202,12 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient#test_iam_permissions."
 
     it 'invokes test_iam_permissions without error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient.note_path("[PROJECT]", "[NOTE]")
-      permissions = []
-
       # Create expected grpc response
       expected_response = {}
       expected_response = Google::Gax::to_proto(expected_response, Google::Iam::V1::TestIamPermissionsResponse)
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(permissions, request.permissions)
+      mock_method = proc do
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
@@ -251,13 +220,13 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
           client = Google::Cloud::ContainerAnalysis.new(version: :v1)
 
           # Call method
-          response = client.test_iam_permissions(formatted_resource, permissions)
+          response = client.test_iam_permissions
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.test_iam_permissions(formatted_resource, permissions) do |response, operation|
+          client.test_iam_permissions do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -267,15 +236,8 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
     end
 
     it 'invokes test_iam_permissions with error' do
-      # Create request parameters
-      formatted_resource = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient.note_path("[PROJECT]", "[NOTE]")
-      permissions = []
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(formatted_resource, request.resource)
-        assert_equal(permissions, request.permissions)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:test_iam_permissions, mock_method)
@@ -289,7 +251,7 @@ describe Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.test_iam_permissions(formatted_resource, permissions)
+            client.test_iam_permissions
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
