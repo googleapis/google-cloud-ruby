@@ -28,6 +28,10 @@ library = gapic.ruby_library(
     extra_proto_files=[
         "google/cloud/common_resources.proto",
         "google/cloud/orgpolicy/v1/orgpolicy.proto",
+        "google/identity/accesscontextmanager/type/device_resources.proto",
+        "google/identity/accesscontextmanager/v1/access_level.proto",
+        "google/identity/accesscontextmanager/v1/access_policy.proto",
+        "google/identity/accesscontextmanager/v1/service_perimeter.proto",
     ],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-asset-v1",
