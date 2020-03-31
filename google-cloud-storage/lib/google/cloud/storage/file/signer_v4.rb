@@ -64,7 +64,10 @@ module Google
 
             policy_str = p.to_json
             puts "\n\npolicy_str:\n\n#{policy_str}\n\n"
-            policy = Base64.strict_encode64(policy_str).force_encoding "utf-8"
+            policy_str_fake = '{\"conditions\":[{\"success_action_redirect\":\"http://www.google.com/\"},{\"x-goog-meta\":\"$test-object-\u00e9-metadata\"},{\"key\":\"$test-object-\u00e9\"},{\"x-goog-date\":\"20200123T043530Z\"},{\"x-goog-credential\":\"test-iam-credentials@dummy-project-id.iam.gserviceaccount.com/20200123/auto/storage/goog4_request\"},{\"x-goog-algorithm\":\"GOOG4-RSA-SHA256\"}],\"expiration\":\"2020-01-23T04:35:40Z\"}'.force_encoding "ASCII"
+            puts "\n\policy_str_fake:\n\n#{policy_str_fake}\n\n"
+
+            policy = Base64.strict_encode64(policy_str_fake).force_encoding "utf-8"
             signature = generate_signature s, policy
 
             fields["x-goog-signature"] = signature
