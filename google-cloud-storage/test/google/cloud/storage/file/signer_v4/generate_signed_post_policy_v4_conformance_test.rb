@@ -14,11 +14,11 @@
 
 require "helper"
 require "json"
-require_relative "../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb.rb"
+require_relative "../../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb.rb"
 
-class SignerV4PostObjectTest < MockStorage
+class GenerateSignedPostPolicyV4ConformanceTest < MockStorage
   def setup
-    account_file_path = File.expand_path "../../../../../conformance/v1/test_service_account.not-a-test.json", __dir__
+    account_file_path = File.expand_path "../../../../../../conformance/v1/test_service_account.not-a-test.json", __dir__
     account = JSON.parse File.read(account_file_path)
     credentials.issuer = account["client_email"]
     credentials.signing_key = OpenSSL::PKey::RSA.new account["private_key"]
@@ -37,12 +37,13 @@ class SignerV4PostObjectTest < MockStorage
       @test_data = ["signer_v4", index, description, output.expectedDecodedPolicy]
       signer = Google::Cloud::Storage::File::SignerV4.new input.bucket, input.object, storage.service
       bucket_bound_hostname = input.bucketBoundHostname unless input.bucketBoundHostname&.empty?
+      fields = fields_hash input.fields
 
       Time.stub :now, timestamp_to_time(input.timestamp) do
         # sut
         post_object = signer.post_object issuer: credentials.issuer,
                                          expires: input.expiration,
-                                         fields: input.fields.to_h,
+                                         fields: fields,
                                          conditions: conditions_array(input.conditions),
                                          scheme: input.scheme,
                                          virtual_hosted_style: (input.urlStyle == :VIRTUAL_HOSTED_STYLE),
@@ -60,19 +61,18 @@ class SignerV4PostObjectTest < MockStorage
   end
 
   def self.bucket_test_for description, input, output, index
-    return unless [9].include? index
-    focus
     define_method("test_bucket_#{index}: #{description}") do
       @test_data = ["bucket", index, description, output.expectedDecodedPolicy]
       bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(input.bucket).to_json
       bucket = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service
       bucket_bound_hostname = input.bucketBoundHostname unless input.bucketBoundHostname&.empty?
+      fields = fields_hash input.fields
 
       Time.stub :now, timestamp_to_time(input.timestamp) do
         # sut
         post_object = bucket.post_object_v4 input.object, issuer: credentials.issuer,
                                                           expires: input.expiration,
-                                                          fields: input.fields.to_h,
+                                                          fields: fields,
                                                           conditions: conditions_array(input.conditions),
                                                           scheme: input.scheme,
                                                           virtual_hosted_style: (input.urlStyle == :VIRTUAL_HOSTED_STYLE),
@@ -89,9 +89,9 @@ class SignerV4PostObjectTest < MockStorage
     end
   end
 
-  def fields_array fields
-    return nil unless fields
-    [{"acl":"public-read"},{"cache-control":"public,max-age=86400"}]
+  # Return a hash from the proto Map, sorted by keys
+  def fields_hash input_fields
+    input_fields.keys.sort.inject({}) { |memo, k| memo[k] = input_fields[k]; memo }
   end
 
   def conditions_array conditions
@@ -108,9 +108,9 @@ class SignerV4PostObjectTest < MockStorage
   end
 end
 
-file_path = File.expand_path "../../../../../conformance/v1/v4_signatures.json", __dir__
+file_path = File.expand_path "../../../../../../conformance/v1/v4_signatures.json", __dir__
 test_file = Google::Cloud::Conformance::Storage::V1::TestFile.decode_json File.read(file_path)
 test_file.post_policy_v4_tests.each_with_index do |test, index|
-  SignerV4PostObjectTest.signer_v4_test_for test.description, test.policyInput, test.policyOutput, index
-  SignerV4PostObjectTest.bucket_test_for test.description, test.policyInput, test.policyOutput, index
+  GenerateSignedPostPolicyV4ConformanceTest.signer_v4_test_for test.description, test.policyInput, test.policyOutput, index
+  GenerateSignedPostPolicyV4ConformanceTest.bucket_test_for test.description, test.policyInput, test.policyOutput, index
 end

@@ -55,26 +55,25 @@ module Google
 
             now = Time.now.utc
             base_fields = required_fields i, now
+            post_fields = fields.dup || {}
+            post_fields.merge! base_fields
+
             p = {}
             p["conditions"] = policy_conditions base_fields, conditions, fields
             expires ||= 60*60*24
             p["expiration"] = (now + expires).strftime "%Y-%m-%dT%H:%M:%SZ"
-            fields ||= {}
-            fields.merge! base_fields
 
-            policy_str = p.to_json
-            puts "\n\npolicy_str:\n\n#{policy_str}\n\n"
-            policy_str_fake = '{\"conditions\":[{\"success_action_redirect\":\"http://www.google.com/\"},{\"x-goog-meta\":\"$test-object-\u00e9-metadata\"},{\"key\":\"$test-object-\u00e9\"},{\"x-goog-date\":\"20200123T043530Z\"},{\"x-goog-credential\":\"test-iam-credentials@dummy-project-id.iam.gserviceaccount.com/20200123/auto/storage/goog4_request\"},{\"x-goog-algorithm\":\"GOOG4-RSA-SHA256\"}],\"expiration\":\"2020-01-23T04:35:40Z\"}'.force_encoding "ASCII"
-            puts "\n\policy_str_fake:\n\n#{policy_str_fake}\n\n"
 
-            policy = Base64.strict_encode64(policy_str_fake).force_encoding "utf-8"
+            policy_str = escape_characters p.to_json
+
+            policy = Base64.strict_encode64(policy_str).force_encoding "utf-8"
             signature = generate_signature s, policy
 
-            fields["x-goog-signature"] = signature
-            fields["policy"] = policy
+            post_fields["x-goog-signature"] = signature
+            post_fields["policy"] = policy
             url = post_object_ext_url scheme, virtual_hosted_style, bucket_bound_hostname
             hostname = "#{url}#{bucket_path path_style?(virtual_hosted_style, bucket_bound_hostname)}"
-            Google::Cloud::Storage::PostObject.new hostname, fields
+            Google::Cloud::Storage::PostObject.new hostname, post_fields
           end
 
           def signed_url method: "GET",
@@ -129,6 +128,21 @@ module Google
             "#{hostname}?#{canonical_query_str}&X-Goog-Signature=#{signature}"
           end
 
+          # methods below are public visibility only for unit testing
+          def escape_characters str
+            str.split("").map do |s|
+              if !s.ascii_only?
+                escape_special_unicode s
+              else
+                s
+              end
+            end.join
+          end
+
+          def escape_special_unicode str
+            str.unpack("U*").map { |i| '\u' + i.to_s(16).rjust(4, "0") }.join
+          end
+
           protected
 
           def required_fields issuer, time
@@ -137,19 +151,19 @@ module Google
               "x-goog-date" => time.strftime("%Y%m%dT%H%M%SZ"),
               "x-goog-credential" => "#{issuer}/#{time.strftime '%Y%m%d'}/auto/storage/goog4_request",
               "x-goog-algorithm" => "GOOG4-RSA-SHA256"
-            }
+            }.freeze
           end
 
           def policy_conditions base_fields, user_conditions, user_fields
             # Convert each pair in base_fields hash to a single-entry hash in an array.
-            base_conditions = base_fields.to_a.map { |f| Hash[*f] }
+            conditions = base_fields.to_a.map { |f| Hash[*f] }
             # Add user-provided conditions to the head of the conditions array.
-            base_conditions.unshift user_conditions if user_conditions && !user_conditions.empty?
+            conditions.unshift user_conditions if user_conditions && !user_conditions.empty?
             if user_fields
               # Convert each pair in fields hash to a single-entry hash and add it to the head of the conditions array.
-              user_fields.to_a.each { |f| base_conditions.unshift Hash[*f] }
+              user_fields.to_a.reverse.each { |f| conditions.unshift Hash[*f] }
             end
-            base_conditions
+            conditions.freeze
           end
 
           def signed_url_hostname scheme, virtual_hosted_style, bucket_bound_hostname

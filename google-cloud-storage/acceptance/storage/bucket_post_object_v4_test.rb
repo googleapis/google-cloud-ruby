@@ -96,6 +96,7 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
     request.set_form form_data, 'multipart/form-data'
 
     response = http.request request
+
     response.code.must_equal "204"
     file = bucket.file(post_object.fields["key"])
     file.wont_be :nil?
@@ -124,6 +125,7 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
     request.set_form form_data, 'multipart/form-data'
 
     response = http.request request
+
     response.code.must_equal "200"
     file = bucket.file(post_object.fields["key"])
     file.wont_be :nil?
