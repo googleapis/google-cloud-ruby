@@ -110,8 +110,6 @@ module Google
           end
 
           # Returns a fully-qualified topic resource name string.
-          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
-          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param topic [String]
           # @return [String]
