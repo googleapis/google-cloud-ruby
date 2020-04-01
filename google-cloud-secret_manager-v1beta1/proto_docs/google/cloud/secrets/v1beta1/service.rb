@@ -65,6 +65,10 @@ module Google
         # @!attribute [rw] secret_id
         #   @return [String]
         #     Required. This must be unique within the project.
+        #
+        #     A secret ID is a string with a maximum length of 255 characters and can
+        #     contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
+        #     underscore (`_`) characters.
         # @!attribute [rw] secret
         #   @return [Google::Cloud::SecretManager::V1beta1::Secret]
         #     A {Google::Cloud::SecretManager::V1beta1::Secret Secret} with initial field values.
