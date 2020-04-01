@@ -723,6 +723,7 @@ google-cloud-security_center:
 google-cloud-service_directory:
 - v0.1.0
 google-cloud-service_directory-v1beta1:
+- v0.2.1
 - v0.2.0
 - v0.1.0
 google-cloud-spanner:
