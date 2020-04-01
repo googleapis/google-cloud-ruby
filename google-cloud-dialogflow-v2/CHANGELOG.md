@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.2 / 2020-04-01
+
+#### Documentation
+
+* Update documentation for core proto types.
+
 ### 0.2.1 / 2020-03-28
 
 #### Bug Fixes
