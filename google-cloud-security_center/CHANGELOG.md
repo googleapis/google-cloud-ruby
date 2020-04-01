@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2020-04-01
+
+#### Features
+
+* Provide a path helper for the security_marks resource.
+
 ### 0.9.0 / 2020-03-11
 
 #### Features
