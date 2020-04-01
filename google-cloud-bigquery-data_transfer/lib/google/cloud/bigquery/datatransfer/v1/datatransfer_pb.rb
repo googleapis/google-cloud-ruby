@@ -66,6 +66,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :AUTHORIZATION_TYPE_UNSPECIFIED, 0
     value :AUTHORIZATION_CODE, 1
     value :GOOGLE_PLUS_AUTHORIZATION_CODE, 2
+    value :FIRST_PARTY_OAUTH, 3
   end
   add_enum "google.cloud.bigquery.datatransfer.v1.DataSource.DataRefreshType" do
     value :DATA_REFRESH_TYPE_UNSPECIFIED, 0
