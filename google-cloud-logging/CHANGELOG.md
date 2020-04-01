@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.2 / 2020-04-01
+
+#### Bug Fixes
+
+* Restore some path helpers in the low-level interface.
+
 ### 1.10.1 / 2020-03-19
 
 #### Bug Fixes
