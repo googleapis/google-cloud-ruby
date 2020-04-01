@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 / 2020-04-01
+
+#### Documentation
+
+* Remove broken troubleshooting link from auth guide.
+
 ### 0.7.0 / 2020-03-11
 
 #### Features
