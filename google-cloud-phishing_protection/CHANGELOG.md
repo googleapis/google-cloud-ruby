@@ -1,5 +1,12 @@
 # Release History
 
+### 0.4.1 / 2020-04-01
+
+#### Documentation
+
+* edit synths to fix broken links ([#5190](https://www.github.com/googleapis/google-cloud-ruby/issues/5190))
+* Remove broken troubleshooting link from auth guide.
+
 ### 0.4.0 / 2020-03-11
 
 #### Features
