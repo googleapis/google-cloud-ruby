@@ -4,8 +4,7 @@
 
 #### Documentation
 
-* edit synths to fix broken links ([#5190](https://www.github.com/googleapis/google-cloud-ruby/issues/5190))
-* Remove broken troubleshooting link from auth guide.
+* Fixed a number of broken links.
 
 ### 0.4.0 / 2020-03-11
 
