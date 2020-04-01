@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2020-04-01
+
+#### Features
+
+* Support FIRST_PARTY_OAUTH for data sources.
+
 ### 0.7.0 / 2020-03-11
 
 #### Features
