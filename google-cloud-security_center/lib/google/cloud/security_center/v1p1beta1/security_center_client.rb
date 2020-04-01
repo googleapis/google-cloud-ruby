@@ -119,6 +119,12 @@ module Google
 
           private_constant :ORGANIZATION_SETTINGS_PATH_TEMPLATE
 
+          SECURITY_MARKS_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+            "organizations/{organization}/assets/{asset}/securityMarks"
+          )
+
+          private_constant :SECURITY_MARKS_PATH_TEMPLATE
+
           SOURCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
             "organizations/{organization}/sources/{source}"
           )
@@ -170,6 +176,17 @@ module Google
           def self.organization_settings_path organization
             ORGANIZATION_SETTINGS_PATH_TEMPLATE.render(
               :"organization" => organization
+            )
+          end
+
+          # Returns a fully-qualified security_marks resource name string.
+          # @param organization [String]
+          # @param asset [String]
+          # @return [String]
+          def self.security_marks_path organization, asset
+            SECURITY_MARKS_PATH_TEMPLATE.render(
+              :"organization" => organization,
+              :"asset" => asset
             )
           end
 

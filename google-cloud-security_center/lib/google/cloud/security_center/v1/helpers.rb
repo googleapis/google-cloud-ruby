@@ -66,6 +66,14 @@ module Google
             self.class.organization_settings_path organization
           end
           
+          # Alias for Google::Cloud::SecurityCenter::V1::SecurityCenterClient.security_marks_path.
+          # @param organization [String]
+          # @param asset [String]
+          # @return [String]
+          def security_marks_path organization, asset
+            self.class.security_marks_path organization, asset
+          end
+          
           # Alias for Google::Cloud::SecurityCenter::V1::SecurityCenterClient.source_path.
           # @param organization [String]
           # @param source [String]
