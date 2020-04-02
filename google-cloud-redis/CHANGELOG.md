@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.2 / 2020-04-01
+
+#### Documentation
+
+* Fixed a number of broken links.
+
 ### 0.8.1 / 2020-03-26
 
 #### Documentation
