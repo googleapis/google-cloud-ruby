@@ -1,5 +1,12 @@
 # Release History
 
+### 0.37.1 / 2020-04-01
+
+#### Documentation
+
+* Document ServiceTier as obsolete and unused.
+* Remove broken troubleshooting link from auth guide.
+
 ### 0.37.0 / 2020-03-25
 
 #### Features
