@@ -1,0 +1,40 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "google-cloud-data_catalog-v1.gemspec"
+    - "lib/**/*_pb.rb"
+    - "proto_docs/**/*"
+    - "test/**/*"
+    - "acceptance/**/*"
+    - "Rakefile"
+
+Metrics/AbcSize:
+  Exclude:
+    - "lib/google/cloud/data_catalog/v1/data_catalog/*.rb"
+Metrics/ClassLength:
+  Exclude:
+    - "lib/google/cloud/data_catalog/v1/data_catalog/*.rb"
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/google/cloud/data_catalog/v1/data_catalog/*.rb"
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/data_catalog/v1/data_catalog/*.rb"
+    - "google-cloud-data_catalog-v1.gemspec"
+Metrics/MethodLength:
+  Exclude:
+    - "lib/google/cloud/data_catalog/v1/data_catalog/*.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/google/cloud/data_catalog/v1/data_catalog/*.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-data_catalog-v1.rb"
+Style/CaseEquality:
+  Exclude:
+    - "lib/google/cloud/data_catalog/v1/data_catalog/*.rb"
+    - "lib/google/cloud/data_catalog/v1.rb"
+Style/ModuleFunction:
+  Enabled: false
