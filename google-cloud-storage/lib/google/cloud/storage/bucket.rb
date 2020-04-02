@@ -1693,7 +1693,7 @@ module Google
         # `issuer` and `signing_key` values. Although the private key can
         # be passed as a string for convenience, creating and storing
         # an instance of # `OpenSSL::PKey::RSA` is more efficient
-        # when making multiple calls to `post_object_v4`.
+        # when making multiple calls to `generate_signed_post_policy_v4`.
         #
         # A {SignedUrlUnavailable} is raised if the service account credentials
         # are missing. Service account credentials are acquired by following the
@@ -1735,7 +1735,8 @@ module Google
         #
         #   bucket = storage.bucket "my-todo-app"
         #   conditions = [["starts-with","$acl","public"]]
-        #   post = bucket.post_object_v4 "avatars/heidi/400x400.png", expires: 10, conditions: conditions
+        #   post = bucket.generate_signed_post_policy_v4 "avatars/heidi/400x400.png", expires: 10,
+        #                                                                             conditions: conditions
         #
         #   post.url #=> "https://storage.googleapis.com/my-todo-app/"
         #   post.fields["key"] #=> "my-todo-app/avatars/heidi/400x400.png"
@@ -1745,17 +1746,17 @@ module Google
         #   post.fields["x-goog-date"] #=> "20200128T000000Z"
         #   post.fields["x-goog-signature"] #=> "4893a0e...cd82"
         #
-        def post_object_v4 path,
-                           issuer: nil,
-                           client_email: nil,
-                           signing_key: nil,
-                           private_key: nil,
-                           expires: nil,
-                           fields: nil,
-                           conditions: nil,
-                           scheme: "https",
-                           virtual_hosted_style: nil,
-                           bucket_bound_hostname: nil
+        def generate_signed_post_policy_v4 path,
+                                           issuer: nil,
+                                           client_email: nil,
+                                           signing_key: nil,
+                                           private_key: nil,
+                                           expires: nil,
+                                           fields: nil,
+                                           conditions: nil,
+                                           scheme: "https",
+                                           virtual_hosted_style: nil,
+                                           bucket_bound_hostname: nil
           ensure_service!
           signer = File::SignerV4.from_bucket self, path
           signer.post_object issuer: issuer,

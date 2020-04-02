@@ -16,7 +16,7 @@ require "storage_helper"
 require 'net/http'
 require 'uri'
 
-describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
+describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :storage do
   let(:bucket_name) { $bucket_names.first }
   let :bucket do
     storage.bucket(bucket_name) ||
@@ -27,7 +27,7 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
   let(:data) { File.expand_path("../data/#{data_file}", __dir__) }
 
   it "generates a signed post object v4 simple" do
-    post_object = bucket.post_object_v4 "test-object", expires: 10
+    post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10
 
     form_data = [['file', File.open(data)]]
 
@@ -53,7 +53,7 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
   end
 
   it "generates a signed post object v4 virtual hosted style" do
-    post_object = bucket.post_object_v4 "test-object", expires: 10, virtual_hosted_style: true
+    post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10, virtual_hosted_style: true
 
     form_data = [['file', File.open(data)]]
 
@@ -82,7 +82,7 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
       "acl" => "public-read",
       "cache-control" => "public,max-age=86400"
     }
-    post_object = bucket.post_object_v4 "test-object", expires: 10, fields: fields
+    post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10, fields: fields
 
     form_data = [['file', File.open(data)]]
 
@@ -111,7 +111,7 @@ describe Google::Cloud::Storage::Bucket, :post_object_v4, :storage do
     fields = {
       "success_action_status" => "200"
     }
-    post_object = bucket.post_object_v4 "test-object", expires: 10, fields: fields
+    post_object = bucket.generate_signed_post_policy_v4 "test-object", expires: 10, fields: fields
 
     form_data = [['file', File.open(data)]]
 

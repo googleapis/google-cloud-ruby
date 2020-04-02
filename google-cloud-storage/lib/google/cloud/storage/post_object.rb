@@ -41,14 +41,14 @@ module Google
       #   post.fields[:signature] #=> "ABC...XYZ="
       #   post.fields[:policy] #=> "ABC...XYZ="
       #
-      # @example Using Bucket#post_object_v4 (V4):
+      # @example Using Bucket#generate_signed_post_policy_v4 (V4):
       #   require "google/cloud/storage"
       #
       #   storage = Google::Cloud::Storage.new
       #
       #   bucket = storage.bucket "my-todo-app"
       #   conditions = [["starts-with","$acl","public"]]
-      #   post = bucket.post_object_v4 "avatars/heidi/400x400.png", expires: 10, conditions: conditions
+      #   post = bucket.generate_signed_post_policy_v4 "avatars/heidi/400x400.png", expires: 10, conditions: conditions
       #
       #   post.url #=> "https://storage.googleapis.com/my-todo-app/"
       #   post.fields["key"] #=> "my-todo-app/avatars/heidi/400x400.png"

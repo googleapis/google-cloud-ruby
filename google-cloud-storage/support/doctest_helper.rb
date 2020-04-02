@@ -65,17 +65,17 @@ module Google
               policy: "ABC...XYZ=" }
         end
 
-        def post_object_v4 path,
-                           issuer: nil,
-                           client_email: nil,
-                           signing_key: nil,
-                           private_key: nil,
-                           expires: nil,
-                           fields: nil,
-                           conditions: nil,
-                           scheme: "https",
-                           virtual_hosted_style: nil,
-                           bucket_bound_hostname: nil
+        def generate_signed_post_policy_v4 path,
+                                           issuer: nil,
+                                           client_email: nil,
+                                           signing_key: nil,
+                                           private_key: nil,
+                                           expires: nil,
+                                           fields: nil,
+                                           conditions: nil,
+                                           scheme: "https",
+                                           virtual_hosted_style: nil,
+                                           bucket_bound_hostname: nil
           fields = {
             "key" => "my-todo-app/avatars/heidi/400x400.png",
             "policy" => "ABC...XYZ",
@@ -292,6 +292,12 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#signed_url" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#generate_signed_post_policy_v4" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
     end

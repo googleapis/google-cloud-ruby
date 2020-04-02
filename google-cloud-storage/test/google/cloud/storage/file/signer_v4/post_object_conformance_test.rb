@@ -16,7 +16,7 @@ require "helper"
 require "json"
 require_relative "../../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb.rb"
 
-class GenerateSignedPostPolicyV4ConformanceTest < MockStorage
+class PostObjectConformanceTest < MockStorage
   def setup
     account_file_path = File.expand_path "../../../../../../conformance/v1/test_service_account.not-a-test.json", __dir__
     account = JSON.parse File.read(account_file_path)
@@ -33,6 +33,7 @@ class GenerateSignedPostPolicyV4ConformanceTest < MockStorage
   end
 
   def self.signer_v4_test_for description, input, output, index
+    focus
     define_method("test_signer_v4_#{index}: #{description}") do
       @test_data = ["signer_v4", index, description, output.expectedDecodedPolicy]
       signer = Google::Cloud::Storage::File::SignerV4.new input.bucket, input.object, storage.service
@@ -74,13 +75,14 @@ class GenerateSignedPostPolicyV4ConformanceTest < MockStorage
 
       Time.stub :now, timestamp_to_time(input.timestamp) do
         # sut
-        post_object = bucket.post_object_v4 input.object, issuer: credentials.issuer,
-                                                          expires: input.expiration,
-                                                          fields: fields,
-                                                          conditions: conditions_array(input.conditions),
-                                                          scheme: input.scheme,
-                                                          virtual_hosted_style: (input.urlStyle == :VIRTUAL_HOSTED_STYLE),
-                                                          bucket_bound_hostname: bucket_bound_hostname
+        post_object = bucket.generate_signed_post_policy_v4 input.object,
+                                                            issuer: credentials.issuer,
+                                                            expires: input.expiration,
+                                                            fields: fields,
+                                                            conditions: conditions_array(input.conditions),
+                                                            scheme: input.scheme,
+                                                            virtual_hosted_style: (input.urlStyle == :VIRTUAL_HOSTED_STYLE),
+                                                            bucket_bound_hostname: bucket_bound_hostname
 
         post_object.url.must_equal output.url
         post_object.fields["key"].must_equal output.fields["key"]
@@ -89,10 +91,6 @@ class GenerateSignedPostPolicyV4ConformanceTest < MockStorage
         post_object.fields["x-goog-date"].must_equal output.fields["x-goog-date"]
         post_object.fields["policy"].must_equal output.fields["policy"]
         post_object.fields["x-goog-signature"].must_equal output.fields["x-goog-signature"]
-
-        fields.each_pair do |k, v|
-          post_object.fields[k].must_equal v
-        end
       end
     end
   end
@@ -119,6 +117,6 @@ end
 file_path = File.expand_path "../../../../../../conformance/v1/v4_signatures.json", __dir__
 test_file = Google::Cloud::Conformance::Storage::V1::TestFile.decode_json File.read(file_path)
 test_file.post_policy_v4_tests.each_with_index do |test, index|
-  GenerateSignedPostPolicyV4ConformanceTest.signer_v4_test_for test.description, test.policyInput, test.policyOutput, index
-  GenerateSignedPostPolicyV4ConformanceTest.bucket_test_for test.description, test.policyInput, test.policyOutput, index
+  PostObjectConformanceTest.signer_v4_test_for test.description, test.policyInput, test.policyOutput, index
+  PostObjectConformanceTest.bucket_test_for test.description, test.policyInput, test.policyOutput, index
 end
