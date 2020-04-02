@@ -1,0 +1,40 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "google-cloud-redis-v1.gemspec"
+    - "lib/**/*_pb.rb"
+    - "proto_docs/**/*"
+    - "test/**/*"
+    - "acceptance/**/*"
+    - "Rakefile"
+
+Metrics/AbcSize:
+  Exclude:
+    - "lib/google/cloud/redis/v1/cloud_redis/*.rb"
+Metrics/ClassLength:
+  Exclude:
+    - "lib/google/cloud/redis/v1/cloud_redis/*.rb"
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/google/cloud/redis/v1/cloud_redis/*.rb"
+Metrics/LineLength:
+  Exclude:
+    - "lib/google/cloud/redis/v1/cloud_redis/*.rb"
+    - "google-cloud-redis-v1.gemspec"
+Metrics/MethodLength:
+  Exclude:
+    - "lib/google/cloud/redis/v1/cloud_redis/*.rb"
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/google/cloud/redis/v1/cloud_redis/*.rb"
+Naming/FileName:
+  Exclude:
+    - "lib/google-cloud-redis-v1.rb"
+Style/CaseEquality:
+  Exclude:
+    - "lib/google/cloud/redis/v1/cloud_redis/*.rb"
+    - "lib/google/cloud/redis/v1.rb"
+Style/ModuleFunction:
+  Enabled: false
