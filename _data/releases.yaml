@@ -536,6 +536,7 @@ google-cloud-logging:
 - v0.20.1
 - v0.20.0
 google-cloud-monitoring:
+- v0.37.1
 - v0.37.0
 - v0.35.1
 - v0.35.0
