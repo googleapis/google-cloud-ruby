@@ -56,6 +56,10 @@ class GenerateSignedPostPolicyV4ConformanceTest < MockStorage
         post_object.fields["x-goog-date"].must_equal output.fields["x-goog-date"]
         post_object.fields["policy"].must_equal output.fields["policy"]
         post_object.fields["x-goog-signature"].must_equal output.fields["x-goog-signature"]
+
+        fields.each_pair do |k, v|
+          post_object.fields[k].must_equal v
+        end
       end
     end
   end
@@ -85,6 +89,10 @@ class GenerateSignedPostPolicyV4ConformanceTest < MockStorage
         post_object.fields["x-goog-date"].must_equal output.fields["x-goog-date"]
         post_object.fields["policy"].must_equal output.fields["policy"]
         post_object.fields["x-goog-signature"].must_equal output.fields["x-goog-signature"]
+
+        fields.each_pair do |k, v|
+          post_object.fields[k].must_equal v
+        end
       end
     end
   end

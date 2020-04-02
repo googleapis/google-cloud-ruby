@@ -134,7 +134,24 @@ module Google
               if !s.ascii_only?
                 escape_special_unicode s
               else
-                s
+                case s
+                when "\\"
+                  '\\'
+                when "\b"
+                  '\b'
+                when "\f"
+                  '\f'
+                when "\n"
+                  '\n'
+                when "\r"
+                  '\r'
+                when "\t"
+                  '\t'
+                when "\v"
+                  '\v'
+                else
+                  s
+                end
               end
             end.join
           end
