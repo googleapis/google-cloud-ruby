@@ -1,5 +1,11 @@
 # Release History
 
+### 0.33.2 / 2020-04-01
+
+#### Documentation
+
+* fix some incorrect markdown causing spurious links
+
 ### 0.33.1 / 2020-02-04
 
 #### Bug Fixes
