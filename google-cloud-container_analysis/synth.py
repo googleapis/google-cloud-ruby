@@ -247,3 +247,10 @@ s.replace(
     'https://googleapis.github.io/google-cloud-ruby/#/docs/.*/authentication',
     'https://googleapis.dev/ruby/google-cloud-container_analysis/latest/file.AUTHENTICATION.html'
 )
+
+# Require helper methods
+s.replace(
+    'lib/google/cloud/container_analysis/v1.rb',
+    'require "google/cloud/container_analysis/v1/container_analysis_client"\n\n',
+    'require "google/cloud/container_analysis/v1/container_analysis_client"\nrequire "google/cloud/container_analysis/v1/helpers"\n\n'
+)
