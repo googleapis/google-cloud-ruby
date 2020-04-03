@@ -51,7 +51,7 @@
           "retry_params_name": "default"
         },
         "ListTimeSeries": {
-          "timeout_millis": 60000,
+          "timeout_millis": 90000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },

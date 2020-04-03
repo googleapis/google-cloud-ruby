@@ -1,5 +1,5 @@
 {
-  "updateTime": "2020-03-31T20:37:54.844694Z",
+  "updateTime": "2020-04-03T10:43:52.201334Z",
   "sources": [
     {
       "generator": {
@@ -12,17 +12,16 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "dc65f39f33cb139b3a2244199a3e722a4d94b679",
-        "internalRef": "304035052",
-        "log": "dc65f39f33cb139b3a2244199a3e722a4d94b679\nFor Secret Manager v1 and v1beta1, noted Secret ID character limitations.\n\nPiperOrigin-RevId: 304035052\n\n2ee8c4d06db823c29a127709e66c35e38b6e98ab\nchore(deps): Update gax-java dependency\nThis is to integrate java11 incompatibility fix\n\nPiperOrigin-RevId: 304032057\n\nb5c94cec71ea9b840dc0110a0275323313ecc85a\nchore: add java assembly target for orgpolicy BUILD.bazel\n\nPiperOrigin-RevId: 304021854\n\n690f4d6344197fde775230cec165a9db3b3929c7\nchore: use the latest protoc-java-resource-name-plugin in third_party/googleapis WORKSPACE.\n- trace up only one level when calculating parent types with singleton resource names\n\nPiperOrigin-RevId: 304007414\n\n87144228bd9920b824996355f27891310fad5a32\nEnable gapic v2 for DLP.\n\nCommitter: @hzyi-google\nPiperOrigin-RevId: 303999064\n\n17cfae00f2bb51cb1683f017da7e295a1b0f01a8\nAdd a new AuthorizationType for Data Source Definition.\n\nPiperOrigin-RevId: 303992863\n\n6da3d64919c006ef40cad2026f1e39084253afe2\nfix(google/maps): Change importpath to developers.google.com/maps/go.\n\nPiperOrigin-RevId: 303976942\n\n2983dccde54f0ce31793e1e628379616c468aea0\nbuild(google/maps): only modify root build.gradle with ext plugin\n\nPiperOrigin-RevId: 303975876\n\n00f0a285f2716ce57e98afe500e450b17b556ff8\nfix: Integerate gapic-generator java_gapic rules Java11 fix\n\nPiperOrigin-RevId: 303899179\n\n"
+        "sha": "3d5d228a58bdf875e6147b228db3159010c735ee",
+        "internalRef": "304500143",
+        "log": "3d5d228a58bdf875e6147b228db3159010c735ee\nEnable visibility on the GetSnapshot and GetTopicSnapshots methods\n\nPiperOrigin-RevId: 304500143\n\n1346f5c11a0376bc82c5c03259b304de52671518\nRefresh public client library for Cloud Monitoring.\nIncrease default ListTimeSeries deadline to 90s.\n\nPiperOrigin-RevId: 304467075\n\n4a6cfccb4a32cb28db7366295d90078c6af3112f\ndocs: Fix link in monitoring summary description.\n\nPiperOrigin-RevId: 304438717\n\n6e2ea9a4b63a264090f1bd4b5b25766a3f634f3a\nfix: add interface name overrides back to logging gapic config.\n\ncommitter: @hzyi-google\nPiperOrigin-RevId: 304438432\n\n01f3ccbaa66cf3ae4e3b9fd140b1ecfbe54a3ed0\nFix: Add package/namespace options for C#, Ruby and PHP in remaining protos.\n\nPiperOrigin-RevId: 304416658\n\nb89abbf12cd3c086abddcd79adb0a653349f960a\nchore(google/maps): Rename nox.py to noxfile.py\n\nupstream wip fix here: https://github.com/googleapis/gapic-generator/pull/3156\n\nPiperOrigin-RevId: 304411146\n\nbbf26d7f11fae7789b13959bf100983c496c9807\nSynchronize new proto/yaml changes.\n\nPiperOrigin-RevId: 304409906\n\n75047719f704d61f405cac6d7439637ab36c1232\nfix Dataproc: add missing `REQUIRED` annotation.\n\nPiperOrigin-RevId: 304305096\n\n7e1b880fd5d477176cf9b0bb9b137b9bea56e787\nAdd Ruby/PHP namespace options\n\nPiperOrigin-RevId: 304288402\n\naba342359b6743353195ca53f944fe71e6fb6cd4\nchore: add java assembly target for accesscontextmanager BUILD.bazel\n\nPiperOrigin-RevId: 304207684\n\n"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "99820243d348191bc9c634f2b48ddf65096285ed",
-        "log": "99820243d348191bc9c634f2b48ddf65096285ed\nfix: update template files for Node.js libraries (#463)\n\n\n3cbe6bcd5623139ac9834c43818424ddca5430cb\nfix(ruby): remove dead troubleshooting link from generated auth guide (#462)\n\n\n"
+        "sha": "99820243d348191bc9c634f2b48ddf65096285ed"
       }
     }
   ],
