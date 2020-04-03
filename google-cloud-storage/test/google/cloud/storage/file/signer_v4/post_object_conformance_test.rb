@@ -33,7 +33,6 @@ class PostObjectConformanceTest < MockStorage
   end
 
   def self.signer_v4_test_for description, input, output, index
-    focus
     define_method("test_signer_v4_#{index}: #{description}") do
       @test_data = ["signer_v4", index, description, output.expectedDecodedPolicy]
       signer = Google::Cloud::Storage::File::SignerV4.new input.bucket, input.object, storage.service
