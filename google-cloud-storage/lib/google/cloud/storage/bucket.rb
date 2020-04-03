@@ -1593,12 +1593,12 @@ module Google
         # @param [String] path Path to the file in Google Cloud Storage.
         # @param [Hash] policy The security policy that describes what
         #   can and cannot be uploaded in the form. When provided, the PostObject
-        #   fields will include a Signature based on the JSON representation of
-        #   this Hash and the same policy in Base64 format.
+        #   fields will include a signature based on the JSON representation of
+        #   this hash and the same policy in Base64 format.
         #
         #   If you do not provide a security policy, requests are considered
         #   to be anonymous and will only work with buckets that have granted
-        #   WRITE or FULL_CONTROL permission to anonymous users.
+        #   `WRITE` or `FULL_CONTROL` permission to anonymous users.
         #   See [Policy Document](https://cloud.google.com/storage/docs/xml-api/post-object#policydocument)
         #   for more information.
         # @param [String] issuer Service Account's Client Email.
@@ -1692,7 +1692,7 @@ module Google
         # {Google::Cloud.storage}, or by passing in the service account
         # `issuer` and `signing_key` values. Although the private key can
         # be passed as a string for convenience, creating and storing
-        # an instance of # `OpenSSL::PKey::RSA` is more efficient
+        # an instance of `OpenSSL::PKey::RSA` is more efficient
         # when making multiple calls to `generate_signed_post_policy_v4`.
         #
         # A {SignedUrlUnavailable} is raised if the service account credentials
@@ -1726,7 +1726,7 @@ module Google
         #   Cloud Load Balancer which routes to a bucket you own, e.g.
         #   `my-load-balancer-domain.tld`.
         #
-        # @return [PostObject]
+        # @return [PostObject] An object containing the URL, fields, and values needed to upload files via html forms.
         #
         # @example
         #   require "google/cloud/storage"
@@ -1734,7 +1734,8 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #
         #   bucket = storage.bucket "my-todo-app"
-        #   conditions = [["starts-with","$acl","public"]]
+        #
+        #   conditions = [["starts-with", "$acl","public"]]
         #   post = bucket.generate_signed_post_policy_v4 "avatars/heidi/400x400.png", expires: 10,
         #                                                                             conditions: conditions
         #
