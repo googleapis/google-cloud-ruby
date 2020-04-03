@@ -61,6 +61,7 @@ gem "google-cloud-recaptcha_enterprise", path: "google-cloud-recaptcha_enterpris
 gem "google-cloud-recommender", path: "google-cloud-recommender"
 gem "google-cloud-recommender-v1", path: "google-cloud-recommender-v1"
 gem "google-cloud-redis", path: "google-cloud-redis"
+gem "google-cloud-redis-v1beta1", path: "google-cloud-redis-v1beta1"
 gem "google-cloud-resource_manager", path: "google-cloud-resource_manager"
 gem "google-cloud-scheduler", path: "google-cloud-scheduler"
 gem "google-cloud-secret_manager", path: "google-cloud-secret_manager"
