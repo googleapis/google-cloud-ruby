@@ -307,6 +307,14 @@ module Google
                 {'subscription' => request.subscription}
               end
             )
+            @get_snapshot = Google::Gax.create_api_call(
+              @subscriber_stub.method(:get_snapshot),
+              defaults["get_snapshot"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'snapshot' => request.snapshot}
+              end
+            )
             @modify_ack_deadline = Google::Gax.create_api_call(
               @subscriber_stub.method(:modify_ack_deadline),
               defaults["modify_ack_deadline"],
@@ -748,6 +756,41 @@ module Google
             req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::DeleteSubscriptionRequest)
             @delete_subscription.call(req, options, &block)
             nil
+          end
+
+          # Gets the configuration details of a snapshot. Snapshots are used in
+          # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+          # operations, which allow you to manage message acknowledgments in bulk. That
+          # is, you can set the acknowledgment state of messages in an existing
+          # subscription to the state captured by a snapshot.
+          #
+          # @param snapshot [String]
+          #   Required. The name of the snapshot to get.
+          #   Format is `projects/{project}/snapshots/{snap}`.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::PubSub::V1::Snapshot]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::PubSub::V1::Snapshot]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub"
+          #
+          #   subscriber_client = Google::Cloud::PubSub::Subscriber.new(version: :v1)
+          #   formatted_snapshot = Google::Cloud::PubSub::V1::SubscriberClient.snapshot_path("[PROJECT]", "[SNAPSHOT]")
+          #   response = subscriber_client.get_snapshot(formatted_snapshot)
+
+          def get_snapshot \
+              snapshot,
+              options: nil,
+              &block
+            req = {
+              snapshot: snapshot
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::GetSnapshotRequest)
+            @get_snapshot.call(req, options, &block)
           end
 
           # Modifies the ack deadline for a specific message. This method is useful
