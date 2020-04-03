@@ -1,0 +1,24 @@
+{
+  "updateTime": "2020-04-02T20:13:38.255204Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "4a6cfccb4a32cb28db7366295d90078c6af3112f",
+        "internalRef": "304438717"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "datacatalog",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
