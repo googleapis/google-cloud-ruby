@@ -64,7 +64,11 @@ module Google
             "list_topic_subscriptions" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "subscriptions")
+              "subscriptions"),
+            "list_topic_snapshots" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "snapshots")
           }.freeze
 
           private_constant :PAGE_DESCRIPTORS
@@ -287,6 +291,14 @@ module Google
             @list_topic_subscriptions = Google::Gax.create_api_call(
               @publisher_stub.method(:list_topic_subscriptions),
               defaults["list_topic_subscriptions"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'topic' => request.topic}
+              end
+            )
+            @list_topic_snapshots = Google::Gax.create_api_call(
+              @publisher_stub.method(:list_topic_snapshots),
+              defaults["list_topic_snapshots"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'topic' => request.topic}
@@ -613,6 +625,66 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest)
             @list_topic_subscriptions.call(req, options, &block)
+          end
+
+          # Lists the names of the snapshots on this topic. Snapshots are used in
+          # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+          # operations, which allow
+          # you to manage message acknowledgments in bulk. That is, you can set the
+          # acknowledgment state of messages in an existing subscription to the state
+          # captured by a snapshot.
+          #
+          # @param topic [String]
+          #   Required. The name of the topic that snapshots are attached to.
+          #   Format is `projects/{project}/topics/{topic}`.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<String>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<String>]
+          #   An enumerable of String instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/pubsub"
+          #
+          #   publisher_client = Google::Cloud::PubSub::Publisher.new(version: :v1)
+          #   formatted_topic = Google::Cloud::PubSub::V1::PublisherClient.topic_path("[PROJECT]", "[TOPIC]")
+          #
+          #   # Iterate over all results.
+          #   publisher_client.list_topic_snapshots(formatted_topic).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   publisher_client.list_topic_snapshots(formatted_topic).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_topic_snapshots \
+              topic,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              topic: topic,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest)
+            @list_topic_snapshots.call(req, options, &block)
           end
 
           # Deletes the topic with the given name. Returns `NOT_FOUND` if the topic
