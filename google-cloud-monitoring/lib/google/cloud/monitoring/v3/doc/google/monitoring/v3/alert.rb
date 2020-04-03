@@ -159,7 +159,7 @@ module Google
         #     receive new data points.
         # @!attribute [rw] condition_time_series_query_language
         #   @return [Google::Monitoring::V3::AlertPolicy::Condition::TimeSeriesQueryLanguageCondition]
-        #     A condition that uses the time series query language format to define
+        #     A condition that uses the Monitoring Query Language to define
         #     alerts.
         #     If set, no other conditions can be present.
         class Condition
@@ -304,13 +304,12 @@ module Google
           #     time series that have been identified by `filter` and `aggregations`.
           class MetricAbsence; end
 
-          # A condition type that allows alert policies to be defined using the
-          # time series query language.
+          # A condition type that allows alert policies to be defined using
+          # Monitoring Query Language.
           # @!attribute [rw] query
           #   @return [String]
-          #     A query in the time series query language format that generates time
-          #     series indicating points in time that the condition should be
-          #     considered active.
+          #     Monitoring Query Language query that generates time series data and
+          #     describes a condition for alerting on that data.
           # @!attribute [rw] summary
           #   @return [String]
           #     A short explanation of what the query represents. For example:
