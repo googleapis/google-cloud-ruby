@@ -21,7 +21,6 @@ module Google
   module Cloud
     module Dialogflow
       module V2
-        # ============================================================================
         # Requests and responses for custom methods.
         # The request to detect user's intent.
         # @!attribute [rw] session
@@ -124,8 +123,11 @@ module Google
         #     for the session of this query.
         # @!attribute [rw] payload
         #   @return [Google::Protobuf::Struct]
-        #     This field can be used to pass custom data into the webhook
-        #     associated with the agent. Arbitrary JSON objects are supported.
+        #     This field can be used to pass custom data to your webhook.
+        #     Arbitrary JSON objects are supported.
+        #     If supplied, the value is used to populate the
+        #     `WebhookRequest.original_detect_intent_request.payload`
+        #     field sent to your webhook.
         # @!attribute [rw] sentiment_analysis_request_config
         #   @return [Google::Cloud::Dialogflow::V2::SentimentAnalysisRequestConfig]
         #     Configures the type of sentiment analysis to perform. If not

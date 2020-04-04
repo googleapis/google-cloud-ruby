@@ -25,41 +25,50 @@ module Google
           # Path helper methods for the SessionEntityTypes API.
           module Paths
             ##
-            # Create a fully-qualified Context resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/agent/sessions/{session}/contexts/{context}`
-            #
-            # @param project [String]
-            # @param session [String]
-            # @param context [String]
-            #
-            # @return [String]
-            def context_path project:, session:, context:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
-
-              "projects/#{project}/agent/sessions/#{session}/contexts/#{context}"
-            end
-
-            ##
             # Create a fully-qualified SessionEntityType resource string.
             #
-            # The resource will be in the following format:
+            # @overload session_entity_type_path(project:, session:, entity_type:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}`
+            #   `projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}`
             #
-            # @param project [String]
-            # @param session [String]
-            # @param entity_type [String]
+            #   @param project [String]
+            #   @param session [String]
+            #   @param entity_type [String]
+            #
+            # @overload session_entity_type_path(project:, environment:, user:, session:, entity_type:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}`
+            #
+            #   @param project [String]
+            #   @param environment [String]
+            #   @param user [String]
+            #   @param session [String]
+            #   @param entity_type [String]
             #
             # @return [String]
-            def session_entity_type_path project:, session:, entity_type:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+            def session_entity_type_path **args
+              resources = {
+                "entity_type:project:session"                  => (proc do |project:, session:, entity_type:|
+                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
-              "projects/#{project}/agent/sessions/#{session}/entityTypes/#{entity_type}"
+                  "projects/#{project}/agent/sessions/#{session}/entityTypes/#{entity_type}"
+                end),
+                "entity_type:environment:project:session:user" => (proc do |project:, environment:, user:, session:, entity_type:|
+                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+                  raise ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+                  "projects/#{project}/agent/environments/#{environment}/users/#{user}/sessions/#{session}/entityTypes/#{entity_type}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self

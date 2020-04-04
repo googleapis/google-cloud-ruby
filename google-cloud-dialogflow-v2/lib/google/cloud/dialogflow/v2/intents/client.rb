@@ -238,12 +238,11 @@ module Google
             #     Required. The agent to list all intents from.
             #     Format: `projects/<Project ID>/agent`.
             #   @param language_code [String]
-            #     Optional. The language to list training phrases, parameters and rich
-            #     messages for. If not specified, the agent's default language is used.
-            #     [Many
-            #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-            #     are supported. Note: languages must be enabled in the agent before they can
-            #     be used.
+            #     Optional. The language used to access language-specific data.
+            #     If not specified, the agent's default language is used.
+            #     For more information, see
+            #     [Multilingual intent and entity
+            #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
             #   @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]
             #     Optional. The resource view to apply to the returned intent.
             #   @param page_size [Integer]
@@ -313,12 +312,11 @@ module Google
             #     Required. The name of the intent.
             #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
             #   @param language_code [String]
-            #     Optional. The language to retrieve training phrases, parameters and rich
-            #     messages for. If not specified, the agent's default language is used.
-            #     [Many
-            #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-            #     are supported. Note: languages must be enabled in the agent before they can
-            #     be used.
+            #     Optional. The language used to access language-specific data.
+            #     If not specified, the agent's default language is used.
+            #     For more information, see
+            #     [Multilingual intent and entity
+            #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
             #   @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]
             #     Optional. The resource view to apply to the returned intent.
             #
@@ -384,12 +382,11 @@ module Google
             #   @param intent [Google::Cloud::Dialogflow::V2::Intent | Hash]
             #     Required. The intent to create.
             #   @param language_code [String]
-            #     Optional. The language of training phrases, parameters and rich messages
-            #     defined in `intent`. If not specified, the agent's default language is
-            #     used. [Many
-            #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-            #     are supported. Note: languages must be enabled in the agent before they can
-            #     be used.
+            #     Optional. The language used to access language-specific data.
+            #     If not specified, the agent's default language is used.
+            #     For more information, see
+            #     [Multilingual intent and entity
+            #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
             #   @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]
             #     Optional. The resource view to apply to the returned intent.
             #
@@ -452,12 +449,11 @@ module Google
             #   @param intent [Google::Cloud::Dialogflow::V2::Intent | Hash]
             #     Required. The intent to update.
             #   @param language_code [String]
-            #     Optional. The language of training phrases, parameters and rich messages
-            #     defined in `intent`. If not specified, the agent's default language is
-            #     used. [Many
-            #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-            #     are supported. Note: languages must be enabled in the agent before they can
-            #     be used.
+            #     Optional. The language used to access language-specific data.
+            #     If not specified, the agent's default language is used.
+            #     For more information, see
+            #     [Multilingual intent and entity
+            #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
             #   @param update_mask [Google::Protobuf::FieldMask | Hash]
             #     Optional. The mask to control which fields get updated.
             #   @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]
@@ -594,12 +590,11 @@ module Google
             #   @param intent_batch_inline [Google::Cloud::Dialogflow::V2::IntentBatch | Hash]
             #     The collection of intents to update or create.
             #   @param language_code [String]
-            #     Optional. The language of training phrases, parameters and rich messages
-            #     defined in `intents`. If not specified, the agent's default language is
-            #     used. [Many
-            #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-            #     are supported. Note: languages must be enabled in the agent before they can
-            #     be used.
+            #     Optional. The language used to access language-specific data.
+            #     If not specified, the agent's default language is used.
+            #     For more information, see
+            #     [Multilingual intent and entity
+            #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
             #   @param update_mask [Google::Protobuf::FieldMask | Hash]
             #     Optional. The mask to control which fields get updated.
             #   @param intent_view [Google::Cloud::Dialogflow::V2::IntentView]

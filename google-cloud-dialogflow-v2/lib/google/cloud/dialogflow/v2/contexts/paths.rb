@@ -27,20 +27,48 @@ module Google
             ##
             # Create a fully-qualified Context resource string.
             #
-            # The resource will be in the following format:
+            # @overload context_path(project:, session:, context:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/agent/sessions/{session}/contexts/{context}`
+            #   `projects/{project}/agent/sessions/{session}/contexts/{context}`
             #
-            # @param project [String]
-            # @param session [String]
-            # @param context [String]
+            #   @param project [String]
+            #   @param session [String]
+            #   @param context [String]
+            #
+            # @overload context_path(project:, environment:, user:, session:, context:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}`
+            #
+            #   @param project [String]
+            #   @param environment [String]
+            #   @param user [String]
+            #   @param session [String]
+            #   @param context [String]
             #
             # @return [String]
-            def context_path project:, session:, context:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+            def context_path **args
+              resources = {
+                "context:project:session"                  => (proc do |project:, session:, context:|
+                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
-              "projects/#{project}/agent/sessions/#{session}/contexts/#{context}"
+                  "projects/#{project}/agent/sessions/#{session}/contexts/#{context}"
+                end),
+                "context:environment:project:session:user" => (proc do |project:, environment:, user:, session:, context:|
+                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+                  raise ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+                  "projects/#{project}/agent/environments/#{environment}/users/#{user}/sessions/#{session}/contexts/#{context}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self
