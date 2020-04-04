@@ -118,12 +118,11 @@ module Google
         #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language to list entity synonyms for. If not specified,
-        #     the agent's default language is used.
-        #     [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Optional. The maximum number of items to return in a single page. By
@@ -157,12 +156,11 @@ module Google
         #     Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language to retrieve entity synonyms for. If not specified,
-        #     the agent's default language is used.
-        #     [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         class GetEntityTypeRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -178,12 +176,11 @@ module Google
         #     Required. The entity type to create.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in `entity_type`. If not
-        #     specified, the agent's default language is used.
-        #     [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         class CreateEntityTypeRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -195,12 +192,11 @@ module Google
         #     Required. The entity type to update.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in `entity_type`. If not
-        #     specified, the agent's default language is used.
-        #     [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.
@@ -235,12 +231,11 @@ module Google
         #     The collection of entity types to update or create.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in `entity_types`. If not
-        #     specified, the agent's default language is used.
-        #     [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.
@@ -282,12 +277,11 @@ module Google
         #     Required. The entities to create.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in `entities`. If not
-        #     specified, the agent's default language is used.
-        #     [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         class BatchCreateEntitiesRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -303,12 +297,11 @@ module Google
         #     Required. The entities to update or create.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in `entities`. If not
-        #     specified, the agent's default language is used.
-        #     [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.
@@ -329,12 +322,11 @@ module Google
         #     `projects/<Project ID>`.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of entity synonyms defined in `entities`. If not
-        #     specified, the agent's default language is used.
-        #     [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         class BatchDeleteEntitiesRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods

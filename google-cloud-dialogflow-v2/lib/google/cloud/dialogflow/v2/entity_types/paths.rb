@@ -25,20 +25,6 @@ module Google
           # Path helper methods for the EntityTypes API.
           module Paths
             ##
-            # Create a fully-qualified Agent resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/agent`
-            #
-            # @param project [String]
-            #
-            # @return [String]
-            def agent_path project:
-              "projects/#{project}/agent"
-            end
-
-            ##
             # Create a fully-qualified EntityType resource string.
             #
             # The resource will be in the following format:

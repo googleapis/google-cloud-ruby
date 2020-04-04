@@ -26,7 +26,7 @@ module Google
         # action is an extraction of a user command or sentence semantics.
         # @!attribute [rw] name
         #   @return [String]
-        #     The unique identifier of this intent.
+        #     Optional. The unique identifier of this intent.
         #     Required for {Google::Cloud::Dialogflow::V2::Intents::Client#update_intent Intents.UpdateIntent} and {Google::Cloud::Dialogflow::V2::Intents::Client#batch_update_intents Intents.BatchUpdateIntents}
         #     methods.
         #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
@@ -244,7 +244,11 @@ module Google
             extend Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Corresponds to the `Response` field in the Dialogflow console.
+          # A rich response message.
+          # Corresponds to the intent `Response` field in the Dialogflow console.
+          # For more information, see
+          # [Rich response
+          # messages](https://cloud.google.com/dialogflow/docs/intents-rich-messages).
           # @!attribute [rw] text
           #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::Text]
           #     The text response.
@@ -259,9 +263,7 @@ module Google
           #     The card response.
           # @!attribute [rw] payload
           #   @return [Google::Protobuf::Struct]
-          #     Returns a response containing a custom, platform-specific payload.
-          #     See the Intent.Message.Platform type for a description of the
-          #     structure that may be required for your platform.
+          #     A custom platform-specific response.
           # @!attribute [rw] simple_responses
           #   @return [Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponses]
           #     The voice and text-only responses for Actions on Google.
@@ -748,9 +750,10 @@ module Google
               extend Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Represents different platforms that a rich message can be intended for.
+            # The rich response message integration platform. See
+            # [Integrations](https://cloud.google.com/dialogflow/docs/integrations).
             module Platform
-              # Not specified.
+              # Default platform.
               PLATFORM_UNSPECIFIED = 0
 
               # Facebook.
@@ -774,67 +777,9 @@ module Google
               # Viber.
               VIBER = 7
 
-              # Actions on Google.
-              # When using Actions on Google, you can choose one of the specific
-              # Intent.Message types that mention support for Actions on Google,
-              # or you can use the advanced Intent.Message.payload field.
-              # The payload field provides access to AoG features not available in the
-              # specific message types.
-              # If using the Intent.Message.payload field, it should have a structure
-              # similar to the JSON message shown here. For more information, see
-              # [Actions on Google Webhook
-              # Format](https://developers.google.com/actions/dialogflow/webhook)
-              # <pre>{
-              #   "expectUserResponse": true,
-              #   "isSsml": false,
-              #   "noInputPrompts": [],
-              #   "richResponse": {
-              #     "items": [
-              #       {
-              #         "simpleResponse": {
-              #           "displayText": "hi",
-              #           "textToSpeech": "hello"
-              #         }
-              #       }
-              #     ],
-              #     "suggestions": [
-              #       {
-              #         "title": "Say this"
-              #       },
-              #       {
-              #         "title": "or this"
-              #       }
-              #     ]
-              #   },
-              #   "systemIntent": {
-              #     "data": {
-              #       "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
-              #       "listSelect": {
-              #         "items": [
-              #           {
-              #             "optionInfo": {
-              #               "key": "key1",
-              #               "synonyms": [
-              #                 "key one"
-              #               ]
-              #             },
-              #             "title": "must not be empty, but unique"
-              #           },
-              #           {
-              #             "optionInfo": {
-              #               "key": "key2",
-              #               "synonyms": [
-              #                 "key two"
-              #               ]
-              #             },
-              #             "title": "must not be empty, but unique"
-              #           }
-              #         ]
-              #       }
-              #     },
-              #     "intent": "actions.intent.OPTION"
-              #   }
-              # }</pre>
+              # Google Assistant
+              # See [Dialogflow webhook
+              # format](https://developers.google.com/assistant/actions/build/json/dialogflow-webhook-json)
               ACTIONS_ON_GOOGLE = 8
 
               # Google Hangouts.
@@ -877,12 +822,11 @@ module Google
         #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language to list training phrases, parameters and rich
-        #     messages for. If not specified, the agent's default language is used.
-        #     [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] intent_view
         #   @return [Google::Cloud::Dialogflow::V2::IntentView]
         #     Optional. The resource view to apply to the returned intent.
@@ -919,12 +863,11 @@ module Google
         #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language to retrieve training phrases, parameters and rich
-        #     messages for. If not specified, the agent's default language is used.
-        #     [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] intent_view
         #   @return [Google::Cloud::Dialogflow::V2::IntentView]
         #     Optional. The resource view to apply to the returned intent.
@@ -943,12 +886,11 @@ module Google
         #     Required. The intent to create.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of training phrases, parameters and rich messages
-        #     defined in `intent`. If not specified, the agent's default language is
-        #     used. [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] intent_view
         #   @return [Google::Cloud::Dialogflow::V2::IntentView]
         #     Optional. The resource view to apply to the returned intent.
@@ -963,12 +905,11 @@ module Google
         #     Required. The intent to update.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of training phrases, parameters and rich messages
-        #     defined in `intent`. If not specified, the agent's default language is
-        #     used. [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.
@@ -991,7 +932,6 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Intents::Client#batch_update_intents Intents.BatchUpdateIntents}.
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the agent to update or create intents in.
@@ -1006,12 +946,11 @@ module Google
         #     The collection of intents to update or create.
         # @!attribute [rw] language_code
         #   @return [String]
-        #     Optional. The language of training phrases, parameters and rich messages
-        #     defined in `intents`. If not specified, the agent's default language is
-        #     used. [Many
-        #     languages](https://cloud.google.com/dialogflow/docs/reference/language)
-        #     are supported. Note: languages must be enabled in the agent before they can
-        #     be used.
+        #     Optional. The language used to access language-specific data.
+        #     If not specified, the agent's default language is used.
+        #     For more information, see
+        #     [Multilingual intent and entity
+        #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.

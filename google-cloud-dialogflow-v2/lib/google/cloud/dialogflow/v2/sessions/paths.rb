@@ -27,33 +27,52 @@ module Google
             ##
             # Create a fully-qualified Context resource string.
             #
-            # The resource will be in the following format:
+            # @overload context_path(project:, session:, context:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/agent/sessions/{session}/contexts/{context}`
+            #   `projects/{project}/agent/sessions/{session}/contexts/{context}`
             #
-            # @param project [String]
-            # @param session [String]
-            # @param context [String]
+            #   @param project [String]
+            #   @param session [String]
+            #   @param context [String]
+            #
+            # @overload context_path(project:, environment:, user:, session:, context:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}`
+            #
+            #   @param project [String]
+            #   @param environment [String]
+            #   @param user [String]
+            #   @param session [String]
+            #   @param context [String]
             #
             # @return [String]
-            def context_path project:, session:, context:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+            def context_path **args
+              resources = {
+                "context:project:session"                  => (proc do |project:, session:, context:|
+                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
-              "projects/#{project}/agent/sessions/#{session}/contexts/#{context}"
+                  "projects/#{project}/agent/sessions/#{session}/contexts/#{context}"
+                end),
+                "context:environment:project:session:user" => (proc do |project:, environment:, user:, session:, context:|
+                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+                  raise ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+                  "projects/#{project}/agent/environments/#{environment}/users/#{user}/sessions/#{session}/contexts/#{context}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
             # Create a fully-qualified Session resource string.
-            #
-            # @overload session_path(project:, location:, session:)
-            #   The resource will be in the following format:
-            #
-            #   `projects/{project}/locations/{location}/agent/sessions/{session}`
-            #
-            #   @param project [String]
-            #   @param location [String]
-            #   @param session [String]
             #
             # @overload session_path(project:, session:)
             #   The resource will be in the following format:
@@ -63,19 +82,30 @@ module Google
             #   @param project [String]
             #   @param session [String]
             #
+            # @overload session_path(project:, environment:, user:, session:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}`
+            #
+            #   @param project [String]
+            #   @param environment [String]
+            #   @param user [String]
+            #   @param session [String]
+            #
             # @return [String]
             def session_path **args
               resources = {
-                "location:project:session" => (proc do |project:, location:, session:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-                  "projects/#{project}/locations/#{location}/agent/sessions/#{session}"
-                end),
-                "project:session"          => (proc do |project:, session:|
+                "project:session"                  => (proc do |project:, session:|
                   raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/agent/sessions/#{session}"
+                end),
+                "environment:project:session:user" => (proc do |project:, environment:, user:, session:|
+                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+                  raise ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+
+                  "projects/#{project}/agent/environments/#{environment}/users/#{user}/sessions/#{session}"
                 end)
               }
 
@@ -87,20 +117,48 @@ module Google
             ##
             # Create a fully-qualified SessionEntityType resource string.
             #
-            # The resource will be in the following format:
+            # @overload session_entity_type_path(project:, session:, entity_type:)
+            #   The resource will be in the following format:
             #
-            # `projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}`
+            #   `projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}`
             #
-            # @param project [String]
-            # @param session [String]
-            # @param entity_type [String]
+            #   @param project [String]
+            #   @param session [String]
+            #   @param entity_type [String]
+            #
+            # @overload session_entity_type_path(project:, environment:, user:, session:, entity_type:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}`
+            #
+            #   @param project [String]
+            #   @param environment [String]
+            #   @param user [String]
+            #   @param session [String]
+            #   @param entity_type [String]
             #
             # @return [String]
-            def session_entity_type_path project:, session:, entity_type:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+            def session_entity_type_path **args
+              resources = {
+                "entity_type:project:session"                  => (proc do |project:, session:, entity_type:|
+                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
-              "projects/#{project}/agent/sessions/#{session}/entityTypes/#{entity_type}"
+                  "projects/#{project}/agent/sessions/#{session}/entityTypes/#{entity_type}"
+                end),
+                "entity_type:environment:project:session:user" => (proc do |project:, environment:, user:, session:, entity_type:|
+                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+                  raise ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+
+                  "projects/#{project}/agent/environments/#{environment}/users/#{user}/sessions/#{session}/entityTypes/#{entity_type}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self
