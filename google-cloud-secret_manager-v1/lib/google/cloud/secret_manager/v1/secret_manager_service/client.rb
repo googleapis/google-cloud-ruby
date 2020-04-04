@@ -275,6 +275,10 @@ module Google
             #     {Google::Cloud::SecretManager::V1::Secret Secret}, in the format `projects/*`.
             #   @param secret_id [String]
             #     Required. This must be unique within the project.
+            #
+            #     A secret ID is a string with a maximum length of 255 characters and can
+            #     contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
+            #     underscore (`_`) characters.
             #   @param secret [Google::Cloud::SecretManager::V1::Secret | Hash]
             #     Required. A {Google::Cloud::SecretManager::V1::Secret Secret} with initial field values.
             #
