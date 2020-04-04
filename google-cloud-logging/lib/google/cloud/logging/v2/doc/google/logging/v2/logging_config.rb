@@ -104,7 +104,7 @@ module Google
       #     Until you grant this identity write-access to the destination, log entry
       #     exports from this sink will fail. For more information,
       #     see [Granting Access for a
-      #     Resource](/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
+      #     Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
       #     Consult the destination service's documentation to determine the
       #     appropriate IAM roles to assign to the identity.
       # @!attribute [rw] include_children
@@ -155,11 +155,11 @@ module Google
       # @!attribute [rw] use_partitioned_tables
       #   @return [true, false]
       #     Optional. Whether to use [BigQuery's partition
-      #     tables](/bigquery/docs/partitioned-tables). By default, Logging
+      #     tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By default, Logging
       #     creates dated tables based on the log entries' timestamps, e.g.
       #     syslog_20170523. With partitioned tables the date suffix is no longer
       #     present and [special query
-      #     syntax](/bigquery/docs/querying-partitioned-tables) has to be used instead.
+      #     syntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables) has to be used instead.
       #     In both cases, tables are sharded based on UTC timezone.
       # @!attribute [rw] uses_timestamp_column_partitioning
       #   @return [true, false]
@@ -578,7 +578,7 @@ module Google
       #     Required. The CMEK settings to update.
       #
       #     See [Enabling CMEK for Logs
-      #     Router](/logging/docs/routing/managed-encryption) for more information.
+      #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
       # @!attribute [rw] update_mask
       #   @return [Google::Protobuf::FieldMask]
       #     Optional. Field mask identifying which fields from `cmek_settings` should
@@ -627,7 +627,7 @@ module Google
       #     To disable CMEK for the Logs Router, set this field to an empty string.
       #
       #     See [Enabling CMEK for Logs
-      #     Router](/logging/docs/routing/managed-encryption) for more information.
+      #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
       # @!attribute [rw] service_account_id
       #   @return [String]
       #     Output only. The service account that will be used by the Logs Router to access your
@@ -640,7 +640,7 @@ module Google
       #     obtain the service account ID.
       #
       #     See [Enabling CMEK for Logs
-      #     Router](/logging/docs/routing/managed-encryption) for more information.
+      #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for more information.
       class CmekSettings; end
 
       # LogBucket lifecycle states (Beta).
