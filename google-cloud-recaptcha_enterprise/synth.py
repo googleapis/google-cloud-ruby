@@ -282,5 +282,23 @@ s.replace(
     'https://cloud.google.com/recaptcha-enterprise'
 )
 
+# https://github.com/googleapis/gapic-generator/issues/2525
+s.replace(
+    'lib/google/cloud/recaptcha_enterprise/v*/**/*.rb',
+    'Google::Cloud::Recaptchaenterprise',
+    'Google::Cloud::RecaptchaEnterprise')
+s.replace(
+    'lib/google/cloud/recaptcha_enterprise/v*/doc/google/cloud/recaptchaenterprise/**/*.rb',
+    '\n    module Recaptchaenterprise\n',
+    '\n    module RecaptchaEnterprise\n'
+)
+
+# https://github.com/protocolbuffers/protobuf/issues/5584
+s.replace(
+    'lib/google/cloud/recaptchaenterprise/v*/*_pb.rb',
+    '\nmodule Google::Cloud::RecaptchaEnterprise::V(\\w+)\n',
+    '\nmodule Google\n  module Cloud\n    module RecaptchaEnterprise\n    end\n    Recaptchaenterprise = RecaptchaEnterprise unless const_defined? :Recaptchaenterprise\n  end\nend\nmodule Google::Cloud::RecaptchaEnterprise::V\\1\n',
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
