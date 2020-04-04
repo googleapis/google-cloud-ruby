@@ -43,11 +43,11 @@ module Google
         #     The language of the document (if not specified, the language is
         #     automatically detected). Both ISO and BCP-47 language codes are
         #     accepted.<br>
-        #     [Language Support](/natural-language/docs/languages)
-        #     lists currently supported languages for each API method.
-        #     If the language (either specified by the caller or automatically detected)
-        #     is not supported by the called API method, an `INVALID_ARGUMENT` error
-        #     is returned.
+        #     [Language
+        #     Support](https://cloud.google.com/natural-language/docs/languages) lists
+        #     currently supported languages for each API method. If the language (either
+        #     specified by the caller or automatically detected) is not supported by the
+        #     called API method, an `INVALID_ARGUMENT` error is returned.
         class Document
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -888,7 +888,7 @@ module Google
         # @!attribute [rw] name
         #   @return [String]
         #     The name of the category representing the document, from the [predefined
-        #     taxonomy](/natural-language/docs/categories).
+        #     taxonomy](https://cloud.google.com/natural-language/docs/categories).
         # @!attribute [rw] confidence
         #   @return [Float]
         #     The classifier's confidence of the category. Number represents how certain
@@ -1061,7 +1061,8 @@ module Google
           #   @return [Boolean]
           #     Classify the full document into categories. If this is true,
           #     the API will use the default model which classifies into a
-          #     [predefined taxonomy](/natural-language/docs/categories).
+          #     [predefined
+          #     taxonomy](https://cloud.google.com/natural-language/docs/categories).
           class Features
             include Google::Protobuf::MessageExts
             extend Google::Protobuf::MessageExts::ClassMethods
