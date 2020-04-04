@@ -399,7 +399,7 @@ module Google
       # @!attribute [rw] push_endpoint
       #   @return [String]
       #     A URL locating the endpoint to which messages should be pushed.
-      #     For example, a Webhook endpoint might use "https://example.com/push".
+      #     For example, a Webhook endpoint might use `https://example.com/push`.
       # @!attribute [rw] attributes
       #   @return [Hash{String => String}]
       #     Endpoint configuration attributes that can be used to control different
