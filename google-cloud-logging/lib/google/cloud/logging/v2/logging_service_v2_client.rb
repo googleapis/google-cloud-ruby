@@ -496,7 +496,7 @@ module Google
           #   Projects listed in the `project_ids` field are added to this list.
           # @param filter [String]
           #   Optional. A filter that chooses which log entries to return.  See [Advanced
-          #   Logs Queries](/logging/docs/view/advanced-queries).  Only log entries that
+          #   Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).  Only log entries that
           #   match the filter are returned.  An empty filter matches all log entries in
           #   the resources listed in `resource_names`. Referencing a parent resource
           #   that is not listed in `resource_names` will cause the filter to return no
