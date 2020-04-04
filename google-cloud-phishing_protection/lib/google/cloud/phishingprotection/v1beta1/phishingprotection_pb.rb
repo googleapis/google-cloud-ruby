@@ -17,13 +17,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-module Google
-  module Cloud
-    module Phishingprotection
-      module V1beta1
-        ReportPhishingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.phishingprotection.v1beta1.ReportPhishingRequest").msgclass
-        ReportPhishingResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.phishingprotection.v1beta1.ReportPhishingResponse").msgclass
-      end
-    end
-  end
+module Google::Cloud::PhishingProtection::V1beta1
+  ReportPhishingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.phishingprotection.v1beta1.ReportPhishingRequest").msgclass
+  ReportPhishingResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.phishingprotection.v1beta1.ReportPhishingResponse").msgclass
 end
