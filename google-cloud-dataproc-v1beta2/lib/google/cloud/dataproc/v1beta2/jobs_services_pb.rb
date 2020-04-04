@@ -35,6 +35,8 @@ module Google
 
             # Submits a job to a cluster.
             rpc :SubmitJob, SubmitJobRequest, Job
+            # Submits job to a cluster.
+            rpc :SubmitJobAsOperation, SubmitJobRequest, Google::Longrunning::Operation
             # Gets the resource representation for a job in a project.
             rpc :GetJob, GetJobRequest, Job
             # Lists regions/{region}/jobs in a project.
