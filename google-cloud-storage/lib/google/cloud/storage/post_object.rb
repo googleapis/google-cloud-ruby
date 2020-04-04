@@ -27,7 +27,7 @@ module Google
       #   form. Each key/value pair should be set as an input tag's name and
       #   value.
       #
-      # @example
+      # @example Using Bucket#post_object (V2):
       #   require "google/cloud/storage"
       #
       #   storage = Google::Cloud::Storage.new
@@ -40,6 +40,23 @@ module Google
       #   post.fields[:GoogleAccessId] #=> "0123456789@gserviceaccount.com"
       #   post.fields[:signature] #=> "ABC...XYZ="
       #   post.fields[:policy] #=> "ABC...XYZ="
+      #
+      # @example Using Bucket#generate_signed_post_policy_v4 (V4):
+      #   require "google/cloud/storage"
+      #
+      #   storage = Google::Cloud::Storage.new
+      #
+      #   bucket = storage.bucket "my-todo-app"
+      #   conditions = [["starts-with","$acl","public"]]
+      #   post = bucket.generate_signed_post_policy_v4 "avatars/heidi/400x400.png", expires: 10, conditions: conditions
+      #
+      #   post.url #=> "https://storage.googleapis.com/my-todo-app/"
+      #   post.fields["key"] #=> "my-todo-app/avatars/heidi/400x400.png"
+      #   post.fields["policy"] #=> "ABC...XYZ"
+      #   post.fields["x-goog-algorithm"] #=> "GOOG4-RSA-SHA256"
+      #   post.fields["x-goog-credential"] #=> "cred@pid.iam.gserviceaccount.com/20200123/auto/storage/goog4_request"
+      #   post.fields["x-goog-date"] #=> "20200128T000000Z"
+      #   post.fields["x-goog-signature"] #=> "4893a0e...cd82"
       #
       class PostObject
         attr_reader :url, :fields

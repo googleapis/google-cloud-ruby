@@ -52,14 +52,39 @@ module Google
           # no-op stub, but ensures that calls match this copied signature
         end
 
-        def post_object path, policy: nil, issuer: nil,
-                        client_email: nil, signing_key: nil,
+        def post_object path,
+                        policy: nil,
+                        issuer: nil,
+                        client_email: nil,
+                        signing_key: nil,
                         private_key: nil
           Google::Cloud::Storage::PostObject.new "https://storage.googleapis.com",
             { key: "my-todo-app/avatars/heidi/400x400.png",
               GoogleAccessId: "0123456789@gserviceaccount.com",
               signature: "ABC...XYZ=",
               policy: "ABC...XYZ=" }
+        end
+
+        def generate_signed_post_policy_v4 path,
+                                           issuer: nil,
+                                           client_email: nil,
+                                           signing_key: nil,
+                                           private_key: nil,
+                                           expires: nil,
+                                           fields: nil,
+                                           conditions: nil,
+                                           scheme: "https",
+                                           virtual_hosted_style: nil,
+                                           bucket_bound_hostname: nil
+          fields = {
+            "key" => "my-todo-app/avatars/heidi/400x400.png",
+            "policy" => "ABC...XYZ",
+            "x-goog-algorithm" => "GOOG4-RSA-SHA256",
+            "x-goog-credential" => "cred@pid.iam.gserviceaccount.com/20200123/auto/storage/goog4_request",
+            "x-goog-date" => "20200128T000000Z",
+            "x-goog-signature" => "4893a0e...cd82",
+          }
+          Google::Cloud::Storage::PostObject.new "https://storage.googleapis.com/my-todo-app/", fields
         end
       end
       class File
@@ -267,6 +292,12 @@ YARD::Doctest.configure do |doctest|
   end
 
   doctest.before "Google::Cloud::Storage::Bucket#signed_url" do
+    mock_storage do |mock|
+      mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
+    end
+  end
+
+  doctest.before "Google::Cloud::Storage::Bucket#generate_signed_post_policy_v4" do
     mock_storage do |mock|
       mock.expect :get_bucket, bucket_gapi("my-todo-app"), ["my-todo-app", Hash]
     end

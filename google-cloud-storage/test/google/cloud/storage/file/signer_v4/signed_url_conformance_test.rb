@@ -14,11 +14,11 @@
 
 require "helper"
 require "json"
-require_relative "../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb.rb"
+require_relative "../../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb.rb"
 
-class SignerV4Test < MockStorage
+class SignedUrlConformanceTest < MockStorage
   def setup
-    account_file_path = File.expand_path "../../../../../conformance/v1/test_service_account.not-a-test.json", __dir__
+    account_file_path = File.expand_path "../../../../../../conformance/v1/test_service_account.not-a-test.json", __dir__
     account = JSON.parse File.read(account_file_path)
     credentials.issuer = account["client_email"]
     credentials.signing_key = OpenSSL::PKey::RSA.new account["private_key"]
@@ -40,9 +40,9 @@ class SignerV4Test < MockStorage
       signer = Google::Cloud::Storage::File::SignerV4.new test.bucket,
                                                           test.object,
                                                           storage.service
-      Time.stub :now, SignerV4Test.timestamp_to_time(test.timestamp) do
+      Time.stub :now, timestamp_to_time(test.timestamp) do
         # sut
-        signed_url = signer.signed_url **SignerV4Test.kwargs(test)
+        signed_url = signer.signed_url **kwargs(test)
 
         signed_url.must_equal test.expectedUrl
       end
@@ -52,9 +52,9 @@ class SignerV4Test < MockStorage
   def self.project_test_for test, index
     define_method("test_project_#{index}: #{test.description}") do
       @test_data = [test, "project", index]
-      Time.stub :now, SignerV4Test.timestamp_to_time(test.timestamp) do
+      Time.stub :now, timestamp_to_time(test.timestamp) do
         # sut
-        signed_url = storage.signed_url test.bucket, test.object, **SignerV4Test.kwargs(test).merge({version: :v4})
+        signed_url = storage.signed_url test.bucket, test.object, **kwargs(test).merge({version: :v4})
 
         signed_url.must_equal test.expectedUrl
       end
@@ -66,9 +66,9 @@ class SignerV4Test < MockStorage
       @test_data = [test, "bucket", index]
       bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(test.bucket).to_json
       bucket = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service
-      Time.stub :now, SignerV4Test.timestamp_to_time(test.timestamp) do
+      Time.stub :now, timestamp_to_time(test.timestamp) do
         # sut
-        signed_url = bucket.signed_url test.object, **SignerV4Test.kwargs(test).merge({version: :v4})
+        signed_url = bucket.signed_url test.object, **kwargs(test).merge({version: :v4})
 
         signed_url.must_equal test.expectedUrl
       end
@@ -82,9 +82,9 @@ class SignerV4Test < MockStorage
       bucket = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service
       file_gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(test.bucket, test.object).to_json
       file = Google::Cloud::Storage::File.from_gapi file_gapi, storage.service
-      Time.stub :now, SignerV4Test.timestamp_to_time(test.timestamp) do
+      Time.stub :now, timestamp_to_time(test.timestamp) do
         # sut
-        signed_url = file.signed_url **SignerV4Test.kwargs(test).merge({version: :v4})
+        signed_url = file.signed_url **kwargs(test).merge({version: :v4})
 
         signed_url.must_equal test.expectedUrl
       end
@@ -93,11 +93,11 @@ class SignerV4Test < MockStorage
 
   # Build kwargs hash from test fixtures.
   # Convert some arguments from protobuf maps and default "" strings.
-  def self.kwargs test
+  def kwargs test
     method = test["method"] unless test["method"]&.empty?
     headers = test.headers.to_h if test.headers
     query = test.query_parameters.to_h if test.query_parameters
-    bucket_bound_hostname = test.bucketBoundDomain unless test.bucketBoundDomain&.empty?
+    bucket_bound_hostname = test.bucketBoundHostname unless test.bucketBoundHostname&.empty?
     {
       method: method,
       expires: test.expiration,
@@ -109,16 +109,16 @@ class SignerV4Test < MockStorage
     }
   end
 
-  def self.timestamp_to_time timestamp
+  def timestamp_to_time timestamp
     ::Time.at(timestamp.nanos * 10**-9 + timestamp.seconds)
   end
 end
 
-file_path = File.expand_path "../../../../../conformance/v1/v4_signatures.json", __dir__
+file_path = File.expand_path "../../../../../../conformance/v1/v4_signatures.json", __dir__
 test_file = Google::Cloud::Conformance::Storage::V1::TestFile.decode_json File.read(file_path)
 test_file.signing_v4_tests.each_with_index do |test, index|
-  SignerV4Test.signer_v4_test_for test, index
-  SignerV4Test.project_test_for test, index
-  SignerV4Test.bucket_test_for test, index
-  SignerV4Test.file_test_for test, index
+  SignedUrlConformanceTest.signer_v4_test_for test, index
+  SignedUrlConformanceTest.project_test_for test, index
+  SignedUrlConformanceTest.bucket_test_for test, index
+  SignedUrlConformanceTest.file_test_for test, index
 end

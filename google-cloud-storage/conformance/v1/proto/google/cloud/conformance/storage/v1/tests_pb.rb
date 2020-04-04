@@ -21,43 +21,43 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     map :headers, :string, :string, 9
     map :query_parameters, :string, :string, 10
     optional :scheme, :string, 11
-    optional :urlStyle, :enum, 12, "google.cloud.conformance.storage.v1.SigningV4Test.UrlStyle"
-    optional :bucketBoundDomain, :string, 13
+    optional :urlStyle, :enum, 12, "google.cloud.conformance.storage.v1.UrlStyle"
+    optional :bucketBoundHostname, :string, 13
     optional :expectedCanonicalRequest, :string, 14
     optional :expectedStringToSign, :string, 15
-  end
-  add_enum "google.cloud.conformance.storage.v1.SigningV4Test.UrlStyle" do
-    value :PATH_STYLE, 0
-    value :VIRTUAL_HOSTED_STYLE, 1
-    value :BUCKET_BOUND_DOMAIN, 2
   end
   add_message "google.cloud.conformance.storage.v1.ConditionalMatches" do
     repeated :expression, :string, 1
   end
   add_message "google.cloud.conformance.storage.v1.PolicyConditions" do
-    optional :successActionStatus, :string, 1
-    optional :successActionRedirect, :string, 2
-    repeated :matches, :message, 3, "google.cloud.conformance.storage.v1.ConditionalMatches"
+    repeated :contentLengthRange, :int32, 1
+    repeated :startsWith, :string, 2
   end
   add_message "google.cloud.conformance.storage.v1.PolicyInput" do
     optional :scheme, :string, 1
-    optional :bucket, :string, 2
-    optional :object, :string, 3
-    optional :expiration, :int64, 4
-    optional :timestamp, :message, 5, "google.protobuf.Timestamp"
-    map :headers, :string, :string, 6
-    optional :conditions, :message, 7, "google.cloud.conformance.storage.v1.PolicyConditions"
+    optional :urlStyle, :enum, 2, "google.cloud.conformance.storage.v1.UrlStyle"
+    optional :bucketBoundHostname, :string, 3
+    optional :bucket, :string, 4
+    optional :object, :string, 5
+    optional :expiration, :int32, 6
+    optional :timestamp, :message, 7, "google.protobuf.Timestamp"
+    map :fields, :string, :string, 8
+    optional :conditions, :message, 9, "google.cloud.conformance.storage.v1.PolicyConditions"
   end
   add_message "google.cloud.conformance.storage.v1.PolicyOutput" do
     optional :url, :string, 1
-    optional :key, :string, 2
-    map :fields, :string, :string, 3
-    optional :expectedDecodedPolicy, :string, 4
+    map :fields, :string, :string, 2
+    optional :expectedDecodedPolicy, :string, 3
   end
   add_message "google.cloud.conformance.storage.v1.PostPolicyV4Test" do
     optional :description, :string, 1
     optional :policyInput, :message, 2, "google.cloud.conformance.storage.v1.PolicyInput"
     optional :policyOutput, :message, 3, "google.cloud.conformance.storage.v1.PolicyOutput"
+  end
+  add_enum "google.cloud.conformance.storage.v1.UrlStyle" do
+    value :PATH_STYLE, 0
+    value :VIRTUAL_HOSTED_STYLE, 1
+    value :BUCKET_BOUND_HOSTNAME, 2
   end
 end
 
@@ -68,12 +68,12 @@ module Google
         module V1
           TestFile = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.conformance.storage.v1.TestFile").msgclass
           SigningV4Test = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.conformance.storage.v1.SigningV4Test").msgclass
-          SigningV4Test::UrlStyle = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.conformance.storage.v1.SigningV4Test.UrlStyle").enummodule
           ConditionalMatches = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.conformance.storage.v1.ConditionalMatches").msgclass
           PolicyConditions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.conformance.storage.v1.PolicyConditions").msgclass
           PolicyInput = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.conformance.storage.v1.PolicyInput").msgclass
           PolicyOutput = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.conformance.storage.v1.PolicyOutput").msgclass
           PostPolicyV4Test = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.conformance.storage.v1.PostPolicyV4Test").msgclass
+          UrlStyle = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.conformance.storage.v1.UrlStyle").enummodule
         end
       end
     end

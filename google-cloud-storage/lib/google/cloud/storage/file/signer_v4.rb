@@ -39,6 +39,43 @@ module Google
             new bucket.name, file_name, bucket.service
           end
 
+          def post_object issuer: nil,
+                          client_email: nil,
+                          signing_key: nil,
+                          private_key: nil,
+                          expires: nil,
+                          fields: nil,
+                          conditions: nil,
+                          scheme: "https",
+                          virtual_hosted_style: nil,
+                          bucket_bound_hostname: nil
+            i = determine_issuer issuer, client_email
+            s = determine_signing_key signing_key, private_key
+            raise SignedUrlUnavailable unless i && s
+
+            now = Time.now.utc
+            base_fields = required_fields i, now
+            post_fields = fields.dup || {}
+            post_fields.merge! base_fields
+
+            p = {}
+            p["conditions"] = policy_conditions base_fields, conditions, fields
+            expires ||= 60*60*24
+            p["expiration"] = (now + expires).strftime "%Y-%m-%dT%H:%M:%SZ"
+
+
+            policy_str = escape_characters p.to_json
+
+            policy = Base64.strict_encode64(policy_str).force_encoding "utf-8"
+            signature = generate_signature s, policy
+
+            post_fields["x-goog-signature"] = signature
+            post_fields["policy"] = policy
+            url = post_object_ext_url scheme, virtual_hosted_style, bucket_bound_hostname
+            hostname = "#{url}#{bucket_path path_style?(virtual_hosted_style, bucket_bound_hostname)}"
+            Google::Cloud::Storage::PostObject.new hostname, post_fields
+          end
+
           def signed_url method: "GET",
                          expires: nil,
                          headers: nil,
@@ -73,7 +110,7 @@ module Google
             payload = headers&.key?("X-Goog-Content-SHA256") ? headers["X-Goog-Content-SHA256"] : "UNSIGNED-PAYLOAD"
 
             canonical_request = [method,
-                                 ext_path(!(virtual_hosted_style || bucket_bound_hostname)),
+                                 file_path(!(virtual_hosted_style || bucket_bound_hostname)),
                                  canonical_query_str,
                                  canonical_headers_str,
                                  signed_headers_str,
@@ -87,11 +124,69 @@ module Google
             signature = signer.call string_to_sign
 
             # Construct signed URL
-            hostname = ext_url scheme, virtual_hosted_style, bucket_bound_hostname
+            hostname = signed_url_hostname scheme, virtual_hosted_style, bucket_bound_hostname
             "#{hostname}?#{canonical_query_str}&X-Goog-Signature=#{signature}"
           end
 
+          # methods below are public visibility only for unit testing
+          def escape_characters str
+            str.split("").map do |s|
+              if !s.ascii_only?
+                escape_special_unicode s
+              else
+                case s
+                when "\\"
+                  '\\'
+                when "\b"
+                  '\b'
+                when "\f"
+                  '\f'
+                when "\n"
+                  '\n'
+                when "\r"
+                  '\r'
+                when "\t"
+                  '\t'
+                when "\v"
+                  '\v'
+                else
+                  s
+                end
+              end
+            end.join
+          end
+
+          def escape_special_unicode str
+            str.unpack("U*").map { |i| '\u' + i.to_s(16).rjust(4, "0") }.join
+          end
+
           protected
+
+          def required_fields issuer, time
+            {
+              "key" => @file_name,
+              "x-goog-date" => time.strftime("%Y%m%dT%H%M%SZ"),
+              "x-goog-credential" => "#{issuer}/#{time.strftime '%Y%m%d'}/auto/storage/goog4_request",
+              "x-goog-algorithm" => "GOOG4-RSA-SHA256"
+            }.freeze
+          end
+
+          def policy_conditions base_fields, user_conditions, user_fields
+            # Convert each pair in base_fields hash to a single-entry hash in an array.
+            conditions = base_fields.to_a.map { |f| Hash[*f] }
+            # Add user-provided conditions to the head of the conditions array.
+            conditions.unshift user_conditions if user_conditions && !user_conditions.empty?
+            if user_fields
+              # Convert each pair in fields hash to a single-entry hash and add it to the head of the conditions array.
+              user_fields.to_a.reverse.each { |f| conditions.unshift Hash[*f] }
+            end
+            conditions.freeze
+          end
+
+          def signed_url_hostname scheme, virtual_hosted_style, bucket_bound_hostname
+            url = ext_url scheme, virtual_hosted_style, bucket_bound_hostname
+            "#{url}#{file_path path_style?(virtual_hosted_style, bucket_bound_hostname)}"
+          end
 
           def determine_issuer issuer, client_email
             # Parse the Service Account and get client id and private key
@@ -174,11 +269,17 @@ module Google
 
           ##
           # The URI-encoded (percent encoded) external path to the file.
-          def ext_path path_style
+          def file_path path_style
             path = []
             path << "/#{@bucket_name}" if path_style
             path << "/#{String(@file_name)}" if @file_name && !@file_name.empty?
             CGI.escape(path.join).gsub "%2F", "/"
+          end
+
+          ##
+          # The external path to the bucket, with trailing slash.
+          def bucket_path path_style
+            return "/#{@bucket_name}/" if path_style
           end
 
           ##
@@ -188,12 +289,58 @@ module Google
             if virtual_hosted_style
               parts = url.split "//"
               parts[1] = "#{@bucket_name}.#{parts[1]}"
-              url = parts.join "//"
+              parts.join "//"
             elsif bucket_bound_hostname
               raise ArgumentError, "scheme is required" unless scheme
-              url = URI "#{scheme.to_s.downcase}://#{bucket_bound_hostname}"
+              URI "#{scheme.to_s.downcase}://#{bucket_bound_hostname}"
+            else
+              url
             end
-            "#{url}#{ext_path !(virtual_hosted_style || bucket_bound_hostname)}"
+          end
+
+          def path_style? virtual_hosted_style, bucket_bound_hostname
+            !(virtual_hosted_style || bucket_bound_hostname)
+          end
+
+          ##
+          # The external path to the file, URI-encoded.
+          # Will not URI encode the special `${filename}` variable.
+          # "You can also use the ${filename} variable..."
+          # https://cloud.google.com/storage/docs/xml-api/post-object
+          #
+          def post_object_ext_path
+            path = "/#{@bucket_name}/#{@file_name}"
+            escaped = Addressable::URI.escape path
+            special_var = "${filename}"
+            # Restore the unencoded `${filename}` variable, if present.
+            if path.include? special_var
+              return escaped.gsub "$%7Bfilename%7D", special_var
+            end
+            escaped
+          end
+
+          ##
+          # The external url to the file.
+          def post_object_ext_url scheme, virtual_hosted_style, bucket_bound_hostname
+            url = GOOGLEAPIS_URL.dup
+            if virtual_hosted_style
+              parts = url.split "//"
+              parts[1] = "#{@bucket_name}.#{parts[1]}/"
+              parts.join "//"
+            elsif bucket_bound_hostname
+              raise ArgumentError, "scheme is required" unless scheme
+              URI "#{scheme.to_s.downcase}://#{bucket_bound_hostname}/"
+            else
+              url
+            end
+          end
+
+          def generate_signature signing_key, data
+            unless signing_key.respond_to? :sign
+              signing_key = OpenSSL::PKey::RSA.new signing_key
+            end
+            signature = signing_key.sign OpenSSL::Digest::SHA256.new, data
+            signature.unpack("H*").first.force_encoding "utf-8"
           end
         end
       end
