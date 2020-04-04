@@ -176,6 +176,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dataproc.v1beta2.JobScheduling" do
       optional :max_failures_per_hour, :int32, 1
     end
+    add_message "google.cloud.dataproc.v1beta2.JobMetadata" do
+      optional :job_id, :string, 1
+      optional :status, :message, 2, "google.cloud.dataproc.v1beta2.JobStatus"
+      optional :operation_type, :string, 3
+      optional :start_time, :message, 4, "google.protobuf.Timestamp"
+    end
     add_message "google.cloud.dataproc.v1beta2.SubmitJobRequest" do
       optional :project_id, :string, 1
       optional :region, :string, 3
@@ -248,6 +254,7 @@ module Google
         YarnApplication::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.YarnApplication.State").enummodule
         Job = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.Job").msgclass
         JobScheduling = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.JobScheduling").msgclass
+        JobMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.JobMetadata").msgclass
         SubmitJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.SubmitJobRequest").msgclass
         GetJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.GetJobRequest").msgclass
         ListJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.ListJobsRequest").msgclass

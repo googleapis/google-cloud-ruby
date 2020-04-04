@@ -110,6 +110,75 @@ class Google::Cloud::Dataproc::V1beta2::JobController::ClientTest < Minitest::Te
     end
   end
 
+  def test_submit_job_as_operation
+    # Create GRPC objects.
+    grpc_response = Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    project_id = "hello world"
+    region = "hello world"
+    job = {}
+    request_id = "hello world"
+
+    submit_job_as_operation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :submit_job_as_operation, name
+      assert_kind_of Google::Cloud::Dataproc::V1beta2::SubmitJobRequest, request
+      assert_equal "hello world", request.project_id
+      assert_equal "hello world", request.region
+      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Dataproc::V1beta2::Job), request.job
+      assert_equal "hello world", request.request_id
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, submit_job_as_operation_client_stub do
+      # Create client
+      client = Google::Cloud::Dataproc::V1beta2::JobController::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.submit_job_as_operation({ project_id: project_id, region: region, job: job, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.submit_job_as_operation project_id: project_id, region: region, job: job, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.submit_job_as_operation Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.submit_job_as_operation({ project_id: project_id, region: region, job: job, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.submit_job_as_operation Google::Cloud::Dataproc::V1beta2::SubmitJobRequest.new(project_id: project_id, region: region, job: job, request_id: request_id), grpc_options do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, submit_job_as_operation_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_job
     # Create GRPC objects.
     grpc_response = Google::Cloud::Dataproc::V1beta2::Job.new

@@ -724,6 +724,24 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Job Operation metadata.
+        # @!attribute [r] job_id
+        #   @return [String]
+        #     Output only. The job id.
+        # @!attribute [r] status
+        #   @return [Google::Cloud::Dataproc::V1beta2::JobStatus]
+        #     Output only. Most recent job status.
+        # @!attribute [r] operation_type
+        #   @return [String]
+        #     Output only. Operation type.
+        # @!attribute [r] start_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Output only. Job submission time.
+        class JobMetadata
+          include Google::Protobuf::MessageExts
+          extend Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request to submit a job.
         # @!attribute [rw] project_id
         #   @return [String]
