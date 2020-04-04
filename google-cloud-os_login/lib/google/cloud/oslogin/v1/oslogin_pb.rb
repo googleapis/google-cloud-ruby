@@ -46,19 +46,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-module Google
-  module Cloud
-    module Oslogin
-      module V1
-        LoginProfile = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.LoginProfile").msgclass
-        DeletePosixAccountRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.DeletePosixAccountRequest").msgclass
-        DeleteSshPublicKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.DeleteSshPublicKeyRequest").msgclass
-        GetLoginProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.GetLoginProfileRequest").msgclass
-        GetSshPublicKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.GetSshPublicKeyRequest").msgclass
-        ImportSshPublicKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.ImportSshPublicKeyRequest").msgclass
-        ImportSshPublicKeyResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.ImportSshPublicKeyResponse").msgclass
-        UpdateSshPublicKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.UpdateSshPublicKeyRequest").msgclass
-      end
-    end
-  end
+module Google::Cloud::OsLogin::V1
+  LoginProfile = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.LoginProfile").msgclass
+  DeletePosixAccountRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.DeletePosixAccountRequest").msgclass
+  DeleteSshPublicKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.DeleteSshPublicKeyRequest").msgclass
+  GetLoginProfileRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.GetLoginProfileRequest").msgclass
+  GetSshPublicKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.GetSshPublicKeyRequest").msgclass
+  ImportSshPublicKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.ImportSshPublicKeyRequest").msgclass
+  ImportSshPublicKeyResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.ImportSshPublicKeyResponse").msgclass
+  UpdateSshPublicKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.UpdateSshPublicKeyRequest").msgclass
 end
