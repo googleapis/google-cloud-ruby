@@ -124,32 +124,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-module Google
-  module Cloud
-    module Recaptchaenterprise
-      module V1beta1
-        CreateAssessmentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest").msgclass
-        AnnotateAssessmentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest").msgclass
-        AnnotateAssessmentRequest::Annotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation").enummodule
-        AnnotateAssessmentResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentResponse").msgclass
-        Assessment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.Assessment").msgclass
-        Assessment::ClassificationReason = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.Assessment.ClassificationReason").enummodule
-        Event = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.Event").msgclass
-        TokenProperties = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.TokenProperties").msgclass
-        TokenProperties::InvalidReason = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.TokenProperties.InvalidReason").enummodule
-        CreateKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest").msgclass
-        ListKeysRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.ListKeysRequest").msgclass
-        ListKeysResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse").msgclass
-        GetKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest").msgclass
-        UpdateKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.UpdateKeyRequest").msgclass
-        DeleteKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest").msgclass
-        Key = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.Key").msgclass
-        WebKeySettings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.WebKeySettings").msgclass
-        WebKeySettings::IntegrationType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.IntegrationType").enummodule
-        WebKeySettings::ChallengeSecurityPreference = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.ChallengeSecurityPreference").enummodule
-        AndroidKeySettings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings").msgclass
-        IOSKeySettings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings").msgclass
-      end
-    end
-  end
+module Google::Cloud::RecaptchaEnterprise::V1beta1
+  CreateAssessmentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest").msgclass
+  AnnotateAssessmentRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest").msgclass
+  AnnotateAssessmentRequest::Annotation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation").enummodule
+  AnnotateAssessmentResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentResponse").msgclass
+  Assessment = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.Assessment").msgclass
+  Assessment::ClassificationReason = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.Assessment.ClassificationReason").enummodule
+  Event = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.Event").msgclass
+  TokenProperties = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.TokenProperties").msgclass
+  TokenProperties::InvalidReason = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.TokenProperties.InvalidReason").enummodule
+  CreateKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.CreateKeyRequest").msgclass
+  ListKeysRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.ListKeysRequest").msgclass
+  ListKeysResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.ListKeysResponse").msgclass
+  GetKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.GetKeyRequest").msgclass
+  UpdateKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.UpdateKeyRequest").msgclass
+  DeleteKeyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.DeleteKeyRequest").msgclass
+  Key = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.Key").msgclass
+  WebKeySettings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.WebKeySettings").msgclass
+  WebKeySettings::IntegrationType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.IntegrationType").enummodule
+  WebKeySettings::ChallengeSecurityPreference = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.WebKeySettings.ChallengeSecurityPreference").enummodule
+  AndroidKeySettings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.AndroidKeySettings").msgclass
+  IOSKeySettings = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1beta1.IOSKeySettings").msgclass
 end
