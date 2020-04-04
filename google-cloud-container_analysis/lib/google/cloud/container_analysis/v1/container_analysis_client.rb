@@ -74,40 +74,6 @@ module Google
           ].freeze
 
 
-          NOTE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/notes/{note}"
-          )
-
-          private_constant :NOTE_PATH_TEMPLATE
-
-          OCCURRENCE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/occurrences/{occurrence}"
-          )
-
-          private_constant :OCCURRENCE_PATH_TEMPLATE
-
-          # Returns a fully-qualified note resource name string.
-          # @param project [String]
-          # @param note [String]
-          # @return [String]
-          def self.note_path project, note
-            NOTE_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"note" => note
-            )
-          end
-
-          # Returns a fully-qualified occurrence resource name string.
-          # @param project [String]
-          # @param occurrence [String]
-          # @return [String]
-          def self.occurrence_path project, occurrence
-            OCCURRENCE_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"occurrence" => occurrence
-            )
-          end
-
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
           #   be many types.
@@ -283,11 +249,13 @@ module Google
           #   require "google/cloud/container_analysis"
           #
           #   container_analysis_client = Google::Cloud::ContainerAnalysis.new(version: :v1)
-          #   formatted_resource = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient.note_path("[PROJECT]", "[NOTE]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `policy`:
           #   policy = {}
-          #   response = container_analysis_client.set_iam_policy(formatted_resource, policy)
+          #   response = container_analysis_client.set_iam_policy(resource, policy)
 
           def set_iam_policy \
               resource,
@@ -331,8 +299,10 @@ module Google
           #   require "google/cloud/container_analysis"
           #
           #   container_analysis_client = Google::Cloud::ContainerAnalysis.new(version: :v1)
-          #   formatted_resource = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient.note_path("[PROJECT]", "[NOTE]")
-          #   response = container_analysis_client.get_iam_policy(formatted_resource)
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
+          #   response = container_analysis_client.get_iam_policy(resource)
 
           def get_iam_policy \
               resource,
@@ -375,11 +345,13 @@ module Google
           #   require "google/cloud/container_analysis"
           #
           #   container_analysis_client = Google::Cloud::ContainerAnalysis.new(version: :v1)
-          #   formatted_resource = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysisClient.note_path("[PROJECT]", "[NOTE]")
+          #
+          #   # TODO: Initialize `resource`:
+          #   resource = ''
           #
           #   # TODO: Initialize `permissions`:
           #   permissions = []
-          #   response = container_analysis_client.test_iam_permissions(formatted_resource, permissions)
+          #   response = container_analysis_client.test_iam_permissions(resource, permissions)
 
           def test_iam_permissions \
               resource,

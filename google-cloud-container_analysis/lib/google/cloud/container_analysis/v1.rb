@@ -14,6 +14,7 @@
 
 
 require "google/cloud/container_analysis/v1/container_analysis_client"
+require "google/cloud/container_analysis/v1/helpers"
 
 module Google
   module Cloud
