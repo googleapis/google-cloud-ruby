@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.0 / 2020-04-06
+
+#### Features
+
+* Support additional formats for context, session, and session_entity_type paths.
+
 ### 0.2.2 / 2020-04-01
 
 #### Documentation
