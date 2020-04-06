@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.1 / 2020-04-06
+
+#### Documentation
+
+* Update docs for core protobuf types.
+
 ### 0.2.0 / 2020-03-25
 
 #### Features
