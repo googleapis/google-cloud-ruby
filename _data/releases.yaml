@@ -591,6 +591,7 @@ google-cloud-phishing_protection:
 - v0.1.1
 - v0.1.0
 google-cloud-pubsub:
+- v1.6.0
 - v1.5.0
 - v1.4.0
 - v1.3.1
