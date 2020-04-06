@@ -1,5 +1,22 @@
 # Release History
 
+### 1.26.0 / 2020-04-06
+
+#### Features
+
+* Update V4 Signature support in Project#signed_url, Bucket#signed_url and File#signed_url
+  * Add scheme, virtual_hosted_style and bucket_bound_hostname to #signed_url methods
+  * Add support for V4 query param encoding and ordering
+  * Convert tabs in V4 to single whitespace character
+  * Set payload in V4 to X-Goog-Content-SHA256 if present
+  * Fix method param default value GET for #signed_url
+* Add support for V4 Signature POST Policies
+  * Add Bucket#generate_signed_post_policy_v4
+
+#### Bug Fixes
+
+* Address keyword argument warnings in Ruby 2.7 and later
+
 ### 1.25.1 / 2020-01-06
 
 #### Documentation
