@@ -1,4 +1,4 @@
-## Migrating to google-cloud-asset 1.0
+## Migrating to google-cloud-dataproc 1.0
 
 The 1.0 release of the google-cloud-dataproc client is a significant upgrade
 based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
@@ -36,7 +36,7 @@ To summarize:
 
 Older 0.x releases of the `google-cloud-dataproc` gem were all-in-one gems
 that included potentially multiple clients for multiple versions of the
-Asset service. Factory methods such as `Google::Cloud::Dataproc::ClusterController.new`
+Dataproc service. Factory methods such as `Google::Cloud::Dataproc::ClusterController.new`
 would return you instances of client classes such as
 `Google::Cloud::Dataproc::V1::ClusterController` or
 `Google::Cloud::Dataproc::V1beta2::ClusterController`, depending on which
