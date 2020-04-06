@@ -1,5 +1,17 @@
 # Release History
 
+### 1.6.0 / 2020-04-06
+
+#### Features
+
+* Add list_topic_snapshots and get_snapshot
+  * Add PublisherClient#list_topic_snapshots
+  * Add SubscriberClient#get_snapshot
+
+#### Documentation
+
+* Remove a spurious link in the low-level interface documentation.
+
 ### 1.5.0 / 2020-03-25
 
 #### Features
