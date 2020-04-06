@@ -558,6 +558,11 @@ namespace :kokoro do
     exit kokoro.exit_status
   end
 
+  task :samples_presubmit do
+    kokoro.samples_presubmit
+    exit kokoro.exit_status
+  end
+
   task :samples_latest do
     kokoro.samples_latest
     exit kokoro.exit_status
