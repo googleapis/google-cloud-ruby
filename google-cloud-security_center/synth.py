@@ -26,7 +26,7 @@ library = gapic.ruby_library(
     "securitycenter", "v1",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-security_center",
-        "ruby-cloud-title": "Cloud Security Command Center",
+        "ruby-cloud-title": "Security Command Center",
         "ruby-cloud-description": "Security Command Center API provides access to temporal views of assets and findings within an organization.",
         "ruby-cloud-env-prefix": "SECURITY_CENTER",
         "ruby-cloud-wrapper-of": "v1:0.0;v1p1beta1:0.0",

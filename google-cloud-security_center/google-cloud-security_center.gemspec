@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Security Command Center API provides access to temporal views of assets and findings within an organization."
-  gem.summary       = "API Client library for the Cloud Security Command Center API"
+  gem.summary       = "API Client library for the Security Command Center API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 

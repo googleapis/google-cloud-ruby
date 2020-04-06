@@ -1,6 +1,6 @@
-# Ruby Client for the Cloud Security Command Center API
+# Ruby Client for the Security Command Center API
 
-API Client library for the Cloud Security Command Center API
+API Client library for the Security Command Center API
 
 Security Command Center API provides access to temporal views of assets and findings within an organization.
 
