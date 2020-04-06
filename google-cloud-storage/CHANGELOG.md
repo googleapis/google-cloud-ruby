@@ -1,5 +1,19 @@
 # Release History
 
+### 1.26.0 / 2020-04-06
+
+#### Features
+
+* Add scheme, virtual_hosted_style and bucket_bound_hostname to #signed_url
+  * Update SignerV4 query param encoding and ordering
+  * Update SignerV4 to convert tabs to single whitespace character
+  * Update SignerV4 to set payload to X-Goog-Content-SHA256 if present
+  * Fix method param default value GET for #signed_url
+
+#### Bug Fixes
+
+* address keyword argument warnings in Ruby 2.7 and later
+
 ### 1.25.1 / 2020-01-06
 
 #### Documentation
