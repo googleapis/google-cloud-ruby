@@ -60,19 +60,25 @@ class Kokoro < Command
     release_please if @should_release && @updated
   end
 
-  def samples_latest
-    unless Dir.entries(@gem).include? "samples"
-      return header "No samples for #{@gem}. Exiting"
+  def samples_presubmit
+    header "Running samples presubmits"
+    header "Gem is #{@gem}"
+    unless updated_samples.include? @gem
+      return header "No changes for #{@gem}'s samples'. Exiting"
     end
+    header "Found changes for #{@gem}"
+    run_ci @gem, true do
+      run "bundle exec rake samples:latest", 3600
+    end
+  end
+
+  def samples_latest
     run_ci do
       run "bundle exec rake samples:latest", 3600
     end
   end
 
   def samples_master
-    unless Dir.entries(@gem).include? "samples"
-      return header "No samples for #{@gem}. Exiting"
-    end
     run_ci do
       if @updated
         header "Gem Updated - Running samples tests against master"
@@ -235,6 +241,14 @@ class Kokoro < Command
       end
     end
     verify_in_gemfile gem unless local
+  end
+
+  def updated_samples
+    updated_directories = `git --no-pager diff --name-only HEAD^ HEAD | grep "/" | cut -d/ -f 1-2 | sort | uniq || true`
+    updated_directories = updated_directories.split "\n"
+    updated_directories.select! { |dir| dir.split("/")[1] == "samples" }
+    updated_directories.map! { |dir| dir.split("/").first }
+    updated_directories.select { |dir| gems.include? dir.split("/").first }
   end
 
   def verify_in_gemfile gem = nil

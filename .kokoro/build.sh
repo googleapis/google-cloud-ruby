@@ -42,6 +42,8 @@ elif [ "$JOB_TYPE" = "continuous" ]; then
         rbenv global "$version"
         (bundle update && bundle exec rake kokoro:continuous) || set_failed_status
     done
+elif [ "$JOB_TYPE"] = "samples_presubmit" ]; then
+    (bundle update && bundle exec rake kokoro:samples_presubmit) || set_failed_status
 elif [ "$JOB_TYPE" = "samples_latest" ]; then
     for version in "${versions[@]}"; do
         rbenv global "$version"

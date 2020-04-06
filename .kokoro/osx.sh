@@ -41,6 +41,20 @@ if [[ $JOB_TYPE = "presubmit" ]]; then
         bundle update
         bundle exec rake kokoro:presubmit || set_failed_status
     fi
+if [[ $JOB_TYPE = "samples_presubmit" ]]; then
+    COMMIT_MESSAGE=$(git log --format=%B -n 1 $KOKORO_GIT_COMMIT)
+    if [[ $COMMIT_MESSAGE = *"[ci skip]"* || $COMMIT_MESSAGE = *"[skip ci]"* ]]; then
+        echo "[ci skip] found. Exiting"
+    else
+        version=${versions[2]}
+        if [[ $rvm_versions != *$version* ]]; then
+            rvm install $version
+        fi
+        rvm use $version@global --default
+        gem update --system
+        bundle update
+        bundle exec rake kokoro:samples_presubmit || set_failed_status
+    fi
 else
     for version in "${versions[@]}"; do
         if [[ $rvm_versions != *$version* ]]; then
