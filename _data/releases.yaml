@@ -487,6 +487,7 @@ google-cloud-language:
 - v0.20.1
 - v0.20.0
 google-cloud-language-v1:
+- v0.1.2
 - v0.1.1
 - v0.1.0
 google-cloud-language-v1beta2:
