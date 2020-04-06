@@ -253,3 +253,21 @@ s.replace(
     'github.io/google-cloud-ruby/#/docs/google-cloud-os_login/latest/.*$',
     'dev/ruby/google-cloud-os_login/latest'
 )
+
+# https://github.com/googleapis/gapic-generator/issues/2525
+s.replace(
+    'lib/google/cloud/os_login/v*/**/*.rb',
+    'Google::Cloud::Oslogin',
+    'Google::Cloud::OsLogin')
+s.replace(
+    'lib/google/cloud/os_login/v*/doc/google/cloud/oslogin/**/*.rb',
+    '\n    module Oslogin\n',
+    '\n    module OsLogin\n'
+)
+
+# https://github.com/protocolbuffers/protobuf/issues/5584
+s.replace(
+    'lib/google/cloud/oslogin/*/*_pb.rb',
+    '\nmodule Google::Cloud::OsLogin::V(\\w+)\n',
+    '\nmodule Google\n  module Cloud\n    module OsLogin\n    end\n    Oslogin = OsLogin unless const_defined? :Oslogin\n  end\nend\nmodule Google::Cloud::OsLogin::V\\1\n',
+)

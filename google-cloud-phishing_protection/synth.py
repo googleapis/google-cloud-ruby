@@ -283,5 +283,23 @@ s.replace(
     'https://cloud.google.com/phishing-protection'
 )
 
+# https://github.com/googleapis/gapic-generator/issues/2525
+s.replace(
+    'lib/google/cloud/phishing_protection/v*/**/*.rb',
+    'Google::Cloud::Phishingprotection',
+    'Google::Cloud::PhishingProtection')
+s.replace(
+    'lib/google/cloud/phishing_protection/v*/doc/google/cloud/phishingprotection/**/*.rb',
+    '\n    module Phishingprotection\n',
+    '\n    module PhishingProtection\n'
+)
+
+# https://github.com/protocolbuffers/protobuf/issues/5584
+s.replace(
+    'lib/google/cloud/phishingprotection/v*/*_pb.rb',
+    '\nmodule Google::Cloud::PhishingProtection::V(\\w+)\n',
+    '\nmodule Google\n  module Cloud\n    module PhishingProtection\n    end\n    Phishingprotection = PhishingProtection unless const_defined? :Phishingprotection\n  end\nend\nmodule Google::Cloud::PhishingProtection::V\\1\n',
+)
+
 # Generate the helper methods
 call('bundle update && bundle exec rake generate_partials', shell=True)
