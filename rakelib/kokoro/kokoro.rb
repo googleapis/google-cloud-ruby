@@ -61,8 +61,6 @@ class Kokoro < Command
   end
 
   def samples_presubmit
-    header "Running samples presubmits"
-    header "Gem is #{@gem}"
     unless updated_samples.include? @gem
       return header "No changes for #{@gem}'s samples'. Exiting"
     end
