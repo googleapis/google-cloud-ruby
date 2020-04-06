@@ -1,62 +1,51 @@
-# Ruby Client for Google Cloud Dataproc API
+# Ruby Client for the Cloud Dataproc API
 
-[Google Cloud Dataproc API][Product Documentation]:
+API Client library for the Cloud Dataproc API
+
 Manages Hadoop-based clusters and jobs on Google Cloud Platform.
-- [Client Library Documentation][]
-- [Product Documentation][]
+
+Actual client classes for the various versions of this API are defined in
+_versioned_ client gems, with names of the form `google-cloud-dataproc-v*`.
+The gem `google-cloud-dataproc` is a convenience wrapper library that brings the
+verisoned gems in as dependencies, and provides high-level methods for
+constructing clients.
+
+View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-dataproc/latest)
+for this library, google-cloud-dataproc, to see the convenience methods for
+constructing client objects. Reference documentation for the client objects
+themselves can be found in the client library documentation for the versioned
+client gems:
+[google-cloud-dataproc-v1](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest),
+[google-cloud-dataproc-v1beta2](https://googleapis.dev/ruby/google-cloud-dataproc-v1beta2/latest).
+
+See also the [Product Documentation](https://cloud.google.com/dataproc)
+for more usage information.
 
 ## Quick Start
-In order to use this library, you first need to go through the following
-steps:
 
-1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Google Cloud Dataproc API.](https://console.cloud.google.com/apis/library/dataproc.googleapis.com)
-4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-dataproc/latest/file.AUTHENTICATION.html)
-
-### Installation
 ```
 $ gem install google-cloud-dataproc
 ```
 
-### Preview
-#### ClusterControllerClient
-```rb
-require "google/cloud/dataproc"
+In order to use this library, you first need to go through the following steps:
 
-cluster_controller_client = Google::Cloud::Dataproc::ClusterController.new
-project_id_2 = project_id
-region = "global"
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+1. [Enable the API.](https://console.cloud.google.com/apis/library/dataproc.googleapis.com)
+1. {file:AUTHENTICATION.md Set up authentication.}
 
-# Iterate over all results.
-cluster_controller_client.list_clusters(project_id_2, region).each do |element|
-  # Process element.
-end
+## Migrating from 0.x versions
 
-# Or iterate over results one page at a time.
-cluster_controller_client.list_clusters(project_id_2, region).each_page do |page|
-  # Process each page at a time.
-  page.each do |element|
-    # Process element.
-  end
-end
-```
-
-### Next Steps
-- Read the [Client Library Documentation][] for Google Cloud Dataproc API
-  to see other available methods on the client.
-- Read the [Google Cloud Dataproc API Product documentation][Product Documentation]
-  to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
-  to see the full list of Cloud APIs that we cover.
-
-[Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-dataproc/latest
-[Product Documentation]: https://cloud.google.com/dataproc
+The 1.0 release of the google-cloud-dataproc client is a significant upgrade
+based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
+and includes substantial interface changes. Existing code written for earlier
+versions of this library will likely require updates to use this version.
+See the {file:MIGRATING.md MIGRATING.md} document for more information.
 
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
 or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
 that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
