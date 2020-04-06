@@ -1,5 +1,11 @@
 # Release History
 
+### 0.1.3 / 2020-04-06
+
+#### Documentation
+
+* Fix a few broken links to product documentation pages.
+
 ### 0.1.2 / 2020-04-01
 
 #### Documentation
