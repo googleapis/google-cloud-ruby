@@ -1,5 +1,11 @@
 # Release History
 
+### 0.37.2 / 2020-04-06
+
+#### Documentation
+
+* Fix some broken links to the monitoring docs on cloud.google.com
+
 ### 0.37.1 / 2020-04-01
 
 #### Documentation
