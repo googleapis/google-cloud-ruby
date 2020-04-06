@@ -61,6 +61,9 @@ class Kokoro < Command
   end
 
   def samples_presubmit
+    unless Dir.entries(@gem).include? "samples"
+      return header "No samples for #{@gem}. Exiting"
+    end
     unless updated_samples.include? @gem
       return header "No changes for #{@gem}'s samples'. Exiting"
     end
@@ -71,12 +74,18 @@ class Kokoro < Command
   end
 
   def samples_latest
+    unless Dir.entries(@gem).include? "samples"
+      return header "No samples for #{@gem}. Exiting"
+    end
     run_ci do
       run "bundle exec rake samples:latest", 3600
     end
   end
 
   def samples_master
+    unless Dir.entries(@gem).include? "samples"
+      return header "No samples for #{@gem}. Exiting"
+    end
     run_ci do
       if @updated
         header "Gem Updated - Running samples tests against master"
