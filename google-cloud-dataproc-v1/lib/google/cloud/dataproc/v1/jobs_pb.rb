@@ -173,6 +173,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 18
       optional :scheduling, :message, 20, "google.cloud.dataproc.v1.JobScheduling"
       optional :job_uuid, :string, 22
+      optional :done, :bool, 24
       oneof :type_job do
         optional :hadoop_job, :message, 3, "google.cloud.dataproc.v1.HadoopJob"
         optional :spark_job, :message, 4, "google.cloud.dataproc.v1.SparkJob"
@@ -192,6 +193,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :region, :string, 3
       optional :job, :message, 2, "google.cloud.dataproc.v1.Job"
       optional :request_id, :string, 4
+    end
+    add_message "google.cloud.dataproc.v1.JobMetadata" do
+      optional :job_id, :string, 1
+      optional :status, :message, 2, "google.cloud.dataproc.v1.JobStatus"
+      optional :operation_type, :string, 3
+      optional :start_time, :message, 4, "google.protobuf.Timestamp"
     end
     add_message "google.cloud.dataproc.v1.GetJobRequest" do
       optional :project_id, :string, 1
@@ -261,6 +268,7 @@ module Google
         Job = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.Job").msgclass
         JobScheduling = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.JobScheduling").msgclass
         SubmitJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SubmitJobRequest").msgclass
+        JobMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.JobMetadata").msgclass
         GetJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GetJobRequest").msgclass
         ListJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ListJobsRequest").msgclass
         ListJobsRequest::JobStateMatcher = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ListJobsRequest.JobStateMatcher").enummodule

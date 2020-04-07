@@ -175,7 +175,7 @@ module Google
         #       `projects/{project_id}/locations/{location}`
         # @!attribute [rw] policy
         #   @return [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
-        #     The autoscaling policy to create.
+        #     Required. The autoscaling policy to create.
         class CreateAutoscalingPolicyRequest
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods

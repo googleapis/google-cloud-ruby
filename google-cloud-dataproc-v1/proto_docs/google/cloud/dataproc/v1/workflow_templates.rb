@@ -197,8 +197,14 @@ module Google
         #   @return [Google::Cloud::Dataproc::V1::HiveJob]
         # @!attribute [rw] pig_job
         #   @return [Google::Cloud::Dataproc::V1::PigJob]
+        # @!attribute [rw] spark_r_job
+        #   @return [Google::Cloud::Dataproc::V1::SparkRJob]
+        #     Spark R job
         # @!attribute [rw] spark_sql_job
         #   @return [Google::Cloud::Dataproc::V1::SparkSqlJob]
+        # @!attribute [rw] presto_job
+        #   @return [Google::Cloud::Dataproc::V1::PrestoJob]
+        #     Presto job
         # @!attribute [rw] labels
         #   @return [Google::Protobuf::Map{String => String}]
         #     Optional. The labels to associate with this job.

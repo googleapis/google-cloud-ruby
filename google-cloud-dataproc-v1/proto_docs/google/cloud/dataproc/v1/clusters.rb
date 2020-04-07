@@ -53,9 +53,9 @@ module Google
         #   @return [String]
         #     Output only. A cluster UUID (Unique Universal Identifier). Dataproc
         #     generates this value when it creates the cluster.
-        # @!attribute [rw] metrics
+        # @!attribute [r] metrics
         #   @return [Google::Cloud::Dataproc::V1::ClusterMetrics]
-        #     Contains cluster daemon metrics such as HDFS and YARN stats.
+        #     Output only. Contains cluster daemon metrics such as HDFS and YARN stats.
         #
         #     **Beta Feature**: This report is available for testing purposes only. It
         #     may be changed before final release.
@@ -277,9 +277,24 @@ module Google
         #     from `cluster_name`, `num_instances`, and the instance group.
         # @!attribute [rw] image_uri
         #   @return [String]
-        #     Optional. The Compute Engine image resource used for cluster
-        #     instances. It can be specified or may be inferred from
-        #     `SoftwareConfig.image_version`.
+        #     Optional. The Compute Engine image resource used for cluster instances.
+        #
+        #     The URI can represent an image or image family.
+        #
+        #     Image examples:
+        #
+        #     * `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/[image-id]`
+        #     * `projects/[project_id]/global/images/[image-id]`
+        #     * `image-id`
+        #
+        #     Image family examples. Dataproc will use the most recent
+        #     image from the family:
+        #
+        #     * `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/family/[custom-image-family-name]`
+        #     * `projects/[project_id]/global/images/family/[custom-image-family-name]`
+        #
+        #     If the URI is unspecified, it will be inferred from
+        #     `SoftwareConfig.image_version` or the system default.
         # @!attribute [rw] machine_type_uri
         #   @return [String]
         #     Optional. The Compute Engine machine type used for cluster instances.
@@ -298,9 +313,9 @@ module Google
         # @!attribute [rw] disk_config
         #   @return [Google::Cloud::Dataproc::V1::DiskConfig]
         #     Optional. Disk option config settings.
-        # @!attribute [rw] is_preemptible
+        # @!attribute [r] is_preemptible
         #   @return [Boolean]
-        #     Optional. Specifies that this instance group contains preemptible
+        #     Output only. Specifies that this instance group contains preemptible
         #     instances.
         # @!attribute [r] managed_group_config
         #   @return [Google::Cloud::Dataproc::V1::ManagedGroupConfig]
@@ -475,7 +490,8 @@ module Google
         # Specifies Kerberos related configuration.
         # @!attribute [rw] enable_kerberos
         #   @return [Boolean]
-        #     Optional. Flag to indicate whether to Kerberize the cluster.
+        #     Optional. Flag to indicate whether to Kerberize the cluster (default: false). Set
+        #     this field to true to enable Kerberos on a cluster.
         # @!attribute [rw] root_principal_password_uri
         #   @return [String]
         #     Required. The Cloud Storage URI of a KMS encrypted file containing the root

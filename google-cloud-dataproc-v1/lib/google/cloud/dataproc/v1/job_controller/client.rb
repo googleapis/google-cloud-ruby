@@ -24,6 +24,7 @@ require "google/cloud/errors"
 require "google/cloud/dataproc/v1/version"
 require "google/cloud/dataproc/v1/jobs_pb"
 require "google/cloud/dataproc/v1/job_controller/credentials"
+require "google/cloud/dataproc/v1/job_controller/operations"
 
 module Google
   module Cloud
@@ -71,6 +72,14 @@ module Google
 
                 default_config.rpcs.submit_job.timeout = 900.0
                 default_config.rpcs.submit_job.retry_policy = {
+                  initial_delay: 0.1,
+                  max_delay:     60.0,
+                  multiplier:    1.3,
+                  retry_codes:   ["UNAVAILABLE"]
+                }
+
+                default_config.rpcs.submit_job_as_operation.timeout = 900.0
+                default_config.rpcs.submit_job_as_operation.retry_policy = {
                   initial_delay: 0.1,
                   max_delay:     60.0,
                   multiplier:    1.3,
@@ -184,6 +193,10 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
+              @operations_client = Operations.new do |config|
+                config.credentials = credentials
+              end
+
               @job_controller_stub = Gapic::ServiceStub.new(
                 Google::Cloud::Dataproc::V1::JobController::Stub,
                 credentials:  credentials,
@@ -265,6 +278,84 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @job_controller_stub.call_rpc :submit_job, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue GRPC::BadStatus => e
+              raise Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Submits job to a cluster.
+            #
+            # @overload submit_job_as_operation(request, options = nil)
+            #   @param request [Google::Cloud::Dataproc::V1::SubmitJobRequest | Hash]
+            #     Submits job to a cluster.
+            #   @param options [Gapic::CallOptions, Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload submit_job_as_operation(project_id: nil, region: nil, job: nil, request_id: nil)
+            #   @param project_id [String]
+            #     Required. The ID of the Google Cloud Platform project that the job
+            #     belongs to.
+            #   @param region [String]
+            #     Required. The Dataproc region in which to handle the request.
+            #   @param job [Google::Cloud::Dataproc::V1::Job | Hash]
+            #     Required. The job resource.
+            #   @param request_id [String]
+            #     Optional. A unique id used to identify the request. If the server
+            #     receives two {Google::Cloud::Dataproc::V1::SubmitJobRequest SubmitJobRequest} requests  with the same
+            #     id, then the second request will be ignored and the
+            #     first {Google::Cloud::Dataproc::V1::Job Job} created and stored in the backend
+            #     is returned.
+            #
+            #     It is recommended to always set this value to a
+            #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+            #
+            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     underscores (_), and hyphens (-). The maximum length is 40 characters.
+            #
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [Gapic::Operation]
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            #
+            # @return [Gapic::Operation]
+            #
+            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            #
+            def submit_job_as_operation request, options = nil
+              raise ArgumentError, "request must be provided" if request.nil?
+
+              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::SubmitJobRequest
+
+              # Converts hash and nil to an options object
+              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.submit_job_as_operation.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {
+                "project_id" => request.project_id,
+                "region"     => request.region
+              }
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.submit_job_as_operation.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.submit_job_as_operation.retry_policy
+              options.apply_defaults metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @job_controller_stub.call_rpc :submit_job_as_operation, request, options: options do |response, operation|
+                response = Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -785,6 +876,11 @@ module Google
                 #
                 attr_reader :submit_job
                 ##
+                # RPC-specific configuration for `submit_job_as_operation`
+                # @return [Gapic::Config::Method]
+                #
+                attr_reader :submit_job_as_operation
+                ##
                 # RPC-specific configuration for `get_job`
                 # @return [Gapic::Config::Method]
                 #
@@ -814,6 +910,8 @@ module Google
                 def initialize parent_rpcs = nil
                   submit_job_config = parent_rpcs&.submit_job if parent_rpcs&.respond_to? :submit_job
                   @submit_job = Gapic::Config::Method.new submit_job_config
+                  submit_job_as_operation_config = parent_rpcs&.submit_job_as_operation if parent_rpcs&.respond_to? :submit_job_as_operation
+                  @submit_job_as_operation = Gapic::Config::Method.new submit_job_as_operation_config
                   get_job_config = parent_rpcs&.get_job if parent_rpcs&.respond_to? :get_job
                   @get_job = Gapic::Config::Method.new get_job_config
                   list_jobs_config = parent_rpcs&.list_jobs if parent_rpcs&.respond_to? :list_jobs
