@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Oslogin
+    module OsLogin
       module Common
         # The POSIX account information associated with a Google account.
         # @!attribute [rw] primary
@@ -47,7 +47,7 @@ module Google
         #   @return [String]
         #     Output only. A POSIX account identifier.
         # @!attribute [rw] operating_system_type
-        #   @return [Google::Cloud::Oslogin::Common::OperatingSystemType]
+        #   @return [Google::Cloud::OsLogin::Common::OperatingSystemType]
         #     The operating system type where this account applies.
         # @!attribute [rw] name
         #   @return [String]
