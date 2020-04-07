@@ -222,6 +222,11 @@ module Google
         #     Output only. The root cause of an import failure. Only present if
         #     {Google::Cloud::Kms::V1::CryptoKeyVersion#state state} is
         #     {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}.
+        # @!attribute [rw] external_protection_level_options
+        #   @return [Google::Cloud::Kms::V1::ExternalProtectionLevelOptions]
+        #     ExternalProtectionLevelOptions stores a group of additional fields for
+        #     configuring a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} that are specific to the
+        #     {Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL EXTERNAL} protection level.
         class CryptoKeyVersion
           # The algorithm of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating what
           # parameters must be used for each cryptographic operation.
@@ -305,6 +310,9 @@ module Google
 
             # ECDSA on the NIST P-384 curve with a SHA384 digest.
             EC_SIGN_P384_SHA384 = 13
+
+            # Algorithm representing symmetric encryption by an external key manager.
+            EXTERNAL_SYMMETRIC_ENCRYPTION = 18
           end
 
           # The state of a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}, indicating if it can be used.
@@ -501,6 +509,14 @@ module Google
             RSA_OAEP_4096_SHA1_AES_256 = 2
           end
         end
+
+        # ExternalProtectionLevelOptions stores a group of additional fields for
+        # configuring a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} that are specific to the
+        # {Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL EXTERNAL} protection level.
+        # @!attribute [rw] external_key_uri
+        #   @return [String]
+        #     The URI for an external resource that this {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} represents.
+        class ExternalProtectionLevelOptions; end
 
         # {Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} specifies how cryptographic operations are performed.
         # For more information, see [Protection levels]

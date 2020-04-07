@@ -479,6 +479,11 @@ module Google
         #     Indicates whether {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with
         #     {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}
         #     {Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} can be created in this location.
+        # @!attribute [rw] ekm_available
+        #   @return [true, false]
+        #     Indicates whether {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with
+        #     {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}
+        #     {Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL EXTERNAL} can be created in this location.
         class LocationMetadata; end
       end
     end
