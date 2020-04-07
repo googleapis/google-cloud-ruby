@@ -68,7 +68,7 @@ class Kokoro < Command
       return header "No changes for #{@gem}'s samples'. Exiting"
     end
     header "Found changes for #{@gem}"
-    run_ci @gem, true do
+    run_ci do
       run "bundle exec rake samples:latest", 3600
     end
   end
@@ -165,7 +165,7 @@ class Kokoro < Command
   end
 
   def autorelease_pending?
-    net = Net::HTTP.new("api.github.com", 443)
+    net = Net::HTTP.new "api.github.com", 443
     net.use_ssl = true
     response = net.get "/repos/googleapis/google-cloud-ruby/pulls/#{@pr_number}"
     parsed = JSON.parse response.body
@@ -196,7 +196,7 @@ class Kokoro < Command
     service_account = "#{ENV['KOKORO_GFILE_DIR']}/service-account.json"
     raise "#{service_account} is not a file" unless File.file? service_account
     ENV["GOOGLE_APPLICATION_CREDENTIALS"] = service_account
-    filename = "#{ENV['KOKORO_GFILE_DIR']}/env_vars.json"
+    filename = "#{ENV['KOKORO_GFILE_DIR']}/ruby_env_vars.json"
     raise "#{filename} is not a file" unless File.file? filename
     env_vars = JSON.parse File.read(filename)
     env_vars.each { |k, v| ENV[k] = v }
