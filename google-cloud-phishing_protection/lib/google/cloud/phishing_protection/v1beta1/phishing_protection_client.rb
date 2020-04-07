@@ -36,7 +36,7 @@ module Google
         # Service to report phishing URIs.
         #
         # @!attribute [r] phishing_protection_stub
-        #   @return [Google::Cloud::Phishingprotection::V1beta1::PhishingProtection::Stub]
+        #   @return [Google::Cloud::PhishingProtection::V1beta1::PhishingProtection::Stub]
         class PhishingProtectionClient
           # @private
           attr_reader :phishing_protection_stub
@@ -182,7 +182,7 @@ module Google
               updater_proc: updater_proc,
               scopes: scopes,
               interceptors: interceptors,
-              &Google::Cloud::Phishingprotection::V1beta1::PhishingProtection::Stub.method(:new)
+              &Google::Cloud::PhishingProtection::V1beta1::PhishingProtection::Stub.method(:new)
             )
 
             @report_phishing = Google::Gax.create_api_call(
@@ -214,9 +214,9 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Phishingprotection::V1beta1::ReportPhishingResponse]
+          # @yieldparam result [Google::Cloud::PhishingProtection::V1beta1::ReportPhishingResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Phishingprotection::V1beta1::ReportPhishingResponse]
+          # @return [Google::Cloud::PhishingProtection::V1beta1::ReportPhishingResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/phishing_protection"
@@ -237,7 +237,7 @@ module Google
               parent: parent,
               uri: uri
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Phishingprotection::V1beta1::ReportPhishingRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest)
             @report_phishing.call(req, options, &block)
           end
         end
