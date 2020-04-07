@@ -162,6 +162,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
   add_message "google.cloud.kms.v1.LocationMetadata" do
     optional :hsm_available, :bool, 1
+    optional :ekm_available, :bool, 2
   end
 end
 

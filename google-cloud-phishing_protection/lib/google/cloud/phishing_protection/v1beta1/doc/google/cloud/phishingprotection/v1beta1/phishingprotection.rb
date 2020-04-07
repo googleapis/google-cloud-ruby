@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Phishingprotection
+    module PhishingProtection
       module V1beta1
         # The ReportPhishing request message.
         # @!attribute [rw] parent

@@ -19,11 +19,12 @@ end
 
 module Google
   module Cloud
-    module Phishingprotection
-      module V1beta1
-        ReportPhishingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.phishingprotection.v1beta1.ReportPhishingRequest").msgclass
-        ReportPhishingResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.phishingprotection.v1beta1.ReportPhishingResponse").msgclass
-      end
+    module PhishingProtection
     end
+    Phishingprotection = PhishingProtection unless const_defined? :Phishingprotection
   end
+end
+module Google::Cloud::PhishingProtection::V1beta1
+  ReportPhishingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.phishingprotection.v1beta1.ReportPhishingRequest").msgclass
+  ReportPhishingResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.phishingprotection.v1beta1.ReportPhishingResponse").msgclass
 end
