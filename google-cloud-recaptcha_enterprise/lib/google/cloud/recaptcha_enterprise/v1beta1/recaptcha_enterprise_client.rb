@@ -36,7 +36,7 @@ module Google
         # Service to determine the likelihood an event is legitimate.
         #
         # @!attribute [r] recaptcha_enterprise_stub
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::RecaptchaEnterprise::Stub]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterprise::Stub]
         class RecaptchaEnterpriseClient
           # @private
           attr_reader :recaptcha_enterprise_stub
@@ -226,7 +226,7 @@ module Google
               updater_proc: updater_proc,
               scopes: scopes,
               interceptors: interceptors,
-              &Google::Cloud::Recaptchaenterprise::V1beta1::RecaptchaEnterprise::Stub.method(:new)
+              &Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterprise::Stub.method(:new)
             )
 
             @create_assessment = Google::Gax.create_api_call(
@@ -294,17 +294,17 @@ module Google
           # @param parent [String]
           #   Required. The name of the project in which the assessment will be created,
           #   in the format "projects/\\{project_number}".
-          # @param assessment [Google::Cloud::Recaptchaenterprise::V1beta1::Assessment | Hash]
+          # @param assessment [Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment | Hash]
           #   Required. The assessment details.
-          #   A hash of the same form as `Google::Cloud::Recaptchaenterprise::V1beta1::Assessment`
+          #   A hash of the same form as `Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Recaptchaenterprise::V1beta1::Assessment]
+          # @yieldparam result [Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Recaptchaenterprise::V1beta1::Assessment]
+          # @return [Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/recaptcha_enterprise"
@@ -325,7 +325,7 @@ module Google
               parent: parent,
               assessment: assessment
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::CreateAssessmentRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::RecaptchaEnterprise::V1beta1::CreateAssessmentRequest)
             @create_assessment.call(req, options, &block)
           end
 
@@ -335,15 +335,15 @@ module Google
           # @param name [String]
           #   Required. The resource name of the Assessment, in the format
           #   "projects/\\{project_number}/assessments/\\{assessment_id}".
-          # @param annotation [Google::Cloud::Recaptchaenterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
+          # @param annotation [Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
           #   Required. The annotation that will be assigned to the Event.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Recaptchaenterprise::V1beta1::AnnotateAssessmentResponse]
+          # @yieldparam result [Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Recaptchaenterprise::V1beta1::AnnotateAssessmentResponse]
+          # @return [Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/recaptcha_enterprise"
@@ -364,7 +364,7 @@ module Google
               name: name,
               annotation: annotation
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::AnnotateAssessmentRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest)
             @annotate_assessment.call(req, options, &block)
           end
 
@@ -373,17 +373,17 @@ module Google
           # @param parent [String]
           #   Required. The name of the project in which the key will be created, in the
           #   format "projects/\\{project_number}".
-          # @param key [Google::Cloud::Recaptchaenterprise::V1beta1::Key | Hash]
+          # @param key [Google::Cloud::RecaptchaEnterprise::V1beta1::Key | Hash]
           #   Required. Information to create a reCAPTCHA Enterprise key.
-          #   A hash of the same form as `Google::Cloud::Recaptchaenterprise::V1beta1::Key`
+          #   A hash of the same form as `Google::Cloud::RecaptchaEnterprise::V1beta1::Key`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @yieldparam result [Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @return [Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/recaptcha_enterprise"
@@ -404,7 +404,7 @@ module Google
               parent: parent,
               key: key
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::CreateKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::RecaptchaEnterprise::V1beta1::CreateKeyRequest)
             @create_key.call(req, options, &block)
           end
 
@@ -423,10 +423,10 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::Recaptchaenterprise::V1beta1::Key>]
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::RecaptchaEnterprise::V1beta1::Key>]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Cloud::Recaptchaenterprise::V1beta1::Key>]
-          #   An enumerable of Google::Cloud::Recaptchaenterprise::V1beta1::Key instances.
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::RecaptchaEnterprise::V1beta1::Key>]
+          #   An enumerable of Google::Cloud::RecaptchaEnterprise::V1beta1::Key instances.
           #   See Google::Gax::PagedEnumerable documentation for other
           #   operations such as per-page iteration or access to the response
           #   object.
@@ -459,7 +459,7 @@ module Google
               parent: parent,
               page_size: page_size
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::ListKeysRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::RecaptchaEnterprise::V1beta1::ListKeysRequest)
             @list_keys.call(req, options, &block)
           end
 
@@ -472,9 +472,9 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @yieldparam result [Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @return [Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/recaptcha_enterprise"
@@ -490,15 +490,15 @@ module Google
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::GetKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::RecaptchaEnterprise::V1beta1::GetKeyRequest)
             @get_key.call(req, options, &block)
           end
 
           # Updates the specified key.
           #
-          # @param key [Google::Cloud::Recaptchaenterprise::V1beta1::Key | Hash]
+          # @param key [Google::Cloud::RecaptchaEnterprise::V1beta1::Key | Hash]
           #   Required. The key to update.
-          #   A hash of the same form as `Google::Cloud::Recaptchaenterprise::V1beta1::Key`
+          #   A hash of the same form as `Google::Cloud::RecaptchaEnterprise::V1beta1::Key`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Optional. The mask to control which field of the key get updated. If the mask is not
@@ -509,9 +509,9 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @yieldparam result [Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+          # @return [Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/recaptcha_enterprise"
@@ -531,7 +531,7 @@ module Google
               key: key,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::UpdateKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::RecaptchaEnterprise::V1beta1::UpdateKeyRequest)
             @update_key.call(req, options, &block)
           end
 
@@ -561,7 +561,7 @@ module Google
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Recaptchaenterprise::V1beta1::DeleteKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::RecaptchaEnterprise::V1beta1::DeleteKeyRequest)
             @delete_key.call(req, options, &block)
             nil
           end
