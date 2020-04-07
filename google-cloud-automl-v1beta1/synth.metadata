@@ -1,0 +1,24 @@
+{
+  "updateTime": "2020-04-07T07:57:17.684070Z",
+  "sources": [
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "823facb4ca6a4b36b817ce955a790dcb40cf808f",
+        "internalRef": "305155214"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "automl",
+        "apiVersion": "v1beta1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
