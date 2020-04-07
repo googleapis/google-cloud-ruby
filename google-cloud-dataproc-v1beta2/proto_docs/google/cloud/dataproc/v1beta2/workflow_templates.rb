@@ -188,8 +188,8 @@ module Google
         #
         #     The step id is used as prefix for job id, as job
         #     `goog-dataproc-workflow-step-id` label, and in
-        #     {Google::Cloud::Dataproc::V1beta2::OrderedJob#prerequisite_step_ids prerequisiteStepIds}
-        #     field from other steps.
+        #     {Google::Cloud::Dataproc::V1beta2::OrderedJob#prerequisite_step_ids prerequisiteStepIds} field from other
+        #     steps.
         #
         #     The id must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). Cannot begin or end with underscore
@@ -204,8 +204,14 @@ module Google
         #   @return [Google::Cloud::Dataproc::V1beta2::HiveJob]
         # @!attribute [rw] pig_job
         #   @return [Google::Cloud::Dataproc::V1beta2::PigJob]
+        # @!attribute [rw] spark_r_job
+        #   @return [Google::Cloud::Dataproc::V1beta2::SparkRJob]
+        #     Spark R job
         # @!attribute [rw] spark_sql_job
         #   @return [Google::Cloud::Dataproc::V1beta2::SparkSqlJob]
+        # @!attribute [rw] presto_job
+        #   @return [Google::Cloud::Dataproc::V1beta2::PrestoJob]
+        #     Presto job
         # @!attribute [rw] labels
         #   @return [Google::Protobuf::Map{String => String}]
         #     Optional. The labels to associate with this job.
@@ -263,10 +269,10 @@ module Google
         #     A field is allowed to appear in at most one parameter's list of field
         #     paths.
         #
-        #     A field path is similar in syntax to a
-        #     {Google::Protobuf::FieldMask google.protobuf.FieldMask}. For example, a
-        #     field path that references the zone field of a workflow template's cluster
-        #     selector would be specified as `placement.clusterSelector.zone`.
+        #     A field path is similar in syntax to a {Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+        #     For example, a field path that references the zone field of a workflow
+        #     template's cluster selector would be specified as
+        #     `placement.clusterSelector.zone`.
         #
         #     Also, field paths can reference fields using the following syntax:
         #

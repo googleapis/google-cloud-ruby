@@ -9,11 +9,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.dataproc.v1beta2.Component" do
       value :COMPONENT_UNSPECIFIED, 0
       value :ANACONDA, 5
+      value :DOCKER, 13
       value :DRUID, 9
+      value :FLINK, 14
       value :HIVE_WEBHCAT, 3
       value :JUPYTER, 1
       value :KERBEROS, 7
       value :PRESTO, 6
+      value :RANGER, 12
+      value :SOLR, 10
       value :ZEPPELIN, 4
       value :ZOOKEEPER, 8
     end

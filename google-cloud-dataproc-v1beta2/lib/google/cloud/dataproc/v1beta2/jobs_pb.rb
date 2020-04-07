@@ -102,6 +102,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :properties, :string, :string, 5
       optional :logging_config, :message, 6, "google.cloud.dataproc.v1beta2.LoggingConfig"
     end
+    add_message "google.cloud.dataproc.v1beta2.PrestoJob" do
+      optional :continue_on_failure, :bool, 3
+      optional :output_format, :string, 4
+      repeated :client_tags, :string, 5
+      map :properties, :string, :string, 6
+      optional :logging_config, :message, 7, "google.cloud.dataproc.v1beta2.LoggingConfig"
+      oneof :queries do
+        optional :query_file_uri, :string, 1
+        optional :query_list, :message, 2, "google.cloud.dataproc.v1beta2.QueryList"
+      end
+    end
     add_message "google.cloud.dataproc.v1beta2.JobPlacement" do
       optional :cluster_name, :string, 1
       optional :cluster_uuid, :string, 2
@@ -163,6 +174,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 18
       optional :scheduling, :message, 20, "google.cloud.dataproc.v1beta2.JobScheduling"
       optional :job_uuid, :string, 22
+      optional :done, :bool, 24
       oneof :type_job do
         optional :hadoop_job, :message, 3, "google.cloud.dataproc.v1beta2.HadoopJob"
         optional :spark_job, :message, 4, "google.cloud.dataproc.v1beta2.SparkJob"
@@ -171,6 +183,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :pig_job, :message, 7, "google.cloud.dataproc.v1beta2.PigJob"
         optional :spark_r_job, :message, 21, "google.cloud.dataproc.v1beta2.SparkRJob"
         optional :spark_sql_job, :message, 12, "google.cloud.dataproc.v1beta2.SparkSqlJob"
+        optional :presto_job, :message, 23, "google.cloud.dataproc.v1beta2.PrestoJob"
       end
     end
     add_message "google.cloud.dataproc.v1beta2.JobScheduling" do
@@ -245,6 +258,7 @@ module Google
         SparkSqlJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.SparkSqlJob").msgclass
         PigJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.PigJob").msgclass
         SparkRJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.SparkRJob").msgclass
+        PrestoJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.PrestoJob").msgclass
         JobPlacement = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.JobPlacement").msgclass
         JobStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.JobStatus").msgclass
         JobStatus::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.JobStatus.State").enummodule

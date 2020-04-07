@@ -456,6 +456,50 @@ module Google
           end
         end
 
+        # A Dataproc job for running [Presto](https://prestosql.io/) queries.
+        # **IMPORTANT**: The [Dataproc Presto Optional
+        # Component](/dataproc/docs/concepts/components/presto) must be enabled when
+        # the cluster is created to submit a Presto job to the cluster.
+        # @!attribute [rw] query_file_uri
+        #   @return [String]
+        #     The HCFS URI of the script that contains SQL queries.
+        # @!attribute [rw] query_list
+        #   @return [Google::Cloud::Dataproc::V1beta2::QueryList]
+        #     A list of queries.
+        # @!attribute [rw] continue_on_failure
+        #   @return [Boolean]
+        #     Optional. Whether to continue executing queries if a query fails.
+        #     The default value is `false`. Setting to `true` can be useful when
+        #     executing independent parallel queries.
+        # @!attribute [rw] output_format
+        #   @return [String]
+        #     Optional. The format in which query output will be displayed. See the
+        #     Presto documentation for supported output formats
+        # @!attribute [rw] client_tags
+        #   @return [Array<String>]
+        #     Optional. Presto client tags to attach to this query
+        # @!attribute [rw] properties
+        #   @return [Google::Protobuf::Map{String => String}]
+        #     Optional. A mapping of property names to values. Used to set Presto
+        #     [session properties](https://prestodb.io/docs/current/sql/set-session.html)
+        #     Equivalent to using the --session flag in the Presto CLI
+        # @!attribute [rw] logging_config
+        #   @return [Google::Cloud::Dataproc::V1beta2::LoggingConfig]
+        #     Optional. The runtime log config for job execution.
+        class PrestoJob
+          include Google::Protobuf::MessageExts
+          extend Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [String]
+          # @!attribute [rw] value
+          #   @return [String]
+          class PropertiesEntry
+            include Google::Protobuf::MessageExts
+            extend Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Dataproc job config.
         # @!attribute [rw] cluster_name
         #   @return [String]
@@ -638,18 +682,28 @@ module Google
         #     run the job.
         # @!attribute [rw] hadoop_job
         #   @return [Google::Cloud::Dataproc::V1beta2::HadoopJob]
+        #     Optional. Job is a Hadoop job.
         # @!attribute [rw] spark_job
         #   @return [Google::Cloud::Dataproc::V1beta2::SparkJob]
+        #     Optional. Job is a Spark job.
         # @!attribute [rw] pyspark_job
         #   @return [Google::Cloud::Dataproc::V1beta2::PySparkJob]
+        #     Optional. Job is a PySpark job.
         # @!attribute [rw] hive_job
         #   @return [Google::Cloud::Dataproc::V1beta2::HiveJob]
+        #     Optional. Job is a Hive job.
         # @!attribute [rw] pig_job
         #   @return [Google::Cloud::Dataproc::V1beta2::PigJob]
+        #     Optional. Job is a Pig job.
         # @!attribute [rw] spark_r_job
         #   @return [Google::Cloud::Dataproc::V1beta2::SparkRJob]
+        #     Optional. Job is a SparkR job.
         # @!attribute [rw] spark_sql_job
         #   @return [Google::Cloud::Dataproc::V1beta2::SparkSqlJob]
+        #     Optional. Job is a SparkSql job.
+        # @!attribute [rw] presto_job
+        #   @return [Google::Cloud::Dataproc::V1beta2::PrestoJob]
+        #     Optional. Job is a Presto job.
         # @!attribute [r] status
         #   @return [Google::Cloud::Dataproc::V1beta2::JobStatus]
         #     Output only. The job status. Additional application-specific
@@ -694,6 +748,12 @@ module Google
         #     Output only. A UUID that uniquely identifies a job within the project
         #     over time. This is in contrast to a user-settable reference.job_id that
         #     may be reused over time.
+        # @!attribute [r] done
+        #   @return [Boolean]
+        #     Output only. Indicates whether the job is completed. If the value is `false`,
+        #     the job is still in progress. If `true`, the job is completed, and
+        #     `status.state` field will indicate if it was successful, failed,
+        #     or cancelled.
         class Job
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods

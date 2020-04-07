@@ -37,6 +37,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :autoscaling_config, :message, 16, "google.cloud.dataproc.v1beta2.AutoscalingConfig"
       optional :endpoint_config, :message, 17, "google.cloud.dataproc.v1beta2.EndpointConfig"
       optional :security_config, :message, 18, "google.cloud.dataproc.v1beta2.SecurityConfig"
+      optional :gke_cluster_config, :message, 19, "google.cloud.dataproc.v1beta2.GkeClusterConfig"
+    end
+    add_message "google.cloud.dataproc.v1beta2.GkeClusterConfig" do
+      optional :namespaced_gke_deployment_target, :message, 1, "google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget"
+    end
+    add_message "google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget" do
+      optional :target_gke_cluster, :string, 1
+      optional :cluster_namespace, :string, 2
     end
     add_message "google.cloud.dataproc.v1beta2.EndpointConfig" do
       map :http_ports, :string, :string, 1
@@ -128,6 +136,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ERROR, 3
       value :DELETING, 4
       value :UPDATING, 5
+      value :STOPPING, 6
+      value :STOPPED, 7
+      value :STARTING, 8
     end
     add_enum "google.cloud.dataproc.v1beta2.ClusterStatus.Substate" do
       value :UNSPECIFIED, 0
@@ -209,6 +220,8 @@ module Google
       module V1beta2
         Cluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.Cluster").msgclass
         ClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.ClusterConfig").msgclass
+        GkeClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.GkeClusterConfig").msgclass
+        GkeClusterConfig::NamespacedGkeDeploymentTarget = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.GkeClusterConfig.NamespacedGkeDeploymentTarget").msgclass
         EndpointConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.EndpointConfig").msgclass
         AutoscalingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.AutoscalingConfig").msgclass
         EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1beta2.EncryptionConfig").msgclass
