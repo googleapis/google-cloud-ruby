@@ -68,7 +68,7 @@ class Kokoro < Command
       return header "No changes for #{@gem}'s samples'. Exiting"
     end
     header "Found changes for #{@gem}"
-    run_ci @gem, true do
+    run_ci do
       run "bundle exec rake samples:latest", 3600
     end
   end
