@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Recaptchaenterprise
+    module RecaptchaEnterprise
       module V1beta1
         # The create assessment request message.
         # @!attribute [rw] parent
@@ -23,7 +23,7 @@ module Google
         #     Required. The name of the project in which the assessment will be created,
         #     in the format "projects/\\{project_number}".
         # @!attribute [rw] assessment
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::Assessment]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment]
         #     Required. The assessment details.
         class CreateAssessmentRequest; end
 
@@ -33,7 +33,7 @@ module Google
         #     Required. The resource name of the Assessment, in the format
         #     "projects/\\{project_number}/assessments/\\{assessment_id}".
         # @!attribute [rw] annotation
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
         #     Required. The annotation that will be assigned to the Event.
         class AnnotateAssessmentRequest
           # Enum that reprensents the types of annotations.
@@ -58,7 +58,7 @@ module Google
         #     Output only. The resource name for the Assessment in the format
         #     "projects/\\{project_number}/assessments/\\{assessment_id}".
         # @!attribute [rw] event
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::Event]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::Event]
         #     The event being assessed.
         # @!attribute [rw] score
         #   @return [Float]
@@ -66,10 +66,10 @@ module Google
         #     (1.0 means very likely legitimate traffic while 0.0 means very likely
         #     non-legitimate traffic).
         # @!attribute [rw] token_properties
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::TokenProperties]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::TokenProperties]
         #     Output only. Properties of the provided event token.
         # @!attribute [rw] reasons
-        #   @return [Array<Google::Cloud::Recaptchaenterprise::V1beta1::Assessment::ClassificationReason>]
+        #   @return [Array<Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment::ClassificationReason>]
         #     Output only. Reasons contributing to the risk analysis verdict.
         class Assessment
           # LINT.IfChange(classification_reason)
@@ -123,7 +123,7 @@ module Google
         #   @return [true, false]
         #     Whether the provided user response token is valid.
         # @!attribute [rw] invalid_reason
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::TokenProperties::InvalidReason]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::TokenProperties::InvalidReason]
         #     Reason associated with the response when valid = false.
         # @!attribute [rw] create_time
         #   @return [Google::Protobuf::Timestamp]
@@ -170,7 +170,7 @@ module Google
         #     Required. The name of the project in which the key will be created, in the
         #     format "projects/\\{project_number}".
         # @!attribute [rw] key
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
         #     Required. Information to create a reCAPTCHA Enterprise key.
         class CreateKeyRequest; end
 
@@ -191,7 +191,7 @@ module Google
 
         # Response to request to list keys in a project.
         # @!attribute [rw] keys
-        #   @return [Array<Google::Cloud::Recaptchaenterprise::V1beta1::Key>]
+        #   @return [Array<Google::Cloud::RecaptchaEnterprise::V1beta1::Key>]
         #     Key details.
         # @!attribute [rw] next_page_token
         #   @return [String]
@@ -208,7 +208,7 @@ module Google
 
         # The update key request message.
         # @!attribute [rw] key
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::Key]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
         #     Required. The key to update.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]
@@ -233,13 +233,13 @@ module Google
         #   @return [String]
         #     Human-readable display name of this key. Modifiable by user.
         # @!attribute [rw] web_settings
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::WebKeySettings]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::WebKeySettings]
         #     Settings for keys that can be used by websites.
         # @!attribute [rw] android_settings
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::AndroidKeySettings]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::AndroidKeySettings]
         #     Settings for keys that can be used by Android apps.
         # @!attribute [rw] ios_settings
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::IOSKeySettings]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::IOSKeySettings]
         #     Settings for keys that can be used by iOS apps.
         class Key; end
 
@@ -257,10 +257,10 @@ module Google
         #   @return [true, false]
         #     Whether this key can be used on AMP (Accelerated Mobile Pages) websites.
         # @!attribute [rw] integration_type
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::WebKeySettings::IntegrationType]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::WebKeySettings::IntegrationType]
         #     Required. Describes how this key is integrated with the website.
         # @!attribute [rw] challenge_security_preference
-        #   @return [Google::Cloud::Recaptchaenterprise::V1beta1::WebKeySettings::ChallengeSecurityPreference]
+        #   @return [Google::Cloud::RecaptchaEnterprise::V1beta1::WebKeySettings::ChallengeSecurityPreference]
         #     Settings for the frequency and difficulty at which this key triggers
         #     captcha challenges. This should only be specified for IntegrationTypes
         #     CHECKBOX_CHALLENGE and INVISIBLE_CHALLENGE.
