@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Oslogin
+    module OsLogin
       module V1
         # The user profile information used for logging in to a virtual machine on
         # Google Compute Engine.
@@ -23,10 +23,10 @@ module Google
         #   @return [String]
         #     Required. A unique user ID.
         # @!attribute [rw] posix_accounts
-        #   @return [Array<Google::Cloud::Oslogin::Common::PosixAccount>]
+        #   @return [Array<Google::Cloud::OsLogin::Common::PosixAccount>]
         #     The list of POSIX accounts associated with the user.
         # @!attribute [rw] ssh_public_keys
-        #   @return [Hash{String => Google::Cloud::Oslogin::Common::SshPublicKey}]
+        #   @return [Hash{String => Google::Cloud::OsLogin::Common::SshPublicKey}]
         #     A map from SSH public key fingerprint to the associated key object.
         class LoginProfile; end
 
@@ -71,7 +71,7 @@ module Google
         #   @return [String]
         #     Required. The unique ID for the user in format `users/{user}`.
         # @!attribute [rw] ssh_public_key
-        #   @return [Google::Cloud::Oslogin::Common::SshPublicKey]
+        #   @return [Google::Cloud::OsLogin::Common::SshPublicKey]
         #     Optional. The SSH public key and expiration time.
         # @!attribute [rw] project_id
         #   @return [String]
@@ -80,7 +80,7 @@ module Google
 
         # A response message for importing an SSH public key.
         # @!attribute [rw] login_profile
-        #   @return [Google::Cloud::Oslogin::V1::LoginProfile]
+        #   @return [Google::Cloud::OsLogin::V1::LoginProfile]
         #     The login profile information for the user.
         class ImportSshPublicKeyResponse; end
 
@@ -91,7 +91,7 @@ module Google
         #     their SHA-256 fingerprint. The fingerprint of the public key is in format
         #     `users/{user}/sshPublicKeys/{fingerprint}`.
         # @!attribute [rw] ssh_public_key
-        #   @return [Google::Cloud::Oslogin::Common::SshPublicKey]
+        #   @return [Google::Cloud::OsLogin::Common::SshPublicKey]
         #     Required. The SSH public key and expiration time.
         # @!attribute [rw] update_mask
         #   @return [Google::Protobuf::FieldMask]

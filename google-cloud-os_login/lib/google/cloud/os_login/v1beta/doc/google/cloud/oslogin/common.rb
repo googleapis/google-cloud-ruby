@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Oslogin
+    module OsLogin
       module Common
         # The POSIX account information associated with a Google account.
         # @!attribute [rw] primary

@@ -33,14 +33,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-module Google
-  module Cloud
-    module Oslogin
-      module Common
-        PosixAccount = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.common.PosixAccount").msgclass
-        SshPublicKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.common.SshPublicKey").msgclass
-        OperatingSystemType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.common.OperatingSystemType").enummodule
-      end
-    end
-  end
+module Google::Cloud::OsLogin::Common
+  PosixAccount = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.common.PosixAccount").msgclass
+  SshPublicKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.common.SshPublicKey").msgclass
+  OperatingSystemType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.common.OperatingSystemType").enummodule
 end

@@ -39,7 +39,7 @@ module Google
         # public keys for logging into virtual machines on Google Cloud Platform.
         #
         # @!attribute [r] os_login_service_stub
-        #   @return [Google::Cloud::Oslogin::V1beta::OsLoginService::Stub]
+        #   @return [Google::Cloud::OsLogin::V1beta::OsLoginService::Stub]
         class OsLoginServiceClient
           # @private
           attr_reader :os_login_service_stub
@@ -222,7 +222,7 @@ module Google
               updater_proc: updater_proc,
               scopes: scopes,
               interceptors: interceptors,
-              &Google::Cloud::Oslogin::V1beta::OsLoginService::Stub.method(:new)
+              &Google::Cloud::OsLogin::V1beta::OsLoginService::Stub.method(:new)
             )
 
             @delete_posix_account = Google::Gax.create_api_call(
@@ -304,7 +304,7 @@ module Google
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::DeletePosixAccountRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest)
             @delete_posix_account.call(req, options, &block)
             nil
           end
@@ -336,7 +336,7 @@ module Google
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::DeleteSshPublicKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest)
             @delete_ssh_public_key.call(req, options, &block)
             nil
           end
@@ -354,9 +354,9 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Oslogin::V1beta::LoginProfile]
+          # @yieldparam result [Google::Cloud::OsLogin::V1beta::LoginProfile]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Oslogin::V1beta::LoginProfile]
+          # @return [Google::Cloud::OsLogin::V1beta::LoginProfile]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/os_login"
@@ -376,7 +376,7 @@ module Google
               project_id: project_id,
               system_id: system_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::GetLoginProfileRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest)
             @get_login_profile.call(req, options, &block)
           end
 
@@ -390,9 +390,9 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Oslogin::Common::SshPublicKey]
+          # @yieldparam result [Google::Cloud::OsLogin::Common::SshPublicKey]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Oslogin::Common::SshPublicKey]
+          # @return [Google::Cloud::OsLogin::Common::SshPublicKey]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/os_login"
@@ -408,7 +408,7 @@ module Google
             req = {
               name: name
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::GetSshPublicKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest)
             @get_ssh_public_key.call(req, options, &block)
           end
 
@@ -418,9 +418,9 @@ module Google
           #
           # @param parent [String]
           #   The unique ID for the user in format `users/{user}`.
-          # @param ssh_public_key [Google::Cloud::Oslogin::Common::SshPublicKey | Hash]
+          # @param ssh_public_key [Google::Cloud::OsLogin::Common::SshPublicKey | Hash]
           #   Required. The SSH public key and expiration time.
-          #   A hash of the same form as `Google::Cloud::Oslogin::Common::SshPublicKey`
+          #   A hash of the same form as `Google::Cloud::OsLogin::Common::SshPublicKey`
           #   can also be provided.
           # @param project_id [String]
           #   The project ID of the Google Cloud Platform project.
@@ -428,9 +428,9 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Oslogin::V1beta::ImportSshPublicKeyResponse]
+          # @yieldparam result [Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Oslogin::V1beta::ImportSshPublicKeyResponse]
+          # @return [Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/os_login"
@@ -453,7 +453,7 @@ module Google
               ssh_public_key: ssh_public_key,
               project_id: project_id
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::ImportSshPublicKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest)
             @import_ssh_public_key.call(req, options, &block)
           end
 
@@ -464,9 +464,9 @@ module Google
           #   Required. The fingerprint of the public key to update. Public keys are identified by
           #   their SHA-256 fingerprint. The fingerprint of the public key is in format
           #   `users/{user}/sshPublicKeys/{fingerprint}`.
-          # @param ssh_public_key [Google::Cloud::Oslogin::Common::SshPublicKey | Hash]
+          # @param ssh_public_key [Google::Cloud::OsLogin::Common::SshPublicKey | Hash]
           #   Required. The SSH public key and expiration time.
-          #   A hash of the same form as `Google::Cloud::Oslogin::Common::SshPublicKey`
+          #   A hash of the same form as `Google::Cloud::OsLogin::Common::SshPublicKey`
           #   can also be provided.
           # @param update_mask [Google::Protobuf::FieldMask | Hash]
           #   Mask to control which fields get updated. Updates all if not present.
@@ -476,9 +476,9 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Oslogin::Common::SshPublicKey]
+          # @yieldparam result [Google::Cloud::OsLogin::Common::SshPublicKey]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Oslogin::Common::SshPublicKey]
+          # @return [Google::Cloud::OsLogin::Common::SshPublicKey]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/os_login"
@@ -501,7 +501,7 @@ module Google
               ssh_public_key: ssh_public_key,
               update_mask: update_mask
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Oslogin::V1beta::UpdateSshPublicKeyRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest)
             @update_ssh_public_key.call(req, options, &block)
           end
         end
