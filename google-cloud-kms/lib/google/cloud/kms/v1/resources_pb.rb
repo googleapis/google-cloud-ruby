@@ -4,11 +4,11 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "google.cloud.kms.v1.KeyRing" do
     optional :name, :string, 1
@@ -58,6 +58,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     optional :import_job, :string, 14
     optional :import_time, :message, 15, "google.protobuf.Timestamp"
     optional :import_failure_reason, :string, 16
+    optional :external_protection_level_options, :message, 17, "google.cloud.kms.v1.ExternalProtectionLevelOptions"
   end
   add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm" do
     value :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED, 0
@@ -76,6 +77,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :RSA_DECRYPT_OAEP_4096_SHA512, 17
     value :EC_SIGN_P256_SHA256, 12
     value :EC_SIGN_P384_SHA384, 13
+    value :EXTERNAL_SYMMETRIC_ENCRYPTION, 18
   end
   add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState" do
     value :CRYPTO_KEY_VERSION_STATE_UNSPECIFIED, 0
@@ -121,6 +123,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :ACTIVE, 2
     value :EXPIRED, 3
   end
+  add_message "google.cloud.kms.v1.ExternalProtectionLevelOptions" do
+    optional :external_key_uri, :string, 1
+  end
   add_enum "google.cloud.kms.v1.ProtectionLevel" do
     value :PROTECTION_LEVEL_UNSPECIFIED, 0
     value :SOFTWARE, 1
@@ -148,6 +153,7 @@ module Google
         ImportJob::WrappingPublicKey = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ImportJob.WrappingPublicKey").msgclass
         ImportJob::ImportMethod = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ImportJob.ImportMethod").enummodule
         ImportJob::ImportJobState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ImportJob.ImportJobState").enummodule
+        ExternalProtectionLevelOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ExternalProtectionLevelOptions").msgclass
         ProtectionLevel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.ProtectionLevel").enummodule
       end
     end
