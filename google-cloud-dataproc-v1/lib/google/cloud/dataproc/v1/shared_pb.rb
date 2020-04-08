@@ -11,7 +11,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ANACONDA, 5
       value :HIVE_WEBHCAT, 3
       value :JUPYTER, 1
+      value :PRESTO, 6
       value :ZEPPELIN, 4
+      value :ZOOKEEPER, 8
     end
   end
 end

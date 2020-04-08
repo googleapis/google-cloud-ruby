@@ -201,7 +201,7 @@ module Google
             #       of the location has the following format:
             #       `projects/{project_id}/locations/{location}`
             #   @param policy [Google::Cloud::Dataproc::V1::AutoscalingPolicy | Hash]
-            #     The autoscaling policy to create.
+            #     Required. The autoscaling policy to create.
             #
             #
             # @yield [response, operation] Access the result along with the RPC operation

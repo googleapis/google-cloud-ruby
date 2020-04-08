@@ -35,8 +35,14 @@ module Google
           # The Jupyter Notebook.
           JUPYTER = 1
 
+          # The Presto query engine.
+          PRESTO = 6
+
           # The Zeppelin notebook.
           ZEPPELIN = 4
+
+          # The Zookeeper service.
+          ZOOKEEPER = 8
         end
       end
     end

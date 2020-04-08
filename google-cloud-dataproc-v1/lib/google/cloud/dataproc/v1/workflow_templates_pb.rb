@@ -51,7 +51,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :pyspark_job, :message, 4, "google.cloud.dataproc.v1.PySparkJob"
         optional :hive_job, :message, 5, "google.cloud.dataproc.v1.HiveJob"
         optional :pig_job, :message, 6, "google.cloud.dataproc.v1.PigJob"
+        optional :spark_r_job, :message, 11, "google.cloud.dataproc.v1.SparkRJob"
         optional :spark_sql_job, :message, 7, "google.cloud.dataproc.v1.SparkSqlJob"
+        optional :presto_job, :message, 12, "google.cloud.dataproc.v1.PrestoJob"
       end
     end
     add_message "google.cloud.dataproc.v1.TemplateParameter" do

@@ -583,11 +583,11 @@ module Google
             end
 
             ##
-            # Lists all regions/\\{region}/clusters in a project.
+            # Lists all regions/\\{region}/clusters in a project alphabetically.
             #
             # @overload list_clusters(request, options = nil)
             #   @param request [Google::Cloud::Dataproc::V1::ListClustersRequest | Hash]
-            #     Lists all regions/\\{region}/clusters in a project.
+            #     Lists all regions/\\{region}/clusters in a project alphabetically.
             #   @param options [Gapic::CallOptions, Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #

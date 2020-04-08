@@ -451,7 +451,10 @@ module Google
           end
         end
 
-        # A Dataproc job for running [Presto](https://prestosql.io/) queries
+        # A Dataproc job for running [Presto](https://prestosql.io/) queries.
+        # **IMPORTANT**: The [Dataproc Presto Optional
+        # Component](/dataproc/docs/concepts/components/presto) must be enabled when
+        # the cluster is created to submit a Presto job to the cluster.
         # @!attribute [rw] query_file_uri
         #   @return [String]
         #     The HCFS URI of the script that contains SQL queries.
@@ -737,6 +740,12 @@ module Google
         #     Output only. A UUID that uniquely identifies a job within the project
         #     over time. This is in contrast to a user-settable reference.job_id that
         #     may be reused over time.
+        # @!attribute [r] done
+        #   @return [Boolean]
+        #     Output only. Indicates whether the job is completed. If the value is `false`,
+        #     the job is still in progress. If `true`, the job is completed, and
+        #     `status.state` field will indicate if it was successful, failed,
+        #     or cancelled.
         class Job
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -792,6 +801,24 @@ module Google
         #     The id must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         class SubmitJobRequest
+          include Google::Protobuf::MessageExts
+          extend Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Job Operation metadata.
+        # @!attribute [r] job_id
+        #   @return [String]
+        #     Output only. The job id.
+        # @!attribute [r] status
+        #   @return [Google::Cloud::Dataproc::V1::JobStatus]
+        #     Output only. Most recent job status.
+        # @!attribute [r] operation_type
+        #   @return [String]
+        #     Output only. Operation type.
+        # @!attribute [r] start_time
+        #   @return [Google::Protobuf::Timestamp]
+        #     Output only. Job submission time.
+        class JobMetadata
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
         end
