@@ -48,7 +48,7 @@ module Google
             rpc :DeleteCluster, DeleteClusterRequest, Google::Longrunning::Operation
             # Gets the resource representation for a cluster in a project.
             rpc :GetCluster, GetClusterRequest, Cluster
-            # Lists all regions/{region}/clusters in a project.
+            # Lists all regions/{region}/clusters in a project alphabetically.
             rpc :ListClusters, ListClustersRequest, ListClustersResponse
             # Gets cluster diagnostic information. The returned
             # [Operation.metadata][google.longrunning.Operation.metadata] will be

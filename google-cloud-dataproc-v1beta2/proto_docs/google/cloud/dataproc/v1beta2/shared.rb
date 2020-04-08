@@ -29,8 +29,14 @@ module Google
           # The Anaconda python distribution.
           ANACONDA = 5
 
+          # Docker
+          DOCKER = 13
+
           # The Druid query engine.
           DRUID = 9
+
+          # Flink
+          FLINK = 14
 
           # The Hive Web HCatalog (the REST service for accessing HCatalog).
           HIVE_WEBHCAT = 3
@@ -43,6 +49,12 @@ module Google
 
           # The Presto query engine.
           PRESTO = 6
+
+          # The Ranger service.
+          RANGER = 12
+
+          # The Solr service.
+          SOLR = 10
 
           # The Zeppelin notebook.
           ZEPPELIN = 4
