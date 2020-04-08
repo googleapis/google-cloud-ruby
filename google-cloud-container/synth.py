@@ -238,3 +238,10 @@ s.replace(
     'github.io/google-cloud-ruby/#/docs/google-cloud-container/latest/.*$',
     'dev/ruby/google-cloud-container/latest'
 )
+
+# https://github.com/googleapis/gapic-generator/issues/2525
+s.replace(
+    'lib/google/container/*/*_pb.rb',
+    '\nmodule Google::Cloud::Container::V(\\w+)\n',
+    '\nmodule Google\n  module Cloud\n    module Container\n    end\n  end\n  Container = Cloud::Container unless const_defined? :Container\nend\nmodule Google::Cloud::Container::V\\1\n',
+)

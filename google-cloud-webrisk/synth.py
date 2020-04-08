@@ -203,3 +203,12 @@ s.replace(
     'github.io/google-cloud-ruby/#/docs/google-cloud-webrisk/latest/.*$',
     'dev/ruby/google-cloud-webrisk/latest'
 )
+
+# For this library, undo the effect of ruby_package and keep things in the
+# module Google::Cloud::Webrisk. When we move to the microgenerator, we will
+# deprecate this entire library and create google-cloud-web_risk instead.
+s.replace(
+    'lib/google/cloud/webrisk/v1beta1/*_pb.rb',
+    '\nmodule Google::Cloud::WebRisk::V1beta1\n',
+    '\nmodule Google::Cloud::Webrisk::V1beta1\n',
+)

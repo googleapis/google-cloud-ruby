@@ -236,3 +236,21 @@ s.replace(
     'github.io/google-cloud-ruby/#/docs/google-cloud-bigquery-data_transfer/latest/.*$',
     'dev/ruby/google-cloud-bigquery-data_transfer/latest'
 )
+
+# https://github.com/googleapis/gapic-generator/issues/2525
+s.replace(
+    'lib/google/cloud/bigquery/data_transfer/v1/**/*.rb',
+    'Google::Cloud::Bigquery::Datatransfer',
+    'Google::Cloud::Bigquery::DataTransfer')
+s.replace(
+    'lib/google/cloud/bigquery/data_transfer/v1/doc/google/cloud/bigquery/datatransfer/**/*.rb',
+    '\n      module Datatransfer\n',
+    '\n      module DataTransfer\n'
+)
+
+# https://github.com/protocolbuffers/protobuf/issues/5584
+s.replace(
+    'lib/google/cloud/bigquery/datatransfer/*/*_pb.rb',
+    '\nmodule Google::Cloud::Bigquery::DataTransfer::V1\n',
+    '\nmodule Google\n  module Cloud\n    module Bigquery\n      module DataTransfer\n      end\n      Datatransfer = DataTransfer unless const_defined? :Datatransfer\n    end\n  end\nend\nmodule Google::Cloud::Bigquery::DataTransfer::V1\n',
+)
