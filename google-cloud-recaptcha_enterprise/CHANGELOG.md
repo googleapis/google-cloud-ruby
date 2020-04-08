@@ -1,5 +1,12 @@
 # Release History
 
+### 0.6.0 / 2020-04-08
+
+#### Features
+
+* Move data type classes from Recaptchaenterprise to RecaptchaEnterprise.
+  * Note: Recaptchaenterprise was left as an alias, so older code should still work.
+
 ### 0.5.1 / 2020-04-01
 
 #### Documentation
