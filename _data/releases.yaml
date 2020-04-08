@@ -441,6 +441,7 @@ google-cloud-firestore:
 - v0.21.0
 - v0.20.0
 google-cloud-kms:
+- v1.6.0
 - v1.5.1
 - v1.5.0
 - v1.4.1
