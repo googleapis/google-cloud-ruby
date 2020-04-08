@@ -35,6 +35,8 @@ def export_assets project_id:, dump_file_path:
   end
 
   operation.wait_until_done!
+  response = operation.response
+  puts "Exported assets to: #{response.output_config.gcs_destination.uri}"
   # Do things with the result
   # [END asset_quickstart_export_assets]
 end

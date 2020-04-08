@@ -54,7 +54,11 @@ describe "Asset Quickstart" do
   describe "export_assets" do
     it "exports assets to a cloud storage file" do
       assert_nil bucket.file(dump_file_name)
-      export_assets project_id: project_id, dump_file_path: dump_file_path
+      out, _err = capture_io do
+        export_assets project_id: project_id, dump_file_path: dump_file_path
+      end
+      match = out.match(/Exported assets to: (.*)\n/)
+      assert_equal match[1], dump_file_path
       refute_nil bucket.file(dump_file_name)
     end
   end

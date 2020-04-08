@@ -33,11 +33,7 @@ else
   # rubocop:enable Bundler/DuplicatedGem
 end
 
-# [END asset_dependencies]
-
 group :test do
   gem "minitest", "~> 5.11.3"
   gem "rake"
 end
-
-gem "pry"
