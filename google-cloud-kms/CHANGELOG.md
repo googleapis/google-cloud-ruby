@@ -1,5 +1,11 @@
 # Release History
 
+### 1.6.0 / 2020-04-08
+
+#### Features
+
+* Support additional options for external protection level.
+
 ### 1.5.1 / 2020-04-01
 
 #### Documentation
