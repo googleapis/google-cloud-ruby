@@ -1,5 +1,12 @@
 # Release History
 
+### 0.7.0 / 2020-04-08
+
+#### Features
+
+* Move data type classes from Oslogin to OsLogin.
+  * Note: Oslogin was left as an alias, so older code should still work.
+
 ### 0.6.1 / 2020-04-01
 
 #### Documentation
