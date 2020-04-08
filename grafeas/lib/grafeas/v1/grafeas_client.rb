@@ -248,6 +248,22 @@ module Grafeas
           &Grafeas::V1::GrafeasService::Stub.method(:new)
         )
 
+        @delete_occurrence = Google::Gax.create_api_call(
+          @grafeas_stub.method(:delete_occurrence),
+          defaults["delete_occurrence"],
+          exception_transformer: exception_transformer,
+          params_extractor: proc do |request|
+            {'name' => request.name}
+          end
+        )
+        @delete_note = Google::Gax.create_api_call(
+          @grafeas_stub.method(:delete_note),
+          defaults["delete_note"],
+          exception_transformer: exception_transformer,
+          params_extractor: proc do |request|
+            {'name' => request.name}
+          end
+        )
         @get_occurrence = Google::Gax.create_api_call(
           @grafeas_stub.method(:get_occurrence),
           defaults["get_occurrence"],
@@ -262,14 +278,6 @@ module Grafeas
           exception_transformer: exception_transformer,
           params_extractor: proc do |request|
             {'parent' => request.parent}
-          end
-        )
-        @delete_occurrence = Google::Gax.create_api_call(
-          @grafeas_stub.method(:delete_occurrence),
-          defaults["delete_occurrence"],
-          exception_transformer: exception_transformer,
-          params_extractor: proc do |request|
-            {'name' => request.name}
           end
         )
         @create_occurrence = Google::Gax.create_api_call(
@@ -320,14 +328,6 @@ module Grafeas
             {'parent' => request.parent}
           end
         )
-        @delete_note = Google::Gax.create_api_call(
-          @grafeas_stub.method(:delete_note),
-          defaults["delete_note"],
-          exception_transformer: exception_transformer,
-          params_extractor: proc do |request|
-            {'name' => request.name}
-          end
-        )
         @create_note = Google::Gax.create_api_call(
           @grafeas_stub.method(:create_note),
           defaults["create_note"],
@@ -363,6 +363,70 @@ module Grafeas
       end
 
       # Service calls
+
+      # Deletes the specified occurrence. For example, use this method to delete an
+      # occurrence when the occurrence is no longer applicable for the given
+      # resource.
+      #
+      # @param name [String]
+      #   The name of the occurrence in the form of
+      #   `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
+      # @param options [Google::Gax::CallOptions]
+      #   Overrides the default settings for this call, e.g, timeout,
+      #   retries, etc.
+      # @yield [result, operation] Access the result along with the RPC operation
+      # @yieldparam result []
+      # @yieldparam operation [GRPC::ActiveCall::Operation]
+      # @raise [Google::Gax::GaxError] if the RPC is aborted.
+      # @example
+      #   require "grafeas"
+      #
+      #   grafeas_client = Grafeas.new(version: :v1)
+      #   formatted_name = Grafeas::V1::GrafeasClient.occurrence_path("[PROJECT]", "[OCCURRENCE]")
+      #   grafeas_client.delete_occurrence(formatted_name)
+
+      def delete_occurrence \
+          name,
+          options: nil,
+          &block
+        req = {
+          name: name
+        }.delete_if { |_, v| v.nil? }
+        req = Google::Gax::to_proto(req, Grafeas::V1::DeleteOccurrenceRequest)
+        @delete_occurrence.call(req, options, &block)
+        nil
+      end
+
+      # Deletes the specified note.
+      #
+      # @param name [String]
+      #   The name of the note in the form of
+      #   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
+      # @param options [Google::Gax::CallOptions]
+      #   Overrides the default settings for this call, e.g, timeout,
+      #   retries, etc.
+      # @yield [result, operation] Access the result along with the RPC operation
+      # @yieldparam result []
+      # @yieldparam operation [GRPC::ActiveCall::Operation]
+      # @raise [Google::Gax::GaxError] if the RPC is aborted.
+      # @example
+      #   require "grafeas"
+      #
+      #   grafeas_client = Grafeas.new(version: :v1)
+      #   formatted_name = Grafeas::V1::GrafeasClient.note_path("[PROJECT]", "[NOTE]")
+      #   grafeas_client.delete_note(formatted_name)
+
+      def delete_note \
+          name,
+          options: nil,
+          &block
+        req = {
+          name: name
+        }.delete_if { |_, v| v.nil? }
+        req = Google::Gax::to_proto(req, Grafeas::V1::DeleteNoteRequest)
+        @delete_note.call(req, options, &block)
+        nil
+      end
 
       # Gets the specified occurrence.
       #
@@ -452,39 +516,6 @@ module Grafeas
         }.delete_if { |_, v| v.nil? }
         req = Google::Gax::to_proto(req, Grafeas::V1::ListOccurrencesRequest)
         @list_occurrences.call(req, options, &block)
-      end
-
-      # Deletes the specified occurrence. For example, use this method to delete an
-      # occurrence when the occurrence is no longer applicable for the given
-      # resource.
-      #
-      # @param name [String]
-      #   The name of the occurrence in the form of
-      #   `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
-      # @param options [Google::Gax::CallOptions]
-      #   Overrides the default settings for this call, e.g, timeout,
-      #   retries, etc.
-      # @yield [result, operation] Access the result along with the RPC operation
-      # @yieldparam result []
-      # @yieldparam operation [GRPC::ActiveCall::Operation]
-      # @raise [Google::Gax::GaxError] if the RPC is aborted.
-      # @example
-      #   require "grafeas"
-      #
-      #   grafeas_client = Grafeas.new(version: :v1)
-      #   formatted_name = Grafeas::V1::GrafeasClient.occurrence_path("[PROJECT]", "[OCCURRENCE]")
-      #   grafeas_client.delete_occurrence(formatted_name)
-
-      def delete_occurrence \
-          name,
-          options: nil,
-          &block
-        req = {
-          name: name
-        }.delete_if { |_, v| v.nil? }
-        req = Google::Gax::to_proto(req, Grafeas::V1::DeleteOccurrenceRequest)
-        @delete_occurrence.call(req, options, &block)
-        nil
       end
 
       # Creates a new occurrence.
@@ -733,37 +764,6 @@ module Grafeas
         }.delete_if { |_, v| v.nil? }
         req = Google::Gax::to_proto(req, Grafeas::V1::ListNotesRequest)
         @list_notes.call(req, options, &block)
-      end
-
-      # Deletes the specified note.
-      #
-      # @param name [String]
-      #   The name of the note in the form of
-      #   `projects/[PROVIDER_ID]/notes/[NOTE_ID]`.
-      # @param options [Google::Gax::CallOptions]
-      #   Overrides the default settings for this call, e.g, timeout,
-      #   retries, etc.
-      # @yield [result, operation] Access the result along with the RPC operation
-      # @yieldparam result []
-      # @yieldparam operation [GRPC::ActiveCall::Operation]
-      # @raise [Google::Gax::GaxError] if the RPC is aborted.
-      # @example
-      #   require "grafeas"
-      #
-      #   grafeas_client = Grafeas.new(version: :v1)
-      #   formatted_name = Grafeas::V1::GrafeasClient.note_path("[PROJECT]", "[NOTE]")
-      #   grafeas_client.delete_note(formatted_name)
-
-      def delete_note \
-          name,
-          options: nil,
-          &block
-        req = {
-          name: name
-        }.delete_if { |_, v| v.nil? }
-        req = Google::Gax::to_proto(req, Grafeas::V1::DeleteNoteRequest)
-        @delete_note.call(req, options, &block)
-        nil
       end
 
       # Creates a new note.

@@ -68,6 +68,144 @@ end
 
 describe Grafeas::V1::GrafeasClient do
 
+  describe 'delete_occurrence' do
+    custom_error = CustomTestError_v1.new "Custom test error for Grafeas::V1::GrafeasClient#delete_occurrence."
+
+    it 'invokes delete_occurrence without error' do
+      # Create request parameters
+      formatted_name = Grafeas::V1::GrafeasClient.occurrence_path("[PROJECT]", "[OCCURRENCE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Grafeas::V1::DeleteOccurrenceRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_occurrence, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockGrafeasCredentials_v1.new("delete_occurrence")
+
+      Grafeas::V1::GrafeasService::Stub.stub(:new, mock_stub) do
+        Grafeas::V1::Credentials.stub(:default, mock_credentials) do
+          client = Grafeas.new(version: :v1)
+
+          # Call method
+          response = client.delete_occurrence(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_occurrence(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_occurrence with error' do
+      # Create request parameters
+      formatted_name = Grafeas::V1::GrafeasClient.occurrence_path("[PROJECT]", "[OCCURRENCE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Grafeas::V1::DeleteOccurrenceRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_occurrence, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockGrafeasCredentials_v1.new("delete_occurrence")
+
+      Grafeas::V1::GrafeasService::Stub.stub(:new, mock_stub) do
+        Grafeas::V1::Credentials.stub(:default, mock_credentials) do
+          client = Grafeas.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.delete_occurrence(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'delete_note' do
+    custom_error = CustomTestError_v1.new "Custom test error for Grafeas::V1::GrafeasClient#delete_note."
+
+    it 'invokes delete_note without error' do
+      # Create request parameters
+      formatted_name = Grafeas::V1::GrafeasClient.note_path("[PROJECT]", "[NOTE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Grafeas::V1::DeleteNoteRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_note, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockGrafeasCredentials_v1.new("delete_note")
+
+      Grafeas::V1::GrafeasService::Stub.stub(:new, mock_stub) do
+        Grafeas::V1::Credentials.stub(:default, mock_credentials) do
+          client = Grafeas.new(version: :v1)
+
+          # Call method
+          response = client.delete_note(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_note(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_note with error' do
+      # Create request parameters
+      formatted_name = Grafeas::V1::GrafeasClient.note_path("[PROJECT]", "[NOTE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Grafeas::V1::DeleteNoteRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_note, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockGrafeasCredentials_v1.new("delete_note")
+
+      Grafeas::V1::GrafeasService::Stub.stub(:new, mock_stub) do
+        Grafeas::V1::Credentials.stub(:default, mock_credentials) do
+          client = Grafeas.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.delete_note(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'get_occurrence' do
     custom_error = CustomTestError_v1.new "Custom test error for Grafeas::V1::GrafeasClient#get_occurrence."
 
@@ -213,75 +351,6 @@ describe Grafeas::V1::GrafeasClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_occurrences(formatted_parent)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'delete_occurrence' do
-    custom_error = CustomTestError_v1.new "Custom test error for Grafeas::V1::GrafeasClient#delete_occurrence."
-
-    it 'invokes delete_occurrence without error' do
-      # Create request parameters
-      formatted_name = Grafeas::V1::GrafeasClient.occurrence_path("[PROJECT]", "[OCCURRENCE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Grafeas::V1::DeleteOccurrenceRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: nil)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:delete_occurrence, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockGrafeasCredentials_v1.new("delete_occurrence")
-
-      Grafeas::V1::GrafeasService::Stub.stub(:new, mock_stub) do
-        Grafeas::V1::Credentials.stub(:default, mock_credentials) do
-          client = Grafeas.new(version: :v1)
-
-          # Call method
-          response = client.delete_occurrence(formatted_name)
-
-          # Verify the response
-          assert_nil(response)
-
-          # Call method with block
-          client.delete_occurrence(formatted_name) do |response, operation|
-            # Verify the response
-            assert_nil(response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes delete_occurrence with error' do
-      # Create request parameters
-      formatted_name = Grafeas::V1::GrafeasClient.occurrence_path("[PROJECT]", "[OCCURRENCE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Grafeas::V1::DeleteOccurrenceRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:delete_occurrence, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockGrafeasCredentials_v1.new("delete_occurrence")
-
-      Grafeas::V1::GrafeasService::Stub.stub(:new, mock_stub) do
-        Grafeas::V1::Credentials.stub(:default, mock_credentials) do
-          client = Grafeas.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.delete_occurrence(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -769,75 +838,6 @@ describe Grafeas::V1::GrafeasClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.list_notes(formatted_parent)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'delete_note' do
-    custom_error = CustomTestError_v1.new "Custom test error for Grafeas::V1::GrafeasClient#delete_note."
-
-    it 'invokes delete_note without error' do
-      # Create request parameters
-      formatted_name = Grafeas::V1::GrafeasClient.note_path("[PROJECT]", "[NOTE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Grafeas::V1::DeleteNoteRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: nil)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:delete_note, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockGrafeasCredentials_v1.new("delete_note")
-
-      Grafeas::V1::GrafeasService::Stub.stub(:new, mock_stub) do
-        Grafeas::V1::Credentials.stub(:default, mock_credentials) do
-          client = Grafeas.new(version: :v1)
-
-          # Call method
-          response = client.delete_note(formatted_name)
-
-          # Verify the response
-          assert_nil(response)
-
-          # Call method with block
-          client.delete_note(formatted_name) do |response, operation|
-            # Verify the response
-            assert_nil(response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes delete_note with error' do
-      # Create request parameters
-      formatted_name = Grafeas::V1::GrafeasClient.note_path("[PROJECT]", "[NOTE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Grafeas::V1::DeleteNoteRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:delete_note, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockGrafeasCredentials_v1.new("delete_note")
-
-      Grafeas::V1::GrafeasService::Stub.stub(:new, mock_stub) do
-        Grafeas::V1::Credentials.stub(:default, mock_credentials) do
-          client = Grafeas.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.delete_note(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
