@@ -74,9 +74,9 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
 
     it 'invokes annotate_video without error' do
       # Create request parameters
-      input_uri = "gs://cloud-samples-data/video/cat.mp4"
       features_element = :LABEL_DETECTION
       features = [features_element]
+      input_uri = "gs://cloud-samples-data/video/cat.mp4"
 
       # Create expected grpc response
       expected_response = {}
@@ -92,8 +92,8 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Videointelligence::V1beta2::AnnotateVideoRequest, request)
-        assert_equal(input_uri, request.input_uri)
         assert_equal(features, request.features)
+        assert_equal(input_uri, request.input_uri)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:annotate_video, mock_method)
@@ -106,7 +106,7 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
           client = Google::Cloud::VideoIntelligence.new(version: :v1beta2)
 
           # Call method
-          response = client.annotate_video(input_uri: input_uri, features: features)
+          response = client.annotate_video(features, input_uri: input_uri)
 
           # Verify the response
           assert_equal(expected_response, response.response)
@@ -116,9 +116,9 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
 
     it 'invokes annotate_video and returns an operation error.' do
       # Create request parameters
-      input_uri = "gs://cloud-samples-data/video/cat.mp4"
       features_element = :LABEL_DETECTION
       features = [features_element]
+      input_uri = "gs://cloud-samples-data/video/cat.mp4"
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
@@ -133,8 +133,8 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Videointelligence::V1beta2::AnnotateVideoRequest, request)
-        assert_equal(input_uri, request.input_uri)
         assert_equal(features, request.features)
+        assert_equal(input_uri, request.input_uri)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:annotate_video, mock_method)
@@ -147,7 +147,7 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
           client = Google::Cloud::VideoIntelligence.new(version: :v1beta2)
 
           # Call method
-          response = client.annotate_video(input_uri: input_uri, features: features)
+          response = client.annotate_video(features, input_uri: input_uri)
 
           # Verify the response
           assert(response.error?)
@@ -158,15 +158,15 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
 
     it 'invokes annotate_video with error' do
       # Create request parameters
-      input_uri = "gs://cloud-samples-data/video/cat.mp4"
       features_element = :LABEL_DETECTION
       features = [features_element]
+      input_uri = "gs://cloud-samples-data/video/cat.mp4"
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Cloud::Videointelligence::V1beta2::AnnotateVideoRequest, request)
-        assert_equal(input_uri, request.input_uri)
         assert_equal(features, request.features)
+        assert_equal(input_uri, request.input_uri)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1beta2.new(:annotate_video, mock_method)
@@ -180,7 +180,7 @@ describe Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceServiceClie
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta2 do
-            client.annotate_video(input_uri: input_uri, features: features)
+            client.annotate_video(features, input_uri: input_uri)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

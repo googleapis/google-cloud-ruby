@@ -203,6 +203,8 @@ module Google
           # `Operation.metadata` contains `AnnotateVideoProgress` (progress).
           # `Operation.response` contains `AnnotateVideoResponse` (results).
           #
+          # @param features [Array<Google::Cloud::VideoIntelligence::V1p1beta1::Feature>]
+          #   Required. Requested video annotation features.
           # @param input_uri [String]
           #   Input video location. Currently, only
           #   [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
@@ -218,8 +220,6 @@ module Google
           #   The video data bytes.
           #   If unset, the input video(s) should be specified via `input_uri`.
           #   If set, `input_uri` should be unset.
-          # @param features [Array<Google::Cloud::VideoIntelligence::V1p1beta1::Feature>]
-          #   Required. Requested video annotation features.
           # @param video_context [Google::Cloud::VideoIntelligence::V1p1beta1::VideoContext | Hash]
           #   Additional video context and/or feature-specific parameters.
           #   A hash of the same form as `Google::Cloud::VideoIntelligence::V1p1beta1::VideoContext`
@@ -244,12 +244,12 @@ module Google
           #   require "google/cloud/video_intelligence"
           #
           #   video_intelligence_client = Google::Cloud::VideoIntelligence.new(version: :v1p1beta1)
-          #   input_uri = "gs://cloud-samples-data/video/cat.mp4"
           #   features_element = :LABEL_DETECTION
           #   features = [features_element]
+          #   input_uri = "gs://cloud-samples-data/video/cat.mp4"
           #
           #   # Register a callback during the method call.
-          #   operation = video_intelligence_client.annotate_video(input_uri: input_uri, features: features) do |op|
+          #   operation = video_intelligence_client.annotate_video(features, input_uri: input_uri) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
@@ -276,17 +276,17 @@ module Google
           #   operation.wait_until_done!
 
           def annotate_video \
+              features,
               input_uri: nil,
               input_content: nil,
-              features: nil,
               video_context: nil,
               output_uri: nil,
               location_id: nil,
               options: nil
             req = {
+              features: features,
               input_uri: input_uri,
               input_content: input_content,
-              features: features,
               video_context: video_context,
               output_uri: output_uri,
               location_id: location_id

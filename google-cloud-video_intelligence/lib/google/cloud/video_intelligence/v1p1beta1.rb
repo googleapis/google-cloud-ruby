@@ -56,7 +56,7 @@ module Google
       # features = [features_element]
       #
       # # Register a callback during the method call.
-      # operation = video_intelligence_client.annotate_video(input_uri: input_uri, features: features) do |op|
+      # operation = video_intelligence_client.annotate_video(features, input_uri: input_uri) do |op|
       #   raise op.results.message if op.error?
       #   op_results = op.results
       #   # Process the results.
