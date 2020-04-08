@@ -93,29 +93,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-module Google
-  module Cloud
-    module Webrisk
-      module V1beta1
-        ComputeThreatListDiffRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest").msgclass
-        ComputeThreatListDiffRequest::Constraints = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints").msgclass
-        ComputeThreatListDiffResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse").msgclass
-        ComputeThreatListDiffResponse::Checksum = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum").msgclass
-        ComputeThreatListDiffResponse::ResponseType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType").enummodule
-        SearchUrisRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchUrisRequest").msgclass
-        SearchUrisResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchUrisResponse").msgclass
-        SearchUrisResponse::ThreatUri = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri").msgclass
-        SearchHashesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchHashesRequest").msgclass
-        SearchHashesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchHashesResponse").msgclass
-        SearchHashesResponse::ThreatHash = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash").msgclass
-        ThreatEntryAdditions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ThreatEntryAdditions").msgclass
-        ThreatEntryRemovals = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ThreatEntryRemovals").msgclass
-        RawIndices = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.RawIndices").msgclass
-        RawHashes = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.RawHashes").msgclass
-        RiceDeltaEncoding = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.RiceDeltaEncoding").msgclass
-        ThreatType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ThreatType").enummodule
-        CompressionType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.CompressionType").enummodule
-      end
-    end
-  end
+module Google::Cloud::Webrisk::V1beta1
+  ComputeThreatListDiffRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest").msgclass
+  ComputeThreatListDiffRequest::Constraints = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest.Constraints").msgclass
+  ComputeThreatListDiffResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse").msgclass
+  ComputeThreatListDiffResponse::Checksum = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.Checksum").msgclass
+  ComputeThreatListDiffResponse::ResponseType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse.ResponseType").enummodule
+  SearchUrisRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchUrisRequest").msgclass
+  SearchUrisResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchUrisResponse").msgclass
+  SearchUrisResponse::ThreatUri = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchUrisResponse.ThreatUri").msgclass
+  SearchHashesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchHashesRequest").msgclass
+  SearchHashesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchHashesResponse").msgclass
+  SearchHashesResponse::ThreatHash = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.SearchHashesResponse.ThreatHash").msgclass
+  ThreatEntryAdditions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ThreatEntryAdditions").msgclass
+  ThreatEntryRemovals = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ThreatEntryRemovals").msgclass
+  RawIndices = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.RawIndices").msgclass
+  RawHashes = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.RawHashes").msgclass
+  RiceDeltaEncoding = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.RiceDeltaEncoding").msgclass
+  ThreatType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.ThreatType").enummodule
+  CompressionType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1beta1.CompressionType").enummodule
 end
