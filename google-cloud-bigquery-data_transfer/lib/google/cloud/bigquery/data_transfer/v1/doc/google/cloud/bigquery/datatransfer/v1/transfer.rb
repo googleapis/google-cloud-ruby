@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Bigquery
-      module Datatransfer
+      module DataTransfer
         module V1
           # Represents preferences for sending email notifications for transfer run
           # events.
@@ -89,7 +89,7 @@ module Google
           #     https://cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#the_schedule_format
           #     NOTE: the granularity should be at least 8 hours, or less frequent.
           # @!attribute [rw] schedule_options
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::ScheduleOptions]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::ScheduleOptions]
           #     Options customizing the data transfer schedule.
           # @!attribute [rw] data_refresh_window_days
           #   @return [Integer]
@@ -110,7 +110,7 @@ module Google
           #   @return [Google::Protobuf::Timestamp]
           #     Output only. Next time when data transfer will run.
           # @!attribute [rw] state
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferState]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferState]
           #     Output only. State of the most recently updated transfer run.
           # @!attribute [rw] user_id
           #   @return [Integer]
@@ -123,7 +123,7 @@ module Google
           #     Pub/Sub topic where notifications will be sent after transfer runs
           #     associated with this transfer config finish.
           # @!attribute [rw] email_preferences
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::EmailPreferences]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
           #     Email notifications will be sent according to these preferences
           #     to the email address of the user who owns this transfer config.
           class TransferConfig; end
@@ -166,7 +166,7 @@ module Google
           #   @return [String]
           #     Output only. Data source id.
           # @!attribute [rw] state
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferState]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferState]
           #     Data transfer run state. Ignored for input requests.
           # @!attribute [rw] user_id
           #   @return [Integer]
@@ -183,7 +183,7 @@ module Google
           #     Output only. Pub/Sub topic where a notification will be sent after this
           #     transfer run finishes
           # @!attribute [rw] email_preferences
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::EmailPreferences]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
           #     Output only. Email notifications will be sent according to these
           #     preferences to the email address of the user who owns the transfer config
           #     this run was derived from.
@@ -194,7 +194,7 @@ module Google
           #   @return [Google::Protobuf::Timestamp]
           #     Time when message was logged.
           # @!attribute [rw] severity
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferMessage::MessageSeverity]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage::MessageSeverity]
           #     Message severity.
           # @!attribute [rw] message_text
           #   @return [String]

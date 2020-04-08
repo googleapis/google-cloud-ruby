@@ -86,18 +86,19 @@ end
 module Google
   module Cloud
     module Bigquery
-      module Datatransfer
-        module V1
-          EmailPreferences = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.EmailPreferences").msgclass
-          ScheduleOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleOptions").msgclass
-          TransferConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferConfig").msgclass
-          TransferRun = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferRun").msgclass
-          TransferMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferMessage").msgclass
-          TransferMessage::MessageSeverity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferMessage.MessageSeverity").enummodule
-          TransferType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferType").enummodule
-          TransferState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferState").enummodule
-        end
+      module DataTransfer
       end
+      Datatransfer = DataTransfer unless const_defined? :Datatransfer
     end
   end
+end
+module Google::Cloud::Bigquery::DataTransfer::V1
+  EmailPreferences = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.EmailPreferences").msgclass
+  ScheduleOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleOptions").msgclass
+  TransferConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferConfig").msgclass
+  TransferRun = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferRun").msgclass
+  TransferMessage = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferMessage").msgclass
+  TransferMessage::MessageSeverity = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferMessage.MessageSeverity").enummodule
+  TransferType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferType").enummodule
+  TransferState = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferState").enummodule
 end
