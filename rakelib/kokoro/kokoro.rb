@@ -69,7 +69,7 @@ class Kokoro < Command
     end
     header "Found changes for #{@gem}"
     run_ci do
-      run "bundle exec rake samples:latest", 3600
+      run "bundle exec rake samples:master", 3600
     end
   end
 
