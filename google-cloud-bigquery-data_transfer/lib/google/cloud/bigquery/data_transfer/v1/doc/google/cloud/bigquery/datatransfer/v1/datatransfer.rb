@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Bigquery
-      module Datatransfer
+      module DataTransfer
         module V1
           # Represents a data source parameter with validation rules, so that
           # parameters can be rendered in the UI. These parameters are given to us by
@@ -34,7 +34,7 @@ module Google
           #   @return [String]
           #     Parameter description.
           # @!attribute [rw] type
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter::Type]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::DataSourceParameter::Type]
           #     Parameter type.
           # @!attribute [rw] required
           #   @return [true, false]
@@ -55,7 +55,7 @@ module Google
           #   @return [Google::Protobuf::DoubleValue]
           #     For integer and double values specifies maxminum allowed value.
           # @!attribute [rw] fields
-          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter>]
+          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::DataSourceParameter>]
           #     Deprecated. This field has no effect.
           # @!attribute [rw] validation_description
           #   @return [String]
@@ -124,7 +124,7 @@ module Google
           #     scopes needed by a data source to prepare data and ingest them into
           #     BigQuery, e.g., https://www.googleapis.com/auth/bigquery
           # @!attribute [rw] transfer_type
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferType]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferType]
           #     Deprecated. This field has no effect.
           # @!attribute [rw] supports_multiple_transfers
           #   @return [true, false]
@@ -146,16 +146,16 @@ module Google
           #     operates on the default schedule.
           #     When set to `true`, user can override default schedule.
           # @!attribute [rw] parameters
-          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::DataSourceParameter>]
+          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::DataSourceParameter>]
           #     Data source parameters.
           # @!attribute [rw] help_url
           #   @return [String]
           #     Url for the help document for this data source.
           # @!attribute [rw] authorization_type
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::DataSource::AuthorizationType]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::DataSource::AuthorizationType]
           #     Indicates the type of authorization.
           # @!attribute [rw] data_refresh_type
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::DataSource::DataRefreshType]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::DataSource::DataRefreshType]
           #     Specifies whether the data source supports automatic data refresh for the
           #     past few days, and how it's supported.
           #     For some data sources, data might not be complete until a few days later,
@@ -236,7 +236,7 @@ module Google
 
           # Returns list of supported data sources and their metadata.
           # @!attribute [rw] data_sources
-          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::DataSource>]
+          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::DataSource>]
           #     List of supported data sources and their transfer settings.
           # @!attribute [rw] next_page_token
           #   @return [String]
@@ -259,7 +259,7 @@ module Google
           #     projects/\\{project_id}. If specified location and location of the
           #     destination bigquery dataset do not match - the request will fail.
           # @!attribute [rw] transfer_config
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
           #     Required. Data transfer configuration to create.
           # @!attribute [rw] authorization_code
           #   @return [String]
@@ -298,7 +298,7 @@ module Google
           # A request to update a transfer configuration. To update the user id of the
           # transfer configuration, an authorization code needs to be provided.
           # @!attribute [rw] transfer_config
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
           #     Required. Data transfer configuration to create.
           # @!attribute [rw] authorization_code
           #   @return [String]
@@ -394,7 +394,7 @@ module Google
 
           # The returned list of pipelines in the project.
           # @!attribute [rw] transfer_configs
-          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferConfig>]
+          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig>]
           #     Output only. The stored pipeline transfer configurations.
           # @!attribute [rw] next_page_token
           #   @return [String]
@@ -414,7 +414,7 @@ module Google
           #     `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] states
-          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferState>]
+          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferState>]
           #     When specified, only transfer runs with requested states are returned.
           # @!attribute [rw] page_token
           #   @return [String]
@@ -427,7 +427,7 @@ module Google
           #   @return [Integer]
           #     Page size. The default page size is the maximum value of 1000 results.
           # @!attribute [rw] run_attempt
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::ListTransferRunsRequest::RunAttempt]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest::RunAttempt]
           #     Indicates how run attempts are to be pulled.
           class ListTransferRunsRequest
             # Represents which runs should be pulled.
@@ -442,7 +442,7 @@ module Google
 
           # The returned list of pipelines in the project.
           # @!attribute [rw] transfer_runs
-          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferRun>]
+          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
           #     Output only. The stored pipeline transfer runs.
           # @!attribute [rw] next_page_token
           #   @return [String]
@@ -469,14 +469,14 @@ module Google
           #   @return [Integer]
           #     Page size. The default page size is the maximum value of 1000 results.
           # @!attribute [rw] message_types
-          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferMessage::MessageSeverity>]
+          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage::MessageSeverity>]
           #     Message types to return. If not populated - INFO, WARNING and ERROR
           #     messages are returned.
           class ListTransferLogsRequest; end
 
           # The returned list transfer run messages.
           # @!attribute [rw] transfer_messages
-          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferMessage>]
+          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage>]
           #     Output only. The stored pipeline transfer messages.
           # @!attribute [rw] next_page_token
           #   @return [String]
@@ -523,7 +523,7 @@ module Google
 
           # A response to schedule transfer runs for a time range.
           # @!attribute [rw] runs
-          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferRun>]
+          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
           #     The transfer runs that were scheduled.
           class ScheduleTransferRunsResponse; end
 
@@ -534,7 +534,7 @@ module Google
           #     `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] requested_time_range
-          #   @return [Google::Cloud::Bigquery::Datatransfer::V1::StartManualTransferRunsRequest::TimeRange]
+          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange]
           #     Time range for the transfer runs that should be started.
           # @!attribute [rw] requested_run_time
           #   @return [Google::Protobuf::Timestamp]
@@ -560,7 +560,7 @@ module Google
 
           # A response to start manual transfer runs.
           # @!attribute [rw] runs
-          #   @return [Array<Google::Cloud::Bigquery::Datatransfer::V1::TransferRun>]
+          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
           #     The transfer runs that were created.
           class StartManualTransferRunsResponse; end
         end

@@ -179,38 +179,39 @@ end
 module Google
   module Cloud
     module Bigquery
-      module Datatransfer
-        module V1
-          DataSourceParameter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSourceParameter").msgclass
-          DataSourceParameter::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSourceParameter.Type").enummodule
-          DataSource = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSource").msgclass
-          DataSource::AuthorizationType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSource.AuthorizationType").enummodule
-          DataSource::DataRefreshType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSource.DataRefreshType").enummodule
-          GetDataSourceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest").msgclass
-          ListDataSourcesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest").msgclass
-          ListDataSourcesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListDataSourcesResponse").msgclass
-          CreateTransferConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest").msgclass
-          UpdateTransferConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest").msgclass
-          GetTransferConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest").msgclass
-          DeleteTransferConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest").msgclass
-          GetTransferRunRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest").msgclass
-          DeleteTransferRunRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest").msgclass
-          ListTransferConfigsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest").msgclass
-          ListTransferConfigsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferConfigsResponse").msgclass
-          ListTransferRunsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest").msgclass
-          ListTransferRunsRequest::RunAttempt = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest.RunAttempt").enummodule
-          ListTransferRunsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferRunsResponse").msgclass
-          ListTransferLogsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest").msgclass
-          ListTransferLogsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferLogsResponse").msgclass
-          CheckValidCredsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest").msgclass
-          CheckValidCredsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.CheckValidCredsResponse").msgclass
-          ScheduleTransferRunsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest").msgclass
-          ScheduleTransferRunsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse").msgclass
-          StartManualTransferRunsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest").msgclass
-          StartManualTransferRunsRequest::TimeRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest.TimeRange").msgclass
-          StartManualTransferRunsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse").msgclass
-        end
+      module DataTransfer
       end
+      Datatransfer = DataTransfer unless const_defined? :Datatransfer
     end
   end
+end
+module Google::Cloud::Bigquery::DataTransfer::V1
+  DataSourceParameter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSourceParameter").msgclass
+  DataSourceParameter::Type = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSourceParameter.Type").enummodule
+  DataSource = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSource").msgclass
+  DataSource::AuthorizationType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSource.AuthorizationType").enummodule
+  DataSource::DataRefreshType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DataSource.DataRefreshType").enummodule
+  GetDataSourceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest").msgclass
+  ListDataSourcesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest").msgclass
+  ListDataSourcesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListDataSourcesResponse").msgclass
+  CreateTransferConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest").msgclass
+  UpdateTransferConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest").msgclass
+  GetTransferConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest").msgclass
+  DeleteTransferConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest").msgclass
+  GetTransferRunRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest").msgclass
+  DeleteTransferRunRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest").msgclass
+  ListTransferConfigsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest").msgclass
+  ListTransferConfigsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferConfigsResponse").msgclass
+  ListTransferRunsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest").msgclass
+  ListTransferRunsRequest::RunAttempt = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest.RunAttempt").enummodule
+  ListTransferRunsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferRunsResponse").msgclass
+  ListTransferLogsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest").msgclass
+  ListTransferLogsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ListTransferLogsResponse").msgclass
+  CheckValidCredsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest").msgclass
+  CheckValidCredsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.CheckValidCredsResponse").msgclass
+  ScheduleTransferRunsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest").msgclass
+  ScheduleTransferRunsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse").msgclass
+  StartManualTransferRunsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest").msgclass
+  StartManualTransferRunsRequest::TimeRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest.TimeRange").msgclass
+  StartManualTransferRunsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse").msgclass
 end

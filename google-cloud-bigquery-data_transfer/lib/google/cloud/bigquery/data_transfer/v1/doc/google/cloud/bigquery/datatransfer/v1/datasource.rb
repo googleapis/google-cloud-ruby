@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Bigquery
-      module Datatransfer
+      module DataTransfer
         module V1
         end
       end
