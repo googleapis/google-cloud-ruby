@@ -573,7 +573,7 @@ module Google
           #   This field has been deprecated and replaced by the parent field.
           # @param cluster [Google::Container::V1beta1::Cluster | Hash]
           #   Required. A [cluster
-          #   resource](/container-engine/reference/rest/v1beta1/projects.zones.clusters)
+          #   resource](https://cloud.google.com/container-engine/reference/rest/v1beta1/projects.zones.clusters)
           #   A hash of the same form as `Google::Container::V1beta1::Cluster`
           #   can also be provided.
           # @param parent [String]
