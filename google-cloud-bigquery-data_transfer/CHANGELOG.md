@@ -1,5 +1,12 @@
 # Release History
 
+### 0.9.0 / 2020-04-09
+
+#### Features
+
+* Move data type classes from Bigquery::Datatransfer to Bigquery::DataTransfer.
+  * Note: Datatransfer was left as an alias, so older code should still work.
+
 ### 0.8.0 / 2020-04-01
 
 #### Features
