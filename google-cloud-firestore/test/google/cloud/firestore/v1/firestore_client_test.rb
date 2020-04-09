@@ -72,7 +72,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes get_document without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      name = ''
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
@@ -82,7 +82,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::GetDocumentRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:get_document, mock_method)
@@ -95,13 +95,13 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          response = client.get_document(formatted_name)
+          response = client.get_document(name)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_document(formatted_name) do |response, operation|
+          client.get_document(name) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -112,12 +112,12 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes get_document with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      name = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::GetDocumentRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:get_document, mock_method)
@@ -131,7 +131,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.get_document(formatted_name)
+            client.get_document(name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -146,7 +146,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes list_documents without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      parent = ''
       collection_id = ''
 
       # Create expected grpc response
@@ -159,7 +159,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::ListDocumentsRequest, request)
-        assert_equal(formatted_parent, request.parent)
+        assert_equal(parent, request.parent)
         assert_equal(collection_id, request.collection_id)
         OpenStruct.new(execute: expected_response)
       end
@@ -173,7 +173,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          response = client.list_documents(formatted_parent, collection_id)
+          response = client.list_documents(parent, collection_id)
 
           # Verify the response
           assert(response.instance_of?(Google::Gax::PagedEnumerable))
@@ -186,13 +186,13 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes list_documents with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      parent = ''
       collection_id = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::ListDocumentsRequest, request)
-        assert_equal(formatted_parent, request.parent)
+        assert_equal(parent, request.parent)
         assert_equal(collection_id, request.collection_id)
         raise custom_error
       end
@@ -207,7 +207,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.list_documents(formatted_parent, collection_id)
+            client.list_documents(parent, collection_id)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -222,9 +222,8 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes create_document without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      parent = ''
       collection_id = ''
-      document_id = ''
       document = {}
 
       # Create expected grpc response
@@ -235,9 +234,8 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::CreateDocumentRequest, request)
-        assert_equal(formatted_parent, request.parent)
+        assert_equal(parent, request.parent)
         assert_equal(collection_id, request.collection_id)
-        assert_equal(document_id, request.document_id)
         assert_equal(Google::Gax::to_proto(document, Google::Firestore::V1::Document), request.document)
         OpenStruct.new(execute: expected_response)
       end
@@ -252,9 +250,8 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           response = client.create_document(
-            formatted_parent,
+            parent,
             collection_id,
-            document_id,
             document
           )
 
@@ -263,9 +260,8 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method with block
           client.create_document(
-            formatted_parent,
+            parent,
             collection_id,
-            document_id,
             document
           ) do |response, operation|
             # Verify the response
@@ -278,17 +274,15 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes create_document with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      parent = ''
       collection_id = ''
-      document_id = ''
       document = {}
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::CreateDocumentRequest, request)
-        assert_equal(formatted_parent, request.parent)
+        assert_equal(parent, request.parent)
         assert_equal(collection_id, request.collection_id)
-        assert_equal(document_id, request.document_id)
         assert_equal(Google::Gax::to_proto(document, Google::Firestore::V1::Document), request.document)
         raise custom_error
       end
@@ -304,9 +298,8 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
             client.create_document(
-              formatted_parent,
+              parent,
               collection_id,
-              document_id,
               document
             )
           end
@@ -324,7 +317,6 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
     it 'invokes update_document without error' do
       # Create request parameters
       document = {}
-      update_mask = {}
 
       # Create expected grpc response
       name = "name3373707"
@@ -335,7 +327,6 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::UpdateDocumentRequest, request)
         assert_equal(Google::Gax::to_proto(document, Google::Firestore::V1::Document), request.document)
-        assert_equal(Google::Gax::to_proto(update_mask, Google::Firestore::V1::DocumentMask), request.update_mask)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:update_document, mock_method)
@@ -348,13 +339,13 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          response = client.update_document(document, update_mask)
+          response = client.update_document(document)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.update_document(document, update_mask) do |response, operation|
+          client.update_document(document) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -366,13 +357,11 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
     it 'invokes update_document with error' do
       # Create request parameters
       document = {}
-      update_mask = {}
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::UpdateDocumentRequest, request)
         assert_equal(Google::Gax::to_proto(document, Google::Firestore::V1::Document), request.document)
-        assert_equal(Google::Gax::to_proto(update_mask, Google::Firestore::V1::DocumentMask), request.update_mask)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:update_document, mock_method)
@@ -386,7 +375,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.update_document(document, update_mask)
+            client.update_document(document)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -401,12 +390,12 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes delete_document without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      name = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::DeleteDocumentRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         OpenStruct.new(execute: nil)
       end
       mock_stub = MockGrpcClientStub_v1.new(:delete_document, mock_method)
@@ -419,13 +408,13 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          response = client.delete_document(formatted_name)
+          response = client.delete_document(name)
 
           # Verify the response
           assert_nil(response)
 
           # Call method with block
-          client.delete_document(formatted_name) do |response, operation|
+          client.delete_document(name) do |response, operation|
             # Verify the response
             assert_nil(response)
             refute_nil(operation)
@@ -436,12 +425,12 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes delete_document with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      name = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::DeleteDocumentRequest, request)
-        assert_equal(formatted_name, request.name)
+        assert_equal(name, request.name)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:delete_document, mock_method)
@@ -455,7 +444,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.delete_document(formatted_name)
+            client.delete_document(name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -470,8 +459,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes batch_get_documents without error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-      documents = []
+      database = ''
 
       # Create expected grpc response
       missing = "missing1069449574"
@@ -482,8 +470,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::BatchGetDocumentsRequest, request)
-        assert_equal(formatted_database, request.database)
-        assert_equal(documents, request.documents)
+        assert_equal(database, request.database)
         OpenStruct.new(execute: [expected_response])
       end
       mock_stub = MockGrpcClientStub_v1.new(:batch_get_documents, mock_method)
@@ -496,7 +483,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          response = client.batch_get_documents(formatted_database, documents)
+          response = client.batch_get_documents(database)
 
           # Verify the response
           assert_equal(1, response.count)
@@ -507,14 +494,12 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes batch_get_documents with error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-      documents = []
+      database = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::BatchGetDocumentsRequest, request)
-        assert_equal(formatted_database, request.database)
-        assert_equal(documents, request.documents)
+        assert_equal(database, request.database)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:batch_get_documents, mock_method)
@@ -528,7 +513,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.batch_get_documents(formatted_database, documents)
+            client.batch_get_documents(database)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -543,7 +528,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes begin_transaction without error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
+      database = ''
 
       # Create expected grpc response
       transaction = "-34"
@@ -553,7 +538,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::BeginTransactionRequest, request)
-        assert_equal(formatted_database, request.database)
+        assert_equal(database, request.database)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:begin_transaction, mock_method)
@@ -566,13 +551,13 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          response = client.begin_transaction(formatted_database)
+          response = client.begin_transaction(database)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.begin_transaction(formatted_database) do |response, operation|
+          client.begin_transaction(database) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -583,12 +568,12 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes begin_transaction with error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
+      database = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::BeginTransactionRequest, request)
-        assert_equal(formatted_database, request.database)
+        assert_equal(database, request.database)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:begin_transaction, mock_method)
@@ -602,7 +587,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.begin_transaction(formatted_database)
+            client.begin_transaction(database)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -617,8 +602,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes commit without error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-      writes = []
+      database = ''
 
       # Create expected grpc response
       expected_response = {}
@@ -627,11 +611,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::CommitRequest, request)
-        assert_equal(formatted_database, request.database)
-        writes = writes.map do |req|
-          Google::Gax::to_proto(req, Google::Firestore::V1::Write)
-        end
-        assert_equal(writes, request.writes)
+        assert_equal(database, request.database)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:commit, mock_method)
@@ -644,13 +624,13 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          response = client.commit(formatted_database, writes)
+          response = client.commit(database)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.commit(formatted_database, writes) do |response, operation|
+          client.commit(database) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -661,17 +641,12 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes commit with error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-      writes = []
+      database = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::CommitRequest, request)
-        assert_equal(formatted_database, request.database)
-        writes = writes.map do |req|
-          Google::Gax::to_proto(req, Google::Firestore::V1::Write)
-        end
-        assert_equal(writes, request.writes)
+        assert_equal(database, request.database)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:commit, mock_method)
@@ -685,7 +660,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.commit(formatted_database, writes)
+            client.commit(database)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -700,13 +675,13 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes rollback without error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
+      database = ''
       transaction = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::RollbackRequest, request)
-        assert_equal(formatted_database, request.database)
+        assert_equal(database, request.database)
         assert_equal(transaction, request.transaction)
         OpenStruct.new(execute: nil)
       end
@@ -720,13 +695,13 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          response = client.rollback(formatted_database, transaction)
+          response = client.rollback(database, transaction)
 
           # Verify the response
           assert_nil(response)
 
           # Call method with block
-          client.rollback(formatted_database, transaction) do |response, operation|
+          client.rollback(database, transaction) do |response, operation|
             # Verify the response
             assert_nil(response)
             refute_nil(operation)
@@ -737,13 +712,13 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes rollback with error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
+      database = ''
       transaction = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::RollbackRequest, request)
-        assert_equal(formatted_database, request.database)
+        assert_equal(database, request.database)
         assert_equal(transaction, request.transaction)
         raise custom_error
       end
@@ -758,7 +733,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.rollback(formatted_database, transaction)
+            client.rollback(database, transaction)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -773,7 +748,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes run_query without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      parent = ''
 
       # Create expected grpc response
       transaction = "-34"
@@ -784,7 +759,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::RunQueryRequest, request)
-        assert_equal(formatted_parent, request.parent)
+        assert_equal(parent, request.parent)
         OpenStruct.new(execute: [expected_response])
       end
       mock_stub = MockGrpcClientStub_v1.new(:run_query, mock_method)
@@ -797,7 +772,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          response = client.run_query(formatted_parent)
+          response = client.run_query(parent)
 
           # Verify the response
           assert_equal(1, response.count)
@@ -808,12 +783,12 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes run_query with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      parent = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::RunQueryRequest, request)
-        assert_equal(formatted_parent, request.parent)
+        assert_equal(parent, request.parent)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:run_query, mock_method)
@@ -827,7 +802,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.run_query(formatted_parent)
+            client.run_query(parent)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -842,8 +817,8 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes write without error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-      request = { database: formatted_database }
+      database = ''
+      request = { database: database }
 
       # Create expected grpc response
       stream_id = "streamId-315624902"
@@ -855,7 +830,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       mock_method = proc do |requests|
         request = requests.first
         assert_instance_of(Google::Firestore::V1::WriteRequest, request)
-        assert_equal(formatted_database, request.database)
+        assert_equal(database, request.database)
         OpenStruct.new(execute: [expected_response])
       end
       mock_stub = MockGrpcClientStub_v1.new(:write, mock_method)
@@ -879,14 +854,14 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes write with error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-      request = { database: formatted_database }
+      database = ''
+      request = { database: database }
 
       # Mock Grpc layer
       mock_method = proc do |requests|
         request = requests.first
         assert_instance_of(Google::Firestore::V1::WriteRequest, request)
-        assert_equal(formatted_database, request.database)
+        assert_equal(database, request.database)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:write, mock_method)
@@ -915,8 +890,8 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes listen without error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-      request = { database: formatted_database }
+      database = ''
+      request = { database: database }
 
       # Create expected grpc response
       expected_response = {}
@@ -926,7 +901,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       mock_method = proc do |requests|
         request = requests.first
         assert_instance_of(Google::Firestore::V1::ListenRequest, request)
-        assert_equal(formatted_database, request.database)
+        assert_equal(database, request.database)
         OpenStruct.new(execute: [expected_response])
       end
       mock_stub = MockGrpcClientStub_v1.new(:listen, mock_method)
@@ -950,14 +925,14 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes listen with error' do
       # Create request parameters
-      formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-      request = { database: formatted_database }
+      database = ''
+      request = { database: database }
 
       # Mock Grpc layer
       mock_method = proc do |requests|
         request = requests.first
         assert_instance_of(Google::Firestore::V1::ListenRequest, request)
-        assert_equal(formatted_database, request.database)
+        assert_equal(database, request.database)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:listen, mock_method)
@@ -986,7 +961,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes list_collection_ids without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      parent = ''
 
       # Create expected grpc response
       next_page_token = ""
@@ -998,7 +973,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::ListCollectionIdsRequest, request)
-        assert_equal(formatted_parent, request.parent)
+        assert_equal(parent, request.parent)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v1.new(:list_collection_ids, mock_method)
@@ -1011,7 +986,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
           client = Google::Cloud::Firestore::V1.new
 
           # Call method
-          response = client.list_collection_ids(formatted_parent)
+          response = client.list_collection_ids(parent)
 
           # Verify the response
           assert(response.instance_of?(Google::Gax::PagedEnumerable))
@@ -1024,12 +999,12 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
     it 'invokes list_collection_ids with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+      parent = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::V1::ListCollectionIdsRequest, request)
-        assert_equal(formatted_parent, request.parent)
+        assert_equal(parent, request.parent)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1.new(:list_collection_ids, mock_method)
@@ -1043,7 +1018,7 @@ describe Google::Cloud::Firestore::V1::FirestoreClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.list_collection_ids(formatted_parent)
+            client.list_collection_ids(parent)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

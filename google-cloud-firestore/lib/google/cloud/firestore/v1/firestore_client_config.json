@@ -4,7 +4,6 @@
       "retry_codes": {
         "idempotent": [
           "DEADLINE_EXCEEDED",
-          "INTERNAL",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
@@ -56,7 +55,7 @@
           "retry_params_name": "default"
         },
         "BatchGetDocuments": {
-          "timeout_millis": 300000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "streaming"
         },
@@ -81,18 +80,18 @@
           "retry_params_name": "streaming"
         },
         "Write": {
-          "timeout_millis": 86400000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "streaming"
         },
         "Listen": {
-          "timeout_millis": 86400000,
+          "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "streaming"
         },
         "ListCollectionIds": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
       }
