@@ -20,7 +20,7 @@ module Google
       # @!attribute [rw] machine_type
       #   @return [String]
       #     The name of a Google Compute Engine [machine
-      #     type](/compute/docs/machine-types) (e.g.
+      #     type](https://cloud.google.com/compute/docs/machine-types) (e.g.
       #     `n1-standard-1`).
       #
       #     If unspecified, the default machine type is
@@ -1018,7 +1018,7 @@ module Google
       # @!attribute [rw] cluster
       #   @return [Google::Container::V1::Cluster]
       #     Required. A [cluster
-      #     resource](/container-engine/reference/rest/v1/projects.zones.clusters)
+      #     resource](https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters)
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent (project and location) where the cluster will be created.
@@ -1629,7 +1629,7 @@ module Google
       # @!attribute [rw] instance_group_urls
       #   @return [Array<String>]
       #     [Output only] The resource URLs of the [managed instance
-      #     groups](/compute/docs/instance-groups/creating-groups-of-managed-instances)
+      #     groups](https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances)
       #     associated with this node pool.
       # @!attribute [rw] status
       #   @return [Google::Container::V1::NodePool::Status]
@@ -2173,7 +2173,7 @@ module Google
       # @!attribute [rw] network
       #   @return [String]
       #     Output only. The relative name of the Google Compute Engine
-      #     {Google::Container::V1::NetworkConfig#network network}(/compute/docs/networks-and-firewalls#networks) to which
+      #     {Google::Container::V1::NetworkConfig#network network}(https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which
       #     the cluster is connected.
       #     Example: projects/my-project/global/networks/my-network
       # @!attribute [rw] subnetwork

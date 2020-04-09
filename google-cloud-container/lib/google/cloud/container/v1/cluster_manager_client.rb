@@ -541,7 +541,7 @@ module Google
           #
           # @param cluster [Google::Container::V1::Cluster | Hash]
           #   Required. A [cluster
-          #   resource](/container-engine/reference/rest/v1/projects.zones.clusters)
+          #   resource](https://cloud.google.com/container-engine/reference/rest/v1/projects.zones.clusters)
           #   A hash of the same form as `Google::Container::V1::Cluster`
           #   can also be provided.
           # @param project_id [String]
