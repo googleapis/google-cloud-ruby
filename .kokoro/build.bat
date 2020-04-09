@@ -13,7 +13,7 @@ REM Neither Powershell's Copy-Item nor xcopy correctly copy the symlinks.
 REM So we clone/checkout the repo ourselves rather than relying on Kokoro.
 SET "run_kokoro=ridk enable && bundle update && bundle exec rake kokoro:%JOB_TYPE%"
 
-IF "%JOB_TYPE%"=="presubmit" (
+IF "%JOB_TYPE%"=="presubmit" OR IF "%JOB_TYPE%"=="samples_presubmit" (
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_PULL_REQUEST_URL'].split('/pull')[0]}.git`"
     SET "git_commands=git fetch origin pull/%KOKORO_GITHUB_PULL_REQUEST_NUMBER%/merge:pull_branch && git checkout pull_branch"
 ) ELSE (
