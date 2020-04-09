@@ -45,6 +45,11 @@ describe Google::Cloud::PubSub, :pubsub do
     end
   end
 
+  it "should raise when endpoint is not the Pub/Sub service" do
+    pubsub_invalid_endpoint = Google::Cloud::Pubsub.new endpoint: "example.com"
+    expect { pubsub_invalid_endpoint.topics }.must_raise Google::Cloud::CanceledError
+  end
+
   describe "Topic", :pubsub do
     it "should be listed" do
       topics = pubsub.topics.all
