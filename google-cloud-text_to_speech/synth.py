@@ -218,3 +218,21 @@ s.replace(
     'github.io/google-cloud-ruby/#/docs/google-cloud-text_to_speech/latest/.*$',
     'dev/ruby/google-cloud-text_to_speech/latest'
 )
+
+# https://github.com/googleapis/gapic-generator/issues/2525
+s.replace(
+    'lib/google/cloud/text_to_speech/v*/**/*.rb',
+    'Google::Cloud::Texttospeech',
+    'Google::Cloud::TextToSpeech')
+s.replace(
+    'lib/google/cloud/text_to_speech/v*/doc/google/cloud/texttospeech/**/*.rb',
+    '\n    module Texttospeech\n',
+    '\n    module TextToSpeech\n'
+)
+
+# https://github.com/protocolbuffers/protobuf/issues/5584
+s.replace(
+    'lib/google/cloud/texttospeech/*/*_pb.rb',
+    '\nmodule Google::Cloud::TextToSpeech::V(\\w+)\n',
+    '\nmodule Google\n  module Cloud\n    module TextToSpeech\n    end\n    Texttospeech = TextToSpeech unless const_defined? :Texttospeech\n  end\nend\nmodule Google::Cloud::TextToSpeech::V\\1\n',
+)

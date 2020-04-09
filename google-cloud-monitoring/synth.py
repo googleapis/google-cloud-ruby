@@ -268,6 +268,18 @@ s.replace(
     'dev/ruby/google-cloud-monitoring/latest'
 )
 
+# https://github.com/googleapis/gapic-generator/issues/2525
+s.replace(
+    'lib/google/monitoring/v3/*_pb.rb',
+    '\nmodule Google::Cloud::Monitoring::V3\n',
+    '\nmodule Google\n  module Cloud\n    module Monitoring\n    end\n  end\n  Monitoring = Cloud::Monitoring unless const_defined? :Monitoring\nend\nmodule Google::Cloud::Monitoring::V3\n',
+)
+s.replace(
+    'lib/google/monitoring/dashboard/v1/*_pb.rb',
+    '\nmodule Google::Cloud::Monitoring::Dashboard::V1\n',
+    '\nmodule Google\n  module Cloud\n    module Monitoring\n    end\n  end\n  Monitoring = Cloud::Monitoring unless const_defined? :Monitoring\nend\nmodule Google::Cloud::Monitoring::Dashboard::V1\n',
+)
+
 # Temporary: Remove docs for the obsolete ServiceTier module which contain
 # broken links.
 s.replace(
