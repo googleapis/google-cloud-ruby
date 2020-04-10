@@ -25,6 +25,7 @@ logging.basicConfig(level=logging.DEBUG)
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
     "redis", "v1",
+    generator_version="0.3.0",
     extra_proto_files=["google/cloud/common_resources.proto"],
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-redis-v1",
