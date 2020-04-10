@@ -1,5 +1,12 @@
 # Release History
 
+### 0.7.0 / 2020-04-10
+
+#### Features
+
+* Move data type classes from Texttospeech to TextToSpeech.
+  * Note: Texttospeech was left as an alias, so older code should still work.
+
 ### 0.6.1 / 2020-04-01
 
 #### Documentation
