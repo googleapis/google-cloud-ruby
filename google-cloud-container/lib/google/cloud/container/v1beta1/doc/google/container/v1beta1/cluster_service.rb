@@ -1129,7 +1129,7 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent (project and location) where the cluster will be created.
-      #     Specified in the format 'projects/*/locations/*'.
+      #     Specified in the format `projects/*/locations/*`.
       class CreateClusterRequest; end
 
       # GetClusterRequest gets the settings of a cluster.
@@ -1151,7 +1151,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to retrieve.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class GetClusterRequest; end
 
       # UpdateClusterRequest updates the settings of a cluster.
@@ -1176,7 +1176,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to update.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class UpdateClusterRequest; end
 
       # SetNodePoolVersionRequest updates the version of a node pool.
@@ -1222,7 +1222,7 @@ module Google
       #   @return [String]
       #     The name (project, location, cluster, node pool) of the node pool to
       #     update. Specified in the format
-      #     'projects/*/locations/*/clusters/*/nodePools/*'.
+      #     `projects/*/locations/*/clusters/*/nodePools/*`.
       class UpdateNodePoolRequest; end
 
       # SetNodePoolAutoscalingRequest sets the autoscaler settings of a node pool.
@@ -1252,7 +1252,7 @@ module Google
       #   @return [String]
       #     The name (project, location, cluster, node pool) of the node pool to set
       #     autoscaler settings. Specified in the format
-      #     'projects/*/locations/*/clusters/*/nodePools/*'.
+      #     `projects/*/locations/*/clusters/*/nodePools/*`.
       class SetNodePoolAutoscalingRequest; end
 
       # SetLoggingServiceRequest sets the logging service of a cluster.
@@ -1281,7 +1281,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to set logging.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class SetLoggingServiceRequest; end
 
       # SetMonitoringServiceRequest sets the monitoring service of a cluster.
@@ -1310,7 +1310,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to set monitoring.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class SetMonitoringServiceRequest; end
 
       # SetAddonsRequest sets the addons associated with the cluster.
@@ -1336,7 +1336,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to set addons.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class SetAddonsConfigRequest; end
 
       # SetLocationsRequest sets the locations of the cluster.
@@ -1367,7 +1367,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to set locations.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class SetLocationsRequest; end
 
       # UpdateMasterRequest updates the master of the cluster.
@@ -1401,7 +1401,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to update.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class UpdateMasterRequest; end
 
       # SetMasterAuthRequest updates the admin password of a cluster.
@@ -1429,7 +1429,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to set auth.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class SetMasterAuthRequest
         # Operation type: what type update to perform.
         module Action
@@ -1469,7 +1469,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster) of the cluster to delete.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class DeleteClusterRequest; end
 
       # ListClustersRequest lists clusters.
@@ -1487,7 +1487,7 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent (project and location) where the clusters will be listed.
-      #     Specified in the format 'projects/*/locations/*'.
+      #     Specified in the format `projects/*/locations/*`.
       #     Location "-" matches all zones and all regions.
       class ListClustersRequest; end
 
@@ -1521,7 +1521,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, operation id) of the operation to get.
-      #     Specified in the format 'projects/*/locations/*/operations/*'.
+      #     Specified in the format `projects/*/locations/*/operations/*`.
       class GetOperationRequest; end
 
       # ListOperationsRequest lists operations.
@@ -1538,7 +1538,7 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent (project and location) where the operations will be listed.
-      #     Specified in the format 'projects/*/locations/*'.
+      #     Specified in the format `projects/*/locations/*`.
       #     Location "-" matches all zones and all regions.
       class ListOperationsRequest; end
 
@@ -1560,7 +1560,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, operation id) of the operation to cancel.
-      #     Specified in the format 'projects/*/locations/*/operations/*'.
+      #     Specified in the format `projects/*/locations/*/operations/*`.
       class CancelOperationRequest; end
 
       # ListOperationsResponse is the result of ListOperationsRequest.
@@ -1587,7 +1587,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project and location) of the server config to get,
-      #     specified in the format 'projects/*/locations/*'.
+      #     specified in the format `projects/*/locations/*`.
       class GetServerConfigRequest; end
 
       # Kubernetes Engine service configuration.
@@ -1631,7 +1631,7 @@ module Google
       #   @return [String]
       #     The parent (project, location, cluster id) where the node pool will be
       #     created. Specified in the format
-      #     'projects/*/locations/*/clusters/*'.
+      #     `projects/*/locations/*/clusters/*`.
       class CreateNodePoolRequest; end
 
       # DeleteNodePoolRequest deletes a node pool for a cluster.
@@ -1658,7 +1658,7 @@ module Google
       #   @return [String]
       #     The name (project, location, cluster, node pool id) of the node pool to
       #     delete. Specified in the format
-      #     'projects/*/locations/*/clusters/*/nodePools/*'.
+      #     `projects/*/locations/*/clusters/*/nodePools/*`.
       class DeleteNodePoolRequest; end
 
       # ListNodePoolsRequest lists the node pool(s) for a cluster.
@@ -1680,7 +1680,7 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     The parent (project, location, cluster id) where the node pools will be
-      #     listed. Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     listed. Specified in the format `projects/*/locations/*/clusters/*`.
       class ListNodePoolsRequest; end
 
       # GetNodePoolRequest retrieves a node pool for a cluster.
@@ -1707,7 +1707,7 @@ module Google
       #   @return [String]
       #     The name (project, location, cluster, node pool id) of the node pool to
       #     get. Specified in the format
-      #     'projects/*/locations/*/clusters/*/nodePools/*'.
+      #     `projects/*/locations/*/clusters/*/nodePools/*`.
       class GetNodePoolRequest; end
 
       # NodePool contains the name and configuration for a cluster's node pool.
@@ -1934,7 +1934,7 @@ module Google
       #   @return [String]
       #     The name (project, location, cluster, node pool id) of the node pool to set
       #     management properties. Specified in the format
-      #     'projects/*/locations/*/clusters/*/nodePools/*'.
+      #     `projects/*/locations/*/clusters/*/nodePools/*`.
       class SetNodePoolManagementRequest; end
 
       # SetNodePoolSizeRequest sets the size a node
@@ -1965,7 +1965,7 @@ module Google
       #   @return [String]
       #     The name (project, location, cluster, node pool id) of the node pool to set
       #     size.
-      #     Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
       class SetNodePoolSizeRequest; end
 
       # RollbackNodePoolUpgradeRequest rollbacks the previously Aborted or Failed
@@ -1994,7 +1994,7 @@ module Google
       #   @return [String]
       #     The name (project, location, cluster, node pool id) of the node poll to
       #     rollback upgrade.
-      #     Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
       class RollbackNodePoolUpgradeRequest; end
 
       # ListNodePoolsResponse is the result of ListNodePoolsRequest.
@@ -2099,7 +2099,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster id) of the cluster to set labels.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class SetLabelsRequest; end
 
       # SetLegacyAbacRequest enables or disables the ABAC authorization mechanism for
@@ -2125,7 +2125,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster id) of the cluster to set legacy abac.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class SetLegacyAbacRequest; end
 
       # StartIPRotationRequest creates a new IP for the cluster and then performs
@@ -2148,7 +2148,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster id) of the cluster to start IP
-      #     rotation. Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     rotation. Specified in the format `projects/*/locations/*/clusters/*`.
       # @!attribute [rw] rotate_credentials
       #   @return [true, false]
       #     Whether to rotate credentials during IP rotation.
@@ -2173,7 +2173,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster id) of the cluster to complete IP
-      #     rotation. Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     rotation. Specified in the format `projects/*/locations/*/clusters/*`.
       class CompleteIPRotationRequest; end
 
       # AcceleratorConfig represents a Hardware Accelerator request.
@@ -2236,7 +2236,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     The name (project, location, cluster id) of the cluster to set networking
-      #     policy. Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     policy. Specified in the format `projects/*/locations/*/clusters/*`.
       class SetNetworkPolicyRequest; end
 
       # SetMaintenancePolicyRequest sets the maintenance policy for a cluster.
@@ -2260,14 +2260,14 @@ module Google
       #   @return [String]
       #     The name (project, location, cluster id) of the cluster to set maintenance
       #     policy.
-      #     Specified in the format 'projects/*/locations/*/clusters/*'.
+      #     Specified in the format `projects/*/locations/*/clusters/*`.
       class SetMaintenancePolicyRequest; end
 
       # ListLocationsRequest is used to request the locations that offer GKE.
       # @!attribute [rw] parent
       #   @return [String]
       #     Required. Contains the name of the resource requested.
-      #     Specified in the format 'projects/*'.
+      #     Specified in the format `projects/*`.
       class ListLocationsRequest; end
 
       # ListLocationsResponse returns the list of all GKE locations and their
@@ -2292,7 +2292,7 @@ module Google
       # @!attribute [rw] name
       #   @return [String]
       #     Contains the name of the resource requested.
-      #     Specified in the format 'projects/*/locations/*'.
+      #     Specified in the format `projects/*/locations/*`.
       # @!attribute [rw] recommended
       #   @return [true, false]
       #     Whether the location is recomended for GKE cluster scheduling.
@@ -2367,7 +2367,7 @@ module Google
       # @!attribute [rw] parent
       #   @return [String]
       #     Required. The parent project where subnetworks are usable.
-      #     Specified in the format 'projects/*'.
+      #     Specified in the format `projects/*`.
       # @!attribute [rw] filter
       #   @return [String]
       #     Filtering currently only supports equality on the networkProjectId and must
