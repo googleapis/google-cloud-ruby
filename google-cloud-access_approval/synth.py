@@ -24,6 +24,7 @@ logging.basicConfig(level=logging.DEBUG)
 gapic = gcp.GAPICMicrogenerator()
 library = gapic.ruby_library(
     "accessapproval", "v1",
+    generator_version="0.3.0",
     generator_args={
         "ruby-cloud-gem-name": "google-cloud-access_approval",
         "ruby-cloud-title": "Access Approval",
