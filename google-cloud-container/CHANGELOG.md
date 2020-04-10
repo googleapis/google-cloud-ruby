@@ -1,5 +1,17 @@
 # Release History
 
+### 0.11.0 / 2020-04-10
+
+#### Features
+
+* Move data type classes from Google::Container to Google::Cloud::Container.
+  * Note: Google::Container was left as an alias, so older code should still work.
+
+#### Documentation
+
+* Change relative URLs to absolute URLs to fix broken links.
+* Render path formats in code font.
+
 ### 0.10.1 / 2020-04-01
 
 #### Documentation
