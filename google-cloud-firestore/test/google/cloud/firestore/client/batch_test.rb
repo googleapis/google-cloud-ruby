@@ -61,7 +61,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "creates a new document using string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, create_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: create_writes, options: default_options]
 
     resp = firestore.batch do |b|
       b.create(document_path, { name: "Mike" })
@@ -72,7 +72,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "creates a new document using doc ref" do
-    firestore_mock.expect :commit, commit_resp, [database_path, create_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: create_writes, options: default_options]
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
@@ -93,7 +93,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "sets a new document using string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, set_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: set_writes, options: default_options]
 
     resp = firestore.batch do |b|
       b.set(document_path, { name: "Mike" })
@@ -104,7 +104,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "sets a new document using doc ref" do
-    firestore_mock.expect :commit, commit_resp, [database_path, set_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: set_writes, options: default_options]
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
@@ -125,7 +125,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "updates a new document using string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_writes, options: default_options]
 
     resp = firestore.batch do |b|
       b.update(document_path, { name: "Mike" })
@@ -136,7 +136,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "updates a new document using doc ref" do
-    firestore_mock.expect :commit, commit_resp, [database_path, update_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_writes, options: default_options]
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
@@ -157,7 +157,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "deletes a document using string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
 
     resp = firestore.batch do |b|
       b.delete document_path
@@ -168,7 +168,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   end
 
   it "deletes a document using doc ref" do
-    firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
@@ -182,7 +182,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
   it "deletes a document with exists precondition" do
     delete_writes.first.current_document = Google::Firestore::V1::Precondition.new(exists: true)
 
-    firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
@@ -197,7 +197,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
     delete_writes.first.current_document = Google::Firestore::V1::Precondition.new(
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time))
 
-    firestore_mock.expect :commit, commit_resp, [database_path, delete_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
 
     doc = firestore.doc document_path
     resp = firestore.batch do |b|
@@ -228,7 +228,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
 
   it "performs multiple writes in the same commit (string)" do
     all_writes = create_writes + set_writes + update_writes + delete_writes
-    firestore_mock.expect :commit, commit_resp, [database_path, all_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: all_writes, options: default_options]
 
     resp = firestore.batch do |b|
       b.create(document_path, { name: "Mike" })
@@ -243,7 +243,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
 
   it "performs multiple writes in the same commit (doc ref)" do
     all_writes = create_writes + set_writes + update_writes + delete_writes
-    firestore_mock.expect :commit, commit_resp, [database_path, all_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: all_writes, options: default_options]
 
     doc_ref = firestore.doc document_path
     doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference

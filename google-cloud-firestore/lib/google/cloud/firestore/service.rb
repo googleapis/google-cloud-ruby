@@ -71,7 +71,10 @@ module Google
         end
 
         def get_documents document_paths, mask: nil, transaction: nil
-          batch_get_args = { mask: document_mask(mask) }
+          batch_get_args = {
+            documents: document_paths,
+            mask:      document_mask(mask)
+          }
           if transaction.is_a? String
             batch_get_args[:transaction] = transaction
           elsif transaction
@@ -80,8 +83,7 @@ module Google
           batch_get_args[:options] = call_options parent: database_path
 
           execute do
-            firestore.batch_get_documents database_path, document_paths,
-                                          batch_get_args
+            firestore.batch_get_documents database_path, **batch_get_args
           end
         end
 
@@ -115,7 +117,7 @@ module Google
           list_args[:options] = call_options parent: database_path
 
           execute do
-            firestore.list_collection_ids parent, list_args
+            firestore.list_collection_ids parent, **list_args
           end
         end
 
@@ -129,7 +131,7 @@ module Google
           run_query_args[:options] = call_options parent: database_path
 
           execute do
-            firestore.run_query path, run_query_args
+            firestore.run_query path, **run_query_args
           end
         end
 
@@ -152,12 +154,14 @@ module Google
         end
 
         def commit writes, transaction: nil
-          commit_args = {}
+          commit_args = {
+            writes: writes
+          }
           commit_args[:transaction] = transaction if transaction
           commit_args[:options] = call_options parent: database_path
 
           execute do
-            firestore.commit database_path, writes, commit_args
+            firestore.commit database_path, **commit_args
           end
         end
 

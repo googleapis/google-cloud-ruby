@@ -39,7 +39,7 @@ describe Google::Cloud::Firestore::Batch, :create, :mock_firestore do
   end
 
   it "creates a new document given a string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, create_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: create_writes, options: default_options]
 
     batch.create(document_path, { name: "Mike" })
     resp = batch.commit
@@ -49,7 +49,7 @@ describe Google::Cloud::Firestore::Batch, :create, :mock_firestore do
   end
 
   it "creates a new document given a DocumentReference" do
-    firestore_mock.expect :commit, commit_resp, [database_path, create_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: create_writes, options: default_options]
 
     doc = firestore.doc document_path
     doc.must_be_kind_of Google::Cloud::Firestore::DocumentReference

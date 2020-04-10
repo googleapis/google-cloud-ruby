@@ -49,7 +49,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
   it "updates a document data with a nil" do
     field = Google::Firestore::V1::Value.new null_value: :NULL_VALUE
 
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: nil })
 
@@ -59,7 +59,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with a true" do
     field = Google::Firestore::V1::Value.new boolean_value: true
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: true })
 
@@ -69,7 +69,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with a false" do
     field = Google::Firestore::V1::Value.new boolean_value: false
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: false })
 
@@ -79,7 +79,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with a nan" do
     field = Google::Firestore::V1::Value.new double_value: Float::NAN
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: Float::NAN })
 
@@ -89,7 +89,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with infinity" do
     field = Google::Firestore::V1::Value.new double_value: Float::INFINITY
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: Float::INFINITY })
 
@@ -99,7 +99,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with an int" do
     field = Google::Firestore::V1::Value.new integer_value: 42
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: 42 })
 
@@ -109,7 +109,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with a float" do
     field = Google::Firestore::V1::Value.new double_value: 3.14
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: 3.14 })
 
@@ -119,7 +119,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with a time" do
     field = Google::Firestore::V1::Value.new timestamp_value: Google::Cloud::Firestore::Convert.time_to_timestamp(commit_time)
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: commit_time })
 
@@ -129,7 +129,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with a string" do
     field = Google::Firestore::V1::Value.new string_value: "hello"
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: "hello" })
 
@@ -139,7 +139,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with a IO" do
     field = Google::Firestore::V1::Value.new bytes_value: "world"
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: StringIO.new("world") })
 
@@ -149,7 +149,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with a doc ref" do
     field = Google::Firestore::V1::Value.new reference_value: "projects/projectID/databases/(default)/documents/C/d"
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: firestore.doc("C/d") })
 
@@ -159,7 +159,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
 
   it "updates a document data with a geo point" do
     field = Google::Firestore::V1::Value.new geo_point_value: Google::Type::LatLng.new(latitude: -122.947778, longitude: 50.1430847)
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: { longitude: 50.1430847, latitude: -122.947778 } })
 
@@ -177,7 +177,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
         ]
       )
     )
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: [1, 2.0, "3"] })
 
@@ -193,7 +193,7 @@ describe Google::Cloud::Firestore::DocumentReference, :values, :mock_firestore d
           }
       )
     )
-    firestore_mock.expect :commit, commit_resp, [database_path, update_write(field), options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_write(field), options: default_options]
 
     resp = document.update({ val: { hello: "word" } })
 

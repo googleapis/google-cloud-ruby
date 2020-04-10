@@ -59,7 +59,7 @@ describe Google::Cloud::Firestore::Transaction, :get, :empty, :mock_firestore do
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time))
       )
     ].to_enum
-    firestore_mock.expect :batch_get_documents, batch_get_resp_enum, ["projects/#{project}/databases/(default)", ["projects/#{project}/databases/(default)/documents/users/mike"], mask: nil, new_transaction: transaction_opt, options: default_options]
+    firestore_mock.expect :batch_get_documents, batch_get_resp_enum, ["projects/#{project}/databases/(default)", documents: ["projects/#{project}/databases/(default)/documents/users/mike"], mask: nil, new_transaction: transaction_opt, options: default_options]
 
     col = firestore.col :users
     col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
@@ -103,7 +103,7 @@ describe Google::Cloud::Firestore::Transaction, :get, :empty, :mock_firestore do
           update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(read_time))
       )
     ].to_enum
-    firestore_mock.expect :batch_get_documents, batch_get_resp_enum, ["projects/#{project}/databases/(default)", ["projects/#{project}/databases/(default)/documents/users/mike"], mask: nil, new_transaction: transaction_opt, options: default_options]
+    firestore_mock.expect :batch_get_documents, batch_get_resp_enum, ["projects/#{project}/databases/(default)", documents: ["projects/#{project}/databases/(default)/documents/users/mike"], mask: nil, new_transaction: transaction_opt, options: default_options]
 
     doc_ref = firestore.doc "users/mike"
     doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference

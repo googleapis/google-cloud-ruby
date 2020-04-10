@@ -86,7 +86,7 @@ class ConformanceCreate < ConformanceTest
           run_conformance_proto test
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, [test.request.database, writes: test.request.writes, options: default_options]
 
         run_conformance_proto test
       end
@@ -109,7 +109,7 @@ class ConformanceSet < ConformanceTest
           run_conformance_proto test
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, [test.request.database, writes: test.request.writes, options: default_options]
 
         run_conformance_proto test
       end
@@ -143,7 +143,7 @@ class ConformanceUpdate < ConformanceTest
           run_conformance_proto test
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, [test.request.database, writes: test.request.writes, options: default_options]
 
         run_conformance_proto test
       end
@@ -173,7 +173,7 @@ class ConformanceUpdatePaths < ConformanceTest
           run_conformance_proto test
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, [test.request.database, writes: test.request.writes, options: default_options]
 
         run_conformance_proto test
       end
@@ -220,7 +220,7 @@ class ConformanceDelete < ConformanceTest
           doc_ref.delete opts
         end.must_raise ArgumentError
       else
-        firestore_mock.expect :commit, commit_resp, [test.request.database, test.request.writes, options: default_options]
+        firestore_mock.expect :commit, commit_resp, [test.request.database, writes: test.request.writes, options: default_options]
 
         doc_ref.delete opts
       end
