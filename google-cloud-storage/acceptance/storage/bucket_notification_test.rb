@@ -42,22 +42,22 @@ describe Google::Cloud::Storage::Bucket, :notification, :storage do
 
       notification.wont_be_nil
       notification.id.wont_be_nil
-      notification.custom_attrs.must_equal custom_attrs
-      notification.event_types.must_equal event_types
-      notification.prefix.must_equal filename_prefix
-      notification.payload.must_equal payload
-      notification.topic.must_equal topic_name_full_path
+      _(notification.custom_attrs).must_equal custom_attrs
+      _(notification.event_types).must_equal event_types
+      _(notification.prefix).must_equal filename_prefix
+      _(notification.payload).must_equal payload
+      _(notification.topic).must_equal topic_name_full_path
 
-      bucket.notifications.wont_be :empty?
+      _(bucket.notifications).wont_be :empty?
 
       fresh_notification = bucket.notification notification.id
       fresh_notification.wont_be_nil
       fresh_notification.id.wont_be_nil
-      fresh_notification.custom_attrs.must_equal custom_attrs
-      fresh_notification.event_types.must_equal event_types
-      fresh_notification.prefix.must_equal filename_prefix
-      fresh_notification.payload.must_equal payload
-      fresh_notification.topic.must_equal topic_name_full_path
+      _(fresh_notification.custom_attrs).must_equal custom_attrs
+      _(fresh_notification.event_types).must_equal event_types
+      _(fresh_notification.prefix).must_equal filename_prefix
+      _(fresh_notification.payload).must_equal payload
+      _(fresh_notification.topic).must_equal topic_name_full_path
 
 
       fresh_notification.delete

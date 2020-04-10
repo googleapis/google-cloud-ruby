@@ -32,10 +32,10 @@ describe Google::Cloud::Storage::File, :storage do
   it "does not perform any file name normalization" do
     filenames.each_with_index do |name, i|
       file = bucket.file name
-      file.name.must_equal name
+      _(file.name).must_equal name
       Tempfile.open "cafe" do |tmpfile|
         downloaded = file.download tmpfile
-        File.read(downloaded.path).must_equal filecontent[i]
+        _(File.read(downloaded.path)).must_equal filecontent[i]
       end
     end
   end

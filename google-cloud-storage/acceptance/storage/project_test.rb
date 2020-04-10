@@ -17,10 +17,10 @@ require "storage_helper"
 describe Google::Cloud::Storage::Project, :storage do
   it "should get its project service account email" do
     email = storage.service_account_email
-    email.wont_be :nil?
-    email.must_be_kind_of String
+    _(email).wont_be :nil?
+    _(email).must_be_kind_of String
     # https://stackoverflow.com/questions/22993545/ruby-email-validation-with-regex
-    email.must_match /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+    _(email).must_match /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   end
 
   it "should create a new HMAC key" do
@@ -30,29 +30,29 @@ describe Google::Cloud::Storage::Project, :storage do
       # Create key.
       hmac_key = storage.create_hmac_key service_account_email
 
-      hmac_key.wont_be :nil?
-      hmac_key.must_be_kind_of Google::Cloud::Storage::HmacKey
+      _(hmac_key).wont_be :nil?
+      _(hmac_key).must_be_kind_of Google::Cloud::Storage::HmacKey
 
       # Check response fields.
-      hmac_key.secret.must_be_kind_of String
-      hmac_key.secret.length.must_equal 40
+      _(hmac_key.secret).must_be_kind_of String
+      _(hmac_key.secret.length).must_equal 40
 
-      hmac_key.access_id.must_be_kind_of String
-      hmac_key.project_id.must_equal storage.project_id
-      hmac_key.etag.must_be_kind_of String
-      hmac_key.id.must_be_kind_of String
-      hmac_key.created_at.must_be_kind_of DateTime
-      hmac_key.updated_at.must_be_kind_of DateTime
-      hmac_key.service_account_email.must_equal service_account_email
-      hmac_key.state.must_equal "ACTIVE"
-      hmac_key.must_be :active?
+      _(hmac_key.access_id).must_be_kind_of String
+      _(hmac_key.project_id).must_equal storage.project_id
+      _(hmac_key.etag).must_be_kind_of String
+      _(hmac_key.id).must_be_kind_of String
+      _(hmac_key.created_at).must_be_kind_of DateTime
+      _(hmac_key.updated_at).must_be_kind_of DateTime
+      _(hmac_key.service_account_email).must_equal service_account_email
+      _(hmac_key.state).must_equal "ACTIVE"
+      _(hmac_key).must_be :active?
 
       hmac_keys = storage.hmac_keys
-      hmac_keys.wont_be :empty?
+      _(hmac_keys).wont_be :empty?
 
       # Verify it shows up in list.
       hmac_key_list_item = hmac_keys.find { |k| k.access_id == hmac_key.access_id }
-      hmac_key_list_item.wont_be :nil?
+      _(hmac_key_list_item).wont_be :nil?
 
       # sleep to ensure etag consistency
       sleep 1
@@ -62,23 +62,23 @@ describe Google::Cloud::Storage::Project, :storage do
 
       # Update key to INACTIVE state
       hmac_key_list_item.inactive!
-      hmac_key_list_item.state.must_equal "INACTIVE"
-      hmac_key_list_item.must_be :inactive?
+      _(hmac_key_list_item.state).must_equal "INACTIVE"
+      _(hmac_key_list_item).must_be :inactive?
 
       # Delete key.
       hmac_key.delete!
-      hmac_key.state.must_equal "DELETED"
-      hmac_key.must_be :deleted?
+      _(hmac_key.state).must_equal "DELETED"
+      _(hmac_key).must_be :deleted?
 
       # Verify it does not show up in list.
       hmac_keys = storage.hmac_keys
       hmac_key_list_item = hmac_keys.find { |k| k.access_id == hmac_key.access_id }
-      hmac_key_list_item.must_be :nil?
+      _(hmac_key_list_item).must_be :nil?
 
       # GET the deleted key.
       hmac_key = storage.hmac_key hmac_key.access_id # similar to reload! above
-      hmac_key.state.must_equal "DELETED"
-      hmac_key.must_be :deleted?
+      _(hmac_key.state).must_equal "DELETED"
+      _(hmac_key).must_be :deleted?
     ensure
       if hmac_key && !hmac_key.deleted?
         safe_gcs_execute { hmac_key.inactive! }

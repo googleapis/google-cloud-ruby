@@ -37,7 +37,7 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
   it "generates a signed post object V2" do
     file_name = "logo-#{SecureRandom.hex(4).downcase}.jpg"
 
-    bucket.file(file_name).must_be :nil?
+    _(bucket.file(file_name)).must_be :nil?
 
     post_object = bucket.post_object file_name, policy: policy
     http = Net::HTTP.new uri.host, uri.port
@@ -55,8 +55,8 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
 
     response = http.request request
 
-    response.code.must_equal "204"
-    bucket.file(file_name).wont_be :nil?
+    _(response.code).must_equal "204"
+    _(bucket.file(file_name)).wont_be :nil?
   end
 
   it "generates a signed post object with special variable key ${filename}" do
@@ -64,7 +64,7 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
     #  https://cloud.google.com/storage/docs/xml-api/post-object
     special_key = "${filename}"
 
-    bucket.file(data_file).must_be :nil?
+    _(bucket.file(data_file)).must_be :nil?
 
     post_object = bucket.post_object special_key, policy: policy
 
@@ -83,7 +83,7 @@ describe Google::Cloud::Storage::Bucket, :post_object, :v2, :storage do
 
     response = http.request request
 
-    response.code.must_equal "204"
-    bucket.file(data_file).wont_be :nil?
+    _(response.code).must_equal "204"
+    _(bucket.file(data_file)).wont_be :nil?
   end
 end

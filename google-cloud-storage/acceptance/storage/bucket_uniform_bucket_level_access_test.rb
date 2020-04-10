@@ -39,17 +39,17 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
 
   it "sets uniform_bucket_level_access true and is unable to modify file ACL rules" do
     refute bucket.uniform_bucket_level_access?
-    bucket.uniform_bucket_level_access_locked_at.must_be :nil?
+    _(bucket.uniform_bucket_level_access_locked_at).must_be :nil?
     file = bucket.create_file local_file, "ReaderTest.png"
 
     bucket.uniform_bucket_level_access = true
     assert bucket.uniform_bucket_level_access?
-    bucket.uniform_bucket_level_access_locked_at.must_be_kind_of DateTime
+    _(bucket.uniform_bucket_level_access_locked_at).must_be_kind_of DateTime
 
     err = expect do
       file.acl.add_reader user_val
     end.must_raise Google::Cloud::PermissionDeniedError
-    err.message.must_match /does not have storage.objects.get access to/
+    _(err.message).must_match /does not have storage.objects.get access to/
   end
 
   it "sets uniform_bucket_level_access true and is unable to get the file" do
@@ -61,7 +61,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     err = expect do
       file.reload!
     end.must_raise Google::Cloud::PermissionDeniedError
-    err.message.must_match /does not have storage.objects.get access to/
+    _(err.message).must_match /does not have storage.objects.get access to/
 
     bucket.uniform_bucket_level_access = false
     file.reload!
@@ -101,36 +101,36 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
 
   it "sets uniform_bucket_level_access true and default object acl and object acls are preserved" do
     bucket.default_acl.public!
-    bucket.default_acl.readers.must_equal ["allUsers"]
+    _(bucket.default_acl.readers).must_equal ["allUsers"]
     file_default_acl = bucket.create_file StringIO.new("default_acl"), "default_acl.txt"
-    file_default_acl.acl.readers.must_equal ["allUsers"]
+    _(file_default_acl.acl.readers).must_equal ["allUsers"]
     refute bucket.uniform_bucket_level_access?
 
     bucket.uniform_bucket_level_access = true
     assert bucket.uniform_bucket_level_access?
-    bucket.uniform_bucket_level_access_locked_at.must_be_kind_of DateTime
+    _(bucket.uniform_bucket_level_access_locked_at).must_be_kind_of DateTime
     bucket.uniform_bucket_level_access = false
 
     refute bucket.uniform_bucket_level_access?
-    bucket.uniform_bucket_level_access_locked_at.must_be :nil?
+    _(bucket.uniform_bucket_level_access_locked_at).must_be :nil?
 
     file_default_acl.reload!
-    file_default_acl.acl.readers.must_equal ["allUsers"]
+    _(file_default_acl.acl.readers).must_equal ["allUsers"]
   end
 
   it "sets DEPRECATED policy_only true and is unable to modify file ACL rules" do
     refute bucket.policy_only?
-    bucket.policy_only_locked_at.must_be :nil?
+    _(bucket.policy_only_locked_at).must_be :nil?
     file = bucket.create_file local_file, "ReaderTest.png"
 
     bucket.policy_only = true
     assert bucket.policy_only?
-    bucket.policy_only_locked_at.must_be_kind_of DateTime
+    _(bucket.policy_only_locked_at).must_be_kind_of DateTime
 
     err = expect do
       file.acl.add_reader user_val
     end.must_raise Google::Cloud::PermissionDeniedError
-    err.message.must_match /does not have storage.objects.get access to/
+    _(err.message).must_match /does not have storage.objects.get access to/
   end
 
   it "sets DEPRECATED policy_only true and is unable to get the file" do
@@ -142,7 +142,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     err = expect do
       file.reload!
     end.must_raise Google::Cloud::PermissionDeniedError
-    err.message.must_match /does not have storage.objects.get access to/
+    _(err.message).must_match /does not have storage.objects.get access to/
 
     bucket.policy_only = false
     file.reload!
@@ -182,20 +182,20 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
 
   it "sets DEPRECATED policy_only true and default object acl and object acls are preserved" do
     bucket.default_acl.public!
-    bucket.default_acl.readers.must_equal ["allUsers"]
+    _(bucket.default_acl.readers).must_equal ["allUsers"]
     file_default_acl = bucket.create_file StringIO.new("default_acl"), "default_acl.txt"
-    file_default_acl.acl.readers.must_equal ["allUsers"]
+    _(file_default_acl.acl.readers).must_equal ["allUsers"]
     refute bucket.policy_only?
 
     bucket.policy_only = true
     assert bucket.policy_only?
-    bucket.policy_only_locked_at.must_be_kind_of DateTime
+    _(bucket.policy_only_locked_at).must_be_kind_of DateTime
     bucket.policy_only = false
 
     refute bucket.policy_only?
-    bucket.policy_only_locked_at.must_be :nil?
+    _(bucket.policy_only_locked_at).must_be :nil?
 
     file_default_acl.reload!
-    file_default_acl.acl.readers.must_equal ["allUsers"]
+    _(file_default_acl.acl.readers).must_equal ["allUsers"]
   end
 end

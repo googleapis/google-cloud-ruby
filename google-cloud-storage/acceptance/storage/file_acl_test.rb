@@ -41,84 +41,84 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   it "adds a reader" do
     file = bucket.create_file local_file, "ReaderTest.png"
     user_val = "user-blowmage@gmail.com"
-    file.acl.readers.wont_include user_val
+    _(file.acl.readers).wont_include user_val
     file.acl.add_reader user_val
-    file.acl.readers.must_include user_val
+    _(file.acl.readers).must_include user_val
     file.acl.refresh!
-    file.acl.readers.must_include user_val
+    _(file.acl.readers).must_include user_val
     file.refresh!
-    file.acl.readers.must_include user_val
+    _(file.acl.readers).must_include user_val
   end
 
   it "adds an owner" do
     file = bucket.create_file local_file, "OwnerTest.png"
     user_val = "user-blowmage@gmail.com"
-    file.acl.owners.wont_include user_val
+    _(file.acl.owners).wont_include user_val
     file.acl.add_owner user_val
-    file.acl.owners.must_include user_val
+    _(file.acl.owners).must_include user_val
     file.acl.refresh!
-    file.acl.owners.must_include user_val
+    _(file.acl.owners).must_include user_val
     file.refresh!
-    file.acl.owners.must_include user_val
+    _(file.acl.owners).must_include user_val
   end
 
   it "updates predefined rules" do
     file = bucket.create_file local_file, "AclTest.png"
-    file.acl.readers.must_include "allAuthenticatedUsers"
+    _(file.acl.readers).must_include "allAuthenticatedUsers"
     file.acl.private!
-    file.acl.readers.must_be :empty?
+    _(file.acl.readers).must_be :empty?
     file.acl.refresh!
-    file.acl.readers.must_be :empty?
+    _(file.acl.readers).must_be :empty?
     file.refresh!
-    file.acl.readers.must_be :empty?
+    _(file.acl.readers).must_be :empty?
   end
 
   it "deletes rules" do
     file = bucket.create_file local_file, "DeleteTest.png"
-    file.acl.readers.must_include "allAuthenticatedUsers"
+    _(file.acl.readers).must_include "allAuthenticatedUsers"
     file.acl.delete "allAuthenticatedUsers"
-    file.acl.readers.must_be :empty?
+    _(file.acl.readers).must_be :empty?
     file.acl.refresh!
-    file.acl.readers.must_be :empty?
+    _(file.acl.readers).must_be :empty?
     file.refresh!
-    file.acl.readers.must_be :empty?
+    _(file.acl.readers).must_be :empty?
   end
 
   it "retrieves and modifies the ACL" do
     bucket.default_acl.private!
     file = bucket.create_file local_file, "CRUDTest.png"
-    bucket.default_acl.owners.must_be  :empty?
-    bucket.default_acl.readers.must_be :empty?
+    _(bucket.default_acl.owners).must_be  :empty?
+    _(bucket.default_acl.readers).must_be :empty?
 
     bucket.default_acl.add_reader user_val
 
-    bucket.default_acl.owners.must_be  :empty?
-    bucket.default_acl.readers.wont_be :empty?
+    _(bucket.default_acl.owners).must_be  :empty?
+    _(bucket.default_acl.readers).wont_be :empty?
 
-    bucket.default_acl.readers.must_include user_val
+    _(bucket.default_acl.readers).must_include user_val
 
     bucket.default_acl.reload!
 
-    bucket.default_acl.readers.must_include user_val
+    _(bucket.default_acl.readers).must_include user_val
 
     bucket.reload!
 
-    bucket.default_acl.readers.must_include user_val
+    _(bucket.default_acl.readers).must_include user_val
 
     bucket.default_acl.delete user_val
 
-    bucket.default_acl.owners.must_be  :empty?
-    bucket.default_acl.readers.must_be :empty?
+    _(bucket.default_acl.owners).must_be  :empty?
+    _(bucket.default_acl.readers).must_be :empty?
 
-    bucket.default_acl.readers.wont_include user_val
+    _(bucket.default_acl.readers).wont_include user_val
 
     bucket.default_acl.reload!
 
-    bucket.default_acl.readers.wont_include user_val
+    _(bucket.default_acl.readers).wont_include user_val
 
     bucket.reload!
 
-    bucket.default_acl.readers.wont_include user_val
+    _(bucket.default_acl.readers).wont_include user_val
   end
 
   it "sets predefined ACL rules" do
