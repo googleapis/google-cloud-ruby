@@ -15,7 +15,7 @@
 
 module Google
   module Cloud
-    module Texttospeech
+    module TextToSpeech
       module V1beta1
         # The top-level message sent by the client for the `ListVoices` method.
         # @!attribute [rw] language_code
@@ -32,7 +32,7 @@ module Google
 
         # The message returned to the client by the `ListVoices` method.
         # @!attribute [rw] voices
-        #   @return [Array<Google::Cloud::Texttospeech::V1beta1::Voice>]
+        #   @return [Array<Google::Cloud::TextToSpeech::V1beta1::Voice>]
         #     The list of voices.
         class ListVoicesResponse; end
 
@@ -46,7 +46,7 @@ module Google
         #   @return [String]
         #     The name of this voice.  Each distinct voice has a unique name.
         # @!attribute [rw] ssml_gender
-        #   @return [Google::Cloud::Texttospeech::V1beta1::SsmlVoiceGender]
+        #   @return [Google::Cloud::TextToSpeech::V1beta1::SsmlVoiceGender]
         #     The gender of this voice.
         # @!attribute [rw] natural_sample_rate_hertz
         #   @return [Integer]
@@ -55,13 +55,13 @@ module Google
 
         # The top-level message sent by the client for the `SynthesizeSpeech` method.
         # @!attribute [rw] input
-        #   @return [Google::Cloud::Texttospeech::V1beta1::SynthesisInput]
+        #   @return [Google::Cloud::TextToSpeech::V1beta1::SynthesisInput]
         #     Required. The Synthesizer requires either plain text or SSML as input.
         # @!attribute [rw] voice
-        #   @return [Google::Cloud::Texttospeech::V1beta1::VoiceSelectionParams]
+        #   @return [Google::Cloud::TextToSpeech::V1beta1::VoiceSelectionParams]
         #     Required. The desired voice of the synthesized audio.
         # @!attribute [rw] audio_config
-        #   @return [Google::Cloud::Texttospeech::V1beta1::AudioConfig]
+        #   @return [Google::Cloud::TextToSpeech::V1beta1::AudioConfig]
         #     Required. The configuration of the synthesized audio.
         class SynthesizeSpeechRequest; end
 
@@ -99,7 +99,7 @@ module Google
         #     The name of the voice. If not set, the service will choose a
         #     voice based on the other parameters such as language_code and gender.
         # @!attribute [rw] ssml_gender
-        #   @return [Google::Cloud::Texttospeech::V1beta1::SsmlVoiceGender]
+        #   @return [Google::Cloud::TextToSpeech::V1beta1::SsmlVoiceGender]
         #     The preferred gender of the voice. If not set, the service will
         #     choose a voice based on the other parameters such as language_code and
         #     name. Note that this is only a preference, not requirement; if a
@@ -109,7 +109,7 @@ module Google
 
         # Description of audio data to be synthesized.
         # @!attribute [rw] audio_encoding
-        #   @return [Google::Cloud::Texttospeech::V1beta1::AudioEncoding]
+        #   @return [Google::Cloud::TextToSpeech::V1beta1::AudioEncoding]
         #     Required. The format of the audio byte stream.
         # @!attribute [rw] speaking_rate
         #   @return [Float]
