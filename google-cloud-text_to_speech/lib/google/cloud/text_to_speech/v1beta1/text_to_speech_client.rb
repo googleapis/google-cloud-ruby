@@ -36,7 +36,7 @@ module Google
         # Service that implements Google Cloud Text-to-Speech API.
         #
         # @!attribute [r] text_to_speech_stub
-        #   @return [Google::Cloud::Texttospeech::V1beta1::TextToSpeech::Stub]
+        #   @return [Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Stub]
         class TextToSpeechClient
           # @private
           attr_reader :text_to_speech_stub
@@ -167,7 +167,7 @@ module Google
               updater_proc: updater_proc,
               scopes: scopes,
               interceptors: interceptors,
-              &Google::Cloud::Texttospeech::V1beta1::TextToSpeech::Stub.method(:new)
+              &Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Stub.method(:new)
             )
 
             @list_voices = Google::Gax.create_api_call(
@@ -199,9 +199,9 @@ module Google
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Texttospeech::V1beta1::ListVoicesResponse]
+          # @yieldparam result [Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Texttospeech::V1beta1::ListVoicesResponse]
+          # @return [Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/text_to_speech"
@@ -216,32 +216,32 @@ module Google
             req = {
               language_code: language_code
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Texttospeech::V1beta1::ListVoicesRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest)
             @list_voices.call(req, options, &block)
           end
 
           # Synthesizes speech synchronously: receive results after all text input
           # has been processed.
           #
-          # @param input [Google::Cloud::Texttospeech::V1beta1::SynthesisInput | Hash]
+          # @param input [Google::Cloud::TextToSpeech::V1beta1::SynthesisInput | Hash]
           #   Required. The Synthesizer requires either plain text or SSML as input.
-          #   A hash of the same form as `Google::Cloud::Texttospeech::V1beta1::SynthesisInput`
+          #   A hash of the same form as `Google::Cloud::TextToSpeech::V1beta1::SynthesisInput`
           #   can also be provided.
-          # @param voice [Google::Cloud::Texttospeech::V1beta1::VoiceSelectionParams | Hash]
+          # @param voice [Google::Cloud::TextToSpeech::V1beta1::VoiceSelectionParams | Hash]
           #   Required. The desired voice of the synthesized audio.
-          #   A hash of the same form as `Google::Cloud::Texttospeech::V1beta1::VoiceSelectionParams`
+          #   A hash of the same form as `Google::Cloud::TextToSpeech::V1beta1::VoiceSelectionParams`
           #   can also be provided.
-          # @param audio_config [Google::Cloud::Texttospeech::V1beta1::AudioConfig | Hash]
+          # @param audio_config [Google::Cloud::TextToSpeech::V1beta1::AudioConfig | Hash]
           #   Required. The configuration of the synthesized audio.
-          #   A hash of the same form as `Google::Cloud::Texttospeech::V1beta1::AudioConfig`
+          #   A hash of the same form as `Google::Cloud::TextToSpeech::V1beta1::AudioConfig`
           #   can also be provided.
           # @param options [Google::Gax::CallOptions]
           #   Overrides the default settings for this call, e.g, timeout,
           #   retries, etc.
           # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::Texttospeech::V1beta1::SynthesizeSpeechResponse]
+          # @yieldparam result [Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse]
           # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::Texttospeech::V1beta1::SynthesizeSpeechResponse]
+          # @return [Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse]
           # @raise [Google::Gax::GaxError] if the RPC is aborted.
           # @example
           #   require "google/cloud/text_to_speech"
@@ -269,7 +269,7 @@ module Google
               voice: voice,
               audio_config: audio_config
             }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::Texttospeech::V1beta1::SynthesizeSpeechRequest)
+            req = Google::Gax::to_proto(req, Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest)
             @synthesize_speech.call(req, options, &block)
           end
         end
