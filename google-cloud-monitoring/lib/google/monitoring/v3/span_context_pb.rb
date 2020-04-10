@@ -12,8 +12,8 @@ end
 
 module Google
   module Monitoring
-    module V3
-      SpanContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.SpanContext").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  SpanContext = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.SpanContext").msgclass
 end

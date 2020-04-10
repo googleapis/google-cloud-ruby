@@ -38,10 +38,10 @@ end
 
 module Google
   module Monitoring
-    module V3
-      NotificationChannelDescriptor = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.NotificationChannelDescriptor").msgclass
-      NotificationChannel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.NotificationChannel").msgclass
-      NotificationChannel::VerificationStatus = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.NotificationChannel.VerificationStatus").enummodule
-    end
   end
+end
+module Google::Monitoring::V3
+  NotificationChannelDescriptor = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.NotificationChannelDescriptor").msgclass
+  NotificationChannel = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.NotificationChannel").msgclass
+  NotificationChannel::VerificationStatus = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.NotificationChannel.VerificationStatus").enummodule
 end

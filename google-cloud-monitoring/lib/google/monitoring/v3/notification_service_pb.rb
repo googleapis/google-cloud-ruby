@@ -71,20 +71,20 @@ end
 
 module Google
   module Monitoring
-    module V3
-      ListNotificationChannelDescriptorsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListNotificationChannelDescriptorsRequest").msgclass
-      ListNotificationChannelDescriptorsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListNotificationChannelDescriptorsResponse").msgclass
-      GetNotificationChannelDescriptorRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetNotificationChannelDescriptorRequest").msgclass
-      CreateNotificationChannelRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateNotificationChannelRequest").msgclass
-      ListNotificationChannelsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListNotificationChannelsRequest").msgclass
-      ListNotificationChannelsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListNotificationChannelsResponse").msgclass
-      GetNotificationChannelRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetNotificationChannelRequest").msgclass
-      UpdateNotificationChannelRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateNotificationChannelRequest").msgclass
-      DeleteNotificationChannelRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteNotificationChannelRequest").msgclass
-      SendNotificationChannelVerificationCodeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.SendNotificationChannelVerificationCodeRequest").msgclass
-      GetNotificationChannelVerificationCodeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetNotificationChannelVerificationCodeRequest").msgclass
-      GetNotificationChannelVerificationCodeResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetNotificationChannelVerificationCodeResponse").msgclass
-      VerifyNotificationChannelRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.VerifyNotificationChannelRequest").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  ListNotificationChannelDescriptorsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListNotificationChannelDescriptorsRequest").msgclass
+  ListNotificationChannelDescriptorsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListNotificationChannelDescriptorsResponse").msgclass
+  GetNotificationChannelDescriptorRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetNotificationChannelDescriptorRequest").msgclass
+  CreateNotificationChannelRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateNotificationChannelRequest").msgclass
+  ListNotificationChannelsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListNotificationChannelsRequest").msgclass
+  ListNotificationChannelsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListNotificationChannelsResponse").msgclass
+  GetNotificationChannelRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetNotificationChannelRequest").msgclass
+  UpdateNotificationChannelRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateNotificationChannelRequest").msgclass
+  DeleteNotificationChannelRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteNotificationChannelRequest").msgclass
+  SendNotificationChannelVerificationCodeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.SendNotificationChannelVerificationCodeRequest").msgclass
+  GetNotificationChannelVerificationCodeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetNotificationChannelVerificationCodeRequest").msgclass
+  GetNotificationChannelVerificationCodeResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetNotificationChannelVerificationCodeResponse").msgclass
+  VerifyNotificationChannelRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.VerifyNotificationChannelRequest").msgclass
 end

@@ -12,8 +12,8 @@ end
 
 module Google
   module Monitoring
-    module V3
-      DroppedLabels = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DroppedLabels").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  DroppedLabels = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DroppedLabels").msgclass
 end

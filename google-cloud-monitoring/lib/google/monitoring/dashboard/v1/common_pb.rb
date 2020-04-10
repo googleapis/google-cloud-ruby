@@ -80,16 +80,16 @@ end
 module Google
   module Monitoring
     module Dashboard
-      module V1
-        Aggregation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Aggregation").msgclass
-        Aggregation::Aligner = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Aggregation.Aligner").enummodule
-        Aggregation::Reducer = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Aggregation.Reducer").enummodule
-        PickTimeSeriesFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.PickTimeSeriesFilter").msgclass
-        PickTimeSeriesFilter::Method = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method").enummodule
-        PickTimeSeriesFilter::Direction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction").enummodule
-        StatisticalTimeSeriesFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter").msgclass
-        StatisticalTimeSeriesFilter::Method = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method").enummodule
-      end
     end
   end
+end
+module Google::Monitoring::Dashboard::V1
+  Aggregation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Aggregation").msgclass
+  Aggregation::Aligner = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Aggregation.Aligner").enummodule
+  Aggregation::Reducer = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Aggregation.Reducer").enummodule
+  PickTimeSeriesFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.PickTimeSeriesFilter").msgclass
+  PickTimeSeriesFilter::Method = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method").enummodule
+  PickTimeSeriesFilter::Direction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction").enummodule
+  StatisticalTimeSeriesFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter").msgclass
+  StatisticalTimeSeriesFilter::Method = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method").enummodule
 end

@@ -66,17 +66,17 @@ end
 
 module Google
   module Monitoring
-    module V3
-      Point = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Point").msgclass
-      TimeSeries = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeries").msgclass
-      TimeSeriesDescriptor = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeriesDescriptor").msgclass
-      TimeSeriesDescriptor::ValueDescriptor = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor").msgclass
-      TimeSeriesData = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeriesData").msgclass
-      TimeSeriesData::PointData = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeriesData.PointData").msgclass
-      LabelValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.LabelValue").msgclass
-      QueryError = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryError").msgclass
-      TextLocator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TextLocator").msgclass
-      TextLocator::Position = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TextLocator.Position").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  Point = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Point").msgclass
+  TimeSeries = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeries").msgclass
+  TimeSeriesDescriptor = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeriesDescriptor").msgclass
+  TimeSeriesDescriptor::ValueDescriptor = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeriesDescriptor.ValueDescriptor").msgclass
+  TimeSeriesData = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeriesData").msgclass
+  TimeSeriesData::PointData = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeriesData.PointData").msgclass
+  LabelValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.LabelValue").msgclass
+  QueryError = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryError").msgclass
+  TextLocator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TextLocator").msgclass
+  TextLocator::Position = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TextLocator.Position").msgclass
 end

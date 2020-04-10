@@ -28,11 +28,11 @@ end
 module Google
   module Monitoring
     module Dashboard
-      module V1
-        Scorecard = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Scorecard").msgclass
-        Scorecard::GaugeView = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Scorecard.GaugeView").msgclass
-        Scorecard::SparkChartView = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Scorecard.SparkChartView").msgclass
-      end
     end
   end
+end
+module Google::Monitoring::Dashboard::V1
+  Scorecard = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Scorecard").msgclass
+  Scorecard::GaugeView = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Scorecard.GaugeView").msgclass
+  Scorecard::SparkChartView = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Scorecard.SparkChartView").msgclass
 end

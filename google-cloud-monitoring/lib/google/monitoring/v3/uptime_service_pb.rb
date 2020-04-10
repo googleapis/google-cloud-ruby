@@ -49,15 +49,15 @@ end
 
 module Google
   module Monitoring
-    module V3
-      ListUptimeCheckConfigsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListUptimeCheckConfigsRequest").msgclass
-      ListUptimeCheckConfigsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListUptimeCheckConfigsResponse").msgclass
-      GetUptimeCheckConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetUptimeCheckConfigRequest").msgclass
-      CreateUptimeCheckConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateUptimeCheckConfigRequest").msgclass
-      UpdateUptimeCheckConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateUptimeCheckConfigRequest").msgclass
-      DeleteUptimeCheckConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteUptimeCheckConfigRequest").msgclass
-      ListUptimeCheckIpsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListUptimeCheckIpsRequest").msgclass
-      ListUptimeCheckIpsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListUptimeCheckIpsResponse").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  ListUptimeCheckConfigsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListUptimeCheckConfigsRequest").msgclass
+  ListUptimeCheckConfigsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListUptimeCheckConfigsResponse").msgclass
+  GetUptimeCheckConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetUptimeCheckConfigRequest").msgclass
+  CreateUptimeCheckConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateUptimeCheckConfigRequest").msgclass
+  UpdateUptimeCheckConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateUptimeCheckConfigRequest").msgclass
+  DeleteUptimeCheckConfigRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteUptimeCheckConfigRequest").msgclass
+  ListUptimeCheckIpsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListUptimeCheckIpsRequest").msgclass
+  ListUptimeCheckIpsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListUptimeCheckIpsResponse").msgclass
 end

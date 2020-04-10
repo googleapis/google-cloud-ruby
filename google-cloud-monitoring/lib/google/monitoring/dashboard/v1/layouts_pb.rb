@@ -29,13 +29,13 @@ end
 module Google
   module Monitoring
     module Dashboard
-      module V1
-        GridLayout = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.GridLayout").msgclass
-        RowLayout = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.RowLayout").msgclass
-        RowLayout::Row = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.RowLayout.Row").msgclass
-        ColumnLayout = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ColumnLayout").msgclass
-        ColumnLayout::Column = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ColumnLayout.Column").msgclass
-      end
     end
   end
+end
+module Google::Monitoring::Dashboard::V1
+  GridLayout = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.GridLayout").msgclass
+  RowLayout = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.RowLayout").msgclass
+  RowLayout::Row = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.RowLayout.Row").msgclass
+  ColumnLayout = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ColumnLayout").msgclass
+  ColumnLayout::Column = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ColumnLayout.Column").msgclass
 end
