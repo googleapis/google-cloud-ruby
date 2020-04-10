@@ -170,11 +170,13 @@ module Google
         end
 
         def database_path project_id: project, database_id: "(default)"
-          V1::FirestoreClient.database_root_path project_id, database_id
+          # Originally used V1::FirestoreClient.database_root_path until it was removed in #5405.
+          "projects/#{project_id}/databases/#{database_id}"
         end
 
         def documents_path project_id: project, database_id: "(default)"
-          V1::FirestoreClient.document_root_path project_id, database_id
+          # Originally used V1::FirestoreClient.document_root_path until it was removed in #5405.
+          "projects/#{project_id}/databases/#{database_id}/documents"
         end
 
         def inspect
