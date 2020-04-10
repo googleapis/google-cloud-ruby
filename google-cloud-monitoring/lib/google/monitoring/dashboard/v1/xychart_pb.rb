@@ -52,15 +52,15 @@ end
 module Google
   module Monitoring
     module Dashboard
-      module V1
-        XyChart = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.XyChart").msgclass
-        XyChart::DataSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.XyChart.DataSet").msgclass
-        XyChart::DataSet::PlotType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.XyChart.DataSet.PlotType").enummodule
-        XyChart::Axis = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.XyChart.Axis").msgclass
-        XyChart::Axis::Scale = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.XyChart.Axis.Scale").enummodule
-        ChartOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ChartOptions").msgclass
-        ChartOptions::Mode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ChartOptions.Mode").enummodule
-      end
     end
   end
+end
+module Google::Monitoring::Dashboard::V1
+  XyChart = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.XyChart").msgclass
+  XyChart::DataSet = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.XyChart.DataSet").msgclass
+  XyChart::DataSet::PlotType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.XyChart.DataSet.PlotType").enummodule
+  XyChart::Axis = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.XyChart.Axis").msgclass
+  XyChart::Axis::Scale = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.XyChart.Axis.Scale").enummodule
+  ChartOptions = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ChartOptions").msgclass
+  ChartOptions::Mode = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ChartOptions.Mode").enummodule
 end

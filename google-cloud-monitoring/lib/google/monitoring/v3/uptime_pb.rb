@@ -91,19 +91,19 @@ end
 
 module Google
   module Monitoring
-    module V3
-      InternalChecker = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.InternalChecker").msgclass
-      InternalChecker::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.InternalChecker.State").enummodule
-      UptimeCheckConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig").msgclass
-      UptimeCheckConfig::ResourceGroup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ResourceGroup").msgclass
-      UptimeCheckConfig::HttpCheck = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck").msgclass
-      UptimeCheckConfig::HttpCheck::BasicAuthentication = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck.BasicAuthentication").msgclass
-      UptimeCheckConfig::TcpCheck = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.TcpCheck").msgclass
-      UptimeCheckConfig::ContentMatcher = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ContentMatcher").msgclass
-      UptimeCheckConfig::ContentMatcher::ContentMatcherOption = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption").enummodule
-      UptimeCheckIp = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckIp").msgclass
-      UptimeCheckRegion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckRegion").enummodule
-      GroupResourceType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GroupResourceType").enummodule
-    end
   end
+end
+module Google::Monitoring::V3
+  InternalChecker = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.InternalChecker").msgclass
+  InternalChecker::State = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.InternalChecker.State").enummodule
+  UptimeCheckConfig = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig").msgclass
+  UptimeCheckConfig::ResourceGroup = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ResourceGroup").msgclass
+  UptimeCheckConfig::HttpCheck = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck").msgclass
+  UptimeCheckConfig::HttpCheck::BasicAuthentication = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck.BasicAuthentication").msgclass
+  UptimeCheckConfig::TcpCheck = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.TcpCheck").msgclass
+  UptimeCheckConfig::ContentMatcher = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ContentMatcher").msgclass
+  UptimeCheckConfig::ContentMatcher::ContentMatcherOption = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption").enummodule
+  UptimeCheckIp = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckIp").msgclass
+  UptimeCheckRegion = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckRegion").enummodule
+  GroupResourceType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GroupResourceType").enummodule
 end

@@ -19,10 +19,10 @@ end
 module Google
   module Monitoring
     module Dashboard
-      module V1
-        Text = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Text").msgclass
-        Text::Format = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Text.Format").enummodule
-      end
     end
   end
+end
+module Google::Monitoring::Dashboard::V1
+  Text = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Text").msgclass
+  Text::Format = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Text.Format").enummodule
 end

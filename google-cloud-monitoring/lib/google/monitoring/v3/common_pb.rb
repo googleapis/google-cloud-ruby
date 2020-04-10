@@ -82,14 +82,14 @@ end
 
 module Google
   module Monitoring
-    module V3
-      TypedValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TypedValue").msgclass
-      TimeInterval = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeInterval").msgclass
-      Aggregation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation").msgclass
-      Aggregation::Aligner = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation.Aligner").enummodule
-      Aggregation::Reducer = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation.Reducer").enummodule
-      ComparisonType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ComparisonType").enummodule
-      ServiceTier = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceTier").enummodule
-    end
   end
+end
+module Google::Monitoring::V3
+  TypedValue = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TypedValue").msgclass
+  TimeInterval = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeInterval").msgclass
+  Aggregation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation").msgclass
+  Aggregation::Aligner = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation.Aligner").enummodule
+  Aggregation::Reducer = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Aggregation.Reducer").enummodule
+  ComparisonType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ComparisonType").enummodule
+  ServiceTier = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceTier").enummodule
 end

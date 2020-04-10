@@ -68,19 +68,19 @@ end
 
 module Google
   module Monitoring
-    module V3
-      CreateServiceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateServiceRequest").msgclass
-      GetServiceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetServiceRequest").msgclass
-      ListServicesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListServicesRequest").msgclass
-      ListServicesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListServicesResponse").msgclass
-      UpdateServiceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateServiceRequest").msgclass
-      DeleteServiceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteServiceRequest").msgclass
-      CreateServiceLevelObjectiveRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateServiceLevelObjectiveRequest").msgclass
-      GetServiceLevelObjectiveRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetServiceLevelObjectiveRequest").msgclass
-      ListServiceLevelObjectivesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListServiceLevelObjectivesRequest").msgclass
-      ListServiceLevelObjectivesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListServiceLevelObjectivesResponse").msgclass
-      UpdateServiceLevelObjectiveRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateServiceLevelObjectiveRequest").msgclass
-      DeleteServiceLevelObjectiveRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteServiceLevelObjectiveRequest").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  CreateServiceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateServiceRequest").msgclass
+  GetServiceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetServiceRequest").msgclass
+  ListServicesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListServicesRequest").msgclass
+  ListServicesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListServicesResponse").msgclass
+  UpdateServiceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateServiceRequest").msgclass
+  DeleteServiceRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteServiceRequest").msgclass
+  CreateServiceLevelObjectiveRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateServiceLevelObjectiveRequest").msgclass
+  GetServiceLevelObjectiveRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetServiceLevelObjectiveRequest").msgclass
+  ListServiceLevelObjectivesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListServiceLevelObjectivesRequest").msgclass
+  ListServiceLevelObjectivesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListServiceLevelObjectivesResponse").msgclass
+  UpdateServiceLevelObjectiveRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateServiceLevelObjectiveRequest").msgclass
+  DeleteServiceLevelObjectiveRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteServiceLevelObjectiveRequest").msgclass
 end

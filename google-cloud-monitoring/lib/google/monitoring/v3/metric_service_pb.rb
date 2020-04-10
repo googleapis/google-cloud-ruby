@@ -106,25 +106,25 @@ end
 
 module Google
   module Monitoring
-    module V3
-      ListMonitoredResourceDescriptorsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListMonitoredResourceDescriptorsRequest").msgclass
-      ListMonitoredResourceDescriptorsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListMonitoredResourceDescriptorsResponse").msgclass
-      GetMonitoredResourceDescriptorRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetMonitoredResourceDescriptorRequest").msgclass
-      ListMetricDescriptorsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListMetricDescriptorsRequest").msgclass
-      ListMetricDescriptorsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListMetricDescriptorsResponse").msgclass
-      GetMetricDescriptorRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetMetricDescriptorRequest").msgclass
-      CreateMetricDescriptorRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateMetricDescriptorRequest").msgclass
-      DeleteMetricDescriptorRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteMetricDescriptorRequest").msgclass
-      ListTimeSeriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListTimeSeriesRequest").msgclass
-      ListTimeSeriesRequest::TimeSeriesView = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListTimeSeriesRequest.TimeSeriesView").enummodule
-      ListTimeSeriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListTimeSeriesResponse").msgclass
-      CreateTimeSeriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesRequest").msgclass
-      CreateTimeSeriesError = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesError").msgclass
-      CreateTimeSeriesSummary = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesSummary").msgclass
-      CreateTimeSeriesSummary::Error = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesSummary.Error").msgclass
-      QueryTimeSeriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryTimeSeriesRequest").msgclass
-      QueryTimeSeriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryTimeSeriesResponse").msgclass
-      QueryErrorList = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryErrorList").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  ListMonitoredResourceDescriptorsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListMonitoredResourceDescriptorsRequest").msgclass
+  ListMonitoredResourceDescriptorsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListMonitoredResourceDescriptorsResponse").msgclass
+  GetMonitoredResourceDescriptorRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetMonitoredResourceDescriptorRequest").msgclass
+  ListMetricDescriptorsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListMetricDescriptorsRequest").msgclass
+  ListMetricDescriptorsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListMetricDescriptorsResponse").msgclass
+  GetMetricDescriptorRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetMetricDescriptorRequest").msgclass
+  CreateMetricDescriptorRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateMetricDescriptorRequest").msgclass
+  DeleteMetricDescriptorRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteMetricDescriptorRequest").msgclass
+  ListTimeSeriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListTimeSeriesRequest").msgclass
+  ListTimeSeriesRequest::TimeSeriesView = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListTimeSeriesRequest.TimeSeriesView").enummodule
+  ListTimeSeriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListTimeSeriesResponse").msgclass
+  CreateTimeSeriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesRequest").msgclass
+  CreateTimeSeriesError = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesError").msgclass
+  CreateTimeSeriesSummary = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesSummary").msgclass
+  CreateTimeSeriesSummary::Error = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateTimeSeriesSummary.Error").msgclass
+  QueryTimeSeriesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryTimeSeriesRequest").msgclass
+  QueryTimeSeriesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryTimeSeriesResponse").msgclass
+  QueryErrorList = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.QueryErrorList").msgclass
 end

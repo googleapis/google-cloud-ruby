@@ -10,8 +10,8 @@ end
 module Google
   module Monitoring
     module Dashboard
-      module V1
-      end
     end
   end
+end
+module Google::Monitoring::Dashboard::V1
 end

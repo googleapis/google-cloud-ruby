@@ -17,8 +17,8 @@ end
 
 module Google
   module Monitoring
-    module V3
-      Group = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Group").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  Group = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Group").msgclass
 end

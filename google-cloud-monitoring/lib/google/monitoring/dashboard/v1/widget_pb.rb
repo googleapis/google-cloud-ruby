@@ -24,9 +24,9 @@ end
 module Google
   module Monitoring
     module Dashboard
-      module V1
-        Widget = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Widget").msgclass
-      end
     end
   end
+end
+module Google::Monitoring::Dashboard::V1
+  Widget = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Widget").msgclass
 end

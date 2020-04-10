@@ -41,13 +41,13 @@ end
 
 module Google
   module Monitoring
-    module V3
-      CreateAlertPolicyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateAlertPolicyRequest").msgclass
-      GetAlertPolicyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetAlertPolicyRequest").msgclass
-      ListAlertPoliciesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListAlertPoliciesRequest").msgclass
-      ListAlertPoliciesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListAlertPoliciesResponse").msgclass
-      UpdateAlertPolicyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateAlertPolicyRequest").msgclass
-      DeleteAlertPolicyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteAlertPolicyRequest").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  CreateAlertPolicyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateAlertPolicyRequest").msgclass
+  GetAlertPolicyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetAlertPolicyRequest").msgclass
+  ListAlertPoliciesRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListAlertPoliciesRequest").msgclass
+  ListAlertPoliciesResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListAlertPoliciesResponse").msgclass
+  UpdateAlertPolicyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateAlertPolicyRequest").msgclass
+  DeleteAlertPolicyRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteAlertPolicyRequest").msgclass
 end

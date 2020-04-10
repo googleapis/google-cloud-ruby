@@ -123,27 +123,27 @@ end
 
 module Google
   module Monitoring
-    module V3
-      Service = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service").msgclass
-      Service::Custom = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.Custom").msgclass
-      Service::AppEngine = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.AppEngine").msgclass
-      Service::CloudEndpoints = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.CloudEndpoints").msgclass
-      Service::ClusterIstio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.ClusterIstio").msgclass
-      Service::MeshIstio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.MeshIstio").msgclass
-      Service::Telemetry = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.Telemetry").msgclass
-      ServiceLevelObjective = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceLevelObjective").msgclass
-      ServiceLevelObjective::View = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceLevelObjective.View").enummodule
-      ServiceLevelIndicator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceLevelIndicator").msgclass
-      BasicSli = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.BasicSli").msgclass
-      BasicSli::AvailabilityCriteria = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.BasicSli.AvailabilityCriteria").msgclass
-      BasicSli::LatencyCriteria = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.BasicSli.LatencyCriteria").msgclass
-      Range = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Range").msgclass
-      RequestBasedSli = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.RequestBasedSli").msgclass
-      TimeSeriesRatio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeriesRatio").msgclass
-      DistributionCut = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DistributionCut").msgclass
-      WindowsBasedSli = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.WindowsBasedSli").msgclass
-      WindowsBasedSli::PerformanceThreshold = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.WindowsBasedSli.PerformanceThreshold").msgclass
-      WindowsBasedSli::MetricRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.WindowsBasedSli.MetricRange").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  Service = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service").msgclass
+  Service::Custom = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.Custom").msgclass
+  Service::AppEngine = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.AppEngine").msgclass
+  Service::CloudEndpoints = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.CloudEndpoints").msgclass
+  Service::ClusterIstio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.ClusterIstio").msgclass
+  Service::MeshIstio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.MeshIstio").msgclass
+  Service::Telemetry = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Service.Telemetry").msgclass
+  ServiceLevelObjective = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceLevelObjective").msgclass
+  ServiceLevelObjective::View = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceLevelObjective.View").enummodule
+  ServiceLevelIndicator = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ServiceLevelIndicator").msgclass
+  BasicSli = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.BasicSli").msgclass
+  BasicSli::AvailabilityCriteria = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.BasicSli.AvailabilityCriteria").msgclass
+  BasicSli::LatencyCriteria = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.BasicSli.LatencyCriteria").msgclass
+  Range = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.Range").msgclass
+  RequestBasedSli = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.RequestBasedSli").msgclass
+  TimeSeriesRatio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.TimeSeriesRatio").msgclass
+  DistributionCut = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DistributionCut").msgclass
+  WindowsBasedSli = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.WindowsBasedSli").msgclass
+  WindowsBasedSli::PerformanceThreshold = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.WindowsBasedSli.PerformanceThreshold").msgclass
+  WindowsBasedSli::MetricRange = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.WindowsBasedSli.MetricRange").msgclass
 end

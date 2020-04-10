@@ -38,14 +38,14 @@ end
 module Google
   module Monitoring
     module Dashboard
-      module V1
-        CreateDashboardRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.CreateDashboardRequest").msgclass
-        ListDashboardsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ListDashboardsRequest").msgclass
-        ListDashboardsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ListDashboardsResponse").msgclass
-        GetDashboardRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.GetDashboardRequest").msgclass
-        DeleteDashboardRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.DeleteDashboardRequest").msgclass
-        UpdateDashboardRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.UpdateDashboardRequest").msgclass
-      end
     end
   end
+end
+module Google::Monitoring::Dashboard::V1
+  CreateDashboardRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.CreateDashboardRequest").msgclass
+  ListDashboardsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ListDashboardsRequest").msgclass
+  ListDashboardsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.ListDashboardsResponse").msgclass
+  GetDashboardRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.GetDashboardRequest").msgclass
+  DeleteDashboardRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.DeleteDashboardRequest").msgclass
+  UpdateDashboardRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.UpdateDashboardRequest").msgclass
 end

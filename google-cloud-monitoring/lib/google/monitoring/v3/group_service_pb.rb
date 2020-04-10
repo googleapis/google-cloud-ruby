@@ -59,15 +59,15 @@ end
 
 module Google
   module Monitoring
-    module V3
-      ListGroupsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListGroupsRequest").msgclass
-      ListGroupsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListGroupsResponse").msgclass
-      GetGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetGroupRequest").msgclass
-      CreateGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateGroupRequest").msgclass
-      UpdateGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateGroupRequest").msgclass
-      DeleteGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteGroupRequest").msgclass
-      ListGroupMembersRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListGroupMembersRequest").msgclass
-      ListGroupMembersResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListGroupMembersResponse").msgclass
-    end
   end
+end
+module Google::Monitoring::V3
+  ListGroupsRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListGroupsRequest").msgclass
+  ListGroupsResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListGroupsResponse").msgclass
+  GetGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GetGroupRequest").msgclass
+  CreateGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.CreateGroupRequest").msgclass
+  UpdateGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UpdateGroupRequest").msgclass
+  DeleteGroupRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.DeleteGroupRequest").msgclass
+  ListGroupMembersRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListGroupMembersRequest").msgclass
+  ListGroupMembersResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.ListGroupMembersResponse").msgclass
 end

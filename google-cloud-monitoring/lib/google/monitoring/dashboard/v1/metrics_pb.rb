@@ -61,16 +61,16 @@ end
 module Google
   module Monitoring
     module Dashboard
-      module V1
-        TimeSeriesQuery = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesQuery").msgclass
-        TimeSeriesFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesFilter").msgclass
-        TimeSeriesFilterRatio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesFilterRatio").msgclass
-        TimeSeriesFilterRatio::RatioPart = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart").msgclass
-        Threshold = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Threshold").msgclass
-        Threshold::Color = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Threshold.Color").enummodule
-        Threshold::Direction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Threshold.Direction").enummodule
-        SparkChartType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.SparkChartType").enummodule
-      end
     end
   end
+end
+module Google::Monitoring::Dashboard::V1
+  TimeSeriesQuery = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesQuery").msgclass
+  TimeSeriesFilter = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesFilter").msgclass
+  TimeSeriesFilterRatio = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesFilterRatio").msgclass
+  TimeSeriesFilterRatio::RatioPart = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart").msgclass
+  Threshold = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Threshold").msgclass
+  Threshold::Color = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Threshold.Color").enummodule
+  Threshold::Direction = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Threshold.Direction").enummodule
+  SparkChartType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.SparkChartType").enummodule
 end

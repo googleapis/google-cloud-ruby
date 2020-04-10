@@ -73,15 +73,15 @@ end
 
 module Google
   module Monitoring
-    module V3
-      AlertPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy").msgclass
-      AlertPolicy::Documentation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Documentation").msgclass
-      AlertPolicy::Condition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition").msgclass
-      AlertPolicy::Condition::Trigger = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.Trigger").msgclass
-      AlertPolicy::Condition::MetricThreshold = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.MetricThreshold").msgclass
-      AlertPolicy::Condition::MetricAbsence = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.MetricAbsence").msgclass
-      AlertPolicy::Condition::TimeSeriesQueryLanguageCondition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition").msgclass
-      AlertPolicy::ConditionCombinerType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.ConditionCombinerType").enummodule
-    end
   end
+end
+module Google::Monitoring::V3
+  AlertPolicy = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy").msgclass
+  AlertPolicy::Documentation = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Documentation").msgclass
+  AlertPolicy::Condition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition").msgclass
+  AlertPolicy::Condition::Trigger = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.Trigger").msgclass
+  AlertPolicy::Condition::MetricThreshold = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.MetricThreshold").msgclass
+  AlertPolicy::Condition::MetricAbsence = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.MetricAbsence").msgclass
+  AlertPolicy::Condition::TimeSeriesQueryLanguageCondition = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.TimeSeriesQueryLanguageCondition").msgclass
+  AlertPolicy::ConditionCombinerType = Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.ConditionCombinerType").enummodule
 end
