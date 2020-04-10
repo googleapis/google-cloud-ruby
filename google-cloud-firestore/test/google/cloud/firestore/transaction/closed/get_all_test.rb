@@ -45,7 +45,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :closed, :mock_firesto
   end
 
   it "gets a single doc from a doc ref object" do
-    firestore_mock.expect :batch_get_documents, transaction_doc_enum, [database_path, ["#{documents_path}/users/mike"], mask: nil, options: default_options]
+    firestore_mock.expect :batch_get_documents, transaction_doc_enum, [database_path, documents: ["#{documents_path}/users/mike"], mask: nil, options: default_options]
 
     doc_ref = firestore.doc("users/mike")
     doc_snp = doc_ref.get

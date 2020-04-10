@@ -414,7 +414,7 @@ def paged_enum_struct response
 end
 
 def commit_args
-  [String, Array, Hash]
+  [String, Hash]
 end
 
 def commit_resp
@@ -493,7 +493,7 @@ def batch_get_resp_obj doc, data
 end
 
 def batch_get_args
-  [String, Array, Hash]
+  [String, Hash]
 end
 
 def list_documents_args

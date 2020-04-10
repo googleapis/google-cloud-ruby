@@ -41,7 +41,7 @@ describe Google::Cloud::Firestore::CollectionReference, :add, :mock_firestore do
         exists: false)
     )]
 
-    firestore_mock.expect :commit, commit_resp, [database_path, commit_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: commit_writes, options: default_options]
 
     Google::Cloud::Firestore::Generate.stub :unique_id, random_document_id do
       document = collection.add
@@ -69,7 +69,7 @@ describe Google::Cloud::Firestore::CollectionReference, :add, :mock_firestore do
         exists: false)
     )]
 
-    firestore_mock.expect :commit, commit_resp, [database_path, commit_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: commit_writes, options: default_options]
 
     Google::Cloud::Firestore::Generate.stub :unique_id, random_document_id do
       document = collection.add hello: :world

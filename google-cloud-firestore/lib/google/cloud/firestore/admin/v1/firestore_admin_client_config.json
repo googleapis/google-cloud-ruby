@@ -4,7 +4,6 @@
       "retry_codes": {
         "idempotent": [
           "DEADLINE_EXCEEDED",
-          "INTERNAL",
           "UNAVAILABLE"
         ],
         "non_idempotent": []
@@ -21,6 +20,16 @@
         }
       },
       "methods": {
+        "DeleteIndex": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateField": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateIndex": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
@@ -36,21 +45,6 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "DeleteIndex": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
-        },
-        "ImportDocuments": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
-        "ExportDocuments": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
-        },
         "GetField": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
@@ -61,7 +55,12 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "UpdateField": {
+        "ExportDocuments": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ImportDocuments": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

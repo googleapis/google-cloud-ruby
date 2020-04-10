@@ -47,7 +47,7 @@ describe Google::Cloud::Firestore::Transaction, :update, :mock_firestore do
   end
 
   it "updates a new document given a string path" do
-    firestore_mock.expect :commit, commit_resp, [database_path, update_writes, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_writes, transaction: transaction_id, options: default_options]
 
     transaction.update(document_path, { name: "Mike" })
     resp = transaction.commit
@@ -57,7 +57,7 @@ describe Google::Cloud::Firestore::Transaction, :update, :mock_firestore do
   end
 
   it "updates a new document given a DocumentReference" do
-    firestore_mock.expect :commit, commit_resp, [database_path, update_writes, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: update_writes, transaction: transaction_id, options: default_options]
 
     doc = firestore.doc document_path
     doc.must_be_kind_of Google::Cloud::Firestore::DocumentReference

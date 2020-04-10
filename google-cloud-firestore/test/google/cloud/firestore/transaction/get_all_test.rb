@@ -52,7 +52,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
   end
 
   it "gets multiple docs using splat (string)" do
-    firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: nil, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, documents: full_doc_paths, mask: nil, transaction: transaction_id, options: default_options]
 
     docs_enum = transaction.get_all "users/mike", "users/tad", "users/chris"
 
@@ -60,7 +60,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
   end
 
   it "gets multiple docs using array (string)" do
-    firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: nil, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, documents: full_doc_paths, mask: nil, transaction: transaction_id, options: default_options]
 
     docs_enum = transaction.get_all ["users/mike", "users/tad", "users/chris"]
 
@@ -68,7 +68,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
   end
 
   it "gets multiple docs using splat (doc ref)" do
-    firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: nil, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, documents: full_doc_paths, mask: nil, transaction: transaction_id, options: default_options]
 
     docs_enum = transaction.get_all firestore.doc("users/mike"), firestore.doc("users/tad"), firestore.doc("users/chris")
 
@@ -76,7 +76,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
   end
 
   it "gets multiple docs using array (doc ref)" do
-    firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: nil, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, documents: full_doc_paths, mask: nil, transaction: transaction_id, options: default_options]
 
     docs_enum = transaction.get_all [firestore.doc("users/mike"), firestore.doc("users/tad"), firestore.doc("users/chris")]
 
@@ -84,7 +84,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
   end
 
   it "gets a single doc (string)" do
-    firestore_mock.expect :batch_get_documents, [transaction_docs_enum.to_a.first].to_enum, [database_path, [full_doc_paths.first], mask: nil, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :batch_get_documents, [transaction_docs_enum.to_a.first].to_enum, [database_path, documents: [full_doc_paths.first], mask: nil, transaction: transaction_id, options: default_options]
 
     docs_enum = transaction.get_all "users/mike"
 
@@ -108,7 +108,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
   end
 
   it "gets a single doc (doc ref)" do
-    firestore_mock.expect :batch_get_documents, [transaction_docs_enum.to_a.first].to_enum, [database_path, [full_doc_paths.first], mask: nil, transaction: transaction_id, options: default_options]
+    firestore_mock.expect :batch_get_documents, [transaction_docs_enum.to_a.first].to_enum, [database_path, documents: [full_doc_paths.first], mask: nil, transaction: transaction_id, options: default_options]
 
     docs_enum = transaction.get_all firestore.doc("users/mike")
 
@@ -135,7 +135,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
     let(:field_mask) { Google::Firestore::V1::DocumentMask.new(field_paths: ["name"]) }
 
     it "gets multiple docs using splat (string)" do
-      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
+      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, documents: full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
 
       docs_enum = transaction.get_all "users/mike", "users/tad", "users/chris", field_mask: [:name]
 
@@ -143,7 +143,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
     end
 
     it "gets multiple docs using array (string)" do
-      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
+      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, documents: full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
 
       docs_enum = transaction.get_all ["users/mike", "users/tad", "users/chris"], field_mask: :name
 
@@ -151,7 +151,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
     end
 
     it "gets multiple docs using splat (doc ref)" do
-      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
+      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, documents: full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
 
       docs_enum = transaction.get_all firestore.doc("users/mike"), firestore.doc("users/tad"), firestore.doc("users/chris"), field_mask: ["name"]
 
@@ -159,7 +159,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
     end
 
     it "gets multiple docs using array (doc ref)" do
-      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
+      firestore_mock.expect :batch_get_documents, transaction_docs_enum, [database_path, documents: full_doc_paths, mask: field_mask, transaction: transaction_id, options: default_options]
 
       docs_enum = transaction.get_all [firestore.doc("users/mike"), firestore.doc("users/tad"), firestore.doc("users/chris")], field_mask: "name"
 
@@ -167,7 +167,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
     end
 
     it "gets a single doc (string)" do
-      firestore_mock.expect :batch_get_documents, [transaction_docs_enum.to_a.first].to_enum, [database_path, [full_doc_paths.first], mask: field_mask, transaction: transaction_id, options: default_options]
+      firestore_mock.expect :batch_get_documents, [transaction_docs_enum.to_a.first].to_enum, [database_path, documents: [full_doc_paths.first], mask: field_mask, transaction: transaction_id, options: default_options]
 
       docs_enum = transaction.get_all "users/mike", field_mask: firestore.field_path(:name)
 
@@ -191,7 +191,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
     end
 
     it "gets a single doc (doc ref)" do
-      firestore_mock.expect :batch_get_documents, [transaction_docs_enum.to_a.first].to_enum, [database_path, [full_doc_paths.first], mask: field_mask, transaction: transaction_id, options: default_options]
+      firestore_mock.expect :batch_get_documents, [transaction_docs_enum.to_a.first].to_enum, [database_path, documents: [full_doc_paths.first], mask: field_mask, transaction: transaction_id, options: default_options]
 
       docs_enum = transaction.get_all firestore.doc("users/mike"), field_mask: [firestore.field_path(:name)]
 

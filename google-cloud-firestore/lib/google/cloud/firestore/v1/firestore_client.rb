@@ -80,80 +80,6 @@ module Google
           ].freeze
 
 
-          ANY_PATH_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/databases/{database}/documents/{document}/{any_path=**}"
-          )
-
-          private_constant :ANY_PATH_PATH_TEMPLATE
-
-          DATABASE_ROOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/databases/{database}"
-          )
-
-          private_constant :DATABASE_ROOT_PATH_TEMPLATE
-
-          DOCUMENT_PATH_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/databases/{database}/documents/{document_path=**}"
-          )
-
-          private_constant :DOCUMENT_PATH_PATH_TEMPLATE
-
-          DOCUMENT_ROOT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-            "projects/{project}/databases/{database}/documents"
-          )
-
-          private_constant :DOCUMENT_ROOT_PATH_TEMPLATE
-
-          # Returns a fully-qualified any_path resource name string.
-          # @param project [String]
-          # @param database [String]
-          # @param document [String]
-          # @param any_path [String]
-          # @return [String]
-          def self.any_path_path project, database, document, any_path
-            ANY_PATH_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"database" => database,
-              :"document" => document,
-              :"any_path" => any_path
-            )
-          end
-
-          # Returns a fully-qualified database_root resource name string.
-          # @param project [String]
-          # @param database [String]
-          # @return [String]
-          def self.database_root_path project, database
-            DATABASE_ROOT_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"database" => database
-            )
-          end
-
-          # Returns a fully-qualified document_path resource name string.
-          # @param project [String]
-          # @param database [String]
-          # @param document_path [String]
-          # @return [String]
-          def self.document_path_path project, database, document_path
-            DOCUMENT_PATH_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"database" => database,
-              :"document_path" => document_path
-            )
-          end
-
-          # Returns a fully-qualified document_root resource name string.
-          # @param project [String]
-          # @param database [String]
-          # @return [String]
-          def self.document_root_path project, database
-            DOCUMENT_ROOT_PATH_TEMPLATE.render(
-              :"project" => project,
-              :"database" => database
-            )
-          end
-
           # @param credentials [Google::Auth::Credentials, String, Hash, GRPC::Core::Channel, GRPC::Core::ChannelCredentials, Proc]
           #   Provides the means for authenticating requests made by the client. This parameter can
           #   be many types.
@@ -393,8 +319,10 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_name = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
-          #   response = firestore_client.get_document(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   response = firestore_client.get_document(name)
 
           def get_document \
               name,
@@ -471,18 +399,20 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+          #
+          #   # TODO: Initialize `parent`:
+          #   parent = ''
           #
           #   # TODO: Initialize `collection_id`:
           #   collection_id = ''
           #
           #   # Iterate over all results.
-          #   firestore_client.list_documents(formatted_parent, collection_id).each do |element|
+          #   firestore_client.list_documents(parent, collection_id).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   firestore_client.list_documents(formatted_parent, collection_id).each_page do |page|
+          #   firestore_client.list_documents(parent, collection_id).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.
@@ -522,14 +452,14 @@ module Google
           #   `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}`
           # @param collection_id [String]
           #   Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`.
-          # @param document_id [String]
-          #   The client-assigned document ID to use for this document.
-          #
-          #   Optional. If not specified, an ID will be assigned by the service.
           # @param document [Google::Firestore::V1::Document | Hash]
           #   Required. The document to create. `name` must not be set.
           #   A hash of the same form as `Google::Firestore::V1::Document`
           #   can also be provided.
+          # @param document_id [String]
+          #   The client-assigned document ID to use for this document.
+          #
+          #   Optional. If not specified, an ID will be assigned by the service.
           # @param mask [Google::Firestore::V1::DocumentMask | Hash]
           #   The fields to return. If not set, returns all fields.
           #
@@ -549,31 +479,30 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+          #
+          #   # TODO: Initialize `parent`:
+          #   parent = ''
           #
           #   # TODO: Initialize `collection_id`:
           #   collection_id = ''
           #
-          #   # TODO: Initialize `document_id`:
-          #   document_id = ''
-          #
           #   # TODO: Initialize `document`:
           #   document = {}
-          #   response = firestore_client.create_document(formatted_parent, collection_id, document_id, document)
+          #   response = firestore_client.create_document(parent, collection_id, document)
 
           def create_document \
               parent,
               collection_id,
-              document_id,
               document,
+              document_id: nil,
               mask: nil,
               options: nil,
               &block
             req = {
               parent: parent,
               collection_id: collection_id,
-              document_id: document_id,
               document: document,
+              document_id: document_id,
               mask: mask
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Firestore::V1::CreateDocumentRequest)
@@ -624,14 +553,11 @@ module Google
           #
           #   # TODO: Initialize `document`:
           #   document = {}
-          #
-          #   # TODO: Initialize `update_mask`:
-          #   update_mask = {}
-          #   response = firestore_client.update_document(document, update_mask)
+          #   response = firestore_client.update_document(document)
 
           def update_document \
               document,
-              update_mask,
+              update_mask: nil,
               mask: nil,
               current_document: nil,
               options: nil,
@@ -667,8 +593,10 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_name = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
-          #   firestore_client.delete_document(formatted_name)
+          #
+          #   # TODO: Initialize `name`:
+          #   name = ''
+          #   firestore_client.delete_document(name)
 
           def delete_document \
               name,
@@ -729,17 +657,16 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #
-          #   # TODO: Initialize `documents`:
-          #   documents = []
-          #   firestore_client.batch_get_documents(formatted_database, documents).each do |element|
+          #   # TODO: Initialize `database`:
+          #   database = ''
+          #   firestore_client.batch_get_documents(database).each do |element|
           #     # Process element.
           #   end
 
           def batch_get_documents \
               database,
-              documents,
+              documents: nil,
               mask: nil,
               transaction: nil,
               new_transaction: nil,
@@ -779,8 +706,10 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-          #   response = firestore_client.begin_transaction(formatted_database)
+          #
+          #   # TODO: Initialize `database`:
+          #   database = ''
+          #   response = firestore_client.begin_transaction(database)
 
           def begin_transaction \
               database,
@@ -820,15 +749,14 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
           #
-          #   # TODO: Initialize `writes`:
-          #   writes = []
-          #   response = firestore_client.commit(formatted_database, writes)
+          #   # TODO: Initialize `database`:
+          #   database = ''
+          #   response = firestore_client.commit(database)
 
           def commit \
               database,
-              writes,
+              writes: nil,
               transaction: nil,
               options: nil,
               &block
@@ -859,11 +787,13 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
+          #
+          #   # TODO: Initialize `database`:
+          #   database = ''
           #
           #   # TODO: Initialize `transaction`:
           #   transaction = ''
-          #   firestore_client.rollback(formatted_database, transaction)
+          #   firestore_client.rollback(database, transaction)
 
           def rollback \
               database,
@@ -917,8 +847,10 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
-          #   firestore_client.run_query(formatted_parent).each do |element|
+          #
+          #   # TODO: Initialize `parent`:
+          #   parent = ''
+          #   firestore_client.run_query(parent).each do |element|
           #     # Process element.
           #   end
 
@@ -961,8 +893,10 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-          #   request = { database: formatted_database }
+          #
+          #   # TODO: Initialize `database`:
+          #   database = ''
+          #   request = { database: database }
           #   requests = [request]
           #   firestore_client.write(requests).each do |element|
           #     # Process element.
@@ -996,8 +930,10 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_database = Google::Cloud::Firestore::V1::FirestoreClient.database_root_path("[PROJECT]", "[DATABASE]")
-          #   request = { database: formatted_database }
+          #
+          #   # TODO: Initialize `database`:
+          #   database = ''
+          #   request = { database: database }
           #   requests = [request]
           #   firestore_client.listen(requests).each do |element|
           #     # Process element.
@@ -1039,15 +975,17 @@ module Google
           #   require "google/cloud/firestore/v1"
           #
           #   firestore_client = Google::Cloud::Firestore::V1.new
-          #   formatted_parent = Google::Cloud::Firestore::V1::FirestoreClient.any_path_path("[PROJECT]", "[DATABASE]", "[DOCUMENT]", "[ANY_PATH]")
+          #
+          #   # TODO: Initialize `parent`:
+          #   parent = ''
           #
           #   # Iterate over all results.
-          #   firestore_client.list_collection_ids(formatted_parent).each do |element|
+          #   firestore_client.list_collection_ids(parent).each do |element|
           #     # Process element.
           #   end
           #
           #   # Or iterate over results one page at a time.
-          #   firestore_client.list_collection_ids(formatted_parent).each_page do |page|
+          #   firestore_client.list_collection_ids(parent).each_page do |page|
           #     # Process each page at a time.
           #     page.each do |element|
           #       # Process element.

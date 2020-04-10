@@ -24,6 +24,8 @@ require "json"
 require "pathname"
 
 require "google/gax"
+require "google/gax/operation"
+require "google/longrunning/operations_client"
 
 require "google/firestore/admin/v1/firestore_admin_pb"
 require "google/cloud/firestore/admin/v1/credentials"
@@ -74,6 +76,16 @@ module Google
               "https://www.googleapis.com/auth/datastore"
             ].freeze
 
+            class OperationsClient < Google::Longrunning::OperationsClient
+              self::SERVICE_ADDRESS = FirestoreAdminClient::SERVICE_ADDRESS
+              self::GRPC_INTERCEPTORS = FirestoreAdminClient::GRPC_INTERCEPTORS
+            end
+
+            COLLECTION_GROUP_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
+              "projects/{project}/databases/{database}/collectionGroups/{collection}"
+            )
+
+            private_constant :COLLECTION_GROUP_PATH_TEMPLATE
 
             DATABASE_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
               "projects/{project}/databases/{database}"
@@ -82,22 +94,29 @@ module Google
             private_constant :DATABASE_PATH_TEMPLATE
 
             FIELD_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-              "projects/{project}/databases/{database}/collectionGroups/{collection_id}/fields/{field_id}"
+              "projects/{project}/databases/{database}/collectionGroups/{collection}/fields/{field}"
             )
 
             private_constant :FIELD_PATH_TEMPLATE
 
             INDEX_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-              "projects/{project}/databases/{database}/collectionGroups/{collection_id}/indexes/{index_id}"
+              "projects/{project}/databases/{database}/collectionGroups/{collection}/indexes/{index}"
             )
 
             private_constant :INDEX_PATH_TEMPLATE
 
-            PARENT_PATH_TEMPLATE = Google::Gax::PathTemplate.new(
-              "projects/{project}/databases/{database}/collectionGroups/{collection_id}"
-            )
-
-            private_constant :PARENT_PATH_TEMPLATE
+            # Returns a fully-qualified collection_group resource name string.
+            # @param project [String]
+            # @param database [String]
+            # @param collection [String]
+            # @return [String]
+            def self.collection_group_path project, database, collection
+              COLLECTION_GROUP_PATH_TEMPLATE.render(
+                :"project" => project,
+                :"database" => database,
+                :"collection" => collection
+              )
+            end
 
             # Returns a fully-qualified database resource name string.
             # @param project [String]
@@ -113,43 +132,30 @@ module Google
             # Returns a fully-qualified field resource name string.
             # @param project [String]
             # @param database [String]
-            # @param collection_id [String]
-            # @param field_id [String]
+            # @param collection [String]
+            # @param field [String]
             # @return [String]
-            def self.field_path project, database, collection_id, field_id
+            def self.field_path project, database, collection, field
               FIELD_PATH_TEMPLATE.render(
                 :"project" => project,
                 :"database" => database,
-                :"collection_id" => collection_id,
-                :"field_id" => field_id
+                :"collection" => collection,
+                :"field" => field
               )
             end
 
             # Returns a fully-qualified index resource name string.
             # @param project [String]
             # @param database [String]
-            # @param collection_id [String]
-            # @param index_id [String]
+            # @param collection [String]
+            # @param index [String]
             # @return [String]
-            def self.index_path project, database, collection_id, index_id
+            def self.index_path project, database, collection, index
               INDEX_PATH_TEMPLATE.render(
                 :"project" => project,
                 :"database" => database,
-                :"collection_id" => collection_id,
-                :"index_id" => index_id
-              )
-            end
-
-            # Returns a fully-qualified parent resource name string.
-            # @param project [String]
-            # @param database [String]
-            # @param collection_id [String]
-            # @return [String]
-            def self.parent_path project, database, collection_id
-              PARENT_PATH_TEMPLATE.render(
-                :"project" => project,
-                :"database" => database,
-                :"collection_id" => collection_id
+                :"collection" => collection,
+                :"index" => index
               )
             end
 
@@ -204,6 +210,18 @@ module Google
               require "google/firestore/admin/v1/firestore_admin_services_pb"
 
               credentials ||= Google::Cloud::Firestore::Admin::V1::Credentials.default
+
+              @operations_client = OperationsClient.new(
+                credentials: credentials,
+                scopes: scopes,
+                client_config: client_config,
+                timeout: timeout,
+                lib_name: lib_name,
+                service_address: service_address,
+                service_port: service_port,
+                lib_version: lib_version,
+                metadata: metadata,
+              )
 
               if credentials.is_a?(String) || credentials.is_a?(Hash)
                 updater_proc = Google::Cloud::Firestore::Admin::V1::Credentials.new(credentials).updater_proc
@@ -265,6 +283,22 @@ module Google
                 &Google::Firestore::Admin::V1::FirestoreAdmin::Stub.method(:new)
               )
 
+              @delete_index = Google::Gax.create_api_call(
+                @firestore_admin_stub.method(:delete_index),
+                defaults["delete_index"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'name' => request.name}
+                end
+              )
+              @update_field = Google::Gax.create_api_call(
+                @firestore_admin_stub.method(:update_field),
+                defaults["update_field"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'field.name' => request.field.name}
+                end
+              )
               @create_index = Google::Gax.create_api_call(
                 @firestore_admin_stub.method(:create_index),
                 defaults["create_index"],
@@ -289,30 +323,6 @@ module Google
                   {'name' => request.name}
                 end
               )
-              @delete_index = Google::Gax.create_api_call(
-                @firestore_admin_stub.method(:delete_index),
-                defaults["delete_index"],
-                exception_transformer: exception_transformer,
-                params_extractor: proc do |request|
-                  {'name' => request.name}
-                end
-              )
-              @import_documents = Google::Gax.create_api_call(
-                @firestore_admin_stub.method(:import_documents),
-                defaults["import_documents"],
-                exception_transformer: exception_transformer,
-                params_extractor: proc do |request|
-                  {'name' => request.name}
-                end
-              )
-              @export_documents = Google::Gax.create_api_call(
-                @firestore_admin_stub.method(:export_documents),
-                defaults["export_documents"],
-                exception_transformer: exception_transformer,
-                params_extractor: proc do |request|
-                  {'name' => request.name}
-                end
-              )
               @get_field = Google::Gax.create_api_call(
                 @firestore_admin_stub.method(:get_field),
                 defaults["get_field"],
@@ -329,17 +339,139 @@ module Google
                   {'parent' => request.parent}
                 end
               )
-              @update_field = Google::Gax.create_api_call(
-                @firestore_admin_stub.method(:update_field),
-                defaults["update_field"],
+              @export_documents = Google::Gax.create_api_call(
+                @firestore_admin_stub.method(:export_documents),
+                defaults["export_documents"],
                 exception_transformer: exception_transformer,
                 params_extractor: proc do |request|
-                  {'field.name' => request.field.name}
+                  {'name' => request.name}
+                end
+              )
+              @import_documents = Google::Gax.create_api_call(
+                @firestore_admin_stub.method(:import_documents),
+                defaults["import_documents"],
+                exception_transformer: exception_transformer,
+                params_extractor: proc do |request|
+                  {'name' => request.name}
                 end
               )
             end
 
             # Service calls
+
+            # Deletes a composite index.
+            #
+            # @param name [String]
+            #   Required. A name of the form
+            #   `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @yield [result, operation] Access the result along with the RPC operation
+            # @yieldparam result []
+            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/firestore/admin"
+            #
+            #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
+            #   formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION]", "[INDEX]")
+            #   firestore_admin_client.delete_index(formatted_name)
+
+            def delete_index \
+                name,
+                options: nil,
+                &block
+              req = {
+                name: name
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Firestore::Admin::V1::DeleteIndexRequest)
+              @delete_index.call(req, options, &block)
+              nil
+            end
+
+            # Updates a field configuration. Currently, field updates apply only to
+            # single field index configuration. However, calls to
+            # {Google::Firestore::Admin::V1::FirestoreAdmin::UpdateField FirestoreAdmin::UpdateField} should provide a field mask to avoid
+            # changing any configuration that the caller isn't aware of. The field mask
+            # should be specified as: `{ paths: "index_config" }`.
+            #
+            # This call returns a {Google::Longrunning::Operation} which may be used to
+            # track the status of the field update. The metadata for
+            # the operation will be the type {Google::Firestore::Admin::V1::FieldOperationMetadata FieldOperationMetadata}.
+            #
+            # To configure the default field settings for the database, use
+            # the special `Field` with resource name:
+            # `projects/{project_id}/databases/{database_id}/collectionGroups/__default__/fields/*`.
+            #
+            # @param field [Google::Firestore::Admin::V1::Field | Hash]
+            #   Required. The field to be updated.
+            #   A hash of the same form as `Google::Firestore::Admin::V1::Field`
+            #   can also be provided.
+            # @param update_mask [Google::Protobuf::FieldMask | Hash]
+            #   A mask, relative to the field. If specified, only configuration specified
+            #   by this field_mask will be updated in the field.
+            #   A hash of the same form as `Google::Protobuf::FieldMask`
+            #   can also be provided.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Gax::Operation]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/firestore/admin"
+            #
+            #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
+            #
+            #   # TODO: Initialize `field`:
+            #   field = {}
+            #
+            #   # Register a callback during the method call.
+            #   operation = firestore_admin_client.update_field(field) do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Or use the return value to register a callback.
+            #   operation.on_done do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Manually reload the operation.
+            #   operation.reload!
+            #
+            #   # Or block until the operation completes, triggering callbacks on
+            #   # completion.
+            #   operation.wait_until_done!
+
+            def update_field \
+                field,
+                update_mask: nil,
+                options: nil
+              req = {
+                field: field,
+                update_mask: update_mask
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Firestore::Admin::V1::UpdateFieldRequest)
+              operation = Google::Gax::Operation.new(
+                @update_field.call(req, options),
+                @operations_client,
+                Google::Firestore::Admin::V1::Field,
+                Google::Firestore::Admin::V1::FieldOperationMetadata,
+                call_options: options
+              )
+              operation.on_done { |operation| yield(operation) } if block_given?
+              operation
+            end
 
             # Creates a composite index. This returns a {Google::Longrunning::Operation}
             # which may be used to track the status of the creation. The metadata for
@@ -355,32 +487,62 @@ module Google
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @yield [result, operation] Access the result along with the RPC operation
-            # @yieldparam result [Google::Longrunning::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
-            # @return [Google::Longrunning::Operation]
+            # @return [Google::Gax::Operation]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/firestore/admin"
             #
             #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
-            #   formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.parent_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]")
+            #   formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.collection_group_path("[PROJECT]", "[DATABASE]", "[COLLECTION]")
             #
             #   # TODO: Initialize `index`:
             #   index = {}
-            #   response = firestore_admin_client.create_index(formatted_parent, index)
+            #
+            #   # Register a callback during the method call.
+            #   operation = firestore_admin_client.create_index(formatted_parent, index) do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Or use the return value to register a callback.
+            #   operation.on_done do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Manually reload the operation.
+            #   operation.reload!
+            #
+            #   # Or block until the operation completes, triggering callbacks on
+            #   # completion.
+            #   operation.wait_until_done!
 
             def create_index \
                 parent,
                 index,
-                options: nil,
-                &block
+                options: nil
               req = {
                 parent: parent,
                 index: index
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Firestore::Admin::V1::CreateIndexRequest)
-              @create_index.call(req, options, &block)
+              operation = Google::Gax::Operation.new(
+                @create_index.call(req, options),
+                @operations_client,
+                Google::Firestore::Admin::V1::Index,
+                Google::Firestore::Admin::V1::IndexOperationMetadata,
+                call_options: options
+              )
+              operation.on_done { |operation| yield(operation) } if block_given?
+              operation
             end
 
             # Lists composite indexes.
@@ -412,7 +574,7 @@ module Google
             #   require "google/cloud/firestore/admin"
             #
             #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
-            #   formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.parent_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]")
+            #   formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.collection_group_path("[PROJECT]", "[DATABASE]", "[COLLECTION]")
             #
             #   # Iterate over all results.
             #   firestore_admin_client.list_indexes(formatted_parent).each do |element|
@@ -459,7 +621,7 @@ module Google
             #   require "google/cloud/firestore/admin"
             #
             #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
-            #   formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]", "[INDEX_ID]")
+            #   formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION]", "[INDEX]")
             #   response = firestore_admin_client.get_index(formatted_name)
 
             def get_index \
@@ -471,138 +633,6 @@ module Google
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Firestore::Admin::V1::GetIndexRequest)
               @get_index.call(req, options, &block)
-            end
-
-            # Deletes a composite index.
-            #
-            # @param name [String]
-            #   Required. A name of the form
-            #   `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`
-            # @param options [Google::Gax::CallOptions]
-            #   Overrides the default settings for this call, e.g, timeout,
-            #   retries, etc.
-            # @yield [result, operation] Access the result along with the RPC operation
-            # @yieldparam result []
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
-            # @raise [Google::Gax::GaxError] if the RPC is aborted.
-            # @example
-            #   require "google/cloud/firestore/admin"
-            #
-            #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
-            #   formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]", "[INDEX_ID]")
-            #   firestore_admin_client.delete_index(formatted_name)
-
-            def delete_index \
-                name,
-                options: nil,
-                &block
-              req = {
-                name: name
-              }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Firestore::Admin::V1::DeleteIndexRequest)
-              @delete_index.call(req, options, &block)
-              nil
-            end
-
-            # Imports documents into Google Cloud Firestore. Existing documents with the
-            # same name are overwritten. The import occurs in the background and its
-            # progress can be monitored and managed via the Operation resource that is
-            # created. If an ImportDocuments operation is cancelled, it is possible
-            # that a subset of the data has already been imported to Cloud Firestore.
-            #
-            # @param name [String]
-            #   Required. Database to import into. Should be of the form:
-            #   `projects/{project_id}/databases/{database_id}`.
-            # @param collection_ids [Array<String>]
-            #   Which collection ids to import. Unspecified means all collections included
-            #   in the import.
-            # @param input_uri_prefix [String]
-            #   Location of the exported files.
-            #   This must match the output_uri_prefix of an ExportDocumentsResponse from
-            #   an export that has completed successfully.
-            #   See:
-            #   {Google::Firestore::Admin::V1::ExportDocumentsResponse#output_uri_prefix}.
-            # @param options [Google::Gax::CallOptions]
-            #   Overrides the default settings for this call, e.g, timeout,
-            #   retries, etc.
-            # @yield [result, operation] Access the result along with the RPC operation
-            # @yieldparam result [Google::Longrunning::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
-            # @return [Google::Longrunning::Operation]
-            # @raise [Google::Gax::GaxError] if the RPC is aborted.
-            # @example
-            #   require "google/cloud/firestore/admin"
-            #
-            #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
-            #   formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
-            #   response = firestore_admin_client.import_documents(formatted_name)
-
-            def import_documents \
-                name,
-                collection_ids: nil,
-                input_uri_prefix: nil,
-                options: nil,
-                &block
-              req = {
-                name: name,
-                collection_ids: collection_ids,
-                input_uri_prefix: input_uri_prefix
-              }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Firestore::Admin::V1::ImportDocumentsRequest)
-              @import_documents.call(req, options, &block)
-            end
-
-            # Exports a copy of all or a subset of documents from Google Cloud Firestore
-            # to another storage system, such as Google Cloud Storage. Recent updates to
-            # documents may not be reflected in the export. The export occurs in the
-            # background and its progress can be monitored and managed via the
-            # Operation resource that is created. The output of an export may only be
-            # used once the associated operation is done. If an export operation is
-            # cancelled before completion it may leave partial data behind in Google
-            # Cloud Storage.
-            #
-            # @param name [String]
-            #   Required. Database to export. Should be of the form:
-            #   `projects/{project_id}/databases/{database_id}`.
-            # @param collection_ids [Array<String>]
-            #   Which collection ids to export. Unspecified means all collections.
-            # @param output_uri_prefix [String]
-            #   The output URI. Currently only supports Google Cloud Storage URIs of the
-            #   form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name
-            #   of the Google Cloud Storage bucket and `NAMESPACE_PATH` is an optional
-            #   Google Cloud Storage namespace path. When
-            #   choosing a name, be sure to consider Google Cloud Storage naming
-            #   guidelines: https://cloud.google.com/storage/docs/naming.
-            #   If the URI is a bucket (without a namespace path), a prefix will be
-            #   generated based on the start time.
-            # @param options [Google::Gax::CallOptions]
-            #   Overrides the default settings for this call, e.g, timeout,
-            #   retries, etc.
-            # @yield [result, operation] Access the result along with the RPC operation
-            # @yieldparam result [Google::Longrunning::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
-            # @return [Google::Longrunning::Operation]
-            # @raise [Google::Gax::GaxError] if the RPC is aborted.
-            # @example
-            #   require "google/cloud/firestore/admin"
-            #
-            #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
-            #   formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
-            #   response = firestore_admin_client.export_documents(formatted_name)
-
-            def export_documents \
-                name,
-                collection_ids: nil,
-                output_uri_prefix: nil,
-                options: nil,
-                &block
-              req = {
-                name: name,
-                collection_ids: collection_ids,
-                output_uri_prefix: output_uri_prefix
-              }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Firestore::Admin::V1::ExportDocumentsRequest)
-              @export_documents.call(req, options, &block)
             end
 
             # Gets the metadata and configuration for a Field.
@@ -622,7 +652,7 @@ module Google
             #   require "google/cloud/firestore/admin"
             #
             #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
-            #   formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.field_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]", "[FIELD_ID]")
+            #   formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.field_path("[PROJECT]", "[DATABASE]", "[COLLECTION]", "[FIELD]")
             #   response = firestore_admin_client.get_field(formatted_name)
 
             def get_field \
@@ -674,7 +704,7 @@ module Google
             #   require "google/cloud/firestore/admin"
             #
             #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
-            #   formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.parent_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]")
+            #   formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.collection_group_path("[PROJECT]", "[DATABASE]", "[COLLECTION]")
             #
             #   # Iterate over all results.
             #   firestore_admin_client.list_fields(formatted_parent).each do |element|
@@ -704,57 +734,165 @@ module Google
               @list_fields.call(req, options, &block)
             end
 
-            # Updates a field configuration. Currently, field updates apply only to
-            # single field index configuration. However, calls to
-            # {Google::Firestore::Admin::V1::FirestoreAdmin::UpdateField FirestoreAdmin::UpdateField} should provide a field mask to avoid
-            # changing any configuration that the caller isn't aware of. The field mask
-            # should be specified as: `{ paths: "index_config" }`.
+            # Exports a copy of all or a subset of documents from Google Cloud Firestore
+            # to another storage system, such as Google Cloud Storage. Recent updates to
+            # documents may not be reflected in the export. The export occurs in the
+            # background and its progress can be monitored and managed via the
+            # Operation resource that is created. The output of an export may only be
+            # used once the associated operation is done. If an export operation is
+            # cancelled before completion it may leave partial data behind in Google
+            # Cloud Storage.
             #
-            # This call returns a {Google::Longrunning::Operation} which may be used to
-            # track the status of the field update. The metadata for
-            # the operation will be the type {Google::Firestore::Admin::V1::FieldOperationMetadata FieldOperationMetadata}.
-            #
-            # To configure the default field settings for the database, use
-            # the special `Field` with resource name:
-            # `projects/{project_id}/databases/{database_id}/collectionGroups/__default__/fields/*`.
-            #
-            # @param field [Google::Firestore::Admin::V1::Field | Hash]
-            #   Required. The field to be updated.
-            #   A hash of the same form as `Google::Firestore::Admin::V1::Field`
-            #   can also be provided.
-            # @param update_mask [Google::Protobuf::FieldMask | Hash]
-            #   A mask, relative to the field. If specified, only configuration specified
-            #   by this field_mask will be updated in the field.
-            #   A hash of the same form as `Google::Protobuf::FieldMask`
-            #   can also be provided.
+            # @param name [String]
+            #   Required. Database to export. Should be of the form:
+            #   `projects/{project_id}/databases/{database_id}`.
+            # @param collection_ids [Array<String>]
+            #   Which collection ids to export. Unspecified means all collections.
+            # @param output_uri_prefix [String]
+            #   The output URI. Currently only supports Google Cloud Storage URIs of the
+            #   form: `gs://BUCKET_NAME[/NAMESPACE_PATH]`, where `BUCKET_NAME` is the name
+            #   of the Google Cloud Storage bucket and `NAMESPACE_PATH` is an optional
+            #   Google Cloud Storage namespace path. When
+            #   choosing a name, be sure to consider Google Cloud Storage naming
+            #   guidelines: https://cloud.google.com/storage/docs/naming.
+            #   If the URI is a bucket (without a namespace path), a prefix will be
+            #   generated based on the start time.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
-            # @yield [result, operation] Access the result along with the RPC operation
-            # @yieldparam result [Google::Longrunning::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
-            # @return [Google::Longrunning::Operation]
+            # @return [Google::Gax::Operation]
             # @raise [Google::Gax::GaxError] if the RPC is aborted.
             # @example
             #   require "google/cloud/firestore/admin"
             #
             #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
+            #   formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
             #
-            #   # TODO: Initialize `field`:
-            #   field = {}
-            #   response = firestore_admin_client.update_field(field)
+            #   # Register a callback during the method call.
+            #   operation = firestore_admin_client.export_documents(formatted_name) do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Or use the return value to register a callback.
+            #   operation.on_done do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Manually reload the operation.
+            #   operation.reload!
+            #
+            #   # Or block until the operation completes, triggering callbacks on
+            #   # completion.
+            #   operation.wait_until_done!
 
-            def update_field \
-                field,
-                update_mask: nil,
-                options: nil,
-                &block
+            def export_documents \
+                name,
+                collection_ids: nil,
+                output_uri_prefix: nil,
+                options: nil
               req = {
-                field: field,
-                update_mask: update_mask
+                name: name,
+                collection_ids: collection_ids,
+                output_uri_prefix: output_uri_prefix
               }.delete_if { |_, v| v.nil? }
-              req = Google::Gax::to_proto(req, Google::Firestore::Admin::V1::UpdateFieldRequest)
-              @update_field.call(req, options, &block)
+              req = Google::Gax::to_proto(req, Google::Firestore::Admin::V1::ExportDocumentsRequest)
+              operation = Google::Gax::Operation.new(
+                @export_documents.call(req, options),
+                @operations_client,
+                Google::Firestore::Admin::V1::ExportDocumentsResponse,
+                Google::Firestore::Admin::V1::ExportDocumentsMetadata,
+                call_options: options
+              )
+              operation.on_done { |operation| yield(operation) } if block_given?
+              operation
+            end
+
+            # Imports documents into Google Cloud Firestore. Existing documents with the
+            # same name are overwritten. The import occurs in the background and its
+            # progress can be monitored and managed via the Operation resource that is
+            # created. If an ImportDocuments operation is cancelled, it is possible
+            # that a subset of the data has already been imported to Cloud Firestore.
+            #
+            # @param name [String]
+            #   Required. Database to import into. Should be of the form:
+            #   `projects/{project_id}/databases/{database_id}`.
+            # @param collection_ids [Array<String>]
+            #   Which collection ids to import. Unspecified means all collections included
+            #   in the import.
+            # @param input_uri_prefix [String]
+            #   Location of the exported files.
+            #   This must match the output_uri_prefix of an ExportDocumentsResponse from
+            #   an export that has completed successfully.
+            #   See:
+            #   {Google::Firestore::Admin::V1::ExportDocumentsResponse#output_uri_prefix}.
+            # @param options [Google::Gax::CallOptions]
+            #   Overrides the default settings for this call, e.g, timeout,
+            #   retries, etc.
+            # @return [Google::Gax::Operation]
+            # @raise [Google::Gax::GaxError] if the RPC is aborted.
+            # @example
+            #   require "google/cloud/firestore/admin"
+            #
+            #   firestore_admin_client = Google::Cloud::Firestore::Admin.new(version: :v1)
+            #   formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
+            #
+            #   # Register a callback during the method call.
+            #   operation = firestore_admin_client.import_documents(formatted_name) do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Or use the return value to register a callback.
+            #   operation.on_done do |op|
+            #     raise op.results.message if op.error?
+            #     op_results = op.results
+            #     # Process the results.
+            #
+            #     metadata = op.metadata
+            #     # Process the metadata.
+            #   end
+            #
+            #   # Manually reload the operation.
+            #   operation.reload!
+            #
+            #   # Or block until the operation completes, triggering callbacks on
+            #   # completion.
+            #   operation.wait_until_done!
+
+            def import_documents \
+                name,
+                collection_ids: nil,
+                input_uri_prefix: nil,
+                options: nil
+              req = {
+                name: name,
+                collection_ids: collection_ids,
+                input_uri_prefix: input_uri_prefix
+              }.delete_if { |_, v| v.nil? }
+              req = Google::Gax::to_proto(req, Google::Firestore::Admin::V1::ImportDocumentsRequest)
+              operation = Google::Gax::Operation.new(
+                @import_documents.call(req, options),
+                @operations_client,
+                Google::Protobuf::Empty,
+                Google::Firestore::Admin::V1::ImportDocumentsMetadata,
+                call_options: options
+              )
+              operation.on_done { |operation| yield(operation) } if block_given?
+              operation
             end
           end
         end

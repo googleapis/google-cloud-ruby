@@ -39,7 +39,7 @@ describe Google::Cloud::Firestore::DocumentReference, :get, :mock_firestore do
   end
 
   it "gets a found snapshot" do
-    firestore_mock.expect :batch_get_documents, found_doc_enum, [database_path, ["#{documents_path}/users/mike"], mask: nil, options: default_options]
+    firestore_mock.expect :batch_get_documents, found_doc_enum, [database_path, documents: ["#{documents_path}/users/mike"], mask: nil, options: default_options]
 
     doc_ref = firestore.doc "users/mike"
     doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
@@ -63,7 +63,7 @@ describe Google::Cloud::Firestore::DocumentReference, :get, :mock_firestore do
   end
 
   it "gets a missing snapshot" do
-    firestore_mock.expect :batch_get_documents, missing_doc_enum, [database_path, ["#{documents_path}/users/tad"], mask: nil, options: default_options]
+    firestore_mock.expect :batch_get_documents, missing_doc_enum, [database_path, documents: ["#{documents_path}/users/tad"], mask: nil, options: default_options]
 
     doc_ref = firestore.doc "users/tad"
     doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference

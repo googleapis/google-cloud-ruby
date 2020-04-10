@@ -39,7 +39,7 @@ describe Google::Cloud::Firestore::DocumentReference, :create, :mock_firestore d
   end
 
   it "creates a new document" do
-    firestore_mock.expect :commit, commit_resp, [database_path, create_writes, options: default_options]
+    firestore_mock.expect :commit, commit_resp, [database_path, writes: create_writes, options: default_options]
 
     document.must_be_kind_of Google::Cloud::Firestore::DocumentReference
 

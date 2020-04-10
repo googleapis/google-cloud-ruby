@@ -20,6 +20,7 @@ require "google/gax"
 require "google/cloud/firestore/admin"
 require "google/cloud/firestore/admin/v1/firestore_admin_client"
 require "google/firestore/admin/v1/firestore_admin_services_pb"
+require "google/longrunning/operations_pb"
 
 class CustomTestError_v1 < StandardError; end
 
@@ -67,26 +68,214 @@ end
 
 describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
 
+  describe 'delete_index' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#delete_index."
+
+    it 'invokes delete_index without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION]", "[INDEX]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::Admin::V1::DeleteIndexRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: nil)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_index, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("delete_index")
+
+      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::Admin.new(version: :v1)
+
+          # Call method
+          response = client.delete_index(formatted_name)
+
+          # Verify the response
+          assert_nil(response)
+
+          # Call method with block
+          client.delete_index(formatted_name) do |response, operation|
+            # Verify the response
+            assert_nil(response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes delete_index with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION]", "[INDEX]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::Admin::V1::DeleteIndexRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:delete_index, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("delete_index")
+
+      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::Admin.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.delete_index(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'update_field' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#update_field."
+
+    it 'invokes update_field without error' do
+      # Create request parameters
+      field = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      expected_response = { name: name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Firestore::Admin::V1::Field)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/update_field_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::Admin::V1::UpdateFieldRequest, request)
+        assert_equal(Google::Gax::to_proto(field, Google::Firestore::Admin::V1::Field), request.field)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_field, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("update_field")
+
+      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::Admin.new(version: :v1)
+
+          # Call method
+          response = client.update_field(field)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes update_field and returns an operation error.' do
+      # Create request parameters
+      field = {}
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#update_field.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/update_field_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::Admin::V1::UpdateFieldRequest, request)
+        assert_equal(Google::Gax::to_proto(field, Google::Firestore::Admin::V1::Field), request.field)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_field, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("update_field")
+
+      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::Admin.new(version: :v1)
+
+          # Call method
+          response = client.update_field(field)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes update_field with error' do
+      # Create request parameters
+      field = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::Admin::V1::UpdateFieldRequest, request)
+        assert_equal(Google::Gax::to_proto(field, Google::Firestore::Admin::V1::Field), request.field)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:update_field, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("update_field")
+
+      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::Admin.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.update_field(field)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
   describe 'create_index' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#create_index."
 
     it 'invokes create_index without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.parent_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]")
+      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.collection_group_path("[PROJECT]", "[DATABASE]", "[COLLECTION]")
       index = {}
 
       # Create expected grpc response
       name = "name3373707"
-      done = true
-      expected_response = { name: name, done: done }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Longrunning::Operation)
+      expected_response = { name: name }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Firestore::Admin::V1::Index)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/create_index_test',
+        done: true,
+        response: result
+      )
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Firestore::Admin::V1::CreateIndexRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(Google::Gax::to_proto(index, Google::Firestore::Admin::V1::Index), request.index)
-        OpenStruct.new(execute: expected_response)
+        OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v1.new(:create_index, mock_method)
 
@@ -101,21 +290,55 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
           response = client.create_index(formatted_parent, index)
 
           # Verify the response
-          assert_equal(expected_response, response)
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
 
-          # Call method with block
-          client.create_index(formatted_parent, index) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
+    it 'invokes create_index and returns an operation error.' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.collection_group_path("[PROJECT]", "[DATABASE]", "[COLLECTION]")
+      index = {}
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#create_index.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/create_index_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::Admin::V1::CreateIndexRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(index, Google::Firestore::Admin::V1::Index), request.index)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:create_index, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("create_index")
+
+      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::Admin.new(version: :v1)
+
+          # Call method
+          response = client.create_index(formatted_parent, index)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
         end
       end
     end
 
     it 'invokes create_index with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.parent_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]")
+      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.collection_group_path("[PROJECT]", "[DATABASE]", "[COLLECTION]")
       index = {}
 
       # Mock Grpc layer
@@ -151,7 +374,7 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
 
     it 'invokes list_indexes without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.parent_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]")
+      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.collection_group_path("[PROJECT]", "[DATABASE]", "[COLLECTION]")
 
       # Create expected grpc response
       next_page_token = ""
@@ -189,7 +412,7 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
 
     it 'invokes list_indexes with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.parent_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]")
+      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.collection_group_path("[PROJECT]", "[DATABASE]", "[COLLECTION]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -223,7 +446,7 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
 
     it 'invokes get_index without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]", "[INDEX_ID]")
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION]", "[INDEX]")
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
@@ -263,7 +486,7 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
 
     it 'invokes get_index with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]", "[INDEX_ID]")
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION]", "[INDEX]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -292,231 +515,12 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
     end
   end
 
-  describe 'delete_index' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#delete_index."
-
-    it 'invokes delete_index without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]", "[INDEX_ID]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Firestore::Admin::V1::DeleteIndexRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: nil)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:delete_index, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockFirestoreAdminCredentials_v1.new("delete_index")
-
-      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore::Admin.new(version: :v1)
-
-          # Call method
-          response = client.delete_index(formatted_name)
-
-          # Verify the response
-          assert_nil(response)
-
-          # Call method with block
-          client.delete_index(formatted_name) do |response, operation|
-            # Verify the response
-            assert_nil(response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes delete_index with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.index_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]", "[INDEX_ID]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Firestore::Admin::V1::DeleteIndexRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:delete_index, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockFirestoreAdminCredentials_v1.new("delete_index")
-
-      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore::Admin.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.delete_index(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'import_documents' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#import_documents."
-
-    it 'invokes import_documents without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      done = true
-      expected_response = { name: name_2, done: done }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Longrunning::Operation)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Firestore::Admin::V1::ImportDocumentsRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:import_documents, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockFirestoreAdminCredentials_v1.new("import_documents")
-
-      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore::Admin.new(version: :v1)
-
-          # Call method
-          response = client.import_documents(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.import_documents(formatted_name) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes import_documents with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Firestore::Admin::V1::ImportDocumentsRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:import_documents, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockFirestoreAdminCredentials_v1.new("import_documents")
-
-      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore::Admin.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.import_documents(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'export_documents' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#export_documents."
-
-    it 'invokes export_documents without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      done = true
-      expected_response = { name: name_2, done: done }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Longrunning::Operation)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Firestore::Admin::V1::ExportDocumentsRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:export_documents, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockFirestoreAdminCredentials_v1.new("export_documents")
-
-      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore::Admin.new(version: :v1)
-
-          # Call method
-          response = client.export_documents(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.export_documents(formatted_name) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes export_documents with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Firestore::Admin::V1::ExportDocumentsRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1.new(:export_documents, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockFirestoreAdminCredentials_v1.new("export_documents")
-
-      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
-        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::Firestore::Admin.new(version: :v1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.export_documents(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
   describe 'get_field' do
     custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#get_field."
 
     it 'invokes get_field without error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.field_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]", "[FIELD_ID]")
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.field_path("[PROJECT]", "[DATABASE]", "[COLLECTION]", "[FIELD]")
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
@@ -556,7 +560,7 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
 
     it 'invokes get_field with error' do
       # Create request parameters
-      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.field_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]", "[FIELD_ID]")
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.field_path("[PROJECT]", "[DATABASE]", "[COLLECTION]", "[FIELD]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -590,7 +594,7 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
 
     it 'invokes list_fields without error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.parent_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]")
+      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.collection_group_path("[PROJECT]", "[DATABASE]", "[COLLECTION]")
 
       # Create expected grpc response
       next_page_token = ""
@@ -628,7 +632,7 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
 
     it 'invokes list_fields with error' do
       # Create request parameters
-      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.parent_path("[PROJECT]", "[DATABASE]", "[COLLECTION_ID]")
+      formatted_parent = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.collection_group_path("[PROJECT]", "[DATABASE]", "[COLLECTION]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -657,64 +661,102 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
     end
   end
 
-  describe 'update_field' do
-    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#update_field."
+  describe 'export_documents' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#export_documents."
 
-    it 'invokes update_field without error' do
+    it 'invokes export_documents without error' do
       # Create request parameters
-      field = {}
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
 
       # Create expected grpc response
-      name = "name3373707"
-      done = true
-      expected_response = { name: name, done: done }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Longrunning::Operation)
+      output_uri_prefix = "outputUriPrefix124746435"
+      expected_response = { output_uri_prefix: output_uri_prefix }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Firestore::Admin::V1::ExportDocumentsResponse)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/export_documents_test',
+        done: true,
+        response: result
+      )
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Firestore::Admin::V1::UpdateFieldRequest, request)
-        assert_equal(Google::Gax::to_proto(field, Google::Firestore::Admin::V1::Field), request.field)
-        OpenStruct.new(execute: expected_response)
+        assert_instance_of(Google::Firestore::Admin::V1::ExportDocumentsRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub_v1.new(:update_field, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:export_documents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreAdminCredentials_v1.new("update_field")
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("export_documents")
 
       Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
           client = Google::Cloud::Firestore::Admin.new(version: :v1)
 
           # Call method
-          response = client.update_field(field)
+          response = client.export_documents(formatted_name)
 
           # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.update_field(field) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
+          assert_equal(expected_response, response.response)
         end
       end
     end
 
-    it 'invokes update_field with error' do
+    it 'invokes export_documents and returns an operation error.' do
       # Create request parameters
-      field = {}
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#export_documents.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/export_documents_test',
+        done: true,
+        error: operation_error
+      )
 
       # Mock Grpc layer
       mock_method = proc do |request|
-        assert_instance_of(Google::Firestore::Admin::V1::UpdateFieldRequest, request)
-        assert_equal(Google::Gax::to_proto(field, Google::Firestore::Admin::V1::Field), request.field)
-        raise custom_error
+        assert_instance_of(Google::Firestore::Admin::V1::ExportDocumentsRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: operation)
       end
-      mock_stub = MockGrpcClientStub_v1.new(:update_field, mock_method)
+      mock_stub = MockGrpcClientStub_v1.new(:export_documents, mock_method)
 
       # Mock auth layer
-      mock_credentials = MockFirestoreAdminCredentials_v1.new("update_field")
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("export_documents")
+
+      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::Admin.new(version: :v1)
+
+          # Call method
+          response = client.export_documents(formatted_name)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes export_documents with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::Admin::V1::ExportDocumentsRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:export_documents, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("export_documents")
 
       Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
         Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
@@ -722,7 +764,119 @@ describe Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
-            client.update_field(field)
+            client.export_documents(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'import_documents' do
+    custom_error = CustomTestError_v1.new "Custom test error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#import_documents."
+
+    it 'invokes import_documents without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Protobuf::Empty)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/import_documents_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::Admin::V1::ImportDocumentsRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:import_documents, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("import_documents")
+
+      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::Admin.new(version: :v1)
+
+          # Call method
+          response = client.import_documents(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes import_documents and returns an operation error.' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient#import_documents.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/import_documents_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::Admin::V1::ImportDocumentsRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:import_documents, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("import_documents")
+
+      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::Admin.new(version: :v1)
+
+          # Call method
+          response = client.import_documents(formatted_name)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes import_documents with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::Firestore::Admin::V1::FirestoreAdminClient.database_path("[PROJECT]", "[DATABASE]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Firestore::Admin::V1::ImportDocumentsRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1.new(:import_documents, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockFirestoreAdminCredentials_v1.new("import_documents")
+
+      Google::Firestore::Admin::V1::FirestoreAdmin::Stub.stub(:new, mock_stub) do
+        Google::Cloud::Firestore::Admin::V1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::Firestore::Admin.new(version: :v1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1 do
+            client.import_documents(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
