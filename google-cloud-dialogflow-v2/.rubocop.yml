@@ -11,65 +11,23 @@ AllCops:
     - "Rakefile"
 
 Metrics/AbcSize:
-  Exclude:
-    - "lib/google/cloud/dialogflow/v2/agents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/contexts/*.rb"
-    - "lib/google/cloud/dialogflow/v2/entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/intents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/session_entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/sessions/*.rb"
+  Enabled: false
 Metrics/ClassLength:
-  Exclude:
-    - "lib/google/cloud/dialogflow/v2/agents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/contexts/*.rb"
-    - "lib/google/cloud/dialogflow/v2/entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/intents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/session_entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/sessions/*.rb"
+  Enabled: false
 Metrics/CyclomaticComplexity:
-  Exclude:
-    - "lib/google/cloud/dialogflow/v2/agents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/contexts/*.rb"
-    - "lib/google/cloud/dialogflow/v2/entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/intents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/session_entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/sessions/*.rb"
+  Enabled: false
 Metrics/LineLength:
-  Exclude:
-    - "lib/google/cloud/dialogflow/v2/agents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/contexts/*.rb"
-    - "lib/google/cloud/dialogflow/v2/entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/intents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/session_entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/sessions/*.rb"
-    - "google-cloud-dialogflow-v2.gemspec"
+  Enabled: false
 Metrics/MethodLength:
-  Exclude:
-    - "lib/google/cloud/dialogflow/v2/agents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/contexts/*.rb"
-    - "lib/google/cloud/dialogflow/v2/entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/intents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/session_entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/sessions/*.rb"
+  Enabled: false
 Metrics/PerceivedComplexity:
-  Exclude:
-    - "lib/google/cloud/dialogflow/v2/agents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/contexts/*.rb"
-    - "lib/google/cloud/dialogflow/v2/entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/intents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/session_entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/sessions/*.rb"
+  Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-dialogflow-v2.rb"
 Style/CaseEquality:
-  Exclude:
-    - "lib/google/cloud/dialogflow/v2/agents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/contexts/*.rb"
-    - "lib/google/cloud/dialogflow/v2/entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/intents/*.rb"
-    - "lib/google/cloud/dialogflow/v2/session_entity_types/*.rb"
-    - "lib/google/cloud/dialogflow/v2/sessions/*.rb"
-    - "lib/google/cloud/dialogflow/v2.rb"
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
 Style/ModuleFunction:
   Enabled: false

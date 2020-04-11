@@ -22,3 +22,19 @@ require "google/cloud/dialogflow/v2/entity_types"
 require "google/cloud/dialogflow/v2/intents"
 require "google/cloud/dialogflow/v2/session_entity_types"
 require "google/cloud/dialogflow/v2/sessions"
+require "google/cloud/dialogflow/v2/version"
+
+module Google
+  module Cloud
+    module Dialogflow
+      ##
+      # To load this package, including all its services, and instantiate a client:
+      #
+      #     require "google/cloud/dialogflow/v2"
+      #     client = Google::Cloud::Dialogflow::V2::Agents::Client.new
+      #
+      module V2
+      end
+    end
+  end
+end
