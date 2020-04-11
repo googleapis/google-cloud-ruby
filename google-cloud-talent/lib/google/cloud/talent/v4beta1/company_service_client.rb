@@ -94,8 +94,6 @@ module Google
           private_constant :TENANT_PATH_TEMPLATE
 
           # Returns a fully-qualified company resource name string.
-          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
-          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param tenant [String]
           # @param company [String]
@@ -320,7 +318,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_without_tenant_path("[PROJECT]", "[COMPANY]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[TENANT]", "[COMPANY]")
           #   company_client.delete_company(formatted_name)
 
           def delete_company \
@@ -401,7 +399,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   company_client = Google::Cloud::Talent::CompanyService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_without_tenant_path("[PROJECT]", "[COMPANY]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::CompanyServiceClient.company_path("[PROJECT]", "[TENANT]", "[COMPANY]")
           #   response = company_client.get_company(formatted_name)
 
           def get_company \
