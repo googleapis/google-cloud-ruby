@@ -11,51 +11,23 @@ AllCops:
     - "Rakefile"
 
 Metrics/AbcSize:
-  Exclude:
-    - "lib/google/cloud/dataproc/v1beta2/autoscaling_policy_service/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/cluster_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/job_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/workflow_template_service/*.rb"
+  Enabled: false
 Metrics/ClassLength:
-  Exclude:
-    - "lib/google/cloud/dataproc/v1beta2/autoscaling_policy_service/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/cluster_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/job_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/workflow_template_service/*.rb"
+  Enabled: false
 Metrics/CyclomaticComplexity:
-  Exclude:
-    - "lib/google/cloud/dataproc/v1beta2/autoscaling_policy_service/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/cluster_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/job_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/workflow_template_service/*.rb"
+  Enabled: false
 Metrics/LineLength:
-  Exclude:
-    - "lib/google/cloud/dataproc/v1beta2/autoscaling_policy_service/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/cluster_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/job_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/workflow_template_service/*.rb"
-    - "google-cloud-dataproc-v1beta2.gemspec"
+  Enabled: false
 Metrics/MethodLength:
-  Exclude:
-    - "lib/google/cloud/dataproc/v1beta2/autoscaling_policy_service/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/cluster_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/job_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/workflow_template_service/*.rb"
+  Enabled: false
 Metrics/PerceivedComplexity:
-  Exclude:
-    - "lib/google/cloud/dataproc/v1beta2/autoscaling_policy_service/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/cluster_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/job_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/workflow_template_service/*.rb"
+  Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-dataproc-v1beta2.rb"
 Style/CaseEquality:
-  Exclude:
-    - "lib/google/cloud/dataproc/v1beta2/autoscaling_policy_service/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/cluster_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/job_controller/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2/workflow_template_service/*.rb"
-    - "lib/google/cloud/dataproc/v1beta2.rb"
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
 Style/ModuleFunction:
   Enabled: false
