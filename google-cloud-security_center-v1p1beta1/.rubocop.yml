@@ -11,30 +11,23 @@ AllCops:
     - "Rakefile"
 
 Metrics/AbcSize:
-  Exclude:
-    - "lib/google/cloud/security_center/v1p1beta1/security_center/*.rb"
+  Enabled: false
 Metrics/ClassLength:
-  Exclude:
-    - "lib/google/cloud/security_center/v1p1beta1/security_center/*.rb"
+  Enabled: false
 Metrics/CyclomaticComplexity:
-  Exclude:
-    - "lib/google/cloud/security_center/v1p1beta1/security_center/*.rb"
+  Enabled: false
 Metrics/LineLength:
-  Exclude:
-    - "lib/google/cloud/security_center/v1p1beta1/security_center/*.rb"
-    - "google-cloud-security_center-v1p1beta1.gemspec"
+  Enabled: false
 Metrics/MethodLength:
-  Exclude:
-    - "lib/google/cloud/security_center/v1p1beta1/security_center/*.rb"
+  Enabled: false
 Metrics/PerceivedComplexity:
-  Exclude:
-    - "lib/google/cloud/security_center/v1p1beta1/security_center/*.rb"
+  Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-security_center-v1p1beta1.rb"
 Style/CaseEquality:
-  Exclude:
-    - "lib/google/cloud/security_center/v1p1beta1/security_center/*.rb"
-    - "lib/google/cloud/security_center/v1p1beta1.rb"
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
 Style/ModuleFunction:
   Enabled: false
