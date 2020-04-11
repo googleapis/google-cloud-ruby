@@ -69,334 +69,6 @@ end
 
 describe Google::Cloud::AutoML::V1beta1::AutoMLClient do
 
-  describe 'create_dataset' do
-    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#create_dataset."
-
-    it 'invokes create_dataset without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-      dataset = {}
-
-      # Create expected grpc response
-      name = "name3373707"
-      display_name = "displayName1615086568"
-      description = "description-1724546052"
-      example_count = 1517063674
-      etag = "etag3123477"
-      expected_response = {
-        name: name,
-        display_name: display_name,
-        description: description,
-        example_count: example_count,
-        etag: etag
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::Dataset)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(dataset, Google::Cloud::AutoML::V1beta1::Dataset), request.dataset)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:create_dataset, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("create_dataset")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.create_dataset(formatted_parent, dataset)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.create_dataset(formatted_parent, dataset) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes create_dataset with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-      dataset = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(dataset, Google::Cloud::AutoML::V1beta1::Dataset), request.dataset)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:create_dataset, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("create_dataset")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.create_dataset(formatted_parent, dataset)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'update_dataset' do
-    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#update_dataset."
-
-    it 'invokes update_dataset without error' do
-      # Create request parameters
-      dataset = {}
-
-      # Create expected grpc response
-      name = "name3373707"
-      display_name = "displayName1615086568"
-      description = "description-1724546052"
-      example_count = 1517063674
-      etag = "etag3123477"
-      expected_response = {
-        name: name,
-        display_name: display_name,
-        description: description,
-        example_count: example_count,
-        etag: etag
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::Dataset)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, request)
-        assert_equal(Google::Gax::to_proto(dataset, Google::Cloud::AutoML::V1beta1::Dataset), request.dataset)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:update_dataset, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("update_dataset")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.update_dataset(dataset)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.update_dataset(dataset) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes update_dataset with error' do
-      # Create request parameters
-      dataset = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, request)
-        assert_equal(Google::Gax::to_proto(dataset, Google::Cloud::AutoML::V1beta1::Dataset), request.dataset)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:update_dataset, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("update_dataset")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.update_dataset(dataset)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'get_dataset' do
-    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#get_dataset."
-
-    it 'invokes get_dataset without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.dataset_path("[PROJECT]", "[LOCATION]", "[DATASET]")
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      display_name = "displayName1615086568"
-      description = "description-1724546052"
-      example_count = 1517063674
-      etag = "etag3123477"
-      expected_response = {
-        name: name_2,
-        display_name: display_name,
-        description: description,
-        example_count: example_count,
-        etag: etag
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::Dataset)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetDatasetRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:get_dataset, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_dataset")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.get_dataset(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.get_dataset(formatted_name) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes get_dataset with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.dataset_path("[PROJECT]", "[LOCATION]", "[DATASET]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetDatasetRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:get_dataset, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_dataset")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.get_dataset(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'list_datasets' do
-    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#list_datasets."
-
-    it 'invokes list_datasets without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-
-      # Create expected grpc response
-      next_page_token = ""
-      datasets_element = {}
-      datasets = [datasets_element]
-      expected_response = { next_page_token: next_page_token, datasets: datasets }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::ListDatasetsResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:list_datasets, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("list_datasets")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.list_datasets(formatted_parent)
-
-          # Verify the response
-          assert(response.instance_of?(Google::Gax::PagedEnumerable))
-          assert_equal(expected_response, response.page.response)
-          assert_nil(response.next_page)
-          assert_equal(expected_response.datasets.to_a, response.to_a)
-        end
-      end
-    end
-
-    it 'invokes list_datasets with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:list_datasets, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("list_datasets")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.list_datasets(formatted_parent)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
   describe 'delete_dataset' do
     custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#delete_dataset."
 
@@ -745,283 +417,6 @@ describe Google::Cloud::AutoML::V1beta1::AutoMLClient do
     end
   end
 
-  describe 'create_model' do
-    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#create_model."
-
-    it 'invokes create_model without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-      model = {}
-
-      # Create expected grpc response
-      name = "name3373707"
-      display_name = "displayName1615086568"
-      dataset_id = "datasetId-2115646910"
-      expected_response = {
-        name: name,
-        display_name: display_name,
-        dataset_id: dataset_id
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::Model)
-      result = Google::Protobuf::Any.new
-      result.pack(expected_response)
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/create_model_test',
-        done: true,
-        response: result
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::CreateModelRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(model, Google::Cloud::AutoML::V1beta1::Model), request.model)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:create_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("create_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.create_model(formatted_parent, model)
-
-          # Verify the response
-          assert_equal(expected_response, response.response)
-        end
-      end
-    end
-
-    it 'invokes create_model and returns an operation error.' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-      model = {}
-
-      # Create expected grpc response
-      operation_error = Google::Rpc::Status.new(
-        message: 'Operation error for Google::Cloud::AutoML::V1beta1::AutoMLClient#create_model.'
-      )
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/create_model_test',
-        done: true,
-        error: operation_error
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::CreateModelRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(model, Google::Cloud::AutoML::V1beta1::Model), request.model)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:create_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("create_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.create_model(formatted_parent, model)
-
-          # Verify the response
-          assert(response.error?)
-          assert_equal(operation_error, response.error)
-        end
-      end
-    end
-
-    it 'invokes create_model with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-      model = {}
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::CreateModelRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        assert_equal(Google::Gax::to_proto(model, Google::Cloud::AutoML::V1beta1::Model), request.model)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:create_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("create_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.create_model(formatted_parent, model)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'get_model' do
-    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#get_model."
-
-    it 'invokes get_model without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      display_name = "displayName1615086568"
-      dataset_id = "datasetId-2115646910"
-      expected_response = {
-        name: name_2,
-        display_name: display_name,
-        dataset_id: dataset_id
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::Model)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetModelRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:get_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.get_model(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.get_model(formatted_name) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes get_model with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetModelRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:get_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.get_model(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'list_models' do
-    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#list_models."
-
-    it 'invokes list_models without error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-
-      # Create expected grpc response
-      next_page_token = ""
-      model_element = {}
-      model = [model_element]
-      expected_response = { next_page_token: next_page_token, model: model }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::ListModelsResponse)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::ListModelsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:list_models, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("list_models")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.list_models(formatted_parent)
-
-          # Verify the response
-          assert(response.instance_of?(Google::Gax::PagedEnumerable))
-          assert_equal(expected_response, response.page.response)
-          assert_nil(response.next_page)
-          assert_equal(expected_response.model.to_a, response.to_a)
-        end
-      end
-    end
-
-    it 'invokes list_models with error' do
-      # Create request parameters
-      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::ListModelsRequest, request)
-        assert_equal(formatted_parent, request.parent)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:list_models, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("list_models")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.list_models(formatted_parent)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
   describe 'delete_model' do
     custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#delete_model."
 
@@ -1125,312 +520,6 @@ describe Google::Cloud::AutoML::V1beta1::AutoMLClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.delete_model(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'deploy_model' do
-    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#deploy_model."
-
-    it 'invokes deploy_model without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-
-      # Create expected grpc response
-      expected_response = {}
-      expected_response = Google::Gax::to_proto(expected_response, Google::Protobuf::Empty)
-      result = Google::Protobuf::Any.new
-      result.pack(expected_response)
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/deploy_model_test',
-        done: true,
-        response: result
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::DeployModelRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:deploy_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("deploy_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.deploy_model(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response.response)
-        end
-      end
-    end
-
-    it 'invokes deploy_model and returns an operation error.' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-
-      # Create expected grpc response
-      operation_error = Google::Rpc::Status.new(
-        message: 'Operation error for Google::Cloud::AutoML::V1beta1::AutoMLClient#deploy_model.'
-      )
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/deploy_model_test',
-        done: true,
-        error: operation_error
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::DeployModelRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:deploy_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("deploy_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.deploy_model(formatted_name)
-
-          # Verify the response
-          assert(response.error?)
-          assert_equal(operation_error, response.error)
-        end
-      end
-    end
-
-    it 'invokes deploy_model with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::DeployModelRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:deploy_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("deploy_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.deploy_model(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'undeploy_model' do
-    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#undeploy_model."
-
-    it 'invokes undeploy_model without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-
-      # Create expected grpc response
-      expected_response = {}
-      expected_response = Google::Gax::to_proto(expected_response, Google::Protobuf::Empty)
-      result = Google::Protobuf::Any.new
-      result.pack(expected_response)
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/undeploy_model_test',
-        done: true,
-        response: result
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::UndeployModelRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:undeploy_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("undeploy_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.undeploy_model(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response.response)
-        end
-      end
-    end
-
-    it 'invokes undeploy_model and returns an operation error.' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-
-      # Create expected grpc response
-      operation_error = Google::Rpc::Status.new(
-        message: 'Operation error for Google::Cloud::AutoML::V1beta1::AutoMLClient#undeploy_model.'
-      )
-      operation = Google::Longrunning::Operation.new(
-        name: 'operations/undeploy_model_test',
-        done: true,
-        error: operation_error
-      )
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::UndeployModelRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: operation)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:undeploy_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("undeploy_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.undeploy_model(formatted_name)
-
-          # Verify the response
-          assert(response.error?)
-          assert_equal(operation_error, response.error)
-        end
-      end
-    end
-
-    it 'invokes undeploy_model with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::UndeployModelRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:undeploy_model, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("undeploy_model")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.undeploy_model(formatted_name)
-          end
-
-          # Verify the GaxError wrapped the custom error that was raised.
-          assert_match(custom_error.message, err.message)
-        end
-      end
-    end
-  end
-
-  describe 'get_model_evaluation' do
-    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#get_model_evaluation."
-
-    it 'invokes get_model_evaluation without error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_evaluation_path("[PROJECT]", "[LOCATION]", "[MODEL]", "[MODEL_EVALUATION]")
-
-      # Create expected grpc response
-      name_2 = "name2-1052831874"
-      annotation_spec_id = "annotationSpecId60690191"
-      display_name = "displayName1615086568"
-      evaluated_example_count = 277565350
-      expected_response = {
-        name: name_2,
-        annotation_spec_id: annotation_spec_id,
-        display_name: display_name,
-        evaluated_example_count: evaluated_example_count
-      }
-      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::ModelEvaluation)
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, request)
-        assert_equal(formatted_name, request.name)
-        OpenStruct.new(execute: expected_response)
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:get_model_evaluation, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_model_evaluation")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          response = client.get_model_evaluation(formatted_name)
-
-          # Verify the response
-          assert_equal(expected_response, response)
-
-          # Call method with block
-          client.get_model_evaluation(formatted_name) do |response, operation|
-            # Verify the response
-            assert_equal(expected_response, response)
-            refute_nil(operation)
-          end
-        end
-      end
-    end
-
-    it 'invokes get_model_evaluation with error' do
-      # Create request parameters
-      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_evaluation_path("[PROJECT]", "[LOCATION]", "[MODEL]", "[MODEL_EVALUATION]")
-
-      # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, request)
-        assert_equal(formatted_name, request.name)
-        raise custom_error
-      end
-      mock_stub = MockGrpcClientStub_v1beta1.new(:get_model_evaluation, mock_method)
-
-      # Mock auth layer
-      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_model_evaluation")
-
-      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
-        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
-          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-
-          # Call method
-          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
-            client.get_model_evaluation(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1739,6 +828,334 @@ describe Google::Cloud::AutoML::V1beta1::AutoMLClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.list_model_evaluations(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'create_dataset' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#create_dataset."
+
+    it 'invokes create_dataset without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+      dataset = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      display_name = "displayName1615086568"
+      description = "description-1724546052"
+      example_count = 1517063674
+      etag = "etag3123477"
+      expected_response = {
+        name: name,
+        display_name: display_name,
+        description: description,
+        example_count: example_count,
+        etag: etag
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::Dataset)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(dataset, Google::Cloud::AutoML::V1beta1::Dataset), request.dataset)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:create_dataset, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("create_dataset")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.create_dataset(formatted_parent, dataset)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.create_dataset(formatted_parent, dataset) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes create_dataset with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+      dataset = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(dataset, Google::Cloud::AutoML::V1beta1::Dataset), request.dataset)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:create_dataset, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("create_dataset")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.create_dataset(formatted_parent, dataset)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_dataset' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#get_dataset."
+
+    it 'invokes get_dataset without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.dataset_path("[PROJECT]", "[LOCATION]", "[DATASET]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      display_name = "displayName1615086568"
+      description = "description-1724546052"
+      example_count = 1517063674
+      etag = "etag3123477"
+      expected_response = {
+        name: name_2,
+        display_name: display_name,
+        description: description,
+        example_count: example_count,
+        etag: etag
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::Dataset)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetDatasetRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:get_dataset, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_dataset")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.get_dataset(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_dataset(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_dataset with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.dataset_path("[PROJECT]", "[LOCATION]", "[DATASET]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetDatasetRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:get_dataset, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_dataset")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.get_dataset(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_datasets' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#list_datasets."
+
+    it 'invokes list_datasets without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Create expected grpc response
+      next_page_token = ""
+      datasets_element = {}
+      datasets = [datasets_element]
+      expected_response = { next_page_token: next_page_token, datasets: datasets }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::ListDatasetsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:list_datasets, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("list_datasets")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.list_datasets(formatted_parent)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.datasets.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes list_datasets with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:list_datasets, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("list_datasets")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.list_datasets(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'update_dataset' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#update_dataset."
+
+    it 'invokes update_dataset without error' do
+      # Create request parameters
+      dataset = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      display_name = "displayName1615086568"
+      description = "description-1724546052"
+      example_count = 1517063674
+      etag = "etag3123477"
+      expected_response = {
+        name: name,
+        display_name: display_name,
+        description: description,
+        example_count: example_count,
+        etag: etag
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::Dataset)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, request)
+        assert_equal(Google::Gax::to_proto(dataset, Google::Cloud::AutoML::V1beta1::Dataset), request.dataset)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:update_dataset, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("update_dataset")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.update_dataset(dataset)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.update_dataset(dataset) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes update_dataset with error' do
+      # Create request parameters
+      dataset = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, request)
+        assert_equal(Google::Gax::to_proto(dataset, Google::Cloud::AutoML::V1beta1::Dataset), request.dataset)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:update_dataset, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("update_dataset")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.update_dataset(dataset)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -2295,6 +1712,589 @@ describe Google::Cloud::AutoML::V1beta1::AutoMLClient do
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
             client.update_column_spec(column_spec)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'create_model' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#create_model."
+
+    it 'invokes create_model without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+      model = {}
+
+      # Create expected grpc response
+      name = "name3373707"
+      display_name = "displayName1615086568"
+      dataset_id = "datasetId-2115646910"
+      expected_response = {
+        name: name,
+        display_name: display_name,
+        dataset_id: dataset_id
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::Model)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/create_model_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::CreateModelRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(model, Google::Cloud::AutoML::V1beta1::Model), request.model)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:create_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("create_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.create_model(formatted_parent, model)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes create_model and returns an operation error.' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+      model = {}
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::AutoML::V1beta1::AutoMLClient#create_model.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/create_model_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::CreateModelRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(model, Google::Cloud::AutoML::V1beta1::Model), request.model)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:create_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("create_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.create_model(formatted_parent, model)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes create_model with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+      model = {}
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::CreateModelRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        assert_equal(Google::Gax::to_proto(model, Google::Cloud::AutoML::V1beta1::Model), request.model)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:create_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("create_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.create_model(formatted_parent, model)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_model' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#get_model."
+
+    it 'invokes get_model without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      display_name = "displayName1615086568"
+      dataset_id = "datasetId-2115646910"
+      expected_response = {
+        name: name_2,
+        display_name: display_name,
+        dataset_id: dataset_id
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::Model)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetModelRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:get_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.get_model(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_model(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_model with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetModelRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:get_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.get_model(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'list_models' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#list_models."
+
+    it 'invokes list_models without error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Create expected grpc response
+      next_page_token = ""
+      model_element = {}
+      model = [model_element]
+      expected_response = { next_page_token: next_page_token, model: model }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::ListModelsResponse)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::ListModelsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:list_models, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("list_models")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.list_models(formatted_parent)
+
+          # Verify the response
+          assert(response.instance_of?(Google::Gax::PagedEnumerable))
+          assert_equal(expected_response, response.page.response)
+          assert_nil(response.next_page)
+          assert_equal(expected_response.model.to_a, response.to_a)
+        end
+      end
+    end
+
+    it 'invokes list_models with error' do
+      # Create request parameters
+      formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::ListModelsRequest, request)
+        assert_equal(formatted_parent, request.parent)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:list_models, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("list_models")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.list_models(formatted_parent)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'deploy_model' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#deploy_model."
+
+    it 'invokes deploy_model without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Protobuf::Empty)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/deploy_model_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::DeployModelRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:deploy_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("deploy_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.deploy_model(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes deploy_model and returns an operation error.' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::AutoML::V1beta1::AutoMLClient#deploy_model.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/deploy_model_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::DeployModelRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:deploy_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("deploy_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.deploy_model(formatted_name)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes deploy_model with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::DeployModelRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:deploy_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("deploy_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.deploy_model(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'undeploy_model' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#undeploy_model."
+
+    it 'invokes undeploy_model without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+
+      # Create expected grpc response
+      expected_response = {}
+      expected_response = Google::Gax::to_proto(expected_response, Google::Protobuf::Empty)
+      result = Google::Protobuf::Any.new
+      result.pack(expected_response)
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/undeploy_model_test',
+        done: true,
+        response: result
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::UndeployModelRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:undeploy_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("undeploy_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.undeploy_model(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response.response)
+        end
+      end
+    end
+
+    it 'invokes undeploy_model and returns an operation error.' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+
+      # Create expected grpc response
+      operation_error = Google::Rpc::Status.new(
+        message: 'Operation error for Google::Cloud::AutoML::V1beta1::AutoMLClient#undeploy_model.'
+      )
+      operation = Google::Longrunning::Operation.new(
+        name: 'operations/undeploy_model_test',
+        done: true,
+        error: operation_error
+      )
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::UndeployModelRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: operation)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:undeploy_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("undeploy_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.undeploy_model(formatted_name)
+
+          # Verify the response
+          assert(response.error?)
+          assert_equal(operation_error, response.error)
+        end
+      end
+    end
+
+    it 'invokes undeploy_model with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::UndeployModelRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:undeploy_model, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("undeploy_model")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.undeploy_model(formatted_name)
+          end
+
+          # Verify the GaxError wrapped the custom error that was raised.
+          assert_match(custom_error.message, err.message)
+        end
+      end
+    end
+  end
+
+  describe 'get_model_evaluation' do
+    custom_error = CustomTestError_v1beta1.new "Custom test error for Google::Cloud::AutoML::V1beta1::AutoMLClient#get_model_evaluation."
+
+    it 'invokes get_model_evaluation without error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_evaluation_path("[PROJECT]", "[LOCATION]", "[MODEL]", "[MODEL_EVALUATION]")
+
+      # Create expected grpc response
+      name_2 = "name2-1052831874"
+      annotation_spec_id = "annotationSpecId60690191"
+      display_name = "displayName1615086568"
+      evaluated_example_count = 277565350
+      expected_response = {
+        name: name_2,
+        annotation_spec_id: annotation_spec_id,
+        display_name: display_name,
+        evaluated_example_count: evaluated_example_count
+      }
+      expected_response = Google::Gax::to_proto(expected_response, Google::Cloud::AutoML::V1beta1::ModelEvaluation)
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, request)
+        assert_equal(formatted_name, request.name)
+        OpenStruct.new(execute: expected_response)
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:get_model_evaluation, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_model_evaluation")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          response = client.get_model_evaluation(formatted_name)
+
+          # Verify the response
+          assert_equal(expected_response, response)
+
+          # Call method with block
+          client.get_model_evaluation(formatted_name) do |response, operation|
+            # Verify the response
+            assert_equal(expected_response, response)
+            refute_nil(operation)
+          end
+        end
+      end
+    end
+
+    it 'invokes get_model_evaluation with error' do
+      # Create request parameters
+      formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_evaluation_path("[PROJECT]", "[LOCATION]", "[MODEL]", "[MODEL_EVALUATION]")
+
+      # Mock Grpc layer
+      mock_method = proc do |request|
+        assert_instance_of(Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, request)
+        assert_equal(formatted_name, request.name)
+        raise custom_error
+      end
+      mock_stub = MockGrpcClientStub_v1beta1.new(:get_model_evaluation, mock_method)
+
+      # Mock auth layer
+      mock_credentials = MockAutoMLCredentials_v1beta1.new("get_model_evaluation")
+
+      Google::Cloud::AutoML::V1beta1::AutoML::Stub.stub(:new, mock_stub) do
+        Google::Cloud::AutoML::V1beta1::Credentials.stub(:default, mock_credentials) do
+          client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+
+          # Call method
+          err = assert_raises Google::Gax::GaxError, CustomTestError_v1beta1 do
+            client.get_model_evaluation(formatted_name)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

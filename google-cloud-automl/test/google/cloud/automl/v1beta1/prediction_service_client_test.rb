@@ -154,6 +154,7 @@ describe Google::Cloud::AutoML::V1beta1::PredictionServiceClient do
       formatted_name = Google::Cloud::AutoML::V1beta1::PredictionServiceClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
       input_config = {}
       output_config = {}
+      params = {}
 
       # Create expected grpc response
       expected_response = {}
@@ -172,6 +173,7 @@ describe Google::Cloud::AutoML::V1beta1::PredictionServiceClient do
         assert_equal(formatted_name, request.name)
         assert_equal(Google::Gax::to_proto(input_config, Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig), request.input_config)
         assert_equal(Google::Gax::to_proto(output_config, Google::Cloud::AutoML::V1beta1::BatchPredictOutputConfig), request.output_config)
+        assert_equal(params, request.params)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v1beta1.new(:batch_predict, mock_method)
@@ -187,7 +189,8 @@ describe Google::Cloud::AutoML::V1beta1::PredictionServiceClient do
           response = client.batch_predict(
             formatted_name,
             input_config,
-            output_config
+            output_config,
+            params
           )
 
           # Verify the response
@@ -201,6 +204,7 @@ describe Google::Cloud::AutoML::V1beta1::PredictionServiceClient do
       formatted_name = Google::Cloud::AutoML::V1beta1::PredictionServiceClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
       input_config = {}
       output_config = {}
+      params = {}
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
@@ -218,6 +222,7 @@ describe Google::Cloud::AutoML::V1beta1::PredictionServiceClient do
         assert_equal(formatted_name, request.name)
         assert_equal(Google::Gax::to_proto(input_config, Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig), request.input_config)
         assert_equal(Google::Gax::to_proto(output_config, Google::Cloud::AutoML::V1beta1::BatchPredictOutputConfig), request.output_config)
+        assert_equal(params, request.params)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v1beta1.new(:batch_predict, mock_method)
@@ -233,7 +238,8 @@ describe Google::Cloud::AutoML::V1beta1::PredictionServiceClient do
           response = client.batch_predict(
             formatted_name,
             input_config,
-            output_config
+            output_config,
+            params
           )
 
           # Verify the response
@@ -248,6 +254,7 @@ describe Google::Cloud::AutoML::V1beta1::PredictionServiceClient do
       formatted_name = Google::Cloud::AutoML::V1beta1::PredictionServiceClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
       input_config = {}
       output_config = {}
+      params = {}
 
       # Mock Grpc layer
       mock_method = proc do |request|
@@ -255,6 +262,7 @@ describe Google::Cloud::AutoML::V1beta1::PredictionServiceClient do
         assert_equal(formatted_name, request.name)
         assert_equal(Google::Gax::to_proto(input_config, Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig), request.input_config)
         assert_equal(Google::Gax::to_proto(output_config, Google::Cloud::AutoML::V1beta1::BatchPredictOutputConfig), request.output_config)
+        assert_equal(params, request.params)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v1beta1.new(:batch_predict, mock_method)
@@ -271,7 +279,8 @@ describe Google::Cloud::AutoML::V1beta1::PredictionServiceClient do
             client.batch_predict(
               formatted_name,
               input_config,
-              output_config
+              output_config,
+              params
             )
           end
 

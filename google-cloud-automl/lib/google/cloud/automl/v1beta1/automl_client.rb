@@ -69,18 +69,14 @@ module Google
           DEFAULT_TIMEOUT = 30
 
           PAGE_DESCRIPTORS = {
-            "list_datasets" => Google::Gax::PageDescriptor.new(
-              "page_token",
-              "next_page_token",
-              "datasets"),
-            "list_models" => Google::Gax::PageDescriptor.new(
-              "page_token",
-              "next_page_token",
-              "model"),
             "list_model_evaluations" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
               "model_evaluation"),
+            "list_datasets" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "datasets"),
             "list_table_specs" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
@@ -88,7 +84,11 @@ module Google
             "list_column_specs" => Google::Gax::PageDescriptor.new(
               "page_token",
               "next_page_token",
-              "column_specs")
+              "column_specs"),
+            "list_models" => Google::Gax::PageDescriptor.new(
+              "page_token",
+              "next_page_token",
+              "model")
           }.freeze
 
           private_constant :PAGE_DESCRIPTORS
@@ -369,38 +369,6 @@ module Google
               &Google::Cloud::AutoML::V1beta1::AutoML::Stub.method(:new)
             )
 
-            @create_dataset = Google::Gax.create_api_call(
-              @automl_stub.method(:create_dataset),
-              defaults["create_dataset"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
-            @update_dataset = Google::Gax.create_api_call(
-              @automl_stub.method(:update_dataset),
-              defaults["update_dataset"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'dataset.name' => request.dataset.name}
-              end
-            )
-            @get_dataset = Google::Gax.create_api_call(
-              @automl_stub.method(:get_dataset),
-              defaults["get_dataset"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @list_datasets = Google::Gax.create_api_call(
-              @automl_stub.method(:list_datasets),
-              defaults["list_datasets"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
             @delete_dataset = Google::Gax.create_api_call(
               @automl_stub.method(:delete_dataset),
               defaults["delete_dataset"],
@@ -425,57 +393,9 @@ module Google
                 {'name' => request.name}
               end
             )
-            @create_model = Google::Gax.create_api_call(
-              @automl_stub.method(:create_model),
-              defaults["create_model"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
-            @get_model = Google::Gax.create_api_call(
-              @automl_stub.method(:get_model),
-              defaults["get_model"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @list_models = Google::Gax.create_api_call(
-              @automl_stub.method(:list_models),
-              defaults["list_models"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'parent' => request.parent}
-              end
-            )
             @delete_model = Google::Gax.create_api_call(
               @automl_stub.method(:delete_model),
               defaults["delete_model"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @deploy_model = Google::Gax.create_api_call(
-              @automl_stub.method(:deploy_model),
-              defaults["deploy_model"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @undeploy_model = Google::Gax.create_api_call(
-              @automl_stub.method(:undeploy_model),
-              defaults["undeploy_model"],
-              exception_transformer: exception_transformer,
-              params_extractor: proc do |request|
-                {'name' => request.name}
-              end
-            )
-            @get_model_evaluation = Google::Gax.create_api_call(
-              @automl_stub.method(:get_model_evaluation),
-              defaults["get_model_evaluation"],
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'name' => request.name}
@@ -503,6 +423,38 @@ module Google
               exception_transformer: exception_transformer,
               params_extractor: proc do |request|
                 {'parent' => request.parent}
+              end
+            )
+            @create_dataset = Google::Gax.create_api_call(
+              @automl_stub.method(:create_dataset),
+              defaults["create_dataset"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @get_dataset = Google::Gax.create_api_call(
+              @automl_stub.method(:get_dataset),
+              defaults["get_dataset"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @list_datasets = Google::Gax.create_api_call(
+              @automl_stub.method(:list_datasets),
+              defaults["list_datasets"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @update_dataset = Google::Gax.create_api_call(
+              @automl_stub.method(:update_dataset),
+              defaults["update_dataset"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'dataset.name' => request.dataset.name}
               end
             )
             @get_annotation_spec = Google::Gax.create_api_call(
@@ -561,182 +513,57 @@ module Google
                 {'column_spec.name' => request.column_spec.name}
               end
             )
+            @create_model = Google::Gax.create_api_call(
+              @automl_stub.method(:create_model),
+              defaults["create_model"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @get_model = Google::Gax.create_api_call(
+              @automl_stub.method(:get_model),
+              defaults["get_model"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @list_models = Google::Gax.create_api_call(
+              @automl_stub.method(:list_models),
+              defaults["list_models"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'parent' => request.parent}
+              end
+            )
+            @deploy_model = Google::Gax.create_api_call(
+              @automl_stub.method(:deploy_model),
+              defaults["deploy_model"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @undeploy_model = Google::Gax.create_api_call(
+              @automl_stub.method(:undeploy_model),
+              defaults["undeploy_model"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
+            @get_model_evaluation = Google::Gax.create_api_call(
+              @automl_stub.method(:get_model_evaluation),
+              defaults["get_model_evaluation"],
+              exception_transformer: exception_transformer,
+              params_extractor: proc do |request|
+                {'name' => request.name}
+              end
+            )
           end
 
           # Service calls
-
-          # Creates a dataset.
-          #
-          # @param parent [String]
-          #   Required. The resource name of the project to create the dataset for.
-          # @param dataset [Google::Cloud::AutoML::V1beta1::Dataset | Hash]
-          #   Required. The dataset to create.
-          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::Dataset`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::AutoML::V1beta1::Dataset]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::AutoML::V1beta1::Dataset]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/automl"
-          #
-          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-          #   formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-          #
-          #   # TODO: Initialize `dataset`:
-          #   dataset = {}
-          #   response = automl_client.create_dataset(formatted_parent, dataset)
-
-          def create_dataset \
-              parent,
-              dataset,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              dataset: dataset
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::CreateDatasetRequest)
-            @create_dataset.call(req, options, &block)
-          end
-
-          # Updates a dataset.
-          #
-          # @param dataset [Google::Cloud::AutoML::V1beta1::Dataset | Hash]
-          #   Required. The dataset which replaces the resource on the server.
-          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::Dataset`
-          #   can also be provided.
-          # @param update_mask [Google::Protobuf::FieldMask | Hash]
-          #   The update mask applies to the resource.
-          #   A hash of the same form as `Google::Protobuf::FieldMask`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::AutoML::V1beta1::Dataset]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::AutoML::V1beta1::Dataset]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/automl"
-          #
-          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-          #
-          #   # TODO: Initialize `dataset`:
-          #   dataset = {}
-          #   response = automl_client.update_dataset(dataset)
-
-          def update_dataset \
-              dataset,
-              update_mask: nil,
-              options: nil,
-              &block
-            req = {
-              dataset: dataset,
-              update_mask: update_mask
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest)
-            @update_dataset.call(req, options, &block)
-          end
-
-          # Gets a dataset.
-          #
-          # @param name [String]
-          #   Required. The resource name of the dataset to retrieve.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::AutoML::V1beta1::Dataset]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::AutoML::V1beta1::Dataset]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/automl"
-          #
-          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-          #   formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.dataset_path("[PROJECT]", "[LOCATION]", "[DATASET]")
-          #   response = automl_client.get_dataset(formatted_name)
-
-          def get_dataset \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::GetDatasetRequest)
-            @get_dataset.call(req, options, &block)
-          end
-
-          # Lists datasets in a project.
-          #
-          # @param parent [String]
-          #   Required. The resource name of the project from which to list datasets.
-          # @param filter [String]
-          #   An expression for filtering the results of the request.
-          #
-          #   * `dataset_metadata` - for existence of the case (e.g.
-          #     image_classification_dataset_metadata:*). Some examples of using the filter are:
-          #
-          #     * `translation_dataset_metadata:*` --> The dataset has
-          #       translation_dataset_metadata.
-          # @param page_size [Integer]
-          #   The maximum number of resources contained in the underlying API
-          #   response. If page streaming is performed per-resource, this
-          #   parameter does not affect the return value. If page streaming is
-          #   performed per-page, this determines the maximum number of
-          #   resources in a page.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Dataset>]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Dataset>]
-          #   An enumerable of Google::Cloud::AutoML::V1beta1::Dataset instances.
-          #   See Google::Gax::PagedEnumerable documentation for other
-          #   operations such as per-page iteration or access to the response
-          #   object.
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/automl"
-          #
-          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-          #   formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-          #
-          #   # Iterate over all results.
-          #   automl_client.list_datasets(formatted_parent).each do |element|
-          #     # Process element.
-          #   end
-          #
-          #   # Or iterate over results one page at a time.
-          #   automl_client.list_datasets(formatted_parent).each_page do |page|
-          #     # Process each page at a time.
-          #     page.each do |element|
-          #       # Process element.
-          #     end
-          #   end
-
-          def list_datasets \
-              parent,
-              filter: nil,
-              page_size: nil,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              filter: filter,
-              page_size: page_size
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::ListDatasetsRequest)
-            @list_datasets.call(req, options, &block)
-          end
 
           # Deletes a dataset and all of its contents.
           # Returns empty response in the
@@ -952,175 +779,6 @@ module Google
             operation
           end
 
-          # Creates a model.
-          # Returns a Model in the {Google::Longrunning::Operation#response response}
-          # field when it completes.
-          # When you create a model, several model evaluations are created for it:
-          # a global evaluation, and one evaluation for each annotation spec.
-          #
-          # @param parent [String]
-          #   Required. Resource name of the parent project where the model is being created.
-          # @param model [Google::Cloud::AutoML::V1beta1::Model | Hash]
-          #   Required. The model to create.
-          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::Model`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @return [Google::Gax::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/automl"
-          #
-          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-          #   formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-          #
-          #   # TODO: Initialize `model`:
-          #   model = {}
-          #
-          #   # Register a callback during the method call.
-          #   operation = automl_client.create_model(formatted_parent, model) do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Or use the return value to register a callback.
-          #   operation.on_done do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Manually reload the operation.
-          #   operation.reload!
-          #
-          #   # Or block until the operation completes, triggering callbacks on
-          #   # completion.
-          #   operation.wait_until_done!
-
-          def create_model \
-              parent,
-              model,
-              options: nil
-            req = {
-              parent: parent,
-              model: model
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::CreateModelRequest)
-            operation = Google::Gax::Operation.new(
-              @create_model.call(req, options),
-              @operations_client,
-              Google::Cloud::AutoML::V1beta1::Model,
-              Google::Cloud::AutoML::V1beta1::OperationMetadata,
-              call_options: options
-            )
-            operation.on_done { |operation| yield(operation) } if block_given?
-            operation
-          end
-
-          # Gets a model.
-          #
-          # @param name [String]
-          #   Required. Resource name of the model.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::AutoML::V1beta1::Model]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::AutoML::V1beta1::Model]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/automl"
-          #
-          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-          #   formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-          #   response = automl_client.get_model(formatted_name)
-
-          def get_model \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::GetModelRequest)
-            @get_model.call(req, options, &block)
-          end
-
-          # Lists models.
-          #
-          # @param parent [String]
-          #   Required. Resource name of the project, from which to list the models.
-          # @param filter [String]
-          #   An expression for filtering the results of the request.
-          #
-          #   * `model_metadata` - for existence of the case (e.g.
-          #     video_classification_model_metadata:*).
-          #     * `dataset_id` - for = or !=. Some examples of using the filter are:
-          #
-          #     * `image_classification_model_metadata:*` --> The model has
-          #       image_classification_model_metadata.
-          #     * `dataset_id=5` --> The model was created from a dataset with ID 5.
-          # @param page_size [Integer]
-          #   The maximum number of resources contained in the underlying API
-          #   response. If page streaming is performed per-resource, this
-          #   parameter does not affect the return value. If page streaming is
-          #   performed per-page, this determines the maximum number of
-          #   resources in a page.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Model>]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Gax::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Model>]
-          #   An enumerable of Google::Cloud::AutoML::V1beta1::Model instances.
-          #   See Google::Gax::PagedEnumerable documentation for other
-          #   operations such as per-page iteration or access to the response
-          #   object.
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/automl"
-          #
-          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-          #   formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
-          #
-          #   # Iterate over all results.
-          #   automl_client.list_models(formatted_parent).each do |element|
-          #     # Process element.
-          #   end
-          #
-          #   # Or iterate over results one page at a time.
-          #   automl_client.list_models(formatted_parent).each_page do |page|
-          #     # Process each page at a time.
-          #     page.each do |element|
-          #       # Process element.
-          #     end
-          #   end
-
-          def list_models \
-              parent,
-              filter: nil,
-              page_size: nil,
-              options: nil,
-              &block
-            req = {
-              parent: parent,
-              filter: filter,
-              page_size: page_size
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::ListModelsRequest)
-            @list_models.call(req, options, &block)
-          end
-
           # Deletes a model.
           # Returns `google.protobuf.Empty` in the
           # {Google::Longrunning::Operation#response response} field when it completes,
@@ -1183,185 +841,6 @@ module Google
             )
             operation.on_done { |operation| yield(operation) } if block_given?
             operation
-          end
-
-          # Deploys a model. If a model is already deployed, deploying it with the
-          # same parameters has no effect. Deploying with different parametrs
-          # (as e.g. changing
-          #
-          # {Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata#node_number node_number})
-          #  will reset the deployment state without pausing the model's availability.
-          #
-          # Only applicable for Text Classification, Image Object Detection , Tables, and Image Segmentation; all other domains manage
-          # deployment automatically.
-          #
-          # Returns an empty response in the
-          # {Google::Longrunning::Operation#response response} field when it completes.
-          #
-          # @param name [String]
-          #   Required. Resource name of the model to deploy.
-          # @param image_object_detection_model_deployment_metadata [Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata | Hash]
-          #   Model deployment metadata specific to Image Object Detection.
-          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata`
-          #   can also be provided.
-          # @param image_classification_model_deployment_metadata [Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata | Hash]
-          #   Model deployment metadata specific to Image Classification.
-          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata`
-          #   can also be provided.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @return [Google::Gax::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/automl"
-          #
-          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-          #   formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-          #
-          #   # Register a callback during the method call.
-          #   operation = automl_client.deploy_model(formatted_name) do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Or use the return value to register a callback.
-          #   operation.on_done do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Manually reload the operation.
-          #   operation.reload!
-          #
-          #   # Or block until the operation completes, triggering callbacks on
-          #   # completion.
-          #   operation.wait_until_done!
-
-          def deploy_model \
-              name,
-              image_object_detection_model_deployment_metadata: nil,
-              image_classification_model_deployment_metadata: nil,
-              options: nil
-            req = {
-              name: name,
-              image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata,
-              image_classification_model_deployment_metadata: image_classification_model_deployment_metadata
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::DeployModelRequest)
-            operation = Google::Gax::Operation.new(
-              @deploy_model.call(req, options),
-              @operations_client,
-              Google::Protobuf::Empty,
-              Google::Cloud::AutoML::V1beta1::OperationMetadata,
-              call_options: options
-            )
-            operation.on_done { |operation| yield(operation) } if block_given?
-            operation
-          end
-
-          # Undeploys a model. If the model is not deployed this method has no effect.
-          #
-          # Only applicable for Text Classification, Image Object Detection and Tables;
-          # all other domains manage deployment automatically.
-          #
-          # Returns an empty response in the
-          # {Google::Longrunning::Operation#response response} field when it completes.
-          #
-          # @param name [String]
-          #   Required. Resource name of the model to undeploy.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @return [Google::Gax::Operation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/automl"
-          #
-          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-          #   formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
-          #
-          #   # Register a callback during the method call.
-          #   operation = automl_client.undeploy_model(formatted_name) do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Or use the return value to register a callback.
-          #   operation.on_done do |op|
-          #     raise op.results.message if op.error?
-          #     op_results = op.results
-          #     # Process the results.
-          #
-          #     metadata = op.metadata
-          #     # Process the metadata.
-          #   end
-          #
-          #   # Manually reload the operation.
-          #   operation.reload!
-          #
-          #   # Or block until the operation completes, triggering callbacks on
-          #   # completion.
-          #   operation.wait_until_done!
-
-          def undeploy_model \
-              name,
-              options: nil
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::UndeployModelRequest)
-            operation = Google::Gax::Operation.new(
-              @undeploy_model.call(req, options),
-              @operations_client,
-              Google::Protobuf::Empty,
-              Google::Cloud::AutoML::V1beta1::OperationMetadata,
-              call_options: options
-            )
-            operation.on_done { |operation| yield(operation) } if block_given?
-            operation
-          end
-
-          # Gets a model evaluation.
-          #
-          # @param name [String]
-          #   Required. Resource name for the model evaluation.
-          # @param options [Google::Gax::CallOptions]
-          #   Overrides the default settings for this call, e.g, timeout,
-          #   retries, etc.
-          # @yield [result, operation] Access the result along with the RPC operation
-          # @yieldparam result [Google::Cloud::AutoML::V1beta1::ModelEvaluation]
-          # @yieldparam operation [GRPC::ActiveCall::Operation]
-          # @return [Google::Cloud::AutoML::V1beta1::ModelEvaluation]
-          # @raise [Google::Gax::GaxError] if the RPC is aborted.
-          # @example
-          #   require "google/cloud/automl"
-          #
-          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
-          #   formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_evaluation_path("[PROJECT]", "[LOCATION]", "[MODEL]", "[MODEL_EVALUATION]")
-          #   response = automl_client.get_model_evaluation(formatted_name)
-
-          def get_model_evaluation \
-              name,
-              options: nil,
-              &block
-            req = {
-              name: name
-            }.delete_if { |_, v| v.nil? }
-            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest)
-            @get_model_evaluation.call(req, options, &block)
           end
 
           # Exports a trained, "export-able", model to a user specified Google Cloud
@@ -1591,6 +1070,179 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest)
             @list_model_evaluations.call(req, options, &block)
+          end
+
+          # Creates a dataset.
+          #
+          # @param parent [String]
+          #   Required. The resource name of the project to create the dataset for.
+          # @param dataset [Google::Cloud::AutoML::V1beta1::Dataset | Hash]
+          #   Required. The dataset to create.
+          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::Dataset`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::AutoML::V1beta1::Dataset]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::AutoML::V1beta1::Dataset]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/automl"
+          #
+          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+          #   formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+          #
+          #   # TODO: Initialize `dataset`:
+          #   dataset = {}
+          #   response = automl_client.create_dataset(formatted_parent, dataset)
+
+          def create_dataset \
+              parent,
+              dataset,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              dataset: dataset
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::CreateDatasetRequest)
+            @create_dataset.call(req, options, &block)
+          end
+
+          # Gets a dataset.
+          #
+          # @param name [String]
+          #   Required. The resource name of the dataset to retrieve.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::AutoML::V1beta1::Dataset]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::AutoML::V1beta1::Dataset]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/automl"
+          #
+          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.dataset_path("[PROJECT]", "[LOCATION]", "[DATASET]")
+          #   response = automl_client.get_dataset(formatted_name)
+
+          def get_dataset \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::GetDatasetRequest)
+            @get_dataset.call(req, options, &block)
+          end
+
+          # Lists datasets in a project.
+          #
+          # @param parent [String]
+          #   Required. The resource name of the project from which to list datasets.
+          # @param filter [String]
+          #   An expression for filtering the results of the request.
+          #
+          #   * `dataset_metadata` - for existence of the case (e.g.
+          #     image_classification_dataset_metadata:*). Some examples of using the filter are:
+          #
+          #     * `translation_dataset_metadata:*` --> The dataset has
+          #       translation_dataset_metadata.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Dataset>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Dataset>]
+          #   An enumerable of Google::Cloud::AutoML::V1beta1::Dataset instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/automl"
+          #
+          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+          #   formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+          #
+          #   # Iterate over all results.
+          #   automl_client.list_datasets(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   automl_client.list_datasets(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_datasets \
+              parent,
+              filter: nil,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              filter: filter,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::ListDatasetsRequest)
+            @list_datasets.call(req, options, &block)
+          end
+
+          # Updates a dataset.
+          #
+          # @param dataset [Google::Cloud::AutoML::V1beta1::Dataset | Hash]
+          #   Required. The dataset which replaces the resource on the server.
+          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::Dataset`
+          #   can also be provided.
+          # @param update_mask [Google::Protobuf::FieldMask | Hash]
+          #   The update mask applies to the resource.
+          #   A hash of the same form as `Google::Protobuf::FieldMask`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::AutoML::V1beta1::Dataset]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::AutoML::V1beta1::Dataset]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/automl"
+          #
+          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+          #
+          #   # TODO: Initialize `dataset`:
+          #   dataset = {}
+          #   response = automl_client.update_dataset(dataset)
+
+          def update_dataset \
+              dataset,
+              update_mask: nil,
+              options: nil,
+              &block
+            req = {
+              dataset: dataset,
+              update_mask: update_mask
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest)
+            @update_dataset.call(req, options, &block)
           end
 
           # Gets an annotation spec.
@@ -1901,6 +1553,354 @@ module Google
             }.delete_if { |_, v| v.nil? }
             req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest)
             @update_column_spec.call(req, options, &block)
+          end
+
+          # Creates a model.
+          # Returns a Model in the {Google::Longrunning::Operation#response response}
+          # field when it completes.
+          # When you create a model, several model evaluations are created for it:
+          # a global evaluation, and one evaluation for each annotation spec.
+          #
+          # @param parent [String]
+          #   Required. Resource name of the parent project where the model is being created.
+          # @param model [Google::Cloud::AutoML::V1beta1::Model | Hash]
+          #   Required. The model to create.
+          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::Model`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/automl"
+          #
+          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+          #   formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+          #
+          #   # TODO: Initialize `model`:
+          #   model = {}
+          #
+          #   # Register a callback during the method call.
+          #   operation = automl_client.create_model(formatted_parent, model) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def create_model \
+              parent,
+              model,
+              options: nil
+            req = {
+              parent: parent,
+              model: model
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::CreateModelRequest)
+            operation = Google::Gax::Operation.new(
+              @create_model.call(req, options),
+              @operations_client,
+              Google::Cloud::AutoML::V1beta1::Model,
+              Google::Cloud::AutoML::V1beta1::OperationMetadata,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
+          end
+
+          # Gets a model.
+          #
+          # @param name [String]
+          #   Required. Resource name of the model.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::AutoML::V1beta1::Model]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::AutoML::V1beta1::Model]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/automl"
+          #
+          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+          #   response = automl_client.get_model(formatted_name)
+
+          def get_model \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::GetModelRequest)
+            @get_model.call(req, options, &block)
+          end
+
+          # Lists models.
+          #
+          # @param parent [String]
+          #   Required. Resource name of the project, from which to list the models.
+          # @param filter [String]
+          #   An expression for filtering the results of the request.
+          #
+          #   * `model_metadata` - for existence of the case (e.g.
+          #     video_classification_model_metadata:*).
+          #     * `dataset_id` - for = or !=. Some examples of using the filter are:
+          #
+          #     * `image_classification_model_metadata:*` --> The model has
+          #       image_classification_model_metadata.
+          #     * `dataset_id=5` --> The model was created from a dataset with ID 5.
+          # @param page_size [Integer]
+          #   The maximum number of resources contained in the underlying API
+          #   response. If page streaming is performed per-resource, this
+          #   parameter does not affect the return value. If page streaming is
+          #   performed per-page, this determines the maximum number of
+          #   resources in a page.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Gax::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Model>]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Gax::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Model>]
+          #   An enumerable of Google::Cloud::AutoML::V1beta1::Model instances.
+          #   See Google::Gax::PagedEnumerable documentation for other
+          #   operations such as per-page iteration or access to the response
+          #   object.
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/automl"
+          #
+          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+          #   formatted_parent = Google::Cloud::AutoML::V1beta1::AutoMLClient.location_path("[PROJECT]", "[LOCATION]")
+          #
+          #   # Iterate over all results.
+          #   automl_client.list_models(formatted_parent).each do |element|
+          #     # Process element.
+          #   end
+          #
+          #   # Or iterate over results one page at a time.
+          #   automl_client.list_models(formatted_parent).each_page do |page|
+          #     # Process each page at a time.
+          #     page.each do |element|
+          #       # Process element.
+          #     end
+          #   end
+
+          def list_models \
+              parent,
+              filter: nil,
+              page_size: nil,
+              options: nil,
+              &block
+            req = {
+              parent: parent,
+              filter: filter,
+              page_size: page_size
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::ListModelsRequest)
+            @list_models.call(req, options, &block)
+          end
+
+          # Deploys a model. If a model is already deployed, deploying it with the
+          # same parameters has no effect. Deploying with different parametrs
+          # (as e.g. changing
+          #
+          # {Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata#node_number node_number})
+          #  will reset the deployment state without pausing the model's availability.
+          #
+          # Only applicable for Text Classification, Image Object Detection , Tables, and Image Segmentation; all other domains manage
+          # deployment automatically.
+          #
+          # Returns an empty response in the
+          # {Google::Longrunning::Operation#response response} field when it completes.
+          #
+          # @param name [String]
+          #   Required. Resource name of the model to deploy.
+          # @param image_object_detection_model_deployment_metadata [Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata | Hash]
+          #   Model deployment metadata specific to Image Object Detection.
+          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata`
+          #   can also be provided.
+          # @param image_classification_model_deployment_metadata [Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata | Hash]
+          #   Model deployment metadata specific to Image Classification.
+          #   A hash of the same form as `Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata`
+          #   can also be provided.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/automl"
+          #
+          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+          #
+          #   # Register a callback during the method call.
+          #   operation = automl_client.deploy_model(formatted_name) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def deploy_model \
+              name,
+              image_object_detection_model_deployment_metadata: nil,
+              image_classification_model_deployment_metadata: nil,
+              options: nil
+            req = {
+              name: name,
+              image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata,
+              image_classification_model_deployment_metadata: image_classification_model_deployment_metadata
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::DeployModelRequest)
+            operation = Google::Gax::Operation.new(
+              @deploy_model.call(req, options),
+              @operations_client,
+              Google::Protobuf::Empty,
+              Google::Cloud::AutoML::V1beta1::OperationMetadata,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
+          end
+
+          # Undeploys a model. If the model is not deployed this method has no effect.
+          #
+          # Only applicable for Text Classification, Image Object Detection and Tables;
+          # all other domains manage deployment automatically.
+          #
+          # Returns an empty response in the
+          # {Google::Longrunning::Operation#response response} field when it completes.
+          #
+          # @param name [String]
+          #   Required. Resource name of the model to undeploy.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @return [Google::Gax::Operation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/automl"
+          #
+          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_path("[PROJECT]", "[LOCATION]", "[MODEL]")
+          #
+          #   # Register a callback during the method call.
+          #   operation = automl_client.undeploy_model(formatted_name) do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Or use the return value to register a callback.
+          #   operation.on_done do |op|
+          #     raise op.results.message if op.error?
+          #     op_results = op.results
+          #     # Process the results.
+          #
+          #     metadata = op.metadata
+          #     # Process the metadata.
+          #   end
+          #
+          #   # Manually reload the operation.
+          #   operation.reload!
+          #
+          #   # Or block until the operation completes, triggering callbacks on
+          #   # completion.
+          #   operation.wait_until_done!
+
+          def undeploy_model \
+              name,
+              options: nil
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::UndeployModelRequest)
+            operation = Google::Gax::Operation.new(
+              @undeploy_model.call(req, options),
+              @operations_client,
+              Google::Protobuf::Empty,
+              Google::Cloud::AutoML::V1beta1::OperationMetadata,
+              call_options: options
+            )
+            operation.on_done { |operation| yield(operation) } if block_given?
+            operation
+          end
+
+          # Gets a model evaluation.
+          #
+          # @param name [String]
+          #   Required. Resource name for the model evaluation.
+          # @param options [Google::Gax::CallOptions]
+          #   Overrides the default settings for this call, e.g, timeout,
+          #   retries, etc.
+          # @yield [result, operation] Access the result along with the RPC operation
+          # @yieldparam result [Google::Cloud::AutoML::V1beta1::ModelEvaluation]
+          # @yieldparam operation [GRPC::ActiveCall::Operation]
+          # @return [Google::Cloud::AutoML::V1beta1::ModelEvaluation]
+          # @raise [Google::Gax::GaxError] if the RPC is aborted.
+          # @example
+          #   require "google/cloud/automl"
+          #
+          #   automl_client = Google::Cloud::AutoML::AutoML.new(version: :v1beta1)
+          #   formatted_name = Google::Cloud::AutoML::V1beta1::AutoMLClient.model_evaluation_path("[PROJECT]", "[LOCATION]", "[MODEL]", "[MODEL_EVALUATION]")
+          #   response = automl_client.get_model_evaluation(formatted_name)
+
+          def get_model_evaluation \
+              name,
+              options: nil,
+              &block
+            req = {
+              name: name
+            }.delete_if { |_, v| v.nil? }
+            req = Google::Gax::to_proto(req, Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest)
+            @get_model_evaluation.call(req, options, &block)
           end
         end
       end

@@ -423,8 +423,11 @@ module Google
           #   # TODO: Initialize `output_config`:
           #   output_config = {}
           #
+          #   # TODO: Initialize `params`:
+          #   params = {}
+          #
           #   # Register a callback during the method call.
-          #   operation = prediction_client.batch_predict(formatted_name, input_config, output_config) do |op|
+          #   operation = prediction_client.batch_predict(formatted_name, input_config, output_config, params) do |op|
           #     raise op.results.message if op.error?
           #     op_results = op.results
           #     # Process the results.
@@ -454,7 +457,7 @@ module Google
               name,
               input_config,
               output_config,
-              params: nil,
+              params,
               options: nil
             req = {
               name: name,
