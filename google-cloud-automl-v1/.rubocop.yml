@@ -11,37 +11,23 @@ AllCops:
     - "Rakefile"
 
 Metrics/AbcSize:
-  Exclude:
-    - "lib/google/cloud/automl/v1/prediction_service/*.rb"
-    - "lib/google/cloud/automl/v1/automl/*.rb"
+  Enabled: false
 Metrics/ClassLength:
-  Exclude:
-    - "lib/google/cloud/automl/v1/prediction_service/*.rb"
-    - "lib/google/cloud/automl/v1/automl/*.rb"
+  Enabled: false
 Metrics/CyclomaticComplexity:
-  Exclude:
-    - "lib/google/cloud/automl/v1/prediction_service/*.rb"
-    - "lib/google/cloud/automl/v1/automl/*.rb"
+  Enabled: false
 Metrics/LineLength:
-  Exclude:
-    - "lib/google/cloud/automl/v1/prediction_service/*.rb"
-    - "lib/google/cloud/automl/v1/automl/*.rb"
-    - "google-cloud-automl-v1.gemspec"
+  Enabled: false
 Metrics/MethodLength:
-  Exclude:
-    - "lib/google/cloud/automl/v1/prediction_service/*.rb"
-    - "lib/google/cloud/automl/v1/automl/*.rb"
+  Enabled: false
 Metrics/PerceivedComplexity:
-  Exclude:
-    - "lib/google/cloud/automl/v1/prediction_service/*.rb"
-    - "lib/google/cloud/automl/v1/automl/*.rb"
+  Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-automl-v1.rb"
 Style/CaseEquality:
-  Exclude:
-    - "lib/google/cloud/automl/v1/prediction_service/*.rb"
-    - "lib/google/cloud/automl/v1/automl/*.rb"
-    - "lib/google/cloud/automl/v1.rb"
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
 Style/ModuleFunction:
   Enabled: false
