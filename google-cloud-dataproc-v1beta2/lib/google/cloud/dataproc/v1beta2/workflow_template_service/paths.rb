@@ -25,6 +25,40 @@ module Google
           # Path helper methods for the WorkflowTemplateService API.
           module Paths
             ##
+            # Create a fully-qualified Location resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [String]
+            def location_path project:, location:
+              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}"
+            end
+
+            ##
+            # Create a fully-qualified Region resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}`
+            #
+            # @param project [String]
+            # @param region [String]
+            #
+            # @return [String]
+            def region_path project:, region:
+              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}"
+            end
+
+            ##
             # Create a fully-qualified WorkflowTemplate resource string.
             #
             # @overload workflow_template_path(project:, region:, workflow_template:)
