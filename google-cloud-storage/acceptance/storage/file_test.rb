@@ -314,7 +314,7 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded = bucket.create_file gzipped, "uploaded/with/gzip-type.txt", content_type: "application/gzip"
     _(uploaded.name).must_equal "uploaded/with/gzip-type.txt"
     _(uploaded.content_type).must_equal "application/gzip"
-    uploaded.content_encoding.must_be_nil
+    _(uploaded.content_encoding).must_be_nil
     downloadio = StringIO.new()
     downloaded = uploaded.download downloadio
     _(downloaded).must_be_kind_of StringIO
@@ -374,8 +374,8 @@ describe Google::Cloud::Storage::File, :storage do
   it "should download, verify, and decompress when Content-Encoding gzip response header with skip_lookup" do
     bucket = storage.bucket bucket_public_test_name, skip_lookup: true
     file = bucket.file file_public_test_gzip_name, skip_lookup: true
-    file.content_encoding.must_be_nil # metadata not loaded
-    file.content_type.must_be_nil # metadata not loaded
+    _(file.content_encoding).must_be_nil # metadata not loaded
+    _(file.content_type).must_be_nil # metadata not loaded
     Tempfile.open ["hello_world", ".txt"] do |tmpfile|
       tmpfile.binmode
       downloaded = file.download tmpfile

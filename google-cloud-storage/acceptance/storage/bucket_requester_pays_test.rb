@@ -133,8 +133,8 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
                                                             prefix: filename_prefix,
                                                             payload: payload
 
-      notification.wont_be_nil
-      notification.id.wont_be_nil
+      _(notification).wont_be_nil
+      _(notification.id).wont_be_nil
       _(notification.custom_attrs).must_equal custom_attrs
       _(notification.event_types).must_equal event_types
       _(notification.prefix).must_equal filename_prefix
@@ -144,8 +144,8 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
       _(bucket.notifications).wont_be :empty?
 
       fresh_notification = bucket.notification notification.id
-      fresh_notification.wont_be_nil
-      fresh_notification.id.wont_be_nil
+      _(fresh_notification).wont_be_nil
+      _(fresh_notification.id).wont_be_nil
       _(fresh_notification.custom_attrs).must_equal custom_attrs
       _(fresh_notification.event_types).must_equal event_types
       _(fresh_notification.prefix).must_equal filename_prefix
