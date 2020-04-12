@@ -253,7 +253,7 @@ describe Google::Cloud::Storage::File, :storage do
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       downloaded = uploaded.download tmpfile
-      downloaded.must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
 
       _(downloaded.size).must_equal original.size
       _(downloaded.size).must_equal uploaded.size
