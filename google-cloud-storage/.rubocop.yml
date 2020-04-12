@@ -5,6 +5,7 @@ inherit_gem:
 
 AllCops:
   Exclude:
+    - "acceptance/**/*"
     - "conformance/**/*"
     - "google-cloud-storage.gemspec"
     - "Rakefile"
