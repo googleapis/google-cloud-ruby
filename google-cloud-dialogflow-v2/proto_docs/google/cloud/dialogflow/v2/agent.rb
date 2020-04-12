@@ -161,8 +161,6 @@ module Google
           extend Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # ============================================================================
-        # Requests and responses for custom methods.
         # The request message for {Google::Cloud::Dialogflow::V2::Agents::Client#search_agents Agents.SearchAgents}.
         # @!attribute [rw] parent
         #   @return [String]
