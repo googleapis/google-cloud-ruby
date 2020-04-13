@@ -1,6 +1,6 @@
 # Enabling Logging
 
-To enable logging for this library, set the logger for the underlying [Google
+To enable general logging for this library, set the logger for the underlying [Google
 API
 Client](https://github.com/google/google-api-ruby-client/blob/master/README.md#logging)
 library. The logger that you set may be a Ruby stdlib
@@ -9,6 +9,10 @@ shown below, or a
 [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
 that will write logs to [Stackdriver
 Logging](https://cloud.google.com/logging/).
+
+You may also pass the same logger (or a different one) when you call
+{Google::Cloud::Bigquery.new}. Logging in the higher-level {Google::Cloud::Bigquery}
+client is currently limited to logging errors that result in request retries.
 
 If you do not set the logger explicitly and your application is running in a
 Rails environment, it will default to `Rails.logger`. Otherwise, if you do not
@@ -24,4 +28,8 @@ my_logger.level = Logger::WARN
 
 # Set the Google API Client logger
 Google::Apis.logger = my_logger
+
+# Set the Google::Cloud::Bigquery logger for logging
+# errors that result in request retries.
+bigquery = Google::Cloud::Bigquery.new logger: my_logger
 ```

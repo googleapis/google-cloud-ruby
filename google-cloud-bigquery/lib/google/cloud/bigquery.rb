@@ -56,6 +56,12 @@ module Google
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
+      # @param [Logger, Google::Cloud::Logging::Logger, nil] logger A logger for
+      #   logging errors that result in request retries. May be a Ruby stdlib
+      #   [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html)
+      #   or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
+      #   that will write logs to [Cloud Logging](https://cloud.google.com/logging/).
+      #   Optional.
       #
       # @return [Google::Cloud::Bigquery::Project]
       #
@@ -67,7 +73,7 @@ module Google
       #   table = dataset.table "my_table"
       #
       def self.new project_id: nil, credentials: nil, scope: nil, retries: nil, timeout: nil, endpoint: nil,
-                   project: nil, keyfile: nil
+                   project: nil, keyfile: nil, logger: nil
         scope       ||= configure.scope
         retries     ||= configure.retries
         timeout     ||= configure.timeout
@@ -84,7 +90,7 @@ module Google
         Bigquery::Project.new(
           Bigquery::Service.new(
             project_id, credentials,
-            retries: retries, timeout: timeout, host: endpoint
+            retries: retries, timeout: timeout, host: endpoint, logger: logger
           )
         )
       end

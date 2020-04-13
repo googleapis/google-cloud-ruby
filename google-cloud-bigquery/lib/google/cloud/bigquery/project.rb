@@ -1582,7 +1582,8 @@ module Google
           project_service = Service.new gapi.project_reference.project_id,
                                         service.credentials,
                                         retries: service.retries,
-                                        timeout: service.timeout
+                                        timeout: service.timeout,
+                                        logger:  service.logger
           new(project_service).tap do |p|
             p.instance_variable_set :@name, gapi.friendly_name
 

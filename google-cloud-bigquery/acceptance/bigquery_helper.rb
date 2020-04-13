@@ -18,6 +18,7 @@ gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
+require "logger"
 require "google/cloud/bigquery"
 require "google/cloud/storage"
 
@@ -27,8 +28,12 @@ if ENV["GCLOUD_TEST_GENERATE_XML_REPORT"]
   Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::JUnitReporter.new]
 end
 
+# Create a stdlib logger for retry attempts
+logger = Logger.new $stderr
+logger.level = Logger::WARN
+
 # Create shared bigquery object so we don't create new for each test
-$bigquery = Google::Cloud::Bigquery.new retries: 10
+$bigquery = Google::Cloud::Bigquery.new retries: 10, logger: logger
 
 # Create shared storage object so we don't create new for each test
 $storage = Google::Cloud::Storage.new

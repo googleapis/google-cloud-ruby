@@ -39,16 +39,20 @@ module Google
         attr_accessor :credentials
 
         # @private
+        attr_accessor :logger
+
+        # @private
         attr_reader :retries, :timeout, :host
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, retries: nil, timeout: nil, host: nil
+        def initialize project, credentials, retries: nil, timeout: nil, host: nil, logger: nil
           @project = project
           @credentials = credentials
           @retries = retries
           @timeout = timeout
           @host = host
+          @logger = logger
         end
 
         def service
@@ -80,7 +84,7 @@ module Google
         # been granted the READER dataset role.
         def list_datasets all: nil, filter: nil, max: nil, token: nil
           # The list operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.list_datasets @project, all: all, filter: filter, max_results: max, page_token: token
           end
         end
@@ -89,7 +93,7 @@ module Google
         # Returns the dataset specified by datasetID.
         def get_dataset dataset_id
           # The get operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.get_dataset @project, dataset_id
           end
         end
@@ -111,7 +115,7 @@ module Google
             # The patch with etag operation is considered idempotent
             patch_with_backoff = true
           end
-          execute backoff: patch_with_backoff do
+          execute backoff: patch_with_backoff, logger_component: fm(__method__) do
             service.patch_dataset @project, dataset_id, patched_dataset_gapi, options: options
           end
         end
@@ -133,14 +137,14 @@ module Google
         # Requires the READER dataset role.
         def list_tables dataset_id, max: nil, token: nil
           # The list operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.list_tables @project, dataset_id, max_results: max, page_token: token
           end
         end
 
         def get_project_table project_id, dataset_id, table_id
           # The get operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.get_table project_id, dataset_id, table_id
           end
         end
@@ -152,7 +156,7 @@ module Google
         # which describes the structure of this table.
         def get_table dataset_id, table_id
           # The get operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             get_project_table @project, dataset_id, table_id
           end
         end
@@ -174,7 +178,7 @@ module Google
             # The patch with etag operation is considered idempotent
             patch_with_backoff = true
           end
-          execute backoff: patch_with_backoff do
+          execute backoff: patch_with_backoff, logger_component: fm(__method__) do
             service.patch_table @project, dataset_id, table_id, patched_table_gapi, options: options
           end
         end
@@ -190,7 +194,7 @@ module Google
         # Retrieves data from the table.
         def list_tabledata dataset_id, table_id, max: nil, token: nil, start: nil
           # The list operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             json_txt = service.list_table_data \
               @project, dataset_id, table_id,
               max_results: max,
@@ -230,7 +234,7 @@ module Google
           }.to_json
 
           # The insertAll with insertId operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.insert_all_table_data(
               @project, dataset_id, table_id, insert_req,
               options: { skip_serialization: true }
@@ -244,7 +248,7 @@ module Google
         def list_models dataset_id, max: nil, token: nil
           options = { skip_deserialization: true }
           # The list operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             json_txt = service.list_models @project, dataset_id, max_results: max, page_token: token, options: options
             JSON.parse json_txt, symbolize_names: true
           end
@@ -256,7 +260,7 @@ module Google
         # which describes the structure of this model.
         def get_model dataset_id, model_id
           # The get operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             json_txt = service.get_model @project, dataset_id, model_id, options: { skip_deserialization: true }
             JSON.parse json_txt, symbolize_names: true
           end
@@ -273,7 +277,7 @@ module Google
             # The patch with etag operation is considered idempotent
             patch_with_backoff = true
           end
-          execute backoff: patch_with_backoff do
+          execute backoff: patch_with_backoff, logger_component: fm(__method__) do
             json_txt = service.patch_model @project, dataset_id, model_id, patched_model_gapi, options: options
             JSON.parse json_txt, symbolize_names: true
           end
@@ -299,7 +303,7 @@ module Google
         #   etag, projectId, datasetId, routineId, routineType, creationTime, lastModifiedTime, and language.
         def list_routines dataset_id, max: nil, token: nil, filter: nil
           # The list operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.list_routines @project, dataset_id, max_results: max,
                                                         page_token:  token,
                                                         filter:      filter
@@ -310,7 +314,7 @@ module Google
         # Gets the specified routine resource by routine ID.
         def get_routine dataset_id, routine_id
           # The get operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.get_routine @project, dataset_id, routine_id
           end
         end
@@ -325,7 +329,7 @@ module Google
             # The update with etag operation is considered idempotent
             update_with_backoff = true
           end
-          execute backoff: update_with_backoff do
+          execute backoff: update_with_backoff, logger_component: fm(__method__) do
             service.update_routine @project, dataset_id, routine_id, new_routine_gapi, options: options
           end
         end
@@ -344,7 +348,7 @@ module Google
           # The list operation is considered idempotent
           min_creation_time = Convert.time_to_millis min_created_at
           max_creation_time = Convert.time_to_millis max_created_at
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.list_jobs @project, all_users: all, max_results: max,
                                         page_token: token, projection: "full", state_filter: filter,
                                         min_creation_time: min_creation_time, max_creation_time: max_creation_time,
@@ -356,7 +360,7 @@ module Google
         # Cancel the job specified by jobId.
         def cancel_job job_id, location: nil
           # The BigQuery team has told us cancelling is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.cancel_job @project, job_id, location: location
           end
         end
@@ -365,7 +369,7 @@ module Google
         # Returns the job specified by jobID.
         def get_job job_id, location: nil
           # The get operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.get_job @project, job_id, location: location
           end
         end
@@ -373,13 +377,13 @@ module Google
         def insert_job config, location: nil
           job_object = API::Job.new job_reference: job_ref_from(nil, nil, location: location), configuration: config
           # Jobs have generated id, so this operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.insert_job @project, job_object
           end
         end
 
         def query_job query_job_gapi
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.insert_job @project, query_job_gapi
           end
         end
@@ -388,7 +392,7 @@ module Google
         # Returns the query data for the job
         def job_query_results job_id, location: nil, max: nil, token: nil, start: nil, timeout: nil
           # The get operation is considered idempotent
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.get_job_query_results @project, job_id,
                                           location:    location,
                                           max_results: max,
@@ -399,25 +403,25 @@ module Google
         end
 
         def copy_table copy_job_gapi
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.insert_job @project, copy_job_gapi
           end
         end
 
         def extract_table extract_job_gapi
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.insert_job @project, extract_job_gapi
           end
         end
 
         def load_table_gs_url load_job_gapi
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.insert_job @project, load_job_gapi
           end
         end
 
         def load_table_file file, load_job_gapi
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.insert_job @project, load_job_gapi, upload_source: file, content_type: mime_type_for(file)
           end
         end
@@ -463,7 +467,7 @@ module Google
         ##
         # Lists all projects to which you have been granted any project role.
         def list_projects max: nil, token: nil
-          execute backoff: true do
+          execute backoff: true, logger_component: fm(__method__) do
             service.list_projects max_results: max, page_token: token
           end
         end
@@ -502,6 +506,11 @@ module Google
 
         protected
 
+        # Format the method name for the logger_component string passed to execute backoff.
+        def fm method
+          "#{self.class}##{method}"
+        end
+
         # Generate a random string similar to the BigQuery service job IDs.
         def generate_id
           SecureRandom.urlsafe_base64 21
@@ -515,9 +524,9 @@ module Google
           nil
         end
 
-        def execute backoff: nil
+        def execute backoff: nil, logger_component: nil
           if backoff
-            Backoff.new(retries: retries).execute { yield }
+            Backoff.new(retries: retries, logger: logger, logger_component: logger_component).execute { yield }
           else
             yield
           end
@@ -542,10 +551,12 @@ module Google
             sleep delay
           end
 
-          def initialize retries: nil, reasons: nil, backoff: nil
+          def initialize retries: nil, reasons: nil, backoff: nil, logger: nil, logger_component: nil
             @retries = (retries || Backoff.retries).to_i
             @reasons = (reasons || Backoff.reasons).to_a
             @backoff = backoff || Backoff.backoff
+            @logger = logger
+            @logger_component = logger_component
           end
 
           def execute
@@ -555,6 +566,12 @@ module Google
                 return yield
               rescue Google::Apis::Error => e
                 raise e unless retry? e.body, current_retries
+
+                if @logger
+                  msg = ["Attempting retry #{current_retries + 1} because of retryable error: #{e.inspect}"]
+                  msg.unshift @logger_component if @logger_component
+                  @logger.warn msg.join(": ")
+                end
 
                 @backoff.call current_retries
                 current_retries += 1
