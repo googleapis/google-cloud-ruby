@@ -231,6 +231,7 @@ google-cloud-core:
 - v0.21.0
 - v0.20.1
 google-cloud-data_catalog:
+- v0.2.0
 - v0.1.0
 google-cloud-data_catalog-v1:
 - v0.2.0
