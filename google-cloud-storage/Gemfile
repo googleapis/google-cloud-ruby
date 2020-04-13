@@ -11,4 +11,4 @@ gem "minitest-reporters", "~> 1.3.5", require: false
 gem "rake"
 
 gem "minitest"
-gem "rubocop-minitest", github: "koic/rubocop-minitest", branch: "fix_false_negative_for_global_expectations_using_without_arguments"
+gem "rubocop-minitest", github: "koic/rubocop-minitest", branch: "work_on_file_names_end_with_test_rb"
