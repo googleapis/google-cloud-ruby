@@ -109,7 +109,8 @@ module Google
         #   @return [Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding]
         #     Encoding of audio data sent in all `RecognitionAudio` messages.
         #     This field is optional for `FLAC` and `WAV` audio files and required
-        #     for all other audio formats. For details, see {Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
+        #     for all other audio formats. For details, see
+        #     {Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
         # @!attribute [rw] sample_rate_hertz
         #   @return [Integer]
         #     Sample rate in Hertz of the audio data sent in all
@@ -118,7 +119,8 @@ module Google
         #     source to 16000 Hz. If that's not possible, use the native sample rate of
         #     the audio source (instead of re-sampling).
         #     This field is optional for FLAC and WAV audio files, but is
-        #     required for all other audio formats. For details, see {Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
+        #     required for all other audio formats. For details, see
+        #     {Google::Cloud::Speech::V1p1beta1::RecognitionConfig::AudioEncoding AudioEncoding}.
         # @!attribute [rw] audio_channel_count
         #   @return [Integer]
         #     The number of channels in the input audio data.
@@ -174,6 +176,13 @@ module Google
         #     profanities, replacing all but the initial character in each filtered word
         #     with asterisks, e.g. "f***". If set to `false` or omitted, profanities
         #     won't be filtered out.
+        # @!attribute [rw] adaptation
+        #   @return [Google::Cloud::Speech::V1p1beta1::SpeechAdaptation]
+        #     Speech adaptation configuration improves the accuracy of speech
+        #     recognition. When speech adaptation is set it supersedes the
+        #     `speech_contexts` field. For more information, see the [speech
+        #     adaptation](https://cloud.google.com/speech-to-text/docs/context-strength)
+        #     documentation.
         # @!attribute [rw] speech_contexts
         #   @return [Array<Google::Cloud::Speech::V1p1beta1::SpeechContext>]
         #     Array of {Google::Cloud::Speech::V1p1beta1::SpeechContext SpeechContext}.
@@ -198,9 +207,6 @@ module Google
         #     This feature is only available in select languages. Setting this for
         #     requests in other languages has no effect at all.
         #     The default 'false' value does not add punctuation to result hypotheses.
-        #     Note: This is currently offered as an experimental service, complimentary
-        #     to all users. In the future this may be exclusively available as a
-        #     premium feature.
         # @!attribute [rw] enable_speaker_diarization
         #   @return [Boolean]
         #     If 'true', enables speaker detection for each recognized word in
@@ -294,7 +300,8 @@ module Google
           # an `AudioEncoding` when you send  send `FLAC` or `WAV` audio, the
           # encoding configuration must match the encoding described in the audio
           # header; otherwise the request returns an
-          # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT] error code.
+          # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT] error
+          # code.
           module AudioEncoding
             # Not specified.
             ENCODING_UNSPECIFIED = 0
@@ -340,8 +347,8 @@ module Google
             SPEEX_WITH_HEADER_BYTE = 7
 
             # MP3 audio. Support all standard MP3 bitrates (which range from 32-320
-            # kbps). When using this encoding, `sample_rate_hertz` can be optionally
-            # unset if not known.
+            # kbps). When using this encoding, `sample_rate_hertz` has to match the
+            # sample rate of the file being used.
             MP3 = 8
           end
         end
@@ -362,6 +369,9 @@ module Google
         #     Maximum number of speakers in the conversation. This range gives you more
         #     flexibility by allowing the system to automatically determine the correct
         #     number of speakers. If not set, the default value is 6.
+        # @!attribute [r] speaker_tag
+        #   @return [Integer]
+        #     Output only. Unused.
         class SpeakerDiarizationConfig
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -534,8 +544,8 @@ module Google
 
         # Contains audio data in the encoding specified in the `RecognitionConfig`.
         # Either `content` or `uri` must be supplied. Supplying both or neither
-        # returns [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. See
-        # [content limits](https://cloud.google.com/speech-to-text/quotas#content).
+        # returns [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT].
+        # See [content limits](https://cloud.google.com/speech-to-text/quotas#content).
         # @!attribute [rw] content
         #   @return [String]
         #     The audio data bytes encoded as specified in
@@ -548,8 +558,9 @@ module Google
         #     Currently, only Google Cloud Storage URIs are
         #     supported, which must be specified in the following format:
         #     `gs://bucket_name/object_name` (other URI formats return
-        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see
-        #     [Request URIs](https://cloud.google.com/storage/docs/reference-uris).
+        #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]).
+        #     For more information, see [Request
+        #     URIs](https://cloud.google.com/storage/docs/reference-uris).
         class RecognitionAudio
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -594,6 +605,10 @@ module Google
         # @!attribute [rw] last_update_time
         #   @return [Google::Protobuf::Timestamp]
         #     Time of the most recent processing update.
+        # @!attribute [r] uri
+        #   @return [String]
+        #     The URI of the audio file being transcribed. Empty if the audio was sent
+        #     as byte content.
         class LongRunningRecognizeMetadata
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -712,11 +727,11 @@ module Google
         #     For multi-channel audio, this is the channel number corresponding to the
         #     recognized result for the audio from that channel.
         #     For audio_channel_count = N, its output values can range from '1' to 'N'.
-        # @!attribute [rw] language_code
+        # @!attribute [r] language_code
         #   @return [String]
-        #     The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag
-        #     of the language in this result. This language code was detected to have
-        #     the most likelihood of being spoken in the audio.
+        #     Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+        #     language tag of the language in this result. This language code was
+        #     detected to have the most likelihood of being spoken in the audio.
         class StreamingRecognitionResult
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -734,11 +749,11 @@ module Google
         #     For multi-channel audio, this is the channel number corresponding to the
         #     recognized result for the audio from that channel.
         #     For audio_channel_count = N, its output values can range from '1' to 'N'.
-        # @!attribute [rw] language_code
+        # @!attribute [r] language_code
         #   @return [String]
-        #     The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag
-        #     of the language in this result. This language code was detected to have
-        #     the most likelihood of being spoken in the audio.
+        #     Output only. The [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+        #     language tag of the language in this result. This language code was
+        #     detected to have the most likelihood of being spoken in the audio.
         class SpeechRecognitionResult
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -796,9 +811,9 @@ module Google
         #     This field is not guaranteed to be accurate and users should not rely on it
         #     to be always provided.
         #     The default of 0.0 is a sentinel value indicating `confidence` was not set.
-        # @!attribute [rw] speaker_tag
+        # @!attribute [r] speaker_tag
         #   @return [Integer]
-        #     A distinct integer value is assigned for every speaker within
+        #     Output only. A distinct integer value is assigned for every speaker within
         #     the audio. This field specifies which one of those speakers was detected to
         #     have spoken this word. Value ranges from '1' to diarization_speaker_count.
         #     speaker_tag is set if enable_speaker_diarization = 'true' and only in the

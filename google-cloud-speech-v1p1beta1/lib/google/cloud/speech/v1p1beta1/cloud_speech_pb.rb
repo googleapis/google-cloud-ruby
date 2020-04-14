@@ -6,6 +6,8 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
+require 'google/cloud/speech/v1p1beta1/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/duration_pb'
@@ -41,6 +43,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :alternative_language_codes, :string, 18
       optional :max_alternatives, :int32, 4
       optional :profanity_filter, :bool, 5
+      optional :adaptation, :message, 20, "google.cloud.speech.v1p1beta1.SpeechAdaptation"
       repeated :speech_contexts, :message, 6, "google.cloud.speech.v1p1beta1.SpeechContext"
       optional :enable_word_time_offsets, :bool, 8
       optional :enable_word_confidence, :bool, 15
@@ -67,6 +70,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :enable_speaker_diarization, :bool, 1
       optional :min_speaker_count, :int32, 2
       optional :max_speaker_count, :int32, 3
+      optional :speaker_tag, :int32, 5
     end
     add_message "google.cloud.speech.v1p1beta1.RecognitionMetadata" do
       optional :interaction_type, :enum, 1, "google.cloud.speech.v1p1beta1.RecognitionMetadata.InteractionType"
@@ -130,6 +134,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :progress_percent, :int32, 1
       optional :start_time, :message, 2, "google.protobuf.Timestamp"
       optional :last_update_time, :message, 3, "google.protobuf.Timestamp"
+      optional :uri, :string, 4
     end
     add_message "google.cloud.speech.v1p1beta1.StreamingRecognizeResponse" do
       optional :error, :message, 1, "google.rpc.Status"
