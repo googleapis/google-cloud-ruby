@@ -21,6 +21,7 @@ require "pathname"
 require "securerandom"
 require "mini_mime"
 require "date"
+require "json"
 
 module Google
   module Cloud
@@ -564,8 +565,8 @@ module Google
             loop do
               begin
                 return yield
-              rescue Google::Apis::Error => e
-                raise e unless retry? e.body, current_retries
+              rescue Google::Apis::Error, JSON::ParserError => e
+                raise e unless retry? e, current_retries
 
                 if @logger
                   msg = ["Attempting retry #{current_retries + 1} because of retryable error: #{e.inspect}"]
@@ -581,9 +582,10 @@ module Google
 
           protected
 
-          def retry? result, current_retries #:nodoc:
+          def retry? err, current_retries #:nodoc:
+            return true if err.is_a? JSON::ParserError # See #5180
             if current_retries < @retries
-              return true if retry_error_reason? result
+              return true if retry_error_reason? err.body
             end
             false
           end

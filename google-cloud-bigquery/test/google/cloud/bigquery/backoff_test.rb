@@ -32,7 +32,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     dataset.dataset_id.must_equal dataset_id
   end
 
-  it "handles a single 404 error (retriable) and retries with backoff" do
+  it "handles a single 404 error (retryable) and retries with backoff" do
     mock = Minitest::Mock.new
     mock.expect :retry, nil, [0]
 
@@ -73,7 +73,47 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     mock.verify
   end
 
-  it "handles a single 404 error with multiple reasons (all retriable) and retries with backoff" do
+  # See #5180
+  it "handles a single JSON::ParserError (retryable) and retries with backoff" do
+    mock = Minitest::Mock.new
+    mock.expect :retry, nil, [0]
+
+    mocked_backoff = lambda { |i| mock.retry i }
+
+    stub = Object.new
+    def stub.get_dataset *args
+      @tries ||= 0
+      @tries += 1
+      if @tries == 1
+        # raises JSON::ParserError: 767: unexpected token at '{"hello": {world}'
+        JSON.parse "{\"hello\": {world}"
+      end
+
+      random_dataset_hash = {
+        "kind" => "bigquery#dataset",
+        "etag" => "etag123456789",
+        "id" => "id",
+        "datasetReference" => {
+          "datasetId" => "my_dataset",
+          "projectId" => "test"
+        },
+        "friendlyName" => "My Dataset",
+      }
+      Google::Apis::BigqueryV2::Dataset.from_json random_dataset_hash.to_json
+    end
+    bigquery.service.mocked_service = stub
+
+    Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
+      dataset = bigquery.dataset dataset_id
+
+      dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+      dataset.dataset_id.must_equal dataset_id
+    end
+
+    mock.verify
+  end
+
+  it "handles a single 404 error with multiple reasons (all retryable) and retries with backoff" do
     mock = Minitest::Mock.new
     mock.expect :retry, nil, [0]
 
@@ -114,7 +154,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     mock.verify
   end
 
-  it "handles a single 404 error with multiple reasons (not all retriable) and does not retry with backoff" do
+  it "handles a single 404 error with multiple reasons (not all retryable) and does not retry with backoff" do
     mock = Minitest::Mock.new
 
     mocked_backoff = lambda { |i| mock.retry i }
@@ -139,7 +179,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     mock.verify
   end
 
-  it "handles a multiple 500 errors (retriable) and retries with backoff" do
+  it "handles a multiple 500 errors (retryable) and retries with backoff" do
     mock = Minitest::Mock.new
     mock.expect :retry, nil, [0]
     mock.expect :retry, nil, [1]
@@ -182,7 +222,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     mock.verify
   end
 
-  it "handles a multiple 500 errors (retriable) and then a 400 error (non-retriable)" do
+  it "handles a multiple 500 errors (retryable) and then a 400 error (non-retryable)" do
     mock = Minitest::Mock.new
     mock.expect :retry, nil, [0]
     mock.expect :retry, nil, [1]
@@ -217,7 +257,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     mock.verify
   end
 
-  it "handles a multiple 400 errors (retriable) until retries limit is reached" do
+  it "handles a multiple 400 errors (retryable) until retries limit is reached" do
     mock = Minitest::Mock.new
     mock.expect :retry, nil, [0]
     mock.expect :retry, nil, [1]
@@ -247,7 +287,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     mock.verify
   end
 
-  it "does not handle a single 404 error (non-retriable)" do
+  it "does not handle a single 404 error (non-retryable)" do
     stub = Object.new
     def stub.get_dataset *args
       raise Google::Apis::Error.new "invalid", status_code: 400
@@ -261,7 +301,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     err.message.must_equal "invalid"
   end
 
-  it "does not handle a single 404 error with reason (non-retriable)" do
+  it "does not handle a single 404 error with reason (non-retryable)" do
     stub = Object.new
     def stub.get_dataset *args
       raise Google::Apis::Error.new "invalid", status_code: 400,
@@ -276,7 +316,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     err.message.must_equal "invalid"
   end
 
-  it "re-raises non-retriable errors" do
+  it "re-raises non-retryable errors" do
     error_proc = -> { raise "nope" }
 
     stub = Object.new
