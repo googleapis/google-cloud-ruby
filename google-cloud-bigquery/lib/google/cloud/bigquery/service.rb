@@ -569,9 +569,16 @@ module Google
                 raise e unless retry? e, current_retries
 
                 if @logger
-                  msg = ["Attempting retry #{current_retries + 1} because of retryable error: #{e.inspect}"]
-                  msg.unshift @logger_component if @logger_component
-                  @logger.warn msg.join(": ")
+                  msg = []
+                  msg << @logger_component if @logger_component
+                  if @logger.debug?
+                    # May contain sensitive user information if JSON::ParserError, see #5552.
+                    msg << ["Attempting retry #{current_retries + 1} because of retryable error: #{e.inspect}"]
+                    @logger.debug msg.join(": ")
+                  else
+                    msg << ["Attempting retry #{current_retries + 1} because of retryable error: #{e.class}"]
+                    @logger.warn msg.join(": ")
+                  end
                 end
 
                 @backoff.call current_retries
