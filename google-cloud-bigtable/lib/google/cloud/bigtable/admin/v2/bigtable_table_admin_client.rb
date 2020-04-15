@@ -602,12 +602,10 @@ module Google
             #
             #   # TODO: Initialize `table_id`:
             #   table_id = ''
-            #
-            #   # TODO: Initialize `source_snapshot`:
-            #   source_snapshot = ''
+            #   formatted_source_snapshot = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[SNAPSHOT]")
             #
             #   # Register a callback during the method call.
-            #   operation = bigtable_table_admin_client.create_table_from_snapshot(formatted_parent, table_id, source_snapshot) do |op|
+            #   operation = bigtable_table_admin_client.create_table_from_snapshot(formatted_parent, table_id, formatted_source_snapshot) do |op|
             #     raise op.results.message if op.error?
             #     op_results = op.results
             #     # Process the results.
@@ -664,15 +662,11 @@ module Google
             #   The view to be applied to the returned tables' fields.
             #   Only NAME_ONLY view (default) and REPLICATION_VIEW are supported.
             # @param page_size [Integer]
-            #   Maximum number of results per page.
-            #
-            #   A page_size of zero lets the server choose the number of items to return.
-            #   A page_size which is strictly positive will return at most that many items.
-            #   A negative page_size will cause an error.
-            #
-            #   Following the first request, subsequent paginated calls are not required
-            #   to pass a page_size. If a page_size is set in subsequent calls, it must
-            #   match the page_size given in the first request.
+            #   The maximum number of resources contained in the underlying API
+            #   response. If page streaming is performed per-resource, this
+            #   parameter does not affect the return value. If page streaming is
+            #   performed per-page, this determines the maximum number of
+            #   resources in a page.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -978,8 +972,10 @@ module Google
             #   require "google/cloud/bigtable/admin"
             #
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
-            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
-            #   response = bigtable_table_admin_client.get_iam_policy(formatted_resource)
+            #
+            #   # TODO: Initialize `resource`:
+            #   resource = ''
+            #   response = bigtable_table_admin_client.get_iam_policy(resource)
 
             def get_iam_policy \
                 resource,
@@ -1019,11 +1015,13 @@ module Google
             #   require "google/cloud/bigtable/admin"
             #
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
-            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #
+            #   # TODO: Initialize `resource`:
+            #   resource = ''
             #
             #   # TODO: Initialize `policy`:
             #   policy = {}
-            #   response = bigtable_table_admin_client.set_iam_policy(formatted_resource, policy)
+            #   response = bigtable_table_admin_client.set_iam_policy(resource, policy)
 
             def set_iam_policy \
                 resource,
@@ -1060,11 +1058,13 @@ module Google
             #   require "google/cloud/bigtable/admin"
             #
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
-            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+            #
+            #   # TODO: Initialize `resource`:
+            #   resource = ''
             #
             #   # TODO: Initialize `permissions`:
             #   permissions = []
-            #   response = bigtable_table_admin_client.test_iam_permissions(formatted_resource, permissions)
+            #   response = bigtable_table_admin_client.test_iam_permissions(resource, permissions)
 
             def test_iam_permissions \
                 resource,
@@ -1101,8 +1101,6 @@ module Google
             #   parent cluster, e.g., `mysnapshot` of the form:
             #   `[_a-zA-Z0-9][-_.a-zA-Z0-9]*` rather than
             #   `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/mysnapshot`.
-            # @param description [String]
-            #   Description of the snapshot.
             # @param ttl [Google::Protobuf::Duration | Hash]
             #   The amount of time that the new snapshot can stay active after it is
             #   created. Once 'ttl' expires, the snapshot will get deleted. The maximum
@@ -1110,6 +1108,8 @@ module Google
             #   specified, the default value of 24 hours will be used.
             #   A hash of the same form as `Google::Protobuf::Duration`
             #   can also be provided.
+            # @param description [String]
+            #   Description of the snapshot.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1120,18 +1120,13 @@ module Google
             #
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
-            #
-            #   # TODO: Initialize `cluster`:
-            #   cluster = ''
+            #   formatted_cluster = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
             #
             #   # TODO: Initialize `snapshot_id`:
             #   snapshot_id = ''
             #
-            #   # TODO: Initialize `description`:
-            #   description = ''
-            #
             #   # Register a callback during the method call.
-            #   operation = bigtable_table_admin_client.snapshot_table(formatted_name, cluster, snapshot_id, description) do |op|
+            #   operation = bigtable_table_admin_client.snapshot_table(formatted_name, formatted_cluster, snapshot_id) do |op|
             #     raise op.results.message if op.error?
             #     op_results = op.results
             #     # Process the results.
@@ -1161,15 +1156,15 @@ module Google
                 name,
                 cluster,
                 snapshot_id,
-                description,
                 ttl: nil,
+                description: nil,
                 options: nil
               req = {
                 name: name,
                 cluster: cluster,
                 snapshot_id: snapshot_id,
-                description: description,
-                ttl: ttl
+                ttl: ttl,
+                description: description
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::SnapshotTableRequest)
               operation = Google::Gax::Operation.new(
@@ -1675,11 +1670,8 @@ module Google
             #
             #   bigtable_table_admin_client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
             #
-            #   # TODO: Initialize `parent`:
-            #   parent = ''
-            #
             #   # Register a callback during the method call.
-            #   operation = bigtable_table_admin_client.restore_table(parent) do |op|
+            #   operation = bigtable_table_admin_client.restore_table do |op|
             #     raise op.results.message if op.error?
             #     op_results = op.results
             #     # Process the results.
@@ -1706,7 +1698,7 @@ module Google
             #   operation.wait_until_done!
 
             def restore_table \
-                parent,
+                parent: nil,
                 table_id: nil,
                 backup: nil,
                 options: nil

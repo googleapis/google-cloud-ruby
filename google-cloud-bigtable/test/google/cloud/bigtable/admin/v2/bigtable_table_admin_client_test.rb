@@ -169,7 +169,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       # Create request parameters
       formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
       table_id = ''
-      source_snapshot = ''
+      formatted_source_snapshot = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[SNAPSHOT]")
 
       # Create expected grpc response
       name = "name3373707"
@@ -188,7 +188,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_instance_of(Google::Bigtable::Admin::V2::CreateTableFromSnapshotRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(table_id, request.table_id)
-        assert_equal(source_snapshot, request.source_snapshot)
+        assert_equal(formatted_source_snapshot, request.source_snapshot)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v2.new(:create_table_from_snapshot, mock_method)
@@ -204,7 +204,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           response = client.create_table_from_snapshot(
             formatted_parent,
             table_id,
-            source_snapshot
+            formatted_source_snapshot
           )
 
           # Verify the response
@@ -217,7 +217,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       # Create request parameters
       formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
       table_id = ''
-      source_snapshot = ''
+      formatted_source_snapshot = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[SNAPSHOT]")
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
@@ -234,7 +234,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
         assert_instance_of(Google::Bigtable::Admin::V2::CreateTableFromSnapshotRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(table_id, request.table_id)
-        assert_equal(source_snapshot, request.source_snapshot)
+        assert_equal(formatted_source_snapshot, request.source_snapshot)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v2.new(:create_table_from_snapshot, mock_method)
@@ -250,7 +250,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           response = client.create_table_from_snapshot(
             formatted_parent,
             table_id,
-            source_snapshot
+            formatted_source_snapshot
           )
 
           # Verify the response
@@ -264,14 +264,14 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       # Create request parameters
       formatted_parent = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
       table_id = ''
-      source_snapshot = ''
+      formatted_source_snapshot = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.snapshot_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]", "[SNAPSHOT]")
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::CreateTableFromSnapshotRequest, request)
         assert_equal(formatted_parent, request.parent)
         assert_equal(table_id, request.table_id)
-        assert_equal(source_snapshot, request.source_snapshot)
+        assert_equal(formatted_source_snapshot, request.source_snapshot)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2.new(:create_table_from_snapshot, mock_method)
@@ -288,7 +288,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
             client.create_table_from_snapshot(
               formatted_parent,
               table_id,
-              source_snapshot
+              formatted_source_snapshot
             )
           end
 
@@ -824,7 +824,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
     it 'invokes get_iam_policy without error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      resource = ''
 
       # Create expected grpc response
       version = 351608024
@@ -835,7 +835,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         OpenStruct.new(execute: expected_response)
       end
       mock_stub = MockGrpcClientStub_v2.new(:get_iam_policy, mock_method)
@@ -848,13 +848,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
 
           # Call method
-          response = client.get_iam_policy(formatted_resource)
+          response = client.get_iam_policy(resource)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.get_iam_policy(formatted_resource) do |response, operation|
+          client.get_iam_policy(resource) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -865,12 +865,12 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
     it 'invokes get_iam_policy with error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      resource = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::GetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2.new(:get_iam_policy, mock_method)
@@ -884,7 +884,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
-            client.get_iam_policy(formatted_resource)
+            client.get_iam_policy(resource)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -899,7 +899,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
     it 'invokes set_iam_policy without error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      resource = ''
       policy = {}
 
       # Create expected grpc response
@@ -911,7 +911,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         OpenStruct.new(execute: expected_response)
       end
@@ -925,13 +925,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
 
           # Call method
-          response = client.set_iam_policy(formatted_resource, policy)
+          response = client.set_iam_policy(resource, policy)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.set_iam_policy(formatted_resource, policy) do |response, operation|
+          client.set_iam_policy(resource, policy) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -942,13 +942,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
     it 'invokes set_iam_policy with error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      resource = ''
       policy = {}
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::SetIamPolicyRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         assert_equal(Google::Gax::to_proto(policy, Google::Iam::V1::Policy), request.policy)
         raise custom_error
       end
@@ -963,7 +963,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
-            client.set_iam_policy(formatted_resource, policy)
+            client.set_iam_policy(resource, policy)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -978,7 +978,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
     it 'invokes test_iam_permissions without error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      resource = ''
       permissions = []
 
       # Create expected grpc response
@@ -988,7 +988,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         assert_equal(permissions, request.permissions)
         OpenStruct.new(execute: expected_response)
       end
@@ -1002,13 +1002,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
 
           # Call method
-          response = client.test_iam_permissions(formatted_resource, permissions)
+          response = client.test_iam_permissions(resource, permissions)
 
           # Verify the response
           assert_equal(expected_response, response)
 
           # Call method with block
-          client.test_iam_permissions(formatted_resource, permissions) do |response, operation|
+          client.test_iam_permissions(resource, permissions) do |response, operation|
             # Verify the response
             assert_equal(expected_response, response)
             refute_nil(operation)
@@ -1019,13 +1019,13 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
     it 'invokes test_iam_permissions with error' do
       # Create request parameters
-      formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
+      resource = ''
       permissions = []
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Iam::V1::TestIamPermissionsRequest, request)
-        assert_equal(formatted_resource, request.resource)
+        assert_equal(resource, request.resource)
         assert_equal(permissions, request.permissions)
         raise custom_error
       end
@@ -1040,7 +1040,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
-            client.test_iam_permissions(formatted_resource, permissions)
+            client.test_iam_permissions(resource, permissions)
           end
 
           # Verify the GaxError wrapped the custom error that was raised.
@@ -1056,18 +1056,17 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
     it 'invokes snapshot_table without error' do
       # Create request parameters
       formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
-      cluster = ''
+      formatted_cluster = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
       snapshot_id = ''
-      description = ''
 
       # Create expected grpc response
       name_2 = "name2-1052831874"
       data_size_bytes = 2110122398
-      description_2 = "description2568623279"
+      description = "description-1724546052"
       expected_response = {
         name: name_2,
         data_size_bytes: data_size_bytes,
-        description: description_2
+        description: description
       }
       expected_response = Google::Gax::to_proto(expected_response, Google::Bigtable::Admin::V2::Snapshot)
       result = Google::Protobuf::Any.new
@@ -1082,9 +1081,8 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::SnapshotTableRequest, request)
         assert_equal(formatted_name, request.name)
-        assert_equal(cluster, request.cluster)
+        assert_equal(formatted_cluster, request.cluster)
         assert_equal(snapshot_id, request.snapshot_id)
-        assert_equal(description, request.description)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v2.new(:snapshot_table, mock_method)
@@ -1099,9 +1097,8 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           # Call method
           response = client.snapshot_table(
             formatted_name,
-            cluster,
-            snapshot_id,
-            description
+            formatted_cluster,
+            snapshot_id
           )
 
           # Verify the response
@@ -1113,9 +1110,8 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
     it 'invokes snapshot_table and returns an operation error.' do
       # Create request parameters
       formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
-      cluster = ''
+      formatted_cluster = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
       snapshot_id = ''
-      description = ''
 
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
@@ -1131,9 +1127,8 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::SnapshotTableRequest, request)
         assert_equal(formatted_name, request.name)
-        assert_equal(cluster, request.cluster)
+        assert_equal(formatted_cluster, request.cluster)
         assert_equal(snapshot_id, request.snapshot_id)
-        assert_equal(description, request.description)
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v2.new(:snapshot_table, mock_method)
@@ -1148,9 +1143,8 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           # Call method
           response = client.snapshot_table(
             formatted_name,
-            cluster,
-            snapshot_id,
-            description
+            formatted_cluster,
+            snapshot_id
           )
 
           # Verify the response
@@ -1163,17 +1157,15 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
     it 'invokes snapshot_table with error' do
       # Create request parameters
       formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.table_path("[PROJECT]", "[INSTANCE]", "[TABLE]")
-      cluster = ''
+      formatted_cluster = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
       snapshot_id = ''
-      description = ''
 
       # Mock Grpc layer
       mock_method = proc do |request|
         assert_instance_of(Google::Bigtable::Admin::V2::SnapshotTableRequest, request)
         assert_equal(formatted_name, request.name)
-        assert_equal(cluster, request.cluster)
+        assert_equal(formatted_cluster, request.cluster)
         assert_equal(snapshot_id, request.snapshot_id)
-        assert_equal(description, request.description)
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2.new(:snapshot_table, mock_method)
@@ -1189,9 +1181,8 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
             client.snapshot_table(
               formatted_name,
-              cluster,
-              snapshot_id,
-              description
+              formatted_cluster,
+              snapshot_id
             )
           end
 
@@ -1875,9 +1866,6 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
     custom_error = CustomTestError_v2.new "Custom test error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#restore_table."
 
     it 'invokes restore_table without error' do
-      # Create request parameters
-      parent = ''
-
       # Create expected grpc response
       name = "name3373707"
       expected_response = { name: name }
@@ -1891,9 +1879,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       )
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Bigtable::Admin::V2::RestoreTableRequest, request)
-        assert_equal(parent, request.parent)
+      mock_method = proc do
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v2.new(:restore_table, mock_method)
@@ -1906,7 +1892,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
 
           # Call method
-          response = client.restore_table(parent)
+          response = client.restore_table
 
           # Verify the response
           assert_equal(expected_response, response.response)
@@ -1915,9 +1901,6 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
     end
 
     it 'invokes restore_table and returns an operation error.' do
-      # Create request parameters
-      parent = ''
-
       # Create expected grpc response
       operation_error = Google::Rpc::Status.new(
         message: 'Operation error for Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient#restore_table.'
@@ -1929,9 +1912,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
       )
 
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Bigtable::Admin::V2::RestoreTableRequest, request)
-        assert_equal(parent, request.parent)
+      mock_method = proc do
         OpenStruct.new(execute: operation)
       end
       mock_stub = MockGrpcClientStub_v2.new(:restore_table, mock_method)
@@ -1944,7 +1925,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
           client = Google::Cloud::Bigtable::Admin::BigtableTableAdmin.new(version: :v2)
 
           # Call method
-          response = client.restore_table(parent)
+          response = client.restore_table
 
           # Verify the response
           assert(response.error?)
@@ -1954,13 +1935,8 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
     end
 
     it 'invokes restore_table with error' do
-      # Create request parameters
-      parent = ''
-
       # Mock Grpc layer
-      mock_method = proc do |request|
-        assert_instance_of(Google::Bigtable::Admin::V2::RestoreTableRequest, request)
-        assert_equal(parent, request.parent)
+      mock_method = proc do
         raise custom_error
       end
       mock_stub = MockGrpcClientStub_v2.new(:restore_table, mock_method)
@@ -1974,7 +1950,7 @@ describe Google::Cloud::Bigtable::Admin::V2::BigtableTableAdminClient do
 
           # Call method
           err = assert_raises Google::Gax::GaxError, CustomTestError_v2 do
-            client.restore_table(parent)
+            client.restore_table
           end
 
           # Verify the GaxError wrapped the custom error that was raised.

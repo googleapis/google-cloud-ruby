@@ -39,7 +39,7 @@
       },
       "methods": {
         "CreateInstance": {
-          "timeout_millis": 300000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "non_idempotent_heavy_params"
         },
@@ -120,7 +120,7 @@
         },
         "GetIamPolicy": {
           "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "idempotent_params"
         },
         "SetIamPolicy": {

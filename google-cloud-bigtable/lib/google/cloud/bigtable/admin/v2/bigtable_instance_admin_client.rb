@@ -616,13 +616,16 @@ module Google
             # name and type for an Instance. To update other Instance properties, such as
             # labels, use PartialUpdateInstance.
             #
-            # @param name [String]
-            #   The unique name of the instance. Values are of the form
-            #   `projects/{project}/instances/[a-z][a-z0-9\\-]+[a-z0-9]`.
             # @param display_name [String]
             #   Required. The descriptive name for this instance as it appears in UIs.
             #   Can be changed at any time, but should be kept globally unique
             #   to avoid confusion.
+            # @param name [String]
+            #   The unique name of the instance. Values are of the form
+            #   `projects/{project}/instances/[a-z][a-z0-9\\-]+[a-z0-9]`.
+            # @param state [Google::Bigtable::Admin::V2::Instance::State]
+            #   (`OutputOnly`)
+            #   The current state of the instance.
             # @param type [Google::Bigtable::Admin::V2::Instance::Type]
             #   The type of the instance. Defaults to `PRODUCTION`.
             # @param labels [Hash{String => String}]
@@ -637,9 +640,6 @@ module Google
             #     the regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`.
             #   * No more than 64 labels can be associated with a given resource.
             #   * Keys and values must both be under 128 bytes.
-            # @param state [Google::Bigtable::Admin::V2::Instance::State]
-            #   (`OutputOnly`)
-            #   The current state of the instance.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -652,32 +652,25 @@ module Google
             #   require "google/cloud/bigtable/admin"
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
-            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
             #
             #   # TODO: Initialize `display_name`:
             #   display_name = ''
-            #
-            #   # TODO: Initialize `type`:
-            #   type = :TYPE_UNSPECIFIED
-            #
-            #   # TODO: Initialize `labels`:
-            #   labels = {}
-            #   response = bigtable_instance_admin_client.update_instance(formatted_name, display_name, type, labels)
+            #   response = bigtable_instance_admin_client.update_instance(display_name)
 
             def update_instance \
-                name,
                 display_name,
-                type,
-                labels,
+                name: nil,
                 state: nil,
+                type: nil,
+                labels: nil,
                 options: nil,
                 &block
               req = {
-                name: name,
                 display_name: display_name,
+                name: name,
+                state: state,
                 type: type,
-                labels: labels,
-                state: state
+                labels: labels
               }.delete_if { |_, v| v.nil? }
               req = Google::Gax::to_proto(req, Google::Bigtable::Admin::V2::Instance)
               @update_instance.call(req, options, &block)
@@ -940,12 +933,12 @@ module Google
 
             # Updates a cluster within an instance.
             #
+            # @param serve_nodes [Integer]
+            #   Required. The number of nodes allocated to this cluster. More nodes enable
+            #   higher throughput and more consistent performance.
             # @param name [String]
             #   The unique name of the cluster. Values are of the form
             #   `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
-            # @param serve_nodes [Integer]
-            #   Required. The number of nodes allocated to this cluster. More nodes enable higher
-            #   throughput and more consistent performance.
             # @param location [String]
             #   (`CreationOnly`)
             #   The location where this cluster's nodes and storage reside. For best
@@ -967,13 +960,12 @@ module Google
             #   require "google/cloud/bigtable/admin"
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
-            #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.cluster_path("[PROJECT]", "[INSTANCE]", "[CLUSTER]")
             #
             #   # TODO: Initialize `serve_nodes`:
             #   serve_nodes = 0
             #
             #   # Register a callback during the method call.
-            #   operation = bigtable_instance_admin_client.update_cluster(formatted_name, serve_nodes) do |op|
+            #   operation = bigtable_instance_admin_client.update_cluster(serve_nodes) do |op|
             #     raise op.results.message if op.error?
             #     op_results = op.results
             #     # Process the results.
@@ -1000,15 +992,15 @@ module Google
             #   operation.wait_until_done!
 
             def update_cluster \
-                name,
                 serve_nodes,
+                name: nil,
                 location: nil,
                 state: nil,
                 default_storage_type: nil,
                 options: nil
               req = {
-                name: name,
                 serve_nodes: serve_nodes,
+                name: name,
                 location: location,
                 state: state,
                 default_storage_type: default_storage_type
@@ -1151,15 +1143,11 @@ module Google
             #   Use `{instance} = '-'` to list AppProfiles for all Instances in a project,
             #   e.g., `projects/myproject/instances/-`.
             # @param page_size [Integer]
-            #   Maximum number of results per page.
-            #
-            #   A page_size of zero lets the server choose the number of items to return.
-            #   A page_size which is strictly positive will return at most that many items.
-            #   A negative page_size will cause an error.
-            #
-            #   Following the first request, subsequent paginated calls are not required
-            #   to pass a page_size. If a page_size is set in subsequent calls, it must
-            #   match the page_size given in the first request.
+            #   The maximum number of resources contained in the underlying API
+            #   response. If page streaming is performed per-resource, this
+            #   parameter does not affect the return value. If page streaming is
+            #   performed per-page, this determines the maximum number of
+            #   resources in a page.
             # @param options [Google::Gax::CallOptions]
             #   Overrides the default settings for this call, e.g, timeout,
             #   retries, etc.
@@ -1301,14 +1289,11 @@ module Google
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
             #   formatted_name = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.app_profile_path("[PROJECT]", "[INSTANCE]", "[APP_PROFILE]")
-            #
-            #   # TODO: Initialize `ignore_warnings`:
-            #   ignore_warnings = false
-            #   bigtable_instance_admin_client.delete_app_profile(formatted_name, ignore_warnings)
+            #   bigtable_instance_admin_client.delete_app_profile(formatted_name)
 
             def delete_app_profile \
                 name,
-                ignore_warnings,
+                ignore_warnings: nil,
                 options: nil,
                 &block
               req = {
@@ -1343,8 +1328,10 @@ module Google
             #   require "google/cloud/bigtable/admin"
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
-            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
-            #   response = bigtable_instance_admin_client.get_iam_policy(formatted_resource)
+            #
+            #   # TODO: Initialize `resource`:
+            #   resource = ''
+            #   response = bigtable_instance_admin_client.get_iam_policy(resource)
 
             def get_iam_policy \
                 resource,
@@ -1384,11 +1371,13 @@ module Google
             #   require "google/cloud/bigtable/admin"
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
-            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #
+            #   # TODO: Initialize `resource`:
+            #   resource = ''
             #
             #   # TODO: Initialize `policy`:
             #   policy = {}
-            #   response = bigtable_instance_admin_client.set_iam_policy(formatted_resource, policy)
+            #   response = bigtable_instance_admin_client.set_iam_policy(resource, policy)
 
             def set_iam_policy \
                 resource,
@@ -1425,11 +1414,13 @@ module Google
             #   require "google/cloud/bigtable/admin"
             #
             #   bigtable_instance_admin_client = Google::Cloud::Bigtable::Admin::BigtableInstanceAdmin.new(version: :v2)
-            #   formatted_resource = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdminClient.instance_path("[PROJECT]", "[INSTANCE]")
+            #
+            #   # TODO: Initialize `resource`:
+            #   resource = ''
             #
             #   # TODO: Initialize `permissions`:
             #   permissions = []
-            #   response = bigtable_instance_admin_client.test_iam_permissions(formatted_resource, permissions)
+            #   response = bigtable_instance_admin_client.test_iam_permissions(resource, permissions)
 
             def test_iam_permissions \
                 resource,
