@@ -38,7 +38,7 @@ class KokoroBuilder < Command
     gems.each do |gem|
       name = gem.split("google-cloud-").last
       build_types = [:continuous, :nightly]
-      build_types += [:samples_latest, :samples_master, :samples_presubmit] unless name =~ /-v\d\w*$/
+      build_types += [:samples_latest, :samples_presubmit] unless name =~ /-v\d\w*$/
       [:linux, :windows, :osx].each do |os_version|
         build_types.each do |build_type|
           next if build_type == :samples_presubmit && os_version != :linux
