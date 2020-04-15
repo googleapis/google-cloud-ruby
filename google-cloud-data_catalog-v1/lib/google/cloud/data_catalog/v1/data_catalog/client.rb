@@ -225,7 +225,8 @@ module Google
             # across repeated search queries.
             #
             # See [Data Catalog Search
-            # Syntax](/data-catalog/docs/how-to/search-reference) for more information.
+            # Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
+            # for more information.
             #
             # @overload search_catalog(request, options = nil)
             #   Pass arguments to `search_catalog` via a request object, either of type
@@ -258,7 +259,8 @@ module Google
             #
             #     Note: Query tokens need to have a minimum of 3 characters for substring
             #     matching to work correctly. See [Data Catalog Search
-            #     Syntax](/data-catalog/docs/how-to/search-reference) for more information.
+            #     Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
+            #     for more information.
             #   @param page_size [Integer]
             #     Number of results in the search page. If <=0 then defaults to 10. Max limit
             #     for page_size is 1000. Throws an invalid argument for page_size > 1000.
@@ -337,7 +339,8 @@ module Google
             #
             # Users should enable the Data Catalog API in the project identified by
             # the `parent` parameter (see [Data Catalog Resource Project]
-            # (/data-catalog/docs/concepts/resource-project) for more information).
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
+            # more information).
             #
             # @overload create_entry_group(request, options = nil)
             #   Pass arguments to `create_entry_group` via a request object, either of type
@@ -485,8 +488,9 @@ module Google
             ##
             # Updates an EntryGroup. The user should enable the Data Catalog API in the
             # project identified by the `entry_group.name` parameter (see [Data Catalog
-            # Resource Project] (/data-catalog/docs/concepts/resource-project) for more
-            # information).
+            # Resource Project]
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
+            # more information).
             #
             # @overload update_entry_group(request, options = nil)
             #   Pass arguments to `update_entry_group` via a request object, either of type
@@ -558,7 +562,8 @@ module Google
             # Deletes an EntryGroup. Only entry groups that do not contain entries can be
             # deleted. Users should enable the Data Catalog API in the project
             # identified by the `name` parameter (see [Data Catalog Resource Project]
-            # (/data-catalog/docs/concepts/resource-project) for more information).
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
+            # more information).
             #
             # @overload delete_entry_group(request, options = nil)
             #   Pass arguments to `delete_entry_group` via a request object, either of type
@@ -708,7 +713,8 @@ module Google
             #
             # Users should enable the Data Catalog API in the project identified by
             # the `parent` parameter (see [Data Catalog Resource Project]
-            # (/data-catalog/docs/concepts/resource-project) for more information).
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
+            # more information).
             #
             # A maximum of 100,000 entries may be created per entry group.
             #
@@ -788,7 +794,8 @@ module Google
             # Updates an existing entry.
             # Users should enable the Data Catalog API in the project identified by
             # the `entry.name` parameter (see [Data Catalog Resource Project]
-            # (/data-catalog/docs/concepts/resource-project) for more information).
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
+            # more information).
             #
             # @overload update_entry(request, options = nil)
             #   Pass arguments to `update_entry` via a request object, either of type
@@ -880,7 +887,8 @@ module Google
             # method can be deleted.
             # Users should enable the Data Catalog API in the project identified by
             # the `name` parameter (see [Data Catalog Resource Project]
-            # (/data-catalog/docs/concepts/resource-project) for more information).
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
+            # more information).
             #
             # @overload delete_entry(request, options = nil)
             #   Pass arguments to `delete_entry` via a request object, either of type
@@ -1050,7 +1058,7 @@ module Google
             #
             #     Examples:
             #
-            #       * `cloud_pubsub.project_id.topic_id`
+            #       * `pubsub.project_id.topic_id`
             #       * ``pubsub.project_id.`topic.id.with.dots` ``
             #       * `bigquery.table.project_id.dataset_id.table_id`
             #       * `bigquery.dataset.project_id.dataset_id`
@@ -1182,8 +1190,9 @@ module Google
             ##
             # Creates a tag template. The user should enable the Data Catalog API in
             # the project identified by the `parent` parameter (see [Data Catalog
-            # Resource Project](/data-catalog/docs/concepts/resource-project) for more
-            # information).
+            # Resource
+            # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
+            # for more information).
             #
             # @overload create_tag_template(request, options = nil)
             #   Pass arguments to `create_tag_template` via a request object, either of type
@@ -1202,8 +1211,7 @@ module Google
             #
             #   @param parent [String]
             #     Required. The name of the project and the template location
-            #     [region](/compute/docs/regions-zones/#available).
-            #     NOTE: Currently, only the `us-central1 region` is supported.
+            #     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
             #
             #     Example:
             #
@@ -1332,7 +1340,8 @@ module Google
             # and should be updated using their own create/update/delete methods.
             # Users should enable the Data Catalog API in the project identified by
             # the `tag_template.name` parameter (see [Data Catalog Resource Project]
-            # (/data-catalog/docs/concepts/resource-project) for more information).
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
+            # more information).
             #
             # @overload update_tag_template(request, options = nil)
             #   Pass arguments to `update_tag_template` via a request object, either of type
@@ -1409,7 +1418,8 @@ module Google
             # Deletes a tag template and all tags using the template.
             # Users should enable the Data Catalog API in the project identified by
             # the `name` parameter (see [Data Catalog Resource Project]
-            # (/data-catalog/docs/concepts/resource-project) for more information).
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
+            # more information).
             #
             # @overload delete_tag_template(request, options = nil)
             #   Pass arguments to `delete_tag_template` via a request object, either of type
@@ -1484,8 +1494,8 @@ module Google
             # Creates a field in a tag template. The user should enable the Data Catalog
             # API in the project identified by the `parent` parameter (see
             # [Data Catalog Resource
-            # Project](/data-catalog/docs/concepts/resource-project) for more
-            # information).
+            # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
+            # for more information).
             #
             # @overload create_tag_template_field(request, options = nil)
             #   Pass arguments to `create_tag_template_field` via a request object, either of type
@@ -1504,8 +1514,7 @@ module Google
             #
             #   @param parent [String]
             #     Required. The name of the project and the template location
-            #     [region](/compute/docs/regions-zones/#available).
-            #     NOTE: Currently, only the `us-central1 region` is supported.
+            #     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
             #
             #     Example:
             #
@@ -1568,7 +1577,8 @@ module Google
             # Updates a field in a tag template. This method cannot be used to update the
             # field type. Users should enable the Data Catalog API in the project
             # identified by the `name` parameter (see [Data Catalog Resource Project]
-            # (/data-catalog/docs/concepts/resource-project) for more information).
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
+            # more information).
             #
             # @overload update_tag_template_field(request, options = nil)
             #   Pass arguments to `update_tag_template_field` via a request object, either of type
@@ -1655,8 +1665,9 @@ module Google
             ##
             # Renames a field in a tag template. The user should enable the Data Catalog
             # API in the project identified by the `name` parameter (see [Data Catalog
-            # Resource Project](/data-catalog/docs/concepts/resource-project) for more
-            # information).
+            # Resource
+            # Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
+            # for more information).
             #
             # @overload rename_tag_template_field(request, options = nil)
             #   Pass arguments to `rename_tag_template_field` via a request object, either of type
@@ -1729,7 +1740,8 @@ module Google
             # Deletes a field in a tag template and all uses of that field.
             # Users should enable the Data Catalog API in the project identified by
             # the `name` parameter (see [Data Catalog Resource Project]
-            # (/data-catalog/docs/concepts/resource-project) for more information).
+            # (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
+            # more information).
             #
             # @overload delete_tag_template_field(request, options = nil)
             #   Pass arguments to `delete_tag_template_field` via a request object, either of type
@@ -1803,10 +1815,10 @@ module Google
             ##
             # Creates a tag on an {Google::Cloud::DataCatalog::V1::Entry Entry}.
             # Note: The project identified by the `parent` parameter for the
-            # [tag](/data-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries.tags/create#path-parameters)
+            # [tag](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries.tags/create#path-parameters)
             # and the
             # [tag
-            # template](/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters)
+            # template](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters)
             # used to create the tag must be from the same organization.
             #
             # @overload create_tag(request, options = nil)
