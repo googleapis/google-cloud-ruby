@@ -1,5 +1,15 @@
 # Release History
 
+### 0.1.4 / 2020-04-13
+
+#### Documentation
+
+* Various documentation and other updates.
+  * Expanded the readme to include quickstart and logging information.
+  * Added documentation for package and service modules.
+  * Fixed and expanded documentation for the two method calling conventions.
+  * Fixed some circular require warnings.
+
 ### 0.1.3 / 2020-04-06
 
 #### Documentation

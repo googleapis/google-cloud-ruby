@@ -1,27 +1,33 @@
 {
-  "updateTime": "2020-03-28T10:47:53.427359Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "1.1.1",
-        "dockerImage": "googleapis/artman@sha256:5ef340c8d9334719bc5c6981d95f4a5d2737b0a6a24f2b9a0d430e96fff85c5b"
+        "version": "2.0.0",
+        "dockerImage": "googleapis/artman@sha256:b3b47805231a305d0f40c4bf069df20f6a2635574e6d4259fac651d3f9f6e098"
+      }
+    },
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
+        "sha": "3b2d6e237a9df5b950652210de641a55529891d0"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "558b800ed594acc02555cc560fbb39c0e42bc438",
-        "internalRef": "303431167",
-        "log": "558b800ed594acc02555cc560fbb39c0e42bc438\nchore: turn on gapic v2 for Dataproc API.\nfix:\n- add missing method signatures\n- remove resource_reference not on a string field\n- adjust resource name pattern orders\n\nPiperOrigin-RevId: 303431167\n\n8eb444cf5ff63f68d826acbb37b2ac3da58655fb\nAdd logging protos for Recommender v1beta1.\n\nPiperOrigin-RevId: 303426030\n\n48a166ce9f6e2a88b10947341b37336fe9dd3478\nPush of PHP, C# and Ruby namespaces\n\nPiperOrigin-RevId: 303302813\n\n"
+        "sha": "1bd77e8ce6f953ac641af7966d0c52646afc16a8",
+        "internalRef": "305974465"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "e36822bfa0acb355502dab391b8ef9c4f30208d8"
+        "sha": "21c3b57ae54ae9db6a3a6b48b31c970c6ab56f19",
+        "log": "21c3b57ae54ae9db6a3a6b48b31c970c6ab56f19\nbuild(nodejs): remove unused codecov config (#486)\n\n\n"
       }
     }
   ],

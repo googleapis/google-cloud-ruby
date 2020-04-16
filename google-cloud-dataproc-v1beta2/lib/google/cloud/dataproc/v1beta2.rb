@@ -20,3 +20,19 @@ require "google/cloud/dataproc/v1beta2/autoscaling_policy_service"
 require "google/cloud/dataproc/v1beta2/cluster_controller"
 require "google/cloud/dataproc/v1beta2/job_controller"
 require "google/cloud/dataproc/v1beta2/workflow_template_service"
+require "google/cloud/dataproc/v1beta2/version"
+
+module Google
+  module Cloud
+    module Dataproc
+      ##
+      # To load this package, including all its services, and instantiate a client:
+      #
+      #     require "google/cloud/dataproc/v1beta2"
+      #     client = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new
+      #
+      module V1beta2
+      end
+    end
+  end
+end

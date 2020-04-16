@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2020-04-13
+
+#### Features
+
+* Let Bundler.require load the gem without an extra explicit require call.
+
 ### 0.3.1 / 2020-03-25
 
 #### Documentation

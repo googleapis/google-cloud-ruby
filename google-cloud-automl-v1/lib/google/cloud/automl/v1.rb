@@ -18,3 +18,19 @@
 
 require "google/cloud/automl/v1/prediction_service"
 require "google/cloud/automl/v1/automl"
+require "google/cloud/automl/v1/version"
+
+module Google
+  module Cloud
+    module AutoML
+      ##
+      # To load this package, including all its services, and instantiate a client:
+      #
+      #     require "google/cloud/automl/v1"
+      #     client = Google::Cloud::AutoML::V1::PredictionService::Client.new
+      #
+      module V1
+      end
+    end
+  end
+end

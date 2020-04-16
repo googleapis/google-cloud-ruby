@@ -11,30 +11,25 @@ AllCops:
     - "Rakefile"
 
 Metrics/AbcSize:
-  Exclude:
-    - "lib/google/cloud/bigquery/storage/v1/big_query_read/*.rb"
+  Enabled: false
 Metrics/ClassLength:
-  Exclude:
-    - "lib/google/cloud/bigquery/storage/v1/big_query_read/*.rb"
+  Enabled: false
 Metrics/CyclomaticComplexity:
-  Exclude:
-    - "lib/google/cloud/bigquery/storage/v1/big_query_read/*.rb"
+  Enabled: false
 Metrics/LineLength:
-  Exclude:
-    - "lib/google/cloud/bigquery/storage/v1/big_query_read/*.rb"
-    - "google-cloud-bigquery-storage-v1.gemspec"
+  Enabled: false
 Metrics/MethodLength:
-  Exclude:
-    - "lib/google/cloud/bigquery/storage/v1/big_query_read/*.rb"
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
 Metrics/PerceivedComplexity:
-  Exclude:
-    - "lib/google/cloud/bigquery/storage/v1/big_query_read/*.rb"
+  Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-bigquery-storage-v1.rb"
 Style/CaseEquality:
-  Exclude:
-    - "lib/google/cloud/bigquery/storage/v1/big_query_read/*.rb"
-    - "lib/google/cloud/bigquery/storage/v1.rb"
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
 Style/ModuleFunction:
   Enabled: false

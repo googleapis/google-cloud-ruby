@@ -1,5 +1,18 @@
 # Release History
 
+### 0.3.0 / 2020-04-14
+
+#### Features
+
+* Support additional IAM features, and other updates.
+  * Added support for IAM policy options.
+  * Added support for IAM policy binding conditions.
+  * Added support for IAM audit config deltas.
+  * Expanded the readme to include quickstart and logging information.
+  * Added documentation for package and service modules.
+  * Fixed and expanded documentation for the two method calling conventions.
+  * Fixed some circular require warnings.
+
 ### 0.2.1 / 2020-04-01
 
 #### Documentation
