@@ -1,5 +1,16 @@
 # Release History
 
+### 0.9.0 / 2020-04-16
+
+#### ⚠ BREAKING CHANGES
+
+* **asset:** use clients created by the new generator
+
+#### Features
+
+* Let Bundler.require load the gem without an extra explicit require call.
+* use clients created by the new generator
+
 ### 0.8.1 / 2020-03-16
 
 #### Documentation
