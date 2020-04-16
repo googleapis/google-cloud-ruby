@@ -526,9 +526,6 @@ module Google
           #   parent project (i.e.,
           #   service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
           #   permission to Acknowledge() messages on this subscription.
-          #   <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
-          #   API might be changed in backward-incompatible ways and is not recommended
-          #   for production use. It is not subject to any SLA or deprecation policy.
           #   A hash of the same form as `Google::Cloud::PubSub::V1::DeadLetterPolicy`
           #   can also be provided.
           # @param retry_policy [Google::Cloud::PubSub::V1::RetryPolicy | Hash]
@@ -1322,8 +1319,8 @@ module Google
           # Sets the access control policy on the specified resource. Replaces
           # any existing policy.
           #
-          # Can return Public Errors: NOT_FOUND, INVALID_ARGUMENT and
-          # PERMISSION_DENIED
+          # Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED`
+          # errors.
           #
           # @param resource [String]
           #   REQUIRED: The resource for which the policy is being specified.
@@ -1411,7 +1408,7 @@ module Google
 
           # Returns permissions that a caller has on the specified resource. If the
           # resource does not exist, this will return an empty set of
-          # permissions, not a NOT_FOUND error.
+          # permissions, not a `NOT_FOUND` error.
           #
           # Note: This operation is designed to be used for building
           # permission-aware UIs and command-line tools, not for authorization
