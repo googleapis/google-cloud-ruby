@@ -56,7 +56,7 @@ To run the unit tests, documentation tests, and code style checks together for a
 
 ``` sh
 $ cd <package-name>
-$ rake ci
+$ bundle exec rake ci
 ```
 
 To run the command above, plus all acceptance tests, use `rake ci:acceptance` or its handy alias, `rake ci:a`.
@@ -70,7 +70,7 @@ To run the unit tests for a package:
 
 ``` sh
 $ cd <package-name>
-$ rake test
+$ bundle exec rake test
 ```
 
 ### Documentation Tests
@@ -83,7 +83,7 @@ To run the documentation tests for a package:
 
 ``` sh
 $ cd <package-name>
-$ rake doctest
+$ bundle exec rake doctest
 ```
 
  If you add, remove or modify documentation examples when working on a pull request, you may need to update the setup for the tests. The stubs and mocks required to run the tests are located in `support/doctest_helper.rb` for each package. Please note that much of the setup is matched by the title of the [`@example`](http://www.rubydoc.info/gems/yard/file/docs/Tags.md#example) tag. If you alter an example's title, you may encounter breaking tests.
@@ -134,7 +134,7 @@ To run the acceptance tests for a package:
 
 ``` sh
 $ cd <package-name>
-$ rake acceptance[PROJECT_ID,KEYFILE_PATH]
+$ bundle exec rake acceptance[PROJECT_ID,KEYFILE_PATH]
 ```
 
 Or, if you prefer you can store the values in the `GCLOUD_TEST_PROJECT` and `GCLOUD_TEST_KEYFILE` environment variables:
@@ -143,7 +143,7 @@ Or, if you prefer you can store the values in the `GCLOUD_TEST_PROJECT` and `GCL
 $ cd <package-name>
 $ export GCLOUD_TEST_PROJECT=my-project-id
 $ export GCLOUD_TEST_KEYFILE=/path/to/keyfile.json
-$ rake acceptance
+$ bundle exec rake acceptance
 ```
 
 If you want to use different values for Datastore vs. Storage acceptance tests, for example, you can use the `DATASTORE_TEST_` and `STORAGE_TEST_` environment variables:
@@ -154,7 +154,7 @@ $ export DATASTORE_TEST_PROJECT=my-project-id
 $ export DATASTORE_TEST_KEYFILE=/path/to/keyfile.json
 $ export STORAGE_TEST_PROJECT=my-other-project-id
 $ export STORAGE_TEST_KEYFILE=/path/to/other/keyfile.json
-$ rake acceptance
+$ bundle exec rake acceptance
 ```
 
 ### Integration Tests
@@ -165,7 +165,7 @@ See the [integration/README.md](integration/README.md) for instructions on how t
 
 To run the integration tests:
 ```sh
-$ rake integration
+$ bundle exec rake integration
 ```
 
 
@@ -180,7 +180,7 @@ You can check your code against these rules by running Rubocop like so:
 
 ```sh
 $ cd <package-name>
-$ rake rubocop
+$ bundle exec rake rubocop
 ```
 
 ## Code of Conduct
