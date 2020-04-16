@@ -58,14 +58,14 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
       http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
 
       resp = http.get uri.request_uri
-      resp.code.must_equal "200"
+      _(resp.code).must_equal "200"
 
       Tempfile.open ["google-cloud", ".png"] do |tmpfile|
         tmpfile.binmode
         tmpfile.write resp.body
-        tmpfile.size.must_equal local_file.size
+        _(tmpfile.size).must_equal local_file.size
 
-        File.read(local_file.path, mode: "rb").must_equal File.read(tmpfile.path, mode: "rb")
+        _(File.read(local_file.path, mode: "rb")).must_equal File.read(tmpfile.path, mode: "rb")
       end
     end
 
@@ -84,8 +84,8 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
       req.content_type = "image/png"    # Required for V2
       resp = https.request(req)
 
-      resp.message.must_equal "Created"
-      resp.code.must_equal "201"
+      _(resp.message).must_equal "Created"
+      _(resp.code).must_equal "201"
     end
   end
 
@@ -104,14 +104,14 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
       http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
   
       resp = http.get uri.request_uri
-      resp.code.must_equal "200"
+      _(resp.code).must_equal "200"
   
       Tempfile.open ["google-cloud", ".png"] do |tmpfile|
         tmpfile.binmode
         tmpfile.write resp.body
-        tmpfile.size.must_equal local_file.size
+        _(tmpfile.size).must_equal local_file.size
   
-        File.read(local_file.path, mode: "rb").must_equal File.read(tmpfile.path, mode: "rb")
+        _(File.read(local_file.path, mode: "rb")).must_equal File.read(tmpfile.path, mode: "rb")
       end
     end
   
@@ -130,8 +130,8 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
       http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
   
       resp = http.get uri.request_uri
-      resp.code.must_equal "200"
-      resp["Content-Disposition"].must_equal "attachment; filename=\"google-cloud.png\""
+      _(resp.code).must_equal "200"
+      _(resp["Content-Disposition"]).must_equal "attachment; filename=\"google-cloud.png\""
     end
 
     it "should create a signed read url to list objects with version v2" do
@@ -142,15 +142,15 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
       url = bucket.signed_url method: "GET", expires: five_min_from_now
 
       uri = URI url
-      uri.path.must_equal "/#{bucket_name}/"
+      _(uri.path).must_equal "/#{bucket_name}/"
 
       http = Net::HTTP.new uri.host, uri.port
       http.use_ssl = true
       http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
 
       resp = http.get uri.request_uri
-      resp.code.must_equal "200"
-      resp.body.must_match "CloudLogoSignedUrlGetBucket.png" # in XML
+      _(resp.code).must_equal "200"
+      _(resp.body).must_match "CloudLogoSignedUrlGetBucket.png" # in XML
     end
   end
 
@@ -169,14 +169,14 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
       http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
 
       resp = http.get uri.request_uri
-      resp.code.must_equal "200"
+      _(resp.code).must_equal "200"
 
       Tempfile.open ["google-cloud", ".png"] do |tmpfile|
         tmpfile.binmode
         tmpfile.write resp.body
-        tmpfile.size.must_equal local_file.size
+        _(tmpfile.size).must_equal local_file.size
 
-        File.read(local_file.path, mode: "rb").must_equal File.read(tmpfile.path, mode: "rb")
+        _(File.read(local_file.path, mode: "rb")).must_equal File.read(tmpfile.path, mode: "rb")
       end
     end
   
@@ -195,8 +195,8 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
       http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
   
       resp = http.get uri.request_uri
-      resp.code.must_equal "200"
-      resp["Content-Disposition"].must_equal "attachment; filename=\"google-cloud.png\""
+      _(resp.code).must_equal "200"
+      _(resp["Content-Disposition"]).must_equal "attachment; filename=\"google-cloud.png\""
     end
   
     it "should create a signed delete url" do
@@ -212,7 +212,7 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
       http.ca_file ||= ENV["SSL_CERT_FILE"] if ENV["SSL_CERT_FILE"]
   
       resp = http.delete uri.request_uri
-      resp.code.must_equal "204"
+      _(resp.code).must_equal "204"
     end
   
     it "should create a signed url with public-read acl" do
@@ -231,14 +231,14 @@ describe Google::Cloud::Storage, :signed_url, :v2, :storage do
   
       resp = http.get uri.request_uri, { "X-Goog-meta-foo" => "bar,baz",
                                          "X-Goog-ACL" => "public-read" }
-      resp.code.must_equal "200"
+      _(resp.code).must_equal "200"
   
       Tempfile.open ["google-cloud", ".png"] do |tmpfile|
         tmpfile.binmode
         tmpfile.write resp.body
-        tmpfile.size.must_equal local_file.size
+        _(tmpfile.size).must_equal local_file.size
   
-        File.read(local_file.path, mode: "rb").must_equal File.read(tmpfile.path, mode: "rb")
+        _(File.read(local_file.path, mode: "rb")).must_equal File.read(tmpfile.path, mode: "rb")
       end
     end
   end

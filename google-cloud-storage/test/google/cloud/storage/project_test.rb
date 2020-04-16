@@ -42,8 +42,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     mock.expect :get_project_service_account, service_account_resp, [project]
     storage.service.mocked_service = mock
 
-    storage.service_account_email.must_equal email
-    storage.service_account_email.must_equal email # memoized, no request
+    _(storage.service_account_email).must_equal email
+    _(storage.service_account_email).must_equal email # memoized, no request
 
     mock.verify
   end
@@ -59,9 +59,9 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.location_type.must_equal bucket_location_type
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.location_type).must_equal bucket_location_type
   end
 
   it "creates a bucket with location" do
@@ -75,10 +75,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.location.must_equal bucket_location
-    bucket.location_type.must_equal bucket_location_type
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.location).must_equal bucket_location
+    _(bucket.location_type).must_equal bucket_location_type
   end
 
   it "creates a bucket with storage_class" do
@@ -92,9 +92,9 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.storage_class.must_equal bucket_storage_class
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.storage_class).must_equal bucket_storage_class
   end
 
   it "creates a bucket with versioning" do
@@ -108,9 +108,9 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.versioning?.must_equal true
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.versioning?).must_equal true
   end
 
   it "creates a bucket with logging bucket and prefix" do
@@ -124,10 +124,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.logging_bucket.must_equal bucket_logging_bucket
-    bucket.logging_prefix.must_equal bucket_logging_prefix
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.logging_bucket).must_equal bucket_logging_bucket
+    _(bucket.logging_prefix).must_equal bucket_logging_prefix
   end
 
   it "creates a bucket with website main and 404" do
@@ -141,10 +141,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.website_main.must_equal bucket_website_main
-    bucket.website_404.must_equal bucket_website_404
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.website_main).must_equal bucket_website_main
+    _(bucket.website_404).must_equal bucket_website_404
   end
 
   it "creates a bucket with requester pays" do
@@ -160,9 +160,9 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.requester_pays.must_equal bucket_requester_pays
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.requester_pays).must_equal bucket_requester_pays
   end
 
   it "creates a bucket with requester pays and user_project set to true" do
@@ -178,10 +178,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.requester_pays.must_equal bucket_requester_pays
-    bucket.user_project.must_equal true
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.requester_pays).must_equal bucket_requester_pays
+    _(bucket.user_project).must_equal true
   end
 
   it "creates a bucket with requester pays and user_project set to another project ID" do
@@ -197,10 +197,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.requester_pays.must_equal bucket_requester_pays
-    bucket.user_project.must_equal "my-other-project"
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.requester_pays).must_equal bucket_requester_pays
+    _(bucket.user_project).must_equal "my-other-project"
   end
 
   it "creates a bucket with block CORS" do
@@ -220,9 +220,9 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.cors.class.must_equal Google::Cloud::Storage::Bucket::Cors
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.cors.class).must_equal Google::Cloud::Storage::Bucket::Cors
   end
 
   it "creates a bucket with block lifecycle (Object Lifecycle Management)" do
@@ -239,9 +239,9 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.lifecycle.class.must_equal Google::Cloud::Storage::Bucket::Lifecycle
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.lifecycle.class).must_equal Google::Cloud::Storage::Bucket::Lifecycle
   end
 
   it "creates a bucket with block labels" do
@@ -254,16 +254,16 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     storage.service.mocked_service = mock
 
     bucket = storage.create_bucket bucket_name do |b|
-      b.labels.must_equal Hash.new
+      _(b.labels).must_equal Hash.new
       b.labels = { "env" => "production" }
       b.labels["foo"] = "bar"
     end
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
-    bucket.cors.class.must_equal Google::Cloud::Storage::Bucket::Cors
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.cors.class).must_equal Google::Cloud::Storage::Bucket::Cors
   end
 
   it "creates a bucket with block encryption" do
@@ -281,10 +281,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.default_kms_key.wont_be :nil?
-    bucket.default_kms_key.must_be_kind_of String
-    bucket.default_kms_key.must_equal kms_key
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.default_kms_key).wont_be :nil?
+    _(bucket.default_kms_key).must_be_kind_of String
+    _(bucket.default_kms_key).must_equal kms_key
   end
 
   it "creates a bucket with predefined acl" do
@@ -298,8 +298,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
   end
 
   it "creates a bucket with predefined acl alias" do
@@ -313,8 +313,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
   end
 
   it "creates a bucket with predefined default acl" do
@@ -328,8 +328,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
   end
 
   it "creates a bucket with predefined default acl alias" do
@@ -343,8 +343,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.name.must_equal bucket_name
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
   end
 
   it "creates a bucket with retention_period" do
@@ -370,10 +370,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.retention_period.must_equal bucket_retention_period
-    bucket.retention_effective_at.must_be_within_delta bucket_retention_effective_at
-    bucket.retention_policy_locked?.must_equal false
-    bucket.default_event_based_hold?.must_equal false
+    _(bucket.retention_period).must_equal bucket_retention_period
+    _(bucket.retention_effective_at).must_be_within_delta bucket_retention_effective_at
+    _(bucket.retention_policy_locked?).must_equal false
+    _(bucket.default_event_based_hold?).must_equal false
   end
 
   it "creates a bucket with default_event_based_hold" do
@@ -391,10 +391,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.retention_period.must_be :nil?
-    bucket.retention_effective_at.must_be :nil?
-    bucket.retention_policy_locked?.must_equal false
-    bucket.default_event_based_hold?.must_equal true
+    _(bucket.retention_period).must_be :nil?
+    _(bucket.retention_effective_at).must_be :nil?
+    _(bucket.retention_policy_locked?).must_equal false
+    _(bucket.default_event_based_hold?).must_equal true
   end
 
   it "raises when creating a bucket with a blank name" do
@@ -423,10 +423,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    buckets.size.must_equal num_buckets
+    _(buckets.size).must_equal num_buckets
     bucket = buckets.first
-    bucket.must_be_kind_of Google::Cloud::Storage::Bucket
-    bucket.location_type.must_equal "multi-region"
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.location_type).must_equal "multi-region"
   end
 
   it "lists buckets with find_buckets alias" do
@@ -441,7 +441,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    buckets.size.must_equal num_buckets
+    _(buckets.size).must_equal num_buckets
   end
 
   it "paginates buckets" do
@@ -456,12 +456,12 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    first_buckets.count.must_equal 3
-    first_buckets.token.wont_be :nil?
-    first_buckets.token.must_equal "next_page_token"
+    _(first_buckets.count).must_equal 3
+    _(first_buckets.token).wont_be :nil?
+    _(first_buckets.token).must_equal "next_page_token"
 
-    second_buckets.count.must_equal 2
-    second_buckets.token.must_be :nil?
+    _(second_buckets.count).must_equal 2
+    _(second_buckets.token).must_be :nil?
   end
 
   it "paginates buckets with max set" do
@@ -476,12 +476,12 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    first_buckets.count.must_equal 3
-    first_buckets.token.wont_be :nil?
-    first_buckets.token.must_equal "next_page_token"
+    _(first_buckets.count).must_equal 3
+    _(first_buckets.token).wont_be :nil?
+    _(first_buckets.token).must_equal "next_page_token"
 
-    second_buckets.count.must_equal 2
-    second_buckets.token.must_be :nil?
+    _(second_buckets.count).must_equal 2
+    _(second_buckets.token).must_be :nil?
   end
 
   it "paginates buckets without max set" do
@@ -496,11 +496,11 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    buckets.size.must_equal num_buckets
+    _(buckets.size).must_equal num_buckets
 
-    buckets.count.must_equal 3
-    buckets.token.wont_be :nil?
-    buckets.token.must_equal "next_page_token"
+    _(buckets.count).must_equal 3
+    _(buckets.token).wont_be :nil?
+    _(buckets.token).must_equal "next_page_token"
   end
 
   it "paginates buckets with next? and next" do
@@ -515,11 +515,11 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    first_buckets.count.must_equal 3
-    first_buckets.next?.must_equal true
+    _(first_buckets.count).must_equal 3
+    _(first_buckets.next?).must_equal true
 
-    second_buckets.count.must_equal 2
-    second_buckets.next?.must_equal false
+    _(second_buckets.count).must_equal 2
+    _(second_buckets.next?).must_equal false
   end
 
   it "paginates buckets with next? and next and max set" do
@@ -534,11 +534,11 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    first_buckets.count.must_equal 3
-    first_buckets.next?.must_equal true
+    _(first_buckets.count).must_equal 3
+    _(first_buckets.next?).must_equal true
 
-    second_buckets.count.must_equal 2
-    second_buckets.next?.must_equal false
+    _(second_buckets.count).must_equal 2
+    _(second_buckets.next?).must_equal false
   end
 
   it "paginates buckets with all" do
@@ -552,7 +552,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    buckets.count.must_equal 5
+    _(buckets.count).must_equal 5
   end
 
   it "paginates buckets with all and max set" do
@@ -566,7 +566,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    buckets.count.must_equal 5
+    _(buckets.count).must_equal 5
   end
 
   it "iterates buckets with all using Enumerator" do
@@ -580,7 +580,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    buckets.count.must_equal 5
+    _(buckets.count).must_equal 5
   end
 
   it "iterates buckets with all and request_limit set" do
@@ -594,7 +594,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    buckets.count.must_equal 6
+    _(buckets.count).must_equal 6
   end
 
   it "iterates buckets with all and user_project set to true" do
@@ -608,8 +608,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    buckets.count.must_equal 6
-    buckets.first.user_project.must_equal true
+    _(buckets.count).must_equal 6
+    _(buckets.first.user_project).must_equal true
   end
 
   it "iterates buckets with all and user_project set to another project ID" do
@@ -623,8 +623,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    buckets.count.must_equal 6
-    buckets.first.user_project.must_equal "my-other-project"
+    _(buckets.count).must_equal 6
+    _(buckets.first.user_project).must_equal "my-other-project"
   end
 
   it "finds a bucket" do
@@ -639,8 +639,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.name.must_equal bucket_name
-    bucket.wont_be :lazy?
+    _(bucket.name).must_equal bucket_name
+    _(bucket).wont_be :lazy?
   end
 
   it "finds a bucket with find_bucket alias" do
@@ -655,8 +655,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.name.must_equal bucket_name
-    bucket.wont_be :lazy?
+    _(bucket.name).must_equal bucket_name
+    _(bucket).wont_be :lazy?
   end
 
   it "finds a bucket with user_project set to true" do
@@ -671,8 +671,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.name.must_equal bucket_name
-    bucket.wont_be :lazy?
+    _(bucket.name).must_equal bucket_name
+    _(bucket).wont_be :lazy?
   end
 
   it "finds a bucket with user_project set to another project ID" do
@@ -687,8 +687,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.name.must_equal bucket_name
-    bucket.wont_be :lazy?
+    _(bucket.name).must_equal bucket_name
+    _(bucket).wont_be :lazy?
   end
 
   it "returns a lazy bucket" do
@@ -702,8 +702,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.name.must_equal bucket_name
-    bucket.must_be :lazy?
+    _(bucket.name).must_equal bucket_name
+    _(bucket).must_be :lazy?
   end
 
   it "returns a lazy bucket with find_bucket alias" do
@@ -717,8 +717,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.name.must_equal bucket_name
-    bucket.must_be :lazy?
+    _(bucket.name).must_equal bucket_name
+    _(bucket).must_be :lazy?
   end
 
   it "returns a lazy bucket with user_project set to true" do
@@ -732,8 +732,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.name.must_equal bucket_name
-    bucket.must_be :lazy?
+    _(bucket.name).must_equal bucket_name
+    _(bucket).must_be :lazy?
   end
 
   it "returns a lazy bucket with user_project set to another project ID" do
@@ -747,8 +747,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     mock.verify
 
-    bucket.name.must_equal bucket_name
-    bucket.must_be :lazy?
+    _(bucket.name).must_equal bucket_name
+    _(bucket).must_be :lazy?
   end
 
   def bucket_with_location created_bucket

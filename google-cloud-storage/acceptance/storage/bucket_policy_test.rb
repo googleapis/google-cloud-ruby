@@ -33,11 +33,11 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
       permissions = bucket.test_permissions roles
       skip "Don't have permissions to get/set bucket's policy" unless permissions == roles
 
-      bucket.policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
+      _(bucket.policy).must_be_kind_of Google::Cloud::Storage::PolicyV1
 
       # We need a valid service account in order to update the policy
       service_account = storage.service.credentials.client.issuer
-      service_account.wont_be :nil?
+      _(service_account).wont_be :nil?
       role = "roles/storage.objectCreator"
       member = "serviceAccount:#{service_account}"
       bucket.policy do |p|
@@ -46,13 +46,13 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
       end
 
       role_member = bucket.policy.role(role).select { |x| x == member }
-      role_member.count.must_equal 1
+      _(role_member.count).must_equal 1
     end
 
     it "allows permissions to be tested" do
       roles = ["storage.buckets.delete", "storage.buckets.get"]
       permissions = bucket.test_permissions roles
-      permissions.must_equal roles
+      _(permissions).must_equal roles
     end
   end
 
@@ -65,31 +65,31 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
       skip "Don't have permissions to get/set bucket's policy" unless permissions == roles
 
       policy = bucket_policy_v3.policy
-      policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
-      policy.version.must_equal 1
-      policy.roles.count.must_equal 2
+      _(policy).must_be_kind_of Google::Cloud::Storage::PolicyV1
+      _(policy.version).must_equal 1
+      _(policy.roles.count).must_equal 2
       expect { policy.bindings }.must_raise RuntimeError
 
       policy = bucket_policy_v3.policy requested_policy_version: 1
-      policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
-      policy.version.must_equal 1
-      policy.roles.count.must_equal 2
+      _(policy).must_be_kind_of Google::Cloud::Storage::PolicyV1
+      _(policy.version).must_equal 1
+      _(policy.roles.count).must_equal 2
       expect { policy.bindings }.must_raise RuntimeError
 
       bucket_policy_v3.policy requested_policy_version: 3 do |p|
-        p.version.must_equal 1
+        _(p.version).must_equal 1
         p.version = 3 # Won't be persisted by the service.
       end
 
       policy = bucket_policy_v3.policy requested_policy_version: 3
-      policy.must_be_kind_of Google::Cloud::Storage::PolicyV3
-      policy.version.must_equal 1
+      _(policy).must_be_kind_of Google::Cloud::Storage::PolicyV3
+      _(policy.version).must_equal 1
       expect { policy.roles }.must_raise RuntimeError
-      policy.bindings.count.must_equal 2
+      _(policy.bindings.count).must_equal 2
 
       # We need a valid service account in order to update the policy
       service_account = storage.service.credentials.client.issuer
-      service_account.wont_be :nil?
+      _(service_account).wont_be :nil?
       role = "roles/storage.admin"
       member = "serviceAccount:#{service_account}"
 
@@ -113,7 +113,7 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
       # end.must_raise Google::Cloud::Error # Fails without version = 3 TODO: uncomment after project is whitelisted
 
       bucket_policy_v3.policy requested_policy_version: 3 do |p|
-        p.version.must_equal 1
+        _(p.version).must_equal 1
         expect { p.roles }.must_raise RuntimeError
         expect { p.add role, member }.must_raise RuntimeError
         expect { p.remove role, member }.must_raise RuntimeError
@@ -132,7 +132,7 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
 
       expect do
         bucket_policy_v3.policy requested_policy_version: 3 do |p|
-          p.version.must_equal 3
+          _(p.version).must_equal 3
           p.version = 1 # Not allowed.
         end
       end.must_raise RuntimeError
@@ -141,21 +141,21 @@ describe Google::Cloud::Storage::Bucket, :policy, :storage do
       # Requested policy version (1) cannot be less than the existing policy version (3).
       # expect { bucket_policy_v3.policy requested_policy_version: 1 }.must_raise Google::Cloud::Error # TODO: uncomment after project is whitelisted
       policy = bucket_policy_v3.policy requested_policy_version: 3
-      policy.version.must_equal 3
+      _(policy.version).must_equal 3
       expect { policy.roles }.must_raise RuntimeError
       expect { policy.deep_dup }.must_raise RuntimeError
-      policy.bindings.count.must_equal 3
+      _(policy.bindings.count).must_equal 3
       binding = policy.bindings.find do |b|
         b.role == role
       end
-      binding.wont_be :nil?
-      binding.role.must_equal role
-      binding.members.count.must_equal 1
-      binding.members[0].must_equal member
-      binding.condition.wont_be :nil?
-      binding.condition.title.must_equal "always-true"
-      binding.condition.description.must_equal "test condition always-true"
-      binding.condition.expression.must_equal "true"
+      _(binding).wont_be :nil?
+      _(binding.role).must_equal role
+      _(binding.members.count).must_equal 1
+      _(binding.members[0]).must_equal member
+      _(binding.condition).wont_be :nil?
+      _(binding.condition.title).must_equal "always-true"
+      _(binding.condition.description).must_equal "test condition always-true"
+      _(binding.condition.expression).must_equal "true"
     end
   end
 end

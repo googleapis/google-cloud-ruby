@@ -41,10 +41,10 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
   let(:bucket_with_retention_policy) { Google::Cloud::Storage::Bucket.from_gapi bucket_with_retention_policy_gapi, storage.service }
 
   it "knows its retention policy attributes" do
-    bucket_with_retention_policy.retention_period.must_equal bucket_retention_period
-    bucket_with_retention_policy.retention_effective_at.must_be_within_delta bucket_retention_effective_at
-    bucket_with_retention_policy.retention_policy_locked?.must_equal true
-    bucket_with_retention_policy.default_event_based_hold?.must_equal true
+    _(bucket_with_retention_policy.retention_period).must_equal bucket_retention_period
+    _(bucket_with_retention_policy.retention_effective_at).must_be_within_delta bucket_retention_effective_at
+    _(bucket_with_retention_policy.retention_policy_locked?).must_equal true
+    _(bucket_with_retention_policy.default_event_based_hold?).must_equal true
   end
 
   it "updates its retention_period" do
@@ -55,12 +55,12 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
                 [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
     bucket.service.mocked_service = mock
 
-    bucket.retention_period.must_be :nil?
+    _(bucket.retention_period).must_be :nil?
 
     bucket.retention_period = bucket_retention_period
 
-    bucket.retention_period.must_equal bucket_retention_period
-    bucket.retention_effective_at.must_be_within_delta bucket_retention_effective_at
+    _(bucket.retention_period).must_equal bucket_retention_period
+    _(bucket.retention_effective_at).must_be_within_delta bucket_retention_effective_at
 
     mock.verify
   end
@@ -72,11 +72,11 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
                 [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
     bucket.service.mocked_service = mock
 
-    bucket.default_event_based_hold?.must_equal false
+    _(bucket.default_event_based_hold?).must_equal false
 
     bucket.default_event_based_hold = true
 
-    bucket.default_event_based_hold?.must_equal true
+    _(bucket.default_event_based_hold?).must_equal true
 
     mock.verify
   end
@@ -91,7 +91,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
 
     mock.verify
 
-    bucket.location_type.must_equal "multi-region"
+    _(bucket.location_type).must_equal "multi-region"
   end
 
   it "locks its retention policy with user_project set to true" do

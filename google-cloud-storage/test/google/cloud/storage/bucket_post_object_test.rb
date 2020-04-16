@@ -45,10 +45,10 @@ describe Google::Cloud::Storage::Bucket, :post_object, :mock_storage do
 
       signed_post = bucket.post_object file_path, policy: policy
 
-      signed_post.url.must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
-      signed_post.fields[:GoogleAccessId].must_equal "native_client_email"
-      signed_post.fields[:signature].must_equal Base64.strict_encode64("native-signature").delete("\n")
-      signed_post.fields[:key].must_equal [bucket_name, file_path_encoded].join("/")
+      _(signed_post.url).must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
+      _(signed_post.fields[:GoogleAccessId]).must_equal "native_client_email"
+      _(signed_post.fields[:signature]).must_equal Base64.strict_encode64("native-signature").delete("\n")
+      _(signed_post.fields[:key]).must_equal [bucket_name, file_path_encoded].join("/")
 
       signing_key_mock.verify
     end
@@ -65,10 +65,10 @@ describe Google::Cloud::Storage::Bucket, :post_object, :mock_storage do
 
     signed_post = bucket.post_object file_path
 
-    signed_post.url.must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
-    signed_post.fields[:GoogleAccessId].must_equal "native_client_email"
-    signed_post.fields[:signature].must_equal Base64.strict_encode64("native-signature").delete("\n")
-    signed_post.fields[:key].must_equal [bucket_name, file_path_encoded].join("/")
+    _(signed_post.url).must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
+    _(signed_post.fields[:GoogleAccessId]).must_equal "native_client_email"
+    _(signed_post.fields[:signature]).must_equal Base64.strict_encode64("native-signature").delete("\n")
+    _(signed_post.fields[:key]).must_equal [bucket_name, file_path_encoded].join("/")
 
     signing_key_mock.verify
   end
@@ -86,10 +86,10 @@ describe Google::Cloud::Storage::Bucket, :post_object, :mock_storage do
 
     signed_post = bucket.post_object file_path_special_variable
 
-    signed_post.url.must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
-    signed_post.fields[:GoogleAccessId].must_equal "native_client_email"
-    signed_post.fields[:signature].must_equal Base64.strict_encode64("native-signature").delete("\n")
-    signed_post.fields[:key].must_equal [bucket_name, file_path_special_variable].join("/")
+    _(signed_post.url).must_equal Google::Cloud::Storage::GOOGLEAPIS_URL
+    _(signed_post.fields[:GoogleAccessId]).must_equal "native_client_email"
+    _(signed_post.fields[:signature]).must_equal Base64.strict_encode64("native-signature").delete("\n")
+    _(signed_post.fields[:key]).must_equal [bucket_name, file_path_special_variable].join("/")
 
     signing_key_mock.verify
   end

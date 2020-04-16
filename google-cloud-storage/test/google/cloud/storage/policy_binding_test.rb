@@ -40,18 +40,18 @@ describe Google::Cloud::Storage::Policy::Binding do
   let(:complex_binding) { Google::Cloud::Storage::Policy::Binding.new **complex_hash }
 
   it "knows itself" do
-    simple_binding.must_be_kind_of Google::Cloud::Storage::Policy::Binding
-    simple_binding.role.must_equal "roles/storage.objectViewer"
-    simple_binding.members.must_equal ["user:viewer@example.com"]
-    simple_binding.condition.must_be :nil?
+    _(simple_binding).must_be_kind_of Google::Cloud::Storage::Policy::Binding
+    _(simple_binding.role).must_equal "roles/storage.objectViewer"
+    _(simple_binding.members).must_equal ["user:viewer@example.com"]
+    _(simple_binding.condition).must_be :nil?
 
-    complex_binding.must_be_kind_of Google::Cloud::Storage::Policy::Binding
-    complex_binding.role.must_equal "roles/storage.objectViewer"
-    complex_binding.members.must_equal ["serviceAccount:1234567890@developer.gserviceaccount.com"]
-    complex_binding.condition.must_be_kind_of Google::Cloud::Storage::Policy::Condition
-    complex_binding.condition.title.must_equal "always-true"
-    complex_binding.condition.description.must_equal "test condition always-true"
-    complex_binding.condition.expression.must_equal "true"
+    _(complex_binding).must_be_kind_of Google::Cloud::Storage::Policy::Binding
+    _(complex_binding.role).must_equal "roles/storage.objectViewer"
+    _(complex_binding.members).must_equal ["serviceAccount:1234567890@developer.gserviceaccount.com"]
+    _(complex_binding.condition).must_be_kind_of Google::Cloud::Storage::Policy::Condition
+    _(complex_binding.condition.title).must_equal "always-true"
+    _(complex_binding.condition.description).must_equal "test condition always-true"
+    _(complex_binding.condition.expression).must_equal "true"
   end
 
   it "can be changed" do
@@ -63,22 +63,22 @@ describe Google::Cloud::Storage::Policy::Binding do
       expression: "false"
     }
 
-    simple_binding.must_be_kind_of Google::Cloud::Storage::Policy::Binding
-    simple_binding.role.must_equal "roles/storage.objectOwner"
-    simple_binding.members.must_equal ["serviceAccount:1234567890@developer.gserviceaccount.com"]
-    simple_binding.condition.must_be_kind_of Google::Cloud::Storage::Policy::Condition
-    simple_binding.condition.title.must_equal "always-false"
-    simple_binding.condition.description.must_equal "test condition always-false"
-    simple_binding.condition.expression.must_equal "false"
+    _(simple_binding).must_be_kind_of Google::Cloud::Storage::Policy::Binding
+    _(simple_binding.role).must_equal "roles/storage.objectOwner"
+    _(simple_binding.members).must_equal ["serviceAccount:1234567890@developer.gserviceaccount.com"]
+    _(simple_binding.condition).must_be_kind_of Google::Cloud::Storage::Policy::Condition
+    _(simple_binding.condition.title).must_equal "always-false"
+    _(simple_binding.condition.description).must_equal "test condition always-false"
+    _(simple_binding.condition.expression).must_equal "false"
 
     simple_binding.role = "roles/storage.objectAdmin"
     simple_binding.members = ["user:admin@example.com"]
     simple_binding.condition = nil
 
-    simple_binding.must_be_kind_of Google::Cloud::Storage::Policy::Binding
-    simple_binding.role.must_equal "roles/storage.objectAdmin"
-    simple_binding.members.must_equal ["user:admin@example.com"]
-    simple_binding.condition.must_be :nil?
+    _(simple_binding).must_be_kind_of Google::Cloud::Storage::Policy::Binding
+    _(simple_binding.role).must_equal "roles/storage.objectAdmin"
+    _(simple_binding.members).must_equal ["user:admin@example.com"]
+    _(simple_binding.condition).must_be :nil?
 
     new_condition = Google::Cloud::Storage::Policy::Condition.new(
       title: "always-true",
@@ -88,9 +88,9 @@ describe Google::Cloud::Storage::Policy::Binding do
 
     simple_binding.condition = new_condition
 
-    simple_binding.condition.must_be_kind_of Google::Cloud::Storage::Policy::Condition
-    simple_binding.condition.title.must_equal "always-true"
-    simple_binding.condition.description.must_equal "test condition always-true"
-    simple_binding.condition.expression.must_equal "true"
+    _(simple_binding.condition).must_be_kind_of Google::Cloud::Storage::Policy::Condition
+    _(simple_binding.condition.title).must_equal "always-true"
+    _(simple_binding.condition.description).must_equal "test condition always-true"
+    _(simple_binding.condition.expression).must_equal "true"
   end
 end

@@ -29,7 +29,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.cache_control.must_equal "public, max-age=3600"
+    _(file.cache_control).must_equal "public, max-age=3600"
     file.cache_control = "private, max-age=0, no-cache"
 
     mock.verify
@@ -43,7 +43,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.content_disposition.must_equal "attachment; filename=filename.ext"
+    _(file.content_disposition).must_equal "attachment; filename=filename.ext"
     file.content_disposition = "inline; filename=filename.ext"
 
     mock.verify
@@ -57,7 +57,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.content_encoding.must_equal "gzip"
+    _(file.content_encoding).must_equal "gzip"
     file.content_encoding = "deflate"
 
     mock.verify
@@ -71,7 +71,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.content_language.must_equal "en"
+    _(file.content_language).must_equal "en"
     file.content_language = "de"
 
     mock.verify
@@ -85,7 +85,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.content_type.must_equal "text/plain"
+    _(file.content_type).must_equal "text/plain"
     file.content_type = "application/json"
 
     mock.verify
@@ -99,7 +99,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.metadata.must_equal({"player"=>"Alice", "score"=>"101"})
+    _(file.metadata).must_equal({"player"=>"Alice", "score"=>"101"})
     file.metadata = { "player" => "Bob", score: 10 }
 
     mock.verify
@@ -115,9 +115,9 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.storage_class.must_equal "STANDARD"
+    _(file.storage_class).must_equal "STANDARD"
     file.storage_class = :nearline
-    file.storage_class.must_equal "NEARLINE"
+    _(file.storage_class).must_equal "NEARLINE"
 
     mock.verify
   end
@@ -132,9 +132,9 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.storage_class.must_equal "STANDARD"
+    _(file_user_project.storage_class).must_equal "STANDARD"
     file_user_project.storage_class = :coldline
-    file_user_project.storage_class.must_equal "COLDLINE"
+    _(file_user_project.storage_class).must_equal "COLDLINE"
 
     mock.verify
   end
@@ -159,9 +159,9 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     def file.sleep *args
     end
 
-    file.storage_class.must_equal "STANDARD"
+    _(file.storage_class).must_equal "STANDARD"
     file.storage_class = :archive
-    file.storage_class.must_equal "ARCHIVE"
+    _(file.storage_class).must_equal "ARCHIVE"
 
     mock.verify
   end
@@ -186,9 +186,9 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
     def file_user_project.sleep *args
     end
 
-    file_user_project.storage_class.must_equal "STANDARD"
+    _(file_user_project.storage_class).must_equal "STANDARD"
     file_user_project.storage_class = :dra
-    file_user_project.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    _(file_user_project.storage_class).must_equal "DURABLE_REDUCED_AVAILABILITY"
 
     mock.verify
   end
@@ -201,7 +201,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.temporary_hold?.must_equal true
+    _(file.temporary_hold?).must_equal true
     file.release_temporary_hold!
 
     mock.verify
@@ -215,7 +215,7 @@ describe Google::Cloud::Storage::File, :update, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.event_based_hold?.must_equal true
+    _(file.event_based_hold?).must_equal true
     file.release_event_based_hold!
 
     mock.verify

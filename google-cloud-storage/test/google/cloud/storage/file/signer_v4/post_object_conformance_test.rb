@@ -49,16 +49,16 @@ class PostObjectConformanceTest < MockStorage
                                          virtual_hosted_style: (input.urlStyle == :VIRTUAL_HOSTED_STYLE),
                                          bucket_bound_hostname: bucket_bound_hostname
 
-        post_object.url.must_equal output.url
-        post_object.fields["key"].must_equal output.fields["key"]
-        post_object.fields["x-goog-algorithm"].must_equal output.fields["x-goog-algorithm"]
-        post_object.fields["x-goog-credential"].must_equal output.fields["x-goog-credential"]
-        post_object.fields["x-goog-date"].must_equal output.fields["x-goog-date"]
-        post_object.fields["policy"].must_equal output.fields["policy"]
-        post_object.fields["x-goog-signature"].must_equal output.fields["x-goog-signature"]
+        _(post_object.url).must_equal output.url
+        _(post_object.fields["key"]).must_equal output.fields["key"]
+        _(post_object.fields["x-goog-algorithm"]).must_equal output.fields["x-goog-algorithm"]
+        _(post_object.fields["x-goog-credential"]).must_equal output.fields["x-goog-credential"]
+        _(post_object.fields["x-goog-date"]).must_equal output.fields["x-goog-date"]
+        _(post_object.fields["policy"]).must_equal output.fields["policy"]
+        _(post_object.fields["x-goog-signature"]).must_equal output.fields["x-goog-signature"]
 
         fields.each_pair do |k, v|
-          post_object.fields[k].must_equal v
+          _(post_object.fields[k]).must_equal v
         end
       end
     end
@@ -83,13 +83,13 @@ class PostObjectConformanceTest < MockStorage
                                                             virtual_hosted_style: (input.urlStyle == :VIRTUAL_HOSTED_STYLE),
                                                             bucket_bound_hostname: bucket_bound_hostname
 
-        post_object.url.must_equal output.url
-        post_object.fields["key"].must_equal output.fields["key"]
-        post_object.fields["x-goog-algorithm"].must_equal output.fields["x-goog-algorithm"]
-        post_object.fields["x-goog-credential"].must_equal output.fields["x-goog-credential"]
-        post_object.fields["x-goog-date"].must_equal output.fields["x-goog-date"]
-        post_object.fields["policy"].must_equal output.fields["policy"]
-        post_object.fields["x-goog-signature"].must_equal output.fields["x-goog-signature"]
+        _(post_object.url).must_equal output.url
+        _(post_object.fields["key"]).must_equal output.fields["key"]
+        _(post_object.fields["x-goog-algorithm"]).must_equal output.fields["x-goog-algorithm"]
+        _(post_object.fields["x-goog-credential"]).must_equal output.fields["x-goog-credential"]
+        _(post_object.fields["x-goog-date"]).must_equal output.fields["x-goog-date"]
+        _(post_object.fields["policy"]).must_equal output.fields["policy"]
+        _(post_object.fields["x-goog-signature"]).must_equal output.fields["x-goog-signature"]
       end
     end
   end

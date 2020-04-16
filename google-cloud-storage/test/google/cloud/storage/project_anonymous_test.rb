@@ -20,9 +20,9 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
   let(:anonymous_storage) { Google::Cloud::Storage.anonymous }
 
   it "raises when creating a bucket without authentication" do
-    stub = Object.new
+    stub = self
     def stub.insert_bucket *args
-      args.first.must_be_nil # project
+      _(args.first).must_be_nil # project
       raise Google::Apis::AuthorizationError.new("unauthorized", status_code: 401)
     end
     anonymous_storage.service.mocked_service = stub
@@ -31,9 +31,9 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
   end
 
   it "raises when listing buckets without authentication" do
-    stub = Object.new
+    stub = self
     def stub.list_buckets *args
-      args.first.must_be_nil # project
+      _(args.first).must_be_nil # project
       raise Google::Apis::AuthorizationError.new("unauthorized", status_code: 401)
     end
     anonymous_storage.service.mocked_service = stub
@@ -53,8 +53,8 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
     mock.verify
 
-    bucket.name.must_equal bucket_name
-    bucket.wont_be :lazy?
+    _(bucket.name).must_equal bucket_name
+    _(bucket).wont_be :lazy?
   end
 
   it "lists public files" do
@@ -71,10 +71,10 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
     mock.verify
 
-    files.size.must_equal num_files
+    _(files.size).must_equal num_files
     files.each do |file|
-      file.must_be_kind_of Google::Cloud::Storage::File
-      file.user_project.must_be :nil?
+      _(file).must_be_kind_of Google::Cloud::Storage::File
+      _(file.user_project).must_be :nil?
     end
   end
 
@@ -93,9 +93,9 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
 
     mock.verify
 
-    file.name.must_equal file_name
-    file.user_project.must_be :nil?
-    file.wont_be :lazy?
+    _(file.name).must_equal file_name
+    _(file.user_project).must_be :nil?
+    _(file).wont_be :lazy?
   end
 
   it "downloads a public file" do
@@ -122,7 +122,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
       end
 
       downloaded = file.download tmpfile
-      downloaded.must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
 
       mock.verify
     end

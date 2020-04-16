@@ -76,48 +76,48 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
     e = expect do
       storage.bucket bucket_name
     end.must_raise Google::Cloud::InvalidArgumentError
-    e.message.must_equal "required: Bucket is requester pays bucket but no user project provided."
+    _(e.message).must_equal "required: Bucket is requester pays bucket but no user project provided."
   end
 
   it "gets and updates the bucket" do
-    bucket.website_main.must_be :nil?
+    _(bucket.website_main).must_be :nil?
     bucket.update do |b|
       b.website_main = "index.html"
     end
     fresh = storage.bucket bucket_name, user_project: true
-    fresh.website_main.must_equal "index.html"
+    _(fresh.website_main).must_equal "index.html"
   end
 
   describe "Bucket ACL" do
 
     it "adds an ACL reader" do
-      bucket.acl.readers.wont_include user_val
+      _(bucket.acl.readers).wont_include user_val
       bucket.acl.add_reader user_val
-      bucket.acl.readers.must_include user_val
+      _(bucket.acl.readers).must_include user_val
     end
 
     it "adds an ACL writer" do
-      bucket.acl.writers.wont_include user_val
+      _(bucket.acl.writers).wont_include user_val
       bucket.acl.add_writer user_val
-      bucket.acl.writers.must_include user_val
+      _(bucket.acl.writers).must_include user_val
     end
 
     it "adds an ACL owner" do
-      bucket.acl.owners.wont_include user_val
+      _(bucket.acl.owners).wont_include user_val
       bucket.acl.add_owner user_val
-      bucket.acl.owners.must_include user_val
+      _(bucket.acl.owners).must_include user_val
     end
 
     it "adds a default ACL reader" do
-      bucket.default_acl.readers.wont_include user_val
+      _(bucket.default_acl.readers).wont_include user_val
       bucket.default_acl.add_reader user_val
-      bucket.default_acl.readers.must_include user_val
+      _(bucket.default_acl.readers).must_include user_val
     end
 
     it "adds an default ACL owner" do
-      bucket.default_acl.owners.wont_include user_val
+      _(bucket.default_acl.owners).wont_include user_val
       bucket.default_acl.add_owner user_val
-      bucket.default_acl.owners.must_include user_val
+      _(bucket.default_acl.owners).must_include user_val
     end
   end
 
@@ -133,24 +133,24 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
                                                             prefix: filename_prefix,
                                                             payload: payload
 
-      notification.wont_be_nil
-      notification.id.wont_be_nil
-      notification.custom_attrs.must_equal custom_attrs
-      notification.event_types.must_equal event_types
-      notification.prefix.must_equal filename_prefix
-      notification.payload.must_equal payload
-      notification.topic.must_equal topic_name_full_path
+      _(notification).wont_be_nil
+      _(notification.id).wont_be_nil
+      _(notification.custom_attrs).must_equal custom_attrs
+      _(notification.event_types).must_equal event_types
+      _(notification.prefix).must_equal filename_prefix
+      _(notification.payload).must_equal payload
+      _(notification.topic).must_equal topic_name_full_path
 
-      bucket.notifications.wont_be :empty?
+      _(bucket.notifications).wont_be :empty?
 
       fresh_notification = bucket.notification notification.id
-      fresh_notification.wont_be_nil
-      fresh_notification.id.wont_be_nil
-      fresh_notification.custom_attrs.must_equal custom_attrs
-      fresh_notification.event_types.must_equal event_types
-      fresh_notification.prefix.must_equal filename_prefix
-      fresh_notification.payload.must_equal payload
-      fresh_notification.topic.must_equal topic_name_full_path
+      _(fresh_notification).wont_be_nil
+      _(fresh_notification.id).wont_be_nil
+      _(fresh_notification.custom_attrs).must_equal custom_attrs
+      _(fresh_notification.event_types).must_equal event_types
+      _(fresh_notification.prefix).must_equal filename_prefix
+      _(fresh_notification.payload).must_equal payload
+      _(fresh_notification.topic).must_equal topic_name_full_path
 
 
       fresh_notification.delete
@@ -169,11 +169,11 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
                  max_age: 300
     end
 
-    bucket.cors.wont_be :empty?
-    bucket.cors.last.origin.must_equal ["http://example.org", "https://example.org"]
-    bucket.cors.last.methods.must_equal ["*"]
-    bucket.cors.last.headers.must_equal ["X-My-Custom-Header"]
-    bucket.cors.last.max_age.must_equal 300
+    _(bucket.cors).wont_be :empty?
+    _(bucket.cors.last.origin).must_equal ["http://example.org", "https://example.org"]
+    _(bucket.cors.last.methods).must_equal ["*"]
+    _(bucket.cors.last.headers).must_equal ["X-My-Custom-Header"]
+    _(bucket.cors.last.max_age).must_equal 300
 
     bucket.reload!
 
@@ -186,10 +186,10 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
 
     bucket.reload!
 
-    bucket.cors.last.origin.must_equal ["http://example.org", "https://example.org", "https://example.com"]
-    bucket.cors.last.methods.must_equal ["PUT"]
-    bucket.cors.last.headers.must_equal ["X-My-Custom-Header", "X-Another-Custom-Header"]
-    bucket.cors.last.max_age.must_equal 600
+    _(bucket.cors.last.origin).must_equal ["http://example.org", "https://example.org", "https://example.com"]
+    _(bucket.cors.last.methods).must_equal ["PUT"]
+    _(bucket.cors.last.headers).must_equal ["X-My-Custom-Header", "X-Another-Custom-Header"]
+    _(bucket.cors.last.max_age).must_equal 600
   end
 
   describe "IAM Policies and Permissions" do
@@ -200,24 +200,24 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
       permissions = bucket.test_permissions roles
       skip "Don't have permissions to get/set bucket's policy" unless permissions == roles
 
-      bucket.policy.must_be_kind_of Google::Cloud::Storage::PolicyV1
+      _(bucket.policy).must_be_kind_of Google::Cloud::Storage::PolicyV1
 
       # We need a valid service account in order to update the policy
       service_account = storage.service.credentials.client.issuer
-      service_account.wont_be :nil?
+      _(service_account).wont_be :nil?
       role = "roles/storage.objectCreator"
       member = "serviceAccount:#{service_account}"
       bucket.policy do |p|
         p.add role, member
       end
 
-      bucket.policy.role(role).must_include member
+      _(bucket.policy.role(role)).must_include member
     end
 
     it "allows permissions to be tested on a bucket" do
       roles = ["storage.buckets.get"]
       permissions = bucket.test_permissions roles
-      permissions.must_equal roles
+      _(permissions).must_equal roles
     end
   end
 
@@ -231,25 +231,25 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
     bucket.create_file original, "CloudLogo-2.png" # second file for pagination
 
     # list
-    uploaded.cache_control.must_equal "public, max-age=3600"
-    uploaded.metadata["title"].must_equal "Logo Image"
+    _(uploaded.cache_control).must_equal "public, max-age=3600"
+    _(uploaded.metadata["title"]).must_equal "Logo Image"
     first_files = bucket.files(max: 1)
-    first_files.wont_be :empty?
-    first_files.next?.must_equal true
+    _(first_files).wont_be :empty?
+    _(first_files.next?).must_equal true
     # pagination
     second_files = first_files.next
-    second_files.wont_be :empty?
+    _(second_files).wont_be :empty?
 
     # get
-    bucket.file(uploaded.name).wont_be :nil?
+    _(bucket.file(uploaded.name)).wont_be :nil?
 
     # download
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       downloaded = uploaded.download tmpfile
 
-      downloaded.size.must_equal original.size
-      File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+      _(downloaded.size).must_equal original.size
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
     end
 
     # update
@@ -258,8 +258,8 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
       f.metadata["title"] = "Logo Image II"
     end
     uploaded.reload!
-    uploaded.cache_control.must_equal "private, max-age=0, no-cache"
-    uploaded.metadata["title"].must_equal "Logo Image II"
+    _(uploaded.cache_control).must_equal "private, max-age=0, no-cache"
+    _(uploaded.metadata["title"]).must_equal "Logo Image II"
 
     # delete
     uploaded.delete
@@ -271,9 +271,9 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
       uploaded.copy "CloudLogoCopy"
     end
 
-    uploaded.name.must_equal "CloudLogo"
-    copied.name.must_equal "CloudLogoCopy"
-    copied.size.must_equal uploaded.size
+    _(uploaded.name).must_equal "CloudLogo"
+    _(copied.name).must_equal "CloudLogoCopy"
+    _(copied.size).must_equal uploaded.size
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
       tmpfile1.binmode
@@ -281,9 +281,9 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
         tmpfile2.binmode
         downloaded1 = uploaded.download tmpfile1
         downloaded2 = copied.download tmpfile2
-        downloaded1.size.must_equal downloaded2.size
+        _(downloaded1.size).must_equal downloaded2.size
 
-        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+        _(File.read(downloaded1.path, mode: "rb")).must_equal File.read(downloaded2.path, mode: "rb")
       end
     end
 
@@ -296,13 +296,13 @@ describe Google::Cloud::Storage::Bucket, :requester_pays, :storage do
     it "adds and deletes a reader" do
       file = bucket.create_file file_path, "ReaderTest.png"
       file.acl.add_reader group_val
-      file.acl.readers.must_include group_val
+      _(file.acl.readers).must_include group_val
       file.acl.refresh!
-      file.acl.readers.must_include group_val
+      _(file.acl.readers).must_include group_val
       file.refresh!
-      file.acl.readers.must_include group_val
+      _(file.acl.readers).must_include group_val
       file.acl.delete group_val
-      file.acl.readers.wont_include group_val
+      _(file.acl.readers).wont_include group_val
     end
 
     it "adds an owner" do

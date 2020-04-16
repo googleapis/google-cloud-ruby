@@ -39,7 +39,7 @@ describe Google::Cloud::Storage::File::Verifier, :mock_storage do
     Tempfile.open "google-cloud" do |tmpfile|
       tmpfile.write file_contents
       digest = Google::Cloud::Storage::File::Verifier.md5_for tmpfile
-      digest.must_equal md5_digest
+      _(digest).must_equal md5_digest
     end
   end
 
@@ -47,7 +47,7 @@ describe Google::Cloud::Storage::File::Verifier, :mock_storage do
     Tempfile.open "google-cloud" do |tmpfile|
       tmpfile.write file_contents
       digest = Google::Cloud::Storage::File::Verifier.crc32c_for tmpfile
-      digest.must_equal crc32c_digest
+      _(digest).must_equal crc32c_digest
     end
   end
 

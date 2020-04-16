@@ -31,14 +31,14 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
       signed_url = bucket.signed_url version: :v4
 
       signed_uri = URI(signed_url)
-      signed_uri.path.must_equal "/bucket"
+      _(signed_uri.path).must_equal "/bucket"
       signed_url_params = CGI::parse(signed_uri.query)
-      signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
-      signed_url_params["X-Goog-Credential"].must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
-      signed_url_params["X-Goog-Date"].must_equal  ["20120101T000000Z"]
-      signed_url_params["X-Goog-Expires"].must_equal  ["604800"]
-      signed_url_params["X-Goog-SignedHeaders"].must_equal  ["host"]
-      signed_url_params["X-Goog-Signature"].must_equal  ["6e61746976652d7369676e6174757265"]
+      _(signed_url_params["X-Goog-Algorithm"]).must_equal  ["GOOG4-RSA-SHA256"]
+      _(signed_url_params["X-Goog-Credential"]).must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
+      _(signed_url_params["X-Goog-Date"]).must_equal  ["20120101T000000Z"]
+      _(signed_url_params["X-Goog-Expires"]).must_equal  ["604800"]
+      _(signed_url_params["X-Goog-SignedHeaders"]).must_equal  ["host"]
+      _(signed_url_params["X-Goog-Signature"]).must_equal  ["6e61746976652d7369676e6174757265"]
 
       signing_key_mock.verify
     end
@@ -54,12 +54,12 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
       signed_url = bucket.signed_url file_path, version: :v4
 
       signed_url_params = CGI::parse(URI(signed_url).query)
-      signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
-      signed_url_params["X-Goog-Credential"].must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
-      signed_url_params["X-Goog-Date"].must_equal  ["20120101T000000Z"]
-      signed_url_params["X-Goog-Expires"].must_equal  ["604800"]
-      signed_url_params["X-Goog-SignedHeaders"].must_equal  ["host"]
-      signed_url_params["X-Goog-Signature"].must_equal  ["6e61746976652d7369676e6174757265"]
+      _(signed_url_params["X-Goog-Algorithm"]).must_equal  ["GOOG4-RSA-SHA256"]
+      _(signed_url_params["X-Goog-Credential"]).must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
+      _(signed_url_params["X-Goog-Date"]).must_equal  ["20120101T000000Z"]
+      _(signed_url_params["X-Goog-Expires"]).must_equal  ["604800"]
+      _(signed_url_params["X-Goog-SignedHeaders"]).must_equal  ["host"]
+      _(signed_url_params["X-Goog-Signature"]).must_equal  ["6e61746976652d7369676e6174757265"]
 
       signing_key_mock.verify
     end
@@ -78,12 +78,12 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
                                      signing_key: signing_key_mock, version: :v4
 
       signed_url_params = CGI::parse(URI(signed_url).query)
-      signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
-      signed_url_params["X-Goog-Credential"].must_equal  ["option_issuer/20120101/auto/storage/goog4_request"]
-      signed_url_params["X-Goog-Date"].must_equal  ["20120101T000000Z"]
-      signed_url_params["X-Goog-Expires"].must_equal  ["604800"]
-      signed_url_params["X-Goog-SignedHeaders"].must_equal  ["host"]
-      signed_url_params["X-Goog-Signature"].must_equal  ["6f7074696f6e2d7369676e6174757265"]
+      _(signed_url_params["X-Goog-Algorithm"]).must_equal  ["GOOG4-RSA-SHA256"]
+      _(signed_url_params["X-Goog-Credential"]).must_equal  ["option_issuer/20120101/auto/storage/goog4_request"]
+      _(signed_url_params["X-Goog-Date"]).must_equal  ["20120101T000000Z"]
+      _(signed_url_params["X-Goog-Expires"]).must_equal  ["604800"]
+      _(signed_url_params["X-Goog-SignedHeaders"]).must_equal  ["host"]
+      _(signed_url_params["X-Goog-Signature"]).must_equal  ["6f7074696f6e2d7369676e6174757265"]
 
       signing_key_mock.verify
     end
@@ -104,12 +104,12 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
                                        private_key: "option_private_key", version: :v4
 
         signed_url_params = CGI::parse(URI(signed_url).query)
-        signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
-        signed_url_params["X-Goog-Credential"].must_equal  ["option_client_email/20120101/auto/storage/goog4_request"]
-        signed_url_params["X-Goog-Date"].must_equal  ["20120101T000000Z"]
-        signed_url_params["X-Goog-Expires"].must_equal  ["604800"]
-        signed_url_params["X-Goog-SignedHeaders"].must_equal  ["host"]
-        signed_url_params["X-Goog-Signature"].must_equal  ["6f7074696f6e2d7369676e6174757265"]
+        _(signed_url_params["X-Goog-Algorithm"]).must_equal  ["GOOG4-RSA-SHA256"]
+        _(signed_url_params["X-Goog-Credential"]).must_equal  ["option_client_email/20120101/auto/storage/goog4_request"]
+        _(signed_url_params["X-Goog-Date"]).must_equal  ["20120101T000000Z"]
+        _(signed_url_params["X-Goog-Expires"]).must_equal  ["604800"]
+        _(signed_url_params["X-Goog-SignedHeaders"]).must_equal  ["host"]
+        _(signed_url_params["X-Goog-Signature"]).must_equal  ["6f7074696f6e2d7369676e6174757265"]
 
       end
 
@@ -129,12 +129,12 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
                                                 "X-Goog-ACL" => "public-read" }, version: :v4
 
       signed_url_params = CGI::parse(URI(signed_url).query)
-      signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
-      signed_url_params["X-Goog-Credential"].must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
-      signed_url_params["X-Goog-Date"].must_equal  ["20120101T000000Z"]
-      signed_url_params["X-Goog-Expires"].must_equal  ["604800"]
-      signed_url_params["X-Goog-SignedHeaders"].must_equal  ["host;x-goog-acl;x-goog-meta-foo"]
-      signed_url_params["X-Goog-Signature"].must_equal  ["6e61746976652d7369676e6174757265"]
+      _(signed_url_params["X-Goog-Algorithm"]).must_equal  ["GOOG4-RSA-SHA256"]
+      _(signed_url_params["X-Goog-Credential"]).must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
+      _(signed_url_params["X-Goog-Date"]).must_equal  ["20120101T000000Z"]
+      _(signed_url_params["X-Goog-Expires"]).must_equal  ["604800"]
+      _(signed_url_params["X-Goog-SignedHeaders"]).must_equal  ["host;x-goog-acl;x-goog-meta-foo"]
+      _(signed_url_params["X-Goog-Signature"]).must_equal  ["6e61746976652d7369676e6174757265"]
 
       signing_key_mock.verify
     end
@@ -169,12 +169,12 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
                                      query: { "response-content-disposition" => "attachment; filename=\"google-cloud.png\"" }, version: :v4
 
       signed_url_params = CGI::parse(URI(signed_url).query)
-      signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
-      signed_url_params["X-Goog-Credential"].must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
-      signed_url_params["X-Goog-Date"].must_equal  ["20120101T000000Z"]
-      signed_url_params["X-Goog-Expires"].must_equal  ["604800"]
-      signed_url_params["X-Goog-SignedHeaders"].must_equal  ["host"]
-      signed_url_params["X-Goog-Signature"].must_equal  ["6e61746976652d7369676e6174757265"]
+      _(signed_url_params["X-Goog-Algorithm"]).must_equal  ["GOOG4-RSA-SHA256"]
+      _(signed_url_params["X-Goog-Credential"]).must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
+      _(signed_url_params["X-Goog-Date"]).must_equal  ["20120101T000000Z"]
+      _(signed_url_params["X-Goog-Expires"]).must_equal  ["604800"]
+      _(signed_url_params["X-Goog-SignedHeaders"]).must_equal  ["host"]
+      _(signed_url_params["X-Goog-Signature"]).must_equal  ["6e61746976652d7369676e6174757265"]
       signing_key_mock.verify
     end
   end
@@ -190,12 +190,12 @@ describe Google::Cloud::Storage::Bucket, :signed_url, :v4, :mock_storage do
                                      query: { disposition: :inline }, version: :v4
 
       signed_url_params = CGI::parse(URI(signed_url).query)
-      signed_url_params["X-Goog-Algorithm"].must_equal  ["GOOG4-RSA-SHA256"]
-      signed_url_params["X-Goog-Credential"].must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
-      signed_url_params["X-Goog-Date"].must_equal  ["20120101T000000Z"]
-      signed_url_params["X-Goog-Expires"].must_equal  ["604800"]
-      signed_url_params["X-Goog-SignedHeaders"].must_equal  ["host"]
-      signed_url_params["X-Goog-Signature"].must_equal  ["6e61746976652d7369676e6174757265"]
+      _(signed_url_params["X-Goog-Algorithm"]).must_equal  ["GOOG4-RSA-SHA256"]
+      _(signed_url_params["X-Goog-Credential"]).must_equal  ["native_client_email/20120101/auto/storage/goog4_request"]
+      _(signed_url_params["X-Goog-Date"]).must_equal  ["20120101T000000Z"]
+      _(signed_url_params["X-Goog-Expires"]).must_equal  ["604800"]
+      _(signed_url_params["X-Goog-SignedHeaders"]).must_equal  ["host"]
+      _(signed_url_params["X-Goog-Signature"]).must_equal  ["6e61746976652d7369676e6174757265"]
 
       signing_key_mock.verify
     end

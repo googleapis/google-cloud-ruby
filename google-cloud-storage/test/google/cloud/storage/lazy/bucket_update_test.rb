@@ -47,9 +47,9 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.wont_be :versioning?
+    _(bucket).wont_be :versioning?
     bucket.versioning = true
-    bucket.must_be :versioning?
+    _(bucket).must_be :versioning?
 
     mock.verify
   end
@@ -66,9 +66,9 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     bucket.service.mocked_service = mock
     bucket.user_project = true
 
-    bucket.wont_be :versioning?
+    _(bucket).wont_be :versioning?
     bucket.versioning = true
-    bucket.must_be :versioning?
+    _(bucket).must_be :versioning?
 
     mock.verify
   end
@@ -84,9 +84,9 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.logging_bucket.must_be :nil?
+    _(bucket.logging_bucket).must_be :nil?
     bucket.logging_bucket = bucket_logging_bucket
-    bucket.logging_bucket.must_equal bucket_logging_bucket
+    _(bucket.logging_bucket).must_equal bucket_logging_bucket
 
     mock.verify
   end
@@ -102,9 +102,9 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.logging_prefix.must_be :nil?
+    _(bucket.logging_prefix).must_be :nil?
     bucket.logging_prefix = bucket_logging_prefix
-    bucket.logging_prefix.must_equal bucket_logging_prefix
+    _(bucket.logging_prefix).must_equal bucket_logging_prefix
 
     mock.verify
   end
@@ -120,16 +120,16 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.logging_bucket.must_be :nil?
-    bucket.logging_prefix.must_be :nil?
+    _(bucket.logging_bucket).must_be :nil?
+    _(bucket.logging_prefix).must_be :nil?
 
     bucket.update do |b|
       b.logging_bucket = bucket_logging_bucket
       b.logging_prefix = bucket_logging_prefix
     end
 
-    bucket.logging_bucket.must_equal bucket_logging_bucket
-    bucket.logging_prefix.must_equal bucket_logging_prefix
+    _(bucket.logging_bucket).must_equal bucket_logging_bucket
+    _(bucket.logging_prefix).must_equal bucket_logging_prefix
 
     mock.verify
   end
@@ -144,9 +144,9 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.storage_class.must_be :nil?
+    _(bucket.storage_class).must_be :nil?
     bucket.storage_class = :nearline
-    bucket.storage_class.must_equal "NEARLINE"
+    _(bucket.storage_class).must_equal "NEARLINE"
 
     mock.verify
   end
@@ -162,9 +162,9 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.website_main.must_be :nil?
+    _(bucket.website_main).must_be :nil?
     bucket.website_main = bucket_website_main
-    bucket.website_main.must_equal bucket_website_main
+    _(bucket.website_main).must_equal bucket_website_main
 
     mock.verify
   end
@@ -180,9 +180,9 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.website_404.must_be :nil?
+    _(bucket.website_404).must_be :nil?
     bucket.website_404 = bucket_website_404
-    bucket.website_404.must_equal bucket_website_404
+    _(bucket.website_404).must_equal bucket_website_404
 
     mock.verify
   end
@@ -198,16 +198,16 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.website_main.must_be :nil?
-    bucket.website_404.must_be :nil?
+    _(bucket.website_main).must_be :nil?
+    _(bucket.website_404).must_be :nil?
 
     bucket.update do |b|
       b.website_main = bucket_website_main
       b.website_404 = bucket_website_404
     end
 
-    bucket.website_main.must_equal bucket_website_main
-    bucket.website_404.must_equal bucket_website_404
+    _(bucket.website_main).must_equal bucket_website_main
+    _(bucket.website_404).must_equal bucket_website_404
 
     mock.verify
   end
@@ -223,15 +223,15 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.requester_pays.must_be :nil?
+    _(bucket.requester_pays).must_be :nil?
     bucket.requester_pays = bucket_requester_pays
-    bucket.requester_pays.must_equal bucket_requester_pays
+    _(bucket.requester_pays).must_equal bucket_requester_pays
 
     mock.verify
   end
 
   it "cannot modify its labels" do
-    bucket.labels.must_equal Hash.new
+    _(bucket.labels).must_equal Hash.new
     assert_raises do
       bucket.labels["foo"] = "bar"
     end
@@ -249,9 +249,9 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.labels.must_equal Hash.new
+    _(bucket.labels).must_equal Hash.new
     bucket.labels = new_labels
-    bucket.labels.must_equal new_labels
+    _(bucket.labels).must_equal new_labels
 
     mock.verify
   end
@@ -271,13 +271,13 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    bucket.wont_be :versioning?
-    bucket.logging_bucket.must_be :nil?
-    bucket.logging_prefix.must_be :nil?
-    bucket.website_main.must_be :nil?
-    bucket.website_404.must_be :nil?
-    bucket.requester_pays.must_be :nil?
-    bucket.labels.must_equal Hash.new
+    _(bucket).wont_be :versioning?
+    _(bucket.logging_bucket).must_be :nil?
+    _(bucket.logging_prefix).must_be :nil?
+    _(bucket.website_main).must_be :nil?
+    _(bucket.website_404).must_be :nil?
+    _(bucket.requester_pays).must_be :nil?
+    _(bucket.labels).must_equal Hash.new
 
     bucket.update do |b|
       b.versioning = true
@@ -290,14 +290,14 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
       b.labels["env"] = "production"
     end
 
-    bucket.versioning?.must_equal true
-    bucket.logging_bucket.must_equal bucket_logging_bucket
-    bucket.logging_prefix.must_equal bucket_logging_prefix
-    bucket.storage_class.must_equal "NEARLINE"
-    bucket.website_main.must_equal bucket_website_main
-    bucket.website_404.must_equal bucket_website_404
-    bucket.requester_pays.must_equal bucket_requester_pays
-    bucket.labels.must_equal({ "env" => "production" })
+    _(bucket.versioning?).must_equal true
+    _(bucket.logging_bucket).must_equal bucket_logging_bucket
+    _(bucket.logging_prefix).must_equal bucket_logging_prefix
+    _(bucket.storage_class).must_equal "NEARLINE"
+    _(bucket.website_main).must_equal bucket_website_main
+    _(bucket.website_404).must_equal bucket_website_404
+    _(bucket.requester_pays).must_equal bucket_requester_pays
+    _(bucket.labels).must_equal({ "env" => "production" })
 
     mock.verify
   end
@@ -313,7 +313,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
         [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
       bucket.service.mocked_service = mock
 
-      bucket.cors.must_equal []
+      _(bucket.cors).must_equal []
       bucket.cors do |c|
         c.add_rule ["http://example.org", "https://example.org"],
                    "*",
@@ -331,7 +331,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
                               headers: ["X-My-Custom-Header"],
                               max_age: 300
       }.must_raise RuntimeError
-      err.message.must_match "can't modify frozen"
+      _(err.message).must_match "can't modify frozen"
     end
 
     it "can update cors inside of a block" do
@@ -350,11 +350,11 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
         [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
       bucket.service.mocked_service = mock
 
-      bucket.cors.must_be :frozen?
-      bucket.cors.class.must_equal Google::Cloud::Storage::Bucket::Cors
+      _(bucket.cors).must_be :frozen?
+      _(bucket.cors.class).must_equal Google::Cloud::Storage::Bucket::Cors
       bucket.update do |b|
-        b.cors.wont_be :frozen?
-        b.cors.must_be :empty?
+        _(b.cors).wont_be :frozen?
+        _(b.cors).must_be :empty?
         b.cors.add_rule ["http://example.org", "https://example.org", "https://example.com"],
                          "PUT",
                          headers: ["X-My-Custom-Header", "X-Another-Custom-Header"],
@@ -431,8 +431,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
                    "*",
                    headers: "X-Another-Custom-Header"
       end
-      returned_cors.frozen?.must_equal true
-      returned_cors.first.frozen?.must_equal true
+      _(returned_cors.frozen?).must_equal true
+      _(returned_cors.first.frozen?).must_equal true
 
       mock.verify
     end
@@ -453,7 +453,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
                   [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
       bucket.service.mocked_service = mock
 
-      bucket.lifecycle.must_equal []
+      _(bucket.lifecycle).must_equal []
       bucket.lifecycle do |l|
         l.add_set_storage_class_rule "NEARLINE", age: 32
       end
@@ -465,7 +465,7 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
       err = expect {
         bucket.lifecycle.add_set_storage_class_rule "NEARLINE", age: 32
       }.must_raise RuntimeError
-      err.message.must_match "can't modify frozen"
+      _(err.message).must_match "can't modify frozen"
     end
 
     it "can update lifecycle inside of a block" do
@@ -481,11 +481,11 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
                   [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
       bucket.service.mocked_service = mock
 
-      bucket.lifecycle.must_be :frozen?
-      bucket.lifecycle.class.must_equal Google::Cloud::Storage::Bucket::Lifecycle
+      _(bucket.lifecycle).must_be :frozen?
+      _(bucket.lifecycle.class).must_equal Google::Cloud::Storage::Bucket::Lifecycle
       bucket.update do |b|
-        b.lifecycle.wont_be :frozen?
-        b.lifecycle.must_be :empty?
+        _(b.lifecycle).wont_be :frozen?
+        _(b.lifecycle).must_be :empty?
         b.lifecycle.add_delete_rule age: 40, is_live: false
       end
 
@@ -530,8 +530,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
                   [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
       bucket.service.mocked_service = mock
 
-      bucket.lifecycle.must_be :frozen?
-      bucket.lifecycle.class.must_equal Google::Cloud::Storage::Bucket::Lifecycle
+      _(bucket.lifecycle).must_be :frozen?
+      _(bucket.lifecycle.class).must_equal Google::Cloud::Storage::Bucket::Lifecycle
       bucket.update do |b|
         b.lifecycle.add_delete_rule age: 40, is_live: false
         b.lifecycle.add_delete_rule is_live: false, num_newer_versions: 8
@@ -554,8 +554,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
                   [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
       bucket.service.mocked_service = mock
 
-      bucket.lifecycle.must_be :frozen?
-      bucket.lifecycle.class.must_equal Google::Cloud::Storage::Bucket::Lifecycle
+      _(bucket.lifecycle).must_be :frozen?
+      _(bucket.lifecycle.class).must_equal Google::Cloud::Storage::Bucket::Lifecycle
       bucket.lifecycle do |l|
         l.add_set_storage_class_rule "COLDLINE", created_before: "2013-01-15", matches_storage_class: ["STANDARD", "NEARLINE"]
         l.add_delete_rule age: 40, is_live: false

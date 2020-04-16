@@ -48,27 +48,27 @@ describe Google::Cloud::Storage::Bucket, :encryption, :storage do
   describe "KMS customer-managed encryption key (CMEK)" do
 
     it "knows its encryption configuration" do
-      bucket.default_kms_key.wont_be :nil?
-      bucket.default_kms_key.must_equal kms_key
+      _(bucket.default_kms_key).wont_be :nil?
+      _(bucket.default_kms_key).must_equal kms_key
       bucket.reload!
-      bucket.default_kms_key.wont_be :nil?
-      bucket.default_kms_key.must_equal kms_key
+      _(bucket.default_kms_key).wont_be :nil?
+      _(bucket.default_kms_key).must_equal kms_key
     end
 
     it "can update its default kms key to another key" do
-      bucket.default_kms_key.must_equal kms_key
+      _(bucket.default_kms_key).must_equal kms_key
       bucket.default_kms_key = kms_key_2
-      bucket.default_kms_key.must_equal kms_key_2
+      _(bucket.default_kms_key).must_equal kms_key_2
       bucket.reload!
-      bucket.default_kms_key.must_equal kms_key_2
+      _(bucket.default_kms_key).must_equal kms_key_2
     end
 
     it "can remove its default kms key by setting encryption to nil" do
-      bucket.default_kms_key.must_equal kms_key
+      _(bucket.default_kms_key).must_equal kms_key
       bucket.default_kms_key = nil
-      bucket.default_kms_key.must_be :nil?
+      _(bucket.default_kms_key).must_be :nil?
       bucket.reload!
-      bucket.default_kms_key.must_be :nil?
+      _(bucket.default_kms_key).must_be :nil?
     end
   end
 end

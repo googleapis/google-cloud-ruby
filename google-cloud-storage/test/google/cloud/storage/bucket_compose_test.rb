@@ -55,8 +55,8 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     bucket.service.mocked_service = mock
 
     new_file = bucket.compose [file_name, file_2_name], file_3_name
-    new_file.must_be_kind_of Google::Cloud::Storage::File
-    new_file.name.must_equal file_3_name
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
 
     mock.verify
   end
@@ -69,8 +69,8 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     bucket.service.mocked_service = mock
 
     new_file = bucket.compose [file, file_2], file_3_name
-    new_file.must_be_kind_of Google::Cloud::Storage::File
-    new_file.name.must_equal file_3_name
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
 
     mock.verify
   end
@@ -86,8 +86,8 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     bucket.service.mocked_service = mock
 
     new_file = bucket.compose [file, file_2], file_3_name
-    new_file.must_be_kind_of Google::Cloud::Storage::File
-    new_file.name.must_equal file_3_name
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
 
     mock.verify
   end
@@ -100,8 +100,8 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     bucket.service.mocked_service = mock
 
     new_file = bucket.compose [file, file_2], file_3_name, acl: "private"
-    new_file.must_be_kind_of Google::Cloud::Storage::File
-    new_file.name.must_equal file_3_name
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
 
     mock.verify
   end
@@ -114,8 +114,8 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     bucket.service.mocked_service = mock
 
     new_file = bucket.compose [file, file_2], file_3_name, acl: :public
-    new_file.must_be_kind_of Google::Cloud::Storage::File
-    new_file.name.must_equal file_3_name
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
 
     mock.verify
   end
@@ -128,9 +128,9 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     file.service.mocked_service = mock
 
     new_file = bucket_user_project.compose [file, file_2], file_3_name
-    new_file.must_be_kind_of Google::Cloud::Storage::File
-    new_file.name.must_equal file_3_name
-    new_file.user_project.must_equal true
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
+    _(new_file.user_project).must_equal true
 
     mock.verify
   end
@@ -143,8 +143,8 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     file.service.mocked_service = mock
 
     new_file = bucket.compose [file, file_2], file_3_name, encryption_key: encryption_key
-    new_file.must_be_kind_of Google::Cloud::Storage::File
-    new_file.name.must_equal file_3_name
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
 
     mock.verify
   end
@@ -177,8 +177,8 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
       f.storage_class = :nearline
     end
 
-    new_file.must_be_kind_of Google::Cloud::Storage::File
-    new_file.name.must_equal file_3_name
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
 
     mock.verify
   end
@@ -211,9 +211,9 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
       f.storage_class = :nearline
     end
 
-    new_file.must_be_kind_of Google::Cloud::Storage::File
-    new_file.name.must_equal file_3_name
-    new_file.user_project.must_equal true
+    _(new_file).must_be_kind_of Google::Cloud::Storage::File
+    _(new_file.name).must_equal file_3_name
+    _(new_file.user_project).must_equal true
 
     mock.verify
   end

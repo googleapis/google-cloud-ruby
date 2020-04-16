@@ -42,13 +42,13 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
 
     response = http.request request
 
-    response.code.must_equal "204"
+    _(response.code).must_equal "204"
     file = bucket.file(post_object.fields["key"])
-    file.wont_be :nil?
+    _(file).wont_be :nil?
     Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
       tmpfile.binmode
       downloaded = file.download tmpfile
-      File.read(downloaded.path, mode: "rb").must_equal File.read(data, mode: "rb")
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(data, mode: "rb")
     end
   end
 
@@ -67,13 +67,13 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
     request.set_form form_data, 'multipart/form-data'
 
     response = http.request request
-    response.code.must_equal "204"
+    _(response.code).must_equal "204"
     file = bucket.file(post_object.fields["key"])
-    file.wont_be :nil?
+    _(file).wont_be :nil?
     Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
       tmpfile.binmode
       downloaded = file.download tmpfile
-      File.read(downloaded.path, mode: "rb").must_equal File.read(data, mode: "rb")
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(data, mode: "rb")
     end
   end
 
@@ -97,13 +97,13 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
 
     response = http.request request
 
-    response.code.must_equal "204"
+    _(response.code).must_equal "204"
     file = bucket.file(post_object.fields["key"])
-    file.wont_be :nil?
+    _(file).wont_be :nil?
     Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
       tmpfile.binmode
       downloaded = file.download tmpfile
-      File.read(downloaded.path, mode: "rb").must_equal File.read(data, mode: "rb")
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(data, mode: "rb")
     end
   end
 
@@ -126,13 +126,13 @@ describe Google::Cloud::Storage::Bucket, :generate_signed_post_policy_v4, :stora
 
     response = http.request request
 
-    response.code.must_equal "200"
+    _(response.code).must_equal "200"
     file = bucket.file(post_object.fields["key"])
-    file.wont_be :nil?
+    _(file).wont_be :nil?
     Tempfile.open ["google-cloud-logo", ".jpg"] do |tmpfile|
       tmpfile.binmode
       downloaded = file.download tmpfile
-      File.read(downloaded.path, mode: "rb").must_equal File.read(data, mode: "rb")
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(data, mode: "rb")
     end
   end
 

@@ -28,7 +28,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.cache_control.must_be :nil?
+    _(file.cache_control).must_be :nil?
     file.cache_control = "private, max-age=0, no-cache"
 
     mock.verify
@@ -42,7 +42,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.content_disposition.must_be :nil?
+    _(file.content_disposition).must_be :nil?
     file.content_disposition = "inline; filename=filename.ext"
 
     mock.verify
@@ -56,7 +56,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.content_encoding.must_be :nil?
+    _(file.content_encoding).must_be :nil?
     file.content_encoding = "deflate"
 
     mock.verify
@@ -70,7 +70,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.content_language.must_be :nil?
+    _(file.content_language).must_be :nil?
     file.content_language = "de"
 
     mock.verify
@@ -84,7 +84,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.content_type.must_be :nil?
+    _(file.content_type).must_be :nil?
     file.content_type = "application/json"
 
     mock.verify
@@ -98,7 +98,7 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.metadata.must_be :empty?
+    _(file.metadata).must_be :empty?
     file.metadata = { "player" => "Bob", score: 10 }
 
     mock.verify
@@ -114,9 +114,9 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
 
     file.service.mocked_service = mock
 
-    file.storage_class.must_be :nil?
+    _(file.storage_class).must_be :nil?
     file.storage_class = :dra
-    file.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    _(file.storage_class).must_equal "DURABLE_REDUCED_AVAILABILITY"
 
     mock.verify
   end
@@ -131,9 +131,9 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
 
     file_user_project.service.mocked_service = mock
 
-    file_user_project.storage_class.must_be :nil?
+    _(file_user_project.storage_class).must_be :nil?
     file_user_project.storage_class = :dra
-    file_user_project.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    _(file_user_project.storage_class).must_equal "DURABLE_REDUCED_AVAILABILITY"
 
     mock.verify
   end
@@ -158,9 +158,9 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
     def file.sleep *args
     end
 
-    file.storage_class.must_be :nil?
+    _(file.storage_class).must_be :nil?
     file.storage_class = :dra
-    file.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    _(file.storage_class).must_equal "DURABLE_REDUCED_AVAILABILITY"
 
     mock.verify
   end
@@ -185,9 +185,9 @@ describe Google::Cloud::Storage::File, :update, :lazy, :mock_storage do
     def file_user_project.sleep *args
     end
 
-    file_user_project.storage_class.must_be :nil?
+    _(file_user_project.storage_class).must_be :nil?
     file_user_project.storage_class = :dra
-    file_user_project.storage_class.must_equal "DURABLE_REDUCED_AVAILABILITY"
+    _(file_user_project.storage_class).must_equal "DURABLE_REDUCED_AVAILABILITY"
 
     mock.verify
   end

@@ -41,58 +41,58 @@ describe Google::Cloud::Storage::PolicyV3, :bindings do
   let(:complex_binding) { Google::Cloud::Storage::Policy::Binding.new **complex_hash }
 
   it "bindings can be added, iterated and removed" do
-    policy.bindings.to_a.count.must_equal 0
+    _(policy.bindings.to_a.count).must_equal 0
     policy.bindings.insert simple_binding
-    policy.bindings.to_a.count.must_equal 1
+    _(policy.bindings.to_a.count).must_equal 1
     policy.bindings.insert complex_binding
-    policy.bindings.to_a.count.must_equal 2
+    _(policy.bindings.to_a.count).must_equal 2
 
     idx = 0
     policy.bindings.each do |binding|
-      binding.must_be_kind_of Google::Cloud::Storage::Policy::Binding
+      _(binding).must_be_kind_of Google::Cloud::Storage::Policy::Binding
       idx += 1
     end
-    idx.must_equal 2
+    _(idx).must_equal 2
 
     enumerator = policy.bindings.each
-    enumerator.next.must_equal simple_binding
-    enumerator.next.must_equal complex_binding
+    _(enumerator.next).must_equal simple_binding
+    _(enumerator.next).must_equal complex_binding
 
     policy.bindings.remove complex_binding
-    policy.bindings.to_a.count.must_equal 1
+    _(policy.bindings.to_a.count).must_equal 1
     policy.bindings.remove simple_binding
-    policy.bindings.to_a.count.must_equal 0
+    _(policy.bindings.to_a.count).must_equal 0
   end
 
   it "multiple bindings can be added and removed in a single call" do
-    policy.bindings.to_a.count.must_equal 0
+    _(policy.bindings.to_a.count).must_equal 0
     policy.bindings.insert simple_binding, complex_binding
-    policy.bindings.to_a.count.must_equal 2
+    _(policy.bindings.to_a.count).must_equal 2
 
     policy.bindings.remove complex_binding, simple_binding
-    policy.bindings.to_a.count.must_equal 0
+    _(policy.bindings.to_a.count).must_equal 0
   end
 
   it "bindings can be added and removed using hashes" do
-    policy.bindings.to_a.count.must_equal 0
+    _(policy.bindings.to_a.count).must_equal 0
     policy.bindings.insert simple_hash
-    policy.bindings.to_a.count.must_equal 1
+    _(policy.bindings.to_a.count).must_equal 1
     policy.bindings.insert complex_hash
-    policy.bindings.to_a.count.must_equal 2
+    _(policy.bindings.to_a.count).must_equal 2
 
     policy.bindings.remove complex_hash
-    policy.bindings.to_a.count.must_equal 1
+    _(policy.bindings.to_a.count).must_equal 1
     policy.bindings.remove simple_hash
-    policy.bindings.to_a.count.must_equal 0
+    _(policy.bindings.to_a.count).must_equal 0
   end
 
   it "multiple bindings can be added and removed using hashes in a single call" do
-    policy.bindings.to_a.count.must_equal 0
+    _(policy.bindings.to_a.count).must_equal 0
     policy.bindings.insert simple_hash, complex_hash
-    policy.bindings.to_a.count.must_equal 2
+    _(policy.bindings.to_a.count).must_equal 2
 
     policy.bindings.remove complex_hash, simple_hash
-    policy.bindings.to_a.count.must_equal 0
+    _(policy.bindings.to_a.count).must_equal 0
   end
 
   it "bindings can be changed to create duplicates and all duplicates removed" do
@@ -114,23 +114,23 @@ describe Google::Cloud::Storage::PolicyV3, :bindings do
       }
     }
 
-    policy.bindings.to_a.count.must_equal 0
+    _(policy.bindings.to_a.count).must_equal 0
     policy.bindings.insert simple_hash, simple_owner_hash
-    policy.bindings.to_a.count.must_equal 2
+    _(policy.bindings.to_a.count).must_equal 2
     policy.bindings.insert complex_hash, complex_owner_hash
-    policy.bindings.to_a.count.must_equal 4
+    _(policy.bindings.to_a.count).must_equal 4
 
     simple_owner_binding = policy.bindings.find { |b| b.role == simple_owner_hash[:role] && b.members == simple_owner_hash[:members] }
-    simple_owner_binding.must_be_kind_of Google::Cloud::Storage::PolicyV3::Binding
-    simple_owner_binding.role.must_equal "roles/storage.objectOwner"
-    simple_owner_binding.members.must_equal ["user:owner@example.com"]
-    simple_owner_binding.condition.must_be :nil?
+    _(simple_owner_binding).must_be_kind_of Google::Cloud::Storage::PolicyV3::Binding
+    _(simple_owner_binding.role).must_equal "roles/storage.objectOwner"
+    _(simple_owner_binding.members).must_equal ["user:owner@example.com"]
+    _(simple_owner_binding.condition).must_be :nil?
 
     complex_owner_binding = policy.bindings.find { |b| b.role == complex_owner_hash[:role] && b.members == complex_owner_hash[:members] }
-    complex_owner_binding.must_be_kind_of Google::Cloud::Storage::PolicyV3::Binding
-    complex_owner_binding.role.must_equal "roles/storage.objectOwner"
-    complex_owner_binding.members.must_equal ["serviceAccount:1234567890@developer.gserviceaccount.com"]
-    complex_owner_binding.condition.must_be_kind_of Google::Cloud::Storage::PolicyV3::Condition
+    _(complex_owner_binding).must_be_kind_of Google::Cloud::Storage::PolicyV3::Binding
+    _(complex_owner_binding.role).must_equal "roles/storage.objectOwner"
+    _(complex_owner_binding.members).must_equal ["serviceAccount:1234567890@developer.gserviceaccount.com"]
+    _(complex_owner_binding.condition).must_be_kind_of Google::Cloud::Storage::PolicyV3::Condition
 
     # change the binding to be the same as the simple binding
     simple_owner_binding.role = simple_hash[:role]
@@ -141,10 +141,10 @@ describe Google::Cloud::Storage::PolicyV3, :bindings do
     complex_owner_binding.condition = complex_hash[:condition]
 
     # remove the now duplicate values by specifying only one binding value
-    policy.bindings.to_a.count.must_equal 4
+    _(policy.bindings.to_a.count).must_equal 4
     policy.bindings.remove simple_hash
-    policy.bindings.to_a.count.must_equal 2
+    _(policy.bindings.to_a.count).must_equal 2
     policy.bindings.remove complex_hash
-    policy.bindings.to_a.count.must_equal 0
+    _(policy.bindings.to_a.count).must_equal 0
   end
 end

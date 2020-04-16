@@ -26,12 +26,12 @@ describe Google::Cloud::Storage::Notification, :mock_storage do
 
 
   it "knows its attributes" do
-    notification.id.must_equal "1"
-    notification.custom_attrs.must_equal({ "foo" => "bar" })
-    notification.event_types.must_equal ["OBJECT_FINALIZE"]
-    notification.prefix.must_equal "my-prefix"
-    notification.payload.must_equal "NONE"
-    notification.topic.must_equal "//pubsub.googleapis.com/projects/#{project}/topics/#{topic_name}"
+    _(notification.id).must_equal "1"
+    _(notification.custom_attrs).must_equal({ "foo" => "bar" })
+    _(notification.event_types).must_equal ["OBJECT_FINALIZE"]
+    _(notification.prefix).must_equal "my-prefix"
+    _(notification.payload).must_equal "NONE"
+    _(notification.topic).must_equal "//pubsub.googleapis.com/projects/#{project}/topics/#{topic_name}"
   end
 
   it "can delete itself" do

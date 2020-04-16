@@ -56,34 +56,34 @@ describe Google::Cloud::Storage::File, :storage do
       tmpfile.binmode
       downloaded = uploaded.download tmpfile
 
-      downloaded.size.must_equal original.size
-      downloaded.size.must_equal uploaded.size
-      downloaded.size.must_equal tmpfile.size # Same file
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
 
-      File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
     end
 
-    uploaded.created_at.must_be_kind_of DateTime
-    uploaded.api_url.must_be_kind_of String
-    uploaded.media_url.must_be_kind_of String
-    uploaded.public_url.must_be_kind_of String
-    uploaded.url.must_be_kind_of String
+    _(uploaded.created_at).must_be_kind_of DateTime
+    _(uploaded.api_url).must_be_kind_of String
+    _(uploaded.media_url).must_be_kind_of String
+    _(uploaded.public_url).must_be_kind_of String
+    _(uploaded.url).must_be_kind_of String
 
-    uploaded.md5.must_be_kind_of String
-    uploaded.crc32c.must_be_kind_of String
-    uploaded.etag.must_be_kind_of String
+    _(uploaded.md5).must_be_kind_of String
+    _(uploaded.crc32c).must_be_kind_of String
+    _(uploaded.etag).must_be_kind_of String
 
-    uploaded.cache_control.must_equal "public, max-age=3600"
-    uploaded.content_disposition.must_equal "attachment; filename=filename.ext"
-    uploaded.content_encoding.must_be :nil?
-    uploaded.content_language.must_equal "en"
-    uploaded.content_type.must_equal "text/plain"
+    _(uploaded.cache_control).must_equal "public, max-age=3600"
+    _(uploaded.content_disposition).must_equal "attachment; filename=filename.ext"
+    _(uploaded.content_encoding).must_be :nil?
+    _(uploaded.content_language).must_equal "en"
+    _(uploaded.content_type).must_equal "text/plain"
 
-    uploaded.metadata.must_be_kind_of Hash
-    uploaded.metadata.size.must_equal 2
-    uploaded.metadata.frozen?.must_equal true
-    uploaded.metadata["player"].must_equal "Alice"
-    uploaded.metadata["score"].must_equal "101"
+    _(uploaded.metadata).must_be_kind_of Hash
+    _(uploaded.metadata.size).must_equal 2
+    _(uploaded.metadata.frozen?).must_equal true
+    _(uploaded.metadata["player"]).must_equal "Alice"
+    _(uploaded.metadata["score"]).must_equal "101"
 
     uploaded.delete
   end
@@ -94,27 +94,27 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded_1 = bucket.create_file StringIO.new("generation 1"), filename
     generation_1 = uploaded_1.generation
     uploaded_1.reload!
-    uploaded_1.generation.must_equal generation_1
+    _(uploaded_1.generation).must_equal generation_1
 
     uploaded_2 = bucket.create_file StringIO.new("generation 2"), filename
     generation_2 = uploaded_2.generation
-    generation_2.wont_equal generation_1
+    _(generation_2).wont_equal generation_1
 
     uploaded_1.reload! generation: true
-    uploaded_1.generation.must_equal generation_1
+    _(uploaded_1.generation).must_equal generation_1
     uploaded_2.reload!
-    uploaded_2.generation.must_equal generation_2
+    _(uploaded_2.generation).must_equal generation_2
     uploaded_1.reload!
-    uploaded_1.generation.must_equal generation_2
+    _(uploaded_1.generation).must_equal generation_2
 
     Tempfile.open ["generation_file", ".txt"] do |tmpfile|
       downloaded = bucket.file(filename).download tmpfile
-      File.read(downloaded.path).must_equal "generation 2"
+      _(File.read(downloaded.path)).must_equal "generation 2"
     end
 
     Tempfile.open ["generation_file", ".txt"] do |tmpfile|
       downloaded =  bucket.file(filename, generation: generation_1).download tmpfile
-      File.read(downloaded.path).must_equal "generation 1"
+      _(File.read(downloaded.path)).must_equal "generation 1"
     end
 
     uploaded_2.delete generation: generation_1
@@ -140,45 +140,45 @@ describe Google::Cloud::Storage::File, :storage do
       tmpfile.binmode
       downloaded = uploaded.download tmpfile, verify: :all
 
-      downloaded.size.must_equal original.size
-      downloaded.size.must_equal uploaded.size
-      downloaded.size.must_equal tmpfile.size # Same file
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
 
-      File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
     end
     uploaded.delete
   end
 
   it "creates and gets and updates and deletes a file" do
-    bucket.file("CRUDLogo").must_be :nil?
+    _(bucket.file("CRUDLogo")).must_be :nil?
 
     original = File.new files[:logo][:path]
     uploaded = bucket.create_file original, "CRUDLogo.png"
 
-    bucket.file("CRUDLogo.png").wont_be :nil?
+    _(bucket.file("CRUDLogo.png")).wont_be :nil?
 
     generation = uploaded.generation
-    generation.must_be_kind_of Integer
+    _(generation).must_be_kind_of Integer
 
-    uploaded.created_at.must_be_kind_of DateTime
-    uploaded.api_url.must_be_kind_of String
-    uploaded.media_url.must_be_kind_of String
-    uploaded.public_url.must_be_kind_of String
-    uploaded.url.must_be_kind_of String
+    _(uploaded.created_at).must_be_kind_of DateTime
+    _(uploaded.api_url).must_be_kind_of String
+    _(uploaded.media_url).must_be_kind_of String
+    _(uploaded.public_url).must_be_kind_of String
+    _(uploaded.url).must_be_kind_of String
 
-    uploaded.md5.must_be_kind_of String
-    uploaded.crc32c.must_be_kind_of String
-    uploaded.etag.must_be_kind_of String
+    _(uploaded.md5).must_be_kind_of String
+    _(uploaded.crc32c).must_be_kind_of String
+    _(uploaded.etag).must_be_kind_of String
 
-    uploaded.cache_control.must_be :nil?
-    uploaded.content_disposition.must_be :nil?
-    uploaded.content_encoding.must_be :nil?
-    uploaded.content_language.must_be :nil?
-    uploaded.content_type.must_equal "image/png"
+    _(uploaded.cache_control).must_be :nil?
+    _(uploaded.content_disposition).must_be :nil?
+    _(uploaded.content_encoding).must_be :nil?
+    _(uploaded.content_language).must_be :nil?
+    _(uploaded.content_type).must_equal "image/png"
 
-    uploaded.metadata.must_be_kind_of Hash
-    uploaded.metadata.must_be :empty?
-    uploaded.metageneration.must_equal 1
+    _(uploaded.metadata).must_be_kind_of Hash
+    _(uploaded.metadata).must_be :empty?
+    _(uploaded.metageneration).must_equal 1
 
     uploaded.update do |f|
       f.cache_control = "private, max-age=0, no-cache"
@@ -189,77 +189,77 @@ describe Google::Cloud::Storage::File, :storage do
       f.metadata[:score] = 101
     end
 
-    uploaded.created_at.must_be_kind_of DateTime
-    uploaded.api_url.must_be_kind_of String
-    uploaded.media_url.must_be_kind_of String
-    uploaded.public_url.must_be_kind_of String
-    uploaded.url.must_be_kind_of String
+    _(uploaded.created_at).must_be_kind_of DateTime
+    _(uploaded.api_url).must_be_kind_of String
+    _(uploaded.media_url).must_be_kind_of String
+    _(uploaded.public_url).must_be_kind_of String
+    _(uploaded.url).must_be_kind_of String
 
-    uploaded.md5.must_be_kind_of String
-    uploaded.crc32c.must_be_kind_of String
-    uploaded.etag.must_be_kind_of String
+    _(uploaded.md5).must_be_kind_of String
+    _(uploaded.crc32c).must_be_kind_of String
+    _(uploaded.etag).must_be_kind_of String
 
-    uploaded.cache_control.must_equal "private, max-age=0, no-cache"
-    uploaded.content_disposition.must_equal "attachment; filename=filename.ext"
-    uploaded.content_encoding.must_be :nil?
-    uploaded.content_language.must_equal "en"
-    uploaded.content_type.must_equal "text/plain"
+    _(uploaded.cache_control).must_equal "private, max-age=0, no-cache"
+    _(uploaded.content_disposition).must_equal "attachment; filename=filename.ext"
+    _(uploaded.content_encoding).must_be :nil?
+    _(uploaded.content_language).must_equal "en"
+    _(uploaded.content_type).must_equal "text/plain"
 
-    uploaded.metadata.must_be_kind_of Hash
-    uploaded.metadata.size.must_equal 2
-    uploaded.metadata.frozen?.must_equal true
-    uploaded.metadata["player"].must_equal "Alice"
-    uploaded.metadata["score"].must_equal "101"
-    uploaded.metageneration.must_equal 2
+    _(uploaded.metadata).must_be_kind_of Hash
+    _(uploaded.metadata.size).must_equal 2
+    _(uploaded.metadata.frozen?).must_equal true
+    _(uploaded.metadata["player"]).must_equal "Alice"
+    _(uploaded.metadata["score"]).must_equal "101"
+    _(uploaded.metageneration).must_equal 2
 
     uploaded.reload!
 
-    uploaded.generation.must_equal generation
+    _(uploaded.generation).must_equal generation
 
-    uploaded.created_at.must_be_kind_of DateTime
-    uploaded.api_url.must_be_kind_of String
-    uploaded.media_url.must_be_kind_of String
-    uploaded.public_url.must_be_kind_of String
-    uploaded.url.must_be_kind_of String
+    _(uploaded.created_at).must_be_kind_of DateTime
+    _(uploaded.api_url).must_be_kind_of String
+    _(uploaded.media_url).must_be_kind_of String
+    _(uploaded.public_url).must_be_kind_of String
+    _(uploaded.url).must_be_kind_of String
 
-    uploaded.md5.must_be_kind_of String
-    uploaded.crc32c.must_be_kind_of String
-    uploaded.etag.must_be_kind_of String
+    _(uploaded.md5).must_be_kind_of String
+    _(uploaded.crc32c).must_be_kind_of String
+    _(uploaded.etag).must_be_kind_of String
 
-    uploaded.cache_control.must_equal "private, max-age=0, no-cache"
-    uploaded.content_disposition.must_equal "attachment; filename=filename.ext"
-    uploaded.content_encoding.must_be :nil?
-    uploaded.content_language.must_equal "en"
-    uploaded.content_type.must_equal "text/plain"
+    _(uploaded.cache_control).must_equal "private, max-age=0, no-cache"
+    _(uploaded.content_disposition).must_equal "attachment; filename=filename.ext"
+    _(uploaded.content_encoding).must_be :nil?
+    _(uploaded.content_language).must_equal "en"
+    _(uploaded.content_type).must_equal "text/plain"
 
-    uploaded.metadata.must_be_kind_of Hash
-    uploaded.metadata.size.must_equal 2
-    uploaded.metadata.frozen?.must_equal true
-    uploaded.metadata["player"].must_equal "Alice"
-    uploaded.metadata["score"].must_equal "101"
+    _(uploaded.metadata).must_be_kind_of Hash
+    _(uploaded.metadata.size).must_equal 2
+    _(uploaded.metadata.frozen?).must_equal true
+    _(uploaded.metadata["player"]).must_equal "Alice"
+    _(uploaded.metadata["score"]).must_equal "101"
 
-    bucket.file("CRUDLogo.png").wont_be :nil?
+    _(bucket.file("CRUDLogo.png")).wont_be :nil?
 
     uploaded.delete
 
-    bucket.file("CRUDLogo.png").must_be :nil?
+    _(bucket.file("CRUDLogo.png")).must_be :nil?
   end
 
   it "should upload and download a file without specifying path" do
     original = File.new files[:logo][:path]
     uploaded = bucket.create_file original
-    uploaded.name.must_equal original.path
+    _(uploaded.name).must_equal original.path
 
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       downloaded = uploaded.download tmpfile
-      downloaded.must_be_kind_of File
+      _(downloaded).must_be_kind_of Tempfile
 
-      downloaded.size.must_equal original.size
-      downloaded.size.must_equal uploaded.size
-      downloaded.size.must_equal tmpfile.size # Same file
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
 
-      File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
     end
 
     uploaded.delete
@@ -269,17 +269,17 @@ describe Google::Cloud::Storage::File, :storage do
     inmemory = StringIO.new(File.read(files[:logo][:path], mode: "rb"))
 
     uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.png"
-    uploaded.name.must_equal "uploaded/with/inmemory.png"
+    _(uploaded.name).must_equal "uploaded/with/inmemory.png"
 
     downloaded = uploaded.download
-    downloaded.must_be_kind_of StringIO
+    _(downloaded).must_be_kind_of StringIO
 
     inmemory.rewind
-    downloaded.size.must_equal inmemory.size
-    downloaded.size.must_equal uploaded.size
+    _(downloaded.size).must_equal inmemory.size
+    _(downloaded.size).must_equal uploaded.size
 
-    downloaded.read.must_equal inmemory.read
-    downloaded.read.encoding.must_equal inmemory.read.encoding
+    _(downloaded.read).must_equal inmemory.read
+    _(downloaded.read.encoding).must_equal inmemory.read.encoding
 
     uploaded.delete
   end
@@ -287,19 +287,19 @@ describe Google::Cloud::Storage::File, :storage do
   it "should upload and download text using IO" do
     inmemory = StringIO.new "Hello world!"
     uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt"
-    uploaded.name.must_equal "uploaded/with/inmemory.txt"
+    _(uploaded.name).must_equal "uploaded/with/inmemory.txt"
 
     downloadio = StringIO.new()
     downloaded = uploaded.download downloadio
-    downloaded.must_be_kind_of StringIO
-    downloaded.must_equal downloadio # The object returned is the object provided
+    _(downloaded).must_be_kind_of StringIO
+    _(downloaded).must_equal downloadio # The object returned is the object provided
 
     inmemory.rewind
-    downloaded.size.must_equal inmemory.size
-    downloaded.size.must_equal uploaded.size
+    _(downloaded.size).must_equal inmemory.size
+    _(downloaded.size).must_equal uploaded.size
 
-    downloaded.read.must_equal inmemory.read
-    downloaded.read.encoding.must_equal inmemory.read.encoding
+    _(downloaded.read).must_equal inmemory.read
+    _(downloaded.read.encoding).must_equal inmemory.read.encoding
 
     uploaded.delete
   end
@@ -312,22 +312,22 @@ describe Google::Cloud::Storage::File, :storage do
     gzipped = StringIO.new gz.string
 
     uploaded = bucket.create_file gzipped, "uploaded/with/gzip-type.txt", content_type: "application/gzip"
-    uploaded.name.must_equal "uploaded/with/gzip-type.txt"
-    uploaded.content_type.must_equal "application/gzip"
-    uploaded.content_encoding.must_be_nil
+    _(uploaded.name).must_equal "uploaded/with/gzip-type.txt"
+    _(uploaded.content_type).must_equal "application/gzip"
+    _(uploaded.content_encoding).must_be_nil
     downloadio = StringIO.new()
     downloaded = uploaded.download downloadio
-    downloaded.must_be_kind_of StringIO
-    downloaded.must_equal downloadio # The object returned is the object provided
+    _(downloaded).must_be_kind_of StringIO
+    _(downloaded).must_equal downloadio # The object returned is the object provided
     gzipped.rewind
 
-    downloaded.size.must_equal gzipped.size
-    downloaded.size.must_equal uploaded.size
+    _(downloaded.size).must_equal gzipped.size
+    _(downloaded.size).must_equal uploaded.size
 
     data = downloaded.read
-    data.must_equal gzipped.read
+    _(data).must_equal gzipped.read
     gzr = Zlib::GzipReader.new StringIO.new(data)
-    gzr.read.must_equal "Hello world!"
+    _(gzr.read).must_equal "Hello world!"
 
     uploaded.delete
   end
@@ -341,18 +341,18 @@ describe Google::Cloud::Storage::File, :storage do
     gzipped = StringIO.new gz.string
 
     uploaded = bucket.create_file gzipped, "uploaded/with/gzip-encoding.txt", content_type: "text/plain", content_encoding: "gzip"
-    uploaded.name.must_equal "uploaded/with/gzip-encoding.txt"
-    uploaded.content_type.must_equal "text/plain"
-    uploaded.content_encoding.must_equal "gzip"
+    _(uploaded.name).must_equal "uploaded/with/gzip-encoding.txt"
+    _(uploaded.content_type).must_equal "text/plain"
+    _(uploaded.content_encoding).must_equal "gzip"
 
     downloadio = StringIO.new()
     downloaded = uploaded.download downloadio
-    downloaded.must_be_kind_of StringIO
-    downloaded.wont_equal downloadio # The object returned is NOT the object provided
+    _(downloaded).must_be_kind_of StringIO
+    _(downloaded).wont_equal downloadio # The object returned is NOT the object provided
 
     downloaded_data = downloaded.read
-    downloaded_data.must_equal data
-    downloaded_data.encoding.must_equal data.encoding
+    _(downloaded_data).must_equal data
+    _(downloaded_data.encoding).must_equal data.encoding
 
     uploaded.delete
   end
@@ -360,27 +360,27 @@ describe Google::Cloud::Storage::File, :storage do
   it "should download and verify when Content-Encoding gzip response header with skip_decompress" do
     bucket = storage.bucket bucket_public_test_name
     file = bucket.file file_public_test_gzip_name
-    file.content_encoding.must_equal "gzip"
+    _(file.content_encoding).must_equal "gzip"
     Tempfile.open ["hello_world", ".txt"] do |tmpfile|
       tmpfile.binmode
       downloaded = file.download tmpfile, skip_decompress: true
 
       data = File.read(downloaded.path, mode: "rb")
       gzr = Zlib::GzipReader.new StringIO.new(data)
-      gzr.read.must_equal "hello world"
+      _(gzr.read).must_equal "hello world"
     end
   end
 
   it "should download, verify, and decompress when Content-Encoding gzip response header with skip_lookup" do
     bucket = storage.bucket bucket_public_test_name, skip_lookup: true
     file = bucket.file file_public_test_gzip_name, skip_lookup: true
-    file.content_encoding.must_be_nil # metadata not loaded
-    file.content_type.must_be_nil # metadata not loaded
+    _(file.content_encoding).must_be_nil # metadata not loaded
+    _(file.content_type).must_be_nil # metadata not loaded
     Tempfile.open ["hello_world", ".txt"] do |tmpfile|
       tmpfile.binmode
       downloaded = file.download tmpfile
 
-      File.read(downloaded.path, mode: "rb").must_equal "hello world"
+      _(File.read(downloaded.path, mode: "rb")).must_equal "hello world"
     end
   end
 
@@ -392,7 +392,7 @@ describe Google::Cloud::Storage::File, :storage do
       tmpfile.binmode
       downloaded = lazy_file.download tmpfile,  verify: :crc32c
 
-      File.read(downloaded.path, mode: "rb").must_equal "hello world" # decompressed file data
+      _(File.read(downloaded.path, mode: "rb")).must_equal "hello world" # decompressed file data
     end
   end
 
@@ -401,7 +401,7 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt"
 
     downloaded = uploaded.download range: 3..6
-    downloaded.must_be_kind_of StringIO
+    _(downloaded).must_be_kind_of StringIO
 
     downloaded.rewind
     downloaded_partial = downloaded.read
@@ -428,18 +428,18 @@ describe Google::Cloud::Storage::File, :storage do
     lazy_bucket = storage.bucket bucket_name, skip_lookup: true
     lazy_file = lazy_bucket.file "CloudLogo.png", skip_lookup: true
 
-    lazy_bucket.must_be :lazy?
-    lazy_file.must_be :lazy?
+    _(lazy_bucket).must_be :lazy?
+    _(lazy_file).must_be :lazy?
 
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       downloaded = lazy_file.download tmpfile
 
-      downloaded.size.must_equal original.size
-      downloaded.size.must_equal uploaded.size
-      downloaded.size.must_equal tmpfile.size # Same file
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
 
-      File.read(downloaded.path, mode: "rb").must_equal File.read(original.path, mode: "rb")
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
     end
 
     uploaded.delete
@@ -452,45 +452,45 @@ describe Google::Cloud::Storage::File, :storage do
                                   "CloudLogo",
                                   meta
 
-    uploaded.content_type.must_equal meta[:content_type]
-    uploaded.metadata["title"].must_equal meta[:metadata][:title]
+    _(uploaded.content_type).must_equal meta[:content_type]
+    _(uploaded.metadata["title"]).must_equal meta[:metadata][:title]
   end
 
   it "should list generations" do
     uploaded = bucket.create_file files[:logo][:path],
                                   "CloudLogo"
 
-    uploaded.generation.wont_be :nil?
-    uploaded.generations.wont_be :nil?
+    _(uploaded.generation).wont_be :nil?
+    _(uploaded.generations).wont_be :nil?
   end
 
   it "should create and update storage_class" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo-storage_class.png", storage_class: :nearline
 
-    uploaded.storage_class.must_equal "NEARLINE"
+    _(uploaded.storage_class).must_equal "NEARLINE"
     uploaded.storage_class = :archive
-    uploaded.storage_class.must_equal "ARCHIVE"
+    _(uploaded.storage_class).must_equal "ARCHIVE"
 
     retrieved1 = bucket.file "CloudLogo-storage_class.png"
 
-    retrieved1.storage_class.must_equal "ARCHIVE"
+    _(retrieved1.storage_class).must_equal "ARCHIVE"
   end
 
   it "should copy an existing file" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo", acl: "public_read", content_language: "en"
-    uploaded.acl.readers.must_include "allUsers" # has "public_read"
-    uploaded.content_language.must_equal "en"
+    _(uploaded.acl.readers).must_include "allUsers" # has "public_read"
+    _(uploaded.content_language).must_equal "en"
 
     copied = try_with_backoff "copying existing file" do
       uploaded.copy "CloudLogoCopy"
     end
 
-    uploaded.name.must_equal "CloudLogo"
-    uploaded.content_language.must_equal "en"
-    copied.name.must_equal "CloudLogoCopy"
-    copied.acl.readers.wont_include "allUsers" # does NOT have "public_read"
-    copied.content_language.must_equal "en"
-    copied.size.must_equal uploaded.size
+    _(uploaded.name).must_equal "CloudLogo"
+    _(uploaded.content_language).must_equal "en"
+    _(copied.name).must_equal "CloudLogoCopy"
+    _(copied.acl.readers).wont_include "allUsers" # does NOT have "public_read"
+    _(copied.content_language).must_equal "en"
+    _(copied.size).must_equal uploaded.size
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
       tmpfile1.binmode
@@ -498,9 +498,9 @@ describe Google::Cloud::Storage::File, :storage do
         tmpfile2.binmode
         downloaded1 = uploaded.download tmpfile1
         downloaded2 = copied.download tmpfile2
-        downloaded1.size.must_equal downloaded2.size
+        _(downloaded1.size).must_equal downloaded2.size
 
-        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+        _(File.read(downloaded1.path, mode: "rb")).must_equal File.read(downloaded2.path, mode: "rb")
       end
     end
 
@@ -510,23 +510,23 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should copy an existing file, with updates" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo", acl: "public_read", content_language: "en", content_type: "image/png"
-    uploaded.acl.readers.must_include "allUsers" # has "public_read"
-    uploaded.content_language.must_equal "en"
-    uploaded.content_type.must_equal "image/png"
+    _(uploaded.acl.readers).must_include "allUsers" # has "public_read"
+    _(uploaded.content_language).must_equal "en"
+    _(uploaded.content_type).must_equal "image/png"
 
     copied = try_with_backoff "copying existing file" do
       uploaded.copy "CloudLogoCopy" do |copy|
         copy.content_language = "de"
       end
     end
-    uploaded.content_language.must_equal "en"
-    copied.acl.readers.wont_include "allUsers" # does NOT have "public_read"
-    copied.content_language.must_equal "de"
-    copied.content_type.must_be :nil?
+    _(uploaded.content_language).must_equal "en"
+    _(copied.acl.readers).wont_include "allUsers" # does NOT have "public_read"
+    _(copied.content_language).must_equal "de"
+    _(copied.content_type).must_be :nil?
 
-    uploaded.name.must_equal "CloudLogo"
-    copied.name.must_equal "CloudLogoCopy"
-    copied.size.must_equal uploaded.size
+    _(uploaded.name).must_equal "CloudLogo"
+    _(copied.name).must_equal "CloudLogoCopy"
+    _(copied.size).must_equal uploaded.size
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
       tmpfile1.binmode
@@ -534,9 +534,9 @@ describe Google::Cloud::Storage::File, :storage do
         tmpfile2.binmode
         downloaded1 = uploaded.download tmpfile1
         downloaded2 = copied.download tmpfile2
-        downloaded1.size.must_equal downloaded2.size
+        _(downloaded1.size).must_equal downloaded2.size
 
-        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+        _(File.read(downloaded1.path, mode: "rb")).must_equal File.read(downloaded2.path, mode: "rb")
       end
     end
 
@@ -546,27 +546,27 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should copy an existing file, with force_copy_metadata set to true" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo", acl: "public_read", content_language: "en", content_type: "image/png"
-    uploaded.acl.readers.must_include "allUsers" # has "public_read"
-    uploaded.content_language.must_equal "en"
-    uploaded.content_type.must_equal "image/png"
-    uploaded.metadata.must_be :empty?
+    _(uploaded.acl.readers).must_include "allUsers" # has "public_read"
+    _(uploaded.content_language).must_equal "en"
+    _(uploaded.content_type).must_equal "image/png"
+    _(uploaded.metadata).must_be :empty?
 
     copied = try_with_backoff "copying existing file" do
       uploaded.copy "CloudLogoCopy", force_copy_metadata: true do |copy|
         copy.content_language = "de"
       end
     end
-    uploaded.content_language.must_equal "en"
+    _(uploaded.content_language).must_equal "en"
     copied2 = bucket.file copied.name
-    copied2.acl.readers.wont_include "allUsers" # does NOT have "public_read"
-    copied.acl.readers.wont_include "allUsers" # does NOT have "public_read"
-    copied.content_language.must_equal "de"
-    copied.content_type.must_equal "image/png"
-    copied.metadata.must_be :empty?
+    _(copied2.acl.readers).wont_include "allUsers" # does NOT have "public_read"
+    _(copied.acl.readers).wont_include "allUsers" # does NOT have "public_read"
+    _(copied.content_language).must_equal "de"
+    _(copied.content_type).must_equal "image/png"
+    _(copied.metadata).must_be :empty?
 
-    uploaded.name.must_equal "CloudLogo"
-    copied.name.must_equal "CloudLogoCopy"
-    copied.size.must_equal uploaded.size
+    _(uploaded.name).must_equal "CloudLogo"
+    _(copied.name).must_equal "CloudLogoCopy"
+    _(copied.size).must_equal uploaded.size
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
       tmpfile1.binmode
@@ -574,9 +574,9 @@ describe Google::Cloud::Storage::File, :storage do
         tmpfile2.binmode
         downloaded1 = uploaded.download tmpfile1
         downloaded2 = copied.download tmpfile2
-        downloaded1.size.must_equal downloaded2.size
+        _(downloaded1.size).must_equal downloaded2.size
 
-        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+        _(File.read(downloaded1.path, mode: "rb")).must_equal File.read(downloaded2.path, mode: "rb")
       end
     end
 
@@ -586,22 +586,22 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should rewrite an existing file, with updates" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png"
-    uploaded.cache_control.must_be :nil?
-    uploaded.content_type.must_equal "image/png"
+    _(uploaded.cache_control).must_be :nil?
+    _(uploaded.content_type).must_equal "image/png"
 
     copied = try_with_backoff "rewriting existing file" do
       uploaded.rewrite "CloudLogoCopy.png" do |f|
         f.cache_control = "public, max-age: 7200"
       end
     end
-    uploaded.cache_control.must_be :nil?
-    uploaded.content_type.must_equal "image/png"
-    copied.cache_control.must_equal "public, max-age: 7200"
-    copied.content_type.must_be :nil?
+    _(uploaded.cache_control).must_be :nil?
+    _(uploaded.content_type).must_equal "image/png"
+    _(copied.cache_control).must_equal "public, max-age: 7200"
+    _(copied.content_type).must_be :nil?
 
-    uploaded.name.must_equal "CloudLogo.png"
-    copied.name.must_equal "CloudLogoCopy.png"
-    copied.size.must_equal uploaded.size
+    _(uploaded.name).must_equal "CloudLogo.png"
+    _(copied.name).must_equal "CloudLogoCopy.png"
+    _(copied.size).must_equal uploaded.size
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
       tmpfile1.binmode
@@ -609,9 +609,9 @@ describe Google::Cloud::Storage::File, :storage do
         tmpfile2.binmode
         downloaded1 = uploaded.download tmpfile1
         downloaded2 = copied.download tmpfile2
-        downloaded1.size.must_equal downloaded2.size
+        _(downloaded1.size).must_equal downloaded2.size
 
-        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+        _(File.read(downloaded1.path, mode: "rb")).must_equal File.read(downloaded2.path, mode: "rb")
       end
     end
 
@@ -621,22 +621,22 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should rewrite an existing file, with force_copy_metadata set to true" do
     uploaded = bucket.create_file files[:logo][:path], "CloudLogo.png"
-    uploaded.cache_control.must_be :nil?
-    uploaded.content_type.must_equal "image/png"
+    _(uploaded.cache_control).must_be :nil?
+    _(uploaded.content_type).must_equal "image/png"
 
     copied = try_with_backoff "rewriting existing file" do
       uploaded.rewrite "CloudLogoCopy.png", force_copy_metadata: true do |f|
         f.cache_control = "public, max-age: 7200"
       end
     end
-    uploaded.cache_control.must_be :nil?
-    uploaded.content_type.must_equal "image/png"
-    copied.cache_control.must_equal "public, max-age: 7200"
-    copied.content_type.must_equal "image/png"
+    _(uploaded.cache_control).must_be :nil?
+    _(uploaded.content_type).must_equal "image/png"
+    _(copied.cache_control).must_equal "public, max-age: 7200"
+    _(copied.content_type).must_equal "image/png"
 
-    uploaded.name.must_equal "CloudLogo.png"
-    copied.name.must_equal "CloudLogoCopy.png"
-    copied.size.must_equal uploaded.size
+    _(uploaded.name).must_equal "CloudLogo.png"
+    _(copied.name).must_equal "CloudLogoCopy.png"
+    _(copied.size).must_equal uploaded.size
 
     Tempfile.open ["CloudLogo", ".png"] do |tmpfile1|
       tmpfile1.binmode
@@ -644,9 +644,9 @@ describe Google::Cloud::Storage::File, :storage do
         tmpfile2.binmode
         downloaded1 = uploaded.download tmpfile1
         downloaded2 = copied.download tmpfile2
-        downloaded1.size.must_equal downloaded2.size
+        _(downloaded1.size).must_equal downloaded2.size
 
-        File.read(downloaded1.path, mode: "rb").must_equal File.read(downloaded2.path, mode: "rb")
+        _(File.read(downloaded1.path, mode: "rb")).must_equal File.read(downloaded2.path, mode: "rb")
       end
     end
 
@@ -656,7 +656,7 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "does not error when getting a file that does not exist" do
     file = bucket.file "this/file/does/not/exist.png"
-    file.must_be :nil?
+    _(file).must_be :nil?
   end
 
   it "should compose existing files into a new file" do
@@ -667,13 +667,13 @@ describe Google::Cloud::Storage::File, :storage do
       bucket.compose [uploaded_a, uploaded_b], "ab.txt"
     end
 
-    composed.name.must_equal "ab.txt"
-    composed.size.must_equal uploaded_a.size + uploaded_b.size
+    _(composed.name).must_equal "ab.txt"
+    _(composed.size).must_equal uploaded_a.size + uploaded_b.size
 
     Tempfile.open ["ab", ".txt"] do |tmpfile|
       downloaded = composed.download tmpfile
 
-      File.read(downloaded.path).must_equal "ab"
+      _(File.read(downloaded.path)).must_equal "ab"
     end
 
     uploaded_a.delete
@@ -687,7 +687,7 @@ describe Google::Cloud::Storage::File, :storage do
       public_bucket = anonymous_storage.bucket bucket_public_test_name, skip_lookup: true
       files = public_bucket.files
 
-      files.wont_be :empty?
+      _(files).wont_be :empty?
     end
 
     it "should download a public file without authentication" do
@@ -698,7 +698,7 @@ describe Google::Cloud::Storage::File, :storage do
         tmpfile.binmode
         downloaded = file.download tmpfile, verify: :none # gzipped file verification bug #1835, does not affect this test
 
-        File.read(downloaded.path, mode: "rb").must_equal "hello world" # decompressed file data
+        _(File.read(downloaded.path, mode: "rb")).must_equal "hello world" # decompressed file data
       end
     end
 

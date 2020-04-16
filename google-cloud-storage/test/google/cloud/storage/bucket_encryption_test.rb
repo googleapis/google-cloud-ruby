@@ -63,9 +63,9 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
       mock.verify
 
-      file.name.must_equal file_name
-      file.user_project.must_be :nil?
-      file.wont_be :lazy?
+      _(file.name).must_equal file_name
+      _(file.user_project).must_be :nil?
+      _(file).wont_be :lazy?
     end
   end
 
@@ -80,11 +80,11 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
       bucket.service.mocked_service = mock
 
-      bucket.default_kms_key.must_be :nil?
+      _(bucket.default_kms_key).must_be :nil?
       bucket.default_kms_key = kms_key
-      bucket.default_kms_key.wont_be :nil?
-      bucket.default_kms_key.must_be_kind_of String
-      bucket.default_kms_key.must_equal kms_key
+      _(bucket.default_kms_key).wont_be :nil?
+      _(bucket.default_kms_key).must_be_kind_of String
+      _(bucket.default_kms_key).must_equal kms_key
     end
 
     it "sets its encryption config to nil" do
@@ -98,10 +98,10 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
       bucket_with_key.service.mocked_service = mock
 
-      bucket_with_key.default_kms_key.wont_be :nil?
+      _(bucket_with_key.default_kms_key).wont_be :nil?
 
       bucket_with_key.default_kms_key = nil
-      bucket_with_key.default_kms_key.must_be :nil?
+      _(bucket_with_key.default_kms_key).must_be :nil?
     end
 
     it "creates a file with the kms_key option" do

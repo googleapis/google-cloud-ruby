@@ -33,9 +33,9 @@ describe Google::Cloud::Storage::File, :acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     file = bucket.file file_name, skip_lookup: true
-    file.name.must_equal file_name
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
+    _(file.name).must_equal file_name
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
 
     mock.verify
   end
@@ -50,9 +50,9 @@ describe Google::Cloud::Storage::File, :acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     file = bucket_user_project.file file_name, skip_lookup: true
-    file.name.must_equal file_name
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
+    _(file.name).must_equal file_name
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
 
     mock.verify
   end
@@ -82,14 +82,14 @@ describe Google::Cloud::Storage::File, :acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     file = bucket.file file_name, skip_lookup: true
-    file.name.must_equal file_name
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
+    _(file.name).must_equal file_name
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
 
     file.acl.add_reader reader_entity
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
-    file.acl.readers.must_include reader_entity
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
+    _(file.acl.readers).must_include reader_entity
 
     mock.verify
   end
@@ -120,14 +120,14 @@ describe Google::Cloud::Storage::File, :acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     file = bucket.file file_name, skip_lookup: true
-    file.name.must_equal file_name
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
+    _(file.name).must_equal file_name
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
 
     file.acl.add_reader reader_entity, generation: generation
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
-    file.acl.readers.must_include reader_entity
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
+    _(file.acl.readers).must_include reader_entity
 
     mock.verify
   end
@@ -157,14 +157,14 @@ describe Google::Cloud::Storage::File, :acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     file = bucket_user_project.file file_name, skip_lookup: true
-    file.name.must_equal file_name
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
+    _(file.name).must_equal file_name
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
 
     file.acl.add_reader reader_entity
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
-    file.acl.readers.must_include reader_entity
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
+    _(file.acl.readers).must_include reader_entity
 
     mock.verify
   end
@@ -183,14 +183,14 @@ describe Google::Cloud::Storage::File, :acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     file = bucket.file file_name, skip_lookup: true
-    file.name.must_equal file_name
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
+    _(file.name).must_equal file_name
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
 
     reader_entity = file.acl.readers.first
     file.acl.delete reader_entity
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.must_be :empty?
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).must_be :empty?
 
     mock.verify
   end
@@ -210,14 +210,14 @@ describe Google::Cloud::Storage::File, :acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     file = bucket.file file_name, skip_lookup: true
-    file.name.must_equal file_name
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
+    _(file.name).must_equal file_name
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
 
     reader_entity = file.acl.readers.first
     file.acl.delete reader_entity, generation: generation
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.must_be :empty?
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).must_be :empty?
 
     mock.verify
   end
@@ -236,14 +236,14 @@ describe Google::Cloud::Storage::File, :acl, :lazy, :mock_storage do
     storage.service.mocked_service = mock
 
     file = bucket_user_project.file file_name, skip_lookup: true
-    file.name.must_equal file_name
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.wont_be :empty?
+    _(file.name).must_equal file_name
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).wont_be :empty?
 
     reader_entity = file.acl.readers.first
     file.acl.delete reader_entity
-    file.acl.owners.wont_be  :empty?
-    file.acl.readers.must_be :empty?
+    _(file.acl.owners).wont_be  :empty?
+    _(file.acl.readers).must_be :empty?
 
     mock.verify
   end

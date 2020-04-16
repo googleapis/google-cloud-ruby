@@ -29,80 +29,80 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :storage do
 
   it "adds a reader" do
     user_val = "user-blowmage@gmail.com"
-    bucket.default_acl.readers.wont_include user_val
+    _(bucket.default_acl.readers).wont_include user_val
     bucket.default_acl.add_reader user_val
-    bucket.default_acl.readers.must_include user_val
+    _(bucket.default_acl.readers).must_include user_val
     bucket.default_acl.refresh!
-    bucket.default_acl.readers.must_include user_val
+    _(bucket.default_acl.readers).must_include user_val
     bucket.refresh!
-    bucket.default_acl.readers.must_include user_val
+    _(bucket.default_acl.readers).must_include user_val
   end
 
   it "adds an owner" do
     user_val = "user-blowmage@gmail.com"
-    bucket.default_acl.owners.wont_include user_val
+    _(bucket.default_acl.owners).wont_include user_val
     bucket.default_acl.add_owner user_val
-    bucket.default_acl.owners.must_include user_val
+    _(bucket.default_acl.owners).must_include user_val
     bucket.default_acl.refresh!
-    bucket.default_acl.owners.must_include user_val
+    _(bucket.default_acl.owners).must_include user_val
     bucket.refresh!
-    bucket.default_acl.owners.must_include user_val
+    _(bucket.default_acl.owners).must_include user_val
   end
 
   it "updates predefined rules" do
-    bucket.default_acl.readers.wont_include "allAuthenticatedUsers"
+    _(bucket.default_acl.readers).wont_include "allAuthenticatedUsers"
     bucket.default_acl.auth!
-    bucket.default_acl.readers.must_include "allAuthenticatedUsers"
+    _(bucket.default_acl.readers).must_include "allAuthenticatedUsers"
     bucket.default_acl.refresh!
-    bucket.default_acl.readers.must_include "allAuthenticatedUsers"
+    _(bucket.default_acl.readers).must_include "allAuthenticatedUsers"
     bucket.refresh!
-    bucket.default_acl.readers.must_include "allAuthenticatedUsers"
+    _(bucket.default_acl.readers).must_include "allAuthenticatedUsers"
   end
 
   it "deletes rules" do
     bucket.default_acl.auth!
-    bucket.default_acl.readers.must_include "allAuthenticatedUsers"
+    _(bucket.default_acl.readers).must_include "allAuthenticatedUsers"
     bucket.default_acl.delete "allAuthenticatedUsers"
-    bucket.default_acl.readers.wont_include "allAuthenticatedUsers"
+    _(bucket.default_acl.readers).wont_include "allAuthenticatedUsers"
     bucket.default_acl.refresh!
-    bucket.default_acl.readers.wont_include "allAuthenticatedUsers"
+    _(bucket.default_acl.readers).wont_include "allAuthenticatedUsers"
     bucket.refresh!
-    bucket.default_acl.readers.wont_include "allAuthenticatedUsers"
+    _(bucket.default_acl.readers).wont_include "allAuthenticatedUsers"
   end
 
   it "retrieves and modifies the ACL" do
-    bucket.default_acl.owners.must_be  :empty?
-    bucket.default_acl.readers.must_be :empty?
+    _(bucket.default_acl.owners).must_be  :empty?
+    _(bucket.default_acl.readers).must_be :empty?
 
     bucket.default_acl.add_reader user_val
 
-    bucket.default_acl.owners.must_be  :empty?
-    bucket.default_acl.readers.wont_be :empty?
+    _(bucket.default_acl.owners).must_be  :empty?
+    _(bucket.default_acl.readers).wont_be :empty?
 
-    bucket.default_acl.readers.must_include user_val
+    _(bucket.default_acl.readers).must_include user_val
 
     bucket.default_acl.reload!
 
-    bucket.default_acl.readers.must_include user_val
+    _(bucket.default_acl.readers).must_include user_val
 
     bucket.reload!
 
-    bucket.default_acl.readers.must_include user_val
+    _(bucket.default_acl.readers).must_include user_val
 
     bucket.default_acl.delete user_val
 
-    bucket.default_acl.owners.must_be  :empty?
-    bucket.default_acl.readers.must_be :empty?
+    _(bucket.default_acl.owners).must_be  :empty?
+    _(bucket.default_acl.readers).must_be :empty?
 
-    bucket.default_acl.readers.wont_include user_val
+    _(bucket.default_acl.readers).wont_include user_val
 
     bucket.default_acl.reload!
 
-    bucket.default_acl.readers.wont_include user_val
+    _(bucket.default_acl.readers).wont_include user_val
 
     bucket.reload!
 
-    bucket.default_acl.readers.wont_include user_val
+    _(bucket.default_acl.readers).wont_include user_val
   end
 
   it "sets predefined ACL rules" do
