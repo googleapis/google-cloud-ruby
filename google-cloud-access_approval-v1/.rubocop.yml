@@ -11,30 +11,25 @@ AllCops:
     - "Rakefile"
 
 Metrics/AbcSize:
-  Exclude:
-    - "lib/google/cloud/access_approval/v1/access_approval/*.rb"
+  Enabled: false
 Metrics/ClassLength:
-  Exclude:
-    - "lib/google/cloud/access_approval/v1/access_approval/*.rb"
+  Enabled: false
 Metrics/CyclomaticComplexity:
-  Exclude:
-    - "lib/google/cloud/access_approval/v1/access_approval/*.rb"
+  Enabled: false
 Metrics/LineLength:
-  Exclude:
-    - "lib/google/cloud/access_approval/v1/access_approval/*.rb"
-    - "google-cloud-access_approval-v1.gemspec"
+  Enabled: false
 Metrics/MethodLength:
-  Exclude:
-    - "lib/google/cloud/access_approval/v1/access_approval/*.rb"
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
 Metrics/PerceivedComplexity:
-  Exclude:
-    - "lib/google/cloud/access_approval/v1/access_approval/*.rb"
+  Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-access_approval-v1.rb"
 Style/CaseEquality:
-  Exclude:
-    - "lib/google/cloud/access_approval/v1/access_approval/*.rb"
-    - "lib/google/cloud/access_approval/v1.rb"
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
 Style/ModuleFunction:
   Enabled: false

@@ -1,0 +1,31 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "f3a196a5f573a44748ce7f1cb5983cbde83a7f3a"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "1bd77e8ce6f953ac641af7966d0c52646afc16a8",
+        "internalRef": "305974465",
+        "log": "1bd77e8ce6f953ac641af7966d0c52646afc16a8\nPublishing ComputeRouteMatrix request and reply messages.\n\nPiperOrigin-RevId: 305974465\n\n"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "bigquery/datatransfer",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
