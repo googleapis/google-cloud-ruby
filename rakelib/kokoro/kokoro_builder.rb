@@ -41,7 +41,7 @@ class KokoroBuilder < Command
       build_types += [:samples_latest, :samples_master, :samples_presubmit] unless name =~ /-v\d\w*$/
       [:linux, :windows, :osx].each do |os_version|
         build_types.each do |build_type|
-          next if build_type == :samples_presubmit && os_version == :osx
+          next if build_type == :samples_presubmit && os_version != :linux
           from_template "./.kokoro/templates/#{os_version}.cfg.erb",
                         "./.kokoro/#{build_type}/#{os_version}/#{name}.cfg",
                         gem: gem
