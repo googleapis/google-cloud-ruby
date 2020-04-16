@@ -107,9 +107,9 @@ module Google
       #   @return [Google::Protobuf::FieldMask]
       #     Required. Indicates which fields in the provided topic to update. Must be
       #     specified and non-empty. Note that if `update_mask` contains
-      #     "message_storage_policy" then the new value will be determined based on the
-      #     policy configured at the project or organization level. The
-      #     `message_storage_policy` must not be set in the `topic` provided above.
+      #     "message_storage_policy" but the `message_storage_policy` is not set in
+      #     the `topic` provided above, then the updated value is determined by the
+      #     policy configured at the project or organization level.
       class UpdateTopicRequest; end
 
       # Request for the Publish method.
@@ -312,9 +312,6 @@ module Google
       #     parent project (i.e.,
       #     service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com) must have
       #     permission to Acknowledge() messages on this subscription.
-      #     <b>EXPERIMENTAL:</b> This feature is part of a closed alpha release. This
-      #     API might be changed in backward-incompatible ways and is not recommended
-      #     for production use. It is not subject to any SLA or deprecation policy.
       # @!attribute [rw] retry_policy
       #   @return [Google::Cloud::PubSub::V1::RetryPolicy]
       #     A policy that specifies how Cloud Pub/Sub retries message delivery for this
