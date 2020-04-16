@@ -120,8 +120,6 @@ module Google
           private_constant :TENANT_PATH_TEMPLATE
 
           # Returns a fully-qualified company resource name string.
-          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
-          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param tenant [String]
           # @param company [String]
@@ -148,8 +146,6 @@ module Google
           end
 
           # Returns a fully-qualified job resource name string.
-          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
-          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param tenant [String]
           # @param job [String]
@@ -428,7 +424,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path("[PROJECT]", "[JOB]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[TENANT]", "[JOB]")
           #   job_client.delete_job(formatted_name)
 
           def delete_job \
@@ -586,7 +582,7 @@ module Google
           #   require "google/cloud/talent"
           #
           #   job_client = Google::Cloud::Talent::JobService.new(version: :v4beta1)
-          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_without_tenant_path("[PROJECT]", "[JOB]")
+          #   formatted_name = Google::Cloud::Talent::V4beta1::JobServiceClient.job_path("[PROJECT]", "[TENANT]", "[JOB]")
           #   response = job_client.get_job(formatted_name)
 
           def get_job \
