@@ -485,11 +485,13 @@ class Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     resource = "hello world"
+    options = {}
 
     get_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_iam_policy, name
       assert_kind_of Google::Iam::V1::GetIamPolicyRequest, request
       assert_equal "hello world", request.resource
+      assert_equal Gapic::Protobuf.coerce({}, to: Google::Iam::V1::GetPolicyOptions), request.options
       refute_nil options
     end
 
@@ -500,31 +502,31 @@ class Google::Cloud::Billing::V1::CloudBilling::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_iam_policy({ resource: resource }) do |response, operation|
+      client.get_iam_policy({ resource: resource, options: options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_iam_policy resource: resource do |response, operation|
+      client.get_iam_policy resource: resource, options: options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_iam_policy Google::Iam::V1::GetIamPolicyRequest.new(resource: resource) do |response, operation|
+      client.get_iam_policy Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_iam_policy({ resource: resource }, grpc_options) do |response, operation|
+      client.get_iam_policy({ resource: resource, options: options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_iam_policy Google::Iam::V1::GetIamPolicyRequest.new(resource: resource), grpc_options do |response, operation|
+      client.get_iam_policy Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

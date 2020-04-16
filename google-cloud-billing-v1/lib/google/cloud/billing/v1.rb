@@ -18,3 +18,19 @@
 
 require "google/cloud/billing/v1/cloud_billing"
 require "google/cloud/billing/v1/cloud_catalog"
+require "google/cloud/billing/v1/version"
+
+module Google
+  module Cloud
+    module Billing
+      ##
+      # To load this package, including all its services, and instantiate a client:
+      #
+      #     require "google/cloud/billing/v1"
+      #     client = Google::Cloud::Billing::V1::CloudBilling::Client.new
+      #
+      module V1
+      end
+    end
+  end
+end
