@@ -9,6 +9,7 @@ Among the highlights:
 * Separate client libraries are now provided for specific service versions.
 * A new configuration mechanism makes it easier to control parameters such as endpoint address, network timeouts, and retry.
 * A consistent method interface using keyword arguments for all fields, and supporting request proto objects.
+* Easier access to path helper methods.
 
 See the MIGRATING file in the documentation for more detailed information and instructions for migrating from earlier versions.
 
