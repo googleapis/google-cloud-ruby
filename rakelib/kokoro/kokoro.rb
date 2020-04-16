@@ -83,15 +83,12 @@ class Kokoro < Command
   end
 
   def samples_master
-    unless Dir.entries(@gem).include? "samples"
-      return header "No samples for #{@gem}. Exiting"
-    end
-    run_ci do
-      if @updated
-        header "Gem Updated - Running samples tests against master"
-        run "bundle exec rake samples:master", 3600
-      else
-        header "Gem Unchanged - Skipping Samples tests"
+    @updated_gems.each do |gem|
+      next unless Dir.entries(gem).include? "samples"
+      next unless Dir.entries("#{gem}/samples").include? "Rakefile"
+      run_ci gem do
+        header "Running samples tests for #{gem}"
+        run "bundle exec rake samples:master", 1800
       end
     end
   end
