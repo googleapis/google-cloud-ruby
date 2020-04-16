@@ -25,6 +25,20 @@ module Google
           # Path helper methods for the Intents API.
           module Paths
             ##
+            # Create a fully-qualified Agent resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/agent`
+            #
+            # @param project [String]
+            #
+            # @return [String]
+            def agent_path project:
+              "projects/#{project}/agent"
+            end
+
+            ##
             # Create a fully-qualified Context resource string.
             #
             # @overload context_path(project:, session:, context:)

@@ -59,7 +59,7 @@ module Google
         #     -   MapKey value: parameter name
         #     -   MapValue type:
         #         -   If parameter's entity type is a composite entity: map
-        #         -   Else: string
+        #         -   Else: string or number, depending on parameter value type
         #     -   MapValue value:
         #         -   If parameter's entity type is a composite entity:
         #             map from composite entity property names to property values

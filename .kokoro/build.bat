@@ -17,13 +17,8 @@ IF "%JOB_TYPE%"=="presubmit" (
     SET clone_command="`git clone #{ENV['KOKORO_GITHUB_PULL_REQUEST_URL'].split('/pull')[0]}.git`"
     SET "git_commands=git fetch origin pull/%KOKORO_GITHUB_PULL_REQUEST_NUMBER%/merge:pull_branch && git checkout pull_branch"
 ) ELSE (
-    IF "%JOB_TYPE%"=="samples_presubmit" (
-        SET clone_command="`git clone #{ENV['KOKORO_GITHUB_PULL_REQUEST_URL'].split('/pull')[0]}.git`"
-        SET "git_commands=git fetch origin pull/%KOKORO_GITHUB_PULL_REQUEST_NUMBER%/merge:pull_branch && git checkout pull_branch"  
-    ) ELSE (
-        SET clone_command="`git clone #{ENV['KOKORO_GITHUB_COMMIT_URL'].split('/commit')[0]}.git`"
-        SET "git_commands=git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%"
-    )
+    SET clone_command="`git clone #{ENV['KOKORO_GITHUB_COMMIT_URL'].split('/commit')[0]}.git`"
+    SET "git_commands=git fetch --depth=10000 && git checkout %KOKORO_GIT_COMMIT%"
 )
 
 ruby -e %clone_command% && CD %REPO_DIR% && %git_commands% && %run_kokoro% && SET /A ERROR_CODE=0

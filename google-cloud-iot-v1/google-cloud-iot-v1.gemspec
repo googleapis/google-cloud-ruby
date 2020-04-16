@@ -25,7 +25,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "gapic-common", "~> 0.2"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
-  gem.add_dependency "grpc-google-iam-v1", "~> 0.6.9"
+  gem.add_dependency "grpc-google-iam-v1", ">= 0.6.10", "< 2.0"
 
   gem.add_development_dependency "google-style", "~> 1.24.0"
   gem.add_development_dependency "minitest", "~> 5.10"
