@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "9e0294589f9d9270583724b26fbc763fd12fc9ef"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "1bd77e8ce6f953ac641af7966d0c52646afc16a8",
+        "internalRef": "305974465"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "oslogin",
+        "apiVersion": "v1beta",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}

@@ -41,7 +41,8 @@ module Google
         #
         #     Note: Query tokens need to have a minimum of 3 characters for substring
         #     matching to work correctly. See [Data Catalog Search
-        #     Syntax](/data-catalog/docs/how-to/search-reference) for more information.
+        #     Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
+        #     for more information.
         # @!attribute [rw] page_size
         #   @return [Integer]
         #     Number of results in the search page. If <=0 then defaults to 10. Max limit
@@ -85,6 +86,42 @@ module Google
           #     search results. Info on GCP public datasets is available at
           #     https://cloud.google.com/public-datasets/. By default, GCP public
           #     datasets are excluded.
+          # @!attribute [rw] restricted_locations
+          #   @return [Array<String>]
+          #     Optional. The list of locations to search within.
+          #     1. If empty, search will be performed in all locations;
+          #     2. If any of the locations are NOT in the valid locations list, error
+          #     will be returned;
+          #     3. Otherwise, search only the given locations for matching results.
+          #     Typical usage is to leave this field empty. When a location is
+          #     unreachable as returned in the `SearchCatalogResponse.unreachable` field,
+          #     users can repeat the search request with this parameter set to get
+          #     additional information on the error.
+          #
+          #     Valid locations:
+          #      * asia-east1
+          #      * asia-east2
+          #      * asia-northeast1
+          #      * asia-northeast2
+          #      * asia-south1
+          #      * asia-southeast1
+          #      * australia-southeast1
+          #      * eu
+          #      * europe-north1
+          #      * europe-west1
+          #      * europe-west2
+          #      * europe-west3
+          #      * europe-west4
+          #      * europe-west6
+          #      * global
+          #      * northamerica-northeast1
+          #      * southamerica-east1
+          #      * us
+          #      * us-central1
+          #      * us-east1
+          #      * us-east4
+          #      * us-west1
+          #      * us-west2
           class Scope
             include Google::Protobuf::MessageExts
             extend Google::Protobuf::MessageExts::ClassMethods
@@ -99,6 +136,12 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [String]
         #     The token that can be used to retrieve the next page of results.
+        # @!attribute [rw] unreachable
+        #   @return [Array<String>]
+        #     Unreachable locations. Search result does not include data from those
+        #     locations. Users can get additional information on the error by repeating
+        #     the search request with a more restrictive parameter -- setting the value
+        #     for `SearchDataCatalogRequest.scope.include_locations`.
         class SearchCatalogResponse
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -300,7 +343,7 @@ module Google
         #
         #     Examples:
         #
-        #       * `cloud_pubsub.project_id.topic_id`
+        #       * `pubsub.project_id.topic_id`
         #       * ``pubsub.project_id.`topic.id.with.dots` ``
         #       * `bigquery.table.project_id.dataset_id.table_id`
         #       * `bigquery.dataset.project_id.dataset_id`
@@ -441,8 +484,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the project and the template location
-        #     [region](/compute/docs/regions-zones/#available).
-        #     NOTE: Currently, only the `us-central1 region` is supported.
+        #     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
         #
         #     Example:
         #
@@ -556,8 +598,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [String]
         #     Required. The name of the project and the template location
-        #     [region](/compute/docs/regions-zones/#available).
-        #     NOTE: Currently, only the `us-central1 region` is supported.
+        #     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
         #
         #     Example:
         #

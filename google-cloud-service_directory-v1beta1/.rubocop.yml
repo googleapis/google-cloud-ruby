@@ -11,37 +11,25 @@ AllCops:
     - "Rakefile"
 
 Metrics/AbcSize:
-  Exclude:
-    - "lib/google/cloud/service_directory/v1beta1/lookup_service/*.rb"
-    - "lib/google/cloud/service_directory/v1beta1/registration_service/*.rb"
+  Enabled: false
 Metrics/ClassLength:
-  Exclude:
-    - "lib/google/cloud/service_directory/v1beta1/lookup_service/*.rb"
-    - "lib/google/cloud/service_directory/v1beta1/registration_service/*.rb"
+  Enabled: false
 Metrics/CyclomaticComplexity:
-  Exclude:
-    - "lib/google/cloud/service_directory/v1beta1/lookup_service/*.rb"
-    - "lib/google/cloud/service_directory/v1beta1/registration_service/*.rb"
+  Enabled: false
 Metrics/LineLength:
-  Exclude:
-    - "lib/google/cloud/service_directory/v1beta1/lookup_service/*.rb"
-    - "lib/google/cloud/service_directory/v1beta1/registration_service/*.rb"
-    - "google-cloud-service_directory-v1beta1.gemspec"
+  Enabled: false
 Metrics/MethodLength:
-  Exclude:
-    - "lib/google/cloud/service_directory/v1beta1/lookup_service/*.rb"
-    - "lib/google/cloud/service_directory/v1beta1/registration_service/*.rb"
+  Enabled: false
+Metrics/ModuleLength:
+  Enabled: false
 Metrics/PerceivedComplexity:
-  Exclude:
-    - "lib/google/cloud/service_directory/v1beta1/lookup_service/*.rb"
-    - "lib/google/cloud/service_directory/v1beta1/registration_service/*.rb"
+  Enabled: false
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-service_directory-v1beta1.rb"
 Style/CaseEquality:
-  Exclude:
-    - "lib/google/cloud/service_directory/v1beta1/lookup_service/*.rb"
-    - "lib/google/cloud/service_directory/v1beta1/registration_service/*.rb"
-    - "lib/google/cloud/service_directory/v1beta1.rb"
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
 Style/ModuleFunction:
   Enabled: false

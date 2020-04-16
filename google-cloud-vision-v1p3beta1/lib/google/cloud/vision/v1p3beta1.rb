@@ -18,3 +18,19 @@
 
 require "google/cloud/vision/v1p3beta1/product_search"
 require "google/cloud/vision/v1p3beta1/image_annotator"
+require "google/cloud/vision/v1p3beta1/version"
+
+module Google
+  module Cloud
+    module Vision
+      ##
+      # To load this package, including all its services, and instantiate a client:
+      #
+      #     require "google/cloud/vision/v1p3beta1"
+      #     client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+      #
+      module V1p3beta1
+      end
+    end
+  end
+end

@@ -31,10 +31,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :include_org_ids, :string, 2
       repeated :include_project_ids, :string, 3
       optional :include_gcp_public_datasets, :bool, 7
+      repeated :restricted_locations, :string, 16
     end
     add_message "google.cloud.datacatalog.v1.SearchCatalogResponse" do
       repeated :results, :message, 1, "google.cloud.datacatalog.v1.SearchCatalogResult"
       optional :next_page_token, :string, 3
+      repeated :unreachable, :string, 6
     end
     add_message "google.cloud.datacatalog.v1.CreateEntryGroupRequest" do
       optional :parent, :string, 1

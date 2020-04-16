@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "6fc544ee4c8d59b8dc6ab9a547d32274a294f8df"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "1bd77e8ce6f953ac641af7966d0c52646afc16a8",
+        "internalRef": "305974465"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "recaptchaenterprise",
+        "apiVersion": "v1",
+        "language": "ruby",
+        "generator": "gapic-generator-ruby"
+      }
+    }
+  ]
+}
