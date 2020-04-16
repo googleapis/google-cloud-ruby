@@ -122,8 +122,6 @@ module Google
           end
 
           # Returns a fully-qualified company resource name string.
-          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
-          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param tenant [String]
           # @param company [String]
@@ -150,8 +148,6 @@ module Google
           end
 
           # Returns a fully-qualified job resource name string.
-          # @deprecated Multi-pattern resource names will have unified creation and parsing helper functions.
-          # This helper function will be deleted in the next major version.
           # @param project [String]
           # @param tenant [String]
           # @param job [String]

@@ -21,7 +21,6 @@ module Google
   module Cloud
     module Dialogflow
       module V2
-        # Requests and responses for custom methods.
         # The request to detect user's intent.
         # @!attribute [rw] session
         #   @return [String]
@@ -194,6 +193,20 @@ module Google
         # @!attribute [rw] parameters
         #   @return [Google::Protobuf::Struct]
         #     The collection of extracted parameters.
+        #
+        #     Depending on your protocol or client library language, this is a
+        #     map, associative array, symbol table, dictionary, or JSON object
+        #     composed of a collection of (MapKey, MapValue) pairs:
+        #
+        #     -   MapKey type: string
+        #     -   MapKey value: parameter name
+        #     -   MapValue type:
+        #         -   If parameter's entity type is a composite entity: map
+        #         -   Else: string or number, depending on parameter value type
+        #     -   MapValue value:
+        #         -   If parameter's entity type is a composite entity:
+        #             map from composite entity property names to property values
+        #         -   Else: parameter value
         # @!attribute [rw] all_required_params_present
         #   @return [Boolean]
         #     This field is set to:
@@ -499,6 +512,20 @@ module Google
         # @!attribute [rw] parameters
         #   @return [Google::Protobuf::Struct]
         #     The collection of parameters associated with the event.
+        #
+        #     Depending on your protocol or client library language, this is a
+        #     map, associative array, symbol table, dictionary, or JSON object
+        #     composed of a collection of (MapKey, MapValue) pairs:
+        #
+        #     -   MapKey type: string
+        #     -   MapKey value: parameter name
+        #     -   MapValue type:
+        #         -   If parameter's entity type is a composite entity: map
+        #         -   Else: string or number, depending on parameter value type
+        #     -   MapValue value:
+        #         -   If parameter's entity type is a composite entity:
+        #             map from composite entity property names to property values
+        #         -   Else: parameter value
         # @!attribute [rw] language_code
         #   @return [String]
         #     Required. The language of this query. See [Language

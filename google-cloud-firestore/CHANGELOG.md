@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.1 / 2020-04-14
+
+#### Bug Fixes
+
+* Update the low-level interface to match service changes
+
 ### 1.4.0 / 2020-03-11
 
 #### Features
