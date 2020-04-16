@@ -24,8 +24,9 @@ module Google
         # Tags are used to attach custom metadata to Data Catalog resources. Tags
         # conform to the specifications within their tag template.
         #
-        # See [Data Catalog IAM](/data-catalog/docs/concepts/iam) for information on
-        # the permissions needed to create or view tags.
+        # See [Data Catalog
+        # IAM](https://cloud.google.com/data-catalog/docs/concepts/iam) for information
+        # on the permissions needed to create or view tags.
         # @!attribute [rw] name
         #   @return [String]
         #     The resource name of the tag in URL format. Example:
@@ -116,10 +117,12 @@ module Google
 
         # A tag template defines a tag, which can have one or more typed fields.
         # The template is used to create and attach the tag to GCP resources.
-        # [Tag template roles](/iam/docs/understanding-roles#data-catalog-roles)
+        # [Tag template
+        # roles](https://cloud.google.com/iam/docs/understanding-roles#data-catalog-roles)
         # provide permissions to create, edit, and use the template. See, for example,
-        # the [TagTemplate User](/data-catalog/docs/how-to/template-user) role, which
-        # includes permission to use the tag template to tag resources.
+        # the [TagTemplate
+        # User](https://cloud.google.com/data-catalog/docs/how-to/template-user) role,
+        # which includes permission to use the tag template to tag resources.
         # @!attribute [rw] name
         #   @return [String]
         #     The resource name of the tag template in URL format. Example:

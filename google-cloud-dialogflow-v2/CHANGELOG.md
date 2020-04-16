@@ -1,5 +1,17 @@
 # Release History
 
+### 0.4.0 / 2020-04-13
+
+#### Features
+
+* Support additional path helpers, and other updates.
+  * Added session_path helper for the Contexts and SessionEntityTypes services.
+  * Added agent_path helper for the EntityTypes and Intents services.
+  * Expanded the readme to include quickstart and logging information.
+  * Added documentation for package and service modules.
+  * Fixed and expanded documentation for the two method calling conventions.
+  * Fixed some circular require warnings.
+
 ### 0.3.0 / 2020-04-06
 
 #### Features
