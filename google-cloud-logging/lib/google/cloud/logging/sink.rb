@@ -27,20 +27,17 @@ module Google
       #
       # A logs filter controls which log entries are exported.
       #
-      # Before creating the sink, ensure that you have granted
-      # `cloud-logs@google.com` permission to write logs to the destination. See
-      # [Permissions for writing exported
-      # logs](https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs).
+      # Before creating the sink, ensure that you have granted the sink's
+      # _unique writer identity_ permission to write logs to the destination.
+      # See [Destination
+      # permissions](https://cloud.google.com/logging/docs/export/configure_export_v2#dest-auth).
       #
       # You can retrieve an existing sink with {Project#sink}.
       #
-      # @see https://cloud.google.com/logging/docs/api/tasks/exporting-logs
-      #   Exporting Logs With Sinks
-      # @see https://cloud.google.com/logging/docs/api/introduction_v2#kinds_of_log_sinks
-      #   Kinds of log sinks (API V2)
-      # @see https://cloud.google.com/logging/docs/api/#sinks Sinks (API V1)
-      # @see https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs
-      #   Permissions for writing exported logs
+      # @see https://cloud.google.com/logging/docs/export
+      #   Overview of logs exports
+      # @see https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#configservicev2
+      #   ConfigService API which includes sink methods
       #
       # @example
       #   require "google/cloud/storage"
@@ -83,22 +80,22 @@ module Google
         end
 
         ##
-        # The export destination. See [Exporting Logs With
-        # Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+        # The export destination. See [Properties of
+        # Sinks](https://cloud.google.com/logging/docs/export#sink-terms).
         def destination
           @grpc.destination
         end
 
         ##
-        # Updates the export destination. See [Exporting Logs With
-        # Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
+        # Updates the export destination. See [Properties of
+        # Sinks](https://cloud.google.com/logging/docs/export#sink-terms).
         def destination= destination
           @grpc.destination = destination
         end
 
         ##
         # An [advanced logs
-        # filter](https://cloud.google.com/logging/docs/view/advanced_filters)
+        # filter](https://cloud.google.com/logging/docs/view/advanced-queries)
         # that defines the log entries to be exported. The filter must be
         # consistent with the log entry format designed by the `version`
         # parameter, regardless of the format of the log entry that was
@@ -109,7 +106,7 @@ module Google
 
         ##
         # Updates the [advanced logs
-        # filter](https://cloud.google.com/logging/docs/view/advanced_filters)
+        # filter](https://cloud.google.com/logging/docs/view/advanced-queries)
         # that defines the log entries to be exported. The filter must be
         # consistent with the log entry format designed by the `version`
         # parameter, regardless of the format of the log entry that was
