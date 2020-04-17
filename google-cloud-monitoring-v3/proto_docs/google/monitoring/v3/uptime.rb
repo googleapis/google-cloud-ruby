@@ -170,6 +170,9 @@ module Google
           end
 
           # Information involved in an HTTP/HTTPS Uptime check request.
+          # @!attribute [rw] request_method
+          #   @return [Google::Cloud::Monitoring::V3::UptimeCheckConfig::HttpCheck::RequestMethod]
+          #     The HTTP request method to use for the check.
           # @!attribute [rw] use_ssl
           #   @return [Boolean]
           #     If `true`, use HTTPS instead of HTTP to run the check.
@@ -208,12 +211,22 @@ module Google
           #     Entering two separate headers with the same key in a Create call will
           #     cause the first to be overwritten by the second.
           #     The maximum number of headers allowed is 100.
+          # @!attribute [rw] content_type
+          #   @return [Google::Cloud::Monitoring::V3::UptimeCheckConfig::HttpCheck::ContentType]
+          #     The content type to use for the check.
           # @!attribute [rw] validate_ssl
           #   @return [Boolean]
           #     Boolean specifying whether to include SSL certificate validation as a
           #     part of the Uptime check. Only applies to checks where
           #     `monitored_resource` is set to `uptime_url`. If `use_ssl` is `false`,
           #     setting `validate_ssl` to `true` has no effect.
+          # @!attribute [rw] body
+          #   @return [String]
+          #     The request body associated with the HTTP request. If `content_type` is
+          #     `URL_ENCODED`, the body passed in must be URL-encoded. Users can provide
+          #     a `Content-Length` header via the `headers` field or the API will do
+          #     so. The maximum byte size is 1 megabyte. Note: As with all `bytes` fields
+          #     JSON representations are base64 encoded.
           class HttpCheck
             include Google::Protobuf::MessageExts
             extend Google::Protobuf::MessageExts::ClassMethods
@@ -240,6 +253,31 @@ module Google
             class HeadersEntry
               include Google::Protobuf::MessageExts
               extend Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The HTTP request method options.
+            module RequestMethod
+              # No request method specified.
+              METHOD_UNSPECIFIED = 0
+
+              # GET request.
+              GET = 1
+
+              # POST request.
+              POST = 2
+            end
+
+            # Header options corresponding to the Content-Type of the body in HTTP
+            # requests. Note that a `Content-Type` header cannot be present in the
+            # `headers` field if this field is specified.
+            module ContentType
+              # No content type specified. If the request method is POST, an
+              # unspecified content type results in a check creation rejection.
+              TYPE_UNSPECIFIED = 0
+
+              # `body` is in URL-encoded form. Equivalent to setting the `Content-Type`
+              # to `application/x-www-form-urlencoded` in the HTTP request.
+              URL_ENCODED = 1
             end
           end
 
