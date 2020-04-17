@@ -515,7 +515,7 @@ module Google
         # Retrieves the list of monitored resource descriptors that are used by
         # Stackdriver Logging.
         #
-        # @see https://cloud.google.com/logging/docs/api/introduction_v2#monitored_resources
+        # @see https://cloud.google.com/logging/docs/api/v2/resource-list
         #   Monitored Resources
         #
         # @param [String] token A previously-returned page token representing
@@ -621,18 +621,15 @@ module Google
         # does not send previously-ingested log entries to the sink's
         # destination.
         #
-        # Before creating the sink, ensure that you have granted
-        # `cloud-logs@google.com` permission to write logs to the destination.
-        # See [Permissions for writing exported
-        # logs](https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs).
+        # Before creating the sink, ensure that you have granted the sink's
+        # _unique writer identity_ permission to write logs to the destination.
+        # See [Destination
+        # permissions](https://cloud.google.com/logging/docs/export/configure_export_v2#dest-auth).
         #
-        # @see https://cloud.google.com/logging/docs/api/tasks/exporting-logs
-        #   Exporting Logs With Sinks
-        # @see https://cloud.google.com/logging/docs/api/introduction_v2#kinds_of_log_sinks
-        #   Kinds of log sinks (API V2)
-        # @see https://cloud.google.com/logging/docs/api/#sinks Sinks (API V1)
-        # @see https://cloud.google.com/logging/docs/export/configure_export#setting_product_name_short_permissions_for_writing_exported_logs
-        #   Permissions for writing exported logs
+        # @see https://cloud.google.com/logging/docs/export
+        #   Overview of logs exports
+        # @see https://cloud.google.com/logging/docs/reference/v2/rpc/google.logging.v2#configservicev2
+        #   ConfigService API which includes sink methods
         #
         # @overload create_sink(name, destination, filter: nil, unique_writer_identity: nil)
         #   @param [String] name The client-assigned sink identifier. Sink
