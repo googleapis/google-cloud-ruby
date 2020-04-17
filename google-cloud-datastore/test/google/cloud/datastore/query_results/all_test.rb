@@ -70,26 +70,26 @@ describe Google::Cloud::Datastore::Dataset, :all, :mock_datastore do
   it "run will fulfill a query and return an object that can paginate" do
     first_entities = dataset.run dataset.query("Task")
 
-    first_entities.count.must_equal 25
+    _(first_entities.count).must_equal 25
     first_entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    first_entities.cursor_for(first_entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1-0")
-    first_entities.cursor_for(first_entities.last).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1-24")
+    _(first_entities.cursor_for(first_entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1-0")
+    _(first_entities.cursor_for(first_entities.last)).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1-24")
     first_entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     first_entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    first_entities.cursor.must_equal     Google::Cloud::Datastore::Cursor.from_grpc("second-page-cursor")
-    first_entities.end_cursor.must_equal Google::Cloud::Datastore::Cursor.from_grpc("second-page-cursor")
-    first_entities.more_results.must_equal :NOT_FINISHED
+    _(first_entities.cursor).must_equal     Google::Cloud::Datastore::Cursor.from_grpc("second-page-cursor")
+    _(first_entities.end_cursor).must_equal Google::Cloud::Datastore::Cursor.from_grpc("second-page-cursor")
+    _(first_entities.more_results).must_equal :NOT_FINISHED
     assert first_entities.not_finished?
     refute first_entities.more_after_limit?
     refute first_entities.more_after_cursor?
@@ -99,24 +99,24 @@ describe Google::Cloud::Datastore::Dataset, :all, :mock_datastore do
     next_entities = first_entities.next
 
     next_entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    next_entities.cursor_for(next_entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-2-0")
-    next_entities.cursor_for(next_entities.last).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-2-24")
+    _(next_entities.cursor_for(next_entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-2-0")
+    _(next_entities.cursor_for(next_entities.last)).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-2-24")
     next_entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     next_entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    next_entities.cursor.must_be     :nil?
-    next_entities.end_cursor.must_be :nil?
-    next_entities.more_results.must_equal :NO_MORE_RESULTS
+    _(next_entities.cursor).must_be     :nil?
+    _(next_entities.end_cursor).must_be :nil?
+    _(next_entities.more_results).must_equal :NO_MORE_RESULTS
     refute next_entities.not_finished?
     refute next_entities.more_after_limit?
     refute next_entities.more_after_cursor?
@@ -128,27 +128,27 @@ describe Google::Cloud::Datastore::Dataset, :all, :mock_datastore do
   it "run will fulfill a query and return an object that can paginate with all" do
     entities = dataset.run dataset.query("Task")
     entities.all.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
   it "run will fulfill a query and can use the all enumerator to get count" do
     entities = dataset.run dataset.query("Task")
-    entities.all.count.must_equal 50
+    _(entities.all.count).must_equal 50
   end
 
   it "run will fulfill a query and can use the all enumerator to map results" do
     entities = dataset.run dataset.query("Task")
     entities.all.map(&:key).each do |result|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
     end
   end
 
   it "run will fulfill a query and return an object that can paginate with all_with_cursor" do
     entities = dataset.run dataset.query("Task")
     entities.all_with_cursor.each do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
   end
 end

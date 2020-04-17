@@ -72,28 +72,28 @@ describe Google::Cloud::Datastore::Dataset, :all_with_offset, :mock_datastore do
     entities = dataset.run dataset.query("Task").offset(5)
     # set request_limit to 1 to only make one more request
     entities.all(request_limit: 1) do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
   it "run will fulfill a query and can use the all as a lazy enumerator" do
     entities = dataset.run dataset.query("Task").offset(5)
     # no request_limit set, enumerator should only make 2 total requests though
-    entities.all.lazy.take(30).count.must_equal 30
+    _(entities.all.lazy.take(30).count).must_equal 30
   end
 
   it "run will fulfill a query and can use the all_with_cursor and limit api calls" do
     entities = dataset.run dataset.query("Task").offset(5)
     # set request_limit to 1 to only make one more request
     entities.all_with_cursor(request_limit: 1) do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
   end
 
   it "run will fulfill a query and can use the all_with_cursor as a lazy enumerator" do
     entities = dataset.run dataset.query("Task").offset(5)
     # no request_limit set, enumerator should only make 2 total requests though
-    entities.all_with_cursor.take(30).count.must_equal 30
+    _(entities.all_with_cursor.take(30).count).must_equal 30
   end
 end

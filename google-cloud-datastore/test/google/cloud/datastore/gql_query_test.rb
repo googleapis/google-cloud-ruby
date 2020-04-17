@@ -20,15 +20,15 @@ describe Google::Cloud::Datastore::GqlQuery, :mock_datastore do
     gql.query_string = "SELECT * FROM Task WHERE completed = @completed"
     gql.named_bindings = {completed: true}
 
-    gql.query_string.must_equal "SELECT * FROM Task WHERE completed = @completed"
-    gql.named_bindings.must_equal({"completed" => true})
+    _(gql.query_string).must_equal "SELECT * FROM Task WHERE completed = @completed"
+    _(gql.named_bindings).must_equal({"completed" => true})
 
     grpc = gql.to_grpc
-    grpc.must_be_kind_of Google::Datastore::V1::GqlQuery
+    _(grpc).must_be_kind_of Google::Datastore::V1::GqlQuery
 
-    grpc.query_string.must_equal gql.query_string
-    grpc.named_bindings.count.must_equal 1
-    grpc.named_bindings["completed"].value.boolean_value.must_equal true
+    _(grpc.query_string).must_equal gql.query_string
+    _(grpc.named_bindings.count).must_equal 1
+    _(grpc.named_bindings["completed"].value.boolean_value).must_equal true
   end
 
   it "can't modify named_bindings" do
@@ -42,15 +42,15 @@ describe Google::Cloud::Datastore::GqlQuery, :mock_datastore do
     gql.query_string = "SELECT * FROM Task WHERE completed = @1"
     gql.positional_bindings = [true]
 
-    gql.query_string.must_equal "SELECT * FROM Task WHERE completed = @1"
-    gql.positional_bindings.must_equal [true]
+    _(gql.query_string).must_equal "SELECT * FROM Task WHERE completed = @1"
+    _(gql.positional_bindings).must_equal [true]
 
     grpc = gql.to_grpc
-    grpc.must_be_kind_of Google::Datastore::V1::GqlQuery
+    _(grpc).must_be_kind_of Google::Datastore::V1::GqlQuery
 
-    grpc.query_string.must_equal gql.query_string
-    grpc.positional_bindings.count.must_equal 1
-    grpc.positional_bindings.first.value.boolean_value.must_equal true
+    _(grpc.query_string).must_equal gql.query_string
+    _(grpc.positional_bindings.count).must_equal 1
+    _(grpc.positional_bindings.first.value.boolean_value).must_equal true
   end
 
   it "can't modify positional_bindings" do
@@ -62,18 +62,18 @@ describe Google::Cloud::Datastore::GqlQuery, :mock_datastore do
   it "can set and modify allow_literals" do
     gql = Google::Cloud::Datastore::GqlQuery.new
     gql.query_string = "SELECT * FROM Task WHERE completed = true"
-    gql.allow_literals.must_equal false #default
+    _(gql.allow_literals).must_equal false #default
 
     gql.allow_literals = true
 
-    gql.query_string.must_equal "SELECT * FROM Task WHERE completed = true"
-    gql.allow_literals.must_equal true
+    _(gql.query_string).must_equal "SELECT * FROM Task WHERE completed = true"
+    _(gql.allow_literals).must_equal true
 
     grpc = gql.to_grpc
-    grpc.must_be_kind_of Google::Datastore::V1::GqlQuery
+    _(grpc).must_be_kind_of Google::Datastore::V1::GqlQuery
 
-    grpc.query_string.must_equal gql.query_string
-    grpc.allow_literals.must_equal true
+    _(grpc.query_string).must_equal gql.query_string
+    _(grpc.allow_literals).must_equal true
   end
 
   it "can set a Cursor as a named binding" do
@@ -82,11 +82,11 @@ describe Google::Cloud::Datastore::GqlQuery, :mock_datastore do
     gql.named_bindings = {startCursor: Google::Cloud::Datastore::Cursor.new("c3VwZXJhd2Vzb21lIQ==")}
 
     grpc = gql.to_grpc
-    grpc.must_be_kind_of Google::Datastore::V1::GqlQuery
+    _(grpc).must_be_kind_of Google::Datastore::V1::GqlQuery
 
-    grpc.query_string.must_equal gql.query_string
-    grpc.named_bindings.count.must_equal 1
-    grpc.named_bindings["startCursor"].cursor.must_equal "superawesome!"
+    _(grpc.query_string).must_equal gql.query_string
+    _(grpc.named_bindings.count).must_equal 1
+    _(grpc.named_bindings["startCursor"].cursor).must_equal "superawesome!"
   end
 
   it "will break if setting a cursor that is not a Cursor object" do
@@ -95,11 +95,11 @@ describe Google::Cloud::Datastore::GqlQuery, :mock_datastore do
     gql.named_bindings = {startCursor: "c3VwZXJhd2Vzb21lIQ=="}
 
     grpc = gql.to_grpc
-    grpc.must_be_kind_of Google::Datastore::V1::GqlQuery
+    _(grpc).must_be_kind_of Google::Datastore::V1::GqlQuery
 
-    grpc.query_string.must_equal gql.query_string
-    grpc.named_bindings.count.must_equal 1
+    _(grpc.query_string).must_equal gql.query_string
+    _(grpc.named_bindings.count).must_equal 1
     # This is bad. The cursor value is not set properly. Query will fail.
-    grpc.named_bindings["startCursor"].value.string_value.must_equal "c3VwZXJhd2Vzb21lIQ=="
+    _(grpc.named_bindings["startCursor"].value.string_value).must_equal "c3VwZXJhd2Vzb21lIQ=="
   end
 end

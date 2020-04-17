@@ -26,38 +26,38 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
 
   it "creates instances with .new" do
     # Calling entity here creates by calling new
-    entity.wont_be :nil?
-    entity.properties["name"].must_equal "User McUser"
-    entity.properties["email"].must_equal "user@example.net"
+    _(entity).wont_be :nil?
+    _(entity.properties["name"]).must_equal "User McUser"
+    _(entity.properties["email"]).must_equal "user@example.net"
   end
 
   it "allows properties to be accessed by strings or symbols" do
     # Calling entity here creates by calling new
-    entity.wont_be :nil?
-    entity.properties["name"].must_equal "User McUser"
-    entity.properties["email"].must_equal "user@example.net"
+    _(entity).wont_be :nil?
+    _(entity.properties["name"]).must_equal "User McUser"
+    _(entity.properties["email"]).must_equal "user@example.net"
 
-    entity.properties[:name].must_equal "User McUser"
-    entity.properties[:email].must_equal "user@example.net"
+    _(entity.properties[:name]).must_equal "User McUser"
+    _(entity.properties[:email]).must_equal "user@example.net"
 
     entity[:age] = 29
-    entity.properties[:age].must_equal 29
-    entity.properties["age"].must_equal 29
+    _(entity.properties[:age]).must_equal 29
+    _(entity.properties["age"]).must_equal 29
   end
 
   it "returns a correct GRPC object" do
     grpc = entity.to_grpc
 
     # Key values
-    grpc.key.path.count.must_equal 1
-    grpc.key.path.last.kind.must_equal "User"
-    grpc.key.path.last.id_type.must_equal :name
-    grpc.key.path.last.name.must_equal "username"
+    _(grpc.key.path.count).must_equal 1
+    _(grpc.key.path.last.kind).must_equal "User"
+    _(grpc.key.path.last.id_type).must_equal :name
+    _(grpc.key.path.last.name).must_equal "username"
 
     # Property values
-    grpc.properties.count.must_equal 2
-    grpc.properties["name"].string_value.must_equal entity["name"]
-    grpc.properties["email"].string_value.must_equal entity["email"]
+    _(grpc.properties.count).must_equal 2
+    _(grpc.properties["name"].string_value).must_equal entity["name"]
+    _(grpc.properties["email"].string_value).must_equal entity["email"]
   end
 
   it "returns a correct GRPC object when key is nil" do
@@ -66,12 +66,12 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
     grpc = entity.to_grpc
 
     # Key values
-    grpc.key.must_be :nil?
+    _(grpc.key).must_be :nil?
 
     # Property values
-    grpc.properties.count.must_equal 2
-    grpc.properties["name"].string_value.must_equal entity["name"]
-    grpc.properties["email"].string_value.must_equal entity["email"]
+    _(grpc.properties.count).must_equal 2
+    _(grpc.properties["name"].string_value).must_equal entity["name"]
+    _(grpc.properties["email"].string_value).must_equal entity["email"]
   end
 
   it "can be created with a GRPC object" do
@@ -86,13 +86,13 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
 
     entity_from_grpc = Google::Cloud::Datastore::Entity.from_grpc grpc
 
-    entity_from_grpc.key.kind.must_equal "User"
-    entity_from_grpc.key.id.must_equal 123456
-    entity_from_grpc.key.name.must_be :nil?
-    entity_from_grpc.properties["name"].must_equal "User McNumber"
-    entity_from_grpc.properties["email"].must_equal "number@example.net"
-    entity_from_grpc.properties.exist?("avatar").must_equal true
-    entity_from_grpc.properties["avatar"].must_be :nil?
+    _(entity_from_grpc.key.kind).must_equal "User"
+    _(entity_from_grpc.key.id).must_equal 123456
+    _(entity_from_grpc.key.name).must_be :nil?
+    _(entity_from_grpc.properties["name"]).must_equal "User McNumber"
+    _(entity_from_grpc.properties["email"]).must_equal "number@example.net"
+    _(entity_from_grpc.properties.exist?("avatar")).must_equal true
+    _(entity_from_grpc.properties["avatar"]).must_be :nil?
   end
 
   it "can store other entities as properties" do
@@ -111,16 +111,16 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
     grpc = entity.to_grpc
 
     task_property = grpc.properties["tasks"]
-    task_property.array_value.values.wont_be :empty?
-    task_property.array_value.values.count.must_equal 2
+    _(task_property.array_value.values).wont_be :empty?
+    _(task_property.array_value.values.count).must_equal 2
     grpc_task_1 = task_property.array_value.values.first
     grpc_task_2 = task_property.array_value.values.last
-    grpc_task_1.wont_be :nil?
-    grpc_task_2.wont_be :nil?
-    grpc_task_1.entity_value.wont_be :nil?
-    grpc_task_2.entity_value.wont_be :nil?
-    grpc_task_1.entity_value.properties["description"].string_value.must_equal "can persist entities"
-    grpc_task_2.entity_value.properties["description"].string_value.must_equal "can persist lists"
+    _(grpc_task_1).wont_be :nil?
+    _(grpc_task_2).wont_be :nil?
+    _(grpc_task_1.entity_value).wont_be :nil?
+    _(grpc_task_2.entity_value).wont_be :nil?
+    _(grpc_task_1.entity_value.properties["description"].string_value).must_equal "can persist entities"
+    _(grpc_task_2.entity_value.properties["description"].string_value).must_equal "can persist lists"
   end
 
   it "can store keys as properties" do
@@ -143,19 +143,19 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
     key_property = grpc.properties["head"]
 
     key_value = key_property.key_value
-    key_value.wont_be :nil?
-    key_value.must_equal                    key1.to_grpc
-    key_value.path.first.kind.must_equal    key1.to_grpc.path.last.kind
-    key_value.path.first.id_type.must_equal key1.to_grpc.path.last.id_type
-    key_value.path.first.name.must_equal    key1.to_grpc.path.last.name
-    key_value.path.first.id.must_equal      key1.to_grpc.path.last.id
+    _(key_value).wont_be :nil?
+    _(key_value).must_equal                    key1.to_grpc
+    _(key_value.path.first.kind).must_equal    key1.to_grpc.path.last.kind
+    _(key_value.path.first.id_type).must_equal key1.to_grpc.path.last.id_type
+    _(key_value.path.first.name).must_equal    key1.to_grpc.path.last.name
+    _(key_value.path.first.id).must_equal      key1.to_grpc.path.last.id
   end
 
   it "raises when setting an unsupported property type" do
     error = assert_raises Google::Cloud::Datastore::PropertyError do
       entity["thing"] = OpenStruct.new
     end
-    error.message.must_equal "A property of type OpenStruct is not supported."
+    _(error.message).must_equal "A property of type OpenStruct is not supported."
   end
 
   it "raises when setting a key when persisted" do
@@ -167,8 +167,8 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
 
     entity_from_grpc = Google::Cloud::Datastore::Entity.from_grpc grpc
 
-    entity_from_grpc.must_be :persisted?
-    entity_from_grpc.key.must_be :frozen?
+    _(entity_from_grpc).must_be :persisted?
+    _(entity_from_grpc.key).must_be :frozen?
 
     assert_raises RuntimeError do
       entity_from_grpc.key = Google::Cloud::Datastore::Key.new "User", 456789
@@ -181,6 +181,6 @@ describe Google::Cloud::Datastore::Entity, :mock_datastore do
 
   it "knows its serialized side" do
     # Don't care about the exact value, just want a number and no error
-    entity.serialized_size.must_be_kind_of Integer
+    _(entity.serialized_size).must_be_kind_of Integer
   end
 end

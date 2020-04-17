@@ -86,16 +86,16 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :allocate_ids, allocate_res, [project, keys, options: default_options]
 
     incomplete_key = Google::Cloud::Datastore::Key.new "ds-test"
-    incomplete_key.must_be :incomplete?
+    _(incomplete_key).must_be :incomplete?
     returned_keys = dataset.allocate_ids incomplete_key
-    returned_keys.count.must_equal 1
-    returned_keys.first.must_be_kind_of Google::Cloud::Datastore::Key
-    returned_keys.first.must_be :complete?
+    _(returned_keys.count).must_equal 1
+    _(returned_keys.first).must_be_kind_of Google::Cloud::Datastore::Key
+    _(returned_keys.first).must_be :complete?
   end
 
   it "allocate_ids raises when not given an incomplete key" do
     complete_key = Google::Cloud::Datastore::Key.new "ds-test", 789
-    complete_key.must_be :complete?
+    _(complete_key).must_be :complete?
     assert_raises Google::Cloud::Datastore::KeyError do
       dataset.allocate_ids complete_key
     end
@@ -118,11 +118,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e["name"] = "thingamajig"
     end
 
-    entity.key.must_be :complete?
-    entity.wont_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).wont_be :persisted?
     dataset.save entity
-    entity.key.must_be :complete?
-    entity.must_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).must_be :persisted?
   end
 
   it "save will persist incomplete entities" do
@@ -140,11 +140,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test"
       e["name"] = "thingamajig"
     end
-    entity.key.wont_be :complete?
-    entity.wont_be :persisted?
+    _(entity.key).wont_be :complete?
+    _(entity).wont_be :persisted?
     dataset.save entity
-    entity.key.must_be :complete?
-    entity.must_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).must_be :persisted?
   end
 
   it "save will persist complete entities with upsert alias" do
@@ -164,11 +164,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
     end
-    entity.key.must_be :complete?
-    entity.wont_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).wont_be :persisted?
     dataset.upsert entity
-    entity.key.must_be :complete?
-    entity.must_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).must_be :persisted?
   end
 
   it "save will persist incomplete entities with upsert alias" do
@@ -186,11 +186,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test"
       e["name"] = "thingamajig"
     end
-    entity.key.wont_be :complete?
-    entity.wont_be :persisted?
+    _(entity.key).wont_be :complete?
+    _(entity).wont_be :persisted?
     dataset.upsert entity
-    entity.key.must_be :complete?
-    entity.must_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).must_be :persisted?
   end
 
   it "save will persist multiple entities" do
@@ -217,11 +217,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thangie"
       e["name"] = "thungamajig"
     end
-    entity1.wont_be :persisted?
-    entity2.wont_be :persisted?
+    _(entity1).wont_be :persisted?
+    _(entity2).wont_be :persisted?
     dataset.save entity1, entity2
-    entity1.must_be :persisted?
-    entity2.must_be :persisted?
+    _(entity1).must_be :persisted?
+    _(entity2).must_be :persisted?
   end
 
   it "save will persist multiple entities in an array" do
@@ -248,11 +248,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thangie"
       e["name"] = "thungamajig"
     end
-    entity1.wont_be :persisted?
-    entity2.wont_be :persisted?
+    _(entity1).wont_be :persisted?
+    _(entity2).wont_be :persisted?
     dataset.save [entity1, entity2]
-    entity1.must_be :persisted?
-    entity2.must_be :persisted?
+    _(entity1).must_be :persisted?
+    _(entity2).must_be :persisted?
   end
 
   it "insert will persist complete entities" do
@@ -272,11 +272,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
     end
-    entity.key.must_be :complete?
-    entity.wont_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).wont_be :persisted?
     dataset.insert entity
-    entity.key.must_be :complete?
-    entity.must_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).must_be :persisted?
   end
 
   it "insert will persist incomplete entities" do
@@ -294,11 +294,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test"
       e["name"] = "thingamajig"
     end
-    entity.key.wont_be :complete?
-    entity.wont_be :persisted?
+    _(entity.key).wont_be :complete?
+    _(entity).wont_be :persisted?
     dataset.insert entity
-    entity.key.must_be :complete?
-    entity.must_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).must_be :persisted?
   end
 
   it "insert will persist multiple entities" do
@@ -326,11 +326,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thangie"
       e["name"] = "thungamajig"
     end
-    entity1.wont_be :persisted?
-    entity2.wont_be :persisted?
+    _(entity1).wont_be :persisted?
+    _(entity2).wont_be :persisted?
     dataset.insert entity1, entity2
-    entity1.must_be :persisted?
-    entity2.must_be :persisted?
+    _(entity1).must_be :persisted?
+    _(entity2).must_be :persisted?
   end
 
   it "insert will persist multiple entities in an array" do
@@ -358,11 +358,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thangie"
       e["name"] = "thungamajig"
     end
-    entity1.wont_be :persisted?
-    entity2.wont_be :persisted?
+    _(entity1).wont_be :persisted?
+    _(entity2).wont_be :persisted?
     dataset.insert [entity1, entity2]
-    entity1.must_be :persisted?
-    entity2.must_be :persisted?
+    _(entity1).must_be :persisted?
+    _(entity2).must_be :persisted?
   end
 
   it "update will persist entities" do
@@ -381,11 +381,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
     end
-    entity.key.must_be :complete?
-    entity.wont_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).wont_be :persisted?
     dataset.update entity
-    entity.key.must_be :complete?
-    entity.must_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).must_be :persisted?
   end
 
   it "update will persist multiple entities" do
@@ -414,11 +414,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thangie"
       e["name"] = "thungamajig"
     end
-    entity1.wont_be :persisted?
-    entity2.wont_be :persisted?
+    _(entity1).wont_be :persisted?
+    _(entity2).wont_be :persisted?
     dataset.update entity1, entity2
-    entity1.must_be :persisted?
-    entity2.must_be :persisted?
+    _(entity1).must_be :persisted?
+    _(entity2).must_be :persisted?
   end
 
   it "update will persist multiple entities in an array" do
@@ -447,11 +447,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thangie"
       e["name"] = "thungamajig"
     end
-    entity1.wont_be :persisted?
-    entity2.wont_be :persisted?
+    _(entity1).wont_be :persisted?
+    _(entity2).wont_be :persisted?
     dataset.update [entity1, entity2]
-    entity1.must_be :persisted?
-    entity2.must_be :persisted?
+    _(entity1).must_be :persisted?
+    _(entity2).must_be :persisted?
   end
 
   it "find can take a kind and id" do
@@ -459,7 +459,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     entity = dataset.find "ds-test", 123
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
   end
 
   it "find can take a kind and name" do
@@ -467,7 +467,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     entity = dataset.find "ds-test", "thingie"
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
   end
 
   it "find can take a key" do
@@ -476,7 +476,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
     key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
     entity = dataset.find key
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
   end
 
   it "find is aliased to get" do
@@ -484,7 +484,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: nil, options: default_options]
 
     entity = dataset.get "ds-test", 123
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
   end
 
   it "find can specify consistency" do
@@ -493,14 +493,14 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, lookup_res, [project, keys, read_options: read_options, options: default_options]
 
     entity = dataset.find "ds-test", 123, consistency: :eventual
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
   end
 
   it "find raises if consistency is a bad value" do
     error = expect do
       dataset.find "ds-test", 123, consistency: "foobar"
     end.must_raise ArgumentError
-    error.message.must_equal "Consistency must be :eventual or :strong, not \"foobar\"."
+    _(error.message).must_equal "Consistency must be :eventual or :strong, not \"foobar\"."
   end
 
   it "find_all takes several keys" do
@@ -511,11 +511,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
     entities = dataset.find_all key1, key2
-    entities.count.must_equal 2
-    entities.deferred.count.must_equal 0
-    entities.missing.count.must_equal 0
+    _(entities.count).must_equal 2
+    _(entities.deferred.count).must_equal 0
+    _(entities.missing.count).must_equal 0
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -527,11 +527,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
     entities = dataset.lookup key1, key2
-    entities.count.must_equal 2
-    entities.deferred.count.must_equal 0
-    entities.missing.count.must_equal 0
+    _(entities.count).must_equal 2
+    _(entities.deferred.count).must_equal 0
+    _(entities.missing.count).must_equal 0
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -544,11 +544,11 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
     entities = dataset.lookup key1, key2, consistency: :eventual
-    entities.count.must_equal 2
-    entities.deferred.count.must_equal 0
-    entities.missing.count.must_equal 0
+    _(entities.count).must_equal 2
+    _(entities.deferred.count).must_equal 0
+    _(entities.missing.count).must_equal 0
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -557,7 +557,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       entities = dataset.lookup key, key, consistency: "foobar"
     end.must_raise ArgumentError
-    error.message.must_equal "Consistency must be :eventual or :strong, not \"foobar\"."
+    _(error.message).must_equal "Consistency must be :eventual or :strong, not \"foobar\"."
   end
 
   describe "find_all result object" do
@@ -590,14 +590,14 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
       key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
       entities = dataset.find_all key1, key2
-      entities.count.must_equal 2
-      entities.deferred.count.must_equal 2
-      entities.missing.count.must_equal 0
+      _(entities.count).must_equal 2
+      _(entities.deferred.count).must_equal 2
+      _(entities.missing.count).must_equal 0
       entities.each do |entity|
-        entity.must_be_kind_of Google::Cloud::Datastore::Entity
+        _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       end
       entities.deferred.each do |deferred_key|
-        deferred_key.must_be_kind_of Google::Cloud::Datastore::Key
+        _(deferred_key).must_be_kind_of Google::Cloud::Datastore::Key
       end
     end
 
@@ -609,14 +609,14 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
       key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
       entities = dataset.find_all key1, key2
-      entities.count.must_equal 2
-      entities.deferred.count.must_equal 0
-      entities.missing.count.must_equal 2
+      _(entities.count).must_equal 2
+      _(entities.deferred.count).must_equal 0
+      _(entities.missing.count).must_equal 2
       entities.each do |entity|
-        entity.must_be_kind_of Google::Cloud::Datastore::Entity
+        _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       end
       entities.missing.each do |entity|
-        entity.must_be_kind_of Google::Cloud::Datastore::Entity
+        _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       end
     end
   end
@@ -736,26 +736,26 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.end_cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -782,37 +782,37 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e["name"] = "Gonna be deleted"
     end
 
-    entity_to_be_saved.wont_be :persisted?
+    _(entity_to_be_saved).wont_be :persisted?
     dataset.commit do |c|
       c.save entity_to_be_saved
       c.delete entity_to_be_deleted
     end
-    entity_to_be_saved.must_be :persisted?
+    _(entity_to_be_saved).must_be :persisted?
   end
 
   it "run_query will fulfill a query" do
     dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run_query query
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -824,25 +824,25 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :run_query, run_query_res, [project, partition_id: partition_id, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run_query query, namespace: "foobar"
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -854,26 +854,26 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run gql
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.end_cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -886,26 +886,26 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run gql, namespace: "foobar"
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.end_cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -917,26 +917,26 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run_query gql
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.end_cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -949,26 +949,26 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
     gql = dataset.gql "SELECT * FROM Task"
     entities = dataset.run_query gql, namespace: "foobar"
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.end_cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -983,124 +983,124 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
 
   it "query returns a Query instance" do
     query = dataset.query "Task"
-    query.must_be_kind_of Google::Cloud::Datastore::Query
+    _(query).must_be_kind_of Google::Cloud::Datastore::Query
 
     grpc = query.to_grpc
-    grpc.kind.map(&:name).must_include "Task"
-    grpc.kind.map(&:name).wont_include "User"
+    _(grpc.kind.map(&:name)).must_include "Task"
+    _(grpc.kind.map(&:name)).wont_include "User"
 
     # Add a second kind to the query
     query.kind "User"
 
     grpc = query.to_grpc
-    grpc.kind.map(&:name).must_include "Task"
-    grpc.kind.map(&:name).must_include "User"
+    _(grpc.kind.map(&:name)).must_include "Task"
+    _(grpc.kind.map(&:name)).must_include "User"
   end
 
   it "key returns a Key instance" do
     key = dataset.key "ThisThing", 1234
-    key.must_be_kind_of Google::Cloud::Datastore::Key
-    key.kind.must_equal "ThisThing"
-    key.id.must_equal 1234
-    key.name.must_be :nil?
+    _(key).must_be_kind_of Google::Cloud::Datastore::Key
+    _(key.kind).must_equal "ThisThing"
+    _(key.id).must_equal 1234
+    _(key.name).must_be :nil?
 
     key = dataset.key "ThisThing", "charlie"
-    key.must_be_kind_of Google::Cloud::Datastore::Key
-    key.kind.must_equal "ThisThing"
-    key.id.must_be :nil?
-    key.name.must_equal "charlie"
+    _(key).must_be_kind_of Google::Cloud::Datastore::Key
+    _(key.kind).must_equal "ThisThing"
+    _(key.id).must_be :nil?
+    _(key.name).must_equal "charlie"
   end
 
   it "key sets a parent and grandparent in the constructor" do
     path = [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
     key = dataset.key path, project: "custom-ds", namespace: "custom-ns"
-    key.kind.must_equal "ThisThing"
-    key.id.must_equal 1234
-    key.name.must_be :nil?
-    key.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
-    key.project.must_equal "custom-ds"
-    key.namespace.must_equal "custom-ns"
+    _(key.kind).must_equal "ThisThing"
+    _(key.id).must_equal 1234
+    _(key.name).must_be :nil?
+    _(key.path).must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    _(key.project).must_equal "custom-ds"
+    _(key.namespace).must_equal "custom-ns"
 
-    key.parent.wont_be :nil?
-    key.parent.kind.must_equal "ThatThing"
-    key.parent.id.must_equal 6789
-    key.parent.name.must_be :nil?
-    key.parent.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
-    key.parent.project.must_equal "custom-ds"
-    key.parent.namespace.must_equal "custom-ns"
+    _(key.parent).wont_be :nil?
+    _(key.parent.kind).must_equal "ThatThing"
+    _(key.parent.id).must_equal 6789
+    _(key.parent.name).must_be :nil?
+    _(key.parent.path).must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
+    _(key.parent.project).must_equal "custom-ds"
+    _(key.parent.namespace).must_equal "custom-ns"
 
-    key.parent.parent.wont_be :nil?
-    key.parent.parent.kind.must_equal "OtherThing"
-    key.parent.parent.id.must_be :nil?
-    key.parent.parent.name.must_equal "root"
-    key.parent.parent.path.must_equal [["OtherThing", "root"]]
-    key.parent.parent.project.must_equal "custom-ds"
-    key.parent.parent.namespace.must_equal "custom-ns"
+    _(key.parent.parent).wont_be :nil?
+    _(key.parent.parent.kind).must_equal "OtherThing"
+    _(key.parent.parent.id).must_be :nil?
+    _(key.parent.parent.name).must_equal "root"
+    _(key.parent.parent.path).must_equal [["OtherThing", "root"]]
+    _(key.parent.parent.project).must_equal "custom-ds"
+    _(key.parent.parent.namespace).must_equal "custom-ns"
   end
 
   it "entity returns an Entity instance" do
     entity = dataset.entity
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
   end
 
   it "entity sets the Key's kind for the new Entity" do
     entity = dataset.entity "User"
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
-    entity.key.kind.must_equal "User"
-    entity.key.id.must_be :nil?
-    entity.key.name.must_be :nil?
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity.key.kind).must_equal "User"
+    _(entity.key.id).must_be :nil?
+    _(entity.key.name).must_be :nil?
   end
 
   it "entity sets the Key's kind and id for the new Entity" do
     entity = dataset.entity "User", 123
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
-    entity.key.kind.must_equal "User"
-    entity.key.id.must_equal 123
-    entity.key.name.must_be :nil?
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity.key.kind).must_equal "User"
+    _(entity.key.id).must_equal 123
+    _(entity.key.name).must_be :nil?
   end
 
   it "entity sets the Key's kind and name for the new Entity" do
     entity = dataset.entity "User", "username"
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
-    entity.key.kind.must_equal "User"
-    entity.key.id.must_be :nil?
-    entity.key.name.must_equal "username"
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity.key.kind).must_equal "User"
+    _(entity.key.id).must_be :nil?
+    _(entity.key.name).must_equal "username"
   end
 
   it "entity sets the Key object for the new Entity" do
     key = dataset.key "User", "username"
     entity = dataset.entity key
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
-    entity.key.kind.must_equal "User"
-    entity.key.id.must_be :nil?
-    entity.key.name.must_equal "username"
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity.key.kind).must_equal "User"
+    _(entity.key.id).must_be :nil?
+    _(entity.key.name).must_equal "username"
   end
 
   it "entity sets a key's parent and grandparent" do
     path = [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
     entity = dataset.entity path, project: "custom-ds", namespace: "custom-ns"
-    entity.key.kind.must_equal "ThisThing"
-    entity.key.id.must_equal 1234
-    entity.key.name.must_be :nil?
-    entity.key.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
-    entity.key.project.must_equal "custom-ds"
-    entity.key.namespace.must_equal "custom-ns"
+    _(entity.key.kind).must_equal "ThisThing"
+    _(entity.key.id).must_equal 1234
+    _(entity.key.name).must_be :nil?
+    _(entity.key.path).must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    _(entity.key.project).must_equal "custom-ds"
+    _(entity.key.namespace).must_equal "custom-ns"
 
-    entity.key.parent.wont_be :nil?
-    entity.key.parent.kind.must_equal "ThatThing"
-    entity.key.parent.id.must_equal 6789
-    entity.key.parent.name.must_be :nil?
-    entity.key.parent.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
-    entity.key.parent.project.must_equal "custom-ds"
-    entity.key.parent.namespace.must_equal "custom-ns"
+    _(entity.key.parent).wont_be :nil?
+    _(entity.key.parent.kind).must_equal "ThatThing"
+    _(entity.key.parent.id).must_equal 6789
+    _(entity.key.parent.name).must_be :nil?
+    _(entity.key.parent.path).must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
+    _(entity.key.parent.project).must_equal "custom-ds"
+    _(entity.key.parent.namespace).must_equal "custom-ns"
 
-    entity.key.parent.parent.wont_be :nil?
-    entity.key.parent.parent.kind.must_equal "OtherThing"
-    entity.key.parent.parent.id.must_be :nil?
-    entity.key.parent.parent.name.must_equal "root"
-    entity.key.parent.parent.path.must_equal [["OtherThing", "root"]]
-    entity.key.parent.parent.project.must_equal "custom-ds"
-    entity.key.parent.parent.namespace.must_equal "custom-ns"
+    _(entity.key.parent.parent).wont_be :nil?
+    _(entity.key.parent.parent.kind).must_equal "OtherThing"
+    _(entity.key.parent.parent.id).must_be :nil?
+    _(entity.key.parent.parent.name).must_equal "root"
+    _(entity.key.parent.parent.path).must_equal [["OtherThing", "root"]]
+    _(entity.key.parent.parent.project).must_equal "custom-ds"
+    _(entity.key.parent.parent.namespace).must_equal "custom-ns"
   end
 
   it "entity can configure the new Entity using a block" do
@@ -1108,12 +1108,12 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       e["name"] = "User McUser"
       e["email"] = "user@example.net"
     end
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
-    entity.key.kind.must_equal "User"
-    entity.key.id.must_be :nil?
-    entity.key.name.must_equal "username"
-    entity.properties["name"].must_equal "User McUser"
-    entity.properties["email"].must_equal "user@example.net"
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity.key.kind).must_equal "User"
+    _(entity.key.id).must_be :nil?
+    _(entity.key.name).must_equal "username"
+    _(entity.properties["name"]).must_equal "User McUser"
+    _(entity.properties["email"]).must_equal "user@example.net"
   end
 
   it "transaction will return a Transaction" do
@@ -1122,8 +1122,8 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: nil]
 
     tx = dataset.transaction
-    tx.must_be_kind_of Google::Cloud::Datastore::Transaction
-    tx.id.must_equal "giterdone"
+    _(tx).must_be_kind_of Google::Cloud::Datastore::Transaction
+    _(tx.id).must_equal "giterdone"
   end
 
   it "transaction will return a Transaction with previous_transaction" do
@@ -1137,8 +1137,8 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: tx_options]
 
     tx = dataset.transaction previous_transaction: previous_transaction_id
-    tx.must_be_kind_of Google::Cloud::Datastore::Transaction
-    tx.id.must_equal "giterdone"
+    _(tx).must_be_kind_of Google::Cloud::Datastore::Transaction
+    _(tx.id).must_equal "giterdone"
   end
 
   it "read_only_transaction will return a read-only Transaction" do
@@ -1151,7 +1151,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: tx_options]
 
     tx = dataset.read_only_transaction
-    tx.must_be_kind_of Google::Cloud::Datastore::ReadOnlyTransaction
+    _(tx).must_be_kind_of Google::Cloud::Datastore::ReadOnlyTransaction
   end
 
   it "snapshot will return a read-only Transaction" do
@@ -1164,7 +1164,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
     dataset.service.mocked_service.expect :begin_transaction, begin_tx_res, [project, transaction_options: tx_options]
 
     tx = dataset.snapshot
-    tx.must_be_kind_of Google::Cloud::Datastore::ReadOnlyTransaction
+    _(tx).must_be_kind_of Google::Cloud::Datastore::ReadOnlyTransaction
   end
 
   it "transaction will commit with a block" do
@@ -1205,10 +1205,10 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       end
     end
 
-    error.wont_be :nil?
-    error.message.must_equal "Transaction failed to commit."
-    error.cause.wont_be :nil?
-    error.cause.message.must_equal "This error should be wrapped by TransactionError."
+    _(error).wont_be :nil?
+    _(error.message).must_equal "Transaction failed to commit."
+    _(error.cause).wont_be :nil?
+    _(error.cause.message).must_equal "This error should be wrapped by TransactionError."
   end
 
   it "transaction will wrap errors for both commit and rollback" do
@@ -1218,7 +1218,7 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
       tx_id = "giterdone".encode("ASCII-8BIT")
       begin_tx_res = Google::Datastore::V1::BeginTransactionResponse.new(transaction: tx_id)
 
-      stub = Object.new
+      stub = self
       stub.instance_variable_set :@response, begin_tx_res
       def stub.begin_transaction read_only: nil, previous_transaction: nil
         @response
@@ -1243,15 +1243,15 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
         end
       end
 
-      error.wont_be :nil?
-      error.must_be_kind_of Google::Cloud::Datastore::TransactionError
-      error.message.must_equal "Transaction failed to commit and rollback."
-      error.cause.wont_be :nil?
-      error.cause.must_be_kind_of RuntimeError
-      error.cause.message.must_equal "rollback error"
+      _(error).wont_be :nil?
+      _(error).must_be_kind_of Google::Cloud::Datastore::TransactionError
+      _(error.message).must_equal "Transaction failed to commit and rollback."
+      _(error.cause).wont_be :nil?
+      _(error.cause).must_be_kind_of RuntimeError
+      _(error.cause.message).must_equal "rollback error"
       if error.cause.respond_to? :cause # RuntimeError#cause not on Ruby 2.0
-        error.cause.cause.must_be_kind_of RuntimeError
-        error.cause.cause.message.must_equal "commit error"
+        _(error.cause.cause).must_be_kind_of RuntimeError
+        _(error.cause.cause.message).must_equal "commit error"
       end
     ensure
       # Reset mocked service so the call to verify works.
@@ -1321,9 +1321,9 @@ describe Google::Cloud::Datastore::Dataset, :mock_datastore do
           tx.save entity
         end
       end.must_raise Google::Cloud::Datastore::TransactionError
-      error.message.must_equal "Transaction failed to commit."
-      error.cause.must_be_kind_of StandardError
-      error.cause.message.must_equal "unsupported"
+      _(error.message).must_equal "Transaction failed to commit."
+      _(error.cause).must_be_kind_of StandardError
+      _(error.cause.message).must_equal "unsupported"
     end
   end
 end

@@ -1,15 +1,15 @@
+require: rubocop-minitest
+
 inherit_gem:
   google-style: google-style.yml
 
 AllCops:
   Exclude:
-    - "acceptance/**/*"
     - "google-cloud-datastore.gemspec"
     - "lib/google/datastore/**/*"
     - "lib/google/cloud/datastore/v1/**/*"
     - "Rakefile"
     - "support/**/*"
-    - "test/**/*"
 
 Documentation:
   Enabled: false
