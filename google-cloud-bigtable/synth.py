@@ -34,7 +34,7 @@ s.copy(v2_library / 'test/google/cloud/bigtable/v2')
 
 v2_admin_library = gapic.ruby_library(
     'bigtableadmin', 'v2',
-    config_path='/google/bigtable/admin/artman_bigtableadmin.yaml',
+    config_path='/google/bigtable/admin/artman_bigtableadmin.legacy.yaml',
     artman_output_name='google-cloud-ruby/google-cloud-bigtable_admin'
 )
 s.copy(v2_admin_library / 'lib/google/cloud/bigtable/admin/v2')
