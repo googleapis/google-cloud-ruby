@@ -43,7 +43,10 @@ module Google
         attr_accessor :logger
 
         # @private
-        attr_reader :retries, :timeout, :host
+        attr_accessor :retries
+
+        # @private
+        attr_reader :timeout, :host
 
         ##
         # Creates a new Service instance.
@@ -590,9 +593,8 @@ module Google
           protected
 
           def retry? err, current_retries #:nodoc:
-            return true if err.is_a? JSON::ParserError # See #5180
             if current_retries < @retries
-              return true if retry_error_reason? err.body
+              return true if err.is_a?(JSON::ParserError) || retry_error_reason?(err.body) # See #5180 re: JSON
             end
             false
           end

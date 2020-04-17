@@ -32,6 +32,33 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     dataset.dataset_id.must_equal dataset_id
   end
 
+  it "does not retry 404 error (retryable) if retries is 0" do
+    mock = Minitest::Mock.new
+    mocked_backoff = lambda { |i| mock.retry i } # never called
+
+    stub = Object.new
+    def stub.get_dataset *args
+      @tries ||= 0
+      @tries += 1
+      if @tries == 1
+        # raise Google::Apis::Error.new "notfound", status_code: 400, body: backenderror_body
+        raise Google::Apis::Error.new "notfound",
+          status_code: 400,
+          body: { "error" => { "errors" => [{ "reason" => "backendError" }] } }.to_json
+      end
+
+      raise "Exceeded retry limit"
+    end
+    bigquery.service.mocked_service = stub
+    bigquery.service.retries = 0
+
+    Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
+      expect { bigquery.dataset dataset_id }.must_raise Google::Cloud::InvalidArgumentError
+    end
+
+    mock.verify
+  end
+
   it "handles a single 404 error (retryable) and retries with backoff" do
     mock = Minitest::Mock.new
     mock.expect :retry, nil, [0]
@@ -68,6 +95,32 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
 
       dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
       dataset.dataset_id.must_equal dataset_id
+    end
+
+    mock.verify
+  end
+
+  # See #5180
+  it "does not retry JSON::ParserError (retryable) if retries is 0" do
+    mock = Minitest::Mock.new
+    mocked_backoff = lambda { |i| mock.retry i } # never called
+
+    stub = Object.new
+    def stub.get_dataset *args
+      @tries ||= 0
+      @tries += 1
+      if @tries == 1
+        # raises JSON::ParserError: 767: unexpected token at '{"hello": {world}'
+        JSON.parse "{\"hello\": {world}"
+      end
+
+      raise "Exceeded retry limit"
+    end
+    bigquery.service.mocked_service = stub
+    bigquery.service.retries = 0
+
+    Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
+      expect { bigquery.dataset dataset_id }.must_raise JSON::ParserError
     end
 
     mock.verify
