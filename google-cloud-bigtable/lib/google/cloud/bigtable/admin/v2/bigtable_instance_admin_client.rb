@@ -944,8 +944,8 @@ module Google
             #   The unique name of the cluster. Values are of the form
             #   `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
             # @param serve_nodes [Integer]
-            #   Required. The number of nodes allocated to this cluster. More nodes enable higher
-            #   throughput and more consistent performance.
+            #   Required. The number of nodes allocated to this cluster. More nodes enable
+            #   higher throughput and more consistent performance.
             # @param location [String]
             #   (`CreationOnly`)
             #   The location where this cluster's nodes and storage reside. For best

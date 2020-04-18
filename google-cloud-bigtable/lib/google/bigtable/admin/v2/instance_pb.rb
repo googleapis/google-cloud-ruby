@@ -4,7 +4,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/bigtable/admin/v2/common_pb'
