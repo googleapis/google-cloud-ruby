@@ -1,9 +1,5 @@
 {
-    "name": "bigquerydatatransfer",
     "language": "ruby",
     "distribution_name": "google-cloud-bigquery-data_transfer",
-    "module_name": "Bigquery::DataTransfer",
-    "module_name_credentials": "Bigquery::DataTransfer::V1",
-    "env_var_prefix": "DATA_TRANSFER",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest"
 }

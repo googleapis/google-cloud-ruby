@@ -16,19 +16,18 @@
 
 require "simplecov"
 require "minitest/autorun"
-require "minitest/spec"
 
 require "google/cloud/bigquery/data_transfer"
 
-describe "DataTransferServiceSmokeTest v1" do
-  it "runs one smoke test with list_data_sources" do
+class DataTransferServiceSmokeTest < Minitest::Test
+  def test_list_data_sources
     unless ENV["DATA_TRANSFER_TEST_PROJECT"]
       fail "DATA_TRANSFER_TEST_PROJECT environment variable must be defined"
     end
     project_id = ENV["DATA_TRANSFER_TEST_PROJECT"].freeze
 
-    data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new(version: :v1)
-    formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path(project_id)
+    data_transfer_client = Google::Cloud::Bigquery::DataTransfer.data_transfer_service
+    formatted_parent = data_transfer_client.project_path project: project_id
 
     # Iterate over all results.
     data_transfer_client.list_data_sources(formatted_parent).each do |element|
