@@ -1,5 +1,15 @@
 # Release History
 
+### 0.3.0 / 2020-04-20
+
+#### Features
+
+* Support Scope#restricted_locations and SearchCatalogResponse#unreachable
+
+#### Documentation
+
+* Document asia-northeast3 region
+
 ### 0.2.0 / 2020-04-13
 
 #### Features
