@@ -48,9 +48,6 @@ def retry_resource_exhaustion
     rescue Google::Cloud::ResourceExhaustedError => e
       puts "\n#{e} Gonna try again"
       sleep rand(3..5)
-    rescue StandardError => e
-      puts "\n#{e}"
-      return
     end
   end
   raise Google::Cloud::ResourceExhaustedError, "Maybe take a break from creating and deleting buckets for a bit"
@@ -64,7 +61,7 @@ def get_kms_key project_id
   key_ring_path = kms_client.key_ring_path project_id, "us", key_ring_id
   begin
     kms_client.get_key_ring key_ring_path
-  rescue
+  rescue Google::Gax::RetryError
     kms_client.create_key_ring location_path, key_ring_id, {}
   end
 
