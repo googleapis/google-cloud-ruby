@@ -9,5 +9,3 @@ gem "google-cloud-errors", path: "../google-cloud-errors"
 gem "rake"
 
 gem "stackprof" unless Gem.win_platform?
-
-gem "rubocop-minitest"
