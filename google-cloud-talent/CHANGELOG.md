@@ -1,5 +1,19 @@
 # Release History
 
+### 0.11.0 / 2020-04-20
+
+#### Features
+
+* Add job_path and job_without_tenant_path helpers
+  * Add ApplicationServiceClient.job_path
+  * Add ApplicationServiceClient.job_without_tenant_path
+
+#### Documentation
+
+* edit synths to fix broken links ([#5190](https://www.github.com/googleapis/google-cloud-ruby/issues/5190))
+* Fix PersonNameFilter docs by removing a link that was crashing YARD
+* Remove broken troubleshooting link from auth guide.
+
 ### 0.10.0 / 2020-03-16
 
 #### Features
