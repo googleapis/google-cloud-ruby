@@ -1,3 +1,5 @@
+require: rubocop-minitest
+
 inherit_gem:
   google-style: google-style.yml
 
@@ -14,9 +16,7 @@ AllCops:
     - "lib/google/cloud/firestore/admin/v1*.rb"
     - "support/**/*"
     - "Rakefile"
-    - "acceptance/**/*"
     - "conformance/**/*"
-    - "test/**/*"
 
 Documentation:
   Enabled: false
