@@ -1,5 +1,11 @@
 # Release History
 
+### 0.37.3 / 2020-04-20
+
+#### Documentation
+
+* Clarify TimeInterval resolution.
+
 ### 0.37.2 / 2020-04-06
 
 #### Documentation
