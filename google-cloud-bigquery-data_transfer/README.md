@@ -1,64 +1,52 @@
-# Ruby Client for BigQuery Data Transfer API
+# Ruby Client for the BigQuery Data Transfer API
 
-[BigQuery Data Transfer API][Product Documentation]:
-Schedule queries or transfer external data from SaaS applications to Google
-BigQuery on a regular basis.
-- [Client Library Documentation][]
-- [Product Documentation][]
+API Client library for the BigQuery Data Transfer API
+
+Schedules queries and transfers external data from SaaS applications to Google BigQuery on a regular basis.
+
+Actual client classes for the various versions of this API are defined in
+_versioned_ client gems, with names of the form `google-cloud-bigquery-data_transfer-v*`.
+The gem `google-cloud-bigquery-data_transfer` is a convenience wrapper library that brings the
+verisoned gems in as dependencies, and provides high-level methods for
+constructing clients.
+
+View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest)
+for this library, google-cloud-bigquery-data_transfer, to see the convenience methods for
+constructing client objects. Reference documentation for the client objects
+themselves can be found in the client library documentation for the versioned
+client gems:
+[google-cloud-bigquery-data_transfer-v1](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer-v1/latest).
+
+See also the [Product Documentation](https://cloud.google.com/bigquery/transfer)
+for more usage information.
 
 ## Quick Start
-In order to use this library, you first need to go through the following
-steps:
 
-1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the BigQuery Data Transfer API.](https://console.cloud.google.com/apis/library/bigquerydatatransfer.googleapis.com)
-4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest/file.AUTHENTICATION.html)
-
-### Installation
 ```
 $ gem install google-cloud-bigquery-data_transfer
 ```
 
-### Preview
-#### DataTransferServiceClient
-```rb
-require "google/cloud/bigquery/data_transfer"
+In order to use this library, you first need to go through the following steps:
 
-data_transfer_client = Google::Cloud::Bigquery::DataTransfer.new
-formatted_parent = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.project_path(project_id)
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+1. [Enable the API.](https://console.cloud.google.com/apis/library/bigquerydatatransfer.googleapis.com)
+1. {file:AUTHENTICATION.md Set up authentication.}
 
-# Iterate over all results.
-data_transfer_client.list_data_sources(formatted_parent).each do |element|
-  # Process element.
-end
+## Migrating from 0.x versions
 
-# Or iterate over results one page at a time.
-data_transfer_client.list_data_sources(formatted_parent).each_page do |page|
-  # Process each page at a time.
-  page.each do |element|
-    # Process element.
-  end
-end
-```
-
-### Next Steps
-- Read the [Client Library Documentation][] for BigQuery Data Transfer API
-  to see other available methods on the client.
-- Read the [BigQuery Data Transfer API Product documentation][Product Documentation]
-  to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
-  to see the full list of Cloud APIs that we cover.
-
-[Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer/latest
-[Product Documentation]: https://cloud.google.com/bigquery/transfer/
+The 1.0 release of the google-cloud-bigquery-data_transfer client is a significant upgrade
+based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
+and includes substantial interface changes. Existing code written for earlier
+versions of this library will likely require updates to use this version.
+See the {file:MIGRATING.md MIGRATING.md} document for more information.
 
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
 or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
-that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
+that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 
 Configuring a Ruby stdlib logger:
