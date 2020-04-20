@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.4 / 2020-04-20
+
+#### Documentation
+
+* Fix some broken links in the Project and Sink docs
+
 ### 1.10.3 / 2020-04-06
 
 #### Documentation
