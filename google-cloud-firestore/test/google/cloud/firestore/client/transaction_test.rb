@@ -412,7 +412,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         raise "bad second begin_transaction" unless options_.read_write.retry_transaction == "transaction123"
         Google::Firestore::V1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
       end
-      def firestore_mock.commit database, writes: writes, transaction: nil, options: nil
+      def firestore_mock.commit database, writes: nil, transaction: nil, options: nil
         if @first_commit.nil?
           @first_commit = true
           raise "bad first commit" unless transaction == "transaction123"
@@ -462,7 +462,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         raise "bad final begin_transaction" unless options_.read_write.retry_transaction == "transaction_3"
         Google::Firestore::V1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
       end
-      def firestore_mock.commit database, writes: writes, transaction: nil, options: nil
+      def firestore_mock.commit database, writes: nil, transaction: nil, options: nil
         @commit_retries ||= 0
         @commit_retries += 1
 
@@ -515,7 +515,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         raise "bad second begin_transaction" unless options_.read_write.retry_transaction == "transaction123"
         Google::Firestore::V1::BeginTransactionResponse.new(transaction: "new_transaction_xyz")
       end
-      def firestore_mock.commit database, writes: writes, transaction: nil, options: nil
+      def firestore_mock.commit database, writes: nil, transaction: nil, options: nil
         if @first_commit.nil?
           @first_commit = true
           raise "bad first commit" unless transaction == "transaction123"
@@ -555,7 +555,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       firestore_mock.expect :rollback, nil, ["projects/#{project}/databases/(default)", transaction_id, options: default_options]
 
       # Unable to use mocks to raise an error, so stub the method instead
-      def firestore_mock.commit database, writes: writes, transaction: nil, options: nil
+      def firestore_mock.commit database, writes: nil, transaction: nil, options: nil
         raise "unsupported"
       end
 
