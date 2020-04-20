@@ -64,7 +64,7 @@ def get_kms_key project_id
   key_ring_path = kms_client.key_ring_path project_id, "us", key_ring_id
   begin
     kms_client.get_key_ring key_ring_path
-  rescue Google::Gax::RetryError
+  rescue
     kms_client.create_key_ring location_path, key_ring_id, {}
   end
 
