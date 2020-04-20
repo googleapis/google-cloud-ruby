@@ -50,7 +50,7 @@ describe "Collection", :firestore_acceptance do
     rand_col.add({bar: "foo"})
     docs = rand_col.list_documents
 
-    _(docs).must_be_kind_of Array
+    _(docs).must_be_kind_of Google::Cloud::Firestore::DocumentReference::List
     _(docs.size).must_be :>, 1
     _(docs.first).must_be_kind_of Google::Cloud::Firestore::DocumentReference
     _(docs.first.client).must_be_kind_of Google::Cloud::Firestore::Client
