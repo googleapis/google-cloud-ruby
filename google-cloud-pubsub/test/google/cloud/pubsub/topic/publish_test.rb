@@ -37,8 +37,8 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
 
     mock.verify
 
-    msg.must_be_kind_of Google::Cloud::PubSub::Message
-    msg.message_id.must_equal "msg1"
+    _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+    _(msg.message_id).must_equal "msg1"
   end
 
   it "publishes a message with multibyte characters" do
@@ -54,9 +54,9 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
 
     mock.verify
 
-    msg.must_be_kind_of Google::Cloud::PubSub::Message
-    msg.data.must_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT)
-    msg.message_id.must_equal "msg1"
+    _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+    _(msg.data).must_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT)
+    _(msg.message_id).must_equal "msg1"
   end
 
   it "publishes a message using an IO-ish object" do
@@ -78,9 +78,9 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
     end
     mock.verify
 
-    msg.must_be_kind_of Google::Cloud::PubSub::Message
-    msg.data.must_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT)
-    msg.message_id.must_equal "msg1"
+    _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+    _(msg.data).must_equal "\xE3\x81\x82".force_encoding(Encoding::ASCII_8BIT)
+    _(msg.message_id).must_equal "msg1"
   end
 
   it "publishes a message with attributes" do
@@ -96,9 +96,9 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
 
     mock.verify
 
-    msg.must_be_kind_of Google::Cloud::PubSub::Message
-    msg.message_id.must_equal "msg1"
-    msg.attributes["format"].must_equal "text"
+    _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+    _(msg.message_id).must_equal "msg1"
+    _(msg.attributes["format"]).must_equal "text"
   end
 
   it "publishes multiple messages with a block" do
@@ -120,11 +120,11 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
 
     mock.verify
 
-    msgs.count.must_equal 3
-    msgs.each { |msg| msg.must_be_kind_of Google::Cloud::PubSub::Message }
-    msgs.first.message_id.must_equal "msg1"
-    msgs.last.message_id.must_equal "msg3"
-    msgs.last.attributes["format"].must_equal "none"
+    _(msgs.count).must_equal 3
+    msgs.each { |msg| _(msg).must_be_kind_of Google::Cloud::PubSub::Message }
+    _(msgs.first.message_id).must_equal "msg1"
+    _(msgs.last.message_id).must_equal "msg3"
+    _(msgs.last.attributes["format"]).must_equal "none"
   end
 
   describe "reference topic that exists" do
@@ -143,8 +143,8 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
 
       mock.verify
 
-      msg.must_be_kind_of Google::Cloud::PubSub::Message
-      msg.message_id.must_equal "msg1"
+      _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+      _(msg.message_id).must_equal "msg1"
     end
 
     it "publishes a message with attributes" do
@@ -160,9 +160,9 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
 
       mock.verify
 
-      msg.must_be_kind_of Google::Cloud::PubSub::Message
-      msg.message_id.must_equal "msg1"
-      msg.attributes["format"].must_equal "text"
+      _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+      _(msg.message_id).must_equal "msg1"
+      _(msg.attributes["format"]).must_equal "text"
     end
 
     it "publishes multiple messages with a block" do
@@ -184,11 +184,11 @@ describe Google::Cloud::PubSub::Topic, :publish, :mock_pubsub do
 
       mock.verify
 
-      msgs.count.must_equal 3
-      msgs.each { |msg| msg.must_be_kind_of Google::Cloud::PubSub::Message }
-      msgs.first.message_id.must_equal "msg1"
-      msgs.last.message_id.must_equal "msg3"
-      msgs.last.attributes["format"].must_equal "none"
+      _(msgs.count).must_equal 3
+      msgs.each { |msg| _(msg).must_be_kind_of Google::Cloud::PubSub::Message }
+      _(msgs.first.message_id).must_equal "msg1"
+      _(msgs.last.message_id).must_equal "msg3"
+      _(msgs.last.attributes["format"]).must_equal "none"
     end
   end
 

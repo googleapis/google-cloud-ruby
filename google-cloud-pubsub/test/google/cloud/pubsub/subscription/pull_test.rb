@@ -32,8 +32,8 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
 
     mock.verify
 
-    rec_messages.wont_be :empty?
-    rec_messages.first.message.data.must_equal rec_message_msg
+    _(rec_messages).wont_be :empty?
+    _(rec_messages.first.message.data).must_equal rec_message_msg
   end
 
   describe "reference subscription object of a subscription that does exist" do
@@ -53,8 +53,8 @@ describe Google::Cloud::PubSub::Subscription, :pull, :mock_pubsub do
 
       mock.verify
 
-      rec_messages.wont_be :empty?
-      rec_messages.first.message.data.must_equal rec_message_msg
+      _(rec_messages).wont_be :empty?
+      _(rec_messages.first.message.data).must_equal rec_message_msg
     end
   end
 

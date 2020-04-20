@@ -20,12 +20,12 @@ describe Google::Cloud::PubSub::Message, :mock_pubsub do
   let(:msg)    { Google::Cloud::PubSub::Message.new data, attributes }
 
   it "knows its data" do
-    msg.data.must_equal data
+    _(msg.data).must_equal data
   end
 
   it "knows its attributes" do
-    msg.attributes.keys.sort.must_equal   attributes.keys.sort
-    msg.attributes.values.sort.must_equal attributes.values.sort
+    _(msg.attributes.keys.sort).must_equal   attributes.keys.sort
+    _(msg.attributes.values.sort).must_equal attributes.values.sort
   end
 
   describe "from gapi" do
@@ -41,28 +41,28 @@ describe Google::Cloud::PubSub::Message, :mock_pubsub do
     let(:msg)     { Google::Cloud::PubSub::Message.from_grpc rec_message_grpc }
 
     it "knows its data" do
-      msg.data.must_equal rec_message_msg
+      _(msg.data).must_equal rec_message_msg
     end
 
     it "knows its attributes" do
-      msg.attributes.keys.sort.must_equal   rec_message_data[:message][:attributes].keys.sort
-      msg.attributes.values.sort.must_equal rec_message_data[:message][:attributes].values.sort
+      _(msg.attributes.keys.sort).must_equal   rec_message_data[:message][:attributes].keys.sort
+      _(msg.attributes.values.sort).must_equal rec_message_data[:message][:attributes].values.sort
     end
 
     it "knows its message_id" do
-      msg.msg_id.must_equal     rec_message_data[:message][:message_id]
-      msg.message_id.must_equal rec_message_data[:message][:message_id]
+      _(msg.msg_id).must_equal     rec_message_data[:message][:message_id]
+      _(msg.message_id).must_equal rec_message_data[:message][:message_id]
     end
 
     it "knows its published_at" do
-      msg.published_at.must_be :nil?
-      msg.publish_time.must_be :nil?
+      _(msg.published_at).must_be :nil?
+      _(msg.publish_time).must_be :nil?
 
       publish_time = Time.now
       rec_message_grpc.publish_time = Google::Cloud::PubSub::Convert.time_to_timestamp publish_time
 
-      msg.published_at.must_equal publish_time
-      msg.publish_time.must_equal publish_time
+      _(msg.published_at).must_equal publish_time
+      _(msg.publish_time).must_equal publish_time
     end
   end
 end

@@ -23,8 +23,8 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "is not reference when created with an HTTP method" do
-    subscription.wont_be :reference?
-    subscription.must_be :resource?
+    _(subscription).wont_be :reference?
+    _(subscription).must_be :resource?
   end
 
   describe "reference subscription" do
@@ -33,8 +33,8 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
     end
 
     it "is reference" do
-      subscription.must_be :reference?
-      subscription.wont_be :resource?
+      _(subscription).must_be :reference?
+      _(subscription).wont_be :resource?
     end
   end
 end

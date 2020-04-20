@@ -56,7 +56,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   let(:persistence_regions) { ["us-west1", "us-west2"] }
 
   it "knows the project identifier" do
-    pubsub.project.must_equal project
+    _(pubsub.project).must_equal project
   end
 
   it "creates a topic" do
@@ -71,11 +71,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topic.name.must_equal topic_path(new_topic_name)
-    topic.labels.must_be :empty?
-    topic.labels.must_be :frozen?
-    topic.kms_key.must_be :empty?
-    topic.persistence_regions.must_be :empty?
+    _(topic.name).must_equal topic_path(new_topic_name)
+    _(topic.labels).must_be :empty?
+    _(topic.labels).must_be :frozen?
+    _(topic.kms_key).must_be :empty?
+    _(topic.persistence_regions).must_be :empty?
   end
 
   it "creates a topic with new_topic_alias" do
@@ -90,11 +90,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topic.name.must_equal topic_path(new_topic_name)
-    topic.labels.must_be :empty?
-    topic.labels.must_be :frozen?
-    topic.kms_key.must_be :empty?
-    topic.persistence_regions.must_be :empty?
+    _(topic.name).must_equal topic_path(new_topic_name)
+    _(topic.labels).must_be :empty?
+    _(topic.labels).must_be :frozen?
+    _(topic.kms_key).must_be :empty?
+    _(topic.persistence_regions).must_be :empty?
   end
 
   it "creates a topic with labels" do
@@ -109,11 +109,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topic.name.must_equal topic_path(new_topic_name)
-    topic.labels.must_equal labels
-    topic.labels.must_be :frozen?
-    topic.kms_key.must_be :empty?
-    topic.persistence_regions.must_be :empty?
+    _(topic.name).must_equal topic_path(new_topic_name)
+    _(topic.labels).must_equal labels
+    _(topic.labels).must_be :frozen?
+    _(topic.kms_key).must_be :empty?
+    _(topic.persistence_regions).must_be :empty?
   end
 
   it "creates a topic with kms_key" do
@@ -128,11 +128,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topic.name.must_equal topic_path(new_topic_name)
-    topic.labels.must_be :empty?
-    topic.labels.must_be :frozen?
-    topic.kms_key.must_equal kms_key
-    topic.persistence_regions.must_be :empty?
+    _(topic.name).must_equal topic_path(new_topic_name)
+    _(topic.labels).must_be :empty?
+    _(topic.labels).must_be :frozen?
+    _(topic.kms_key).must_equal kms_key
+    _(topic.persistence_regions).must_be :empty?
   end
 
   it "creates a topic with persistence_regions" do
@@ -147,11 +147,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topic.name.must_equal topic_path(new_topic_name)
-    topic.labels.must_be :empty?
-    topic.labels.must_be :frozen?
-    topic.kms_key.must_be :empty?
-    topic.persistence_regions.must_equal persistence_regions
+    _(topic.name).must_equal topic_path(new_topic_name)
+    _(topic.labels).must_be :empty?
+    _(topic.labels).must_be :frozen?
+    _(topic.kms_key).must_be :empty?
+    _(topic.persistence_regions).must_equal persistence_regions
   end
 
   it "gets a topic" do
@@ -166,9 +166,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topic.name.must_equal topic_path(topic_name)
-    topic.wont_be :reference?
-    topic.must_be :resource?
+    _(topic.name).must_equal topic_path(topic_name)
+    _(topic).wont_be :reference?
+    _(topic).must_be :resource?
   end
 
   it "gets a topic with get_topic alias" do
@@ -183,9 +183,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topic.name.must_equal topic_path(topic_name)
-    topic.wont_be :reference?
-    topic.must_be :resource?
+    _(topic.name).must_equal topic_path(topic_name)
+    _(topic).wont_be :reference?
+    _(topic).must_be :resource?
   end
 
   it "gets a topic with find_topic alias" do
@@ -200,9 +200,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topic.name.must_equal topic_path(topic_name)
-    topic.wont_be :reference?
-    topic.must_be :resource?
+    _(topic.name).must_equal topic_path(topic_name)
+    _(topic).wont_be :reference?
+    _(topic).must_be :resource?
   end
 
   it "returns nil when getting an non-existent topic" do
@@ -217,7 +217,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     pubsub.service.mocked_publisher = stub
 
     topic = pubsub.find_topic not_found_topic_name
-    topic.must_be :nil?
+    _(topic).must_be :nil?
   end
 
   it "gets a topic with skip_lookup option" do
@@ -225,9 +225,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     # No HTTP mock needed, since the lookup is not made
 
     topic = pubsub.find_topic topic_name, skip_lookup: true
-    topic.name.must_equal topic_path(topic_name)
-    topic.must_be :reference?
-    topic.wont_be :resource?
+    _(topic.name).must_equal topic_path(topic_name)
+    _(topic).must_be :reference?
+    _(topic).wont_be :resource?
   end
 
   it "gets a topic with skip_lookup and project options" do
@@ -235,9 +235,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     # No HTTP mock needed, since the lookup is not made
 
     topic = pubsub.find_topic topic_name, skip_lookup: true, project: "custom"
-    topic.name.must_equal "projects/custom/topics/found-topic"
-    topic.must_be :reference?
-    topic.wont_be :resource?
+    _(topic.name).must_equal "projects/custom/topics/found-topic"
+    _(topic).must_be :reference?
+    _(topic).wont_be :resource?
   end
 
   it "lists topics" do
@@ -249,7 +249,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topics.size.must_equal 3
+    _(topics.size).must_equal 3
   end
 
   it "lists topics with find_topics alias" do
@@ -261,7 +261,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topics.size.must_equal 3
+    _(topics.size).must_equal 3
   end
 
   it "lists topics with list_topics alias" do
@@ -273,7 +273,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topics.size.must_equal 3
+    _(topics.size).must_equal 3
   end
 
   it "paginates topics" do
@@ -288,13 +288,13 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    first_topics.size.must_equal 3
+    _(first_topics.size).must_equal 3
     token = first_topics.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
 
-    second_topics.size.must_equal 2
-    second_topics.token.must_be :nil?
+    _(second_topics.size).must_equal 2
+    _(second_topics.token).must_be :nil?
   end
 
   it "paginates topics with max set" do
@@ -306,10 +306,10 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topics.size.must_equal 3
+    _(topics.size).must_equal 3
     token = topics.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
   end
 
   it "paginates topics with next? and next" do
@@ -324,11 +324,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    first_topics.size.must_equal 3
-    first_topics.next?.must_equal true
+    _(first_topics.size).must_equal 3
+    _(first_topics.next?).must_equal true
 
-    second_topics.size.must_equal 2
-    second_topics.next?.must_equal false
+    _(second_topics.size).must_equal 2
+    _(second_topics.next?).must_equal false
   end
 
   it "paginates topics with next? and next and max set" do
@@ -343,11 +343,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    first_topics.size.must_equal 3
-    first_topics.next?.must_equal true
+    _(first_topics.size).must_equal 3
+    _(first_topics.next?).must_equal true
 
-    second_topics.size.must_equal 2
-    second_topics.next?.must_equal false
+    _(second_topics.size).must_equal 2
+    _(second_topics.next?).must_equal false
   end
 
   it "paginates topics with all" do
@@ -361,7 +361,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topics.size.must_equal 5
+    _(topics.size).must_equal 5
   end
 
   it "paginates topics with all and max set" do
@@ -375,7 +375,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topics.size.must_equal 5
+    _(topics.size).must_equal 5
   end
 
   it "iterates topics with all using Enumerator" do
@@ -389,7 +389,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topics.size.must_equal 5
+    _(topics.size).must_equal 5
   end
 
   it "iterates topics with all and request_limit set" do
@@ -403,7 +403,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topics.size.must_equal 6
+    _(topics.size).must_equal 6
   end
 
   it "paginates topics without max set" do
@@ -415,10 +415,10 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    topics.size.must_equal 3
+    _(topics.size).must_equal 3
     token = topics.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
   end
 
   it "gets a subscription" do
@@ -433,11 +433,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.name.must_equal subscription_path(sub_name)
-    sub.wont_be :reference?
-    sub.must_be :resource?
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.name).must_equal subscription_path(sub_name)
+    _(sub).wont_be :reference?
+    _(sub).must_be :resource?
   end
 
   it "gets a subscription with get_subscription alias" do
@@ -452,11 +452,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.name.must_equal subscription_path(sub_name)
-    sub.wont_be :reference?
-    sub.must_be :resource?
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.name).must_equal subscription_path(sub_name)
+    _(sub).wont_be :reference?
+    _(sub).must_be :resource?
   end
 
   it "gets a subscription with find_subscription alias" do
@@ -471,11 +471,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.name.must_equal subscription_path(sub_name)
-    sub.wont_be :reference?
-    sub.must_be :resource?
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.name).must_equal subscription_path(sub_name)
+    _(sub).wont_be :reference?
+    _(sub).must_be :resource?
   end
 
   it "returns nil when getting an non-existent subscription" do
@@ -490,7 +490,7 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     pubsub.service.mocked_subscriber = stub
 
     sub = pubsub.subscription not_found_sub_name
-    sub.must_be :nil?
+    _(sub).must_be :nil?
   end
 
   it "gets a subscription with skip_lookup option" do
@@ -498,11 +498,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     # No HTTP mock needed, since the lookup is not made
 
     sub = pubsub.subscription sub_name, skip_lookup: true
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.name.must_equal subscription_path(sub_name)
-    sub.must_be :reference?
-    sub.wont_be :resource?
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.name).must_equal subscription_path(sub_name)
+    _(sub).must_be :reference?
+    _(sub).wont_be :resource?
   end
 
   it "gets a subscription with skip_lookup and project options" do
@@ -510,11 +510,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
     # No HTTP mock needed, since the lookup is not made
 
     sub = pubsub.subscription sub_name, skip_lookup: true, project: "custom"
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.name.must_equal "projects/custom/subscriptions/#{sub_name}"
-    sub.must_be :reference?
-    sub.wont_be :resource?
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.name).must_equal "projects/custom/subscriptions/#{sub_name}"
+    _(sub).must_be :reference?
+    _(sub).wont_be :resource?
   end
 
   it "lists subscriptions" do
@@ -526,9 +526,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 3
+    _(subs.count).must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
     end
   end
 
@@ -541,9 +541,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 3
+    _(subs.count).must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
     end
   end
 
@@ -556,9 +556,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 3
+    _(subs.count).must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
     end
   end
 
@@ -574,13 +574,13 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    first_subs.count.must_equal 3
+    _(first_subs.count).must_equal 3
     token = first_subs.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
 
-    second_subs.count.must_equal 2
-    second_subs.token.must_be :nil?
+    _(second_subs.count).must_equal 2
+    _(second_subs.token).must_be :nil?
   end
 
   it "paginates subscriptions with max set" do
@@ -592,10 +592,10 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 3
+    _(subs.count).must_equal 3
     token = subs.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
   end
 
   it "paginates subscriptions with next? and next" do
@@ -610,20 +610,20 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    first_subs.count.must_equal 3
-    first_subs.next?.must_equal true
+    _(first_subs.count).must_equal 3
+    _(first_subs.next?).must_equal true
     first_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.wont_be :reference?
-      sub.must_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).wont_be :reference?
+      _(sub).must_be :resource?
     end
 
-    second_subs.count.must_equal 2
-    second_subs.next?.must_equal false
+    _(second_subs.count).must_equal 2
+    _(second_subs.next?).must_equal false
     second_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.wont_be :reference?
-      sub.must_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).wont_be :reference?
+      _(sub).must_be :resource?
     end
   end
 
@@ -639,20 +639,20 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    first_subs.count.must_equal 3
-    first_subs.next?.must_equal true
+    _(first_subs.count).must_equal 3
+    _(first_subs.next?).must_equal true
     first_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.wont_be :reference?
-      sub.must_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).wont_be :reference?
+      _(sub).must_be :resource?
     end
 
-    second_subs.count.must_equal 2
-    second_subs.next?.must_equal false
+    _(second_subs.count).must_equal 2
+    _(second_subs.next?).must_equal false
     second_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.wont_be :reference?
-      sub.must_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).wont_be :reference?
+      _(sub).must_be :resource?
     end
   end
 
@@ -667,11 +667,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 5
+    _(subs.count).must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.wont_be :reference?
-      sub.must_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).wont_be :reference?
+      _(sub).must_be :resource?
     end
   end
 
@@ -686,11 +686,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 5
+    _(subs.count).must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.wont_be :reference?
-      sub.must_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).wont_be :reference?
+      _(sub).must_be :resource?
     end
   end
 
@@ -705,11 +705,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 5
+    _(subs.count).must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.wont_be :reference?
-      sub.must_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).wont_be :reference?
+      _(sub).must_be :resource?
     end
   end
 
@@ -724,11 +724,11 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 6
+    _(subs.count).must_equal 6
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.wont_be :reference?
-      sub.must_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).wont_be :reference?
+      _(sub).must_be :resource?
     end
   end
 
@@ -744,9 +744,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    snapshots.count.must_equal 3
+    _(snapshots.count).must_equal 3
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -759,9 +759,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    snapshots.count.must_equal 3
+    _(snapshots.count).must_equal 3
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -774,9 +774,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    snapshots.count.must_equal 3
+    _(snapshots.count).must_equal 3
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -792,13 +792,13 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    first_subs.count.must_equal 3
+    _(first_subs.count).must_equal 3
     token = first_subs.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
 
-    second_subs.count.must_equal 2
-    second_subs.token.must_be :nil?
+    _(second_subs.count).must_equal 2
+    _(second_subs.token).must_be :nil?
   end
 
   it "paginates snapshots with max set" do
@@ -810,10 +810,10 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    snapshots.count.must_equal 3
+    _(snapshots.count).must_equal 3
     token = snapshots.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
   end
 
   it "paginates snapshots with next? and next" do
@@ -828,16 +828,16 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    first_subs.count.must_equal 3
-    first_subs.next?.must_equal true
+    _(first_subs.count).must_equal 3
+    _(first_subs.next?).must_equal true
     first_subs.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
 
-    second_subs.count.must_equal 2
-    second_subs.next?.must_equal false
+    _(second_subs.count).must_equal 2
+    _(second_subs.next?).must_equal false
     second_subs.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -853,16 +853,16 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    first_subs.count.must_equal 3
-    first_subs.next?.must_equal true
+    _(first_subs.count).must_equal 3
+    _(first_subs.next?).must_equal true
     first_subs.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
 
-    second_subs.count.must_equal 2
-    second_subs.next?.must_equal false
+    _(second_subs.count).must_equal 2
+    _(second_subs.next?).must_equal false
     second_subs.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -877,9 +877,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    snapshots.count.must_equal 5
+    _(snapshots.count).must_equal 5
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -894,9 +894,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    snapshots.count.must_equal 5
+    _(snapshots.count).must_equal 5
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -911,9 +911,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    snapshots.count.must_equal 5
+    _(snapshots.count).must_equal 5
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 
@@ -928,9 +928,9 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
 
     mock.verify
 
-    snapshots.count.must_equal 6
+    _(snapshots.count).must_equal 6
     snapshots.each do |snapshot|
-      snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+      _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
     end
   end
 end

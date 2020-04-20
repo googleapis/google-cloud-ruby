@@ -30,9 +30,9 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
 
     mock.verify
 
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.wont_be :reference?
-    sub.must_be :resource?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :reference?
+    _(sub).must_be :resource?
   end
 
   it "gets an existing subscription with get_subscription alias" do
@@ -45,9 +45,9 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
 
     mock.verify
 
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.wont_be :reference?
-    sub.must_be :resource?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :reference?
+    _(sub).must_be :resource?
   end
 
   it "gets an existing subscription with find_subscription alias" do
@@ -60,9 +60,9 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
 
     mock.verify
 
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.wont_be :reference?
-    sub.must_be :resource?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :reference?
+    _(sub).must_be :resource?
   end
 
   it "returns nil when getting an non-existant subscription" do
@@ -75,16 +75,16 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
     topic.service.mocked_subscriber = stub
 
     sub = topic.subscription found_sub_name
-    sub.must_be :nil?
+    _(sub).must_be :nil?
   end
 
   it "gets a subscription with skip_lookup option" do
     # No HTTP mock needed, since the lookup is not made
 
     sub = topic.find_subscription found_sub_name, skip_lookup: true
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.must_be :reference?
-    sub.wont_be :resource?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).must_be :reference?
+    _(sub).wont_be :resource?
   end
 
   describe "reference topic that exists" do
@@ -100,9 +100,9 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
 
       mock.verify
 
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.wont_be :reference?
-      sub.must_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).wont_be :reference?
+      _(sub).must_be :resource?
     end
 
     it "returns nil when getting an non-existant subscription" do
@@ -115,7 +115,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
       topic.service.mocked_subscriber = stub
 
       sub = topic.subscription found_sub_name
-      sub.must_be :nil?
+      _(sub).must_be :nil?
     end
   end
 
@@ -132,7 +132,7 @@ describe Google::Cloud::PubSub::Topic, :subscription, :mock_pubsub do
       topic.service.mocked_subscriber = stub
 
       sub = topic.subscription found_sub_name
-      sub.must_be :nil?
+      _(sub).must_be :nil?
     end
   end
 end

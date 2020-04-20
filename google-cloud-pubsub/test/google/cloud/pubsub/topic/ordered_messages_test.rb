@@ -32,14 +32,14 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :ordered_messages, :mock_
       topic.publish_async msg[:message], ordering_key: msg[:key]
     end
 
-    topic.async_publisher.must_be :started?
-    topic.async_publisher.wont_be :stopped?
+    _(topic.async_publisher).must_be :started?
+    _(topic.async_publisher).wont_be :stopped?
 
     # force the queued messages to be published
     topic.async_publisher.stop.wait!
 
-    topic.async_publisher.wont_be :started?
-    topic.async_publisher.must_be :stopped?
+    _(topic.async_publisher).wont_be :started?
+    _(topic.async_publisher).must_be :stopped?
 
     published_messages_hash = topic.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
@@ -61,14 +61,14 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :ordered_messages, :mock_
       end
     end
 
-    topic.async_publisher.must_be :started?
-    topic.async_publisher.wont_be :stopped?
+    _(topic.async_publisher).must_be :started?
+    _(topic.async_publisher).wont_be :stopped?
 
     # force the queued messages to be published
     topic.async_publisher.stop.wait!
 
-    topic.async_publisher.wont_be :started?
-    topic.async_publisher.must_be :stopped?
+    _(topic.async_publisher).wont_be :started?
+    _(topic.async_publisher).must_be :stopped?
 
     published_messages_hash = topic.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
@@ -92,14 +92,14 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :ordered_messages, :mock_
       end
     end
 
-    topic.async_publisher.must_be :started?
-    topic.async_publisher.wont_be :stopped?
+    _(topic.async_publisher).must_be :started?
+    _(topic.async_publisher).wont_be :stopped?
 
     # force the queued messages to be published
     topic.async_publisher.stop.wait!
 
-    topic.async_publisher.wont_be :started?
-    topic.async_publisher.must_be :stopped?
+    _(topic.async_publisher).wont_be :started?
+    _(topic.async_publisher).must_be :stopped?
 
     published_messages_hash = topic.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
@@ -119,14 +119,14 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :ordered_messages, :mock_
       topic.publish_async msg[:message], ordering_key: msg[:key]
     end
 
-    topic.async_publisher.must_be :started?
-    topic.async_publisher.wont_be :stopped?
+    _(topic.async_publisher).must_be :started?
+    _(topic.async_publisher).wont_be :stopped?
 
     # force the queued messages to be published
     topic.async_publisher.stop.wait!
 
-    topic.async_publisher.wont_be :started?
-    topic.async_publisher.must_be :stopped?
+    _(topic.async_publisher).wont_be :started?
+    _(topic.async_publisher).must_be :stopped?
 
     published_messages_hash = topic.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
@@ -146,14 +146,14 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :ordered_messages, :mock_
       topic.publish_async msg[:message], ordering_key: msg[:key]
     end
 
-    topic.async_publisher.must_be :started?
-    topic.async_publisher.wont_be :stopped?
+    _(topic.async_publisher).must_be :started?
+    _(topic.async_publisher).wont_be :stopped?
 
     # force the queued messages to be published
     topic.async_publisher.stop.wait!
 
-    topic.async_publisher.wont_be :started?
-    topic.async_publisher.must_be :stopped?
+    _(topic.async_publisher).wont_be :started?
+    _(topic.async_publisher).must_be :stopped?
 
     published_messages_hash = topic.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort

@@ -28,27 +28,27 @@ describe Google::Cloud::PubSub::Snapshot, :mock_pubsub do
   end
 
   it "knows its name" do
-    snapshot.name.must_equal snapshot_path(snapshot_name)
+    _(snapshot.name).must_equal snapshot_path(snapshot_name)
   end
 
   it "knows its topic" do
-    snapshot.topic.must_be_kind_of Google::Cloud::PubSub::Topic
-    snapshot.topic.must_be :reference?
-    snapshot.topic.wont_be :resource?
-    snapshot.topic.name.must_equal topic_path(topic_name)
+    _(snapshot.topic).must_be_kind_of Google::Cloud::PubSub::Topic
+    _(snapshot.topic).must_be :reference?
+    _(snapshot.topic).wont_be :resource?
+    _(snapshot.topic.name).must_equal topic_path(topic_name)
   end
 
   it "knows its expiration_time" do
-    snapshot.expiration_time.must_be_kind_of ::Time
+    _(snapshot.expiration_time).must_be_kind_of ::Time
   end
 
   it "knows its labels" do
-    snapshot.labels.must_equal labels
+    _(snapshot.labels).must_equal labels
   end
 
 
   it "updates labels" do
-    snapshot.labels.must_equal labels
+    _(snapshot.labels).must_equal labels
 
     update_sub = snapshot_grpc.dup
     update_sub.labels = new_labels_map
@@ -61,11 +61,11 @@ describe Google::Cloud::PubSub::Snapshot, :mock_pubsub do
 
     mock.verify
 
-    snapshot.labels.must_equal new_labels
+    _(snapshot.labels).must_equal new_labels
   end
 
   it "updates labels to empty hash" do
-    snapshot.labels.must_equal labels
+    _(snapshot.labels).must_equal labels
 
     update_sub = snapshot_grpc.dup
     update_sub.labels = Google::Protobuf::Map.new(:string, :string)
@@ -79,16 +79,16 @@ describe Google::Cloud::PubSub::Snapshot, :mock_pubsub do
 
     mock.verify
 
-    snapshot.labels.wont_be :nil?
-    snapshot.labels.must_be :empty?
+    _(snapshot.labels).wont_be :nil?
+    _(snapshot.labels).must_be :empty?
   end
 
   it "raises when setting labels to nil" do
-    snapshot.labels.must_equal labels
+    _(snapshot.labels).must_equal labels
 
     expect { snapshot.labels = nil }.must_raise ArgumentError
 
-    snapshot.labels.must_equal labels
+    _(snapshot.labels).must_equal labels
   end
 
   it "can delete itself" do

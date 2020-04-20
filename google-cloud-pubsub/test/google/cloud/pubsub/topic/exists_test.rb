@@ -21,9 +21,9 @@ describe Google::Cloud::PubSub::Topic, :exists, :mock_pubsub do
   it "knows if it exists when created with an HTTP method" do
     # The absense of a mock means this test will fail
     # if the method exists? makes an HTTP call.
-    topic.must_be :exists?
+    _(topic).must_be :exists?
     # Additional exists? calls do not make HTTP calls either
-    topic.must_be :exists?
+    _(topic).must_be :exists?
   end
 
   describe "reference topic object of a topic that exists" do
@@ -35,9 +35,9 @@ describe Google::Cloud::PubSub::Topic, :exists, :mock_pubsub do
       mock.expect :get_topic, get_res, [topic_path(topic_name), options: default_options]
       topic.service.mocked_publisher = mock
 
-      topic.must_be :exists?
+      _(topic).must_be :exists?
       # Additional exists? calls do not make HTTP calls
-      topic.must_be :exists?
+      _(topic).must_be :exists?
 
       mock.verify
     end
@@ -55,9 +55,9 @@ describe Google::Cloud::PubSub::Topic, :exists, :mock_pubsub do
       end
       topic.service.mocked_publisher = stub
 
-      topic.wont_be :exists?
+      _(topic).wont_be :exists?
       # Additional exists? calls do not make HTTP calls
-      topic.wont_be :exists?
+      _(topic).wont_be :exists?
     end
   end
 end

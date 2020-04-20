@@ -59,7 +59,7 @@ describe Google::Cloud::PubSub::Subscriber, :error, :mock_pubsub do
       sleep 0.01
     end
 
-    errors.count.must_equal 0
+    _(errors.count).must_equal 0
 
     subscriber.stop
     subscriber.wait!

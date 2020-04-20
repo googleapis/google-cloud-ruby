@@ -36,7 +36,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "updates deadline" do
-    subscription.deadline.must_equal 60
+    _(subscription.deadline).must_equal 60
 
     update_sub = update_sub = Google::Cloud::PubSub::V1::Subscription.new \
       name: sub_path, ack_deadline_seconds: 30
@@ -49,11 +49,11 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    subscription.deadline.must_equal 30
+    _(subscription.deadline).must_equal 30
   end
 
   it "updates retain_acked" do
-    subscription.retain_acked.must_equal true
+    _(subscription.retain_acked).must_equal true
 
     update_sub = update_sub = Google::Cloud::PubSub::V1::Subscription.new \
       name: sub_path, retain_acked_messages: false
@@ -66,11 +66,11 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    subscription.retain_acked.must_equal false
+    _(subscription.retain_acked).must_equal false
   end
 
   it "updates retention" do
-    subscription.retention.must_equal 600.9
+    _(subscription.retention).must_equal 600.9
 
     update_sub = Google::Cloud::PubSub::V1::Subscription.new \
       name: sub_path, message_retention_duration: Google::Cloud::PubSub::Convert.number_to_duration(600.2)
@@ -83,11 +83,11 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    subscription.retention.must_equal 600.2
+    _(subscription.retention).must_equal 600.2
   end
 
   it "updates labels" do
-    subscription.labels.must_equal labels
+    _(subscription.labels).must_equal labels
 
     update_sub = Google::Cloud::PubSub::V1::Subscription.new \
       name: sub_path, labels: new_labels
@@ -100,11 +100,11 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    subscription.labels.must_equal new_labels
+    _(subscription.labels).must_equal new_labels
   end
 
   it "updates labels to empty hash" do
-    subscription.labels.must_equal labels
+    _(subscription.labels).must_equal labels
 
     update_sub = Google::Cloud::PubSub::V1::Subscription.new \
       name: sub_path, labels: {}
@@ -118,16 +118,16 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    subscription.labels.wont_be :nil?
-    subscription.labels.must_be :empty?
+    _(subscription.labels).wont_be :nil?
+    _(subscription.labels).must_be :empty?
   end
 
   it "raises when setting labels to nil" do
-    subscription.labels.must_equal labels
+    _(subscription.labels).must_equal labels
 
     expect { subscription.labels = nil }.must_raise ArgumentError
 
-    subscription.labels.must_equal labels
+    _(subscription.labels).must_equal labels
   end
 
   it "can update the endpoint" do
@@ -161,7 +161,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    subscription.expires_in.must_equal week_seconds
+    _(subscription.expires_in).must_equal week_seconds
   end
 
   it "can update the expires_in to nil" do
@@ -177,15 +177,15 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    subscription.expires_in.must_be :nil?
+    _(subscription.expires_in).must_be :nil?
   end
 
   it "updates push_config" do
-    subscription.push_config.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
-    subscription.push_config.endpoint.must_equal "http://example.com/callback"
-    subscription.push_config.authentication.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
-    subscription.push_config.authentication.email.must_equal "user@example.com"
-    subscription.push_config.authentication.audience.must_equal "client-12345"
+    _(subscription.push_config).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
+    _(subscription.push_config.endpoint).must_equal "http://example.com/callback"
+    _(subscription.push_config.authentication).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
+    _(subscription.push_config.authentication.email).must_equal "user@example.com"
+    _(subscription.push_config.authentication.audience).must_equal "client-12345"
 
     update_sub = Google::Cloud::PubSub::V1::Subscription.new(
       name: sub_path, push_config: Google::Cloud::PubSub::V1::PushConfig.new(
@@ -208,11 +208,11 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    subscription.push_config.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
-    subscription.push_config.endpoint.must_equal "http://example.net/endpoint"
-    subscription.push_config.authentication.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
-    subscription.push_config.authentication.email.must_equal "admin@example.net"
-    subscription.push_config.authentication.audience.must_equal "some-header-value"
+    _(subscription.push_config).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
+    _(subscription.push_config.endpoint).must_equal "http://example.net/endpoint"
+    _(subscription.push_config.authentication).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
+    _(subscription.push_config.authentication.email).must_equal "admin@example.net"
+    _(subscription.push_config.authentication.audience).must_equal "some-header-value"
   end
 
   it "updates dead_letter_topic" do
@@ -228,8 +228,8 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    subscription.dead_letter_topic.name.must_equal new_dead_letter_topic.name
-    subscription.dead_letter_max_delivery_attempts.must_equal 6
+    _(subscription.dead_letter_topic.name).must_equal new_dead_letter_topic.name
+    _(subscription.dead_letter_max_delivery_attempts).must_equal 6
   end
 
   it "updates dead_letter_max_delivery_attempts" do
@@ -245,8 +245,8 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     mock.verify
 
-    subscription.dead_letter_topic.name.must_equal dead_letter_topic_path
-    subscription.dead_letter_max_delivery_attempts.must_equal 7
+    _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_path
+    _(subscription.dead_letter_max_delivery_attempts).must_equal 7
   end
 
   it "raises when updating dead_letter_max_delivery_attempts if dead_letter_topic is not set" do
@@ -261,8 +261,8 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     let(:subscription) { Google::Cloud::PubSub::Subscription.from_name sub_name, pubsub.service }
 
     it "updates deadline" do
-      subscription.must_be :reference?
-      subscription.wont_be :resource?
+      _(subscription).must_be :reference?
+      _(subscription).wont_be :resource?
 
       update_sub = Google::Cloud::PubSub::V1::Subscription.new \
         name: subscription_path(sub_name),
@@ -277,14 +277,14 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
       mock.verify
 
-      subscription.wont_be :reference?
-      subscription.must_be :resource?
-      subscription.deadline.must_equal 30
+      _(subscription).wont_be :reference?
+      _(subscription).must_be :resource?
+      _(subscription.deadline).must_equal 30
     end
 
     it "updates retain_acked" do
-      subscription.must_be :reference?
-      subscription.wont_be :resource?
+      _(subscription).must_be :reference?
+      _(subscription).wont_be :resource?
 
       update_sub = Google::Cloud::PubSub::V1::Subscription.new \
         name: subscription_path(sub_name),
@@ -299,14 +299,14 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
       mock.verify
 
-      subscription.wont_be :reference?
-      subscription.must_be :resource?
-      subscription.retain_acked.must_equal true
+      _(subscription).wont_be :reference?
+      _(subscription).must_be :resource?
+      _(subscription.retain_acked).must_equal true
     end
 
     it "updates retention" do
-      subscription.must_be :reference?
-      subscription.wont_be :resource?
+      _(subscription).must_be :reference?
+      _(subscription).wont_be :resource?
 
       update_sub = Google::Cloud::PubSub::V1::Subscription.new \
         name: subscription_path(sub_name),
@@ -321,14 +321,14 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
       mock.verify
 
-      subscription.wont_be :reference?
-      subscription.must_be :resource?
-      subscription.retention.must_equal 600.2
+      _(subscription).wont_be :reference?
+      _(subscription).must_be :resource?
+      _(subscription.retention).must_equal 600.2
     end
 
     it "updates labels" do
-      subscription.must_be :reference?
-      subscription.wont_be :resource?
+      _(subscription).must_be :reference?
+      _(subscription).wont_be :resource?
 
       update_sub = Google::Cloud::PubSub::V1::Subscription.new \
         name: subscription_path(sub_name),
@@ -343,9 +343,9 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
       mock.verify
 
-      subscription.wont_be :reference?
-      subscription.must_be :resource?
-      subscription.labels.must_equal new_labels
+      _(subscription).wont_be :reference?
+      _(subscription).must_be :resource?
+      _(subscription.labels).must_equal new_labels
     end
 
     it "makes an HTTP API call to update endpoint" do

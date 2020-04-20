@@ -20,18 +20,18 @@ describe Google::Cloud::PubSub::Policy, :mock_pubsub do
   let(:policy)    { Google::Cloud::PubSub::Policy.new etag, roles }
 
   it "knows its etag" do
-    policy.roles.must_equal roles
+    _(policy.roles).must_equal roles
   end
 
   it "knows its roles" do
-    policy.roles.keys.sort.must_equal   roles.keys.sort
-    policy.roles.values.sort.must_equal roles.values.sort
+    _(policy.roles.keys.sort).must_equal   roles.keys.sort
+    _(policy.roles.values.sort).must_equal roles.values.sort
   end
 
   it "returns an empty array for missing role" do
     role = policy.role "roles/does-not-exist"
-    role.must_be_kind_of Array
-    role.must_be :empty?
-    role.frozen?.must_equal false
+    _(role).must_be_kind_of Array
+    _(role).must_be :empty?
+    _(role.frozen?).must_equal false
   end
 end

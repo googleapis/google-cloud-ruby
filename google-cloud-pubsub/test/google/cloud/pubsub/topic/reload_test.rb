@@ -24,18 +24,18 @@ describe Google::Cloud::PubSub::Topic, :reload, :mock_pubsub do
   let(:topic_reference) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
   it "it has a reload method and a refresh alias" do
-    topic_resource.must_respond_to :reload!
-    topic_reference.must_respond_to :reload!
+    _(topic_resource).must_respond_to :reload!
+    _(topic_reference).must_respond_to :reload!
 
-    topic_resource.must_respond_to :refresh!
-    topic_reference.must_respond_to :refresh!
+    _(topic_resource).must_respond_to :refresh!
+    _(topic_reference).must_respond_to :refresh!
   end
 
   it "is reloads a resource by calling get_topic API" do
-    topic_resource.name.must_equal topic_path(topic_name)
-    topic_resource.labels.must_equal old_labels
-    topic_resource.wont_be :reference?
-    topic_resource.must_be :resource?
+    _(topic_resource.name).must_equal topic_path(topic_name)
+    _(topic_resource.labels).must_equal old_labels
+    _(topic_resource).wont_be :reference?
+    _(topic_resource).must_be :resource?
 
     mock = Minitest::Mock.new
     mock.expect :get_topic, topic_grpc_new, [topic_path(topic_name), options: default_options]
@@ -45,16 +45,16 @@ describe Google::Cloud::PubSub::Topic, :reload, :mock_pubsub do
 
     mock.verify
 
-    topic_resource.name.must_equal topic_path(topic_name)
-    topic_resource.labels.must_equal new_labels
-    topic_resource.wont_be :reference?
-    topic_resource.must_be :resource?
+    _(topic_resource.name).must_equal topic_path(topic_name)
+    _(topic_resource.labels).must_equal new_labels
+    _(topic_resource).wont_be :reference?
+    _(topic_resource).must_be :resource?
   end
 
   it "is reloads a reference by calling get_topic API" do
-    topic_reference.name.must_equal topic_path(topic_name)
-    topic_reference.must_be :reference?
-    topic_reference.wont_be :resource?
+    _(topic_reference.name).must_equal topic_path(topic_name)
+    _(topic_reference).must_be :reference?
+    _(topic_reference).wont_be :resource?
 
     mock = Minitest::Mock.new
     mock.expect :get_topic, topic_grpc_new, [topic_path(topic_name), options: default_options]
@@ -64,9 +64,9 @@ describe Google::Cloud::PubSub::Topic, :reload, :mock_pubsub do
 
     mock.verify
 
-    topic_reference.name.must_equal topic_path(topic_name)
-    topic_reference.labels.must_equal new_labels
-    topic_reference.wont_be :reference?
-    topic_reference.must_be :resource?
+    _(topic_reference.name).must_equal topic_path(topic_name)
+    _(topic_reference.labels).must_equal new_labels
+    _(topic_reference).wont_be :reference?
+    _(topic_reference).must_be :resource?
   end
 end

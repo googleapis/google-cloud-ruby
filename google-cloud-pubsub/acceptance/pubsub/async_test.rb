@@ -30,7 +30,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
 
   it "publishes and pulls asyncronously" do
     events = sub.pull
-    events.must_be :empty?
+    _(events).must_be :empty?
     # Publish a new message
     publish_result = nil
     topic.publish_async "hello" do |result|
@@ -45,8 +45,8 @@ describe Google::Cloud::PubSub, :async, :pubsub do
       puts "the async publish has not completed yet. sleeping for #{unpublished_retries*unpublished_retries} second(s) and retrying."
       sleep unpublished_retries*unpublished_retries
     end
-    publish_result.wont_be :nil?
-    publish_result.must_be :succeeded?
+    _(publish_result).wont_be :nil?
+    _(publish_result).must_be :succeeded?
 
     received_message = nil
     subscriber = sub.listen do |msg|
@@ -63,8 +63,8 @@ describe Google::Cloud::PubSub, :async, :pubsub do
       puts "received_message has not been received. sleeping for #{subscription_retries} second(s) and retrying."
       sleep subscription_retries
     end
-    received_message.wont_be :nil?
-    received_message.data.must_equal publish_result.data
+    _(received_message).wont_be :nil?
+    _(received_message.data).must_equal publish_result.data
 
     subscriber.stop
     subscriber.wait!
@@ -82,7 +82,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
     assert sub.message_ordering?
 
     events = sub.pull
-    events.must_be :empty?
+    _(events).must_be :empty?
 
     # Publish a new message
     publish_result = nil
@@ -112,8 +112,8 @@ describe Google::Cloud::PubSub, :async, :pubsub do
       puts "the async publish has not completed yet. sleeping for #{unpublished_retries*unpublished_retries} second(s) and retrying."
       sleep unpublished_retries*unpublished_retries
     end
-    publish_result.wont_be :nil?
-    publish_result.must_be :succeeded?
+    _(publish_result).wont_be :nil?
+    _(publish_result).must_be :succeeded?
 
     received_message_hash = Hash.new { |hash, key| hash[key] = [] }
     subscriber = sub.listen do |msg|
@@ -147,7 +147,7 @@ describe Google::Cloud::PubSub, :async, :pubsub do
         "ordered message 9"
       ]
     }
-    received_message_hash.must_equal expected_message_hash
+    _(received_message_hash).must_equal expected_message_hash
 
     subscriber.stop
     subscriber.wait!

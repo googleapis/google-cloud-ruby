@@ -24,71 +24,71 @@ describe Google::Cloud::PubSub::Convert, :number_to_duration, :mock_pubsub do
   it "converts an Integer" do
     number = 42
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
-    duration.must_be_kind_of Google::Protobuf::Duration
-    duration.seconds.must_equal 42
-    duration.nanos.must_equal 0
+    _(duration).must_be_kind_of Google::Protobuf::Duration
+    _(duration.seconds).must_equal 42
+    _(duration.nanos).must_equal 0
   end
 
   it "converts a negative Integer" do
     number = -42
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
-    duration.must_be_kind_of Google::Protobuf::Duration
-    duration.seconds.must_equal -42
-    duration.nanos.must_equal 0
+    _(duration).must_be_kind_of Google::Protobuf::Duration
+    _(duration.seconds).must_equal -42
+    _(duration.nanos).must_equal 0
   end
 
   it "converts a Float" do
     number = 1.5
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
-    duration.must_be_kind_of Google::Protobuf::Duration
-    duration.seconds.must_equal 1
-    duration.nanos.must_equal 500000000
+    _(duration).must_be_kind_of Google::Protobuf::Duration
+    _(duration.seconds).must_equal 1
+    _(duration.nanos).must_equal 500000000
   end
 
   it "converts a negative Float" do
     number = -1.5
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
-    duration.must_be_kind_of Google::Protobuf::Duration
-    duration.seconds.must_equal -1
-    duration.nanos.must_equal -500000000
+    _(duration).must_be_kind_of Google::Protobuf::Duration
+    _(duration.seconds).must_equal -1
+    _(duration.nanos).must_equal -500000000
   end
 
   it "converts a BigDecimal" do
     number = BigDecimal "643383279502884.1971693993751058209749445923078164062"
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
-    duration.must_be_kind_of Google::Protobuf::Duration
-    duration.seconds.must_equal 643383279502884
-    duration.nanos.must_equal 197169399
+    _(duration).must_be_kind_of Google::Protobuf::Duration
+    _(duration.seconds).must_equal 643383279502884
+    _(duration.nanos).must_equal 197169399
   end
 
   it "converts a negative BigDecimal" do
     number = BigDecimal "-643383279502884.1971693993751058209749445923078164062"
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
-    duration.must_be_kind_of Google::Protobuf::Duration
+    _(duration).must_be_kind_of Google::Protobuf::Duration
     # This should really be -643383279502884, but BigDecimal is doing something here...
-    duration.seconds.must_equal -643383279502885
-    duration.nanos.must_equal -197169399
+    _(duration.seconds).must_equal -643383279502885
+    _(duration.nanos).must_equal -197169399
   end
 
   it "converts a Rational" do
     number = Rational "3.14159265358979323846264338327950288419716939937510582097"
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
-    duration.must_be_kind_of Google::Protobuf::Duration
-    duration.seconds.must_equal 3
-    duration.nanos.must_equal 141592654
+    _(duration).must_be_kind_of Google::Protobuf::Duration
+    _(duration.seconds).must_equal 3
+    _(duration.nanos).must_equal 141592654
   end
 
   it "converts a negative Rational" do
     number = Rational "-3.14159265358979323846264338327950288419716939937510582097"
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
-    duration.must_be_kind_of Google::Protobuf::Duration
-    duration.seconds.must_equal -3
-    duration.nanos.must_equal -141592654
+    _(duration).must_be_kind_of Google::Protobuf::Duration
+    _(duration.seconds).must_equal -3
+    _(duration.nanos).must_equal -141592654
   end
 
   it "returns nil when given nil" do
     number = nil
     duration = Google::Cloud::PubSub::Convert.number_to_duration number
-    duration.must_be :nil?
+    _(duration).must_be :nil?
   end
 end

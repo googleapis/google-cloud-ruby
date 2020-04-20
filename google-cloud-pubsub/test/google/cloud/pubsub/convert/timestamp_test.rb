@@ -24,35 +24,35 @@ describe Google::Cloud::PubSub::Convert, :timestamp, :mock_pubsub do
   it "converts a Time to a Timestamp" do
     time = Time.parse "2014-10-02T15:01:23.045123456Z"
     timestamp = Google::Cloud::PubSub::Convert.time_to_timestamp time
-    timestamp.must_be_kind_of Google::Protobuf::Timestamp
-    timestamp.seconds.must_equal 1412262083
-    timestamp.nanos.must_equal 45123456
+    _(timestamp).must_be_kind_of Google::Protobuf::Timestamp
+    _(timestamp.seconds).must_equal 1412262083
+    _(timestamp.nanos).must_equal 45123456
   end
 
   it "converts a DateTime to a Timestamp" do
     datetime = DateTime.parse "2014-10-02T15:01:23.045123456Z"
     timestamp = Google::Cloud::PubSub::Convert.time_to_timestamp datetime
-    timestamp.must_be_kind_of Google::Protobuf::Timestamp
-    timestamp.seconds.must_equal 1412262083
-    timestamp.nanos.must_equal 45123456
+    _(timestamp).must_be_kind_of Google::Protobuf::Timestamp
+    _(timestamp.seconds).must_equal 1412262083
+    _(timestamp.nanos).must_equal 45123456
   end
 
   it "converts an empty Time to an empty Timestamp" do
     time = nil
     timestamp = Google::Cloud::PubSub::Convert.time_to_timestamp time
-    timestamp.must_be :nil?
+    _(timestamp).must_be :nil?
   end
 
   it "converts a Timestamp to a Time" do
     timestamp = Google::Protobuf::Timestamp.new seconds: 1412262083, nanos: 45123456
     time = Google::Cloud::PubSub::Convert.timestamp_to_time timestamp
-    time.must_be_kind_of Time
-    time.must_equal Time.parse("2014-10-02T15:01:23.045123456Z")
+    _(time).must_be_kind_of Time
+    _(time).must_equal Time.parse("2014-10-02T15:01:23.045123456Z")
   end
 
   it "converts an empty Timestamp to an empty Time" do
     timestamp = nil
     time = Google::Cloud::PubSub::Convert.timestamp_to_time timestamp
-    time.must_be :nil?
+    _(time).must_be :nil?
   end
 end

@@ -31,14 +31,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
       publisher.publish msg[:message], ordering_key: msg[:key]
     end
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     published_messages_hash = pubsub.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
@@ -61,14 +61,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
       end
     end
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     published_messages_hash = pubsub.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
@@ -93,14 +93,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
       end
     end
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     published_messages_hash = pubsub.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
@@ -121,14 +121,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
       publisher.publish msg[:message], ordering_key: msg[:key]
     end
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     published_messages_hash = pubsub.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
@@ -149,14 +149,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :message_ordering, :mock_pubsub 
       publisher.publish msg[:message], ordering_key: msg[:key]
     end
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     published_messages_hash = pubsub.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
