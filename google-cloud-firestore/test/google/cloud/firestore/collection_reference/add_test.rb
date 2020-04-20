@@ -46,15 +46,15 @@ describe Google::Cloud::Firestore::CollectionReference, :add, :mock_firestore do
     Google::Cloud::Firestore::Generate.stub :unique_id, random_document_id do
       document = collection.add
 
-      document.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-      document.document_id.must_equal random_document_id
-      document.document_path.must_equal "#{collection_path}/#{random_document_id}"
-      document.path.must_equal "#{documents_path}/#{collection_path}/#{random_document_id}"
+      _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(document.document_id).must_equal random_document_id
+      _(document.document_path).must_equal "#{collection_path}/#{random_document_id}"
+      _(document.path).must_equal "#{documents_path}/#{collection_path}/#{random_document_id}"
 
-      document.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      document.parent.collection_id.must_equal collection_id
-      document.parent.collection_path.must_equal collection_path
-      document.parent.path.must_equal "#{documents_path}/#{collection_path}"
+      _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(document.parent.collection_id).must_equal collection_id
+      _(document.parent.collection_path).must_equal collection_path
+      _(document.parent.path).must_equal "#{documents_path}/#{collection_path}"
     end
   end
 
@@ -74,15 +74,15 @@ describe Google::Cloud::Firestore::CollectionReference, :add, :mock_firestore do
     Google::Cloud::Firestore::Generate.stub :unique_id, random_document_id do
       document = collection.add hello: :world
 
-      document.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-      document.document_id.must_equal random_document_id
-      document.document_path.must_equal "#{collection_path}/#{random_document_id}"
-      document.path.must_equal "#{documents_path}/#{collection_path}/#{random_document_id}"
+      _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(document.document_id).must_equal random_document_id
+      _(document.document_path).must_equal "#{collection_path}/#{random_document_id}"
+      _(document.path).must_equal "#{documents_path}/#{collection_path}/#{random_document_id}"
 
-      document.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      document.parent.collection_id.must_equal collection_id
-      document.parent.collection_path.must_equal collection_path
-      document.parent.path.must_equal "#{documents_path}/#{collection_path}"
+      _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(document.parent.collection_id).must_equal collection_id
+      _(document.parent.collection_path).must_equal collection_path
+      _(document.parent.path).must_equal "#{documents_path}/#{collection_path}"
     end
   end
 end

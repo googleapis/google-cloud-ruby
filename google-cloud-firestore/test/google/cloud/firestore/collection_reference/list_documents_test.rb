@@ -30,8 +30,8 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
 
     firestore_mock.verify
 
-    documents.each { |m| m.must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    documents.size.must_equal num_documents
+    documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(documents.size).must_equal num_documents
   end
 
   it "paginates documents" do
@@ -46,14 +46,14 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
 
     firestore_mock.verify
 
-    first_documents.each { |m| m.must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    first_documents.count.must_equal 3
-    first_documents.token.wont_be :nil?
-    first_documents.token.must_equal "next_page_token"
+    first_documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(first_documents.count).must_equal 3
+    _(first_documents.token).wont_be :nil?
+    _(first_documents.token).must_equal "next_page_token"
 
-    second_documents.each { |m| m.must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    second_documents.count.must_equal 2
-    second_documents.token.must_be :nil?
+    second_documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(second_documents.count).must_equal 2
+    _(second_documents.token).must_be :nil?
   end
 
   it "paginates documents using next? and next" do
@@ -68,13 +68,13 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
 
     firestore_mock.verify
 
-    first_documents.each { |m| m.must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    first_documents.count.must_equal 3
-    first_documents.next?.must_equal true #must_be :next?
+    first_documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(first_documents.count).must_equal 3
+    _(first_documents.next?).must_equal true #must_be :next?
 
-    second_documents.each { |m| m.must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    second_documents.count.must_equal 2
-    second_documents.next?.must_equal false #wont_be :next?
+    second_documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(second_documents.count).must_equal 2
+    _(second_documents.next?).must_equal false #wont_be :next?
   end
 
   it "paginates documents using all" do
@@ -88,8 +88,8 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
 
     firestore_mock.verify
 
-    all_documents.each { |m| m.must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    all_documents.count.must_equal 5
+    all_documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(all_documents.count).must_equal 5
   end
 
   it "paginates documents using all using Enumerator" do
@@ -103,8 +103,8 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
 
     firestore_mock.verify
 
-    all_documents.each { |m| m.must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    all_documents.count.must_equal 5
+    all_documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(all_documents.count).must_equal 5
   end
 
   it "paginates documents using all with request_limit set" do
@@ -118,8 +118,8 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
 
     firestore_mock.verify
 
-    all_documents.each { |m| m.must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    all_documents.count.must_equal 6
+    all_documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(all_documents.count).must_equal 6
   end
 
   it "paginates documents with max set" do
@@ -131,10 +131,10 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
 
     firestore_mock.verify
 
-    documents.each { |m| m.must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    documents.count.must_equal 3
-    documents.token.wont_be :nil?
-    documents.token.must_equal "next_page_token"
+    documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(documents.count).must_equal 3
+    _(documents.token).wont_be :nil?
+    _(documents.token).must_equal "next_page_token"
   end
 
   it "paginates documents without max set" do
@@ -146,10 +146,10 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
 
     firestore_mock.verify
 
-    documents.each { |m| m.must_be_kind_of Google::Cloud::Firestore::DocumentReference }
-    documents.count.must_equal 3
-    documents.token.wont_be :nil?
-    documents.token.must_equal "next_page_token"
+    documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(documents.count).must_equal 3
+    _(documents.token).wont_be :nil?
+    _(documents.token).must_equal "next_page_token"
   end
 
   def document_gapi

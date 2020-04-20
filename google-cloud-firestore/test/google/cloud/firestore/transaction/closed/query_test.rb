@@ -26,6 +26,6 @@ describe Google::Cloud::Firestore::Transaction, :query, :closed, :mock_firestore
       query = firestore.col(:users).select(:name)
       transaction.run query
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 end

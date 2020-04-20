@@ -23,20 +23,20 @@ describe Google::Cloud::Firestore::Convert, :identify_leaf_nodes do
     orig = { foo: "FOO", bar: "BAR" }
 
     paths = Google::Cloud::Firestore::Convert.identify_leaf_nodes orig
-    paths.map(&:formatted_string).must_equal ["foo", "bar"]
+    _(paths.map(&:formatted_string)).must_equal ["foo", "bar"]
   end
 
   it "finds paths belonging to a nested hash" do
     orig = { foo: { bar: "BAR", baz: "BAZ" } }
 
     paths = Google::Cloud::Firestore::Convert.identify_leaf_nodes orig
-    paths.map(&:formatted_string).must_equal ["foo.bar", "foo.baz"]
+    _(paths.map(&:formatted_string)).must_equal ["foo.bar", "foo.baz"]
   end
 
   it "finds paths belonging to a deeply nested hash" do
     orig = { foo: { bar: { baz: { bif: "BIF" } } } }
 
     paths = Google::Cloud::Firestore::Convert.identify_leaf_nodes orig
-    paths.map(&:formatted_string).must_equal ["foo.bar.baz.bif"]
+    _(paths.map(&:formatted_string)).must_equal ["foo.bar.baz.bif"]
   end
 end

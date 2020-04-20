@@ -20,28 +20,28 @@ describe Google::Cloud::Firestore::Client, :doc, :mock_firestore do
 
     document = firestore.doc document_path
 
-    document.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    document.document_id.must_equal "mike"
-    document.document_path.must_equal document_path
-    document.path.must_equal "projects/projectID/databases/(default)/documents/users/mike"
+    _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(document.document_id).must_equal "mike"
+    _(document.document_path).must_equal document_path
+    _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/mike"
 
-    document.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    document.parent.collection_id.must_equal "users"
-    document.parent.collection_path.must_equal "users"
-    document.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+    _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(document.parent.collection_id).must_equal "users"
+    _(document.parent.collection_path).must_equal "users"
+    _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
   end
 
   it "does not allow a collection_id" do
     error = expect do
       firestore.doc "users"
     end.must_raise ArgumentError
-    error.message.must_equal "document_path must refer to a document."
+    _(error.message).must_equal "document_path must refer to a document."
   end
 
   it "does not allow a collection_path" do
     error = expect do
       firestore.doc "users/mike/messages"
     end.must_raise ArgumentError
-    error.message.must_equal "document_path must refer to a document."
+    _(error.message).must_equal "document_path must refer to a document."
   end
 end

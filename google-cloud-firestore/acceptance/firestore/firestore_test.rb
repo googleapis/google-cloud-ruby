@@ -19,29 +19,29 @@ describe "Firestore", :firestore_acceptance do
     root_col.add # call to ensure that the collection exists
 
     col_paths = firestore.collections.map do |col|
-      col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
 
       col.collection_path
     end
 
-    col_paths.wont_be :empty?
-    col_paths.must_include root_path
+    _(col_paths).wont_be :empty?
+    _(col_paths).must_include root_path
   end
 
   it "has collection method" do
     col_ref = firestore.col "col"
 
-    col_ref.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    col_ref.collection_id.must_equal "col"
-    col_ref.collection_path.must_equal "col"
+    _(col_ref).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(col_ref.collection_id).must_equal "col"
+    _(col_ref.collection_path).must_equal "col"
   end
 
   it "has doc method" do
     doc_ref = firestore.doc "col/doc"
 
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    doc_ref.document_id.must_equal "doc"
-    doc_ref.document_path.must_equal "col/doc"
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref.document_id).must_equal "doc"
+    _(doc_ref.document_path).must_equal "col/doc"
   end
 
   it "has get_all method" do
@@ -54,7 +54,7 @@ describe "Firestore", :firestore_acceptance do
     doc2.create foo: :b
 
     docs = firestore.get_all doc1, doc2
-    docs.to_a.count.must_equal 2
+    _(docs.to_a.count).must_equal 2
   end
 
   it "has get_all method with field_mask argument" do
@@ -67,6 +67,6 @@ describe "Firestore", :firestore_acceptance do
     doc2.create foo: :b
 
     docs = firestore.get_all doc1, doc2, field_mask: :foo
-    docs.to_a.count.must_equal 2
+    _(docs.to_a.count).must_equal 2
   end
 end

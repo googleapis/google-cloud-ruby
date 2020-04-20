@@ -40,7 +40,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
     actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-    actual_writes.must_equal expected_writes
+    _(actual_writes).must_equal expected_writes
   end
 
   it "complex create" do
@@ -71,7 +71,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
     actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-    actual_writes.must_equal expected_writes
+    _(actual_writes).must_equal expected_writes
   end
 
   it "creating empty data" do
@@ -86,7 +86,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
     actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-    actual_writes.must_equal expected_writes
+    _(actual_writes).must_equal expected_writes
   end
 
   it "don't split on dots" do
@@ -109,7 +109,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
     actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-    actual_writes.must_equal expected_writes
+    _(actual_writes).must_equal expected_writes
   end
 
   it "non-alpha characters in map keys" do
@@ -132,7 +132,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
     actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-    actual_writes.must_equal expected_writes
+    _(actual_writes).must_equal expected_writes
   end
 
   describe :field_delete do
@@ -142,7 +142,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "DELETE not allowed on create"
+      _(error.message).must_equal "DELETE not allowed on create"
     end
   end
 
@@ -167,7 +167,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "SERVER_TIME with data" do
@@ -199,7 +199,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "multiple SERVER_TIME fields" do
@@ -234,7 +234,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "nested SERVER_TIME field" do
@@ -266,7 +266,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "SERVER_TIME cannot be anywhere inside an array value" do
@@ -275,7 +275,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest server_time under arrays"
+      _(error.message).must_equal "cannot nest server_time under arrays"
     end
 
     it "SERVER_TIME cannot be in an array value" do
@@ -284,7 +284,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest server_time under arrays"
+      _(error.message).must_equal "cannot nest server_time under arrays"
     end
   end
 
@@ -317,7 +317,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "ARRAY_UNION with data" do
@@ -355,7 +355,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "multiple ARRAY_UNION fields" do
@@ -402,7 +402,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "nested ARRAY_UNION field" do
@@ -440,7 +440,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "ARRAY_UNION cannot be anywhere inside an array value" do
@@ -449,7 +449,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest array_union under arrays"
+      _(error.message).must_equal "cannot nest array_union under arrays"
     end
 
     it "ARRAY_UNION cannot be in an array value" do
@@ -458,7 +458,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest array_union under arrays"
+      _(error.message).must_equal "cannot nest array_union under arrays"
     end
   end
 
@@ -491,7 +491,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "ARRAY_DELETE with data" do
@@ -529,7 +529,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "multiple ARRAY_DELETE fields" do
@@ -576,7 +576,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "nested ARRAY_DELETE field" do
@@ -614,7 +614,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "ARRAY_DELETE cannot be anywhere inside an array value" do
@@ -623,7 +623,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest array_delete under arrays"
+      _(error.message).must_equal "cannot nest array_delete under arrays"
     end
 
     it "ARRAY_DELETE cannot be in an array value" do
@@ -632,7 +632,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest array_delete under arrays"
+      _(error.message).must_equal "cannot nest array_delete under arrays"
     end
   end
 
@@ -659,7 +659,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "INCREMENT with data" do
@@ -691,7 +691,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "multiple INCREMENT fields" do
@@ -726,7 +726,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "nested INCREMENT field" do
@@ -758,7 +758,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "INCREMENT cannot be anywhere inside an array value" do
@@ -767,7 +767,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest increment under arrays"
+      _(error.message).must_equal "cannot nest increment under arrays"
     end
 
     it "INCREMENT cannot be in an array value" do
@@ -776,7 +776,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest increment under arrays"
+      _(error.message).must_equal "cannot nest increment under arrays"
     end
   end
 
@@ -803,7 +803,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "MAXIMUM with data" do
@@ -835,7 +835,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "multiple MAXIMUM fields" do
@@ -870,7 +870,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "nested MAXIMUM field" do
@@ -902,7 +902,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "MAXIMUM cannot be anywhere inside an array value" do
@@ -911,7 +911,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest maximum under arrays"
+      _(error.message).must_equal "cannot nest maximum under arrays"
     end
 
     it "MAXIMUM cannot be in an array value" do
@@ -920,7 +920,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest maximum under arrays"
+      _(error.message).must_equal "cannot nest maximum under arrays"
     end
   end
 
@@ -947,7 +947,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "MINIMUM with data" do
@@ -979,7 +979,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "multiple MINIMUM fields" do
@@ -1014,7 +1014,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "nested MINIMUM field" do
@@ -1046,7 +1046,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
 
       actual_writes = Google::Cloud::Firestore::Convert.writes_for_create document_path, data
 
-      actual_writes.must_equal expected_writes
+      _(actual_writes).must_equal expected_writes
     end
 
     it "MINIMUM cannot be anywhere inside an array value" do
@@ -1055,7 +1055,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest minimum under arrays"
+      _(error.message).must_equal "cannot nest minimum under arrays"
     end
 
     it "MINIMUM cannot be in an array value" do
@@ -1064,7 +1064,7 @@ describe Google::Cloud::Firestore::Convert, :writes_for_create do
       error = expect do
         Google::Cloud::Firestore::Convert.writes_for_create document_path, data
       end.must_raise ArgumentError
-      error.message.must_equal "cannot nest minimum under arrays"
+      _(error.message).must_equal "cannot nest minimum under arrays"
     end
   end
 end

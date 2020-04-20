@@ -254,33 +254,33 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
   end
 
   def assert_results_enum enum
-    enum.must_be_kind_of Enumerator
+    _(enum).must_be_kind_of Enumerator
 
     results = enum.to_a
-    results.count.must_equal 2
+    _(results.count).must_equal 2
 
     results.each do |result|
-      result.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+      _(result).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
-      result.ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-      result.ref.client.must_equal firestore
+      _(result.ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(result.ref.client).must_equal firestore
 
-      result.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      result.parent.collection_id.must_equal "users"
-      result.parent.collection_path.must_equal "users"
-      result.parent.client.must_equal firestore
+      _(result.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(result.parent.collection_id).must_equal "users"
+      _(result.parent.collection_path).must_equal "users"
+      _(result.parent.client).must_equal firestore
     end
 
-    results.first.data.must_be_kind_of Hash
-    results.first.data.must_equal({ name: "Mike" })
-    results.first.created_at.must_equal read_time
-    results.first.updated_at.must_equal read_time
-    results.first.read_at.must_equal read_time
+    _(results.first.data).must_be_kind_of Hash
+    _(results.first.data).must_equal({ name: "Mike" })
+    _(results.first.created_at).must_equal read_time
+    _(results.first.updated_at).must_equal read_time
+    _(results.first.read_at).must_equal read_time
 
-    results.last.data.must_be_kind_of Hash
-    results.last.data.must_equal({ name: "Chris" })
-    results.last.created_at.must_equal read_time
-    results.last.updated_at.must_equal read_time
-    results.last.read_at.must_equal read_time
+    _(results.last.data).must_be_kind_of Hash
+    _(results.last.data).must_equal({ name: "Chris" })
+    _(results.last.created_at).must_equal read_time
+    _(results.last.updated_at).must_equal read_time
+    _(results.last.read_at).must_equal read_time
   end
 end

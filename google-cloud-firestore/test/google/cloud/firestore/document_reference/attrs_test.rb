@@ -19,14 +19,14 @@ describe Google::Cloud::Firestore::DocumentReference, :attrs, :mock_firestore do
   let(:document) { Google::Cloud::Firestore::DocumentReference.from_path "projects/#{project}/databases/(default)/documents/#{document_path}", firestore }
 
   it "represents a document reference" do
-    document.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    document.document_id.must_equal "mike"
-    document.document_path.must_equal document_path
-    document.path.must_equal "projects/projectID/databases/(default)/documents/users/mike"
+    _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(document.document_id).must_equal "mike"
+    _(document.document_path).must_equal document_path
+    _(document.path).must_equal "projects/projectID/databases/(default)/documents/users/mike"
 
-    document.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    document.parent.collection_id.must_equal "users"
-    document.parent.collection_path.must_equal "users"
-    document.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+    _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(document.parent.collection_id).must_equal "users"
+    _(document.parent.collection_path).must_equal "users"
+    _(document.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
   end
 end

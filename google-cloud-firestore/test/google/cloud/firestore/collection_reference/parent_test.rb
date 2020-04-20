@@ -20,26 +20,26 @@ describe Google::Cloud::Firestore::CollectionReference, :parent, :mock_firestore
   let(:collection) { Google::Cloud::Firestore::CollectionReference.from_path "projects/#{project}/databases/(default)/documents/#{collection_path}", firestore }
 
   it "represents a nested collection reference" do
-    collection.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    collection.collection_id.must_equal collection_id
-    collection.collection_path.must_equal collection_path
-    collection.path.must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
+    _(collection).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(collection.collection_id).must_equal collection_id
+    _(collection.collection_path).must_equal collection_path
+    _(collection.path).must_equal "projects/projectID/databases/(default)/documents/users/mike/messages"
 
-    collection.parent.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    collection.parent.document_id.must_equal "mike"
-    collection.parent.document_path.must_equal "users/mike"
-    collection.parent.path.must_equal "projects/projectID/databases/(default)/documents/users/mike"
+    _(collection.parent).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(collection.parent.document_id).must_equal "mike"
+    _(collection.parent.document_path).must_equal "users/mike"
+    _(collection.parent.path).must_equal "projects/projectID/databases/(default)/documents/users/mike"
   end
 
   it "represents a top-level collection reference" do
     collection = Google::Cloud::Firestore::CollectionReference.from_path "projects/#{project}/databases/(default)/documents/#{collection_id}", firestore
 
-    collection.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    collection.collection_id.must_equal collection_id
-    collection.collection_path.must_equal collection_id
-    collection.path.must_equal "projects/projectID/databases/(default)/documents/messages"
+    _(collection).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(collection.collection_id).must_equal collection_id
+    _(collection.collection_path).must_equal collection_id
+    _(collection.path).must_equal "projects/projectID/databases/(default)/documents/messages"
 
-    collection.parent.must_be_kind_of Google::Cloud::Firestore::Client
-    collection.parent.path.must_equal "projects/projectID/databases/(default)"
+    _(collection.parent).must_be_kind_of Google::Cloud::Firestore::Client
+    _(collection.parent.path).must_equal "projects/projectID/databases/(default)"
   end
 end

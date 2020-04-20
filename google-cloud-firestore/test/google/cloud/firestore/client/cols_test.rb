@@ -19,33 +19,33 @@ describe Google::Cloud::Firestore::Client, :cols, :mock_firestore do
     firestore_mock.expect :list_collection_ids, ["users", "lists", "todos"].to_enum, ["projects/#{project}/databases/(default)/documents", options: default_options]
 
     col_enum = firestore.cols
-    col_enum.must_be_kind_of Enumerator
+    _(col_enum).must_be_kind_of Enumerator
 
     col_ids = col_enum.map do |col|
-      col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
 
-      col.parent.must_be_kind_of Google::Cloud::Firestore::Client
+      _(col.parent).must_be_kind_of Google::Cloud::Firestore::Client
 
       col.collection_id
     end
-    col_ids.wont_be :empty?
-    col_ids.must_equal ["users", "lists", "todos"]
+    _(col_ids).wont_be :empty?
+    _(col_ids).must_equal ["users", "lists", "todos"]
   end
 
   it "retrieves collections using collections alias" do
     firestore_mock.expect :list_collection_ids, ["users", "lists", "todos"].to_enum, ["projects/#{project}/databases/(default)/documents", options: default_options]
 
     col_enum = firestore.collections
-    col_enum.must_be_kind_of Enumerator
+    _(col_enum).must_be_kind_of Enumerator
 
     col_ids = col_enum.map do |col|
-      col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
 
-      col.parent.must_be_kind_of Google::Cloud::Firestore::Client
+      _(col.parent).must_be_kind_of Google::Cloud::Firestore::Client
 
       col.collection_id
     end
-    col_ids.wont_be :empty?
-    col_ids.must_equal ["users", "lists", "todos"]
+    _(col_ids).wont_be :empty?
+    _(col_ids).must_equal ["users", "lists", "todos"]
   end
 end

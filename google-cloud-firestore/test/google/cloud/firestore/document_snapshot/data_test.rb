@@ -33,7 +33,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ expires_on: nil })
+    _(document.data).must_equal({ expires_on: nil })
   end
 
   it "holds a true value" do
@@ -43,7 +43,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ active: true })
+    _(document.data).must_equal({ active: true })
   end
 
   it "holds a false value" do
@@ -53,7 +53,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ expired: false })
+    _(document.data).must_equal({ expired: false })
   end
 
   it "holds an integer value" do
@@ -63,7 +63,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ score: 29 })
+    _(document.data).must_equal({ score: 29 })
   end
 
   it "holds a nan value" do
@@ -73,7 +73,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data[:ratio].must_be :nan?
+    _(document.data[:ratio]).must_be :nan?
   end
 
   it "holds an infinity value" do
@@ -83,7 +83,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ ratio: Float::INFINITY })
+    _(document.data).must_equal({ ratio: Float::INFINITY })
   end
 
   it "holds a float value" do
@@ -93,7 +93,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ ratio: 0.9 })
+    _(document.data).must_equal({ ratio: 0.9 })
   end
 
   it "holds a time value" do
@@ -103,7 +103,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ published_at: Time.parse("2017-01-02 03:04:05.06 UTC") })
+    _(document.data).must_equal({ published_at: Time.parse("2017-01-02 03:04:05.06 UTC") })
   end
 
   it "holds a string value" do
@@ -113,7 +113,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ name: "Mike" })
+    _(document.data).must_equal({ name: "Mike" })
   end
 
   it "holds a bytes value" do
@@ -123,8 +123,8 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.keys.must_include :avatar
-    document.data[:avatar].read.must_equal "contents"
+    _(document.data.keys).must_include :avatar
+    _(document.data[:avatar].read).must_equal "contents"
   end
 
   it "holds a reference value" do
@@ -134,11 +134,11 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.keys.must_include :friend
-    document.data[:friend].must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    document.data[:friend].document_id.must_equal "chris"
-    document.data[:friend].document_path.must_equal "users/chris"
-    document.data[:friend].path.must_equal "projects/#{project}/databases/(default)/documents/users/chris"
+    _(document.data.keys).must_include :friend
+    _(document.data[:friend]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(document.data[:friend].document_id).must_equal "chris"
+    _(document.data[:friend].document_path).must_equal "users/chris"
+    _(document.data[:friend].path).must_equal "projects/#{project}/databases/(default)/documents/users/chris"
   end
 
   it "holds a geo_point value" do
@@ -148,7 +148,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ location: { longitude: -103.45700740814209, latitude: 43.878264 } })
+    _(document.data).must_equal({ location: { longitude: -103.45700740814209, latitude: 43.878264 } })
   end
 
   it "holds an array value" do
@@ -158,7 +158,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ projects: [1, 2, 3] })
+    _(document.data).must_equal({ projects: [1, 2, 3] })
   end
 
   it "holds a hash value" do
@@ -168,7 +168,7 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data.must_equal({ details: { env: "production", score: 0.9, project_ids: [1, 2, 3] } })
+    _(document.data).must_equal({ details: { env: "production", score: 0.9, project_ids: [1, 2, 3] } })
   end
 
   it "holds all the values" do
@@ -188,21 +188,21 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :data, :mock_firestore do
       create_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time),
       update_time: Google::Cloud::Firestore::Convert.time_to_timestamp(document_time)
 
-    document.data[:expires_on].must_be :nil?
-    document.data[:active].must_equal true
-    document.data[:expired].must_equal false
-    document.data[:score].must_equal 29
-    document.data[:ratio].must_equal 0.9
-    document.data[:published_at].must_equal Time.parse("2017-01-02 03:04:05.06 UTC")
-    document.data[:name].must_equal "Mike"
-    document.data.keys.must_include :avatar
-    document.data[:avatar].read.must_equal "contents"
-    document.data.keys.must_include :friend
-    document.data[:friend].must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    document.data[:friend].document_id.must_equal "chris"
-    document.data[:friend].document_path.must_equal "users/chris"
-    document.data[:friend].path.must_equal "projects/#{project}/databases/(default)/documents/users/chris"
-    document.data[:location].must_equal({ longitude: -103.45700740814209, latitude: 43.878264 })
-    document.data[:details].must_equal({ env: "production", score: 0.9, project_ids: [1, 2, 3] })
+    _(document.data[:expires_on]).must_be :nil?
+    _(document.data[:active]).must_equal true
+    _(document.data[:expired]).must_equal false
+    _(document.data[:score]).must_equal 29
+    _(document.data[:ratio]).must_equal 0.9
+    _(document.data[:published_at]).must_equal Time.parse("2017-01-02 03:04:05.06 UTC")
+    _(document.data[:name]).must_equal "Mike"
+    _(document.data.keys).must_include :avatar
+    _(document.data[:avatar].read).must_equal "contents"
+    _(document.data.keys).must_include :friend
+    _(document.data[:friend]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(document.data[:friend].document_id).must_equal "chris"
+    _(document.data[:friend].document_path).must_equal "users/chris"
+    _(document.data[:friend].path).must_equal "projects/#{project}/databases/(default)/documents/users/chris"
+    _(document.data[:location]).must_equal({ longitude: -103.45700740814209, latitude: 43.878264 })
+    _(document.data[:details]).must_equal({ env: "production", score: 0.9, project_ids: [1, 2, 3] })
   end
 end

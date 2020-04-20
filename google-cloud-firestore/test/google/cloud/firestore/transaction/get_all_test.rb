@@ -88,23 +88,23 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
 
     docs_enum = transaction.get_all "users/mike"
 
-    docs_enum.must_be_kind_of Enumerator
+    _(docs_enum).must_be_kind_of Enumerator
 
     docs = docs_enum.to_a
-    docs.count.must_equal 1
+    _(docs.count).must_equal 1
 
-    docs.first.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(docs.first).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
-    docs.first.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    docs.first.parent.collection_id.must_equal "users"
-    docs.first.parent.collection_path.must_equal "users"
-    docs.first.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+    _(docs.first.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(docs.first.parent.collection_id).must_equal "users"
+    _(docs.first.parent.collection_path).must_equal "users"
+    _(docs.first.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
 
-    docs.first.data.must_be_kind_of Hash
-    docs.first.data.must_equal({ name: "Mike" })
-    docs.first.created_at.must_equal read_time
-    docs.first.updated_at.must_equal read_time
-    docs.first.read_at.must_equal read_time
+    _(docs.first.data).must_be_kind_of Hash
+    _(docs.first.data).must_equal({ name: "Mike" })
+    _(docs.first.created_at).must_equal read_time
+    _(docs.first.updated_at).must_equal read_time
+    _(docs.first.read_at).must_equal read_time
   end
 
   it "gets a single doc (doc ref)" do
@@ -112,23 +112,23 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
 
     docs_enum = transaction.get_all firestore.doc("users/mike")
 
-    docs_enum.must_be_kind_of Enumerator
+    _(docs_enum).must_be_kind_of Enumerator
 
     docs = docs_enum.to_a
-    docs.count.must_equal 1
+    _(docs.count).must_equal 1
 
-    docs.first.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(docs.first).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
-    docs.first.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    docs.first.parent.collection_id.must_equal "users"
-    docs.first.parent.collection_path.must_equal "users"
-    docs.first.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+    _(docs.first.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(docs.first.parent.collection_id).must_equal "users"
+    _(docs.first.parent.collection_path).must_equal "users"
+    _(docs.first.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
 
-    docs.first.data.must_be_kind_of Hash
-    docs.first.data.must_equal({ name: "Mike" })
-    docs.first.created_at.must_equal read_time
-    docs.first.updated_at.must_equal read_time
-    docs.first.read_at.must_equal read_time
+    _(docs.first.data).must_be_kind_of Hash
+    _(docs.first.data).must_equal({ name: "Mike" })
+    _(docs.first.created_at).must_equal read_time
+    _(docs.first.updated_at).must_equal read_time
+    _(docs.first.read_at).must_equal read_time
   end
 
   describe :field_mask do
@@ -171,23 +171,23 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
 
       docs_enum = transaction.get_all "users/mike", field_mask: firestore.field_path(:name)
 
-      docs_enum.must_be_kind_of Enumerator
+      _(docs_enum).must_be_kind_of Enumerator
 
       docs = docs_enum.to_a
-      docs.count.must_equal 1
+      _(docs.count).must_equal 1
 
-      docs.first.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+      _(docs.first).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
-      docs.first.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      docs.first.parent.collection_id.must_equal "users"
-      docs.first.parent.collection_path.must_equal "users"
-      docs.first.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+      _(docs.first.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(docs.first.parent.collection_id).must_equal "users"
+      _(docs.first.parent.collection_path).must_equal "users"
+      _(docs.first.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
 
-      docs.first.data.must_be_kind_of Hash
-      docs.first.data.must_equal({ name: "Mike" })
-      docs.first.created_at.must_equal read_time
-      docs.first.updated_at.must_equal read_time
-      docs.first.read_at.must_equal read_time
+      _(docs.first.data).must_be_kind_of Hash
+      _(docs.first.data).must_equal({ name: "Mike" })
+      _(docs.first.created_at).must_equal read_time
+      _(docs.first.updated_at).must_equal read_time
+      _(docs.first.read_at).must_equal read_time
     end
 
     it "gets a single doc (doc ref)" do
@@ -195,63 +195,63 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :mock_firestore do
 
       docs_enum = transaction.get_all firestore.doc("users/mike"), field_mask: [firestore.field_path(:name)]
 
-      docs_enum.must_be_kind_of Enumerator
+      _(docs_enum).must_be_kind_of Enumerator
 
       docs = docs_enum.to_a
-      docs.count.must_equal 1
+      _(docs.count).must_equal 1
 
-      docs.first.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+      _(docs.first).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
-      docs.first.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      docs.first.parent.collection_id.must_equal "users"
-      docs.first.parent.collection_path.must_equal "users"
-      docs.first.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+      _(docs.first.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(docs.first.parent.collection_id).must_equal "users"
+      _(docs.first.parent.collection_path).must_equal "users"
+      _(docs.first.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
 
-      docs.first.data.must_be_kind_of Hash
-      docs.first.data.must_equal({ name: "Mike" })
-      docs.first.created_at.must_equal read_time
-      docs.first.updated_at.must_equal read_time
-      docs.first.read_at.must_equal read_time
+      _(docs.first.data).must_be_kind_of Hash
+      _(docs.first.data).must_equal({ name: "Mike" })
+      _(docs.first.created_at).must_equal read_time
+      _(docs.first.updated_at).must_equal read_time
+      _(docs.first.read_at).must_equal read_time
     end
   end
 
   def assert_docs_enum enum
-    enum.must_be_kind_of Enumerator
+    _(enum).must_be_kind_of Enumerator
 
     docs = enum.to_a
-    docs.count.must_equal 3
+    _(docs.count).must_equal 3
 
     docs.each do |doc|
-      doc.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+      _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
-      doc.ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-      doc.ref.client.must_equal firestore
+      _(doc.ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(doc.ref.client).must_equal firestore
 
-      doc.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      doc.parent.collection_id.must_equal "users"
-      doc.parent.collection_path.must_equal "users"
-      doc.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
-      doc.parent.client.must_equal firestore
+      _(doc.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(doc.parent.collection_id).must_equal "users"
+      _(doc.parent.collection_path).must_equal "users"
+      _(doc.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
+      _(doc.parent.client).must_equal firestore
     end
 
-    docs[0].must_be :exists?
-    docs[0].data.must_be_kind_of Hash
-    docs[0].data.must_equal({ name: "Mike" })
-    docs[0].created_at.must_equal read_time
-    docs[0].updated_at.must_equal read_time
-    docs[0].read_at.must_equal read_time
+    _(docs[0]).must_be :exists?
+    _(docs[0].data).must_be_kind_of Hash
+    _(docs[0].data).must_equal({ name: "Mike" })
+    _(docs[0].created_at).must_equal read_time
+    _(docs[0].updated_at).must_equal read_time
+    _(docs[0].read_at).must_equal read_time
 
-    docs[1].must_be :missing?
-    docs[1].data.must_be :nil?
-    docs[1].created_at.must_be :nil?
-    docs[1].updated_at.must_be :nil?
-    docs[1].read_at.must_equal read_time
+    _(docs[1]).must_be :missing?
+    _(docs[1].data).must_be :nil?
+    _(docs[1].created_at).must_be :nil?
+    _(docs[1].updated_at).must_be :nil?
+    _(docs[1].read_at).must_equal read_time
 
-    docs[2].must_be :exists?
-    docs[2].data.must_be_kind_of Hash
-    docs[2].data.must_equal({ name: "Chris" })
-    docs[2].created_at.must_equal read_time
-    docs[2].updated_at.must_equal read_time
-    docs[2].read_at.must_equal read_time
+    _(docs[2]).must_be :exists?
+    _(docs[2].data).must_be_kind_of Hash
+    _(docs[2].data).must_equal({ name: "Chris" })
+    _(docs[2].created_at).must_equal read_time
+    _(docs[2].updated_at).must_equal read_time
+    _(docs[2].read_at).must_equal read_time
   end
 end

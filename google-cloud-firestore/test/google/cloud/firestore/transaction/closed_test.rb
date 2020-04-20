@@ -29,7 +29,7 @@ describe Google::Cloud::Firestore::Transaction, :closed, :mock_firestore do
       transaction.create(document_path, { name: "Mike" })
       transaction.commit
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "set raises when closed" do
@@ -37,7 +37,7 @@ describe Google::Cloud::Firestore::Transaction, :closed, :mock_firestore do
       transaction.set(document_path, { name: "Mike" })
       transaction.commit
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "update raises when closed" do
@@ -45,7 +45,7 @@ describe Google::Cloud::Firestore::Transaction, :closed, :mock_firestore do
       transaction.update(document_path, { name: "Mike" })
       transaction.commit
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "delete raises when closed" do
@@ -53,7 +53,7 @@ describe Google::Cloud::Firestore::Transaction, :closed, :mock_firestore do
       transaction.delete document_path
       transaction.commit
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "run raises when closed" do
@@ -61,6 +61,6 @@ describe Google::Cloud::Firestore::Transaction, :closed, :mock_firestore do
       transaction.run document_path
       transaction.commit
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 end

@@ -60,30 +60,30 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
     listener.stop
 
     # assert snapshots
-    doc_snapshots.count.must_equal 6
-    doc_snapshots.each { |qs| qs.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
+    _(doc_snapshots.count).must_equal 6
+    doc_snapshots.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
 
-    doc_snapshots[0].document_path.must_equal document.document_path
-    doc_snapshots[0].must_be :exists?
-    doc_snapshots[0][:val].must_be :nil?
+    _(doc_snapshots[0].document_path).must_equal document.document_path
+    _(doc_snapshots[0]).must_be :exists?
+    _(doc_snapshots[0][:val]).must_be :nil?
 
-    doc_snapshots[1].document_path.must_equal document.document_path
-    doc_snapshots[1].must_be :exists?
-    doc_snapshots[1][:val].must_equal 42
+    _(doc_snapshots[1].document_path).must_equal document.document_path
+    _(doc_snapshots[1]).must_be :exists?
+    _(doc_snapshots[1][:val]).must_equal 42
 
-    doc_snapshots[2].document_path.must_equal document.document_path
-    doc_snapshots[2].must_be :missing?
+    _(doc_snapshots[2].document_path).must_equal document.document_path
+    _(doc_snapshots[2]).must_be :missing?
 
-    doc_snapshots[3].document_path.must_equal document.document_path
-    doc_snapshots[3].must_be :exists?
-    doc_snapshots[3][:val].must_equal 11.1
+    _(doc_snapshots[3].document_path).must_equal document.document_path
+    _(doc_snapshots[3]).must_be :exists?
+    _(doc_snapshots[3][:val]).must_equal 11.1
 
-    doc_snapshots[4].document_path.must_equal document.document_path
-    doc_snapshots[4].must_be :missing?
+    _(doc_snapshots[4].document_path).must_equal document.document_path
+    _(doc_snapshots[4]).must_be :missing?
 
-    doc_snapshots[5].document_path.must_equal document.document_path
-    doc_snapshots[5].must_be :exists?
-    doc_snapshots[5][:val].must_equal "hi"
+    _(doc_snapshots[5].document_path).must_equal document.document_path
+    _(doc_snapshots[5]).must_be :exists?
+    _(doc_snapshots[5][:val]).must_equal "hi"
   end
 
   it "resets when RESET is returned" do
@@ -134,30 +134,30 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
     listener.stop
 
     # assert snapshots
-    doc_snapshots.count.must_equal 6
-    doc_snapshots.each { |qs| qs.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
+    _(doc_snapshots.count).must_equal 6
+    doc_snapshots.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
 
-    doc_snapshots[0].document_path.must_equal document.document_path
-    doc_snapshots[0].must_be :exists?
-    doc_snapshots[0][:val].must_be :nil?
+    _(doc_snapshots[0].document_path).must_equal document.document_path
+    _(doc_snapshots[0]).must_be :exists?
+    _(doc_snapshots[0][:val]).must_be :nil?
 
-    doc_snapshots[1].document_path.must_equal document.document_path
-    doc_snapshots[1].must_be :exists?
-    doc_snapshots[1][:val].must_equal 42
+    _(doc_snapshots[1].document_path).must_equal document.document_path
+    _(doc_snapshots[1]).must_be :exists?
+    _(doc_snapshots[1][:val]).must_equal 42
 
-    doc_snapshots[2].document_path.must_equal document.document_path
-    doc_snapshots[2].must_be :missing?
+    _(doc_snapshots[2].document_path).must_equal document.document_path
+    _(doc_snapshots[2]).must_be :missing?
 
-    doc_snapshots[3].document_path.must_equal document.document_path
-    doc_snapshots[3].must_be :exists?
-    doc_snapshots[3][:val].must_equal 11.1
+    _(doc_snapshots[3].document_path).must_equal document.document_path
+    _(doc_snapshots[3]).must_be :exists?
+    _(doc_snapshots[3][:val]).must_equal 11.1
 
-    doc_snapshots[4].document_path.must_equal document.document_path
-    doc_snapshots[4].must_be :missing?
+    _(doc_snapshots[4].document_path).must_equal document.document_path
+    _(doc_snapshots[4]).must_be :missing?
 
-    doc_snapshots[5].document_path.must_equal document.document_path
-    doc_snapshots[5].must_be :exists?
-    doc_snapshots[5][:val].must_equal "hi"
+    _(doc_snapshots[5].document_path).must_equal document.document_path
+    _(doc_snapshots[5]).must_be :exists?
+    _(doc_snapshots[5][:val]).must_equal "hi"
   end
 
   it "resets when FILTER count is incorrect" do
@@ -209,30 +209,30 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :watch_firestore 
     listener.stop
 
     # assert snapshots
-    doc_snapshots.count.must_equal 6
-    doc_snapshots.each { |qs| qs.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
+    _(doc_snapshots.count).must_equal 6
+    doc_snapshots.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
 
-    doc_snapshots[0].document_path.must_equal document.document_path
-    doc_snapshots[0].must_be :exists?
-    doc_snapshots[0][:val].must_be :nil?
+    _(doc_snapshots[0].document_path).must_equal document.document_path
+    _(doc_snapshots[0]).must_be :exists?
+    _(doc_snapshots[0][:val]).must_be :nil?
 
-    doc_snapshots[1].document_path.must_equal document.document_path
-    doc_snapshots[1].must_be :exists?
-    doc_snapshots[1][:val].must_equal 42
+    _(doc_snapshots[1].document_path).must_equal document.document_path
+    _(doc_snapshots[1]).must_be :exists?
+    _(doc_snapshots[1][:val]).must_equal 42
 
-    doc_snapshots[2].document_path.must_equal document.document_path
-    doc_snapshots[2].must_be :missing?
+    _(doc_snapshots[2].document_path).must_equal document.document_path
+    _(doc_snapshots[2]).must_be :missing?
 
-    doc_snapshots[3].document_path.must_equal document.document_path
-    doc_snapshots[3].must_be :exists?
-    doc_snapshots[3][:val].must_equal 11.1
+    _(doc_snapshots[3].document_path).must_equal document.document_path
+    _(doc_snapshots[3]).must_be :exists?
+    _(doc_snapshots[3][:val]).must_equal 11.1
 
-    doc_snapshots[4].document_path.must_equal document.document_path
-    doc_snapshots[4].must_be :missing?
+    _(doc_snapshots[4].document_path).must_equal document.document_path
+    _(doc_snapshots[4]).must_be :missing?
 
-    doc_snapshots[5].document_path.must_equal document.document_path
-    doc_snapshots[5].must_be :exists?
-    doc_snapshots[5][:val].must_equal "hi"
+    _(doc_snapshots[5].document_path).must_equal document.document_path
+    _(doc_snapshots[5]).must_be :exists?
+    _(doc_snapshots[5][:val]).must_equal "hi"
   end
 end
 181

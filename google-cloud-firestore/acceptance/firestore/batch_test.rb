@@ -18,15 +18,15 @@ describe "Batch", :firestore_acceptance do
   it "has create method" do
     rand_batch_col = firestore.col "#{root_path}/batch/#{SecureRandom.hex(4)}"
     doc_ref = rand_batch_col.doc
-    doc_ref.get.wont_be :exists?
+    _(doc_ref.get).wont_be :exists?
 
     firestore.batch do |b|
       b.create doc_ref, foo: "bar"
     end
 
     doc_snp = doc_ref.get
-    doc_snp.must_be :exists?
-    doc_snp[:foo].must_equal "bar"
+    _(doc_snp).must_be :exists?
+    _(doc_snp[:foo]).must_equal "bar"
   end
 
   it "has set method" do
@@ -37,7 +37,7 @@ describe "Batch", :firestore_acceptance do
       b.set doc_ref, foo: "baz"
     end
 
-    doc_ref.get[:foo].must_equal "baz"
+    _(doc_ref.get[:foo]).must_equal "baz"
   end
 
   it "has update method" do
@@ -48,13 +48,13 @@ describe "Batch", :firestore_acceptance do
       b.update doc_ref, foo: "baz"
     end
 
-    doc_ref.get[:foo].must_equal "baz"
+    _(doc_ref.get[:foo]).must_equal "baz"
   end
 
   it "enforces that updated document exists" do
     rand_batch_col = firestore.col "#{root_path}/batch/#{SecureRandom.hex(4)}"
     doc_ref = rand_batch_col.doc
-    doc_ref.get.wont_be :exists?
+    _(doc_ref.get).wont_be :exists?
 
     expect do
       firestore.batch do |b|
@@ -72,6 +72,6 @@ describe "Batch", :firestore_acceptance do
       b.delete doc_ref
     end
 
-    doc_ref.get.wont_be :exists?
+    _(doc_ref.get).wont_be :exists?
   end
 end

@@ -23,20 +23,20 @@ describe Google::Cloud::Firestore::Convert, :build_hash_from_field_paths_and_val
     orig = [[Google::Cloud::Firestore::FieldPath.new("foo", "bar"), "BAZ"]]
 
     hash = Google::Cloud::Firestore::Convert.build_hash_from_field_paths_and_values orig
-    hash.must_equal({ foo: { bar: "BAZ" } })
+    _(hash).must_equal({ foo: { bar: "BAZ" } })
   end
 
   it "extracts only top-level field paths" do
     orig = [[Google::Cloud::Firestore::FieldPath.new("foo", "bar"), { "baz.bif" => 42 }]]
 
     hash = Google::Cloud::Firestore::Convert.build_hash_from_field_paths_and_values orig
-    hash.must_equal({ foo: { bar: { "baz.bif" => 42 } } })
+    _(hash).must_equal({ foo: { bar: { "baz.bif" => 42 } } })
   end
 
   it "handles an empty hash" do
     orig = []
 
     hash = Google::Cloud::Firestore::Convert.build_hash_from_field_paths_and_values orig
-    hash.must_equal({})
+    _(hash).must_equal({})
   end
 end

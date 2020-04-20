@@ -22,7 +22,7 @@ describe "Transaction", :firestore_acceptance do
     doc_snp = firestore.transaction do |tx|
       tx.get doc_ref
     end
-    doc_snp.wont_be :exists?
+    _(doc_snp).wont_be :exists?
   end
 
   it "returns CommitResponse when commit_response option is true" do
@@ -31,11 +31,11 @@ describe "Transaction", :firestore_acceptance do
 
     resp = firestore.transaction commit_response: true do |tx|
       doc_snp = tx.get doc_ref
-      doc_snp.wont_be :exists?
+      _(doc_snp).wont_be :exists?
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_be_kind_of Time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_be_kind_of Time
   end
 
   it "has get with query" do
@@ -48,8 +48,8 @@ describe "Transaction", :firestore_acceptance do
     results = firestore.transaction do |tx|
       tx.get(query).to_a # all results must be retrieved inside tx
     end
-    results.map(&:document_id).must_equal ["doc1", "doc2"]
-    results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
+    _(results.map(&:document_id)).must_equal ["doc1", "doc2"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["a", "b"]
   end
 
   it "has set method" do
@@ -60,8 +60,8 @@ describe "Transaction", :firestore_acceptance do
       tx.set doc_ref, foo: "bar"
     end
 
-    resp.must_be :nil?
-    doc_ref.get[:foo].must_equal "bar"
+    _(resp).must_be :nil?
+    _(doc_ref.get[:foo]).must_equal "bar"
   end
 
   it "has update method" do
@@ -73,14 +73,14 @@ describe "Transaction", :firestore_acceptance do
       tx.update doc_ref, foo: "baz"
     end
 
-    resp.must_be :nil?
-    doc_ref.get[:foo].must_equal "baz"
+    _(resp).must_be :nil?
+    _(doc_ref.get[:foo]).must_equal "baz"
   end
 
   it "update enforces document exists" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
     doc_ref = rand_tx_col.doc
-    doc_ref.get.wont_be :exists?
+    _(doc_ref.get).wont_be :exists?
 
     expect do
       firestore.transaction do |tx|
@@ -98,7 +98,7 @@ describe "Transaction", :firestore_acceptance do
       tx.delete doc_ref
     end
 
-    resp.must_be :nil?
-    doc_ref.get.wont_be :exists?
+    _(resp).must_be :nil?
+    _(doc_ref.get).wont_be :exists?
   end
 end

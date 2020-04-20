@@ -41,7 +41,7 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :closed, :mock_firesto
     error = expect do
       transaction.get_all "users/mike", "users/tad", "users/chris"
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "gets a single doc from a doc ref object" do
@@ -50,17 +50,17 @@ describe Google::Cloud::Firestore::Transaction, :get_all, :closed, :mock_firesto
     doc_ref = firestore.doc("users/mike")
     doc_snp = doc_ref.get
 
-    doc_snp.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(doc_snp).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
-    doc_snp.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    doc_snp.parent.collection_id.must_equal "users"
-    doc_snp.parent.collection_path.must_equal "users"
-    doc_snp.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
+    _(doc_snp.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(doc_snp.parent.collection_id).must_equal "users"
+    _(doc_snp.parent.collection_path).must_equal "users"
+    _(doc_snp.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
 
-    doc_snp.data.must_be_kind_of Hash
-    doc_snp.data.must_equal({ name: "Mike" })
-    doc_snp.created_at.must_equal read_time
-    doc_snp.updated_at.must_equal read_time
-    doc_snp.read_at.must_equal read_time
+    _(doc_snp.data).must_be_kind_of Hash
+    _(doc_snp.data).must_equal({ name: "Mike" })
+    _(doc_snp.created_at).must_equal read_time
+    _(doc_snp.updated_at).must_equal read_time
+    _(doc_snp.read_at).must_equal read_time
   end
 end

@@ -39,21 +39,21 @@ describe Google::Cloud::Firestore::Batch, :delete, :mock_firestore do
     batch.delete document_path
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "deletes a document given a doc ref" do
     firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
 
     doc = firestore.doc document_path
-    doc.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     batch.delete doc
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "deletes a document with exists precondition" do
@@ -64,8 +64,8 @@ describe Google::Cloud::Firestore::Batch, :delete, :mock_firestore do
     batch.delete document_path, exists: true
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "deletes a document with update_time precondition" do
@@ -77,14 +77,14 @@ describe Google::Cloud::Firestore::Batch, :delete, :mock_firestore do
     batch.delete document_path, update_time: commit_time
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "can't specify both exists and update_time precondition" do
     error = expect do
       batch.delete document_path, exists: true, update_time: commit_time
     end.must_raise ArgumentError
-    error.message.must_equal "cannot specify both exists and update_time"
+    _(error.message).must_equal "cannot specify both exists and update_time"
   end
 end

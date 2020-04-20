@@ -194,8 +194,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       tx.create(document_path, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "creates a new document using doc ref" do
@@ -207,8 +207,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       tx.create(doc, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "raises if create is not given a Hash" do
@@ -217,7 +217,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         tx.create document_path, "not a hash"
       end
     end.must_raise ArgumentError
-    error.message.must_equal "data is required"
+    _(error.message).must_equal "data is required"
   end
 
   it "sets a new document using string path" do
@@ -228,8 +228,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       tx.set(document_path, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "sets a new document using doc ref" do
@@ -241,8 +241,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       tx.set(doc, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "raises if set is not given a Hash" do
@@ -251,7 +251,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         tx.set document_path, "not a hash"
       end
     end.must_raise ArgumentError
-    error.message.must_equal "data is required"
+    _(error.message).must_equal "data is required"
   end
 
   it "updates a new document using string path" do
@@ -262,8 +262,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       tx.update(document_path, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a new document using doc ref" do
@@ -275,8 +275,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       tx.update(doc, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "raises if update is not given a Hash" do
@@ -285,7 +285,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
         tx.update document_path, "not a hash"
       end
     end.must_raise ArgumentError
-    error.message.must_equal "data is required"
+    _(error.message).must_equal "data is required"
   end
 
   it "deletes a document using string path" do
@@ -296,8 +296,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       tx.delete document_path
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "deletes a document using doc ref" do
@@ -309,8 +309,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       tx.delete doc
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "returns nil when the transaction is empty and commit_response is false or nil" do
@@ -318,7 +318,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       # no op
     end
 
-    resp.must_be :nil?
+    _(resp).must_be :nil?
   end
 
   it "returns the user-provided return value from the transaction when commit_response is false or nil" do
@@ -327,7 +327,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       "my-return-value"
     end
 
-    resp.must_equal "my-return-value"
+    _(resp).must_equal "my-return-value"
   end
 
   it "returns commit_time nil when no work is done in the transaction with commit_response: true" do
@@ -335,8 +335,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       "my-return-value"
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_be :nil?
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_be :nil?
   end
 
   it "performs multiple writes in the same commit (string)" do
@@ -351,8 +351,8 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       tx.delete document_path
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "performs multiple writes in the same commit (doc ref)" do
@@ -361,7 +361,7 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
     firestore_mock.expect :commit, write_commit_resp, [database_path, writes: all_writes, transaction: transaction_id, options: default_options]
 
     doc_ref = firestore.doc document_path
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     resp = firestore.transaction commit_response: true do |tx|
       tx.create(doc_ref, { name: "Mike" })
@@ -370,33 +370,33 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
       tx.delete doc_ref
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "closed transactions cannot make changes" do
     doc_ref = firestore.doc document_path
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     outside_transaction_obj = nil
 
     resp = firestore.transaction commit_response: true do |tx|
-      tx.wont_be :closed?
-      tx.firestore.must_equal firestore
+      _(tx).wont_be :closed?
+      _(tx.firestore).must_equal firestore
 
       outside_transaction_obj = tx
     end
 
-    resp.commit_time.must_be :nil?
+    _(resp.commit_time).must_be :nil?
 
-    outside_transaction_obj.must_be :closed?
+    _(outside_transaction_obj).must_be :closed?
 
     error = expect do
       firestore.batch do |b|
         outside_transaction_obj.create(doc_ref, { name: "Mike" })
       end
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   describe :retry do
@@ -567,39 +567,39 @@ describe Google::Cloud::Firestore::Client, :transaction, :mock_firestore do
           tx.delete document_path
         end
       end.must_raise RuntimeError
-      error.message.must_equal "unsupported"
+      _(error.message).must_equal "unsupported"
     end
   end
 
   def assert_results_enum enum
-    enum.must_be_kind_of Enumerator
+    _(enum).must_be_kind_of Enumerator
 
     results = enum.to_a
-    results.count.must_equal 2
+    _(results.count).must_equal 2
 
     results.each do |result|
-      result.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+      _(result).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
-      result.ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-      result.ref.client.must_equal firestore
+      _(result.ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(result.ref.client).must_equal firestore
 
-      result.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      result.parent.collection_id.must_equal "users"
-      result.parent.collection_path.must_equal "users"
-      result.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
-      result.parent.client.must_equal firestore
+      _(result.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(result.parent.collection_id).must_equal "users"
+      _(result.parent.collection_path).must_equal "users"
+      _(result.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
+      _(result.parent.client).must_equal firestore
     end
 
-    results.first.data.must_be_kind_of Hash
-    results.first.data.must_equal({ name: "Mike" })
-    results.first.created_at.must_equal read_time
-    results.first.updated_at.must_equal read_time
-    results.first.read_at.must_equal read_time
+    _(results.first.data).must_be_kind_of Hash
+    _(results.first.data).must_equal({ name: "Mike" })
+    _(results.first.created_at).must_equal read_time
+    _(results.first.updated_at).must_equal read_time
+    _(results.first.read_at).must_equal read_time
 
-    results.last.data.must_be_kind_of Hash
-    results.last.data.must_equal({ name: "Chris" })
-    results.last.created_at.must_equal read_time
-    results.last.updated_at.must_equal read_time
-    results.last.read_at.must_equal read_time
+    _(results.last.data).must_be_kind_of Hash
+    _(results.last.data).must_equal({ name: "Chris" })
+    _(results.last.created_at).must_equal read_time
+    _(results.last.updated_at).must_equal read_time
+    _(results.last.read_at).must_equal read_time
   end
 end

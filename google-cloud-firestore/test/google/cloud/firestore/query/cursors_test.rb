@@ -41,7 +41,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     doc_snp = document_snapshot("projects/projectID/databases/(default)/documents/C/D", { a: 7, b: 8 })
 
     generated_query = collection.start_at(doc_snp).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "document snapshot and an equality where clause" do
@@ -75,7 +75,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     doc_snp = document_snapshot("projects/projectID/databases/(default)/documents/C/D", { a: 7, b: 8 })
 
     generated_query = collection.where(:a, "==", 3).end_at(doc_snp).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "document snapshot and an inequality where clause" do
@@ -114,7 +114,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     doc_snp = document_snapshot("projects/projectID/databases/(default)/documents/C/D", { a: 7, b: 8 })
 
     generated_query = collection.where(:a, "<=", 3).end_before(doc_snp).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "doc snapshot, inequality where clause, and existing orderBy clause" do
@@ -153,7 +153,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     doc_snp = document_snapshot("projects/projectID/databases/(default)/documents/C/D", { a: 7, b: 8 })
 
     generated_query = collection.order(:a, :desc).where(:a, "<", 4).start_at(doc_snp).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "existing orderBy" do
@@ -197,7 +197,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     doc_snp = document_snapshot("projects/projectID/databases/(default)/documents/C/D", { a: 7, b: 8 })
 
     generated_query = collection.order(:a).order(:b, :desc).where(:a, "<", 4).start_after(doc_snp).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "existing orderBy __name__" do
@@ -241,7 +241,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     doc_snp = document_snapshot("projects/projectID/databases/(default)/documents/C/D", { a: 7, b: 8 })
 
     generated_query = collection.order(:a, :desc).order(:__name__).start_at(doc_snp).end_at(doc_snp).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "without orderBy" do
@@ -275,7 +275,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     )
 
     generated_query = collection.order(:a).start_at(7).end_before(9).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "StartAfter/EndAt with values" do
@@ -302,7 +302,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     )
 
     generated_query = collection.order(:a).start_after(7).end_at(9).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "Start/End with two values" do
@@ -335,7 +335,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     )
 
     generated_query = collection.order(:a).order(:b, :desc).start_after(7, 8).end_at(9, 10).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "with __name__" do
@@ -373,7 +373,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     )
 
     generated_query = collection.order(:__name__).start_after("D1").end_before("D2").query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "last one wins" do
@@ -390,7 +390,7 @@ describe Google::Cloud::Firestore::Query, :cursors, :mock_firestore do
     )
 
     generated_query = collection.order(:a).start_after(1).start_at(2).end_at(3).end_before(4).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   def document_snapshot path, data

@@ -20,7 +20,7 @@ describe "Query", :firestore_acceptance do
     rand_query_col.add({foo: "bar", bar: "foo"})
 
     result_snp = rand_query_col.select("foo").get.first
-    result_snp[:foo].must_equal "bar"
+    _(result_snp[:foo]).must_equal "bar"
   end
 
   it "select() supports empty fields" do
@@ -28,7 +28,7 @@ describe "Query", :firestore_acceptance do
     rand_query_col.add({foo: "bar", bar: "foo"})
 
     result_snp = rand_query_col.select.get.first
-    result_snp.data.must_be :empty?
+    _(result_snp.data).must_be :empty?
   end
 
   it "has where method" do
@@ -36,7 +36,7 @@ describe "Query", :firestore_acceptance do
     rand_query_col.add({foo: "bar", bar: "foo"})
 
     result_snp = rand_query_col.where(:foo, :==, :bar).get.first
-    result_snp[:foo].must_equal "bar"
+    _(result_snp[:foo]).must_equal "bar"
   end
 
   it "has where method with array_contains" do
@@ -44,7 +44,7 @@ describe "Query", :firestore_acceptance do
     rand_query_col.add({foo: ["bar", "baz", "bif"]})
 
     result_snp = rand_query_col.where(:foo, :array_contains, :bif).get.first
-    result_snp[:foo].must_equal ["bar", "baz", "bif"]
+    _(result_snp[:foo]).must_equal ["bar", "baz", "bif"]
   end
 
   it "has where method with in" do
@@ -52,7 +52,7 @@ describe "Query", :firestore_acceptance do
     rand_query_col.add({foo: "bar"})
 
     result_snp = rand_query_col.where(:foo, :in, ["bar", "baz", "bif"]).get.first
-    result_snp[:foo].must_equal "bar"
+    _(result_snp[:foo]).must_equal "bar"
   end
 
   it "has where method with array_contains_any" do
@@ -60,7 +60,7 @@ describe "Query", :firestore_acceptance do
     rand_query_col.add({foo: ["bar", "baz", "bif"]})
 
     result_snp = rand_query_col.where(:foo, :array_contains_any, [:bif, :out]).get.first
-    result_snp[:foo].must_equal ["bar", "baz", "bif"]
+    _(result_snp[:foo]).must_equal ["bar", "baz", "bif"]
   end
 
   it "supports NaN" do
@@ -68,8 +68,8 @@ describe "Query", :firestore_acceptance do
     doc_ref = rand_query_col.add({foo: Float::NAN})
 
     result_snp = rand_query_col.where(:foo, :==, Float::NAN).get.first
-    result_snp.wont_be :nil?
-    result_snp[:foo].must_be :nan?
+    _(result_snp).wont_be :nil?
+    _(result_snp[:foo]).must_be :nan?
   end
 
   it "supports NaN (symbol)" do
@@ -77,8 +77,8 @@ describe "Query", :firestore_acceptance do
     doc_ref = rand_query_col.add({foo: Float::NAN})
 
     result_snp = rand_query_col.where(:foo, :==, :nan).get.first
-    result_snp.wont_be :nil?
-    result_snp[:foo].must_be :nan?
+    _(result_snp).wont_be :nil?
+    _(result_snp[:foo]).must_be :nan?
   end
 
   it "supports NULL" do
@@ -86,8 +86,8 @@ describe "Query", :firestore_acceptance do
     doc_ref = rand_query_col.add({foo: nil})
 
     result_snp = rand_query_col.where(:foo, :==, nil).get.first
-    result_snp.wont_be :nil?
-    result_snp[:foo].must_be :nil?
+    _(result_snp).wont_be :nil?
+    _(result_snp[:foo]).must_be :nil?
   end
 
   it "supports NULL (symbol)" do
@@ -95,8 +95,8 @@ describe "Query", :firestore_acceptance do
     doc_ref = rand_query_col.add({foo: nil})
 
     result_snp = rand_query_col.where(:foo, :==, :null).get.first
-    result_snp.wont_be :nil?
-    result_snp[:foo].must_be :nil?
+    _(result_snp).wont_be :nil?
+    _(result_snp[:foo]).must_be :nil?
   end
 
   it "has order method" do
@@ -105,10 +105,10 @@ describe "Query", :firestore_acceptance do
     rand_query_col.add({foo: "b"})
 
     results = rand_query_col.order(:foo).get.map { |doc| doc[:foo] }
-    results.must_equal ["a", "b"]
+    _(results).must_equal ["a", "b"]
 
     results = rand_query_col.order(:foo, :desc).get.map { |doc| doc[:foo] }
-    results.must_equal ["b", "a"]
+    _(results).must_equal ["b", "a"]
   end
 
   it "can order by document id" do
@@ -117,8 +117,8 @@ describe "Query", :firestore_acceptance do
     rand_query_col.doc("doc2").create({foo: "b"})
 
     results = rand_query_col.order(firestore.document_id).get
-    results.map(&:document_id).must_equal ["doc1", "doc2"]
-    results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
+    _(results.map(&:document_id)).must_equal ["doc1", "doc2"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["a", "b"]
 
     # results = rand_query_col.order(firestore.document_id, :desc).get
     # results.map(&:document_id).must_equal ["doc2", "doc1"]
@@ -131,8 +131,8 @@ describe "Query", :firestore_acceptance do
     rand_query_col.doc("doc2").create({foo: "b"})
 
     results = rand_query_col.order(:foo).limit(1).get
-    results.map(&:document_id).must_equal ["doc1"]
-    results.map { |doc| doc[:foo] }.must_equal ["a"]
+    _(results.map(&:document_id)).must_equal ["doc1"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["a"]
   end
 
   it "has offset method" do
@@ -141,8 +141,8 @@ describe "Query", :firestore_acceptance do
     rand_query_col.doc("doc2").create({foo: "b"})
 
     results = rand_query_col.order(:foo).offset(1).get
-    results.map(&:document_id).must_equal ["doc2"]
-    results.map { |doc| doc[:foo] }.must_equal ["b"]
+    _(results.map(&:document_id)).must_equal ["doc2"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["b"]
   end
 
   it "has start_at method" do
@@ -151,8 +151,8 @@ describe "Query", :firestore_acceptance do
     rand_query_col.doc("doc2").create({foo: "b"})
 
     results = rand_query_col.order(:foo).start_at("a").get
-    results.map(&:document_id).must_equal ["doc1", "doc2"]
-    results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
+    _(results.map(&:document_id)).must_equal ["doc1", "doc2"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["a", "b"]
   end
 
   it "has start_after method" do
@@ -161,8 +161,8 @@ describe "Query", :firestore_acceptance do
     rand_query_col.doc("doc2").create({foo: "b"})
 
     results = rand_query_col.order(:foo).start_after("a").get
-    results.map(&:document_id).must_equal ["doc2"]
-    results.map { |doc| doc[:foo] }.must_equal ["b"]
+    _(results.map(&:document_id)).must_equal ["doc2"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["b"]
   end
 
   it "has end_before method" do
@@ -171,8 +171,8 @@ describe "Query", :firestore_acceptance do
     rand_query_col.doc("doc2").create({foo: "b"})
 
     results = rand_query_col.order(:foo).end_before("b").get
-    results.map(&:document_id).must_equal ["doc1"]
-    results.map { |doc| doc[:foo] }.must_equal ["a"]
+    _(results.map(&:document_id)).must_equal ["doc1"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["a"]
   end
 
   it "has end_at method" do
@@ -181,8 +181,8 @@ describe "Query", :firestore_acceptance do
     rand_query_col.doc("doc2").create({foo: "b"})
 
     results = rand_query_col.order(:foo).end_at("b").get
-    results.map(&:document_id).must_equal ["doc1", "doc2"]
-    results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
+    _(results.map(&:document_id)).must_equal ["doc1", "doc2"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["a", "b"]
   end
 
   it "can call cursor methods with a DocumentSnapshot object" do
@@ -191,20 +191,20 @@ describe "Query", :firestore_acceptance do
     rand_query_col.doc("doc2").create({foo: "b"})
 
     results = rand_query_col.order(:foo).start_at(rand_query_col.doc("doc1").get).get
-    results.map(&:document_id).must_equal ["doc1", "doc2"]
-    results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
+    _(results.map(&:document_id)).must_equal ["doc1", "doc2"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["a", "b"]
 
     results = rand_query_col.order(:foo).start_after(rand_query_col.doc("doc1").get).get
-    results.map(&:document_id).must_equal ["doc2"]
-    results.map { |doc| doc[:foo] }.must_equal ["b"]
+    _(results.map(&:document_id)).must_equal ["doc2"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["b"]
 
     results = rand_query_col.order(:foo).end_before(rand_query_col.doc("doc2").get).get
-    results.map(&:document_id).must_equal ["doc1"]
-    results.map { |doc| doc[:foo] }.must_equal ["a"]
+    _(results.map(&:document_id)).must_equal ["doc1"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["a"]
 
     results = rand_query_col.order(:foo).end_at(rand_query_col.doc("doc2").get).get
-    results.map(&:document_id).must_equal ["doc1", "doc2"]
-    results.map { |doc| doc[:foo] }.must_equal ["a", "b"]
+    _(results.map(&:document_id)).must_equal ["doc1", "doc2"]
+    _(results.map { |doc| doc[:foo] }).must_equal ["a", "b"]
   end
 
   describe "Collection Group" do
@@ -232,7 +232,7 @@ describe "Query", :firestore_acceptance do
 
       query = firestore.collection_group collection_group
       snapshots = query.get
-      snapshots.map(&:document_id).must_equal ["cg-doc1", "cg-doc2", "cg-doc3", "cg-doc4", "cg-doc5"]
+      _(snapshots.map(&:document_id)).must_equal ["cg-doc1", "cg-doc2", "cg-doc3", "cg-doc4", "cg-doc5"]
     end
 
     it "queries a collection group with start_at and end_at" do
@@ -259,14 +259,14 @@ describe "Query", :firestore_acceptance do
         .end_at(firestore.document("a/b0"))
 
       snapshots = query.get
-      snapshots.map(&:document_id).must_equal ["cg-doc2", "cg-doc3", "cg-doc4"]
+      _(snapshots.map(&:document_id)).must_equal ["cg-doc2", "cg-doc3", "cg-doc4"]
 
       query = firestore.collection_group(collection_group)
         .order_by("__name__")
         .start_after(firestore.document("a/b"))
         .end_before(firestore.document("a/b/#{collection_group}/cg-doc3"))
       snapshots = query.get
-      snapshots.map(&:document_id).must_equal ["cg-doc2"]
+      _(snapshots.map(&:document_id)).must_equal ["cg-doc2"]
     end
 
     it "queries a collection group with filters" do
@@ -292,7 +292,7 @@ describe "Query", :firestore_acceptance do
         .where("__name__", "<=", firestore.document("a/b0"))
 
       snapshots = query.get
-      snapshots.map(&:document_id).must_equal ["cg-doc2", "cg-doc3", "cg-doc4"]
+      _(snapshots.map(&:document_id)).must_equal ["cg-doc2", "cg-doc3", "cg-doc4"]
 
       query = firestore.collection_group(collection_group)
         .where("__name__", ">", firestore.document("a/b"))
@@ -300,7 +300,7 @@ describe "Query", :firestore_acceptance do
           "__name__", "<", firestore.document("a/b/#{collection_group}/cg-doc3")
         )
       snapshots = query.get
-      snapshots.map(&:document_id).must_equal ["cg-doc2"]
+      _(snapshots.map(&:document_id)).must_equal ["cg-doc2"]
     end
   end
 end

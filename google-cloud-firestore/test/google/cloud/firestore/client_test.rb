@@ -16,9 +16,9 @@ require "helper"
 
 describe Google::Cloud::Firestore::Client, :mock_firestore do
   it "knows the project and database identifiers" do
-    firestore.must_be_kind_of Google::Cloud::Firestore::Client
-    firestore.project_id.must_equal project
-    firestore.database_id.must_equal "(default)"
-    firestore.path.must_equal "projects/projectID/databases/(default)"
+    _(firestore).must_be_kind_of Google::Cloud::Firestore::Client
+    _(firestore.project_id).must_equal project
+    _(firestore.database_id).must_equal "(default)"
+    _(firestore.path).must_equal "projects/projectID/databases/(default)"
   end
 end

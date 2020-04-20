@@ -52,32 +52,32 @@ describe "Watch", :firestore_acceptance do
 
     listener.stop
 
-    query_snapshots.count.must_equal 4
-    query_snapshots.each { |qs| qs.must_be_kind_of Google::Cloud::Firestore::QuerySnapshot }
+    _(query_snapshots.count).must_equal 4
+    query_snapshots.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::QuerySnapshot }
 
-    query_snapshots[0].count.must_equal 12
-    query_snapshots[0].changes.count.must_equal 12
-    query_snapshots[0].docs.map(&:document_id).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
-    query_snapshots[0].changes.each { |change| change.must_be :added? }
-    query_snapshots[0].changes.map(&:doc).map(&:document_id).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
+    _(query_snapshots[0].count).must_equal 12
+    _(query_snapshots[0].changes.count).must_equal 12
+    _(query_snapshots[0].docs.map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
+    query_snapshots[0].changes.each { |change| _(change).must_be :added? }
+    _(query_snapshots[0].changes.map(&:doc).map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "nil"]
 
-    query_snapshots[1].count.must_equal 13
-    query_snapshots[1].changes.count.must_equal 1
-    query_snapshots[1].docs.map(&:document_id).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
-    query_snapshots[1].changes.each { |change| change.must_be :added? }
-    query_snapshots[1].changes.map(&:doc).map(&:document_id).must_equal ["added"]
+    _(query_snapshots[1].count).must_equal 13
+    _(query_snapshots[1].changes.count).must_equal 1
+    _(query_snapshots[1].docs.map(&:document_id)).must_equal ["hash", "array", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
+    query_snapshots[1].changes.each { |change| _(change).must_be :added? }
+    _(query_snapshots[1].changes.map(&:doc).map(&:document_id)).must_equal ["added"]
 
-    query_snapshots[2].count.must_equal 12
-    query_snapshots[2].changes.count.must_equal 1
-    query_snapshots[2].docs.map(&:document_id).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
-    query_snapshots[2].changes.each { |change| change.must_be :removed? }
-    query_snapshots[2].changes.map(&:doc).map(&:document_id).must_equal ["array"]
+    _(query_snapshots[2].count).must_equal 12
+    _(query_snapshots[2].changes.count).must_equal 1
+    _(query_snapshots[2].docs.map(&:document_id)).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "false", "added", "nil"]
+    query_snapshots[2].changes.each { |change| _(change).must_be :removed? }
+    _(query_snapshots[2].changes.map(&:doc).map(&:document_id)).must_equal ["array"]
 
-    query_snapshots[3].count.must_equal 12
-    query_snapshots[3].changes.count.must_equal 1
-    query_snapshots[3].docs.map(&:document_id).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "added", "false", "nil"]
-    query_snapshots[3].changes.each { |change| change.must_be :modified? }
-    query_snapshots[3].changes.map(&:doc).map(&:document_id).must_equal ["added"]
+    _(query_snapshots[3].count).must_equal 12
+    _(query_snapshots[3].changes.count).must_equal 1
+    _(query_snapshots[3].docs.map(&:document_id)).must_equal ["hash", "geo", "ref", "io", "str", "time", "num", "int", "true", "added", "false", "nil"]
+    query_snapshots[3].changes.each { |change| _(change).must_be :modified? }
+    _(query_snapshots[3].changes.map(&:doc).map(&:document_id)).must_equal ["added"]
   end
 
   it "watches a document" do
@@ -106,23 +106,23 @@ describe "Watch", :firestore_acceptance do
 
     listener.stop
 
-    doc_snapshots.count.must_equal 4
-    doc_snapshots.each { |qs| qs.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
+    _(doc_snapshots.count).must_equal 4
+    doc_snapshots.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
 
-    doc_snapshots[0].document_path.must_equal watch_col.doc("watch-doc").document_path
-    doc_snapshots[0].must_be :exists?
-    doc_snapshots[0][:val].must_equal true
+    _(doc_snapshots[0].document_path).must_equal watch_col.doc("watch-doc").document_path
+    _(doc_snapshots[0]).must_be :exists?
+    _(doc_snapshots[0][:val]).must_equal true
 
-    doc_snapshots[1].document_path.must_equal watch_col.doc("watch-doc").document_path
-    doc_snapshots[1].must_be :exists?
-    doc_snapshots[1][:val].must_equal false
+    _(doc_snapshots[1].document_path).must_equal watch_col.doc("watch-doc").document_path
+    _(doc_snapshots[1]).must_be :exists?
+    _(doc_snapshots[1][:val]).must_equal false
 
-    doc_snapshots[2].document_path.must_equal watch_col.doc("watch-doc").document_path
-    doc_snapshots[2].must_be :missing?
+    _(doc_snapshots[2].document_path).must_equal watch_col.doc("watch-doc").document_path
+    _(doc_snapshots[2]).must_be :missing?
 
-    doc_snapshots[3].document_path.must_equal watch_col.doc("watch-doc").document_path
-    doc_snapshots[3].must_be :exists?
-    doc_snapshots[3][:val].must_equal 1
+    _(doc_snapshots[3].document_path).must_equal watch_col.doc("watch-doc").document_path
+    _(doc_snapshots[3]).must_be :exists?
+    _(doc_snapshots[3][:val]).must_equal 1
   end
 
   def wait_until &block

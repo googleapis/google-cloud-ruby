@@ -18,22 +18,22 @@ describe "Document", :firestore_acceptance do
   it "has properties" do
     doc_ref = firestore.doc "col/doc"
 
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    doc_ref.document_id.must_equal "doc"
-    doc_ref.document_path.must_equal "col/doc"
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref.document_id).must_equal "doc"
+    _(doc_ref.document_path).must_equal "col/doc"
 
     col_ref = doc_ref.parent
-    col_ref.collection_id.must_equal "col"
-    col_ref.collection_path.must_equal "col"
+    _(col_ref.collection_id).must_equal "col"
+    _(col_ref.collection_path).must_equal "col"
   end
 
   it "has collection method" do
     doc_ref = firestore.doc "col/doc"
 
     sub_col = doc_ref.col "subcol"
-    sub_col.collection_id.must_equal "subcol"
-    sub_col.collection_path.must_equal "col/doc/subcol"
-    sub_col.parent.document_path.must_equal doc_ref.document_path
+    _(sub_col.collection_id).must_equal "subcol"
+    _(sub_col.collection_path).must_equal "col/doc/subcol"
+    _(sub_col.parent.document_path).must_equal doc_ref.document_path
   end
 
   it "has create and get method" do
@@ -41,7 +41,7 @@ describe "Document", :firestore_acceptance do
 
     doc_ref.create foo: :a
     doc_snp = doc_ref.get
-    doc_snp[:foo].must_equal "a"
+    _(doc_snp[:foo]).must_equal "a"
   end
 
   it "has set method" do
@@ -69,26 +69,26 @@ describe "Document", :firestore_acceptance do
     doc_ref.set all_values
     doc_snp = doc_ref.get
 
-    doc_snp[:name].must_equal all_values[:name]
-    doc_snp[:active].must_equal all_values[:active]
-    doc_snp[:score].must_equal all_values[:score]
-    doc_snp[:large_score].must_equal all_values[:large_score]
-    doc_snp[:ratio].must_equal all_values[:ratio]
-    doc_snp[:infinity].must_equal all_values[:infinity]
-    doc_snp[:negative_infinity].must_equal all_values[:negative_infinity]
-    doc_snp[:nan].must_be :nan?
-    doc_snp[:object].must_equal all_values[:object]
-    doc_snp[:date].must_equal all_values[:date]
-    doc_snp[:linked].must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    doc_snp[:linked].document_path.must_equal all_values[:linked].document_path
-    doc_snp[:list].must_equal all_values[:list]
-    doc_snp[:empty_list].must_equal all_values[:empty_list]
-    doc_snp[:null].must_be :nil?
-    doc_snp[:location].must_equal all_values[:location]
-    doc_snp[:binary].must_be_kind_of StringIO
+    _(doc_snp[:name]).must_equal all_values[:name]
+    _(doc_snp[:active]).must_equal all_values[:active]
+    _(doc_snp[:score]).must_equal all_values[:score]
+    _(doc_snp[:large_score]).must_equal all_values[:large_score]
+    _(doc_snp[:ratio]).must_equal all_values[:ratio]
+    _(doc_snp[:infinity]).must_equal all_values[:infinity]
+    _(doc_snp[:negative_infinity]).must_equal all_values[:negative_infinity]
+    _(doc_snp[:nan]).must_be :nan?
+    _(doc_snp[:object]).must_equal all_values[:object]
+    _(doc_snp[:date]).must_equal all_values[:date]
+    _(doc_snp[:linked]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_snp[:linked].document_path).must_equal all_values[:linked].document_path
+    _(doc_snp[:list]).must_equal all_values[:list]
+    _(doc_snp[:empty_list]).must_equal all_values[:empty_list]
+    _(doc_snp[:null]).must_be :nil?
+    _(doc_snp[:location]).must_equal all_values[:location]
+    _(doc_snp[:binary]).must_be_kind_of StringIO
     doc_snp[:binary].rewind
     all_values[:binary].rewind
-    doc_snp[:binary].read.must_equal all_values[:binary].read
+    _(doc_snp[:binary].read).must_equal all_values[:binary].read
   end
 
   it "supports server timestamps" do
@@ -107,8 +107,8 @@ describe "Document", :firestore_acceptance do
     doc_snp = doc_ref.get
 
     set_timestamp = doc_snp.get "d"
-    set_timestamp.wont_be :nil?
-    doc_snp.data.must_equal({
+    _(set_timestamp).wont_be :nil?
+    _(doc_snp.data).must_equal({
       a: "bar",
       b: { keep: "bar" },
       d: set_timestamp,
@@ -120,7 +120,7 @@ describe "Document", :firestore_acceptance do
     doc_snp = doc_ref.get
 
     update_timestamp = doc_snp[:a]
-    update_timestamp.wont_be :nil?
+    _(update_timestamp).wont_be :nil?
     expected_data = {
       a: update_timestamp,
       b: { c: update_timestamp, keep: "bar" },
@@ -158,8 +158,8 @@ describe "Document", :firestore_acceptance do
 
     doc_snp = doc_ref.get
     timestamp = doc_snp.get :c
-    timestamp.wont_be :nil?
-    doc_snp.data.must_equal({
+    _(timestamp).wont_be :nil?
+    _(doc_snp.data).must_equal({
       a: "b",
       c: timestamp,
     })
@@ -172,7 +172,7 @@ describe "Document", :firestore_acceptance do
     doc_ref.update({ foo: "b" }, update_time: set_result.update_time)
 
     doc_snp = doc_ref.get
-    doc_snp.data.must_equal({
+    _(doc_snp.data).must_equal({
       foo: "b",
     })
   end
@@ -183,21 +183,21 @@ describe "Document", :firestore_acceptance do
     doc_ref.set({ list: [1, 2, 3] })
 
     doc_snp = doc_ref.get
-    doc_snp.data.must_equal({
+    _(doc_snp.data).must_equal({
       list: [1, 2, 3],
     })
 
     doc_ref.update({ list: firestore.field_array_union(42) })
 
     doc_snp = doc_ref.get
-    doc_snp.data.must_equal({
+    _(doc_snp.data).must_equal({
       list: [1, 2, 3, 42],
     })
 
     doc_ref.update({ list: firestore.field_array_delete(42) })
 
     doc_snp = doc_ref.get
-    doc_snp.data.must_equal({
+    _(doc_snp.data).must_equal({
       list: [1, 2, 3],
     })
   end
@@ -216,24 +216,24 @@ describe "Document", :firestore_acceptance do
     doc_ref.set({ foo: "a" })
 
     doc_snp = doc_ref.get
-    doc_snp.must_be :exists?
+    _(doc_snp).must_be :exists?
 
     doc_ref.delete
 
     doc_snp = doc_ref.get
-    doc_snp.wont_be :exists?
+    _(doc_snp).wont_be :exists?
   end
 
   it "can delete a non-existing document" do
     doc_ref = root_col.doc
 
     doc_snp = doc_ref.get
-    doc_snp.wont_be :exists?
+    _(doc_snp).wont_be :exists?
 
     doc_ref.delete
 
     doc_snp = doc_ref.get
-    doc_snp.wont_be :exists?
+    _(doc_snp).wont_be :exists?
   end
 
   it "supports non-alphanumeric field names" do
@@ -256,73 +256,73 @@ describe "Document", :firestore_acceptance do
     end
 
     sub_cols = collections_doc_ref.cols
-    sub_cols.to_a.count.must_equal collections.count
-    sub_cols.map(&:collection_id).sort.must_equal collections.sort
+    _(sub_cols.to_a.count).must_equal collections.count
+    _(sub_cols.map(&:collection_id).sort).must_equal collections.sort
   end
 
   it "can add and delete fields sequentially" do
     doc_ref = root_col.doc
 
     doc_ref.create({})
-    doc_ref.get.data.must_equal({})
+    _(doc_ref.get.data).must_equal({})
 
     doc_ref.delete
-    doc_ref.get.wont_be :exists?
+    _(doc_ref.get).wont_be :exists?
 
     doc_ref.create({ a: { b: "c" } })
-    doc_ref.get.data.must_equal({ a: { b: "c" } })
+    _(doc_ref.get.data).must_equal({ a: { b: "c" } })
 
     doc_ref.set({})
-    doc_ref.get.data.must_equal({})
+    _(doc_ref.get.data).must_equal({})
 
     doc_ref.set({ a: { b: "c" } })
-    doc_ref.get.data.must_equal({ a: { b: "c" } })
+    _(doc_ref.get.data).must_equal({ a: { b: "c" } })
 
     doc_ref.set({ a: { d: "e" } }, merge: true)
-    doc_ref.get.data.must_equal({ a: { b: "c", d: "e" } })
+    _(doc_ref.get.data).must_equal({ a: { b: "c", d: "e" } })
 
     # INFO: the original test used nested deletes, but that is not allowed...
     # doc_ref.update({ a: { d: firestore.field_delete } })
     doc_ref.update({ "a.d" => firestore.field_delete })
-    doc_ref.get.data.must_equal({ a: { b: "c" } })
+    _(doc_ref.get.data).must_equal({ a: { b: "c" } })
 
     # INFO: the original test used nested deletes, but that is not allowed...
     # doc_ref.update({ a: { b: firestore.field_delete } })
     doc_ref.update({ "a.b" => firestore.field_delete })
-    doc_ref.get.data.must_equal({ a: {} })
+    _(doc_ref.get.data).must_equal({ a: {} })
 
     doc_ref.update({ a: { e: "foo" } })
-    doc_ref.get.data.must_equal({ a: { e: "foo" } })
+    _(doc_ref.get.data).must_equal({ a: { e: "foo" } })
 
     doc_ref.update({ f: "foo" })
-    doc_ref.get.data.must_equal({ a: { e: "foo" }, f: "foo" })
+    _(doc_ref.get.data).must_equal({ a: { e: "foo" }, f: "foo" })
 
     doc_ref.update({ f: { g: "foo" } })
-    doc_ref.get.data.must_equal({ a: { e: "foo" }, f: { g: "foo" } })
+    _(doc_ref.get.data).must_equal({ a: { e: "foo" }, f: { g: "foo" } })
 
     doc_ref.update({ "f.h" => "foo" })
-    doc_ref.get.data.must_equal({ a: { e: "foo" }, f: { g: "foo", h: "foo" } })
+    _(doc_ref.get.data).must_equal({ a: { e: "foo" }, f: { g: "foo", h: "foo" } })
 
     doc_ref.update({ "f.g" => firestore.field_delete })
-    doc_ref.get.data.must_equal({ a: { e: "foo" }, f: { h: "foo" } })
+    _(doc_ref.get.data).must_equal({ a: { e: "foo" }, f: { h: "foo" } })
 
     doc_ref.update({ "f.h" => firestore.field_delete })
-    doc_ref.get.data.must_equal({ a: { e: "foo" }, f: {} })
+    _(doc_ref.get.data).must_equal({ a: { e: "foo" }, f: {} })
 
     doc_ref.update({ "f" => firestore.field_delete })
-    doc_ref.get.data.must_equal({ a: { e: "foo" } })
+    _(doc_ref.get.data).must_equal({ a: { e: "foo" } })
 
     doc_ref.update({ "i.j" => { k: "foo" } })
-    doc_ref.get.data.must_equal({ a: { e: "foo" }, i: { j: { k: "foo" } } })
+    _(doc_ref.get.data).must_equal({ a: { e: "foo" }, i: { j: { k: "foo" } } })
 
     doc_ref.update({ "i.j.l" => {} })
-    doc_ref.get.data.must_equal({ a: { e: "foo" }, i: { j: { k: "foo", l: {} } } })
+    _(doc_ref.get.data).must_equal({ a: { e: "foo" }, i: { j: { k: "foo", l: {} } } })
 
     doc_ref.update({ i: firestore.field_delete })
-    doc_ref.get.data.must_equal({ a: { e: "foo" } })
+    _(doc_ref.get.data).must_equal({ a: { e: "foo" } })
 
     doc_ref.update({ a: firestore.field_delete })
-    doc_ref.get.data.must_equal({})
+    _(doc_ref.get.data).must_equal({})
   end
 
   it "can add and delete fields with server timestamps" do
@@ -331,67 +331,67 @@ describe "Document", :firestore_acceptance do
 
     doc_ref.create({ time: firestore.field_server_time, a: { b: firestore.field_server_time } })
     doc_snp = doc_ref.get
-    doc_snp[:time].must_be_kind_of Time
+    _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    doc_snp[:a][:b].must_equal times[0]
-    doc_snp.get(:time).must_equal times[0]
-    doc_snp.get("a.b".to_sym).must_equal times[0]
-    doc_snp.get("time").must_equal times[0]
-    doc_snp.get("a.b").must_equal times[0]
+    _(doc_snp[:a][:b]).must_equal times[0]
+    _(doc_snp.get(:time)).must_equal times[0]
+    _(doc_snp.get("a.b".to_sym)).must_equal times[0]
+    _(doc_snp.get("time")).must_equal times[0]
+    _(doc_snp.get("a.b")).must_equal times[0]
 
     doc_ref.set({ time: firestore.field_server_time, a: { c: firestore.field_server_time } })
     doc_snp = doc_ref.get
-    doc_snp[:time].must_be_kind_of Time
+    _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal times[1]
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal times[1]
 
     doc_ref.set({ time: firestore.field_server_time, a: { d: firestore.field_server_time } }, merge: true)
     doc_snp = doc_ref.get
-    doc_snp[:time].must_be_kind_of Time
+    _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal times[1]
-    doc_snp[:a][:d].must_equal times[2]
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal times[1]
+    _(doc_snp[:a][:d]).must_equal times[2]
 
     doc_ref.set({ time: firestore.field_server_time, e: firestore.field_server_time }, merge: true)
     doc_snp = doc_ref.get
-    doc_snp[:time].must_be_kind_of Time
+    _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal times[1]
-    doc_snp[:a][:d].must_equal times[2]
-    doc_snp[:e].must_equal times[3]
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal times[1]
+    _(doc_snp[:a][:d]).must_equal times[2]
+    _(doc_snp[:e]).must_equal times[3]
 
     doc_ref.set({ time: firestore.field_server_time, e: { f: firestore.field_server_time } }, merge: true)
     doc_snp = doc_ref.get
-    doc_snp[:time].must_be_kind_of Time
+    _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal times[1]
-    doc_snp[:a][:d].must_equal times[2]
-    doc_snp[:e][:f].must_equal times[4]
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal times[1]
+    _(doc_snp[:a][:d]).must_equal times[2]
+    _(doc_snp[:e][:f]).must_equal times[4]
 
     doc_ref.update({ time: firestore.field_server_time, "g.h" => firestore.field_server_time })
     doc_snp = doc_ref.get
-    doc_snp[:time].must_be_kind_of Time
+    _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal times[1]
-    doc_snp[:a][:d].must_equal times[2]
-    doc_snp[:e][:f].must_equal times[4]
-    doc_snp[:g][:h].must_equal times[5]
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal times[1]
+    _(doc_snp[:a][:d]).must_equal times[2]
+    _(doc_snp[:e][:f]).must_equal times[4]
+    _(doc_snp[:g][:h]).must_equal times[5]
 
     doc_ref.update({ time: firestore.field_server_time, "g.j.k" => firestore.field_server_time })
     doc_snp = doc_ref.get
-    doc_snp[:time].must_be_kind_of Time
+    _(doc_snp[:time]).must_be_kind_of Time
     times << doc_snp[:time]
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal times[1]
-    doc_snp[:a][:d].must_equal times[2]
-    doc_snp[:e][:f].must_equal times[4]
-    doc_snp[:g][:h].must_equal times[5]
-    doc_snp[:g][:j][:k].must_equal times[6]
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal times[1]
+    _(doc_snp[:a][:d]).must_equal times[2]
+    _(doc_snp[:e][:f]).must_equal times[4]
+    _(doc_snp[:g][:h]).must_equal times[5]
+    _(doc_snp[:g][:j][:k]).must_equal times[6]
   end
 
   it "can update numeric fields with transforms" do
@@ -399,56 +399,56 @@ describe "Document", :firestore_acceptance do
 
     doc_ref.create({ num: 1, a: { b: 1 } })
     doc_snp = doc_ref.get
-    doc_snp[:a][:b].must_equal 1
-    doc_snp.get(:num).must_equal 1
-    doc_snp.get("a.b".to_sym).must_equal 1
-    doc_snp.get("num").must_equal 1
-    doc_snp.get("a.b").must_equal 1
+    _(doc_snp[:a][:b]).must_equal 1
+    _(doc_snp.get(:num)).must_equal 1
+    _(doc_snp.get("a.b".to_sym)).must_equal 1
+    _(doc_snp.get("num")).must_equal 1
+    _(doc_snp.get("a.b")).must_equal 1
 
     doc_ref.set({ num: firestore.field_increment(50), a: { c: firestore.field_maximum(100) } })
     doc_snp = doc_ref.get
-    doc_snp[:num].must_equal 50
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal 100
+    _(doc_snp[:num]).must_equal 50
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal 100
 
     doc_ref.set({ num: firestore.field_increment(1), a: { d: firestore.field_minimum(-100) } }, merge: true)
     doc_snp = doc_ref.get
-    doc_snp[:num].must_equal 51
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal 100
-    doc_snp[:a][:d].must_equal -100
+    _(doc_snp[:num]).must_equal 51
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal 100
+    _(doc_snp[:a][:d]).must_equal -100
 
     doc_ref.set({ num: firestore.field_minimum(100), e: firestore.field_minimum(100) }, merge: true)
     doc_snp = doc_ref.get
-    doc_snp[:num].must_equal 51
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal 100
-    doc_snp[:a][:d].must_equal -100
-    doc_snp[:e].must_equal 100
+    _(doc_snp[:num]).must_equal 51
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal 100
+    _(doc_snp[:a][:d]).must_equal -100
+    _(doc_snp[:e]).must_equal 100
 
     doc_ref.set({ num: firestore.field_maximum(-100), e: { f: firestore.field_maximum(100) } }, merge: true)
     doc_snp = doc_ref.get
-    doc_snp[:num].must_equal 51
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal 100
-    doc_snp[:a][:d].must_equal -100
-    doc_snp[:e][:f].must_equal 100
+    _(doc_snp[:num]).must_equal 51
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal 100
+    _(doc_snp[:a][:d]).must_equal -100
+    _(doc_snp[:e][:f]).must_equal 100
 
     doc_ref.update({ num: firestore.field_minimum(-100), e: { f: firestore.field_maximum(1000) } })
     doc_snp = doc_ref.get
-    doc_snp[:num].must_equal -100
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal 100
-    doc_snp[:a][:d].must_equal -100
-    doc_snp[:e][:f].must_equal 1000
+    _(doc_snp[:num]).must_equal -100
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal 100
+    _(doc_snp[:a][:d]).must_equal -100
+    _(doc_snp[:e][:f]).must_equal 1000
 
     doc_ref.update({ num: firestore.field_maximum(100), e: { f: firestore.field_minimum(10) } })
     doc_snp = doc_ref.get
-    doc_snp[:num].must_equal 100
-    doc_snp[:a][:b].must_be :nil?
-    doc_snp[:a][:c].must_equal 100
-    doc_snp[:a][:d].must_equal -100
-    doc_snp[:e][:f].must_equal 10
+    _(doc_snp[:num]).must_equal 100
+    _(doc_snp[:a][:b]).must_be :nil?
+    _(doc_snp[:a][:c]).must_equal 100
+    _(doc_snp[:a][:d]).must_equal -100
+    _(doc_snp[:e][:f]).must_equal 10
   end
 
   def assert_equal_unordered a, b, msg = nil

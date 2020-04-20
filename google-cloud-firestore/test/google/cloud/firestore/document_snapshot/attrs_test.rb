@@ -35,68 +35,68 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :attrs, :mock_firestore do
   end
 
   it "represents a document reference" do
-    document.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(document).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
     # document's metadata
-    document.document_id.must_equal "mike"
-    document.document_path.must_equal document_path
+    _(document.document_id).must_equal "mike"
+    _(document.document_path).must_equal document_path
 
-    document.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    document.parent.collection_id.must_equal "users"
-    document.parent.collection_path.must_equal "users"
+    _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(document.parent.collection_id).must_equal "users"
+    _(document.parent.collection_path).must_equal "users"
 
     # a reference document does not have any data
-    document.data.wont_be :nil?
-    document.data.must_be_kind_of Hash
-    document.data.must_equal({ name: "Mike" })
-    document.created_at.wont_be :nil?
-    document.created_at.must_equal document_time
-    document.updated_at.wont_be :nil?
-    document.updated_at.must_equal document_time
-    document.read_at.wont_be :nil?
-    document.read_at.must_equal document_time
-    document.must_be :exists?
-    document.wont_be :missing?
+    _(document.data).wont_be :nil?
+    _(document.data).must_be_kind_of Hash
+    _(document.data).must_equal({ name: "Mike" })
+    _(document.created_at).wont_be :nil?
+    _(document.created_at).must_equal document_time
+    _(document.updated_at).wont_be :nil?
+    _(document.updated_at).must_equal document_time
+    _(document.read_at).wont_be :nil?
+    _(document.read_at).must_equal document_time
+    _(document).must_be :exists?
+    _(document).wont_be :missing?
 
     # aliases for resource methods
-    document.fields.wont_be :nil?
-    document.fields.must_be_kind_of Hash
-    document.fields.must_equal({ name: "Mike" })
-    document.create_time.wont_be :nil?
-    document.create_time.must_equal document_time
-    document.update_time.wont_be :nil?
-    document.update_time.must_equal document_time
-    document.read_time.wont_be :nil?
-    document.read_time.must_equal document_time
+    _(document.fields).wont_be :nil?
+    _(document.fields).must_be_kind_of Hash
+    _(document.fields).must_equal({ name: "Mike" })
+    _(document.create_time).wont_be :nil?
+    _(document.create_time).must_equal document_time
+    _(document.update_time).wont_be :nil?
+    _(document.update_time).must_equal document_time
+    _(document.read_time).wont_be :nil?
+    _(document.read_time).must_equal document_time
   end
 
   it "represents a missing document reference" do
     document.grpc = nil
 
-    document.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(document).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
     # document's metadata
-    document.document_id.must_equal "mike"
-    document.document_path.must_equal document_path
+    _(document.document_id).must_equal "mike"
+    _(document.document_path).must_equal document_path
 
-    document.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    document.parent.collection_id.must_equal "users"
-    document.parent.collection_path.must_equal "users"
+    _(document.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(document.parent.collection_id).must_equal "users"
+    _(document.parent.collection_path).must_equal "users"
 
     # a reference document does not have any data
-    document.data.must_be :nil?
-    document.created_at.must_be :nil?
-    document.updated_at.must_be :nil?
-    document.read_at.wont_be :nil?
-    document.read_at.must_equal document_time
-    document.wont_be :exists?
-    document.must_be :missing?
+    _(document.data).must_be :nil?
+    _(document.created_at).must_be :nil?
+    _(document.updated_at).must_be :nil?
+    _(document.read_at).wont_be :nil?
+    _(document.read_at).must_equal document_time
+    _(document).wont_be :exists?
+    _(document).must_be :missing?
 
     # aliases for resource methods
-    document.fields.must_be :nil?
-    document.create_time.must_be :nil?
-    document.update_time.must_be :nil?
-    document.read_time.wont_be :nil?
-    document.read_time.must_equal document_time
+    _(document.fields).must_be :nil?
+    _(document.create_time).must_be :nil?
+    _(document.update_time).must_be :nil?
+    _(document.read_time).wont_be :nil?
+    _(document.read_time).must_equal document_time
   end
 end

@@ -25,8 +25,8 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, []
 
-    commit_response.commit_time.must_be :nil?
-    commit_response.write_results.must_be :empty?
+    _(commit_response.commit_time).must_be :nil?
+    _(commit_response.write_results).must_be :empty?
   end
 
   it "can represent an empty result" do
@@ -34,8 +34,8 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, []
 
-    commit_response.commit_time.must_be :nil?
-    commit_response.write_results.must_be :empty?
+    _(commit_response.commit_time).must_be :nil?
+    _(commit_response.write_results).must_be :empty?
   end
 
   it "can represent results with transforms" do
@@ -55,10 +55,10 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
-    commit_response.commit_time.must_equal update_time
-    commit_response.write_results.size.must_equal 1
+    _(commit_response.commit_time).must_equal update_time
+    _(commit_response.write_results.size).must_equal 1
     commit_response.write_results.first.tap do |write_result|
-      write_result.update_time.must_equal update_time
+      _(write_result.update_time).must_equal update_time
     end
   end
 
@@ -73,9 +73,9 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
-    commit_response.commit_time.must_equal update_time
-    commit_response.write_results.size.must_equal 1
-    commit_response.write_results[0].update_time.must_equal update_time
+    _(commit_response.commit_time).must_equal update_time
+    _(commit_response.write_results.size).must_equal 1
+    _(commit_response.write_results[0].update_time).must_equal update_time
   end
 
   it "can represent results without and with update_time" do
@@ -89,9 +89,9 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
-    commit_response.commit_time.must_equal update_time
-    commit_response.write_results.size.must_equal 1
-    commit_response.write_results[0].update_time.must_equal update_time
+    _(commit_response.commit_time).must_equal update_time
+    _(commit_response.write_results.size).must_equal 1
+    _(commit_response.write_results[0].update_time).must_equal update_time
   end
 
   it "can represent results without update_time" do
@@ -105,9 +105,9 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two]]
 
-    commit_response.commit_time.must_equal update_time
-    commit_response.write_results.size.must_equal 1
-    commit_response.write_results[0].update_time.must_equal update_time
+    _(commit_response.commit_time).must_equal update_time
+    _(commit_response.write_results.size).must_equal 1
+    _(commit_response.write_results[0].update_time).must_equal update_time
   end
 
   it "can represent results without mismatched writes" do
@@ -121,9 +121,9 @@ describe Google::Cloud::Firestore::CommitResponse, :mock_firestore do
 
     commit_response = Google::Cloud::Firestore::CommitResponse.from_grpc grpc_response, [[:one, :two], :three]
 
-    commit_response.commit_time.must_equal update_time
-    commit_response.write_results.size.must_equal 2
-    commit_response.write_results[0].update_time.must_equal update_time
-    commit_response.write_results[1].update_time.must_equal update_time
+    _(commit_response.commit_time).must_equal update_time
+    _(commit_response.write_results.size).must_equal 2
+    _(commit_response.write_results[0].update_time).must_equal update_time
+    _(commit_response.write_results[1].update_time).must_equal update_time
   end
 end

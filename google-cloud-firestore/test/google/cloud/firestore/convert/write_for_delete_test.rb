@@ -29,7 +29,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_delete do
 
     actual_write = Google::Cloud::Firestore::Convert.write_for_delete document_path, exists: true
 
-    actual_write.must_equal expected_write
+    _(actual_write).must_equal expected_write
   end
 
   it "delete without precondition" do
@@ -39,7 +39,7 @@ describe Google::Cloud::Firestore::Convert, :write_for_delete do
 
     actual_write = Google::Cloud::Firestore::Convert.write_for_delete document_path
 
-    actual_write.must_equal expected_write
+    _(actual_write).must_equal expected_write
   end
 
   it "delete with last-update-time precondition" do

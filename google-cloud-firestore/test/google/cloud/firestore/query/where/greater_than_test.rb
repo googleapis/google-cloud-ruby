@@ -29,7 +29,7 @@ describe Google::Cloud::Firestore::Query, :where, :greater_than, :mock_firestore
     )
 
     generated_query = query.where(:foo, :>, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using gt" do
@@ -44,7 +44,7 @@ describe Google::Cloud::Firestore::Query, :where, :greater_than, :mock_firestore
     )
 
     generated_query = query.where(:foo, :gt, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using >=" do
@@ -59,7 +59,7 @@ describe Google::Cloud::Firestore::Query, :where, :greater_than, :mock_firestore
     )
 
     generated_query = query.where(:foo, :>=, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using gte" do
@@ -74,6 +74,6 @@ describe Google::Cloud::Firestore::Query, :where, :greater_than, :mock_firestore
     )
 
     generated_query = query.where(:foo, :gte, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 end

@@ -21,19 +21,19 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
     firestore_mock.expect :list_collection_ids, ["messages", "follows", "followers"].to_enum, [shallow_doc.path, options: default_options]
 
     col_enum = shallow_doc.cols
-    col_enum.must_be_kind_of Enumerator
+    _(col_enum).must_be_kind_of Enumerator
 
     col_ids = col_enum.map do |col|
-      col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
 
-      col.parent.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-      col.parent.document_id.must_equal shallow_doc.document_id
-      col.parent.document_path.must_equal shallow_doc.document_path
+      _(col.parent).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(col.parent.document_id).must_equal shallow_doc.document_id
+      _(col.parent.document_path).must_equal shallow_doc.document_path
 
       col.collection_id
     end
-    col_ids.wont_be :empty?
-    col_ids.must_equal ["messages", "follows", "followers"]
+    _(col_ids).wont_be :empty?
+    _(col_ids).must_equal ["messages", "follows", "followers"]
   end
 
   it "retrieves collections from nested document" do
@@ -42,19 +42,19 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
     firestore_mock.expect :list_collection_ids, ["likes", "saves", "hearts"].to_enum, [nested_doc.path, options: default_options]
 
     col_enum = nested_doc.cols
-    col_enum.must_be_kind_of Enumerator
+    _(col_enum).must_be_kind_of Enumerator
 
     col_ids = col_enum.map do |col|
-      col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
 
-      col.parent.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-      col.parent.document_id.must_equal nested_doc.document_id
-      col.parent.document_path.must_equal nested_doc.document_path
+      _(col.parent).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(col.parent.document_id).must_equal nested_doc.document_id
+      _(col.parent.document_path).must_equal nested_doc.document_path
 
       col.collection_id
     end
-    col_ids.wont_be :empty?
-    col_ids.must_equal ["likes", "saves", "hearts"]
+    _(col_ids).wont_be :empty?
+    _(col_ids).must_equal ["likes", "saves", "hearts"]
   end
 
   it "retrieves collections from a document that does not exist" do
@@ -63,8 +63,8 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
     firestore_mock.expect :list_collection_ids, [].to_enum, [missing_doc.path, options: default_options]
 
     col_enum = missing_doc.cols
-    col_enum.must_be_kind_of Enumerator
-    col_enum.to_a.must_be :empty?
+    _(col_enum).must_be_kind_of Enumerator
+    _(col_enum.to_a).must_be :empty?
   end
 
   describe "using collections alias" do
@@ -74,19 +74,19 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
       firestore_mock.expect :list_collection_ids, ["messages", "follows", "followers"].to_enum, [shallow_doc.path, options: default_options]
 
       col_enum = shallow_doc.collections
-      col_enum.must_be_kind_of Enumerator
+      _(col_enum).must_be_kind_of Enumerator
 
       col_ids = col_enum.map do |col|
-        col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
+        _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
 
-        col.parent.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-        col.parent.document_id.must_equal shallow_doc.document_id
-        col.parent.document_path.must_equal shallow_doc.document_path
+        _(col.parent).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+        _(col.parent.document_id).must_equal shallow_doc.document_id
+        _(col.parent.document_path).must_equal shallow_doc.document_path
 
         col.collection_id
       end
-      col_ids.wont_be :empty?
-      col_ids.must_equal ["messages", "follows", "followers"]
+      _(col_ids).wont_be :empty?
+      _(col_ids).must_equal ["messages", "follows", "followers"]
     end
 
     it "retrieves collections from nested document" do
@@ -95,19 +95,19 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
       firestore_mock.expect :list_collection_ids, ["likes", "saves", "hearts"].to_enum, [nested_doc.path, options: default_options]
 
       col_enum = nested_doc.collections
-      col_enum.must_be_kind_of Enumerator
+      _(col_enum).must_be_kind_of Enumerator
 
       col_ids = col_enum.map do |col|
-        col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
+        _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
 
-        col.parent.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-        col.parent.document_id.must_equal nested_doc.document_id
-        col.parent.document_path.must_equal nested_doc.document_path
+        _(col.parent).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+        _(col.parent.document_id).must_equal nested_doc.document_id
+        _(col.parent.document_path).must_equal nested_doc.document_path
 
         col.collection_id
       end
-      col_ids.wont_be :empty?
-      col_ids.must_equal ["likes", "saves", "hearts"]
+      _(col_ids).wont_be :empty?
+      _(col_ids).must_equal ["likes", "saves", "hearts"]
     end
 
     it "retrieves collections from a document that does not exist" do
@@ -116,8 +116,8 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
       firestore_mock.expect :list_collection_ids, [].to_enum, [missing_doc.path, options: default_options]
 
       col_enum = missing_doc.collections
-      col_enum.must_be_kind_of Enumerator
-      col_enum.to_a.must_be :empty?
+      _(col_enum).must_be_kind_of Enumerator
+      _(col_enum.to_a).must_be :empty?
     end
   end
 end

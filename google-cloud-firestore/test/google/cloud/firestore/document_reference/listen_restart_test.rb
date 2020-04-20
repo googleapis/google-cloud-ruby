@@ -228,29 +228,29 @@ describe Google::Cloud::Firestore::DocumentReference, :listen, :retry, :watch_fi
 
   def verify_doc_snapshots snapshots
     assert snapshots
-    snapshots.count.must_equal 6
-    snapshots.each { |qs| qs.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
+    _(snapshots.count).must_equal 6
+    snapshots.each { |qs| _(qs).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot }
 
-    snapshots[0].document_path.must_equal document.document_path
-    snapshots[0].must_be :exists?
-    snapshots[0][:val].must_be :nil?
+    _(snapshots[0].document_path).must_equal document.document_path
+    _(snapshots[0]).must_be :exists?
+    _(snapshots[0][:val]).must_be :nil?
 
-    snapshots[1].document_path.must_equal document.document_path
-    snapshots[1].must_be :exists?
-    snapshots[1][:val].must_equal 42
+    _(snapshots[1].document_path).must_equal document.document_path
+    _(snapshots[1]).must_be :exists?
+    _(snapshots[1][:val]).must_equal 42
 
-    snapshots[2].document_path.must_equal document.document_path
-    snapshots[2].must_be :missing?
+    _(snapshots[2].document_path).must_equal document.document_path
+    _(snapshots[2]).must_be :missing?
 
-    snapshots[3].document_path.must_equal document.document_path
-    snapshots[3].must_be :exists?
-    snapshots[3][:val].must_equal 11.1
+    _(snapshots[3].document_path).must_equal document.document_path
+    _(snapshots[3]).must_be :exists?
+    _(snapshots[3][:val]).must_equal 11.1
 
-    snapshots[4].document_path.must_equal document.document_path
-    snapshots[4].must_be :missing?
+    _(snapshots[4].document_path).must_equal document.document_path
+    _(snapshots[4]).must_be :missing?
 
-    snapshots[5].document_path.must_equal document.document_path
-    snapshots[5].must_be :exists?
-    snapshots[5][:val].must_equal "hi"
+    _(snapshots[5].document_path).must_equal document.document_path
+    _(snapshots[5]).must_be :exists?
+    _(snapshots[5][:val]).must_equal "hi"
   end
 end

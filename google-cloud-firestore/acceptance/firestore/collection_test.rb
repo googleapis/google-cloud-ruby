@@ -16,32 +16,32 @@ require "firestore_helper"
 
 describe "Collection", :firestore_acceptance do
   it "has properties" do
-    root_col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    root_col.collection_id.must_equal root_path
-    root_col.collection_path.must_equal root_path
+    _(root_col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(root_col.collection_id).must_equal root_path
+    _(root_col.collection_path).must_equal root_path
 
-    root_col.parent.must_equal firestore
+    _(root_col.parent).must_equal firestore
   end
 
   it "has doc method" do
     doc_ref = root_col.doc # no id, will create random id instead
 
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    doc_ref.client.must_be_kind_of Google::Cloud::Firestore::Client
-    doc_ref.document_id.length.must_equal 20 # random doc id
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref.client).must_be_kind_of Google::Cloud::Firestore::Client
+    _(doc_ref.document_id.length).must_equal 20 # random doc id
 
-    doc_ref.parent.collection_path.must_equal root_col.collection_path
+    _(doc_ref.parent.collection_path).must_equal root_col.collection_path
   end
 
   it "has add method" do
     doc_ref = root_col.add({ foo: "hello world" })
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    doc_ref.client.must_be_kind_of Google::Cloud::Firestore::Client
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref.client).must_be_kind_of Google::Cloud::Firestore::Client
 
     doc_snp = doc_ref.get
-    doc_snp.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(doc_snp).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
-    doc_snp[:foo].must_equal "hello world"
+    _(doc_snp[:foo]).must_equal "hello world"
   end
 
   it "lists its documents" do
@@ -50,15 +50,15 @@ describe "Collection", :firestore_acceptance do
     rand_col.add({bar: "foo"})
     docs = rand_col.list_documents
 
-    docs.must_be_kind_of Array
-    docs.size.must_be :>, 1
-    docs.first.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    docs.first.client.must_be_kind_of Google::Cloud::Firestore::Client
+    _(docs).must_be_kind_of Array
+    _(docs.size).must_be :>, 1
+    _(docs.first).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(docs.first.client).must_be_kind_of Google::Cloud::Firestore::Client
 
     docs_max_1 = rand_col.list_documents max: 1
-    docs_max_1.size.must_equal 1
+    _(docs_max_1.size).must_equal 1
 
     rand_col.list_documents.map(&:delete)
-    rand_col.list_documents.must_be :empty?
+    _(rand_col.list_documents).must_be :empty?
   end
 end
