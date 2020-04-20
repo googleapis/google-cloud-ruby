@@ -71,25 +71,25 @@ describe Google::Cloud::Datastore::Dataset::QueryResults, :mock_datastore do
     dataset.service.mocked_service.expect :run_query, run_query_res_not_finished, [project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.more_results.must_equal :NOT_FINISHED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :NOT_FINISHED
     assert entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -100,25 +100,25 @@ describe Google::Cloud::Datastore::Dataset::QueryResults, :mock_datastore do
     dataset.service.mocked_service.expect :run_query, run_query_res_more_after_limit, [project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_AFTER_LIMIT
+    _(entities.cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_AFTER_LIMIT
     refute entities.not_finished?
     assert entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -129,25 +129,25 @@ describe Google::Cloud::Datastore::Dataset::QueryResults, :mock_datastore do
     dataset.service.mocked_service.expect :run_query, run_query_res_more_after_cursor, [project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_AFTER_CURSOR
+    _(entities.cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_AFTER_CURSOR
     refute entities.not_finished?
     refute entities.more_after_limit?
     assert entities.more_after_cursor?
@@ -158,25 +158,25 @@ describe Google::Cloud::Datastore::Dataset::QueryResults, :mock_datastore do
     dataset.service.mocked_service.expect :run_query, run_query_res_no_more, [project, partition_id: nil, read_options: nil, query: query.to_grpc, gql_query: nil, options: default_options]
 
     entities = dataset.run query
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.more_results.must_equal :NO_MORE_RESULTS
+    _(entities.cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :NO_MORE_RESULTS
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?

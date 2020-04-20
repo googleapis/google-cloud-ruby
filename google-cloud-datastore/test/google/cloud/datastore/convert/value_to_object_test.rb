@@ -25,31 +25,31 @@ describe Google::Cloud::Datastore::Convert, :value_to_object do
 
   it "converts nil value" do
     obj = Google::Cloud::Datastore::Convert.value_to_object nil_value
-    obj.must_be :nil?
+    _(obj).must_be :nil?
   end
 
   it "converts true value" do
     obj = Google::Cloud::Datastore::Convert.value_to_object true_value
-    obj.must_equal true
+    _(obj).must_equal true
   end
 
   it "converts string value" do
     obj = Google::Cloud::Datastore::Convert.value_to_object string_value
-    obj.must_equal "bif"
+    _(obj).must_equal "bif"
   end
 
   it "converts num value" do
     obj = Google::Cloud::Datastore::Convert.value_to_object num_value
-    obj.must_equal 3.14
+    _(obj).must_equal 3.14
   end
 
   it "converts struct value" do
     obj = Google::Cloud::Datastore::Convert.value_to_object struct_value
-    obj.must_equal({ "foo" => "bar" })
+    _(obj).must_equal({ "foo" => "bar" })
   end
 
   it "converts list value" do
     obj = Google::Cloud::Datastore::Convert.value_to_object list_value
-    obj.must_equal ["hello", "world"]
+    _(obj).must_equal ["hello", "world"]
   end
 end

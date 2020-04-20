@@ -75,7 +75,7 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
 
     key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
     entity = transaction.find key
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
   end
 
   it "find_all takes several keys" do
@@ -87,11 +87,11 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
     entities = transaction.find_all key1, key2
-    entities.count.must_equal 2
-    entities.deferred.count.must_equal 0
-    entities.missing.count.must_equal 0
+    _(entities.count).must_equal 2
+    _(entities.deferred.count).must_equal 0
+    _(entities.missing.count).must_equal 0
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -101,13 +101,13 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
 
     query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = transaction.run query
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.end_cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -119,26 +119,26 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
 
     gql = transaction.gql "SELECT * FROM Task"
     entities = transaction.run gql
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor_for(entities.first).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
-    entities.cursor_for(entities.last).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
+    _(entities.cursor_for(entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-0")
+    _(entities.cursor_for(entities.last)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1")
     entities.each_with_cursor do |entity, cursor|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     # can use the enumerator without passing a block...
     entities.each_with_cursor.map do |entity, cursor|
       [entity.key, cursor]
     end.each do |result, cursor|
-      result.must_be_kind_of Google::Cloud::Datastore::Key
-      cursor.must_be_kind_of Google::Cloud::Datastore::Cursor
+      _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.end_cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -147,91 +147,91 @@ describe Google::Cloud::Datastore::ReadOnlyTransaction, :mock_datastore do
 
   describe "error handling" do
     it "start will raise if transaction is already open" do
-      transaction.id.wont_be :nil?
+      _(transaction.id).wont_be :nil?
       error = assert_raises Google::Cloud::Datastore::TransactionError do
         transaction.start
       end
-      error.wont_be :nil?
-      error.message.must_equal "Transaction already opened."
+      _(error).wont_be :nil?
+      _(error.message).must_equal "Transaction already opened."
     end
 
     it "commit will raise if transaction is not open" do
-      transaction.id.wont_be :nil?
+      _(transaction.id).wont_be :nil?
       transaction.reset!
-      transaction.id.must_be :nil?
+      _(transaction.id).must_be :nil?
       error = assert_raises Google::Cloud::Datastore::TransactionError do
         transaction.commit
       end
-      error.wont_be :nil?
-      error.message.must_equal "Cannot commit when not in a transaction."
+      _(error).wont_be :nil?
+      _(error.message).must_equal "Cannot commit when not in a transaction."
     end
 
     it "transaction will raise if transaction is not open" do
-      transaction.id.wont_be :nil?
+      _(transaction.id).wont_be :nil?
       transaction.reset!
-      transaction.id.must_be :nil?
+      _(transaction.id).must_be :nil?
       error = assert_raises Google::Cloud::Datastore::TransactionError do
         transaction.rollback
       end
-      error.wont_be :nil?
-      error.message.must_equal "Cannot rollback when not in a transaction."
+      _(error).wont_be :nil?
+      _(error.message).must_equal "Cannot rollback when not in a transaction."
     end
   end
 
   it "query returns a Query instance" do
     query = transaction.query "Task"
-    query.must_be_kind_of Google::Cloud::Datastore::Query
+    _(query).must_be_kind_of Google::Cloud::Datastore::Query
 
     grpc = query.to_grpc
-    grpc.kind.map(&:name).must_include "Task"
-    grpc.kind.map(&:name).wont_include "User"
+    _(grpc.kind.map(&:name)).must_include "Task"
+    _(grpc.kind.map(&:name)).wont_include "User"
 
     # Add a second kind to the query
     query.kind "User"
 
     grpc = query.to_grpc
-    grpc.kind.map(&:name).must_include "Task"
-    grpc.kind.map(&:name).must_include "User"
+    _(grpc.kind.map(&:name)).must_include "Task"
+    _(grpc.kind.map(&:name)).must_include "User"
   end
 
   it "key returns a Key instance" do
     key = transaction.key "ThisThing", 1234
-    key.must_be_kind_of Google::Cloud::Datastore::Key
-    key.kind.must_equal "ThisThing"
-    key.id.must_equal 1234
-    key.name.must_be :nil?
+    _(key).must_be_kind_of Google::Cloud::Datastore::Key
+    _(key.kind).must_equal "ThisThing"
+    _(key.id).must_equal 1234
+    _(key.name).must_be :nil?
 
     key = transaction.key "ThisThing", "charlie"
-    key.must_be_kind_of Google::Cloud::Datastore::Key
-    key.kind.must_equal "ThisThing"
-    key.id.must_be :nil?
-    key.name.must_equal "charlie"
+    _(key).must_be_kind_of Google::Cloud::Datastore::Key
+    _(key.kind).must_equal "ThisThing"
+    _(key.id).must_be :nil?
+    _(key.name).must_equal "charlie"
   end
 
   it "key sets a parent and grandparent in the constructor" do
     path = [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
     key = transaction.key path, project: "custom-ds", namespace: "custom-ns"
-    key.kind.must_equal "ThisThing"
-    key.id.must_equal 1234
-    key.name.must_be :nil?
-    key.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
-    key.project.must_equal "custom-ds"
-    key.namespace.must_equal "custom-ns"
+    _(key.kind).must_equal "ThisThing"
+    _(key.id).must_equal 1234
+    _(key.name).must_be :nil?
+    _(key.path).must_equal [["OtherThing", "root"], ["ThatThing", 6789], ["ThisThing", 1234]]
+    _(key.project).must_equal "custom-ds"
+    _(key.namespace).must_equal "custom-ns"
 
-    key.parent.wont_be :nil?
-    key.parent.kind.must_equal "ThatThing"
-    key.parent.id.must_equal 6789
-    key.parent.name.must_be :nil?
-    key.parent.path.must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
-    key.parent.project.must_equal "custom-ds"
-    key.parent.namespace.must_equal "custom-ns"
+    _(key.parent).wont_be :nil?
+    _(key.parent.kind).must_equal "ThatThing"
+    _(key.parent.id).must_equal 6789
+    _(key.parent.name).must_be :nil?
+    _(key.parent.path).must_equal [["OtherThing", "root"], ["ThatThing", 6789]]
+    _(key.parent.project).must_equal "custom-ds"
+    _(key.parent.namespace).must_equal "custom-ns"
 
-    key.parent.parent.wont_be :nil?
-    key.parent.parent.kind.must_equal "OtherThing"
-    key.parent.parent.id.must_be :nil?
-    key.parent.parent.name.must_equal "root"
-    key.parent.parent.path.must_equal [["OtherThing", "root"]]
-    key.parent.parent.project.must_equal "custom-ds"
-    key.parent.parent.namespace.must_equal "custom-ns"
+    _(key.parent.parent).wont_be :nil?
+    _(key.parent.parent.kind).must_equal "OtherThing"
+    _(key.parent.parent.id).must_be :nil?
+    _(key.parent.parent.name).must_equal "root"
+    _(key.parent.parent.path).must_equal [["OtherThing", "root"]]
+    _(key.parent.parent.project).must_equal "custom-ds"
+    _(key.parent.parent.namespace).must_equal "custom-ns"
   end
 end

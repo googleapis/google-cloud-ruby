@@ -66,29 +66,29 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
   end
 
   it "save does not persist entities" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
     end
     transaction.save entity
     # Testing implementation like we are writing Java!
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts").must_include entity
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts")).must_include entity
   end
 
   it "save does not persist entities with upsert alias" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
     end
     transaction.upsert entity
     # Testing implementation like we are writing Java!
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts").must_include entity
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts")).must_include entity
   end
 
   it "save does not persist multiple entities" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity1 = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
@@ -98,12 +98,12 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "thungamajig"
     end
     transaction.save entity1, entity2
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts").must_include entity1
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts").must_include entity2
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts")).must_include entity1
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts")).must_include entity2
   end
 
   it "save does not persist multiple entities in an array" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity1 = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
@@ -113,23 +113,23 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "thungamajig"
     end
     transaction.save [entity1, entity2]
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts").must_include entity1
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts").must_include entity2
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts")).must_include entity1
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_upserts")).must_include entity2
   end
 
   it "insert does not persist entities" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
     end
     transaction.insert entity
     # Testing implementation like we are writing Java!
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts").must_include entity
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts")).must_include entity
   end
 
   it "insert does not persist multiple entities" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity1 = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
@@ -139,12 +139,12 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "thungamajig"
     end
     transaction.insert entity1, entity2
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts").must_include entity1
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts").must_include entity2
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts")).must_include entity1
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts")).must_include entity2
   end
 
   it "insert does not persist multiple entities in an array" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity1 = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
@@ -154,23 +154,23 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "thungamajig"
     end
     transaction.insert [entity1, entity2]
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts").must_include entity1
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts").must_include entity2
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts")).must_include entity1
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_inserts")).must_include entity2
   end
 
   it "update does not persist entities" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
     end
     transaction.update entity
     # Testing implementation like we are writing Java!
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates").must_include entity
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates")).must_include entity
   end
 
   it "update does not persist multiple entities" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity1 = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
@@ -180,12 +180,12 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "thungamajig"
     end
     transaction.update entity1, entity2
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates").must_include entity1
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates").must_include entity2
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates")).must_include entity1
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates")).must_include entity2
   end
 
   it "update does not persist multiple entities in an array" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity1 = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
@@ -195,8 +195,8 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "thungamajig"
     end
     transaction.update [entity1, entity2]
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates").must_include entity1
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates").must_include entity2
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates")).must_include entity1
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_updates")).must_include entity2
   end
 
   it "delete does not persist entities" do
@@ -206,11 +206,11 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
     end
     transaction.delete entity
     # Testing implementation is bad, mkay?
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity.key
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes")).must_include entity.key
   end
 
   it "delete does not persist multiple entities" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity1 = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
@@ -220,12 +220,12 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "thungamajig"
     end
     transaction.delete entity1, entity2
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity1.key
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity2.key
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes")).must_include entity1.key
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes")).must_include entity2.key
   end
 
   it "delete does not persist multiple entities in an array" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity1 = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
@@ -235,8 +235,8 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "thungamajig"
     end
     transaction.delete [entity1, entity2]
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity1.key
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity2.key
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes")).must_include entity1.key
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes")).must_include entity2.key
   end
 
   it "delete does not persist keys" do
@@ -246,11 +246,11 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
     end
     transaction.delete entity.key
     # Testing implementation like a BOSS!
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity.key
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes")).must_include entity.key
   end
 
   it "delete does not persist multiple keys" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity1 = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
@@ -260,12 +260,12 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "thungamajig"
     end
     transaction.delete entity1.key, entity2.key
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity1.key
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity2.key
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes")).must_include entity1.key
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes")).must_include entity2.key
   end
 
   it "delete does not persist multiple keys in an array" do
-    begin_tx_res.wont_equal "poop"
+    _(begin_tx_res).wont_equal "poop"
     entity1 = Google::Cloud::Datastore::Entity.new.tap do |e|
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
@@ -275,8 +275,8 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "thungamajig"
     end
     transaction.delete [entity1.key, entity2.key]
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity1.key
-    transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes").must_include entity2.key
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes")).must_include entity1.key
+    _(transaction.instance_variable_get("@commit").instance_variable_get("@shared_deletes")).must_include entity2.key
   end
 
   it "commit will save and delete entities" do
@@ -324,14 +324,14 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e["name"] = "Gonna be deleted"
     end
 
-    entity_to_be_saved.wont_be :persisted?
+    _(entity_to_be_saved).wont_be :persisted?
     transaction.commit do |c|
       c.save entity_to_be_saved
       c.insert entity_to_be_inserted
       c.update entity_to_be_updated
       c.delete entity_to_be_deleted
     end
-    entity_to_be_saved.must_be :persisted?
+    _(entity_to_be_saved).must_be :persisted?
   end
 
   it "find can take a key" do
@@ -341,7 +341,7 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
 
     key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
     entity = transaction.find key
-    entity.must_be_kind_of Google::Cloud::Datastore::Entity
+    _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
   end
 
   it "find_all takes several keys" do
@@ -353,11 +353,11 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
     key1 = Google::Cloud::Datastore::Key.new "ds-test", "thingie1"
     key2 = Google::Cloud::Datastore::Key.new "ds-test", "thingie2"
     entities = transaction.find_all key1, key2
-    entities.count.must_equal 2
-    entities.deferred.count.must_equal 0
-    entities.missing.count.must_equal 0
+    _(entities.count).must_equal 2
+    _(entities.deferred.count).must_equal 0
+    _(entities.missing.count).must_equal 0
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -368,13 +368,13 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
 
     query = Google::Cloud::Datastore::Query.new.kind("User")
     entities = transaction.run query
-    entities.count.must_equal 2
+    _(entities.count).must_equal 2
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
-    entities.cursor.must_equal query_cursor
-    entities.end_cursor.must_equal query_cursor
-    entities.more_results.must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
+    _(entities.cursor).must_equal query_cursor
+    _(entities.end_cursor).must_equal query_cursor
+    _(entities.more_results).must_equal :MORE_RESULTS_TYPE_UNSPECIFIED
     refute entities.not_finished?
     refute entities.more_after_limit?
     refute entities.more_after_cursor?
@@ -399,12 +399,12 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test", "thingie"
       e["name"] = "thingamajig"
     end
-    entity.key.must_be :complete?
+    _(entity.key).must_be :complete?
     transaction.save entity
-    entity.wont_be :persisted?
+    _(entity).wont_be :persisted?
     transaction.commit
-    entity.key.must_be :complete?
-    entity.must_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).must_be :persisted?
   end
 
   it "commit persists entities with incomplete keys" do
@@ -428,12 +428,12 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
       e.key = Google::Cloud::Datastore::Key.new "ds-test"
       e["name"] = "thingamajig"
     end
-    entity.key.must_be :incomplete?
+    _(entity.key).must_be :incomplete?
     transaction.save entity
-    entity.wont_be :persisted?
+    _(entity).wont_be :persisted?
     transaction.commit
-    entity.key.must_be :complete?
-    entity.must_be :persisted?
+    _(entity.key).must_be :complete?
+    _(entity).must_be :persisted?
   end
 
   it "rollback does not persist entities" do
@@ -450,34 +450,34 @@ describe Google::Cloud::Datastore::Transaction, :mock_datastore do
 
   describe "error handling" do
     it "start will raise if transaction is already open" do
-      transaction.id.wont_be :nil?
+      _(transaction.id).wont_be :nil?
       error = assert_raises Google::Cloud::Datastore::TransactionError do
         transaction.start
       end
-      error.wont_be :nil?
-      error.message.must_equal "Transaction already opened."
+      _(error).wont_be :nil?
+      _(error.message).must_equal "Transaction already opened."
     end
 
     it "commit will raise if transaction is not open" do
-      transaction.id.wont_be :nil?
+      _(transaction.id).wont_be :nil?
       transaction.reset!
-      transaction.id.must_be :nil?
+      _(transaction.id).must_be :nil?
       error = assert_raises Google::Cloud::Datastore::TransactionError do
         transaction.commit
       end
-      error.wont_be :nil?
-      error.message.must_equal "Cannot commit when not in a transaction."
+      _(error).wont_be :nil?
+      _(error.message).must_equal "Cannot commit when not in a transaction."
     end
 
     it "transaction will raise if transaction is not open" do
-      transaction.id.wont_be :nil?
+      _(transaction.id).wont_be :nil?
       transaction.reset!
-      transaction.id.must_be :nil?
+      _(transaction.id).must_be :nil?
       error = assert_raises Google::Cloud::Datastore::TransactionError do
         transaction.rollback
       end
-      error.wont_be :nil?
-      error.message.must_equal "Cannot rollback when not in a transaction."
+      _(error).wont_be :nil?
+      _(error.message).must_equal "Cannot rollback when not in a transaction."
     end
   end
 end

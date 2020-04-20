@@ -29,19 +29,19 @@ describe Google::Cloud::Datastore::Convert, :struct_to_hash do
 
   it "converts empty struct" do
     hash = Google::Cloud::Datastore::Convert.struct_to_hash Google::Protobuf::Struct.new
-    hash.must_be_kind_of Hash
-    hash.must_be :empty?
+    _(hash).must_be_kind_of Hash
+    _(hash).must_be :empty?
   end
 
   it "converts complex struct" do
     hash = Google::Cloud::Datastore::Convert.struct_to_hash struct
-    hash.must_be_kind_of Hash
-    hash.wont_be :empty?
-    hash["foo"].must_be :nil?
-    hash["bar"].must_equal true
-    hash["baz"].must_equal "bif"
-    hash["pi"].must_equal 3.14
-    hash["meta"].must_equal({ "foo" => "bar" })
-    hash["msg"].must_equal ["hello", "world"]
+    _(hash).must_be_kind_of Hash
+    _(hash).wont_be :empty?
+    _(hash["foo"]).must_be :nil?
+    _(hash["bar"]).must_equal true
+    _(hash["baz"]).must_equal "bif"
+    _(hash["pi"]).must_equal 3.14
+    _(hash["meta"]).must_equal({ "foo" => "bar" })
+    _(hash["msg"]).must_equal ["hello", "world"]
   end
 end

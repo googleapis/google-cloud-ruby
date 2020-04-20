@@ -31,7 +31,7 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
     grpc.properties["name"] = Google::Cloud::Datastore::Convert.to_value "User McNumber"
 
     entity_from_grpc = Google::Cloud::Datastore::Entity.from_grpc grpc
-    entity_from_grpc.exclude_from_indexes?("name").must_equal false
+    _(entity_from_grpc.exclude_from_indexes?("name")).must_equal false
   end
 
   it "converts indexed list to not excluded from a GRPC object" do
@@ -41,7 +41,7 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
     grpc.properties["tags"] = Google::Cloud::Datastore::Convert.to_value ["ruby", "code"]
 
     entity_from_grpc = Google::Cloud::Datastore::Entity.from_grpc grpc
-    entity_from_grpc.exclude_from_indexes?("tags").must_equal [false, false]
+    _(entity_from_grpc.exclude_from_indexes?("tags")).must_equal [false, false]
   end
 
   it "doesn't exclude from indexes by default" do
@@ -50,19 +50,19 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
 
     grpc = entity.to_grpc
 
-    grpc.properties["name"].exclude_from_indexes.must_equal false
-    grpc.properties["email"].exclude_from_indexes.must_equal false
+    _(grpc.properties["name"].exclude_from_indexes).must_equal false
+    _(grpc.properties["email"].exclude_from_indexes).must_equal false
   end
 
   it "excludes when setting a boolean" do
     entity["age"] = 21
     entity.exclude_from_indexes! "age", true
 
-    entity.exclude_from_indexes?("age").must_equal true
+    _(entity.exclude_from_indexes?("age")).must_equal true
 
     grpc = entity.to_grpc
 
-    grpc.properties["age"].exclude_from_indexes.must_equal true
+    _(grpc.properties["age"].exclude_from_indexes).must_equal true
   end
 
   it "excludes when setting a Proc" do
@@ -71,11 +71,11 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
       age > 18
     end
 
-    entity.exclude_from_indexes?("age").must_equal true
+    _(entity.exclude_from_indexes?("age")).must_equal true
 
     grpc = entity.to_grpc
 
-    grpc.properties["age"].exclude_from_indexes.must_equal true
+    _(grpc.properties["age"].exclude_from_indexes).must_equal true
 
     # And now the inverse, the Proc evaluates to false
 
@@ -83,58 +83,58 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
       age < 18
     end
 
-    entity.exclude_from_indexes?("age").must_equal false
+    _(entity.exclude_from_indexes?("age")).must_equal false
 
     grpc = entity.to_grpc
 
-    grpc.properties["age"].exclude_from_indexes.must_equal false
+    _(grpc.properties["age"].exclude_from_indexes).must_equal false
   end
 
   it "excludes when setting an Array on a non array value" do
     entity["age"] = 21
     entity.exclude_from_indexes! "age", [true, false, true, false]
 
-    entity.exclude_from_indexes?("age").must_equal true
+    _(entity.exclude_from_indexes?("age")).must_equal true
 
     grpc = entity.to_grpc
 
-    grpc.properties["age"].exclude_from_indexes.must_equal true
+    _(grpc.properties["age"].exclude_from_indexes).must_equal true
 
     # And now the inverse, the first value is false
 
     entity.exclude_from_indexes! "age", [false, true, false, true]
 
-    entity.exclude_from_indexes?("age").must_equal false
+    _(entity.exclude_from_indexes?("age")).must_equal false
 
     grpc = entity.to_grpc
 
-    grpc.properties["age"].exclude_from_indexes.must_equal false
+    _(grpc.properties["age"].exclude_from_indexes).must_equal false
   end
 
   describe Array do
     it "doesn't exclude Array values from indexes by default" do
       entity["tags"] = ["ruby", "code"]
 
-      entity.exclude_from_indexes?("tags").must_equal [false, false]
+      _(entity.exclude_from_indexes?("tags")).must_equal [false, false]
 
       grpc = entity.to_grpc
 
       tag_grpc = grpc.properties["tags"]
-      tag_grpc.exclude_from_indexes.must_equal false
-        tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [false, false]
+      _(tag_grpc.exclude_from_indexes).must_equal false
+        _(tag_grpc.array_value.values.map(&:exclude_from_indexes)).must_equal [false, false]
     end
 
     it "excludes an Array when setting a boolean" do
       entity["tags"] = ["ruby", "code"]
       entity.exclude_from_indexes! "tags", true
 
-      entity.exclude_from_indexes?("tags").must_equal [true, true]
+      _(entity.exclude_from_indexes?("tags")).must_equal [true, true]
 
       grpc = entity.to_grpc
 
       tag_grpc = grpc.properties["tags"]
-      tag_grpc.exclude_from_indexes.must_equal false
-      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, true]
+      _(tag_grpc.exclude_from_indexes).must_equal false
+      _(tag_grpc.array_value.values.map(&:exclude_from_indexes)).must_equal [true, true]
     end
 
     it "excludes an Array when setting a Proc" do
@@ -143,13 +143,13 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
         tag =~ /r/
       end
 
-      entity.exclude_from_indexes?("tags").must_equal [true, false]
+      _(entity.exclude_from_indexes?("tags")).must_equal [true, false]
 
       grpc = entity.to_grpc
 
       tag_grpc = grpc.properties["tags"]
-      tag_grpc.exclude_from_indexes.must_equal false
-      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, false]
+      _(tag_grpc.exclude_from_indexes).must_equal false
+      _(tag_grpc.array_value.values.map(&:exclude_from_indexes)).must_equal [true, false]
 
       # And now the inverse, the Proc evaluates to false
 
@@ -158,26 +158,26 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
         tag =~ /c/
       end
 
-      entity.exclude_from_indexes?("tags").must_equal [false, true]
+      _(entity.exclude_from_indexes?("tags")).must_equal [false, true]
 
       grpc = entity.to_grpc
 
       tag_grpc = grpc.properties["tags"]
-      tag_grpc.exclude_from_indexes.must_equal false
-      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [false, true]
+      _(tag_grpc.exclude_from_indexes).must_equal false
+      _(tag_grpc.array_value.values.map(&:exclude_from_indexes)).must_equal [false, true]
     end
 
     it "excludes an Array when setting an Array" do
       entity["tags"] = ["ruby", "code"]
       entity.exclude_from_indexes! "tags", [true, false]
 
-      entity.exclude_from_indexes?("tags").must_equal [true, false]
+      _(entity.exclude_from_indexes?("tags")).must_equal [true, false]
 
       grpc = entity.to_grpc
 
       tag_grpc = grpc.properties["tags"]
-      tag_grpc.exclude_from_indexes.must_equal false
-      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, false]
+      _(tag_grpc.exclude_from_indexes).must_equal false
+      _(tag_grpc.array_value.values.map(&:exclude_from_indexes)).must_equal [true, false]
     end
 
     it "excludes an Array when setting an Array that is too small" do
@@ -185,38 +185,38 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
       entity.exclude_from_indexes! "tags", [true, false]
 
       # the default is to not exclude when the array is too small
-      entity.exclude_from_indexes?("tags").must_equal [true, false, false, false]
+      _(entity.exclude_from_indexes?("tags")).must_equal [true, false, false, false]
 
       grpc = entity.to_grpc
 
       tag_grpc = grpc.properties["tags"]
-      tag_grpc.exclude_from_indexes.must_equal false
-      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, false, false, false]
+      _(tag_grpc.exclude_from_indexes).must_equal false
+      _(tag_grpc.array_value.values.map(&:exclude_from_indexes)).must_equal [true, false, false, false]
     end
 
     it "excludes an Array when setting an Array that is too big" do
       entity["tags"] = ["ruby", "code"]
       entity.exclude_from_indexes! "tags", [true, false, true, false, true, false]
 
-      entity.exclude_from_indexes?("tags").must_equal [true, false]
+      _(entity.exclude_from_indexes?("tags")).must_equal [true, false]
 
       grpc = entity.to_grpc
 
       tag_grpc = grpc.properties["tags"]
-      tag_grpc.exclude_from_indexes.must_equal false
-      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, false]
+      _(tag_grpc.exclude_from_indexes).must_equal false
+      _(tag_grpc.array_value.values.map(&:exclude_from_indexes)).must_equal [true, false]
 
       # Now add to the entity and get the previously stored exclude values
 
       entity["tags"] = ["ruby", "code", "google", "cloud"]
 
-      entity.exclude_from_indexes?("tags").must_equal [true, false, true, false]
+      _(entity.exclude_from_indexes?("tags")).must_equal [true, false, true, false]
 
       grpc = entity.to_grpc
 
       tag_grpc = grpc.properties["tags"]
-      tag_grpc.exclude_from_indexes.must_equal false
-      tag_grpc.array_value.values.map(&:exclude_from_indexes).must_equal [true, false, true, false]
+      _(tag_grpc.exclude_from_indexes).must_equal false
+      _(tag_grpc.array_value.values.map(&:exclude_from_indexes)).must_equal [true, false, true, false]
     end
   end
 
@@ -224,21 +224,21 @@ describe Google::Cloud::Datastore::Entity, :exclude_from_indexes, :mock_datastor
     it "recalculates when changing from a single value to an array" do
       entity["tags"] = "ruby"
 
-      entity.exclude_from_indexes?("tags").must_equal false
+      _(entity.exclude_from_indexes?("tags")).must_equal false
 
       entity.exclude_from_indexes! "tags", true
 
-      entity.exclude_from_indexes?("tags").must_equal true
+      _(entity.exclude_from_indexes?("tags")).must_equal true
 
       entity["tags"] = ["ruby", "code"]
 
-      entity.exclude_from_indexes?("tags").must_equal [true, true]
+      _(entity.exclude_from_indexes?("tags")).must_equal [true, true]
 
       entity.exclude_from_indexes! "tags", [false, false]
 
       entity["tags"] = "ruby"
 
-      entity.exclude_from_indexes?("tags").must_equal false
+      _(entity.exclude_from_indexes?("tags")).must_equal false
     end
   end
 end

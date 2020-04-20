@@ -76,25 +76,25 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: nil, options: default_options]
 
     first_entities = dataset.find_all keys
-    first_entities.count.must_equal 2
-    first_entities.deferred.count.must_equal 2
-    first_entities.missing.count.must_equal 2
+    _(first_entities.count).must_equal 2
+    _(first_entities.deferred.count).must_equal 2
+    _(first_entities.missing.count).must_equal 2
     first_entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
     first_entities.deferred.each do |deferred_key|
-      deferred_key.must_be_kind_of Google::Cloud::Datastore::Key
+      _(deferred_key).must_be_kind_of Google::Cloud::Datastore::Key
     end
     first_entities.missing.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
 
     second_entities = dataset.find_all first_entities.deferred
-    second_entities.count.must_equal 2
-    second_entities.deferred.count.must_equal 0
-    second_entities.missing.count.must_equal 0
+    _(second_entities.count).must_equal 2
+    _(second_entities.deferred.count).must_equal 0
+    _(second_entities.missing.count).must_equal 0
     second_entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -104,25 +104,25 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: read_options, options: default_options]
 
     first_entities = dataset.find_all keys, consistency: :eventual
-    first_entities.count.must_equal 2
-    first_entities.deferred.count.must_equal 2
-    first_entities.missing.count.must_equal 2
+    _(first_entities.count).must_equal 2
+    _(first_entities.deferred.count).must_equal 2
+    _(first_entities.missing.count).must_equal 2
     first_entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
     first_entities.deferred.each do |deferred_key|
-      deferred_key.must_be_kind_of Google::Cloud::Datastore::Key
+      _(deferred_key).must_be_kind_of Google::Cloud::Datastore::Key
     end
     first_entities.missing.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
 
     second_entities = dataset.find_all first_entities.deferred, consistency: :eventual
-    second_entities.count.must_equal 2
-    second_entities.deferred.count.must_equal 0
-    second_entities.missing.count.must_equal 0
+    _(second_entities.count).must_equal 2
+    _(second_entities.deferred.count).must_equal 0
+    _(second_entities.missing.count).must_equal 0
     second_entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -142,25 +142,25 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
 
     dataset.transaction do |tx|
       first_entities = tx.find_all keys
-      first_entities.count.must_equal 2
-      first_entities.deferred.count.must_equal 2
-      first_entities.missing.count.must_equal 2
+      _(first_entities.count).must_equal 2
+      _(first_entities.deferred.count).must_equal 2
+      _(first_entities.missing.count).must_equal 2
       first_entities.each do |entity|
-        entity.must_be_kind_of Google::Cloud::Datastore::Entity
+        _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       end
       first_entities.deferred.each do |deferred_key|
-        deferred_key.must_be_kind_of Google::Cloud::Datastore::Key
+        _(deferred_key).must_be_kind_of Google::Cloud::Datastore::Key
       end
       first_entities.missing.each do |entity|
-        entity.must_be_kind_of Google::Cloud::Datastore::Entity
+        _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       end
 
       second_entities = tx.find_all first_entities.deferred
-      second_entities.count.must_equal 2
-      second_entities.deferred.count.must_equal 0
-      second_entities.missing.count.must_equal 0
+      _(second_entities.count).must_equal 2
+      _(second_entities.deferred.count).must_equal 0
+      _(second_entities.missing.count).must_equal 0
       second_entities.each do |entity|
-        entity.must_be_kind_of Google::Cloud::Datastore::Entity
+        _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       end
     end
   end
@@ -170,27 +170,27 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: nil, options: default_options]
 
     first_entities = dataset.find_all keys
-    first_entities.next?.must_equal true
-    first_entities.count.must_equal 2
-    first_entities.deferred.count.must_equal 2
-    first_entities.missing.count.must_equal 2
+    _(first_entities.next?).must_equal true
+    _(first_entities.count).must_equal 2
+    _(first_entities.deferred.count).must_equal 2
+    _(first_entities.missing.count).must_equal 2
     first_entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
     first_entities.deferred.each do |deferred_key|
-      deferred_key.must_be_kind_of Google::Cloud::Datastore::Key
+      _(deferred_key).must_be_kind_of Google::Cloud::Datastore::Key
     end
     first_entities.missing.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
 
     second_entities = first_entities.next
-    second_entities.next?.must_equal false
-    second_entities.count.must_equal 2
-    second_entities.deferred.count.must_equal 0
-    second_entities.missing.count.must_equal 0
+    _(second_entities.next?).must_equal false
+    _(second_entities.count).must_equal 2
+    _(second_entities.deferred.count).must_equal 0
+    _(second_entities.missing.count).must_equal 0
     second_entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -200,27 +200,27 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: read_options, options: default_options]
 
     first_entities = dataset.find_all keys, consistency: :eventual
-    first_entities.next?.must_equal true
-    first_entities.count.must_equal 2
-    first_entities.deferred.count.must_equal 2
-    first_entities.missing.count.must_equal 2
+    _(first_entities.next?).must_equal true
+    _(first_entities.count).must_equal 2
+    _(first_entities.deferred.count).must_equal 2
+    _(first_entities.missing.count).must_equal 2
     first_entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
     first_entities.deferred.each do |deferred_key|
-      deferred_key.must_be_kind_of Google::Cloud::Datastore::Key
+      _(deferred_key).must_be_kind_of Google::Cloud::Datastore::Key
     end
     first_entities.missing.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
 
     second_entities = first_entities.next
-    second_entities.next?.must_equal false
-    second_entities.count.must_equal 2
-    second_entities.deferred.count.must_equal 0
-    second_entities.missing.count.must_equal 0
+    _(second_entities.next?).must_equal false
+    _(second_entities.count).must_equal 2
+    _(second_entities.deferred.count).must_equal 0
+    _(second_entities.missing.count).must_equal 0
     second_entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -240,27 +240,27 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
 
     dataset.transaction do |tx|
       first_entities = tx.find_all keys
-      first_entities.next?.must_equal true
-      first_entities.count.must_equal 2
-      first_entities.deferred.count.must_equal 2
-      first_entities.missing.count.must_equal 2
+      _(first_entities.next?).must_equal true
+      _(first_entities.count).must_equal 2
+      _(first_entities.deferred.count).must_equal 2
+      _(first_entities.missing.count).must_equal 2
       first_entities.each do |entity|
-        entity.must_be_kind_of Google::Cloud::Datastore::Entity
+        _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       end
       first_entities.deferred.each do |deferred_key|
-        deferred_key.must_be_kind_of Google::Cloud::Datastore::Key
+        _(deferred_key).must_be_kind_of Google::Cloud::Datastore::Key
       end
       first_entities.missing.each do |entity|
-        entity.must_be_kind_of Google::Cloud::Datastore::Entity
+        _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       end
 
       second_entities = first_entities.next
-      second_entities.next?.must_equal false
-      second_entities.count.must_equal 2
-      second_entities.deferred.count.must_equal 0
-      second_entities.missing.count.must_equal 0
+      _(second_entities.next?).must_equal false
+      _(second_entities.count).must_equal 2
+      _(second_entities.deferred.count).must_equal 0
+      _(second_entities.missing.count).must_equal 0
       second_entities.each do |entity|
-        entity.must_be_kind_of Google::Cloud::Datastore::Entity
+        _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       end
     end
   end
@@ -270,9 +270,9 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: nil, options: default_options]
 
     entities = dataset.find_all(keys).all.to_a
-    entities.count.must_equal 4
+    _(entities.count).must_equal 4
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -282,9 +282,9 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: read_options, options: default_options]
 
     entities = dataset.find_all(keys, consistency: :eventual).all.to_a
-    entities.count.must_equal 4
+    _(entities.count).must_equal 4
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -304,9 +304,9 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
 
     dataset.transaction do |tx|
       entities = tx.find_all(keys).all.to_a
-      entities.count.must_equal 4
+      _(entities.count).must_equal 4
       entities.each do |entity|
-        entity.must_be_kind_of Google::Cloud::Datastore::Entity
+        _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       end
     end
   end
@@ -316,9 +316,9 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     dataset.service.mocked_service.expect :lookup, second_lookup_res, [project, second_keys, read_options: nil, options: default_options]
 
     entities = dataset.find_all(keys).all.take(3)
-    entities.count.must_equal 3
+    _(entities.count).must_equal 3
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 
@@ -329,9 +329,9 @@ describe Google::Cloud::Datastore::Dataset, :find_all, :mock_datastore do
     # This test is a bit handwavy, as there aren't more results to lookup.
     # But if you reduce the limit it will not make additional call.
     entities = dataset.find_all(keys).all(request_limit: 1).to_a
-    entities.count.must_equal 4
+    _(entities.count).must_equal 4
     entities.each do |entity|
-      entity.must_be_kind_of Google::Cloud::Datastore::Entity
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
     end
   end
 end
