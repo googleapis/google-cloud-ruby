@@ -168,7 +168,7 @@ module Google
         # This value type can be used only if the metric kind is `GAUGE`.
         STRING = 4
 
-        # The value is a [`Distribution`][google.api.Distribution].
+        # The value is a {Google::Api::Distribution `Distribution`}.
         DISTRIBUTION = 5
 
         # The value is money.
@@ -177,7 +177,7 @@ module Google
     end
 
     # A specific metric, identified by specifying values for all of the
-    # labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
+    # labels of a {Google::Api::MetricDescriptor `MetricDescriptor`}.
     # @!attribute [rw] type
     #   @return [String]
     #     An existing metric type, see {Google::Api::MetricDescriptor google.api.MetricDescriptor}.

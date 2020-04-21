@@ -105,7 +105,7 @@ module Google
         #   @return [Google::Protobuf::Duration]
         #     The `alignment_period` specifies a time interval, in seconds, that is used
         #     to divide the data in all the
-        #     [time series][google.monitoring.v3.TimeSeries] into consistent blocks of
+        #     {Google::Cloud::Monitoring::V3::TimeSeries time series} into consistent blocks of
         #     time. This will be done before the per-series aligner can be applied to
         #     the data.
         #

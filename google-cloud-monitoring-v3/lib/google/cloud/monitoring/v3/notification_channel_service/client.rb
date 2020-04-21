@@ -386,7 +386,7 @@ module Google
             #     in which to look for the notification channels; it does not name a
             #     specific channel. To query a specific channel by REST resource name, use
             #     the
-            #     [`GetNotificationChannel`][google.monitoring.v3.NotificationChannelService.GetNotificationChannel]
+            #     {Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel `GetNotificationChannel`}
             #     operation.
             #   @param filter [String]
             #     If provided, this field specifies the criteria that must be met by

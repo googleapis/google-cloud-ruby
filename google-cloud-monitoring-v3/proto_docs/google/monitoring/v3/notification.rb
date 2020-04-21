@@ -108,9 +108,9 @@ module Google
         # @!attribute [rw] verification_status
         #   @return [Google::Cloud::Monitoring::V3::NotificationChannel::VerificationStatus]
         #     Indicates whether this channel has been verified or not. On a
-        #     [`ListNotificationChannels`][google.monitoring.v3.NotificationChannelService.ListNotificationChannels]
+        #     {Google::Cloud::Monitoring::V3::NotificationChannelService::Client#list_notification_channels `ListNotificationChannels`}
         #     or
-        #     [`GetNotificationChannel`][google.monitoring.v3.NotificationChannelService.GetNotificationChannel]
+        #     {Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel `GetNotificationChannel`}
         #     operation, this field is expected to be populated.
         #
         #     If the value is `UNVERIFIED`, then it indicates that the channel is
@@ -123,9 +123,9 @@ module Google
         #     created prior to verification being required for channels of this type.
         #
         #     This field cannot be modified using a standard
-        #     [`UpdateNotificationChannel`][google.monitoring.v3.NotificationChannelService.UpdateNotificationChannel]
+        #     {Google::Cloud::Monitoring::V3::NotificationChannelService::Client#update_notification_channel `UpdateNotificationChannel`}
         #     operation. To change the value of this field, you must call
-        #     [`VerifyNotificationChannel`][google.monitoring.v3.NotificationChannelService.VerifyNotificationChannel].
+        #     {Google::Cloud::Monitoring::V3::NotificationChannelService::Client#verify_notification_channel `VerifyNotificationChannel`}.
         # @!attribute [rw] enabled
         #   @return [Google::Protobuf::BoolValue]
         #     Whether notifications are forwarded to the described channel. This makes
@@ -158,9 +158,9 @@ module Google
 
           # Indicates whether the channel has been verified or not. It is illegal
           # to specify this field in a
-          # [`CreateNotificationChannel`][google.monitoring.v3.NotificationChannelService.CreateNotificationChannel]
+          # {Google::Cloud::Monitoring::V3::NotificationChannelService::Client#create_notification_channel `CreateNotificationChannel`}
           # or an
-          # [`UpdateNotificationChannel`][google.monitoring.v3.NotificationChannelService.UpdateNotificationChannel]
+          # {Google::Cloud::Monitoring::V3::NotificationChannelService::Client#update_notification_channel `UpdateNotificationChannel`}
           # operation.
           module VerificationStatus
             # Sentinel value used to indicate that the state is unknown, omitted, or
