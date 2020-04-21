@@ -522,4 +522,22 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       assert_equal 5, run_job_client_stub.call_rpc_count
     end
   end
+
+  def test_configure
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = block_config = config = nil
+    Gapic::ServiceStub.stub :new, nil do
+      client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    config = client.configure do |c|
+      block_config = c
+    end
+
+    assert_same block_config, config
+    assert_kind_of Google::Cloud::Scheduler::V1::CloudScheduler::Client::Configuration, config
+  end
 end
