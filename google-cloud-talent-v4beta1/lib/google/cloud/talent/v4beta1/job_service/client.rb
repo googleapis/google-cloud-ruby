@@ -172,6 +172,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.endpoint = @config.endpoint
               end
 
               @job_service_stub = Gapic::ServiceStub.new(
@@ -182,6 +183,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [Google::Cloud::Talent::V4beta1::JobService::Operations]
+            #
+            attr_reader :operations_client
 
             # Service calls
 

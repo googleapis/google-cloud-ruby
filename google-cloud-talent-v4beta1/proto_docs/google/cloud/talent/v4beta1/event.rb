@@ -73,7 +73,7 @@ module Google
         #     example, "projects/foo/tenants/bar/jobs/baz".
         # @!attribute [rw] profile
         #   @return [String]
-        #     The [profile name][google.cloud.talent.v4beta1.Profile.name] associated with this client event.
+        #     The {Google::Cloud::Talent::V4beta1::Profile#name profile name} associated with this client event.
         #
         #     The format is
         #     "projects/\\{project_id}/tenants/\\{tenant_id}/profiles/\\{profile_id}",
