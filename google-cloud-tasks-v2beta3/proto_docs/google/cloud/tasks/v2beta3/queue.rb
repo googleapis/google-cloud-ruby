@@ -48,8 +48,8 @@ module Google
         # @!attribute [rw] app_engine_http_queue
         #   @return [Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue]
         #     {Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue AppEngineHttpQueue} settings apply only to
-        #     [App Engine tasks][google.cloud.tasks.v2beta3.AppEngineHttpRequest] in this queue.
-        #     [Http tasks][google.cloud.tasks.v2beta3.HttpRequest] are not affected by this proto.
+        #     {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest App Engine tasks} in this queue.
+        #     {Google::Cloud::Tasks::V2beta3::HttpRequest Http tasks} are not affected by this proto.
         # @!attribute [rw] rate_limits
         #   @return [Google::Cloud::Tasks::V2beta3::RateLimits]
         #     Rate limits for task dispatches.
@@ -171,7 +171,7 @@ module Google
         #     If unspecified when the queue is created, Cloud Tasks will pick the
         #     default.
         #
-        #     * For [App Engine queues][google.cloud.tasks.v2beta3.AppEngineHttpQueue], the maximum allowed value
+        #     * For {Google::Cloud::Tasks::V2beta3::AppEngineHttpQueue App Engine queues}, the maximum allowed value
         #       is 500.
         #
         #
