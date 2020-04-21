@@ -138,7 +138,7 @@ module Google
         #     for more details.
         # @!attribute [rw] model_variant
         #   @return [Google::Cloud::Dialogflow::V2::SpeechModelVariant]
-        #     Which variant of the [Speech model][google.cloud.dialogflow.v2.InputAudioConfig.model] to use.
+        #     Which variant of the {Google::Cloud::Dialogflow::V2::InputAudioConfig#model Speech model} to use.
         # @!attribute [rw] single_utterance
         #   @return [Boolean]
         #     If `false` (default), recognition does not cease until the
@@ -279,7 +279,7 @@ module Google
           AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
         end
 
-        # Variant of the specified [Speech model][google.cloud.dialogflow.v2.InputAudioConfig.model] to use.
+        # Variant of the specified {Google::Cloud::Dialogflow::V2::InputAudioConfig#model Speech model} to use.
         #
         # See the [Cloud Speech
         # documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)

@@ -38,7 +38,7 @@ module Google
         # user in a natural way.
         #
         # After you create an agent, you can add {Google::Cloud::Dialogflow::V2::Intents::Client Intents}, {Google::Cloud::Dialogflow::V2::Contexts::Client Contexts},
-        # [Entity Types][google.cloud.dialogflow.v2.EntityTypes], {Google::Cloud::Dialogflow::V2::WebhookRequest Webhooks}, and so on to
+        # {Google::Cloud::Dialogflow::V2::EntityTypes::Client Entity Types}, {Google::Cloud::Dialogflow::V2::WebhookRequest Webhooks}, and so on to
         # manage the flow of a conversation and match user input to predefined intents
         # and actions.
         #
