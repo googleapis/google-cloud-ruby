@@ -101,8 +101,8 @@ module Google
             # sensitive data.
             #
             # This view does not include the
-            # ([payload in AppEngineHttpRequest][google.cloud.tasks.v2beta2.AppEngineHttpRequest] and
-            # [payload in PullMessage][google.cloud.tasks.v2beta2.PullMessage.payload]). These payloads are
+            # ({Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest payload in AppEngineHttpRequest} and
+            # {Google::Cloud::Tasks::V2beta2::PullMessage#payload payload in PullMessage}). These payloads are
             # desirable to return only when needed, because they can be large
             # and because of the sensitivity of the data that you choose to
             # store in it.
@@ -128,7 +128,7 @@ module Google
         #   @return [Integer]
         #     Output only. The number of attempts which have received a response.
         #
-        #     This field is not calculated for [pull tasks][google.cloud.tasks.v2beta2.PullMessage].
+        #     This field is not calculated for {Google::Cloud::Tasks::V2beta2::PullMessage pull tasks}.
         # @!attribute [rw] first_attempt_status
         #   @return [Google::Cloud::Tasks::V2beta2::AttemptStatus]
         #     Output only. The status of the task's first attempt.
@@ -136,12 +136,12 @@ module Google
         #     Only {Google::Cloud::Tasks::V2beta2::AttemptStatus#dispatch_time dispatch_time} will be set.
         #     The other {Google::Cloud::Tasks::V2beta2::AttemptStatus AttemptStatus} information is not retained by Cloud Tasks.
         #
-        #     This field is not calculated for [pull tasks][google.cloud.tasks.v2beta2.PullMessage].
+        #     This field is not calculated for {Google::Cloud::Tasks::V2beta2::PullMessage pull tasks}.
         # @!attribute [rw] last_attempt_status
         #   @return [Google::Cloud::Tasks::V2beta2::AttemptStatus]
         #     Output only. The status of the task's last attempt.
         #
-        #     This field is not calculated for [pull tasks][google.cloud.tasks.v2beta2.PullMessage].
+        #     This field is not calculated for {Google::Cloud::Tasks::V2beta2::PullMessage pull tasks}.
         class TaskStatus
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods

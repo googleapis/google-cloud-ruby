@@ -1308,9 +1308,9 @@ module Google
             #
             # Tasks cannot be updated after creation; there is no UpdateTask command.
             #
-            # * For [App Engine queues][google.cloud.tasks.v2beta2.AppEngineHttpTarget], the maximum task size is
+            # * For {Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget App Engine queues}, the maximum task size is
             #   100KB.
-            # * For [pull queues][google.cloud.tasks.v2beta2.PullTarget], the maximum task size is 1MB.
+            # * For {Google::Cloud::Tasks::V2beta2::PullTarget pull queues}, the maximum task size is 1MB.
             #
             # @overload create_task(request, options = nil)
             #   Pass arguments to `create_task` via a request object, either of type
@@ -1546,7 +1546,7 @@ module Google
             #
             #     The largest that `max_tasks` can be is 1000.
             #
-            #     The maximum total size of a [lease tasks response][google.cloud.tasks.v2beta2.LeaseTasksResponse] is
+            #     The maximum total size of a {Google::Cloud::Tasks::V2beta2::LeaseTasksResponse lease tasks response} is
             #     32 MB. If the sum of all task sizes requested reaches this limit,
             #     fewer tasks than requested are returned.
             #   @param lease_duration [Google::Protobuf::Duration, Hash]
@@ -1957,7 +1957,7 @@ module Google
             # task that has already succeeded or permanently failed.
             #
             # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} cannot be called on a
-            # [pull task][google.cloud.tasks.v2beta2.PullMessage].
+            # {Google::Cloud::Tasks::V2beta2::PullMessage pull task}.
             #
             # @overload run_task(request, options = nil)
             #   Pass arguments to `run_task` via a request object, either of type

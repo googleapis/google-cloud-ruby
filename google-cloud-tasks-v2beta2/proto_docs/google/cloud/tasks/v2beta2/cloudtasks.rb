@@ -345,7 +345,7 @@ module Google
         #
         #     The largest that `max_tasks` can be is 1000.
         #
-        #     The maximum total size of a [lease tasks response][google.cloud.tasks.v2beta2.LeaseTasksResponse] is
+        #     The maximum total size of a {Google::Cloud::Tasks::V2beta2::LeaseTasksResponse lease tasks response} is
         #     32 MB. If the sum of all task sizes requested reaches this limit,
         #     fewer tasks than requested are returned.
         # @!attribute [rw] lease_duration
