@@ -152,6 +152,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.endpoint = @config.endpoint
               end
 
               @image_annotator_stub = Gapic::ServiceStub.new(
@@ -162,6 +163,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [Google::Cloud::Vision::V1p3beta1::ImageAnnotator::Operations]
+            #
+            attr_reader :operations_client
 
             # Service calls
 
