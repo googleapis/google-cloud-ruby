@@ -26,21 +26,21 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
   let(:sub_reference) { Google::Cloud::PubSub::Subscription.from_name sub_name, pubsub.service }
 
   it "it has a reload method and a refresh alias" do
-    sub_resource.must_respond_to :reload!
-    sub_reference.must_respond_to :reload!
+    _(sub_resource).must_respond_to :reload!
+    _(sub_reference).must_respond_to :reload!
 
-    sub_resource.must_respond_to :refresh!
-    sub_reference.must_respond_to :refresh!
+    _(sub_resource).must_respond_to :refresh!
+    _(sub_reference).must_respond_to :refresh!
   end
 
   it "is reloads a resource by calling get_topic API" do
-    sub_resource.name.must_equal sub_path
-    sub_resource.topic.name.must_equal topic_path(topic_name)
-    sub_resource.deadline.must_equal 60
-    sub_resource.endpoint.must_equal "http://example.com/callback"
-    sub_resource.labels.must_be :empty?
-    sub_resource.wont_be :reference?
-    sub_resource.must_be :resource?
+    _(sub_resource.name).must_equal sub_path
+    _(sub_resource.topic.name).must_equal topic_path(topic_name)
+    _(sub_resource.deadline).must_equal 60
+    _(sub_resource.endpoint).must_equal "http://example.com/callback"
+    _(sub_resource.labels).must_be :empty?
+    _(sub_resource).wont_be :reference?
+    _(sub_resource).must_be :resource?
 
     mock = Minitest::Mock.new
     mock.expect :get_subscription, sub_grpc_new, [sub_path, options: default_options]
@@ -50,19 +50,19 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
 
     mock.verify
 
-    sub_resource.name.must_equal sub_path
-    sub_resource.topic.name.must_equal topic_path(topic_name)
-    sub_resource.deadline.must_equal 30
-    sub_resource.endpoint.must_equal "http://example.net/endpoint"
-    sub_resource.labels.must_equal({ "foo" => "bar" })
-    sub_resource.wont_be :reference?
-    sub_resource.must_be :resource?
+    _(sub_resource.name).must_equal sub_path
+    _(sub_resource.topic.name).must_equal topic_path(topic_name)
+    _(sub_resource.deadline).must_equal 30
+    _(sub_resource.endpoint).must_equal "http://example.net/endpoint"
+    _(sub_resource.labels).must_equal({ "foo" => "bar" })
+    _(sub_resource).wont_be :reference?
+    _(sub_resource).must_be :resource?
   end
 
   it "is reloads a reference by calling get_topic API" do
-    sub_reference.name.must_equal sub_path
-    sub_reference.must_be :reference?
-    sub_reference.wont_be :resource?
+    _(sub_reference.name).must_equal sub_path
+    _(sub_reference).must_be :reference?
+    _(sub_reference).wont_be :resource?
 
     mock = Minitest::Mock.new
     mock.expect :get_subscription, sub_grpc_new, [sub_path, options: default_options]
@@ -72,11 +72,11 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
 
     mock.verify
 
-    sub_reference.name.must_equal sub_path
-    sub_reference.deadline.must_equal 30
-    sub_reference.endpoint.must_equal "http://example.net/endpoint"
-    sub_reference.labels.must_equal({ "foo" => "bar" })
-    sub_reference.wont_be :reference?
-    sub_reference.must_be :resource?
+    _(sub_reference.name).must_equal sub_path
+    _(sub_reference.deadline).must_equal 30
+    _(sub_reference.endpoint).must_equal "http://example.net/endpoint"
+    _(sub_reference.labels).must_equal({ "foo" => "bar" })
+    _(sub_reference).wont_be :reference?
+    _(sub_reference).must_be :resource?
   end
 end

@@ -54,31 +54,31 @@ describe Google::Cloud::PubSub, :pubsub do
     it "should be listed" do
       topics = pubsub.topics.all
       topics.each do |topic|
-        topic.must_be_kind_of Google::Cloud::PubSub::Topic
+        _(topic).must_be_kind_of Google::Cloud::PubSub::Topic
       end
     end
 
     it "should be created, updated and deleted" do
       topic = pubsub.create_topic new_topic_name, labels: labels
-      topic.must_be_kind_of Google::Cloud::PubSub::Topic
+      _(topic).must_be_kind_of Google::Cloud::PubSub::Topic
       topic = pubsub.topic(topic.name)
-      topic.wont_be :nil?
-      topic.labels.must_equal labels
-      topic.labels.must_be :frozen?
+      _(topic).wont_be :nil?
+      _(topic.labels).must_equal labels
+      _(topic.labels).must_be :frozen?
       topic.labels = {}
-      topic.labels.must_be :empty?
+      _(topic.labels).must_be :empty?
       topic.delete
-      pubsub.topic(topic.name).must_be :nil?
+      _(pubsub.topic(topic.name)).must_be :nil?
     end
 
     it "should publish a message" do
       data = "message from me"
       msg = pubsub.topic(topic_names.first).publish data, foo: :bar
 
-      msg.wont_be :nil?
-      msg.must_be_kind_of Google::Cloud::PubSub::Message
-      msg.data.must_equal data
-      msg.attributes["foo"].must_equal "bar"
+      _(msg).wont_be :nil?
+      _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+      _(msg.data).must_equal data
+      _(msg.attributes["foo"]).must_equal "bar"
     end
 
     it "should publish multiple messages" do
@@ -88,9 +88,9 @@ describe Google::Cloud::PubSub, :pubsub do
         batch.publish "third message", format: :text
       end
 
-      msgs.wont_be :nil?
-      msgs.count.must_equal 3
-      msgs.each { |msg| msg.must_be_kind_of Google::Cloud::PubSub::Message }
+      _(msgs).wont_be :nil?
+      _(msgs.count).must_equal 3
+      msgs.each { |msg| _(msg).must_be_kind_of Google::Cloud::PubSub::Message }
     end
   end
 
@@ -107,7 +107,7 @@ describe Google::Cloud::PubSub, :pubsub do
       subscriptions = pubsub.subscriptions.all
       subscriptions.each do |subscription|
         # subscriptions on project are objects...
-        subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
+        _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
       end
     end
   end
@@ -128,172 +128,180 @@ describe Google::Cloud::PubSub, :pubsub do
 
     it "should list all subscriptions registered to the topic" do
       subscriptions = topic.subscriptions.all
-      subscriptions.count.must_be :>=, subs.count
+      _(subscriptions.count).must_be :>=, subs.count
       subscriptions.each do |subscription|
         # subscriptions on topic are strings...
-        subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
+        _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
       end
     end
 
     it "should allow create and update of subscription with options" do
-      # create
-      subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600, labels: labels
-      subscription.wont_be :nil?
-      subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
-      assert subscription.retain_acked
-      subscription.retention.must_equal 600
-      subscription.labels.must_equal labels
-      subscription.labels.must_be :frozen?
+      begin
+        # create
+        subscription = topic.subscribe "#{$topic_prefix}-sub3", retain_acked: true, retention: 600, labels: labels
+        _(subscription).wont_be :nil?
+        _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
+        assert subscription.retain_acked
+        _(subscription.retention).must_equal 600
+        _(subscription.labels).must_equal labels
+        _(subscription.labels).must_be :frozen?
 
-      # update
-      subscription.labels = {}
-      subscription.labels.must_be :empty?
-    ensure
-      # delete
-      subscription.delete
+        # update
+        subscription.labels = {}
+        _(subscription.labels).must_be :empty?
+      ensure
+        # delete
+        subscription.delete
+      end
     end
 
     it "should not error when asking for a non-existent subscription" do
       subscription = topic.get_subscription "non-existent-subscription"
-      subscription.must_be :nil?
+      _(subscription).must_be :nil?
     end
 
     it "should be able to pull and ack" do
-      subscription = topic.subscribe "#{$topic_prefix}-sub4"
-      subscription.wont_be :nil?
-      subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
-      # No messages, should be empty
-      received_messages = subscription.pull
-      received_messages.must_be :empty?
-      # Publish a new message
-      msg = topic.publish "hello"
-      msg.wont_be :nil?
-      # Check it received the published message
-      received_messages = pull_with_retry subscription
-      received_messages.wont_be :empty?
-      received_messages.count.must_equal 1
-      received_message = received_messages.first
-      received_message.wont_be :nil?
-      received_message.delivery_attempt.must_be :nil?
-      received_message.msg.data.must_equal msg.data
-      received_message.msg.published_at.wont_be :nil?
-      # Acknowledge the message
-      subscription.ack received_message.ack_id
-    ensure
-      # Remove the subscription
-      subscription.delete
+      begin
+        subscription = topic.subscribe "#{$topic_prefix}-sub4"
+        _(subscription).wont_be :nil?
+        _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
+        # No messages, should be empty
+        received_messages = subscription.pull
+        _(received_messages).must_be :empty?
+        # Publish a new message
+        msg = topic.publish "hello"
+        _(msg).wont_be :nil?
+        # Check it received the published message
+        received_messages = pull_with_retry subscription
+        _(received_messages).wont_be :empty?
+        _(received_messages.count).must_equal 1
+        received_message = received_messages.first
+        _(received_message).wont_be :nil?
+        _(received_message.delivery_attempt).must_be :nil?
+        _(received_message.msg.data).must_equal msg.data
+        _(received_message.msg.published_at).wont_be :nil?
+        # Acknowledge the message
+        subscription.ack received_message.ack_id
+      ensure
+        # Remove the subscription
+        subscription.delete
+      end
     end
 
     it "should be able to pull same message again after ack by seeking to snapshot" do
-      subscription = topic.subscribe "#{$topic_prefix}-sub5"
-      subscription.wont_be :nil?
-      subscription.must_be_kind_of Google::Cloud::PubSub::Subscription
+      begin
+        subscription = topic.subscribe "#{$topic_prefix}-sub5"
+        _(subscription).wont_be :nil?
+        _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
 
-      # No messages, should be empty
-      received_messages = subscription.pull
-      received_messages.must_be :empty?
-      # Publish a new message
-      msg = topic.publish "hello-#{rand(1000)}"
-      msg.wont_be :nil?
+        # No messages, should be empty
+        received_messages = subscription.pull
+        _(received_messages).must_be :empty?
+        # Publish a new message
+        msg = topic.publish "hello-#{rand(1000)}"
+        _(msg).wont_be :nil?
 
-      snapshot = subscription.create_snapshot labels: labels
+        snapshot = subscription.create_snapshot labels: labels
 
-      # Check it pulls the message
-      received_messages = pull_with_retry subscription
-      received_messages.wont_be :empty?
-      received_messages.count.must_equal 1
-      received_message = received_messages.first
-      received_message.wont_be :nil?
-      received_message.delivery_attempt.must_be :nil?
-      received_message.msg.data.must_equal msg.data
-      received_message.msg.published_at.wont_be :nil?
-      # Acknowledge the message
-      subscription.ack received_message.ack_id
+        # Check it pulls the message
+        received_messages = pull_with_retry subscription
+        _(received_messages).wont_be :empty?
+        _(received_messages.count).must_equal 1
+        received_message = received_messages.first
+        _(received_message).wont_be :nil?
+        _(received_message.delivery_attempt).must_be :nil?
+        _(received_message.msg.data).must_equal msg.data
+        _(received_message.msg.published_at).wont_be :nil?
+        # Acknowledge the message
+        subscription.ack received_message.ack_id
 
-      # No messages, should be empty
-      received_messages = subscription.pull
-      received_messages.must_be :empty?
+        # No messages, should be empty
+        received_messages = subscription.pull
+        _(received_messages).must_be :empty?
 
-      # Reset to the snapshot
-      subscription.seek snapshot
+        # Reset to the snapshot
+        subscription.seek snapshot
 
-      # Check it again pulls the message
-      received_messages = pull_with_retry subscription
-      received_messages.count.must_equal 1
-      received_message = received_messages.first
-      received_message.wont_be :nil?
-      received_message.delivery_attempt.must_be :nil?
-      received_message.msg.data.must_equal msg.data
-      # Acknowledge the message
-      subscription.ack received_message.ack_id
-      # No messages, should be empty
-      received_messages = subscription.pull
-      received_messages.must_be :empty?
+        # Check it again pulls the message
+        received_messages = pull_with_retry subscription
+        _(received_messages.count).must_equal 1
+        received_message = received_messages.first
+        _(received_message).wont_be :nil?
+        _(received_message.delivery_attempt).must_be :nil?
+        _(received_message.msg.data).must_equal msg.data
+        # Acknowledge the message
+        subscription.ack received_message.ack_id
+        # No messages, should be empty
+        received_messages = subscription.pull
+        _(received_messages).must_be :empty?
 
-      # No messages, should be empty
-      received_messages = subscription.pull
-      received_messages.must_be :empty?
+        # No messages, should be empty
+        received_messages = subscription.pull
+        _(received_messages).must_be :empty?
 
-      snapshot.labels.must_equal labels
-      snapshot.labels.must_be :frozen?
-      snapshot.labels = {}
-      snapshot.labels.must_be :empty?
-    ensure
-      # Remove the subscription
-      subscription.delete
+        _(snapshot.labels).must_equal labels
+        _(snapshot.labels).must_be :frozen?
+        snapshot.labels = {}
+        _(snapshot.labels).must_be :empty?
+      ensure
+        # Remove the subscription
+        subscription.delete
+      end
     end
 
     if $project_number
       it "should be able to direct messages to a dead letter topic" do
-        dead_letter_topic = retrieve_topic dead_letter_topic_name
-        dead_letter_subscription = dead_letter_topic.subscribe "#{$topic_prefix}-dead-letter-sub1"
+        begin
+          dead_letter_topic = retrieve_topic dead_letter_topic_name
+          dead_letter_subscription = dead_letter_topic.subscribe "#{$topic_prefix}-dead-letter-sub1"
 
-        # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is
-        # automatically created and managed by the service team in a private project.
-        service_account_email = "serviceAccount:service-#{$project_number}@gcp-sa-pubsub.iam.gserviceaccount.com"
+          # Dead Letter Queue (DLQ) testing requires IAM bindings to the Cloud Pub/Sub service account that is
+          # automatically created and managed by the service team in a private project.
+          service_account_email = "serviceAccount:service-#{$project_number}@gcp-sa-pubsub.iam.gserviceaccount.com"
 
-        dead_letter_topic.policy { |p| p.add "roles/pubsub.publisher", service_account_email }
-        dead_letter_subscription.policy { |p| p.add "roles/pubsub.subscriber", service_account_email }
+          dead_letter_topic.policy { |p| p.add "roles/pubsub.publisher", service_account_email }
+          dead_letter_subscription.policy { |p| p.add "roles/pubsub.subscriber", service_account_email }
 
-        # create
-        subscription = topic.subscribe "#{$topic_prefix}-sub6", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 6
-        subscription.dead_letter_max_delivery_attempts.must_equal 6
-        subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic.name
+          # create
+          subscription = topic.subscribe "#{$topic_prefix}-sub6", dead_letter_topic: dead_letter_topic, dead_letter_max_delivery_attempts: 6
+          _(subscription.dead_letter_max_delivery_attempts).must_equal 6
+          _(subscription.dead_letter_topic.reload!.name).must_equal dead_letter_topic.name
 
-        # update
-        subscription.dead_letter_max_delivery_attempts = 5
-        subscription.dead_letter_max_delivery_attempts.must_equal 5
-        dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
-        dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub2"
-        subscription.dead_letter_topic = dead_letter_topic_2
-        subscription.dead_letter_topic.reload!.name.must_equal dead_letter_topic_2.name
+          # update
+          subscription.dead_letter_max_delivery_attempts = 5
+          _(subscription.dead_letter_max_delivery_attempts).must_equal 5
+          dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2
+          dead_letter_subscription_2 = dead_letter_topic_2.subscribe "#{$topic_prefix}-dead-letter-sub2"
+          subscription.dead_letter_topic = dead_letter_topic_2
+          _(subscription.dead_letter_topic.reload!.name).must_equal dead_letter_topic_2.name
 
-        # Publish a new message
-        msg = topic.publish "dead-letter-#{rand(1000)}"
-        msg.wont_be :nil?
+          # Publish a new message
+          msg = topic.publish "dead-letter-#{rand(1000)}"
+          _(msg).wont_be :nil?
 
-        # Check it pulls the message
-        (1..7).each do |i|
-          received_messages = pull_with_retry subscription
-          received_messages.count.must_equal 1
+          # Check it pulls the message
+          (1..7).each do |i|
+            received_messages = pull_with_retry subscription
+            _(received_messages.count).must_equal 1
+            received_message = received_messages.first
+            _(received_message.msg.data).must_equal msg.data
+            _(received_message.delivery_attempt).must_be :>, 0
+            received_message.nack!
+          end
+
+          # Check the dead letter subscription pulls the message
+          received_messages = dead_letter_subscription.pull
+          _(received_messages).wont_be :empty?
+          _(received_messages.count).must_equal 1
           received_message = received_messages.first
-          received_message.msg.data.must_equal msg.data
-          received_message.delivery_attempt.must_be :>, 0
-          received_message.nack!
+          _(received_message).wont_be :nil?
+          _(received_message.msg.data).must_equal msg.data
+          _(received_message.delivery_attempt).must_be :nil?
+        ensure
+          # Remove the subscription
+          subscription.delete
+          dead_letter_subscription.delete
         end
-
-        # Check the dead letter subscription pulls the message
-        received_messages = dead_letter_subscription.pull
-        received_messages.wont_be :empty?
-        received_messages.count.must_equal 1
-        received_message = received_messages.first
-        received_message.wont_be :nil?
-        received_message.msg.data.must_equal msg.data
-        received_message.delivery_attempt.must_be :nil?
-      ensure
-        # Remove the subscription
-        subscription.delete
-        dead_letter_subscription.delete
       end
     end
 
@@ -322,10 +330,10 @@ describe Google::Cloud::PubSub, :pubsub do
       permissions = topic.test_permissions roles
       skip "Don't have permissions to get/set topic's policy" unless permissions == roles
 
-      topic.policy.must_be_kind_of Google::Cloud::PubSub::Policy
+      _(topic.policy).must_be_kind_of Google::Cloud::PubSub::Policy
 
       # We need a valid service account in order to update the policy
-      service_account.wont_be :nil?
+      _(service_account).wont_be :nil?
       role = "roles/pubsub.publisher"
       member = "serviceAccount:#{service_account}"
       topic.policy do |p|
@@ -334,7 +342,7 @@ describe Google::Cloud::PubSub, :pubsub do
       end
 
       role_member = topic.policy.role(role).select { |x| x == member }
-      role_member.size.must_equal 1
+      _(role_member.size).must_equal 1
     end
 
     it "allows policy to be updated on a subscription" do
@@ -343,29 +351,29 @@ describe Google::Cloud::PubSub, :pubsub do
       permissions = subscription.test_permissions roles
       skip "Don't have permissions to get/set subscription's policy" unless permissions == roles
 
-      subscription.policy.must_be_kind_of Google::Cloud::PubSub::Policy
+      _(subscription.policy).must_be_kind_of Google::Cloud::PubSub::Policy
 
       # We need a valid service account in order to update the policy
-      service_account.wont_be :nil?
+      _(service_account).wont_be :nil?
       role = "roles/pubsub.subscriber"
       member = "serviceAccount:#{service_account}"
       subscription.policy do |p|
         p.add role, member
       end
 
-      subscription.policy.role(role).must_include member
+      _(subscription.policy.role(role)).must_include member
     end
 
     it "allows permissions to be tested on a topic" do
       roles = ["pubsub.topics.get", "pubsub.topics.publish"]
       permissions = topic.test_permissions roles
-      permissions.must_equal roles
+      _(permissions).must_equal roles
     end
 
     it "allows permissions to be tested on a subscription" do
       roles = ["pubsub.subscriptions.consume", "pubsub.subscriptions.get"]
       permissions = subscription.test_permissions roles
-      permissions.must_equal roles
+      _(permissions).must_equal roles
     end
   end
 
@@ -383,7 +391,7 @@ describe Google::Cloud::PubSub, :pubsub do
       snapshots = pubsub.snapshots.all
       snapshots.each do |snapshot|
         # snapshots on project are objects...
-        snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+        _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
       end
     end
   end

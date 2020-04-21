@@ -27,56 +27,56 @@ describe Google::Cloud::PubSub::ReceivedMessage, :mock_pubsub do
   let(:rec_message) { Google::Cloud::PubSub::ReceivedMessage.from_grpc rec_message_grpc, subscription }
 
   it "knows its subscription" do
-    rec_message.subscription.wont_be :nil?
-    rec_message.subscription.name.must_equal subscription_path(subscription_name)
+    _(rec_message.subscription).wont_be :nil?
+    _(rec_message.subscription.name).must_equal subscription_path(subscription_name)
   end
 
   it "knows its ack_id" do
-    rec_message.ack_id.must_equal rec_message_data[:ack_id]
+    _(rec_message.ack_id).must_equal rec_message_data[:ack_id]
   end
 
   it "has a message" do
-    rec_message.message.wont_be :nil?
-    rec_message.message.data.must_equal rec_message_msg
-    rec_message.message.attributes.keys.sort.must_equal   rec_message_data[:message][:attributes].keys.sort
-    rec_message.message.attributes.values.sort.must_equal rec_message_data[:message][:attributes].values.sort
-    rec_message.message.msg_id.must_equal rec_message_data[:message][:message_id]
-    rec_message.message.message_id.must_equal rec_message_data[:message][:message_id]
+    _(rec_message.message).wont_be :nil?
+    _(rec_message.message.data).must_equal rec_message_msg
+    _(rec_message.message.attributes.keys.sort).must_equal   rec_message_data[:message][:attributes].keys.sort
+    _(rec_message.message.attributes.values.sort).must_equal rec_message_data[:message][:attributes].values.sort
+    _(rec_message.message.msg_id).must_equal rec_message_data[:message][:message_id]
+    _(rec_message.message.message_id).must_equal rec_message_data[:message][:message_id]
   end
 
   it "knows the message's data" do
-    rec_message.data.must_equal rec_message.message.data
+    _(rec_message.data).must_equal rec_message.message.data
   end
 
   it "knows the message's attributes" do
-    rec_message.attributes.must_equal rec_message.message.attributes
+    _(rec_message.attributes).must_equal rec_message.message.attributes
   end
 
   it "knows the message's message_id" do
-    rec_message.msg_id.must_equal     rec_message.message.msg_id
-    rec_message.message_id.must_equal rec_message.message.message_id
+    _(rec_message.msg_id).must_equal     rec_message.message.msg_id
+    _(rec_message.message_id).must_equal rec_message.message.message_id
   end
 
   it "knows its published_at" do
-    rec_message.published_at.must_be :nil?
-    rec_message.publish_time.must_be :nil?
+    _(rec_message.published_at).must_be :nil?
+    _(rec_message.publish_time).must_be :nil?
 
     publish_time = Time.now
     rec_message_grpc.message.publish_time = Google::Cloud::PubSub::Convert.time_to_timestamp publish_time
 
-    rec_message.published_at.must_equal publish_time
-    rec_message.publish_time.must_equal publish_time
+    _(rec_message.published_at).must_equal publish_time
+    _(rec_message.publish_time).must_equal publish_time
   end
 
   it "knows its delivery_attempt counter" do
-    rec_message.delivery_attempt.must_equal 10
+    _(rec_message.delivery_attempt).must_equal 10
   end
 
   it "returns nil for delivery_attempt when delivery_attempt is 0" do
     rec_message_data_non_dlq = rec_message_hash rec_message_msg, delivery_attempt: 0
     rec_message_grpc_non_dlq = Google::Cloud::PubSub::V1::ReceivedMessage.new rec_message_data_non_dlq
     rec_message_non_dlq = Google::Cloud::PubSub::ReceivedMessage.from_grpc rec_message_grpc_non_dlq, subscription
-    rec_message_non_dlq.delivery_attempt.must_be :nil?
+    _(rec_message_non_dlq.delivery_attempt).must_be :nil?
   end
 
   it "can acknowledge" do

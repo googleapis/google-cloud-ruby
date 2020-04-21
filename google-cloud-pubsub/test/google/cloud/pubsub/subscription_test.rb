@@ -22,30 +22,30 @@ describe Google::Cloud::PubSub::Subscription, :mock_pubsub do
   let(:labels) { { "foo" => "bar" } }
 
   it "knows its name" do
-    subscription.name.must_equal subscription_path(subscription_name)
+    _(subscription.name).must_equal subscription_path(subscription_name)
   end
 
   it "knows its topic" do
-    subscription.topic.must_be_kind_of Google::Cloud::PubSub::Topic
-    subscription.topic.must_be :reference?
-    subscription.topic.wont_be :resource?
-    subscription.topic.name.must_equal topic_path(topic_name)
+    _(subscription.topic).must_be_kind_of Google::Cloud::PubSub::Topic
+    _(subscription.topic).must_be :reference?
+    _(subscription.topic).wont_be :resource?
+    _(subscription.topic.name).must_equal topic_path(topic_name)
   end
 
   it "has an ack deadline" do
-    subscription.must_respond_to :deadline
+    _(subscription).must_respond_to :deadline
   end
 
   it "knows its retain_acked" do
-    subscription.must_respond_to :retain_acked
+    _(subscription).must_respond_to :retain_acked
   end
 
   it "knows its retention_duration" do
-    subscription.must_respond_to :retention
+    _(subscription).must_respond_to :retention
   end
 
   it "has an endpoint" do
-    subscription.must_respond_to :endpoint
+    _(subscription).must_respond_to :endpoint
   end
 
   it "can update the endpoint" do
@@ -83,8 +83,8 @@ describe Google::Cloud::PubSub::Subscription, :mock_pubsub do
 
     mock.verify
 
-    rec_messages.wont_be :empty?
-    rec_messages.first.message.data.must_equal rec_message_msg
+    _(rec_messages).wont_be :empty?
+    _(rec_messages.first.message.data).must_equal rec_message_msg
   end
 
   it "can acknowledge one message" do
@@ -131,8 +131,8 @@ describe Google::Cloud::PubSub::Subscription, :mock_pubsub do
 
     mock.verify
 
-    snapshot.wont_be :nil?
-    snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+    _(snapshot).wont_be :nil?
+    _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
   end
 
   it "creates a snapshot with new_snapshot alias" do
@@ -146,8 +146,8 @@ describe Google::Cloud::PubSub::Subscription, :mock_pubsub do
 
     mock.verify
 
-    snapshot.wont_be :nil?
-    snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
+    _(snapshot).wont_be :nil?
+    _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
   end
 
   it "creates a snapshot with labels" do
@@ -161,10 +161,10 @@ describe Google::Cloud::PubSub::Subscription, :mock_pubsub do
 
     mock.verify
 
-    snapshot.wont_be :nil?
-    snapshot.must_be_kind_of Google::Cloud::PubSub::Snapshot
-    snapshot.labels.must_equal labels
-    snapshot.labels.must_be :frozen?
+    _(snapshot).wont_be :nil?
+    _(snapshot).must_be_kind_of Google::Cloud::PubSub::Snapshot
+    _(snapshot.labels).must_equal labels
+    _(snapshot.labels).must_be :frozen?
   end
 
   it "raises when creating a snapshot that already exists" do

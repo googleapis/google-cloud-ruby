@@ -36,14 +36,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
 
     publisher.publish message1
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     published_messages_hash = publisher.service.mocked_publisher.message_hash
     expected_messages_hash = { "" => messages }
@@ -60,14 +60,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
 
     publisher.publish message1, format: :text
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     published_messages_hash = publisher.service.mocked_publisher.message_hash
     expected_messages_hash = { "" => messages }
@@ -88,19 +88,19 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       callback_called = true
     end
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     published_messages_hash = publisher.service.mocked_publisher.message_hash
     expected_messages_hash = { "" => messages }
     assert_equal expected_messages_hash, published_messages_hash
-    callback_called.must_equal true
+    _(callback_called).must_equal true
   end
 
   it "publishes multiple messages" do
@@ -117,14 +117,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     publisher.publish message2
     publisher.publish message3, format: :none
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     published_messages_hash = publisher.service.mocked_publisher.message_hash
     expected_messages_hash = { "" => messages }
@@ -155,19 +155,19 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       callback_count += 1
     end
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     published_messages_hash = publisher.service.mocked_publisher.message_hash
     expected_messages_hash = { "" => messages }
     assert_equal expected_messages_hash, published_messages_hash
-    callback_count.must_equal 3
+    _(callback_count).must_equal 3
   end
 
   it "publishes multiple batches when message count limit is reached" do
@@ -186,14 +186,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       end
     end
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     expected_messages = Array.new(3) do
       Array.new(10) do |count|
@@ -202,7 +202,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     end
 
     assert_equal expected_messages, publisher.service.mocked_publisher.messages
-    callback_count.must_equal 30
+    _(callback_count).must_equal 30
   end
 
   it "publishes multiple batches when message size limit is reached" do
@@ -221,14 +221,14 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       end
     end
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     expected_messages = Array.new(3) do
       Array.new(10) do |count|
@@ -238,7 +238,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
 
     assert_equal expected_messages.map(&:count), publisher.service.mocked_publisher.messages.map(&:count)
     assert_equal expected_messages, publisher.service.mocked_publisher.messages
-    callback_count.must_equal 30
+    _(callback_count).must_equal 30
   end
 
   it "publishes when message size is greater than the limit" do
@@ -257,21 +257,21 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
       callback_count += 1
     end
 
-    publisher.must_be :started?
-    publisher.wont_be :stopped?
+    _(publisher).must_be :started?
+    _(publisher).wont_be :stopped?
 
     # force the queued messages to be published
     publisher.stop.wait!
 
-    publisher.wont_be :started?
-    publisher.must_be :stopped?
+    _(publisher).wont_be :started?
+    _(publisher).must_be :stopped?
 
     expected_messages = [
       [Google::Cloud::PubSub::V1::PubsubMessage.new(data: msg_encoded1, message_id: "msg0")],
       [Google::Cloud::PubSub::V1::PubsubMessage.new(data: big_msg_data, message_id: "msg1")]
     ]
     assert_equal publisher.service.mocked_publisher.messages, expected_messages
-    callback_count.must_equal 2
+    _(callback_count).must_equal 2
   end
 
   def wait_until delay: 0.01, max: 10, output: nil, msg: "criteria not met", &block

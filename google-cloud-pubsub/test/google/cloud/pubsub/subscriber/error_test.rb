@@ -50,7 +50,7 @@ describe Google::Cloud::PubSub::Subscriber, :error, :mock_pubsub do
       errors << error
     end
 
-    subscriber.last_error.must_be :nil?
+    _(subscriber.last_error).must_be :nil?
 
     subscriber.start
 
@@ -61,10 +61,10 @@ describe Google::Cloud::PubSub::Subscriber, :error, :mock_pubsub do
       sleep 0.01
     end
 
-    errors.count.must_equal 2
-    errors[0].must_be_kind_of ArgumentError
-    errors[1].must_be_kind_of ZeroDivisionError
-    subscriber.last_error.must_be_kind_of ZeroDivisionError
+    _(errors.count).must_equal 2
+    _(errors[0]).must_be_kind_of ArgumentError
+    _(errors[1]).must_be_kind_of ZeroDivisionError
+    _(subscriber.last_error).must_be_kind_of ZeroDivisionError
 
     subscriber.stop
     subscriber.wait!

@@ -23,24 +23,24 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
 
   it "is not reference when created with an HTTP method" do
-    topic.wont_be :reference?
-    topic.must_be :resource?
+    _(topic).wont_be :reference?
+    _(topic).must_be :resource?
   end
 
   it "accesses name without making an API call" do
-    topic.name.must_equal topic_path(topic_name)
+    _(topic.name).must_equal topic_path(topic_name)
   end
 
   it "accesses labels without making an API call" do
-    topic.labels.must_equal labels
+    _(topic.labels).must_equal labels
   end
 
   it "accesses kms_key without making an API call" do
-    topic.kms_key.must_equal kms_key_name
+    _(topic.kms_key).must_equal kms_key_name
   end
 
   it "accesses persistence_regions without making an API call" do
-    topic.persistence_regions.must_equal persistence_regions
+    _(topic.persistence_regions).must_equal persistence_regions
   end
 
   describe "reference topic" do
@@ -49,64 +49,64 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
     end
 
     it "is reference" do
-      topic.must_be :reference?
-      topic.wont_be :resource?
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
     end
 
     it "accesses name without making an API call" do
-      topic.must_be :reference?
-      topic.wont_be :resource?
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
 
-      topic.name.must_equal topic_path(topic_name)
+      _(topic.name).must_equal topic_path(topic_name)
 
-      topic.must_be :reference?
-      topic.wont_be :resource?
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
     end
 
     it "accesses labels by making an API call" do
-      topic.must_be :reference?
-      topic.wont_be :resource?
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
 
       mock = Minitest::Mock.new
       mock.expect :get_topic, topic_grpc, [topic_path(topic_name), options: default_options]
       topic.service.mocked_publisher = mock
 
-      topic.labels.must_equal labels
+      _(topic.labels).must_equal labels
 
-      topic.wont_be :reference?
-      topic.must_be :resource?
+      _(topic).wont_be :reference?
+      _(topic).must_be :resource?
 
       mock.verify
     end
 
     it "accesses kms_key by making an API call" do
-      topic.must_be :reference?
-      topic.wont_be :resource?
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
 
       mock = Minitest::Mock.new
       mock.expect :get_topic, topic_grpc, [topic_path(topic_name), options: default_options]
       topic.service.mocked_publisher = mock
 
-      topic.kms_key.must_equal kms_key_name
+      _(topic.kms_key).must_equal kms_key_name
 
-      topic.wont_be :reference?
-      topic.must_be :resource?
+      _(topic).wont_be :reference?
+      _(topic).must_be :resource?
 
       mock.verify
     end
 
     it "accesses persistence_regions by making an API call" do
-      topic.must_be :reference?
-      topic.wont_be :resource?
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
 
       mock = Minitest::Mock.new
       mock.expect :get_topic, topic_grpc, [topic_path(topic_name), options: default_options]
       topic.service.mocked_publisher = mock
 
-      topic.persistence_regions.must_equal persistence_regions
+      _(topic.persistence_regions).must_equal persistence_regions
 
-      topic.wont_be :reference?
-      topic.must_be :resource?
+      _(topic).wont_be :reference?
+      _(topic).must_be :resource?
 
       mock.verify
     end
@@ -115,17 +115,17 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
       let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name, labels: labels) }
 
       it "accesses persistence_regions by making an API call" do
-        topic.must_be :reference?
-        topic.wont_be :resource?
+        _(topic).must_be :reference?
+        _(topic).wont_be :resource?
 
         mock = Minitest::Mock.new
         mock.expect :get_topic, topic_grpc, [topic_path(topic_name), options: default_options]
         topic.service.mocked_publisher = mock
 
-        topic.persistence_regions.must_be :empty?
+        _(topic.persistence_regions).must_be :empty?
 
-        topic.wont_be :reference?
-        topic.must_be :resource?
+        _(topic).wont_be :reference?
+        _(topic).must_be :resource?
 
         mock.verify
       end

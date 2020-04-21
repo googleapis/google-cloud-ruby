@@ -19,16 +19,16 @@ describe Google::Cloud::PubSub::Topic, :reference, :mock_pubsub do
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
 
   it "will not be reference when created with an HTTP method" do
-    topic.wont_be :reference?
-    topic.must_be :resource?
+    _(topic).wont_be :reference?
+    _(topic).must_be :resource?
   end
 
   describe "reference topic" do
     let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "will be reference when created lazily" do
-      topic.must_be :reference?
-      topic.wont_be :resource?
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
     end
   end
 end

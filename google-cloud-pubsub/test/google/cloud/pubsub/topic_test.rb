@@ -34,12 +34,12 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
   let(:dead_letter_topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(dead_letter_topic_name)), pubsub.service }
 
   it "knows its name" do
-    topic.name.must_equal topic_path(topic_name)
+    _(topic.name).must_equal topic_path(topic_name)
   end
 
   it "knows its labels" do
-    topic.labels.must_equal labels
-    topic.labels.must_be :frozen?
+    _(topic.labels).must_equal labels
+    _(topic.labels).must_be :frozen?
   end
 
   it "can delete itself" do
@@ -64,8 +64,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with create_subscription alias" do
@@ -79,8 +79,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with new_subscription alias" do
@@ -94,8 +94,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with a deadline" do
@@ -110,8 +110,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with retain_acked and retention" do
@@ -127,8 +127,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with a push endpoint" do
@@ -144,8 +144,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
   end
 
   it "creates a subscription with labels" do
@@ -159,10 +159,10 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.labels.must_equal labels
-    sub.labels.must_be :frozen?
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.labels).must_equal labels
+    _(sub.labels).must_be :frozen?
   end
 
   it "creates a subscription with dead_letter_topic and dead_letter_max_delivery_attempts" do
@@ -177,10 +177,10 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.dead_letter_topic.name.must_equal topic_path(dead_letter_topic_name)
-    sub.dead_letter_max_delivery_attempts.must_equal 7
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.dead_letter_topic.name).must_equal topic_path(dead_letter_topic_name)
+    _(sub.dead_letter_max_delivery_attempts).must_equal 7
   end
 
   it "raises when creating a subscription with dead_letter_max_delivery_attempts but no dead_letter_topic" do
@@ -234,10 +234,10 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.wont_be :reference?
-    sub.must_be :resource?
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :reference?
+    _(sub).must_be :resource?
   end
 
   it "gets a subscription with get_subscription alias" do
@@ -252,10 +252,10 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.wont_be :reference?
-    sub.must_be :resource?
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :reference?
+    _(sub).must_be :resource?
   end
 
   it "gets a subscription with find_subscription alias" do
@@ -270,10 +270,10 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    sub.wont_be :nil?
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.wont_be :reference?
-    sub.must_be :resource?
+    _(sub).wont_be :nil?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub).wont_be :reference?
+    _(sub).must_be :resource?
   end
 
   it "lists subscriptions" do
@@ -285,11 +285,11 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 3
+    _(subs.count).must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -300,11 +300,11 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     subs = topic.find_subscriptions
 
-    subs.count.must_equal 3
+    _(subs.count).must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -317,11 +317,11 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 3
+    _(subs.count).must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -337,22 +337,22 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    first_subs.count.must_equal 3
+    _(first_subs.count).must_equal 3
     token = first_subs.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
     first_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
 
-    second_subs.count.must_equal 2
-    second_subs.token.must_be :nil?
+    _(second_subs.count).must_equal 2
+    _(second_subs.token).must_be :nil?
     second_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -365,14 +365,14 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 3
+    _(subs.count).must_equal 3
     token = subs.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -388,20 +388,20 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    first_subs.count.must_equal 3
-    first_subs.next?.must_equal true
+    _(first_subs.count).must_equal 3
+    _(first_subs.next?).must_equal true
     first_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
 
-    second_subs.count.must_equal 2
-    second_subs.next?.must_equal false
+    _(second_subs.count).must_equal 2
+    _(second_subs.next?).must_equal false
     second_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -417,20 +417,20 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    first_subs.count.must_equal 3
-    first_subs.next?.must_equal true
+    _(first_subs.count).must_equal 3
+    _(first_subs.next?).must_equal true
     first_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
 
-    second_subs.count.must_equal 2
-    second_subs.next?.must_equal false
+    _(second_subs.count).must_equal 2
+    _(second_subs.next?).must_equal false
     second_subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -445,11 +445,11 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 5
+    _(subs.count).must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -464,11 +464,11 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 5
+    _(subs.count).must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -483,11 +483,11 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 5
+    _(subs.count).must_equal 5
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -502,11 +502,11 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 6
+    _(subs.count).must_equal 6
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -525,8 +525,8 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    msg.must_be_kind_of Google::Cloud::PubSub::Message
-    msg.message_id.must_equal "msg1"
+    _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+    _(msg.message_id).must_equal "msg1"
   end
 
   it "can publish a message with attributes" do
@@ -544,9 +544,9 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    msg.must_be_kind_of Google::Cloud::PubSub::Message
-    msg.message_id.must_equal "msg1"
-    msg.attributes["format"].must_equal "text"
+    _(msg).must_be_kind_of Google::Cloud::PubSub::Message
+    _(msg.message_id).must_equal "msg1"
+    _(msg.attributes["format"]).must_equal "text"
   end
 
   it "can publish multiple messages with a block" do
@@ -570,11 +570,11 @@ describe Google::Cloud::PubSub::Topic, :mock_pubsub do
 
     mock.verify
 
-    msgs.count.must_equal 2
-    msgs.first.must_be_kind_of Google::Cloud::PubSub::Message
-    msgs.first.message_id.must_equal "msg1"
-    msgs.last.must_be_kind_of Google::Cloud::PubSub::Message
-    msgs.last.message_id.must_equal "msg2"
-    msgs.last.attributes["format"].must_equal "none"
+    _(msgs.count).must_equal 2
+    _(msgs.first).must_be_kind_of Google::Cloud::PubSub::Message
+    _(msgs.first.message_id).must_equal "msg1"
+    _(msgs.last).must_be_kind_of Google::Cloud::PubSub::Message
+    _(msgs.last.message_id).must_equal "msg2"
+    _(msgs.last.attributes["format"]).must_equal "none"
   end
 end

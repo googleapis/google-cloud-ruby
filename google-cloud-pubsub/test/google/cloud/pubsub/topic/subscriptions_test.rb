@@ -31,11 +31,11 @@ describe Google::Cloud::PubSub::Topic, :subscriptions, :mock_pubsub do
 
     mock.verify
 
-    subs.count.must_equal 3
+    _(subs.count).must_equal 3
     subs.each do |sub|
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.must_be :reference?
-      sub.wont_be :resource?
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub).must_be :reference?
+      _(sub).wont_be :resource?
     end
   end
 
@@ -51,11 +51,11 @@ describe Google::Cloud::PubSub::Topic, :subscriptions, :mock_pubsub do
 
       mock.verify
 
-      subs.count.must_equal 3
+      _(subs.count).must_equal 3
       subs.each do |sub|
-        sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-        sub.must_be :reference?
-        sub.wont_be :resource?
+        _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+        _(sub).must_be :reference?
+        _(sub).wont_be :resource?
       end
     end
   end

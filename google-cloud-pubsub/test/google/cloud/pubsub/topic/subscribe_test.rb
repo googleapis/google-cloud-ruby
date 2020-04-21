@@ -30,8 +30,8 @@ describe Google::Cloud::PubSub::Topic, :subscribe, :mock_pubsub do
 
     mock.verify
 
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.name).must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
   end
 
   it "creates a subscription with labels" do
@@ -44,10 +44,10 @@ describe Google::Cloud::PubSub::Topic, :subscribe, :mock_pubsub do
 
     mock.verify
 
-    sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-    sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
-    sub.labels.must_equal labels
-    sub.labels.must_be :frozen?
+    _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+    _(sub.name).must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
+    _(sub.labels).must_equal labels
+    _(sub.labels).must_be :frozen?
   end
 
   describe "reference topic that exists" do
@@ -63,8 +63,8 @@ describe Google::Cloud::PubSub::Topic, :subscribe, :mock_pubsub do
 
       mock.verify
 
-      sub.must_be_kind_of Google::Cloud::PubSub::Subscription
-      sub.name.must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
+      _(sub).must_be_kind_of Google::Cloud::PubSub::Subscription
+      _(sub.name).must_equal "projects/#{project}/subscriptions/#{new_sub_name}"
     end
   end
 

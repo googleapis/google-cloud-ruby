@@ -23,7 +23,7 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
 
   it "gives the name returned from the HTTP method" do
-    subscription.name.must_equal sub_path
+    _(subscription.name).must_equal sub_path
   end
 
   describe "reference subscription given the short name" do
@@ -33,7 +33,7 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
     end
 
     it "matches the name returned from the HTTP method" do
-      subscription.name.must_equal sub_path
+      _(subscription.name).must_equal sub_path
     end
   end
 
@@ -44,7 +44,7 @@ describe Google::Cloud::PubSub::Subscription, :name, :mock_pubsub do
     end
 
     it "matches the name returned from the HTTP method" do
-      subscription.name.must_equal sub_path
+      _(subscription.name).must_equal sub_path
     end
   end
 end

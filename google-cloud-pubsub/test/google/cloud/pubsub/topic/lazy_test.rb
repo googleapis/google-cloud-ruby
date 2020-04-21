@@ -20,8 +20,8 @@ describe Google::Cloud::PubSub::Topic, :reference, :mock_pubsub do
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
 
   it "is not reference when created with an HTTP method" do
-    topic.wont_be :reference?
-    topic.must_be :resource?
+    _(topic).wont_be :reference?
+    _(topic).must_be :resource?
   end
 
   describe "reference topic" do
@@ -30,8 +30,8 @@ describe Google::Cloud::PubSub::Topic, :reference, :mock_pubsub do
     end
 
     it "is reference" do
-      topic.must_be :reference?
-      topic.wont_be :resource?
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
     end
   end
 end

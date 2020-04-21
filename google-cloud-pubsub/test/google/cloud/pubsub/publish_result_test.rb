@@ -21,36 +21,36 @@ describe Google::Cloud::PubSub::PublishResult, :mock_pubsub do
   let(:result) { Google::Cloud::PubSub::PublishResult.new msg }
 
   it "knows attributes" do
-    result.data.must_equal data
-    result.message.data.must_equal data
-    result.msg.data.must_equal data
+    _(result.data).must_equal data
+    _(result.message.data).must_equal data
+    _(result.msg.data).must_equal data
 
-    result.attributes.keys.sort.must_equal   attributes.keys.sort
-    result.attributes.values.sort.must_equal attributes.values.sort
-    result.message.attributes.keys.sort.must_equal   attributes.keys.sort
-    result.message.attributes.values.sort.must_equal attributes.values.sort
-    result.msg.attributes.keys.sort.must_equal   attributes.keys.sort
-    result.msg.attributes.values.sort.must_equal attributes.values.sort
+    _(result.attributes.keys.sort).must_equal   attributes.keys.sort
+    _(result.attributes.values.sort).must_equal attributes.values.sort
+    _(result.message.attributes.keys.sort).must_equal   attributes.keys.sort
+    _(result.message.attributes.values.sort).must_equal attributes.values.sort
+    _(result.msg.attributes.keys.sort).must_equal   attributes.keys.sort
+    _(result.msg.attributes.values.sort).must_equal attributes.values.sort
 
-    result.message_id.must_be :empty?
-    result.message.message_id.must_be :empty?
-    result.msg.message_id.must_be :empty?
+    _(result.message_id).must_be :empty?
+    _(result.message.message_id).must_be :empty?
+    _(result.msg.message_id).must_be :empty?
 
-    result.published_at.must_be :nil?
-    result.message.published_at.must_be :nil?
-    result.msg.published_at.must_be :nil?
+    _(result.published_at).must_be :nil?
+    _(result.message.published_at).must_be :nil?
+    _(result.msg.published_at).must_be :nil?
 
-    result.publish_time.must_be :nil?
-    result.message.publish_time.must_be :nil?
-    result.msg.publish_time.must_be :nil?
+    _(result.publish_time).must_be :nil?
+    _(result.message.publish_time).must_be :nil?
+    _(result.msg.publish_time).must_be :nil?
 
-    result.message.must_equal msg
-    result.msg.must_equal msg
+    _(result.message).must_equal msg
+    _(result.msg).must_equal msg
 
-    result.error.must_be :nil?
+    _(result.error).must_be :nil?
 
-    result.must_be :succeeded?
-    result.wont_be :failed?
+    _(result).must_be :succeeded?
+    _(result).wont_be :failed?
   end
 
   describe "with error" do
@@ -58,36 +58,36 @@ describe Google::Cloud::PubSub::PublishResult, :mock_pubsub do
     let(:result) { Google::Cloud::PubSub::PublishResult.new msg, error }
 
     it "knows attributes" do
-      result.data.must_equal data
-      result.message.data.must_equal data
-      result.msg.data.must_equal data
+      _(result.data).must_equal data
+      _(result.message.data).must_equal data
+      _(result.msg.data).must_equal data
 
-      result.attributes.keys.sort.must_equal   attributes.keys.sort
-      result.attributes.values.sort.must_equal attributes.values.sort
-      result.message.attributes.keys.sort.must_equal   attributes.keys.sort
-      result.message.attributes.values.sort.must_equal attributes.values.sort
-      result.msg.attributes.keys.sort.must_equal   attributes.keys.sort
-      result.msg.attributes.values.sort.must_equal attributes.values.sort
+      _(result.attributes.keys.sort).must_equal   attributes.keys.sort
+      _(result.attributes.values.sort).must_equal attributes.values.sort
+      _(result.message.attributes.keys.sort).must_equal   attributes.keys.sort
+      _(result.message.attributes.values.sort).must_equal attributes.values.sort
+      _(result.msg.attributes.keys.sort).must_equal   attributes.keys.sort
+      _(result.msg.attributes.values.sort).must_equal attributes.values.sort
 
-      result.message_id.must_be :empty?
-      result.message.message_id.must_be :empty?
-      result.msg.message_id.must_be :empty?
+      _(result.message_id).must_be :empty?
+      _(result.message.message_id).must_be :empty?
+      _(result.msg.message_id).must_be :empty?
 
-      result.published_at.must_be :nil?
-      result.message.published_at.must_be :nil?
-      result.msg.published_at.must_be :nil?
+      _(result.published_at).must_be :nil?
+      _(result.message.published_at).must_be :nil?
+      _(result.msg.published_at).must_be :nil?
 
-      result.publish_time.must_be :nil?
-      result.message.publish_time.must_be :nil?
-      result.msg.publish_time.must_be :nil?
+      _(result.publish_time).must_be :nil?
+      _(result.message.publish_time).must_be :nil?
+      _(result.msg.publish_time).must_be :nil?
 
-      result.message.must_equal msg
-      result.msg.must_equal msg
+      _(result.message).must_equal msg
+      _(result.msg).must_equal msg
 
-      result.error.must_equal error
+      _(result.error).must_equal error
 
-      result.wont_be :succeeded?
-      result.must_be :failed?
+      _(result).wont_be :succeeded?
+      _(result).must_be :failed?
     end
   end
 end

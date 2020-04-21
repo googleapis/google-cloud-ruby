@@ -26,8 +26,8 @@ describe Google::Cloud::PubSub::Message, :attributes do
   let(:message_obj)  { Google::Cloud::PubSub::Message.from_grpc message_grpc }
 
   it "has attributes as a Hash even when being a Google API object" do
-    message_obj.attributes["foo"].must_equal "FOO"
-    message_obj.attributes.keys.must_include "bar"
-    message_obj.attributes.must_be_kind_of Hash
+    _(message_obj.attributes["foo"]).must_equal "FOO"
+    _(message_obj.attributes.keys).must_include "bar"
+    _(message_obj.attributes).must_be_kind_of Hash
   end
 end

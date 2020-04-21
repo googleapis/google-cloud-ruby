@@ -32,8 +32,8 @@ describe Google::Cloud::PubSub::Subscription, :pull, :wait, :mock_pubsub do
 
     mock.verify
 
-    rec_messages.wont_be :empty?
-    rec_messages.first.message.data.must_equal rec_message_msg
+    _(rec_messages).wont_be :empty?
+    _(rec_messages.first.message.data).must_equal rec_message_msg
   end
 
   it "can pull messages by calling wait_for_messages" do
@@ -47,8 +47,8 @@ describe Google::Cloud::PubSub::Subscription, :pull, :wait, :mock_pubsub do
 
     mock.verify
 
-    rec_messages.wont_be :empty?
-    rec_messages.first.message.data.must_equal rec_message_msg
+    _(rec_messages).wont_be :empty?
+    _(rec_messages.first.message.data).must_equal rec_message_msg
   end
 
   it "will not error when a request times out with Google::Cloud::DeadlineExceededError" do
@@ -59,6 +59,6 @@ describe Google::Cloud::PubSub::Subscription, :pull, :wait, :mock_pubsub do
     subscription.service.mocked_subscriber = stub
 
     rec_messages = subscription.pull immediate: false
-    rec_messages.must_be :empty?
+    _(rec_messages).must_be :empty?
   end
 end

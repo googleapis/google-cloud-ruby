@@ -332,7 +332,7 @@ describe Google::Cloud::PubSub::AsyncPublisher::Batch do
 
     assert batch.canceled?
 
-    canceled_items.count.must_equal 15
+    _(canceled_items.count).must_equal 15
   end
 
   describe :empty? do

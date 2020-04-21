@@ -27,14 +27,14 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
 
   it "gets topic from the Google API object" do
     # No mocked service means no API calls are happening.
-    subscription.topic.must_be_kind_of Google::Cloud::PubSub::Topic
-    subscription.topic.must_be :reference?
-    subscription.topic.wont_be :resource?
-    subscription.topic.name.must_equal topic_path(topic_name)
+    _(subscription.topic).must_be_kind_of Google::Cloud::PubSub::Topic
+    _(subscription.topic).must_be :reference?
+    _(subscription.topic).wont_be :resource?
+    _(subscription.topic.name).must_equal topic_path(topic_name)
   end
 
   it "gets deadline from the Google API object" do
-    subscription.deadline.must_equal sub_deadline
+    _(subscription.deadline).must_equal sub_deadline
   end
 
   it "gets retain_acked from the Google API object" do
@@ -42,11 +42,11 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
   end
 
   it "gets its retention from the Google API object" do
-    subscription.retention.must_equal 600.9
+    _(subscription.retention).must_equal 600.9
   end
 
   it "gets endpoint from the Google API object" do
-    subscription.endpoint.must_equal sub_endpoint
+    _(subscription.endpoint).must_equal sub_endpoint
   end
 
   it "can update the endpoint" do
@@ -64,28 +64,28 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
 
   it "gets expires_in from the Google API object" do
     two_days_seconds = 60*60*24*2
-    subscription.expires_in.must_equal two_days_seconds
+    _(subscription.expires_in).must_equal two_days_seconds
   end
 
   it "gets push_config from the Google API object" do
-    subscription.push_config.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
-    subscription.push_config.endpoint.must_equal sub_endpoint
-    subscription.push_config.authentication.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
-    subscription.push_config.authentication.email.must_equal "user@example.com"
-    subscription.push_config.authentication.audience.must_equal "client-12345"
-    subscription.push_config.must_be :oidc_token?
+    _(subscription.push_config).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
+    _(subscription.push_config.endpoint).must_equal sub_endpoint
+    _(subscription.push_config.authentication).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
+    _(subscription.push_config.authentication.email).must_equal "user@example.com"
+    _(subscription.push_config.authentication.audience).must_equal "client-12345"
+    _(subscription.push_config).must_be :oidc_token?
   end
 
   it "gets labels from the Google API object" do
-    subscription.labels.must_equal labels
+    _(subscription.labels).must_equal labels
   end
 
   it "gets dead_letter_topic from the Google API object" do
-    subscription.dead_letter_topic.name.must_equal dead_letter_topic_path
+    _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_path
   end
 
   it "gets dead_letter_max_delivery_attempts from the Google API object" do
-    subscription.dead_letter_max_delivery_attempts.must_equal 6
+    _(subscription.dead_letter_max_delivery_attempts).must_equal 6
   end
 
   describe "reference subscription object of a subscription that does exist" do
@@ -100,13 +100,13 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      subscription.topic.must_be_kind_of Google::Cloud::PubSub::Topic
+      _(subscription.topic).must_be_kind_of Google::Cloud::PubSub::Topic
 
       mock.verify
 
-      subscription.topic.must_be :reference?
-      subscription.topic.wont_be :resource?
-      subscription.topic.name.must_equal topic_path(topic_name)
+      _(subscription.topic).must_be :reference?
+      _(subscription.topic).wont_be :resource?
+      _(subscription.topic.name).must_equal topic_path(topic_name)
     end
 
     it "makes an HTTP API call to retrieve deadline" do
@@ -115,7 +115,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      subscription.deadline.must_equal sub_deadline
+      _(subscription.deadline).must_equal sub_deadline
 
       mock.verify
     end
@@ -137,7 +137,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      subscription.endpoint.must_equal sub_endpoint
+      _(subscription.endpoint).must_equal sub_endpoint
 
       mock.verify
     end
@@ -150,7 +150,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      subscription.expires_in.must_equal two_days_seconds
+      _(subscription.expires_in).must_equal two_days_seconds
 
       mock.verify
     end
@@ -161,7 +161,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      subscription.labels.must_equal labels
+      _(subscription.labels).must_equal labels
 
       mock.verify
     end
@@ -172,8 +172,8 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      subscription.dead_letter_topic.name.must_equal dead_letter_topic_path
-      subscription.dead_letter_max_delivery_attempts.must_equal 7
+      _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_path
+      _(subscription.dead_letter_max_delivery_attempts).must_equal 7
 
       mock.verify
     end
@@ -184,15 +184,15 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      subscription.labels.must_equal labels
+      _(subscription.labels).must_equal labels
 
       mock.verify
     end
 
     it "does not make an HTTP API call to access push_config" do
-      subscription.push_config.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
-      subscription.push_config.endpoint.must_be :empty?
-      subscription.push_config.authentication.must_be :nil?
+      _(subscription.push_config).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
+      _(subscription.push_config.endpoint).must_be :empty?
+      _(subscription.push_config.authentication).must_be :nil?
     end
   end
 
@@ -273,9 +273,9 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     end
 
     it "does not raise NotFoundError when accessing push_config" do
-      subscription.push_config.must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
-      subscription.push_config.endpoint.must_be :empty?
-      subscription.push_config.authentication.must_be :nil?
+      _(subscription.push_config).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
+      _(subscription.push_config.endpoint).must_be :empty?
+      _(subscription.push_config.authentication).must_be :nil?
     end
 
     it "raises NotFoundError when retrieving dead_letter_topic" do

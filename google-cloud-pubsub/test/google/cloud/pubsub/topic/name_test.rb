@@ -19,6 +19,6 @@ describe Google::Cloud::PubSub::Topic, :name, :mock_pubsub do
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service }
 
   it "gives the name returned from the HTTP method" do
-    topic.name.must_equal "projects/#{project}/topics/#{topic_name}"
+    _(topic.name).must_equal "projects/#{project}/topics/#{topic_name}"
   end
 end

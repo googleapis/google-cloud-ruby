@@ -61,7 +61,7 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
     subscriber.stop
     subscriber.wait!
 
-    stub.requests.map(&:to_a).must_equal [
+    _(stub.requests.map(&:to_a)).must_equal [
       [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
         subscription: sub_path,
         stream_ack_deadline_seconds: 60
@@ -74,7 +74,7 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
       assert_equal ack_sub_path, sub_path
       ack_msg_ids += msg_ids
     end
-    ack_msg_ids.sort.must_equal ["ack-id-123456789"]
+    _(ack_msg_ids.sort).must_equal ["ack-id-123456789"]
 
     # pusher thread pool may deliver out of order, which stinks...
     mod_ack_hash = {}
@@ -86,7 +86,7 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
         mod_ack_hash[deadline] = msg_ids
       end
     end
-    mod_ack_hash[60].sort.must_equal ["ack-id-123456789"]
+    _(mod_ack_hash[60].sort).must_equal ["ack-id-123456789"]
   end
 
   it "can acknowledge multiple messages" do
@@ -117,7 +117,7 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
     subscriber.stop
     subscriber.wait!
 
-    stub.requests.map(&:to_a).must_equal [
+    _(stub.requests.map(&:to_a)).must_equal [
       [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
         subscription: sub_path,
         stream_ack_deadline_seconds: 60
@@ -130,7 +130,7 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
       assert_equal ack_sub_path, sub_path
       ack_msg_ids += msg_ids
     end
-    ack_msg_ids.sort.must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
+    _(ack_msg_ids.sort).must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
 
     # pusher thread pool may deliver out of order, which stinks...
     mod_ack_hash = {}
@@ -142,6 +142,6 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
         mod_ack_hash[deadline] = msg_ids
       end
     end
-    mod_ack_hash[60].sort.must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
+    _(mod_ack_hash[60].sort).must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
   end
 end

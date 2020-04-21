@@ -24,9 +24,9 @@ describe Google::Cloud::PubSub::Subscription, :exists, :mock_pubsub do
   it "knows if it exists when created with an HTTP method" do
     # The absense of a mock means this test will fail
     # if the method exists? makes an HTTP call.
-    subscription.must_be :exists?
+    _(subscription).must_be :exists?
     # Additional exists? calls do not make HTTP calls either
-    subscription.must_be :exists?
+    _(subscription).must_be :exists?
   end
 
   describe "reference subscription object of a subscription that exists" do
@@ -41,12 +41,12 @@ describe Google::Cloud::PubSub::Subscription, :exists, :mock_pubsub do
       mock.expect :get_subscription, get_res, [subscription_path(sub_name), options: default_options]
       subscription.service.mocked_subscriber = mock
 
-      subscription.must_be :exists?
+      _(subscription).must_be :exists?
 
       mock.verify
 
       # Additional exists? calls do not make HTTP calls
-      subscription.must_be :exists?
+      _(subscription).must_be :exists?
     end
   end
 
@@ -65,9 +65,9 @@ describe Google::Cloud::PubSub::Subscription, :exists, :mock_pubsub do
       end
       subscription.service.mocked_subscriber = stub
 
-      subscription.wont_be :exists?
+      _(subscription).wont_be :exists?
       # Additional exists? calls do not make HTTP calls
-      subscription.wont_be :exists?
+      _(subscription).wont_be :exists?
     end
   end
 end

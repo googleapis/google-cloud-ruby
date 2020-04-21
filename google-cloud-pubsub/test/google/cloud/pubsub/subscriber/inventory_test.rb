@@ -66,7 +66,7 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
     subscriber.stop
     subscriber.wait!
 
-    stub.requests.map(&:to_a).must_equal [
+    _(stub.requests.map(&:to_a)).must_equal [
       [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
         subscription: sub_path,
         stream_ack_deadline_seconds: 60
@@ -91,7 +91,7 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
         mod_ack_hash[deadline] = msg_ids
       end
     end
-    mod_ack_hash[60].sort.must_equal ["ack-id-123456789"]
+    _(mod_ack_hash[60].sort).must_equal ["ack-id-123456789"]
   end
 
   it "removes multiple messages from inventory, even when ack or nack are not called" do
@@ -126,7 +126,7 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
     subscriber.stop
     subscriber.wait!
 
-    stub.requests.map(&:to_a).must_equal [
+    _(stub.requests.map(&:to_a)).must_equal [
       [Google::Cloud::PubSub::V1::StreamingPullRequest.new(
         subscription: sub_path,
         stream_ack_deadline_seconds: 60
@@ -151,7 +151,7 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
         mod_ack_hash[deadline] = msg_ids
       end
     end
-    mod_ack_hash[60].sort.must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
+    _(mod_ack_hash[60].sort).must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
   end
 
   it "knows its count limit" do
@@ -159,11 +159,11 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
     inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 2, bytesize: 100_000, extension: 3600, max_duration_per_lease_extension: 0
 
     inventory.add rec_msg1_grpc
-    inventory.wont_be :full?
-    inventory.count.must_equal 1
+    _(inventory).wont_be :full?
+    _(inventory.count).must_equal 1
     inventory.add rec_msg2_grpc, rec_msg3_grpc
-    inventory.count.must_equal 3
-    inventory.must_be :full?
+    _(inventory.count).must_equal 3
+    _(inventory).must_be :full?
   end
 
   it "knows its bytesize limit" do
@@ -171,11 +171,11 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
     inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100, extension: 3600, max_duration_per_lease_extension: 0
 
     inventory.add rec_msg1_grpc
-    inventory.wont_be :full?
-    inventory.total_bytesize.must_equal 58
+    _(inventory).wont_be :full?
+    _(inventory.total_bytesize).must_equal 58
     inventory.add rec_msg2_grpc, rec_msg3_grpc
-    inventory.total_bytesize.must_equal 174
-    inventory.must_be :full?
+    _(inventory.total_bytesize).must_equal 174
+    _(inventory).must_be :full?
   end
 
   it "removes expired items" do
@@ -187,19 +187,19 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
     Time.stub :now, expired_time do
       inventory.add rec_msg1_grpc
     end
-    inventory.ack_ids.must_equal ["ack-id-1111"]
+    _(inventory.ack_ids).must_equal ["ack-id-1111"]
     inventory.add rec_msg2_grpc, rec_msg3_grpc
-    inventory.ack_ids.must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
+    _(inventory.ack_ids).must_equal ["ack-id-1111", "ack-id-1112", "ack-id-1113"]
 
     inventory.remove_expired!
 
-    inventory.ack_ids.must_equal ["ack-id-1112", "ack-id-1113"]
+    _(inventory.ack_ids).must_equal ["ack-id-1112", "ack-id-1113"]
   end
 
   it "knows its max_duration_per_lease_extension limit" do
     subscriber_mock = Minitest::Mock.new
     inventory = Google::Cloud::PubSub::Subscriber::Inventory.new subscriber_mock, limit: 1000, bytesize: 100, extension: 3600, max_duration_per_lease_extension: 10
 
-    inventory.max_duration_per_lease_extension.must_equal 10
+    _(inventory.max_duration_per_lease_extension).must_equal 10
   end
 end

@@ -31,7 +31,7 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
   let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service }
 
   it "updates labels" do
-    topic.labels.must_equal labels
+    _(topic.labels).must_equal labels
 
     update_grpc = topic_grpc.dup
     update_grpc.labels = new_labels_map
@@ -44,11 +44,11 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
     mock.verify
 
-    topic.labels.must_equal new_labels
+    _(topic.labels).must_equal new_labels
   end
 
   it "updates labels to empty hash" do
-    topic.labels.must_equal labels
+    _(topic.labels).must_equal labels
 
     update_grpc = topic_grpc.dup
     update_grpc.labels = Google::Protobuf::Map.new(:string, :string)
@@ -62,21 +62,21 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
     mock.verify
 
-    topic.labels.wont_be :nil?
-    topic.labels.must_be :empty?
+    _(topic.labels).wont_be :nil?
+    _(topic.labels).must_be :empty?
   end
 
   it "raises when setting labels to nil" do
-    topic.labels.must_equal labels
+    _(topic.labels).must_equal labels
 
     expect { topic.labels = nil }.must_raise ArgumentError
 
-    topic.labels.must_equal labels
+    _(topic.labels).must_equal labels
   end
 
   it "updates kms_key" do
     topic_grpc.kms_key_name = kms_key_name
-    topic.kms_key.must_equal kms_key_name
+    _(topic.kms_key).must_equal kms_key_name
 
     update_grpc = Google::Cloud::PubSub::V1::Topic.new \
       name: topic_path(topic_name),
@@ -90,12 +90,12 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
     mock.verify
 
-    topic.kms_key.must_equal new_kms_key_name
+    _(topic.kms_key).must_equal new_kms_key_name
   end
 
   it "updates kms_key to empty string" do
     topic_grpc.kms_key_name = kms_key_name
-    topic.kms_key.must_equal kms_key_name
+    _(topic.kms_key).must_equal kms_key_name
 
     update_grpc = Google::Cloud::PubSub::V1::Topic.new \
       name: topic_path(topic_name),
@@ -109,12 +109,12 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
     mock.verify
 
-    topic.kms_key.must_be :empty?
+    _(topic.kms_key).must_be :empty?
   end
 
   it "updates kms_key to nil" do
     topic_grpc.kms_key_name = kms_key_name
-    topic.kms_key.must_equal kms_key_name
+    _(topic.kms_key).must_equal kms_key_name
 
     update_grpc = Google::Cloud::PubSub::V1::Topic.new \
       name: topic_path(topic_name),
@@ -128,14 +128,14 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
     mock.verify
 
-    topic.kms_key.must_be :empty?
+    _(topic.kms_key).must_be :empty?
   end
 
   it "updates persistence_regions" do
     topic_grpc.message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
       allowed_persistence_regions: persistence_regions
     )
-    topic.persistence_regions.must_equal persistence_regions
+    _(topic.persistence_regions).must_equal persistence_regions
 
     update_grpc = Google::Cloud::PubSub::V1::Topic.new(
       name: topic_path(topic_name),
@@ -150,14 +150,14 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
     mock.verify
 
-    topic.persistence_regions.must_equal new_persistence_regions
+    _(topic.persistence_regions).must_equal new_persistence_regions
   end
 
   it "updates persistence_regions to empty array" do
     topic_grpc.message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
       allowed_persistence_regions: persistence_regions
     )
-    topic.persistence_regions.must_equal persistence_regions
+    _(topic.persistence_regions).must_equal persistence_regions
 
     update_grpc = Google::Cloud::PubSub::V1::Topic.new(
       name: topic_path(topic_name),
@@ -172,14 +172,14 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
     mock.verify
 
-    topic.persistence_regions.must_be :empty?
+    _(topic.persistence_regions).must_be :empty?
   end
 
   it "updates persistence_regions to nil" do
     topic_grpc.message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
       allowed_persistence_regions: persistence_regions
     )
-    topic.persistence_regions.must_equal persistence_regions
+    _(topic.persistence_regions).must_equal persistence_regions
 
     update_grpc = Google::Cloud::PubSub::V1::Topic.new(
       name: topic_path(topic_name),
@@ -194,15 +194,15 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
     mock.verify
 
-    topic.persistence_regions.must_be :empty?
+    _(topic.persistence_regions).must_be :empty?
   end
 
   describe :reference do
     let(:topic) { Google::Cloud::PubSub::Topic.from_name topic_name, pubsub.service }
 
     it "updates labels" do
-      topic.must_be :reference?
-      topic.wont_be :resource?
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
 
       update_grpc = Google::Cloud::PubSub::V1::Topic.new \
         name: topic_path(topic_name),
@@ -217,14 +217,14 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
       mock.verify
 
-      topic.wont_be :reference?
-      topic.must_be :resource?
-      topic.labels.must_equal new_labels
+      _(topic).wont_be :reference?
+      _(topic).must_be :resource?
+      _(topic.labels).must_equal new_labels
     end
 
     it "updates kms_key" do
-      topic.must_be :reference?
-      topic.wont_be :resource?
+      _(topic).must_be :reference?
+      _(topic).wont_be :resource?
 
       update_grpc = Google::Cloud::PubSub::V1::Topic.new \
         name: topic_path(topic_name),
@@ -239,9 +239,9 @@ describe Google::Cloud::PubSub::Topic, :update, :mock_pubsub do
 
       mock.verify
 
-      topic.wont_be :reference?
-      topic.must_be :resource?
-      topic.kms_key.must_equal new_kms_key_name
+      _(topic).wont_be :reference?
+      _(topic).must_be :resource?
+      _(topic.kms_key).must_equal new_kms_key_name
     end
   end
 end
