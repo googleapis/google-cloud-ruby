@@ -80,10 +80,10 @@ module Google
         #
         #     The default and maximum values depend on the type of request:
         #
-        #     * For [HTTP tasks][google.cloud.tasks.v2beta3.HttpRequest], the default is 10 minutes. The deadline
+        #     * For {Google::Cloud::Tasks::V2beta3::HttpRequest HTTP tasks}, the default is 10 minutes. The deadline
         #       must be in the interval [15 seconds, 30 minutes].
         #
-        #     * For [App Engine tasks][google.cloud.tasks.v2beta3.AppEngineHttpRequest], 0 indicates that the
+        #     * For {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest App Engine tasks}, 0 indicates that the
         #       request has the default deadline. The default deadline depends on the
         #       [scaling
         #       type](https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling)
@@ -140,7 +140,7 @@ module Google
             # sensitive data.
             #
             # This view does not include the
-            # [body in AppEngineHttpRequest][google.cloud.tasks.v2beta3.AppEngineHttpRequest.body].
+            # {Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest#body body in AppEngineHttpRequest}.
             # Bodies are desirable to return only when needed, because they
             # can be large and because of the sensitivity of the data that you
             # choose to store in it.
