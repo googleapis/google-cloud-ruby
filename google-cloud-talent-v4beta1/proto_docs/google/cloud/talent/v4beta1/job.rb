@@ -131,8 +131,8 @@ module Google
         # @!attribute [rw] employment_types
         #   @return [Array<Google::Cloud::Talent::V4beta1::EmploymentType>]
         #     The employment type(s) of a job, for example,
-        #     [full time][google.cloud.talent.v4beta1.EmploymentType.FULL_TIME] or
-        #     [part time][google.cloud.talent.v4beta1.EmploymentType.PART_TIME].
+        #     {Google::Cloud::Talent::V4beta1::EmploymentType::FULL_TIME full time} or
+        #     {Google::Cloud::Talent::V4beta1::EmploymentType::PART_TIME part time}.
         # @!attribute [rw] incentives
         #   @return [String]
         #     A description of bonus, commission, and other compensation

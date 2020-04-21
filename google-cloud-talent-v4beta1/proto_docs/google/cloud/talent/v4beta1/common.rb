@@ -345,13 +345,13 @@ module Google
           #   @return [Google::Type::Money]
           #     The maximum amount of compensation. If left empty, the value is set
           #     to a maximal compensation value and the currency code is set to
-          #     match the [currency code][google.type.Money.currency_code] of
+          #     match the {Google::Type::Money#currency_code currency code} of
           #     min_compensation.
           # @!attribute [rw] min_compensation
           #   @return [Google::Type::Money]
           #     The minimum amount of compensation. If left empty, the value is set
           #     to zero and the currency code is set to match the
-          #     [currency code][google.type.Money.currency_code] of max_compensation.
+          #     {Google::Type::Money#currency_code currency code} of max_compensation.
           class CompensationRange
             include Google::Protobuf::MessageExts
             extend Google::Protobuf::MessageExts::ClassMethods
