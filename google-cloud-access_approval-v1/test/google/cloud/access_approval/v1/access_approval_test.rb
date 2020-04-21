@@ -466,4 +466,22 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       assert_equal 5, delete_access_approval_settings_client_stub.call_rpc_count
     end
   end
+
+  def test_configure
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = block_config = config = nil
+    Gapic::ServiceStub.stub :new, nil do
+      client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    config = client.configure do |c|
+      block_config = c
+    end
+
+    assert_same block_config, config
+    assert_kind_of Google::Cloud::AccessApproval::V1::AccessApproval::Client::Configuration, config
+  end
 end
