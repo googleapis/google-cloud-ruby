@@ -90,7 +90,7 @@ module Google
         #     when incidents are opened or closed or when new violations occur on
         #     an already opened incident. Each element of this array corresponds to
         #     the `name` field in each of the
-        #     [`NotificationChannel`][google.monitoring.v3.NotificationChannel]
+        #     {Google::Cloud::Monitoring::V3::NotificationChannel `NotificationChannel`}
         #     objects that are returned from the [`ListNotificationChannels`]
         #     [google.monitoring.v3.NotificationChannelService.ListNotificationChannels]
         #     method. The format of the entries in this field is:
