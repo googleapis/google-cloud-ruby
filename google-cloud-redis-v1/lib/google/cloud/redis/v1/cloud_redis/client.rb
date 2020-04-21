@@ -164,6 +164,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.endpoint = @config.endpoint
               end
 
               @cloud_redis_stub = Gapic::ServiceStub.new(
@@ -174,6 +175,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [Google::Cloud::Redis::V1::CloudRedis::Operations]
+            #
+            attr_reader :operations_client
 
             # Service calls
 
@@ -213,7 +221,7 @@ module Google
             #     If not specified, a default value of 1000 will be used by the service.
             #     Regardless of the page_size value, the response may include a partial list
             #     and a caller should only rely on response's
-            #     [`next_page_token`][google.cloud.redis.v1.ListInstancesResponse.next_page_token]
+            #     {Google::Cloud::Redis::V1::ListInstancesResponse#next_page_token `next_page_token`}
             #     to determine if there are more instances left to be queried.
             #   @param page_token [String]
             #     The `next_page_token` value returned from a previous
