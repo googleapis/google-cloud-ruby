@@ -41,13 +41,13 @@ module Google
         #
         #     Tags allow similar tasks to be processed in a batch. If you label
         #     tasks with a tag, your worker can
-        #     [lease tasks][google.cloud.tasks.v2beta2.CloudTasks.LeaseTasks] with the same tag using
+        #     {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks lease tasks} with the same tag using
         #     {Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter filter}. For example, if you want to
         #     aggregate the events associated with a specific user once a day,
         #     you could tag tasks with the user ID.
         #
         #     The task's tag can only be set when the
-        #     [task is created][google.cloud.tasks.v2beta2.CloudTasks.CreateTask].
+        #     {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task task is created}.
         #
         #     The tag must be less than 500 characters.
         #
@@ -77,11 +77,11 @@ module Google
         # @!attribute [rw] app_engine_routing_override
         #   @return [Google::Cloud::Tasks::V2beta2::AppEngineRouting]
         #     Overrides for the
-        #     [task-level app_engine_routing][google.cloud.tasks.v2beta2.AppEngineHttpRequest.app_engine_routing].
+        #     {Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest#app_engine_routing task-level app_engine_routing}.
         #
         #     If set, `app_engine_routing_override` is used for all tasks in
         #     the queue, no matter what the setting is for the
-        #     [task-level app_engine_routing][google.cloud.tasks.v2beta2.AppEngineHttpRequest.app_engine_routing].
+        #     {Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest#app_engine_routing task-level app_engine_routing}.
         class AppEngineHttpTarget
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
@@ -122,7 +122,7 @@ module Google
         #    {Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget#app_engine_routing_override app_engine_routing_override}
         #    is used for all tasks in the queue, no matter what the setting
         #    is for the
-        #    [task-level app_engine_routing][google.cloud.tasks.v2beta2.AppEngineHttpRequest.app_engine_routing].
+        #    {Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest#app_engine_routing task-level app_engine_routing}.
         #
         #
         # The `url` that the task will be sent to is:
@@ -145,7 +145,7 @@ module Google
         # the app's handler returns a non-2xx response code or Cloud Tasks does
         # not receive response before the [deadline][Task.dispatch_deadline]. Failed
         # tasks will be retried according to the
-        # [retry configuration][google.cloud.tasks.v2beta2.Queue.retry_config]. `503` (Service Unavailable) is
+        # {Google::Cloud::Tasks::V2beta2::Queue#retry_config retry configuration}. `503` (Service Unavailable) is
         # considered an App Engine system error instead of an application error and
         # will cause Cloud Tasks' traffic congestion control to temporarily throttle
         # the queue's dispatches. Unlike other types of task targets, a `429` (Too Many
@@ -171,7 +171,7 @@ module Google
         #     If set,
         #     {Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget#app_engine_routing_override app_engine_routing_override}
         #     is used for all tasks in the queue, no matter what the setting is for the
-        #     [task-level app_engine_routing][google.cloud.tasks.v2beta2.AppEngineHttpRequest.app_engine_routing].
+        #     {Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest#app_engine_routing task-level app_engine_routing}.
         # @!attribute [rw] relative_url
         #   @return [String]
         #     The relative URL.
@@ -186,7 +186,7 @@ module Google
         #
         #     This map contains the header field names and values.
         #     Headers can be set when the
-        #     [task is created][google.cloud.tasks.v2beta2.CloudTasks.CreateTask].
+        #     {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task task is created}.
         #     Repeated headers are not supported but a header value can contain commas.
         #
         #     Cloud Tasks sets some headers to default values:
@@ -203,7 +203,7 @@ module Google
         #     * `Content-Type`: By default, the `Content-Type` header is set to
         #       `"application/octet-stream"`. The default can be overridden by explicitly
         #       setting `Content-Type` to a particular media type when the
-        #       [task is created][google.cloud.tasks.v2beta2.CloudTasks.CreateTask].
+        #       {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task task is created}.
         #       For example, `Content-Type` can be set to `"application/json"`.
         #     * `Content-Length`: This is computed by Cloud Tasks. This value is
         #       output only.   It cannot be changed.

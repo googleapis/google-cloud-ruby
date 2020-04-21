@@ -166,9 +166,9 @@ module Google
         #     If unspecified when the queue is created, Cloud Tasks will pick the
         #     default.
         #
-        #     * For [App Engine queues][google.cloud.tasks.v2beta2.AppEngineHttpTarget], the maximum allowed value
+        #     * For {Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget App Engine queues}, the maximum allowed value
         #       is 500.
-        #     * This field is output only   for [pull queues][google.cloud.tasks.v2beta2.PullTarget]. In addition to the
+        #     * This field is output only   for {Google::Cloud::Tasks::V2beta2::PullTarget pull queues}. In addition to the
         #       `max_tasks_dispatched_per_second` limit, a maximum of 10 QPS of
         #       {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} requests are allowed per pull queue.
         #
@@ -224,7 +224,7 @@ module Google
         #     The maximum allowed value is 5,000.
         #
         #     This field is output only for
-        #     [pull queues][google.cloud.tasks.v2beta2.PullTarget] and always -1, which indicates no limit. No other
+        #     {Google::Cloud::Tasks::V2beta2::PullTarget pull queues} and always -1, which indicates no limit. No other
         #     queue types can have `max_concurrent_tasks` set to -1.
         #
         #
@@ -263,7 +263,7 @@ module Google
         #     If unspecified when the queue is created, Cloud Tasks will pick the
         #     default.
         #
-        #     This field is output only for [pull queues][google.cloud.tasks.v2beta2.PullTarget].
+        #     This field is output only for {Google::Cloud::Tasks::V2beta2::PullTarget pull queues}.
         #
         #
         #     `max_retry_duration` will be truncated to the nearest second.
@@ -282,7 +282,7 @@ module Google
         #     If unspecified when the queue is created, Cloud Tasks will pick the
         #     default.
         #
-        #     This field is output only for [pull queues][google.cloud.tasks.v2beta2.PullTarget].
+        #     This field is output only for {Google::Cloud::Tasks::V2beta2::PullTarget pull queues}.
         #
         #
         #     `min_backoff` will be truncated to the nearest second.
@@ -301,7 +301,7 @@ module Google
         #     If unspecified when the queue is created, Cloud Tasks will pick the
         #     default.
         #
-        #     This field is output only for [pull queues][google.cloud.tasks.v2beta2.PullTarget].
+        #     This field is output only for {Google::Cloud::Tasks::V2beta2::PullTarget pull queues}.
         #
         #
         #     `max_backoff` will be truncated to the nearest second.
@@ -333,7 +333,7 @@ module Google
         #     If unspecified when the queue is created, Cloud Tasks will pick the
         #     default.
         #
-        #     This field is output only for [pull queues][google.cloud.tasks.v2beta2.PullTarget].
+        #     This field is output only for {Google::Cloud::Tasks::V2beta2::PullTarget pull queues}.
         #
         #
         #     This field has the same meaning as
