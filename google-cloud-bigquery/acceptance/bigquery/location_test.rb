@@ -52,42 +52,42 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
 
   it "creates a query job with location" do
     insert_response = table.insert rows
-    insert_response.must_be :success?
-    insert_response.insert_count.must_equal 3
-    insert_response.insert_errors.must_be :empty?
-    insert_response.error_rows.must_be :empty?
+    _(insert_response).must_be :success?
+    _(insert_response.insert_count).must_equal 3
+    _(insert_response.insert_errors).must_be :empty?
+    _(insert_response.error_rows).must_be :empty?
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id
 
-    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    query_job.job_id.must_equal job_id
-    query_job.location.must_equal region
+    _(query_job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(query_job.job_id).must_equal job_id
+    _(query_job.location).must_equal region
     query_job.wait_until_done!
-    query_job.location.must_equal region
-    query_job.wont_be :failed?
+    _(query_job.location).must_equal region
+    _(query_job).wont_be :failed?
     query_job.rerun!
-    query_job.location.must_equal region
+    _(query_job.location).must_equal region
     query_job.wait_until_done!
-    query_job.location.must_equal region
-    query_job.wont_be :failed?
+    _(query_job.location).must_equal region
+    _(query_job).wont_be :failed?
 
-    query_job.data.class.must_equal Google::Cloud::Bigquery::Data
-    query_job.data.total.wont_be :nil?
+    _(query_job.data.class).must_equal Google::Cloud::Bigquery::Data
+    _(query_job.data.total).wont_be :nil?
 
     assert_data table.data(max: 1)
 
     data = dataset.query query
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.total.wont_be(:nil?)
-    data.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    data.fields.count.must_equal 4
-    [:id, :breed, :name, :dob].each { |k| data.headers.must_include k }
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    _(data.total).wont_be(:nil?)
+    _(data.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(data.fields.count).must_equal 4
+    [:id, :breed, :name, :dob].each { |k| _(data.headers).must_include k }
     data.all.each do |row|
-      row.must_be_kind_of Hash
+      _(row).must_be_kind_of Hash
     end
-    data.next.must_be :nil?
+    _(data.next).must_be :nil?
   end
 
   it "creates a load job with location" do
@@ -98,10 +98,10 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
       # Load the file to a dataset in the region with an load job in the region.
       job = table.load_job load_file
 
-      job.location.must_equal region
+      _(job.location).must_equal region
       job.wait_until_done!
-      job.location.must_equal region
-      job.wont_be :failed?
+      _(job.location).must_equal region
+      _(job).wont_be :failed?
     ensure
       post_bucket = storage.bucket "#{prefix}_load_loc"
       if post_bucket
@@ -118,49 +118,49 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
       j.write = :empty
     end
 
-    copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    copy_job.job_id.must_equal job_id
-    copy_job.location.must_equal region
+    _(copy_job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(copy_job.job_id).must_equal job_id
+    _(copy_job.location).must_equal region
     copy_job.wait_until_done!
 
-    copy_job.wont_be :failed?
-    copy_job.location.must_equal region
-    copy_job.source.table_id.must_equal table.table_id
-    copy_job.destination.table_id.must_equal target_table_2_id
-    copy_job.create_if_needed?.must_equal true
-    copy_job.create_never?.must_equal false
-    copy_job.write_truncate?.must_equal false
-    copy_job.write_append?.must_equal false
-    copy_job.write_empty?.must_equal true
+    _(copy_job).wont_be :failed?
+    _(copy_job.location).must_equal region
+    _(copy_job.source.table_id).must_equal table.table_id
+    _(copy_job.destination.table_id).must_equal target_table_2_id
+    _(copy_job.create_if_needed?).must_equal true
+    _(copy_job.create_never?).must_equal false
+    _(copy_job.write_truncate?).must_equal false
+    _(copy_job.write_append?).must_equal false
+    _(copy_job.write_empty?).must_equal true
   end
 
   it "creates, cancels and gets a job with location" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     job = table.load_job local_file, job_id: job_id
 
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.location.must_equal region
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.location).must_equal region
+    _(job).wont_be :done?
 
     # Can cancel the job from the region.
     job.cancel
-    job.location.must_equal region
+    _(job.location).must_equal region
 
     # Cannot get the job without specifying location
     job = bigquery.job job_id
-    job.must_be :nil?
+    _(job).must_be :nil?
 
     # Cannot get the job from the US.
     job = bigquery.job job_id, location: "US"
-    job.must_be :nil?
+    _(job).must_be :nil?
 
     # Can get the job from the region.
     job = bigquery.job job_id, location: region
-    job.wont_be :nil?
+    _(job).wont_be :nil?
     job.wait_until_done!
 
-    job.must_be :done?
-    job.wont_be :failed?
+    _(job).must_be :done?
+    _(job).wont_be :failed?
   end
 
   it "creates an extract job with location" do
@@ -168,27 +168,27 @@ describe Google::Cloud::Bigquery, :location, :bigquery do
       # Make sure there is data to extract...
       load_job = table.load_job local_file
 
-      load_job.location.must_equal region
+      _(load_job.location).must_equal region
       load_job.wait_until_done!
-      load_job.wont_be :failed?
-      load_job.location.must_equal region
+      _(load_job).wont_be :failed?
+      _(load_job.location).must_equal region
 
       Tempfile.open "empty_extract_file.json" do |tmp|
-        tmp.size.must_equal 0
+        _(tmp.size).must_equal 0
         extract_bucket = safe_gcs_execute { storage.create_bucket "#{prefix}_ext_loc", location: region }
         extract_file = extract_bucket.create_file tmp, "kitten-test-data-backup.json"
         job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
         extract_job = table.extract_job extract_file, job_id: job_id
 
-        extract_job.job_id.must_equal job_id
+        _(extract_job.job_id).must_equal job_id
         extract_job.wait_until_done!
-        extract_job.wont_be :failed?
-        extract_job.location.must_equal region
+        _(extract_job).wont_be :failed?
+        _(extract_job.location).must_equal region
         # Refresh to get the latest file data
         extract_file = extract_bucket.file "kitten-test-data-backup.json"
         downloaded_file = extract_file.download tmp.path
-        downloaded_file.size.must_be :>, 0
+        _(downloaded_file.size).must_be :>, 0
       end
     ensure
       post_bucket = storage.bucket "#{prefix}_ext_loc"

@@ -44,7 +44,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
 
     mock.verify
 
-    model.name.must_equal new_model_name
+    _(model.name).must_equal new_model_name
   end
 
   it "updates its description" do
@@ -63,7 +63,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
 
     mock.verify
 
-    model.description.must_equal new_description
+    _(model.description).must_equal new_description
   end
 
   it "updates its labels" do
@@ -84,7 +84,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
 
     mock.verify
 
-    model.labels.must_equal new_labels
+    _(model.labels).must_equal new_labels
   end
 
   it "updates its expires time" do
@@ -105,7 +105,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
 
     mock.verify
 
-    model.expires_at.must_be_close_to one_hour_from_now, 1
+    _(model.expires_at).must_be_close_to one_hour_from_now, 1
   end
 
   it "updates its expires time to nil" do
@@ -124,7 +124,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
 
     mock.verify
 
-    model.expires_at.must_be_nil
+    _(model.expires_at).must_be_nil
   end
 
   it "updates its encryption" do
@@ -141,7 +141,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
     mock.expect :get_model, model_hash.to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
     model.service.mocked_service = mock
 
-    model.encryption.must_be :nil?
+    _(model.encryption).must_be :nil?
 
     encrypt_config = bigquery.encryption kms_key: kms_key
 
@@ -149,8 +149,8 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
 
     mock.verify
 
-    model.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
-    model.encryption.kms_key.must_equal kms_key
-    model.encryption.must_be :frozen?
+    _(model.encryption).must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    _(model.encryption.kms_key).must_equal kms_key
+    _(model.encryption).must_be :frozen?
   end
 end

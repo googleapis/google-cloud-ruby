@@ -54,7 +54,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     result = source_table.copy target_table
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can copy to a table identified by a string" do
@@ -69,7 +69,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     result = source_table.copy "target-project:target_dataset.target_table_id"
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can copy to a table name string only" do
@@ -91,7 +91,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     result = source_table.copy "new_target_table_id"
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can copy itself with create disposition" do
@@ -107,7 +107,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     result = source_table.copy target_table, create: "CREATE_NEVER"
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can copy itself with create disposition symbol" do
@@ -123,7 +123,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     result = source_table.copy target_table, create: :never
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
 
@@ -140,7 +140,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     result = source_table.copy target_table, write: "WRITE_TRUNCATE"
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can copy itself with write disposition symbol" do
@@ -156,7 +156,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     result = source_table.copy target_table, write: :truncate
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   def copy_job_gapi source, target, job_id: "job_9876543210", location: "US"

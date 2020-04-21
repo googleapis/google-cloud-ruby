@@ -52,64 +52,64 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
   let(:failed_job_id) { failed_job.job_id }
 
   it "knows its attributes" do
-    job.job_id.wont_be :nil?
-    job.job_id.must_equal job_gapi.job_reference.job_id
-    job.location.must_equal region
-    job.labels.must_equal labels
-    job.labels.must_be :frozen?
-    job.user_email.must_equal "user@example.com"
-    job.num_child_jobs.must_equal 2
-    job.parent_job_id.must_equal "2222222222"
+    _(job.job_id).wont_be :nil?
+    _(job.job_id).must_equal job_gapi.job_reference.job_id
+    _(job.location).must_equal region
+    _(job.labels).must_equal labels
+    _(job.labels).must_be :frozen?
+    _(job.user_email).must_equal "user@example.com"
+    _(job.num_child_jobs).must_equal 2
+    _(job.parent_job_id).must_equal "2222222222"
   end
 
   it "knows its state" do
-    job.state.must_equal "running"
-    job.must_be :running?
-    job.wont_be :pending?
-    job.wont_be :done?
-    job.wont_be :failed?
+    _(job.state).must_equal "running"
+    _(job).must_be :running?
+    _(job).wont_be :pending?
+    _(job).wont_be :done?
+    _(job).wont_be :failed?
 
     job.gapi.status.state = "RUNNING"
-    job.state.must_equal "RUNNING"
-    job.must_be :running?
-    job.wont_be :pending?
-    job.wont_be :done?
-    job.wont_be :failed?
+    _(job.state).must_equal "RUNNING"
+    _(job).must_be :running?
+    _(job).wont_be :pending?
+    _(job).wont_be :done?
+    _(job).wont_be :failed?
 
     job.gapi.status.state = "pending"
-    job.state.must_equal "pending"
-    job.wont_be :running?
-    job.must_be :pending?
-    job.wont_be :done?
-    job.wont_be :failed?
+    _(job.state).must_equal "pending"
+    _(job).wont_be :running?
+    _(job).must_be :pending?
+    _(job).wont_be :done?
+    _(job).wont_be :failed?
 
     job.gapi.status.state = "PENDING"
-    job.state.must_equal "PENDING"
-    job.wont_be :running?
-    job.must_be :pending?
-    job.wont_be :done?
-    job.wont_be :failed?
+    _(job.state).must_equal "PENDING"
+    _(job).wont_be :running?
+    _(job).must_be :pending?
+    _(job).wont_be :done?
+    _(job).wont_be :failed?
 
     job.gapi.status.state = "done"
-    job.state.must_equal "done"
-    job.wont_be :running?
-    job.wont_be :pending?
-    job.must_be :done?
-    job.wont_be :failed?
+    _(job.state).must_equal "done"
+    _(job).wont_be :running?
+    _(job).wont_be :pending?
+    _(job).must_be :done?
+    _(job).wont_be :failed?
 
     job.gapi.status.state = "DONE"
-    job.state.must_equal "DONE"
-    job.wont_be :running?
-    job.wont_be :pending?
-    job.must_be :done?
-    job.wont_be :failed?
+    _(job.state).must_equal "DONE"
+    _(job).wont_be :running?
+    _(job).wont_be :pending?
+    _(job).must_be :done?
+    _(job).wont_be :failed?
 
     job.gapi.status.state = nil
-    job.state.must_be :nil?
-    job.wont_be :running?
-    job.wont_be :pending?
-    job.wont_be :done?
-    job.wont_be :failed?
+    _(job.state).must_be :nil?
+    _(job).wont_be :running?
+    _(job).wont_be :pending?
+    _(job).wont_be :done?
+    _(job).wont_be :failed?
   end
 
   it "knows its creation and modification times" do
@@ -117,9 +117,9 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     job.gapi.statistics.start_time = nil
     job.gapi.statistics.end_time = nil
 
-    job.created_at.must_be :nil?
-    job.started_at.must_be :nil?
-    job.ended_at.must_be :nil?
+    _(job.created_at).must_be :nil?
+    _(job.started_at).must_be :nil?
+    _(job.ended_at).must_be :nil?
 
     nowish = ::Time.now
     timestamp = time_millis
@@ -128,59 +128,59 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     job.gapi.statistics.start_time = timestamp
     job.gapi.statistics.end_time = timestamp
 
-    job.created_at.must_be_close_to nowish, 1
-    job.started_at.must_be_close_to nowish, 1
-    job.ended_at.must_be_close_to nowish, 1
+    _(job.created_at).must_be_close_to nowish, 1
+    _(job.started_at).must_be_close_to nowish, 1
+    _(job.ended_at).must_be_close_to nowish, 1
   end
 
   it "knows its configuration" do
-    job.config.must_be_kind_of Hash
-    job.config["dryRun"].must_equal false
-    job.configuration.must_be_kind_of Hash
-    job.configuration["dryRun"].must_equal false
+    _(job.config).must_be_kind_of Hash
+    _(job.config["dryRun"]).must_equal false
+    _(job.configuration).must_be_kind_of Hash
+    _(job.configuration["dryRun"]).must_equal false
   end
 
   it "knows its statistics config" do
-    job.statistics.must_be_kind_of Hash
-    job.statistics["creationTime"].wont_be :nil?
-    job.stats.must_be_kind_of Hash
-    job.stats["creationTime"].wont_be :nil?
+    _(job.statistics).must_be_kind_of Hash
+    _(job.statistics["creationTime"]).wont_be :nil?
+    _(job.stats).must_be_kind_of Hash
+    _(job.stats["creationTime"]).wont_be :nil?
   end
 
   it "knows its script statistics" do
-    job.script_statistics.must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
-    job.script_statistics.evaluation_kind.must_equal "EXPRESSION"
-    job.script_statistics.stack_frames.wont_be :nil?
-    job.script_statistics.stack_frames.must_be_kind_of Array
-    job.script_statistics.stack_frames.count.must_equal 1
-    job.script_statistics.stack_frames[0].must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
-    job.script_statistics.stack_frames[0].start_line.must_equal 5
-    job.script_statistics.stack_frames[0].start_column.must_equal 29
-    job.script_statistics.stack_frames[0].end_line.must_equal 9
-    job.script_statistics.stack_frames[0].end_column.must_equal 14
-    job.script_statistics.stack_frames[0].text.must_equal "QUERY TEXT"
+    _(job.script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
+    _(job.script_statistics.evaluation_kind).must_equal "EXPRESSION"
+    _(job.script_statistics.stack_frames).wont_be :nil?
+    _(job.script_statistics.stack_frames).must_be_kind_of Array
+    _(job.script_statistics.stack_frames.count).must_equal 1
+    _(job.script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
+    _(job.script_statistics.stack_frames[0].start_line).must_equal 5
+    _(job.script_statistics.stack_frames[0].start_column).must_equal 29
+    _(job.script_statistics.stack_frames[0].end_line).must_equal 9
+    _(job.script_statistics.stack_frames[0].end_column).must_equal 14
+    _(job.script_statistics.stack_frames[0].text).must_equal "QUERY TEXT"
   end
 
   it "knows its error info if it has not failed" do
-    job.wont_be :failed?
-    job.error.must_be :nil?
-    job.errors.count.must_equal 0
+    _(job).wont_be :failed?
+    _(job.error).must_be :nil?
+    _(job.errors.count).must_equal 0
   end
 
   it "knows if it has failed" do
-    failed_job.state.must_equal "DONE"
-    failed_job.must_be :failed?
-    failed_job.error.must_be_kind_of Hash
-    failed_job.error.wont_be :empty?
-    failed_job.error["reason"].must_equal "r34s0n"
-    failed_job.error["location"].must_equal "l0c4t10n"
-    failed_job.error["debugInfo"].must_equal "d3bugInf0"
-    failed_job.error["message"].must_equal "m3ss4g3"
-    failed_job.errors.count.must_equal 1
-    failed_job.errors.first["reason"].must_equal "r34s0n"
-    failed_job.errors.first["location"].must_equal "l0c4t10n"
-    failed_job.errors.first["debugInfo"].must_equal "d3bugInf0"
-    failed_job.errors.first["message"].must_equal "m3ss4g3"
+    _(failed_job.state).must_equal "DONE"
+    _(failed_job).must_be :failed?
+    _(failed_job.error).must_be_kind_of Hash
+    _(failed_job.error).wont_be :empty?
+    _(failed_job.error["reason"]).must_equal "r34s0n"
+    _(failed_job.error["location"]).must_equal "l0c4t10n"
+    _(failed_job.error["debugInfo"]).must_equal "d3bugInf0"
+    _(failed_job.error["message"]).must_equal "m3ss4g3"
+    _(failed_job.errors.count).must_equal 1
+    _(failed_job.errors.first["reason"]).must_equal "r34s0n"
+    _(failed_job.errors.first["location"]).must_equal "l0c4t10n"
+    _(failed_job.errors.first["debugInfo"]).must_equal "d3bugInf0"
+    _(failed_job.errors.first["message"]).must_equal "m3ss4g3"
   end
 
   it "can reload itself" do
@@ -190,9 +190,9 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
                 Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "done").to_json),
                 [project, job_id, {location: "US"}]
 
-    job.must_be :running?
+    _(job).must_be :running?
     job.reload!
-    job.must_be :done?
+    _(job).must_be :done?
     mock.verify
   end
 
@@ -220,9 +220,9 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     def job.sleep *args
     end
 
-    job.must_be :running?
+    _(job).must_be :running?
     job.wait_until_done!
-    job.must_be :done?
+    _(job).must_be :done?
     mock.verify
   end
 

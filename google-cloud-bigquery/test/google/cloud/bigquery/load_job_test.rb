@@ -24,13 +24,13 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
   let(:job_id) { job.job_id }
 
   it "knows it is load job" do
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
   end
 
   it "knows its source uris" do
-    job.sources.must_be_kind_of Array
-    job.sources.count.must_equal 1
-    job.sources.first.must_equal "gs://bucket/file.ext"
+    _(job.sources).must_be_kind_of Array
+    _(job.sources.count).must_equal 1
+    _(job.sources.first).must_equal "gs://bucket/file.ext"
   end
 
   it "knows its destination table" do
@@ -41,68 +41,68 @@ describe Google::Cloud::Bigquery::LoadJob, :mock_bigquery do
     job.service.mocked_service = mock
 
     table = job.destination
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
 
     mock.verify
 
-    table.project_id.must_equal "target_project_id"
-    table.dataset_id.must_equal "target_dataset_id"
-    table.table_id.must_equal   "target_table_id"
+    _(table.project_id).must_equal "target_project_id"
+    _(table.dataset_id).must_equal "target_dataset_id"
+    _(table.table_id).must_equal   "target_table_id"
   end
 
   it "knows its default attributes" do
-    job_defaults.delimiter.must_equal ","
-    job_defaults.skip_leading_rows.must_equal 0
-    job_defaults.must_be :utf8?
-    job_defaults.wont_be :iso8859_1?
-    job_defaults.quote.must_equal "\""
-    job_defaults.max_bad_records.must_equal 0
-    job_defaults.null_marker.must_equal ""
-    job_defaults.wont_be :quoted_newlines?
-    job_defaults.wont_be :autodetect?
-    job_defaults.must_be :json?
-    job_defaults.wont_be :csv?
-    job_defaults.wont_be :backup?
-    job_defaults.wont_be :allow_jagged_rows?
-    job_defaults.wont_be :ignore_unknown_values?
+    _(job_defaults.delimiter).must_equal ","
+    _(job_defaults.skip_leading_rows).must_equal 0
+    _(job_defaults).must_be :utf8?
+    _(job_defaults).wont_be :iso8859_1?
+    _(job_defaults.quote).must_equal "\""
+    _(job_defaults.max_bad_records).must_equal 0
+    _(job_defaults.null_marker).must_equal ""
+    _(job_defaults).wont_be :quoted_newlines?
+    _(job_defaults).wont_be :autodetect?
+    _(job_defaults).must_be :json?
+    _(job_defaults).wont_be :csv?
+    _(job_defaults).wont_be :backup?
+    _(job_defaults).wont_be :allow_jagged_rows?
+    _(job_defaults).wont_be :ignore_unknown_values?
   end
 
   it "knows its full attributes" do
-    job.delimiter.must_equal ","
-    job.skip_leading_rows.must_equal 0
-    job.must_be :utf8?
-    job.wont_be :iso8859_1?
-    job.quote.must_equal "\""
-    job.max_bad_records.must_equal 0
-    job.null_marker.must_equal "\N"
-    job.must_be :quoted_newlines?
-    job.must_be :autodetect?
-    job.must_be :json?
-    job.wont_be :csv?
-    job.wont_be :backup?
-    job.must_be :allow_jagged_rows?
-    job.must_be :ignore_unknown_values?
+    _(job.delimiter).must_equal ","
+    _(job.skip_leading_rows).must_equal 0
+    _(job).must_be :utf8?
+    _(job).wont_be :iso8859_1?
+    _(job.quote).must_equal "\""
+    _(job.max_bad_records).must_equal 0
+    _(job.null_marker).must_equal "\N"
+    _(job).must_be :quoted_newlines?
+    _(job).must_be :autodetect?
+    _(job).must_be :json?
+    _(job).wont_be :csv?
+    _(job).wont_be :backup?
+    _(job).must_be :allow_jagged_rows?
+    _(job).must_be :ignore_unknown_values?
   end
 
   it "knows its statistics data" do
-    job.input_files.must_equal 3
-    job.input_file_bytes.must_equal 456
-    job.output_rows.must_equal 5
-    job.output_bytes.must_equal 789
+    _(job.input_files).must_equal 3
+    _(job.input_file_bytes).must_equal 456
+    _(job.output_rows).must_equal 5
+    _(job.output_bytes).must_equal 789
   end
 
   it "knows its schema" do
-    job.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    job.schema.must_be :frozen?
-    job.schema.fields.wont_be :empty?
-    job.schema.fields.map(&:name).must_equal ["name", "age", "score", "pi", "active", "avatar", "started_at", "duration", "target_end", "birthday"]
+    _(job.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(job.schema).must_be :frozen?
+    _(job.schema.fields).wont_be :empty?
+    _(job.schema.fields.map(&:name)).must_equal ["name", "age", "score", "pi", "active", "avatar", "started_at", "duration", "target_end", "birthday"]
   end
 
   it "knows its load config" do
-    job.config.must_be_kind_of Hash
-    job.config["load"]["destinationTable"]["tableId"].must_equal "target_table_id"
-    job.config["load"]["createDisposition"].must_equal "CREATE_IF_NEEDED"
-    job.config["load"]["encoding"].must_equal "UTF-8"
+    _(job.config).must_be_kind_of Hash
+    _(job.config["load"]["destinationTable"]["tableId"]).must_equal "target_table_id"
+    _(job.config["load"]["createDisposition"]).must_equal "CREATE_IF_NEEDED"
+    _(job.config["load"]["encoding"]).must_equal "UTF-8"
   end
 
   def load_job_defaults_hash

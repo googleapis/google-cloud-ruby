@@ -59,7 +59,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with the job labels option" do
@@ -79,8 +79,8 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.labels.must_equal labels
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.labels).must_equal labels
   end
 
   it "queries the data with an array for the udfs option" do
@@ -100,8 +100,8 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.udfs.must_equal udfs
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.udfs).must_equal udfs
   end
 
   it "queries the data with a string for the udfs option" do
@@ -121,8 +121,8 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.udfs.must_equal ["gs://my-bucket/my-lib.js"]
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.udfs).must_equal ["gs://my-bucket/my-lib.js"]
   end
 
   it "queries the data with the encryption option" do
@@ -144,8 +144,8 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
-    job.encryption.kms_key.must_equal kms_key
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.encryption).must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    _(job.encryption.kms_key).must_equal kms_key
   end
 end

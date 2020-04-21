@@ -38,8 +38,8 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
 
     mock.verify
 
-    routine.must_be_kind_of Google::Cloud::Bigquery::Routine
-    routine.routine_id.must_equal routine_id
+    _(routine).must_be_kind_of Google::Cloud::Bigquery::Routine
+    _(routine.routine_id).must_equal routine_id
   end
 
   it "creates a routine with attributes in a block" do
@@ -93,8 +93,8 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
 
     mock.verify
 
-    routine.must_be_kind_of Google::Cloud::Bigquery::Routine
-    routine.routine_id.must_equal routine_id
+    _(routine).must_be_kind_of Google::Cloud::Bigquery::Routine
+    _(routine.routine_id).must_equal routine_id
   end
 
   it "finds a routine" do
@@ -108,7 +108,7 @@ describe Google::Cloud::Bigquery::Dataset, :routine, :mock_bigquery do
 
     mock.verify
 
-    routine.must_be_kind_of Google::Cloud::Bigquery::Routine
-    routine.routine_id.must_equal found_routine_id
+    _(routine).must_be_kind_of Google::Cloud::Bigquery::Routine
+    _(routine.routine_id).must_equal found_routine_id
   end
 end

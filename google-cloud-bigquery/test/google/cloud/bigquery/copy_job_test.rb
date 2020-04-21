@@ -22,7 +22,7 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
   let(:job_id) { job.job_id }
 
   it "knows it is copy job" do
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "knows its copy tables" do
@@ -32,34 +32,34 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
     mock.expect :get_table, source_table_gapi, ["source_project_id", "source_dataset_id", "source_table_id"]
 
     source = job.source
-    source.must_be_kind_of Google::Cloud::Bigquery::Table
-    source.project_id.must_equal "source_project_id"
-    source.dataset_id.must_equal "source_dataset_id"
-    source.table_id.must_equal   "source_table_id"
+    _(source).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(source.project_id).must_equal "source_project_id"
+    _(source.dataset_id).must_equal "source_dataset_id"
+    _(source.table_id).must_equal   "source_table_id"
 
     mock.expect :get_table, destination_table_gapi, ["target_project_id", "target_dataset_id", "target_table_id"]
     destination = job.destination
-    destination.must_be_kind_of Google::Cloud::Bigquery::Table
-    destination.project_id.must_equal "target_project_id"
-    destination.dataset_id.must_equal "target_dataset_id"
-    destination.table_id.must_equal   "target_table_id"
+    _(destination).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(destination.project_id).must_equal "target_project_id"
+    _(destination.dataset_id).must_equal "target_dataset_id"
+    _(destination.table_id).must_equal   "target_table_id"
 
     mock.verify
   end
 
   it "knows its create/write disposition flags" do
-    job.must_be :create_if_needed?
-    job.wont_be :create_never?
-    job.wont_be :write_truncate?
-    job.wont_be :write_append?
-    job.must_be :write_empty?
+    _(job).must_be :create_if_needed?
+    _(job).wont_be :create_never?
+    _(job).wont_be :write_truncate?
+    _(job).wont_be :write_append?
+    _(job).must_be :write_empty?
   end
 
   it "knows its copy config" do
-    job.config.must_be_kind_of Hash
-    job.config["copy"]["sourceTable"]["projectId"].must_equal "source_project_id"
-    job.config["copy"]["destinationTable"]["tableId"].must_equal "target_table_id"
-    job.config["copy"]["createDisposition"].must_equal "CREATE_IF_NEEDED"
+    _(job.config).must_be_kind_of Hash
+    _(job.config["copy"]["sourceTable"]["projectId"]).must_equal "source_project_id"
+    _(job.config["copy"]["destinationTable"]["tableId"]).must_equal "target_table_id"
+    _(job.config["copy"]["createDisposition"]).must_equal "CREATE_IF_NEEDED"
   end
 
   it "can re-run itself" do
@@ -73,8 +73,8 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
     mock.expect :insert_job, copy_job_gapi(job.job_id + "-rerun"), [project, rerun_job_gapi]
 
     new_job = job.rerun!
-    new_job.config["dryRun"].must_equal job.config["dryRun"]
-    new_job.job_id.wont_equal job.job_id
+    _(new_job.config["dryRun"]).must_equal job.config["dryRun"]
+    _(new_job.job_id).wont_equal job.job_id
     mock.verify
   end
 

@@ -25,18 +25,18 @@ describe Google::Cloud::Bigquery::External::DataSource do
       source_format: "AVRO"
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
-    table.urls.must_equal ["gs://my-bucket/path/to/file.avro"]
-    table.must_be :avro?
-    table.format.must_equal "AVRO"
+    _(table).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(table.urls).must_equal ["gs://my-bucket/path/to/file.avro"]
+    _(table).must_be :avro?
+    _(table.format).must_equal "AVRO"
 
-    table.wont_be :csv?
-    table.wont_be :json?
-    table.wont_be :sheets?
-    table.wont_be :backup?
-    table.wont_be :bigtable?
+    _(table).wont_be :csv?
+    _(table).wont_be :json?
+    _(table).wont_be :sheets?
+    _(table).wont_be :backup?
+    _(table).wont_be :bigtable?
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "can be used for DATASTORE_BACKUP" do
@@ -49,18 +49,18 @@ describe Google::Cloud::Bigquery::External::DataSource do
       source_format: "DATASTORE_BACKUP"
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
-    table.urls.must_equal ["gs://my-bucket/path/to/file.backup_info"]
-    table.must_be :backup?
-    table.format.must_equal "DATASTORE_BACKUP"
+    _(table).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(table.urls).must_equal ["gs://my-bucket/path/to/file.backup_info"]
+    _(table).must_be :backup?
+    _(table.format).must_equal "DATASTORE_BACKUP"
 
-    table.wont_be :csv?
-    table.wont_be :json?
-    table.wont_be :sheets?
-    table.wont_be :avro?
-    table.wont_be :bigtable?
+    _(table).wont_be :csv?
+    _(table).wont_be :json?
+    _(table).wont_be :sheets?
+    _(table).wont_be :avro?
+    _(table).wont_be :bigtable?
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets autodetect" do
@@ -74,13 +74,13 @@ describe Google::Cloud::Bigquery::External::DataSource do
       autodetect: true
     )
 
-    table.autodetect.must_be :nil?
+    _(table.autodetect).must_be :nil?
 
     table.autodetect = true
 
-    table.autodetect.must_equal true
+    _(table.autodetect).must_equal true
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets compression" do
@@ -94,13 +94,13 @@ describe Google::Cloud::Bigquery::External::DataSource do
       compression: "GZIP"
     )
 
-    table.compression.must_be :nil?
+    _(table.compression).must_be :nil?
 
     table.compression = "GZIP"
 
-    table.compression.must_equal "GZIP"
+    _(table.compression).must_equal "GZIP"
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets ignore_unknown" do
@@ -114,13 +114,13 @@ describe Google::Cloud::Bigquery::External::DataSource do
       ignore_unknown_values: true
     )
 
-    table.ignore_unknown.must_be :nil?
+    _(table.ignore_unknown).must_be :nil?
 
     table.ignore_unknown = true
 
-    table.ignore_unknown.must_equal true
+    _(table.ignore_unknown).must_equal true
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets max_bad_records" do
@@ -134,12 +134,12 @@ describe Google::Cloud::Bigquery::External::DataSource do
       max_bad_records: 10
     )
 
-    table.max_bad_records.must_be :nil?
+    _(table.max_bad_records).must_be :nil?
 
     table.max_bad_records = 10
 
-    table.max_bad_records.must_equal 10
+    _(table.max_bad_records).must_equal 10
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 end

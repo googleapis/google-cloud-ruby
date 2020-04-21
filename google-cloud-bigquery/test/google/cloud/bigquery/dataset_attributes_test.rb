@@ -33,10 +33,10 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
 
-    dataset.created_at.must_be_close_to ::Time.now, 1
+    _(dataset.created_at).must_be_close_to ::Time.now, 1
 
     # A second call to attribute does not make a second HTTP API call
-    dataset.created_at.must_be_close_to ::Time.now, 1
+    _(dataset.created_at).must_be_close_to ::Time.now, 1
     mock.verify
   end
 
@@ -45,10 +45,10 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
 
-    dataset.modified_at.must_be_close_to ::Time.now, 1
+    _(dataset.modified_at).must_be_close_to ::Time.now, 1
 
     # A second call to attribute does not make a second HTTP API call
-    dataset.modified_at.must_be_close_to ::Time.now, 1
+    _(dataset.modified_at).must_be_close_to ::Time.now, 1
     mock.verify
   end
 
@@ -57,10 +57,10 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
 
-    dataset.default_encryption.must_be_nil
+    _(dataset.default_encryption).must_be_nil
 
     # A second call to attribute does not make a second HTTP API call
-    dataset.default_encryption.must_be_nil
+    _(dataset.default_encryption).must_be_nil
     mock.verify
   end
 
@@ -70,10 +70,10 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
       bigquery.service.mocked_service = mock
       mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
 
-      dataset.send(attr).must_equal val
+      _(dataset.send(attr)).must_equal val
 
       # A second call to attribute does not make a second HTTP API call
-      dataset.send(attr).must_equal val
+      _(dataset.send(attr)).must_equal val
       mock.verify
     end
   end

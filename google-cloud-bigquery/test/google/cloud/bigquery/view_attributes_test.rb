@@ -33,7 +33,7 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
       [view.project_id, view.dataset_id, view.table_id]
     view.service.mocked_service = mock
 
-    view.created_at.must_be_close_to ::Time.now, 1
+    _(view.created_at).must_be_close_to ::Time.now, 1
 
     mock.verify
 
@@ -47,7 +47,7 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
       [view.project_id, view.dataset_id, view.table_id]
     view.service.mocked_service = mock
 
-    view.expires_at.must_be_close_to ::Time.now, 1
+    _(view.expires_at).must_be_close_to ::Time.now, 1
 
     mock.verify
 
@@ -61,7 +61,7 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
       [view.project_id, view.dataset_id, view.table_id]
     view.service.mocked_service = mock
 
-    view.modified_at.must_be_close_to ::Time.now, 1
+    _(view.modified_at).must_be_close_to ::Time.now, 1
 
     mock.verify
 
@@ -75,12 +75,12 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
       [view.project_id, view.dataset_id, view.table_id]
     view.service.mocked_service = mock
 
-    view.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    view.schema.must_be :frozen?
-    view.schema.fields.wont_be :empty?
-    view.fields.wont_be :empty?
-    view.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    view.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(view.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(view.schema).must_be :frozen?
+    _(view.schema.fields).wont_be :empty?
+    _(view.fields).wont_be :empty?
+    _(view.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(view.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
 
     mock.verify
 
@@ -95,7 +95,7 @@ describe Google::Cloud::Bigquery::Table, :view, :attributes, :mock_bigquery do
         [view.project_id, view.dataset_id, view.table_id]
       view.service.mocked_service = mock
 
-      view.send(attr).must_equal val
+      _(view.send(attr)).must_equal val
 
       mock.verify
 

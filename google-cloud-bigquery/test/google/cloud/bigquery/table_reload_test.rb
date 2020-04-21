@@ -27,16 +27,16 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
     mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
-    table.wont_be :reference?
-    table.must_be :resource?
-    table.wont_be :resource_partial?
-    table.must_be :resource_full?
+    _(table).wont_be :reference?
+    _(table).must_be :resource?
+    _(table).wont_be :resource_partial?
+    _(table).must_be :resource_full?
 
     table.reload!
-    table.wont_be :reference?
-    table.must_be :resource?
-    table.wont_be :resource_partial?
-    table.must_be :resource_full?
+    _(table).wont_be :reference?
+    _(table).must_be :resource?
+    _(table).wont_be :resource_partial?
+    _(table).must_be :resource_full?
 
     mock.verify
   end
@@ -50,16 +50,16 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
       mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
       table.service.mocked_service = mock
 
-      table.wont_be :reference?
-      table.must_be :resource?
-      table.must_be :resource_partial?
-      table.wont_be :resource_full?
+      _(table).wont_be :reference?
+      _(table).must_be :resource?
+      _(table).must_be :resource_partial?
+      _(table).wont_be :resource_full?
 
       table.reload!
-      table.wont_be :reference?
-      table.must_be :resource?
-      table.wont_be :resource_partial?
-      table.must_be :resource_full?
+      _(table).wont_be :reference?
+      _(table).must_be :resource?
+      _(table).wont_be :resource_partial?
+      _(table).must_be :resource_full?
 
       mock.verify
     end
@@ -73,16 +73,16 @@ describe Google::Cloud::Bigquery::Table, :reload, :mock_bigquery do
       mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
       table.service.mocked_service = mock
 
-      table.must_be :reference?
-      table.wont_be :resource?
-      table.wont_be :resource_partial?
-      table.wont_be :resource_full?
+      _(table).must_be :reference?
+      _(table).wont_be :resource?
+      _(table).wont_be :resource_partial?
+      _(table).wont_be :resource_full?
 
       table.reload!
-      table.wont_be :reference?
-      table.must_be :resource?
-      table.wont_be :resource_partial?
-      table.must_be :resource_full?
+      _(table).wont_be :reference?
+      _(table).must_be :resource?
+      _(table).wont_be :resource_partial?
+      _(table).must_be :resource_full?
 
       mock.verify
     end

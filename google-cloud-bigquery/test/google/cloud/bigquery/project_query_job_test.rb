@@ -38,19 +38,19 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
 
     # Sometimes statistics.query is nil in the returned job, test for that behavior here.
-    job.cache_hit?.must_equal true
-    job.bytes_processed.must_equal 123456
-    job.query_plan.wont_be :nil?
-    job.statement_type.must_equal "SELECT"
-    job.ddl?.must_equal false
-    job.dml?.must_equal false
-    job.ddl_operation_performed.must_be :nil?
-    job.ddl_target_routine.must_be :nil?
-    job.ddl_target_table.must_be :nil?
-    job.num_dml_affected_rows.must_be :nil?
+    _(job.cache_hit?).must_equal true
+    _(job.bytes_processed).must_equal 123456
+    _(job.query_plan).wont_be :nil?
+    _(job.statement_type).must_equal "SELECT"
+    _(job.ddl?).must_equal false
+    _(job.dml?).must_equal false
+    _(job.ddl_operation_performed).must_be :nil?
+    _(job.ddl_target_routine).must_be :nil?
+    _(job.ddl_target_table).must_be :nil?
+    _(job.num_dml_affected_rows).must_be :nil?
   end
 
   it "queries the data with options set" do
@@ -65,7 +65,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query, priority: :batch, cache: false
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with table options" do
@@ -93,7 +93,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
                                 maximum_bytes_billed: 12345678901234
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with dataset option as a Dataset" do
@@ -110,7 +110,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query, dataset: dataset
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with dataset and project options" do
@@ -127,7 +127,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query, dataset: "some_random_dataset", project: "some_random_project"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with job_id option" do
@@ -142,8 +142,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query, job_id: job_id
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.job_id).must_equal job_id
   end
 
   it "queries the data with dryrun flag" do
@@ -157,11 +157,11 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query, dryrun: true
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.dryrun?.must_equal true
-    job.dryrun.must_equal true # alias
-    job.dry_run.must_equal true # alias
-    job.dry_run?.must_equal true # alias
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.dryrun?).must_equal true
+    _(job.dryrun).must_equal true # alias
+    _(job.dry_run).must_equal true # alias
+    _(job.dry_run?).must_equal true # alias
   end
 
   it "queries the data with prefix option" do
@@ -179,8 +179,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query, prefix: prefix
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.job_id).must_equal job_id
   end
 
   it "queries the data with job_id option if both job_id and prefix options are provided" do
@@ -195,8 +195,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query, job_id: job_id, prefix: "IGNORED"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.job_id).must_equal job_id
   end
 
   it "queries the data with the job labels option" do
@@ -210,8 +210,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query, labels: labels
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.labels.must_equal labels
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.labels).must_equal labels
   end
 
   it "queries the data with an array for the udfs option" do
@@ -225,8 +225,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query, udfs: udfs
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.udfs.must_equal udfs
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.udfs).must_equal udfs
   end
 
   it "queries the data with a string for the udfs option" do
@@ -240,7 +240,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     job = bigquery.query_job query, udfs: "gs://my-bucket/my-lib.js"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.udfs.must_equal ["gs://my-bucket/my-lib.js"]
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.udfs).must_equal ["gs://my-bucket/my-lib.js"]
   end
 end

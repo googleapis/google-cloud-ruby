@@ -20,25 +20,25 @@ describe Google::Cloud::Bigquery::Convert do
 
   describe :millis_to_time do
     it "converts nil to nil with no error" do
-      Google::Cloud::Bigquery::Convert.millis_to_time(nil).must_be :nil?
+      _(Google::Cloud::Bigquery::Convert.millis_to_time(nil)).must_be :nil?
     end
 
     it "converts time in millis to a Time object with same value in seconds" do
       converted_time = Google::Cloud::Bigquery::Convert.millis_to_time time_millis
-      converted_time.must_be_kind_of ::Time
-      converted_time.must_equal time_object
+      _(converted_time).must_be_kind_of ::Time
+      _(converted_time).must_equal time_object
     end
   end
 
   describe :time_to_millis do
     it "converts nil to nil with no error" do
-      Google::Cloud::Bigquery::Convert.time_to_millis(nil).must_be :nil?
+      _(Google::Cloud::Bigquery::Convert.time_to_millis(nil)).must_be :nil?
     end
 
     it "converts time in millis to a Time object with same value in seconds" do
       converted_millis = Google::Cloud::Bigquery::Convert.time_to_millis time_object
-      converted_millis.must_be_kind_of ::Integer
-      converted_millis.must_equal time_millis
+      _(converted_millis).must_be_kind_of ::Integer
+      _(converted_millis).must_equal time_millis
     end
   end
 
@@ -47,20 +47,20 @@ describe Google::Cloud::Bigquery::Convert do
       float_type = Google::Apis::BigqueryV2::TableFieldSchema.new(type: "FLOAT")
 
       f = Google::Cloud::Bigquery::Convert.format_value({ v: "3.333" }, float_type)
-      f.must_be_kind_of ::Float
-      f.must_equal 3.333
+      _(f).must_be_kind_of ::Float
+      _(f).must_equal 3.333
 
       f = Google::Cloud::Bigquery::Convert.format_value({ v: "Infinity" }, float_type)
-      f.must_be_kind_of ::Float
-      f.must_equal Float::INFINITY
+      _(f).must_be_kind_of ::Float
+      _(f).must_equal Float::INFINITY
 
       f = Google::Cloud::Bigquery::Convert.format_value({ v: "-Infinity" }, float_type)
-      f.must_be_kind_of ::Float
-      f.must_equal -Float::INFINITY
+      _(f).must_be_kind_of ::Float
+      _(f).must_equal -Float::INFINITY
 
       f = Google::Cloud::Bigquery::Convert.format_value({ v: "NaN" }, float_type)
-      f.must_be_kind_of ::Float
-      f.must_be :nan?
+      _(f).must_be_kind_of ::Float
+      _(f).must_be :nan?
     end
   end
 end

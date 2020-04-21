@@ -39,15 +39,15 @@ describe Google::Cloud::Bigquery::Table, :view, :update, :mock_bigquery do
     mock.expect :get_table, return_view(view_hash), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     view.name = new_table_name
 
-    view.name.must_equal new_table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.name).must_equal new_table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     mock.verify
   end
@@ -63,15 +63,15 @@ describe Google::Cloud::Bigquery::Table, :view, :update, :mock_bigquery do
     mock.expect :get_table, return_view(view_hash), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     view.description = new_description
 
-    view.description.must_equal new_description
-    view.name.must_equal table_name
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.description).must_equal new_description
+    _(view.name).must_equal table_name
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     mock.verify
   end
@@ -95,19 +95,19 @@ describe Google::Cloud::Bigquery::Table, :view, :update, :mock_bigquery do
     mock.expect :get_table, return_view(view_hash, request_view_gapi.view), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     view.query = new_query
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
-    view.query.must_equal new_query
-    view.must_be :query_standard_sql?
-    view.wont_be :query_legacy_sql?
-    view.query_udfs.must_be :empty?
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
+    _(view.query).must_equal new_query
+    _(view).must_be :query_standard_sql?
+    _(view).wont_be :query_legacy_sql?
+    _(view.query_udfs).must_be :empty?
 
     mock.verify
   end
@@ -131,19 +131,19 @@ describe Google::Cloud::Bigquery::Table, :view, :update, :mock_bigquery do
     mock.expect :get_table, return_view(view_hash, request_view_gapi.view), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     view.set_query new_query
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
-    view.query.must_equal new_query
-    view.must_be :query_standard_sql?
-    view.wont_be :query_legacy_sql?
-    view.query_udfs.must_be :empty?
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
+    _(view.query).must_equal new_query
+    _(view).must_be :query_standard_sql?
+    _(view).wont_be :query_legacy_sql?
+    _(view.query_udfs).must_be :empty?
 
     mock.verify
   end
@@ -167,19 +167,19 @@ describe Google::Cloud::Bigquery::Table, :view, :update, :mock_bigquery do
     mock.expect :get_table, return_view(view_hash, request_view_gapi.view), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     view.set_query new_query, standard_sql: true
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
-    view.query.must_equal new_query
-    view.must_be :query_standard_sql?
-    view.wont_be :query_legacy_sql?
-    view.query_udfs.must_be :empty?
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
+    _(view.query).must_equal new_query
+    _(view).must_be :query_standard_sql?
+    _(view).wont_be :query_legacy_sql?
+    _(view.query_udfs).must_be :empty?
 
     mock.verify
   end
@@ -203,19 +203,19 @@ describe Google::Cloud::Bigquery::Table, :view, :update, :mock_bigquery do
     mock.expect :get_table, return_view(view_hash, request_view_gapi.view), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     view.set_query new_query, legacy_sql: true
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
-    view.query.must_equal new_query
-    view.wont_be :query_standard_sql?
-    view.must_be :query_legacy_sql?
-    view.query_udfs.must_be :empty?
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
+    _(view.query).must_equal new_query
+    _(view).wont_be :query_standard_sql?
+    _(view).must_be :query_legacy_sql?
+    _(view.query_udfs).must_be :empty?
 
     mock.verify
   end
@@ -242,19 +242,19 @@ describe Google::Cloud::Bigquery::Table, :view, :update, :mock_bigquery do
     mock.expect :get_table, return_view(view_hash, request_view_gapi.view), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     view.set_query new_query, udfs: ["return x+1;", "gs://my-bucket/my-lib.js"]
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
-    view.query.must_equal new_query
-    view.must_be :query_standard_sql?
-    view.wont_be :query_legacy_sql?
-    view.query_udfs.must_equal ["return x+1;", "gs://my-bucket/my-lib.js"]
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
+    _(view.query).must_equal new_query
+    _(view).must_be :query_standard_sql?
+    _(view).wont_be :query_legacy_sql?
+    _(view.query_udfs).must_equal ["return x+1;", "gs://my-bucket/my-lib.js"]
 
     mock.verify
   end
@@ -280,19 +280,19 @@ describe Google::Cloud::Bigquery::Table, :view, :update, :mock_bigquery do
     mock.expect :get_table, return_view(view_hash, request_view_gapi.view), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     view.set_query new_query, udfs: "return x+1;"
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
-    view.query.must_equal new_query
-    view.must_be :query_standard_sql?
-    view.wont_be :query_legacy_sql?
-    view.query_udfs.must_equal ["return x+1;"]
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
+    _(view.query).must_equal new_query
+    _(view).must_be :query_standard_sql?
+    _(view).wont_be :query_legacy_sql?
+    _(view.query_udfs).must_equal ["return x+1;"]
 
     mock.verify
   end
@@ -318,19 +318,19 @@ describe Google::Cloud::Bigquery::Table, :view, :update, :mock_bigquery do
     mock.expect :get_table, return_view(view_hash, request_view_gapi.view), [project, dataset_id, table_id]
     view.service.mocked_service = mock
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
 
     view.set_query new_query, udfs: "gs://my-bucket/my-lib.js"
 
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.schema.fields.count.must_equal schema.fields.count
-    view.query.must_equal new_query
-    view.must_be :query_standard_sql?
-    view.wont_be :query_legacy_sql?
-    view.query_udfs.must_equal ["gs://my-bucket/my-lib.js"]
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.schema.fields.count).must_equal schema.fields.count
+    _(view.query).must_equal new_query
+    _(view).must_be :query_standard_sql?
+    _(view).wont_be :query_legacy_sql?
+    _(view.query_udfs).must_equal ["gs://my-bucket/my-lib.js"]
 
     mock.verify
   end

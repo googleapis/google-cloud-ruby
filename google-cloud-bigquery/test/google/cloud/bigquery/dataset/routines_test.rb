@@ -30,8 +30,8 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    routines.size.must_equal 3
-    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(routines.size).must_equal 3
+    routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 
   it "lists routines with max set" do
@@ -44,10 +44,10 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    routines.count.must_equal 3
-    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
-    routines.token.wont_be :nil?
-    routines.token.must_equal "next_page_token"
+    _(routines.count).must_equal 3
+    routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(routines.token).wont_be :nil?
+    _(routines.token).must_equal "next_page_token"
   end
 
   it "lists routines with filter set" do
@@ -60,10 +60,10 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    routines.count.must_equal 3
-    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
-    routines.token.wont_be :nil?
-    routines.token.must_equal "next_page_token"
+    _(routines.count).must_equal 3
+    routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(routines.token).wont_be :nil?
+    _(routines.token).must_equal "next_page_token"
   end
 
   it "paginates routines" do
@@ -79,14 +79,14 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    first_routines.count.must_equal 3
-    first_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
-    first_routines.token.wont_be :nil?
-    first_routines.token.must_equal "next_page_token"
+    _(first_routines.count).must_equal 3
+    first_routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(first_routines.token).wont_be :nil?
+    _(first_routines.token).must_equal "next_page_token"
 
-    second_routines.count.must_equal 2
-    second_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
-    second_routines.token.must_be :nil?
+    _(second_routines.count).must_equal 2
+    second_routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(second_routines.token).must_be :nil?
   end
 
   it "paginates routines with next? and next" do
@@ -102,14 +102,14 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    first_routines.count.must_equal 3
-    first_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
-    first_routines.token.wont_be :nil?
-    first_routines.token.must_equal "next_page_token"
+    _(first_routines.count).must_equal 3
+    first_routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(first_routines.token).wont_be :nil?
+    _(first_routines.token).must_equal "next_page_token"
 
-    second_routines.count.must_equal 2
-    second_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
-    second_routines.token.must_be :nil?
+    _(second_routines.count).must_equal 2
+    second_routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(second_routines.token).must_be :nil?
   end
 
   it "paginates routines with next? and next and max" do
@@ -125,13 +125,13 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    first_routines.count.must_equal 3
-    first_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
-    first_routines.next?.must_equal true
+    _(first_routines.count).must_equal 3
+    first_routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(first_routines.next?).must_equal true
 
-    second_routines.count.must_equal 2
-    second_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
-    second_routines.next?.must_equal false
+    _(second_routines.count).must_equal 2
+    second_routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(second_routines.next?).must_equal false
   end
 
   it "paginates routines with next? and next and filter" do
@@ -147,13 +147,13 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    first_routines.count.must_equal 3
-    first_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
-    first_routines.next?.must_equal true
+    _(first_routines.count).must_equal 3
+    first_routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(first_routines.next?).must_equal true
 
-    second_routines.count.must_equal 2
-    second_routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
-    second_routines.next?.must_equal false
+    _(second_routines.count).must_equal 2
+    second_routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(second_routines.next?).must_equal false
   end
 
   it "paginates routines with all" do
@@ -168,8 +168,8 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    routines.count.must_equal 5
-    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(routines.count).must_equal 5
+    routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 
   it "paginates routines with all and max" do
@@ -184,8 +184,8 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    routines.count.must_equal 5
-    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(routines.count).must_equal 5
+    routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 
   it "paginates routines with all and filter" do
@@ -200,8 +200,8 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    routines.count.must_equal 5
-    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(routines.count).must_equal 5
+    routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 
   it "iterates routines with all using Enumerator" do
@@ -216,8 +216,8 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    routines.count.must_equal 5
-    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(routines.count).must_equal 5
+    routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 
   it "iterates routines with all with request_limit set" do
@@ -232,7 +232,7 @@ describe Google::Cloud::Bigquery::Dataset, :routines, :mock_bigquery do
 
     mock.verify
 
-    routines.count.must_equal 6
-    routines.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Routine }
+    _(routines.count).must_equal 6
+    routines.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Routine }
   end
 end

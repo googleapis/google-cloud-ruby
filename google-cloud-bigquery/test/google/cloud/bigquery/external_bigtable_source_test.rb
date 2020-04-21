@@ -28,18 +28,18 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
       )
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
-    table.urls.must_equal ["https://googleapis.com/bigtable/projects/my-project/instances/my-instance/tables/my-table"]
-    table.must_be :bigtable?
-    table.format.must_equal "BIGTABLE"
+    _(table).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(table.urls).must_equal ["https://googleapis.com/bigtable/projects/my-project/instances/my-instance/tables/my-table"]
+    _(table).must_be :bigtable?
+    _(table.format).must_equal "BIGTABLE"
 
-    table.wont_be :csv?
-    table.wont_be :json?
-    table.wont_be :sheets?
-    table.wont_be :avro?
-    table.wont_be :backup?
+    _(table).wont_be :csv?
+    _(table).wont_be :json?
+    _(table).wont_be :sheets?
+    _(table).wont_be :avro?
+    _(table).wont_be :backup?
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets rowkey_as_string" do
@@ -56,13 +56,13 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
       )
     )
 
-    table.rowkey_as_string.must_be :nil?
+    _(table.rowkey_as_string).must_be :nil?
 
     table.rowkey_as_string = true
 
-    table.rowkey_as_string.must_equal true
+    _(table.rowkey_as_string).must_equal true
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "adds column families using block" do
@@ -88,7 +88,7 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
       )
     )
 
-    table.families.must_be :empty?
+    _(table.families).must_be :empty?
 
     table.add_family "user" do |u|
       u.add_string  "name"
@@ -98,28 +98,28 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
       u.add_bytes   "avatar"
     end
 
-    table.families.wont_be :empty?
-    table.families.count.must_equal 1
-    table.families[0].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily
-    table.families[0].family_id.must_equal "user"
-    table.families[0].columns.count.must_equal 5
-    table.families[0].columns[0].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
-    table.families[0].columns[0].qualifier.must_equal "name"
-    table.families[0].columns[0].type.must_equal "STRING"
-    table.families[0].columns[1].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
-    table.families[0].columns[1].qualifier.must_equal "age"
-    table.families[0].columns[1].type.must_equal "INTEGER"
-    table.families[0].columns[2].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
-    table.families[0].columns[2].qualifier.must_equal "score"
-    table.families[0].columns[2].type.must_equal "FLOAT"
-    table.families[0].columns[3].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
-    table.families[0].columns[3].qualifier.must_equal "active"
-    table.families[0].columns[3].type.must_equal "BOOLEAN"
-    table.families[0].columns[4].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
-    table.families[0].columns[4].qualifier.must_equal "avatar"
-    table.families[0].columns[4].type.must_equal "BYTES"
+    _(table.families).wont_be :empty?
+    _(table.families.count).must_equal 1
+    _(table.families[0]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily
+    _(table.families[0].family_id).must_equal "user"
+    _(table.families[0].columns.count).must_equal 5
+    _(table.families[0].columns[0]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    _(table.families[0].columns[0].qualifier).must_equal "name"
+    _(table.families[0].columns[0].type).must_equal "STRING"
+    _(table.families[0].columns[1]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    _(table.families[0].columns[1].qualifier).must_equal "age"
+    _(table.families[0].columns[1].type).must_equal "INTEGER"
+    _(table.families[0].columns[2]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    _(table.families[0].columns[2].qualifier).must_equal "score"
+    _(table.families[0].columns[2].type).must_equal "FLOAT"
+    _(table.families[0].columns[3]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    _(table.families[0].columns[3].qualifier).must_equal "active"
+    _(table.families[0].columns[3].type).must_equal "BOOLEAN"
+    _(table.families[0].columns[4]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    _(table.families[0].columns[4].qualifier).must_equal "avatar"
+    _(table.families[0].columns[4].type).must_equal "BYTES"
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "adds column families inline" do
@@ -145,7 +145,7 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
       )
     )
 
-    table.families.must_be :empty?
+    _(table.families).must_be :empty?
 
     family = table.add_family "user"
     family.add_string  "name"
@@ -154,27 +154,27 @@ describe Google::Cloud::Bigquery::External::BigtableSource do
     family.add_boolean "active"
     family.add_bytes   "avatar"
 
-    table.families.wont_be :empty?
-    table.families.count.must_equal 1
-    table.families[0].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily
-    table.families[0].family_id.must_equal "user"
-    table.families[0].columns.count.must_equal 5
-    table.families[0].columns[0].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
-    table.families[0].columns[0].qualifier.must_equal "name"
-    table.families[0].columns[0].type.must_equal "STRING"
-    table.families[0].columns[1].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
-    table.families[0].columns[1].qualifier.must_equal "age"
-    table.families[0].columns[1].type.must_equal "INTEGER"
-    table.families[0].columns[2].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
-    table.families[0].columns[2].qualifier.must_equal "score"
-    table.families[0].columns[2].type.must_equal "FLOAT"
-    table.families[0].columns[3].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
-    table.families[0].columns[3].qualifier.must_equal "active"
-    table.families[0].columns[3].type.must_equal "BOOLEAN"
-    table.families[0].columns[4].must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
-    table.families[0].columns[4].qualifier.must_equal "avatar"
-    table.families[0].columns[4].type.must_equal "BYTES"
+    _(table.families).wont_be :empty?
+    _(table.families.count).must_equal 1
+    _(table.families[0]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::ColumnFamily
+    _(table.families[0].family_id).must_equal "user"
+    _(table.families[0].columns.count).must_equal 5
+    _(table.families[0].columns[0]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    _(table.families[0].columns[0].qualifier).must_equal "name"
+    _(table.families[0].columns[0].type).must_equal "STRING"
+    _(table.families[0].columns[1]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    _(table.families[0].columns[1].qualifier).must_equal "age"
+    _(table.families[0].columns[1].type).must_equal "INTEGER"
+    _(table.families[0].columns[2]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    _(table.families[0].columns[2].qualifier).must_equal "score"
+    _(table.families[0].columns[2].type).must_equal "FLOAT"
+    _(table.families[0].columns[3]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    _(table.families[0].columns[3].qualifier).must_equal "active"
+    _(table.families[0].columns[3].type).must_equal "BOOLEAN"
+    _(table.families[0].columns[4]).must_be_kind_of Google::Cloud::Bigquery::External::BigtableSource::Column
+    _(table.families[0].columns[4].qualifier).must_equal "avatar"
+    _(table.families[0].columns[4].type).must_equal "BYTES"
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 end

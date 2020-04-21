@@ -41,8 +41,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     job = bigquery.query_job query, job_id: job_id
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.job_id).must_equal job_id
   end
 
   it "queries the data with prefix option" do
@@ -60,8 +60,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     job = bigquery.query_job query, prefix: prefix
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.job_id).must_equal job_id
   end
 
   it "queries the data with options set" do
@@ -84,7 +84,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with table options" do
@@ -114,7 +114,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with dataset option" do
@@ -133,7 +133,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with the job labels option" do
@@ -149,8 +149,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.labels.must_equal labels
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.labels).must_equal labels
   end
 
   it "queries the data with an array for the udfs option" do
@@ -166,8 +166,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.udfs.must_equal udfs
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.udfs).must_equal udfs
   end
 
   it "queries the data with a string for the udfs option" do
@@ -183,8 +183,8 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.udfs.must_equal ["gs://my-bucket/my-lib.js"]
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.udfs).must_equal ["gs://my-bucket/my-lib.js"]
   end
 
   it "queries the data with the encryption option" do
@@ -202,9 +202,9 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
-    job.encryption.kms_key.must_equal kms_key
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.encryption).must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    _(job.encryption.kms_key).must_equal kms_key
   end
 
   it "queries the data with the location option" do
@@ -216,13 +216,13 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock.expect :insert_job, return_job_gapi, [project, insert_job_gapi]
 
     job = bigquery.query_job query do |j|
-      j.location.must_be :nil?
+      _(j.location).must_be :nil?
       j.location = region
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.location.must_equal region
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.location).must_equal region
   end
 
   it "queries the data with setting location to nil" do
@@ -234,12 +234,12 @@ describe Google::Cloud::Bigquery::Project, :query_job, :updater, :mock_bigquery 
     mock.expect :insert_job, return_job_gapi, [project, insert_job_gapi]
 
     job = bigquery.query_job query do |j|
-      j.location.must_be :nil?
+      _(j.location).must_be :nil?
       j.location = nil
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.location.must_equal "US"
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.location).must_equal "US"
   end
 end

@@ -24,19 +24,19 @@ describe Google::Cloud::Bigquery::Table, :exists, :mock_bigquery do
   it "knows if full resource exists when created with an HTTP method" do
     # The absence of a mock means this test will fail
     # if the method exists? makes an HTTP call.
-    table.wont_be :reference?
-    table.must_be :resource?
-    table.wont_be :resource_partial?
-    table.must_be :resource_full?
+    _(table).wont_be :reference?
+    _(table).must_be :resource?
+    _(table).wont_be :resource_partial?
+    _(table).must_be :resource_full?
 
-    table.must_be :exists?
-    table.wont_be :reference?
-    table.must_be :resource?
-    table.wont_be :resource_partial?
-    table.must_be :resource_full?
+    _(table).must_be :exists?
+    _(table).wont_be :reference?
+    _(table).must_be :resource?
+    _(table).wont_be :resource_partial?
+    _(table).must_be :resource_full?
 
     # Additional exists? calls do not make HTTP calls either
-    table.must_be :exists?
+    _(table).must_be :exists?
   end
 
   describe "partial dataset resource from list of a dataset that exists" do
@@ -46,19 +46,19 @@ describe Google::Cloud::Bigquery::Table, :exists, :mock_bigquery do
     it "knows if partial resource exists when created with an HTTP method" do
       # The absence of a mock means this test will fail
       # if the method exists? makes an HTTP call.
-      table.wont_be :reference?
-      table.must_be :resource?
-      table.must_be :resource_partial?
-      table.wont_be :resource_full?
+      _(table).wont_be :reference?
+      _(table).must_be :resource?
+      _(table).must_be :resource_partial?
+      _(table).wont_be :resource_full?
 
-      table.must_be :exists?
-      table.wont_be :reference?
-      table.must_be :resource?
-      table.must_be :resource_partial?
-      table.wont_be :resource_full?
+      _(table).must_be :exists?
+      _(table).wont_be :reference?
+      _(table).must_be :resource?
+      _(table).must_be :resource_partial?
+      _(table).wont_be :resource_full?
 
       # Additional exists? calls do not make HTTP calls
-      table.must_be :exists?
+      _(table).must_be :exists?
     end
   end
 
@@ -70,19 +70,19 @@ describe Google::Cloud::Bigquery::Table, :exists, :mock_bigquery do
       mock.expect :get_table, table_gapi, [project, dataset_id, table_id]
       table.service.mocked_service = mock
 
-      table.must_be :reference?
-      table.wont_be :resource?
-      table.wont_be :resource_partial?
-      table.wont_be :resource_full?
+      _(table).must_be :reference?
+      _(table).wont_be :resource?
+      _(table).wont_be :resource_partial?
+      _(table).wont_be :resource_full?
 
-      table.must_be :exists?
-      table.wont_be :reference?
-      table.must_be :resource?
-      table.wont_be :resource_partial?
-      table.must_be :resource_full?
+      _(table).must_be :exists?
+      _(table).wont_be :reference?
+      _(table).must_be :resource?
+      _(table).wont_be :resource_partial?
+      _(table).must_be :resource_full?
 
       # Additional exists? calls do not make HTTP calls
-      table.must_be :exists?
+      _(table).must_be :exists?
 
       mock.verify
     end
@@ -98,19 +98,19 @@ describe Google::Cloud::Bigquery::Table, :exists, :mock_bigquery do
       end
       table.service.mocked_service = stub
 
-      table.must_be :reference?
-      table.wont_be :resource?
-      table.wont_be :resource_partial?
-      table.wont_be :resource_full?
+      _(table).must_be :reference?
+      _(table).wont_be :resource?
+      _(table).wont_be :resource_partial?
+      _(table).wont_be :resource_full?
 
-      table.wont_be :exists?
-      table.must_be :reference?
-      table.wont_be :resource?
-      table.wont_be :resource_partial?
-      table.wont_be :resource_full?
+      _(table).wont_be :exists?
+      _(table).must_be :reference?
+      _(table).wont_be :resource?
+      _(table).wont_be :resource_partial?
+      _(table).wont_be :resource_full?
 
       # Additional exists? calls do not make HTTP calls
-      table.wont_be :exists?
+      _(table).wont_be :exists?
     end
   end
 end

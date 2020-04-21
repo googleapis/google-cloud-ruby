@@ -20,51 +20,51 @@ describe Google::Cloud do
     it "calls out to Google::Cloud.bigquery" do
       gcloud = Google::Cloud.new
       stubbed_bigquery = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
-        project.must_be :nil?
-        keyfile.must_be :nil?
-        scope.must_be :nil?
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        _(project).must_be :nil?
+        _(keyfile).must_be :nil?
+        _(scope).must_be :nil?
+        _(retries).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
         "bigquery-project-object-empty"
       }
       Google::Cloud.stub :bigquery, stubbed_bigquery do
         project = gcloud.bigquery
-        project.must_equal "bigquery-project-object-empty"
+        _(project).must_equal "bigquery-project-object-empty"
       end
     end
 
     it "passes project and keyfile to Google::Cloud.bigquery" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
       stubbed_bigquery = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        keyfile.must_equal "keyfile-path"
-        scope.must_be :nil?
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        _(project).must_equal "project-id"
+        _(keyfile).must_equal "keyfile-path"
+        _(scope).must_be :nil?
+        _(retries).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
         "bigquery-project-object"
       }
       Google::Cloud.stub :bigquery, stubbed_bigquery do
         project = gcloud.bigquery
-        project.must_equal "bigquery-project-object"
+        _(project).must_equal "bigquery-project-object"
       end
     end
 
     it "passes project and keyfile and options to Google::Cloud.bigquery" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
       stubbed_bigquery = ->(project, keyfile, scope: nil, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        keyfile.must_equal "keyfile-path"
-        scope.must_equal "http://example.com/scope"
-        retries.must_equal 5
-        timeout.must_equal 60
-        host.must_be :nil?
+        _(project).must_equal "project-id"
+        _(keyfile).must_equal "keyfile-path"
+        _(scope).must_equal "http://example.com/scope"
+        _(retries).must_equal 5
+        _(timeout).must_equal 60
+        _(host).must_be :nil?
         "bigquery-project-object-scoped"
       }
       Google::Cloud.stub :bigquery, stubbed_bigquery do
         project = gcloud.bigquery scope: "http://example.com/scope", retries: 5, timeout: 60
-        project.must_equal "bigquery-project-object-scoped"
+        _(project).must_equal "bigquery-project-object-scoped"
       end
     end
   end
@@ -86,9 +86,9 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Bigquery::Credentials.stub :default, default_credentials do
             bigquery = Google::Cloud.bigquery
-            bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-            bigquery.project.must_equal "project-id"
-            bigquery.service.credentials.must_equal default_credentials
+            _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+            _(bigquery.project).must_equal "project-id"
+            _(bigquery.service.credentials).must_equal default_credentials
           end
         end
       end
@@ -96,16 +96,16 @@ describe Google::Cloud do
 
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "bigquery-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        credentials.must_equal "bigquery-credentials"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "bigquery-credentials"
+        _(retries).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -116,9 +116,9 @@ describe Google::Cloud do
             Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
                 bigquery = Google::Cloud.bigquery "project-id", "path/to/keyfile.json"
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-                bigquery.project.must_equal "project-id"
-                bigquery.service.must_be_kind_of OpenStruct
+                _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+                _(bigquery.project).must_equal "project-id"
+                _(bigquery.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -144,9 +144,9 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Bigquery::Credentials.stub :default, default_credentials do
             bigquery = Google::Cloud::Bigquery.new
-            bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-            bigquery.project.must_equal "project-id"
-            bigquery.service.credentials.must_equal default_credentials
+            _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+            _(bigquery.project).must_equal "project-id"
+            _(bigquery.service.credentials).must_equal default_credentials
           end
         end
       end
@@ -154,11 +154,11 @@ describe Google::Cloud do
 
     it "uses provided endpoint" do
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        credentials.must_equal default_credentials
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_equal "bigquery-endpoint2.example.com"
+        _(project).must_equal "project-id"
+        _(credentials).must_equal default_credentials
+        _(retries).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_equal "bigquery-endpoint2.example.com"
         OpenStruct.new project: project
       }
 
@@ -167,9 +167,9 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
             bigquery = Google::Cloud::Bigquery.new credentials: default_credentials, endpoint: "bigquery-endpoint2.example.com"
-            bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-            bigquery.project.must_equal "project-id"
-            bigquery.service.must_be_kind_of OpenStruct
+            _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+            _(bigquery.project).must_equal "project-id"
+            _(bigquery.service).must_be_kind_of OpenStruct
           end
         end
       end
@@ -177,16 +177,16 @@ describe Google::Cloud do
 
     it "uses provided project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "bigquery-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        credentials.must_equal "bigquery-credentials"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "bigquery-credentials"
+        _(retries).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -197,9 +197,9 @@ describe Google::Cloud do
             Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
                 bigquery = Google::Cloud::Bigquery.new project_id: "project-id", credentials: "path/to/keyfile.json"
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-                bigquery.project.must_equal "project-id"
-                bigquery.service.must_be_kind_of OpenStruct
+                _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+                _(bigquery.project).must_equal "project-id"
+                _(bigquery.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -209,16 +209,16 @@ describe Google::Cloud do
 
     it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "bigquery-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        credentials.must_equal "bigquery-credentials"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "bigquery-credentials"
+        _(retries).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -229,9 +229,9 @@ describe Google::Cloud do
             Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
                 bigquery = Google::Cloud::Bigquery.new project: "project-id", keyfile: "path/to/keyfile.json"
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-                bigquery.project.must_equal "project-id"
-                bigquery.service.must_be_kind_of OpenStruct
+                _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+                _(bigquery.project).must_equal "project-id"
+                _(bigquery.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -241,17 +241,17 @@ describe Google::Cloud do
 
     it "gets project_id from credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        credentials.must_be_kind_of OpenStruct
-        credentials.project_id.must_equal "project-id"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_be_kind_of OpenStruct
+        _(credentials.project_id).must_equal "project-id"
+        _(retries).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -264,9 +264,9 @@ describe Google::Cloud do
               Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
                 Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
                   bigquery = Google::Cloud::Bigquery.new credentials: "path/to/keyfile.json"
-                  bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-                  bigquery.project.must_equal "project-id"
-                  bigquery.service.must_be_kind_of OpenStruct
+                  _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+                  _(bigquery.project).must_equal "project-id"
+                  _(bigquery.service).must_be_kind_of OpenStruct
                 end
               end
             end
@@ -285,16 +285,16 @@ describe Google::Cloud do
 
     it "uses shared config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "bigquery-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        credentials.must_equal "bigquery-credentials"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "bigquery-credentials"
+        _(retries).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -311,9 +311,9 @@ describe Google::Cloud do
             Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
                 bigquery = Google::Cloud::Bigquery.new
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-                bigquery.project.must_equal "project-id"
-                bigquery.service.must_be_kind_of OpenStruct
+                _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+                _(bigquery.project).must_equal "project-id"
+                _(bigquery.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -323,16 +323,16 @@ describe Google::Cloud do
 
     it "uses shared config for project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "bigquery-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        credentials.must_equal "bigquery-credentials"
-        retries.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "bigquery-credentials"
+        _(retries).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -349,9 +349,9 @@ describe Google::Cloud do
             Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
                 bigquery = Google::Cloud::Bigquery.new
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-                bigquery.project.must_equal "project-id"
-                bigquery.service.must_be_kind_of OpenStruct
+                _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+                _(bigquery.project).must_equal "project-id"
+                _(bigquery.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -361,16 +361,16 @@ describe Google::Cloud do
 
     it "uses bigquery config for project and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "bigquery-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        credentials.must_equal "bigquery-credentials"
-        retries.must_equal 3
-        timeout.must_equal 42
-        host.must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "bigquery-credentials"
+        _(retries).must_equal 3
+        _(timeout).must_equal 42
+        _(host).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -389,9 +389,9 @@ describe Google::Cloud do
             Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
                 bigquery = Google::Cloud::Bigquery.new
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-                bigquery.project.must_equal "project-id"
-                bigquery.service.must_be_kind_of OpenStruct
+                _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+                _(bigquery.project).must_equal "project-id"
+                _(bigquery.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -401,16 +401,16 @@ describe Google::Cloud do
 
     it "uses bigquery config for project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "bigquery-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        credentials.must_equal "bigquery-credentials"
-        retries.must_equal 3
-        timeout.must_equal 42
-        host.must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "bigquery-credentials"
+        _(retries).must_equal 3
+        _(timeout).must_equal 42
+        _(host).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -429,9 +429,9 @@ describe Google::Cloud do
             Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
                 bigquery = Google::Cloud::Bigquery.new
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-                bigquery.project.must_equal "project-id"
-                bigquery.service.must_be_kind_of OpenStruct
+                _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+                _(bigquery.project).must_equal "project-id"
+                _(bigquery.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -441,16 +441,16 @@ describe Google::Cloud do
 
     it "uses bigquery config for endpoint" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "bigquery-credentials"
       }
       stubbed_service = ->(project, credentials, retries: nil, timeout: nil, host: nil) {
-        project.must_equal "project-id"
-        credentials.must_equal "bigquery-credentials"
-        retries.must_equal 3
-        timeout.must_equal 42
-        host.must_equal "bigquery-endpoint2.example.com"
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "bigquery-credentials"
+        _(retries).must_equal 3
+        _(timeout).must_equal 42
+        _(host).must_equal "bigquery-endpoint2.example.com"
         OpenStruct.new project: project
       }
 
@@ -470,9 +470,9 @@ describe Google::Cloud do
             Google::Cloud::Bigquery::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Bigquery::Service.stub :new, stubbed_service do
                 bigquery = Google::Cloud::Bigquery.new
-                bigquery.must_be_kind_of Google::Cloud::Bigquery::Project
-                bigquery.project.must_equal "project-id"
-                bigquery.service.must_be_kind_of OpenStruct
+                _(bigquery).must_be_kind_of Google::Cloud::Bigquery::Project
+                _(bigquery.project).must_equal "project-id"
+                _(bigquery.service).must_be_kind_of OpenStruct
               end
             end
           end

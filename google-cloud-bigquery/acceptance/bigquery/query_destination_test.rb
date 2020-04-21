@@ -43,9 +43,9 @@ describe Google::Cloud::Bigquery, :bigquery do
 
     dest_table = dataset.table table_id
     rows = dest_table.data
-    rows.class.must_equal Google::Cloud::Bigquery::Data
-    rows.count.must_equal 1
-    rows.first[:value].must_equal 123
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal 123
   end
 
   it "sends query results to destination table with encryption" do
@@ -57,11 +57,11 @@ describe Google::Cloud::Bigquery, :bigquery do
     end
 
     dest_table = dataset.table table_id
-    dest_table.encryption.must_equal encrypt_config
+    _(dest_table.encryption).must_equal encrypt_config
     rows = dest_table.data
-    rows.class.must_equal Google::Cloud::Bigquery::Data
-    rows.count.must_equal 1
-    rows.first[:value].must_equal 456
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal 456
   end
 
   it "sends query results to a range partitioned destination table" do
@@ -74,21 +74,21 @@ describe Google::Cloud::Bigquery, :bigquery do
       job.range_partitioning_end = 100
     end
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.wait_until_done!
-    job.wont_be :failed?
+    _(job).wont_be :failed?
 
-    job.range_partitioning?.must_equal true
-    job.range_partitioning_field.must_equal "num"
-    job.range_partitioning_start.must_equal 0
-    job.range_partitioning_interval.must_equal 10
-    job.range_partitioning_end.must_equal 100
+    _(job.range_partitioning?).must_equal true
+    _(job.range_partitioning_field).must_equal "num"
+    _(job.range_partitioning_start).must_equal 0
+    _(job.range_partitioning_interval).must_equal 10
+    _(job.range_partitioning_end).must_equal 100
 
     dest_table = dataset.table range_table_id
-    dest_table.must_be_kind_of Google::Cloud::Bigquery::Table
+    _(dest_table).must_be_kind_of Google::Cloud::Bigquery::Table
     rows = dest_table.data
-    rows.class.must_equal Google::Cloud::Bigquery::Data
-    rows.count.must_equal 100
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 100
   end
 
   it "sends query results to a time partitioned destination table" do
@@ -104,20 +104,20 @@ describe Google::Cloud::Bigquery, :bigquery do
       job.time_partitioning_require_filter = true
     end
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.wait_until_done!
-    job.wont_be :failed?
+    _(job).wont_be :failed?
 
-    job.time_partitioning_type.must_equal "DAY"
-    job.time_partitioning_field.must_equal "dob"
-    job.time_partitioning_expiration.must_equal 86_400
-    job.time_partitioning_require_filter?.must_equal true
+    _(job.time_partitioning_type).must_equal "DAY"
+    _(job.time_partitioning_field).must_equal "dob"
+    _(job.time_partitioning_expiration).must_equal 86_400
+    _(job.time_partitioning_require_filter?).must_equal true
 
     dest_table = dataset.table timestamp_table_id
-    dest_table.must_be_kind_of Google::Cloud::Bigquery::Table
+    _(dest_table).must_be_kind_of Google::Cloud::Bigquery::Table
     rows = dest_table.data
-    rows.class.must_equal Google::Cloud::Bigquery::Data
-    rows.count.must_equal 10
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 10
   end
 
   it "sends query results to a clustered destination table" do
@@ -132,15 +132,15 @@ describe Google::Cloud::Bigquery, :bigquery do
       job.clustering_fields = ["name"]
     end
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.wait_until_done!
-    job.wont_be :failed?
-    job.num_child_jobs.must_equal 0
-    job.parent_job_id.must_be :nil?
+    _(job).wont_be :failed?
+    _(job.num_child_jobs).must_equal 0
+    _(job.parent_job_id).must_be :nil?
 
-    job.time_partitioning_type.must_equal "DAY"
-    job.time_partitioning_field.must_equal "dob"
-    job.clustering?.must_equal true
-    job.clustering_fields.must_equal ["name"]
+    _(job.time_partitioning_type).must_equal "DAY"
+    _(job.time_partitioning_field).must_equal "dob"
+    _(job.clustering?).must_equal true
+    _(job.clustering_fields).must_equal ["name"]
   end
 end

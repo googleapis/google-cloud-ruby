@@ -58,7 +58,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   describe "dataset reference" do
@@ -78,7 +78,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
       job = dataset.query_job query
       mock.verify
 
-      job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+      _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     end
   end
 
@@ -111,19 +111,19 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
                             maximum_bytes_billed: 12345678901234
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.range_partitioning?.must_equal false
-    job.range_partitioning_field.must_be_nil
-    job.range_partitioning_start.must_be_nil
-    job.range_partitioning_interval.must_be_nil
-    job.range_partitioning_end.must_be_nil
-    job.time_partitioning?.must_equal false
-    job.time_partitioning_type.must_be :nil?
-    job.time_partitioning_field.must_be :nil?
-    job.time_partitioning_expiration.must_be :nil?
-    job.time_partitioning_require_filter?.must_equal false
-    job.clustering?.must_equal false
-    job.clustering_fields.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.range_partitioning?).must_equal false
+    _(job.range_partitioning_field).must_be_nil
+    _(job.range_partitioning_start).must_be_nil
+    _(job.range_partitioning_interval).must_be_nil
+    _(job.range_partitioning_end).must_be_nil
+    _(job.time_partitioning?).must_equal false
+    _(job.time_partitioning_type).must_be :nil?
+    _(job.time_partitioning_field).must_be :nil?
+    _(job.time_partitioning_expiration).must_be :nil?
+    _(job.time_partitioning_require_filter?).must_equal false
+    _(job.clustering?).must_equal false
+    _(job.clustering_fields).must_be :nil?
   end
 
   it "queries the data with range_partitioning" do
@@ -152,12 +152,12 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.range_partitioning?.must_equal true
-    job.range_partitioning_field.must_equal "my_table_id"
-    job.range_partitioning_start.must_equal 0
-    job.range_partitioning_interval.must_equal 10
-    job.range_partitioning_end.must_equal 100
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.range_partitioning?).must_equal true
+    _(job.range_partitioning_field).must_equal "my_table_id"
+    _(job.range_partitioning_start).must_equal 0
+    _(job.range_partitioning_interval).must_equal 10
+    _(job.range_partitioning_end).must_equal 100
   end
 
   it "queries the data with time_partitioning and clustering" do
@@ -188,14 +188,14 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.time_partitioning?.must_equal true
-    job.time_partitioning_type.must_equal "DAY"
-    job.time_partitioning_field.must_equal "dob"
-    job.time_partitioning_expiration.must_equal 86_400
-    job.time_partitioning_require_filter?.must_equal true
-    job.clustering?.must_equal true
-    job.clustering_fields.must_equal clustering_fields
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.time_partitioning?).must_equal true
+    _(job.time_partitioning_type).must_equal "DAY"
+    _(job.time_partitioning_field).must_equal "dob"
+    _(job.time_partitioning_expiration).must_equal 86_400
+    _(job.time_partitioning_require_filter?).must_equal true
+    _(job.clustering?).must_equal true
+    _(job.clustering_fields).must_equal clustering_fields
   end
 
   it "queries the data with job_id option" do
@@ -214,8 +214,8 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, job_id: job_id
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.job_id).must_equal job_id
   end
 
   it "queries the data with dryrun flag" do
@@ -233,11 +233,11 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, dryrun: true
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.dryrun?.must_equal true
-    job.dryrun.must_equal true # alias
-    job.dry_run.must_equal true # alias
-    job.dry_run?.must_equal true # alias
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.dryrun?).must_equal true
+    _(job.dryrun).must_equal true # alias
+    _(job.dry_run).must_equal true # alias
+    _(job.dry_run?).must_equal true # alias
   end
 
   it "queries the data with prefix option" do
@@ -259,8 +259,8 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, prefix: prefix
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.job_id).must_equal job_id
   end
 
   it "queries the data with job_id option if both job_id and prefix options are provided" do
@@ -279,8 +279,8 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, job_id: job_id, prefix: "IGNORED"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.job_id).must_equal job_id
   end
 
   it "queries the data with the job labels option" do
@@ -298,8 +298,8 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, labels: labels
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.labels.must_equal labels
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.labels).must_equal labels
   end
 
   it "queries the data with an array for the udfs option" do
@@ -317,8 +317,8 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, udfs: udfs
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.udfs.must_equal udfs
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.udfs).must_equal udfs
   end
 
   it "queries the data with a string for the udfs option" do
@@ -336,7 +336,7 @@ describe Google::Cloud::Bigquery::Dataset, :query_job, :mock_bigquery do
     job = dataset.query_job query, udfs: "gs://my-bucket/my-lib.js"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    job.udfs.must_equal ["gs://my-bucket/my-lib.js"]
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.udfs).must_equal ["gs://my-bucket/my-lib.js"]
   end
 end

@@ -70,72 +70,72 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
   let(:routine) { Google::Cloud::Bigquery::Routine.from_gapi routine_gapi, bigquery.service }
 
   it "knows its attributes" do
-    routine.routine_id.must_equal routine_id
-    routine.dataset_id.must_equal dataset
-    routine.project_id.must_equal project
+    _(routine.routine_id).must_equal routine_id
+    _(routine.dataset_id).must_equal dataset
+    _(routine.project_id).must_equal project
     # routine_ref is private
-    routine.routine_ref.must_be_kind_of Google::Apis::BigqueryV2::RoutineReference
-    routine.routine_ref.routine_id.must_equal routine_id
-    routine.routine_ref.dataset_id.must_equal dataset
-    routine.routine_ref.project_id.must_equal project
+    _(routine.routine_ref).must_be_kind_of Google::Apis::BigqueryV2::RoutineReference
+    _(routine.routine_ref.routine_id).must_equal routine_id
+    _(routine.routine_ref.dataset_id).must_equal dataset
+    _(routine.routine_ref.project_id).must_equal project
 
-    routine.etag.must_equal etag
-    routine.routine_type.must_equal "SCALAR_FUNCTION"
-    routine.procedure?.must_equal false
-    routine.scalar_function?.must_equal true
-    routine.created_at.must_be_close_to now, 1
-    routine.modified_at.must_be_close_to now, 1
-    routine.language.must_equal "SQL"
-    routine.javascript?.must_equal false
-    routine.sql?.must_equal true
+    _(routine.etag).must_equal etag
+    _(routine.routine_type).must_equal "SCALAR_FUNCTION"
+    _(routine.procedure?).must_equal false
+    _(routine.scalar_function?).must_equal true
+    _(routine.created_at).must_be_close_to now, 1
+    _(routine.modified_at).must_be_close_to now, 1
+    _(routine.language).must_equal "SQL"
+    _(routine.javascript?).must_equal false
+    _(routine.sql?).must_equal true
 
-    routine.arguments.must_be_kind_of Array
-    routine.arguments.must_be :frozen?
-    routine.arguments.size.must_equal 2
-    routine.arguments[0].must_be_kind_of Google::Cloud::Bigquery::Argument
-    routine.arguments[0].name.must_equal "arr"
-    routine.arguments[0].argument_kind.must_equal "FIXED_TYPE"
-    routine.arguments[0].fixed_type?.must_equal true
-    routine.arguments[0].any_type?.must_equal false
-    routine.arguments[0].mode.must_equal "IN"
-    routine.arguments[0].in?.must_equal true
-    routine.arguments[0].out?.must_equal false
-    routine.arguments[0].inout?.must_equal false
-    routine.arguments[0].data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    routine.arguments[0].data_type.type_kind.must_equal "ARRAY"
-    routine.arguments[0].data_type.array_element_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    routine.arguments[0].data_type.array_element_type.type_kind.must_equal "STRUCT"
-    routine.arguments[0].data_type.array_element_type.struct_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::StructType
-    routine.arguments[0].data_type.array_element_type.struct_type.fields.must_be_kind_of Array
-    routine.arguments[0].data_type.array_element_type.struct_type.fields.must_be :frozen?
-    routine.arguments[0].data_type.array_element_type.struct_type.fields.size.must_equal 2
-    routine.arguments[0].data_type.array_element_type.struct_type.fields[0].must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
-    routine.arguments[0].data_type.array_element_type.struct_type.fields[0].name.must_equal "my-struct-name"
-    routine.arguments[0].data_type.array_element_type.struct_type.fields[0].type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    routine.arguments[0].data_type.array_element_type.struct_type.fields[0].type.type_kind.must_equal "STRING"
-    routine.arguments[0].data_type.array_element_type.struct_type.fields[1].name.must_equal "my-struct-val"
-    routine.arguments[0].data_type.array_element_type.struct_type.fields[1].type.type_kind.must_equal "INT64"
-    routine.arguments[1].name.must_equal "out"
-    routine.arguments[1].argument_kind.must_equal "ANY_TYPE"
-    routine.arguments[1].fixed_type?.must_equal false
-    routine.arguments[1].any_type?.must_equal true
-    routine.arguments[1].mode.must_equal "OUT"
-    routine.arguments[1].in?.must_equal false
-    routine.arguments[1].out?.must_equal true
-    routine.arguments[1].inout?.must_equal false
-    routine.arguments[1].data_type.type_kind.must_equal "STRING"
+    _(routine.arguments).must_be_kind_of Array
+    _(routine.arguments).must_be :frozen?
+    _(routine.arguments.size).must_equal 2
+    _(routine.arguments[0]).must_be_kind_of Google::Cloud::Bigquery::Argument
+    _(routine.arguments[0].name).must_equal "arr"
+    _(routine.arguments[0].argument_kind).must_equal "FIXED_TYPE"
+    _(routine.arguments[0].fixed_type?).must_equal true
+    _(routine.arguments[0].any_type?).must_equal false
+    _(routine.arguments[0].mode).must_equal "IN"
+    _(routine.arguments[0].in?).must_equal true
+    _(routine.arguments[0].out?).must_equal false
+    _(routine.arguments[0].inout?).must_equal false
+    _(routine.arguments[0].data_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(routine.arguments[0].data_type.type_kind).must_equal "ARRAY"
+    _(routine.arguments[0].data_type.array_element_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(routine.arguments[0].data_type.array_element_type.type_kind).must_equal "STRUCT"
+    _(routine.arguments[0].data_type.array_element_type.struct_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::StructType
+    _(routine.arguments[0].data_type.array_element_type.struct_type.fields).must_be_kind_of Array
+    _(routine.arguments[0].data_type.array_element_type.struct_type.fields).must_be :frozen?
+    _(routine.arguments[0].data_type.array_element_type.struct_type.fields.size).must_equal 2
+    _(routine.arguments[0].data_type.array_element_type.struct_type.fields[0]).must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
+    _(routine.arguments[0].data_type.array_element_type.struct_type.fields[0].name).must_equal "my-struct-name"
+    _(routine.arguments[0].data_type.array_element_type.struct_type.fields[0].type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(routine.arguments[0].data_type.array_element_type.struct_type.fields[0].type.type_kind).must_equal "STRING"
+    _(routine.arguments[0].data_type.array_element_type.struct_type.fields[1].name).must_equal "my-struct-val"
+    _(routine.arguments[0].data_type.array_element_type.struct_type.fields[1].type.type_kind).must_equal "INT64"
+    _(routine.arguments[1].name).must_equal "out"
+    _(routine.arguments[1].argument_kind).must_equal "ANY_TYPE"
+    _(routine.arguments[1].fixed_type?).must_equal false
+    _(routine.arguments[1].any_type?).must_equal true
+    _(routine.arguments[1].mode).must_equal "OUT"
+    _(routine.arguments[1].in?).must_equal false
+    _(routine.arguments[1].out?).must_equal true
+    _(routine.arguments[1].inout?).must_equal false
+    _(routine.arguments[1].data_type.type_kind).must_equal "STRING"
 
-    routine.return_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    routine.return_type.type_kind.must_equal "INT64"
+    _(routine.return_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(routine.return_type.type_kind).must_equal "INT64"
 
-    routine.imported_libraries.must_equal ["gs://cloud-samples-data/bigquery/udfs/max-value.js"]
-    routine.imported_libraries.must_be :frozen?
-    routine.body.must_equal "x * 3"
-    routine.description.must_equal description
+    _(routine.imported_libraries).must_equal ["gs://cloud-samples-data/bigquery/udfs/max-value.js"]
+    _(routine.imported_libraries).must_be :frozen?
+    _(routine.body).must_equal "x * 3"
+    _(routine.description).must_equal description
   end
 
   it "can test its existence" do
-    routine.exists?.must_equal true
+    _(routine.exists?).must_equal true
   end
 
   it "can test its existence with force to load resource" do
@@ -143,7 +143,7 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     mock.expect :get_routine, routine_gapi, [routine.project_id, routine.dataset_id, routine.routine_id]
     routine.service.mocked_service = mock
 
-    routine.exists?(force: true).must_equal true
+    _(routine.exists?(force: true)).must_equal true
 
     mock.verify
   end
@@ -153,9 +153,9 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
     mock.expect :delete_routine, nil, [project, dataset, routine_id]
     routine.service.mocked_service = mock
 
-    routine.delete.must_equal true
+    _(routine.delete).must_equal true
 
-    routine.exists?.must_equal false
+    _(routine.exists?).must_equal false
 
     mock.verify
   end
@@ -169,16 +169,16 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
       [project, dataset, routine_id]
     routine.service.mocked_service = mock
 
-    routine.description.must_equal description
+    _(routine.description).must_equal description
     routine.reload!
 
     mock.verify
 
-    routine.description.must_equal new_description
+    _(routine.description).must_equal new_description
   end
 
   it "updates its routine_type" do
-    routine.routine_type.must_equal routine_type
+    _(routine.routine_type).must_equal routine_type
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -191,11 +191,11 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     mock.verify
 
-    routine.routine_type.must_equal new_routine_type
+    _(routine.routine_type).must_equal new_routine_type
   end
 
   it "updates its language" do
-    routine.language.must_equal language
+    _(routine.language).must_equal language
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -208,11 +208,11 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     mock.verify
 
-    routine.language.must_equal new_language
+    _(routine.language).must_equal new_language
   end
 
   it "updates its arguments" do
-    routine.arguments.size.must_equal routine_gapi.arguments.size
+    _(routine.arguments.size).must_equal routine_gapi.arguments.size
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -225,11 +225,11 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     mock.verify
 
-    routine.arguments.size.must_equal new_arguments.size
+    _(routine.arguments.size).must_equal new_arguments.size
   end
 
   it "updates its return_type" do
-    routine.return_type.type_kind.must_equal return_type.type_kind
+    _(routine.return_type.type_kind).must_equal return_type.type_kind
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -242,11 +242,11 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     mock.verify
 
-    routine.return_type.type_kind.must_equal new_return_type.type_kind
+    _(routine.return_type.type_kind).must_equal new_return_type.type_kind
   end
 
   it "updates its return_type with a string" do
-    routine.return_type.type_kind.must_equal return_type.type_kind
+    _(routine.return_type.type_kind).must_equal return_type.type_kind
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -259,11 +259,11 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     mock.verify
 
-    routine.return_type.type_kind.must_equal new_return_type.type_kind
+    _(routine.return_type.type_kind).must_equal new_return_type.type_kind
   end
 
   it "updates its return_type to nil" do
-    routine.return_type.type_kind.must_equal return_type.type_kind
+    _(routine.return_type.type_kind).must_equal return_type.type_kind
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -276,11 +276,11 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     mock.verify
 
-    routine.return_type.must_be :nil?
+    _(routine.return_type).must_be :nil?
   end
   
   it "updates its imported_libraries" do
-    routine.imported_libraries.must_equal imported_libraries
+    _(routine.imported_libraries).must_equal imported_libraries
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -293,11 +293,11 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     mock.verify
 
-    routine.imported_libraries.must_equal new_imported_libraries
+    _(routine.imported_libraries).must_equal new_imported_libraries
   end
   
   it "updates its body" do
-    routine.body.must_equal body
+    _(routine.body).must_equal body
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -310,11 +310,11 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     mock.verify
 
-    routine.body.must_equal new_body
+    _(routine.body).must_equal new_body
   end
 
   it "updates its description" do
-    routine.description.must_equal description
+    _(routine.description).must_equal description
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -327,11 +327,11 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     mock.verify
 
-    routine.description.must_equal new_description
+    _(routine.description).must_equal new_description
   end
 
   it "updates its attributes in a block" do
-    routine.description.must_equal description
+    _(routine.description).must_equal description
 
     mock = Minitest::Mock.new
     updated_routine_gapi = routine_gapi.dup
@@ -358,13 +358,13 @@ describe Google::Cloud::Bigquery::Routine, :resource, :mock_bigquery do
 
     mock.verify
 
-    routine.routine_type.must_equal new_routine_type
-    routine.language.must_equal new_language
-    routine.arguments.size.must_equal new_arguments.size
-    routine.return_type.type_kind.must_equal new_return_type.type_kind
-    routine.imported_libraries.must_equal new_imported_libraries
-    routine.body.must_equal new_body
-    routine.description.must_equal new_description
+    _(routine.routine_type).must_equal new_routine_type
+    _(routine.language).must_equal new_language
+    _(routine.arguments.size).must_equal new_arguments.size
+    _(routine.return_type.type_kind).must_equal new_return_type.type_kind
+    _(routine.imported_libraries).must_equal new_imported_libraries
+    _(routine.body).must_equal new_body
+    _(routine.description).must_equal new_description
   end
 
   it "skips update when no updates are made in a block" do

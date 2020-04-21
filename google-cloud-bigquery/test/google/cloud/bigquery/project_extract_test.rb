@@ -50,7 +50,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table_id_standard_sql, extract_file
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table to a storage file using a Legacy SQL table id" do
@@ -65,7 +65,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table_id_legacy_sql, extract_file
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table to a storage file" do
@@ -80,7 +80,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table, extract_file
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table to a storage url" do
@@ -95,7 +95,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table, extract_url
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table and determine the csv format" do
@@ -112,7 +112,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table, "#{extract_url}.csv"
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table and specify the csv format" do
@@ -128,7 +128,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table, extract_url, format: :csv
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table and specify the csv format and options" do
@@ -147,7 +147,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table, extract_url, format: :csv, compression: "GZIP", delimiter: "\t", header: false
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table and determine the json format" do
@@ -164,7 +164,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table, "#{extract_url}.json"
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table and specify the json format" do
@@ -180,7 +180,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table, extract_url, format: :json
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table and determine the avro format" do
@@ -197,7 +197,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table, "#{extract_url}.avro"
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table and determine the avro format with options" do
@@ -217,7 +217,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     end
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table and specify the avro format" do
@@ -233,7 +233,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     result = bigquery.extract table, extract_url, format: :avro
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract a table and specify the avro format with options" do
@@ -253,7 +253,7 @@ describe Google::Cloud::Bigquery::Project, :extract, :mock_bigquery do
     end
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   # Borrowed from MockStorage, extract to a common module?

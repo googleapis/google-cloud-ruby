@@ -54,7 +54,7 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, target_table
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy to a table identified by a string" do
@@ -67,7 +67,7 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, "target-project:target_dataset.target_table_id"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy to a dataset ID and table name string only" do
@@ -87,7 +87,7 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, "source_dataset.new_target_table_id"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy a table with create disposition" do
@@ -101,7 +101,7 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, target_table, create: "CREATE_NEVER"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy a table with create disposition symbol" do
@@ -115,7 +115,7 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, target_table, create: :never
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
 
@@ -130,7 +130,7 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, target_table, write: "WRITE_TRUNCATE"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy a table with write disposition symbol" do
@@ -144,7 +144,7 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, target_table, write: :truncate
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy a table with job_id option" do
@@ -158,8 +158,8 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, target_table, job_id: job_id
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can copy a table with prefix option" do
@@ -176,8 +176,8 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, target_table, prefix: prefix
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can copy a table with job_id option if both job_id and prefix options are provided" do
@@ -191,8 +191,8 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, target_table, job_id: job_id, prefix: "IGNORED"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can copy a table with the job labels option" do
@@ -205,8 +205,8 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     job = bigquery.copy_job source_table, target_table, labels: labels
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    job.labels.must_equal labels
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job.labels).must_equal labels
   end
 
   it "can copy a table with the location option" do
@@ -227,7 +227,7 @@ describe Google::Cloud::Bigquery::Project, :copy_job, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    job.location.must_equal region
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job.location).must_equal region
   end
 end

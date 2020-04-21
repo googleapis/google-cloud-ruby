@@ -48,7 +48,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result = table.extract extract_file
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself to a storage url" do
@@ -63,7 +63,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result = table.extract extract_url
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself and determine the csv format" do
@@ -80,7 +80,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result = table.extract "#{extract_url}.csv"
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself and specify the csv format" do
@@ -96,7 +96,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result = table.extract extract_url, format: :csv
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself and specify the csv format and options" do
@@ -115,7 +115,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result = table.extract extract_url, format: :csv, compression: "GZIP", delimiter: "\t", header: false
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself and determine the json format" do
@@ -132,7 +132,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result = table.extract "#{extract_url}.json"
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself and specify the json format" do
@@ -148,7 +148,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result = table.extract extract_url, format: :json
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself and determine the avro format" do
@@ -165,7 +165,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result = table.extract "#{extract_url}.avro"
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself and determine the avro format with options" do
@@ -185,7 +185,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     end
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself and specify the avro format" do
@@ -201,7 +201,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     result = table.extract extract_url, format: :avro
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself and specify the avro format with options" do
@@ -221,7 +221,7 @@ describe Google::Cloud::Bigquery::Table, :extract, :mock_bigquery do
     end
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   def extract_job_gapi table, extract_file, job_id: "job_9876543210", location: "US"

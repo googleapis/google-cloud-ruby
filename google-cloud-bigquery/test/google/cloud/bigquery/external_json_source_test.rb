@@ -25,18 +25,18 @@ describe Google::Cloud::Bigquery::External::JsonSource do
       source_format: "NEWLINE_DELIMITED_JSON"
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
-    table.urls.must_equal ["gs://my-bucket/path/to/file.json"]
-    table.must_be :json?
-    table.format.must_equal "NEWLINE_DELIMITED_JSON"
+    _(table).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(table.urls).must_equal ["gs://my-bucket/path/to/file.json"]
+    _(table).must_be :json?
+    _(table.format).must_equal "NEWLINE_DELIMITED_JSON"
 
-    table.wont_be :csv?
-    table.wont_be :sheets?
-    table.wont_be :avro?
-    table.wont_be :backup?
-    table.wont_be :bigtable?
+    _(table).wont_be :csv?
+    _(table).wont_be :sheets?
+    _(table).wont_be :avro?
+    _(table).wont_be :backup?
+    _(table).wont_be :bigtable?
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets schema using block" do
@@ -61,8 +61,8 @@ describe Google::Cloud::Bigquery::External::JsonSource do
       ])
     )
 
-    table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    table.schema.must_be :empty?
+    _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(table.schema).must_be :empty?
 
     table.schema do |s|
       s.string "name", mode: :required
@@ -77,14 +77,14 @@ describe Google::Cloud::Bigquery::External::JsonSource do
       s.date "birthday"
     end
 
-    table.schema.wont_be :empty?
-    table.fields.must_equal table.schema.fields
-    table.headers.must_equal table.schema.headers
-    table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    table.param_types.must_equal table.schema.param_types
-    table.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.schema).wont_be :empty?
+    _(table.fields).must_equal table.schema.fields
+    _(table.headers).must_equal table.schema.headers
+    _(table.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(table.param_types).must_equal table.schema.param_types
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets schema using object" do
@@ -109,8 +109,8 @@ describe Google::Cloud::Bigquery::External::JsonSource do
       ])
     )
 
-    table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    table.schema.must_be :empty?
+    _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(table.schema).must_be :empty?
 
     # this object is usually created by calling bigquery.schema
     schema = Google::Cloud::Bigquery::Schema.from_gapi
@@ -127,13 +127,13 @@ describe Google::Cloud::Bigquery::External::JsonSource do
 
     table.schema = schema
 
-    table.schema.wont_be :empty?
-    table.fields.must_equal table.schema.fields
-    table.headers.must_equal table.schema.headers
-    table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    table.param_types.must_equal table.schema.param_types
-    table.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.schema).wont_be :empty?
+    _(table.fields).must_equal table.schema.fields
+    _(table.headers).must_equal table.schema.headers
+    _(table.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(table.param_types).must_equal table.schema.param_types
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 end

@@ -115,13 +115,13 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       expect { job.wait_until_done! }.must_raise RuntimeError
     end
 
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.schema_update_options.must_equal schema_update_options
-    job.range_partitioning?.must_equal true
-    job.range_partitioning_field.must_equal "age"
-    job.range_partitioning_start.must_equal 0
-    job.range_partitioning_interval.must_equal 10
-    job.range_partitioning_end.must_equal 100
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.schema_update_options).must_equal schema_update_options
+    _(job.range_partitioning?).must_equal true
+    _(job.range_partitioning_field).must_equal "age"
+    _(job.range_partitioning_start).must_equal 0
+    _(job.range_partitioning_interval).must_equal 10
+    _(job.range_partitioning_end).must_equal 100
 
     mock.verify
   end
@@ -164,15 +164,15 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       expect { job.wait_until_done! }.must_raise RuntimeError
     end
 
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.schema_update_options.must_equal schema_update_options
-    job.time_partitioning?.must_equal true
-    job.time_partitioning_type.must_equal "DAY"
-    job.time_partitioning_field.must_equal "dob"
-    job.time_partitioning_expiration.must_equal 86_400
-    job.time_partitioning_require_filter?.must_equal true
-    job.clustering?.must_equal true
-    job.clustering_fields.must_equal clustering_fields
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.schema_update_options).must_equal schema_update_options
+    _(job.time_partitioning?).must_equal true
+    _(job.time_partitioning_type).must_equal "DAY"
+    _(job.time_partitioning_field).must_equal "dob"
+    _(job.time_partitioning_expiration).must_equal 86_400
+    _(job.time_partitioning_require_filter?).must_equal true
+    _(job.clustering?).must_equal true
+    _(job.clustering_fields).must_equal clustering_fields
 
     mock.verify
   end
@@ -196,21 +196,21 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     schema.timestamp "dob", mode: :required
 
     job = dataset.load_job table_id, load_file, create: :needed, schema: schema
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.schema_update_options.must_be_kind_of Array
-    job.schema_update_options.must_be :empty?
-    job.range_partitioning?.must_equal false
-    job.range_partitioning_field.must_be_nil
-    job.range_partitioning_start.must_be_nil
-    job.range_partitioning_interval.must_be_nil
-    job.range_partitioning_end.must_be_nil
-    job.time_partitioning?.must_equal false
-    job.time_partitioning_type.must_be :nil?
-    job.time_partitioning_field.must_be :nil?
-    job.time_partitioning_expiration.must_be :nil?
-    job.time_partitioning_require_filter?.must_equal false
-    job.clustering?.must_equal false
-    job.clustering_fields.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.schema_update_options).must_be_kind_of Array
+    _(job.schema_update_options).must_be :empty?
+    _(job.range_partitioning?).must_equal false
+    _(job.range_partitioning_field).must_be_nil
+    _(job.range_partitioning_start).must_be_nil
+    _(job.range_partitioning_interval).must_be_nil
+    _(job.range_partitioning_end).must_be_nil
+    _(job.time_partitioning?).must_equal false
+    _(job.time_partitioning_type).must_be :nil?
+    _(job.time_partitioning_field).must_be :nil?
+    _(job.time_partitioning_expiration).must_be :nil?
+    _(job.time_partitioning_require_filter?).must_equal false
+    _(job.clustering?).must_equal false
+    _(job.clustering_fields).must_be :nil?
 
     mock.verify
   end
@@ -239,8 +239,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
       schema.timestamp "dob", mode: :required
       schema.schema_update_options = schema_update_options
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.schema_update_options.must_equal schema_update_options
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.schema_update_options).must_equal schema_update_options
 
     mock.verify
   end

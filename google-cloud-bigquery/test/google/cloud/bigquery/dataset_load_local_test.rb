@@ -35,7 +35,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
         [project, load_job_gapi(table_reference, "CSV"), upload_source: file, content_type: "text/csv"]
 
       result = dataset.load table_id, file, format: :csv
-      result.must_equal true
+      _(result).must_equal true
     end
     mock.verify
   end
@@ -51,7 +51,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
       result = dataset.load table_id, file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
         encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
         quote: "'", skip_leading: 1
-      result.must_equal true
+      _(result).must_equal true
     end
 
     mock.verify
@@ -70,7 +70,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
         [project, load_job_gapi(table_reference), upload_source: file, content_type: "application/json"]
 
       result = dataset.load table_id, file, format: "JSON"
-      result.must_equal true
+      _(result).must_equal true
     end
 
     mock.verify
@@ -84,7 +84,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
 
     local_json = "acceptance/data/kitten-test-data.json"
     result = dataset.load table_id, local_json
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end

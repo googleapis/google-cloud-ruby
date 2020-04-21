@@ -43,8 +43,8 @@ describe Google::Cloud::Bigquery::External, :bigquery do
     ext_table.skip_leading_rows = 1
 
     data = dataset.query "SELECT * FROM pets", external: { pets: ext_table }
-    data.count.must_equal 3
-    data.must_equal [
+    _(data.count).must_equal 3
+    _(data).must_equal [
       { id: 4, name: "silvano", breed: "the cat kind" },
       { id: 5, name: "ryan", breed: "golden retriever?" },
       { id: 6, name: "stephen", breed: "idkanycatbreeds" }
@@ -62,8 +62,8 @@ describe Google::Cloud::Bigquery::External, :bigquery do
     end
 
     data = dataset.query "SELECT id, name, breed FROM pets", external: { pets: ext_table }
-    data.count.must_equal 3
-    data.must_equal [
+    _(data.count).must_equal 3
+    _(data).must_equal [
       { id: 4, name: "silvano", breed: "the cat kind" },
       { id: 5, name: "ryan", breed: "golden retriever?" },
       { id: 6, name: "stephen", breed: "idkanycatbreeds" }

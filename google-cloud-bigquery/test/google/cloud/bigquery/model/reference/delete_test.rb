@@ -28,9 +28,9 @@ describe Google::Cloud::Bigquery::Model, :reference, :attributes, :mock_bigquery
       [project, dataset, model_id]
     model.service.mocked_service = mock
 
-    model.delete.must_equal true
+    _(model.delete).must_equal true
 
-    model.exists?.must_equal false
+    _(model.exists?).must_equal false
 
     mock.verify
   end

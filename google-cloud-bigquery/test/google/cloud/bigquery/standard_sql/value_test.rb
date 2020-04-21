@@ -21,294 +21,294 @@ describe Google::Cloud::Bigquery::StandardSql, :value do
       parent = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "STRING"
       data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "ARRAY", array_element_type: parent
 
-      data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-      data_type.type_kind.must_equal "ARRAY"
-      data_type.array_element_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-      data_type.array_element_type.type_kind.must_equal "STRING"
+      _(data_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      _(data_type.type_kind).must_equal "ARRAY"
+      _(data_type.array_element_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      _(data_type.array_element_type.type_kind).must_equal "STRING"
     end
 
     it "takes Hash as an argument" do
       data_type = Google::Cloud::Bigquery::StandardSql::DataType.new type_kind: "ARRAY", array_element_type: "STRING"
 
-      data_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-      data_type.type_kind.must_equal "ARRAY"
-      data_type.array_element_type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-      data_type.array_element_type.type_kind.must_equal "STRING"
+      _(data_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      _(data_type.type_kind).must_equal "ARRAY"
+      _(data_type.array_element_type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+      _(data_type.array_element_type.type_kind).must_equal "STRING"
     end
   end
 
   it "represents a INT64 field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "int_col", type: "INT64"
 
-    field.name.must_equal "int_col"
+    _(field.name).must_equal "int_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "INT64"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "INT64"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.must_be :int?
-    field.type.wont_be :float?
-    field.type.wont_be :numeric?
-    field.type.wont_be :boolean?
-    field.type.wont_be :string?
-    field.type.wont_be :bytes?
-    field.type.wont_be :date?
-    field.type.wont_be :datetime?
-    field.type.wont_be :geography?
-    field.type.wont_be :time?
-    field.type.wont_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).must_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 
   it "represents a FLOAT64 field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "float_col", type: "FLOAT64"
 
-    field.name.must_equal "float_col"
+    _(field.name).must_equal "float_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "FLOAT64"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "FLOAT64"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.wont_be :int?
-    field.type.must_be :float?
-    field.type.wont_be :numeric?
-    field.type.wont_be :boolean?
-    field.type.wont_be :string?
-    field.type.wont_be :bytes?
-    field.type.wont_be :date?
-    field.type.wont_be :datetime?
-    field.type.wont_be :geography?
-    field.type.wont_be :time?
-    field.type.wont_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).wont_be :int?
+    _(field.type).must_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 
   it "represents a NUMERIC field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "num_col", type: "NUMERIC"
 
-    field.name.must_equal "num_col"
+    _(field.name).must_equal "num_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "NUMERIC"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "NUMERIC"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.wont_be :int?
-    field.type.wont_be :float?
-    field.type.must_be :numeric?
-    field.type.wont_be :boolean?
-    field.type.wont_be :string?
-    field.type.wont_be :bytes?
-    field.type.wont_be :date?
-    field.type.wont_be :datetime?
-    field.type.wont_be :geography?
-    field.type.wont_be :time?
-    field.type.wont_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).wont_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).must_be :numeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 
   it "represents a BOOL field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "bool_col", type: "BOOL"
 
-    field.name.must_equal "bool_col"
+    _(field.name).must_equal "bool_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "BOOL"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "BOOL"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.wont_be :int?
-    field.type.wont_be :float?
-    field.type.wont_be :numeric?
-    field.type.must_be :boolean?
-    field.type.wont_be :string?
-    field.type.wont_be :bytes?
-    field.type.wont_be :date?
-    field.type.wont_be :datetime?
-    field.type.wont_be :geography?
-    field.type.wont_be :time?
-    field.type.wont_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).wont_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).must_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 
   it "represents a STRING field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "str_col", type: "STRING"
 
-    field.name.must_equal "str_col"
+    _(field.name).must_equal "str_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "STRING"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "STRING"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.wont_be :int?
-    field.type.wont_be :float?
-    field.type.wont_be :numeric?
-    field.type.wont_be :boolean?
-    field.type.must_be :string?
-    field.type.wont_be :bytes?
-    field.type.wont_be :date?
-    field.type.wont_be :datetime?
-    field.type.wont_be :geography?
-    field.type.wont_be :time?
-    field.type.wont_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).wont_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).must_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 
   it "represents a BYTES field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "bytes_col", type: "BYTES"
 
-    field.name.must_equal "bytes_col"
+    _(field.name).must_equal "bytes_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "BYTES"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "BYTES"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.wont_be :int?
-    field.type.wont_be :float?
-    field.type.wont_be :numeric?
-    field.type.wont_be :boolean?
-    field.type.wont_be :string?
-    field.type.must_be :bytes?
-    field.type.wont_be :date?
-    field.type.wont_be :datetime?
-    field.type.wont_be :geography?
-    field.type.wont_be :time?
-    field.type.wont_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).wont_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).must_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 
   it "represents a DATE field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "date_col", type: "DATE"
 
-    field.name.must_equal "date_col"
+    _(field.name).must_equal "date_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "DATE"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "DATE"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.wont_be :int?
-    field.type.wont_be :float?
-    field.type.wont_be :numeric?
-    field.type.wont_be :boolean?
-    field.type.wont_be :string?
-    field.type.wont_be :bytes?
-    field.type.must_be :date?
-    field.type.wont_be :datetime?
-    field.type.wont_be :geography?
-    field.type.wont_be :time?
-    field.type.wont_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).wont_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).must_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 
   it "represents a DATETIME field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "datetime_col", type: "DATETIME"
 
-    field.name.must_equal "datetime_col"
+    _(field.name).must_equal "datetime_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "DATETIME"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "DATETIME"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.wont_be :int?
-    field.type.wont_be :float?
-    field.type.wont_be :numeric?
-    field.type.wont_be :boolean?
-    field.type.wont_be :string?
-    field.type.wont_be :bytes?
-    field.type.wont_be :date?
-    field.type.must_be :datetime?
-    field.type.wont_be :geography?
-    field.type.wont_be :time?
-    field.type.wont_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).wont_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).must_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 
   it "represents a GEOGRAPHY field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "geo_col", type: "GEOGRAPHY"
 
-    field.name.must_equal "geo_col"
+    _(field.name).must_equal "geo_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "GEOGRAPHY"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "GEOGRAPHY"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.wont_be :int?
-    field.type.wont_be :float?
-    field.type.wont_be :numeric?
-    field.type.wont_be :boolean?
-    field.type.wont_be :string?
-    field.type.wont_be :bytes?
-    field.type.wont_be :date?
-    field.type.wont_be :datetime?
-    field.type.must_be :geography?
-    field.type.wont_be :time?
-    field.type.wont_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).wont_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).must_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 
   it "represents a TIME field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "time_col", type: "TIME"
 
-    field.name.must_equal "time_col"
+    _(field.name).must_equal "time_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "TIME"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "TIME"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.wont_be :int?
-    field.type.wont_be :float?
-    field.type.wont_be :numeric?
-    field.type.wont_be :boolean?
-    field.type.wont_be :string?
-    field.type.wont_be :bytes?
-    field.type.wont_be :date?
-    field.type.wont_be :datetime?
-    field.type.wont_be :geography?
-    field.type.must_be :time?
-    field.type.wont_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).wont_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).must_be :time?
+    _(field.type).wont_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 
   it "represents a TIMESTAMP field" do
     field = Google::Cloud::Bigquery::StandardSql::Field.new name: "ts_col", type: "TIMESTAMP"
 
-    field.name.must_equal "ts_col"
+    _(field.name).must_equal "ts_col"
 
-    field.type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    field.type.type_kind.must_equal "TIMESTAMP"
-    field.type.array_element_type.must_be_nil
-    field.type.struct_type.must_be_nil
+    _(field.type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(field.type.type_kind).must_equal "TIMESTAMP"
+    _(field.type.array_element_type).must_be_nil
+    _(field.type.struct_type).must_be_nil
 
-    field.type.wont_be :int?
-    field.type.wont_be :float?
-    field.type.wont_be :numeric?
-    field.type.wont_be :boolean?
-    field.type.wont_be :string?
-    field.type.wont_be :bytes?
-    field.type.wont_be :date?
-    field.type.wont_be :datetime?
-    field.type.wont_be :geography?
-    field.type.wont_be :time?
-    field.type.must_be :timestamp?
-    field.type.wont_be :array?
-    field.type.wont_be :struct?
+    _(field.type).wont_be :int?
+    _(field.type).wont_be :float?
+    _(field.type).wont_be :numeric?
+    _(field.type).wont_be :boolean?
+    _(field.type).wont_be :string?
+    _(field.type).wont_be :bytes?
+    _(field.type).wont_be :date?
+    _(field.type).wont_be :datetime?
+    _(field.type).wont_be :geography?
+    _(field.type).wont_be :time?
+    _(field.type).must_be :timestamp?
+    _(field.type).wont_be :array?
+    _(field.type).wont_be :struct?
   end
 end

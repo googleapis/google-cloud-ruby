@@ -28,7 +28,7 @@ describe Google::Cloud::Bigquery::Model, :reference, :attributes, :mock_bigquery
     mock.expect :get_model, model_hash.to_json, [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
     model.service.mocked_service = mock
 
-    model.exists?.must_equal true
+    _(model.exists?).must_equal true
 
     mock.verify
   end
@@ -38,7 +38,7 @@ describe Google::Cloud::Bigquery::Model, :reference, :attributes, :mock_bigquery
     mock.expect :get_model, model_hash.to_json, [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
     model.service.mocked_service = mock
 
-    model.exists?(force: true).must_equal true
+    _(model.exists?(force: true)).must_equal true
 
     mock.verify
   end

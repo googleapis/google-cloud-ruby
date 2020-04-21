@@ -48,26 +48,26 @@ describe Google::Cloud::Bigquery::Dataset, :query, :external, :mock_bigquery do
     data = dataset.query query, external: { my_csv: external_csv }
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   def assert_valid_data data
-    data.count.must_equal 3
-    data[0].must_be_kind_of Hash
-    data[0][:name].must_equal "Heidi"
-    data[0][:age].must_equal 36
-    data[0][:score].must_equal 7.65
-    data[0][:active].must_equal true
-    data[1].must_be_kind_of Hash
-    data[1][:name].must_equal "Aaron"
-    data[1][:age].must_equal 42
-    data[1][:score].must_equal 8.15
-    data[1][:active].must_equal false
-    data[2].must_be_kind_of Hash
-    data[2][:name].must_equal "Sally"
-    data[2][:age].must_be :nil?
-    data[2][:score].must_be :nil?
-    data[2][:active].must_be :nil?
+    _(data.count).must_equal 3
+    _(data[0]).must_be_kind_of Hash
+    _(data[0][:name]).must_equal "Heidi"
+    _(data[0][:age]).must_equal 36
+    _(data[0][:score]).must_equal 7.65
+    _(data[0][:active]).must_equal true
+    _(data[1]).must_be_kind_of Hash
+    _(data[1][:name]).must_equal "Aaron"
+    _(data[1][:age]).must_equal 42
+    _(data[1][:score]).must_equal 8.15
+    _(data[1][:active]).must_equal false
+    _(data[2]).must_be_kind_of Hash
+    _(data[2][:name]).must_equal "Sally"
+    _(data[2][:age]).must_be :nil?
+    _(data[2][:score]).must_be :nil?
+    _(data[2][:active]).must_be :nil?
   end
 end

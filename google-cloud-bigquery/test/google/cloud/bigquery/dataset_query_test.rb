@@ -38,8 +38,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
                 [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
     data = dataset.query query
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.count.must_equal 3
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    _(data.count).must_equal 3
     mock.verify
   end
 
@@ -61,8 +61,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
                   [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
 
       data = dataset.query query
-      data.class.must_equal Google::Cloud::Bigquery::Data
-      data.count.must_equal 3
+      _(data.class).must_equal Google::Cloud::Bigquery::Data
+      _(data.count).must_equal 3
       mock.verify
     end
   end
@@ -76,8 +76,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
     mock.expect :insert_job, failed_query_job_resp_gapi(query, job_id: job_id, reason: "accessDenied"), [project, job_gapi]
 
     err = expect { dataset.query query }.must_raise Google::Cloud::PermissionDeniedError
-    err.message.must_equal "string"
-    err.cause.body.must_equal({
+    _(err.message).must_equal "string"
+    _(err.cause.body).must_equal({
       "debugInfo"=>"string",
       "location"=>"string",
       "message"=>"string",
@@ -102,8 +102,8 @@ describe Google::Cloud::Bigquery::Dataset, :query, :mock_bigquery do
     mock.expect :insert_job, failed_query_job_resp_gapi(query, job_id: job_id, reason: "backendError"), [project, job_gapi]
 
     err = expect { dataset.query query }.must_raise Google::Cloud::InternalError
-    err.message.must_equal "string"
-    err.cause.body.must_equal({
+    _(err.message).must_equal "string"
+    _(err.cause.body).must_equal({
       "debugInfo"=>"string",
       "location"=>"string",
       "message"=>"string",

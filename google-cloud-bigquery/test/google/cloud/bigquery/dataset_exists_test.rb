@@ -24,19 +24,19 @@ describe Google::Cloud::Bigquery::Dataset, :exists, :mock_bigquery do
   it "knows if full resource exists when created with an HTTP method" do
     # The absence of a mock means this test will fail
     # if the method exists? makes an HTTP call.
-    dataset.wont_be :reference?
-    dataset.must_be :resource?
-    dataset.wont_be :resource_partial?
-    dataset.must_be :resource_full?
+    _(dataset).wont_be :reference?
+    _(dataset).must_be :resource?
+    _(dataset).wont_be :resource_partial?
+    _(dataset).must_be :resource_full?
 
-    dataset.must_be :exists?
-    dataset.wont_be :reference?
-    dataset.must_be :resource?
-    dataset.wont_be :resource_partial?
-    dataset.must_be :resource_full?
+    _(dataset).must_be :exists?
+    _(dataset).wont_be :reference?
+    _(dataset).must_be :resource?
+    _(dataset).wont_be :resource_partial?
+    _(dataset).must_be :resource_full?
 
     # Additional exists? calls do not make HTTP calls either
-    dataset.must_be :exists?
+    _(dataset).must_be :exists?
   end
 
   describe "partial dataset resource from list of a dataset that exists" do
@@ -46,19 +46,19 @@ describe Google::Cloud::Bigquery::Dataset, :exists, :mock_bigquery do
     it "knows if partial resource exists when created with an HTTP method" do
       # The absence of a mock means this test will fail
       # if the method exists? makes an HTTP call.
-      dataset.wont_be :reference?
-      dataset.must_be :resource?
-      dataset.must_be :resource_partial?
-      dataset.wont_be :resource_full?
+      _(dataset).wont_be :reference?
+      _(dataset).must_be :resource?
+      _(dataset).must_be :resource_partial?
+      _(dataset).wont_be :resource_full?
 
-      dataset.must_be :exists?
-      dataset.wont_be :reference?
-      dataset.must_be :resource?
-      dataset.must_be :resource_partial?
-      dataset.wont_be :resource_full?
+      _(dataset).must_be :exists?
+      _(dataset).wont_be :reference?
+      _(dataset).must_be :resource?
+      _(dataset).must_be :resource_partial?
+      _(dataset).wont_be :resource_full?
 
       # Additional exists? calls do not make HTTP calls
-      dataset.must_be :exists?
+      _(dataset).must_be :exists?
     end
   end
 
@@ -70,19 +70,19 @@ describe Google::Cloud::Bigquery::Dataset, :exists, :mock_bigquery do
       mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
       dataset.service.mocked_service = mock
 
-      dataset.must_be :reference?
-      dataset.wont_be :resource?
-      dataset.wont_be :resource_partial?
-      dataset.wont_be :resource_full?
+      _(dataset).must_be :reference?
+      _(dataset).wont_be :resource?
+      _(dataset).wont_be :resource_partial?
+      _(dataset).wont_be :resource_full?
 
-      dataset.must_be :exists?
-      dataset.wont_be :reference?
-      dataset.must_be :resource?
-      dataset.wont_be :resource_partial?
-      dataset.must_be :resource_full?
+      _(dataset).must_be :exists?
+      _(dataset).wont_be :reference?
+      _(dataset).must_be :resource?
+      _(dataset).wont_be :resource_partial?
+      _(dataset).must_be :resource_full?
 
       # Additional exists? calls do not make HTTP calls
-      dataset.must_be :exists?
+      _(dataset).must_be :exists?
 
       mock.verify
     end
@@ -98,19 +98,19 @@ describe Google::Cloud::Bigquery::Dataset, :exists, :mock_bigquery do
       end
       dataset.service.mocked_service = stub
 
-      dataset.must_be :reference?
-      dataset.wont_be :resource?
-      dataset.wont_be :resource_partial?
-      dataset.wont_be :resource_full?
+      _(dataset).must_be :reference?
+      _(dataset).wont_be :resource?
+      _(dataset).wont_be :resource_partial?
+      _(dataset).wont_be :resource_full?
 
-      dataset.wont_be :exists?
-      dataset.must_be :reference?
-      dataset.wont_be :resource?
-      dataset.wont_be :resource_partial?
-      dataset.wont_be :resource_full?
+      _(dataset).wont_be :exists?
+      _(dataset).must_be :reference?
+      _(dataset).wont_be :resource?
+      _(dataset).wont_be :resource_partial?
+      _(dataset).wont_be :resource_full?
 
       # Additional exists? calls do not make HTTP calls
-      dataset.wont_be :exists?
+      _(dataset).wont_be :exists?
     end
   end
 end

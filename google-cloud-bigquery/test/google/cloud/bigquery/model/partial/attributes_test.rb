@@ -31,24 +31,24 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
   let(:model) { Google::Cloud::Bigquery::Model.from_gapi_json model_hash, bigquery.service }
 
   it "knows its attributes" do
-    model.model_id.must_equal model_id
-    model.dataset_id.must_equal dataset
-    model.project_id.must_equal project
+    _(model.model_id).must_equal model_id
+    _(model.dataset_id).must_equal dataset
+    _(model.project_id).must_equal project
     # model_ref is private
-    model.model_ref.must_be_kind_of Google::Apis::BigqueryV2::ModelReference
-    model.model_ref.model_id.must_equal model_id
-    model.model_ref.dataset_id.must_equal dataset
-    model.model_ref.project_id.must_equal project
+    _(model.model_ref).must_be_kind_of Google::Apis::BigqueryV2::ModelReference
+    _(model.model_ref.model_id).must_equal model_id
+    _(model.model_ref.dataset_id).must_equal dataset
+    _(model.model_ref.project_id).must_equal project
 
     # Only the following fields are populated:
     # modelReference, modelType, creationTime, lastModifiedTime and labels
-    model.model_type.must_equal model_type
-    model.created_at.must_be_close_to ::Time.now, 1
-    model.modified_at.must_be_close_to ::Time.now, 1
-    model.labels.must_equal labels
-    model.labels.must_be :frozen?
+    _(model.model_type).must_equal model_type
+    _(model.created_at).must_be_close_to ::Time.now, 1
+    _(model.modified_at).must_be_close_to ::Time.now, 1
+    _(model.labels).must_equal labels
+    _(model.labels).must_be :frozen?
 
-    model.encryption.must_be_nil
+    _(model.encryption).must_be_nil
   end
 
   it "gets full data for name" do
@@ -57,7 +57,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
       [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
     model.service.mocked_service = mock
 
-    model.name.must_equal model_name
+    _(model.name).must_equal model_name
 
     mock.verify
 
@@ -71,7 +71,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
       [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
     model.service.mocked_service = mock
 
-    model.description.must_equal description
+    _(model.description).must_equal description
 
     mock.verify
 
@@ -85,7 +85,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
       [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
     model.service.mocked_service = mock
 
-    model.etag.must_equal etag
+    _(model.etag).must_equal etag
 
     mock.verify
 
@@ -99,7 +99,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
       [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
     model.service.mocked_service = mock
 
-    model.location.must_equal location_code
+    _(model.location).must_equal location_code
 
     mock.verify
 
@@ -113,7 +113,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
       [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
     model.service.mocked_service = mock
 
-    model.expires_at.must_be_close_to ::Time.now, 1
+    _(model.expires_at).must_be_close_to ::Time.now, 1
 
     mock.verify
 
@@ -129,7 +129,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
       [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
     model.service.mocked_service = mock
 
-    model.expires_at.must_be :nil?
+    _(model.expires_at).must_be :nil?
 
     mock.verify
 
