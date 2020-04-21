@@ -125,7 +125,7 @@ module Google
           #     {Google::Cloud::AutoML::V1beta1::BoundingPoly#normalized_vertices normalized_vertices}
           #     and they are connected by edges in the order provided, which will
           #     represent a rectangle parallel to the frame. The
-          #     [NormalizedVertex-s][google.cloud.automl.v1beta1.NormalizedVertex] are
+          #     {Google::Cloud::AutoML::V1beta1::NormalizedVertex NormalizedVertex-s} are
           #     relative to the page.
           #     Coordinates are based on top-left as point (0,0).
           # @!attribute [rw] text_segment_type

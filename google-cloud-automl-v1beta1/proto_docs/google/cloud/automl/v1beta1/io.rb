@@ -565,7 +565,7 @@ module Google
         #
         # [input_feature_column_specs'][google.cloud.automl.v1beta1.TablesModelMetadata.input_feature_column_specs]
         #
-        # [display_name-s][google.cloud.automl.v1beta1.ColumnSpec.display_name]
+        # {Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name display_name-s}
         #           (order doesn't matter). The columns corresponding to the model's
         #           input feature column specs must contain values compatible with the
         #           column spec's data types. Prediction on all the rows, i.e. the CSV
@@ -589,7 +589,7 @@ module Google
         #
         # [input_feature_column_specs'][google.cloud.automl.v1beta1.TablesModelMetadata.input_feature_column_specs]
         #
-        # [display_name-s][google.cloud.automl.v1beta1.ColumnSpec.display_name]
+        # {Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name display_name-s}
         #           (order doesn't matter). The columns corresponding to the model's
         #           input feature column specs must contain values compatible with the
         #           column spec's data types. Prediction on all the rows of the table
@@ -901,7 +901,7 @@ module Google
         # [prediction_type-s][google.cloud.automl.v1beta1.TablesModelMetadata.prediction_type]:
         #             Each .csv file will contain a header, listing all columns'
         #
-        # [display_name-s][google.cloud.automl.v1beta1.ColumnSpec.display_name]
+        # {Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name display_name-s}
         #             given on input followed by M target column names in the format of
         #
         # "<{Google::Cloud::AutoML::V1beta1::TablesModelMetadata#target_column_spec target_column_specs}
@@ -950,7 +950,7 @@ module Google
         #           two tables will be created, `predictions`, and `errors`.
         #           The `predictions` table's column names will be the input columns'
         #
-        # [display_name-s][google.cloud.automl.v1beta1.ColumnSpec.display_name]
+        # {Google::Cloud::AutoML::V1beta1::ColumnSpec#display_name display_name-s}
         #           followed by the target column with name in the format of
         #
         # "predicted_<{Google::Cloud::AutoML::V1beta1::TablesModelMetadata#target_column_spec target_column_specs}
