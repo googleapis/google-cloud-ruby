@@ -293,4 +293,22 @@ class Google::Cloud::Translate::V3::TranslationService::OperationsTest < Minites
       assert_equal 5, cancel_operation_client_stub.call_rpc_count
     end
   end
+
+  def test_configure
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = block_config = config = nil
+    Gapic::ServiceStub.stub :new, nil do
+      client = Google::Cloud::Translate::V3::TranslationService::Operations.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    config = client.configure do |c|
+      block_config = c
+    end
+
+    assert_same block_config, config
+    assert_kind_of Google::Cloud::Translate::V3::TranslationService::Operations::Configuration, config
+  end
 end

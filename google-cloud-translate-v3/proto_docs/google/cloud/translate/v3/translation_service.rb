@@ -125,14 +125,14 @@ module Google
         #   @return [Array<Google::Cloud::Translate::V3::Translation>]
         #     Text translation responses with no glossary applied.
         #     This field has the same length as
-        #     [`contents`][google.cloud.translation.v3.TranslateTextRequest.contents].
+        #     {Google::Cloud::Translate::V3::TranslateTextRequest#contents `contents`}.
         # @!attribute [rw] glossary_translations
         #   @return [Array<Google::Cloud::Translate::V3::Translation>]
         #     Text translation responses if a glossary is provided in the request.
         #     This can be the same as
-        #     [`translations`][google.cloud.translation.v3.TranslateTextResponse.translations]
+        #     {Google::Cloud::Translate::V3::TranslateTextResponse#translations `translations`}
         #     if no terms apply. This field has the same length as
-        #     [`contents`][google.cloud.translation.v3.TranslateTextRequest.contents].
+        #     {Google::Cloud::Translate::V3::TranslateTextRequest#contents `contents`}.
         class TranslateTextResponse
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
