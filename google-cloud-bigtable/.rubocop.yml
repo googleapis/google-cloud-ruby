@@ -1,9 +1,10 @@
+require: rubocop-minitest
+
 inherit_gem:
   google-style: google-style.yml
 
 AllCops:
   Exclude:
-    - "acceptance/**/*"
     - "conformance/**/*"
     - "lib/**/*_pb.rb"
     - "lib/google/cloud/bigtable/admin.rb"
@@ -12,7 +13,6 @@ AllCops:
     - "lib/google/cloud/bigtable/v2/**/*"
     - "samples/**/*"
     - "support/**/*"
-    - "test/**/*"
 
 Documentation:
   Exclude:
