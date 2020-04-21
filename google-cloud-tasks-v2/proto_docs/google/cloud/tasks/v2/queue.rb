@@ -48,15 +48,15 @@ module Google
         # @!attribute [rw] app_engine_routing_override
         #   @return [Google::Cloud::Tasks::V2::AppEngineRouting]
         #     Overrides for
-        #     [task-level app_engine_routing][google.cloud.tasks.v2.AppEngineHttpRequest.app_engine_routing].
+        #     {Google::Cloud::Tasks::V2::AppEngineHttpRequest#app_engine_routing task-level app_engine_routing}.
         #     These settings apply only to
-        #     [App Engine tasks][google.cloud.tasks.v2.AppEngineHttpRequest] in this queue.
-        #     [Http tasks][google.cloud.tasks.v2.HttpRequest] are not affected.
+        #     {Google::Cloud::Tasks::V2::AppEngineHttpRequest App Engine tasks} in this queue.
+        #     {Google::Cloud::Tasks::V2::HttpRequest Http tasks} are not affected.
         #
         #     If set, `app_engine_routing_override` is used for all
-        #     [App Engine tasks][google.cloud.tasks.v2.AppEngineHttpRequest] in the queue, no matter what the
+        #     {Google::Cloud::Tasks::V2::AppEngineHttpRequest App Engine tasks} in the queue, no matter what the
         #     setting is for the
-        #     [task-level app_engine_routing][google.cloud.tasks.v2.AppEngineHttpRequest.app_engine_routing].
+        #     {Google::Cloud::Tasks::V2::AppEngineHttpRequest#app_engine_routing task-level app_engine_routing}.
         # @!attribute [rw] rate_limits
         #   @return [Google::Cloud::Tasks::V2::RateLimits]
         #     Rate limits for task dispatches.

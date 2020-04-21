@@ -29,8 +29,8 @@ module Google
         # any other HTTP response code is returned or no response is received, the
         # task will be retried according to the following:
         #
-        # * User-specified throttling: [retry configuration][google.cloud.tasks.v2.Queue.retry_config],
-        #   [rate limits][google.cloud.tasks.v2.Queue.rate_limits], and the [queue's state][google.cloud.tasks.v2.Queue.state].
+        # * User-specified throttling: {Google::Cloud::Tasks::V2::Queue#retry_config retry configuration},
+        #   {Google::Cloud::Tasks::V2::Queue#rate_limits rate limits}, and the [queue's state][google.cloud.tasks.v2.Queue.state].
         #
         # * System throttling: To prevent the worker from overloading, Cloud Tasks may
         #   temporarily reduce the queue's effective rate. User-specified settings
@@ -39,7 +39,7 @@ module Google
         #  System throttling happens because:
         #
         #   * Cloud Tasks backs off on all errors. Normally the backoff specified in
-        #     [rate limits][google.cloud.tasks.v2.Queue.rate_limits] will be used. But if the worker returns
+        #     {Google::Cloud::Tasks::V2::Queue#rate_limits rate limits} will be used. But if the worker returns
         #     `429` (Too Many Requests), `503` (Service Unavailable), or the rate of
         #     errors is high, Cloud Tasks will use a higher backoff rate. The retry
         #     specified in the `Retry-After` HTTP response header is considered.
@@ -98,7 +98,7 @@ module Google
         #     HTTP request body.
         #
         #     A request body is allowed only if the
-        #     [HTTP method][google.cloud.tasks.v2.HttpRequest.http_method] is POST, PUT, or PATCH. It is an
+        #     {Google::Cloud::Tasks::V2::HttpRequest#http_method HTTP method} is POST, PUT, or PATCH. It is an
         #     error to set body on a task with an incompatible {Google::Cloud::Tasks::V2::HttpMethod HttpMethod}.
         # @!attribute [rw] oauth_token
         #   @return [Google::Cloud::Tasks::V2::OAuthToken]
@@ -187,7 +187,7 @@ module Google
         # the app's handler returns a non-2xx response code or Cloud Tasks does
         # not receive response before the {Google::Cloud::Tasks::V2::Task#dispatch_deadline deadline}. Failed
         # tasks will be retried according to the
-        # [retry configuration][google.cloud.tasks.v2.Queue.retry_config]. `503` (Service Unavailable) is
+        # {Google::Cloud::Tasks::V2::Queue#retry_config retry configuration}. `503` (Service Unavailable) is
         # considered an App Engine system error instead of an application error and
         # will cause Cloud Tasks' traffic congestion control to temporarily throttle
         # the queue's dispatches. Unlike other types of task targets, a `429` (Too Many
@@ -228,7 +228,7 @@ module Google
         #
         #     This map contains the header field names and values.
         #     Headers can be set when the
-        #     [task is created][google.cloud.tasks.v2.CloudTasks.CreateTask].
+        #     {Google::Cloud::Tasks::V2::CloudTasks::Client#create_task task is created}.
         #     Repeated headers are not supported but a header value can contain commas.
         #
         #     Cloud Tasks sets some headers to default values:
@@ -245,7 +245,7 @@ module Google
         #     * `Content-Type`: By default, the `Content-Type` header is set to
         #       `"application/octet-stream"`. The default can be overridden by explicitly
         #       setting `Content-Type` to a particular media type when the
-        #       [task is created][google.cloud.tasks.v2.CloudTasks.CreateTask].
+        #       {Google::Cloud::Tasks::V2::CloudTasks::Client#create_task task is created}.
         #       For example, `Content-Type` can be set to `"application/json"`.
         #     * `Content-Length`: This is computed by Cloud Tasks. This value is
         #       output only.   It cannot be changed.
