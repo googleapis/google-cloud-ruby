@@ -1,5 +1,15 @@
 # Release History
 
+### 0.38.0 / 2020-04-21
+
+#### Features
+
+* Support custom request method and body in uptime http checks.
+
+#### Documentation
+
+* Clarify TimeInterval resolution.
+
 ### 0.37.2 / 2020-04-06
 
 #### Documentation
