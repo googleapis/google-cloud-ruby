@@ -26,12 +26,12 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
     chunk_processor.last_key = "3"
     rows_reader.instance_variable_set("@rows_count", 10)
 
-    rows_reader.last_key.must_equal "3"
+    _(rows_reader.last_key).must_equal "3"
 
     rows_limit, retry_row_set = rows_reader.retry_options(100, row_set)
 
-    rows_limit.must_equal 90
-    retry_row_set.row_keys.must_equal ["5"]
+    _(rows_limit).must_equal 90
+    _(retry_row_set.row_keys).must_equal ["5"]
   end
 
   it "add row range if row set row ranges empty" do
@@ -44,8 +44,8 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
     _, retry_row_set = rows_reader.retry_options(100, row_set)
     row_ranges = retry_row_set.row_ranges
 
-    row_ranges.length.must_equal 1
-    row_ranges.first.must_equal Google::Bigtable::V2::RowRange.new(start_key_open: "3")
+    _(row_ranges.length).must_equal 1
+    _(row_ranges.first).must_equal Google::Bigtable::V2::RowRange.new(start_key_open: "3")
   end
 
   it "removed already read row ranges" do
@@ -59,8 +59,8 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
     _, retry_row_set = rows_reader.retry_options(100, row_set)
     row_ranges = retry_row_set.row_ranges
 
-    row_ranges.length.must_equal 1
-    row_ranges.first.end_key_closed.must_equal "5"
+    _(row_ranges.length).must_equal 1
+    _(row_ranges.first.end_key_closed).must_equal "5"
   end
 
   it "set start key for already read row ranges" do
@@ -74,18 +74,18 @@ describe Google::Cloud::Bigtable::RowsReader, :row_reader, :mock_bigtable do
     _, retry_row_set = rows_reader.retry_options(100, row_set)
     row_ranges = retry_row_set.row_ranges
 
-    row_ranges.length.must_equal 1
-    row_ranges.first.must_equal Google::Bigtable::V2::RowRange.new(start_key_open: "3", end_key_closed: "5")
+    _(row_ranges.length).must_equal 1
+    _(row_ranges.first).must_equal Google::Bigtable::V2::RowRange.new(start_key_open: "3", end_key_closed: "5")
   end
 
   it "increment and check read is retryable" do
     rows_reader = Google::Cloud::Bigtable::RowsReader.new("dummy-table-client")
 
-    rows_reader.retryable?.must_equal true
+    _(rows_reader.retryable?).must_equal true
 
     [true, true, false].each do |expected_value|
       rows_reader.retry_count += 1
-      rows_reader.retryable?.must_equal expected_value
+      _(rows_reader.retryable?).must_equal expected_value
     end
   end
 end

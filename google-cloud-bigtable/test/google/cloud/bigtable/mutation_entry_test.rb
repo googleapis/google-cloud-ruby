@@ -22,18 +22,18 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
 
   it "create empty instance" do
     entry = Google::Cloud::Bigtable::MutationEntry.new
-    entry.row_key.must_be :nil?
-    entry.mutations.must_be_empty
-    entry.retryable?.must_equal true
+    _(entry.row_key).must_be :nil?
+    _(entry.mutations).must_be_empty
+    _(entry.retryable?).must_equal true
   end
 
   it "create instance with only row_key" do
     entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
-    entry.row_key.must_equal row_key
+    _(entry.row_key).must_equal row_key
 
     grpc = entry.to_grpc
-    grpc.must_be_kind_of Google::Bigtable::V2::MutateRowsRequest::Entry
-    grpc.row_key.must_equal row_key
+    _(grpc).must_be_kind_of Google::Bigtable::V2::MutateRowsRequest::Entry
+    _(grpc.row_key).must_equal row_key
   end
 
   describe "#set_cell" do
@@ -44,52 +44,52 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
     it "add set cell mutation without timestamp" do
       entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
       entry.set_cell(family, qualifier, cell_value)
-      entry.mutations.length.must_equal 1
-      entry.retryable?.must_equal true
+      _(entry.mutations.length).must_equal 1
+      _(entry.retryable?).must_equal true
 
       grpc = entry.to_grpc
       mutation = grpc.mutations.first
-      mutation.set_cell.wont_be_nil
+      _(mutation.set_cell).wont_be_nil
 
       set_cell_grpc = mutation.set_cell
-      set_cell_grpc.family_name.must_equal family
-      set_cell_grpc.column_qualifier.must_equal qualifier
-      set_cell_grpc.value.must_equal cell_value
-      set_cell_grpc.timestamp_micros.must_equal 0
+      _(set_cell_grpc.family_name).must_equal family
+      _(set_cell_grpc.column_qualifier).must_equal qualifier
+      _(set_cell_grpc.value).must_equal cell_value
+      _(set_cell_grpc.timestamp_micros).must_equal 0
     end
 
     it "add set cell mutation with timestamp" do
       timestamp = timestamp_micros
       entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
       entry.set_cell(family, qualifier, cell_value, timestamp: timestamp)
-      entry.mutations.length.must_equal 1
-      entry.retryable?.must_equal true
+      _(entry.mutations.length).must_equal 1
+      _(entry.retryable?).must_equal true
 
       grpc = entry.to_grpc
       mutation = grpc.mutations.first
-      mutation.set_cell.wont_be_nil
+      _(mutation.set_cell).wont_be_nil
 
       set_cell_grpc = mutation.set_cell
-      set_cell_grpc.family_name.must_equal family
-      set_cell_grpc.column_qualifier.must_equal qualifier
-      set_cell_grpc.value.must_equal cell_value
-      set_cell_grpc.timestamp_micros.must_equal timestamp
+      _(set_cell_grpc.family_name).must_equal family
+      _(set_cell_grpc.column_qualifier).must_equal qualifier
+      _(set_cell_grpc.value).must_equal cell_value
+      _(set_cell_grpc.timestamp_micros).must_equal timestamp
     end
 
     it "add set cell non retyable mutation with server time timestamp" do
       entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
       entry.set_cell(family, qualifier, cell_value, timestamp: -1)
-      entry.mutations.length.must_equal 1
-      entry.retryable?.must_equal false
+      _(entry.mutations.length).must_equal 1
+      _(entry.retryable?).must_equal false
     end
 
     it "convert integer value to 64 bit big endian" do
       entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
       entry.set_cell(family, qualifier, 5)
-      entry.mutations.length.must_equal 1
+      _(entry.mutations.length).must_equal 1
 
       set_cell_grpc = entry.mutations.first.set_cell
-      set_cell_grpc.value.bytes.must_equal [0, 0, 0, 0, 0, 0, 0, 5]
+      _(set_cell_grpc.value.bytes).must_equal [0, 0, 0, 0, 0, 0, 0, 5]
     end
   end
 
@@ -103,12 +103,12 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
 
       grpc = entry.to_grpc
       mutation = grpc.mutations.first
-      mutation.delete_from_column.wont_be_nil
+      _(mutation.delete_from_column).wont_be_nil
 
       delete_cells_grpc = mutation.delete_from_column
-      delete_cells_grpc.family_name.must_equal family
-      delete_cells_grpc.column_qualifier.must_equal qualifier
-      delete_cells_grpc.time_range.must_be_nil
+      _(delete_cells_grpc.family_name).must_equal family
+      _(delete_cells_grpc.column_qualifier).must_equal qualifier
+      _(delete_cells_grpc.time_range).must_be_nil
     end
 
     it "add delete cells mutation with from timestamp" do
@@ -119,14 +119,14 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
 
       grpc = entry.to_grpc
       mutation = grpc.mutations.first
-      mutation.delete_from_column.wont_be_nil
+      _(mutation.delete_from_column).wont_be_nil
 
       delete_cells_grpc = mutation.delete_from_column
-      delete_cells_grpc.family_name.must_equal family
-      delete_cells_grpc.column_qualifier.must_equal qualifier
-      delete_cells_grpc.time_range.wont_be_nil
-      delete_cells_grpc.time_range.start_timestamp_micros.must_equal timestamp_from
-      delete_cells_grpc.time_range.end_timestamp_micros.must_equal 0
+      _(delete_cells_grpc.family_name).must_equal family
+      _(delete_cells_grpc.column_qualifier).must_equal qualifier
+      _(delete_cells_grpc.time_range).wont_be_nil
+      _(delete_cells_grpc.time_range.start_timestamp_micros).must_equal timestamp_from
+      _(delete_cells_grpc.time_range.end_timestamp_micros).must_equal 0
     end
 
     it "add delete cells mutation with to timestamp range" do
@@ -137,14 +137,14 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
 
       grpc = entry.to_grpc
       mutation = grpc.mutations.first
-      mutation.delete_from_column.wont_be_nil
+      _(mutation.delete_from_column).wont_be_nil
 
       delete_cells_grpc = mutation.delete_from_column
-      delete_cells_grpc.family_name.must_equal family
-      delete_cells_grpc.column_qualifier.must_equal qualifier
-      delete_cells_grpc.time_range.wont_be_nil
-      delete_cells_grpc.time_range.end_timestamp_micros.must_equal timestamp_to
-      delete_cells_grpc.time_range.start_timestamp_micros.must_equal 0
+      _(delete_cells_grpc.family_name).must_equal family
+      _(delete_cells_grpc.column_qualifier).must_equal qualifier
+      _(delete_cells_grpc.time_range).wont_be_nil
+      _(delete_cells_grpc.time_range.end_timestamp_micros).must_equal timestamp_to
+      _(delete_cells_grpc.time_range.start_timestamp_micros).must_equal 0
     end
 
     it "add delete cells mutation with timestamp range" do
@@ -156,14 +156,14 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
 
       grpc = entry.to_grpc
       mutation = grpc.mutations.first
-      mutation.delete_from_column.wont_be_nil
+      _(mutation.delete_from_column).wont_be_nil
 
       delete_cells_grpc = mutation.delete_from_column
-      delete_cells_grpc.family_name.must_equal family
-      delete_cells_grpc.column_qualifier.must_equal qualifier
-      delete_cells_grpc.time_range.wont_be_nil
-      delete_cells_grpc.time_range.start_timestamp_micros.must_equal timestamp_from
-      delete_cells_grpc.time_range.end_timestamp_micros.must_equal timestamp_to
+      _(delete_cells_grpc.family_name).must_equal family
+      _(delete_cells_grpc.column_qualifier).must_equal qualifier
+      _(delete_cells_grpc.time_range).wont_be_nil
+      _(delete_cells_grpc.time_range.start_timestamp_micros).must_equal timestamp_from
+      _(delete_cells_grpc.time_range.end_timestamp_micros).must_equal timestamp_to
     end
   end
 
@@ -176,8 +176,8 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
 
       grpc = entry.to_grpc
       mutation = grpc.mutations.first
-      mutation.delete_from_family.wont_be_nil
-      mutation.delete_from_family.family_name.must_equal family
+      _(mutation.delete_from_family).wont_be_nil
+      _(mutation.delete_from_family.family_name).must_equal family
     end
   end
 
@@ -188,7 +188,7 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
 
       grpc = entry.to_grpc
       mutation = grpc.mutations.first
-      mutation.delete_from_row.wont_be_nil
+      _(mutation.delete_from_row).wont_be_nil
     end
   end
 
@@ -199,14 +199,14 @@ describe Google::Cloud::Bigtable::MutationEntry, :mutation_entry, :mock_bigtable
       .delete_cells("cf3", "field02")
       .delete_from_row
 
-    entry.mutations.length.must_equal 4
+    _(entry.mutations.length).must_equal 4
 
     grpc = entry.to_grpc
-    grpc.mutations.length.must_equal 4
+    _(grpc.mutations.length).must_equal 4
 
-    entry.mutations[0].set_cell.wont_be_nil
-    entry.mutations[1].delete_from_family.wont_be_nil
-    entry.mutations[2].delete_from_column.wont_be_nil
-    entry.mutations[3].delete_from_row.wont_be_nil
+    _(entry.mutations[0].set_cell).wont_be_nil
+    _(entry.mutations[1].delete_from_family).wont_be_nil
+    _(entry.mutations[2].delete_from_column).wont_be_nil
+    _(entry.mutations[3].delete_from_row).wont_be_nil
   end
 end

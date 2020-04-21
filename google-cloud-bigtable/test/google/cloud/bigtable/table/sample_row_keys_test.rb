@@ -37,9 +37,9 @@ describe Google::Cloud::Bigtable::Table, :sample_row_keys, :mock_bigtable do
     ]
 
     table.sample_row_keys.each do |sample_row|
-      sample_row.must_be_kind_of Google::Cloud::Bigtable::SampleRowKey
-      sample_row.key.must_equal row_key
-      sample_row.offset.must_equal offset
+      _(sample_row).must_be_kind_of Google::Cloud::Bigtable::SampleRowKey
+      _(sample_row.key).must_equal row_key
+      _(sample_row.offset).must_equal offset
     end
     mock.verify
   end

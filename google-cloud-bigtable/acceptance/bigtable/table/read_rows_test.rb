@@ -23,75 +23,75 @@ describe "DataClient Read Rows", :bigtable do
 
   it "read single row" do
     row = table.read_row("test-1")
-    row.key.must_equal "test-1"
-    row.must_be_kind_of Google::Cloud::Bigtable::Row
+    _(row.key).must_equal "test-1"
+    _(row).must_be_kind_of Google::Cloud::Bigtable::Row
   end
 
   it "read single row with filter" do
     filter = table.filter.label("readtest")
     row = table.read_row("test-1", filter: filter)
-    row.must_be_kind_of Google::Cloud::Bigtable::Row
+    _(row).must_be_kind_of Google::Cloud::Bigtable::Row
 
     row.cells.each do |_, cells|
       cells.each do |cell|
-        cell.labels.must_equal ["readtest"]
+        _(cell.labels).must_equal ["readtest"]
       end
     end
   end
 
   it "read rows" do
     rows = table.read_rows.map do |row|
-      row.must_be_kind_of Google::Cloud::Bigtable::Row
+      _(row).must_be_kind_of Google::Cloud::Bigtable::Row
       row
     end
 
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
   end
 
   it "read rows with limit" do
     rows = table.read_rows(limit: 2).map do |row|
-      row.must_be_kind_of Google::Cloud::Bigtable::Row
+      _(row).must_be_kind_of Google::Cloud::Bigtable::Row
       row
     end
 
-    rows.length.must_equal 2
+    _(rows.length).must_equal 2
   end
 
   it "read rows using row keys" do
     keys = ["test-1", "test-3"]
     rows = table.read_rows(keys: keys).map do |row|
-      row.must_be_kind_of Google::Cloud::Bigtable::Row
+      _(row).must_be_kind_of Google::Cloud::Bigtable::Row
       row
     end
 
-    rows.length.must_equal 2
-    rows.map(&:key).must_equal keys
+    _(rows.length).must_equal 2
+    _(rows.map(&:key)).must_equal keys
   end
 
   it "read rows with filter" do
     filter = table.filter.key("test-.*")
 
     rows = table.read_rows(filter: filter).map do |row|
-      row.must_be_kind_of Google::Cloud::Bigtable::Row
+      _(row).must_be_kind_of Google::Cloud::Bigtable::Row
       row
     end
 
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
     rows.each do |row|
-      row.key.start_with?("test-").must_equal true
+      _(row.key.start_with?("test-")).must_equal true
     end
   end
 
   it "read rows with range" do
     range = table.new_row_range.from("test-5")
     rows = table.read_rows(ranges: range).map do |row|
-      row.must_be_kind_of Google::Cloud::Bigtable::Row
+      _(row).must_be_kind_of Google::Cloud::Bigtable::Row
       row
     end
 
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
     rows.each do |row|
-      (row.key >= "test-5").must_equal true
+      _((row.key >= "test-5")).must_equal true
     end
   end
 
@@ -101,19 +101,19 @@ describe "DataClient Read Rows", :bigtable do
     limit = 5
 
     rows = table.read_rows(ranges: range, filter: filter, limit: limit).map do |row|
-      row.must_be_kind_of Google::Cloud::Bigtable::Row
+      _(row).must_be_kind_of Google::Cloud::Bigtable::Row
       row
     end
 
-    rows.wont_be :empty?
-    rows.length.must_equal 5
+    _(rows).wont_be :empty?
+    _(rows.length).must_equal 5
     rows.each do |row|
-      (row.key >= "test-1").must_equal true
+      _((row.key >= "test-1")).must_equal true
     end
 
     rows.each do |row|
       row.cells[family].each do |cell|
-        cell.qualifier.start_with?("field").must_equal true
+        _(cell.qualifier.start_with?("field")).must_equal true
       end
     end
   end

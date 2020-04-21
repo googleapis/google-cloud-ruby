@@ -27,19 +27,19 @@ describe "Instance Tables", :bigtable do
       cfs.add("cf", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(3))
     end
 
-    table.must_be_kind_of Google::Cloud::Bigtable::Table
+    _(table).must_be_kind_of Google::Cloud::Bigtable::Table
 
     tables = bigtable.tables(instance_id).to_a
-    tables.wont_be :empty?
+    _(tables).wont_be :empty?
     tables.each do |t|
-      t.must_be_kind_of Google::Cloud::Bigtable::Table
+      _(t).must_be_kind_of Google::Cloud::Bigtable::Table
     end
 
     table = bigtable.table(instance_id, table_id, perform_lookup: true)
-    table.must_be_kind_of Google::Cloud::Bigtable::Table
+    _(table).must_be_kind_of Google::Cloud::Bigtable::Table
 
     table.delete
-    table.exists?.must_equal false
+    _(table.exists?).must_equal false
   end
 
   it "create table with initial splits and granularity" do
@@ -54,9 +54,9 @@ describe "Instance Tables", :bigtable do
       cfs.add("cf", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
-    table.must_be_kind_of Google::Cloud::Bigtable::Table
-    table.granularity_millis?.must_equal true
-    table.exists?.must_equal true
+    _(table).must_be_kind_of Google::Cloud::Bigtable::Table
+    _(table.granularity_millis?).must_equal true
+    _(table.exists?).must_equal true
 
     entries = 10.times.map do |i|
       key = "customer-#{"%03d" % (i+1).to_s}"
@@ -64,13 +64,13 @@ describe "Instance Tables", :bigtable do
     end
 
     responses = table.mutate_rows(entries)
-    responses.count.must_equal entries.count
-    responses.each { |r| r.status.code.must_equal 0 }
+    _(responses.count).must_equal entries.count
+    responses.each { |r| _(r.status.code).must_equal 0 }
 
     sample_keys = table.sample_row_keys.to_a.map(&:key)
 
     initial_splits.each do |key|
-      sample_keys.must_include(key)
+      _(sample_keys).must_include(key)
     end
 
     table.delete
@@ -86,21 +86,21 @@ describe "Instance Tables", :bigtable do
     end
 
     column_families = table.column_families
-    column_families.must_be_kind_of Google::Cloud::Bigtable::ColumnFamilyMap
-    column_families.must_be :frozen?
-    column_families.count.must_equal 3
+    _(column_families).must_be_kind_of Google::Cloud::Bigtable::ColumnFamilyMap
+    _(column_families).must_be :frozen?
+    _(column_families.count).must_equal 3
 
     cf1 = column_families["cf1"]
-    cf1.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf1.gc_rule.must_be :nil?
+    _(cf1).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf1.gc_rule).must_be :nil?
 
     cf2 = column_families["cf2"]
-    cf2.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf2.gc_rule.max_versions.must_equal 5
+    _(cf2).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf2.gc_rule.max_versions).must_equal 5
 
     cf3 = column_families["cf3"]
-    cf3.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf3.gc_rule.max_age.must_equal 600
+    _(cf3).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf3.gc_rule.max_age).must_equal 600
 
     table.delete
   end
@@ -110,14 +110,14 @@ describe "Instance Tables", :bigtable do
 
     it "generate consistency token and check consistency" do
       token = table.generate_consistency_token
-      token.wont_be :nil?
+      _(token).wont_be :nil?
       result = table.check_consistency(token)
-      [true, false].must_include result
+      _([true, false]).must_include result
     end
 
     it "generate consistency token and check consistency wail unitil complete" do
       result = table.wait_for_replication(timeout: 600, check_interval: 3)
-      [true, false].must_include result
+      _([true, false]).must_include result
     end
   end
 
@@ -128,14 +128,14 @@ describe "Instance Tables", :bigtable do
     it "tests permissions" do
       roles = ["bigtable.tables.delete", "bigtable.tables.get"]
       permissions = table.test_iam_permissions(roles)
-      permissions.must_be_kind_of Array
-      permissions.must_equal roles
+      _(permissions).must_be_kind_of Array
+      _(permissions).must_equal roles
     end
 
     it "allows policy to be updated on a table" do
-      table.policy.must_be_kind_of Google::Cloud::Bigtable::Policy
+      _(table.policy).must_be_kind_of Google::Cloud::Bigtable::Policy
 
-      service_account.wont_be :nil?
+      _(service_account).wont_be :nil?
 
       role = "roles/bigtable.user"
       member = "serviceAccount:#{service_account}"
@@ -144,10 +144,10 @@ describe "Instance Tables", :bigtable do
       policy.add(role, member)
       updated_policy = table.update_policy(policy)
 
-      updated_policy.role(role).wont_be :nil?
+      _(updated_policy.role(role)).wont_be :nil?
 
       role_member = table.policy.role(role).select { |m| m == member }
-      role_member.size.must_equal 1
+      _(role_member.size).must_equal 1
     end
   end
 end

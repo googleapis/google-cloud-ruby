@@ -55,7 +55,7 @@ describe Google::Cloud::Bigtable::Instance, :clusters, :mock_bigtable do
 
     mock.verify
 
-    clusters.size.must_equal 3
+    _(clusters.size).must_equal 3
   end
 
   it "paginates all clusters in project" do
@@ -69,13 +69,13 @@ describe Google::Cloud::Bigtable::Instance, :clusters, :mock_bigtable do
 
     mock.verify
 
-    first_clusters.size.must_equal 3
+    _(first_clusters.size).must_equal 3
     token = first_clusters.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
 
-    second_clusters.size.must_equal 2
-    second_clusters.token.must_be :nil?
+    _(second_clusters.size).must_equal 2
+    _(second_clusters.token).must_be :nil?
   end
 
   it "paginates all clusters in project with next? and next" do
@@ -89,11 +89,11 @@ describe Google::Cloud::Bigtable::Instance, :clusters, :mock_bigtable do
 
     mock.verify
 
-    first_clusters.size.must_equal 3
-    first_clusters.next?.must_equal true
+    _(first_clusters.size).must_equal 3
+    _(first_clusters.next?).must_equal true
 
-    second_clusters.size.must_equal 2
-    second_clusters.next?.must_equal false
+    _(second_clusters.size).must_equal 2
+    _(second_clusters.next?).must_equal false
   end
 
   it "paginates all clusters in project with all" do
@@ -106,7 +106,7 @@ describe Google::Cloud::Bigtable::Instance, :clusters, :mock_bigtable do
 
     mock.verify
 
-    clusters.size.must_equal 5
+    _(clusters.size).must_equal 5
   end
 
   it "iterates all clusters in project with all using Enumerator" do
@@ -119,6 +119,6 @@ describe Google::Cloud::Bigtable::Instance, :clusters, :mock_bigtable do
 
     mock.verify
 
-    clusters.size.must_equal 5
+    _(clusters.size).must_equal 5
   end
 end

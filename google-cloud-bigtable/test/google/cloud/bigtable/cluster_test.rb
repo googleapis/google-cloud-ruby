@@ -32,19 +32,19 @@ describe Google::Cloud::Bigtable::Cluster, :mock_bigtable do
   let(:cluster) { Google::Cloud::Bigtable::Cluster.from_grpc(cluster_grpc, bigtable.service) }
 
   it "knows the identifiers" do
-    cluster.must_be_kind_of Google::Cloud::Bigtable::Cluster
-    cluster.project_id.must_equal project_id
-    cluster.instance_id.must_equal instance_id
-    cluster.cluster_id.must_equal cluster_id
-    cluster.path.must_equal cluster_path(instance_id, cluster_id)
-    cluster.nodes.must_equal nodes
-    cluster.location.must_equal location_id
-    cluster.location_path.must_equal location_path(location_id)
-    cluster.state.must_equal :READY
-    cluster.must_be :ready?
-    cluster.wont_be :creating?
-    cluster.wont_be :resizing?
-    cluster.wont_be :disabled?
+    _(cluster).must_be_kind_of Google::Cloud::Bigtable::Cluster
+    _(cluster.project_id).must_equal project_id
+    _(cluster.instance_id).must_equal instance_id
+    _(cluster.cluster_id).must_equal cluster_id
+    _(cluster.path).must_equal cluster_path(instance_id, cluster_id)
+    _(cluster.nodes).must_equal nodes
+    _(cluster.location).must_equal location_id
+    _(cluster.location_path).must_equal location_path(location_id)
+    _(cluster.state).must_equal :READY
+    _(cluster).must_be :ready?
+    _(cluster).wont_be :creating?
+    _(cluster).wont_be :resizing?
+    _(cluster).wont_be :disabled?
   end
 
   it "reloads its state" do
@@ -56,13 +56,13 @@ describe Google::Cloud::Bigtable::Cluster, :mock_bigtable do
 
     mock.verify
 
-    cluster.project_id.must_equal project_id
-    cluster.instance_id.must_equal instance_id
-    cluster.cluster_id.must_equal cluster_id
-    cluster.path.must_equal cluster_path(instance_id, cluster_id)
-    cluster.state.must_equal :READY
-    cluster.ready?.must_equal true
-    cluster.storage_type.must_equal :SSD
-    cluster.nodes.must_equal 3
+    _(cluster.project_id).must_equal project_id
+    _(cluster.instance_id).must_equal instance_id
+    _(cluster.cluster_id).must_equal cluster_id
+    _(cluster.path).must_equal cluster_path(instance_id, cluster_id)
+    _(cluster.state).must_equal :READY
+    _(cluster.ready?).must_equal true
+    _(cluster.storage_type).must_equal :SSD
+    _(cluster.nodes).must_equal 3
   end
 end

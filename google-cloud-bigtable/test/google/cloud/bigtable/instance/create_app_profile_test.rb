@@ -43,11 +43,11 @@ describe Google::Cloud::Bigtable::Instance, :create_app_profile, :mock_bigtable 
     routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
     app_profile = instance.create_app_profile app_profile_id, routing_policy, description: description
 
-    app_profile.wont_be :nil?
-    app_profile.must_be_kind_of Google::Cloud::Bigtable::AppProfile
-    app_profile.path.must_equal path
-    app_profile.description.must_equal description
-    app_profile.routing_policy.must_be_kind_of Google::Cloud::Bigtable::MultiClusterRoutingUseAny
+    _(app_profile).wont_be :nil?
+    _(app_profile).must_be_kind_of Google::Cloud::Bigtable::AppProfile
+    _(app_profile.path).must_equal path
+    _(app_profile.description).must_equal description
+    _(app_profile.routing_policy).must_be_kind_of Google::Cloud::Bigtable::MultiClusterRoutingUseAny
 
     mock.verify
   end

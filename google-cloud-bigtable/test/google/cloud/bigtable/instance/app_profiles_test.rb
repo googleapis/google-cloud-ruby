@@ -48,7 +48,7 @@ describe Google::Cloud::Bigtable::Instance, :app_profiles, :mock_bigtable do
 
     mock.verify
 
-    app_profiles.size.must_equal 3
+    _(app_profiles.size).must_equal 3
   end
 
   it "paginates app_profiles with next? and next" do
@@ -61,10 +61,10 @@ describe Google::Cloud::Bigtable::Instance, :app_profiles, :mock_bigtable do
 
     mock.verify
 
-    list.size.must_equal 3
-    list.next?.must_equal true
-    list.next.size.must_equal 2
-    list.next?.must_equal false
+    _(list.size).must_equal 3
+    _(list.next?).must_equal true
+    _(list.next.size).must_equal 2
+    _(list.next?).must_equal false
   end
 
   it "paginates app_profiles with all" do
@@ -77,7 +77,7 @@ describe Google::Cloud::Bigtable::Instance, :app_profiles, :mock_bigtable do
 
     mock.verify
 
-    app_profiles.size.must_equal 5
+    _(app_profiles.size).must_equal 5
   end
 
   it "iterates app_profiles with all using Enumerator" do
@@ -90,6 +90,6 @@ describe Google::Cloud::Bigtable::Instance, :app_profiles, :mock_bigtable do
 
     mock.verify
 
-    app_profiles.size.must_equal 5
+    _(app_profiles.size).must_equal 5
   end
 end

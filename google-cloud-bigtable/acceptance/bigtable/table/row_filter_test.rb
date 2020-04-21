@@ -25,34 +25,34 @@ describe "DataClient Read Rows Filters", :bigtable do
     filter = table.filter.strip_value
 
     rows = table.read_rows(filter: filter, limit: 1).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
     cell = rows.first.cells[family].first
-    cell.value.must_be :empty?
+    _(cell.value).must_be :empty?
   end
 
   it "key regex filter" do
     filter = table.filter.key("test-1.*")
     rows = table.read_rows(filter: filter).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
     rows.each do |r|
-      r.key.start_with?("test-1").must_equal true
+      _(r.key.start_with?("test-1")).must_equal true
     end
   end
 
   it "sample probability filter" do
     filter = table.filter.sample(0.5)
     rows = table.read_rows(filter: filter).to_a
-    rows.length.must_be :>=, 0
+    _(rows.length).must_be :>=, 0
   end
 
   it "family filter" do
     filter = table.filter.family("c.*")
     rows = table.read_rows(filter: filter, limit: 2).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
 
     rows.each do |row|
       row.cells.each do |family, _|
-        family.start_with?("c").must_equal true
+        _(family.start_with?("c")).must_equal true
       end
     end
   end
@@ -60,11 +60,11 @@ describe "DataClient Read Rows Filters", :bigtable do
   it "family filter" do
     filter = table.filter.qualifier("field.*")
     rows = table.read_rows(filter: filter, limit: 2).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
 
     rows.each do |row|
       row.cells[family].each do |cell|
-        cell.qualifier.start_with?("field").must_equal true
+        _(cell.qualifier.start_with?("field")).must_equal true
       end
     end
   end
@@ -72,11 +72,11 @@ describe "DataClient Read Rows Filters", :bigtable do
   it "value filter" do
     filter = table.filter.value("value.*")
     rows = table.read_rows(filter: filter, limit: 2).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
 
     rows.each do |row|
       row.cells[family].each do |cell|
-        cell.value.start_with?("value").must_equal true
+        _(cell.value.start_with?("value")).must_equal true
       end
     end
   end
@@ -84,30 +84,30 @@ describe "DataClient Read Rows Filters", :bigtable do
   it "cells per row offset filter" do
     filter = table.filter.cells_per_row_offset(1)
     rows = table.read_rows(filter: filter, limit: 2).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
 
     rows.each do |row|
-      row.cells[family].length.must_equal 1
+      _(row.cells[family].length).must_equal 1
     end
   end
 
   it "cells per row filter" do
     filter = table.filter.cells_per_row(1)
     rows = table.read_rows(filter: filter, limit: 2).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
 
     rows.each do |row|
-      row.cells[family].length.must_equal 1
+      _(row.cells[family].length).must_equal 1
     end
   end
 
   it "cells per column filter" do
     filter = table.filter.cells_per_column(1)
     rows = table.read_rows(keys: ["test-1"], filter: filter).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
 
     rows.each do |row|
-      row.cells[family].map(&:qualifier).length.must_equal 2
+      _(row.cells[family].map(&:qualifier).length).must_equal 2
     end
   end
 
@@ -119,11 +119,11 @@ describe "DataClient Read Rows Filters", :bigtable do
 
     filter = table.filter.timestamp_range(from: timestamp_micros)
     rows = table.read_rows(filter: filter, limit: 2).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
 
     rows.each do |row|
       row.cells[family].each do |cell|
-        cell.timestamp.must_be :>=, timestamp_micros
+        _(cell.timestamp).must_be :>=, timestamp_micros
       end
     end
   end
@@ -133,12 +133,12 @@ describe "DataClient Read Rows Filters", :bigtable do
 
     filter = table.filter.value_range(range)
     rows = table.read_rows(filter: filter).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
 
     rows.each do |row|
       row.cells[family].each do |cell|
-        cell.value.must_be :>=, "value-1"
-        cell.value.must_be :<=, "value-2"
+        _(cell.value).must_be :>=, "value-1"
+        _(cell.value).must_be :<=, "value-2"
       end
     end
   end
@@ -148,11 +148,11 @@ describe "DataClient Read Rows Filters", :bigtable do
 
     filter = table.filter.column_range(range)
     rows = table.read_rows(filter: filter, limit: 2).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
 
     rows.each do |row|
       row.cells[family].each do |cell|
-        cell.qualifier.must_be :>=, "field1"
+        _(cell.qualifier).must_be :>=, "field1"
       end
     end
   end
@@ -166,20 +166,20 @@ describe "DataClient Read Rows Filters", :bigtable do
     condition.on_match(label).otherwise(strip_value)
 
     rows = table.read_rows(filter: condition).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
   end
 
   it "chain filter" do
     filter = table.filter.chain.key("test-.*").strip_value.label("test")
 
     rows = table.read_rows(filter: filter).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
   end
 
   it "interleave filter" do
     filter = table.filter.interleave.key("test-.*").cells_per_row(1)
 
     rows = table.read_rows(filter: filter).to_a
-    rows.wont_be :empty?
+    _(rows).wont_be :empty?
   end
 end

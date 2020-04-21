@@ -48,7 +48,7 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
       bigtable.service.mocked_tables = mock
 
       result = table.drop_row_range(row_key_prefix: "user")
-      result.must_equal true
+      _(result).must_equal true
       mock.verify
     end
 
@@ -63,7 +63,7 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
       bigtable.service.mocked_tables = mock
 
       result = table.drop_row_range(delete_all_data: true)
-      result.must_equal true
+      _(result).must_equal true
       mock.verify
     end
 
@@ -75,18 +75,18 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
       )
 
       def stub.drop_row_range parent, args
-        parent.must_equal expected_table_path
-        args[:row_key_prefix].must_be :nil?
-        args[:delete_all_data_from_table].must_equal true
+        _(parent).must_equal expected_table_path
+        _(args[:row_key_prefix]).must_be :nil?
+        _(args[:delete_all_data_from_table]).must_equal true
 
         retry_timeout = args[:options].retry_options.backoff_settings.initial_rpc_timeout_millis
-        retry_timeout.must_equal expected_timeout
+        _(retry_timeout).must_equal expected_timeout
         nil
       end
       bigtable.service.mocked_tables = stub
 
       result = table.drop_row_range(delete_all_data: true, timeout: timeout_secs)
-      result.must_equal true
+      _(result).must_equal true
     end
   end
 
@@ -102,7 +102,7 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
       bigtable.service.mocked_tables = mock
 
       result = table.delete_all_rows
-      result.must_equal true
+      _(result).must_equal true
       mock.verify
     end
 
@@ -114,18 +114,18 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
       )
 
       def stub.drop_row_range parent, args
-        parent.must_equal expected_table_path
-        args[:row_key_prefix].must_be :nil?
-        args[:delete_all_data_from_table].must_equal true
+        _(parent).must_equal expected_table_path
+        _(args[:row_key_prefix]).must_be :nil?
+        _(args[:delete_all_data_from_table]).must_equal true
 
         retry_timeout = args[:options].retry_options.backoff_settings.initial_rpc_timeout_millis
-        retry_timeout.must_equal expected_timeout
+        _(retry_timeout).must_equal expected_timeout
         nil
       end
       bigtable.service.mocked_tables = stub
 
       result = table.delete_all_rows(timeout: timeout_secs)
-      result.must_equal true
+      _(result).must_equal true
     end
   end
 
@@ -141,7 +141,7 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
       bigtable.service.mocked_tables = mock
 
       result = table.delete_rows_by_prefix("user")
-      result.must_equal true
+      _(result).must_equal true
       mock.verify
     end
 
@@ -153,18 +153,18 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
       )
 
       def stub.drop_row_range parent, args
-        parent.must_equal expected_table_path
-        args[:row_key_prefix].must_equal "user"
-        args[:delete_all_data_from_table].must_be :nil?
+        _(parent).must_equal expected_table_path
+        _(args[:row_key_prefix]).must_equal "user"
+        _(args[:delete_all_data_from_table]).must_be :nil?
 
         retry_timeout = args[:options].retry_options.backoff_settings.initial_rpc_timeout_millis
-        retry_timeout.must_equal expected_timeout
+        _(retry_timeout).must_equal expected_timeout
         nil
       end
       bigtable.service.mocked_tables = stub
 
       result = table.delete_rows_by_prefix("user", timeout: timeout_secs)
-      result.must_equal true
+      _(result).must_equal true
     end
   end
 end

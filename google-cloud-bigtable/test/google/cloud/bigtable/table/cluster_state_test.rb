@@ -25,12 +25,12 @@ describe Google::Cloud::Bigtable::Table::ClusterState, :mock_bigtable do
       grpc, cluster_name
     )
 
-    cluster_state.must_be_kind_of Google::Cloud::Bigtable::Table::ClusterState
-    cluster_state.cluster_name.must_equal cluster_name
-    cluster_state.replication_state.must_equal :READY
-    cluster_state.ready?.must_equal true
-    cluster_state.initializing?.wont_equal true
-    cluster_state.planned_maintenance?.wont_equal true
-    cluster_state.unplanned_maintenance?.wont_equal true
+    _(cluster_state).must_be_kind_of Google::Cloud::Bigtable::Table::ClusterState
+    _(cluster_state.cluster_name).must_equal cluster_name
+    _(cluster_state.replication_state).must_equal :READY
+    _(cluster_state.ready?).must_equal true
+    _(cluster_state.initializing?).wont_equal true
+    _(cluster_state.planned_maintenance?).wont_equal true
+    _(cluster_state.unplanned_maintenance?).wont_equal true
   end
 end

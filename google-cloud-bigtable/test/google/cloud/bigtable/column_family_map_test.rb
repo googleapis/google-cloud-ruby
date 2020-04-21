@@ -29,11 +29,11 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.add cf_name, gc_rule: gc_rule
 
     cfs = cfm.to_grpc
-    cfs.length.must_equal 4
+    _(cfs.length).must_equal 4
     cf = cfs[cf_name]
-    cf.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
-    cf.gc_rule.must_be_kind_of Google::Bigtable::Admin::V2::GcRule
-    cf.gc_rule.must_equal gc_rule.to_grpc
+    _(cf).must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
+    _(cf.gc_rule).must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    _(cf.gc_rule).must_equal gc_rule.to_grpc
   end
 
   it "adds a column family without gc_rule" do
@@ -42,10 +42,10 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.add cf_name
 
     cfs = cfm.to_grpc
-    cfs.length.must_equal 4
+    _(cfs.length).must_equal 4
     cf = cfs[cf_name]
-    cf.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
-    cf.gc_rule.must_be :nil?
+    _(cf).must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
+    _(cf.gc_rule).must_be :nil?
   end
 
   it "adds a column family with the deprecated gc_rule" do
@@ -57,18 +57,18 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     end.must_output "", deprecated_gc_rule_warning
 
     cfs = cfm.to_grpc
-    cfs.length.must_equal 4
+    _(cfs.length).must_equal 4
     cf = cfs[cf_name]
-    cf.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
-    cf.gc_rule.must_be_kind_of Google::Bigtable::Admin::V2::GcRule
-    cf.gc_rule.must_equal gc_rule.to_grpc
+    _(cf).must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
+    _(cf.gc_rule).must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    _(cf.gc_rule).must_equal gc_rule.to_grpc
   end
 
   it "doesn't add a column family if one already exists" do
     cf_name = cfm.names.first
 
     error = expect { cfm.add cf_name }.must_raise ArgumentError
-    error.message.must_equal "column family \"cf1\" already exists"
+    _(error.message).must_equal "column family \"cf1\" already exists"
   end
 
   it "doesn't add a column family when frozen" do
@@ -77,7 +77,7 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.freeze
 
     error = expect { cfm.add cf_name }.must_raise frozen_error_class
-    error.message.must_equal "can't modify frozen Hash"
+    _(error.message).must_equal "can't modify frozen Hash"
   end
 
   it "updates a column family" do
@@ -87,11 +87,11 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.update cf_name, gc_rule: gc_rule
 
     cfs = cfm.to_grpc
-    cfs.length.must_equal 3
+    _(cfs.length).must_equal 3
     cf = cfs[cf_name]
-    cf.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
-    cf.gc_rule.must_be_kind_of Google::Bigtable::Admin::V2::GcRule
-    cf.gc_rule.must_equal gc_rule.to_grpc
+    _(cf).must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
+    _(cf.gc_rule).must_be_kind_of Google::Bigtable::Admin::V2::GcRule
+    _(cf.gc_rule).must_equal gc_rule.to_grpc
   end
 
   it "updates a column family without gc_rule" do
@@ -100,17 +100,17 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.update cf_name
 
     cfs = cfm.to_grpc
-    cfs.length.must_equal 3
+    _(cfs.length).must_equal 3
     cf = cfs[cf_name]
-    cf.must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
-    cf.gc_rule.must_be :nil?
+    _(cf).must_be_kind_of Google::Bigtable::Admin::V2::ColumnFamily
+    _(cf.gc_rule).must_be :nil?
   end
 
   it "doesn't update a column family if one doesn't exist" do
     cf_name = "new-cf"
 
     error = expect { cfm.update cf_name }.must_raise ArgumentError
-    error.message.must_equal "column family \"new-cf\" does not exist"
+    _(error.message).must_equal "column family \"new-cf\" does not exist"
   end
 
   it "doesn't update a column family when frozen" do
@@ -119,7 +119,7 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.freeze
 
     error = expect { cfm.update cf_name }.must_raise frozen_error_class
-    error.message.must_equal "can't modify frozen Hash"
+    _(error.message).must_equal "can't modify frozen Hash"
   end
 
   it "deletes a column family" do
@@ -128,16 +128,16 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.delete cf_name
 
     cfs = cfm.to_grpc
-    cfs.length.must_equal 2
+    _(cfs.length).must_equal 2
     cf = cfs[cf_name]
-    cf.must_be :nil?
+    _(cf).must_be :nil?
   end
 
   it "doesn't delete a column family if one doesn't exist" do
     cf_name = "new-cf"
 
     error = expect { cfm.delete cf_name }.must_raise ArgumentError
-    error.message.must_equal "column family \"new-cf\" does not exist"
+    _(error.message).must_equal "column family \"new-cf\" does not exist"
   end
 
   it "doesn't delete a column family when frozen" do
@@ -146,6 +146,6 @@ describe Google::Cloud::Bigtable::ColumnFamilyMap, :mock_bigtable do
     cfm.freeze
 
     error = expect { cfm.delete cf_name }.must_raise frozen_error_class
-    error.message.must_equal "can't modify frozen Hash"
+    _(error.message).must_equal "can't modify frozen Hash"
   end
 end

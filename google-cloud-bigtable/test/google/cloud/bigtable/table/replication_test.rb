@@ -47,7 +47,7 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
     bigtable.service.mocked_tables = mock
 
     result = table.generate_consistency_token
-    result.must_equal token
+    _(result).must_equal token
     mock.verify
   end
 
@@ -60,7 +60,7 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
     bigtable.service.mocked_tables = mock
 
     result = table.check_consistency(token)
-    result.must_equal true
+    _(result).must_equal true
     mock.verify
   end
 
@@ -79,7 +79,7 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
     bigtable.service.mocked_tables = mock
 
     result = table.wait_for_replication
-    result.must_equal true
+    _(result).must_equal true
     mock.verify
   end
 
@@ -102,14 +102,14 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
     time_now = Time.now
 
     result = table.wait_for_replication(timeout: 2, check_interval: 1)
-    result.must_equal false
-    (Time.now - time_now).must_be :>=, 2
+    _(result).must_equal false
+    _((Time.now - time_now)).must_be :>=, 2
     mock.verify
   end
 
   it "wait for replication timeout can not be greater then check interval" do
-    proc {
+    _ { proc {
       table.wait_for_replication(timeout: 1, check_interval: 2)
-    }.must_raise Google::Cloud::InvalidArgumentError
+    } }.must_raise Google::Cloud::InvalidArgumentError
   end
 end

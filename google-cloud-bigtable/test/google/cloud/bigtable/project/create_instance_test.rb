@@ -85,17 +85,17 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
       clusters.add("test-cluster", "us-east1-b", nodes: 1)
     end
 
-    job.must_be_kind_of Google::Cloud::Bigtable::Instance::Job
-    job.wont_be :done?
-    job.wont_be :error?
-    job.error.must_be :nil?
-    job.instance.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Bigtable::Instance::Job
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.instance).must_be :nil?
 
     job.reload!
     instance = job.instance
 
-    instance.wont_be :nil?
-    instance.must_be_kind_of Google::Cloud::Bigtable::Instance
+    _(instance).wont_be :nil?
+    _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
 
     mock.verify
   end
@@ -137,17 +137,17 @@ describe Google::Cloud::Bigtable::Project, :create_instance, :mock_bigtable do
       clusters.add("test-cluster-2", "us-east1-b", nodes: 3, storage_type: :SSD)
     end
 
-    job.must_be_kind_of Google::Cloud::Bigtable::Instance::Job
-    job.wont_be :done?
-    job.wont_be :error?
-    job.error.must_be :nil?
-    job.instance.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Bigtable::Instance::Job
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.instance).must_be :nil?
 
     job.reload!
     instance = job.instance
 
-    instance.wont_be :nil?
-    instance.must_be_kind_of Google::Cloud::Bigtable::Instance
+    _(instance).wont_be :nil?
+    _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
 
     mock.verify
   end

@@ -64,10 +64,10 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     end
 
     cf = column_families[new_cf_name]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal new_cf_name
-    cf.gc_rule.wont_be :nil?
-    cf.gc_rule.max_versions.must_equal 3
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal new_cf_name
+    _(cf.gc_rule).wont_be :nil?
+    _(cf.gc_rule.max_versions).must_equal 3
 
     mock.verify
   end
@@ -100,9 +100,9 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     end
 
     cf = column_families[new_cf_name]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal new_cf_name
-    cf.gc_rule.must_be :nil?
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal new_cf_name
+    _(cf.gc_rule).must_be :nil?
 
     mock.verify
   end
@@ -141,10 +141,10 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     end
 
     cf = column_families[cf_name]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal cf_name
-    cf.gc_rule.wont_be :nil?
-    cf.gc_rule.max_versions.must_equal 1
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal cf_name
+    _(cf.gc_rule).wont_be :nil?
+    _(cf.gc_rule.max_versions).must_equal 1
 
     mock.verify
   end
@@ -181,9 +181,9 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     end
 
     cf = column_families[cf_name]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal cf_name
-    cf.gc_rule.must_be :nil?
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal cf_name
+    _(cf.gc_rule).must_be :nil?
 
     mock.verify
   end
@@ -212,7 +212,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
       cfm.delete(cf_name)
     end
 
-    column_families[cf_name].must_be :nil?
+    _(column_families[cf_name]).must_be :nil?
 
     mock.verify
   end

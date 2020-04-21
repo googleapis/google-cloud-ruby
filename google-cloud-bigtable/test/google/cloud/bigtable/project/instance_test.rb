@@ -37,14 +37,14 @@ describe Google::Cloud::Bigtable::Project, :instance, :mock_bigtable do
 
     mock.verify
 
-    instance.project_id.must_equal project_id
-    instance.instance_id.must_equal instance_id
-    instance.path.must_equal instance_path(instance_id)
-    instance.display_name.must_equal "Test instance"
-    instance.state.must_equal :READY
-    instance.ready?.must_equal true
-    instance.type.must_equal :PRODUCTION
-    instance.production?.must_equal true
+    _(instance.project_id).must_equal project_id
+    _(instance.instance_id).must_equal instance_id
+    _(instance.path).must_equal instance_path(instance_id)
+    _(instance.display_name).must_equal "Test instance"
+    _(instance.state).must_equal :READY
+    _(instance.ready?).must_equal true
+    _(instance.type).must_equal :PRODUCTION
+    _(instance.production?).must_equal true
   end
 
   it "returns nil when getting an non-existent instance" do
@@ -60,6 +60,6 @@ describe Google::Cloud::Bigtable::Project, :instance, :mock_bigtable do
     bigtable.service.mocked_instances = stub
 
     instance = bigtable.instance(not_found_instance_id)
-    instance.must_be :nil?
+    _(instance).must_be :nil?
   end
 end

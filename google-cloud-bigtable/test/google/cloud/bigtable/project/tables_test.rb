@@ -45,7 +45,7 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
 
     mock.verify
 
-    tables.size.must_equal 3
+    _(tables.size).must_equal 3
   end
 
   it "paginates tables with next? and next" do
@@ -58,10 +58,10 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
 
     mock.verify
 
-    list.size.must_equal 3
-    list.next?.must_equal true
-    list.next.size.must_equal 2
-    list.next?.must_equal false
+    _(list.size).must_equal 3
+    _(list.next?).must_equal true
+    _(list.next.size).must_equal 2
+    _(list.next?).must_equal false
   end
 
   it "paginates tables with all" do
@@ -74,7 +74,7 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
 
     mock.verify
 
-    tables.size.must_equal 5
+    _(tables.size).must_equal 5
   end
 
   it "iterates tables with all using Enumerator" do
@@ -87,6 +87,6 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
 
     mock.verify
 
-    tables.size.must_equal 5
+    _(tables.size).must_equal 5
   end
 end

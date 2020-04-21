@@ -37,16 +37,16 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     end
 
     cf = column_families["cfcreate"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal "cfcreate"
-    cf.gc_rule.wont_be :nil?
-    cf.gc_rule.max_versions.must_equal 1
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal "cfcreate"
+    _(cf.gc_rule).wont_be :nil?
+    _(cf.gc_rule.max_versions).must_equal 1
 
     cf = table.column_families["cfcreate"] # was updated by table.column_families
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal "cfcreate"
-    cf.gc_rule.wont_be :nil?
-    cf.gc_rule.max_versions.must_equal 1
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal "cfcreate"
+    _(cf.gc_rule).wont_be :nil?
+    _(cf.gc_rule.max_versions).must_equal 1
   end
 
   it "adds a column family" do
@@ -57,16 +57,16 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     end
 
     cf = column_families["cfcreate"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal "cfcreate"
-    cf.gc_rule.wont_be :nil?
-    cf.gc_rule.max_versions.must_equal 1
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal "cfcreate"
+    _(cf.gc_rule).wont_be :nil?
+    _(cf.gc_rule.max_versions).must_equal 1
 
     cf = table.column_families["cfcreate"] # was updated by table.column_families
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal "cfcreate"
-    cf.gc_rule.wont_be :nil?
-    cf.gc_rule.max_versions.must_equal 1
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal "cfcreate"
+    _(cf.gc_rule).wont_be :nil?
+    _(cf.gc_rule.max_versions).must_equal 1
   end
 
   it "adds a column family without gc_rule" do
@@ -75,14 +75,14 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     end
 
     cf = column_families["cfcreate"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal "cfcreate"
-    cf.gc_rule.must_be :nil?
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal "cfcreate"
+    _(cf.gc_rule).must_be :nil?
 
     cf = table.column_families["cfcreate"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal "cfcreate"
-    cf.gc_rule.must_be :nil?
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal "cfcreate"
+    _(cf.gc_rule).must_be :nil?
   end
 
   it "updates a column family" do
@@ -93,40 +93,40 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     end
 
     cf = column_families["cf1"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.gc_rule.max_age.must_equal 300
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.gc_rule.max_age).must_equal 300
 
     cf = table.column_families["cf1"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.gc_rule.max_age.must_equal 300
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.gc_rule.max_age).must_equal 300
   end
 
   it "updates a column family without gc_rule" do
     cf = table.column_families["cf1"]
-    cf.gc_rule.wont_be :nil?
+    _(cf.gc_rule).wont_be :nil?
 
     column_families = table.column_families do |cfs|
       cfs.update "cf1"
     end
 
     cf = column_families["cf1"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.gc_rule.must_be :nil?
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.gc_rule).must_be :nil?
 
     cf = table.column_families["cf1"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.gc_rule.must_be :nil?
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.gc_rule).must_be :nil?
   end
 
   it "deletes a column family" do
-    table.column_families["cf2"].wont_be :nil?
+    _(table.column_families["cf2"]).wont_be :nil?
 
     column_families = table.column_families do |cfs|
       cfs.delete "cf2"
     end
 
-    column_families["cf2"].must_be :nil?
-    table.column_families["cf2"].must_be :nil?
+    _(column_families["cf2"]).must_be :nil?
+    _(table.column_families["cf2"]).must_be :nil?
   end
 
   it "adds a column family with union gc rules" do
@@ -139,20 +139,20 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     end
 
     cf = column_families["cfunion"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal "cfunion"
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal "cfunion"
     rules = cf.gc_rule.union
-    rules.must_be_kind_of Array
-    rules.count.must_equal 2
-    rules[0].must_be_kind_of Google::Cloud::Bigtable::GcRule
-    rules[0].max_versions.must_equal 3
-    rules[1].must_be_kind_of Google::Cloud::Bigtable::GcRule
-    rules[1].max_age.must_equal 300
+    _(rules).must_be_kind_of Array
+    _(rules.count).must_equal 2
+    _(rules[0]).must_be_kind_of Google::Cloud::Bigtable::GcRule
+    _(rules[0].max_versions).must_equal 3
+    _(rules[1]).must_be_kind_of Google::Cloud::Bigtable::GcRule
+    _(rules[1].max_age).must_equal 300
 
     cf = table.column_families["cfunion"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal "cfunion"
-    cf.gc_rule.union.count.must_equal 2
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal "cfunion"
+    _(cf.gc_rule.union.count).must_equal 2
   end
 
   it "adds a column family with intersection gc rules" do
@@ -167,19 +167,19 @@ describe Google::Cloud::Bigtable::Table, :column_families, :bigtable do
     end
 
     cf = column_families["cfintersect"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal "cfintersect"
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal "cfintersect"
     rules = cf.gc_rule.intersection
-    rules.must_be_kind_of Array
-    rules.count.must_equal 2
-    rules[0].must_be_kind_of Google::Cloud::Bigtable::GcRule
-    rules[0].max_versions.must_equal 1
-    rules[1].must_be_kind_of Google::Cloud::Bigtable::GcRule
-    rules[1].max_age.must_equal 600
+    _(rules).must_be_kind_of Array
+    _(rules.count).must_equal 2
+    _(rules[0]).must_be_kind_of Google::Cloud::Bigtable::GcRule
+    _(rules[0].max_versions).must_equal 1
+    _(rules[1]).must_be_kind_of Google::Cloud::Bigtable::GcRule
+    _(rules[1].max_age).must_equal 600
 
     cf = table.column_families["cfintersect"]
-    cf.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    cf.name.must_equal "cfintersect"
-    cf.gc_rule.intersection.count.must_equal 2
+    _(cf).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(cf.name).must_equal "cfintersect"
+    _(cf.gc_rule.intersection.count).must_equal 2
   end
 end

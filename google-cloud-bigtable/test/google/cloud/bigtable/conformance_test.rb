@@ -67,18 +67,18 @@ class ReadRowsTest < MockBigtable
               # If cells is empty, either we are just starting, or else we have emptied `cells` from the previous row.
               # We need to fetch a row and cells against which to test the remaining `results`
               row = rows.next
-              row.key.must_equal result.row_key
+              _(row.key).must_equal result.row_key
               # The cells in a row are in a map, but the corresponding expected
               # results are in a simple array, so convert cells to array.
               cells = row.cells.values.flatten
             end
 
             cell = cells.shift # take a cell from `cells` against which to test the current `result`
-            cell.family.must_equal result.family_name
-            cell.qualifier.must_equal result.qualifier
-            cell.timestamp.must_equal result.timestamp_micros
-            cell.value.must_equal result.value
-            cell.labels.first.must_equal result.label unless result.label.empty?
+            _(cell.family).must_equal result.family_name
+            _(cell.qualifier).must_equal result.qualifier
+            _(cell.timestamp).must_equal result.timestamp_micros
+            _(cell.value).must_equal result.value
+            _(cell.labels.first).must_equal result.label unless result.label.empty?
           end
         end
       end

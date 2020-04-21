@@ -45,14 +45,14 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
 
     mock.verify
 
-    cluster.project_id.must_equal project_id
-    cluster.instance_id.must_equal instance_id
-    cluster.cluster_id.must_equal cluster_id
-    cluster.path.must_equal cluster_path(instance_id, cluster_id)
-    cluster.state.must_equal :READY
-    cluster.ready?.must_equal true
-    cluster.storage_type.must_equal :SSD
-    cluster.nodes.must_equal 3
+    _(cluster.project_id).must_equal project_id
+    _(cluster.instance_id).must_equal instance_id
+    _(cluster.cluster_id).must_equal cluster_id
+    _(cluster.path).must_equal cluster_path(instance_id, cluster_id)
+    _(cluster.state).must_equal :READY
+    _(cluster.ready?).must_equal true
+    _(cluster.storage_type).must_equal :SSD
+    _(cluster.nodes).must_equal 3
   end
 
   it "returns nil when getting an non-existent cluster" do
@@ -68,6 +68,6 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
     bigtable.service.mocked_instances = stub
 
     cluster = instance.cluster(not_found_cluster_id)
-    cluster.must_be :nil?
+    _(cluster).must_be :nil?
   end
 end

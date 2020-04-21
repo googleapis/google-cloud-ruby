@@ -77,12 +77,12 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     responses = table.mutate_rows([entry])
 
     mock.verify
-    responses.length.must_equal 1
-    responses[0].index.must_equal 0
-    responses[0].status.code.must_equal Google::Rpc::Code::OK
-    responses[0].status.description.must_equal "OK"
-    responses[0].status.message.must_equal "success"
-    responses[0].status.details.must_equal []
+    _(responses.length).must_equal 1
+    _(responses[0].index).must_equal 0
+    _(responses[0].status.code).must_equal Google::Rpc::Code::OK
+    _(responses[0].status.description).must_equal "OK"
+    _(responses[0].status.message).must_equal "success"
+    _(responses[0].status.details).must_equal []
   end
 
   it "do not retry for cell timestamp set to server time(-1)" do
@@ -110,9 +110,9 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     )
     def mock.mutate_rows(parent, mutation_entries, app_profile_id: nil)
       self.retry_count += 1
-      parent.must_equal expected_table_path
-      mutation_entries.must_equal expected_req_entries
-      app_profile_id.must_equal expected_req_app_profile_id
+      _(parent).must_equal expected_table_path
+      _(mutation_entries).must_equal expected_req_entries
+      _(app_profile_id).must_equal expected_req_app_profile_id
       return expected_response
     end
 
@@ -124,13 +124,13 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
 
     responses = table.mutate_rows([entry])
 
-    mock.retry_count.must_equal 1
-    responses.length.must_equal 1
-    responses[0].index.must_equal 0
-    responses[0].status.code.must_equal Google::Rpc::Code::DEADLINE_EXCEEDED
-    responses[0].status.description.must_equal "DEADLINE_EXCEEDED"
-    responses[0].status.message.must_equal "failed"
-    responses[0].status.details.must_equal []
+    _(mock.retry_count).must_equal 1
+    _(responses.length).must_equal 1
+    _(responses[0].index).must_equal 0
+    _(responses[0].status.code).must_equal Google::Rpc::Code::DEADLINE_EXCEEDED
+    _(responses[0].status.description).must_equal "DEADLINE_EXCEEDED"
+    _(responses[0].status.message).must_equal "failed"
+    _(responses[0].status.details).must_equal []
   end
 
   it "retry for failed mutation with 3 times" do
@@ -166,9 +166,9 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       req_retry_response: retry_responses
     )
     def mock.mutate_rows(parent, mutation_entries, app_profile_id: nil)
-      parent.must_equal expected_table_path
-      mutation_entries.must_equal req_retry_entries[self.retry_count]
-      app_profile_id.must_equal expected_req_app_profile_id
+      _(parent).must_equal expected_table_path
+      _(mutation_entries).must_equal req_retry_entries[self.retry_count]
+      _(app_profile_id).must_equal expected_req_app_profile_id
 
       res = req_retry_response[self.retry_count]
       self.retry_count += 1
@@ -184,18 +184,18 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     end
     responses = table.mutate_rows(mutation_entries)
 
-    mock.retry_count.must_equal 3
-    responses.length.must_equal 2
-    responses[0].index.must_equal 0
-    responses[0].status.code.must_equal Google::Rpc::Code::OK
-    responses[0].status.description.must_equal "OK"
-    responses[0].status.message.must_equal "success"
-    responses[0].status.details.must_equal []
-    responses[1].index.must_equal 1
-    responses[1].status.code.must_equal Google::Rpc::Code::DEADLINE_EXCEEDED
-    responses[1].status.description.must_equal "DEADLINE_EXCEEDED"
-    responses[1].status.message.must_equal "failed"
-    responses[1].status.details.must_equal []
+    _(mock.retry_count).must_equal 3
+    _(responses.length).must_equal 2
+    _(responses[0].index).must_equal 0
+    _(responses[0].status.code).must_equal Google::Rpc::Code::OK
+    _(responses[0].status.description).must_equal "OK"
+    _(responses[0].status.message).must_equal "success"
+    _(responses[0].status.details).must_equal []
+    _(responses[1].index).must_equal 1
+    _(responses[1].status.code).must_equal Google::Rpc::Code::DEADLINE_EXCEEDED
+    _(responses[1].status.description).must_equal "DEADLINE_EXCEEDED"
+    _(responses[1].status.message).must_equal "failed"
+    _(responses[1].status.details).must_equal []
   end
 
   it "stop retry on success of all mutations" do
@@ -232,9 +232,9 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       req_retry_response: retry_responses
     )
     def mock.mutate_rows(parent, mutation_entries, app_profile_id: nil)
-      parent.must_equal expected_table_path
-      mutation_entries.must_equal req_retry_entries[self.retry_count]
-      app_profile_id.must_equal expected_req_app_profile_id
+      _(parent).must_equal expected_table_path
+      _(mutation_entries).must_equal req_retry_entries[self.retry_count]
+      _(app_profile_id).must_equal expected_req_app_profile_id
 
       res = req_retry_response[self.retry_count]
       self.retry_count += 1
@@ -250,17 +250,17 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     end
     responses = table.mutate_rows(mutation_entries)
 
-    mock.retry_count.must_equal 2
-    responses.length.must_equal 2
-    responses[0].index.must_equal 0
-    responses[0].status.code.must_equal Google::Rpc::Code::OK
-    responses[0].status.description.must_equal "OK"
-    responses[0].status.message.must_equal "success"
-    responses[0].status.details.must_equal []
-    responses[1].index.must_equal 1
-    responses[1].status.code.must_equal Google::Rpc::Code::OK
-    responses[1].status.description.must_equal "OK"
-    responses[1].status.message.must_equal "success"
-    responses[1].status.details.must_equal []
+    _(mock.retry_count).must_equal 2
+    _(responses.length).must_equal 2
+    _(responses[0].index).must_equal 0
+    _(responses[0].status.code).must_equal Google::Rpc::Code::OK
+    _(responses[0].status.description).must_equal "OK"
+    _(responses[0].status.message).must_equal "success"
+    _(responses[0].status.details).must_equal []
+    _(responses[1].index).must_equal 1
+    _(responses[1].status.code).must_equal Google::Rpc::Code::OK
+    _(responses[1].status.description).must_equal "OK"
+    _(responses[1].status.message).must_equal "success"
+    _(responses[1].status.details).must_equal []
   end
 end

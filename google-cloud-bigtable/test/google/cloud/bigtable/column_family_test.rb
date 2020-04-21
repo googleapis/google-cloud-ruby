@@ -27,11 +27,11 @@ describe Google::Cloud::Bigtable::ColumnFamily, :mock_bigtable do
       cf_name
     )
 
-    column_family.must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
-    column_family.gc_rule.wont_be :nil?
-    column_family.gc_rule.must_be_kind_of Google::Cloud::Bigtable::GcRule
-    column_family.gc_rule.max_versions.must_equal 3
-    column_family.name.must_equal cf_name
+    _(column_family).must_be_kind_of Google::Cloud::Bigtable::ColumnFamily
+    _(column_family.gc_rule).wont_be :nil?
+    _(column_family.gc_rule).must_be_kind_of Google::Cloud::Bigtable::GcRule
+    _(column_family.gc_rule.max_versions).must_equal 3
+    _(column_family.name).must_equal cf_name
   end
 
   it "set column family gc rule" do
@@ -41,10 +41,10 @@ describe Google::Cloud::Bigtable::ColumnFamily, :mock_bigtable do
       "cf"
     )
 
-    column_family.gc_rule.must_be :nil?
+    _(column_family.gc_rule).must_be :nil?
 
     column_family.gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
-    column_family.gc_rule.must_be_kind_of Google::Cloud::Bigtable::GcRule
-    column_family.gc_rule.max_versions.must_equal 3
+    _(column_family.gc_rule).must_be_kind_of Google::Cloud::Bigtable::GcRule
+    _(column_family.gc_rule.max_versions).must_equal 3
   end
 end

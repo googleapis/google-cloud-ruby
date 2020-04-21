@@ -37,10 +37,10 @@ describe Google::Cloud::Bigtable::Instance, :app_profile, :mock_bigtable do
 
     mock.verify
 
-    app_profile.project_id.must_equal project_id
-    app_profile.instance_id.must_equal instance_id
-    app_profile.name.must_equal app_profile_id
-    app_profile.path.must_equal app_profile_path(instance_id, app_profile_id)
+    _(app_profile.project_id).must_equal project_id
+    _(app_profile.instance_id).must_equal instance_id
+    _(app_profile.name).must_equal app_profile_id
+    _(app_profile.path).must_equal app_profile_path(instance_id, app_profile_id)
   end
 
   it "returns nil when getting an non-existent app_profile" do
@@ -56,6 +56,6 @@ describe Google::Cloud::Bigtable::Instance, :app_profile, :mock_bigtable do
     bigtable.service.mocked_instances = stub
 
     app_profile = instance.app_profile(not_found_app_profile_id)
-    app_profile.must_be :nil?
+    _(app_profile).must_be :nil?
   end
 end

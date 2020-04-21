@@ -27,9 +27,9 @@ describe "DataClient Mutate Row", :bigtable do
     # Set cell
     entry = table.new_mutation_entry("setcell-#{postfix}")
     entry.set_cell(family + "&  *^(*&^%^%&^", "mutate-row-#{postfix}", "mutatetest value #{postfix}")
-    proc {
+    _ { proc {
       table.mutate_row(entry)
-    }.must_raise Google::Cloud::InvalidArgumentError
+    } }.must_raise Google::Cloud::InvalidArgumentError
   end
 
   it "set cell and delete cells" do
@@ -41,17 +41,17 @@ describe "DataClient Mutate Row", :bigtable do
     entry = table.new_mutation_entry(row_key)
     entry.set_cell(family, qualifier, "mutatetest value #{postfix}")
 
-    table.mutate_row(entry).must_equal true
+    _(table.mutate_row(entry)).must_equal true
     row = table.read_row(row_key)
     cell = row.cells[family].select{|v| v.qualifier == qualifier}.first
-    cell.must_be_kind_of Google::Cloud::Bigtable::Row::Cell
+    _(cell).must_be_kind_of Google::Cloud::Bigtable::Row::Cell
 
     # Delete cell
     entry = table.new_mutation_entry(row_key)
     entry.delete_cells(family, qualifier)
 
     table.mutate_row(entry)
-    table.read_row(row_key).must_be :nil?
+    _(table.read_row(row_key)).must_be :nil?
   end
 
   it "set cell with timestamp and delete cells with integer timestamp range" do
@@ -70,9 +70,9 @@ describe "DataClient Mutate Row", :bigtable do
       family, qualifier, "mutatetest value #{postfix}", timestamp: timestamp + 2000
     )
 
-    table.mutate_row(entry).must_equal true
+    _(table.mutate_row(entry)).must_equal true
     row = table.read_row(row_key)
-    row.cells[family].select{|v| v.qualifier == qualifier}.length.must_equal 3
+    _(row.cells[family].select{|v| v.qualifier == qualifier}.length).must_equal 3
 
     # Delete cell
     entry = table.new_mutation_entry(row_key)
@@ -82,7 +82,7 @@ describe "DataClient Mutate Row", :bigtable do
 
     table.mutate_row(entry)
     row = table.read_row(row_key)
-    row.cells[family].select{|v| v.qualifier == qualifier}.length.must_equal 1
+    _(row.cells[family].select{|v| v.qualifier == qualifier}.length).must_equal 1
   end
 
   it "raises when set_cell with incorrect Time timestamp" do
@@ -90,7 +90,7 @@ describe "DataClient Mutate Row", :bigtable do
     row_key = "setcell-#{postfix}"
     qualifier = "mutate-row-#{postfix}"
 
-    table.granularity.must_equal :MILLIS
+    _(table.granularity).must_equal :MILLIS
 
     # Set cell
     entry = table.new_mutation_entry(row_key)
@@ -99,7 +99,7 @@ describe "DataClient Mutate Row", :bigtable do
         family, qualifier, "mutatetest value #{postfix}", timestamp: Time.now
       )
     end.must_raise Google::Protobuf::TypeError
-    err.message.must_match "Expected number type for integral field 'timestamp_micros' (given Time)."
+    _(err.message).must_match "Expected number type for integral field 'timestamp_micros' (given Time)."
   end
 
   it "raises when set_cell with incorrect microsecond integer timestamp" do
@@ -109,7 +109,7 @@ describe "DataClient Mutate Row", :bigtable do
     timestamp_micros = (Time.now.to_f * 1000000).round
     timestamp_micros += 1 if (timestamp_micros % 10).zero?
 
-    table.granularity.must_equal :MILLIS
+    _(table.granularity).must_equal :MILLIS
 
     # Set cell
     entry = table.new_mutation_entry(row_key)
@@ -119,7 +119,7 @@ describe "DataClient Mutate Row", :bigtable do
     err = expect do
       table.mutate_row(entry)
     end.must_raise Google::Cloud::InvalidArgumentError
-    err.message.must_match /Timestamp granularity mismatch. Expected a multiple of 1000 \(millisecond granularity\), but got #{timestamp_micros}/
+    _(err.message).must_match /Timestamp granularity mismatch. Expected a multiple of 1000 \(millisecond granularity\), but got #{timestamp_micros}/
   end
 
   it "raises when set_cell with incorrect millisecond integer timestamp" do
@@ -129,7 +129,7 @@ describe "DataClient Mutate Row", :bigtable do
     timestamp_millis = (Time.now.to_f * 1000).to_i
     timestamp_millis += 1 if (timestamp_millis % 10).zero?
 
-    table.granularity.must_equal :MILLIS
+    _(table.granularity).must_equal :MILLIS
 
     # Set cell
     entry = table.new_mutation_entry(row_key)
@@ -139,7 +139,7 @@ describe "DataClient Mutate Row", :bigtable do
     err = expect do
       table.mutate_row(entry)
     end.must_raise Google::Cloud::InvalidArgumentError
-    err.message.must_match /Timestamp granularity mismatch. Expected a multiple of 1000 \(millisecond granularity\), but got #{timestamp_millis}/
+    _(err.message).must_match /Timestamp granularity mismatch. Expected a multiple of 1000 \(millisecond granularity\), but got #{timestamp_millis}/
   end
 
   it "set_cell with correct microseconds rounded to milliseconds integer timestamp" do
@@ -148,7 +148,7 @@ describe "DataClient Mutate Row", :bigtable do
     qualifier = "mutate-row-#{postfix}"
     timestamp_micros = (Time.now.to_f * 1000000).round(-3)
 
-    table.granularity.must_equal :MILLIS
+    _(table.granularity).must_equal :MILLIS
 
     # Set cell
     entry = table.new_mutation_entry(row_key)
@@ -156,11 +156,11 @@ describe "DataClient Mutate Row", :bigtable do
       family, qualifier, "mutatetest value #{postfix}", timestamp: timestamp_micros
     )
 
-    table.mutate_row(entry).must_equal true
+    _(table.mutate_row(entry)).must_equal true
     row = table.read_row(row_key)
     cells = row.cells[family].select{|v| v.qualifier == qualifier}
-    cells.length.must_equal 1
-    cells.first.timestamp.must_equal timestamp_micros
+    _(cells.length).must_equal 1
+    _(cells.first.timestamp).must_equal timestamp_micros
 
     # Delete cell
     entry = table.new_mutation_entry(row_key)
@@ -175,11 +175,11 @@ describe "DataClient Mutate Row", :bigtable do
 
     entry = table.new_mutation_entry(row_key)
     entry.set_cell(family, qualifier, "mutatetest value #{postfix}")
-    table.mutate_row(entry).must_equal true
+    _(table.mutate_row(entry)).must_equal true
 
     entry = table.new_mutation_entry(row_key).delete_from_family(family)
-    table.mutate_row(entry).must_equal true
-    table.read_row(row_key).must_be :nil?
+    _(table.mutate_row(entry)).must_equal true
+    _(table.read_row(row_key)).must_be :nil?
   end
 
   it "delete row" do
@@ -189,11 +189,11 @@ describe "DataClient Mutate Row", :bigtable do
 
     entry = table.new_mutation_entry(row_key)
     entry.set_cell(family, qualifier, "mutatetest value #{postfix}")
-    table.mutate_row(entry).must_equal true
+    _(table.mutate_row(entry)).must_equal true
 
     entry = table.new_mutation_entry(row_key).delete_from_row
-    table.mutate_row(entry).must_equal true
-    table.read_row(row_key).must_be :nil?
+    _(table.mutate_row(entry)).must_equal true
+    _(table.read_row(row_key)).must_be :nil?
   end
 
   it "set integer cell value" do
@@ -203,10 +203,10 @@ describe "DataClient Mutate Row", :bigtable do
 
     entry = table.new_mutation_entry(row_key)
     entry.set_cell(family, qualifier, 100)
-    table.mutate_row(entry).must_equal true
+    _(table.mutate_row(entry)).must_equal true
 
     row = table.read_row(row_key)
     cell = row.cells[family].select{|v| v.qualifier == qualifier}.first
-    cell.to_i.must_equal 100
+    _(cell.to_i).must_equal 100
   end
 end
