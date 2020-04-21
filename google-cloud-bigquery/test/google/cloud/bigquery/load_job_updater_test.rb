@@ -30,60 +30,60 @@ describe Google::Cloud::Bigquery::LoadJob::Updater do
     updater = new_updater
     updater.format = "csv"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.source_format.must_equal "CSV"
+    _(job_gapi.configuration.load.source_format).must_equal "CSV"
 
     updater.format = "json"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.source_format.must_equal "NEWLINE_DELIMITED_JSON"
+    _(job_gapi.configuration.load.source_format).must_equal "NEWLINE_DELIMITED_JSON"
 
     updater.format = "avro"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.source_format.must_equal "AVRO"
+    _(job_gapi.configuration.load.source_format).must_equal "AVRO"
 
     updater.format = "orc"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.source_format.must_equal "ORC"
+    _(job_gapi.configuration.load.source_format).must_equal "ORC"
 
     updater.format = "parquet"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.source_format.must_equal "PARQUET"
+    _(job_gapi.configuration.load.source_format).must_equal "PARQUET"
 
     updater.format = "SOME_NEW_UNSUPPORTED_FORMAT"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.source_format.must_equal "SOME_NEW_UNSUPPORTED_FORMAT"
+    _(job_gapi.configuration.load.source_format).must_equal "SOME_NEW_UNSUPPORTED_FORMAT"
   end
 
   it "can set the create disposition" do
     updater = new_updater
     updater.create = "needed"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.create_disposition.must_equal "CREATE_IF_NEEDED"
+    _(job_gapi.configuration.load.create_disposition).must_equal "CREATE_IF_NEEDED"
 
     updater.create = "never"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.create_disposition.must_equal "CREATE_NEVER"
+    _(job_gapi.configuration.load.create_disposition).must_equal "CREATE_NEVER"
 
     updater.create = "SOME_NEW_UNSUPPORTED_DISPOSITION"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.create_disposition.must_equal "SOME_NEW_UNSUPPORTED_DISPOSITION"
+    _(job_gapi.configuration.load.create_disposition).must_equal "SOME_NEW_UNSUPPORTED_DISPOSITION"
   end
 
   it "can set the write disposition" do
     updater = new_updater
     updater.write = "append"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.write_disposition.must_equal "WRITE_APPEND"
+    _(job_gapi.configuration.load.write_disposition).must_equal "WRITE_APPEND"
 
     updater.write = "truncate"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.write_disposition.must_equal "WRITE_TRUNCATE"
+    _(job_gapi.configuration.load.write_disposition).must_equal "WRITE_TRUNCATE"
 
     updater.write = "empty"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.write_disposition.must_equal "WRITE_EMPTY"
+    _(job_gapi.configuration.load.write_disposition).must_equal "WRITE_EMPTY"
 
     updater.write = "SOME_NEW_UNSUPPORTED_DISPOSITION"
     job_gapi = updater.to_gapi
-    job_gapi.configuration.load.write_disposition.must_equal "SOME_NEW_UNSUPPORTED_DISPOSITION"
+    _(job_gapi.configuration.load.write_disposition).must_equal "SOME_NEW_UNSUPPORTED_DISPOSITION"
   end
 end

@@ -26,18 +26,18 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       csv_options: Google::Apis::BigqueryV2::CsvOptions.new
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
-    table.urls.must_equal ["gs://my-bucket/path/to/file.csv"]
-    table.must_be :csv?
-    table.format.must_equal "CSV"
+    _(table).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(table.urls).must_equal ["gs://my-bucket/path/to/file.csv"]
+    _(table).must_be :csv?
+    _(table.format).must_equal "CSV"
 
-    table.wont_be :json?
-    table.wont_be :sheets?
-    table.wont_be :avro?
-    table.wont_be :backup?
-    table.wont_be :bigtable?
+    _(table).wont_be :json?
+    _(table).wont_be :sheets?
+    _(table).wont_be :avro?
+    _(table).wont_be :backup?
+    _(table).wont_be :bigtable?
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets jagged_rows" do
@@ -53,13 +53,13 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       )
     )
 
-    table.jagged_rows.must_be :nil?
+    _(table.jagged_rows).must_be :nil?
 
     table.jagged_rows = true
 
-    table.jagged_rows.must_equal true
+    _(table.jagged_rows).must_equal true
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets quoted_newlines" do
@@ -75,13 +75,13 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       )
     )
 
-    table.quoted_newlines.must_be :nil?
+    _(table.quoted_newlines).must_be :nil?
 
     table.quoted_newlines = true
 
-    table.quoted_newlines.must_equal true
+    _(table.quoted_newlines).must_equal true
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets encoding" do
@@ -97,23 +97,23 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       )
     )
 
-    table.encoding.must_be :nil?
-    table.must_be :utf8? # default is UTF-8, even when encoding is not specifically set
-    table.wont_be :iso8859_1?
+    _(table.encoding).must_be :nil?
+    _(table).must_be :utf8? # default is UTF-8, even when encoding is not specifically set
+    _(table).wont_be :iso8859_1?
 
     table.encoding = "ISO-8859-1"
 
-    table.encoding.must_equal "ISO-8859-1"
-    table.wont_be :utf8?
-    table.must_be :iso8859_1?
+    _(table.encoding).must_equal "ISO-8859-1"
+    _(table).wont_be :utf8?
+    _(table).must_be :iso8859_1?
 
     table.encoding = "UTF-8"
 
-    table.encoding.must_equal "UTF-8"
-    table.must_be :utf8?
-    table.wont_be :iso8859_1?
+    _(table.encoding).must_equal "UTF-8"
+    _(table).must_be :utf8?
+    _(table).wont_be :iso8859_1?
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets delimiter" do
@@ -129,13 +129,13 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       )
     )
 
-    table.delimiter.must_be :nil?
+    _(table.delimiter).must_be :nil?
 
     table.delimiter = "|"
 
-    table.delimiter.must_equal "|"
+    _(table.delimiter).must_equal "|"
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets quote" do
@@ -151,13 +151,13 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       )
     )
 
-    table.quote.must_be :nil?
+    _(table.quote).must_be :nil?
 
     table.quote = "'"
 
-    table.quote.must_equal "'"
+    _(table.quote).must_equal "'"
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets skip_leading_rows" do
@@ -173,13 +173,13 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       )
     )
 
-    table.skip_leading_rows.must_be :nil?
+    _(table.skip_leading_rows).must_be :nil?
 
     table.skip_leading_rows = true
 
-    table.skip_leading_rows.must_equal true
+    _(table.skip_leading_rows).must_equal true
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets schema using block" do
@@ -205,8 +205,8 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       csv_options: Google::Apis::BigqueryV2::CsvOptions.new
     )
 
-    table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    table.schema.must_be :empty?
+    _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(table.schema).must_be :empty?
 
     table.schema do |s|
       s.string "name", mode: :required
@@ -221,14 +221,14 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       s.date "birthday"
     end
 
-    table.schema.wont_be :empty?
-    table.fields.must_equal table.schema.fields
-    table.headers.must_equal table.schema.headers
-    table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    table.param_types.must_equal table.schema.param_types
-    table.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.schema).wont_be :empty?
+    _(table.fields).must_equal table.schema.fields
+    _(table.headers).must_equal table.schema.headers
+    _(table.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(table.param_types).must_equal table.schema.param_types
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets schema using object" do
@@ -254,8 +254,8 @@ describe Google::Cloud::Bigquery::External::CsvSource do
       csv_options: Google::Apis::BigqueryV2::CsvOptions.new
     )
 
-    table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    table.schema.must_be :empty?
+    _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(table.schema).must_be :empty?
 
     # this object is usually created by calling bigquery.schema
     schema = Google::Cloud::Bigquery::Schema.from_gapi
@@ -272,13 +272,13 @@ describe Google::Cloud::Bigquery::External::CsvSource do
 
     table.schema = schema
 
-    table.schema.wont_be :empty?
-    table.fields.must_equal table.schema.fields
-    table.headers.must_equal table.schema.headers
-    table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    table.param_types.must_equal table.schema.param_types
-    table.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.schema).wont_be :empty?
+    _(table.fields).must_equal table.schema.fields
+    _(table.headers).must_equal table.schema.headers
+    _(table.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(table.param_types).must_equal table.schema.param_types
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 end

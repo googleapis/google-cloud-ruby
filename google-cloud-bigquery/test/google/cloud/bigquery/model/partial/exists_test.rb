@@ -24,7 +24,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
   let(:model) { Google::Cloud::Bigquery::Model.from_gapi_json model_hash, bigquery.service }
 
   it "can test its existence" do
-    model.exists?.must_equal true
+    _(model.exists?).must_equal true
   end
 
   it "can test its existence with force to load resource" do
@@ -32,7 +32,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
     mock.expect :get_model, model_hash.to_json, [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
     model.service.mocked_service = mock
 
-    model.exists?(force: true).must_equal true
+    _(model.exists?(force: true)).must_equal true
 
     mock.verify
   end

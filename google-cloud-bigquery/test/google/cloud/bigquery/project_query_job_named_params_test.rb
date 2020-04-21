@@ -53,7 +53,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE name = @name", params: { name: "Testy McTesterson" }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with an integer parameter" do
@@ -77,7 +77,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE age > @age", params: { age: 35 }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a float parameter" do
@@ -101,7 +101,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE score > @score", params: { score: 90.0 }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a numeric parameter" do
@@ -125,7 +125,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE pi = @pi", params: { pi: BigDecimal("3.141592654") }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a true parameter" do
@@ -149,7 +149,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE active = @active", params: { active: true }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a false parameter" do
@@ -173,7 +173,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE active = @active", params: { active: false }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a date parameter" do
@@ -199,7 +199,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE create_date = @day", params: { day: today }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a datetime parameter" do
@@ -225,7 +225,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE update_datetime < @when", params: { when: now }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a timestamp parameter" do
@@ -251,7 +251,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE update_timestamp < @when", params: { when: now }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a time parameter" do
@@ -277,7 +277,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE create_time = @time", params: { time: timeofday }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a File parameter" do
@@ -303,7 +303,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE avatar = @file", params: { file: file }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a StringIO parameter" do
@@ -329,7 +329,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE avatar = @file", params: { file: file }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with many parameters" do
@@ -420,7 +420,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with an array parameter" do
@@ -451,7 +451,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE name IN @names", params: { names: %w{name1 name2 name3} }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 
   it "queries the data with a struct parameter" do
@@ -494,6 +494,6 @@ describe Google::Cloud::Bigquery::Project, :query_job, :named_params, :mock_bigq
     job = bigquery.query_job "#{query} WHERE meta = @meta", params: { meta: { name: "Testy McTesterson", age: 42, active: false, score: 98.7 } }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 end

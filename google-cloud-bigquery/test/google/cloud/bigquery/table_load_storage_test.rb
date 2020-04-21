@@ -44,7 +44,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load load_file
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -61,7 +61,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load special_file, format: :csv
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -78,7 +78,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load special_file
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -97,7 +97,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     result = table.load special_file, jagged_rows: true, quoted_newlines: true, autodetect: true,
       encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
       quote: "'", skip_leading: 1
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -114,7 +114,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load special_file
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -131,7 +131,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load special_file
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -148,7 +148,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load special_file
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -165,7 +165,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load special_file
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -184,7 +184,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load special_file, projection_fields: projection_fields
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -197,7 +197,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load load_url
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -210,7 +210,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load URI load_url
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -224,7 +224,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load [URI(load_url), load_url2]
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -238,7 +238,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load load_url, create: "CREATE_NEVER"
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -252,7 +252,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load load_url, create: :never
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -266,7 +266,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load load_url, write: "WRITE_TRUNCATE"
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -280,7 +280,7 @@ describe Google::Cloud::Bigquery::Table, :load, :storage, :mock_bigquery do
     table.service.mocked_service = mock
 
     result = table.load load_url, write: :truncate
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end

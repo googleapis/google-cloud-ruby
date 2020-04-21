@@ -61,8 +61,8 @@ describe Google::Cloud::Bigquery::Dataset, :access, :bigquery do
       acl.add_reader_special :all
     end
     dataset = bigquery.dataset dataset_id
-    dataset.access.wont_be :empty?
-    dataset.access.to_a.must_be_kind_of Array
+    _(dataset.access).wont_be :empty?
+    _(dataset.access.to_a).must_be_kind_of Array
     assert dataset.access.reader_special? :all
 
     dataset.access do |acl|

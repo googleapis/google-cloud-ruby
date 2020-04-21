@@ -58,13 +58,13 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy_job target_table, prefix: prefix do |j|
-      j.job_id.must_equal job_id
+      _(j.job_id).must_equal job_id
     end
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can copy itself with create disposition" do
@@ -80,7 +80,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy itself with create disposition symbol" do
@@ -96,7 +96,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
 
@@ -113,7 +113,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy itself with write disposition symbol" do
@@ -129,7 +129,7 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy itself with the job labels option" do
@@ -144,8 +144,8 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    job.labels.must_equal labels
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job.labels).must_equal labels
   end
 
   it "can copy itself with the encryption option" do
@@ -163,9 +163,9 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    job.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
-    job.encryption.kms_key.must_equal kms_key
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job.encryption).must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    _(job.encryption.kms_key).must_equal kms_key
   end
 
   it "can copy itself with the location option" do
@@ -177,13 +177,13 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy_job target_table do |j|
-      j.location.must_equal "US" # default
+      _(j.location).must_equal "US" # default
       j.location = region
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    job.location.must_equal region
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job.location).must_equal region
   end
 
   it "can copy itself with unsetting the location option" do
@@ -195,12 +195,12 @@ describe Google::Cloud::Bigquery::Table, :copy_job, :updater, :mock_bigquery do
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = source_table.copy_job target_table do |j|
-      j.location.must_equal "US" # default
+      _(j.location).must_equal "US" # default
       j.location = nil
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    job.location.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job.location).must_be :nil?
   end
 end

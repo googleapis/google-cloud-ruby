@@ -38,8 +38,8 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.size.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.size).must_equal 3
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 
   it "lists jobs with max set" do
@@ -52,10 +52,10 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
+    _(jobs.count).must_equal 3
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.token).wont_be :nil?
+    _(jobs.token).must_equal "next_page_token"
   end
 
   it "lists jobs with filter set" do
@@ -68,10 +68,10 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
+    _(jobs.count).must_equal 3
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.token).wont_be :nil?
+    _(jobs.token).must_equal "next_page_token"
   end
 
   it "lists jobs with only min_created_at set" do
@@ -84,10 +84,10 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
+    _(jobs.count).must_equal 3
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.token).wont_be :nil?
+    _(jobs.token).must_equal "next_page_token"
   end
 
   it "lists jobs with only max_created_at set" do
@@ -100,10 +100,10 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
+    _(jobs.count).must_equal 3
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.token).wont_be :nil?
+    _(jobs.token).must_equal "next_page_token"
   end
 
   it "lists jobs with created_at set" do
@@ -116,10 +116,10 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
+    _(jobs.count).must_equal 3
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.token).wont_be :nil?
+    _(jobs.token).must_equal "next_page_token"
   end
 
   it "lists jobs with parent_job set to a string" do
@@ -132,10 +132,10 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
+    _(jobs.count).must_equal 3
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.token).wont_be :nil?
+    _(jobs.token).must_equal "next_page_token"
   end
 
   it "lists jobs with parent_job set to a job" do
@@ -148,10 +148,10 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
+    _(jobs.count).must_equal 3
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.token).wont_be :nil?
+    _(jobs.token).must_equal "next_page_token"
   end
 
   it "lists jobs with filter and created_at set" do
@@ -164,10 +164,10 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 3
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    jobs.token.wont_be :nil?
-    jobs.token.must_equal "next_page_token"
+    _(jobs.count).must_equal 3
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.token).wont_be :nil?
+    _(jobs.token).must_equal "next_page_token"
   end
 
   it "paginates jobs" do
@@ -183,14 +183,14 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    first_jobs.count.must_equal 3
-    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    first_jobs.token.wont_be :nil?
-    first_jobs.token.must_equal "next_page_token"
+    _(first_jobs.count).must_equal 3
+    first_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(first_jobs.token).wont_be :nil?
+    _(first_jobs.token).must_equal "next_page_token"
 
-    second_jobs.count.must_equal 2
-    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    second_jobs.token.must_be :nil?
+    _(second_jobs.count).must_equal 2
+    second_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(second_jobs.token).must_be :nil?
   end
 
   it "paginates jobs using next? and next" do
@@ -206,13 +206,13 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    first_jobs.count.must_equal 3
-    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    first_jobs.next?.must_equal true
+    _(first_jobs.count).must_equal 3
+    first_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(first_jobs.next?).must_equal true
 
-    second_jobs.count.must_equal 2
-    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    second_jobs.next?.must_equal false
+    _(second_jobs.count).must_equal 2
+    second_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(second_jobs.next?).must_equal false
   end
 
   it "paginates jobs with next? and next and filter set" do
@@ -228,13 +228,13 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    first_jobs.count.must_equal 3
-    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    first_jobs.next?.must_equal true
+    _(first_jobs.count).must_equal 3
+    first_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(first_jobs.next?).must_equal true
 
-    second_jobs.count.must_equal 2
-    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    second_jobs.next?.must_equal false
+    _(second_jobs.count).must_equal 2
+    second_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(second_jobs.next?).must_equal false
   end
 
   it "paginates jobs with next? and next and created_at set" do
@@ -250,13 +250,13 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    first_jobs.count.must_equal 3
-    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    first_jobs.next?.must_equal true
+    _(first_jobs.count).must_equal 3
+    first_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(first_jobs.next?).must_equal true
 
-    second_jobs.count.must_equal 2
-    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    second_jobs.next?.must_equal false
+    _(second_jobs.count).must_equal 2
+    second_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(second_jobs.next?).must_equal false
   end
 
   it "paginates jobs with next? and next and parent_job_id set" do
@@ -272,13 +272,13 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    first_jobs.count.must_equal 3
-    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    first_jobs.next?.must_equal true
+    _(first_jobs.count).must_equal 3
+    first_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(first_jobs.next?).must_equal true
 
-    second_jobs.count.must_equal 2
-    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    second_jobs.next?.must_equal false
+    _(second_jobs.count).must_equal 2
+    second_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(second_jobs.next?).must_equal false
   end
 
   it "paginates jobs with next? and next and filter and created_at set" do
@@ -294,13 +294,13 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    first_jobs.count.must_equal 3
-    first_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    first_jobs.next?.must_equal true
+    _(first_jobs.count).must_equal 3
+    first_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(first_jobs.next?).must_equal true
 
-    second_jobs.count.must_equal 2
-    second_jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
-    second_jobs.next?.must_equal false
+    _(second_jobs.count).must_equal 2
+    second_jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(second_jobs.next?).must_equal false
   end
 
   it "paginates jobs with all" do
@@ -315,8 +315,8 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 5
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.count).must_equal 5
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 
   it "paginates jobs with all and filter set" do
@@ -331,8 +331,8 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 5
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.count).must_equal 5
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 
   it "paginates jobs with all and created_at set" do
@@ -347,8 +347,8 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 5
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.count).must_equal 5
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 
   it "paginates jobs with all and parent_job_id set" do
@@ -363,8 +363,8 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 5
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.count).must_equal 5
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 
   it "paginates jobs with all and filter and created_at set" do
@@ -379,8 +379,8 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 5
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.count).must_equal 5
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 
   it "iterates jobs with all using Enumerator" do
@@ -395,8 +395,8 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 5
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.count).must_equal 5
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 
   it "iterates jobs with all with request_limit set" do
@@ -411,8 +411,8 @@ describe Google::Cloud::Bigquery::Project, :jobs, :mock_bigquery do
 
     mock.verify
 
-    jobs.count.must_equal 6
-    jobs.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Job }
+    _(jobs.count).must_equal 6
+    jobs.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Job }
   end
 
   def list_jobs_gapi count = 2, token = nil

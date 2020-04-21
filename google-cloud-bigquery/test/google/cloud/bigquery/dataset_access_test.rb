@@ -22,7 +22,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
                                                       bigquery.service }
 
   it "gets the access rules" do
-    dataset.access.must_be :empty?
+    _(dataset.access).must_be :empty?
   end
 
   it "adds an access entry with specifying user scope" do
@@ -34,22 +34,22 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
     mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
-    dataset.access.must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
-    dataset.access.must_be :frozen?
+    _(dataset.access).must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
+    _(dataset.access).must_be :frozen?
 
     refute dataset.access.writer_user? "writer@example.com"
 
     dataset.access do |acl|
-      acl.must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
-      acl.wont_be :frozen?
+      _(acl).must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
+      _(acl).wont_be :frozen?
 
       refute acl.writer_user? "writer@example.com"
       acl.add_writer_user "writer@example.com"
       assert acl.writer_user? "writer@example.com"
     end
 
-    dataset.access.must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
-    dataset.access.must_be :frozen?
+    _(dataset.access).must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
+    _(dataset.access).must_be :frozen?
 
     assert dataset.access.writer_user? "writer@example.com"
 

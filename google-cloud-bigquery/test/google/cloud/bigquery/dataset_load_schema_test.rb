@@ -75,7 +75,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
       schema.boolean "active"
       schema.bytes "avatar"
     end
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -97,7 +97,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     schema.bytes "avatar"
 
     result = dataset.load table_id, load_file, create: :needed, schema: schema
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end
@@ -120,7 +120,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
       schema.boolean "active"
       schema.bytes "avatar"
     end
-    result.must_equal true
+    _(result).must_equal true
 
     mock.verify
   end

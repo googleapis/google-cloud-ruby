@@ -28,79 +28,79 @@ describe Google::Cloud::Bigquery::Service do
 
   it "returns table ref from standard sql format with project, dataset, table and no default ref" do
     table_ref = Service.table_ref_from_s "#{project_id}.#{dataset_id}.#{table_id}"
-    table_ref.must_be_kind_of Google::Apis::BigqueryV2::TableReference
-    table_ref.project_id.must_equal project_id
-    table_ref.dataset_id.must_equal dataset_id
-    table_ref.table_id.must_equal table_id
+    _(table_ref).must_be_kind_of Google::Apis::BigqueryV2::TableReference
+    _(table_ref.project_id).must_equal project_id
+    _(table_ref.dataset_id).must_equal dataset_id
+    _(table_ref.table_id).must_equal table_id
   end
 
   it "returns table ref from legacy sql format with project, dataset, table and no default ref" do
     table_ref = Service.table_ref_from_s "#{project_id}:#{dataset_id}.#{table_id}"
-    table_ref.project_id.must_equal project_id
-    table_ref.dataset_id.must_equal dataset_id
-    table_ref.table_id.must_equal table_id
+    _(table_ref.project_id).must_equal project_id
+    _(table_ref.dataset_id).must_equal dataset_id
+    _(table_ref.table_id).must_equal table_id
   end
 
   it "returns table ref from standard sql format with project, dataset, table and project default ref" do
     table_ref = Service.table_ref_from_s "#{project_id}.#{dataset_id}.#{table_id}", default_ref: project_default_ref
-    table_ref.project_id.must_equal project_id
-    table_ref.dataset_id.must_equal dataset_id
-    table_ref.table_id.must_equal table_id
+    _(table_ref.project_id).must_equal project_id
+    _(table_ref.dataset_id).must_equal dataset_id
+    _(table_ref.table_id).must_equal table_id
   end
 
   it "returns table ref from standard sql format with project, dataset, table and dataset default ref" do
     table_ref = Service.table_ref_from_s "#{project_id}.#{dataset_id}.#{table_id}", default_ref: dataset_default_ref
-    table_ref.project_id.must_equal project_id
-    table_ref.dataset_id.must_equal dataset_id
-    table_ref.table_id.must_equal table_id
+    _(table_ref.project_id).must_equal project_id
+    _(table_ref.dataset_id).must_equal dataset_id
+    _(table_ref.table_id).must_equal table_id
   end
 
   it "returns table ref from standard sql format with project, dataset, table and table default ref" do
     table_ref = Service.table_ref_from_s "#{project_id}.#{dataset_id}.#{table_id}", default_ref: table_default_ref
-    table_ref.project_id.must_equal project_id
-    table_ref.dataset_id.must_equal dataset_id
-    table_ref.table_id.must_equal table_id
+    _(table_ref.project_id).must_equal project_id
+    _(table_ref.dataset_id).must_equal dataset_id
+    _(table_ref.table_id).must_equal table_id
   end
 
   it "returns table ref from standard sql format with dataset, table and project default ref" do
     table_ref = Service.table_ref_from_s "#{dataset_id}.#{table_id}", default_ref: project_default_ref
-    table_ref.project_id.must_equal project_id_default
-    table_ref.dataset_id.must_equal dataset_id
-    table_ref.table_id.must_equal table_id
+    _(table_ref.project_id).must_equal project_id_default
+    _(table_ref.dataset_id).must_equal dataset_id
+    _(table_ref.table_id).must_equal table_id
   end
 
   it "returns table ref from standard sql format with dataset, table and dataset default ref" do
     table_ref = Service.table_ref_from_s "#{dataset_id}.#{table_id}", default_ref: dataset_default_ref
-    table_ref.project_id.must_equal project_id_default
-    table_ref.dataset_id.must_equal dataset_id
-    table_ref.table_id.must_equal table_id
+    _(table_ref.project_id).must_equal project_id_default
+    _(table_ref.dataset_id).must_equal dataset_id
+    _(table_ref.table_id).must_equal table_id
   end
 
   it "returns table ref from standard sql format with dataset, table and table default ref" do
     table_ref = Service.table_ref_from_s "#{dataset_id}.#{table_id}", default_ref: table_default_ref
-    table_ref.project_id.must_equal project_id_default
-    table_ref.dataset_id.must_equal dataset_id
-    table_ref.table_id.must_equal table_id
+    _(table_ref.project_id).must_equal project_id_default
+    _(table_ref.dataset_id).must_equal dataset_id
+    _(table_ref.table_id).must_equal table_id
   end
 
   it "raises from standard sql format with table and project default ref" do
     err = expect do
       Service.table_ref_from_s table_id, default_ref: project_default_ref
     end.must_raise ArgumentError
-    err.message.must_equal "TableReference is missing dataset_id"
+    _(err.message).must_equal "TableReference is missing dataset_id"
   end
 
   it "returns table ref from standard sql format with table and dataset default ref" do
     table_ref = Service.table_ref_from_s table_id, default_ref: dataset_default_ref
-    table_ref.project_id.must_equal project_id_default
-    table_ref.dataset_id.must_equal dataset_id_default
-    table_ref.table_id.must_equal table_id
+    _(table_ref.project_id).must_equal project_id_default
+    _(table_ref.dataset_id).must_equal dataset_id_default
+    _(table_ref.table_id).must_equal table_id
   end
 
   it "returns table ref from standard sql format with table and table default ref" do
     table_ref = Service.table_ref_from_s table_id, default_ref: table_default_ref
-    table_ref.project_id.must_equal project_id_default
-    table_ref.dataset_id.must_equal dataset_id_default
-    table_ref.table_id.must_equal table_id
+    _(table_ref.project_id).must_equal project_id_default
+    _(table_ref.dataset_id).must_equal dataset_id_default
+    _(table_ref.table_id).must_equal table_id
   end
 end

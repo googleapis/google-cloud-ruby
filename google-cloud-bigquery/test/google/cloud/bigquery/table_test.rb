@@ -33,44 +33,44 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
 
   it "knows its attributes" do
-    table.table_id.must_equal table_id
-    table.dataset_id.must_equal dataset
-    table.project_id.must_equal project
-    table.table_ref.must_be_kind_of Google::Apis::BigqueryV2::TableReference
-    table.table_ref.table_id.must_equal table_id
-    table.table_ref.dataset_id.must_equal dataset
-    table.table_ref.project_id.must_equal project
+    _(table.table_id).must_equal table_id
+    _(table.dataset_id).must_equal dataset
+    _(table.project_id).must_equal project
+    _(table.table_ref).must_be_kind_of Google::Apis::BigqueryV2::TableReference
+    _(table.table_ref.table_id).must_equal table_id
+    _(table.table_ref.dataset_id).must_equal dataset
+    _(table.table_ref.project_id).must_equal project
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.etag.must_equal etag
-    table.api_url.must_equal api_url
-    table.bytes_count.must_equal 1000
-    table.rows_count.must_equal 100
-    table.table?.must_equal true
-    table.view?.must_equal false
-    table.location.must_equal location_code
-    table.labels.must_equal labels
-    table.labels.must_be :frozen?
-    table.require_partition_filter.must_equal true
-    table.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
-    table.encryption.kms_key.must_equal kms_key
-    table.encryption.must_be :frozen?
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.etag).must_equal etag
+    _(table.api_url).must_equal api_url
+    _(table.bytes_count).must_equal 1000
+    _(table.rows_count).must_equal 100
+    _(table.table?).must_equal true
+    _(table.view?).must_equal false
+    _(table.location).must_equal location_code
+    _(table.labels).must_equal labels
+    _(table.labels).must_be :frozen?
+    _(table.require_partition_filter).must_equal true
+    _(table.encryption).must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    _(table.encryption.kms_key).must_equal kms_key
+    _(table.encryption).must_be :frozen?
   end
 
   it "knows its fully-qualified ID" do
-    table.id.must_equal "#{project}:#{dataset}.#{table_id}"
+    _(table.id).must_equal "#{project}:#{dataset}.#{table_id}"
   end
 
   it "knows its fully-qualified query ID" do
     standard_id = "`#{project}.#{dataset}.#{table_id}`"
     legacy_id = "[#{project}:#{dataset}.#{table_id}]"
 
-    table.query_id.must_equal standard_id
-    table.query_id(standard_sql: true).must_equal standard_id
-    table.query_id(standard_sql: false).must_equal legacy_id
-    table.query_id(legacy_sql: true).must_equal legacy_id
-    table.query_id(legacy_sql: false).must_equal standard_id
+    _(table.query_id).must_equal standard_id
+    _(table.query_id(standard_sql: true)).must_equal standard_id
+    _(table.query_id(standard_sql: false)).must_equal legacy_id
+    _(table.query_id(legacy_sql: true)).must_equal legacy_id
+    _(table.query_id(legacy_sql: false)).must_equal standard_id
   end
 
   it "knows its creation and modification and expiration times" do
@@ -80,33 +80,33 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table_hash["expirationTime"] = time_millis
 
 
-    table.created_at.must_be_close_to now, 1
-    table.modified_at.must_be_close_to now, 1
-    table.expires_at.must_be_close_to now, 1
+    _(table.created_at).must_be_close_to now, 1
+    _(table.modified_at).must_be_close_to now, 1
+    _(table.expires_at).must_be_close_to now, 1
   end
 
   it "can have an empty expiration times" do
     table_hash["expirationTime"] = nil
 
-    table.expires_at.must_be :nil?
+    _(table.expires_at).must_be :nil?
   end
 
   it "knows schema, fields, and headers" do
-    table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    table.schema.must_be :frozen?
-    table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
-    table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    table.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(table.schema).must_be :frozen?
+    _(table.fields.map(&:name)).must_equal table.schema.fields.map(&:name)
+    _(table.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
   end
 
   it "knows its streaming buffer attributes" do
-    table.buffer_bytes.must_equal 2000
-    table.buffer_rows.must_equal 200
-    table.buffer_oldest_at.must_be_close_to ::Time.now, 1
+    _(table.buffer_bytes).must_equal 2000
+    _(table.buffer_rows).must_equal 200
+    _(table.buffer_oldest_at).must_be_close_to ::Time.now, 1
   end
 
   it "can test its existence" do
-    table.exists?.must_equal true
+    _(table.exists?).must_equal true
   end
 
   it "can test its existence with force to load resource" do
@@ -114,7 +114,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
     table.service.mocked_service = mock
 
-    table.exists?(force: true).must_equal true
+    _(table.exists?(force: true)).must_equal true
 
     mock.verify
   end
@@ -125,9 +125,9 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       [project, dataset, table_id]
     table.service.mocked_service = mock
 
-    table.delete.must_equal true
+    _(table.delete).must_equal true
 
-    table.exists?.must_equal false
+    _(table.exists?).must_equal false
 
     mock.verify
   end

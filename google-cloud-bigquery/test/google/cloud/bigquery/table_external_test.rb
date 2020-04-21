@@ -39,13 +39,13 @@ describe Google::Cloud::Bigquery::Table, :external, :mock_bigquery do
   let(:etag) { "etag123456789" }
 
   it "can have a permanent external data source" do
-    table.external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
-    table.external.urls.must_equal ["gs://my-bucket/path/to/file.csv"]
-    table.external.format.must_equal "CSV"
-    table.external.autodetect.must_equal true
-    table.external.skip_leading_rows.must_equal 1
-    table.external.schema.must_be :empty?
-    table.external.must_be :frozen?
+    _(table.external).must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    _(table.external.urls).must_equal ["gs://my-bucket/path/to/file.csv"]
+    _(table.external.format).must_equal "CSV"
+    _(table.external.autodetect).must_equal true
+    _(table.external.skip_leading_rows).must_equal 1
+    _(table.external.schema).must_be :empty?
+    _(table.external).must_be :frozen?
   end
 
   it "can update the permanent external data source" do
@@ -82,13 +82,13 @@ describe Google::Cloud::Bigquery::Table, :external, :mock_bigquery do
 
     mock.verify
 
-    table.external.must_be_kind_of Google::Cloud::Bigquery::External::JsonSource
-    table.external.urls.must_equal ["gs://my-bucket/path/to/file.json"]
-    table.external.format.must_equal "NEWLINE_DELIMITED_JSON"
-    table.external.autodetect.must_be :nil?
-    table.external.schema.wont_be :empty?
-    table.external.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    table.external.schema.must_be :frozen?
-    table.external.must_be :frozen?
+    _(table.external).must_be_kind_of Google::Cloud::Bigquery::External::JsonSource
+    _(table.external.urls).must_equal ["gs://my-bucket/path/to/file.json"]
+    _(table.external.format).must_equal "NEWLINE_DELIMITED_JSON"
+    _(table.external.autodetect).must_be :nil?
+    _(table.external.schema).wont_be :empty?
+    _(table.external.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(table.external.schema).must_be :frozen?
+    _(table.external).must_be :frozen?
   end
 end

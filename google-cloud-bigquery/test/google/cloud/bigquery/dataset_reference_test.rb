@@ -32,23 +32,23 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
   let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
 
   it "knows its attributes" do
-    dataset.dataset_id.must_equal dataset_id
-    dataset.project_id.must_equal project
-    dataset.dataset_ref.must_be_kind_of Hash
-    dataset.dataset_ref[:dataset_id].must_equal dataset_id
-    dataset.dataset_ref[:project_id].must_equal project
+    _(dataset.dataset_id).must_equal dataset_id
+    _(dataset.project_id).must_equal project
+    _(dataset.dataset_ref).must_be_kind_of Hash
+    _(dataset.dataset_ref[:dataset_id]).must_equal dataset_id
+    _(dataset.dataset_ref[:project_id]).must_equal project
 
-    dataset.name.must_be_nil
-    dataset.description.must_be_nil
-    dataset.default_expiration.must_be_nil
-    dataset.etag.must_be_nil
-    dataset.api_url.must_be_nil
-    dataset.location.must_be_nil
-    dataset.labels.must_be_nil
-    dataset.created_at.must_be_nil
-    dataset.modified_at.must_be_nil
+    _(dataset.name).must_be_nil
+    _(dataset.description).must_be_nil
+    _(dataset.default_expiration).must_be_nil
+    _(dataset.etag).must_be_nil
+    _(dataset.api_url).must_be_nil
+    _(dataset.location).must_be_nil
+    _(dataset.labels).must_be_nil
+    _(dataset.created_at).must_be_nil
+    _(dataset.modified_at).must_be_nil
 
-    dataset.default_encryption.must_be_nil
+    _(dataset.default_encryption).must_be_nil
   end
 
   it "can test its existence" do
@@ -56,7 +56,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
     mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
     dataset.service.mocked_service = mock
 
-    dataset.exists?.must_equal true
+    _(dataset.exists?).must_equal true
 
     mock.verify
   end
@@ -66,7 +66,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
     mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
     dataset.service.mocked_service = mock
 
-    dataset.exists?(force: true).must_equal true
+    _(dataset.exists?(force: true)).must_equal true
 
     mock.verify
   end
@@ -77,9 +77,9 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
       [project, dataset.dataset_id, delete_contents: nil]
     dataset.service.mocked_service = mock
 
-    dataset.delete.must_equal true
+    _(dataset.delete).must_equal true
 
-    dataset.exists?.must_equal false
+    _(dataset.exists?).must_equal false
 
     mock.verify
   end
@@ -90,9 +90,9 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
       [project, dataset.dataset_id, delete_contents: true]
     dataset.service.mocked_service = mock
 
-    dataset.delete(force: true).must_equal true
+    _(dataset.delete(force: true)).must_equal true
 
-    dataset.exists?.must_equal false
+    _(dataset.exists?).must_equal false
 
     mock.verify
   end
@@ -110,10 +110,10 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
 
     mock.verify
 
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
-    table.table_id.must_equal table_id
-    table.must_be :table?
-    table.wont_be :view?
+    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(table.table_id).must_equal table_id
+    _(table).must_be :table?
+    _(table).wont_be :view?
   end
 
   it "can create a empty view" do
@@ -136,14 +136,14 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
 
     mock.verify
 
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
-    table.table_id.must_equal view_id
-    table.query.must_equal query
-    table.must_be :query_standard_sql?
-    table.wont_be :query_legacy_sql?
-    table.query_udfs.must_be :empty?
-    table.must_be :view?
-    table.wont_be :table?
+    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(table.table_id).must_equal view_id
+    _(table.query).must_equal query
+    _(table).must_be :query_standard_sql?
+    _(table).wont_be :query_legacy_sql?
+    _(table.query_udfs).must_be :empty?
+    _(table).must_be :view?
+    _(table).wont_be :table?
   end
 
   it "lists tables" do
@@ -156,8 +156,8 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
 
     mock.verify
 
-    tables.size.must_equal 3
-    tables.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Table }
+    _(tables.size).must_equal 3
+    tables.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Table }
   end
 
   it "paginates tables" do
@@ -173,16 +173,16 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
 
     mock.verify
 
-    first_tables.count.must_equal 3
-    first_tables.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Table }
-    first_tables.token.wont_be :nil?
-    first_tables.token.must_equal "next_page_token"
-    first_tables.total.must_equal 5
+    _(first_tables.count).must_equal 3
+    first_tables.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Table }
+    _(first_tables.token).wont_be :nil?
+    _(first_tables.token).must_equal "next_page_token"
+    _(first_tables.total).must_equal 5
 
-    second_tables.count.must_equal 2
-    second_tables.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Table }
-    second_tables.token.must_be :nil?
-    second_tables.total.must_equal 5
+    _(second_tables.count).must_equal 2
+    second_tables.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Table }
+    _(second_tables.token).must_be :nil?
+    _(second_tables.total).must_equal 5
   end
 
   it "finds a table" do
@@ -196,8 +196,8 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
 
     mock.verify
 
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
-    table.table_id.must_equal found_table_id
+    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(table.table_id).must_equal found_table_id
   end
 
   def create_table_gapi id, name = nil, description = nil

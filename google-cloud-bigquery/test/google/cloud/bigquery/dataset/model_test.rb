@@ -30,7 +30,7 @@ describe Google::Cloud::Bigquery::Dataset, :model, :mock_bigquery do
 
     mock.verify
 
-    model.must_be_kind_of Google::Cloud::Bigquery::Model
-    model.model_id.must_equal found_model_id
+    _(model).must_be_kind_of Google::Cloud::Bigquery::Model
+    _(model.model_id).must_equal found_model_id
   end
 end

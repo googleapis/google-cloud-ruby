@@ -48,14 +48,14 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
       tbl.external = csv_table
     end
 
-    table.must_be :external?
-    table.external.wont_be :nil?
-    table.external.must_be :frozen?
-    table.external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    _(table).must_be :external?
+    _(table.external).wont_be :nil?
+    _(table.external).must_be :frozen?
+    _(table.external).must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
 
     data = dataset.query "SELECT id, name, breed FROM #{table_id} ORDER BY id"
-    data.count.must_equal 3
-    data.must_equal [
+    _(data.count).must_equal 3
+    _(data).must_equal [
       { id: 4, name: "silvano", breed: "the cat kind" },
       { id: 5, name: "ryan", breed: "golden retriever?" },
       { id: 6, name: "stephen", breed: "idkanycatbreeds" }
@@ -77,14 +77,14 @@ describe Google::Cloud::Bigquery::Table, :external, :bigquery do
       tbl.external = csv_table
     end
 
-    table.must_be :external?
-    table.external.wont_be :nil?
-    table.external.must_be :frozen?
-    table.external.must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
+    _(table).must_be :external?
+    _(table.external).wont_be :nil?
+    _(table.external).must_be :frozen?
+    _(table.external).must_be_kind_of Google::Cloud::Bigquery::External::CsvSource
 
     data = dataset.query "SELECT id, name, breed FROM #{table_id} ORDER BY id"
-    data.count.must_equal 3
-    data.must_equal [
+    _(data.count).must_equal 3
+    _(data).must_equal [
       { id: 4, name: "silvano", breed: "the cat kind" },
       { id: 5, name: "ryan", breed: "golden retriever?" },
       { id: 6, name: "stephen", breed: "idkanycatbreeds" }

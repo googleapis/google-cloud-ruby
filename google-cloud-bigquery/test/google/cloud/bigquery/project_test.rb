@@ -26,8 +26,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     mock.expect :get_project_service_account, service_account_resp, [project]
     bigquery.service.mocked_service = mock
 
-    bigquery.service_account_email.must_equal email
-    bigquery.service_account_email.must_equal email # memoized, no request
+    _(bigquery.service_account_email).must_equal email
+    _(bigquery.service_account_email).must_equal email # memoized, no request
 
     mock.verify
   end
@@ -46,7 +46,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
   end
 
   it "creates a dataset with options" do
@@ -74,11 +74,11 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    dataset.name.must_equal name
-    dataset.description.must_equal description
-    dataset.default_expiration.must_equal default_expiration
-    dataset.location.must_equal location
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset.name).must_equal name
+    _(dataset.description).must_equal description
+    _(dataset.default_expiration).must_equal default_expiration
+    _(dataset.location).must_equal location
   end
 
   it "creates a dataset and access rules using a block" do
@@ -104,8 +104,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    dataset.access.wont_be :empty?
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset.access).wont_be :empty?
   end
 
   it "creates a dataset with options and access rules using a block" do
@@ -163,13 +163,13 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    dataset.name.must_equal name
-    dataset.description.must_equal description
-    dataset.default_expiration.must_equal default_expiration
-    dataset.labels.must_equal labels
-    dataset.location.must_equal location
-    dataset.access.wont_be :empty?
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset.name).must_equal name
+    _(dataset.description).must_equal description
+    _(dataset.default_expiration).must_equal default_expiration
+    _(dataset.labels).must_equal labels
+    _(dataset.location).must_equal location
+    _(dataset.access).wont_be :empty?
   end
 
   it "creates a dataset with block options and access rules not using a block" do
@@ -203,12 +203,12 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    dataset.name.must_equal name
-    dataset.description.must_equal description
-    dataset.default_expiration.must_equal default_expiration
-    dataset.location.must_equal location
-    dataset.access.wont_be :empty?
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset.name).must_equal name
+    _(dataset.description).must_equal description
+    _(dataset.default_expiration).must_equal default_expiration
+    _(dataset.location).must_equal location
+    _(dataset.access).wont_be :empty?
   end
 
   it "raises when creating a dataset with a blank id" do
@@ -233,13 +233,13 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    datasets.size.must_equal 3
+    _(datasets.size).must_equal 3
     datasets.each do |ds|
-      ds.must_be_kind_of Google::Cloud::Bigquery::Dataset
-      ds.wont_be :reference?
-      ds.must_be :resource?
-      ds.must_be :resource_partial?
-      ds.wont_be :resource_full?
+      _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset
+      _(ds).wont_be :reference?
+      _(ds).must_be :resource?
+      _(ds).must_be :resource_partial?
+      _(ds).wont_be :resource_full?
     end
   end
 
@@ -253,10 +253,10 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    datasets.count.must_equal 3
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    datasets.token.wont_be :nil?
-    datasets.token.must_equal "next_page_token"
+    _(datasets.count).must_equal 3
+    datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(datasets.token).wont_be :nil?
+    _(datasets.token).must_equal "next_page_token"
   end
 
   it "paginates datasets with filter set" do
@@ -269,10 +269,10 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    datasets.count.must_equal 3
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    datasets.token.wont_be :nil?
-    datasets.token.must_equal "next_page_token"
+    _(datasets.count).must_equal 3
+    datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(datasets.token).wont_be :nil?
+    _(datasets.token).must_equal "next_page_token"
   end
 
   it "paginates datasets with max set" do
@@ -285,10 +285,10 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    datasets.count.must_equal 3
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    datasets.token.wont_be :nil?
-    datasets.token.must_equal "next_page_token"
+    _(datasets.count).must_equal 3
+    datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(datasets.token).wont_be :nil?
+    _(datasets.token).must_equal "next_page_token"
   end
 
   it "paginates datasets" do
@@ -304,14 +304,14 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    first_datasets.count.must_equal 3
-    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    first_datasets.token.wont_be :nil?
-    first_datasets.token.must_equal "next_page_token"
+    _(first_datasets.count).must_equal 3
+    first_datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(first_datasets.token).wont_be :nil?
+    _(first_datasets.token).must_equal "next_page_token"
 
-    second_datasets.count.must_equal 2
-    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    second_datasets.token.must_be :nil?
+    _(second_datasets.count).must_equal 2
+    second_datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(second_datasets.token).must_be :nil?
   end
 
   it "paginates datasets with next? and next" do
@@ -327,13 +327,13 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    first_datasets.count.must_equal 3
-    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    first_datasets.next?.must_equal true
+    _(first_datasets.count).must_equal 3
+    first_datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(first_datasets.next?).must_equal true
 
-    second_datasets.count.must_equal 2
-    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    second_datasets.next?.must_equal false
+    _(second_datasets.count).must_equal 2
+    second_datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(second_datasets.next?).must_equal false
   end
 
   it "paginates datasets with next? and next with all/hidden set" do
@@ -349,13 +349,13 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    first_datasets.count.must_equal 3
-    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    first_datasets.next?.must_equal true
+    _(first_datasets.count).must_equal 3
+    first_datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(first_datasets.next?).must_equal true
 
-    second_datasets.count.must_equal 2
-    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    second_datasets.next?.must_equal false
+    _(second_datasets.count).must_equal 2
+    second_datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(second_datasets.next?).must_equal false
   end
 
   it "paginates datasets with next? and next with filter set" do
@@ -371,13 +371,13 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    first_datasets.count.must_equal 3
-    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    first_datasets.next?.must_equal true
+    _(first_datasets.count).must_equal 3
+    first_datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(first_datasets.next?).must_equal true
 
-    second_datasets.count.must_equal 2
-    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    second_datasets.next?.must_equal false
+    _(second_datasets.count).must_equal 2
+    second_datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(second_datasets.next?).must_equal false
   end
 
   it "paginates datasets with next? and next with max set" do
@@ -393,13 +393,13 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    first_datasets.count.must_equal 3
-    first_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    first_datasets.next?.must_equal true
+    _(first_datasets.count).must_equal 3
+    first_datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(first_datasets.next?).must_equal true
 
-    second_datasets.count.must_equal 2
-    second_datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
-    second_datasets.next?.must_equal false
+    _(second_datasets.count).must_equal 2
+    second_datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(second_datasets.next?).must_equal false
   end
 
   it "paginates datasets with all" do
@@ -414,8 +414,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    datasets.count.must_equal 5
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(datasets.count).must_equal 5
+    datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
   end
 
   it "paginates datasets with all with all/hidden set" do
@@ -430,8 +430,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    datasets.count.must_equal 5
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(datasets.count).must_equal 5
+    datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
   end
 
   it "paginates datasets with all with filter set" do
@@ -446,8 +446,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    datasets.count.must_equal 5
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(datasets.count).must_equal 5
+    datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
   end
 
   it "paginates datasets with all with max set" do
@@ -462,8 +462,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    datasets.count.must_equal 5
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(datasets.count).must_equal 5
+    datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
   end
 
   it "iterates datasets with all using Enumerator" do
@@ -478,8 +478,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    datasets.count.must_equal 5
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(datasets.count).must_equal 5
+    datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
   end
 
   it "iterates datasets with all with request_limit set" do
@@ -494,8 +494,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    datasets.count.must_equal 6
-    datasets.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Dataset }
+    _(datasets.count).must_equal 6
+    datasets.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Dataset }
   end
 
   it "finds a dataset" do
@@ -511,9 +511,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    dataset.dataset_id.must_equal dataset_id
-    dataset.name.must_equal dataset_name
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset.dataset_id).must_equal dataset_id
+    _(dataset.name).must_equal dataset_name
   end
 
   it "finds a dataset with skip_lookup option" do
@@ -522,11 +522,11 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     dataset = bigquery.dataset dataset_id, skip_lookup: true
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    dataset.must_be :reference?
-    dataset.wont_be :resource?
-    dataset.wont_be :resource_partial?
-    dataset.wont_be :resource_full?
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset).must_be :reference?
+    _(dataset).wont_be :resource?
+    _(dataset).wont_be :resource_partial?
+    _(dataset).wont_be :resource_full?
   end
 
   it "finds a dataset with skip_lookup option and then reloads it" do
@@ -540,19 +540,19 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     dataset = bigquery.dataset dataset_id, skip_lookup: true
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    dataset.must_be :reference?
-    dataset.wont_be :resource?
-    dataset.wont_be :resource_partial?
-    dataset.wont_be :resource_full?
-    dataset.dataset_id.must_equal dataset_id # does not call reload! internally
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset).must_be :reference?
+    _(dataset).wont_be :resource?
+    _(dataset).wont_be :resource_partial?
+    _(dataset).wont_be :resource_full?
+    _(dataset.dataset_id).must_equal dataset_id # does not call reload! internally
 
     dataset.reload!
-    dataset.name.must_equal dataset_name
-    dataset.wont_be :reference?
-    dataset.must_be :resource?
-    dataset.wont_be :resource_partial?
-    dataset.must_be :resource_full?
+    _(dataset.name).must_equal dataset_name
+    _(dataset).wont_be :reference?
+    _(dataset).must_be :resource?
+    _(dataset).wont_be :resource_partial?
+    _(dataset).must_be :resource_full?
 
     mock.verify
   end
@@ -568,22 +568,22 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     dataset = bigquery.dataset dataset_id, skip_lookup: true
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    dataset.must_be :reference?
-    dataset.project_id.must_equal project # does not call reload! internally
-    dataset.dataset_id.must_equal dataset_id # does not call reload! internally
-    dataset.dataset_ref.wont_be_nil
-    dataset.must_be :reference?
-    dataset.wont_be :resource?
-    dataset.wont_be :resource_partial?
-    dataset.wont_be :resource_full?
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset).must_be :reference?
+    _(dataset.project_id).must_equal project # does not call reload! internally
+    _(dataset.dataset_id).must_equal dataset_id # does not call reload! internally
+    _(dataset.dataset_ref).wont_be_nil
+    _(dataset).must_be :reference?
+    _(dataset).wont_be :resource?
+    _(dataset).wont_be :resource_partial?
+    _(dataset).wont_be :resource_full?
 
     dataset.exists? # calls reload! internally
-    dataset.wont_be :reference?
-    dataset.must_be :resource?
-    dataset.wont_be :resource_partial?
-    dataset.must_be :resource_full?
-    dataset.name.must_equal dataset_name
+    _(dataset).wont_be :reference?
+    _(dataset).must_be :resource?
+    _(dataset).wont_be :resource_partial?
+    _(dataset).must_be :resource_full?
+    _(dataset.name).must_equal dataset_name
 
     mock.verify
   end
@@ -594,7 +594,7 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
     error = expect do
       bigquery.dataset dataset_id, skip_lookup: true
     end.must_raise ArgumentError
-    error.message.must_equal "dataset_id is required"
+    _(error.message).must_equal "dataset_id is required"
   end
 
   it "finds a job" do
@@ -608,8 +608,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::Job
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::Job
+    _(job.job_id).must_equal job_id
   end
 
   it "finds a job with location" do
@@ -624,9 +624,9 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::Job
-    job.job_id.must_equal job_id
-    job.location.must_equal region
+    _(job).must_be_kind_of Google::Cloud::Bigquery::Job
+    _(job.job_id).must_equal job_id
+    _(job.location).must_equal region
   end
 
   it "lists projects" do
@@ -639,12 +639,12 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    projects.size.must_equal 3
+    _(projects.size).must_equal 3
     projects.each do |project|
-      project.must_be_kind_of Google::Cloud::Bigquery::Project
-      project.name.must_equal "project-name"
-      project.numeric_id.must_equal 1234567890
-      project.project.must_equal "project-id-12345"
+      _(project).must_be_kind_of Google::Cloud::Bigquery::Project
+      _(project.name).must_equal "project-name"
+      _(project.numeric_id).must_equal 1234567890
+      _(project.project).must_equal "project-id-12345"
     end
   end
 
@@ -658,10 +658,10 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    projects.count.must_equal 3
-    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
-    projects.token.wont_be :nil?
-    projects.token.must_equal "next_page_token"
+    _(projects.count).must_equal 3
+    projects.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Project }
+    _(projects.token).wont_be :nil?
+    _(projects.token).must_equal "next_page_token"
   end
 
   it "paginates projects" do
@@ -677,14 +677,14 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    first_projects.count.must_equal 3
-    first_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
-    first_projects.token.wont_be :nil?
-    first_projects.token.must_equal "next_page_token"
+    _(first_projects.count).must_equal 3
+    first_projects.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Project }
+    _(first_projects.token).wont_be :nil?
+    _(first_projects.token).must_equal "next_page_token"
 
-    second_projects.count.must_equal 2
-    second_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
-    second_projects.token.must_be :nil?
+    _(second_projects.count).must_equal 2
+    second_projects.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Project }
+    _(second_projects.token).must_be :nil?
   end
 
   it "paginates projects using next? and next" do
@@ -700,13 +700,13 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    first_projects.count.must_equal 3
-    first_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
-    first_projects.next?.must_equal true
+    _(first_projects.count).must_equal 3
+    first_projects.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Project }
+    _(first_projects.next?).must_equal true
 
-    second_projects.count.must_equal 2
-    second_projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
-    second_projects.next?.must_equal false
+    _(second_projects.count).must_equal 2
+    second_projects.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Project }
+    _(second_projects.next?).must_equal false
   end
 
   it "paginates projects with all" do
@@ -721,8 +721,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    projects.count.must_equal 5
-    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    _(projects.count).must_equal 5
+    projects.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Project }
   end
 
   it "iterates projects with all using Enumerator" do
@@ -737,8 +737,8 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    projects.count.must_equal 5
-    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    _(projects.count).must_equal 5
+    projects.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Project }
   end
 
   it "iterates projects with all with request_limit set" do
@@ -753,27 +753,27 @@ describe Google::Cloud::Bigquery::Project, :mock_bigquery do
 
     mock.verify
 
-    projects.count.must_equal 6
-    projects.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Project }
+    _(projects.count).must_equal 6
+    projects.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Project }
   end
 
   it "creates a schema" do
     schema = bigquery.schema
-    schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    schema.wont_be :frozen?
-    schema.fields.must_be :empty?
+    _(schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(schema).wont_be :frozen?
+    _(schema.fields).must_be :empty?
   end
 
   it "creates a schema with configuration in a block" do
     schema = bigquery.schema do |s|
       s.string "first_name", mode: :required
     end
-    schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    schema.wont_be :frozen?
-    schema.fields.wont_be :empty?
-    schema.fields.size.must_equal 1
-    schema.fields[0].name.must_equal "first_name"
-    schema.fields[0].mode.must_equal "REQUIRED"
+    _(schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(schema).wont_be :frozen?
+    _(schema.fields).wont_be :empty?
+    _(schema.fields.size).must_equal 1
+    _(schema.fields[0].name).must_equal "first_name"
+    _(schema.fields[0].mode).must_equal "REQUIRED"
   end
 
   def create_dataset_gapi id, name = nil, description = nil, default_expiration = nil, location = "US"

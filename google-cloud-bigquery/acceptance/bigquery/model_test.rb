@@ -43,25 +43,25 @@ describe Google::Cloud::Bigquery, :bigquery do
   it "can create, list, read, update, and delete a model" do
     job = dataset.query_job model_sql
     job.wait_until_done!
-    job.wont_be :failed?
+    _(job).wont_be :failed?
 
     # can find the model in the list of models
-    dataset.models.all.map(&:model_id).must_include model_id
+    _(dataset.models.all.map(&:model_id)).must_include model_id
 
     # can get the model
     model = dataset.model model_id
-    model.must_be_kind_of Google::Cloud::Bigquery::Model
-    model.project_id.must_equal bigquery.project
-    model.dataset_id.must_equal dataset.dataset_id
-    model.model_id.must_equal model_id
+    _(model).must_be_kind_of Google::Cloud::Bigquery::Model
+    _(model.project_id).must_equal bigquery.project
+    _(model.dataset_id).must_equal dataset.dataset_id
+    _(model.model_id).must_equal model_id
 
     new_description = "Model was updated #{Time.now}"
     model.description = new_description
     model.refresh!
-    model.description.must_equal new_description
+    _(model.description).must_equal new_description
 
-    model.delete.must_equal true
+    _(model.delete).must_equal true
 
-    dataset.model(model_id).must_be_nil
+    _(dataset.model(model_id)).must_be_nil
   end
 end

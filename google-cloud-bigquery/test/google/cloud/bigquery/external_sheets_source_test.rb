@@ -26,18 +26,18 @@ describe Google::Cloud::Bigquery::External::SheetsSource do
       google_sheets_options: Google::Apis::BigqueryV2::GoogleSheetsOptions.new
     )
 
-    table.must_be_kind_of Google::Cloud::Bigquery::External::DataSource
-    table.urls.must_equal ["https://docs.google.com/spreadsheets/d/1234567980"]
-    table.must_be :sheets?
-    table.format.must_equal "GOOGLE_SHEETS"
+    _(table).must_be_kind_of Google::Cloud::Bigquery::External::DataSource
+    _(table.urls).must_equal ["https://docs.google.com/spreadsheets/d/1234567980"]
+    _(table).must_be :sheets?
+    _(table.format).must_equal "GOOGLE_SHEETS"
 
-    table.wont_be :csv?
-    table.wont_be :json?
-    table.wont_be :avro?
-    table.wont_be :backup?
-    table.wont_be :bigtable?
+    _(table).wont_be :csv?
+    _(table).wont_be :json?
+    _(table).wont_be :avro?
+    _(table).wont_be :backup?
+    _(table).wont_be :bigtable?
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets skip_leading_rows" do
@@ -53,13 +53,13 @@ describe Google::Cloud::Bigquery::External::SheetsSource do
       )
     )
 
-    table.skip_leading_rows.must_be :nil?
+    _(table.skip_leading_rows).must_be :nil?
 
     table.skip_leading_rows = true
 
-    table.skip_leading_rows.must_equal true
+    _(table.skip_leading_rows).must_equal true
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 
   it "sets range" do
@@ -75,12 +75,12 @@ describe Google::Cloud::Bigquery::External::SheetsSource do
       )
     )
 
-    table.range.must_be :nil?
+    _(table.range).must_be :nil?
 
     table.range = "sheet1!A1:B20"
 
-    table.range.must_equal "sheet1!A1:B20"
+    _(table.range).must_equal "sheet1!A1:B20"
 
-    table.to_gapi.to_h.must_equal table_gapi.to_h
+    _(table.to_gapi.to_h).must_equal table_gapi.to_h
   end
 end

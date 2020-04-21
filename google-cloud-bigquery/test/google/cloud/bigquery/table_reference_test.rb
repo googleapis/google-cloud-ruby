@@ -56,58 +56,58 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
                       end }
 
   it "knows its attributes" do
-    table.table_id.must_equal table_id
-    table.dataset_id.must_equal dataset_id
-    table.project_id.must_equal project
-    table.table_ref.must_be_kind_of Google::Apis::BigqueryV2::TableReference
-    table.table_ref.table_id.must_equal table_id
-    table.table_ref.dataset_id.must_equal dataset_id
-    table.table_ref.project_id.must_equal project
+    _(table.table_id).must_equal table_id
+    _(table.dataset_id).must_equal dataset_id
+    _(table.project_id).must_equal project
+    _(table.table_ref).must_be_kind_of Google::Apis::BigqueryV2::TableReference
+    _(table.table_ref.table_id).must_equal table_id
+    _(table.table_ref.dataset_id).must_equal dataset_id
+    _(table.table_ref.project_id).must_equal project
 
-    table.range_partitioning?.must_be_nil
-    table.range_partitioning_field.must_be_nil
-    table.range_partitioning_start.must_be_nil
-    table.range_partitioning_interval.must_be_nil
-    table.range_partitioning_end.must_be_nil
-    table.time_partitioning?.must_be_nil
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.clustering_fields.must_be_nil
-    table.id.must_be_nil
-    table.name.must_be_nil
-    table.etag.must_be_nil
-    table.api_url.must_be_nil
-    table.description.must_be_nil
-    table.bytes_count.must_be_nil
-    table.rows_count.must_be_nil
-    table.created_at.must_be_nil
-    table.expires_at.must_be_nil
-    table.modified_at.must_be_nil
-    table.table?.must_be_nil
-    table.view?.must_be_nil
-    table.external?.must_be_nil
-    table.location.must_be_nil
-    table.labels.must_be_nil
-    table.schema.must_be_nil
-    table.fields.must_be_nil
-    table.headers.must_be_nil
-    table.param_types.must_be_nil
-    table.external.must_be_nil
-    table.buffer_bytes.must_be_nil
-    table.buffer_rows.must_be_nil
-    table.buffer_oldest_at.must_be_nil
+    _(table.range_partitioning?).must_be_nil
+    _(table.range_partitioning_field).must_be_nil
+    _(table.range_partitioning_start).must_be_nil
+    _(table.range_partitioning_interval).must_be_nil
+    _(table.range_partitioning_end).must_be_nil
+    _(table.time_partitioning?).must_be_nil
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.clustering_fields).must_be_nil
+    _(table.id).must_be_nil
+    _(table.name).must_be_nil
+    _(table.etag).must_be_nil
+    _(table.api_url).must_be_nil
+    _(table.description).must_be_nil
+    _(table.bytes_count).must_be_nil
+    _(table.rows_count).must_be_nil
+    _(table.created_at).must_be_nil
+    _(table.expires_at).must_be_nil
+    _(table.modified_at).must_be_nil
+    _(table.table?).must_be_nil
+    _(table.view?).must_be_nil
+    _(table.external?).must_be_nil
+    _(table.location).must_be_nil
+    _(table.labels).must_be_nil
+    _(table.schema).must_be_nil
+    _(table.fields).must_be_nil
+    _(table.headers).must_be_nil
+    _(table.param_types).must_be_nil
+    _(table.external).must_be_nil
+    _(table.buffer_bytes).must_be_nil
+    _(table.buffer_rows).must_be_nil
+    _(table.buffer_oldest_at).must_be_nil
   end
 
   it "knows its fully-qualified query ID" do
     standard_id = "`#{project}.#{dataset_id}.#{table_id}`"
     legacy_id = "[#{project}:#{dataset_id}.#{table_id}]"
 
-    table.query_id.must_equal standard_id
-    table.query_id(standard_sql: true).must_equal standard_id
-    table.query_id(standard_sql: false).must_equal legacy_id
-    table.query_id(legacy_sql: true).must_equal legacy_id
-    table.query_id(legacy_sql: false).must_equal standard_id
+    _(table.query_id).must_equal standard_id
+    _(table.query_id(standard_sql: true)).must_equal standard_id
+    _(table.query_id(standard_sql: false)).must_equal legacy_id
+    _(table.query_id(legacy_sql: true)).must_equal legacy_id
+    _(table.query_id(legacy_sql: false)).must_equal standard_id
   end
 
   it "adds to its existing schema" do
@@ -132,7 +132,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
     mock.verify
 
-    table.headers.must_include :end_date
+    _(table.headers).must_include :end_date
   end
 
   it "replaces existing schema with replace option" do
@@ -154,7 +154,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
     mock.verify
 
-    table.schema.fields.must_include field_timestamp
+    _(table.schema.fields).must_include field_timestamp
   end
 
   it "can update the permanent external data source" do
@@ -192,14 +192,14 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
     mock.verify
 
-    table.external.must_be_kind_of Google::Cloud::Bigquery::External::JsonSource
-    table.external.urls.must_equal ["gs://my-bucket/path/to/file.json"]
-    table.external.format.must_equal "NEWLINE_DELIMITED_JSON"
-    table.external.autodetect.must_be :nil?
-    table.external.schema.wont_be :empty?
-    table.external.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    table.external.schema.must_be :frozen?
-    table.external.must_be :frozen?
+    _(table.external).must_be_kind_of Google::Cloud::Bigquery::External::JsonSource
+    _(table.external.urls).must_equal ["gs://my-bucket/path/to/file.json"]
+    _(table.external.format).must_equal "NEWLINE_DELIMITED_JSON"
+    _(table.external.autodetect).must_be :nil?
+    _(table.external.schema).wont_be :empty?
+    _(table.external.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(table.external.schema).must_be :frozen?
+    _(table.external).must_be :frozen?
   end
 
   it "returns data as a list of hashes" do
@@ -213,9 +213,9 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     data = table.data
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.count.must_equal 3
-    data[0].must_be_kind_of Hash
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    _(data.count).must_equal 3
+    _(data[0]).must_be_kind_of Hash
   end
 
   it "can copy itself with copy_job" do
@@ -227,7 +227,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     job = table.copy_job target_table
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
   end
 
   it "can copy itself with copy" do
@@ -241,7 +241,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     result = table.copy target_table
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can extract itself with extract_job" do
@@ -254,7 +254,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     job = table.extract_job storage_file
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself with extract" do
@@ -269,7 +269,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     result = table.extract storage_file
     mock.verify
 
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "can load data from a storage file with load_job" do
@@ -280,7 +280,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     table.service.mocked_service = mock
 
     job = table.load_job load_file
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -296,7 +296,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
         [project, load_job_gapi(table_gapi.table_reference, "CSV", location: nil), upload_source: file, content_type: "text/csv"]
 
       result = table.load file, format: :csv
-      result.must_equal true
+      _(result).must_equal true
     end
 
     mock.verify
@@ -318,9 +318,9 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
 
     mock.verify
 
-    result.must_be :success?
-    result.insert_count.must_equal 3
-    result.error_count.must_equal 0
+    _(result).must_be :success?
+    _(result.insert_count).must_equal 3
+    _(result.error_count).must_equal 0
   end
 
   it "inserts three rows one at a time with insert_async" do
@@ -339,19 +339,19 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
         inserter.insert row
       end
 
-      inserter.batch.rows.must_equal rows
+      _(inserter.batch.rows).must_equal rows
 
-      inserter.must_be :started?
-      inserter.wont_be :stopped?
+      _(inserter).must_be :started?
+      _(inserter).wont_be :stopped?
 
       # force the queued rows to be inserted
       inserter.flush
       inserter.stop.wait!
 
-      inserter.wont_be :started?
-      inserter.must_be :stopped?
+      _(inserter).wont_be :started?
+      _(inserter).must_be :stopped?
 
-      inserter.batch.must_be :nil?
+      _(inserter.batch).must_be :nil?
     end
 
     mock.verify
@@ -362,7 +362,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
     table.service.mocked_service = mock
 
-    table.exists?.must_equal true
+    _(table.exists?).must_equal true
 
     mock.verify
   end
@@ -372,7 +372,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
     mock.expect :get_table, table_gapi, [table.project_id, table.dataset_id, table.table_id]
     table.service.mocked_service = mock
 
-    table.exists?(force: true).must_equal true
+    _(table.exists?(force: true)).must_equal true
 
     mock.verify
   end
@@ -383,9 +383,9 @@ describe Google::Cloud::Bigquery::Table, :reference, :mock_bigquery do
       [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
-    table.delete.must_equal true
+    _(table.delete).must_equal true
 
-    table.exists?.must_equal false
+    _(table.exists?).must_equal false
 
     mock.verify
   end

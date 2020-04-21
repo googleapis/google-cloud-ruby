@@ -32,26 +32,26 @@ describe Google::Cloud::Bigquery::Model, :reference, :attributes, :mock_bigquery
   let(:model_gapi) { Google::Apis::BigqueryV2::Model.from_json model_full_hash.to_json }
 
   it "knows its attributes" do
-    model.model_id.must_equal model_id
-    model.dataset_id.must_equal dataset
-    model.project_id.must_equal project
+    _(model.model_id).must_equal model_id
+    _(model.dataset_id).must_equal dataset
+    _(model.project_id).must_equal project
     # model_ref is private
-    model.model_ref.must_be_kind_of Google::Apis::BigqueryV2::ModelReference
-    model.model_ref.model_id.must_equal model_id
-    model.model_ref.dataset_id.must_equal dataset
-    model.model_ref.project_id.must_equal project
+    _(model.model_ref).must_be_kind_of Google::Apis::BigqueryV2::ModelReference
+    _(model.model_ref.model_id).must_equal model_id
+    _(model.model_ref.dataset_id).must_equal dataset
+    _(model.model_ref.project_id).must_equal project
 
-    model.model_type.must_be_nil
-    model.created_at.must_be_nil
-    model.modified_at.must_be_nil
-    model.labels.must_be_nil
+    _(model.model_type).must_be_nil
+    _(model.created_at).must_be_nil
+    _(model.modified_at).must_be_nil
+    _(model.labels).must_be_nil
 
-    model.name.must_be_nil
-    model.description.must_be_nil
-    model.etag.must_be_nil
-    model.location.must_be_nil
-    model.expires_at.must_be_nil
+    _(model.name).must_be_nil
+    _(model.description).must_be_nil
+    _(model.etag).must_be_nil
+    _(model.location).must_be_nil
+    _(model.expires_at).must_be_nil
 
-    model.encryption.must_be_nil
+    _(model.encryption).must_be_nil
   end
 end

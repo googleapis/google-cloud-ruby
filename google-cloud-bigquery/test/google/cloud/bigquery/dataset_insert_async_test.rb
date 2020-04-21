@@ -61,19 +61,19 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     SecureRandom.stub :uuid, insert_id do
       inserter.insert rows.first
 
-      inserter.batch.rows.must_equal [rows.first]
+      _(inserter.batch.rows).must_equal [rows.first]
 
-      inserter.must_be :started?
-      inserter.wont_be :stopped?
+      _(inserter).must_be :started?
+      _(inserter).wont_be :stopped?
 
       # force the queued rows to be inserted
       inserter.flush
       inserter.stop.wait!
 
-      inserter.wont_be :started?
-      inserter.must_be :stopped?
+      _(inserter).wont_be :started?
+      _(inserter).must_be :stopped?
 
-      inserter.batch.must_be :nil?
+      _(inserter.batch).must_be :nil?
     end
 
     mock.verify
@@ -97,19 +97,19 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
       SecureRandom.stub :uuid, insert_id do
         inserter.insert rows.first
 
-        inserter.batch.rows.must_equal [rows.first]
+        _(inserter.batch.rows).must_equal [rows.first]
 
-        inserter.must_be :started?
-        inserter.wont_be :stopped?
+        _(inserter).must_be :started?
+        _(inserter).wont_be :stopped?
 
         # force the queued rows to be inserted
         inserter.flush
         inserter.stop.wait!
 
-        inserter.wont_be :started?
-        inserter.must_be :stopped?
+        _(inserter).wont_be :started?
+        _(inserter).must_be :stopped?
 
-        inserter.batch.must_be :nil?
+        _(inserter.batch).must_be :nil?
       end
 
       mock.verify
@@ -131,19 +131,19 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     SecureRandom.stub :uuid, insert_id do
       inserter.insert rows
 
-      inserter.batch.rows.must_equal rows
+      _(inserter.batch.rows).must_equal rows
 
-      inserter.must_be :started?
-      inserter.wont_be :stopped?
+      _(inserter).must_be :started?
+      _(inserter).wont_be :stopped?
 
       # force the queued rows to be inserted
       inserter.flush
       inserter.stop.wait!
 
-      inserter.wont_be :started?
-      inserter.must_be :stopped?
+      _(inserter).wont_be :started?
+      _(inserter).must_be :stopped?
 
-      inserter.batch.must_be :nil?
+      _(inserter.batch).must_be :nil?
     end
 
     mock.verify
@@ -166,19 +166,19 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
         inserter.insert row
       end
 
-      inserter.batch.rows.must_equal rows
+      _(inserter.batch.rows).must_equal rows
 
-      inserter.must_be :started?
-      inserter.wont_be :stopped?
+      _(inserter).must_be :started?
+      _(inserter).wont_be :stopped?
 
       # force the queued rows to be inserted
       inserter.flush
       inserter.stop.wait!
 
-      inserter.wont_be :started?
-      inserter.must_be :stopped?
+      _(inserter).wont_be :started?
+      _(inserter).must_be :stopped?
 
-      inserter.batch.must_be :nil?
+      _(inserter.batch).must_be :nil?
     end
 
     mock.verify
@@ -205,34 +205,34 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     SecureRandom.stub :uuid, insert_id do
       inserter.insert rows
 
-      inserter.batch.rows.must_equal rows
+      _(inserter.batch.rows).must_equal rows
 
-      inserter.must_be :started?
-      inserter.wont_be :stopped?
+      _(inserter).must_be :started?
+      _(inserter).wont_be :stopped?
 
       # force the queued rows to be inserted
       inserter.flush
       wait_until { callback_called == true }
       inserter.stop.wait!
 
-      inserter.wont_be :started?
-      inserter.must_be :stopped?
+      _(inserter).wont_be :started?
+      _(inserter).must_be :stopped?
 
-      inserter.batch.must_be :nil?
+      _(inserter.batch).must_be :nil?
     end
 
-    insert_result.wont_be_nil
-    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
-    insert_result.wont_be :error?
-    insert_result.error.must_be_nil
-    insert_result.must_be :success?
-    insert_result.insert_response.wont_be_nil
-    insert_result.insert_count.must_equal 3
-    insert_result.error_count.must_equal 0
-    insert_result.insert_errors.must_be_kind_of Array
-    insert_result.insert_errors.must_be :empty?
-    insert_result.error_rows.must_be_kind_of Array
-    insert_result.error_rows.must_be :empty?
+    _(insert_result).wont_be_nil
+    _(insert_result).must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    _(insert_result).wont_be :error?
+    _(insert_result.error).must_be_nil
+    _(insert_result).must_be :success?
+    _(insert_result.insert_response).wont_be_nil
+    _(insert_result.insert_count).must_equal 3
+    _(insert_result.error_count).must_equal 0
+    _(insert_result.insert_errors).must_be_kind_of Array
+    _(insert_result.insert_errors).must_be :empty?
+    _(insert_result.error_rows).must_be_kind_of Array
+    _(insert_result.error_rows).must_be :empty?
 
     mock.verify
   end
@@ -257,20 +257,20 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     SecureRandom.stub :uuid, insert_id do
       inserter.insert rows
 
-      inserter.batch.rows.must_equal [rows.last]
+      _(inserter.batch.rows).must_equal [rows.last]
 
-      inserter.must_be :started?
-      inserter.wont_be :stopped?
+      _(inserter).must_be :started?
+      _(inserter).wont_be :stopped?
 
       # force the queued rows to be inserted
       inserter.flush
       wait_until { callbacks == 2 }
       inserter.stop.wait!
 
-      inserter.wont_be :started?
-      inserter.must_be :stopped?
+      _(inserter).wont_be :started?
+      _(inserter).must_be :stopped?
 
-      inserter.batch.must_be :nil?
+      _(inserter.batch).must_be :nil?
     end
 
     mock.verify
@@ -296,20 +296,20 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
     SecureRandom.stub :uuid, insert_id do
       inserter.insert rows
 
-      inserter.batch.rows.must_equal [rows.last]
+      _(inserter.batch.rows).must_equal [rows.last]
 
-      inserter.must_be :started?
-      inserter.wont_be :stopped?
+      _(inserter).must_be :started?
+      _(inserter).wont_be :stopped?
 
       # force the queued rows to be inserted
       inserter.flush
       wait_until { callbacks == 2 }
       inserter.stop.wait!
 
-      inserter.wont_be :started?
-      inserter.must_be :stopped?
+      _(inserter).wont_be :started?
+      _(inserter).must_be :stopped?
 
-      inserter.batch.must_be :nil?
+      _(inserter.batch).must_be :nil?
     end
 
     mock.verify
@@ -329,19 +329,19 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
 
     inserter.insert rows, insert_ids: insert_ids
 
-    inserter.batch.rows.must_equal rows
+    _(inserter.batch.rows).must_equal rows
 
-    inserter.must_be :started?
-    inserter.wont_be :stopped?
+    _(inserter).must_be :started?
+    _(inserter).wont_be :stopped?
 
     # force the queued rows to be inserted
     inserter.flush
     inserter.stop.wait!
 
-    inserter.wont_be :started?
-    inserter.must_be :stopped?
+    _(inserter).wont_be :started?
+    _(inserter).must_be :stopped?
 
-    inserter.batch.must_be :nil?
+    _(inserter.batch).must_be :nil?
 
     mock.verify
   end
@@ -362,19 +362,19 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
       inserter.insert row, insert_ids: insert_id
     end
 
-    inserter.batch.rows.must_equal rows
+    _(inserter.batch.rows).must_equal rows
 
-    inserter.must_be :started?
-    inserter.wont_be :stopped?
+    _(inserter).must_be :started?
+    _(inserter).wont_be :stopped?
 
     # force the queued rows to be inserted
     inserter.flush
     inserter.stop.wait!
 
-    inserter.wont_be :started?
-    inserter.must_be :stopped?
+    _(inserter).wont_be :started?
+    _(inserter).must_be :stopped?
 
-    inserter.batch.must_be :nil?
+    _(inserter.batch).must_be :nil?
 
     mock.verify
   end
@@ -389,17 +389,17 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
 
     expect { inserter.insert rows, insert_ids: insert_ids }.must_raise ArgumentError
 
-    inserter.batch.must_be :nil?
+    _(inserter.batch).must_be :nil?
 
-    inserter.must_be :started?
-    inserter.wont_be :stopped?
+    _(inserter).must_be :started?
+    _(inserter).wont_be :stopped?
 
     # force the queued rows to be inserted
     inserter.flush
     inserter.stop.wait!
 
-    inserter.wont_be :started?
-    inserter.must_be :stopped?
+    _(inserter).wont_be :started?
+    _(inserter).must_be :stopped?
 
     mock.verify
   end
@@ -418,19 +418,19 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
 
     inserter.insert rows, insert_ids: :skip
 
-    inserter.batch.rows.must_equal rows
+    _(inserter.batch.rows).must_equal rows
 
-    inserter.must_be :started?
-    inserter.wont_be :stopped?
+    _(inserter).must_be :started?
+    _(inserter).wont_be :stopped?
 
     # force the queued rows to be inserted
     inserter.flush
     inserter.stop.wait!
 
-    inserter.wont_be :started?
-    inserter.must_be :stopped?
+    _(inserter).wont_be :started?
+    _(inserter).must_be :stopped?
 
-    inserter.batch.must_be :nil?
+    _(inserter.batch).must_be :nil?
 
     mock.verify
   end
@@ -451,19 +451,19 @@ describe Google::Cloud::Bigquery::Dataset, :insert_async, :mock_bigquery do
       inserter.insert row, insert_ids: :skip
     end
 
-    inserter.batch.rows.must_equal rows
+    _(inserter.batch.rows).must_equal rows
 
-    inserter.must_be :started?
-    inserter.wont_be :stopped?
+    _(inserter).must_be :started?
+    _(inserter).wont_be :stopped?
 
     # force the queued rows to be inserted
     inserter.flush
     inserter.stop.wait!
 
-    inserter.wont_be :started?
-    inserter.must_be :stopped?
+    _(inserter).wont_be :started?
+    _(inserter).must_be :stopped?
 
-    inserter.batch.must_be :nil?
+    _(inserter.batch).must_be :nil?
 
     mock.verify
   end

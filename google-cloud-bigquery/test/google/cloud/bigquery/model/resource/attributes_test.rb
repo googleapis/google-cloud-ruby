@@ -31,58 +31,58 @@ describe Google::Cloud::Bigquery::Model, :resource, :attributes, :mock_bigquery 
   let(:model) { Google::Cloud::Bigquery::Model.from_gapi_json model_hash, bigquery.service }
 
   it "knows its attributes" do
-    model.model_id.must_equal model_id
-    model.dataset_id.must_equal dataset
-    model.project_id.must_equal project
+    _(model.model_id).must_equal model_id
+    _(model.dataset_id).must_equal dataset
+    _(model.project_id).must_equal project
     # model_ref is private
-    model.model_ref.must_be_kind_of Google::Apis::BigqueryV2::ModelReference
-    model.model_ref.model_id.must_equal model_id
-    model.model_ref.dataset_id.must_equal dataset
-    model.model_ref.project_id.must_equal project
+    _(model.model_ref).must_be_kind_of Google::Apis::BigqueryV2::ModelReference
+    _(model.model_ref.model_id).must_equal model_id
+    _(model.model_ref.dataset_id).must_equal dataset
+    _(model.model_ref.project_id).must_equal project
 
     # Only the following fields are populated:
     # modelReference, modelType, creationTime, lastModifiedTime and labels
-    model.model_type.must_equal model_type
-    model.created_at.must_be_close_to ::Time.now, 1
-    model.modified_at.must_be_close_to ::Time.now, 1
-    model.labels.must_equal labels
-    model.labels.must_be :frozen?
+    _(model.model_type).must_equal model_type
+    _(model.created_at).must_be_close_to ::Time.now, 1
+    _(model.modified_at).must_be_close_to ::Time.now, 1
+    _(model.labels).must_equal labels
+    _(model.labels).must_be :frozen?
 
-    model.name.must_equal model_name
-    model.description.must_equal description
-    model.etag.must_equal etag
-    model.location.must_equal location_code
-    model.expires_at.must_be_close_to ::Time.now, 1
+    _(model.name).must_equal model_name
+    _(model.description).must_equal description
+    _(model.etag).must_equal etag
+    _(model.location).must_equal location_code
+    _(model.expires_at).must_be_close_to ::Time.now, 1
 
-    model.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
-    model.encryption.kms_key.must_equal kms_key
-    model.encryption.must_be :frozen?
+    _(model.encryption).must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    _(model.encryption.kms_key).must_equal kms_key
+    _(model.encryption).must_be :frozen?
   end
 
   it "handles nil for optional expires_at" do
     model.gapi_json.delete :expirationTime
 
-    model.model_id.must_equal model_id
-    model.dataset_id.must_equal dataset
-    model.project_id.must_equal project
+    _(model.model_id).must_equal model_id
+    _(model.dataset_id).must_equal dataset
+    _(model.project_id).must_equal project
     # model_ref is private
-    model.model_ref.must_be_kind_of Google::Apis::BigqueryV2::ModelReference
-    model.model_ref.model_id.must_equal model_id
-    model.model_ref.dataset_id.must_equal dataset
-    model.model_ref.project_id.must_equal project
+    _(model.model_ref).must_be_kind_of Google::Apis::BigqueryV2::ModelReference
+    _(model.model_ref.model_id).must_equal model_id
+    _(model.model_ref.dataset_id).must_equal dataset
+    _(model.model_ref.project_id).must_equal project
 
     # Only the following fields are populated:
     # modelReference, modelType, creationTime, lastModifiedTime and labels
-    model.model_type.must_equal model_type
-    model.created_at.must_be_close_to ::Time.now, 1
-    model.modified_at.must_be_close_to ::Time.now, 1
-    model.labels.must_equal labels
-    model.labels.must_be :frozen?
+    _(model.model_type).must_equal model_type
+    _(model.created_at).must_be_close_to ::Time.now, 1
+    _(model.modified_at).must_be_close_to ::Time.now, 1
+    _(model.labels).must_equal labels
+    _(model.labels).must_be :frozen?
 
-    model.name.must_equal model_name
-    model.description.must_equal description
-    model.etag.must_equal etag
-    model.location.must_equal location_code
-    model.expires_at.must_be_nil
+    _(model.name).must_equal model_name
+    _(model.description).must_equal description
+    _(model.etag).must_equal etag
+    _(model.location).must_equal location_code
+    _(model.expires_at).must_be_nil
   end
 end

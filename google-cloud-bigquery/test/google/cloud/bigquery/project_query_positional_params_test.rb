@@ -54,7 +54,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE name = ?", params: ["Testy McTesterson"]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -85,7 +85,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE age > ?", params: [35]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -116,7 +116,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE score > ?", params: [90.0]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -147,7 +147,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE pi = ?", params: [BigDecimal("3.141592654")]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -178,7 +178,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE active = ?", params: [true]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -209,7 +209,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE active = ?", params: [false]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -242,7 +242,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE create_date = ?", params: [today]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -275,7 +275,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE update_datetime < ?", params: [now]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -308,7 +308,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE update_timestamp < ?", params: [now]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -341,7 +341,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE create_time = ?", params: [timeofday]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -374,7 +374,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE avatar = ?", params: [file]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -407,7 +407,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE avatar = ?", params: [file]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -494,7 +494,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
 
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -532,7 +532,7 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE name IN ?", params: [%w{name1 name2 name3}]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
@@ -582,26 +582,26 @@ describe Google::Cloud::Bigquery::Project, :query, :positional_params, :mock_big
     data = bigquery.query "#{query} WHERE meta = ?", params: [{name: "Testy McTesterson", age: 42, active: false, score: 98.7}]
     mock.verify
 
-    data.class.must_equal Google::Cloud::Bigquery::Data
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
     assert_valid_data data
   end
 
   def assert_valid_data data
-    data.count.must_equal 3
-    data[0].must_be_kind_of Hash
-    data[0][:name].must_equal "Heidi"
-    data[0][:age].must_equal 36
-    data[0][:score].must_equal 7.65
-    data[0][:active].must_equal true
-    data[1].must_be_kind_of Hash
-    data[1][:name].must_equal "Aaron"
-    data[1][:age].must_equal 42
-    data[1][:score].must_equal 8.15
-    data[1][:active].must_equal false
-    data[2].must_be_kind_of Hash
-    data[2][:name].must_equal "Sally"
-    data[2][:age].must_be :nil?
-    data[2][:score].must_be :nil?
-    data[2][:active].must_be :nil?
+    _(data.count).must_equal 3
+    _(data[0]).must_be_kind_of Hash
+    _(data[0][:name]).must_equal "Heidi"
+    _(data[0][:age]).must_equal 36
+    _(data[0][:score]).must_equal 7.65
+    _(data[0][:active]).must_equal true
+    _(data[1]).must_be_kind_of Hash
+    _(data[1][:name]).must_equal "Aaron"
+    _(data[1][:age]).must_equal 42
+    _(data[1][:score]).must_equal 8.15
+    _(data[1][:active]).must_equal false
+    _(data[2]).must_be_kind_of Hash
+    _(data[2][:name]).must_equal "Sally"
+    _(data[2][:age]).must_be :nil?
+    _(data[2][:score]).must_be :nil?
+    _(data[2][:active]).must_be :nil?
   end
 end

@@ -31,17 +31,17 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
                                                 bigquery.service }
 
   it "knows its attributes" do
-    view.name.must_equal table_name
-    view.description.must_equal description
-    view.etag.must_equal etag
-    view.api_url.must_equal api_url
-    view.query.must_equal "SELECT name, age, score, active FROM `external.publicdata.users`"
-    view.wont_be :query_standard_sql?
-    view.must_be :query_legacy_sql?
-    view.query_udfs.must_be :empty?
-    view.view?.must_equal true
-    view.table?.must_equal false
-    view.location.must_equal location_code
+    _(view.name).must_equal table_name
+    _(view.description).must_equal description
+    _(view.etag).must_equal etag
+    _(view.api_url).must_equal api_url
+    _(view.query).must_equal "SELECT name, age, score, active FROM `external.publicdata.users`"
+    _(view).wont_be :query_standard_sql?
+    _(view).must_be :query_legacy_sql?
+    _(view.query_udfs).must_be :empty?
+    _(view.view?).must_equal true
+    _(view.table?).must_equal false
+    _(view.location).must_equal location_code
   end
 
   it "knows its creation and modification and expiration times" do
@@ -51,21 +51,21 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
     view_hash["expirationTime"] = time_millis
 
 
-    view.created_at.must_be_close_to now, 1
-    view.modified_at.must_be_close_to now, 1
-    view.expires_at.must_be_close_to now, 1
+    _(view.created_at).must_be_close_to now, 1
+    _(view.modified_at).must_be_close_to now, 1
+    _(view.expires_at).must_be_close_to now, 1
   end
 
   it "knows schema, fields, and headers" do
-    view.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    view.schema.must_be :frozen?
-    view.fields.map(&:name).must_equal view.schema.fields.map(&:name)
-    view.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    view.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(view.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(view.schema).must_be :frozen?
+    _(view.fields.map(&:name)).must_equal view.schema.fields.map(&:name)
+    _(view.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(view.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
   end
 
   it "can test its existence" do
-    view.exists?.must_equal true
+    _(view.exists?).must_equal true
   end
 
   it "can test its existence with force to load resource" do
@@ -73,7 +73,7 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
     mock.expect :get_table, view_gapi, [view.project_id, view.dataset_id, view.table_id]
     view.service.mocked_service = mock
 
-    view.exists?(force: true).must_equal true
+    _(view.exists?(force: true)).must_equal true
 
     mock.verify
   end
@@ -84,9 +84,9 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
       [project, dataset, table_id]
     view.service.mocked_service = mock
 
-    view.delete.must_equal true
+    _(view.delete).must_equal true
 
-    view.exists?.must_equal false
+    _(view.exists?).must_equal false
 
     mock.verify
   end
@@ -100,11 +100,11 @@ describe Google::Cloud::Bigquery::Table, :view, :mock_bigquery do
       [project, dataset, table_id]
     view.service.mocked_service = mock
 
-    view.description.must_equal description
+    _(view.description).must_equal description
     view.reload!
 
     mock.verify
 
-    view.description.must_equal new_description
+    _(view.description).must_equal new_description
   end
 end

@@ -83,36 +83,36 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   end
 
   it "has the attributes of a dataset after reload" do
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    dataset.project_id.must_equal bigquery.project
-    dataset.dataset_id.must_equal dataset.dataset_id
-    dataset.etag.must_be_nil
-    dataset.api_url.must_be_nil
-    dataset.created_at.must_be_nil
-    dataset.modified_at.must_be_nil
-    dataset.dataset_ref.must_be_kind_of Hash
-    dataset.dataset_ref[:project_id].must_equal bigquery.project
-    dataset.dataset_ref[:dataset_id].must_equal dataset.dataset_id
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset.project_id).must_equal bigquery.project
+    _(dataset.dataset_id).must_equal dataset.dataset_id
+    _(dataset.etag).must_be_nil
+    _(dataset.api_url).must_be_nil
+    _(dataset.created_at).must_be_nil
+    _(dataset.modified_at).must_be_nil
+    _(dataset.dataset_ref).must_be_kind_of Hash
+    _(dataset.dataset_ref[:project_id]).must_equal bigquery.project
+    _(dataset.dataset_ref[:dataset_id]).must_equal dataset.dataset_id
 
     dataset.reload!
 
-    dataset.project_id.must_equal bigquery.project
-    dataset.dataset_id.must_equal dataset.dataset_id
-    dataset.etag.wont_be_nil
-    dataset.api_url.wont_be_nil
-    dataset.created_at.must_be_kind_of Time
-    dataset.modified_at.must_be_kind_of Time
-    dataset.dataset_ref.must_be_kind_of Hash
-    dataset.dataset_ref[:project_id].must_equal bigquery.project
-    dataset.dataset_ref[:dataset_id].must_equal dataset.dataset_id
+    _(dataset.project_id).must_equal bigquery.project
+    _(dataset.dataset_id).must_equal dataset.dataset_id
+    _(dataset.etag).wont_be_nil
+    _(dataset.api_url).wont_be_nil
+    _(dataset.created_at).must_be_kind_of Time
+    _(dataset.modified_at).must_be_kind_of Time
+    _(dataset.dataset_ref).must_be_kind_of Hash
+    _(dataset.dataset_ref[:project_id]).must_equal bigquery.project
+    _(dataset.dataset_ref[:dataset_id]).must_equal dataset.dataset_id
   end
 
   it "deletes itself and knows it no longer exists" do
-    dataset.exists?.must_equal true
+    _(dataset.exists?).must_equal true
     dataset.tables.all(&:delete)
-    dataset.delete.must_equal true
-    dataset.exists?.must_equal false
-    dataset.exists?(force: true).must_equal false
+    _(dataset.delete).must_equal true
+    _(dataset.exists?).must_equal false
+    _(dataset.exists?(force: true)).must_equal false
   end
 
   it "should set & get metadata" do
@@ -127,13 +127,13 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
     dataset.labels = new_labels
 
     fresh = bigquery.dataset dataset.dataset_id
-    fresh.wont_be_nil
-    fresh.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    fresh.dataset_id.must_equal dataset.dataset_id
-    fresh.name.must_equal new_name
-    fresh.description.must_equal new_desc
-    fresh.default_expiration.must_equal new_default_expiration
-    fresh.labels.must_equal new_labels
+    _(fresh).wont_be_nil
+    _(fresh).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(fresh.dataset_id).must_equal dataset.dataset_id
+    _(fresh.name).must_equal new_name
+    _(fresh.description).must_equal new_desc
+    _(fresh.default_expiration).must_equal new_default_expiration
+    _(fresh.labels).must_equal new_labels
 
     dataset.default_expiration = nil
   end
@@ -141,19 +141,19 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   it "should get a list of tables and views" do
     tables = dataset.tables
     # The code in before ensures we have at least one dataset
-    tables.count.must_be :>=, 2
+    _(tables.count).must_be :>=, 2
     tables.each do |t|
-      t.table_id.wont_be_nil
-      t.created_at.must_be_kind_of Time # Loads full representation
+      _(t.table_id).wont_be_nil
+      _(t.created_at).must_be_kind_of Time # Loads full representation
     end
   end
 
   it "should get all tables and views in pages with token" do
     tables = dataset.tables(max: 1).all
-    tables.count.must_be :>=, 2
+    _(tables.count).must_be :>=, 2
     tables.each do |t|
-      t.table_id.wont_be_nil
-      t.created_at.must_be_kind_of Time # Loads full representation
+      _(t.table_id).wont_be_nil
+      _(t.created_at).must_be_kind_of Time # Loads full representation
     end
   end
 
@@ -164,7 +164,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
       schema.string    "name",  description: "name description",  mode: :required
       schema.timestamp "dob",   description: "dob description",   mode: :required
     end
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from a list of files in your bucket with load_job" do
@@ -176,9 +176,9 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
     # Test both by file object and URL as string
     job = dataset.load_job table_id, [file1, gs_url]
     job.wait_until_done!
-    job.wont_be :failed?
-    job.input_files.must_equal 2
-    job.output_rows.must_equal 6
+    _(job).wont_be :failed?
+    _(job.input_files).must_equal 2
+    _(job.output_rows).must_equal 6
   end
 
   it "imports data from a list of files in your bucket with load" do
@@ -189,7 +189,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
 
     # Test both by file object and URL as string
     result = dataset.load table_id, [file1, gs_url]
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "adds an access entry with specifying user scope" do
@@ -208,21 +208,21 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
 
   it "inserts rows directly and gets its data" do
     insert_response = table.insert rows
-    insert_response.must_be :success?
-    insert_response.insert_count.must_equal 3
-    insert_response.insert_errors.must_be :empty?
-    insert_response.error_rows.must_be :empty?
+    _(insert_response).must_be :success?
+    _(insert_response.insert_count).must_equal 3
+    _(insert_response.insert_errors).must_be :empty?
+    _(insert_response.error_rows).must_be :empty?
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id
-    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    query_job.job_id.must_equal job_id
+    _(query_job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(query_job.job_id).must_equal job_id
     query_job.wait_until_done!
-    query_job.done?.must_equal true
-    query_job.data.total.wont_be_nil
+    _(query_job.done?).must_equal true
+    _(query_job.data.total).wont_be_nil
 
     data = dataset.query query
-    data.class.must_equal Google::Cloud::Bigquery::Data
-    data.total.wont_be_nil
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    _(data.total).wont_be_nil
   end
 end

@@ -50,12 +50,12 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
     mock.expect :insert_job, job_gapi, [project, job_gapi]
 
     job = table.extract_job extract_url, prefix: prefix do |j|
-      j.job_id.must_equal job_id
+      _(j.job_id).must_equal job_id
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can extract itself and specify the csv format and options" do
@@ -77,7 +77,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the json format" do
@@ -93,7 +93,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the avro format" do
@@ -109,7 +109,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself with the job labels option" do
@@ -125,8 +125,8 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.labels.must_equal labels
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.labels).must_equal labels
   end
 
   it "can extract itself with the location option" do
@@ -140,13 +140,13 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
     mock.expect :insert_job, return_job_gapi, [project, insert_job_gapi]
 
     job = table.extract_job extract_file do |j|
-      j.location.must_equal "US"
+      _(j.location).must_equal "US"
       j.location = region
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.location.must_equal region
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.location).must_equal region
   end
 
   it "can extract itself and unset the location" do
@@ -160,13 +160,13 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :updater, :mock_bigquery 
     mock.expect :insert_job, return_job_gapi, [project, insert_job_gapi]
 
     job = table.extract_job extract_file do |j|
-      j.location.must_equal "US"
+      _(j.location).must_equal "US"
       j.location = nil
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.location.must_equal "US"
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.location).must_equal "US"
   end
 
   # Borrowed from MockStorage, extract to a common module?

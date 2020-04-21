@@ -70,64 +70,64 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
   end
 
   it "gets the schema, fields, and headers" do
-    table.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    table.schema.must_be :frozen?
-    table.schema.fields.count.must_equal 10
+    _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(table.schema).must_be :frozen?
+    _(table.schema.fields.count).must_equal 10
 
-    table.schema.fields[0].name.must_equal "name"
-    table.schema.fields[0].type.must_equal "STRING"
-    table.schema.fields[0].description.must_be :nil?
-    table.schema.fields[0].mode.must_equal "REQUIRED"
+    _(table.schema.fields[0].name).must_equal "name"
+    _(table.schema.fields[0].type).must_equal "STRING"
+    _(table.schema.fields[0].description).must_be :nil?
+    _(table.schema.fields[0].mode).must_equal "REQUIRED"
 
-    table.schema.fields[1].name.must_equal "age"
-    table.schema.fields[1].type.must_equal "INTEGER"
-    table.schema.fields[1].description.must_be :nil?
-    table.schema.fields[1].mode.must_equal "NULLABLE"
+    _(table.schema.fields[1].name).must_equal "age"
+    _(table.schema.fields[1].type).must_equal "INTEGER"
+    _(table.schema.fields[1].description).must_be :nil?
+    _(table.schema.fields[1].mode).must_equal "NULLABLE"
 
-    table.schema.fields[2].name.must_equal "score"
-    table.schema.fields[2].type.must_equal "FLOAT"
-    table.schema.fields[2].description.must_be :nil?
-    table.schema.fields[2].mode.must_equal "NULLABLE"
+    _(table.schema.fields[2].name).must_equal "score"
+    _(table.schema.fields[2].type).must_equal "FLOAT"
+    _(table.schema.fields[2].description).must_be :nil?
+    _(table.schema.fields[2].mode).must_equal "NULLABLE"
 
-    table.schema.fields[3].name.must_equal "pi"
-    table.schema.fields[3].type.must_equal "NUMERIC"
-    table.schema.fields[3].description.must_be :nil?
-    table.schema.fields[3].mode.must_equal "NULLABLE"
+    _(table.schema.fields[3].name).must_equal "pi"
+    _(table.schema.fields[3].type).must_equal "NUMERIC"
+    _(table.schema.fields[3].description).must_be :nil?
+    _(table.schema.fields[3].mode).must_equal "NULLABLE"
 
-    table.schema.fields[4].name.must_equal "active"
-    table.schema.fields[4].type.must_equal "BOOLEAN"
-    table.schema.fields[4].description.must_be :nil?
-    table.schema.fields[4].mode.must_equal "NULLABLE"
+    _(table.schema.fields[4].name).must_equal "active"
+    _(table.schema.fields[4].type).must_equal "BOOLEAN"
+    _(table.schema.fields[4].description).must_be :nil?
+    _(table.schema.fields[4].mode).must_equal "NULLABLE"
 
-    table.schema.fields[5].name.must_equal "avatar"
-    table.schema.fields[5].type.must_equal "BYTES"
-    table.schema.fields[5].description.must_be :nil?
-    table.schema.fields[5].mode.must_equal "NULLABLE"
+    _(table.schema.fields[5].name).must_equal "avatar"
+    _(table.schema.fields[5].type).must_equal "BYTES"
+    _(table.schema.fields[5].description).must_be :nil?
+    _(table.schema.fields[5].mode).must_equal "NULLABLE"
 
-    table.schema.fields[6].name.must_equal "started_at"
-    table.schema.fields[6].type.must_equal "TIMESTAMP"
-    table.schema.fields[6].description.must_be :nil?
-    table.schema.fields[6].mode.must_equal "NULLABLE"
+    _(table.schema.fields[6].name).must_equal "started_at"
+    _(table.schema.fields[6].type).must_equal "TIMESTAMP"
+    _(table.schema.fields[6].description).must_be :nil?
+    _(table.schema.fields[6].mode).must_equal "NULLABLE"
 
-    table.schema.fields[7].name.must_equal "duration"
-    table.schema.fields[7].type.must_equal "TIME"
-    table.schema.fields[7].description.must_be :nil?
-    table.schema.fields[7].mode.must_equal "NULLABLE"
+    _(table.schema.fields[7].name).must_equal "duration"
+    _(table.schema.fields[7].type).must_equal "TIME"
+    _(table.schema.fields[7].description).must_be :nil?
+    _(table.schema.fields[7].mode).must_equal "NULLABLE"
 
-    table.schema.fields[8].name.must_equal "target_end"
-    table.schema.fields[8].type.must_equal "DATETIME"
-    table.schema.fields[8].description.must_be :nil?
-    table.schema.fields[8].mode.must_equal "NULLABLE"
+    _(table.schema.fields[8].name).must_equal "target_end"
+    _(table.schema.fields[8].type).must_equal "DATETIME"
+    _(table.schema.fields[8].description).must_be :nil?
+    _(table.schema.fields[8].mode).must_equal "NULLABLE"
 
-    table.schema.fields[9].name.must_equal "birthday"
-    table.schema.fields[9].type.must_equal "DATE"
-    table.schema.fields[9].description.must_be :nil?
-    table.schema.fields[9].mode.must_equal "NULLABLE"
+    _(table.schema.fields[9].name).must_equal "birthday"
+    _(table.schema.fields[9].type).must_equal "DATE"
+    _(table.schema.fields[9].description).must_be :nil?
+    _(table.schema.fields[9].mode).must_equal "NULLABLE"
 
-    table.fields.count.must_equal 10
-    table.fields.map(&:name).must_equal table.schema.fields.map(&:name)
-    table.headers.must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    table.param_types.must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.fields.count).must_equal 10
+    _(table.fields.map(&:name)).must_equal table.schema.fields.map(&:name)
+    _(table.headers).must_equal [:name, :age, :score, :pi, :active, :avatar, :started_at, :duration, :target_end, :birthday]
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
   end
 
   it "sets a flat schema via a block with replace option true" do
@@ -189,7 +189,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     mock.verify
 
-    table.headers.must_include :end_date
+    _(table.headers).must_include :end_date
   end
 
   it "replaces existing schema with replace option" do
@@ -210,7 +210,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     mock.verify
 
-    table.schema.fields.must_include field_timestamp
+    _(table.schema.fields).must_include field_timestamp
   end
 
   it "replaces the schema when loaded from a file" do
@@ -257,9 +257,9 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     mock.verify
 
-    table.schema.fields.must_include field_string_required
-    table.schema.fields.must_include field_record_repeated
-    table.schema.fields.must_equal [field_string_required, field_record_repeated]
+    _(table.schema.fields).must_include field_string_required
+    _(table.schema.fields).must_include field_record_repeated
+    _(table.schema.fields).must_equal [field_string_required, field_record_repeated]
   end
 
   it "modifies a nested schema via field" do
@@ -297,7 +297,7 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     table.service.mocked_service = mock
 
     table.schema do |schema|
-      schema.field("first_name").mode.must_equal "REQUIRED"
+      _(schema.field("first_name").mode).must_equal "REQUIRED"
       schema.field "cities_lived" do |nested|
         # Add a new field to the existing record
         nested.string "first_name", mode: :required
@@ -306,11 +306,11 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
     mock.verify
 
-    table.schema.headers.must_include :first_name
-    table.schema.headers.must_include :cities_lived
-    table.schema.field(:cities_lived).headers.must_include :started_at
-    table.schema.field(:cities_lived).headers.must_include :rank
-    table.schema.field("cities_lived").headers.must_include :first_name
+    _(table.schema.headers).must_include :first_name
+    _(table.schema.headers).must_include :cities_lived
+    _(table.schema.field(:cities_lived).headers).must_include :started_at
+    _(table.schema.field(:cities_lived).headers).must_include :rank
+    _(table.schema.field("cities_lived").headers).must_include :first_name
   end
 
   it "allows nested records several levels deep" do

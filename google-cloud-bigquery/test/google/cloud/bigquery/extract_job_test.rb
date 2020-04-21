@@ -22,13 +22,13 @@ describe Google::Cloud::Bigquery::ExtractJob, :mock_bigquery do
   let(:job_id) { job.job_id }
 
   it "knows it is extract job" do
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "knows its destination uris" do
-    job.destinations.must_be_kind_of Array
-    job.destinations.count.must_equal 1
-    job.destinations.first.must_equal "gs://bucket/file-*.ext"
+    _(job.destinations).must_be_kind_of Array
+    _(job.destinations.count).must_equal 1
+    _(job.destinations.first).must_equal "gs://bucket/file-*.ext"
   end
 
   it "knows its source table" do
@@ -38,40 +38,40 @@ describe Google::Cloud::Bigquery::ExtractJob, :mock_bigquery do
     mock.expect :get_table, source_table_gapi, ["source_project_id", "source_dataset_id", "source_table_id"]
 
     source = job.source
-    source.must_be_kind_of Google::Cloud::Bigquery::Table
-    source.project_id.must_equal "source_project_id"
-    source.dataset_id.must_equal "source_dataset_id"
-    source.table_id.must_equal   "source_table_id"
+    _(source).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(source.project_id).must_equal "source_project_id"
+    _(source.dataset_id).must_equal "source_dataset_id"
+    _(source.table_id).must_equal   "source_table_id"
     mock.verify
   end
 
   it "knows its attributes" do
-    job.must_be :compression?
-    job.must_be :json?
-    job.wont_be :csv?
-    job.wont_be :avro?
-    job.delimiter.must_equal ","
-    job.must_be :print_header?
-    job.must_be :use_avro_logical_types?
+    _(job).must_be :compression?
+    _(job).must_be :json?
+    _(job).wont_be :csv?
+    _(job).wont_be :avro?
+    _(job.delimiter).must_equal ","
+    _(job).must_be :print_header?
+    _(job).must_be :use_avro_logical_types?
   end
 
   it "knows its extract config" do
-    job.config.must_be_kind_of Hash
-    job.config["extract"]["sourceTable"]["projectId"].must_equal "source_project_id"
-    job.config["extract"]["compression"].must_equal "GZIP"
-    job.config["extract"]["fieldDelimiter"].must_equal ","
+    _(job.config).must_be_kind_of Hash
+    _(job.config["extract"]["sourceTable"]["projectId"]).must_equal "source_project_id"
+    _(job.config["extract"]["compression"]).must_equal "GZIP"
+    _(job.config["extract"]["fieldDelimiter"]).must_equal ","
   end
 
   it "knows its statistics attributes" do
     # stats convenience method
-    job.destinations_file_counts.must_be_kind_of Array
-    job.destinations_file_counts.count.must_equal 1
-    job.destinations_file_counts.first.must_equal 123
+    _(job.destinations_file_counts).must_be_kind_of Array
+    _(job.destinations_file_counts.count).must_equal 1
+    _(job.destinations_file_counts.first).must_equal 123
 
     # hash of the uris and the file counts
-    job.destinations_counts.must_be_kind_of Hash
-    job.destinations_counts.count.must_equal 1
-    job.destinations_counts["gs://bucket/file-*.ext"].must_equal 123
+    _(job.destinations_counts).must_be_kind_of Hash
+    _(job.destinations_counts.count).must_equal 1
+    _(job.destinations_counts["gs://bucket/file-*.ext"]).must_equal 123
   end
 
   def extract_job_gapi

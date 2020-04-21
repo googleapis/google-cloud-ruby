@@ -35,7 +35,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
         [project, load_job_gapi(table_reference, "CSV"), upload_source: file, content_type: "text/csv"]
 
       job = dataset.load_job table_id, file, format: :csv
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
     end
     mock.verify
   end
@@ -51,7 +51,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
       job = dataset.load_job table_id, file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
         encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
         quote: "'", skip_leading: 1
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
     end
 
     mock.verify
@@ -70,7 +70,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
         [project, load_job_gapi(table_reference), upload_source: file, content_type: "application/json"]
 
       job = dataset.load_job table_id, file, format: "JSON"
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
     end
 
     mock.verify
@@ -84,7 +84,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
 
     local_json = "acceptance/data/kitten-test-data.json"
     job = dataset.load_job table_id, local_json
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -100,8 +100,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
       job = dataset.load_job table_id, file, format: "JSON", job_id: job_id
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-      job.job_id.must_equal job_id
+      _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      _(job.job_id).must_equal job_id
     end
 
     mock.verify
@@ -121,8 +121,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
       job = dataset.load_job table_id, file, format: "JSON", prefix: prefix
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-      job.job_id.must_equal job_id
+      _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      _(job.job_id).must_equal job_id
     end
 
     mock.verify
@@ -139,8 +139,8 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :local, :mock_bigquery do
         [project, job_gapi, upload_source: file, content_type: "application/json"]
 
       job = dataset.load_job table_id, file, format: "JSON", job_id: job_id, prefix: "IGNORED"
-      job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-      job.job_id.must_equal job_id
+      _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+      _(job.job_id).must_equal job_id
     end
 
     mock.verify

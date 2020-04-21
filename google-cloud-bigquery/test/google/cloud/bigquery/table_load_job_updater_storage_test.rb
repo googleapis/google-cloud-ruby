@@ -53,9 +53,9 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     table.service.mocked_service = mock
 
     job = table.load_job special_file, job_id: job_id do |j|
-      j.job_id.must_equal job_id
+      _(j.job_id).must_equal job_id
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -74,7 +74,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     job = table.load_job special_file do |j|
       j.format = :csv
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -102,7 +102,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
       j.quote = "'"
       j.skip_leading = 1
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -123,7 +123,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     job = table.load_job special_file do |j|
       j.projection_fields = projection_fields
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -139,7 +139,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     job = table.load_job load_url do |j|
       j.create = "CREATE_NEVER"
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -155,7 +155,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     job = table.load_job load_url do |j|
       j.create = :never
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -171,7 +171,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     job = table.load_job load_url do |j|
       j.write = "WRITE_TRUNCATE"
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -187,7 +187,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     job = table.load_job load_url do |j|
       j.write = :truncate
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
 
     mock.verify
   end
@@ -203,8 +203,8 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     job = table.load_job load_file do |j|
       j.labels = labels
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.labels.must_equal labels
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.labels).must_equal labels
 
     mock.verify
   end
@@ -224,9 +224,9 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
-    job.encryption.kms_key.must_equal kms_key
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.encryption).must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    _(job.encryption.kms_key).must_equal kms_key
   end
 
   it "can load a storage file with the location option" do
@@ -240,13 +240,13 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     table.service.mocked_service = mock
 
     job = table.load_job load_file do |j|
-      j.location.must_equal "US"
+      _(j.location).must_equal "US"
       j.location = region
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.location.must_equal region
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.location).must_equal region
   end
 
   it "can load a storage file and unset location" do
@@ -260,13 +260,13 @@ describe Google::Cloud::Bigquery::Table, :load_job, :updater, :storage, :mock_bi
     table.service.mocked_service = mock
 
     job = table.load_job load_file do |j|
-      j.location.must_equal "US"
+      _(j.location).must_equal "US"
       j.location = nil
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.location.must_equal "US"
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.location).must_equal "US"
   end
 
   def load_job_resp_gapi table, load_url, job_id: "job_9876543210", labels: nil

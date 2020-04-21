@@ -25,20 +25,20 @@ describe Google::Cloud::Bigquery::Model, :columns, :mock_bigquery do
   let(:model) { Google::Cloud::Bigquery::Model.from_gapi_json model_full_hash, bigquery.service }
 
   it "maps columns to primitive ruby values" do
-    model.feature_columns.count.must_equal 1
-    model.feature_columns[0].must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
-    model.feature_columns[0].name.must_equal "f1"
-    model.feature_columns[0].type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    model.feature_columns[0].type.type_kind.must_equal "STRING"
-    model.feature_columns[0].type.array_element_type.must_be_nil
-    model.feature_columns[0].type.struct_type.must_be_nil
+    _(model.feature_columns.count).must_equal 1
+    _(model.feature_columns[0]).must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
+    _(model.feature_columns[0].name).must_equal "f1"
+    _(model.feature_columns[0].type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(model.feature_columns[0].type.type_kind).must_equal "STRING"
+    _(model.feature_columns[0].type.array_element_type).must_be_nil
+    _(model.feature_columns[0].type.struct_type).must_be_nil
 
-    model.label_columns.count.must_equal 1
-    model.label_columns[0].must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
-    model.label_columns[0].name.must_equal "predicted_label"
-    model.label_columns[0].type.must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
-    model.label_columns[0].type.type_kind.must_equal "FLOAT64"
-    model.label_columns[0].type.array_element_type.must_be_nil
-    model.label_columns[0].type.struct_type.must_be_nil
+    _(model.label_columns.count).must_equal 1
+    _(model.label_columns[0]).must_be_kind_of Google::Cloud::Bigquery::StandardSql::Field
+    _(model.label_columns[0].name).must_equal "predicted_label"
+    _(model.label_columns[0].type).must_be_kind_of Google::Cloud::Bigquery::StandardSql::DataType
+    _(model.label_columns[0].type.type_kind).must_equal "FLOAT64"
+    _(model.label_columns[0].type.array_element_type).must_be_nil
+    _(model.label_columns[0].type.struct_type).must_be_nil
   end
 end

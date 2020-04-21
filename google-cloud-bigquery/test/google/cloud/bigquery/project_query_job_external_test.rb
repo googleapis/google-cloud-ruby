@@ -41,6 +41,6 @@ describe Google::Cloud::Bigquery::Project, :query_job, :external, :mock_bigquery
     job = bigquery.query_job query, external: { my_csv: external_csv }
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
   end
 end

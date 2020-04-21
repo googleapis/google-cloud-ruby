@@ -50,7 +50,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table_id_standard_sql, extract_file
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table to a storage file using a Legacy SQL table id" do
@@ -63,7 +63,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table_id_legacy_sql, extract_file
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table to a storage file" do
@@ -76,7 +76,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, extract_file
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table to a storage url" do
@@ -89,7 +89,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, extract_url
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table and determine the csv format" do
@@ -104,7 +104,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, "#{extract_url}.csv"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table and specify the csv format" do
@@ -118,7 +118,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, extract_url, format: :csv
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table and specify the csv format and options" do
@@ -135,7 +135,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, extract_url, format: :csv, compression: "GZIP", delimiter: "\t", header: false
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table and determine the json format" do
@@ -150,7 +150,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, "#{extract_url}.json"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table and specify the json format" do
@@ -164,7 +164,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, extract_url, format: :json
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table and determine the avro format" do
@@ -179,7 +179,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, "#{extract_url}.avro"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table and determine the avro format with options" do
@@ -202,7 +202,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table and specify the avro format" do
@@ -216,7 +216,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, extract_url, format: :avro
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table and specify the avro format and options" do
@@ -234,7 +234,7 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract a table with job_id option" do
@@ -248,8 +248,8 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, extract_url, job_id: job_id
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can extract a table with prefix option" do
@@ -266,8 +266,8 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, extract_url, prefix: prefix
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can extract a table with job_id option if both job_id and prefix options are provided" do
@@ -281,8 +281,8 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, extract_url, job_id: job_id, prefix: "IGNORED"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can extract a table with the job labels option" do
@@ -296,8 +296,8 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     job = bigquery.extract_job table, extract_file, labels: labels
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.labels.must_equal labels
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.labels).must_equal labels
   end
 
   it "can extract a table with the location option" do
@@ -315,8 +315,8 @@ describe Google::Cloud::Bigquery::Project, :extract_job, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.location.must_equal region
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.location).must_equal region
   end
 
   # Borrowed from MockStorage, extract to a common module?

@@ -36,22 +36,22 @@ describe Google::Cloud::Bigquery::Table, :view, :bigquery do
 
   it "has the attributes of a view" do
     fresh = dataset.table view.table_id
-    fresh.must_be_kind_of  Google::Cloud::Bigquery::Table
+    _(fresh).must_be_kind_of  Google::Cloud::Bigquery::Table
 
-    fresh.project_id.must_equal bigquery.project
-    fresh.id.must_equal "#{bigquery.project}:#{dataset.dataset_id}.#{view.table_id}"
-    fresh.query_id.must_equal "`#{bigquery.project}.#{dataset.dataset_id}.#{view.table_id}`"
-    fresh.etag.wont_be :nil?
-    fresh.api_url.wont_be :nil?
-    fresh.query_id.must_equal view.query_id
-    fresh.created_at.must_be_kind_of Time
-    fresh.expires_at.must_be :nil?
-    fresh.modified_at.must_be_kind_of Time
-    fresh.table?.must_equal false
-    fresh.view?.must_equal true
+    _(fresh.project_id).must_equal bigquery.project
+    _(fresh.id).must_equal "#{bigquery.project}:#{dataset.dataset_id}.#{view.table_id}"
+    _(fresh.query_id).must_equal "`#{bigquery.project}.#{dataset.dataset_id}.#{view.table_id}`"
+    _(fresh.etag).wont_be :nil?
+    _(fresh.api_url).wont_be :nil?
+    _(fresh.query_id).must_equal view.query_id
+    _(fresh.created_at).must_be_kind_of Time
+    _(fresh.expires_at).must_be :nil?
+    _(fresh.modified_at).must_be_kind_of Time
+    _(fresh.table?).must_equal false
+    _(fresh.view?).must_equal true
     #fresh.location.must_equal "US"       TODO why nil? Set in dataset
-    fresh.schema.must_be_kind_of Google::Cloud::Bigquery::Schema
-    fresh.headers.must_equal [:url]
+    _(fresh.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+    _(fresh.headers).must_equal [:url]
   end
 
   it "gets and sets attributes" do
@@ -63,24 +63,24 @@ describe Google::Cloud::Bigquery::Table, :view, :bigquery do
     view.query = publicdata_query_2
 
     view.reload!
-    view.table_id.must_equal view_id
-    view.name.must_equal new_name
-    view.description.must_equal new_desc
-    view.query.must_equal publicdata_query_2
+    _(view.table_id).must_equal view_id
+    _(view.name).must_equal new_name
+    _(view.description).must_equal new_desc
+    _(view.query).must_equal publicdata_query_2
   end
 
   it "should fail to set metadata with stale etag" do
     fresh = dataset.table view.table_id
-    fresh.etag.wont_be :nil?
+    _(fresh.etag).wont_be :nil?
 
     stale = dataset.table view_id
-    stale.etag.wont_be :nil?
-    stale.etag.must_equal fresh.etag
+    _(stale.etag).wont_be :nil?
+    _(stale.etag).must_equal fresh.etag
 
     # Modify on the server, which will change the etag
     fresh.description = "Description 1"
-    stale.etag.wont_equal fresh.etag
+    _(stale.etag).wont_equal fresh.etag
     err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
-    err.message.must_equal "failedPrecondition: Precondition check failed."
+    _(err.message).must_equal "failedPrecondition: Precondition check failed."
   end
 end

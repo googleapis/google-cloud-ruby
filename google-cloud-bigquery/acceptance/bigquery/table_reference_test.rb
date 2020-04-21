@@ -54,50 +54,50 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
   let(:labels) { { "foo" => "bar" } }
 
   it "has the attributes of a table" do
-    table.must_be_kind_of Google::Cloud::Bigquery::Table
+    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
 
-    table.table_id.must_equal table_id
-    table.dataset_id.must_equal dataset_id
-    table.project_id.must_equal bigquery.project
+    _(table.table_id).must_equal table_id
+    _(table.dataset_id).must_equal dataset_id
+    _(table.project_id).must_equal bigquery.project
 
-    table.time_partitioning?.must_be_nil
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.range_partitioning?.must_be_nil
-    table.range_partitioning_field.must_be_nil
-    table.range_partitioning_start.must_be_nil
-    table.range_partitioning_interval.must_be_nil
-    table.range_partitioning_end.must_be_nil
-    table.id.must_be_nil
-    table.name.must_be_nil
-    table.etag.must_be_nil
-    table.api_url.must_be_nil
-    table.description.must_be_nil
-    table.bytes_count.must_be_nil
-    table.rows_count.must_be_nil
-    table.created_at.must_be_nil
-    table.expires_at.must_be_nil
-    table.modified_at.must_be_nil
-    table.table?.must_be_nil
-    table.view?.must_be_nil
-    table.external?.must_be_nil
-    table.location.must_be_nil
-    table.labels.must_be_nil
-    table.schema.must_be_nil
-    table.fields.must_be_nil
-    table.headers.must_be_nil
-    table.external.must_be_nil
-    table.buffer_bytes.must_be_nil
-    table.buffer_rows.must_be_nil
-    table.buffer_oldest_at.must_be_nil
+    _(table.time_partitioning?).must_be_nil
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.range_partitioning?).must_be_nil
+    _(table.range_partitioning_field).must_be_nil
+    _(table.range_partitioning_start).must_be_nil
+    _(table.range_partitioning_interval).must_be_nil
+    _(table.range_partitioning_end).must_be_nil
+    _(table.id).must_be_nil
+    _(table.name).must_be_nil
+    _(table.etag).must_be_nil
+    _(table.api_url).must_be_nil
+    _(table.description).must_be_nil
+    _(table.bytes_count).must_be_nil
+    _(table.rows_count).must_be_nil
+    _(table.created_at).must_be_nil
+    _(table.expires_at).must_be_nil
+    _(table.modified_at).must_be_nil
+    _(table.table?).must_be_nil
+    _(table.view?).must_be_nil
+    _(table.external?).must_be_nil
+    _(table.location).must_be_nil
+    _(table.labels).must_be_nil
+    _(table.schema).must_be_nil
+    _(table.fields).must_be_nil
+    _(table.headers).must_be_nil
+    _(table.external).must_be_nil
+    _(table.buffer_bytes).must_be_nil
+    _(table.buffer_rows).must_be_nil
+    _(table.buffer_oldest_at).must_be_nil
   end
 
   it "deletes itself and knows it no longer exists" do
-    table.exists?.must_equal true
-    table.delete.must_equal true
-    table.exists?.must_equal false
-    table.exists?(force: true).must_equal false
+    _(table.exists?).must_equal true
+    _(table.delete).must_equal true
+    _(table.exists?).must_equal false
+    _(table.exists?(force: true)).must_equal false
   end
 
   it "gets and sets metadata" do
@@ -110,10 +110,10 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     table.labels = new_labels
 
     table.reload!
-    table.table_id.must_equal table_id
-    table.name.must_equal new_name
-    table.description.must_equal new_desc
-    table.labels.must_equal new_labels
+    _(table.table_id).must_equal table_id
+    _(table.name).must_equal new_name
+    _(table.description).must_equal new_desc
+    _(table.labels).must_equal new_labels
   end
 
   it "gets and sets time partitioning" do
@@ -129,10 +129,10 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     partitioned_table.time_partitioning_expiration = 1
 
     partitioned_table.reload!
-    partitioned_table.table_id.must_equal partitioned_table_id
-    partitioned_table.time_partitioning_type.must_equal "DAY"
-    partitioned_table.time_partitioning_field.must_be_nil
-    partitioned_table.time_partitioning_expiration.must_equal 1
+    _(partitioned_table.table_id).must_equal partitioned_table_id
+    _(partitioned_table.time_partitioning_type).must_equal "DAY"
+    _(partitioned_table.time_partitioning_field).must_be_nil
+    _(partitioned_table.time_partitioning_expiration).must_equal 1
   end
 
   it "gets and sets time partitioning by field" do
@@ -152,10 +152,10 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     partitioned_table.time_partitioning_expiration = 1
 
     partitioned_table.reload!
-    partitioned_table.table_id.must_equal partitioned_field_table_id
-    partitioned_table.time_partitioning_type.must_equal "DAY"
-    partitioned_table.time_partitioning_field.must_equal "dob"
-    partitioned_table.time_partitioning_expiration.must_equal 1
+    _(partitioned_table.table_id).must_equal partitioned_field_table_id
+    _(partitioned_table.time_partitioning_type).must_equal "DAY"
+    _(partitioned_table.time_partitioning_field).must_equal "dob"
+    _(partitioned_table.time_partitioning_expiration).must_equal 1
   end
 
   it "updates its schema" do
@@ -165,14 +165,14 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
       t.schema do |s|
         s.boolean "available", description: "available description", mode: :nullable
       end
-      t.headers.must_equal [:available]
+      _(t.headers).must_equal [:available]
       t.schema replace: true do |s|
         s.boolean "available", description: "available description", mode: :nullable
         s.record "countries_lived", description: "countries_lived description", mode: :repeated do |nested|
           nested.float "rating", description: "An value from 1 to 10", mode: :nullable
         end
       end
-      t.headers.must_equal [:available, :countries_lived]
+      _(t.headers).must_equal [:available, :countries_lived]
     ensure
       t2 = dataset.table "table_schema_test"
       t2.delete if t2
@@ -181,18 +181,18 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
 
   it "inserts rows directly and gets its data" do
     insert_response = table.insert rows
-    insert_response.must_be :success?
-    insert_response.insert_count.must_equal 3
-    insert_response.insert_errors.must_be :empty?
-    insert_response.error_rows.must_be :empty?
+    _(insert_response).must_be :success?
+    _(insert_response.insert_count).must_equal 3
+    _(insert_response.insert_errors).must_be :empty?
+    _(insert_response.error_rows).must_be :empty?
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id
-    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    query_job.job_id.must_equal job_id
+    _(query_job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(query_job.job_id).must_equal job_id
     query_job.wait_until_done!
-    query_job.done?.must_equal true
-    query_job.data.total.wont_be_nil
+    _(query_job.done?).must_equal true
+    _(query_job.data.total).wont_be_nil
 
     assert_data table.data(max: 1)
   end
@@ -208,19 +208,19 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     inserter.flush
     inserter.stop.wait!
 
-    insert_result.must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
-    insert_result.must_be :success?
-    insert_result.insert_count.must_equal 3
-    insert_result.insert_errors.must_be :empty?
-    insert_result.error_rows.must_be :empty?
+    _(insert_result).must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+    _(insert_result).must_be :success?
+    _(insert_result.insert_count).must_equal 3
+    _(insert_result.insert_errors).must_be :empty?
+    _(insert_result.error_rows).must_be :empty?
 
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     query_job = dataset.query_job query, job_id: job_id
-    query_job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
-    query_job.job_id.must_equal job_id
+    _(query_job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(query_job.job_id).must_equal job_id
     query_job.wait_until_done!
-    query_job.done?.must_equal true
-    query_job.data.total.wont_be :nil?
+    _(query_job.done?).must_equal true
+    _(query_job.data.total).wont_be :nil?
 
     assert_data table.data(max: 1)
   end
@@ -228,13 +228,13 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
   it "imports data from a local file with load_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     job = table.load_job local_file, job_id: job_id, labels: labels
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.job_id.must_equal job_id
-    job.labels.must_equal labels
-    job.wont_be :autodetect?
-    job.null_marker.must_equal ""
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.job_id).must_equal job_id
+    _(job.labels).must_equal labels
+    _(job).wont_be :autodetect?
+    _(job.null_marker).must_equal ""
     job.wait_until_done!
-    job.output_rows.must_equal 3
+    _(job.output_rows).must_equal 3
   end
 
   it "imports data from a file in your bucket with load_job" do
@@ -242,7 +242,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
 
     job = table.load_job file
     job.wait_until_done!
-    job.wont_be :failed?
+    _(job).wont_be :failed?
   end
 
   it "imports data from a list of files in your bucket with load_job" do
@@ -254,21 +254,21 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     # Test both by file object and URL as string
     job = table.load_job [file1, gs_url]
     job.wait_until_done!
-    job.wont_be :failed?
-    job.input_files.must_equal 2
-    job.output_rows.must_equal 6
+    _(job).wont_be :failed?
+    _(job.input_files).must_equal 2
+    _(job.output_rows).must_equal 6
   end
 
   it "imports data from a local file with load" do
     result = table.load local_file
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from a file in your bucket with load" do
     file = bucket.create_file local_file, random_file_destination_name
 
     result = table.load file
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from a list of files in your bucket with load" do
@@ -279,31 +279,31 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
 
     # Test both by file object and URL as string
     result = table.load [file1, gs_url]
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "copies itself to another table with copy_job" do
     job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
     copy_job = table.copy_job target_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
 
-    copy_job.must_be_kind_of Google::Cloud::Bigquery::CopyJob
-    copy_job.job_id.must_equal job_id
-    copy_job.labels.must_equal labels
+    _(copy_job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(copy_job.job_id).must_equal job_id
+    _(copy_job.labels).must_equal labels
     copy_job.wait_until_done!
 
-    copy_job.wont_be :failed?
-    copy_job.source.table_id.must_equal table.table_id
-    copy_job.destination.table_id.must_equal target_table_id
-    copy_job.create_if_needed?.must_equal true
-    copy_job.create_never?.must_equal false
-    copy_job.write_truncate?.must_equal false
-    copy_job.write_append?.must_equal false
-    copy_job.write_empty?.must_equal true
+    _(copy_job).wont_be :failed?
+    _(copy_job.source.table_id).must_equal table.table_id
+    _(copy_job.destination.table_id).must_equal target_table_id
+    _(copy_job.create_if_needed?).must_equal true
+    _(copy_job.create_never?).must_equal false
+    _(copy_job.write_truncate?).must_equal false
+    _(copy_job.write_append?).must_equal false
+    _(copy_job.write_empty?).must_equal true
   end
 
   it "copies itself to another table with copy" do
     result = table.copy target_table_2_id, create: :needed, write: :empty
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "extracts data to a file in your bucket with extract_job" do
@@ -311,37 +311,37 @@ describe Google::Cloud::Bigquery::Table, :reference, :bigquery do
     load_job = table.load_job local_file
     load_job.wait_until_done!
     Tempfile.open "empty_extract_file.json" do |tmp|
-      tmp.size.must_equal 0
+      _(tmp.size).must_equal 0
       dest_file_name = random_file_destination_name
       extract_file = bucket.create_file tmp, dest_file_name
       job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
       extract_job = table.extract_job extract_file, job_id: job_id
-      extract_job.job_id.must_equal job_id
+      _(extract_job.job_id).must_equal job_id
       extract_job.wait_until_done!
-      extract_job.wont_be :failed?
+      _(extract_job).wont_be :failed?
       # Refresh to get the latest file data
       extract_file = bucket.file dest_file_name
       downloaded_file = extract_file.download tmp.path
-      downloaded_file.size.must_be :>, 0
+      _(downloaded_file.size).must_be :>, 0
     end
   end
 
   it "extracts data to a file in your bucket with extract" do
     # Make sure there is data to extract...
     result = table.load local_file
-    result.must_equal true
+    _(result).must_equal true
     Tempfile.open "empty_extract_file.json" do |tmp|
-      tmp.size.must_equal 0
+      _(tmp.size).must_equal 0
       dest_file_name = random_file_destination_name
       extract_file = bucket.create_file tmp, dest_file_name
 
       result = table.extract extract_file
-      result.must_equal true
+      _(result).must_equal true
       # Refresh to get the latest file data
       extract_file = bucket.file dest_file_name
       downloaded_file = extract_file.download tmp.path
-      downloaded_file.size.must_be :>, 0
+      _(downloaded_file.size).must_be :>, 0
     end
   end
 end

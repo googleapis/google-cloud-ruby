@@ -26,16 +26,16 @@ describe Google::Cloud::Bigquery::Dataset, :reload, :mock_bigquery do
     mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
     dataset.service.mocked_service = mock
 
-    dataset.wont_be :reference?
-    dataset.must_be :resource?
-    dataset.wont_be :resource_partial?
-    dataset.must_be :resource_full?
+    _(dataset).wont_be :reference?
+    _(dataset).must_be :resource?
+    _(dataset).wont_be :resource_partial?
+    _(dataset).must_be :resource_full?
 
     dataset.reload!
-    dataset.wont_be :reference?
-    dataset.must_be :resource?
-    dataset.wont_be :resource_partial?
-    dataset.must_be :resource_full?
+    _(dataset).wont_be :reference?
+    _(dataset).must_be :resource?
+    _(dataset).wont_be :resource_partial?
+    _(dataset).must_be :resource_full?
 
     mock.verify
   end
@@ -49,16 +49,16 @@ describe Google::Cloud::Bigquery::Dataset, :reload, :mock_bigquery do
       mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
       dataset.service.mocked_service = mock
 
-      dataset.wont_be :reference?
-      dataset.must_be :resource?
-      dataset.must_be :resource_partial?
-      dataset.wont_be :resource_full?
+      _(dataset).wont_be :reference?
+      _(dataset).must_be :resource?
+      _(dataset).must_be :resource_partial?
+      _(dataset).wont_be :resource_full?
 
       dataset.reload!
-      dataset.wont_be :reference?
-      dataset.must_be :resource?
-      dataset.wont_be :resource_partial?
-      dataset.must_be :resource_full?
+      _(dataset).wont_be :reference?
+      _(dataset).must_be :resource?
+      _(dataset).wont_be :resource_partial?
+      _(dataset).must_be :resource_full?
 
       mock.verify
     end
@@ -72,16 +72,16 @@ describe Google::Cloud::Bigquery::Dataset, :reload, :mock_bigquery do
       mock.expect :get_dataset, dataset_gapi, [project, dataset_id]
       dataset.service.mocked_service = mock
 
-      dataset.must_be :reference?
-      dataset.wont_be :resource?
-      dataset.wont_be :resource_partial?
-      dataset.wont_be :resource_full?
+      _(dataset).must_be :reference?
+      _(dataset).wont_be :resource?
+      _(dataset).wont_be :resource_partial?
+      _(dataset).wont_be :resource_full?
 
       dataset.reload!
-      dataset.wont_be :reference?
-      dataset.must_be :resource?
-      dataset.wont_be :resource_partial?
-      dataset.must_be :resource_full?
+      _(dataset).wont_be :reference?
+      _(dataset).must_be :resource?
+      _(dataset).wont_be :resource_partial?
+      _(dataset).must_be :resource_full?
 
       mock.verify
     end

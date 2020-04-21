@@ -42,7 +42,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
 
     table.name = new_table_name
 
-    table.name.must_equal new_table_name
+    _(table.name).must_equal new_table_name
     mock.verify
   end
 
@@ -60,7 +60,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
 
     table.description = new_description
 
-    table.description.must_equal new_description
+    _(table.description).must_equal new_description
     mock.verify
   end
 
@@ -82,7 +82,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
 
     table.time_partitioning_type = type
 
-    table.time_partitioning_type.must_equal type
+    _(table.time_partitioning_type).must_equal type
     mock.verify
   end
 
@@ -104,7 +104,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
 
     table.time_partitioning_field = field
 
-    table.time_partitioning_field.must_equal field
+    _(table.time_partitioning_field).must_equal field
     mock.verify
   end
 
@@ -127,7 +127,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
 
     table.time_partitioning_expiration = expiration
 
-    table.time_partitioning_expiration.must_equal expiration
+    _(table.time_partitioning_expiration).must_equal expiration
     mock.verify
   end
 
@@ -147,7 +147,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
 
     table.labels = new_labels
 
-    table.labels.must_equal new_labels
+    _(table.labels).must_equal new_labels
     mock.verify
   end
 

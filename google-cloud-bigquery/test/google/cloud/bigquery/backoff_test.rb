@@ -28,8 +28,8 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
 
     mock.verify
 
-    dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    dataset.dataset_id.must_equal dataset_id
+    _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(dataset.dataset_id).must_equal dataset_id
   end
 
   it "handles a single 404 error (retriable) and retries with backoff" do
@@ -66,8 +66,8 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
       dataset = bigquery.dataset dataset_id
 
-      dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-      dataset.dataset_id.must_equal dataset_id
+      _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+      _(dataset.dataset_id).must_equal dataset_id
     end
 
     mock.verify
@@ -107,8 +107,8 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
       dataset = bigquery.dataset dataset_id
 
-      dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-      dataset.dataset_id.must_equal dataset_id
+      _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+      _(dataset.dataset_id).must_equal dataset_id
     end
 
     mock.verify
@@ -132,8 +132,8 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
         bigquery.dataset dataset_id
       end
 
-      err.message.must_equal "notfound"
-      err.cause.body.must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"},{\"reason\":\"other\"}]}}"
+      _(err.message).must_equal "notfound"
+      _(err.cause.body).must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"},{\"reason\":\"other\"}]}}"
     end
 
     mock.verify
@@ -175,8 +175,8 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
     Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { mocked_backoff } do
       dataset = bigquery.dataset dataset_id
 
-      dataset.must_be_kind_of Google::Cloud::Bigquery::Dataset
-      dataset.dataset_id.must_equal dataset_id
+      _(dataset).must_be_kind_of Google::Cloud::Bigquery::Dataset
+      _(dataset.dataset_id).must_equal dataset_id
     end
 
     mock.verify
@@ -210,8 +210,8 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
         bigquery.dataset dataset_id
       end
 
-      err.message.must_equal "invalid"
-      err.cause.body.must_be :nil?
+      _(err.message).must_equal "invalid"
+      _(err.cause.body).must_be :nil?
     end
 
     mock.verify
@@ -240,8 +240,8 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
         bigquery.dataset dataset_id
       end
 
-      err.message.must_equal "invalid"
-      err.cause.body.must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"}]}}"
+      _(err.message).must_equal "invalid"
+      _(err.cause.body).must_equal "{\"error\":{\"errors\":[{\"reason\":\"backendError\"}]}}"
     end
 
     mock.verify
@@ -258,7 +258,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
       bigquery.dataset dataset_id
     end
 
-    err.message.must_equal "invalid"
+    _(err.message).must_equal "invalid"
   end
 
   it "does not handle a single 404 error with reason (non-retriable)" do
@@ -273,7 +273,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
       bigquery.dataset dataset_id
     end
 
-    err.message.must_equal "invalid"
+    _(err.message).must_equal "invalid"
   end
 
   it "re-raises non-retriable errors" do
@@ -290,7 +290,7 @@ describe Google::Cloud::Bigquery::Service::Backoff, :mock_bigquery do
       bigquery.dataset dataset_id
     end
 
-    err.message.must_equal "nope"
+    _(err.message).must_equal "nope"
   end
 
   def find_dataset_gapi id

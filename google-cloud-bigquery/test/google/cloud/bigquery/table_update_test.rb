@@ -39,25 +39,25 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
 
     table.service.mocked_service = mock
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal true
-    table.clustering_fields.must_be_nil
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal true
+    _(table.clustering_fields).must_be_nil
 
     table.name = new_table_name
 
-    table.name.must_equal new_table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal true
-    table.clustering_fields.must_be_nil
+    _(table.name).must_equal new_table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal true
+    _(table.clustering_fields).must_be_nil
 
     mock.verify
   end
@@ -73,23 +73,23 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal true
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal true
 
     table.description = new_description
 
-    table.name.must_equal table_name
-    table.description.must_equal new_description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal true
+    _(table.name).must_equal table_name
+    _(table.description).must_equal new_description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal true
 
     mock.verify
   end
@@ -109,22 +109,22 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal true
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal true
 
     table.time_partitioning_type = type
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_equal type
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal true
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_equal type
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal true
 
     mock.verify
   end
@@ -144,23 +144,23 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal true
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal true
 
     table.time_partitioning_field = field
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_equal field
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal true
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_equal field
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal true
 
     mock.verify
   end
@@ -181,23 +181,23 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal true
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal true
 
     table.time_partitioning_expiration = expiration
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_equal expiration
-    table.require_partition_filter.must_equal true
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_equal expiration
+    _(table.require_partition_filter).must_equal true
 
     mock.verify
   end
@@ -212,23 +212,23 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal true
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal true
 
     table.require_partition_filter = false
 
-    table.name.must_equal table_name
-    table.description.must_equal description
-    table.schema.fields.count.must_equal schema.fields.count
-    table.time_partitioning_type.must_be_nil
-    table.time_partitioning_field.must_be_nil
-    table.time_partitioning_expiration.must_be_nil
-    table.require_partition_filter.must_equal false
+    _(table.name).must_equal table_name
+    _(table.description).must_equal description
+    _(table.schema.fields.count).must_equal schema.fields.count
+    _(table.time_partitioning_type).must_be_nil
+    _(table.time_partitioning_field).must_be_nil
+    _(table.time_partitioning_expiration).must_be_nil
+    _(table.require_partition_filter).must_equal false
 
     mock.verify
   end
@@ -246,11 +246,11 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
-    table.labels.must_equal labels
+    _(table.labels).must_equal labels
 
     table.labels = new_labels
 
-    table.labels.must_equal new_labels
+    _(table.labels).must_equal new_labels
     mock.verify
   end
 
@@ -267,15 +267,15 @@ describe Google::Cloud::Bigquery::Table, :update, :mock_bigquery do
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
-    table.encryption.must_be :nil?
+    _(table.encryption).must_be :nil?
 
     encrypt_config = bigquery.encryption kms_key: kms_key
 
     table.encryption = encrypt_config
 
-    table.encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
-    table.encryption.kms_key.must_equal kms_key
-    table.encryption.must_be :frozen?
+    _(table.encryption).must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    _(table.encryption.kms_key).must_equal kms_key
+    _(table.encryption).must_be :frozen?
 
     mock.verify
   end

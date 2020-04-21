@@ -29,8 +29,8 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
 
     mock.verify
 
-    models.size.must_equal 3
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(models.size).must_equal 3
+    models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
   end
 
   it "lists models with max set" do
@@ -43,10 +43,10 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
 
     mock.verify
 
-    models.count.must_equal 3
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    models.token.wont_be :nil?
-    models.token.must_equal "next_page_token"
+    _(models.count).must_equal 3
+    models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(models.token).wont_be :nil?
+    _(models.token).must_equal "next_page_token"
   end
 
   it "paginates models" do
@@ -62,14 +62,14 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
 
     mock.verify
 
-    first_models.count.must_equal 3
-    first_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    first_models.token.wont_be :nil?
-    first_models.token.must_equal "next_page_token"
+    _(first_models.count).must_equal 3
+    first_models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(first_models.token).wont_be :nil?
+    _(first_models.token).must_equal "next_page_token"
 
-    second_models.count.must_equal 2
-    second_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    second_models.token.must_be :nil?
+    _(second_models.count).must_equal 2
+    second_models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(second_models.token).must_be :nil?
   end
 
   it "paginates models with next? and next" do
@@ -85,14 +85,14 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
 
     mock.verify
 
-    first_models.count.must_equal 3
-    first_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    first_models.token.wont_be :nil?
-    first_models.token.must_equal "next_page_token"
+    _(first_models.count).must_equal 3
+    first_models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(first_models.token).wont_be :nil?
+    _(first_models.token).must_equal "next_page_token"
 
-    second_models.count.must_equal 2
-    second_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    second_models.token.must_be :nil?
+    _(second_models.count).must_equal 2
+    second_models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(second_models.token).must_be :nil?
   end
 
   it "paginates models with next? and next and max" do
@@ -108,13 +108,13 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
 
     mock.verify
 
-    first_models.count.must_equal 3
-    first_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    first_models.next?.must_equal true
+    _(first_models.count).must_equal 3
+    first_models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(first_models.next?).must_equal true
 
-    second_models.count.must_equal 2
-    second_models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
-    second_models.next?.must_equal false
+    _(second_models.count).must_equal 2
+    second_models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(second_models.next?).must_equal false
   end
 
   it "paginates models with all" do
@@ -129,8 +129,8 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
 
     mock.verify
 
-    models.count.must_equal 5
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(models.count).must_equal 5
+    models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
   end
 
   it "paginates models with all and max" do
@@ -145,8 +145,8 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
 
     mock.verify
 
-    models.count.must_equal 5
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(models.count).must_equal 5
+    models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
   end
 
   it "iterates models with all using Enumerator" do
@@ -161,8 +161,8 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
 
     mock.verify
 
-    models.count.must_equal 5
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(models.count).must_equal 5
+    models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
   end
 
   it "iterates models with all with request_limit set" do
@@ -177,7 +177,7 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
 
     mock.verify
 
-    models.count.must_equal 6
-    models.each { |ds| ds.must_be_kind_of Google::Cloud::Bigquery::Model }
+    _(models.count).must_equal 6
+    models.each { |ds| _(ds).must_be_kind_of Google::Cloud::Bigquery::Model }
   end
 end

@@ -92,26 +92,26 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
   it "has the attributes of a dataset" do
     fresh = bigquery.dataset dataset_id
-    fresh.must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(fresh).must_be_kind_of Google::Cloud::Bigquery::Dataset
 
-    fresh.project_id.must_equal bigquery.project
-    fresh.dataset_id.must_equal dataset.dataset_id
-    fresh.etag.wont_be :nil?
-    fresh.api_url.wont_be :nil?
-    fresh.created_at.must_be_kind_of Time
-    fresh.modified_at.must_be_kind_of Time
-    fresh.dataset_ref.must_be_kind_of Hash
-    fresh.dataset_ref[:project_id].must_equal bigquery.project
-    fresh.dataset_ref[:dataset_id].must_equal dataset.dataset_id
+    _(fresh.project_id).must_equal bigquery.project
+    _(fresh.dataset_id).must_equal dataset.dataset_id
+    _(fresh.etag).wont_be :nil?
+    _(fresh.api_url).wont_be :nil?
+    _(fresh.created_at).must_be_kind_of Time
+    _(fresh.modified_at).must_be_kind_of Time
+    _(fresh.dataset_ref).must_be_kind_of Hash
+    _(fresh.dataset_ref[:project_id]).must_equal bigquery.project
+    _(fresh.dataset_ref[:dataset_id]).must_equal dataset.dataset_id
     # fresh.location.must_equal "US"       TODO why nil? Set in dataset
   end
 
   it "deletes itself and knows it no longer exists" do
-    dataset.exists?.must_equal true
+    _(dataset.exists?).must_equal true
     dataset.tables.all(&:delete)
-    dataset.delete.must_equal true
-    dataset.exists?.must_equal false
-    dataset.exists?(force: true).must_equal false
+    _(dataset.delete).must_equal true
+    _(dataset.exists?).must_equal false
+    _(dataset.exists?(force: true)).must_equal false
   end
 
   it "should set & get metadata" do
@@ -126,58 +126,58 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     dataset.labels = new_labels
 
     fresh = bigquery.dataset dataset.dataset_id
-    fresh.wont_be :nil?
-    fresh.must_be_kind_of Google::Cloud::Bigquery::Dataset
-    fresh.dataset_id.must_equal dataset.dataset_id
-    fresh.name.must_equal new_name
-    fresh.description.must_equal new_desc
-    fresh.default_expiration.must_equal new_default_expiration
-    fresh.labels.must_equal new_labels
+    _(fresh).wont_be :nil?
+    _(fresh).must_be_kind_of Google::Cloud::Bigquery::Dataset
+    _(fresh.dataset_id).must_equal dataset.dataset_id
+    _(fresh.name).must_equal new_name
+    _(fresh.description).must_equal new_desc
+    _(fresh.default_expiration).must_equal new_default_expiration
+    _(fresh.labels).must_equal new_labels
 
     dataset.default_expiration = nil
   end
 
   it "should fail to set metadata with stale etag" do
     fresh = bigquery.dataset dataset.dataset_id
-    fresh.etag.wont_be :nil?
+    _(fresh.etag).wont_be :nil?
 
     stale = bigquery.dataset dataset_id
-    stale.etag.wont_be :nil?
-    stale.etag.must_equal fresh.etag
+    _(stale.etag).wont_be :nil?
+    _(stale.etag).must_equal fresh.etag
 
     # Modify on the server, which will change the etag
     fresh.description = "Description 1"
-    stale.etag.wont_equal fresh.etag
+    _(stale.etag).wont_equal fresh.etag
     err = expect { stale.description = "Description 2" }.must_raise Google::Cloud::FailedPreconditionError
-    err.message.must_equal "failedPrecondition: Precondition check failed."
+    _(err.message).must_equal "failedPrecondition: Precondition check failed."
   end
 
   it "create dataset returns valid etag equal to get dataset" do
     fresh_dataset_id = "#{prefix}_#{rand 100}_unique"
     fresh = bigquery.create_dataset fresh_dataset_id
-    fresh.etag.wont_be :nil?
+    _(fresh.etag).wont_be :nil?
 
     stale = bigquery.dataset fresh_dataset_id
-    stale.etag.wont_be :nil?
-    stale.etag.must_equal fresh.etag
+    _(stale.etag).wont_be :nil?
+    _(stale.etag).must_equal fresh.etag
   end
 
   it "should get a list of tables and views" do
     tables = dataset.tables
     # The code in before ensures we have at least one dataset
-    tables.count.must_be :>=, 2
+    _(tables.count).must_be :>=, 2
     tables.each do |t|
-      t.table_id.wont_be :nil?
-      t.created_at.must_be_kind_of Time # Loads full representation
+      _(t.table_id).wont_be :nil?
+      _(t.created_at).must_be_kind_of Time # Loads full representation
     end
   end
 
   it "should get all tables and views in pages with token" do
     tables = dataset.tables(max: 1).all
-    tables.count.must_be :>=, 2
+    _(tables.count).must_be :>=, 2
     tables.each do |t|
-      t.table_id.wont_be :nil?
-      t.created_at.must_be_kind_of Time # Loads full representation
+      _(t.table_id).wont_be :nil?
+      _(t.created_at).must_be_kind_of Time # Loads full representation
     end
   end
 
@@ -194,16 +194,16 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       job.range_partitioning_interval = 10
       job.range_partitioning_end = 100
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.job_id).must_equal job_id
     job.wait_until_done!
-    job.output_rows.must_equal 3
-    job.schema_update_options.must_equal schema_update_options
-    job.range_partitioning?.must_equal true
-    job.range_partitioning_field.must_equal "id"
-    job.range_partitioning_start.must_equal 0
-    job.range_partitioning_interval.must_equal 10
-    job.range_partitioning_end.must_equal 100
+    _(job.output_rows).must_equal 3
+    _(job.schema_update_options).must_equal schema_update_options
+    _(job.range_partitioning?).must_equal true
+    _(job.range_partitioning_field).must_equal "id"
+    _(job.range_partitioning_start).must_equal 0
+    _(job.range_partitioning_interval).must_equal 10
+    _(job.range_partitioning_end).must_equal 100
   end
 
   it "imports data from a local file and creates a new table with schema and time partitioning in a block with load_job" do
@@ -220,18 +220,18 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       job.time_partitioning_require_filter = true
       job.clustering_fields = clustering_fields
     end
-    job.must_be_kind_of Google::Cloud::Bigquery::LoadJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.job_id).must_equal job_id
     job.wait_until_done!
-    job.output_rows.must_equal 3
-    job.schema_update_options.must_equal schema_update_options
-    job.time_partitioning?.must_equal true
-    job.time_partitioning_type.must_equal "DAY"
-    job.time_partitioning_field.must_equal "dob"
-    job.time_partitioning_expiration.must_equal 86_400
-    job.time_partitioning_require_filter?.must_equal true
-    job.clustering?.must_equal true
-    job.clustering_fields.must_equal clustering_fields
+    _(job.output_rows).must_equal 3
+    _(job.schema_update_options).must_equal schema_update_options
+    _(job.time_partitioning?).must_equal true
+    _(job.time_partitioning_type).must_equal "DAY"
+    _(job.time_partitioning_field).must_equal "dob"
+    _(job.time_partitioning_expiration).must_equal 86_400
+    _(job.time_partitioning_require_filter?).must_equal true
+    _(job.clustering?).must_equal true
+    _(job.clustering_fields).must_equal clustering_fields
   end
 
   it "imports data from a local file and creates a new table with schema as an option with load_job" do
@@ -245,13 +245,13 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     job = dataset.load_job "local_file_table_2", local_file, schema: schema
 
     job.wait_until_done!
-    job.output_rows.must_equal 3
+    _(job.output_rows).must_equal 3
   end
 
   it "imports data from a local file and creates a new table without a schema with load_job" do
     job = dataset.load_job table_with_schema.table_id, local_file, create: :never
     job.wait_until_done!
-    job.output_rows.must_equal 3
+    _(job.output_rows).must_equal 3
   end
 
   it "imports data from a list of files in your bucket with load_job" do
@@ -263,9 +263,9 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     # Test both by file object and URL as string
     job = dataset.load_job table_with_schema.table_id, [file1, gs_url]
     job.wait_until_done!
-    job.wont_be :failed?
-    job.input_files.must_equal 2
-    job.output_rows.must_equal 6
+    _(job).wont_be :failed?
+    _(job.input_files).must_equal 2
+    _(job.output_rows).must_equal 6
   end
 
   it "imports data from a local file and creates a new table with specified schema in a block with load" do
@@ -275,7 +275,7 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       schema.string    "name",  description: "name description",  mode: :required
       schema.timestamp "dob",   description: "dob description",   mode: :required
     end
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from a local file and creates a new table with specified schema as an option with load" do
@@ -287,14 +287,14 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
     end
 
     result = dataset.load "local_file_table_4", local_file, schema: schema
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from a local file and creates a new table without a schema with load" do
     result = dataset.load table_with_schema.table_id, local_file do |job|
       job.create = :never
     end
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from a list of files in your bucket with load" do
@@ -305,14 +305,14 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
     # Test both by file object and URL as string
     result = dataset.load table_with_schema.table_id, [file1, gs_url]
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from GCS Avro file and creates a new table with load" do
     result = dataset.load(
       table_avro_id,
       "gs://#{samples_bucket}/bigquery/us-states/us-states.avro")
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from GCS Avro file and creates a new table with encryption with load" do
@@ -323,65 +323,65 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       load.write = :truncate
       load.encryption = encrypt_config
     end
-    result.must_equal true
+    _(result).must_equal true
     table_avro.reload!
-    table_avro.encryption.must_equal encrypt_config
+    _(table_avro.encryption).must_equal encrypt_config
   end
 
   it "imports data from a local ORC file and creates a new table without a schema with load" do
     result = dataset.load table_orc_id, local_orc_file
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from GCS ORC file and creates a new table with load" do
     result = dataset.load(
         table_orc_id,
         "gs://#{samples_bucket}/bigquery/us-states/us-states.orc")
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from a local Parquet file and creates a new table without a schema with load" do
     result = dataset.load table_parquet_id, local_parquet_file
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "imports data from GCS Parquet file and creates a new table with load" do
     result = dataset.load(
         table_parquet_id,
         "gs://#{samples_bucket}/bigquery/us-states/us-states.parquet")
-    result.must_equal true
+    _(result).must_equal true
   end
 
   it "inserts rows directly and gets its data" do
     insert_response = dataset.insert table_with_schema.table_id, rows
-    insert_response.must_be :success?
-    insert_response.insert_count.must_equal 3
-    insert_response.insert_errors.must_be :empty?
-    insert_response.error_rows.must_be :empty?
+    _(insert_response).must_be :success?
+    _(insert_response.insert_count).must_equal 3
+    _(insert_response.insert_errors).must_be :empty?
+    _(insert_response.error_rows).must_be :empty?
 
     assert_data table_with_schema.data(max: 1)
   end
 
   it "insert skip invalid rows and return insert errors" do
     insert_response = dataset.insert table_with_schema.table_id, invalid_rows, skip_invalid: true
-    insert_response.wont_be :success?
-    insert_response.insert_count.must_equal 2
+    _(insert_response).wont_be :success?
+    _(insert_response.insert_count).must_equal 2
 
-    insert_response.insert_errors.wont_be :empty?
-    insert_response.insert_errors.count.must_equal 1
-    insert_response.insert_errors.first.class.must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
-    insert_response.insert_errors.first.index.must_equal 1
+    _(insert_response.insert_errors).wont_be :empty?
+    _(insert_response.insert_errors.count).must_equal 1
+    _(insert_response.insert_errors.first.class).must_equal Google::Cloud::Bigquery::InsertResponse::InsertError
+    _(insert_response.insert_errors.first.index).must_equal 1
 
     bigquery_row = invalid_rows[insert_response.insert_errors.first.index]
-    insert_response.insert_errors.first.row.must_equal bigquery_row
+    _(insert_response.insert_errors.first.row).must_equal bigquery_row
 
-    insert_response.error_rows.wont_be :empty?
-    insert_response.error_rows.count.must_equal 1
-    insert_response.error_rows.first.must_equal bigquery_row
+    _(insert_response.error_rows).wont_be :empty?
+    _(insert_response.error_rows.count).must_equal 1
+    _(insert_response.error_rows.first).must_equal bigquery_row
 
-    insert_response.insert_error_for(invalid_rows[1]).index.must_equal insert_response.insert_errors.first.index
-    insert_response.errors_for(invalid_rows[1]).wont_be :empty?
-    insert_response.index_for(invalid_rows[1]).must_equal 1
+    _(insert_response.insert_error_for(invalid_rows[1]).index).must_equal insert_response.insert_errors.first.index
+    _(insert_response.errors_for(invalid_rows[1])).wont_be :empty?
+    _(insert_response.index_for(invalid_rows[1])).must_equal 1
   end
 
   it "inserts rows with autocreate option" do
@@ -393,23 +393,23 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       t.schema.timestamp "dob",   description: "dob description",   mode: :required
     end
 
-    insert_response.must_be :success?
-    insert_response.insert_count.must_equal 3
-    insert_response.insert_errors.must_be :empty?
-    insert_response.error_rows.must_be :empty?
+    _(insert_response).must_be :success?
+    _(insert_response.insert_count).must_equal 3
+    _(insert_response.insert_errors).must_be :empty?
+    _(insert_response.error_rows).must_be :empty?
 
     table = dataset.table table_with_schema_id
-    table.wont_be_nil
+    _(table).wont_be_nil
 
     assert_data table.data(max: 1)
   end
 
   it "inserts rows with insert_ids option" do
     insert_response = dataset.insert table_with_schema.table_id, rows, insert_ids: insert_ids
-    insert_response.must_be :success?
-    insert_response.insert_count.must_equal 3
-    insert_response.insert_errors.must_be :empty?
-    insert_response.error_rows.must_be :empty?
+    _(insert_response).must_be :success?
+    _(insert_response.insert_count).must_equal 3
+    _(insert_response.insert_errors).must_be :empty?
+    _(insert_response.error_rows).must_be :empty?
 
     assert_data table_with_schema.data(max: 1)
   end
@@ -424,13 +424,13 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       t.schema.timestamp "dob",   description: "dob description",   mode: :required
     end
 
-    insert_response.must_be :success?
-    insert_response.insert_count.must_equal 3
-    insert_response.insert_errors.must_be :empty?
-    insert_response.error_rows.must_be :empty?
+    _(insert_response).must_be :success?
+    _(insert_response.insert_count).must_equal 3
+    _(insert_response.insert_errors).must_be :empty?
+    _(insert_response.error_rows).must_be :empty?
 
     table = dataset.table new_table_id
-    table.wont_be_nil
+    _(table).wont_be_nil
 
     assert_data table.data(max: 1)
   end

@@ -47,7 +47,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_file
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself to a storage url" do
@@ -60,7 +60,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_url
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself as a dryrun (deprecated)" do
@@ -74,7 +74,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_url, dryrun: true
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and determine the csv format" do
@@ -89,7 +89,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job "#{extract_url}.csv"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the csv format" do
@@ -103,7 +103,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_url, format: :csv
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the csv format and options" do
@@ -120,7 +120,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_url, format: :csv, compression: "GZIP", delimiter: "\t", header: false
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and determine the json format" do
@@ -135,7 +135,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job "#{extract_url}.json"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the json format" do
@@ -149,7 +149,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_url, format: :json
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and determine the avro format" do
@@ -164,7 +164,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job "#{extract_url}.avro"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and determine the avro format with options" do
@@ -182,7 +182,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the avro format" do
@@ -196,7 +196,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_url, format: :avro
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself and specify the avro format with options" do
@@ -214,7 +214,7 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     end
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
   end
 
   it "can extract itself with job_id option" do
@@ -228,8 +228,8 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_url, job_id: job_id
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can extract itself with prefix option" do
@@ -246,8 +246,8 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_url, prefix: prefix
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can extract itself with job_id option if both job_id and prefix options are provided" do
@@ -261,8 +261,8 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_url, job_id: job_id, prefix: "IGNORED"
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.job_id.must_equal job_id
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.job_id).must_equal job_id
   end
 
   it "can extract itself with the job labels option" do
@@ -276,8 +276,8 @@ describe Google::Cloud::Bigquery::Table, :extract_job, :mock_bigquery do
     job = table.extract_job extract_file, labels: labels
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Bigquery::ExtractJob
-    job.labels.must_equal labels
+    _(job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+    _(job.labels).must_equal labels
   end
 
   # Borrowed from MockStorage, extract to a common module?

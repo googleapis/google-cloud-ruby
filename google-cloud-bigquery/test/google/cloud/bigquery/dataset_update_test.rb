@@ -35,15 +35,15 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     patch_dataset_gapi = Google::Apis::BigqueryV2::Dataset.new friendly_name: new_dataset_name, etag: dataset_gapi.etag
     mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_dataset_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
-    dataset.name.must_equal dataset_name
-    dataset.description.must_equal description
-    dataset.default_expiration.must_equal default_expiration
+    _(dataset.name).must_equal dataset_name
+    _(dataset.description).must_equal description
+    _(dataset.default_expiration).must_equal default_expiration
 
     dataset.name = new_dataset_name
 
-    dataset.name.must_equal new_dataset_name
-    dataset.description.must_equal description
-    dataset.default_expiration.must_equal default_expiration
+    _(dataset.name).must_equal new_dataset_name
+    _(dataset.description).must_equal description
+    _(dataset.default_expiration).must_equal default_expiration
     mock.verify
   end
 
@@ -57,15 +57,15 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new description: new_description, etag: dataset_gapi.etag
     mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
-    dataset.name.must_equal dataset_name
-    dataset.description.must_equal description
-    dataset.default_expiration.must_equal default_expiration
+    _(dataset.name).must_equal dataset_name
+    _(dataset.description).must_equal description
+    _(dataset.default_expiration).must_equal default_expiration
 
     dataset.description = new_description
 
-    dataset.name.must_equal dataset_name
-    dataset.description.must_equal new_description
-    dataset.default_expiration.must_equal default_expiration
+    _(dataset.name).must_equal dataset_name
+    _(dataset.description).must_equal new_description
+    _(dataset.default_expiration).must_equal default_expiration
     mock.verify
   end
 
@@ -79,15 +79,15 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_table_expiration_ms: new_default_expiration, etag: dataset_gapi.etag
     mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
-    dataset.name.must_equal dataset_name
-    dataset.description.must_equal description
-    dataset.default_expiration.must_equal default_expiration
+    _(dataset.name).must_equal dataset_name
+    _(dataset.description).must_equal description
+    _(dataset.default_expiration).must_equal default_expiration
 
     dataset.default_expiration = new_default_expiration
 
-    dataset.name.must_equal dataset_name
-    dataset.description.must_equal description
-    dataset.default_expiration.must_equal new_default_expiration
+    _(dataset.name).must_equal dataset_name
+    _(dataset.description).must_equal description
+    _(dataset.default_expiration).must_equal new_default_expiration
     mock.verify
   end
 
@@ -101,11 +101,11 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new labels: new_labels, etag: dataset_gapi.etag
     mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
-    dataset.labels.must_equal labels
+    _(dataset.labels).must_equal labels
 
     dataset.labels = new_labels
 
-    dataset.labels.must_equal new_labels
+    _(dataset.labels).must_equal new_labels
     mock.verify
   end
 
@@ -119,13 +119,13 @@ describe Google::Cloud::Bigquery::Dataset, :update, :mock_bigquery do
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_encryption_configuration: updated_gapi.default_encryption_configuration, etag: dataset_gapi.etag
     mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
 
-    dataset.default_encryption.must_be_nil
+    _(dataset.default_encryption).must_be_nil
 
     dataset.default_encryption = bigquery.encryption kms_key: kms_key
 
-    dataset.default_encryption.must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
-    dataset.default_encryption.kms_key.must_equal kms_key
-    dataset.default_encryption.must_be :frozen?
+    _(dataset.default_encryption).must_be_kind_of Google::Cloud::Bigquery::EncryptionConfiguration
+    _(dataset.default_encryption.kms_key).must_equal kms_key
+    _(dataset.default_encryption).must_be :frozen?
     mock.verify
   end
 end

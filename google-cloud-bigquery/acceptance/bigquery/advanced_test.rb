@@ -33,8 +33,8 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "queries values in standard mode" do
     rows = bigquery.query "SELECT * FROM #{dataset_id}.#{table_id} WHERE id = ?", params: [2]
 
-    rows.class.must_equal Google::Cloud::Bigquery::Data
-    rows.count.must_equal 1
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 1
     row = rows.first
 
     assert_rows_equal rows.first, example_table_rows[1]
@@ -43,21 +43,21 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "queries repeated scalars in legacy mode" do
     rows = bigquery.query "SELECT name, scores FROM [#{table.id}] WHERE id = 2", legacy_sql: true
 
-    rows.class.must_equal Google::Cloud::Bigquery::Data
-    rows.count.must_equal 3
-    rows[0].must_equal({ name: "Gandalf", scores: 100.0})
-    rows[1].must_equal({ name: "Gandalf", scores: 99.0})
-    rows[2].must_equal({ name: "Gandalf", scores: 0.001})
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 3
+    _(rows[0]).must_equal({ name: "Gandalf", scores: 100.0})
+    _(rows[1]).must_equal({ name: "Gandalf", scores: 99.0})
+    _(rows[2]).must_equal({ name: "Gandalf", scores: 0.001})
   end
 
   it "queries repeated records in legacy mode" do
     rows = bigquery.query "SELECT name, spells.name, spells.properties.name, spells.properties.power FROM [#{table.id}] WHERE id = 2", legacy_sql: true
 
-    rows.class.must_equal Google::Cloud::Bigquery::Data
-    rows.count.must_equal 3
-    rows[0].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Flying",   spells_properties_power: 1.0 })
-    rows[1].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Creature", spells_properties_power: 1.0 })
-    rows[2].must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Explodey", spells_properties_power: 11.0 })
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 3
+    _(rows[0]).must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Flying",   spells_properties_power: 1.0 })
+    _(rows[1]).must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Creature", spells_properties_power: 1.0 })
+    _(rows[2]).must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Explodey", spells_properties_power: 11.0 })
   end
 
   it "modifies a nested schema via field" do
@@ -77,9 +77,9 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
       end
     end
 
-    empty_table.schema.field("spells").headers.wont_include :score
-    empty_table.schema.field("spells").headers.must_include :properties
-    empty_table.schema.field(:spells).field(:properties).headers.wont_include :grade
+    _(empty_table.schema.field("spells").headers).wont_include :score
+    _(empty_table.schema.field("spells").headers).must_include :properties
+    _(empty_table.schema.field(:spells).field(:properties).headers).wont_include :grade
     empty_table.schema do |schema|
       # adds to a nested field directly inline
       schema.field(:spells).integer :score, mode: :nullable
@@ -90,9 +90,9 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
         end
       end
     end
-    empty_table.schema.field("spells").headers.must_include :score
-    empty_table.schema.field("spells").headers.must_include :properties
-    empty_table.schema.field(:spells).field(:properties).headers.must_include :grade
+    _(empty_table.schema.field("spells").headers).must_include :score
+    _(empty_table.schema.field("spells").headers).must_include :properties
+    _(empty_table.schema.field(:spells).field(:properties).headers).must_include :grade
 
     empty_table.delete
   end
@@ -100,8 +100,8 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "converts all floats correctly" do
     rows = bigquery.query "SELECT CAST('NaN' as FLOAT64) as not_a_number, CAST('+inf' as FLOAT64) as positive_infinity, CAST('-inf' as FLOAT64) as negative_infinity"
 
-    rows.class.must_equal Google::Cloud::Bigquery::Data
-    rows.count.must_equal 1
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.count).must_equal 1
     row = rows.first
 
     assert_predicate row[:not_a_number], :nan? # assert_equal won't work with Float::NAN
@@ -131,62 +131,62 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
 
     job = bigquery.query_job multi_statement_sql
 
-    job.must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     job.wait_until_done!
-    job.wont_be :failed?
-    job.num_child_jobs.must_equal 2
-    job.parent_job_id.must_be :nil?
+    _(job).wont_be :failed?
+    _(job.num_child_jobs).must_equal 2
+    _(job.parent_job_id).must_be :nil?
 
-    job.script_statistics.must_be :nil?
+    _(job.script_statistics).must_be :nil?
 
     child_jobs = bigquery.jobs parent_job: job
-    child_jobs.count.must_equal 2
+    _(child_jobs.count).must_equal 2
 
-    child_jobs[0].parent_job_id.must_equal job.job_id
-    child_jobs[0].script_statistics.must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
-    child_jobs[0].script_statistics.evaluation_kind.must_equal "STATEMENT"
-    child_jobs[0].script_statistics.stack_frames.wont_be :nil?
-    child_jobs[0].script_statistics.stack_frames.must_be_kind_of Array
-    child_jobs[0].script_statistics.stack_frames.count.must_equal 1
-    child_jobs[0].script_statistics.stack_frames[0].must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
-    child_jobs[0].script_statistics.stack_frames[0].start_line.must_equal 10
-    child_jobs[0].script_statistics.stack_frames[0].start_column.must_equal 1
-    child_jobs[0].script_statistics.stack_frames[0].end_line.must_equal 16
-    child_jobs[0].script_statistics.stack_frames[0].end_column.must_equal 2
-    child_jobs[0].script_statistics.stack_frames[0].text.length.must_be :>, 0
+    _(child_jobs[0].parent_job_id).must_equal job.job_id
+    _(child_jobs[0].script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
+    _(child_jobs[0].script_statistics.evaluation_kind).must_equal "STATEMENT"
+    _(child_jobs[0].script_statistics.stack_frames).wont_be :nil?
+    _(child_jobs[0].script_statistics.stack_frames).must_be_kind_of Array
+    _(child_jobs[0].script_statistics.stack_frames.count).must_equal 1
+    _(child_jobs[0].script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
+    _(child_jobs[0].script_statistics.stack_frames[0].start_line).must_equal 10
+    _(child_jobs[0].script_statistics.stack_frames[0].start_column).must_equal 1
+    _(child_jobs[0].script_statistics.stack_frames[0].end_line).must_equal 16
+    _(child_jobs[0].script_statistics.stack_frames[0].end_column).must_equal 2
+    _(child_jobs[0].script_statistics.stack_frames[0].text.length).must_be :>, 0
 
-    child_jobs[1].parent_job_id.must_equal job.job_id
-    child_jobs[1].script_statistics.must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
-    child_jobs[1].script_statistics.evaluation_kind.must_equal "EXPRESSION"
-    child_jobs[1].script_statistics.stack_frames.wont_be :nil?
-    child_jobs[1].script_statistics.stack_frames.must_be_kind_of Array
-    child_jobs[1].script_statistics.stack_frames.count.must_equal 1
-    child_jobs[1].script_statistics.stack_frames[0].must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
-    child_jobs[1].script_statistics.stack_frames[0].start_line.must_equal 4
-    child_jobs[1].script_statistics.stack_frames[0].start_column.must_equal 17
-    child_jobs[1].script_statistics.stack_frames[0].end_line.must_equal 8
-    child_jobs[1].script_statistics.stack_frames[0].end_column.must_equal 2
-    child_jobs[1].script_statistics.stack_frames[0].text.length.must_be :>, 0
+    _(child_jobs[1].parent_job_id).must_equal job.job_id
+    _(child_jobs[1].script_statistics).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStatistics
+    _(child_jobs[1].script_statistics.evaluation_kind).must_equal "EXPRESSION"
+    _(child_jobs[1].script_statistics.stack_frames).wont_be :nil?
+    _(child_jobs[1].script_statistics.stack_frames).must_be_kind_of Array
+    _(child_jobs[1].script_statistics.stack_frames.count).must_equal 1
+    _(child_jobs[1].script_statistics.stack_frames[0]).must_be_kind_of Google::Cloud::Bigquery::Job::ScriptStackFrame
+    _(child_jobs[1].script_statistics.stack_frames[0].start_line).must_equal 4
+    _(child_jobs[1].script_statistics.stack_frames[0].start_column).must_equal 17
+    _(child_jobs[1].script_statistics.stack_frames[0].end_line).must_equal 8
+    _(child_jobs[1].script_statistics.stack_frames[0].end_column).must_equal 2
+    _(child_jobs[1].script_statistics.stack_frames[0].text.length).must_be :>, 0
   end
 
   def assert_rows_equal returned_row, example_row
-    returned_row[:id].must_equal example_row[:id]
-    returned_row[:name].must_equal example_row[:name]
-    returned_row[:age].must_equal example_row[:age]
-    returned_row[:weight].must_equal example_row[:weight]
-    returned_row[:is_magic].must_equal example_row[:is_magic]
-    returned_row[:scores].must_equal example_row[:scores]
+    _(returned_row[:id]).must_equal example_row[:id]
+    _(returned_row[:name]).must_equal example_row[:name]
+    _(returned_row[:age]).must_equal example_row[:age]
+    _(returned_row[:weight]).must_equal example_row[:weight]
+    _(returned_row[:is_magic]).must_equal example_row[:is_magic]
+    _(returned_row[:scores]).must_equal example_row[:scores]
     returned_row[:spells].zip example_row[:spells] do |row_spell, example_spell|
-      row_spell[:name].must_equal example_spell[:name]
-      row_spell[:discovered_by].must_equal example_spell[:discovered_by]
+      _(row_spell[:name]).must_equal example_spell[:name]
+      _(row_spell[:discovered_by]).must_equal example_spell[:discovered_by]
       row_spell[:properties].zip example_spell[:properties] do |row_properties, example_properties|
-        row_properties[:name].must_equal example_properties[:name]
-        row_properties[:power].must_equal example_properties[:power]
+        _(row_properties[:name]).must_equal example_properties[:name]
+        _(row_properties[:power]).must_equal example_properties[:power]
       end
     end
-    returned_row[:tea_time].must_equal example_row[:tea_time]
-    returned_row[:next_vacation].must_equal example_row[:next_vacation]
-    returned_row[:favorite_time].must_equal example_row[:favorite_time]
+    _(returned_row[:tea_time]).must_equal example_row[:tea_time]
+    _(returned_row[:next_vacation]).must_equal example_row[:next_vacation]
+    _(returned_row[:favorite_time]).must_equal example_row[:favorite_time]
   end
 
   def get_or_create_example_table dataset, table_id
