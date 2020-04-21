@@ -124,10 +124,10 @@ module Google
         #
         #     The allowed duration for this deadline is:
         #
-        #     * For [HTTP targets][google.cloud.scheduler.v1beta1.Job.http_target], between 15 seconds and 30 minutes.
-        #     * For [App Engine HTTP targets][google.cloud.scheduler.v1beta1.Job.app_engine_http_target], between 15
+        #     * For {Google::Cloud::Scheduler::V1beta1::Job#http_target HTTP targets}, between 15 seconds and 30 minutes.
+        #     * For {Google::Cloud::Scheduler::V1beta1::Job#app_engine_http_target App Engine HTTP targets}, between 15
         #       seconds and 24 hours.
-        #     * For [PubSub targets][google.cloud.scheduler.v1beta1.Job.pubsub_target], this field is ignored.
+        #     * For {Google::Cloud::Scheduler::V1beta1::Job#pubsub_target PubSub targets}, this field is ignored.
         class Job
           include Google::Protobuf::MessageExts
           extend Google::Protobuf::MessageExts::ClassMethods
