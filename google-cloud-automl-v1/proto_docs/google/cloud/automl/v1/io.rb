@@ -259,8 +259,8 @@ module Google
         # **In-line JSONL files**
         #
         # In-line .JSONL files contain, per line, a JSON document that wraps a
-        # [`text_snippet`][google.cloud.automl.v1.TextSnippet] field followed by
-        # one or more [`annotations`][google.cloud.automl.v1.AnnotationPayload]
+        # {Google::Cloud::AutoML::V1::TextSnippet `text_snippet`} field followed by
+        # one or more {Google::Cloud::AutoML::V1::AnnotationPayload `annotations`}
         # fields, which have `display_name` and `text_extraction` fields to describe
         # the entity from the text snippet. Multiple JSON documents can be separated
         # using line breaks (\n).
