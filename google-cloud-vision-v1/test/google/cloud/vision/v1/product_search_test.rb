@@ -1215,4 +1215,35 @@ class Google::Cloud::Vision::V1::ProductSearch::ClientTest < Minitest::Test
       assert_equal 5, purge_products_client_stub.call_rpc_count
     end
   end
+
+  def test_configure
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = block_config = config = nil
+    Gapic::ServiceStub.stub :new, nil do
+      client = Google::Cloud::Vision::V1::ProductSearch::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    config = client.configure do |c|
+      block_config = c
+    end
+
+    assert_same block_config, config
+    assert_kind_of Google::Cloud::Vision::V1::ProductSearch::Client::Configuration, config
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    Gapic::ServiceStub.stub :new, nil do
+      client = Google::Cloud::Vision::V1::ProductSearch::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of Google::Cloud::Vision::V1::ProductSearch::Operations, client.operations_client
+  end
 end
