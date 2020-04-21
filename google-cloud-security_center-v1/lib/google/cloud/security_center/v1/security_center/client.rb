@@ -246,6 +246,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.endpoint = @config.endpoint
               end
 
               @security_center_stub = Gapic::ServiceStub.new(
@@ -256,6 +257,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [Google::Cloud::SecurityCenter::V1::SecurityCenter::Operations]
+            #
+            attr_reader :operations_client
 
             # Service calls
 
