@@ -1,13 +1,13 @@
-require: rubocop-minitest
-
 inherit_gem:
   google-style: google-style.yml
 
 AllCops:
   Exclude:
+    - "acceptance/**/*"
     - "support/**/*"
     - "google-cloud-spanner.gemspec"
     - "Rakefile"
+    - "test/**/*"
     - "benchmark/**/*"
     - "lib/google/spanner/**/*"
     - "lib/google/cloud/spanner/v1/**/*"
