@@ -35,18 +35,18 @@ describe Google::Cloud::Spanner::Results, :empty_fields, :mock_spanner do
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 
   it "handles empty field names" do
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
     fields = results.fields
-    fields.wont_be :nil?
-    fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    fields.types.must_equal []
-    fields.keys.must_equal []
-    fields.pairs.must_equal []
-    fields.to_a.must_equal []
-    fields.to_h.must_equal({})
+    _(fields).wont_be :nil?
+    _(fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(fields.types).must_equal []
+    _(fields.keys).must_equal []
+    _(fields.pairs).must_equal []
+    _(fields.to_a).must_equal []
+    _(fields.to_h).must_equal({})
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 0
+    _(rows.count).must_equal 0
   end
 end

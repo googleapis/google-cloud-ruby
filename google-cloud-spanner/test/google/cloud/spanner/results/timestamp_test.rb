@@ -40,8 +40,8 @@ describe Google::Cloud::Spanner::Results, :timestamp, :mock_spanner do
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 
   it "knows it has a timestamp" do
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.timestamp.must_equal time_obj
+    _(results.timestamp).must_equal time_obj
   end
 end

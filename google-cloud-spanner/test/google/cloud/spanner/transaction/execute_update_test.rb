@@ -49,7 +49,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with bool param" do
@@ -61,7 +61,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with int param" do
@@ -73,7 +73,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with float param" do
@@ -85,7 +85,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with Time param" do
@@ -99,7 +99,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with Date param" do
@@ -113,7 +113,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with String param" do
@@ -125,7 +125,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with IO-ish param" do
@@ -139,7 +139,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with an Array param" do
@@ -151,7 +151,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with an empty Array param" do
@@ -163,7 +163,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with a simple Hash param" do
@@ -175,7 +175,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with a complex Hash param" do
@@ -187,7 +187,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a DML query with an empty Hash param" do
@@ -199,7 +199,7 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "raises InvalidArgumentError if the response does not contain stats" do
@@ -228,6 +228,6 @@ describe Google::Cloud::Spanner::Transaction, :execute_update, :mock_spanner do
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 end

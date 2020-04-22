@@ -21,34 +21,34 @@ describe "Spanner Database Operations", :spanner do
 
   it "list database operations" do
     instance = spanner.instance instance_id
-    instance.wont_be :nil?
+    _(instance).wont_be :nil?
 
     # All
     jobs = instance.database_operations.all.to_a
-    jobs.wont_be :empty?
+    _(jobs).wont_be :empty?
 
     jobs.each do |job|
-      job.must_be_kind_of Google::Cloud::Spanner::Database::Job
+      _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
 
       if job.database
-        job.database.must_be_kind_of Google::Cloud::Spanner::Database
+        _(job.database).must_be_kind_of Google::Cloud::Spanner::Database
       end
     end
 
     # Filter completed jobs
     filter = "done:true"
     jobs = instance.database_operations(filter: filter).all.to_a
-    jobs.wont_be :empty?
+    _(jobs).wont_be :empty?
     jobs.each do |job|
-      job.must_be :done?
+      _(job).must_be :done?
     end
 
     # Filter by metdata type
     filter = "metadata.@type:CreateDatabaseMetadata"
     jobs = instance.database_operations(filter: filter).all.to_a
-    jobs.wont_be :empty?
+    _(jobs).wont_be :empty?
     jobs.each do |job|
-      job.grpc.metadata.must_be_kind_of Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
+      _(job.grpc.metadata).must_be_kind_of Google::Spanner::Admin::Database::V1::CreateDatabaseMetadata
     end
   end
 end

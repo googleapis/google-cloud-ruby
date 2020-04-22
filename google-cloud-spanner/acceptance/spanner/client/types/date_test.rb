@@ -23,9 +23,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, date: Date.parse("2017-01-01") }
     results = db.read table_name, [:id, :date], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, date: :DATE })
-    results.rows.first.to_h.must_equal({ id: id, date: Date.parse("2017-01-01") })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
+    _(results.rows.first.to_h).must_equal({ id: id, date: Date.parse("2017-01-01") })
   end
 
   it "writes and queries date" do
@@ -33,9 +33,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, date: Date.parse("2017-01-01") }
     results = db.execute_query "SELECT id, date FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, date: :DATE })
-    results.rows.first.to_h.must_equal({ id: id, date: Date.parse("2017-01-01") })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
+    _(results.rows.first.to_h).must_equal({ id: id, date: Date.parse("2017-01-01") })
   end
 
   it "writes and reads NULL date" do
@@ -43,9 +43,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, date: nil }
     results = db.read table_name, [:id, :date], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, date: :DATE })
-    results.rows.first.to_h.must_equal({ id: id, date: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
+    _(results.rows.first.to_h).must_equal({ id: id, date: nil })
   end
 
   it "writes and queries NULL date" do
@@ -53,9 +53,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, date: nil }
     results = db.execute_query "SELECT id, date FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, date: :DATE })
-    results.rows.first.to_h.must_equal({ id: id, date: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
+    _(results.rows.first.to_h).must_equal({ id: id, date: nil })
   end
 
   it "writes and reads array of date" do
@@ -63,9 +63,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
     results = db.read table_name, [:id, :dates], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
-    results.rows.first.to_h.must_equal({ id: id, dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+    _(results.rows.first.to_h).must_equal({ id: id, dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
   end
 
   it "writes and queries array of date" do
@@ -73,9 +73,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
     results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
-    results.rows.first.to_h.must_equal({ id: id, dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+    _(results.rows.first.to_h).must_equal({ id: id, dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
   end
 
   it "writes and reads array of date with NULL" do
@@ -83,9 +83,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
     results = db.read table_name, [:id, :dates], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
-    results.rows.first.to_h.must_equal({ id: id, dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+    _(results.rows.first.to_h).must_equal({ id: id, dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
   end
 
   it "writes and queries array of date with NULL" do
@@ -93,9 +93,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
     results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
-    results.rows.first.to_h.must_equal({ id: id, dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+    _(results.rows.first.to_h).must_equal({ id: id, dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
   end
 
   it "writes and reads empty array of date" do
@@ -103,9 +103,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, dates: [] }
     results = db.read table_name, [:id, :dates], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
-    results.rows.first.to_h.must_equal({ id: id, dates: [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+    _(results.rows.first.to_h).must_equal({ id: id, dates: [] })
   end
 
   it "writes and queries empty array of date" do
@@ -113,9 +113,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, dates: [] }
     results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
-    results.rows.first.to_h.must_equal({ id: id, dates: [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+    _(results.rows.first.to_h).must_equal({ id: id, dates: [] })
   end
 
   it "writes and reads NULL array of date" do
@@ -123,9 +123,9 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, dates: nil }
     results = db.read table_name, [:id, :dates], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
-    results.rows.first.to_h.must_equal({ id: id, dates: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+    _(results.rows.first.to_h).must_equal({ id: id, dates: nil })
   end
 
   it "writes and queries NULL array of date" do
@@ -133,8 +133,8 @@ describe "Spanner Client", :types, :date, :spanner do
     db.upsert table_name, { id: id, dates: nil }
     results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, dates: [:DATE] })
-    results.rows.first.to_h.must_equal({ id: id, dates: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+    _(results.rows.first.to_h).must_equal({ id: id, dates: nil })
   end
 end

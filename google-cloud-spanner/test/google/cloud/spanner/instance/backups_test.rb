@@ -46,7 +46,7 @@ describe Google::Cloud::Spanner::Instance, :backups, :mock_spanner do
 
     mock.verify
 
-    backups.size.must_equal 3
+    _(backups.size).must_equal 3
   end
 
   it "paginates backups with page size" do
@@ -59,7 +59,7 @@ describe Google::Cloud::Spanner::Instance, :backups, :mock_spanner do
 
     mock.verify
 
-    backups.size.must_equal 3
+    _(backups.size).must_equal 3
   end
 
   it "paginates backups with next? and next" do
@@ -72,10 +72,10 @@ describe Google::Cloud::Spanner::Instance, :backups, :mock_spanner do
 
     mock.verify
 
-    list.size.must_equal 3
-    list.next?.must_equal true
-    list.next.size.must_equal 2
-    list.next?.must_equal false
+    _(list.size).must_equal 3
+    _(list.next?).must_equal true
+    _(list.next.size).must_equal 2
+    _(list.next?).must_equal false
   end
 
   it "paginates backups with next? and next and page size" do
@@ -88,10 +88,10 @@ describe Google::Cloud::Spanner::Instance, :backups, :mock_spanner do
 
     mock.verify
 
-    list.size.must_equal 3
-    list.next?.must_equal true
-    list.next.size.must_equal 2
-    list.next?.must_equal false
+    _(list.size).must_equal 3
+    _(list.next?).must_equal true
+    _(list.next.size).must_equal 2
+    _(list.next?).must_equal false
   end
 
   it "paginates backups with all" do
@@ -104,7 +104,7 @@ describe Google::Cloud::Spanner::Instance, :backups, :mock_spanner do
 
     mock.verify
 
-    backups.size.must_equal 5
+    _(backups.size).must_equal 5
   end
 
   it "paginates backups with all and page size" do
@@ -117,7 +117,7 @@ describe Google::Cloud::Spanner::Instance, :backups, :mock_spanner do
 
     mock.verify
 
-    backups.size.must_equal 5
+    _(backups.size).must_equal 5
   end
 
   it "iterates backups with all using Enumerator" do
@@ -130,7 +130,7 @@ describe Google::Cloud::Spanner::Instance, :backups, :mock_spanner do
 
     mock.verify
 
-    backups.size.must_equal 5
+    _(backups.size).must_equal 5
   end
 
   it "paginates backups with filter" do
@@ -143,7 +143,7 @@ describe Google::Cloud::Spanner::Instance, :backups, :mock_spanner do
 
     mock.verify
 
-    backups.size.must_equal 3
+    _(backups.size).must_equal 3
   end
 
   it "paginates backups with filter and page size" do
@@ -156,6 +156,6 @@ describe Google::Cloud::Spanner::Instance, :backups, :mock_spanner do
 
     mock.verify
 
-    backups.size.must_equal 3
+    _(backups.size).must_equal 3
   end
 end

@@ -402,31 +402,31 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_query, :mock_spanner 
     mock.verify
 
     partitions.each do |p|
-      p.execute.query_options.to_h.must_equal expect_query_options
+      _(p.execute.query_options.to_h).must_equal expect_query_options
     end
   end
 
   def assert_partitions partitions, sql = "SELECT * FROM users", params: nil, types: nil
-    partitions.must_be_kind_of Array
-    partitions.wont_be :empty?
+    _(partitions).must_be_kind_of Array
+    _(partitions).wont_be :empty?
 
     params, types = Google::Cloud::Spanner::Convert.to_input_params_and_types params, types
 
     partitions.each do |partition|
-      partition.must_be :execute?
-      partition.must_be :execute_query?
+      _(partition).must_be :execute?
+      _(partition).must_be :execute_query?
 
-      partition.execute.partition_token.must_equal "partition-token"
-      partition.execute.sql.must_equal sql
+      _(partition.execute.partition_token).must_equal "partition-token"
+      _(partition.execute.sql).must_equal sql
       if params.nil?
-        partition.execute.params.must_be_nil
+        _(partition.execute.params).must_be_nil
       else
-        partition.execute.params.must_equal params
+        _(partition.execute.params).must_equal params
       end
       types_hash = Hash[Hash(types).map { |key, value| [key, value.to_h] }]
-      partition.execute.param_types.to_h.must_equal types_hash
+      _(partition.execute.param_types.to_h).must_equal types_hash
 
-      partition.read.must_be_nil
+      _(partition.read).must_be_nil
     end
   end
 end

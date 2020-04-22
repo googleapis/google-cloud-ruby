@@ -24,9 +24,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, string: "hello" }
     results = db.read table_name, [:id, :string], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, string: :STRING })
-    results.rows.first.to_h.must_equal({ id: id, string: "hello" })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING })
+    _(results.rows.first.to_h).must_equal({ id: id, string: "hello" })
   end
 
   it "writes and queries string" do
@@ -34,9 +34,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, string: "hello" }
     results = db.execute_query "SELECT id, string FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, string: :STRING })
-    results.rows.first.to_h.must_equal({ id: id, string: "hello" })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING })
+    _(results.rows.first.to_h).must_equal({ id: id, string: "hello" })
   end
 
   it "writes and reads NULL string" do
@@ -44,9 +44,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, string: nil }
     results = db.read table_name, [:id, :string], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, string: :STRING })
-    results.rows.first.to_h.must_equal({ id: id, string: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING })
+    _(results.rows.first.to_h).must_equal({ id: id, string: nil })
   end
 
   it "writes and queries NULL string" do
@@ -54,9 +54,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, string: nil }
     results = db.execute_query "SELECT id, string FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, string: :STRING })
-    results.rows.first.to_h.must_equal({ id: id, string: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING })
+    _(results.rows.first.to_h).must_equal({ id: id, string: nil })
   end
 
   it "writes and reads array of string" do
@@ -64,9 +64,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, strings: ["howdy", "hola", "hello"] }
     results = db.read table_name, [:id, :strings], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
-    results.rows.first.to_h.must_equal({ id: id, strings: ["howdy", "hola", "hello"] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, strings: [:STRING] })
+    _(results.rows.first.to_h).must_equal({ id: id, strings: ["howdy", "hola", "hello"] })
   end
 
   it "writes and queries array of string" do
@@ -74,9 +74,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, strings: ["howdy", "hola", "hello"] }
     results = db.execute_query "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
-    results.rows.first.to_h.must_equal({ id: id, strings: ["howdy", "hola", "hello"] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, strings: [:STRING] })
+    _(results.rows.first.to_h).must_equal({ id: id, strings: ["howdy", "hola", "hello"] })
   end
 
   it "writes and reads array of string with NULL" do
@@ -84,9 +84,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, strings: [nil, "howdy", "hola", "hello"] }
     results = db.read table_name, [:id, :strings], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
-    results.rows.first.to_h.must_equal({ id: id, strings: [nil, "howdy", "hola", "hello"] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, strings: [:STRING] })
+    _(results.rows.first.to_h).must_equal({ id: id, strings: [nil, "howdy", "hola", "hello"] })
   end
 
   it "writes and queries array of string with NULL" do
@@ -94,9 +94,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, strings: [nil, "howdy", "hola", "hello"] }
     results = db.execute_query "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
-    results.rows.first.to_h.must_equal({ id: id, strings: [nil, "howdy", "hola", "hello"] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, strings: [:STRING] })
+    _(results.rows.first.to_h).must_equal({ id: id, strings: [nil, "howdy", "hola", "hello"] })
   end
 
   it "writes and reads empty array of string" do
@@ -104,9 +104,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, strings: [] }
     results = db.read table_name, [:id, :strings], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
-    results.rows.first.to_h.must_equal({ id: id, strings: [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, strings: [:STRING] })
+    _(results.rows.first.to_h).must_equal({ id: id, strings: [] })
   end
 
   it "writes and queries empty array of string" do
@@ -114,9 +114,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, strings: [] }
     results = db.execute_query "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
-    results.rows.first.to_h.must_equal({ id: id, strings: [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, strings: [:STRING] })
+    _(results.rows.first.to_h).must_equal({ id: id, strings: [] })
   end
 
   it "writes and reads NULL array of string" do
@@ -124,9 +124,9 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, strings: nil }
     results = db.read table_name, [:id, :strings], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
-    results.rows.first.to_h.must_equal({ id: id, strings: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, strings: [:STRING] })
+    _(results.rows.first.to_h).must_equal({ id: id, strings: nil })
   end
 
   it "writes and queries NULL array of string" do
@@ -134,8 +134,8 @@ describe "Spanner Client", :types, :string, :spanner do
     db.upsert table_name, { id: id, strings: nil }
     results = db.execute_query "SELECT id, strings FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, strings: [:STRING] })
-    results.rows.first.to_h.must_equal({ id: id, strings: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, strings: [:STRING] })
+    _(results.rows.first.to_h).must_equal({ id: id, strings: nil })
   end
 end

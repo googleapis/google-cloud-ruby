@@ -178,23 +178,23 @@ describe Google::Cloud::Spanner::Results, :deeply_nested_list, :mock_spanner do
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 
   it "handles nested structs" do
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.must_equal [0]
-    results.fields.to_a.must_equal [[Google::Cloud::Spanner::Fields.new({ name: :STRING, numbers: [:INT64], strings: [:STRING] })]]
-    results.fields.to_h.must_equal({ 0 => [Google::Cloud::Spanner::Fields.new({ name: :STRING, numbers: [:INT64], strings: [:STRING] })] })
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys).must_equal [0]
+    _(results.fields.to_a).must_equal [[Google::Cloud::Spanner::Fields.new({ name: :STRING, numbers: [:INT64], strings: [:STRING] })]]
+    _(results.fields.to_h).must_equal({ 0 => [Google::Cloud::Spanner::Fields.new({ name: :STRING, numbers: [:INT64], strings: [:STRING] })] })
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
+    _(rows.count).must_equal 1
     row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row.keys.must_equal [0]
-    row.to_a.must_equal [[{ name: "foo", numbers: [111, 222333], strings: ["foo", "barbaz"] },
+    _(row).must_be_kind_of Google::Cloud::Spanner::Data
+    _(row.keys).must_equal [0]
+    _(row.to_a).must_equal [[{ name: "foo", numbers: [111, 222333], strings: ["foo", "barbaz"] },
                           { name: "bar", numbers: [444555, 666], strings: ["foobar", "baz"] },
                           { name: "baz", numbers: [777888999], strings: ["foobarbaz"] }]]
-    row.to_h.must_equal({ 0 => [{ name: "foo", numbers: [111, 222333], strings: ["foo", "barbaz"] },
+    _(row.to_h).must_equal({ 0 => [{ name: "foo", numbers: [111, 222333], strings: ["foo", "barbaz"] },
                                 { name: "bar", numbers: [444555, 666], strings: ["foobar", "baz"] },
                                 { name: "baz", numbers: [777888999], strings: ["foobarbaz"] }] })
   end

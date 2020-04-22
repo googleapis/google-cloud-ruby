@@ -27,14 +27,14 @@ describe Google::Cloud::Spanner::Snapshot, :metadata, :mock_spanner do
   let(:snapshot) { Google::Cloud::Spanner::Snapshot.from_grpc transaction_grpc, session }
 
   it "knows it has a transaction_id" do
-    snapshot.must_be_kind_of Google::Cloud::Spanner::Snapshot
+    _(snapshot).must_be_kind_of Google::Cloud::Spanner::Snapshot
 
-    snapshot.transaction_id.must_equal transaction_id
+    _(snapshot.transaction_id).must_equal transaction_id
   end
 
   it "knows it has a timestamp" do
-    snapshot.must_be_kind_of Google::Cloud::Spanner::Snapshot
+    _(snapshot).must_be_kind_of Google::Cloud::Spanner::Snapshot
 
-    snapshot.timestamp.must_equal time_obj
+    _(snapshot.timestamp).must_equal time_obj
   end
 end

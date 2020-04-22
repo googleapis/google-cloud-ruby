@@ -20,48 +20,48 @@ describe "Spanner Client", :params, :bool, :spanner do
   it "queries and returns a bool parameter" do
     results = db.execute_query "SELECT @value AS value", params: { value: true }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal :BOOL
-    results.rows.first[:value].must_equal true
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal :BOOL
+    _(results.rows.first[:value]).must_equal true
   end
 
   it "queries and returns a NULL bool parameter" do
     results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: :BOOL }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal :BOOL
-    results.rows.first[:value].must_be :nil?
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal :BOOL
+    _(results.rows.first[:value]).must_be :nil?
   end
 
   it "queries and returns an array of bool parameters" do
     results = db.execute_query "SELECT @value AS value", params: { value: [false, true, false] }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal [:BOOL]
-    results.rows.first[:value].must_equal [false, true, false]
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal [:BOOL]
+    _(results.rows.first[:value]).must_equal [false, true, false]
   end
 
   it "queries and returns an array of bool parameters with a nil value" do
     results = db.execute_query "SELECT @value AS value", params: { value: [nil, false, true, false] }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal [:BOOL]
-    results.rows.first[:value].must_equal [nil, false, true, false]
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal [:BOOL]
+    _(results.rows.first[:value]).must_equal [nil, false, true, false]
   end
 
   it "queries and returns an empty array of bool parameters" do
     results = db.execute_query "SELECT @value AS value", params: { value: [] }, types: { value: [:BOOL] }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal [:BOOL]
-    results.rows.first[:value].must_equal []
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal [:BOOL]
+    _(results.rows.first[:value]).must_equal []
   end
 
   it "queries and returns a NULL array of bool parameters" do
     results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: [:BOOL] }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal [:BOOL]
-    results.rows.first[:value].must_be :nil?
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal [:BOOL]
+    _(results.rows.first[:value]).must_be :nil?
   end
 end

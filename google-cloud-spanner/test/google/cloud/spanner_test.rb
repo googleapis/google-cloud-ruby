@@ -19,76 +19,76 @@ describe Google::Cloud do
     it "calls out to Google::Cloud.spanner" do
       gcloud = Google::Cloud.new
       stubbed_spanner = ->(project, keyfile, scope: nil, timeout: nil, host: nil, client_config: nil, lib_name: nil, lib_version: nil) {
-        project.must_be :nil?
-        keyfile.must_be :nil?
-        scope.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
-        client_config.must_be :nil?
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        _(project).must_be :nil?
+        _(keyfile).must_be :nil?
+        _(scope).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(client_config).must_be :nil?
+        _(lib_name).must_be :nil?
+        _(lib_version).must_be :nil?
         "spanner-project-object-empty"
       }
       Google::Cloud.stub :spanner, stubbed_spanner do
         project = gcloud.spanner
-        project.must_equal "spanner-project-object-empty"
+        _(project).must_equal "spanner-project-object-empty"
       end
     end
 
     it "passes project and keyfile to Google::Cloud.spanner" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
       stubbed_spanner = ->(project, keyfile, scope: nil, timeout: nil, host: nil, client_config: nil, lib_name: nil, lib_version: nil) {
-        project.must_equal "project-id"
-        keyfile.must_equal "keyfile-path"
-        scope.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
-        client_config.must_be :nil?
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        _(project).must_equal "project-id"
+        _(keyfile).must_equal "keyfile-path"
+        _(scope).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(client_config).must_be :nil?
+        _(lib_name).must_be :nil?
+        _(lib_version).must_be :nil?
         "spanner-project-object"
       }
       Google::Cloud.stub :spanner, stubbed_spanner do
         project = gcloud.spanner
-        project.must_equal "spanner-project-object"
+        _(project).must_equal "spanner-project-object"
       end
     end
 
     it "passes project and keyfile and options to Google::Cloud.spanner" do
       gcloud = Google::Cloud.new "project-id", "keyfile-path"
       stubbed_spanner = ->(project, keyfile, scope: nil, timeout: nil, host: nil, client_config: nil, lib_name: nil, lib_version: nil) {
-        project.must_equal "project-id"
-        keyfile.must_equal "keyfile-path"
-        scope.must_equal "http://example.com/scope"
-        timeout.must_equal 60
-        host.must_be :nil?
-        client_config.must_equal({ "gax" => "options" })
-        lib_name.must_be :nil?
-        lib_version.must_be :nil?
+        _(project).must_equal "project-id"
+        _(keyfile).must_equal "keyfile-path"
+        _(scope).must_equal "http://example.com/scope"
+        _(timeout).must_equal 60
+        _(host).must_be :nil?
+        _(client_config).must_equal({ "gax" => "options" })
+        _(lib_name).must_be :nil?
+        _(lib_version).must_be :nil?
         "spanner-project-object-scoped"
       }
       Google::Cloud.stub :spanner, stubbed_spanner do
         project = gcloud.spanner scope: "http://example.com/scope", timeout: 60, client_config: { "gax" => "options" }
-        project.must_equal "spanner-project-object-scoped"
+        _(project).must_equal "spanner-project-object-scoped"
       end
     end
 
     it "passes lib name and version to Google::Cloud.spanner" do
       gcloud = Google::Cloud.new
       stubbed_spanner = ->(project, keyfile, scope: nil, timeout: nil, host: nil, client_config: nil, lib_name: nil, lib_version: nil) {
-        project.must_be :nil?
-        keyfile.must_be :nil?
-        scope.must_be :nil?
-        timeout.must_be :nil?
-        host.must_be :nil?
-        client_config.must_be :nil?
-        lib_name.must_equal "spanner-ruby"
-        lib_version.must_equal "1.0.0"
+        _(project).must_be :nil?
+        _(keyfile).must_be :nil?
+        _(scope).must_be :nil?
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(client_config).must_be :nil?
+        _(lib_name).must_equal "spanner-ruby"
+        _(lib_version).must_equal "1.0.0"
         "spanner-project-object-with-lib-version-name"
       }
       Google::Cloud.stub :spanner, stubbed_spanner do
         project = gcloud.spanner lib_name: "spanner-ruby", lib_version: "1.0.0"
-        project.must_equal "spanner-project-object-with-lib-version-name"
+        _(project).must_equal "spanner-project-object-with-lib-version-name"
       end
     end
   end
@@ -110,9 +110,9 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud.spanner
-            spanner.must_be_kind_of Google::Cloud::Spanner::Project
-            spanner.project.must_equal "project-id"
-            spanner.service.credentials.must_equal default_credentials
+            _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+            _(spanner.project).must_equal "project-id"
+            _(spanner.service.credentials).must_equal default_credentials
           end
         end
       end
@@ -120,21 +120,21 @@ describe Google::Cloud do
 
     it "uses provided project_id and keyfile" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "spanner-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
 
-        project.must_equal "project-id"
-        credentials.must_equal "spanner-credentials"
-        timeout.must_be :nil?
-        host.must_be :nil?
-        client_config.must_be :nil?
-        keyword_args.key?(:lib_name).must_equal true
-        keyword_args.key?(:lib_version).must_equal true
-        keyword_args[:lib_name].must_be :nil?
-        keyword_args[:lib_version].must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "spanner-credentials"
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(client_config).must_be :nil?
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -145,9 +145,9 @@ describe Google::Cloud do
             Google::Cloud::Spanner::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Spanner::Service.stub :new, stubbed_service do
                 spanner = Google::Cloud.spanner "project-id", "path/to/keyfile.json"
-                spanner.must_be_kind_of Google::Cloud::Spanner::Project
-                spanner.project.must_equal "project-id"
-                spanner.service.must_be_kind_of OpenStruct
+                _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+                _(spanner.project).must_equal "project-id"
+                _(spanner.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -173,12 +173,12 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud::Spanner.new
-            spanner.must_be_kind_of Google::Cloud::Spanner::Project
-            spanner.project.must_equal "project-id"
-            spanner.service.credentials.must_equal default_credentials
-            spanner.service.lib_name.must_be :nil?
-            spanner.service.lib_version.must_be :nil?
-            spanner.service.send(:lib_name_with_prefix).must_equal "gccl"
+            _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+            _(spanner.project).must_equal "project-id"
+            _(spanner.service.credentials).must_equal default_credentials
+            _(spanner.service.lib_name).must_be :nil?
+            _(spanner.service.lib_version).must_be :nil?
+            _(spanner.service.send(:lib_name_with_prefix)).must_equal "gccl"
           end
         end
       end
@@ -186,20 +186,20 @@ describe Google::Cloud do
 
     it "uses provided project_id and credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "spanner-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
-        project.must_equal "project-id"
-        credentials.must_equal "spanner-credentials"
-        timeout.must_be :nil?
-        host.must_be :nil?
-        client_config.must_be :nil?
-        keyword_args.key?(:lib_name).must_equal true
-        keyword_args.key?(:lib_version).must_equal true
-        keyword_args[:lib_name].must_be :nil?
-        keyword_args[:lib_version].must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "spanner-credentials"
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(client_config).must_be :nil?
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -210,9 +210,9 @@ describe Google::Cloud do
             Google::Cloud::Spanner::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Spanner::Service.stub :new, stubbed_service do
                 spanner = Google::Cloud::Spanner.new project_id: "project-id", credentials: "path/to/keyfile.json"
-                spanner.must_be_kind_of Google::Cloud::Spanner::Project
-                spanner.project.must_equal "project-id"
-                spanner.service.must_be_kind_of OpenStruct
+                _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+                _(spanner.project).must_equal "project-id"
+                _(spanner.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -223,15 +223,15 @@ describe Google::Cloud do
     it "uses provided endpoint" do
       endpoint = "spanner-endpoint2.example.com"
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
-        project.must_equal "project-id"
-        credentials.must_equal default_credentials
-        timeout.must_be :nil?
-        host.must_equal endpoint
-        client_config.must_be :nil?
-        keyword_args.key?(:lib_name).must_equal true
-        keyword_args.key?(:lib_version).must_equal true
-        keyword_args[:lib_name].must_be :nil?
-        keyword_args[:lib_version].must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal default_credentials
+        _(timeout).must_be :nil?
+        _(host).must_equal endpoint
+        _(client_config).must_be :nil?
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -239,29 +239,29 @@ describe Google::Cloud do
       ENV.stub :[], nil do
         Google::Cloud::Spanner::Service.stub :new, stubbed_service do
           spanner = Google::Cloud::Spanner.new project: "project-id", credentials: default_credentials, endpoint: endpoint
-          spanner.must_be_kind_of Google::Cloud::Spanner::Project
-          spanner.project.must_equal "project-id"
-          spanner.service.must_be_kind_of OpenStruct
+          _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+          _(spanner.project).must_equal "project-id"
+          _(spanner.service).must_be_kind_of OpenStruct
         end
       end
     end
 
     it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "spanner-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
-        project.must_equal "project-id"
-        credentials.must_equal "spanner-credentials"
-        timeout.must_be :nil?
-        host.must_be :nil?
-        client_config.must_be :nil?
-        keyword_args.key?(:lib_name).must_equal true
-        keyword_args.key?(:lib_version).must_equal true
-        keyword_args[:lib_name].must_be :nil?
-        keyword_args[:lib_version].must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "spanner-credentials"
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(client_config).must_be :nil?
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -272,9 +272,9 @@ describe Google::Cloud do
             Google::Cloud::Spanner::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Spanner::Service.stub :new, stubbed_service do
                 spanner = Google::Cloud::Spanner.new project: "project-id", keyfile: "path/to/keyfile.json"
-                spanner.must_be_kind_of Google::Cloud::Spanner::Project
-                spanner.project.must_equal "project-id"
-                spanner.service.must_be_kind_of OpenStruct
+                _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+                _(spanner.project).must_equal "project-id"
+                _(spanner.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -284,21 +284,21 @@ describe Google::Cloud do
 
     it "gets project_id from credentials" do
       stubbed_credentials = ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
-        project.must_equal "project-id"
-        credentials.must_be_kind_of OpenStruct
-        credentials.project_id.must_equal "project-id"
-        timeout.must_be :nil?
-        host.must_be :nil?
-        client_config.must_be :nil?
-        keyword_args.key?(:lib_name).must_equal true
-        keyword_args.key?(:lib_version).must_equal true
-        keyword_args[:lib_name].must_be :nil?
-        keyword_args[:lib_version].must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_be_kind_of OpenStruct
+        _(credentials.project_id).must_equal "project-id"
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(client_config).must_be :nil?
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -311,9 +311,9 @@ describe Google::Cloud do
               Google::Cloud::Spanner::Credentials.stub :new, stubbed_credentials do
                 Google::Cloud::Spanner::Service.stub :new, stubbed_service do
                   spanner = Google::Cloud::Spanner.new credentials: "path/to/keyfile.json"
-                  spanner.must_be_kind_of Google::Cloud::Spanner::Project
-                  spanner.project.must_equal "project-id"
-                  spanner.service.must_be_kind_of OpenStruct
+                  _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+                  _(spanner.project).must_equal "project-id"
+                  _(spanner.service).must_be_kind_of OpenStruct
                 end
               end
             end
@@ -331,10 +331,10 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud::Spanner.new
-            spanner.must_be_kind_of Google::Cloud::Spanner::Project
-            spanner.project.must_equal "project-id"
-            spanner.service.credentials.must_equal :this_channel_is_insecure
-            spanner.service.host.must_equal emulator_host
+            _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+            _(spanner.project).must_equal "project-id"
+            _(spanner.service.credentials).must_equal :this_channel_is_insecure
+            _(spanner.service.host).must_equal emulator_host
           end
         end
       end
@@ -347,7 +347,7 @@ describe Google::Cloud do
           credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
           new_spanner = Google::Cloud::Spanner.new
           new_client = new_spanner.client "instance-id", "database-id", pool: { min: 0 }, query_options: expect_query_options
-          new_client.query_options.must_equal expect_query_options
+          _(new_client.query_options).must_equal expect_query_options
         end
       end
     end
@@ -362,7 +362,7 @@ describe Google::Cloud do
             credentials = OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {}))
             new_spanner = Google::Cloud::Spanner.new
             new_client = new_spanner.client "instance-id", "database-id", pool: { min: 0 }, query_options: { optimizer_version: "1", another_field: "test" }
-            new_client.query_options.must_equal expect_query_options
+            _(new_client.query_options).must_equal expect_query_options
           end
         end
       end
@@ -376,10 +376,10 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud::Spanner.new emulator_host: emulator_host
-            spanner.must_be_kind_of Google::Cloud::Spanner::Project
-            spanner.project.must_equal "project-id"
-            spanner.service.credentials.must_equal :this_channel_is_insecure
-            spanner.service.host.must_equal emulator_host
+            _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+            _(spanner.project).must_equal "project-id"
+            _(spanner.service.credentials).must_equal :this_channel_is_insecure
+            _(spanner.service.host).must_equal emulator_host
           end
         end
       end
@@ -395,11 +395,11 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud::Spanner.new lib_name: lib_name, lib_version: lib_version
-            spanner.must_be_kind_of Google::Cloud::Spanner::Project
-            spanner.project.must_equal "project-id"
-            spanner.service.lib_name.must_equal lib_name
-            spanner.service.lib_version.must_equal lib_version
-            spanner.service.send(:lib_name_with_prefix).must_equal "#{lib_name}/#{lib_version} gccl"
+            _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+            _(spanner.project).must_equal "project-id"
+            _(spanner.service.lib_name).must_equal lib_name
+            _(spanner.service.lib_version).must_equal lib_version
+            _(spanner.service.send(:lib_name_with_prefix)).must_equal "#{lib_name}/#{lib_version} gccl"
           end
         end
       end
@@ -415,7 +415,7 @@ describe Google::Cloud do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud::Spanner.new
             query_options = {optimizer_version: optimizer_version}
-            spanner.query_options.must_equal query_options
+            _(spanner.query_options).must_equal query_options
           end
         end
       end
@@ -430,11 +430,11 @@ describe Google::Cloud do
         Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
           Google::Cloud::Spanner::Credentials.stub :default, default_credentials do
             spanner = Google::Cloud::Spanner.new lib_name: lib_name
-            spanner.must_be_kind_of Google::Cloud::Spanner::Project
-            spanner.project.must_equal "project-id"
-            spanner.service.lib_name.must_equal lib_name
-            spanner.service.lib_version.must_be :nil?
-            spanner.service.send(:lib_name_with_prefix).must_equal "#{lib_name} gccl"
+            _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+            _(spanner.project).must_equal "project-id"
+            _(spanner.service.lib_name).must_equal lib_name
+            _(spanner.service.lib_version).must_be :nil?
+            _(spanner.service.send(:lib_name_with_prefix)).must_equal "#{lib_name} gccl"
           end
         end
       end
@@ -444,8 +444,8 @@ describe Google::Cloud do
   describe "Spanner.configure" do
     let(:default_credentials) do
       ->(keyfile, scope: nil) {
-        keyfile.must_equal "path/to/keyfile.json"
-        scope.must_be :nil?
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(scope).must_be :nil?
         "spanner-credentials"
       }
     end
@@ -462,15 +462,15 @@ describe Google::Cloud do
 
     it "uses shared config for project and keyfile" do
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
-        project.must_equal "project-id"
-        credentials.must_equal "spanner-credentials"
-        timeout.must_be :nil?
-        host.must_be :nil?
-        client_config.must_be :nil?
-        keyword_args.key?(:lib_name).must_equal true
-        keyword_args.key?(:lib_version).must_equal true
-        keyword_args[:lib_name].must_be :nil?
-        keyword_args[:lib_version].must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "spanner-credentials"
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(client_config).must_be :nil?
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -487,9 +487,9 @@ describe Google::Cloud do
             Google::Cloud::Spanner::Credentials.stub :new, default_credentials do
               Google::Cloud::Spanner::Service.stub :new, stubbed_service do
                 spanner = Google::Cloud::Spanner.new
-                spanner.must_be_kind_of Google::Cloud::Spanner::Project
-                spanner.project.must_equal "project-id"
-                spanner.service.must_be_kind_of OpenStruct
+                _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+                _(spanner.project).must_equal "project-id"
+                _(spanner.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -499,15 +499,15 @@ describe Google::Cloud do
 
     it "uses shared config for project_id and credentials" do
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
-        project.must_equal "project-id"
-        credentials.must_equal "spanner-credentials"
-        timeout.must_be :nil?
-        host.must_be :nil?
-        client_config.must_be :nil?
-        keyword_args.key?(:lib_name).must_equal true
-        keyword_args.key?(:lib_version).must_equal true
-        keyword_args[:lib_name].must_be :nil?
-        keyword_args[:lib_version].must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "spanner-credentials"
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(client_config).must_be :nil?
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -524,9 +524,9 @@ describe Google::Cloud do
             Google::Cloud::Spanner::Credentials.stub :new, default_credentials do
               Google::Cloud::Spanner::Service.stub :new, stubbed_service do
                 spanner = Google::Cloud::Spanner.new
-                spanner.must_be_kind_of Google::Cloud::Spanner::Project
-                spanner.project.must_equal "project-id"
-                spanner.service.must_be_kind_of OpenStruct
+                _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+                _(spanner.project).must_equal "project-id"
+                _(spanner.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -536,15 +536,15 @@ describe Google::Cloud do
 
     it "uses spanner config for project and keyfile" do
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
-        project.must_equal "project-id"
-        credentials.must_equal "spanner-credentials"
-        timeout.must_equal 42
-        host.must_be :nil?
-        client_config.must_equal spanner_client_config
-        keyword_args.key?(:lib_name).must_equal true
-        keyword_args.key?(:lib_version).must_equal true
-        keyword_args[:lib_name].must_be :nil?
-        keyword_args[:lib_version].must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "spanner-credentials"
+        _(timeout).must_equal 42
+        _(host).must_be :nil?
+        _(client_config).must_equal spanner_client_config
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -563,9 +563,9 @@ describe Google::Cloud do
             Google::Cloud::Spanner::Credentials.stub :new, default_credentials do
               Google::Cloud::Spanner::Service.stub :new, stubbed_service do
                 spanner = Google::Cloud::Spanner.new
-                spanner.must_be_kind_of Google::Cloud::Spanner::Project
-                spanner.project.must_equal "project-id"
-                spanner.service.must_be_kind_of OpenStruct
+                _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+                _(spanner.project).must_equal "project-id"
+                _(spanner.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -575,15 +575,15 @@ describe Google::Cloud do
 
     it "uses spanner config for project_id and credentials" do
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
-        project.must_equal "project-id"
-        credentials.must_equal "spanner-credentials"
-        timeout.must_equal 42
-        host.must_be :nil?
-        client_config.must_equal spanner_client_config
-        keyword_args.key?(:lib_name).must_equal true
-        keyword_args.key?(:lib_version).must_equal true
-        keyword_args[:lib_name].must_be :nil?
-        keyword_args[:lib_version].must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "spanner-credentials"
+        _(timeout).must_equal 42
+        _(host).must_be :nil?
+        _(client_config).must_equal spanner_client_config
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -602,9 +602,9 @@ describe Google::Cloud do
             Google::Cloud::Spanner::Credentials.stub :new, default_credentials do
               Google::Cloud::Spanner::Service.stub :new, stubbed_service do
                 spanner = Google::Cloud::Spanner.new
-                spanner.must_be_kind_of Google::Cloud::Spanner::Project
-                spanner.project.must_equal "project-id"
-                spanner.service.must_be_kind_of OpenStruct
+                _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+                _(spanner.project).must_equal "project-id"
+                _(spanner.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -615,15 +615,15 @@ describe Google::Cloud do
     it "uses spanner config for endpoint" do
       endpoint = "spanner-endpoint2.example.com"
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
-        project.must_equal "project-id"
-        credentials.must_equal "spanner-credentials"
-        timeout.must_be :nil?
-        host.must_equal endpoint
-        client_config.must_be :nil?
-        keyword_args.key?(:lib_name).must_equal true
-        keyword_args.key?(:lib_version).must_equal true
-        keyword_args[:lib_name].must_be :nil?
-        keyword_args[:lib_version].must_be :nil?
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "spanner-credentials"
+        _(timeout).must_be :nil?
+        _(host).must_equal endpoint
+        _(client_config).must_be :nil?
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -641,9 +641,9 @@ describe Google::Cloud do
             Google::Cloud::Spanner::Credentials.stub :new, default_credentials do
               Google::Cloud::Spanner::Service.stub :new, stubbed_service do
                 spanner = Google::Cloud::Spanner.new
-                spanner.must_be_kind_of Google::Cloud::Spanner::Project
-                spanner.project.must_equal "project-id"
-                spanner.service.must_be_kind_of OpenStruct
+                _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+                _(spanner.project).must_equal "project-id"
+                _(spanner.service).must_be_kind_of OpenStruct
               end
             end
           end
@@ -662,10 +662,10 @@ describe Google::Cloud do
         end
 
         spanner = Google::Cloud::Spanner.new
-        spanner.must_be_kind_of Google::Cloud::Spanner::Project
-        spanner.project.must_equal "project-id"
-        spanner.service.credentials.must_equal :this_channel_is_insecure
-        spanner.service.host.must_equal "localhost:4567"
+        _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+        _(spanner.project).must_equal "project-id"
+        _(spanner.service.credentials).must_equal :this_channel_is_insecure
+        _(spanner.service.host).must_equal "localhost:4567"
       end
     end
 
@@ -674,17 +674,17 @@ describe Google::Cloud do
       custom_lib_version = "1.0.0"
 
       stubbed_credentials = ->(keyfile, scope: nil) {
-        scope.must_be :nil?
+        _(scope).must_be :nil?
         "spanner-credentials"
       }
       stubbed_service = ->(project, credentials, timeout: nil, host: nil, client_config: nil, **keyword_args) {
-        project.must_equal "project-id"
-        credentials.must_equal "spanner-credentials"
-        timeout.must_be :nil?
-        host.must_be :nil?
-        client_config.must_be :nil?
-        keyword_args[:lib_name].must_equal custom_lib_name
-        keyword_args[:lib_version].must_equal custom_lib_version
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "spanner-credentials"
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(client_config).must_be :nil?
+        _(keyword_args[:lib_name]).must_equal custom_lib_name
+        _(keyword_args[:lib_version]).must_equal custom_lib_version
         OpenStruct.new project: project, lib_name: keyword_args[:lib_name], lib_version: keyword_args[:lib_version]
       }
 
@@ -703,11 +703,11 @@ describe Google::Cloud do
             Google::Cloud::Spanner::Credentials.stub :new, stubbed_credentials do
               Google::Cloud::Spanner::Service.stub :new, stubbed_service do
                 spanner = Google::Cloud::Spanner.new
-                spanner.must_be_kind_of Google::Cloud::Spanner::Project
-                spanner.project.must_equal "project-id"
-                spanner.service.must_be_kind_of OpenStruct
-                spanner.service.lib_name.must_equal custom_lib_name
-                spanner.service.lib_version.must_equal custom_lib_version
+                _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+                _(spanner.project).must_equal "project-id"
+                _(spanner.service).must_be_kind_of OpenStruct
+                _(spanner.service.lib_name).must_equal custom_lib_name
+                _(spanner.service.lib_version).must_equal custom_lib_version
               end
             end
           end
@@ -730,8 +730,8 @@ describe Google::Cloud do
           File.stub :read, found_credentials, ["path/to/keyfile.json"] do
             Google::Cloud::Spanner::Credentials.stub :new, default_credentials do
               spanner = Google::Cloud::Spanner.new
-              spanner.project.must_equal "project-id"
-              spanner.query_options.must_equal query_options
+              _(spanner.project).must_equal "project-id"
+              _(spanner.query_options).must_equal query_options
             end
           end
         end

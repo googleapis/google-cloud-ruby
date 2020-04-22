@@ -28,11 +28,11 @@ describe Google::Cloud::Spanner::Project, :instance_config, :mock_spanner do
 
     mock.verify
 
-    config.project_id.must_equal project
-    config.instance_config_id.must_equal instance_config_hash[:name].split("/").last
-    config.path.must_equal instance_config_hash[:name]
-    config.name.must_equal instance_config_hash[:display_name]
-    config.display_name.must_equal instance_config_hash[:display_name]
+    _(config.project_id).must_equal project
+    _(config.instance_config_id).must_equal instance_config_hash[:name].split("/").last
+    _(config.path).must_equal instance_config_hash[:name]
+    _(config.name).must_equal instance_config_hash[:display_name]
+    _(config.display_name).must_equal instance_config_hash[:display_name]
   end
 
   it "returns nil when getting an non-existent instance config" do
@@ -47,6 +47,6 @@ describe Google::Cloud::Spanner::Project, :instance_config, :mock_spanner do
     spanner.service.mocked_instances = stub
 
     config = spanner.instance_config not_found_config_name
-    config.must_be :nil?
+    _(config).must_be :nil?
   end
 end

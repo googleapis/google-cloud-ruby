@@ -33,11 +33,11 @@ describe Google::Cloud::Spanner::Database, :ddl, :mock_spanner do
 
     mock.verify
 
-    ddl.must_equal statements
+    _(ddl).must_equal statements
 
     # The results are cached, second call does not raise
     ddl2 = database.ddl
-    ddl2.must_equal ddl
+    _(ddl2).must_equal ddl
   end
 
   it "forces an API request" do
@@ -45,7 +45,7 @@ describe Google::Cloud::Spanner::Database, :ddl, :mock_spanner do
 
     # The results are cached, this does not make an API request
     cached_ddl = database.ddl
-    cached_ddl.must_equal statements
+    _(cached_ddl).must_equal statements
 
     update_res = Google::Spanner::Admin::Database::V1::GetDatabaseDdlResponse.new(
       statements: statements.reverse
@@ -58,6 +58,6 @@ describe Google::Cloud::Spanner::Database, :ddl, :mock_spanner do
 
     mock.verify
 
-    ddl.must_equal statements.reverse
+    _(ddl).must_equal statements.reverse
   end
 end

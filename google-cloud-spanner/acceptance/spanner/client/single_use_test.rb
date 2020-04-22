@@ -33,166 +33,166 @@ describe "Spanner Client", :single_use, :spanner do
   it "runs a query with strong option" do
     results = db.execute_sql "SELECT * FROM accounts", single_use: { strong: true }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
 
-    results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
+    _(results.timestamp).wont_be :nil?
+    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a read with strong option" do
     results = db.read "accounts", columns, single_use: { strong: true }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
 
-    results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
+    _(results.timestamp).wont_be :nil?
+    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a query with timestamp option" do
     results = db.execute_sql "SELECT * FROM accounts", single_use: { timestamp: @setup_timestamp }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
 
-    results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to @setup_timestamp, 1
+    _(results.timestamp).wont_be :nil?
+    _(results.timestamp).must_be_close_to @setup_timestamp, 1
   end
 
   it "runs a read with timestamp option" do
     results = db.read "accounts", columns, single_use: { timestamp: @setup_timestamp }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
 
-    results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to @setup_timestamp, 1
+    _(results.timestamp).wont_be :nil?
+    _(results.timestamp).must_be_close_to @setup_timestamp, 1
   end
 
   it "runs a query with staleness option" do
     results = db.execute_sql "SELECT * FROM accounts", single_use: { staleness: 0.0001 }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
 
-    results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
+    _(results.timestamp).wont_be :nil?
+    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a read with staleness option" do
     results = db.read "accounts", columns, single_use: { staleness: 0.0001 }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
 
-    results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
+    _(results.timestamp).wont_be :nil?
+    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a query with bounded_timestamp option" do
     results = db.execute_sql "SELECT * FROM accounts", single_use: { bounded_timestamp: @setup_timestamp }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
 
-    results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
+    _(results.timestamp).wont_be :nil?
+    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a read with bounded_timestamp option" do
     results = db.read "accounts", columns, single_use: { bounded_timestamp: @setup_timestamp }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
 
-    results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
+    _(results.timestamp).wont_be :nil?
+    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a query with bounded_staleness option" do
     results = db.execute_sql "SELECT * FROM accounts", single_use: { bounded_staleness: 0.0001 }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
 
-    results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
+    _(results.timestamp).wont_be :nil?
+    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   it "runs a read with bounded_staleness option" do
     results = db.read "accounts", columns, single_use: { bounded_staleness: 0.0001 }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
 
-    results.timestamp.wont_be :nil?
-    results.timestamp.must_be_close_to @setup_timestamp, 3 # within 3 seconds?
+    _(results.timestamp).wont_be :nil?
+    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
 
   def assert_accounts_equal expected, actual
     if actual[:account_id].nil?
-      expected[:account_id].must_be :nil?
+      _(expected[:account_id]).must_be :nil?
     else
-      expected[:account_id].must_equal actual[:account_id]
+      _(expected[:account_id]).must_equal actual[:account_id]
     end
 
     if actual[:username].nil?
-      expected[:username].must_be :nil?
+      _(expected[:username]).must_be :nil?
     else
-      expected[:username].must_equal actual[:username]
+      _(expected[:username]).must_equal actual[:username]
     end
 
     if actual[:reputation].nil?
-      expected[:reputation].must_be :nil?
+      _(expected[:reputation]).must_be :nil?
     else
-      expected[:reputation].must_equal actual[:reputation]
+      _(expected[:reputation]).must_equal actual[:reputation]
     end
 
     if actual[:active].nil?
-      expected[:active].must_be :nil?
+      _(expected[:active]).must_be :nil?
     else
-      expected[:active].must_equal actual[:active]
+      _(expected[:active]).must_equal actual[:active]
     end
 
     if expected[:avatar] && actual[:avatar]
-      expected[:avatar].read.must_equal actual[:avatar].read
+      _(expected[:avatar].read).must_equal actual[:avatar].read
     end
 
     if actual[:friends].nil?
-      expected[:friends].must_be :nil?
+      _(expected[:friends]).must_be :nil?
     else
-      expected[:friends].must_equal actual[:friends]
+      _(expected[:friends]).must_equal actual[:friends]
     end
   end
 end

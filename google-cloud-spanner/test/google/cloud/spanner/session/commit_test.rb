@@ -74,7 +74,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
       c.replace "users", [{ id: 4, name: "Henry",  active: true }]
       c.delete "users", [1, 2, 3, 4, 5]
     end
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     mock.verify
   end
@@ -94,7 +94,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     timestamp = session.update "users", [{ id: 1, name: "Charlie", active: false }]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     mock.verify
   end
@@ -114,7 +114,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     timestamp = session.insert "users", [{ id: 2, name: "Harvey",  active: true }]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     mock.verify
   end
@@ -134,7 +134,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     timestamp = session.upsert "users", [{ id: 3, name: "Marley",  active: false }]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     mock.verify
   end
@@ -154,7 +154,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     timestamp = session.save "users", [{ id: 3, name: "Marley",  active: false }]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     mock.verify
   end
@@ -174,7 +174,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     timestamp = session.replace "users", [{ id: 4, name: "Henry",  active: true }]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     mock.verify
   end
@@ -197,7 +197,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     timestamp = session.delete "users", [1, 2, 3, 4, 5]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     mock.verify
   end
@@ -218,7 +218,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     timestamp = session.delete "users", 1..100
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     mock.verify
   end
@@ -241,7 +241,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     timestamp = session.delete "users", 5
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     mock.verify
   end
@@ -260,7 +260,7 @@ describe Google::Cloud::Spanner::Session, :read, :mock_spanner do
     session.service.mocked_service = mock
 
     timestamp = session.delete "users"
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     mock.verify
   end
