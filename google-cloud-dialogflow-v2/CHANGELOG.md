@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 / 2020-04-22
+
+#### Bug Fixes
+
+* Operations client honors its main client's custom endpoint.
+
 ### 0.4.0 / 2020-04-13
 
 #### Features
