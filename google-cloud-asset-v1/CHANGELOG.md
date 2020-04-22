@@ -1,5 +1,11 @@
 # Release History
 
+### 0.2.2 / 2020-04-22
+
+#### Bug Fixes
+
+* Operations client honors its main client's custom endpoint.
+
 ### 0.2.1 / 2020-04-13
 
 * Update docs for IAM Policy data types.
