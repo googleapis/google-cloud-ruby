@@ -53,7 +53,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with bool param" do
@@ -67,7 +67,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with int param" do
@@ -81,7 +81,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with float param" do
@@ -95,7 +95,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with Time param" do
@@ -111,7 +111,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with Date param" do
@@ -127,7 +127,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with String param" do
@@ -141,7 +141,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with IO-ish param" do
@@ -157,7 +157,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with an Array param" do
@@ -171,7 +171,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with an empty Array param" do
@@ -185,7 +185,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with a simple Hash param" do
@@ -199,7 +199,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with a complex Hash param" do
@@ -213,7 +213,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with an empty Hash param" do
@@ -227,7 +227,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "raises InvalidArgumentError if the response does not contain stats" do
@@ -260,7 +260,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with query options (environment variable or client-level)" do
@@ -276,7 +276,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 
   it "can execute a PDML statement with query options that query-level configs merge over environment variable or client-level configs" do
@@ -292,6 +292,6 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
 
     mock.verify
 
-    row_count.must_equal 1
+    _(row_count).must_equal 1
   end
 end

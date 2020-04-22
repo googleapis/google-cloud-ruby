@@ -23,88 +23,88 @@ describe "Spanner Database Backup", :spanner do
   it "creates, get, updates, restore and delete a database backup" do
     backup_id = "#{$spanner_database_id}-crud"
     database = spanner.database instance_id, database_id
-    database.wont_be :nil?
+    _(database).wont_be :nil?
 
     # Create
     job = database.create_backup backup_id, expire_time
 
-    job.must_be_kind_of Google::Cloud::Spanner::Backup::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Backup::Job
+    _(job).wont_be :done?
     job.wait_until_done!
 
-    job.must_be :done?
-    job.error.must_be :nil?
+    _(job).must_be :done?
+    _(job.error).must_be :nil?
 
     backup = job.backup
-    backup.wont_be :nil?
-    backup.must_be_kind_of Google::Cloud::Spanner::Backup
-    backup.backup_id.must_equal backup_id
-    backup.database_id.must_equal database_id
-    backup.instance_id.must_equal instance_id
-    backup.project_id.must_equal spanner.project
-    backup.expire_time.to_i.must_equal expire_time.to_i
-    backup.create_time.must_be_kind_of Time
-    backup.size_in_bytes.must_be :>, 0
+    _(backup).wont_be :nil?
+    _(backup).must_be_kind_of Google::Cloud::Spanner::Backup
+    _(backup.backup_id).must_equal backup_id
+    _(backup.database_id).must_equal database_id
+    _(backup.instance_id).must_equal instance_id
+    _(backup.project_id).must_equal spanner.project
+    _(backup.expire_time.to_i).must_equal expire_time.to_i
+    _(backup.create_time).must_be_kind_of Time
+    _(backup.size_in_bytes).must_be :>, 0
 
     # Get
     instance = spanner.instance instance_id
     backup = instance.backup backup_id
 
-    backup.wont_be :nil?
-    backup.must_be_kind_of Google::Cloud::Spanner::Backup
-    backup.backup_id.must_equal backup_id
-    backup.database_id.must_equal database_id
-    backup.instance_id.must_equal instance_id
-    backup.project_id.must_equal spanner.project
-    backup.expire_time.to_i.must_equal expire_time.to_i
-    backup.create_time.must_be_kind_of Time
-    backup.size_in_bytes.must_be :>, 0
+    _(backup).wont_be :nil?
+    _(backup).must_be_kind_of Google::Cloud::Spanner::Backup
+    _(backup.backup_id).must_equal backup_id
+    _(backup.database_id).must_equal database_id
+    _(backup.instance_id).must_equal instance_id
+    _(backup.project_id).must_equal spanner.project
+    _(backup.expire_time.to_i).must_equal expire_time.to_i
+    _(backup.create_time).must_be_kind_of Time
+    _(backup.size_in_bytes).must_be :>, 0
 
     # Update
     backup.expire_time = expire_time + 3600
     backup = instance.backup backup_id
-    backup.expire_time.to_i.must_equal((expire_time + 3600).to_i)
+    _(backup.expire_time.to_i).must_equal((expire_time + 3600).to_i)
 
-    proc {
+    _ { proc {
       backup.expire_time = Time.now - 36000
-    }.must_raise Google::Cloud::Error
-    backup.expire_time.to_i.must_equal((expire_time + 3600 ).to_i)
+    } }.must_raise Google::Cloud::Error
+    _(backup.expire_time.to_i).must_equal((expire_time + 3600 ).to_i)
 
     # Restore
     restore_database_id = "restore-#{database_id}"
     backup = instance.backup backup_id
     job = backup.restore restore_database_id
-    job.wont_be :done?
+    _(job).wont_be :done?
 
     job.wait_until_done!
 
-    job.must_be :done?
-    job.wont_be :error?
+    _(job).must_be :done?
+    _(job).wont_be :error?
 
     database = job.database
-    database.must_be_kind_of Google::Cloud::Spanner::Database
-    database.database_id.must_equal restore_database_id
-    database.instance_id.must_equal instance_id
-    database.project_id.must_equal spanner.project
+    _(database).must_be_kind_of Google::Cloud::Spanner::Database
+    _(database.database_id).must_equal restore_database_id
+    _(database.instance_id).must_equal instance_id
+    _(database.project_id).must_equal spanner.project
 
     restore_info = database.restore_info
-    restore_info.must_be_kind_of Google::Cloud::Spanner::Database::RestoreInfo
-    restore_info.source_type.must_equal :BACKUP
-    restore_info.must_be :source_backup?
+    _(restore_info).must_be_kind_of Google::Cloud::Spanner::Database::RestoreInfo
+    _(restore_info.source_type).must_equal :BACKUP
+    _(restore_info).must_be :source_backup?
 
     backup_info = restore_info.backup_info
-    backup_info.must_be_kind_of Google::Cloud::Spanner::Database::BackupInfo
-    backup_info.project_id.must_equal spanner.project
-    backup_info.instance_id.must_equal instance_id
-    backup_info.backup_id.must_equal backup_id
-    backup_info.source_database_project_id.must_equal spanner.project
-    backup_info.source_database_instance_id.must_equal instance_id
-    backup_info.source_database_id.must_equal database_id
-    backup_info.create_time.must_be_kind_of Time
+    _(backup_info).must_be_kind_of Google::Cloud::Spanner::Database::BackupInfo
+    _(backup_info.project_id).must_equal spanner.project
+    _(backup_info.instance_id).must_equal instance_id
+    _(backup_info.backup_id).must_equal backup_id
+    _(backup_info.source_database_project_id).must_equal spanner.project
+    _(backup_info.source_database_instance_id).must_equal instance_id
+    _(backup_info.source_database_id).must_equal database_id
+    _(backup_info.create_time).must_be_kind_of Time
 
     # Delete
     backup.delete
-    instance.backup(backup_id).must_be :nil?
+    _(instance.backup(backup_id)).must_be :nil?
   end
 
   it "cancel create backup operation" do
@@ -112,21 +112,21 @@ describe "Spanner Database Backup", :spanner do
     database = spanner.database instance_id, database_id
 
     job = database.create_backup backup_id, expire_time
-    job.wont_be :done?
+    _(job).wont_be :done?
 
     job.cancel
 
     job.reload!
-    job.must_be :done?
-    job.error.wont_be :nil?
-    job.error.code.must_equal 1
-    job.error.description.must_equal "CANCELLED"
+    _(job).must_be :done?
+    _(job.error).wont_be :nil?
+    _(job.error.code).must_equal 1
+    _(job.error.description).must_equal "CANCELLED"
   end
 
   it "lists and gets database backups" do
     backup_id = "#{$spanner_database_id}-list"
     database = spanner.database instance_id, database_id
-    database.wont_be :nil?
+    _(database).wont_be :nil?
 
     job = database.create_backup backup_id, expire_time
     job.wait_until_done!
@@ -136,20 +136,20 @@ describe "Spanner Database Backup", :spanner do
 
     # List all
     all_backups = instance.backups.all.to_a
-    all_backups.wont_be :empty?
+    _(all_backups).wont_be :empty?
     all_backups.each do |backup|
-      backup.must_be_kind_of Google::Cloud::Spanner::Backup
+      _(backup).must_be_kind_of Google::Cloud::Spanner::Backup
     end
 
     # Filter by backup name
     backups = instance.backups(filter: "name:#{backup_id}").to_a
-    backups.length.must_equal 1
-    backups.first.backup_id.must_equal backup_id
+    _(backups.length).must_equal 1
+    _(backups.first.backup_id).must_equal backup_id
 
     # Filter by database name
     backups = instance.backups(filter: "database:#{database_id}").to_a
-    backups.wont_be :empty?
-    backups.first.database_id.must_equal database_id
+    _(backups).wont_be :empty?
+    _(backups.first.database_id).must_equal database_id
 
     backup.delete
   end

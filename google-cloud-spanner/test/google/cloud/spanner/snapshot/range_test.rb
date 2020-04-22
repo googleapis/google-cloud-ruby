@@ -27,40 +27,40 @@ describe Google::Cloud::Spanner::Snapshot, :range, :mock_spanner do
   it "creates an inclusive range" do
     range = snapshot.range 1, 100
 
-    range.begin.must_equal 1
-    range.end.must_equal 100
+    _(range.begin).must_equal 1
+    _(range.end).must_equal 100
 
-    range.wont_be :exclude_begin?
-    range.wont_be :exclude_end?
+    _(range).wont_be :exclude_begin?
+    _(range).wont_be :exclude_end?
   end
 
   it "creates an exclusive range" do
     range = snapshot.range 1, 100, exclude_begin: true, exclude_end: true
 
-    range.begin.must_equal 1
-    range.end.must_equal 100
+    _(range.begin).must_equal 1
+    _(range.end).must_equal 100
 
-    range.must_be :exclude_begin?
-    range.must_be :exclude_end?
+    _(range).must_be :exclude_begin?
+    _(range).must_be :exclude_end?
   end
 
   it "creates a range that excludes beginning" do
     range = snapshot.range 1, 100, exclude_begin: true
 
-    range.begin.must_equal 1
-    range.end.must_equal 100
+    _(range.begin).must_equal 1
+    _(range.end).must_equal 100
 
-    range.must_be :exclude_begin?
-    range.wont_be :exclude_end?
+    _(range).must_be :exclude_begin?
+    _(range).wont_be :exclude_end?
   end
 
   it "creates a range that excludes ending" do
     range = snapshot.range 1, 100, exclude_end: true
 
-    range.begin.must_equal 1
-    range.end.must_equal 100
+    _(range.begin).must_equal 1
+    _(range.end).must_equal 100
 
-    range.wont_be :exclude_begin?
-    range.must_be :exclude_end?
+    _(range).wont_be :exclude_begin?
+    _(range).must_be :exclude_end?
   end
 end

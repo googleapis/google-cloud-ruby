@@ -48,8 +48,8 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Spanner::Instance::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
+    _(job).wont_be :done?
   end
 
   it "updates and saves when changing the labels directly" do
@@ -72,7 +72,7 @@ describe Google::Cloud::Spanner::Instance, :save, :mock_spanner do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Spanner::Instance::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
+    _(job).wont_be :done?
   end
 end

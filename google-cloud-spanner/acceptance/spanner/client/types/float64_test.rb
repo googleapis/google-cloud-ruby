@@ -23,9 +23,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, float: 99.99 }
     results = db.read table_name, [:id, :float], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
-    results.rows.first.to_h.must_equal({ id: id, float: 99.99 })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, float: :FLOAT64 })
+    _(results.rows.first.to_h).must_equal({ id: id, float: 99.99 })
   end
 
   it "writes and queries float64" do
@@ -33,9 +33,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, float: 99.99 }
     results = db.execute_sql "SELECT id, float FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
-    results.rows.first.to_h.must_equal({ id: id, float: 99.99 })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, float: :FLOAT64 })
+    _(results.rows.first.to_h).must_equal({ id: id, float: 99.99 })
   end
 
   it "writes and reads Infinity float64" do
@@ -43,9 +43,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, float: Float::INFINITY }
     results = db.read table_name, [:id, :float], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
-    results.rows.first.to_h.must_equal({ id: id, float: Float::INFINITY })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, float: :FLOAT64 })
+    _(results.rows.first.to_h).must_equal({ id: id, float: Float::INFINITY })
   end
 
   it "writes and queries Infinity float64" do
@@ -53,9 +53,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, float: Float::INFINITY }
     results = db.execute_sql "SELECT id, float FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
-    results.rows.first.to_h.must_equal({ id: id, float: Float::INFINITY })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, float: :FLOAT64 })
+    _(results.rows.first.to_h).must_equal({ id: id, float: Float::INFINITY })
   end
 
   it "writes and reads -Infinity float64" do
@@ -63,9 +63,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, float: -Float::INFINITY }
     results = db.read table_name, [:id, :float], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
-    results.rows.first.to_h.must_equal({ id: id, float: -Float::INFINITY })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, float: :FLOAT64 })
+    _(results.rows.first.to_h).must_equal({ id: id, float: -Float::INFINITY })
   end
 
   it "writes and queries -Infinity float64" do
@@ -73,9 +73,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, float: -Float::INFINITY }
     results = db.execute_sql "SELECT id, float FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
-    results.rows.first.to_h.must_equal({ id: id, float: -Float::INFINITY })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, float: :FLOAT64 })
+    _(results.rows.first.to_h).must_equal({ id: id, float: -Float::INFINITY })
   end
 
   it "writes and reads NaN float64" do
@@ -83,12 +83,12 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, float: Float::NAN }
     results = db.read table_name, [:id, :float], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, float: :FLOAT64 })
     returned_hash = results.rows.first.to_h
     returned_value = returned_hash[:float]
-    returned_value.must_be_kind_of Float
-    returned_value.must_be :nan?
+    _(returned_value).must_be_kind_of Float
+    _(returned_value).must_be :nan?
   end
 
   it "writes and queries NaN float64" do
@@ -96,12 +96,12 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, float: Float::NAN }
     results = db.execute_sql "SELECT id, float FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, float: :FLOAT64 })
     returned_hash = results.rows.first.to_h
     returned_value = returned_hash[:float]
-    returned_value.must_be_kind_of Float
-    returned_value.must_be :nan?
+    _(returned_value).must_be_kind_of Float
+    _(returned_value).must_be :nan?
   end
 
   it "writes and reads NULL float64" do
@@ -109,9 +109,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, float: nil }
     results = db.read table_name, [:id, :float], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
-    results.rows.first.to_h.must_equal({ id: id, float: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, float: :FLOAT64 })
+    _(results.rows.first.to_h).must_equal({ id: id, float: nil })
   end
 
   it "writes and queries NULL float64" do
@@ -119,9 +119,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, float: nil }
     results = db.execute_sql "SELECT id, float FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, float: :FLOAT64 })
-    results.rows.first.to_h.must_equal({ id: id, float: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, float: :FLOAT64 })
+    _(results.rows.first.to_h).must_equal({ id: id, float: nil })
   end
 
   it "writes and reads array of float64" do
@@ -129,9 +129,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, floats: [77.77, 88.88, 99.99] }
     results = db.read table_name, [:id, :floats], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, floats: [:FLOAT64] })
-    results.rows.first.to_h.must_equal({ id: id, floats: [77.77, 88.88, 99.99] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, floats: [:FLOAT64] })
+    _(results.rows.first.to_h).must_equal({ id: id, floats: [77.77, 88.88, 99.99] })
   end
 
   it "writes and queries array of float64" do
@@ -139,9 +139,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, floats: [77.77, 88.88, 99.99] }
     results = db.execute_sql "SELECT id, floats FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, floats: [:FLOAT64] })
-    results.rows.first.to_h.must_equal({ id: id, floats: [77.77, 88.88, 99.99] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, floats: [:FLOAT64] })
+    _(results.rows.first.to_h).must_equal({ id: id, floats: [77.77, 88.88, 99.99] })
   end
 
   it "writes and reads array of float64 with NULL" do
@@ -149,9 +149,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, floats: [nil, 77.77, 88.88, 99.99] }
     results = db.read table_name, [:id, :floats], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, floats: [:FLOAT64] })
-    results.rows.first.to_h.must_equal({ id: id, floats: [nil, 77.77, 88.88, 99.99] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, floats: [:FLOAT64] })
+    _(results.rows.first.to_h).must_equal({ id: id, floats: [nil, 77.77, 88.88, 99.99] })
   end
 
   it "writes and queries array of float64 with NULL" do
@@ -159,9 +159,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, floats: [nil, 77.77, 88.88, 99.99] }
     results = db.execute_sql "SELECT id, floats FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, floats: [:FLOAT64] })
-    results.rows.first.to_h.must_equal({ id: id, floats: [nil, 77.77, 88.88, 99.99] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, floats: [:FLOAT64] })
+    _(results.rows.first.to_h).must_equal({ id: id, floats: [nil, 77.77, 88.88, 99.99] })
   end
 
   it "writes and reads empty array of float64" do
@@ -169,9 +169,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, floats: [] }
     results = db.read table_name, [:id, :floats], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, floats: [:FLOAT64] })
-    results.rows.first.to_h.must_equal({ id: id, floats: [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, floats: [:FLOAT64] })
+    _(results.rows.first.to_h).must_equal({ id: id, floats: [] })
   end
 
   it "writes and queries empty array of float64" do
@@ -179,9 +179,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, floats: [] }
     results = db.execute_sql "SELECT id, floats FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, floats: [:FLOAT64] })
-    results.rows.first.to_h.must_equal({ id: id, floats: [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, floats: [:FLOAT64] })
+    _(results.rows.first.to_h).must_equal({ id: id, floats: [] })
   end
 
   it "writes and reads NULL array of float64" do
@@ -189,9 +189,9 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, floats: nil }
     results = db.read table_name, [:id, :floats], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, floats: [:FLOAT64] })
-    results.rows.first.to_h.must_equal({ id: id, floats: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, floats: [:FLOAT64] })
+    _(results.rows.first.to_h).must_equal({ id: id, floats: nil })
   end
 
   it "writes and queries NULL array of float64" do
@@ -199,8 +199,8 @@ describe "Spanner Client", :types, :float64, :spanner do
     db.upsert table_name, { id: id, floats: nil }
     results = db.execute_sql "SELECT id, floats FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, floats: [:FLOAT64] })
-    results.rows.first.to_h.must_equal({ id: id, floats: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, floats: [:FLOAT64] })
+    _(results.rows.first.to_h).must_equal({ id: id, floats: nil })
   end
 end

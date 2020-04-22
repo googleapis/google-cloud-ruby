@@ -34,15 +34,15 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   let(:batch_client_labels) { spanner.batch_client instance_id, database_id, labels: labels }
 
   it "knows its project_id" do
-    batch_client.project_id.must_equal project
+    _(batch_client.project_id).must_equal project
   end
 
   it "holds a reference to project" do
-    batch_client.project.must_equal spanner
+    _(batch_client.project).must_equal spanner
   end
 
   it "knows its instance_id" do
-    batch_client.instance_id.must_equal instance_id
+    _(batch_client.instance_id).must_equal instance_id
   end
 
   it "retrieves the instance" do
@@ -55,13 +55,13 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
     mock.verify
 
-    instance.project_id.must_equal project
-    instance.instance_id.must_equal instance_id
-    instance.path.must_equal instance_path(instance_id)
+    _(instance.project_id).must_equal project
+    _(instance.instance_id).must_equal instance_id
+    _(instance.path).must_equal instance_path(instance_id)
   end
 
   it "knows its database_id" do
-    batch_client.database_id.must_equal database_id
+    _(batch_client.database_id).must_equal database_id
   end
 
   it "retrieves the database" do
@@ -74,10 +74,10 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
     mock.verify
 
-    database.project_id.must_equal project
-    database.instance_id.must_equal instance_id
-    database.database_id.must_equal database_id
-    database.path.must_equal database_path(instance_id, database_id)
+    _(database.project_id).must_equal project
+    _(database.instance_id).must_equal instance_id
+    _(database.database_id).must_equal database_id
+    _(database.path).must_equal database_path(instance_id, database_id)
   end
 
   it "creates a batch_snapshot" do
@@ -90,9 +90,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
     mock.verify
 
-    batch_snapshot.transaction_id.must_equal transaction_id
-    batch_snapshot.timestamp.must_equal timestamp_time
-    batch_snapshot.session.path.must_equal session.path
+    _(batch_snapshot.transaction_id).must_equal transaction_id
+    _(batch_snapshot.timestamp).must_equal timestamp_time
+    _(batch_snapshot.session.path).must_equal session.path
   end
 
   it "creates a batch_snapshot with session labels" do
@@ -107,9 +107,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
     mock.verify
 
-    batch_snapshot.transaction_id.must_equal transaction_id
-    batch_snapshot.timestamp.must_equal timestamp_time
-    batch_snapshot.session.path.must_equal session.path
+    _(batch_snapshot.transaction_id).must_equal transaction_id
+    _(batch_snapshot.timestamp).must_equal timestamp_time
+    _(batch_snapshot.session.path).must_equal session.path
   end
 
   describe :strong do
@@ -125,9 +125,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
       mock.verify
 
-      batch_snapshot.transaction_id.must_equal transaction_id
-      batch_snapshot.timestamp.must_equal timestamp_time
-      batch_snapshot.session.path.must_equal session.path
+      _(batch_snapshot.transaction_id).must_equal transaction_id
+      _(batch_snapshot.timestamp).must_equal timestamp_time
+      _(batch_snapshot.session.path).must_equal session.path
     end
   end
 
@@ -147,9 +147,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
       mock.verify
 
-      batch_snapshot.transaction_id.must_equal transaction_id
-      batch_snapshot.timestamp.must_equal timestamp_time
-      batch_snapshot.session.path.must_equal session.path
+      _(batch_snapshot.transaction_id).must_equal transaction_id
+      _(batch_snapshot.timestamp).must_equal timestamp_time
+      _(batch_snapshot.session.path).must_equal session.path
     end
 
     it "creates a batch_snapshot with read_timestamp option (Time)" do
@@ -162,9 +162,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
       mock.verify
 
-      batch_snapshot.transaction_id.must_equal transaction_id
-      batch_snapshot.timestamp.must_equal timestamp_time
-      batch_snapshot.session.path.must_equal session.path
+      _(batch_snapshot.transaction_id).must_equal transaction_id
+      _(batch_snapshot.timestamp).must_equal timestamp_time
+      _(batch_snapshot.session.path).must_equal session.path
     end
 
     it "creates a batch_snapshot with timestamp option (DateTime)" do
@@ -177,9 +177,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
       mock.verify
 
-      batch_snapshot.transaction_id.must_equal transaction_id
-      batch_snapshot.timestamp.must_equal timestamp_time
-      batch_snapshot.session.path.must_equal session.path
+      _(batch_snapshot.transaction_id).must_equal transaction_id
+      _(batch_snapshot.timestamp).must_equal timestamp_time
+      _(batch_snapshot.session.path).must_equal session.path
     end
 
     it "creates a batch_snapshot with read_timestamp option (DateTime)" do
@@ -192,9 +192,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
       mock.verify
 
-      batch_snapshot.transaction_id.must_equal transaction_id
-      batch_snapshot.timestamp.must_equal timestamp_time
-      batch_snapshot.session.path.must_equal session.path
+      _(batch_snapshot.transaction_id).must_equal transaction_id
+      _(batch_snapshot.timestamp).must_equal timestamp_time
+      _(batch_snapshot.session.path).must_equal session.path
     end
   end
 
@@ -213,9 +213,9 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
       mock.verify
 
-      batch_snapshot.transaction_id.must_equal transaction_id
-      batch_snapshot.timestamp.must_equal timestamp_time
-      batch_snapshot.session.path.must_equal session.path
+      _(batch_snapshot.transaction_id).must_equal transaction_id
+      _(batch_snapshot.timestamp).must_equal timestamp_time
+      _(batch_snapshot.session.path).must_equal session.path
     end
 
     it "creates a batch_snapshot with the exact_staleness option" do
@@ -228,65 +228,65 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
 
       mock.verify
 
-      batch_snapshot.transaction_id.must_equal transaction_id
-      batch_snapshot.timestamp.must_equal timestamp_time
-      batch_snapshot.session.path.must_equal session.path
+      _(batch_snapshot.transaction_id).must_equal transaction_id
+      _(batch_snapshot.timestamp).must_equal timestamp_time
+      _(batch_snapshot.session.path).must_equal session.path
     end
   end
 
   it "loads a batch_snapshot (hash)" do
     batch_snapshot = batch_client.load_batch_snapshot batch_tx_hash
 
-    batch_snapshot.transaction_id.must_equal transaction_id
-    batch_snapshot.timestamp.must_equal timestamp_time
-    batch_snapshot.session.path.must_equal session.path
+    _(batch_snapshot.transaction_id).must_equal transaction_id
+    _(batch_snapshot.timestamp).must_equal timestamp_time
+    _(batch_snapshot.session.path).must_equal session.path
   end
 
   it "loads a batch_snapshot (json)" do
     batch_snapshot = batch_client.load_batch_snapshot batch_tx_hash
 
-    batch_snapshot.transaction_id.must_equal transaction_id
-    batch_snapshot.timestamp.must_equal timestamp_time
-    batch_snapshot.session.path.must_equal session.path
+    _(batch_snapshot.transaction_id).must_equal transaction_id
+    _(batch_snapshot.timestamp).must_equal timestamp_time
+    _(batch_snapshot.session.path).must_equal session.path
   end
 
   it "creates an inclusive range" do
     range = batch_client.range 1, 100
 
-    range.begin.must_equal 1
-    range.end.must_equal 100
+    _(range.begin).must_equal 1
+    _(range.end).must_equal 100
 
-    range.wont_be :exclude_begin?
-    range.wont_be :exclude_end?
+    _(range).wont_be :exclude_begin?
+    _(range).wont_be :exclude_end?
   end
 
   it "creates an exclusive range" do
     range = batch_client.range 1, 100, exclude_begin: true, exclude_end: true
 
-    range.begin.must_equal 1
-    range.end.must_equal 100
+    _(range.begin).must_equal 1
+    _(range.end).must_equal 100
 
-    range.must_be :exclude_begin?
-    range.must_be :exclude_end?
+    _(range).must_be :exclude_begin?
+    _(range).must_be :exclude_end?
   end
 
   it "creates a range that excludes beginning" do
     range = batch_client.range 1, 100, exclude_begin: true
 
-    range.begin.must_equal 1
-    range.end.must_equal 100
+    _(range.begin).must_equal 1
+    _(range.end).must_equal 100
 
-    range.must_be :exclude_begin?
-    range.wont_be :exclude_end?
+    _(range).must_be :exclude_begin?
+    _(range).wont_be :exclude_end?
   end
 
   it "creates a range that excludes ending" do
     range = batch_client.range 1, 100, exclude_end: true
 
-    range.begin.must_equal 1
-    range.end.must_equal 100
+    _(range.begin).must_equal 1
+    _(range.end).must_equal 100
 
-    range.wont_be :exclude_begin?
-    range.must_be :exclude_end?
+    _(range).wont_be :exclude_begin?
+    _(range).must_be :exclude_end?
   end
 end

@@ -45,8 +45,8 @@ describe Google::Cloud::Spanner::Project, :create_database, :mock_spanner do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Spanner::Database::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done?
   end
 
   it "creates a database with additional statements" do
@@ -70,7 +70,7 @@ describe Google::Cloud::Spanner::Project, :create_database, :mock_spanner do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Spanner::Database::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done?
   end
 end

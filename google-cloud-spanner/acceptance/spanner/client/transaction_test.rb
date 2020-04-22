@@ -35,11 +35,11 @@ describe "Spanner Client", :transaction, :spanner do
 
   it "modifies accounts and verifies data with reads" do
     timestamp = db.transaction do |tx|
-      tx.transaction_id.wont_be :nil?
+      _(tx.transaction_id).wont_be :nil?
 
       tx_results = tx.read "accounts", columns
-      tx_results.must_be_kind_of Google::Cloud::Spanner::Results
-      tx_results.fields.to_h.must_equal fields_hash
+      _(tx_results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(tx_results.fields.to_h).must_equal fields_hash
       tx_results.rows.zip(default_account_rows).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -50,12 +50,12 @@ describe "Spanner Client", :transaction, :spanner do
       tx.update "accounts", reversed_update_rows
       tx.insert "accounts", additional_account
     end
-    timestamp.must_be_kind_of Time
+    _(timestamp).must_be_kind_of Time
 
     # outside of transaction, verify the new account was added
     results = db.read "accounts", columns
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     # new data fixtures to match updated rows
     reversed_account_rows = default_account_rows.map do |row|
       row[:username] = row[:username].reverse
@@ -68,11 +68,11 @@ describe "Spanner Client", :transaction, :spanner do
 
   it "can rollback a transaction without passing on using Rollback" do
     timestamp = db.transaction do |tx|
-      tx.transaction_id.wont_be :nil?
+      _(tx.transaction_id).wont_be :nil?
 
       tx_results = tx.read "accounts", columns
-      tx_results.must_be_kind_of Google::Cloud::Spanner::Results
-      tx_results.fields.to_h.must_equal fields_hash
+      _(tx_results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(tx_results.fields.to_h).must_equal fields_hash
       tx_results.rows.zip(default_account_rows).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -85,12 +85,12 @@ describe "Spanner Client", :transaction, :spanner do
 
       raise Google::Cloud::Spanner::Rollback
     end
-    timestamp.must_be :nil?
+    _(timestamp).must_be :nil?
 
     # outside of transaction, the new account was NOT added
     results = db.read "accounts", columns
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -99,11 +99,11 @@ describe "Spanner Client", :transaction, :spanner do
   it "can rollback a transaction and pass on the error" do
     assert_raises ZeroDivisionError do
       db.transaction do |tx|
-        tx.transaction_id.wont_be :nil?
+        _(tx.transaction_id).wont_be :nil?
 
         tx_results = tx.read "accounts", columns
-        tx_results.must_be_kind_of Google::Cloud::Spanner::Results
-        tx_results.fields.to_h.must_equal fields_hash
+        _(tx_results).must_be_kind_of Google::Cloud::Spanner::Results
+        _(tx_results.fields.to_h).must_equal fields_hash
         tx_results.rows.zip(default_account_rows).each do |expected, actual|
           assert_accounts_equal expected, actual
         end
@@ -120,8 +120,8 @@ describe "Spanner Client", :transaction, :spanner do
 
     # outside of transaction, the new account was NOT added
     results = db.read "accounts", columns
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -165,7 +165,7 @@ describe "Spanner Client", :transaction, :spanner do
     end
 
     results = db.read "accounts", [:reputation], keys: 1, limit: 1
-    results.rows.first[:reputation].must_equal original_val + 2
+    _(results.rows.first[:reputation]).must_equal original_val + 2
   end
 
   it "supports tx isolation with query and update" do
@@ -184,14 +184,14 @@ describe "Spanner Client", :transaction, :spanner do
     end
 
     results = db.execute_sql query_reputation
-    results.rows.first[:reputation].must_equal original_val + 2
+    _(results.rows.first[:reputation]).must_equal original_val + 2
   end
 
   it "can execute sql with query options" do
     query_options = { optimizer_version: "latest" }
     db.transaction do |tx|
       tx_results = tx.execute_sql query_reputation, query_options: query_options
-      tx_results.rows.first[:reputation].must_equal 63.5
+      _(tx_results.rows.first[:reputation]).must_equal 63.5
     end
   end
 
@@ -217,37 +217,37 @@ describe "Spanner Client", :transaction, :spanner do
 
   def assert_accounts_equal expected, actual
     if actual[:account_id].nil?
-      expected[:account_id].must_be :nil?
+      _(expected[:account_id]).must_be :nil?
     else
-      expected[:account_id].must_equal actual[:account_id]
+      _(expected[:account_id]).must_equal actual[:account_id]
     end
 
     if actual[:username].nil?
-      expected[:username].must_be :nil?
+      _(expected[:username]).must_be :nil?
     else
-      expected[:username].must_equal actual[:username]
+      _(expected[:username]).must_equal actual[:username]
     end
 
     if actual[:reputation].nil?
-      expected[:reputation].must_be :nil?
+      _(expected[:reputation]).must_be :nil?
     else
-      expected[:reputation].must_equal actual[:reputation]
+      _(expected[:reputation]).must_equal actual[:reputation]
     end
 
     if actual[:active].nil?
-      expected[:active].must_be :nil?
+      _(expected[:active]).must_be :nil?
     else
-      expected[:active].must_equal actual[:active]
+      _(expected[:active]).must_equal actual[:active]
     end
 
     if expected[:avatar] && actual[:avatar]
-      expected[:avatar].read.must_equal actual[:avatar].read
+      _(expected[:avatar].read).must_equal actual[:avatar].read
     end
 
     if actual[:friends].nil?
-      expected[:friends].must_be :nil?
+      _(expected[:friends]).must_be :nil?
     else
-      expected[:friends].must_equal actual[:friends]
+      _(expected[:friends]).must_equal actual[:friends]
     end
   end
 end

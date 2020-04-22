@@ -20,48 +20,48 @@ describe "Spanner Client", :params, :string, :spanner do
   it "queries and returns a string parameter" do
     results = db.execute_query "SELECT @value AS value", params: { value: "hello" }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal :STRING
-    results.rows.first[:value].must_equal "hello"
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal :STRING
+    _(results.rows.first[:value]).must_equal "hello"
   end
 
   it "queries and returns a NULL string parameter" do
     results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: :STRING }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal :STRING
-    results.rows.first[:value].must_be :nil?
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal :STRING
+    _(results.rows.first[:value]).must_be :nil?
   end
 
   it "queries and returns an array of string parameters" do
     results = db.execute_query "SELECT @value AS value", params: { value: ["foo", "bar", "baz"] }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal [:STRING]
-    results.rows.first[:value].must_equal ["foo", "bar", "baz"]
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal [:STRING]
+    _(results.rows.first[:value]).must_equal ["foo", "bar", "baz"]
   end
 
   it "queries and returns an array of string parameters with a nil value" do
     results = db.execute_query "SELECT @value AS value", params: { value: [nil, "foo", "bar", "baz"] }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal [:STRING]
-    results.rows.first[:value].must_equal [nil, "foo", "bar", "baz"]
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal [:STRING]
+    _(results.rows.first[:value]).must_equal [nil, "foo", "bar", "baz"]
   end
 
   it "queries and returns an empty array of string parameters" do
     results = db.execute_query "SELECT @value AS value", params: { value: [] }, types: { value: [:STRING] }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal [:STRING]
-    results.rows.first[:value].must_equal []
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal [:STRING]
+    _(results.rows.first[:value]).must_equal []
   end
 
   it "queries and returns a NULL array of string parameters" do
     results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: [:STRING] }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields[:value].must_equal [:STRING]
-    results.rows.first[:value].must_be :nil?
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields[:value]).must_equal [:STRING]
+    _(results.rows.first[:value]).must_be :nil?
   end
 end

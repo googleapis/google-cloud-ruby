@@ -96,23 +96,23 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
 
     job = database.create_backup backup_id, expire_time
 
-    job.must_be_kind_of Google::Cloud::Spanner::Backup::Job
-    job.wont_be :done?
-    job.wont_be :error?
-    job.error.must_be :nil?
-    job.backup.must_be :nil?
-    job.start_time.must_be_kind_of Time
-    job.end_time.must_be :nil?
-    job.progress_percent.must_equal 0
+    _(job).must_be_kind_of Google::Cloud::Spanner::Backup::Job
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.backup).must_be :nil?
+    _(job.start_time).must_be_kind_of Time
+    _(job.end_time).must_be :nil?
+    _(job.progress_percent).must_equal 0
 
     job.reload!
     backup = job.backup
-    backup.wont_be :nil?
-    backup.must_be_kind_of Google::Cloud::Spanner::Backup
-    job.start_time.must_be_kind_of Time
-    job.end_time.must_be_kind_of Time
-    job.cancel_time.must_be :nil?
-    job.progress_percent.must_equal 100
+    _(backup).wont_be :nil?
+    _(backup).must_be_kind_of Google::Cloud::Spanner::Backup
+    _(job.start_time).must_be_kind_of Time
+    _(job.end_time).must_be_kind_of Time
+    _(job.cancel_time).must_be :nil?
+    _(job.progress_percent).must_equal 100
 
     mock.verify
   end
@@ -140,16 +140,16 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
 
     job = database.create_backup backup_id, expire_time
 
-    job.must_be_kind_of Google::Cloud::Spanner::Backup::Job
-    job.wont_be :done?
-    job.cancel.must_be_nil
+    _(job).must_be_kind_of Google::Cloud::Spanner::Backup::Job
+    _(job).wont_be :done?
+    _(job.cancel).must_be_nil
 
     job.reload!
-    job.must_be :done?
-    job.start_time.must_be_kind_of Time
-    job.end_time.must_be_kind_of Time
-    job.cancel_time.must_be_kind_of Time
-    job.progress_percent.must_equal 100
+    _(job).must_be :done?
+    _(job.start_time).must_be_kind_of Time
+    _(job.end_time).must_be_kind_of Time
+    _(job.cancel_time).must_be_kind_of Time
+    _(job.progress_percent).must_equal 100
 
     mock.verify
   end
@@ -163,8 +163,8 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
 
     spanner.service.mocked_databases = stub
 
-    proc {
+    _ { proc {
       database.create_backup backup_id, Time.now - 36000
-    }.must_raise Google::Cloud::Error
+    } }.must_raise Google::Cloud::Error
   end
 end

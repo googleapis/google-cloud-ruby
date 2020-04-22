@@ -34,28 +34,28 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
   let(:database) { Google::Cloud::Spanner::Database.from_grpc database_grpc, spanner.service }
 
   it "knows the identifiers" do
-    database.must_be_kind_of Google::Cloud::Spanner::Database
-    database.project_id.must_equal project
-    database.instance_id.must_equal instance_id
-    database.database_id.must_equal database_id
+    _(database).must_be_kind_of Google::Cloud::Spanner::Database
+    _(database.project_id).must_equal project
+    _(database.instance_id).must_equal instance_id
+    _(database.database_id).must_equal database_id
 
-    database.state.must_equal :READY
-    database.must_be :ready?
-    database.wont_be :creating?
+    _(database.state).must_equal :READY
+    _(database).must_be :ready?
+    _(database).wont_be :creating?
 
     restore_info = database.restore_info
-    restore_info.must_be_kind_of Google::Cloud::Spanner::Database::RestoreInfo
-    restore_info.source_type.must_equal :BACKUP
-    restore_info.must_be :source_backup?
+    _(restore_info).must_be_kind_of Google::Cloud::Spanner::Database::RestoreInfo
+    _(restore_info.source_type).must_equal :BACKUP
+    _(restore_info).must_be :source_backup?
 
     backup_info = restore_info.backup_info
-    backup_info.must_be_kind_of Google::Cloud::Spanner::Database::BackupInfo
-    backup_info.project_id.must_equal project
-    backup_info.instance_id.must_equal instance_id
-    backup_info.backup_id.must_equal backup_id
-    backup_info.source_database_project_id.must_equal project
-    backup_info.source_database_instance_id.must_equal instance_id
-    backup_info.source_database_id.must_equal source_database_id
-    backup_info.create_time.must_be_kind_of Time
+    _(backup_info).must_be_kind_of Google::Cloud::Spanner::Database::BackupInfo
+    _(backup_info.project_id).must_equal project
+    _(backup_info.instance_id).must_equal instance_id
+    _(backup_info.backup_id).must_equal backup_id
+    _(backup_info.source_database_project_id).must_equal project
+    _(backup_info.source_database_instance_id).must_equal instance_id
+    _(backup_info.source_database_id).must_equal source_database_id
+    _(backup_info.create_time).must_be_kind_of Time
   end
 end

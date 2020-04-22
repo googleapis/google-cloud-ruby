@@ -27,7 +27,7 @@ describe Google::Cloud::Spanner::Transaction, :commit_timestamp, :mock_spanner d
   it "creates a commit_timestamp column value" do
     column_value = transaction.commit_timestamp
 
-    column_value.must_be_kind_of Google::Cloud::Spanner::ColumnValue
-    column_value.type.must_equal :commit_timestamp
+    _(column_value).must_be_kind_of Google::Cloud::Spanner::ColumnValue
+    _(column_value.type).must_equal :commit_timestamp
   end
 end

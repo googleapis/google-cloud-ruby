@@ -31,7 +31,7 @@ describe Google::Cloud::Spanner::Backup, :delete, :mock_spanner do
     mock.expect :delete_backup, nil, [backup_grpc.name]
     spanner.service.mocked_databases = mock
 
-    backup.delete.must_equal true
+    _(backup.delete).must_equal true
     mock.verify
   end
 end

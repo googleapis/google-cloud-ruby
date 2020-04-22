@@ -86,19 +86,19 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
     database.service.mocked_databases = mock
 
     jobs = database.database_operations
-    jobs.size.must_equal 3
+    _(jobs.size).must_equal 3
 
     jobs.each do |job|
-      job.must_be_kind_of Google::Cloud::Spanner::Database::Job
-      job.wont_be :done?
-      job.wont_be :error?
-      job.error.must_be :nil?
-      job.database.must_be :nil?
+      _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+      _(job).wont_be :done?
+      _(job).wont_be :error?
+      _(job.error).must_be :nil?
+      _(job.database).must_be :nil?
       job.reload!
 
       database = job.database
-      database.wont_be :nil?
-      database.must_be_kind_of Google::Cloud::Spanner::Database
+      _(database).wont_be :nil?
+      _(database).must_be_kind_of Google::Cloud::Spanner::Database
     end
 
     mock.verify
@@ -116,19 +116,19 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
     database.service.mocked_databases = mock
 
     jobs = database.database_operations page_size: 3
-    jobs.size.must_equal 3
+    _(jobs.size).must_equal 3
 
     jobs.each do |job|
-      job.must_be_kind_of Google::Cloud::Spanner::Database::Job
-      job.wont_be :done?
-      job.wont_be :error?
-      job.error.must_be :nil?
-      job.database.must_be :nil?
+      _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+      _(job).wont_be :done?
+      _(job).wont_be :error?
+      _(job.error).must_be :nil?
+      _(job.database).must_be :nil?
       job.reload!
 
       database = job.database
-      database.wont_be :nil?
-      database.must_be_kind_of Google::Cloud::Spanner::Database
+      _(database).wont_be :nil?
+      _(database).must_be_kind_of Google::Cloud::Spanner::Database
     end
 
     mock.verify
@@ -145,10 +145,10 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
 
     jobs = database.database_operations
 
-    jobs.size.must_equal 3
-    jobs.next?.must_equal true
-    jobs.next.size.must_equal 2
-    jobs.next?.must_equal false
+    _(jobs.size).must_equal 3
+    _(jobs.next?).must_equal true
+    _(jobs.next.size).must_equal 2
+    _(jobs.next?).must_equal false
 
     mock.verify
   end
@@ -166,7 +166,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
 
     mock.verify
 
-    jobs.size.must_equal 5
+    _(jobs.size).must_equal 5
   end
 
   it "paginates database operations with all and page size" do
@@ -182,7 +182,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
 
     mock.verify
 
-    jobs.size.must_equal 5
+    _(jobs.size).must_equal 5
   end
 
   it "iterates database operations with all using Enumerator" do
@@ -198,7 +198,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
 
     mock.verify
 
-    jobs.size.must_equal 5
+    _(jobs.size).must_equal 5
   end
 
   it "paginates database operations with filter" do
@@ -216,7 +216,7 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
 
     mock.verify
 
-    jobs.size.must_equal 3
+    _(jobs.size).must_equal 3
   end
 
   it "paginates database operations with filter and page size" do
@@ -234,6 +234,6 @@ describe Google::Cloud::Spanner::Database, :database_operations, :mock_spanner d
 
     mock.verify
 
-    jobs.size.must_equal 3
+    _(jobs.size).must_equal 3
   end
 end

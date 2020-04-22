@@ -18,7 +18,7 @@ describe "Spanner Client", :reset, :spanner do
   let(:db) { spanner_client }
 
   it "closes all sessions and creates new sessions" do
-    db.reset.must_equal true
-    db.execute_query("SELECT 1").rows.first.values.must_equal [1]
+    _(db.reset).must_equal true
+    _(db.execute_query("SELECT 1").rows.first.values).must_equal [1]
   end
 end

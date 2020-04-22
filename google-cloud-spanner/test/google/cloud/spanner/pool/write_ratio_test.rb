@@ -48,9 +48,9 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
     shutdown_pool! pool
 
-    pool.all_sessions.size.must_equal 2
-    pool.session_queue.size.must_equal 1
-    pool.transaction_queue.size.must_equal 1
+    _(pool.all_sessions.size).must_equal 2
+    _(pool.session_queue.size).must_equal 1
+    _(pool.transaction_queue.size).must_equal 1
 
     mock.verify
   end
@@ -76,9 +76,9 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
     shutdown_pool! pool
 
-    pool.all_sessions.size.must_equal 2
-    pool.session_queue.size.must_equal 1
-    pool.transaction_queue.size.must_equal 1
+    _(pool.all_sessions.size).must_equal 2
+    _(pool.session_queue.size).must_equal 1
+    _(pool.transaction_queue.size).must_equal 1
 
     mock.verify
   end
@@ -104,9 +104,9 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
     shutdown_pool! pool
 
-    pool.all_sessions.size.must_equal 5
-    pool.session_queue.size.must_equal 2
-    pool.transaction_queue.size.must_equal 3
+    _(pool.all_sessions.size).must_equal 5
+    _(pool.session_queue.size).must_equal 2
+    _(pool.transaction_queue.size).must_equal 3
 
     mock.verify
   end
@@ -134,9 +134,9 @@ describe Google::Cloud::Spanner::Pool, :write_ratio, :mock_spanner do
 
     shutdown_pool! pool
 
-    pool.all_sessions.size.must_equal 8
-    pool.session_queue.size.must_equal 6
-    pool.transaction_queue.size.must_equal 2
+    _(pool.all_sessions.size).must_equal 8
+    _(pool.session_queue.size).must_equal 6
+    _(pool.transaction_queue.size).must_equal 2
 
     mock.verify
   end
