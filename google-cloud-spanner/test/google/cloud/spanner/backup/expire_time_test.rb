@@ -48,9 +48,9 @@ describe Google::Cloud::Spanner::Backup, :expire_time=, :mock_spanner do
     backup.service.mocked_databases = stub
     expire_time_was = backup.expire_time
 
-    _ { proc {
+    assert_raises Google::Cloud::Error do
       backup.expire_time = (Time.now - 36000)
-    } }.must_raise Google::Cloud::Error
+    end
 
     _(backup.expire_time).must_equal expire_time_was
   end

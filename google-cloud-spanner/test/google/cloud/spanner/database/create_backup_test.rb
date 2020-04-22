@@ -163,8 +163,8 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
 
     spanner.service.mocked_databases = stub
 
-    _ { proc {
+    assert_raises Google::Cloud::Error do
       database.create_backup backup_id, Time.now - 36000
-    } }.must_raise Google::Cloud::Error
+    end 
   end
 end
