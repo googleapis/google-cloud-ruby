@@ -7,3 +7,5 @@ gem "google-cloud-env", path: "../google-cloud-env"
 gem "google-cloud-errors", path: "../google-cloud-errors"
 
 gem "rake"
+
+gem "rubocop-minitest"
