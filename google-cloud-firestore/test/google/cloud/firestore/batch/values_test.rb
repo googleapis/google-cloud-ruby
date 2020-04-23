@@ -53,8 +53,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: nil })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with a true" do
@@ -64,8 +64,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: true })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with a false" do
@@ -75,8 +75,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: false })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with a nan" do
@@ -86,8 +86,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: Float::NAN })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with infinity" do
@@ -97,8 +97,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: Float::INFINITY })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with an int" do
@@ -108,8 +108,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: 42 })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with a float" do
@@ -119,8 +119,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: 3.14 })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with a time" do
@@ -130,8 +130,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: commit_time })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with a string" do
@@ -141,8 +141,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: "hello" })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with a IO" do
@@ -152,8 +152,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: StringIO.new("world") })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with a doc ref" do
@@ -163,8 +163,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: firestore.doc("C/d") })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with a geo point" do
@@ -174,8 +174,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: { longitude: 50.1430847, latitude: -122.947778 } })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with an array" do
@@ -193,8 +193,8 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: [1, 2.0, "3"] })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a document data with a hash" do
@@ -210,7 +210,7 @@ describe Google::Cloud::Firestore::Batch, :values, :mock_firestore do
     batch.update(document_path, { val: { hello: "word" } })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 end

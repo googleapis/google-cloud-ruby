@@ -38,85 +38,85 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
   end
 
   it "retrieves top-level value from data given a fieldpath (string)" do
-    document.get("name").must_equal "Mike"
+    _(document.get("name")).must_equal "Mike"
   end
 
   it "retrieves top-level value from data given a fieldpath (symbol)" do
-    document.get(:name).must_equal "Mike"
+    _(document.get(:name)).must_equal "Mike"
   end
 
   it "retrieves top-level value from data given a fieldpath (array(string))" do
-    document.get(["name"]).must_equal "Mike"
+    _(document.get(["name"])).must_equal "Mike"
   end
 
   it "retrieves top-level value from data given a fieldpath (array(symbol))" do
-    document.get([:name]).must_equal "Mike"
+    _(document.get([:name])).must_equal "Mike"
   end
 
   it "retrieves nested value from data given a fieldpath (string)" do
-    document.get("foo.bar.baz").must_equal "bif"
+    _(document.get("foo.bar.baz")).must_equal "bif"
   end
 
   it "retrieves nested value from data given a fieldpath (symbol)" do
-    document.get(:"foo.bar.baz").must_equal "bif"
+    _(document.get(:"foo.bar.baz")).must_equal "bif"
   end
 
   it "retrieves nested value from data given a fieldpath (array(string))" do
-    document.get(["foo", "bar", "baz"]).must_equal "bif"
+    _(document.get(["foo", "bar", "baz"])).must_equal "bif"
   end
 
   it "retrieves nested value from data given a fieldpath (array(symbol))" do
-    document.get([:foo, :bar, :baz]).must_equal "bif"
+    _(document.get([:foo, :bar, :baz])).must_equal "bif"
   end
 
   it "retrieves hash structure from data given a top-level node" do
-    document.get(:foo).must_equal({ bar: { baz: "bif" } })
+    _(document.get(:foo)).must_equal({ bar: { baz: "bif" } })
   end
 
   it "returns nil when given a top-level fieldpath (string) that does not exist" do
-    document.get("doesnotexist").must_be :nil?
+    _(document.get("doesnotexist")).must_be :nil?
   end
 
   it "returns nil when given a top-level fieldpath (symbol) that does not exist" do
-    document.get(:doesnotexist).must_be :nil?
+    _(document.get(:doesnotexist)).must_be :nil?
   end
 
   it "raises when given a nested fieldpath (string) that does not exist" do
     error = expect do
       document.get "does.not.exist"
     end.must_raise ArgumentError
-    error.message.must_equal "does.not.exist is not contained in the data"
+    _(error.message).must_equal "does.not.exist is not contained in the data"
   end
 
   it "raises when given a nested fieldpath (symbol) that does not exist" do
     error = expect do
       document.get :"does.not.exist"
     end.must_raise ArgumentError
-    error.message.must_equal "does.not.exist is not contained in the data"
+    _(error.message).must_equal "does.not.exist is not contained in the data"
   end
 
   it "retrieves full data given nil" do
-    document.get(nil).must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
+    _(document.get(nil)).must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
   end
 
   it "retrieves full data given an empty string" do
-    document.get("").must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
+    _(document.get("")).must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
   end
 
   it "retrieves path given __name__" do
-    document.get("__name__").must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    document.get(:__name__).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(document.get("__name__")).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(document.get(:__name__)).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
-    document.get("__name__").path.must_equal document.path
-    document.get(:__name__).path.must_equal document.path
+    _(document.get("__name__").path).must_equal document.path
+    _(document.get(:__name__).path).must_equal document.path
   end
 
   it "retrieves path given document_id" do
-    document.get(firestore.document_id).must_be_kind_of Google::Cloud::Firestore::DocumentReference
-    document.get(Google::Cloud::Firestore::FieldPath.document_id).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(document.get(firestore.document_id)).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(document.get(Google::Cloud::Firestore::FieldPath.document_id)).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
-    document.get(firestore.document_id).path.must_equal document.path
-    document.get(Google::Cloud::Firestore::FieldPath.document_id).path.must_equal document.path
+    _(document.get(firestore.document_id).path).must_equal document.path
+    _(document.get(Google::Cloud::Firestore::FieldPath.document_id).path).must_equal document.path
   end
 
   describe "strange data" do
@@ -133,92 +133,92 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
     end
 
     it "can still retrieve data using arrays" do
-      document.get(["foo", "bar.baz", "bif"]).must_equal 42
-      document.get([:foo, "bar.baz".to_sym]).must_equal({ bif: 42 })
+      _(document.get(["foo", "bar.baz", "bif"])).must_equal 42
+      _(document.get([:foo, "bar.baz".to_sym])).must_equal({ bif: 42 })
     end
   end
 
   describe :[] do
     it "retrieves top-level value from data given a fieldpath (string)" do
-      document["name"].must_equal "Mike"
+      _(document["name"]).must_equal "Mike"
     end
 
     it "retrieves top-level value from data given a fieldpath (symbol)" do
-      document[:name].must_equal "Mike"
+      _(document[:name]).must_equal "Mike"
     end
 
     it "retrieves top-level value from data given a fieldpath (array(string))" do
-      document[["name"]].must_equal "Mike"
+      _(document[["name"]]).must_equal "Mike"
     end
 
     it "retrieves top-level value from data given a fieldpath (array(symbol))" do
-      document[[:name]].must_equal "Mike"
+      _(document[[:name]]).must_equal "Mike"
     end
 
     it "retrieves nested value from data given a fieldpath (string)" do
-      document["foo.bar.baz"].must_equal "bif"
+      _(document["foo.bar.baz"]).must_equal "bif"
     end
 
     it "retrieves nested value from data given a fieldpath (symbol)" do
-      document[:"foo.bar.baz"].must_equal "bif"
+      _(document[:"foo.bar.baz"]).must_equal "bif"
     end
 
     it "retrieves nested value from data given a fieldpath (array(string))" do
-      document[["foo", "bar", "baz"]].must_equal "bif"
+      _(document[["foo", "bar", "baz"]]).must_equal "bif"
     end
 
     it "retrieves nested value from data given a fieldpath (array(symbol))" do
-      document[[:foo, :bar, :baz]].must_equal "bif"
+      _(document[[:foo, :bar, :baz]]).must_equal "bif"
     end
 
     it "retrieves hash structure from data given a top-level node" do
-      document[:foo].must_equal({ bar: { baz: "bif" } })
+      _(document[:foo]).must_equal({ bar: { baz: "bif" } })
     end
 
     it "returns nil when given a top-level fieldpath (string) that does not exist" do
-      document["doesnotexist"].must_be :nil?
+      _(document["doesnotexist"]).must_be :nil?
     end
 
     it "returns nil when given a top-level fieldpath (symbol) that does not exist" do
-      document[:doesnotexist].must_be :nil?
+      _(document[:doesnotexist]).must_be :nil?
     end
 
     it "raises when given a nested fieldpath (string) that does not exist" do
       error = expect do
         document["does.not.exist"]
       end.must_raise ArgumentError
-      error.message.must_equal "does.not.exist is not contained in the data"
+      _(error.message).must_equal "does.not.exist is not contained in the data"
     end
 
     it "raises when given a nested fieldpath (symbol) that does not exist" do
       error = expect do
         document[:"does.not.exist"]
       end.must_raise ArgumentError
-      error.message.must_equal "does.not.exist is not contained in the data"
+      _(error.message).must_equal "does.not.exist is not contained in the data"
     end
 
     it "retrieves full data given nil" do
-      document[nil].must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
+      _(document[nil]).must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
     end
 
     it "retrieves full data given an empty string" do
-      document[""].must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
+      _(document[""]).must_equal({ foo: {bar: { baz: "bif" } }, name: "Mike" })
     end
 
     it "retrieves path given __name__" do
-      document["__name__"].must_be_kind_of Google::Cloud::Firestore::DocumentReference
-      document[:__name__].must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(document["__name__"]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(document[:__name__]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
-      document["__name__"].path.must_equal document.path
-      document[:__name__].path.must_equal document.path
+      _(document["__name__"].path).must_equal document.path
+      _(document[:__name__].path).must_equal document.path
     end
 
     it "retrieves path given document_id" do
-      document[firestore.document_id].must_be_kind_of Google::Cloud::Firestore::DocumentReference
-      document[Google::Cloud::Firestore::FieldPath.document_id].must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(document[firestore.document_id]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(document[Google::Cloud::Firestore::FieldPath.document_id]).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
-      document[firestore.document_id].path.must_equal document.path
-      document[Google::Cloud::Firestore::FieldPath.document_id].path.must_equal document.path
+      _(document[firestore.document_id].path).must_equal document.path
+      _(document[Google::Cloud::Firestore::FieldPath.document_id].path).must_equal document.path
     end
 
     describe "strange data" do
@@ -235,8 +235,8 @@ describe Google::Cloud::Firestore::DocumentSnapshot, :get, :mock_firestore do
       end
 
       it "can still retrieve data using arrays" do
-        document[["foo", "bar.baz", "bif"]].must_equal 42
-        document[[:foo, "bar.baz".to_sym]].must_equal({ bif: 42 })
+        _(document[["foo", "bar.baz", "bif"]]).must_equal 42
+        _(document[[:foo, "bar.baz".to_sym]]).must_equal({ bif: 42 })
       end
     end
   end

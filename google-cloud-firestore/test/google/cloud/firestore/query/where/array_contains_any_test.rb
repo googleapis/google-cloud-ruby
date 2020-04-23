@@ -29,7 +29,7 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains_any, :mock_fir
     )
 
     generated_query = query.where(:foo, "array-contains-any", 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using array_contains_any" do
@@ -44,7 +44,7 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains_any, :mock_fir
     )
 
     generated_query = query.where(:foo, :array_contains_any, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "with multiple values" do
@@ -73,6 +73,6 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains_any, :mock_fir
     )
 
     generated_query = query.where(:foo, :array_contains_any, 42).where(:foo, :array_contains_any, 43).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 end

@@ -29,7 +29,7 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
     )
 
     generated_query = query.where(:foo, "array-contains", 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using array_contains" do
@@ -44,7 +44,7 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
     )
 
     generated_query = query.where(:foo, :array_contains, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using include" do
@@ -59,7 +59,7 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
     )
 
     generated_query = query.where(:foo, :include, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using include?" do
@@ -74,7 +74,7 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
     )
 
     generated_query = query.where(:foo, :include?, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using has" do
@@ -89,7 +89,7 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
     )
 
     generated_query = query.where(:foo, :has, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "with multiple values" do
@@ -118,6 +118,6 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains, :mock_firesto
     )
 
     generated_query = query.where(:foo, :array_contains, 42).where(:foo, :array_contains, 43).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 end

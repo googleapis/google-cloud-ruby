@@ -21,31 +21,31 @@ describe Google::Cloud::Firestore::Client, :col_group, :mock_firestore do
   it "creates a collection group query" do
     query = firestore.col_group(collection_id).where "foo", "==", "bar"
 
-    query.must_be_kind_of Google::Cloud::Firestore::Query
+    _(query).must_be_kind_of Google::Cloud::Firestore::Query
     query_gapi = query.query
-    query_gapi.must_be_kind_of Google::Firestore::V1::StructuredQuery
-    query_gapi.from.size.must_equal 1
-    query_gapi.from.first.must_be_kind_of Google::Firestore::V1::StructuredQuery::CollectionSelector
-    query_gapi.from.first.all_descendants.must_equal true
-    query_gapi.from.first.collection_id.must_equal collection_id
+    _(query_gapi).must_be_kind_of Google::Firestore::V1::StructuredQuery
+    _(query_gapi.from.size).must_equal 1
+    _(query_gapi.from.first).must_be_kind_of Google::Firestore::V1::StructuredQuery::CollectionSelector
+    _(query_gapi.from.first.all_descendants).must_equal true
+    _(query_gapi.from.first.collection_id).must_equal collection_id
   end
 
   it "creates a collection group query using collection_group alias" do
     query = firestore.collection_group(collection_id).where "foo", "==", "bar"
 
-    query.must_be_kind_of Google::Cloud::Firestore::Query
+    _(query).must_be_kind_of Google::Cloud::Firestore::Query
     query_gapi = query.query
-    query_gapi.must_be_kind_of Google::Firestore::V1::StructuredQuery
-    query_gapi.from.size.must_equal 1
-    query_gapi.from.first.must_be_kind_of Google::Firestore::V1::StructuredQuery::CollectionSelector
-    query_gapi.from.first.all_descendants.must_equal true
-    query_gapi.from.first.collection_id.must_equal collection_id
+    _(query_gapi).must_be_kind_of Google::Firestore::V1::StructuredQuery
+    _(query_gapi.from.size).must_equal 1
+    _(query_gapi.from.first).must_be_kind_of Google::Firestore::V1::StructuredQuery::CollectionSelector
+    _(query_gapi.from.first.all_descendants).must_equal true
+    _(query_gapi.from.first.collection_id).must_equal collection_id
   end
 
   it "raises when collection_id contains a forward slash" do
     error = expect do
       firestore.col_group collection_id_bad
     end.must_raise ArgumentError
-    error.message.must_equal "Invalid collection_id: 'a/b/my-collection-id', must not contain '/'."
+    _(error.message).must_equal "Invalid collection_id: 'a/b/my-collection-id', must not contain '/'."
   end
 end

@@ -42,46 +42,46 @@ describe Google::Cloud::Firestore::DocumentReference, :get, :mock_firestore do
     firestore_mock.expect :batch_get_documents, found_doc_enum, [database_path, documents: ["#{documents_path}/users/mike"], mask: nil, options: default_options]
 
     doc_ref = firestore.doc "users/mike"
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     doc = doc_ref.get
 
-    doc.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
-    doc.document_id.must_equal doc_ref.document_id
-    doc.document_path.must_equal doc_ref.document_path
+    _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(doc.document_id).must_equal doc_ref.document_id
+    _(doc.document_path).must_equal doc_ref.document_path
 
-    doc.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    doc.parent.collection_id.must_equal "users"
-    doc.parent.collection_path.must_equal "users"
+    _(doc.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(doc.parent.collection_id).must_equal "users"
+    _(doc.parent.collection_path).must_equal "users"
 
-    doc.must_be :exists?
-    doc.data.must_be_kind_of Hash
-    doc.data.must_equal({ name: "Mike" })
-    doc.created_at.must_equal read_time
-    doc.updated_at.must_equal read_time
-    doc.read_at.must_equal read_time
+    _(doc).must_be :exists?
+    _(doc.data).must_be_kind_of Hash
+    _(doc.data).must_equal({ name: "Mike" })
+    _(doc.created_at).must_equal read_time
+    _(doc.updated_at).must_equal read_time
+    _(doc.read_at).must_equal read_time
   end
 
   it "gets a missing snapshot" do
     firestore_mock.expect :batch_get_documents, missing_doc_enum, [database_path, documents: ["#{documents_path}/users/tad"], mask: nil, options: default_options]
 
     doc_ref = firestore.doc "users/tad"
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     doc = doc_ref.get
 
-    doc.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
-    doc.document_id.must_equal doc_ref.document_id
-    doc.document_path.must_equal doc_ref.document_path
+    _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(doc.document_id).must_equal doc_ref.document_id
+    _(doc.document_path).must_equal doc_ref.document_path
 
-    doc.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    doc.parent.collection_id.must_equal "users"
-    doc.parent.collection_path.must_equal "users"
+    _(doc.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(doc.parent.collection_id).must_equal "users"
+    _(doc.parent.collection_path).must_equal "users"
 
-    doc.must_be :missing?
-    doc.data.must_be :nil?
-    doc.created_at.must_be :nil?
-    doc.updated_at.must_be :nil?
-    doc.read_at.must_equal read_time
+    _(doc).must_be :missing?
+    _(doc.data).must_be :nil?
+    _(doc.created_at).must_be :nil?
+    _(doc.updated_at).must_be :nil?
+    _(doc.read_at).must_equal read_time
   end
 end

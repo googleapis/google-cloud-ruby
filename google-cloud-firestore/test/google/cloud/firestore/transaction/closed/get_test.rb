@@ -27,14 +27,14 @@ describe Google::Cloud::Firestore::Transaction, :get, :closed, :mock_firestore d
     error = expect do
       transaction.get doc
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "raises when getting a document (string)" do
     error = expect do
       transaction.get "users/mike"
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "raises when getting a collection" do
@@ -43,21 +43,21 @@ describe Google::Cloud::Firestore::Transaction, :get, :closed, :mock_firestore d
     error = expect do
       transaction.get col
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "raises when getting a collection (string)" do
     error = expect do
       transaction.get "users"
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "raises when getting a collection (symbol)" do
     error = expect do
       transaction.get :users
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "raises when getting a simple query" do
@@ -66,7 +66,7 @@ describe Google::Cloud::Firestore::Transaction, :get, :closed, :mock_firestore d
     error = expect do
       transaction.get query
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 
   it "raises when getting a complex query" do
@@ -75,6 +75,6 @@ describe Google::Cloud::Firestore::Transaction, :get, :closed, :mock_firestore d
     error = expect do
       transaction.get query
     end.must_raise RuntimeError
-    error.message.must_equal "transaction is closed"
+    _(error.message).must_equal "transaction is closed"
   end
 end

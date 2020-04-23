@@ -36,7 +36,7 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains_any, :mock_fir
     )
 
     generated_query = query.where(:foo, :in, [42, 43]).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "with multiple values" do
@@ -79,6 +79,6 @@ describe Google::Cloud::Firestore::Query, :where, :array_contains_any, :mock_fir
     )
 
     generated_query = query.where(:foo, :in, [42, 43]).where(:foo, :in, [43, 44]).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 end

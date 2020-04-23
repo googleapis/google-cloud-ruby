@@ -140,22 +140,22 @@ describe "Watch", :order, :mock_firestore do
 
   it "compares unequal values" do
     comparison_indexes(sorted_values.count).each do |i, j|
-      compare_values(sorted_values[i], sorted_values[j]).must_equal -1
-      compare_values(sorted_values[j], sorted_values[i]).must_equal  1
+      _(compare_values(sorted_values[i], sorted_values[j])).must_equal -1
+      _(compare_values(sorted_values[j], sorted_values[i])).must_equal  1
     end
   end
 
   it "compares self to be equal" do
     sorted_values.each do |value|
-      compare_values(value, value).must_equal 0
+      _(compare_values(value, value)).must_equal 0
     end
   end
 
   it "compares equal values" do
     equality_groups.each do |equality_values|
       comparison_indexes(equality_values.count).each do |i, j|
-        compare_values(equality_values[i], equality_values[j]).must_equal 0
-        compare_values(equality_values[j], equality_values[i]).must_equal 0
+        _(compare_values(equality_values[i], equality_values[j])).must_equal 0
+        _(compare_values(equality_values[j], equality_values[i])).must_equal 0
       end
     end
   end

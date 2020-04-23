@@ -42,27 +42,27 @@ describe Google::Cloud::Firestore::Batch, :set, :mock_firestore do
     batch.set(document_path, { name: "Mike" })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "sets a new document given a DocumentReference" do
     firestore_mock.expect :commit, commit_resp, [database_path, writes: set_writes, options: default_options]
 
     doc = firestore.doc document_path
-    doc.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     batch.set(doc, { name: "Mike" })
     resp = batch.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "raises if not given a Hash" do
     error = expect do
       batch.set document_path, "not a hash"
     end.must_raise ArgumentError
-    error.message.must_equal "data is required"
+    _(error.message).must_equal "data is required"
   end
 end

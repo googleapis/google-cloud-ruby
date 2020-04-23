@@ -18,9 +18,9 @@ describe Google::Cloud::Firestore::FieldValue do
   describe :array_union do
     it "represents values to add to an array" do
       field_union = Google::Cloud::Firestore::FieldValue.array_union 1, 2, 3
-      field_union.must_be_kind_of Google::Cloud::Firestore::FieldValue
-      field_union.type.must_equal :array_union
-      field_union.value.must_equal [1, 2, 3]
+      _(field_union).must_be_kind_of Google::Cloud::Firestore::FieldValue
+      _(field_union.type).must_equal :array_union
+      _(field_union.value).must_equal [1, 2, 3]
     end
 
     it "does not allow nested FieldValues" do
@@ -28,16 +28,16 @@ describe Google::Cloud::Firestore::FieldValue do
       err = assert_raises ArgumentError do
         Google::Cloud::Firestore::FieldValue.array_union 1, 2, 3, field_delete
       end
-      err.message.must_equal "A value of type Google::Cloud::Firestore::FieldValue is not supported."
+      _(err.message).must_equal "A value of type Google::Cloud::Firestore::FieldValue is not supported."
     end
   end
 
   describe :array_delete do
     it "represents values to remove from an array" do
       field_delete = Google::Cloud::Firestore::FieldValue.array_delete 7, 8, 9
-      field_delete.must_be_kind_of Google::Cloud::Firestore::FieldValue
-      field_delete.type.must_equal :array_delete
-      field_delete.value.must_equal [7, 8, 9]
+      _(field_delete).must_be_kind_of Google::Cloud::Firestore::FieldValue
+      _(field_delete.type).must_equal :array_delete
+      _(field_delete.value).must_equal [7, 8, 9]
     end
 
     it "does not allow nested FieldValues" do
@@ -45,7 +45,7 @@ describe Google::Cloud::Firestore::FieldValue do
       err = assert_raises ArgumentError do
         Google::Cloud::Firestore::FieldValue.array_delete 7, 8, 9, field_union
       end
-      err.message.must_equal "A value of type Google::Cloud::Firestore::FieldValue is not supported."
+      _(err.message).must_equal "A value of type Google::Cloud::Firestore::FieldValue is not supported."
     end
   end
 end

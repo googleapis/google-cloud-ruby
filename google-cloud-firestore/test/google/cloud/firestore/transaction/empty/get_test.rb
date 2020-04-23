@@ -62,31 +62,31 @@ describe Google::Cloud::Firestore::Transaction, :get, :empty, :mock_firestore do
     firestore_mock.expect :batch_get_documents, batch_get_resp_enum, ["projects/#{project}/databases/(default)", documents: ["projects/#{project}/databases/(default)/documents/users/mike"], mask: nil, new_transaction: transaction_opt, options: default_options]
 
     col = firestore.col :users
-    col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
 
     doc_ref = col.doc :mike
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
-    transaction.transaction_id.must_be :nil?
+    _(transaction.transaction_id).must_be :nil?
 
     doc = transaction.get doc_ref
 
-    transaction.transaction_id.must_equal transaction_id
+    _(transaction.transaction_id).must_equal transaction_id
 
-    doc.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
-    doc.document_id.must_equal doc_ref.document_id
-    doc.document_path.must_equal doc_ref.document_path
+    _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(doc.document_id).must_equal doc_ref.document_id
+    _(doc.document_path).must_equal doc_ref.document_path
 
-    doc.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    doc.parent.collection_id.must_equal col.collection_id
-    doc.parent.collection_path.must_equal col.collection_path
+    _(doc.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(doc.parent.collection_id).must_equal col.collection_id
+    _(doc.parent.collection_path).must_equal col.collection_path
 
-    doc.must_be :exists?
-    doc.data.must_be_kind_of Hash
-    doc.data.must_equal({ name: "Mike" })
-    doc.created_at.must_equal read_time
-    doc.updated_at.must_equal read_time
-    doc.read_at.must_equal read_time
+    _(doc).must_be :exists?
+    _(doc.data).must_be_kind_of Hash
+    _(doc.data).must_equal({ name: "Mike" })
+    _(doc.created_at).must_equal read_time
+    _(doc.updated_at).must_equal read_time
+    _(doc.read_at).must_equal read_time
   end
 
   it "gets a document (string)" do
@@ -106,28 +106,28 @@ describe Google::Cloud::Firestore::Transaction, :get, :empty, :mock_firestore do
     firestore_mock.expect :batch_get_documents, batch_get_resp_enum, ["projects/#{project}/databases/(default)", documents: ["projects/#{project}/databases/(default)/documents/users/mike"], mask: nil, new_transaction: transaction_opt, options: default_options]
 
     doc_ref = firestore.doc "users/mike"
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
-    transaction.transaction_id.must_be :nil?
+    _(transaction.transaction_id).must_be :nil?
 
     doc = transaction.get "users/mike"
 
-    transaction.transaction_id.must_equal transaction_id
+    _(transaction.transaction_id).must_equal transaction_id
 
-    doc.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
-    doc.document_id.must_equal doc_ref.document_id
-    doc.document_path.must_equal doc_ref.document_path
+    _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+    _(doc.document_id).must_equal doc_ref.document_id
+    _(doc.document_path).must_equal doc_ref.document_path
 
-    doc.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    doc.parent.collection_id.must_equal doc_ref.parent.collection_id
-    doc.parent.collection_path.must_equal doc_ref.parent.collection_path
+    _(doc.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(doc.parent.collection_id).must_equal doc_ref.parent.collection_id
+    _(doc.parent.collection_path).must_equal doc_ref.parent.collection_path
 
-    doc.must_be :exists?
-    doc.data.must_be_kind_of Hash
-    doc.data.must_equal({ name: "Mike" })
-    doc.created_at.must_equal read_time
-    doc.updated_at.must_equal read_time
-    doc.read_at.must_equal read_time
+    _(doc).must_be :exists?
+    _(doc.data).must_be_kind_of Hash
+    _(doc.data).must_equal({ name: "Mike" })
+    _(doc.created_at).must_equal read_time
+    _(doc.updated_at).must_equal read_time
+    _(doc.read_at).must_equal read_time
   end
 
   it "gets a collection (ref)" do
@@ -204,34 +204,34 @@ describe Google::Cloud::Firestore::Transaction, :get, :empty, :mock_firestore do
   end
 
   def assert_results_enum enum
-    enum.must_be_kind_of Enumerator
+    _(enum).must_be_kind_of Enumerator
 
     results = enum.to_a
-    results.count.must_equal 2
+    _(results.count).must_equal 2
 
     results.each do |result|
-      result.must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
+      _(result).must_be_kind_of Google::Cloud::Firestore::DocumentSnapshot
 
-      result.ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
-      result.ref.client.must_equal firestore
+      _(result.ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
+      _(result.ref.client).must_equal firestore
 
-      result.parent.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      result.parent.collection_id.must_equal "users"
-      result.parent.collection_path.must_equal "users"
-      result.parent.path.must_equal "projects/projectID/databases/(default)/documents/users"
-      result.parent.client.must_equal firestore
+      _(result.parent).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(result.parent.collection_id).must_equal "users"
+      _(result.parent.collection_path).must_equal "users"
+      _(result.parent.path).must_equal "projects/projectID/databases/(default)/documents/users"
+      _(result.parent.client).must_equal firestore
     end
 
-    results.first.data.must_be_kind_of Hash
-    results.first.data.must_equal({ name: "Mike" })
-    results.first.created_at.must_equal read_time
-    results.first.updated_at.must_equal read_time
-    results.first.read_at.must_equal read_time
+    _(results.first.data).must_be_kind_of Hash
+    _(results.first.data).must_equal({ name: "Mike" })
+    _(results.first.created_at).must_equal read_time
+    _(results.first.updated_at).must_equal read_time
+    _(results.first.read_at).must_equal read_time
 
-    results.last.data.must_be_kind_of Hash
-    results.last.data.must_equal({ name: "Chris" })
-    results.last.created_at.must_equal read_time
-    results.last.updated_at.must_equal read_time
-    results.last.read_at.must_equal read_time
+    _(results.last.data).must_be_kind_of Hash
+    _(results.last.data).must_equal({ name: "Chris" })
+    _(results.last.created_at).must_equal read_time
+    _(results.last.updated_at).must_equal read_time
+    _(results.last.read_at).must_equal read_time
   end
 end

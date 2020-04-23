@@ -29,7 +29,7 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, "=", 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using ==" do
@@ -44,7 +44,7 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, :==, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using eq" do
@@ -59,7 +59,7 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, :eq, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using eql" do
@@ -74,7 +74,7 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, :eql, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "using is" do
@@ -89,7 +89,7 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, :is, 42).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "with multiple values" do
@@ -118,7 +118,7 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, :==, 42).where(:bar, :==, "baz").query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "with nil" do
@@ -132,7 +132,7 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, :==, nil).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "with :nil" do
@@ -146,7 +146,7 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, :==, :nil).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "with :null" do
@@ -160,7 +160,7 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, :==, :null).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "with :nan" do
@@ -174,7 +174,7 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, :==, :nan).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 
   it "with Float::NAN" do
@@ -188,6 +188,6 @@ describe Google::Cloud::Firestore::Query, :where, :equal, :mock_firestore do
     )
 
     generated_query = query.where(:foo, :==, Float::NAN).query
-    generated_query.must_equal expected_query
+    _(generated_query).must_equal expected_query
   end
 end

@@ -311,7 +311,7 @@ class ConformanceListen < ConformanceTest
 
       listener.stop
 
-      query_snapshots.count.must_equal test.snapshots.count
+      _(query_snapshots.count).must_equal test.snapshots.count
       query_snapshots.zip(test.snapshots).each do |ruby_snapshot, proto_snapshot|
         compare_query_snapshot ruby_snapshot, proto_snapshot
       end
@@ -319,16 +319,16 @@ class ConformanceListen < ConformanceTest
   end
 
   def compare_query_snapshot ruby_snapshot, proto_snapshot
-    ruby_snapshot.docs.count.must_equal proto_snapshot.docs.count
-    ruby_snapshot.docs.map(&:path).must_equal proto_snapshot.docs.map(&:name)
+    _(ruby_snapshot.docs.count).must_equal proto_snapshot.docs.count
+    _(ruby_snapshot.docs.map(&:path)).must_equal proto_snapshot.docs.map(&:name)
     ruby_snapshot.docs.zip(proto_snapshot.docs).each do |ruby_doc, proto_doc|
       compare_document_snapshot ruby_doc, proto_doc
     end
-    ruby_snapshot.changes.count.must_equal proto_snapshot.changes.count
+    _(ruby_snapshot.changes.count).must_equal proto_snapshot.changes.count
   end
 
   def compare_document_snapshot ruby_snapshot, proto_snapshot
-    ruby_snapshot.grpc.to_h.must_equal proto_snapshot.to_h
+    _(ruby_snapshot.grpc.to_h).must_equal proto_snapshot.to_h
   end
 end
 

@@ -44,20 +44,20 @@ describe Google::Cloud::Firestore::Transaction, :delete, :mock_firestore do
     transaction.delete document_path
     resp = transaction.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "deletes a document given a doc ref" do
     firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, transaction: transaction_id, options: default_options]
 
     doc = firestore.doc document_path
-    doc.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     transaction.delete doc
     resp = transaction.commit
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 end

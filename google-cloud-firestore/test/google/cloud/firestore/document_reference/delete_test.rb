@@ -36,11 +36,11 @@ describe Google::Cloud::Firestore::DocumentReference, :delete, :mock_firestore d
   it "deletes a document" do
     firestore_mock.expect :commit, commit_resp, [database_path, writes: delete_writes, options: default_options]
 
-    document.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     resp = document.delete
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse::WriteResult
-    resp.update_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse::WriteResult
+    _(resp.update_time).must_equal commit_time
   end
 end

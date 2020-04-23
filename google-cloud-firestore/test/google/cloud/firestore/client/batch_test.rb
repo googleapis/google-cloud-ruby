@@ -67,8 +67,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.create(document_path, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "creates a new document using doc ref" do
@@ -79,8 +79,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.create(doc, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "raises if create is not given a Hash" do
@@ -89,7 +89,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
         b.create document_path, "not a hash"
       end
     end.must_raise ArgumentError
-    error.message.must_equal "data is required"
+    _(error.message).must_equal "data is required"
   end
 
   it "sets a new document using string path" do
@@ -99,8 +99,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.set(document_path, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "sets a new document using doc ref" do
@@ -111,8 +111,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.set(doc, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "raises if set is not given a Hash" do
@@ -121,7 +121,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
         b.set document_path, "not a hash"
       end
     end.must_raise ArgumentError
-    error.message.must_equal "data is required"
+    _(error.message).must_equal "data is required"
   end
 
   it "updates a new document using string path" do
@@ -131,8 +131,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.update(document_path, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "updates a new document using doc ref" do
@@ -143,8 +143,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.update(doc, { name: "Mike" })
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "raises if update is not given a Hash" do
@@ -153,7 +153,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
         b.update document_path, "not a hash"
       end
     end.must_raise ArgumentError
-    error.message.must_equal "data is required"
+    _(error.message).must_equal "data is required"
   end
 
   it "deletes a document using string path" do
@@ -163,8 +163,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.delete document_path
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "deletes a document using doc ref" do
@@ -175,8 +175,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.delete doc
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "deletes a document with exists precondition" do
@@ -189,8 +189,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.delete doc, exists: true
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "deletes a document with update_time precondition" do
@@ -204,8 +204,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.delete doc, update_time: commit_time
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "can't specify both exists and update_time precondition" do
@@ -215,15 +215,15 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
         b.delete doc, exists: true, update_time: commit_time
       end
     end.must_raise ArgumentError
-    error.message.must_equal "cannot specify both exists and update_time"
+    _(error.message).must_equal "cannot specify both exists and update_time"
   end
 
   it "returns nil when no work is done in the batch" do
     resp = firestore.batch do |b|
-      b.firestore.must_equal firestore
+      _(b.firestore).must_equal firestore
     end
 
-    resp.must_be :nil?
+    _(resp).must_be :nil?
   end
 
   it "performs multiple writes in the same commit (string)" do
@@ -237,8 +237,8 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.delete document_path
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "performs multiple writes in the same commit (doc ref)" do
@@ -246,7 +246,7 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
     firestore_mock.expect :commit, commit_resp, [database_path, writes: all_writes, options: default_options]
 
     doc_ref = firestore.doc document_path
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     resp = firestore.batch do |b|
       b.create(doc_ref, { name: "Mike" })
@@ -255,32 +255,32 @@ describe Google::Cloud::Firestore::Client, :batch, :mock_firestore do
       b.delete doc_ref
     end
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse
-    resp.commit_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse
+    _(resp.commit_time).must_equal commit_time
   end
 
   it "closed batches cannot make changes" do
     doc_ref = firestore.doc document_path
-    doc_ref.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(doc_ref).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     outside_batch_obj = nil
 
     resp = firestore.batch do |b|
-      b.wont_be :closed?
-      b.firestore.must_equal firestore
+      _(b).wont_be :closed?
+      _(b.firestore).must_equal firestore
 
       outside_batch_obj = b
     end
 
-    resp.must_be :nil?
+    _(resp).must_be :nil?
 
-    outside_batch_obj.must_be :closed?
+    _(outside_batch_obj).must_be :closed?
 
     error = expect do
       firestore.batch do |b|
         outside_batch_obj.create(doc_ref, { name: "Mike" })
       end
     end.must_raise RuntimeError
-    error.message.must_equal "batch is closed"
+    _(error.message).must_equal "batch is closed"
   end
 end

@@ -27,7 +27,7 @@ describe Google::Cloud::Firestore::Convert, :select_by_field_paths do
     ]
 
     result = Google::Cloud::Firestore::Convert.select_by_field_paths orig, paths
-    result.must_equal({ "foo" => "FOO", "bar" => "BAR" })
+    _(result).must_equal({ "foo" => "FOO", "bar" => "BAR" })
   end
 
   it "finds all nested selected field paths" do
@@ -38,7 +38,7 @@ describe Google::Cloud::Firestore::Convert, :select_by_field_paths do
     ]
 
     result = Google::Cloud::Firestore::Convert.select_by_field_paths orig, paths
-    result.must_equal({ "foo" => { "bar" => "BAR", "baz" => "BAZ" } })
+    _(result).must_equal({ "foo" => { "bar" => "BAR", "baz" => "BAZ" } })
   end
 
   it "finds deeply nested selected field paths" do
@@ -48,7 +48,7 @@ describe Google::Cloud::Firestore::Convert, :select_by_field_paths do
     ]
 
     result = Google::Cloud::Firestore::Convert.select_by_field_paths orig, paths
-    result.must_equal({ "foo" => { "bar" => { "baz" => { "bif" => "BIF" } } } })
+    _(result).must_equal({ "foo" => { "bar" => { "baz" => { "bif" => "BIF" } } } })
   end
 
   it "finds partial using field paths" do
@@ -58,7 +58,7 @@ describe Google::Cloud::Firestore::Convert, :select_by_field_paths do
     ]
 
     result = Google::Cloud::Firestore::Convert.select_by_field_paths orig, paths
-    result.must_equal({ "foo" => "FOO" })
+    _(result).must_equal({ "foo" => "FOO" })
   end
 
   it "finds partial from nested selected field paths" do
@@ -68,6 +68,6 @@ describe Google::Cloud::Firestore::Convert, :select_by_field_paths do
     ]
 
     result = Google::Cloud::Firestore::Convert.select_by_field_paths orig, paths
-    result.must_equal({ "foo" => { "baz" => "BAZ" } })
+    _(result).must_equal({ "foo" => { "baz" => "BAZ" } })
   end
 end

@@ -44,18 +44,18 @@ describe Google::Cloud::Firestore::DocumentReference, :update, :mock_firestore d
   it "updates a new document" do
     firestore_mock.expect :commit, commit_resp, [database_path, writes: update_writes, options: default_options]
 
-    document.must_be_kind_of Google::Cloud::Firestore::DocumentReference
+    _(document).must_be_kind_of Google::Cloud::Firestore::DocumentReference
 
     resp = document.update({ name: "Mike" })
 
-    resp.must_be_kind_of Google::Cloud::Firestore::CommitResponse::WriteResult
-    resp.update_time.must_equal commit_time
+    _(resp).must_be_kind_of Google::Cloud::Firestore::CommitResponse::WriteResult
+    _(resp.update_time).must_equal commit_time
   end
 
   it "raises if not given a Hash" do
     error = expect do
       document.update "not a hash"
     end.must_raise ArgumentError
-    error.message.must_equal "data is required"
+    _(error.message).must_equal "data is required"
   end
 end

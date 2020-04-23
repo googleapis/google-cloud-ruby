@@ -21,52 +21,52 @@ describe Google::Cloud::Firestore::DocumentReference, :col, :mock_firestore do
   it "gets a collection by a collection_id" do
     col = document.col "messages"
 
-    col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    col.collection_id.must_equal "messages"
-    col.collection_path.must_equal "users/mike/messages"
-    col.path.must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages"
+    _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(col.collection_id).must_equal "messages"
+    _(col.collection_path).must_equal "users/mike/messages"
+    _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages"
   end
 
   it "gets a collection by a nested collection path" do
     col = document.col "messages/abc123/likes"
 
-    col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-    col.collection_id.must_equal "likes"
-    col.collection_path.must_equal "users/mike/messages/abc123/likes"
-    col.path.must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages/abc123/likes"
+    _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+    _(col.collection_id).must_equal "likes"
+    _(col.collection_path).must_equal "users/mike/messages/abc123/likes"
+    _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages/abc123/likes"
   end
 
   it "does not allow a document path" do
     error = expect do
       document.col "messages/abc123"
     end.must_raise ArgumentError
-    error.message.must_equal "collection_path must refer to a collection."
+    _(error.message).must_equal "collection_path must refer to a collection."
   end
 
   describe "using collection alias" do
     it "gets a collection by a collection_id" do
       col = document.collection "messages"
 
-      col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      col.collection_id.must_equal "messages"
-      col.collection_path.must_equal "users/mike/messages"
-      col.path.must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages"
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(col.collection_id).must_equal "messages"
+      _(col.collection_path).must_equal "users/mike/messages"
+      _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages"
     end
 
     it "gets a collection by a nested collection path" do
       col = document.collection "messages/abc123/likes"
 
-      col.must_be_kind_of Google::Cloud::Firestore::CollectionReference
-      col.collection_id.must_equal "likes"
-      col.collection_path.must_equal "users/mike/messages/abc123/likes"
-      col.path.must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages/abc123/likes"
+      _(col).must_be_kind_of Google::Cloud::Firestore::CollectionReference
+      _(col.collection_id).must_equal "likes"
+      _(col.collection_path).must_equal "users/mike/messages/abc123/likes"
+      _(col.path).must_equal "projects/#{project}/databases/(default)/documents/users/mike/messages/abc123/likes"
     end
 
     it "does not allow a document path" do
       error = expect do
         document.collection "messages/abc123"
       end.must_raise ArgumentError
-      error.message.must_equal "collection_path must refer to a collection."
+      _(error.message).must_equal "collection_path must refer to a collection."
     end
   end
 end
