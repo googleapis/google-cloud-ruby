@@ -14,15 +14,14 @@
 
 require "simplecov"
 require "minitest/autorun"
-require "minitest/spec"
 
 require "google/cloud/kms"
 
-describe "KMS V1 smoke test" do
-  it "calls list_key_rings" do
-    kms = Google::Cloud::Kms.new version: :v1
+class KmsServiceSmokeTest < Minitest::Test
+  def test_list_key_rings
+    kms = Google::Cloud::Kms.key_management_service version: :v1
     key_ring_parent = kms.class.location_path ENV["KMS_PROJECT"], "us-central1"
-    key_rings = kms.list_key_rings(key_ring_parent).to_a
+    key_rings = kms.list_key_rings(parent: key_ring_parent).to_a
     key_rings.size.must_equal 1
     key_rings[0].name.must_match %r{keyRings/ruby-test$}
   end
