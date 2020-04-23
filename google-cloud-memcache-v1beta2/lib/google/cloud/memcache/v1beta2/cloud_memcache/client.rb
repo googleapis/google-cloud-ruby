@@ -162,6 +162,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.endpoint = @config.endpoint
               end
 
               @cloud_memcache_stub = Gapic::ServiceStub.new(
@@ -172,6 +173,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [Google::Cloud::Memcache::V1beta2::CloudMemcache::Operations]
+            #
+            attr_reader :operations_client
 
             # Service calls
 
