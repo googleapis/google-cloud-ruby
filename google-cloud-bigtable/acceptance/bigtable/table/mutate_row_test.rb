@@ -27,9 +27,9 @@ describe "DataClient Mutate Row", :bigtable do
     # Set cell
     entry = table.new_mutation_entry("setcell-#{postfix}")
     entry.set_cell(family + "&  *^(*&^%^%&^", "mutate-row-#{postfix}", "mutatetest value #{postfix}")
-    _ { proc {
+    assert_raises Google::Cloud::InvalidArgumentError do
       table.mutate_row(entry)
-    } }.must_raise Google::Cloud::InvalidArgumentError
+    end
   end
 
   it "set cell and delete cells" do

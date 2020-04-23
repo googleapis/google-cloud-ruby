@@ -60,8 +60,8 @@ describe "DataClient Read Modify Write Row", :bigtable do
       family + "&  *^(*&^%^%&^", qualifier, 1
     )
 
-    _ { proc {
+    assert_raises Google::Cloud::InvalidArgumentError do
       table.read_modify_write_row(row_key, rule)
-    } }.must_raise Google::Cloud::InvalidArgumentError
+    end
   end
 end

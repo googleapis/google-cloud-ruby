@@ -56,8 +56,8 @@ describe "DataClient Check and Mutate Row", :bigtable do
     )
     otherwise_mutations = table.new_mutation_entry.delete_from_family(family)
 
-    _ { proc {
+    assert_raises Google::Cloud::InvalidArgumentError do
       table.check_and_mutate_row row_key, predicate_filter, on_match: matched_mutations, otherwise: otherwise_mutations
-    } }.must_raise Google::Cloud::InvalidArgumentError
+    end
   end
 end
