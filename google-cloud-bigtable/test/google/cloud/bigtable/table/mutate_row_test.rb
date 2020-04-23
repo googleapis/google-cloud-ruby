@@ -62,8 +62,8 @@ describe Google::Cloud::Bigtable::Table, :mutate_row, :mock_bigtable do
     entry.set_cell("cf1-BAD ", "field1", "XYZ")
 
 
-    _ { proc {
+    assert_raises Google::Cloud::InvalidArgumentError do
       _(table.mutate_row(entry)).must_equal true
-    } }.must_raise Google::Cloud::InvalidArgumentError
+    end
   end
 end

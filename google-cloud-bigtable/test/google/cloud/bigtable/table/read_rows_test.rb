@@ -113,7 +113,9 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     bigtable.service.mocked_client = mock
     table = bigtable.table(instance_id, table_id)
 
-    _ { proc { table.read_rows.to_a } }.must_raise Google::Cloud::Error
+    assert_raises Google::Cloud::Error do
+      table.read_rows.to_a
+    end
     _(mock.retry_count).must_equal 3
   end
 
@@ -182,9 +184,9 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     bigtable.service.mocked_client = mock
     table = bigtable.table(instance_id, table_id)
 
-    _ { proc {
+    assert_raises Google::Cloud::Error do
       table.read_rows.map {|v| v}
-    } }.must_raise Google::Cloud::Error
+    end
     _(mock.retry_count).must_equal 3
   end
 

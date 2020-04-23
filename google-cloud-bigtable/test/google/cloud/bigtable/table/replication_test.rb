@@ -108,8 +108,8 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
   end
 
   it "wait for replication timeout can not be greater then check interval" do
-    _ { proc {
+    assert_raises Google::Cloud::InvalidArgumentError do
       table.wait_for_replication(timeout: 1, check_interval: 2)
-    } }.must_raise Google::Cloud::InvalidArgumentError
+    end
   end
 end

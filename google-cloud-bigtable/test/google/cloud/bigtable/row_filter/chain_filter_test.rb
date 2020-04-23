@@ -172,9 +172,9 @@ describe Google::Cloud::Bigtable::RowFilter::ChainFilter, :mock_bigtable do
     end
 
     it "range instance must be type of ValueRange" do
-      _ { proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.value_range(Object.new)
-      } }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
   end
 
@@ -196,9 +196,9 @@ describe Google::Cloud::Bigtable::RowFilter::ChainFilter, :mock_bigtable do
     end
 
     it "range instance must be type of ColumnRange" do
-      _ { proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.column_range(Object.new)
-      } }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
   end
 
@@ -212,27 +212,27 @@ describe Google::Cloud::Bigtable::RowFilter::ChainFilter, :mock_bigtable do
     end
 
     it "probability can not be greather then 1" do
-      _ { proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.sample(1.1)
-      } }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
 
     it "probability can not be equal to 1" do
-      _ { proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.sample(1)
-      } }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
 
     it "probability can not be equal to 0" do
-      _ { proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.sample(0)
-      } }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
 
     it "probability can not be less then 0" do
-      _ { proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.sample(-0.1)
-      } }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
   end
 

@@ -142,11 +142,11 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
 
     row_key = "user-1"
 
-    _ { proc {
+    assert_raises Google::Cloud::InvalidArgumentError do
       table.read_modify_write_row(
         row_key,
         Google::Cloud::Bigtable::ReadModifyWriteRule.append(family_name, qualifier, append_value)
       )
-    } }.must_raise Google::Cloud::InvalidArgumentError
+    end
   end
 end

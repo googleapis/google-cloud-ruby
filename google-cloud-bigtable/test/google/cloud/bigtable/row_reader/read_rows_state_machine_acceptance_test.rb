@@ -87,9 +87,9 @@ describe Google::Cloud::Bigtable::RowsReader, :read_state_machine_acceptance, :m
 
       get_res = chunk_data_to_read_res(test_data["chunks_base64"])
       mock.expect :read_rows, get_res, [table_path(instance_id, table_id), Hash]
-      _ { proc {
+      assert_raises Google::Cloud::Bigtable::InvalidRowStateError do
         table.read_rows.each{|v| v}
-      } }.must_raise Google::Cloud::Bigtable::InvalidRowStateError
+      end
 
       mock.verify
     end
