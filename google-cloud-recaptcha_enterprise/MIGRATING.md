@@ -27,11 +27,13 @@ To summarize:
     specifies whether they are required or optional. Additionally, you can pass
     a proto request object instead of separate arguments. See
     [Passing Arguments](#passing-arguments) for more info.
- *  Previously, some client classes included class methods for constructing
-    resource paths. These paths are now instance methods on the client objects,
-    and are also available in a separate paths module. See
+ *  Previously, some client classes included helper methods for constructing
+    resource paths. These methods now take keyword rather than positional
+    arguments, and are also available in a separate paths module. See
     [Resource Path Helpers](#resource-path-helpers) for more info.
- *  Some classes have moved into different namespaces. See
+ *  Some classes have moved into different namespaces. In particular, classes
+    that were under `Google::Cloud::Recaptchaenterprise` were moved under
+    `Google::Cloud::RecaptchaEnterprise`. See
     [Class Namespaces](#class-namespaces) for more info.
 
 ### Library Structure
@@ -208,7 +210,7 @@ The client library includes helper methods for generating the resource path
 strings passed to many calls. These helpers have changed in two ways:
 
 * In older releases, they are both _class_ methods and _instance_ methods on
-  the client class. In the 1.0 release, they are _instance_methods _only_.
+  the client class. In the 1.0 release, they are _instance methods only_.
   However, they are also available on a separate paths module that you can
   include elsewhere for convenience.
 * In older releases, arguments to a resource path helper are passed as
@@ -257,6 +259,12 @@ end
 ```
 
 ### Class Namespaces
+
+In older releases, (protobuf) data type classes were located under the module
+`Google::Cloud::Recaptchaenterprise` (note the lower-case "e"), even though the
+client class and most other classes were under `Google::Cloud::RecaptchaEnterprise`
+(with an upper-case "E"). In the 1.0 release, all classes, including data types,
+are under the module `Google::Cloud::RecaptchaEnterprise`.
 
 In older releases, the client object was of classes with names like:
 `Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseClient`.
