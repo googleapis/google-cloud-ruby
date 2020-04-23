@@ -37,7 +37,7 @@ To summarize:
 Older 0.x releases of the `google-cloud-dlp` gem were all-in-one gems
 that included potentially multiple clients for multiple versions of the
 DLP service. The `Google::Cloud::Dlp.new` factory method would
-return you an instance of a `Google::Cloud::Dlp::V1::DlpServiceClient`
+return you an instance of a `Google::Cloud::Dlp::V2::DlpServiceClient`
 object for the V2 version of the service.
 
 With the 1.0 release, the `google-cloud-dlp` gem still provides factory
