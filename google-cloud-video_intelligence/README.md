@@ -1,81 +1,55 @@
-# Ruby Client for Cloud Video Intelligence API
+# Ruby Client for the Cloud Video Intelligence API
 
-[Cloud Video Intelligence API][Product Documentation]:
-Detects objects, explicit content, and scene changes in videos. It also
-specifies the region for annotation and transcribes speech to text.
-Supports both asynchronous API and streaming API.
-- [Client Library Documentation][]
-- [Product Documentation][]
+API Client library for the Cloud Video Intelligence API
+
+Detects objects, explicit content, and scene changes in videos. It also specifies the region for annotation and transcribes speech to text. Supports both asynchronous API and streaming API.
+
+Actual client classes for the various versions of this API are defined in
+_versioned_ client gems, with names of the form `google-cloud-video_intelligence-v*`.
+The gem `google-cloud-video_intelligence` is a convenience wrapper library that brings the
+verisoned gems in as dependencies, and provides high-level methods for
+constructing clients.
+
+View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-video_intelligence/latest)
+for this library, google-cloud-video_intelligence, to see the convenience methods for
+constructing client objects. Reference documentation for the client objects
+themselves can be found in the client library documentation for the versioned
+client gems:
+[google-cloud-video_intelligence-v1](https://googleapis.dev/ruby/google-cloud-video_intelligence-v1/latest),
+[google-cloud-video_intelligence-v1beta2](https://googleapis.dev/ruby/google-cloud-video_intelligence-v1beta2/latest),
+[google-cloud-video_intelligence-v1p1beta1](https://googleapis.dev/ruby/google-cloud-video_intelligence-v1p1beta1/latest),
+[google-cloud-video_intelligence-v1p2beta1](https://googleapis.dev/ruby/google-cloud-video_intelligence-v1p2beta1/latest).
+
+See also the [Product Documentation](https://cloud.google.com/video-intelligence)
+for more usage information.
 
 ## Quick Start
-In order to use this library, you first need to go through the following
-steps:
 
-1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
-2. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
-3. [Enable the Cloud Video Intelligence API.](https://console.cloud.google.com/apis/library/videointelligence.googleapis.com)
-4. [Setup Authentication.](https://googleapis.dev/ruby/google-cloud-video_intelligence/latest/file.AUTHENTICATION.html)
-
-### Installation
 ```
 $ gem install google-cloud-video_intelligence
 ```
 
-### Preview
-#### VideoIntelligenceServiceClient
-```rb
-require "google/cloud/video_intelligence"
+In order to use this library, you first need to go through the following steps:
 
-video_intelligence_client = Google::Cloud::VideoIntelligence.new
-input_uri = "gs://cloud-samples-data/video/cat.mp4"
-features_element = :LABEL_DETECTION
-features = [features_element]
+1. [Select or create a Cloud Platform project.](https://console.cloud.google.com/project)
+1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
+1. [Enable the API.](https://console.cloud.google.com/apis/library/videointelligence.googleapis.com)
+1. {file:AUTHENTICATION.md Set up authentication.}
 
-# Register a callback during the method call.
-operation = video_intelligence_client.annotate_video(features, input_uri: input_uri) do |op|
-  raise op.results.message if op.error?
-  op_results = op.results
-  # Process the results.
+## Migrating from 2.x versions
 
-  metadata = op.metadata
-  # Process the metadata.
-end
-
-# Or use the return value to register a callback.
-operation.on_done do |op|
-  raise op.results.message if op.error?
-  op_results = op.results
-  # Process the results.
-
-  metadata = op.metadata
-  # Process the metadata.
-end
-
-# Manually reload the operation.
-operation.reload!
-
-# Or block until the operation completes, triggering callbacks on
-# completion.
-operation.wait_until_done!
-```
-
-### Next Steps
-- Read the [Client Library Documentation][] for Cloud Video Intelligence API
-  to see other available methods on the client.
-- Read the [Cloud Video Intelligence API Product documentation][Product Documentation]
-  to learn more about the product and see How-to Guides.
-- View this [repository's main README](https://github.com/googleapis/google-cloud-ruby/blob/master/README.md)
-  to see the full list of Cloud APIs that we cover.
-
-[Client Library Documentation]: https://googleapis.dev/ruby/google-cloud-video_intelligence/latest
-[Product Documentation]: https://cloud.google.com/video-intelligence
+The 3.0 release of the google-cloud-video_intelligence client is a significant upgrade
+based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
+and includes substantial interface changes. Existing code written for earlier
+versions of this library will likely require updates to use this version.
+See the {file:MIGRATING.md MIGRATING.md} document for more information.
 
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib-2.5.0/libdoc/logger/rdoc/Logger.html) as shown below,
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
 or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
-that will write logs to [Stackdriver Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
+that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 
 Configuring a Ruby stdlib logger:

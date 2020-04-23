@@ -16,20 +16,18 @@
 
 require "simplecov"
 require "minitest/autorun"
-require "minitest/spec"
 
 require "google/cloud/video_intelligence"
 
-describe "VideoIntelligenceServiceSmokeTest v1" do
-  it "runs one smoke test with annotate_video" do
-
-    video_intelligence_client = Google::Cloud::VideoIntelligence.new(version: :v1)
+class VideoIntelligenceServiceSmokeTestV1 < Minitest::Test
+  def test_anotate_video
+    video_intelligence_client = Google::Cloud::VideoIntelligence.video_intelligence_service version: :v1
     input_uri = "gs://cloud-samples-data/video/cat.mp4"
     features_element = :LABEL_DETECTION
     features = [features_element]
 
     # Register a callback during the method call.
-    operation = video_intelligence_client.annotate_video(features, input_uri: input_uri) do |op|
+    operation = video_intelligence_client.annotate_video(features: features, input_uri: input_uri) do |op|
       raise op.results.message if op.error?
       op_results = op.results
       # Process the results.

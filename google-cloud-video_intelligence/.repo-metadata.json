@@ -1,9 +1,5 @@
 {
-    "name": "videointelligence",
     "language": "ruby",
     "distribution_name": "google-cloud-video_intelligence",
-    "module_name": "VideoIntelligence",
-    "module_name_credentials": "VideoIntelligence::V1",
-    "env_var_prefix": "VIDEO_INTELLIGENCE",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-video_intelligence/latest"
 }
