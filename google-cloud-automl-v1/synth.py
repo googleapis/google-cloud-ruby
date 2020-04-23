@@ -39,10 +39,3 @@ library = gapic.ruby_library(
 )
 
 s.copy(library, merge=ruby.global_merge)
-
-# Workaround for https://github.com/googleapis/gapic-generator-ruby/issues/382
-s.replace(
-    "lib/google/cloud/automl/v1/service_services_pb.rb",
-    "module AutoMl\n",
-    "module AutoML\n"
-)
