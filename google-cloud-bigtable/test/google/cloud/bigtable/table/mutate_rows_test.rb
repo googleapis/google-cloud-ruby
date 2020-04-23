@@ -100,37 +100,24 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
         status: { code: Google::Rpc::Code::DEADLINE_EXCEEDED, message: "failed", details: [] }
       }]
     )
-
-    mock = OpenStruct.new(
-      retry_count: 0,
-      expected_table_path: table_path(instance_id, table_id),
-      expected_req_entries: [entry],
-      expected_req_app_profile_id: app_profile_id,
-      expected_response: [res]
-    )
-    def mock.mutate_rows(parent, mutation_entries, app_profile_id: nil)
-      self.retry_count += 1
-      _(parent).must_equal expected_table_path
-      _(mutation_entries).must_equal expected_req_entries
-      _(app_profile_id).must_equal expected_req_app_profile_id
-      return expected_response
-    end
+    mock = Minitest::Mock.new
+    mock.expect :mutate_rows, [res], [table_path(instance_id, table_id), [entry], app_profile_id: app_profile_id]
 
     bigtable.service.mocked_client = mock
 
     entry = Google::Cloud::Bigtable::MutationEntry.new(row_key)
     entry.set_cell(family, qualifier, cell_value, timestamp: -1)
 
-
     responses = table.mutate_rows([entry])
 
-    _(mock.retry_count).must_equal 1
     _(responses.length).must_equal 1
     _(responses[0].index).must_equal 0
     _(responses[0].status.code).must_equal Google::Rpc::Code::DEADLINE_EXCEEDED
     _(responses[0].status.description).must_equal "DEADLINE_EXCEEDED"
     _(responses[0].status.message).must_equal "failed"
     _(responses[0].status.details).must_equal []
+
+    mock.verify
   end
 
   it "retry for failed mutation with 3 times" do
@@ -159,6 +146,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     end
 
     mock = OpenStruct.new(
+      t: self,
       retry_count: 0,
       expected_table_path: table_path(instance_id, table_id),
       expected_req_app_profile_id: app_profile_id,
@@ -166,9 +154,9 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       req_retry_response: retry_responses
     )
     def mock.mutate_rows(parent, mutation_entries, app_profile_id: nil)
-      _(parent).must_equal expected_table_path
-      _(mutation_entries).must_equal req_retry_entries[self.retry_count]
-      _(app_profile_id).must_equal expected_req_app_profile_id
+      t._(parent).must_equal expected_table_path
+      t._(mutation_entries).must_equal req_retry_entries[self.retry_count]
+      t._(app_profile_id).must_equal expected_req_app_profile_id
 
       res = req_retry_response[self.retry_count]
       self.retry_count += 1
@@ -225,6 +213,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
     ])
 
     mock = OpenStruct.new(
+      t: self,
       retry_count: 0,
       expected_table_path: table_path(instance_id, table_id),
       expected_req_app_profile_id: app_profile_id,
@@ -232,9 +221,9 @@ describe Google::Cloud::Bigtable::Table, :mutate_rows, :mock_bigtable do
       req_retry_response: retry_responses
     )
     def mock.mutate_rows(parent, mutation_entries, app_profile_id: nil)
-      _(parent).must_equal expected_table_path
-      _(mutation_entries).must_equal req_retry_entries[self.retry_count]
-      _(app_profile_id).must_equal expected_req_app_profile_id
+      t._(parent).must_equal expected_table_path
+      t._(mutation_entries).must_equal req_retry_entries[self.retry_count]
+      t._(app_profile_id).must_equal expected_req_app_profile_id
 
       res = req_retry_response[self.retry_count]
       self.retry_count += 1

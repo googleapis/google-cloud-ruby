@@ -70,17 +70,18 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
     it "drop rows all data rows with timeout option" do
       timeout_secs = 10
       stub = OpenStruct.new(
+        t: self,
         expected_table_path: table_path(instance_id, table_id),
         expected_timeout: timeout_secs * 1000
       )
 
       def stub.drop_row_range parent, args
-        _(parent).must_equal expected_table_path
-        _(args[:row_key_prefix]).must_be :nil?
-        _(args[:delete_all_data_from_table]).must_equal true
+        t._(parent).must_equal expected_table_path
+        t._(args[:row_key_prefix]).must_be :nil?
+        t._(args[:delete_all_data_from_table]).must_equal true
 
         retry_timeout = args[:options].retry_options.backoff_settings.initial_rpc_timeout_millis
-        _(retry_timeout).must_equal expected_timeout
+        t._(retry_timeout).must_equal expected_timeout
         nil
       end
       bigtable.service.mocked_tables = stub
@@ -109,17 +110,18 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
     it "drop rows all rows with timeout" do
       timeout_secs = 10
       stub = OpenStruct.new(
+        t: self,
         expected_table_path: table_path(instance_id, table_id),
         expected_timeout: timeout_secs * 1000
       )
 
       def stub.drop_row_range parent, args
-        _(parent).must_equal expected_table_path
-        _(args[:row_key_prefix]).must_be :nil?
-        _(args[:delete_all_data_from_table]).must_equal true
+        t._(parent).must_equal expected_table_path
+        t._(args[:row_key_prefix]).must_be :nil?
+        t._(args[:delete_all_data_from_table]).must_equal true
 
         retry_timeout = args[:options].retry_options.backoff_settings.initial_rpc_timeout_millis
-        _(retry_timeout).must_equal expected_timeout
+        t._(retry_timeout).must_equal expected_timeout
         nil
       end
       bigtable.service.mocked_tables = stub
@@ -148,17 +150,18 @@ describe Google::Cloud::Bigtable::Table, :drop_rows, :mock_bigtable do
     it "delete rows by prefix with timeout" do
       timeout_secs = 10
       stub = OpenStruct.new(
+        t: self,
         expected_table_path: table_path(instance_id, table_id),
         expected_timeout: timeout_secs * 1000
       )
 
       def stub.drop_row_range parent, args
-        _(parent).must_equal expected_table_path
-        _(args[:row_key_prefix]).must_equal "user"
-        _(args[:delete_all_data_from_table]).must_be :nil?
+        t._(parent).must_equal expected_table_path
+        t._(args[:row_key_prefix]).must_equal "user"
+        t._(args[:delete_all_data_from_table]).must_be :nil?
 
         retry_timeout = args[:options].retry_options.backoff_settings.initial_rpc_timeout_millis
-        _(retry_timeout).must_equal expected_timeout
+        t._(retry_timeout).must_equal expected_timeout
         nil
       end
       bigtable.service.mocked_tables = stub

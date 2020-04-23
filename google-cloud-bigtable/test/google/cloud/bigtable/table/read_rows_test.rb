@@ -189,20 +189,31 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   end
 
   it "read rows using row keys" do
-    mock = OpenStruct.new
-
-    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
-      _(rows.row_keys).must_equal ["A", "B"]
-      return []
-    end
+    mock = Minitest::Mock.new
+    mock.expect :read_rows,
+                [],
+                [
+                  "projects/test/instances/test-instance/tables/test-table",
+                  { 
+                    rows: Google::Bigtable::V2::RowSet.new(
+                      row_keys: ["A", "B"],
+                      row_ranges: []
+                    ),
+                    filter: nil,
+                    rows_limit: nil,
+                    app_profile_id: nil
+                  }
+                ]
 
     bigtable.service.mocked_client = mock
     table = bigtable.table(instance_id, table_id)
     table.read_rows(keys: ["A", "B"]).map {|v| v}
+
+    mock.verify
   end
 
   it "read rows using single row range" do
-    mock = OpenStruct.new
+    mock = self
 
     def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
       _(rows.row_ranges.length).must_equal 1
@@ -220,7 +231,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   end
 
   it "read rows using multiple row ranges" do
-    mock = OpenStruct.new
+    mock = self
 
     def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
       _(rows.row_ranges.length).must_equal 2
@@ -239,7 +250,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   end
 
   it "read rows using rows limit" do
-    mock = OpenStruct.new
+    mock = self
 
     def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
       _(rows_limit).must_equal 100
@@ -252,7 +263,7 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   end
 
   it "read rows using rows filter" do
-    mock = OpenStruct.new
+    mock = self
 
     def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
       _(filter).must_be_kind_of Google::Bigtable::V2::RowFilter
