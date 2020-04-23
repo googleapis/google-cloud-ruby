@@ -238,7 +238,33 @@ name = client.inspect_template_path project: "my-project",
 response = client.get_inspect_template name: name
 ```
 
-In the 1.0 client, you can also use the paths module as a convenience module.
+Because IDs are passed as keyword arguments, some closely related paths
+have been combined. For example, `project_inspect_template_path` and
+`organization_inspect_template_path` used to be separate helpers, one that took
+a project as the parent, and another that took an organization as the parent.
+In the 1.0 client, use `inspect_template_path` for both cases, and pass either
+the `project:` or `organization:` keyword argument.
+
+Old:
+```
+name1 = Google::Cloud::Dlp::V2::DlpServiceClient.project_inspect_template_path(
+  "my-project", "my-template"
+)
+name2 = Google::Cloud::Dlp::V2::DlpServiceClient.organization_inspect_template_path(
+  "my-org", "my-template"
+)
+```
+
+New:
+```
+client = Google::Cloud::Dlp.dlp_service
+name1 = client.inspect_template_path project: "my-project",
+                                     inspect_template: "my-template"
+name2 = client.inspect_template_path organization: "my-org",
+                                     inspect_template: "my-template"
+```
+
+Finall, in the 1.0 client, you can also use the paths module as a convenience module.
 
 New:
 ```
@@ -257,11 +283,6 @@ def foo
   # Do something with response...
 end
 ```
-
-Note that, because the path helpers use keyword arguments, a single helper
-method supports multiple variants. The example above show both a variant using
-project as the parent resource, and a variant using organization as the parent.
-Previously, these would require separate helper methods.
 
 ### Class Namespaces
 
