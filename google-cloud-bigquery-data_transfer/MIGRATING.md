@@ -231,10 +231,31 @@ name = client.data_source_path project: "my-project", data_source: "my-source"
 response = client.get_data_source name: name
 ```
 
-The 1.0 client includes additional options for constructing certain paths that
-were not available in earlier clients. For example, the `data_source_path`
-helper can take an optional `location` argument. See the reference docs for
-more details.
+Because IDs are passed as keyword arguments, some closely related paths
+have been combined. For example, `data_source_path` and `location_data_source_path`
+used to be separate helpers, one that took a location argument and one that did not.
+In the 1.0 client, use `data_source_path` for both cases, and either pass or
+omit the `location:` keyword argument.
+
+Old:
+```
+name1 = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.data_source_path(
+  "my-project", "my-source"
+)
+name2 = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferServiceClient.location_data_source_path(
+  "my-project", "my-location", "my-source"
+)
+```
+
+New:
+```
+client = Google::Cloud::Dlp.dlp_service
+name1 = client.data_source_path project: "my-project",
+                                data_source: "my-source"
+name2 = client.data_source_path project: "my-project",
+                                location: "my-location",
+                                data_source: "my-source"
+```
 
 Finally, in the 1.0 client, you can also use the paths module as a convenience module.
 
