@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2020-04-23
+
+#### Features
+
+* Support the ListEnvironments call.
+
 ### 0.4.1 / 2020-04-22
 
 #### Bug Fixes
