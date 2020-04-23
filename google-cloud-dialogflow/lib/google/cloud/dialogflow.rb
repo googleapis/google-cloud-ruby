@@ -198,6 +198,36 @@ module Google
       end
 
       ##
+      # Create a new client object for Environments.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Dialogflow::V2::Environments::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest/Google/Cloud/Dialogflow/V2/Environments/Client.html)
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the Environments service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About Environments
+      #
+      # Manages agent environments.
+      #
+      # @param version [String, Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @return [Environments::Client] A client object for the specified version.
+      #
+      def self.environments version: :v2, &block
+        require "google/cloud/dialogflow/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Dialogflow
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Dialogflow.const_get package_name
+        package_module.const_get(:Environments).const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for Intents.
       #
       # By default, this returns an instance of
