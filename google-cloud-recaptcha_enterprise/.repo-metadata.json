@@ -1,9 +1,5 @@
 {
-    "name": "recaptchaenterprise",
     "language": "ruby",
     "distribution_name": "google-cloud-recaptcha_enterprise",
-    "module_name": "RecaptchaEnterprise",
-    "module_name_credentials": "RecaptchaEnterprise::V1beta1",
-    "env_var_prefix": "RECAPTCHA_ENTERPRISE",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-recaptcha_enterprise/latest"
 }
