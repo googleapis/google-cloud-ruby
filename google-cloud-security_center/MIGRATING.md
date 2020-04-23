@@ -26,6 +26,10 @@ To summarize:
     specifies whether they are required or optional. Additionally, you can pass
     a proto request object instead of separate arguments. See
     [Passing Arguments](#passing-arguments) for more info.
+ *  Previously, some client classes included helper methods for constructing
+    resource paths. These methods now take keyword rather than positional
+    arguments, and are also available in a separate paths module. See
+    [Resource Path Helpers](#resource-path-helpers) for more info.
  *  Some classes have moved into different namespaces. See
     [Class Namespaces](#class-namespaces) for more info.
 
@@ -200,6 +204,60 @@ response = client.list_findings(
   { parent: parent, order_by: ordering },
   timeout: 10_000
 )
+```
+
+### Resource Path Helpers
+
+The client library includes helper methods for generating the resource path
+strings passed to many calls. These helpers have changed in two ways:
+
+* In older releases, they are both _class_ methods and _instance_ methods on
+  the client class. In the 1.0 release, they are _instance methods only_.
+  However, they are also available on a separate paths module that you can
+  include elsewhere for convenience.
+* In older releases, arguments to a resource path helper are passed as
+  _positional_ arguments. In the 1.0 release, they are passed as named _keyword_
+  arguments.
+
+Following is an example involving using a resource path helper.
+
+Old:
+```
+client = Google::Cloud::SecurityCenter.new
+
+# Call the helper using positional arguments.
+parent = client.source_path "my-org", "my-source"
+
+response = client.list_findings parent
+```
+
+New:
+```
+client = Google::Cloud::SecurityCenter.security_center
+
+# Call the helper using keyword arguments
+parent = client.source_path organization: "my-org", source: "my-source"
+
+response = client.list_findings parent: parent
+```
+
+In the 1.0 client, you can also use the paths module as a convenience module.
+
+New:
+```
+# Bring the session_path method into the current class
+include Google::Cloud::SecurityCenter::V1::SecurityCenterService::Paths
+
+def foo
+  client = Google::Cloud::SecurityCenter.security_center
+
+  # Call the included helper method
+  parent = source_path organization: "my-org", source: "my-source"
+
+  response = client.list_findings parent: parent
+
+  # Do something with response...
+end
 ```
 
 ### Class Namespaces
