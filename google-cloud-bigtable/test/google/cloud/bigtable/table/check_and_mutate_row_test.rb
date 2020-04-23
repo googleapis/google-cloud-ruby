@@ -53,7 +53,7 @@ describe Google::Cloud::Bigtable::Table, :check_and_mutate_row, :mock_bigtable d
       on_match: Google::Cloud::Bigtable::MutationEntry.new.delete_cells("cf", "field1"),
       otherwise: Google::Cloud::Bigtable::MutationEntry.new.delete_from_row
     )
-    result.must_equal true
+    _(result).must_equal true
     mock.verify
   end
 
@@ -68,13 +68,13 @@ describe Google::Cloud::Bigtable::Table, :check_and_mutate_row, :mock_bigtable d
     table = bigtable.table(instance_id, table_id)
 
     row_key = "user-1"
-    proc {
+    assert_raises Google::Cloud::InvalidArgumentError do
        table.check_and_mutate_row(
         row_key,
         Google::Cloud::Bigtable::RowFilter.key("user-1*"),
         on_match: Google::Cloud::Bigtable::MutationEntry.new.delete_cells("cf-BAD ", "field1"),
         otherwise: Google::Cloud::Bigtable::MutationEntry.new.delete_from_row
       )
-    }.must_raise Google::Cloud::InvalidArgumentError
+    end
   end
 end

@@ -26,134 +26,134 @@ describe Google::Cloud::Bigtable::RowFilter::ChainFilter, :mock_bigtable do
   let(:chain_filter) { Google::Cloud::Bigtable::RowFilter.chain }
 
   it "knows its attributes" do
-    chain_filter.must_be_kind_of Google::Cloud::Bigtable::RowFilter::ChainFilter
+    _(chain_filter).must_be_kind_of Google::Cloud::Bigtable::RowFilter::ChainFilter
     filters = chain_filter.filters
-    filters.must_be_kind_of Array
-    filters.must_be :frozen?
-    filters.must_be :empty?
+    _(filters).must_be_kind_of Array
+    _(filters).must_be :frozen?
+    _(filters).must_be :empty?
   end
 
   it "creates a sink filter" do
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.sink
     assert_filter :sink
   end
 
   it "creates a pass filter" do
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.pass
     assert_filter :pass_all_filter
   end
 
   it "creates a block filter" do
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.block
     assert_filter :block_all_filter
   end
 
   it "creates a strip_value filter" do
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.strip_value
     assert_filter :strip_value_transformer
   end
 
   it "creates a key filter" do
     regex = "user-*"
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.key(regex)
     filter = assert_filter :row_key_regex_filter
-    filter.to_grpc.row_key_regex_filter.must_equal regex
+    _(filter.to_grpc.row_key_regex_filter).must_equal regex
   end
 
   it "creates a family filter" do
     regex = "cf-*"
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.family(regex)
     filter = assert_filter :family_name_regex_filter
-    filter.to_grpc.family_name_regex_filter.must_equal regex
+    _(filter.to_grpc.family_name_regex_filter).must_equal regex
   end
 
   it "creates a qualifier filter" do
     regex = "field*"
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.qualifier(regex)
     filter = assert_filter :column_qualifier_regex_filter
-    filter.to_grpc.column_qualifier_regex_filter.must_equal regex
+    _(filter.to_grpc.column_qualifier_regex_filter).must_equal regex
   end
 
   it "creates a value filter" do
     regex = "abc*"
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.value(regex)
     filter = assert_filter :value_regex_filter
-    filter.to_grpc.value_regex_filter.must_equal regex
+    _(filter.to_grpc.value_regex_filter).must_equal regex
   end
 
   it "creates a label filter" do
     label = "test"
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.label(label)
     filter = assert_filter :apply_label_transformer
-    filter.to_grpc.apply_label_transformer.must_equal label
+    _(filter.to_grpc.apply_label_transformer).must_equal label
   end
 
   it "creates a cells_per_row_offset filter" do
     offset = 5
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.cells_per_row_offset(offset)
     filter = assert_filter :cells_per_row_offset_filter
-    filter.to_grpc.cells_per_row_offset_filter.must_equal offset
+    _(filter.to_grpc.cells_per_row_offset_filter).must_equal offset
   end
 
   it "creates a cells_per_row filter" do
     limit = 10
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.cells_per_row(limit)
     filter = assert_filter :cells_per_row_limit_filter
-    filter.to_grpc.cells_per_row_limit_filter.must_equal limit
+    _(filter.to_grpc.cells_per_row_limit_filter).must_equal limit
   end
 
   it "creates a cells_per_column filter" do
     limit = 10
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.cells_per_column(limit)
     filter = assert_filter :cells_per_column_limit_filter
-    filter.to_grpc.cells_per_column_limit_filter.must_equal limit
+    _(filter.to_grpc.cells_per_column_limit_filter).must_equal limit
   end
 
   describe "timestamp_range" do
     it "creates a timestamp_range filter" do
       from = timestamp_micros - 3000000
       to = timestamp_micros
-      chain_filter.filters.must_be :empty?
+      _(chain_filter.filters).must_be :empty?
       chain_filter.timestamp_range(from: from, to: to)
       filter = assert_filter :timestamp_range_filter
       range_grpc = Google::Bigtable::V2::TimestampRange.new(
         start_timestamp_micros: from, end_timestamp_micros: to
       )
-      filter.to_grpc.timestamp_range_filter.must_equal range_grpc
+      _(filter.to_grpc.timestamp_range_filter).must_equal range_grpc
     end
 
     it "creates a timestamp_range filter with only from range" do
       from = timestamp_micros - 3000000
-      chain_filter.filters.must_be :empty?
+      _(chain_filter.filters).must_be :empty?
       chain_filter.timestamp_range(from: from)
       filter = assert_filter :timestamp_range_filter
       range_grpc = Google::Bigtable::V2::TimestampRange.new(
         start_timestamp_micros: from
       )
-      filter.to_grpc.timestamp_range_filter.must_equal range_grpc
+      _(filter.to_grpc.timestamp_range_filter).must_equal range_grpc
     end
 
     it "creates a timestamp_range filter with only to range" do
       to = timestamp_micros
-      chain_filter.filters.must_be :empty?
+      _(chain_filter.filters).must_be :empty?
       chain_filter.timestamp_range(to: to)
       filter = assert_filter :timestamp_range_filter
       range_grpc = Google::Bigtable::V2::TimestampRange.new(
         end_timestamp_micros: to
       )
-      filter.to_grpc.timestamp_range_filter.must_equal range_grpc
+      _(filter.to_grpc.timestamp_range_filter).must_equal range_grpc
     end
   end
 
@@ -162,19 +162,19 @@ describe Google::Cloud::Bigtable::RowFilter::ChainFilter, :mock_bigtable do
       from_value = "abc"
       to_value = "xyz"
       range = Google::Cloud::Bigtable::ValueRange.new.from(from_value).to(to_value)
-      chain_filter.filters.must_be :empty?
+      _(chain_filter.filters).must_be :empty?
       chain_filter.value_range(range)
       filter = assert_filter :value_range_filter
       grpc = filter.to_grpc.value_range_filter
-      grpc.must_be_kind_of Google::Bigtable::V2::ValueRange
-      grpc.start_value_closed.must_equal from_value
-      grpc.end_value_open.must_equal to_value
+      _(grpc).must_be_kind_of Google::Bigtable::V2::ValueRange
+      _(grpc.start_value_closed).must_equal from_value
+      _(grpc.end_value_open).must_equal to_value
     end
 
     it "range instance must be type of ValueRange" do
-      proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.value_range(Object.new)
-      }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
   end
 
@@ -185,67 +185,67 @@ describe Google::Cloud::Bigtable::RowFilter::ChainFilter, :mock_bigtable do
       to_value = "field5"
 
       range = Google::Cloud::Bigtable::ColumnRange.new(family).from(from_value).to(to_value)
-      chain_filter.filters.must_be :empty?
+      _(chain_filter.filters).must_be :empty?
       chain_filter.column_range(range)
       filter = assert_filter :column_range_filter
       grpc = filter.to_grpc.column_range_filter
-      grpc.must_be_kind_of Google::Bigtable::V2::ColumnRange
-      grpc.family_name.must_equal family
-      grpc.start_qualifier_closed.must_equal from_value
-      grpc.end_qualifier_open.must_equal to_value
+      _(grpc).must_be_kind_of Google::Bigtable::V2::ColumnRange
+      _(grpc.family_name).must_equal family
+      _(grpc.start_qualifier_closed).must_equal from_value
+      _(grpc.end_qualifier_open).must_equal to_value
     end
 
     it "range instance must be type of ColumnRange" do
-      proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.column_range(Object.new)
-      }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
   end
 
   describe "#sample" do
     it "creates a sample probability filter" do
       probability = 0.5
-      chain_filter.filters.must_be :empty?
+      _(chain_filter.filters).must_be :empty?
       chain_filter.sample(probability)
       filter = assert_filter :row_sample_filter
-      filter.to_grpc.row_sample_filter.must_equal probability
+      _(filter.to_grpc.row_sample_filter).must_equal probability
     end
 
     it "probability can not be greather then 1" do
-      proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.sample(1.1)
-      }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
 
     it "probability can not be equal to 1" do
-      proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.sample(1)
-      }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
 
     it "probability can not be equal to 0" do
-      proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.sample(0)
-      }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
 
     it "probability can not be less then 0" do
-      proc {
+      assert_raises Google::Cloud::Bigtable::RowFilterError do
         chain_filter.sample(-0.1)
-      }.must_raise Google::Cloud::Bigtable::RowFilterError
+      end
     end
   end
 
   it "creates a chain filter" do
     filter = Google::Cloud::Bigtable::RowFilter.chain
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.chain filter
     assert_filter :chain, Google::Cloud::Bigtable::RowFilter::ChainFilter
   end
 
   it "creates an interleave filter" do
     filter = Google::Cloud::Bigtable::RowFilter.interleave
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.interleave filter
     assert_filter :interleave, Google::Cloud::Bigtable::RowFilter::InterleaveFilter
   end
@@ -253,13 +253,13 @@ describe Google::Cloud::Bigtable::RowFilter::ChainFilter, :mock_bigtable do
   it "creates a condition filter" do
     predicate = Google::Cloud::Bigtable::RowFilter.key("user-*")
     filter = Google::Cloud::Bigtable::RowFilter.condition(predicate)
-    chain_filter.filters.must_be :empty?
+    _(chain_filter.filters).must_be :empty?
     chain_filter.condition filter
     assert_filter :condition, Google::Cloud::Bigtable::RowFilter::ConditionFilter
   end
 
   def assert_filter method, type = Google::Cloud::Bigtable::RowFilter::SimpleFilter
-    chain_filter.filters.count.must_equal 1
+    _(chain_filter.filters.count).must_equal 1
     filter = chain_filter.filters.find do |f|
       t = f.to_grpc.send method
       if t.kind_of? String # may be empty string in protobuf
@@ -268,7 +268,7 @@ describe Google::Cloud::Bigtable::RowFilter::ChainFilter, :mock_bigtable do
         !t.nil?
       end
     end
-    filter.must_be_kind_of type
+    _(filter).must_be_kind_of type
     filter
   end
 end

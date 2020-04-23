@@ -82,17 +82,17 @@ describe Google::Cloud::Bigtable::Cluster, :save, :mock_bigtable do
 
     job = cluster.save
 
-    job.must_be_kind_of Google::Cloud::Bigtable::Cluster::Job
-    job.wont_be :done?
-    job.wont_be :error?
-    job.error.must_be :nil?
-    job.cluster.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Bigtable::Cluster::Job
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.cluster).must_be :nil?
 
     job.reload!
     cluster = job.cluster
 
-    cluster.wont_be :nil?
-    cluster.must_be_kind_of Google::Cloud::Bigtable::Cluster
+    _(cluster).wont_be :nil?
+    _(cluster).must_be_kind_of Google::Cloud::Bigtable::Cluster
 
     mock.verify
   end

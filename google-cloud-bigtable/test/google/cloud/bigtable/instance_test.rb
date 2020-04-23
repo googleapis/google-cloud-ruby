@@ -33,18 +33,18 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
   end
 
   it "knows the identifiers" do
-    instance.must_be_kind_of Google::Cloud::Bigtable::Instance
-    instance.project_id.must_equal project_id
-    instance.instance_id.must_equal instance_id
-    instance.display_name.must_equal display_name
+    _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
+    _(instance.project_id).must_equal project_id
+    _(instance.instance_id).must_equal instance_id
+    _(instance.display_name).must_equal display_name
 
-    instance.state.must_equal :READY
-    instance.must_be :ready?
-    instance.wont_be :creating?
+    _(instance.state).must_equal :READY
+    _(instance).must_be :ready?
+    _(instance).wont_be :creating?
 
-    instance.type.must_equal :PRODUCTION
-    instance.must_be :production?
-    instance.wont_be :development?
+    _(instance.type).must_equal :PRODUCTION
+    _(instance).must_be :production?
+    _(instance).wont_be :development?
   end
   describe "#labels=" do
     let(:instance) do
@@ -57,19 +57,19 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
 
     it "set labels using hash" do
       instance.labels = { "env" => "test1" }
-      instance.labels.to_h.must_equal({"env" => "test1"})
+      _(instance.labels.to_h).must_equal({"env" => "test1"})
 
       instance.labels = { :env => "test2" }
-      instance.labels.to_h.must_equal({"env" => "test2"})
+      _(instance.labels.to_h).must_equal({"env" => "test2"})
 
       instance.labels = { data: "users", appprofile: 12345 }
-      instance.labels.to_h.must_equal({ "data" => "users", "appprofile" => "12345" })
+      _(instance.labels.to_h).must_equal({ "data" => "users", "appprofile" => "12345" })
     end
 
     it "clear lables if labels value is nil" do
       instance.labels = { "env" => "test" }
       instance.labels = nil
-      instance.labels.length.must_equal 0
+      _(instance.labels.length).must_equal 0
     end
   end
 
@@ -82,13 +82,13 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
 
     mock.verify
 
-    instance.project_id.must_equal project_id
-    instance.instance_id.must_equal instance_id
-    instance.path.must_equal instance_path(instance_id)
-    instance.display_name.must_equal "Test instance"
-    instance.state.must_equal :READY
-    instance.ready?.must_equal true
-    instance.type.must_equal :PRODUCTION
-    instance.production?.must_equal true
+    _(instance.project_id).must_equal project_id
+    _(instance.instance_id).must_equal instance_id
+    _(instance.path).must_equal instance_path(instance_id)
+    _(instance.display_name).must_equal "Test instance"
+    _(instance.state).must_equal :READY
+    _(instance.ready?).must_equal true
+    _(instance.type).must_equal :PRODUCTION
+    _(instance.production?).must_equal true
   end
 end

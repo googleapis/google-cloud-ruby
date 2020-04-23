@@ -78,17 +78,17 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
 
     job = instance.save
 
-    job.must_be_kind_of Google::Cloud::Bigtable::Instance::Job
-    job.wont_be :done?
-    job.wont_be :error?
-    job.error.must_be :nil?
-    job.instance.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Bigtable::Instance::Job
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.instance).must_be :nil?
 
     job.reload!
     instance = job.instance
 
-    instance.wont_be :nil?
-    instance.must_be_kind_of Google::Cloud::Bigtable::Instance
+    _(instance).wont_be :nil?
+    _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
 
     mock.verify
   end
@@ -111,17 +111,17 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
 
     job = instance.save
 
-    job.must_be_kind_of Google::Cloud::Bigtable::Instance::Job
-    job.wont_be :done?
-    job.wont_be :error?
-    job.error.must_be :nil?
-    job.instance.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Bigtable::Instance::Job
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.instance).must_be :nil?
 
     job.reload!
     instance = job.instance
 
-    instance.wont_be :nil?
-    instance.must_be_kind_of Google::Cloud::Bigtable::Instance
+    _(instance).wont_be :nil?
+    _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
 
     mock.verify
   end

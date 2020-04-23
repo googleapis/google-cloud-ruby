@@ -83,17 +83,17 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
 
     job = app_profile.save
 
-    job.must_be_kind_of Google::Cloud::Bigtable::AppProfile::Job
-    job.wont_be :done?
-    job.wont_be :error?
-    job.error.must_be :nil?
-    job.app_profile.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Bigtable::AppProfile::Job
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.app_profile).must_be :nil?
 
     job.reload!
     app_profile = job.app_profile
 
-    app_profile.wont_be :nil?
-    app_profile.must_be_kind_of Google::Cloud::Bigtable::AppProfile
+    _(app_profile).wont_be :nil?
+    _(app_profile).must_be_kind_of Google::Cloud::Bigtable::AppProfile
 
     mock.verify
   end
@@ -122,17 +122,17 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
 
     job = app_profile.save(ignore_warnings: true)
 
-    job.must_be_kind_of Google::Cloud::Bigtable::AppProfile::Job
-    job.wont_be :done?
-    job.wont_be :error?
-    job.error.must_be :nil?
-    job.app_profile.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Bigtable::AppProfile::Job
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.app_profile).must_be :nil?
 
     job.reload!
     app_profile = job.app_profile
 
-    app_profile.wont_be :nil?
-    app_profile.must_be_kind_of Google::Cloud::Bigtable::AppProfile
+    _(app_profile).wont_be :nil?
+    _(app_profile).must_be_kind_of Google::Cloud::Bigtable::AppProfile
 
     mock.verify
   end

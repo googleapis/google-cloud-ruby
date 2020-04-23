@@ -20,15 +20,15 @@ require "bigtable_helper"
 describe "Instances", :bigtable do
   it "lists and get a instance" do
     instances = bigtable.instances.all.to_a
-    instances.wont_be :empty?
+    _(instances).wont_be :empty?
     instances.each do |instance|
-      instance.must_be_kind_of Google::Cloud::Bigtable::Instance
+      _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
     end
 
     instance_id = instances.first.instance_id
 
     first_instance = bigtable.instance(instance_id)
-    first_instance.must_be_kind_of Google::Cloud::Bigtable::Instance
+    _(first_instance).must_be_kind_of Google::Cloud::Bigtable::Instance
   end
 
   it "update instance labels and display name" do
@@ -43,8 +43,8 @@ describe "Instances", :bigtable do
     job.wait_until_done!
 
     instance.reload!
-    instance.display_name.must_equal display_name
-    instance.labels["updated-at"].must_equal time
+    _(instance.display_name).must_equal display_name
+    _(instance.labels["updated-at"]).must_equal time
   end
 
   describe "IAM policies and permissions" do
@@ -55,15 +55,15 @@ describe "Instances", :bigtable do
 
       roles = ["bigtable.instances.get", "bigtable.tables.get"]
       permissions = instance.test_iam_permissions(roles)
-      permissions.must_be_kind_of Array
-      permissions.must_equal roles
+      _(permissions).must_be_kind_of Array
+      _(permissions).must_equal roles
     end
 
     it "allows policy to be updated on an instance" do
       instance = bigtable_instance
-      instance.policy.must_be_kind_of Google::Cloud::Bigtable::Policy
+      _(instance.policy).must_be_kind_of Google::Cloud::Bigtable::Policy
 
-      service_account.wont_be :nil?
+      _(service_account).wont_be :nil?
 
       role = "roles/bigtable.user"
       member = "serviceAccount:#{service_account}"
@@ -72,10 +72,10 @@ describe "Instances", :bigtable do
       policy.add(role, member)
       updated_policy = instance.update_policy(policy)
 
-      updated_policy.role(role).wont_be :nil?
+      _(updated_policy.role(role)).wont_be :nil?
 
       role_member = instance.policy.role(role).select { |m| m == member }
-      role_member.size.must_equal 1
+      _(role_member.size).must_equal 1
     end
   end
 end

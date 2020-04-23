@@ -46,21 +46,21 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
 
     mock.verify
 
-    table.project_id.must_equal project_id
-    table.instance_id.must_equal instance_id
-    table.name.must_equal table_id
-    table.path.must_equal table_path(instance_id, table_id)
-    table.granularity.must_equal :MILLIS
-    table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
+    _(table.project_id).must_equal project_id
+    _(table.instance_id).must_equal instance_id
+    _(table.name).must_equal table_id
+    _(table.path).must_equal table_path(instance_id, table_id)
+    _(table.granularity).must_equal :MILLIS
+    _(table.cluster_states.map(&:cluster_name).sort).must_equal cluster_states.keys
     table.cluster_states.each do |cs|
-      cs.replication_state.must_equal :READY
+      _(cs.replication_state).must_equal :READY
     end
 
-    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
-    table.column_families.must_be :frozen?
-    table.column_families.names.sort.must_equal column_families.keys
+    _(table.column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    _(table.column_families).must_be :frozen?
+    _(table.column_families.names.sort).must_equal column_families.keys
     table.column_families.each do |name, cf|
-      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
+      _(cf.gc_rule.to_grpc).must_equal column_families[cf.name].gc_rule
     end
   end
 
@@ -77,7 +77,7 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
     bigtable.service.mocked_tables = stub
 
     table = instance.table(not_found_table_id, perform_lookup: true)
-    table.must_be :nil?
+    _(table).must_be :nil?
   end
 
   it "get table object without fetching table" do
@@ -85,8 +85,8 @@ describe Google::Cloud::Bigtable::Instance, :table, :mock_bigtable do
     app_profile_id = "my-app-profile"
 
     table = instance.table(table_id, app_profile_id: app_profile_id)
-    table.must_be_kind_of Google::Cloud::Bigtable::Table
-    table.path.must_equal table_path(instance_id, table_id)
-    table.app_profile_id.must_equal app_profile_id
+    _(table).must_be_kind_of Google::Cloud::Bigtable::Table
+    _(table.path).must_equal table_path(instance_id, table_id)
+    _(table.app_profile_id).must_equal app_profile_id
   end
 end

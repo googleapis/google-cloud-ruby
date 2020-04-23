@@ -25,8 +25,8 @@ describe Google::Cloud::Bigtable::SampleRowKey, :simple_row_key, :mock_bigtable 
 
     sample_row_key = Google::Cloud::Bigtable::SampleRowKey.from_grpc(grpc)
 
-    sample_row_key.must_be_kind_of Google::Cloud::Bigtable::SampleRowKey
-    sample_row_key.key.must_equal row_key
-    sample_row_key.offset.must_equal offset
+    _(sample_row_key).must_be_kind_of Google::Cloud::Bigtable::SampleRowKey
+    _(sample_row_key.key).must_equal row_key
+    _(sample_row_key.offset).must_equal offset
   end
 end

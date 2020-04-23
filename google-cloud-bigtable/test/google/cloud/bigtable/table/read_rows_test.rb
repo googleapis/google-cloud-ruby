@@ -56,9 +56,9 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
 
     mock.verify
 
-    rows.length.must_equal 1
-    rows.first.column_families.must_equal ["A"]
-    rows.first.must_equal expected_row
+    _(rows.length).must_equal 1
+    _(rows.first.column_families).must_equal ["A"]
+    _(rows.first).must_equal expected_row
   end
 
   it "retry on retryable error" do
@@ -96,10 +96,10 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
 
     rows = table.read_rows.map {|v| v}
 
-    mock.retry_count.must_equal 1
-    rows.length.must_equal 1
-    rows.first.column_families.must_equal ["A"]
-    rows.first.must_equal expected_row
+    _(mock.retry_count).must_equal 1
+    _(rows.length).must_equal 1
+    _(rows.first.column_families).must_equal ["A"]
+    _(rows.first).must_equal expected_row
   end
 
   it "do not retry on successive 3 failure" do
@@ -113,8 +113,10 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     bigtable.service.mocked_client = mock
     table = bigtable.table(instance_id, table_id)
 
-    proc { table.read_rows.to_a }.must_raise Google::Cloud::Error
-    mock.retry_count.must_equal 3
+    assert_raises Google::Cloud::Error do
+      table.read_rows.to_a
+    end
+    _(mock.retry_count).must_equal 3
   end
 
   it "reads rows with not successive faliure errors" do
@@ -163,11 +165,11 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
 
     rows = table.read_rows.to_a
 
-    mock_itr.counter.must_equal 2
-    rows.length.must_equal 3
+    _(mock_itr.counter).must_equal 2
+    _(rows.length).must_equal 3
 
     expected_rows.each_with_index do |r, i|
-      rows[i].key.must_equal r.key
+      _(rows[i].key).must_equal r.key
     end
   end
 
@@ -182,32 +184,43 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     bigtable.service.mocked_client = mock
     table = bigtable.table(instance_id, table_id)
 
-    proc {
+    assert_raises Google::Cloud::Error do
       table.read_rows.map {|v| v}
-    }.must_raise Google::Cloud::Error
-    mock.retry_count.must_equal 3
+    end
+    _(mock.retry_count).must_equal 3
   end
 
   it "read rows using row keys" do
-    mock = OpenStruct.new
-
-    def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
-      rows.row_keys.must_equal ["A", "B"]
-      return []
-    end
+    mock = Minitest::Mock.new
+    mock.expect :read_rows,
+                [],
+                [
+                  "projects/test/instances/test-instance/tables/test-table",
+                  { 
+                    rows: Google::Bigtable::V2::RowSet.new(
+                      row_keys: ["A", "B"],
+                      row_ranges: []
+                    ),
+                    filter: nil,
+                    rows_limit: nil,
+                    app_profile_id: nil
+                  }
+                ]
 
     bigtable.service.mocked_client = mock
     table = bigtable.table(instance_id, table_id)
     table.read_rows(keys: ["A", "B"]).map {|v| v}
+
+    mock.verify
   end
 
   it "read rows using single row range" do
-    mock = OpenStruct.new
+    mock = self
 
     def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
-      rows.row_ranges.length.must_equal 1
+      _(rows.row_ranges.length).must_equal 1
       rows.row_ranges.each do |r|
-        r.must_be_kind_of Google::Bigtable::V2::RowRange
+        _(r).must_be_kind_of Google::Bigtable::V2::RowRange
       end
       return []
     end
@@ -220,12 +233,12 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   end
 
   it "read rows using multiple row ranges" do
-    mock = OpenStruct.new
+    mock = self
 
     def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
-      rows.row_ranges.length.must_equal 2
+      _(rows.row_ranges.length).must_equal 2
       rows.row_ranges.each do |r|
-        r.must_be_kind_of Google::Bigtable::V2::RowRange
+        _(r).must_be_kind_of Google::Bigtable::V2::RowRange
       end
       return []
     end
@@ -239,10 +252,10 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   end
 
   it "read rows using rows limit" do
-    mock = OpenStruct.new
+    mock = self
 
     def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
-      rows_limit.must_equal 100
+      _(rows_limit).must_equal 100
       return []
     end
 
@@ -252,10 +265,10 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   end
 
   it "read rows using rows filter" do
-    mock = OpenStruct.new
+    mock = self
 
     def mock.read_rows(parent, rows: nil, filter: nil, rows_limit: nil, app_profile_id: nil)
-      filter.must_be_kind_of Google::Bigtable::V2::RowFilter
+      _(filter).must_be_kind_of Google::Bigtable::V2::RowFilter
       return []
     end
 

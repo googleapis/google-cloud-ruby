@@ -30,15 +30,15 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
   let(:app_profile) { Google::Cloud::Bigtable::AppProfile.from_grpc(app_profile_grpc, bigtable.service) }
 
   it "knows the identifiers" do
-    app_profile.must_be_kind_of Google::Cloud::Bigtable::AppProfile
-    app_profile.project_id.must_equal project_id
-    app_profile.instance_id.must_equal instance_id
-    app_profile.name.must_equal app_profile_id
-    app_profile.path.must_equal app_profile_path(instance_id, app_profile_id)
-    app_profile.description.must_equal description
-    app_profile.multi_cluster_routing.to_grpc.must_equal routing_policy_grpc
-    app_profile.routing_policy.to_grpc.must_equal routing_policy_grpc
-    app_profile.single_cluster_routing.must_be :nil?
+    _(app_profile).must_be_kind_of Google::Cloud::Bigtable::AppProfile
+    _(app_profile.project_id).must_equal project_id
+    _(app_profile.instance_id).must_equal instance_id
+    _(app_profile.name).must_equal app_profile_id
+    _(app_profile.path).must_equal app_profile_path(instance_id, app_profile_id)
+    _(app_profile.description).must_equal description
+    _(app_profile.multi_cluster_routing.to_grpc).must_equal routing_policy_grpc
+    _(app_profile.routing_policy.to_grpc).must_equal routing_policy_grpc
+    _(app_profile.single_cluster_routing).must_be :nil?
   end
 
   it "set multi_cluster_routing policy" do
@@ -47,13 +47,13 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
     )
     app_profile = Google::Cloud::Bigtable::AppProfile.from_grpc(app_profile_grpc, bigtable.service)
 
-    app_profile.routing_policy.must_be :nil?
+    _(app_profile.routing_policy).must_be :nil?
 
     routing_policy = Google::Cloud::Bigtable::AppProfile.multi_cluster_routing
     app_profile.routing_policy = routing_policy
 
-    app_profile.routing_policy.must_be_kind_of Google::Cloud::Bigtable::MultiClusterRoutingUseAny
-    app_profile.routing_policy.to_grpc.must_equal routing_policy.to_grpc
+    _(app_profile.routing_policy).must_be_kind_of Google::Cloud::Bigtable::MultiClusterRoutingUseAny
+    _(app_profile.routing_policy.to_grpc).must_equal routing_policy.to_grpc
   end
 
   it "set single_cluster_routing policy" do
@@ -62,7 +62,7 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
     )
     app_profile = Google::Cloud::Bigtable::AppProfile.from_grpc(app_profile_grpc, bigtable.service)
 
-    app_profile.routing_policy.must_be :nil?
+    _(app_profile.routing_policy).must_be :nil?
 
     routing_policy = Google::Cloud::Bigtable::AppProfile.single_cluster_routing(
       "test-cluster",
@@ -70,8 +70,8 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
     )
     app_profile.routing_policy = routing_policy
 
-    app_profile.routing_policy.must_be_kind_of Google::Cloud::Bigtable::SingleClusterRouting
-    app_profile.routing_policy.to_grpc.must_equal routing_policy.to_grpc
+    _(app_profile.routing_policy).must_be_kind_of Google::Cloud::Bigtable::SingleClusterRouting
+    _(app_profile.routing_policy.to_grpc).must_equal routing_policy.to_grpc
   end
 
   it "reloads its state" do
@@ -83,9 +83,9 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
 
     mock.verify
 
-    app_profile.project_id.must_equal project_id
-    app_profile.instance_id.must_equal instance_id
-    app_profile.name.must_equal app_profile_id
-    app_profile.path.must_equal app_profile_path(instance_id, app_profile_id)
+    _(app_profile.project_id).must_equal project_id
+    _(app_profile.instance_id).must_equal instance_id
+    _(app_profile.name).must_equal app_profile_id
+    _(app_profile.path).must_equal app_profile_path(instance_id, app_profile_id)
   end
 end

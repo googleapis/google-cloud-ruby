@@ -63,18 +63,18 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
     )
     mock.verify
 
-    row.must_be_kind_of Google::Cloud::Bigtable::Row
-    row.key.must_equal row_key
-    row.cells[family_name].length.must_equal 1
+    _(row).must_be_kind_of Google::Cloud::Bigtable::Row
+    _(row.key).must_equal row_key
+    _(row.cells[family_name].length).must_equal 1
 
     cell = row.cells[family_name].first
-    cell.value.must_equal cell_value
-    cell.family.must_equal family_name
-    cell.qualifier.must_equal qualifier
-    cell.timestamp.must_equal timestamp
-    cell.to_time.must_equal Time.at(timestamp/1000.0)
-    cell.to_i.must_equal 4702094672846537781
-    cell.labels.must_equal labels
+    _(cell.value).must_equal cell_value
+    _(cell.family).must_equal family_name
+    _(cell.qualifier).must_equal qualifier
+    _(cell.timestamp).must_equal timestamp
+    _(cell.to_time).must_equal Time.at(timestamp/1000.0)
+    _(cell.to_i).must_equal 4702094672846537781
+    _(cell.labels).must_equal labels
   end
 
   it "read modify and write row with multiple rule" do
@@ -118,16 +118,16 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
     )
     mock.verify
 
-    row.must_be_kind_of Google::Cloud::Bigtable::Row
-    row.key.must_equal row_key
-    row.cells[family_name].length.must_equal 2
+    _(row).must_be_kind_of Google::Cloud::Bigtable::Row
+    _(row.key).must_equal row_key
+    _(row.cells[family_name].length).must_equal 2
 
     row.cells[family_name].each_with_index do |cell, i|
-      cell.value.must_equal "#{cell_value}#{i+1}"
-      cell.family.must_equal family_name
-      cell.qualifier.must_equal qualifier
-      cell.timestamp.must_equal 0
-      cell.labels.must_equal []
+      _(cell.value).must_equal "#{cell_value}#{i+1}"
+      _(cell.family).must_equal family_name
+      _(cell.qualifier).must_equal qualifier
+      _(cell.timestamp).must_equal 0
+      _(cell.labels).must_equal []
     end
   end
 
@@ -142,11 +142,11 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
 
     row_key = "user-1"
 
-    proc {
+    assert_raises Google::Cloud::InvalidArgumentError do
       table.read_modify_write_row(
         row_key,
         Google::Cloud::Bigtable::ReadModifyWriteRule.append(family_name, qualifier, append_value)
       )
-    }.must_raise Google::Cloud::InvalidArgumentError
+    end
   end
 end

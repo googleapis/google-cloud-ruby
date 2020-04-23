@@ -44,7 +44,7 @@ describe Google::Cloud::Bigtable::Table, :mutate_row, :mock_bigtable do
       app_profile_id: app_profile_id
     ]
 
-    table.mutate_row(entry).must_equal true
+    _(table.mutate_row(entry)).must_equal true
     mock.verify
   end
 
@@ -62,8 +62,8 @@ describe Google::Cloud::Bigtable::Table, :mutate_row, :mock_bigtable do
     entry.set_cell("cf1-BAD ", "field1", "XYZ")
 
 
-    proc {
-      table.mutate_row(entry).must_equal true
-    }.must_raise Google::Cloud::InvalidArgumentError
+    assert_raises Google::Cloud::InvalidArgumentError do
+      _(table.mutate_row(entry)).must_equal true
+    end
   end
 end

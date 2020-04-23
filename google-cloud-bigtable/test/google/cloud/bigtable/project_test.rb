@@ -17,7 +17,7 @@ require "helper"
 
 describe Google::Cloud::Bigtable::Project, :mock_bigtable do
   it "knows the project identifier" do
-    bigtable.must_be_kind_of Google::Cloud::Bigtable::Project
-    bigtable.project_id.must_equal project_id
+    _(bigtable).must_be_kind_of Google::Cloud::Bigtable::Project
+    _(bigtable.project_id).must_equal project_id
   end
 end

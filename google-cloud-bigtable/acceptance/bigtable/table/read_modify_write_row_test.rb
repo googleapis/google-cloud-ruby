@@ -34,7 +34,7 @@ describe "DataClient Read Modify Write Row", :bigtable do
     )
 
     row = table.read_modify_write_row(row_key, rule)
-    row.cells[family].first.value.must_equal "Value append-xyz"
+    _(row.cells[family].first.value).must_equal "Value append-xyz"
   end
 
   it "increment row cell value" do
@@ -50,7 +50,7 @@ describe "DataClient Read Modify Write Row", :bigtable do
     )
 
     row = table.read_modify_write_row(row_key, rule)
-    row.cells[family].first.to_i.must_equal 101
+    _(row.cells[family].first.to_i).must_equal 101
   end
 
   it "raises Google::Cloud::InvalidArgumentError for invalid id for collection columnFamilies" do
@@ -60,8 +60,8 @@ describe "DataClient Read Modify Write Row", :bigtable do
       family + "&  *^(*&^%^%&^", qualifier, 1
     )
 
-    proc {
+    assert_raises Google::Cloud::InvalidArgumentError do
       table.read_modify_write_row(row_key, rule)
-    }.must_raise Google::Cloud::InvalidArgumentError
+    end
   end
 end

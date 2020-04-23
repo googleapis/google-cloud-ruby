@@ -22,14 +22,14 @@ describe "Instance Clusters", :bigtable do
 
   it "lists and get cluster" do
     clusters = instance.clusters.to_a
-    clusters.wont_be :empty?
+    _(clusters).wont_be :empty?
     clusters.each do |cluster|
-      cluster.must_be_kind_of Google::Cloud::Bigtable::Cluster
+      _(cluster).must_be_kind_of Google::Cloud::Bigtable::Cluster
     end
 
     cluster_id = clusters.first.cluster_id
     first_cluster = instance.cluster(cluster_id)
-    first_cluster.must_be_kind_of Google::Cloud::Bigtable::Cluster
+    _(first_cluster).must_be_kind_of Google::Cloud::Bigtable::Cluster
   end
 
   it "create cluster, update and delete" do
@@ -40,20 +40,20 @@ describe "Instance Clusters", :bigtable do
     job.wait_until_done!
 
     clusters = instance.clusters.to_a
-    clusters.length.must_equal 2
+    _(clusters.length).must_equal 2
 
     cluster = job.cluster
-    cluster.must_be_kind_of Google::Cloud::Bigtable::Cluster
-    instance.cluster(cluster_id).wont_be :nil?
+    _(cluster).must_be_kind_of Google::Cloud::Bigtable::Cluster
+    _(instance.cluster(cluster_id)).wont_be :nil?
 
     cluster.nodes = 5
     job = cluster.save
     job.wait_until_done!
 
     cluster = instance.cluster(cluster_id)
-    cluster.nodes.must_equal 5
+    _(cluster.nodes).must_equal 5
 
     cluster.delete
-    instance.cluster(cluster_id).must_be :nil?
+    _(instance.cluster(cluster_id)).must_be :nil?
   end if ENV["BIGTABLE_ALL_ACCEPTANCE_TESTS"]
 end

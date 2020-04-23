@@ -66,14 +66,14 @@ describe Google::Cloud::Bigtable::Table, :iam_policy, :mock_bigtable do
 
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::Bigtable::Policy
-    policy.etag.must_equal "abc"
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be_kind_of Array
-    policy.roles["roles/viewer"].count.must_equal 2
-    policy.roles["roles/viewer"].first.must_equal "user:viewer@example.com"
-    policy.roles["roles/viewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+    _(policy).must_be_kind_of Google::Cloud::Bigtable::Policy
+    _(policy.etag).must_equal "abc"
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles.size).must_equal 1
+    _(policy.roles["roles/viewer"]).must_be_kind_of Array
+    _(policy.roles["roles/viewer"].count).must_equal 2
+    _(policy.roles["roles/viewer"].first).must_equal "user:viewer@example.com"
+    _(policy.roles["roles/viewer"].last).must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
   it "update the iam policy" do
@@ -99,15 +99,15 @@ describe Google::Cloud::Bigtable::Table, :iam_policy, :mock_bigtable do
 
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::Bigtable::Policy
-    policy.etag.must_equal "xyz"
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be :nil?
-    policy.roles["roles/owner"].must_be_kind_of Array
-    policy.roles["roles/owner"].count.must_equal 2
-    policy.roles["roles/owner"].first.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
-    policy.roles["roles/owner"].last.must_equal  "user:newowner@example.com"
+    _(policy).must_be_kind_of Google::Cloud::Bigtable::Policy
+    _(policy.etag).must_equal "xyz"
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles.size).must_equal 1
+    _(policy.roles["roles/viewer"]).must_be :nil?
+    _(policy.roles["roles/owner"]).must_be_kind_of Array
+    _(policy.roles["roles/owner"].count).must_equal 2
+    _(policy.roles["roles/owner"].first).must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    _(policy.roles["roles/owner"].last).must_equal  "user:newowner@example.com"
   end
 
   it "get and set policy using block" do
@@ -131,15 +131,15 @@ describe Google::Cloud::Bigtable::Table, :iam_policy, :mock_bigtable do
 
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::Bigtable::Policy
-    policy.etag.must_equal "xyz"
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be :nil?
-    policy.roles["roles/owner"].must_be_kind_of Array
-    policy.roles["roles/owner"].count.must_equal 2
-    policy.roles["roles/owner"].first.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
-    policy.roles["roles/owner"].last.must_equal  "user:newowner@example.com"
+    _(policy).must_be_kind_of Google::Cloud::Bigtable::Policy
+    _(policy.etag).must_equal "xyz"
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles.size).must_equal 1
+    _(policy.roles["roles/viewer"]).must_be :nil?
+    _(policy.roles["roles/owner"]).must_be_kind_of Array
+    _(policy.roles["roles/owner"].count).must_equal 2
+    _(policy.roles["roles/owner"].first).must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    _(policy.roles["roles/owner"].last).must_equal  "user:newowner@example.com"
   end
 
   it "tests the available permissions" do
@@ -157,7 +157,7 @@ describe Google::Cloud::Bigtable::Table, :iam_policy, :mock_bigtable do
 
    mock.verify
 
-   permissions.must_be_kind_of Array
-   permissions.must_equal ["bigtable.tables.list"]
+   _(permissions).must_be_kind_of Array
+   _(permissions).must_equal ["bigtable.tables.list"]
  end
 end

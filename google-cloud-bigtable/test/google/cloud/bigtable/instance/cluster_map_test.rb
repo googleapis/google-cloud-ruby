@@ -23,15 +23,15 @@ describe Google::Cloud::Bigtable::Instance::ClusterMap, :mock_bigtable do
     cluster_id = "test-cluster"
 
     cluster_map = Google::Cloud::Bigtable::Instance::ClusterMap.new
-    cluster_map.must_be :empty?
+    _(cluster_map).must_be :empty?
 
     cluster_map.add(cluster_id, location, nodes: 3, storage_type: :SSD)
-    cluster_map.length.must_equal 1
+    _(cluster_map.length).must_equal 1
 
     cluster_grpc = cluster_map[cluster_id]
-    cluster_grpc.must_be_kind_of Google::Bigtable::Admin::V2::Cluster
-    cluster_grpc.location.must_equal location_path("us-east-1b")
-    cluster_grpc.serve_nodes.must_equal 3
-    cluster_grpc.default_storage_type.must_equal :SSD
+    _(cluster_grpc).must_be_kind_of Google::Bigtable::Admin::V2::Cluster
+    _(cluster_grpc.location).must_equal location_path("us-east-1b")
+    _(cluster_grpc.serve_nodes).must_equal 3
+    _(cluster_grpc.default_storage_type).must_equal :SSD
   end
 end

@@ -24,8 +24,8 @@ describe Google::Cloud::Bigtable::ReadModifyWriteRule, :read_modifu_write_rue, :
   it "create instance of rule" do
     rule = Google::Cloud::Bigtable::ReadModifyWriteRule.new(family, qualifier)
     grpc = rule.to_grpc
-    grpc.family_name.must_equal family
-    grpc.column_qualifier.must_equal qualifier
+    _(grpc.family_name).must_equal family
+    _(grpc.column_qualifier).must_equal qualifier
   end
 
   it "create append rule instance" do
@@ -34,11 +34,11 @@ describe Google::Cloud::Bigtable::ReadModifyWriteRule, :read_modifu_write_rue, :
       family, qualifier, append_value
     )
 
-    rule.must_be_kind_of Google::Cloud::Bigtable::ReadModifyWriteRule
+    _(rule).must_be_kind_of Google::Cloud::Bigtable::ReadModifyWriteRule
     grpc = rule.to_grpc
-    grpc.family_name.must_equal family
-    grpc.column_qualifier.must_equal qualifier
-    grpc.append_value.must_equal append_value
+    _(grpc.family_name).must_equal family
+    _(grpc.column_qualifier).must_equal qualifier
+    _(grpc.append_value).must_equal append_value
   end
 
   it "create increment amount instance" do
@@ -47,11 +47,11 @@ describe Google::Cloud::Bigtable::ReadModifyWriteRule, :read_modifu_write_rue, :
       family, qualifier, increment_amount
     )
 
-    rule.must_be_kind_of Google::Cloud::Bigtable::ReadModifyWriteRule
+    _(rule).must_be_kind_of Google::Cloud::Bigtable::ReadModifyWriteRule
     grpc = rule.to_grpc
-    grpc.family_name.must_equal family
-    grpc.column_qualifier.must_equal qualifier
-    grpc.increment_amount.must_equal increment_amount
+    _(grpc.family_name).must_equal family
+    _(grpc.column_qualifier).must_equal qualifier
+    _(grpc.increment_amount).must_equal increment_amount
   end
 
   it "set append value field" do
@@ -60,7 +60,7 @@ describe Google::Cloud::Bigtable::ReadModifyWriteRule, :read_modifu_write_rue, :
     rule.append(value)
 
     grpc = rule.to_grpc
-    grpc.append_value.must_equal value
+    _(grpc.append_value).must_equal value
   end
 
   it "set increment value field" do
@@ -69,6 +69,6 @@ describe Google::Cloud::Bigtable::ReadModifyWriteRule, :read_modifu_write_rue, :
     rule.increment(amount)
 
     grpc = rule.to_grpc
-    grpc.increment_amount.must_equal amount
+    _(grpc.increment_amount).must_equal amount
   end
 end

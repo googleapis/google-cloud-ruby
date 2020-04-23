@@ -36,7 +36,7 @@ describe Google::Cloud::Bigtable::AppProfile, :delete, :mock_bigtable do
     bigtable.service.mocked_instances = mock
 
     result = app_profile.delete
-    result.must_equal true
+    _(result).must_equal true
     mock.verify
   end
 
@@ -48,7 +48,7 @@ describe Google::Cloud::Bigtable::AppProfile, :delete, :mock_bigtable do
     bigtable.service.mocked_instances = mock
 
     result = app_profile.delete(ignore_warnings: ignore_warnings)
-    result.must_equal true
+    _(result).must_equal true
     mock.verify
   end
 end

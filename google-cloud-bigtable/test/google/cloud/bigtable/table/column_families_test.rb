@@ -76,23 +76,23 @@ describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
       cfm.update "cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
     end
 
-    column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
-    table.column_families.must_be :frozen?
-    column_families.names.sort.must_equal column_families_resp.keys
-    column_families["cf4"].gc_rule.to_grpc.must_equal gc_rule_1
-    column_families["cf2"].gc_rule.to_grpc.must_equal gc_rule_2
+    _(column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    _(table.column_families).must_be :frozen?
+    _(column_families.names.sort).must_equal column_families_resp.keys
+    _(column_families["cf4"].gc_rule.to_grpc).must_equal gc_rule_1
+    _(column_families["cf2"].gc_rule.to_grpc).must_equal gc_rule_2
 
-    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
-    table.column_families.must_be :frozen?
-    table.column_families.names.sort.must_equal column_families_resp.keys
-    table.column_families["cf4"].gc_rule.to_grpc.must_equal gc_rule_1
-    table.column_families["cf2"].gc_rule.to_grpc.must_equal gc_rule_2
+    _(table.column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    _(table.column_families).must_be :frozen?
+    _(table.column_families.names.sort).must_equal column_families_resp.keys
+    _(table.column_families["cf4"].gc_rule.to_grpc).must_equal gc_rule_1
+    _(table.column_families["cf2"].gc_rule.to_grpc).must_equal gc_rule_2
 
-    table.project_id.must_equal project_id
-    table.instance_id.must_equal instance_id
-    table.name.must_equal table_id
-    table.path.must_equal table_path(instance_id, table_id)
-    table.granularity.must_equal :MILLIS
+    _(table.project_id).must_equal project_id
+    _(table.instance_id).must_equal instance_id
+    _(table.name).must_equal table_id
+    _(table.path).must_equal table_path(instance_id, table_id)
+    _(table.granularity).must_equal :MILLIS
 
     mock.verify
   end

@@ -23,22 +23,22 @@ describe Google::Cloud::Bigtable::RowRange, :row_range, :mock_bigtable do
       from_key = "from-key-inclusive"
       range = Google::Cloud::Bigtable::RowRange.new.from(from_key)
 
-      range.must_be_kind_of Google::Cloud::Bigtable::RowRange
+      _(range).must_be_kind_of Google::Cloud::Bigtable::RowRange
 
       grpc = range.to_grpc
-      grpc.must_be_kind_of Google::Bigtable::V2::RowRange
-      grpc.start_key_closed.must_equal from_key
+      _(grpc).must_be_kind_of Google::Bigtable::V2::RowRange
+      _(grpc.start_key_closed).must_equal from_key
     end
 
     it "create exclusive from range instance" do
       from_key = "from-key-exclusive"
       range = Google::Cloud::Bigtable::RowRange.new.from(from_key, inclusive: false)
 
-      range.must_be_kind_of Google::Cloud::Bigtable::RowRange
+      _(range).must_be_kind_of Google::Cloud::Bigtable::RowRange
 
       grpc = range.to_grpc
-      grpc.must_be_kind_of Google::Bigtable::V2::RowRange
-      grpc.start_key_open.must_equal from_key
+      _(grpc).must_be_kind_of Google::Bigtable::V2::RowRange
+      _(grpc.start_key_open).must_equal from_key
     end
 
     it "create instance with from and to range" do
@@ -46,12 +46,12 @@ describe Google::Cloud::Bigtable::RowRange, :row_range, :mock_bigtable do
       to_key = "to-key"
       range = Google::Cloud::Bigtable::RowRange.new.from(from_key).to(to_key)
 
-      range.must_be_kind_of Google::Cloud::Bigtable::RowRange
+      _(range).must_be_kind_of Google::Cloud::Bigtable::RowRange
 
       grpc = range.to_grpc
-      grpc.must_be_kind_of Google::Bigtable::V2::RowRange
-      grpc.start_key_closed.must_equal from_key
-      grpc.end_key_open.must_equal to_key
+      _(grpc).must_be_kind_of Google::Bigtable::V2::RowRange
+      _(grpc.start_key_closed).must_equal from_key
+      _(grpc.end_key_open).must_equal to_key
     end
   end
 
@@ -60,22 +60,22 @@ describe Google::Cloud::Bigtable::RowRange, :row_range, :mock_bigtable do
       to_key = "to-key-inclusive"
       range = Google::Cloud::Bigtable::RowRange.new.to(to_key)
 
-      range.must_be_kind_of Google::Cloud::Bigtable::RowRange
+      _(range).must_be_kind_of Google::Cloud::Bigtable::RowRange
 
       grpc = range.to_grpc
-      grpc.must_be_kind_of Google::Bigtable::V2::RowRange
-      grpc.end_key_open.must_equal to_key
+      _(grpc).must_be_kind_of Google::Bigtable::V2::RowRange
+      _(grpc.end_key_open).must_equal to_key
     end
 
     it "create inclusive to range instance" do
       to_key = "to-key-exclusive"
       range = Google::Cloud::Bigtable::RowRange.new.to(to_key, inclusive: true)
 
-      range.must_be_kind_of Google::Cloud::Bigtable::RowRange
+      _(range).must_be_kind_of Google::Cloud::Bigtable::RowRange
 
       grpc = range.to_grpc
-      grpc.must_be_kind_of Google::Bigtable::V2::RowRange
-      grpc.end_key_closed.must_equal to_key
+      _(grpc).must_be_kind_of Google::Bigtable::V2::RowRange
+      _(grpc.end_key_closed).must_equal to_key
     end
 
     it "create instance with from and to range" do
@@ -83,12 +83,12 @@ describe Google::Cloud::Bigtable::RowRange, :row_range, :mock_bigtable do
       to_key = "to-key"
       range = Google::Cloud::Bigtable::RowRange.new.to(to_key).from(from_key)
 
-      range.must_be_kind_of Google::Cloud::Bigtable::RowRange
+      _(range).must_be_kind_of Google::Cloud::Bigtable::RowRange
 
       grpc = range.to_grpc
-      grpc.must_be_kind_of Google::Bigtable::V2::RowRange
-      grpc.start_key_closed.must_equal from_key
-      grpc.end_key_open.must_equal to_key
+      _(grpc).must_be_kind_of Google::Bigtable::V2::RowRange
+      _(grpc.start_key_closed).must_equal from_key
+      _(grpc.end_key_open).must_equal to_key
     end
   end
 
@@ -97,12 +97,12 @@ describe Google::Cloud::Bigtable::RowRange, :row_range, :mock_bigtable do
     to_key = "to-key"
     range = Google::Cloud::Bigtable::RowRange.new.between(from_key, to_key)
 
-    range.must_be_kind_of Google::Cloud::Bigtable::RowRange
+    _(range).must_be_kind_of Google::Cloud::Bigtable::RowRange
 
     grpc = range.to_grpc
-    grpc.must_be_kind_of Google::Bigtable::V2::RowRange
-    grpc.start_key_closed.must_equal from_key
-    grpc.end_key_closed.must_equal to_key
+    _(grpc).must_be_kind_of Google::Bigtable::V2::RowRange
+    _(grpc.start_key_closed).must_equal from_key
+    _(grpc.end_key_closed).must_equal to_key
   end
 
   it "create instance using of" do
@@ -110,11 +110,11 @@ describe Google::Cloud::Bigtable::RowRange, :row_range, :mock_bigtable do
     to_key = "to-key"
     range = Google::Cloud::Bigtable::RowRange.new.of(from_key, to_key)
 
-    range.must_be_kind_of Google::Cloud::Bigtable::RowRange
+    _(range).must_be_kind_of Google::Cloud::Bigtable::RowRange
 
     grpc = range.to_grpc
-    grpc.must_be_kind_of Google::Bigtable::V2::RowRange
-    grpc.start_key_closed.must_equal from_key
-    grpc.end_key_open.must_equal to_key
+    _(grpc).must_be_kind_of Google::Bigtable::V2::RowRange
+    _(grpc.start_key_closed).must_equal from_key
+    _(grpc.end_key_open).must_equal to_key
   end
 end

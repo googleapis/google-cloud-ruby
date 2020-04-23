@@ -45,10 +45,10 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
     table = instance.create_table(table_id)
     mock.verify
 
-    table.project_id.must_equal project_id
-    table.instance_id.must_equal instance_id
-    table.name.must_equal table_id
-    table.path.must_equal table_path(instance_id, table_id)
+    _(table.project_id).must_equal project_id
+    _(table.instance_id).must_equal instance_id
+    _(table.name).must_equal table_id
+    _(table.path).must_equal table_path(instance_id, table_id)
   end
 
   it "creates a table with column_families arg" do
@@ -87,18 +87,18 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
 
     table = instance.create_table(table_id, column_families: cfm, granularity: :MILLIS)
 
-    table.project_id.must_equal project_id
-    table.instance_id.must_equal instance_id
-    table.name.must_equal table_id
-    table.path.must_equal table_path(instance_id, table_id)
-    table.granularity.must_equal :MILLIS
-    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
-    table.column_families.must_be :frozen?
-    table.column_families.names.sort.must_equal column_families.keys
+    _(table.project_id).must_equal project_id
+    _(table.instance_id).must_equal instance_id
+    _(table.name).must_equal table_id
+    _(table.path).must_equal table_path(instance_id, table_id)
+    _(table.granularity).must_equal :MILLIS
+    _(table.column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    _(table.column_families).must_be :frozen?
+    _(table.column_families.names.sort).must_equal column_families.keys
     table.column_families.each do |name, cf|
-      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
+      _(cf.gc_rule.to_grpc).must_equal column_families[cf.name].gc_rule
     end
-    table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
+    _(table.cluster_states.map(&:cluster_name).sort).must_equal cluster_states.keys
 
     mock.verify
   end
@@ -138,18 +138,18 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
       cfm.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
-    table.project_id.must_equal project_id
-    table.instance_id.must_equal instance_id
-    table.name.must_equal table_id
-    table.path.must_equal table_path(instance_id, table_id)
-    table.granularity.must_equal :MILLIS
-    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
-    table.column_families.must_be :frozen?
-    table.column_families.names.sort.must_equal column_families.keys
+    _(table.project_id).must_equal project_id
+    _(table.instance_id).must_equal instance_id
+    _(table.name).must_equal table_id
+    _(table.path).must_equal table_path(instance_id, table_id)
+    _(table.granularity).must_equal :MILLIS
+    _(table.column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    _(table.column_families).must_be :frozen?
+    _(table.column_families.names.sort).must_equal column_families.keys
     table.column_families.each do |name, cf|
-      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
+      _(cf.gc_rule.to_grpc).must_equal column_families[cf.name].gc_rule
     end
-    table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
+    _(table.cluster_states.map(&:cluster_name).sort).must_equal cluster_states.keys
 
     mock.verify
   end
@@ -187,16 +187,16 @@ describe Google::Cloud::Bigtable::Instance, :create_table, :mock_bigtable do
       cfm.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(1))
     end
 
-    table.project_id.must_equal project_id
-    table.instance_id.must_equal instance_id
-    table.name.must_equal table_id
-    table.path.must_equal table_path(instance_id, table_id)
-    table.granularity.must_equal :MILLIS
-    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
-    table.column_families.must_be :frozen?
-    table.column_families.names.sort.must_equal column_families.keys
+    _(table.project_id).must_equal project_id
+    _(table.instance_id).must_equal instance_id
+    _(table.name).must_equal table_id
+    _(table.path).must_equal table_path(instance_id, table_id)
+    _(table.granularity).must_equal :MILLIS
+    _(table.column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    _(table.column_families).must_be :frozen?
+    _(table.column_families.names.sort).must_equal column_families.keys
     table.column_families.each do |name, cf|
-      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
+      _(cf.gc_rule.to_grpc).must_equal column_families[cf.name].gc_rule
     end
 
     mock.verify

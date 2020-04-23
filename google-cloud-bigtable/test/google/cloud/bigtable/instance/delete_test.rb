@@ -38,7 +38,7 @@ describe Google::Cloud::Bigtable::Instance, :delete, :mock_bigtable do
     bigtable.service.mocked_instances = mock
 
     result = instance.delete
-    result.must_equal true
+    _(result).must_equal true
     mock.verify
   end
 end

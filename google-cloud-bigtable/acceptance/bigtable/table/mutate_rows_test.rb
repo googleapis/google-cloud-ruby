@@ -33,12 +33,12 @@ describe "DataClient Mutate Rows", :bigtable do
     entry2.set_cell(family, qualifier, "mutatetest value #{postfix} 2")
 
     responses = table.mutate_rows([entry1, entry2])
-    responses.length.must_equal 2
+    _(responses.length).must_equal 2
 
     success_count = responses.count{ |r| r.status.code == 0 }
 
     keys = ["#{row_key}-1", "#{row_key}-2"]
     rows = table.read_rows(keys: keys).to_a
-    rows.length.must_equal success_count
+    _(rows.length).must_equal success_count
   end
 end

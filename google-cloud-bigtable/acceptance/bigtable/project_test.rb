@@ -43,9 +43,9 @@ describe Google::Cloud::Bigtable::Project, :bigtable do
     raise GRPC::BadStatus.new(job.error.code, job.error.message) if job.error?
 
     instance = job.instance
-    instance.must_be_kind_of Google::Cloud::Bigtable::Instance
-    instance.development?.must_equal true
-    instance.clusters.count.must_equal 1
-    instance.clusters.first.nodes.must_equal 1
+    _(instance).must_be_kind_of Google::Cloud::Bigtable::Instance
+    _(instance.development?).must_equal true
+    _(instance.clusters.count).must_equal 1
+    _(instance.clusters.first.nodes).must_equal 1
   end
 end

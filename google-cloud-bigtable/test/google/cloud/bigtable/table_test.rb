@@ -37,25 +37,25 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
   it "knows the identifiers" do
 
-    table.must_be_kind_of Google::Cloud::Bigtable::Table
-    table.project_id.must_equal project_id
-    table.instance_id.must_equal instance_id
-    table.name.must_equal table_id
-    table.path.must_equal table_path(instance_id, table_id)
+    _(table).must_be_kind_of Google::Cloud::Bigtable::Table
+    _(table.project_id).must_equal project_id
+    _(table.instance_id).must_equal instance_id
+    _(table.name).must_equal table_id
+    _(table.path).must_equal table_path(instance_id, table_id)
 
-    table.granularity.must_equal :MILLIS
-    table.granularity_millis?.must_equal true
+    _(table.granularity).must_equal :MILLIS
+    _(table.granularity_millis?).must_equal true
 
-    table.cluster_states.map(&:cluster_name).sort.must_equal cluster_states.keys
+    _(table.cluster_states.map(&:cluster_name).sort).must_equal cluster_states.keys
     table.cluster_states.each do |cs|
-      cs.replication_state.must_equal :READY
+      _(cs.replication_state).must_equal :READY
     end
 
-    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
-    table.column_families.must_be :frozen?
-    table.column_families.names.sort.must_equal column_families.keys
+    _(table.column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    _(table.column_families).must_be :frozen?
+    _(table.column_families.names.sort).must_equal column_families.keys
     table.column_families.each do |name, cf|
-      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
+      _(cf.gc_rule.to_grpc).must_equal column_families[cf.name].gc_rule
     end
   end
 
@@ -66,37 +66,37 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
     it "create mutation entry instance" do
       mutation_entry = table.new_mutation_entry("row-1")
-      mutation_entry.must_be_kind_of Google::Cloud::Bigtable::MutationEntry
-      mutation_entry.row_key.must_equal "row-1"
+      _(mutation_entry).must_be_kind_of Google::Cloud::Bigtable::MutationEntry
+      _(mutation_entry.row_key).must_equal "row-1"
     end
 
     it "create read modify write row rule instance" do
       table = Google::Cloud::Bigtable::Table.new(Object.new, Object.new)
       rule = table.new_read_modify_write_rule("cf", "field1")
-      rule.must_be_kind_of Google::Cloud::Bigtable::ReadModifyWriteRule
-      rule.to_grpc.family_name.must_equal "cf"
-      rule.to_grpc.column_qualifier.must_equal "field1"
+      _(rule).must_be_kind_of Google::Cloud::Bigtable::ReadModifyWriteRule
+      _(rule.to_grpc.family_name).must_equal "cf"
+      _(rule.to_grpc.column_qualifier).must_equal "field1"
     end
 
     it "create value range instance" do
       range = table.new_value_range
-      range.must_be_kind_of Google::Cloud::Bigtable::ValueRange
+      _(range).must_be_kind_of Google::Cloud::Bigtable::ValueRange
     end
 
     it "create column range instance" do
       range = table.new_column_range("cf")
-      range.must_be_kind_of Google::Cloud::Bigtable::ColumnRange
-      range.family.must_equal "cf"
+      _(range).must_be_kind_of Google::Cloud::Bigtable::ColumnRange
+      _(range.family).must_equal "cf"
     end
 
     it "create row range instance" do
       range = table.new_row_range
-      range.must_be_kind_of Google::Cloud::Bigtable::RowRange
+      _(range).must_be_kind_of Google::Cloud::Bigtable::RowRange
     end
 
     it "get filter module" do
       filter = table.filter
-      filter.must_equal Google::Cloud::Bigtable::RowFilter
+      _(filter).must_equal Google::Cloud::Bigtable::RowFilter
     end
   end
 
@@ -109,17 +109,17 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
     mock.verify
 
-    table.project_id.must_equal project_id
-    table.instance_id.must_equal instance_id
-    table.name.must_equal table_id
-    table.path.must_equal table_path(instance_id, table_id)
-    table.granularity.must_equal :MILLIS
+    _(table.project_id).must_equal project_id
+    _(table.instance_id).must_equal instance_id
+    _(table.name).must_equal table_id
+    _(table.path).must_equal table_path(instance_id, table_id)
+    _(table.granularity).must_equal :MILLIS
 
-    table.column_families.must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
-    table.column_families.must_be :frozen?
-    table.column_families.names.sort.must_equal column_families.keys
+    _(table.column_families).must_be_instance_of Google::Cloud::Bigtable::ColumnFamilyMap
+    _(table.column_families).must_be :frozen?
+    _(table.column_families.names.sort).must_equal column_families.keys
     table.column_families.each do |name, cf|
-      cf.gc_rule.to_grpc.must_equal column_families[cf.name].gc_rule
+      _(cf.gc_rule.to_grpc).must_equal column_families[cf.name].gc_rule
     end
   end
 end
