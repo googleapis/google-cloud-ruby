@@ -249,7 +249,23 @@ query = { text: { text: "book a meeting room", language_code: "en-US" } }
 response = client.detect_intent session: session, query_input: query
 ```
 
-In the 1.0 client, you can also use the paths module as a convenience module.
+Because helpers take keyword arguments, some can now generate several different
+variations on the path that were not available under earlier versions of the
+library. For example, `session_path` can generate paths with the `environment`
+and `user` sections omitted or present.
+
+New:
+```
+client = Google::Cloud::Dialogflow.sessions
+# Create paths with different parent resource types
+name1 = client.session_path project: "my-project", session: "my-session"
+# => "projects/my-project/agent/sessions/my-session"
+name2 = client.session_path project: "my-project", session: "my-session",
+                            environment: "my-env", user: "my-user"
+# => "projects/my-project/agent/environments/my-env/user/my-user/session/my-session"
+```
+
+Finally, in the 1.0 client, you can also use the paths module as a convenience module.
 
 New:
 ```
