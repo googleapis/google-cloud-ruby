@@ -237,16 +237,24 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.endpoint = @config.endpoint
               end
 
               @auto_ml_stub = Gapic::ServiceStub.new(
-                Google::Cloud::AutoML::V1::AutoML::Stub,
+                Google::Cloud::AutoML::V1::AutoMl::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [Google::Cloud::AutoML::V1::AutoML::Operations]
+            #
+            attr_reader :operations_client
 
             # Service calls
 

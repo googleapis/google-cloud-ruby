@@ -23,7 +23,7 @@ module Google
   module Cloud
     module AutoML
       module V1
-        module AutoML
+        module AutoMl
           # AutoML Server API.
           #
           # The resource names are assigned by the server.
