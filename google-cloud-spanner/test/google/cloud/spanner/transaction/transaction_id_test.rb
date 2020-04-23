@@ -25,8 +25,8 @@ describe Google::Cloud::Spanner::Transaction, :transaction_id, :mock_spanner do
   let(:transaction) { Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session }
 
   it "knows it has a timestamp" do
-    transaction.must_be_kind_of Google::Cloud::Spanner::Transaction
+    _(transaction).must_be_kind_of Google::Cloud::Spanner::Transaction
 
-    transaction.transaction_id.must_equal transaction_id
+    _(transaction.transaction_id).must_equal transaction_id
   end
 end

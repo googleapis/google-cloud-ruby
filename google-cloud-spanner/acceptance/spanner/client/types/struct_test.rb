@@ -23,17 +23,17 @@ describe "Spanner Client", :types, :struct, :spanner do
       "ORDER BY C1 ASC)"
     results = db.execute_query nested_sql
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ 0 => [db.fields(C1: :STRING, C2: :INT64)] })
-    results.rows.first.to_h.must_equal({ 0 => [{ C1: "a", C2: 1 }, { C1: "b", C2: 2 }] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ 0 => [db.fields(C1: :STRING, C2: :INT64)] })
+    _(results.rows.first.to_h).must_equal({ 0 => [{ C1: "a", C2: 1 }, { C1: "b", C2: 2 }] })
   end
 
   it "queries an empty struct" do
     empty_sql = "SELECT ARRAY(SELECT AS STRUCT * FROM (SELECT 'a', 1) WHERE 0 = 1)"
     results = db.execute_query empty_sql
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ 0 => [db.fields(0 => :STRING, 1 => :INT64)] })
-    results.rows.first.to_h.must_equal({ 0 => [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ 0 => [db.fields(0 => :STRING, 1 => :INT64)] })
+    _(results.rows.first.to_h).must_equal({ 0 => [] })
   end
 end

@@ -40,8 +40,8 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
 
     mock.verify
 
-    row_counts.count.must_equal 1
-    row_counts.first.must_equal 1
+    _(row_counts.count).must_equal 1
+    _(row_counts.first).must_equal 1
   end
 
   it "can execute a DML query with multiple statements and param types" do
@@ -73,16 +73,16 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
 
     mock.verify
 
-    row_counts.count.must_equal 9
-    row_counts.first.must_equal 1
-    row_counts.last.must_equal 1
+    _(row_counts.count).must_equal 9
+    _(row_counts.first).must_equal 1
+    _(row_counts.last).must_equal 1
   end
 
   it "raises ArgumentError if no block is provided" do
     err = expect do
       transaction.batch_update
     end.must_raise ArgumentError
-    err.message.must_equal "block is required"
+    _(err.message).must_equal "block is required"
   end
 
   describe "when used with execute_update" do

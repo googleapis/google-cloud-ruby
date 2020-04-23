@@ -153,19 +153,19 @@ describe Google::Cloud::Spanner::BatchSnapshot, :partition_read, :mock_spanner d
   end
 
   def assert_partitions partitions, keys: nil, index: nil
-    partitions.must_be_kind_of Array
-    partitions.wont_be :empty?
+    _(partitions).must_be_kind_of Array
+    _(partitions).wont_be :empty?
 
     partitions.each do |partition|
-      partition.must_be :read?
+      _(partition).must_be :read?
 
-      partition.read.partition_token.must_equal "partition-token"
-      partition.read.table.must_equal "my-table"
-      partition.read.key_set.must_equal Google::Cloud::Spanner::Convert.to_key_set(keys)
-      partition.read.columns.must_equal columns.map(&:to_s)
-      partition.read.index.must_equal index.to_s
+      _(partition.read.partition_token).must_equal "partition-token"
+      _(partition.read.table).must_equal "my-table"
+      _(partition.read.key_set).must_equal Google::Cloud::Spanner::Convert.to_key_set(keys)
+      _(partition.read.columns).must_equal columns.map(&:to_s)
+      _(partition.read.index).must_equal index.to_s
 
-      partition.execute.must_be_nil
+      _(partition.execute).must_be_nil
     end
   end
 end

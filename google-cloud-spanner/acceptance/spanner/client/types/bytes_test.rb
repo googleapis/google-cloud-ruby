@@ -23,11 +23,11 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, byte: StringIO.new("hello") }
     results = db.read table_name, [:id, :byte], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, byte: :BYTES })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, byte: :BYTES })
     returned_value = results.rows.first[:byte]
-    returned_value.must_be_kind_of StringIO
-    returned_value.read.must_equal "hello"
+    _(returned_value).must_be_kind_of StringIO
+    _(returned_value.read).must_equal "hello"
   end
 
   it "writes and queries bytes" do
@@ -35,11 +35,11 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, byte: StringIO.new("hello") }
     results = db.execute_query "SELECT id, byte FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, byte: :BYTES })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, byte: :BYTES })
     returned_value = results.rows.first[:byte]
-    returned_value.must_be_kind_of StringIO
-    returned_value.read.must_equal "hello"
+    _(returned_value).must_be_kind_of StringIO
+    _(returned_value.read).must_equal "hello"
   end
 
   it "writes and reads random bytes" do
@@ -48,12 +48,12 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, byte: random_bytes }
     results = db.read table_name, [:id, :byte], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, byte: :BYTES })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, byte: :BYTES })
     returned_value = results.rows.first[:byte]
-    returned_value.must_be_kind_of StringIO
+    _(returned_value).must_be_kind_of StringIO
     random_bytes.rewind
-    returned_value.read.must_equal random_bytes.read
+    _(returned_value.read).must_equal random_bytes.read
   end
 
   it "writes and queries random bytes" do
@@ -62,12 +62,12 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, byte: random_bytes }
     results = db.execute_query "SELECT id, byte FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, byte: :BYTES })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, byte: :BYTES })
     returned_value = results.rows.first[:byte]
-    returned_value.must_be_kind_of StringIO
+    _(returned_value).must_be_kind_of StringIO
     random_bytes.rewind
-    returned_value.read.must_equal random_bytes.read
+    _(returned_value.read).must_equal random_bytes.read
   end
 
   it "writes and reads NULL bytes" do
@@ -75,10 +75,10 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, byte: nil }
     results = db.read table_name, [:id, :byte], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, byte: :BYTES })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, byte: :BYTES })
     returned_value = results.rows.first[:byte]
-    returned_value.must_be :nil?
+    _(returned_value).must_be :nil?
   end
 
   it "writes and queries NULL bytes" do
@@ -86,10 +86,10 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, byte: nil }
     results = db.execute_query "SELECT id, byte FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, byte: :BYTES })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, byte: :BYTES })
     returned_value = results.rows.first[:byte]
-    returned_value.must_be :nil?
+    _(returned_value).must_be :nil?
   end
 
   it "writes and reads array of bytes" do
@@ -97,15 +97,15 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, bytes: [StringIO.new("howdy"), StringIO.new("hola"), StringIO.new("hello")] }
     results = db.read table_name, [:id, :bytes], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bytes: [:BYTES] })
     returned_values = results.rows.first[:bytes]
-    returned_values[0].must_be_kind_of StringIO
-    returned_values[0].read.must_equal "howdy"
-    returned_values[1].must_be_kind_of StringIO
-    returned_values[1].read.must_equal "hola"
-    returned_values[2].must_be_kind_of StringIO
-    returned_values[2].read.must_equal "hello"
+    _(returned_values[0]).must_be_kind_of StringIO
+    _(returned_values[0].read).must_equal "howdy"
+    _(returned_values[1]).must_be_kind_of StringIO
+    _(returned_values[1].read).must_equal "hola"
+    _(returned_values[2]).must_be_kind_of StringIO
+    _(returned_values[2].read).must_equal "hello"
   end
 
   it "writes and queries array of bytes" do
@@ -113,15 +113,15 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, bytes: [StringIO.new("howdy"), StringIO.new("hola"), StringIO.new("hello")] }
     results = db.execute_query "SELECT id, bytes FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bytes: [:BYTES] })
     returned_values = results.rows.first[:bytes]
-    returned_values[0].must_be_kind_of StringIO
-    returned_values[0].read.must_equal "howdy"
-    returned_values[1].must_be_kind_of StringIO
-    returned_values[1].read.must_equal "hola"
-    returned_values[2].must_be_kind_of StringIO
-    returned_values[2].read.must_equal "hello"
+    _(returned_values[0]).must_be_kind_of StringIO
+    _(returned_values[0].read).must_equal "howdy"
+    _(returned_values[1]).must_be_kind_of StringIO
+    _(returned_values[1].read).must_equal "hola"
+    _(returned_values[2]).must_be_kind_of StringIO
+    _(returned_values[2].read).must_equal "hello"
   end
 
   it "writes and reads array of byte with NULL" do
@@ -129,16 +129,16 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, bytes: [nil, StringIO.new("howdy"), StringIO.new("hola"), StringIO.new("hello")] }
     results = db.read table_name, [:id, :bytes], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bytes: [:BYTES] })
     returned_values = results.rows.first[:bytes]
-    returned_values[0].must_be :nil?
-    returned_values[1].must_be_kind_of StringIO
-    returned_values[1].read.must_equal "howdy"
-    returned_values[2].must_be_kind_of StringIO
-    returned_values[2].read.must_equal "hola"
-    returned_values[3].must_be_kind_of StringIO
-    returned_values[3].read.must_equal "hello"
+    _(returned_values[0]).must_be :nil?
+    _(returned_values[1]).must_be_kind_of StringIO
+    _(returned_values[1].read).must_equal "howdy"
+    _(returned_values[2]).must_be_kind_of StringIO
+    _(returned_values[2].read).must_equal "hola"
+    _(returned_values[3]).must_be_kind_of StringIO
+    _(returned_values[3].read).must_equal "hello"
   end
 
   it "writes and queries array of byte with NULL" do
@@ -146,16 +146,16 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, bytes: [nil, StringIO.new("howdy"), StringIO.new("hola"), StringIO.new("hello")] }
     results = db.execute_query "SELECT id, bytes FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bytes: [:BYTES] })
     returned_values = results.rows.first[:bytes]
-    returned_values[0].must_be :nil?
-    returned_values[1].must_be_kind_of StringIO
-    returned_values[1].read.must_equal "howdy"
-    returned_values[2].must_be_kind_of StringIO
-    returned_values[2].read.must_equal "hola"
-    returned_values[3].must_be_kind_of StringIO
-    returned_values[3].read.must_equal "hello"
+    _(returned_values[0]).must_be :nil?
+    _(returned_values[1]).must_be_kind_of StringIO
+    _(returned_values[1].read).must_equal "howdy"
+    _(returned_values[2]).must_be_kind_of StringIO
+    _(returned_values[2].read).must_equal "hola"
+    _(returned_values[3]).must_be_kind_of StringIO
+    _(returned_values[3].read).must_equal "hello"
   end
 
   it "writes and reads empty array of byte" do
@@ -163,9 +163,9 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, bytes: [] }
     results = db.read table_name, [:id, :bytes], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })
-    results.rows.first[:bytes].must_equal []
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bytes: [:BYTES] })
+    _(results.rows.first[:bytes]).must_equal []
   end
 
   it "writes and queries empty array of byte" do
@@ -173,9 +173,9 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, bytes: [] }
     results = db.execute_query "SELECT id, bytes FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })
-    results.rows.first[:bytes].must_equal []
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bytes: [:BYTES] })
+    _(results.rows.first[:bytes]).must_equal []
   end
 
   it "writes and reads NULL array of byte" do
@@ -183,9 +183,9 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, bytes: nil }
     results = db.read table_name, [:id, :bytes], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })
-    results.rows.first[:bytes].must_be :nil?
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bytes: [:BYTES] })
+    _(results.rows.first[:bytes]).must_be :nil?
   end
 
   it "writes and queries NULL array of byte" do
@@ -193,8 +193,8 @@ describe "Spanner Client", :types, :bytes, :spanner do
     db.upsert table_name, { id: id, bytes: nil }
     results = db.execute_query "SELECT id, bytes FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bytes: [:BYTES] })
-    results.rows.first[:bytes].must_be :nil?
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bytes: [:BYTES] })
+    _(results.rows.first[:bytes]).must_be :nil?
   end
 end

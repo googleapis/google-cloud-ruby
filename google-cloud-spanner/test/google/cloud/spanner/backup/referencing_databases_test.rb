@@ -40,11 +40,11 @@ describe Google::Cloud::Spanner::Backup, :referencing_databases, :mock_spanner d
     referencing_databases = backup.referencing_databases
     mock.verify
 
-    referencing_databases.must_be_kind_of Array
-    referencing_databases.length.must_equal 1
+    _(referencing_databases).must_be_kind_of Array
+    _(referencing_databases.length).must_equal 1
 
     referencing_database = referencing_databases[0]
-    referencing_database.instance_id.must_equal instance_id
-    referencing_database.database_id.must_equal referencing_database_id
+    _(referencing_database.instance_id).must_equal instance_id
+    _(referencing_database.database_id).must_equal referencing_database_id
   end
 end

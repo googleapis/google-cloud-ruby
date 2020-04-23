@@ -45,7 +45,7 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
     mock.verify
 
-    instances.size.must_equal 3
+    _(instances.size).must_equal 3
   end
 
   it "paginates instances" do
@@ -59,13 +59,13 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
     mock.verify
 
-    first_instances.size.must_equal 3
+    _(first_instances.size).must_equal 3
     token = first_instances.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
 
-    second_instances.size.must_equal 2
-    second_instances.token.must_be :nil?
+    _(second_instances.size).must_equal 2
+    _(second_instances.token).must_be :nil?
   end
 
   it "paginates instances with max set" do
@@ -77,10 +77,10 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
     mock.verify
 
-    instances.size.must_equal 3
+    _(instances.size).must_equal 3
     token = instances.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
   end
 
   it "paginates instances with next? and next" do
@@ -94,11 +94,11 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
     mock.verify
 
-    first_instances.size.must_equal 3
-    first_instances.next?.must_equal true
+    _(first_instances.size).must_equal 3
+    _(first_instances.next?).must_equal true
 
-    second_instances.size.must_equal 2
-    second_instances.next?.must_equal false
+    _(second_instances.size).must_equal 2
+    _(second_instances.next?).must_equal false
   end
 
   it "paginates instances with next? and next and max set" do
@@ -112,11 +112,11 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
     mock.verify
 
-    first_instances.size.must_equal 3
-    first_instances.next?.must_equal true
+    _(first_instances.size).must_equal 3
+    _(first_instances.next?).must_equal true
 
-    second_instances.size.must_equal 2
-    second_instances.next?.must_equal false
+    _(second_instances.size).must_equal 2
+    _(second_instances.next?).must_equal false
   end
 
   it "paginates instances with all" do
@@ -129,7 +129,7 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
     mock.verify
 
-    instances.size.must_equal 5
+    _(instances.size).must_equal 5
   end
 
   it "paginates instances with all and max set" do
@@ -142,7 +142,7 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
     mock.verify
 
-    instances.size.must_equal 5
+    _(instances.size).must_equal 5
   end
 
   it "iterates instances with all using Enumerator" do
@@ -155,7 +155,7 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
     mock.verify
 
-    instances.size.must_equal 5
+    _(instances.size).must_equal 5
   end
 
   it "iterates instances with all and request_limit set" do
@@ -168,6 +168,6 @@ describe Google::Cloud::Spanner::Project, :instances, :mock_spanner do
 
     mock.verify
 
-    instances.size.must_equal 6
+    _(instances.size).must_equal 6
   end
 end

@@ -19,6 +19,7 @@
 require "google/cloud/dialogflow/v2/agents"
 require "google/cloud/dialogflow/v2/contexts"
 require "google/cloud/dialogflow/v2/entity_types"
+require "google/cloud/dialogflow/v2/environments"
 require "google/cloud/dialogflow/v2/intents"
 require "google/cloud/dialogflow/v2/session_entity_types"
 require "google/cloud/dialogflow/v2/sessions"

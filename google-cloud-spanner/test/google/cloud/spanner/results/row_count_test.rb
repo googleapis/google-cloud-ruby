@@ -33,9 +33,9 @@ describe Google::Cloud::Spanner::Results, :row_count, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
     results.rows.to_a # force all results to be processed
 
-    results.must_be :row_count_exact?
-    results.wont_be :row_count_lower_bound?
-    results.row_count.must_equal 1
+    _(results).must_be :row_count_exact?
+    _(results).wont_be :row_count_lower_bound?
+    _(results.row_count).must_equal 1
   end
 
   it "knows lower bound row count" do
@@ -56,9 +56,9 @@ describe Google::Cloud::Spanner::Results, :row_count, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
     results.rows.to_a # force all results to be processed
 
-    results.must_be :row_count_lower_bound?
-    results.wont_be :row_count_exact?
-    results.row_count.must_equal 42
+    _(results).must_be :row_count_lower_bound?
+    _(results).wont_be :row_count_exact?
+    _(results.row_count).must_equal 42
   end
 
   it "does not present row_count if none is provided" do
@@ -76,8 +76,8 @@ describe Google::Cloud::Spanner::Results, :row_count, :mock_spanner do
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
     results.rows.to_a # force all results to be processed
 
-    results.wont_be :row_count_exact?
-    results.wont_be :row_count_lower_bound?
-    results.row_count.must_be :nil?
+    _(results).wont_be :row_count_exact?
+    _(results).wont_be :row_count_lower_bound?
+    _(results.row_count).must_be :nil?
   end
 end

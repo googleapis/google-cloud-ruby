@@ -39,23 +39,23 @@ describe Google::Cloud::Spanner::Results, :anonymous_struct, :mock_spanner do
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 
   it "handles anonymous structs" do
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.must_equal [0]
-    results.fields.pairs.must_equal [[0, [Google::Cloud::Spanner::Fields.new([:INT64, :INT64])]]]
-    results.fields.to_a.must_equal [[Google::Cloud::Spanner::Fields.new([:INT64, :INT64])]]
-    results.fields.to_h.must_equal({ 0 => [Google::Cloud::Spanner::Fields.new([:INT64, :INT64])] })
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys).must_equal [0]
+    _(results.fields.pairs).must_equal [[0, [Google::Cloud::Spanner::Fields.new([:INT64, :INT64])]]]
+    _(results.fields.to_a).must_equal [[Google::Cloud::Spanner::Fields.new([:INT64, :INT64])]]
+    _(results.fields.to_h).must_equal({ 0 => [Google::Cloud::Spanner::Fields.new([:INT64, :INT64])] })
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
+    _(rows.count).must_equal 1
     row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row.keys.must_equal [0]
-    row.values.must_equal [[Google::Cloud::Spanner::Fields.new([:INT64, :INT64]).new([1, 2])]]
-    row.pairs.must_equal [[0, [Google::Cloud::Spanner::Fields.new([:INT64, :INT64]).new([1, 2])]]]
-    row.to_a.must_equal [[{ 0 => 1, 1 => 2 }]]
-    row.to_h.must_equal({ 0 => [{ 0 => 1, 1 => 2 }] })
+    _(row).must_be_kind_of Google::Cloud::Spanner::Data
+    _(row.keys).must_equal [0]
+    _(row.values).must_equal [[Google::Cloud::Spanner::Fields.new([:INT64, :INT64]).new([1, 2])]]
+    _(row.pairs).must_equal [[0, [Google::Cloud::Spanner::Fields.new([:INT64, :INT64]).new([1, 2])]]]
+    _(row.to_a).must_equal [[{ 0 => 1, 1 => 2 }]]
+    _(row.to_h).must_equal({ 0 => [{ 0 => 1, 1 => 2 }] })
   end
 end

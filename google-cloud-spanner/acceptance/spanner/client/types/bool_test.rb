@@ -23,9 +23,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bool: true }
     results = db.read table_name, [:id, :bool], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bool: :BOOL })
-    results.rows.first.to_h.must_equal({ id: id, bool: true })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bool: :BOOL })
+    _(results.rows.first.to_h).must_equal({ id: id, bool: true })
   end
 
   it "writes and queries bool" do
@@ -33,9 +33,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bool: true }
     results = db.execute_query "SELECT id, bool FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bool: :BOOL })
-    results.rows.first.to_h.must_equal({ id: id, bool: true })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bool: :BOOL })
+    _(results.rows.first.to_h).must_equal({ id: id, bool: true })
   end
 
   it "writes and reads NULL bool" do
@@ -43,9 +43,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bool: nil }
     results = db.read table_name, [:id, :bool], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bool: :BOOL })
-    results.rows.first.to_h.must_equal({ id: id, bool: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bool: :BOOL })
+    _(results.rows.first.to_h).must_equal({ id: id, bool: nil })
   end
 
   it "writes and queries NULL bool" do
@@ -53,9 +53,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bool: nil }
     results = db.execute_query "SELECT id, bool FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bool: :BOOL })
-    results.rows.first.to_h.must_equal({ id: id, bool: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bool: :BOOL })
+    _(results.rows.first.to_h).must_equal({ id: id, bool: nil })
   end
 
   it "writes and reads array of bool" do
@@ -63,9 +63,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bools: [true, false, true] }
     results = db.read table_name, [:id, :bools], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bools: [:BOOL] })
-    results.rows.first.to_h.must_equal({ id: id, bools: [true, false, true] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bools: [:BOOL] })
+    _(results.rows.first.to_h).must_equal({ id: id, bools: [true, false, true] })
   end
 
   it "writes and queries array of bool" do
@@ -73,9 +73,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bools: [true, false, true] }
     results = db.execute_query "SELECT id, bools FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bools: [:BOOL] })
-    results.rows.first.to_h.must_equal({ id: id, bools: [true, false, true] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bools: [:BOOL] })
+    _(results.rows.first.to_h).must_equal({ id: id, bools: [true, false, true] })
   end
 
   it "writes and reads array of bool with NULL" do
@@ -83,9 +83,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bools: [nil, true, false, true] }
     results = db.read table_name, [:id, :bools], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bools: [:BOOL] })
-    results.rows.first.to_h.must_equal({ id: id, bools: [nil, true, false, true] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bools: [:BOOL] })
+    _(results.rows.first.to_h).must_equal({ id: id, bools: [nil, true, false, true] })
   end
 
   it "writes and queries array of bool with NULL" do
@@ -93,9 +93,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bools: [nil, true, false, true] }
     results = db.execute_query "SELECT id, bools FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bools: [:BOOL] })
-    results.rows.first.to_h.must_equal({ id: id, bools: [nil, true, false, true] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bools: [:BOOL] })
+    _(results.rows.first.to_h).must_equal({ id: id, bools: [nil, true, false, true] })
   end
 
   it "writes and reads empty array of bool" do
@@ -103,9 +103,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bools: [] }
     results = db.read table_name, [:id, :bools], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bools: [:BOOL] })
-    results.rows.first.to_h.must_equal({ id: id, bools: [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bools: [:BOOL] })
+    _(results.rows.first.to_h).must_equal({ id: id, bools: [] })
   end
 
   it "writes and queries empty array of bool" do
@@ -113,9 +113,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bools: [] }
     results = db.execute_query "SELECT id, bools FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bools: [:BOOL] })
-    results.rows.first.to_h.must_equal({ id: id, bools: [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bools: [:BOOL] })
+    _(results.rows.first.to_h).must_equal({ id: id, bools: [] })
   end
 
   it "writes and reads NULL array of bool" do
@@ -123,9 +123,9 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bools: nil }
     results = db.read table_name, [:id, :bools], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bools: [:BOOL] })
-    results.rows.first.to_h.must_equal({ id: id, bools: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bools: [:BOOL] })
+    _(results.rows.first.to_h).must_equal({ id: id, bools: nil })
   end
 
   it "writes and queries NULL array of bool" do
@@ -133,8 +133,8 @@ describe "Spanner Client", :types, :bool, :spanner do
     db.upsert table_name, { id: id, bools: nil }
     results = db.execute_query "SELECT id, bools FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, bools: [:BOOL] })
-    results.rows.first.to_h.must_equal({ id: id, bools: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, bools: [:BOOL] })
+    _(results.rows.first.to_h).must_equal({ id: id, bools: nil })
   end
 end

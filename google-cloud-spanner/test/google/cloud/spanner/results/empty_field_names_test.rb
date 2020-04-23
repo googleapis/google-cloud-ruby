@@ -50,24 +50,24 @@ describe Google::Cloud::Spanner::Results, :empty_field_names, :mock_spanner do
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 
   it "handles empty field names" do
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
     fields = results.fields
-    fields.wont_be :nil?
-    fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    fields.types.must_equal [:INT64, :INT64, :INT64, :INT64]
-    fields.keys.must_equal [0, 1, 2, 3]
-    fields.pairs.must_equal [[0, :INT64], [1, :INT64], [2, :INT64], [3, :INT64]]
-    fields.to_a.must_equal [:INT64, :INT64, :INT64, :INT64]
-    fields.to_h.must_equal({ 0=>:INT64, 1=>:INT64, 2=>:INT64, 3=>:INT64 })
+    _(fields).wont_be :nil?
+    _(fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(fields.types).must_equal [:INT64, :INT64, :INT64, :INT64]
+    _(fields.keys).must_equal [0, 1, 2, 3]
+    _(fields.pairs).must_equal [[0, :INT64], [1, :INT64], [2, :INT64], [3, :INT64]]
+    _(fields.to_a).must_equal [:INT64, :INT64, :INT64, :INT64]
+    _(fields.to_h).must_equal({ 0=>:INT64, 1=>:INT64, 2=>:INT64, 3=>:INT64 })
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 2
-    rows.first.to_a.must_equal [1, 2, 3, 4]
-    rows.last.to_a.must_equal [5, 6, 7, 8]
-    rows.first.to_h.must_equal({ 0=>1, 1=>2, 2=>3, 3=>4 })
-    rows.last.to_h.must_equal({ 0=>5, 1=>6, 2=>7, 3=>8 })
-    rows.first.pairs.must_equal [[0, 1], [1, 2], [2, 3], [3, 4]]
-    rows.last.pairs.must_equal [[0, 5], [1, 6], [2, 7], [3, 8]]
+    _(rows.count).must_equal 2
+    _(rows.first.to_a).must_equal [1, 2, 3, 4]
+    _(rows.last.to_a).must_equal [5, 6, 7, 8]
+    _(rows.first.to_h).must_equal({ 0=>1, 1=>2, 2=>3, 3=>4 })
+    _(rows.last.to_h).must_equal({ 0=>5, 1=>6, 2=>7, 3=>8 })
+    _(rows.first.pairs).must_equal [[0, 1], [1, 2], [2, 3], [3, 4]]
+    _(rows.last.pairs).must_equal [[0, 5], [1, 6], [2, 7], [3, 8]]
   end
 end

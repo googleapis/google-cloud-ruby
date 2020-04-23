@@ -31,8 +31,8 @@ describe Google::Cloud::Spanner::Client, :threads, :mock_spanner do
     threads = pool.instance_variable_get :@threads
     thread_pool = pool.instance_variable_get :@thread_pool
 
-    threads.must_equal 13
-    thread_pool.max_length.must_equal 13
+    _(threads).must_equal 13
+    _(thread_pool.max_length).must_equal 13
 
     client.close
 

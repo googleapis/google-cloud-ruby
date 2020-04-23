@@ -45,28 +45,28 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   end
 
   it "reads all by default" do
-    batch_snapshot.timestamp.must_be_kind_of Time
+    _(batch_snapshot.timestamp).must_be_kind_of Time
     serialized_snapshot = batch_snapshot.dump
 
     columns = [:id]
     partitions = batch_snapshot.partition_read table_name, columns
     partitions.each do |partition|
-      partition.read.partition_token.wont_be_nil
-      partition.read.columns.must_equal columns.map(&:to_s)
-      partition.read.table.must_equal "stuffs"
+      _(partition.read.partition_token).wont_be_nil
+      _(partition.read.columns).must_equal columns.map(&:to_s)
+      _(partition.read.table).must_equal "stuffs"
 
       partition = batch_client.load_partition partition.dump
 
-      partition.read.partition_token.wont_be_nil
-      partition.read.columns.must_equal columns.map(&:to_s)
-      partition.read.table.must_equal "stuffs"
+      _(partition.read.partition_token).wont_be_nil
+      _(partition.read.columns).must_equal columns.map(&:to_s)
+      _(partition.read.table).must_equal "stuffs"
 
       new_batch_snapshot = batch_client.load_batch_snapshot serialized_snapshot
-      new_batch_snapshot.timestamp.must_be_kind_of Time
+      _(new_batch_snapshot.timestamp).must_be_kind_of Time
       results = new_batch_snapshot.execute_partition partition
-      results.must_be_kind_of Google::Cloud::Spanner::Results
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
       unless results.fields.to_a.empty? # With so little data, just one partition should get the entire result set
-        results.rows.map(&:to_h).must_equal [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }, { id: 10 }, { id: 11 }, { id: 12 }]
+        _(results.rows.map(&:to_h)).must_equal [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }, { id: 10 }, { id: 11 }, { id: 12 }]
       end
     end
     batch_snapshot.close
@@ -79,19 +79,19 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
     sql = "SELECT s.id, s.bool FROM stuffs AS s WHERE s.id = 2 AND s.bool = false"
     partitions = batch_snapshot.partition_query sql
     partitions.each do |partition|
-      partition.execute.partition_token.wont_be_nil
-      partition.execute.sql.must_equal sql
+      _(partition.execute.partition_token).wont_be_nil
+      _(partition.execute.sql).must_equal sql
 
       partition = batch_client.load_partition partition.dump
 
-      partition.execute.partition_token.wont_be_nil
-      partition.execute.sql.must_equal sql
+      _(partition.execute.partition_token).wont_be_nil
+      _(partition.execute.sql).must_equal sql
 
       new_batch_snapshot = batch_client.load_batch_snapshot serialized_snapshot
       results = new_batch_snapshot.execute_partition partition
-      results.must_be_kind_of Google::Cloud::Spanner::Results
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
       unless results.fields.to_a.empty? # With so little data, just one partition should get the entire result set
-        results.rows.map(&:to_h).must_equal [{:id=>2, :bool=>false}]
+        _(results.rows.map(&:to_h)).must_equal [{:id=>2, :bool=>false}]
       end
     end
     batch_snapshot.close
@@ -105,19 +105,19 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
     query_options = { optimizer_version: "1" }
     partitions = batch_snapshot.partition_query sql, query_options: query_options
     partitions.each do |partition|
-      partition.execute.partition_token.wont_be_nil
-      partition.execute.sql.must_equal sql
+      _(partition.execute.partition_token).wont_be_nil
+      _(partition.execute.sql).must_equal sql
 
       partition = batch_client.load_partition partition.dump
 
-      partition.execute.partition_token.wont_be_nil
-      partition.execute.sql.must_equal sql
+      _(partition.execute.partition_token).wont_be_nil
+      _(partition.execute.sql).must_equal sql
 
       new_batch_snapshot = batch_client.load_batch_snapshot serialized_snapshot
       results = new_batch_snapshot.execute_partition partition
-      results.must_be_kind_of Google::Cloud::Spanner::Results
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
       unless results.fields.to_a.empty? # With so little data, just one partition should get the entire result set
-        results.rows.map(&:to_h).must_equal [{:id=>2, :bool=>false}]
+        _(results.rows.map(&:to_h)).must_equal [{:id=>2, :bool=>false}]
       end
     end
     batch_snapshot.close

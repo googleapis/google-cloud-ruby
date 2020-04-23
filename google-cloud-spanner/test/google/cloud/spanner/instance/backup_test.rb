@@ -34,16 +34,16 @@ describe Google::Cloud::Spanner::Instance, :backup, :mock_spanner do
 
     mock.verify
 
-    backup.project_id.must_equal project
-    backup.instance_id.must_equal instance_id
-    backup.database_id.must_equal database_id
-    backup.backup_id.must_equal backup_id
+    _(backup.project_id).must_equal project
+    _(backup.instance_id).must_equal instance_id
+    _(backup.database_id).must_equal database_id
+    _(backup.backup_id).must_equal backup_id
 
-    backup.path.must_equal backup_path(instance_id, backup_id)
+    _(backup.path).must_equal backup_path(instance_id, backup_id)
 
-    backup.state.must_equal :READY
-    backup.must_be :ready?
-    backup.wont_be :creating?
+    _(backup.state).must_equal :READY
+    _(backup).must_be :ready?
+    _(backup).wont_be :creating?
   end
 
   it "returns nil when getting a non-existent backup" do
@@ -58,6 +58,6 @@ describe Google::Cloud::Spanner::Instance, :backup, :mock_spanner do
     instance.service.mocked_databases = stub
 
     backup = instance.backup not_found_backup_id
-    backup.must_be :nil?
+    _(backup).must_be :nil?
   end
 end

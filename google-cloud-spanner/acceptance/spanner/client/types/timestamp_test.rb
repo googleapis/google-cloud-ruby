@@ -24,9 +24,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamp: Time.parse("2017-01-01 00:00:00Z") }
     results = db.read table_name, [:id, :timestamp], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamp: :TIMESTAMP })
-    results.rows.first.to_h.must_equal({ id: id, timestamp: Time.parse("2017-01-01 00:00:00Z") })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamp: :TIMESTAMP })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamp: Time.parse("2017-01-01 00:00:00Z") })
   end
 
   it "writes and reads commit_timestamp timestamp" do
@@ -34,9 +34,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     commit_timestamp = db.upsert table_name, { id: id, timestamp: db.commit_timestamp }
     results = db.read table_name, [:id, :timestamp], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamp: :TIMESTAMP })
-    results.rows.first.to_h.must_equal({ id: id, timestamp: commit_timestamp })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamp: :TIMESTAMP })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamp: commit_timestamp })
   end
 
   it "writes and queries timestamp" do
@@ -44,9 +44,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamp: Time.parse("2017-01-01 00:00:00Z") }
     results = db.execute_query "SELECT id, timestamp FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamp: :TIMESTAMP })
-    results.rows.first.to_h.must_equal({ id: id, timestamp: Time.parse("2017-01-01 00:00:00Z") })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamp: :TIMESTAMP })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamp: Time.parse("2017-01-01 00:00:00Z") })
   end
 
   it "writes and queries commit_timestamp timestamp" do
@@ -54,9 +54,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     commit_timestamp = db.upsert table_name, { id: id, timestamp: db.commit_timestamp }
     results = db.execute_query "SELECT id, timestamp FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamp: :TIMESTAMP })
-    results.rows.first.to_h.must_equal({ id: id, timestamp: commit_timestamp })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamp: :TIMESTAMP })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamp: commit_timestamp })
   end
 
   it "writes and reads NULL timestamp" do
@@ -64,9 +64,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamp: nil }
     results = db.read table_name, [:id, :timestamp], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamp: :TIMESTAMP })
-    results.rows.first.to_h.must_equal({ id: id, timestamp: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamp: :TIMESTAMP })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamp: nil })
   end
 
   it "writes and queries NULL timestamp" do
@@ -74,9 +74,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamp: nil }
     results = db.execute_query "SELECT id, timestamp FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamp: :TIMESTAMP })
-    results.rows.first.to_h.must_equal({ id: id, timestamp: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamp: :TIMESTAMP })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamp: nil })
   end
 
   it "writes and reads array of timestamp" do
@@ -84,9 +84,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] }
     results = db.read table_name, [:id, :timestamps], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    results.rows.first.to_h.must_equal({ id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
   end
 
   it "writes and queries array of timestamp" do
@@ -94,9 +94,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] }
     results = db.execute_query "SELECT id, timestamps FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    results.rows.first.to_h.must_equal({ id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
   end
 
   it "writes and reads array of timestamp with NULL" do
@@ -104,9 +104,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] }
     results = db.read table_name, [:id, :timestamps], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    results.rows.first.to_h.must_equal({ id: id, timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
   end
 
   it "writes and queries array of timestamp with NULL" do
@@ -114,9 +114,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] }
     results = db.execute_query "SELECT id, timestamps FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    results.rows.first.to_h.must_equal({ id: id, timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
   end
 
   it "writes and reads empty array of timestamp" do
@@ -124,9 +124,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamps: [] }
     results = db.read table_name, [:id, :timestamps], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    results.rows.first.to_h.must_equal({ id: id, timestamps: [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamps: [] })
   end
 
   it "writes and queries empty array of timestamp" do
@@ -134,9 +134,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamps: [] }
     results = db.execute_query "SELECT id, timestamps FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    results.rows.first.to_h.must_equal({ id: id, timestamps: [] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamps: [] })
   end
 
   it "writes and reads NULL array of timestamp" do
@@ -144,9 +144,9 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamps: nil }
     results = db.read table_name, [:id, :timestamps], keys: id
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    results.rows.first.to_h.must_equal({ id: id, timestamps: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamps: nil })
   end
 
   it "writes and queries NULL array of timestamp" do
@@ -154,8 +154,8 @@ describe "Spanner Client", :types, :timestamp, :spanner do
     db.upsert table_name, { id: id, timestamps: nil }
     results = db.execute_query "SELECT id, timestamps FROM #{table_name} WHERE id = @id", params: { id: id }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    results.rows.first.to_h.must_equal({ id: id, timestamps: nil })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
+    _(results.rows.first.to_h).must_equal({ id: id, timestamps: nil })
   end
 end

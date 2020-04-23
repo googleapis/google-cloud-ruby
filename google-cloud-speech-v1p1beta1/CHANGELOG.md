@@ -1,5 +1,15 @@
 # Release History
 
+### 0.2.0 / 2020-04-22
+
+#### Features
+
+* Support for speech adaptation configuration.
+
+#### Bug Fixes
+
+* Operations client honors its main client's custom endpoint.
+
 ### 0.1.2 / 2020-04-13
 
 #### Documentation

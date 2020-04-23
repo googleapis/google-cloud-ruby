@@ -33,14 +33,14 @@ describe "Spanner Client", :snapshot, :spanner do
   it "runs a query" do
     results = nil
     db.snapshot do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.execute_sql "SELECT * FROM accounts"
     end
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -50,14 +50,14 @@ describe "Spanner Client", :snapshot, :spanner do
     query_options = { optimizer_version: "latest" }
     results = nil
     db.snapshot do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.execute_sql "SELECT * FROM accounts", query_options: query_options
     end
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -66,14 +66,14 @@ describe "Spanner Client", :snapshot, :spanner do
   it "runs a read" do
     results = nil
     db.snapshot do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.read "accounts", columns
     end
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -82,14 +82,14 @@ describe "Spanner Client", :snapshot, :spanner do
   it "runs a query with strong option" do
     results = nil
     db.snapshot strong: true do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.execute_sql "SELECT * FROM accounts"
     end
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -98,14 +98,14 @@ describe "Spanner Client", :snapshot, :spanner do
   it "runs a read with strong option" do
     results = nil
     db.snapshot strong: true do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.read "accounts", columns
     end
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -114,14 +114,14 @@ describe "Spanner Client", :snapshot, :spanner do
   it "runs a query with timestamp option" do
     results = nil
     db.snapshot timestamp: @setup_timestamp do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.execute_sql "SELECT * FROM accounts"
     end
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -130,14 +130,14 @@ describe "Spanner Client", :snapshot, :spanner do
   it "runs a read with timestamp option" do
     results = nil
     db.snapshot timestamp: @setup_timestamp do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.read "accounts", columns
     end
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -146,14 +146,14 @@ describe "Spanner Client", :snapshot, :spanner do
   it "runs a query with staleness option" do
     results = nil
     db.snapshot staleness: 0.0001 do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.execute_sql "SELECT * FROM accounts"
     end
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -162,14 +162,14 @@ describe "Spanner Client", :snapshot, :spanner do
   it "runs a read with staleness option" do
     results = nil
     db.snapshot staleness: 0.0001 do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.read "accounts", columns
     end
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal fields_hash
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal fields_hash
     results.rows.zip(default_account_rows).each do |expected, actual|
       assert_accounts_equal expected, actual
     end
@@ -181,19 +181,19 @@ describe "Spanner Client", :snapshot, :spanner do
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
     db.snapshot strong: true do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.read "accounts", [:account_id, :username], keys: sample_row[:account_id]
       # verify we got the row we were expecting
-      results.rows.first.to_h.must_equal sample_row
+      _(results.rows.first.to_h).must_equal sample_row
 
       # outside of the snapshot, update the row!
       db.update "accounts", modified_row
 
       results2 = snp.read "accounts", [:account_id, :username], keys: modified_row[:account_id]
       # verify we got the previous row, not the modified row
-      results2.rows.first.to_h.must_equal sample_row
+      _(results2.rows.first.to_h).must_equal sample_row
     end
   end
 
@@ -203,19 +203,19 @@ describe "Spanner Client", :snapshot, :spanner do
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
     db.snapshot strong: true do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
       # verify we got the row we were expecting
-      results.rows.first.to_h.must_equal sample_row
+      _(results.rows.first.to_h).must_equal sample_row
 
       # outside of the snapshot, update the row!
       db.update "accounts", modified_row
 
       results2 = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
       # verify we got the previous row, not the modified row
-      results2.rows.first.to_h.must_equal sample_row
+      _(results2.rows.first.to_h).must_equal sample_row
     end
   end
 
@@ -225,19 +225,19 @@ describe "Spanner Client", :snapshot, :spanner do
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
     db.snapshot timestamp: @setup_timestamp do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.read "accounts", [:account_id, :username], keys: sample_row[:account_id]
       # verify we got the row we were expecting
-      results.rows.first.to_h.must_equal sample_row
+      _(results.rows.first.to_h).must_equal sample_row
 
       # outside of the snapshot, update the row!
       db.update "accounts", modified_row
 
       results2 = snp.read "accounts", [:account_id, :username], keys: modified_row[:account_id]
       # verify we got the previous row, not the modified row
-      results2.rows.first.to_h.must_equal sample_row
+      _(results2.rows.first.to_h).must_equal sample_row
     end
   end
 
@@ -247,19 +247,19 @@ describe "Spanner Client", :snapshot, :spanner do
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
     db.snapshot timestamp: @setup_timestamp do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
       # verify we got the row we were expecting
-      results.rows.first.to_h.must_equal sample_row
+      _(results.rows.first.to_h).must_equal sample_row
 
       # outside of the snapshot, update the row!
       db.update "accounts", modified_row
 
       results2 = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
       # verify we got the previous row, not the modified row
-      results2.rows.first.to_h.must_equal sample_row
+      _(results2.rows.first.to_h).must_equal sample_row
     end
   end
 
@@ -269,19 +269,19 @@ describe "Spanner Client", :snapshot, :spanner do
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
     db.snapshot staleness: 0.01 do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.read "accounts", [:account_id, :username], keys: sample_row[:account_id]
       # verify we got the row we were expecting
-      results.rows.first.to_h.must_equal sample_row
+      _(results.rows.first.to_h).must_equal sample_row
 
       # outside of the snapshot, update the row!
       db.update "accounts", modified_row
 
       results2 = snp.read "accounts", [:account_id, :username], keys: modified_row[:account_id]
       # verify we got the previous row, not the modified row
-      results2.rows.first.to_h.must_equal sample_row
+      _(results2.rows.first.to_h).must_equal sample_row
     end
   end
 
@@ -291,19 +291,19 @@ describe "Spanner Client", :snapshot, :spanner do
     modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
     db.snapshot staleness: 0.01 do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: sample_row[:account_id] }
       # verify we got the row we were expecting
-      results.rows.first.to_h.must_equal sample_row
+      _(results.rows.first.to_h).must_equal sample_row
 
       # outside of the snapshot, update the row!
       db.update "accounts", modified_row
 
       results2 = snp.execute_sql "SELECT account_id, username FROM accounts WHERE account_id = @id", params: { id: modified_row[:account_id] }
       # verify we got the previous row, not the modified row
-      results2.rows.first.to_h.must_equal sample_row
+      _(results2.rows.first.to_h).must_equal sample_row
     end
   end
 
@@ -311,17 +311,17 @@ describe "Spanner Client", :snapshot, :spanner do
     keys = default_account_rows.map{|row| row[:account_id] }
 
     db.snapshot do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.read "accounts", [:account_id, :username], keys: keys
-      results.must_be_kind_of Google::Cloud::Spanner::Results
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
       rows = results.rows.to_a
-      rows.count.must_equal default_account_rows.count
+      _(rows.count).must_equal default_account_rows.count
       rows.zip(default_account_rows).each do |expected, actual|
-        expected[:account_id].must_equal actual[:account_id]
-        expected[:username].must_equal actual[:username]
+        _(expected[:account_id]).must_equal actual[:account_id]
+        _(expected[:username]).must_equal actual[:username]
       end
 
       # outside of the snapshot, delete rows
@@ -329,36 +329,36 @@ describe "Spanner Client", :snapshot, :spanner do
 
       # read rows and from snaphot and verify rows got from the snapshot
       results2 = snp.read "accounts", [:account_id, :username], keys: keys
-      results2.must_be_kind_of Google::Cloud::Spanner::Results
+      _(results2).must_be_kind_of Google::Cloud::Spanner::Results
       rows2 = results2.rows.to_a
 
-      rows2.count.must_equal default_account_rows.count
+      _(rows2.count).must_equal default_account_rows.count
       rows2.zip(default_account_rows).each do |expected, actual|
-        expected[:account_id].must_equal actual[:account_id]
-        expected[:username].must_equal actual[:username]
+        _(expected[:account_id]).must_equal actual[:account_id]
+        _(expected[:username]).must_equal actual[:username]
       end
     end
 
     # outside of snapshot check all rows are deleted
     rows3 = db.execute_sql("SELECT * FROM accounts").rows.to_a
-    rows3.count.must_equal 0
+    _(rows3.count).must_equal 0
   end
 
   it "multiuse snapshot reads with read timestamp are consistent even when delete happen" do
     keys = default_account_rows.map{|row| row[:account_id] }
 
     db.snapshot read_timestamp: @setup_timestamp do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.read "accounts", [:account_id, :username], keys: keys
-      results.must_be_kind_of Google::Cloud::Spanner::Results
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
       rows = results.rows.to_a
-      rows.count.must_equal default_account_rows.count
+      _(rows.count).must_equal default_account_rows.count
       rows.zip(default_account_rows).each do |expected, actual|
-        expected[:account_id].must_equal actual[:account_id]
-        expected[:username].must_equal actual[:username]
+        _(expected[:account_id]).must_equal actual[:account_id]
+        _(expected[:username]).must_equal actual[:username]
       end
 
       # outside of the snapshot, delete rows
@@ -366,18 +366,18 @@ describe "Spanner Client", :snapshot, :spanner do
 
       # read rows and from snaphot and verify rows got from the snapshot
       results2 = snp.read "accounts", [:account_id, :username], keys: keys
-      results2.must_be_kind_of Google::Cloud::Spanner::Results
+      _(results2).must_be_kind_of Google::Cloud::Spanner::Results
       rows2 = results2.rows.to_a
-      rows2.count.must_equal default_account_rows.count
+      _(rows2.count).must_equal default_account_rows.count
       rows2.zip(default_account_rows).each do |expected, actual|
-        expected[:account_id].must_equal actual[:account_id]
-        expected[:username].must_equal actual[:username]
+        _(expected[:account_id]).must_equal actual[:account_id]
+        _(expected[:username]).must_equal actual[:username]
       end
     end
 
     # outside of snapshot check all rows are deleted
     rows3 = db.execute_sql("SELECT * FROM accounts").rows.to_a
-    rows3.count.must_equal 0
+    _(rows3.count).must_equal 0
   end
 
   it "multiuse snapshot reads with exact staleness are consistent even when delete happen" do
@@ -387,17 +387,17 @@ describe "Spanner Client", :snapshot, :spanner do
     delta = 0.001
 
     db.snapshot exact_staleness: delta do |snp|
-      snp.transaction_id.wont_be :nil?
-      snp.timestamp.wont_be :nil?
+      _(snp.transaction_id).wont_be :nil?
+      _(snp.timestamp).wont_be :nil?
 
       results = snp.read "accounts", [:account_id, :username], keys: keys
-      results.must_be_kind_of Google::Cloud::Spanner::Results
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
       rows = results.rows.to_a
-      rows.count.must_equal default_account_rows.count
+      _(rows.count).must_equal default_account_rows.count
       rows.zip(default_account_rows).each do |expected, actual|
-        expected[:account_id].must_equal actual[:account_id]
-        expected[:username].must_equal actual[:username]
+        _(expected[:account_id]).must_equal actual[:account_id]
+        _(expected[:username]).must_equal actual[:username]
       end
 
       # outside of the snapshot, delete rows
@@ -405,53 +405,53 @@ describe "Spanner Client", :snapshot, :spanner do
 
       # read rows and from snaphot and verify rows got from the snapshot
       results2 = snp.read "accounts", [:account_id, :username], keys: keys
-      results2.must_be_kind_of Google::Cloud::Spanner::Results
+      _(results2).must_be_kind_of Google::Cloud::Spanner::Results
       rows2 = results2.rows.to_a
-      rows2.count.must_equal default_account_rows.count
+      _(rows2.count).must_equal default_account_rows.count
       rows2.zip(default_account_rows).each do |expected, actual|
-        expected[:account_id].must_equal actual[:account_id]
-        expected[:username].must_equal actual[:username]
+        _(expected[:account_id]).must_equal actual[:account_id]
+        _(expected[:username]).must_equal actual[:username]
       end
     end
 
     # outside of snapshot check all rows are deleted
     rows3 = db.execute_sql("SELECT * FROM accounts").rows.to_a
-    rows3.count.must_equal 0
+    _(rows3.count).must_equal 0
   end
 
   def assert_accounts_equal expected, actual
     if actual[:account_id].nil?
-      expected[:account_id].must_be :nil?
+      _(expected[:account_id]).must_be :nil?
     else
-      expected[:account_id].must_equal actual[:account_id]
+      _(expected[:account_id]).must_equal actual[:account_id]
     end
 
     if actual[:username].nil?
-      expected[:username].must_be :nil?
+      _(expected[:username]).must_be :nil?
     else
-      expected[:username].must_equal actual[:username]
+      _(expected[:username]).must_equal actual[:username]
     end
 
     if actual[:reputation].nil?
-      expected[:reputation].must_be :nil?
+      _(expected[:reputation]).must_be :nil?
     else
-      expected[:reputation].must_equal actual[:reputation]
+      _(expected[:reputation]).must_equal actual[:reputation]
     end
 
     if actual[:active].nil?
-      expected[:active].must_be :nil?
+      _(expected[:active]).must_be :nil?
     else
-      expected[:active].must_equal actual[:active]
+      _(expected[:active]).must_equal actual[:active]
     end
 
     if expected[:avatar] && actual[:avatar]
-      expected[:avatar].read.must_equal actual[:avatar].read
+      _(expected[:avatar].read).must_equal actual[:avatar].read
     end
 
     if actual[:friends].nil?
-      expected[:friends].must_be :nil?
+      _(expected[:friends]).must_be :nil?
     else
-      expected[:friends].must_equal actual[:friends]
+      _(expected[:friends]).must_equal actual[:friends]
     end
   end
 end

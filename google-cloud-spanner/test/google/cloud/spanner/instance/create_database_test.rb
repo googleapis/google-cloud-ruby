@@ -66,17 +66,17 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
 
     job = instance.create_database database_id
 
-    job.must_be_kind_of Google::Cloud::Spanner::Database::Job
-    job.wont_be :done?
-    job.wont_be :error?
-    job.error.must_be :nil?
-    job.database.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.database).must_be :nil?
 
     job.reload!
     database = job.database
 
-    database.wont_be :nil?
-    database.must_be_kind_of Google::Cloud::Spanner::Database
+    _(database).wont_be :nil?
+    _(database).must_be_kind_of Google::Cloud::Spanner::Database
 
     mock.verify
   end
@@ -102,7 +102,7 @@ describe Google::Cloud::Spanner::Instance, :create_database, :mock_spanner do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Spanner::Database::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done?
   end
 end

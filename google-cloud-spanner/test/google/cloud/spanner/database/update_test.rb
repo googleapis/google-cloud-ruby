@@ -44,8 +44,8 @@ describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Spanner::Database::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done?
   end
 
   it "updates with multiple statements" do
@@ -63,8 +63,8 @@ describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Spanner::Database::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done?
   end
 
   it "updates with operation_id" do
@@ -82,7 +82,7 @@ describe Google::Cloud::Spanner::Database, :update, :mock_spanner do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Spanner::Database::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done?
   end
 end

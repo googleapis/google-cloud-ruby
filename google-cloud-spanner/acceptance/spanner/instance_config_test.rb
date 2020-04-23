@@ -17,12 +17,12 @@ require "spanner_helper"
 describe "Spanner Instance Configs", :spanner do
   it "lists and gets instance configs" do
     all_configs = spanner.instance_configs.all.to_a
-    all_configs.wont_be :empty?
+    _(all_configs).wont_be :empty?
     all_configs.each do |config|
-      config.must_be_kind_of Google::Cloud::Spanner::Instance::Config
+      _(config).must_be_kind_of Google::Cloud::Spanner::Instance::Config
     end
 
     first_configs = spanner.instance_config all_configs.first.instance_config_id
-    first_configs.must_be_kind_of Google::Cloud::Spanner::Instance::Config
+    _(first_configs).must_be_kind_of Google::Cloud::Spanner::Instance::Config
   end
 end
