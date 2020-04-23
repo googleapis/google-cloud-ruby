@@ -19,6 +19,8 @@ import synthtool.gcp as gcp
 import synthtool.languages.ruby as ruby
 import logging
 
+AUTOSYNTH_MULTIPLE_COMMITS = True
+
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICMicrogenerator()

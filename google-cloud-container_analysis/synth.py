@@ -21,6 +21,8 @@ import logging
 import os
 import re
 
+AUTOSYNTH_MULTIPLE_COMMITS = True
+
 logging.basicConfig(level=logging.DEBUG)
 
 gapic = gcp.GAPICGenerator()
