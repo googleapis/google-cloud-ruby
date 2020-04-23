@@ -86,7 +86,7 @@ Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
 end
 ```
 
-Defaults for certain configurations can be set for all Dialogflow versions and
+Defaults for certain configurations can be set for all DLP versions and
 services globally:
 
 ```
