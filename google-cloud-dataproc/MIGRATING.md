@@ -250,7 +250,27 @@ name = client.workflow_template_path project: "my-project",
 response = client.get_workflow_template name: name
 ```
 
-In the 1.0 client, you can also use the paths module as a convenience module.
+Because helpers take keyword arguments, some can now generate several different
+variations on the path that were not available under earlier versions of the
+library. For example, `workflow_template_path` can generate paths with either
+a region or location as the parent resource.
+
+New:
+```
+client = Google::Cloud::Dataproc.workflow_template_service
+
+# Create paths with different parent resource types
+name1 = client.workflow_template_path project: "my-project",
+                                      region: "us-central1",
+                                      workflow_template: "my-template"
+# => "projects/my-project/regions/us-central1/workflowTemplates/my-template"
+name2 = client.workflow_template_path project: "my-project",
+                                      location: "my-location",
+                                      workflow_template: "my-template"
+# => "projects/my-project/locations/my-location/workflowTemplates/my-template"
+```
+
+Finally, in the 1.0 client, you can also use the paths module as a convenience module.
 
 New:
 ```
@@ -270,10 +290,6 @@ def foo
   # Do something with response...
 end
 ```
-
-Note that, because the path helper uses keyword arguments, it now supports both
-path variants, including both the variant using region and the variant using
-location. Previously, the helper supported only paths with region.
 
 ### Class Namespaces
 
