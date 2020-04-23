@@ -75,7 +75,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
       c.replace "users", [{ id: 4, name: "Henry",  active: true }]
       c.delete "users", [1, 2, 3, 4, 5]
     end
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -98,7 +98,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.update "users", [{ id: 1, name: "Charlie", active: false }]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -121,7 +121,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.insert "users", [{ id: 2, name: "Harvey",  active: true }]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -144,7 +144,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.upsert "users", [{ id: 3, name: "Marley",  active: false }]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -167,7 +167,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.save "users", [{ id: 3, name: "Marley",  active: false }]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -190,7 +190,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.replace "users", [{ id: 4, name: "Henry",  active: true }]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -216,7 +216,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users", [1, 2, 3, 4, 5]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -247,7 +247,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users", [time1, time2, time3, time4]
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -271,7 +271,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users", 1..100
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -297,7 +297,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users", 5
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -325,7 +325,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users", time5
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 
@@ -347,7 +347,7 @@ describe Google::Cloud::Spanner::Client, :read, :mock_spanner do
     spanner.service.mocked_service = mock
 
     timestamp = client.delete "users"
-    timestamp.must_equal commit_time
+    _(timestamp).must_equal commit_time
 
     shutdown_client! client
 

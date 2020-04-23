@@ -27,11 +27,11 @@ describe Google::Cloud::Spanner::Project, :instance, :mock_spanner do
 
     mock.verify
 
-    instance.project_id.must_equal project
-    instance.instance_id.must_equal instance_id
-    instance.path.must_equal instance_path(instance_id)
-    instance.name.must_equal instance_id.split("-").map(&:capitalize).join(" ")
-    instance.display_name.must_equal instance_id.split("-").map(&:capitalize).join(" ")
+    _(instance.project_id).must_equal project
+    _(instance.instance_id).must_equal instance_id
+    _(instance.path).must_equal instance_path(instance_id)
+    _(instance.name).must_equal instance_id.split("-").map(&:capitalize).join(" ")
+    _(instance.display_name).must_equal instance_id.split("-").map(&:capitalize).join(" ")
   end
 
   it "returns nil when getting an non-existent instance" do
@@ -46,6 +46,6 @@ describe Google::Cloud::Spanner::Project, :instance, :mock_spanner do
     spanner.service.mocked_instances = stub
 
     instance = spanner.instance not_found_instance_id
-    instance.must_be :nil?
+    _(instance).must_be :nil?
   end
 end

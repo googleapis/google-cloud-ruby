@@ -45,7 +45,7 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
     mock.verify
 
-    configs.size.must_equal 3
+    _(configs.size).must_equal 3
   end
 
   it "paginates configs" do
@@ -59,13 +59,13 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
     mock.verify
 
-    first_configs.size.must_equal 3
+    _(first_configs.size).must_equal 3
     token = first_configs.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
 
-    second_configs.size.must_equal 2
-    second_configs.token.must_be :nil?
+    _(second_configs.size).must_equal 2
+    _(second_configs.token).must_be :nil?
   end
 
   it "paginates configs with max set" do
@@ -77,10 +77,10 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
     mock.verify
 
-    configs.size.must_equal 3
+    _(configs.size).must_equal 3
     token = configs.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
   end
 
   it "paginates configs with next? and next" do
@@ -94,11 +94,11 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
     mock.verify
 
-    first_configs.size.must_equal 3
-    first_configs.next?.must_equal true
+    _(first_configs.size).must_equal 3
+    _(first_configs.next?).must_equal true
 
-    second_configs.size.must_equal 2
-    second_configs.next?.must_equal false
+    _(second_configs.size).must_equal 2
+    _(second_configs.next?).must_equal false
   end
 
   it "paginates configs with next? and next and max set" do
@@ -112,11 +112,11 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
     mock.verify
 
-    first_configs.size.must_equal 3
-    first_configs.next?.must_equal true
+    _(first_configs.size).must_equal 3
+    _(first_configs.next?).must_equal true
 
-    second_configs.size.must_equal 2
-    second_configs.next?.must_equal false
+    _(second_configs.size).must_equal 2
+    _(second_configs.next?).must_equal false
   end
 
   it "paginates configs with all" do
@@ -129,7 +129,7 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
     mock.verify
 
-    configs.size.must_equal 5
+    _(configs.size).must_equal 5
   end
 
   it "paginates configs with all and max set" do
@@ -142,7 +142,7 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
     mock.verify
 
-    configs.size.must_equal 5
+    _(configs.size).must_equal 5
   end
 
   it "iterates configs with all using Enumerator" do
@@ -155,7 +155,7 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
     mock.verify
 
-    configs.size.must_equal 5
+    _(configs.size).must_equal 5
   end
 
   it "iterates configs with all and request_limit set" do
@@ -168,6 +168,6 @@ describe Google::Cloud::Spanner::Project, :instance_configs, :mock_spanner do
 
     mock.verify
 
-    configs.size.must_equal 6
+    _(configs.size).must_equal 6
   end
 end

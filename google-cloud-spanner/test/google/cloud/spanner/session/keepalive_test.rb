@@ -62,7 +62,7 @@ describe Google::Cloud::Spanner::Session, :keepalive, :mock_spanner do
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
 
     result = session.keepalive!
-    result.must_equal false
+    _(result).must_equal false
     mock.verify
   end
 
@@ -76,7 +76,7 @@ describe Google::Cloud::Spanner::Session, :keepalive, :mock_spanner do
     mock.expect :create_session, session_grpc_labels, [database_path(instance_id, database_id), session: Google::Spanner::V1::Session.new(labels: labels), options: default_options]
 
     result = session_labels.keepalive!
-    result.must_equal false
+    _(result).must_equal false
     mock.verify
   end
 end

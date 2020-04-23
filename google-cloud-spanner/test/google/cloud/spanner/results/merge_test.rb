@@ -27,18 +27,18 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.count.must_equal 1
-    results.fields[:f1].must_equal :STRING
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys.count).must_equal 1
+    _(results.fields[:f1]).must_equal :STRING
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
+    _(rows.count).must_equal 1
     row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row[:f1].must_equal "abcdefghi"
+    _(row).must_be_kind_of Google::Cloud::Spanner::Data
+    _(row[:f1]).must_equal "abcdefghi"
   end
 
   it "merges String Arrays" do
@@ -53,18 +53,18 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.count.must_equal 1
-    results.fields[:f1].must_equal [:STRING]
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys.count).must_equal 1
+    _(results.fields[:f1]).must_equal [:STRING]
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
+    _(rows.count).must_equal 1
     row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row[:f1].must_equal ["abc", "def", "ghi", "jkl"]
+    _(row).must_be_kind_of Google::Cloud::Spanner::Data
+    _(row[:f1]).must_equal ["abc", "def", "ghi", "jkl"]
   end
 
   it "merges String Arrays With Nulls" do
@@ -79,18 +79,18 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.count.must_equal 1
-    results.fields[:f1].must_equal [:STRING]
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys.count).must_equal 1
+    _(results.fields[:f1]).must_equal [:STRING]
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
+    _(rows.count).must_equal 1
     row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row[:f1].must_equal ["abc", "def", nil, "ghi", nil, "jkl"]
+    _(row).must_be_kind_of Google::Cloud::Spanner::Data
+    _(row[:f1]).must_equal ["abc", "def", nil, "ghi", nil, "jkl"]
   end
 
   it "merges String Arrays With Empty Strings" do
@@ -105,18 +105,18 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.count.must_equal 1
-    results.fields[:f1].must_equal [:STRING]
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys.count).must_equal 1
+    _(results.fields[:f1]).must_equal [:STRING]
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
+    _(rows.count).must_equal 1
     row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row[:f1].must_equal ["abc", "def", "ghi", "jkl"]
+    _(row).must_be_kind_of Google::Cloud::Spanner::Data
+    _(row[:f1]).must_equal ["abc", "def", "ghi", "jkl"]
   end
 
   it "merges String Arrays With One Large String" do
@@ -131,18 +131,18 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.count.must_equal 1
-    results.fields[:f1].must_equal [:STRING]
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys.count).must_equal 1
+    _(results.fields[:f1]).must_equal [:STRING]
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
+    _(rows.count).must_equal 1
     row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row[:f1].must_equal ["abcdefghi"]
+    _(row).must_be_kind_of Google::Cloud::Spanner::Data
+    _(row[:f1]).must_equal ["abcdefghi"]
   end
 
   it "merges INT64 Arrays" do
@@ -157,18 +157,18 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.count.must_equal 1
-    results.fields[:f1].must_equal [:INT64]
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys.count).must_equal 1
+    _(results.fields[:f1]).must_equal [:INT64]
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
+    _(rows.count).must_equal 1
     row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row[:f1].must_equal [1, 23, 4, nil, 5]
+    _(row).must_be_kind_of Google::Cloud::Spanner::Data
+    _(row[:f1]).must_equal [1, 23, 4, nil, 5]
   end
 
   it "merges FLOAT64 Arrays" do
@@ -183,18 +183,18 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.count.must_equal 1
-    results.fields[:f1].must_equal [:FLOAT64]
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys.count).must_equal 1
+    _(results.fields[:f1]).must_equal [:FLOAT64]
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
+    _(rows.count).must_equal 1
     row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row[:f1].must_equal [1.0, 2.0, Float::INFINITY, -Float::INFINITY, Float::NAN, nil, 3.0]
+    _(row).must_be_kind_of Google::Cloud::Spanner::Data
+    _(row[:f1]).must_equal [1.0, 2.0, Float::INFINITY, -Float::INFINITY, Float::NAN, nil, 3.0]
   end
 
   it "merges Multiple Row Chunks/Non Chunks Interleaved" do
@@ -210,15 +210,15 @@ describe Google::Cloud::Spanner::Results, :merge, :mock_spanner do
     results_enum = results_hashes.map { |hash| Google::Spanner::V1::PartialResultSet.new hash }.to_enum
     results = Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.count.must_equal 1
-    results.fields[:f1].must_equal :STRING
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys.count).must_equal 1
+    _(results.fields[:f1]).must_equal :STRING
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 4
-    rows.map(&:to_h).must_equal [{ f1: "ab" }, { f1: "c" }, { f1: "d" }, { f1: "ef" }]
+    _(rows.count).must_equal 4
+    _(rows.map(&:to_h)).must_equal [{ f1: "ab" }, { f1: "c" }, { f1: "d" }, { f1: "ef" }]
   end
 end

@@ -23,8 +23,8 @@ describe "Spanner Client", :commit_timestamp, :spanner do
     commit_timestamp = db.upsert table_name, { committs: db.commit_timestamp }
     results = db.read table_name, table_types, keys: commit_timestamp
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ committs: :TIMESTAMP })
-    results.rows.first.to_h.must_equal({ committs: commit_timestamp })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ committs: :TIMESTAMP })
+    _(results.rows.first.to_h).must_equal({ committs: commit_timestamp })
   end
 end

@@ -19,45 +19,45 @@ describe "Spanner Databases", :spanner do
   let(:database_id) { "#{$spanner_database_id}-crud" }
 
   it "creates, updates, and drops a database" do
-    spanner.database(instance_id, database_id).must_be :nil?
+    _(spanner.database(instance_id, database_id)).must_be :nil?
 
     job = spanner.create_database instance_id, database_id
-    job.must_be_kind_of Google::Cloud::Spanner::Database::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job).wont_be :done?
     job.wait_until_done!
 
-    job.must_be :done?
+    _(job).must_be :done?
     raise Google::Cloud::Error.from_error(job.error) if job.error?
     database = job.database
-    database.wont_be :nil?
-    database.must_be_kind_of Google::Cloud::Spanner::Database
-    database.database_id.must_equal database_id
-    database.instance_id.must_equal instance_id
-    database.project_id.must_equal spanner.project
+    _(database).wont_be :nil?
+    _(database).must_be_kind_of Google::Cloud::Spanner::Database
+    _(database.database_id).must_equal database_id
+    _(database.instance_id).must_equal instance_id
+    _(database.project_id).must_equal spanner.project
 
-    spanner.database(instance_id, database_id).wont_be :nil?
+    _(spanner.database(instance_id, database_id)).wont_be :nil?
 
     job2 = database.update statements: "CREATE TABLE users (id INT64 NOT NULL) PRIMARY KEY(id)"
 
-    job2.must_be_kind_of Google::Cloud::Spanner::Database::Job
-    job2.wont_be :done?
+    _(job2).must_be_kind_of Google::Cloud::Spanner::Database::Job
+    _(job2).wont_be :done?
     job2.wait_until_done!
 
-    job2.must_be :done?
-    job2.database.must_be :nil?
+    _(job2).must_be :done?
+    _(job2.database).must_be :nil?
 
     database.drop
-    spanner.database(instance_id, database_id).must_be :nil?
+    _(spanner.database(instance_id, database_id)).must_be :nil?
   end
 
   it "lists and gets databases" do
     all_databases = spanner.databases(instance_id).all.to_a
-    all_databases.wont_be :empty?
+    _(all_databases).wont_be :empty?
     all_databases.each do |database|
-      database.must_be_kind_of Google::Cloud::Spanner::Database
+      _(database).must_be_kind_of Google::Cloud::Spanner::Database
     end
 
     first_database = spanner.database all_databases.first.instance_id, all_databases.first.database_id
-    first_database.must_be_kind_of Google::Cloud::Spanner::Database
+    _(first_database).must_be_kind_of Google::Cloud::Spanner::Database
   end
 end

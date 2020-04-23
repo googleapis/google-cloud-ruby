@@ -50,23 +50,23 @@ describe Google::Cloud::Spanner::Results, :duplicate, :mock_spanner do
   let(:results) { Google::Cloud::Spanner::Results.from_enum results_enum, spanner.service }
 
   it "handles duplicate names" do
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
     fields = results.fields
-    fields.wont_be :nil?
-    fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    fields.types.must_equal [:INT64, :INT64, :STRING, :STRING]
-    fields.keys.must_equal [:num, :str, :num, :str]
-    fields.pairs.must_equal [[:num, :INT64], [:str, :INT64], [:num, :STRING], [:str, :STRING]]
-    fields.to_a.must_equal [:INT64, :INT64, :STRING, :STRING]
+    _(fields).wont_be :nil?
+    _(fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(fields.types).must_equal [:INT64, :INT64, :STRING, :STRING]
+    _(fields.keys).must_equal [:num, :str, :num, :str]
+    _(fields.pairs).must_equal [[:num, :INT64], [:str, :INT64], [:num, :STRING], [:str, :STRING]]
+    _(fields.to_a).must_equal [:INT64, :INT64, :STRING, :STRING]
     assert_raises Google::Cloud::Spanner::DuplicateNameError do
       fields.to_h
     end
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 2
-    rows.first.to_a.must_equal [1, 2, "hello", "world"]
-    rows.last.to_a.must_equal [3, 4, "hola", "mundo"]
+    _(rows.count).must_equal 2
+    _(rows.first.to_a).must_equal [1, 2, "hello", "world"]
+    _(rows.last.to_a).must_equal [3, 4, "hola", "mundo"]
     assert_raises Google::Cloud::Spanner::DuplicateNameError do
       rows.first.to_h
     end
@@ -75,7 +75,7 @@ describe Google::Cloud::Spanner::Results, :duplicate, :mock_spanner do
       rows.last.to_h
     end
     rows.last.to_h skip_dup_check: true # does not raise
-    rows.first.pairs.must_equal [[:num, 1], [:str, 2], [:num, "hello"], [:str, "world"]]
-    rows.last.pairs.must_equal [[:num, 3], [:str, 4], [:num, "hola"], [:str, "mundo"]]
+    _(rows.first.pairs).must_equal [[:num, 1], [:str, 2], [:num, "hello"], [:str, "world"]]
+    _(rows.last.pairs).must_equal [[:num, 3], [:str, 4], [:num, "hola"], [:str, "mundo"]]
   end
 end

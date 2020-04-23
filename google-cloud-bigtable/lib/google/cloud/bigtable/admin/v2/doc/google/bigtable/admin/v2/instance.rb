@@ -106,8 +106,8 @@ module Google
         #     The current state of the cluster.
         # @!attribute [rw] serve_nodes
         #   @return [Integer]
-        #     Required. The number of nodes allocated to this cluster. More nodes enable higher
-        #     throughput and more consistent performance.
+        #     Required. The number of nodes allocated to this cluster. More nodes enable
+        #     higher throughput and more consistent performance.
         # @!attribute [rw] default_storage_type
         #   @return [Google::Bigtable::Admin::V2::StorageType]
         #     (`CreationOnly`)

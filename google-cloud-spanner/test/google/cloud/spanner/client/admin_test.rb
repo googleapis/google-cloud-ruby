@@ -28,15 +28,15 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
   end
 
   it "knows its project_id" do
-    client.project_id.must_equal project
+    _(client.project_id).must_equal project
   end
 
   it "holds a reference to project" do
-    client.project.must_equal spanner
+    _(client.project).must_equal spanner
   end
 
   it "knows its instance_id" do
-    client.instance_id.must_equal instance_id
+    _(client.instance_id).must_equal instance_id
   end
 
   it "retrieves the instance" do
@@ -49,13 +49,13 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
 
     mock.verify
 
-    instance.project_id.must_equal project
-    instance.instance_id.must_equal instance_id
-    instance.path.must_equal instance_path(instance_id)
+    _(instance.project_id).must_equal project
+    _(instance.instance_id).must_equal instance_id
+    _(instance.path).must_equal instance_path(instance_id)
   end
 
   it "knows its database_id" do
-    client.database_id.must_equal database_id
+    _(client.database_id).must_equal database_id
   end
 
   it "retrieves the database" do
@@ -68,9 +68,9 @@ describe Google::Cloud::Spanner::Client, :admin, :mock_spanner do
 
     mock.verify
 
-    database.project_id.must_equal project
-    database.instance_id.must_equal instance_id
-    database.database_id.must_equal database_id
-    database.path.must_equal database_path(instance_id, database_id)
+    _(database.project_id).must_equal project
+    _(database.instance_id).must_equal instance_id
+    _(database.database_id).must_equal database_id
+    _(database.path).must_equal database_path(instance_id, database_id)
   end
 end

@@ -54,14 +54,14 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
 
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::Spanner::Policy
-    policy.etag.must_equal "\b\x01"
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be_kind_of Array
-    policy.roles["roles/viewer"].count.must_equal 2
-    policy.roles["roles/viewer"].first.must_equal "user:viewer@example.com"
-    policy.roles["roles/viewer"].last.must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
+    _(policy).must_be_kind_of Google::Cloud::Spanner::Policy
+    _(policy.etag).must_equal "\b\x01"
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles.size).must_equal 1
+    _(policy.roles["roles/viewer"]).must_be_kind_of Array
+    _(policy.roles["roles/viewer"].count).must_equal 2
+    _(policy.roles["roles/viewer"].first).must_equal "user:viewer@example.com"
+    _(policy.roles["roles/viewer"].last).must_equal "serviceAccount:1234567890@developer.gserviceaccount.com"
   end
 
   it "sets the IAM Policy" do
@@ -87,15 +87,15 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
 
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::Spanner::Policy
-    policy.etag.must_equal "\b\x10"
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be :nil?
-    policy.roles["roles/owner"].must_be_kind_of Array
-    policy.roles["roles/owner"].count.must_equal 2
-    policy.roles["roles/owner"].first.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
-    policy.roles["roles/owner"].last.must_equal  "user:newowner@example.com"
+    _(policy).must_be_kind_of Google::Cloud::Spanner::Policy
+    _(policy.etag).must_equal "\b\x10"
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles.size).must_equal 1
+    _(policy.roles["roles/viewer"]).must_be :nil?
+    _(policy.roles["roles/owner"]).must_be_kind_of Array
+    _(policy.roles["roles/owner"].count).must_equal 2
+    _(policy.roles["roles/owner"].first).must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    _(policy.roles["roles/owner"].last).must_equal  "user:newowner@example.com"
   end
 
   it "sets the IAM Policy in a block" do
@@ -120,15 +120,15 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
 
     mock.verify
 
-    policy.must_be_kind_of Google::Cloud::Spanner::Policy
-    policy.etag.must_equal "\b\x10"
-    policy.roles.must_be_kind_of Hash
-    policy.roles.size.must_equal 1
-    policy.roles["roles/viewer"].must_be :nil?
-    policy.roles["roles/owner"].must_be_kind_of Array
-    policy.roles["roles/owner"].count.must_equal 2
-    policy.roles["roles/owner"].first.must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
-    policy.roles["roles/owner"].last.must_equal  "user:newowner@example.com"
+    _(policy).must_be_kind_of Google::Cloud::Spanner::Policy
+    _(policy.etag).must_equal "\b\x10"
+    _(policy.roles).must_be_kind_of Hash
+    _(policy.roles.size).must_equal 1
+    _(policy.roles["roles/viewer"]).must_be :nil?
+    _(policy.roles["roles/owner"]).must_be_kind_of Array
+    _(policy.roles["roles/owner"].count).must_equal 2
+    _(policy.roles["roles/owner"].first).must_equal "serviceAccount:0987654321@developer.gserviceaccount.com"
+    _(policy.roles["roles/owner"].last).must_equal  "user:newowner@example.com"
   end
 
   it "tests the available permissions" do
@@ -145,6 +145,6 @@ describe Google::Cloud::Spanner::Database, :iam, :mock_spanner do
 
     mock.verify
 
-    permissions.must_equal ["spanner.databases.get"]
+    _(permissions).must_equal ["spanner.databases.get"]
   end
 end

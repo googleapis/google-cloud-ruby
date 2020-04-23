@@ -61,17 +61,17 @@ describe Google::Cloud::Spanner::Transaction, :fields_for, :mock_spanner do
   end
 
   def assert_fields fields
-    fields.wont_be :nil?
-    fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    fields.keys.count.must_equal 9
-    fields[:id].must_equal          :INT64
-    fields[:name].must_equal        :STRING
-    fields[:active].must_equal      :BOOL
-    fields[:age].must_equal         :INT64
-    fields[:score].must_equal       :FLOAT64
-    fields[:updated_at].must_equal  :TIMESTAMP
-    fields[:birthday].must_equal    :DATE
-    fields[:avatar].must_equal      :BYTES
-    fields[:project_ids].must_equal [:INT64]
+    _(fields).wont_be :nil?
+    _(fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(fields.keys.count).must_equal 9
+    _(fields[:id]).must_equal          :INT64
+    _(fields[:name]).must_equal        :STRING
+    _(fields[:active]).must_equal      :BOOL
+    _(fields[:age]).must_equal         :INT64
+    _(fields[:score]).must_equal       :FLOAT64
+    _(fields[:updated_at]).must_equal  :TIMESTAMP
+    _(fields[:birthday]).must_equal    :DATE
+    _(fields[:avatar]).must_equal      :BYTES
+    _(fields[:project_ids]).must_equal [:INT64]
   end
 end

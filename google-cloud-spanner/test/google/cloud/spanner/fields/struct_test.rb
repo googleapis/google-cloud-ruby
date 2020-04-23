@@ -124,141 +124,141 @@ describe Google::Cloud::Spanner::Fields, :struct do
   end
 
   def assert_unnamed_struct data
-    data.must_be_kind_of Google::Cloud::Spanner::Data
+    _(data).must_be_kind_of Google::Cloud::Spanner::Data
 
-    data.fields.wont_be :nil?
-    data.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    data.fields.keys.count.must_equal 9
-    data.fields.to_a.must_equal fields_unnamed_array
-    data.fields.to_h.must_equal fields_unnamed_hash
+    _(data.fields).wont_be :nil?
+    _(data.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(data.fields.keys.count).must_equal 9
+    _(data.fields.to_a).must_equal fields_unnamed_array
+    _(data.fields.to_h).must_equal fields_unnamed_hash
 
-    data.fields.to_s.wont_be :empty?
-    data.fields.inspect.must_match /Google::Cloud::Spanner::Fields/
+    _(data.fields.to_s).wont_be :empty?
+    _(data.fields.inspect).must_match /Google::Cloud::Spanner::Fields/
 
-    data.keys.must_equal [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    _(data.keys).must_equal [0, 1, 2, 3, 4, 5, 6, 7, 8]
     data_values = data.values
-    data_values[0].must_equal 1
-    data_values[1].must_equal "Charlie"
-    data_values[2].must_equal true
-    data_values[3].must_equal 29
-    data_values[4].must_equal 0.9
-    data_values[5].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    data_values[6].must_equal Date.parse("1950-01-01")
-    data_values[7].must_be_kind_of StringIO
-    data_values[7].read.must_equal "image"
-    data_values[8].must_equal [1, 2, 3]
+    _(data_values[0]).must_equal 1
+    _(data_values[1]).must_equal "Charlie"
+    _(data_values[2]).must_equal true
+    _(data_values[3]).must_equal 29
+    _(data_values[4]).must_equal 0.9
+    _(data_values[5]).must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
+    _(data_values[6]).must_equal Date.parse("1950-01-01")
+    _(data_values[7]).must_be_kind_of StringIO
+    _(data_values[7].read).must_equal "image"
+    _(data_values[8]).must_equal [1, 2, 3]
 
-    data[0].must_equal 1
-    data[1].must_equal "Charlie"
-    data[2].must_equal true
-    data[3].must_equal 29
-    data[4].must_equal 0.9
-    data[5].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    data[6].must_equal Date.parse("1950-01-01")
-    data[7].must_be_kind_of StringIO
-    data[7].read.must_equal "image"
-    data[8].must_equal [1, 2, 3]
+    _(data[0]).must_equal 1
+    _(data[1]).must_equal "Charlie"
+    _(data[2]).must_equal true
+    _(data[3]).must_equal 29
+    _(data[4]).must_equal 0.9
+    _(data[5]).must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
+    _(data[6]).must_equal Date.parse("1950-01-01")
+    _(data[7]).must_be_kind_of StringIO
+    _(data[7].read).must_equal "image"
+    _(data[8]).must_equal [1, 2, 3]
 
     data_hash = data.to_h
-    data_hash[0].must_equal 1
-    data_hash[1].must_equal "Charlie"
-    data_hash[2].must_equal true
-    data_hash[3].must_equal 29
-    data_hash[4].must_equal 0.9
-    data_hash[5].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    data_hash[6].must_equal Date.parse("1950-01-01")
-    data_hash[7].must_be_kind_of StringIO
-    data_hash[7].read.must_equal "image"
-    data_hash[8].must_equal [1, 2, 3]
+    _(data_hash[0]).must_equal 1
+    _(data_hash[1]).must_equal "Charlie"
+    _(data_hash[2]).must_equal true
+    _(data_hash[3]).must_equal 29
+    _(data_hash[4]).must_equal 0.9
+    _(data_hash[5]).must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
+    _(data_hash[6]).must_equal Date.parse("1950-01-01")
+    _(data_hash[7]).must_be_kind_of StringIO
+    _(data_hash[7].read).must_equal "image"
+    _(data_hash[8]).must_equal [1, 2, 3]
 
     data_array = data.to_a
-    data_array[0].must_equal 1
-    data_array[1].must_equal "Charlie"
-    data_array[2].must_equal true
-    data_array[3].must_equal 29
-    data_array[4].must_equal 0.9
-    data_array[5].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    data_array[6].must_equal Date.parse("1950-01-01")
-    data_array[7].must_be_kind_of StringIO
-    data_array[7].read.must_equal "image"
-    data_array[8].must_equal [1, 2, 3]
+    _(data_array[0]).must_equal 1
+    _(data_array[1]).must_equal "Charlie"
+    _(data_array[2]).must_equal true
+    _(data_array[3]).must_equal 29
+    _(data_array[4]).must_equal 0.9
+    _(data_array[5]).must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
+    _(data_array[6]).must_equal Date.parse("1950-01-01")
+    _(data_array[7]).must_be_kind_of StringIO
+    _(data_array[7].read).must_equal "image"
+    _(data_array[8]).must_equal [1, 2, 3]
 
-    data.to_s.wont_be :empty?
-    data.inspect.must_match /Google::Cloud::Spanner::Data/
+    _(data.to_s).wont_be :empty?
+    _(data.inspect).must_match /Google::Cloud::Spanner::Data/
   end
 
   def assert_named_struct data
-    data.must_be_kind_of Google::Cloud::Spanner::Data
+    _(data).must_be_kind_of Google::Cloud::Spanner::Data
 
-    data.fields.wont_be :nil?
-    data.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    data.fields.keys.count.must_equal 9
-    data.fields.to_a.must_equal fields_unnamed_array
-    data.fields.to_h.must_equal fields_named_hash
+    _(data.fields).wont_be :nil?
+    _(data.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(data.fields.keys.count).must_equal 9
+    _(data.fields.to_a).must_equal fields_unnamed_array
+    _(data.fields.to_h).must_equal fields_named_hash
 
-    data.fields.to_s.wont_be :empty?
-    data.fields.inspect.must_match /Google::Cloud::Spanner::Fields/
+    _(data.fields.to_s).wont_be :empty?
+    _(data.fields.inspect).must_match /Google::Cloud::Spanner::Fields/
 
-    data.keys.must_equal [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
+    _(data.keys).must_equal [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
     data_values = data.values
-    data_values[0].must_equal 1
-    data_values[1].must_equal "Charlie"
-    data_values[2].must_equal true
-    data_values[3].must_equal 29
-    data_values[4].must_equal 0.9
-    data_values[5].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    data_values[6].must_equal Date.parse("1950-01-01")
-    data_values[7].must_be_kind_of StringIO
-    data_values[7].read.must_equal "image"
-    data_values[8].must_equal [1, 2, 3]
+    _(data_values[0]).must_equal 1
+    _(data_values[1]).must_equal "Charlie"
+    _(data_values[2]).must_equal true
+    _(data_values[3]).must_equal 29
+    _(data_values[4]).must_equal 0.9
+    _(data_values[5]).must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
+    _(data_values[6]).must_equal Date.parse("1950-01-01")
+    _(data_values[7]).must_be_kind_of StringIO
+    _(data_values[7].read).must_equal "image"
+    _(data_values[8]).must_equal [1, 2, 3]
 
-    data[:id].must_equal 1
-    data[:name].must_equal "Charlie"
-    data[:active].must_equal true
-    data[:age].must_equal 29
-    data[:score].must_equal 0.9
-    data[:updated_at].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    data[:birthday].must_equal Date.parse("1950-01-01")
-    data[:avatar].must_be_kind_of StringIO
-    data[:avatar].read.must_equal "image"
-    data[:project_ids].must_equal [1, 2, 3]
+    _(data[:id]).must_equal 1
+    _(data[:name]).must_equal "Charlie"
+    _(data[:active]).must_equal true
+    _(data[:age]).must_equal 29
+    _(data[:score]).must_equal 0.9
+    _(data[:updated_at]).must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
+    _(data[:birthday]).must_equal Date.parse("1950-01-01")
+    _(data[:avatar]).must_be_kind_of StringIO
+    _(data[:avatar].read).must_equal "image"
+    _(data[:project_ids]).must_equal [1, 2, 3]
 
-    data[0].must_equal 1
-    data[1].must_equal "Charlie"
-    data[2].must_equal true
-    data[3].must_equal 29
-    data[4].must_equal 0.9
-    data[5].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    data[6].must_equal Date.parse("1950-01-01")
-    data[7].must_be_kind_of StringIO
-    data[7].read.must_equal "image"
-    data[8].must_equal [1, 2, 3]
+    _(data[0]).must_equal 1
+    _(data[1]).must_equal "Charlie"
+    _(data[2]).must_equal true
+    _(data[3]).must_equal 29
+    _(data[4]).must_equal 0.9
+    _(data[5]).must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
+    _(data[6]).must_equal Date.parse("1950-01-01")
+    _(data[7]).must_be_kind_of StringIO
+    _(data[7].read).must_equal "image"
+    _(data[8]).must_equal [1, 2, 3]
 
     data_hash = data.to_h
-    data_hash[:id].must_equal 1
-    data_hash[:name].must_equal "Charlie"
-    data_hash[:active].must_equal true
-    data_hash[:age].must_equal 29
-    data_hash[:score].must_equal 0.9
-    data_hash[:updated_at].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    data_hash[:birthday].must_equal Date.parse("1950-01-01")
-    data_hash[:avatar].must_be_kind_of StringIO
-    data_hash[:avatar].read.must_equal "image"
-    data_hash[:project_ids].must_equal [1, 2, 3]
+    _(data_hash[:id]).must_equal 1
+    _(data_hash[:name]).must_equal "Charlie"
+    _(data_hash[:active]).must_equal true
+    _(data_hash[:age]).must_equal 29
+    _(data_hash[:score]).must_equal 0.9
+    _(data_hash[:updated_at]).must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
+    _(data_hash[:birthday]).must_equal Date.parse("1950-01-01")
+    _(data_hash[:avatar]).must_be_kind_of StringIO
+    _(data_hash[:avatar].read).must_equal "image"
+    _(data_hash[:project_ids]).must_equal [1, 2, 3]
 
     data_array = data.to_a
-    data_array[0].must_equal 1
-    data_array[1].must_equal "Charlie"
-    data_array[2].must_equal true
-    data_array[3].must_equal 29
-    data_array[4].must_equal 0.9
-    data_array[5].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    data_array[6].must_equal Date.parse("1950-01-01")
-    data_array[7].must_be_kind_of StringIO
-    data_array[7].read.must_equal "image"
-    data_array[8].must_equal [1, 2, 3]
+    _(data_array[0]).must_equal 1
+    _(data_array[1]).must_equal "Charlie"
+    _(data_array[2]).must_equal true
+    _(data_array[3]).must_equal 29
+    _(data_array[4]).must_equal 0.9
+    _(data_array[5]).must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
+    _(data_array[6]).must_equal Date.parse("1950-01-01")
+    _(data_array[7]).must_be_kind_of StringIO
+    _(data_array[7].read).must_equal "image"
+    _(data_array[8]).must_equal [1, 2, 3]
 
-    data.to_s.wont_be :empty?
-    data.inspect.must_match /Google::Cloud::Spanner::Data/
+    _(data.to_s).wont_be :empty?
+    _(data.inspect).must_match /Google::Cloud::Spanner::Data/
   end
 end

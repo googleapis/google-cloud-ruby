@@ -23,54 +23,54 @@ describe Google::Cloud::Spanner::Convert, :duration_to_number, :mock_spanner do
   it "converts an integer" do
     duration = Google::Protobuf::Duration.new seconds: 42, nanos: 0
     number = Google::Cloud::Spanner::Convert.duration_to_number duration
-    number.must_equal 42
+    _(number).must_equal 42
   end
 
   it "converts a negative integer" do
     duration = Google::Protobuf::Duration.new seconds: -42, nanos: 0
     number = Google::Cloud::Spanner::Convert.duration_to_number duration
-    number.must_equal -42
+    _(number).must_equal -42
   end
 
   it "converts a small number" do
     duration = Google::Protobuf::Duration.new seconds: 1, nanos: 500000000
     number = Google::Cloud::Spanner::Convert.duration_to_number duration
-    number.must_equal 1.5
+    _(number).must_equal 1.5
   end
 
   it "converts a negative small number" do
     duration = Google::Protobuf::Duration.new seconds: -1, nanos: -500000000
     number = Google::Cloud::Spanner::Convert.duration_to_number duration
-    number.must_equal -1.5
+    _(number).must_equal -1.5
   end
 
   it "converts a big number" do
     duration = Google::Protobuf::Duration.new seconds: 643383279502884, nanos: 197169399
     number = Google::Cloud::Spanner::Convert.duration_to_number duration
-    number.must_equal 643383279502884.197169399
+    _(number).must_equal 643383279502884.197169399
   end
 
   it "converts a negative big number" do
     duration = Google::Protobuf::Duration.new seconds: -643383279502884, nanos: -197169399
     number = Google::Cloud::Spanner::Convert.duration_to_number duration
-    number.must_equal -643383279502884.197169399
+    _(number).must_equal -643383279502884.197169399
   end
 
   it "converts pi" do
     duration = Google::Protobuf::Duration.new seconds: 3, nanos: 141592654
     number = Google::Cloud::Spanner::Convert.duration_to_number duration
-    number.must_equal 3.141592654
+    _(number).must_equal 3.141592654
   end
 
   it "converts a negative pi" do
     duration = Google::Protobuf::Duration.new seconds: -3, nanos: -141592654
     number = Google::Cloud::Spanner::Convert.duration_to_number duration
-    number.must_equal -3.141592654
+    _(number).must_equal -3.141592654
   end
 
   it "returns nil when given nil" do
     duration = nil
     number = Google::Cloud::Spanner::Convert.duration_to_number duration
-    number.must_be :nil?
+    _(number).must_be :nil?
   end
 end

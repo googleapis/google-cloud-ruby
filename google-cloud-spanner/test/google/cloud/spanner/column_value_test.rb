@@ -18,8 +18,8 @@ describe Google::Cloud::Spanner::ColumnValue do
   it "creates an commit_timestamp" do
     column_value = Google::Cloud::Spanner::ColumnValue.commit_timestamp
 
-    column_value.must_be_kind_of Google::Cloud::Spanner::ColumnValue
-    column_value.type.must_equal :commit_timestamp
-    column_value.to_column_value.must_equal "spanner.commit_timestamp()"
+    _(column_value).must_be_kind_of Google::Cloud::Spanner::ColumnValue
+    _(column_value.type).must_equal :commit_timestamp
+    _(column_value.to_column_value).must_equal "spanner.commit_timestamp()"
   end
 end

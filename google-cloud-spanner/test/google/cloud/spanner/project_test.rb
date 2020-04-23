@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Spanner::Project, :mock_spanner do
   it "knows the project identifier" do
-    spanner.must_be_kind_of Google::Cloud::Spanner::Project
-    spanner.project_id.must_equal project
+    _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+    _(spanner.project_id).must_equal project
   end
 end

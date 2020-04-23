@@ -61,24 +61,24 @@ describe "Spanner Client", :large_data, :spanner do
     db.upsert table_name, my_row
     results = db.read table_name, [:id, :string, :byte, :strings, :bytes], keys: my_row[:id]
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING], bytes: [:BYTES] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING], bytes: [:BYTES] })
     returned_row = results.rows.first
 
-    returned_row[:string].must_equal my_row[:string]
+    _(returned_row[:string]).must_equal my_row[:string]
 
-    returned_row[:strings].must_equal my_row[:strings]
+    _(returned_row[:strings]).must_equal my_row[:strings]
 
-    returned_row[:byte].must_be_kind_of StringIO
+    _(returned_row[:byte]).must_be_kind_of StringIO
     my_row[:byte].rewind
-    returned_row[:byte].read.must_equal my_row[:byte].read
+    _(returned_row[:byte].read).must_equal my_row[:byte].read
 
     returned_row[:bytes].each do |byte|
-      byte.must_be_kind_of StringIO
+      _(byte).must_be_kind_of StringIO
     end
     my_row[:bytes].each(&:rewind)
     returned_row[:bytes].each_with_index do |byte, index|
-      byte.read.must_equal my_row[:bytes][index].read
+      _(byte.read).must_equal my_row[:bytes][index].read
     end
   end
 
@@ -87,24 +87,24 @@ describe "Spanner Client", :large_data, :spanner do
     db.upsert table_name, my_row
     results = db.execute_sql "SELECT id, string, byte, strings, bytes FROM #{table_name} WHERE id = @id", params: { id: my_row[:id] }
 
-    results.must_be_kind_of Google::Cloud::Spanner::Results
-    results.fields.to_h.must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING], bytes: [:BYTES] })
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
+    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING], bytes: [:BYTES] })
     returned_row = results.rows.first
 
-    returned_row[:string].must_equal my_row[:string]
+    _(returned_row[:string]).must_equal my_row[:string]
 
-    returned_row[:strings].must_equal my_row[:strings]
+    _(returned_row[:strings]).must_equal my_row[:strings]
 
-    returned_row[:byte].must_be_kind_of StringIO
+    _(returned_row[:byte]).must_be_kind_of StringIO
     my_row[:byte].rewind
-    returned_row[:byte].read.must_equal my_row[:byte].read
+    _(returned_row[:byte].read).must_equal my_row[:byte].read
 
     returned_row[:bytes].each do |byte|
-      byte.must_be_kind_of StringIO
+      _(byte).must_be_kind_of StringIO
     end
     my_row[:bytes].each(&:rewind)
     returned_row[:bytes].each_with_index do |byte, index|
-      byte.read.must_equal my_row[:bytes][index].read
+      _(byte.read).must_equal my_row[:bytes][index].read
     end
   end
 end

@@ -17,13 +17,13 @@ require "spanner_helper"
 describe "Spanner Instances", :spanner do
   it "lists and gets instances" do
     all_instances = spanner.instances.all.to_a
-    all_instances.wont_be :empty?
+    _(all_instances).wont_be :empty?
     all_instances.each do |instance|
-      instance.must_be_kind_of Google::Cloud::Spanner::Instance
+      _(instance).must_be_kind_of Google::Cloud::Spanner::Instance
     end
 
     first_instance = spanner.instance all_instances.first.instance_id
-    first_instance.must_be_kind_of Google::Cloud::Spanner::Instance
+    _(first_instance).must_be_kind_of Google::Cloud::Spanner::Instance
   end
 
   describe "IAM Policies and Permissions" do
@@ -37,10 +37,10 @@ describe "Spanner Instances", :spanner do
       permissions = instance.test_permissions roles
       skip "Don't have permissions to get/set topic's policy" unless permissions == roles
 
-      instance.policy.must_be_kind_of Google::Cloud::Spanner::Policy
+      _(instance.policy).must_be_kind_of Google::Cloud::Spanner::Policy
 
       # We need a valid service account in order to update the policy
-      service_account.wont_be :nil?
+      _(service_account).wont_be :nil?
       role = "roles/viewer"
       member = "serviceAccount:#{service_account}"
       instance.policy do |p|
@@ -49,7 +49,7 @@ describe "Spanner Instances", :spanner do
       end
 
       role_member = instance.policy.role(role).select { |x| x == member }
-      role_member.size.must_equal 1
+      _(role_member.size).must_equal 1
     end
   end
 end

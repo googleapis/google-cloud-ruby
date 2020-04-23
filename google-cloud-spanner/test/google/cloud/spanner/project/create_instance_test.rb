@@ -66,17 +66,17 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
 
     job = spanner.create_instance instance_id, config: config
 
-    job.must_be_kind_of Google::Cloud::Spanner::Instance::Job
-    job.wont_be :done?
-    job.wont_be :error?
-    job.error.must_be :nil?
-    job.instance.must_be :nil?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
+    _(job).wont_be :done?
+    _(job).wont_be :error?
+    _(job.error).must_be :nil?
+    _(job.instance).must_be :nil?
 
     job.reload!
     instance = job.instance
 
-    instance.wont_be :nil?
-    instance.must_be_kind_of Google::Cloud::Spanner::Instance
+    _(instance).wont_be :nil?
+    _(instance).must_be_kind_of Google::Cloud::Spanner::Instance
 
     mock.verify
   end
@@ -101,7 +101,7 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
 
     mock.verify
 
-    job.must_be_kind_of Google::Cloud::Spanner::Instance::Job
-    job.wont_be :done?
+    _(job).must_be_kind_of Google::Cloud::Spanner::Instance::Job
+    _(job).wont_be :done?
   end
 end

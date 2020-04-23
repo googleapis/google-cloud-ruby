@@ -31,15 +31,15 @@ describe Google::Cloud::Spanner::Instance, :database, :mock_spanner do
 
     mock.verify
 
-    database.project_id.must_equal project
-    database.instance_id.must_equal instance_id
-    database.database_id.must_equal database_id
+    _(database.project_id).must_equal project
+    _(database.instance_id).must_equal instance_id
+    _(database.database_id).must_equal database_id
 
-    database.path.must_equal database_path(instance_id, database_id)
+    _(database.path).must_equal database_path(instance_id, database_id)
 
-    database.state.must_equal :READY
-    database.must_be :ready?
-    database.wont_be :creating?
+    _(database.state).must_equal :READY
+    _(database).must_be :ready?
+    _(database).wont_be :creating?
   end
 
   it "returns nil when getting an non-existent database" do
@@ -54,6 +54,6 @@ describe Google::Cloud::Spanner::Instance, :database, :mock_spanner do
     instance.service.mocked_databases = stub
 
     database = instance.database not_found_database_id
-    database.must_be :nil?
+    _(database).must_be :nil?
   end
 end

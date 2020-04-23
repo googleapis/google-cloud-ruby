@@ -46,42 +46,42 @@ describe Google::Cloud::Spanner::Pool, :new_sessions_in_process, :mock_spanner d
     end
     spanner.service.mocked_service = stub
 
-    pool.all_sessions.size.must_equal 1
-    pool.session_queue.size.must_equal 1
-    pool.instance_variable_get(:@new_sessions_in_process).must_equal 0
+    _(pool.all_sessions.size).must_equal 1
+    _(pool.session_queue.size).must_equal 1
+    _(pool.instance_variable_get(:@new_sessions_in_process)).must_equal 0
 
     s1 = pool.checkout_session # gets the one session from the queue
 
-    pool.all_sessions.size.must_equal 1
-    pool.session_queue.size.must_equal 0
-    pool.instance_variable_get(:@new_sessions_in_process).must_equal 0
+    _(pool.all_sessions.size).must_equal 1
+    _(pool.session_queue.size).must_equal 0
+    _(pool.instance_variable_get(:@new_sessions_in_process)).must_equal 0
 
     raised_error = assert_raises Google::Cloud::Error do
       pool.checkout_session
     end
-    raised_error.message.must_equal "11:sumthin happen"
+    _(raised_error.message).must_equal "11:sumthin happen"
 
-    pool.all_sessions.size.must_equal 1
-    pool.session_queue.size.must_equal 0
-    pool.instance_variable_get(:@new_sessions_in_process).must_equal 0
+    _(pool.all_sessions.size).must_equal 1
+    _(pool.session_queue.size).must_equal 0
+    _(pool.instance_variable_get(:@new_sessions_in_process)).must_equal 0
 
     10.times do
       raised_error = assert_raises Google::Cloud::Error do
         pool.checkout_session
       end
-      raised_error.message.must_equal "11:sumthin happen"
+      _(raised_error.message).must_equal "11:sumthin happen"
     end
 
-    pool.all_sessions.size.must_equal 1
-    pool.session_queue.size.must_equal 0
-    pool.instance_variable_get(:@new_sessions_in_process).must_equal 0
+    _(pool.all_sessions.size).must_equal 1
+    _(pool.session_queue.size).must_equal 0
+    _(pool.instance_variable_get(:@new_sessions_in_process)).must_equal 0
 
     pool.checkin_session s1
 
     shutdown_pool! pool
 
-    pool.all_sessions.size.must_equal 1
-    pool.session_queue.size.must_equal 1
-    pool.instance_variable_get(:@new_sessions_in_process).must_equal 0
+    _(pool.all_sessions.size).must_equal 1
+    _(pool.session_queue.size).must_equal 1
+    _(pool.instance_variable_get(:@new_sessions_in_process)).must_equal 0
   end
 end

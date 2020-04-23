@@ -60,8 +60,8 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
     expect_execute_streaming_sql results_enum, session.path, "SELECT 1", options: default_options
     
     client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }
-    client.reset.must_equal true
-    client.execute_query("SELECT 1").rows.first.values.must_equal [1]
+    _(client.reset).must_equal true
+    _(client.execute_query("SELECT 1").rows.first.values).must_equal [1]
 
     pool = client.instance_variable_get :@pool
     shutdown_pool! pool

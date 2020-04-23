@@ -78,7 +78,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
     results = nil
     client.snapshot do |snp|
-      snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+      _(snp).must_be_kind_of Google::Cloud::Spanner::Snapshot
       results = snp.execute_query "SELECT * FROM users"
     end
 
@@ -112,7 +112,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
       results = nil
       client.snapshot strong: true do |snp|
-        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        _(snp).must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute_query "SELECT * FROM users"
       end
 
@@ -135,7 +135,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
       results = nil
       client.snapshot timestamp: snapshot_time do |snp|
-        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        _(snp).must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute_query "SELECT * FROM users"
       end
 
@@ -151,7 +151,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
       results = nil
       client.snapshot read_timestamp: snapshot_time do |snp|
-        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        _(snp).must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute_query "SELECT * FROM users"
       end
 
@@ -167,7 +167,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
       results = nil
       client.snapshot timestamp: snapshot_datetime do |snp|
-        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        _(snp).must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute_query "SELECT * FROM users"
       end
 
@@ -183,7 +183,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
       results = nil
       client.snapshot read_timestamp: snapshot_datetime do |snp|
-        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        _(snp).must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute_query "SELECT * FROM users"
       end
 
@@ -205,7 +205,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
       results = nil
       client.snapshot staleness: snapshot_staleness do |snp|
-        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        _(snp).must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute_query "SELECT * FROM users"
       end
 
@@ -221,7 +221,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
       results = nil
       client.snapshot exact_staleness: snapshot_staleness do |snp|
-        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        _(snp).must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute_query "SELECT * FROM users"
       end
 
@@ -241,16 +241,16 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
 
     nested_error = assert_raises RuntimeError do
       client.snapshot do |snp|
-        snp.must_be_kind_of Google::Cloud::Spanner::Snapshot
+        _(snp).must_be_kind_of Google::Cloud::Spanner::Snapshot
         results = snp.execute_query "SELECT * FROM users"
 
         client.snapshot do |snp2|
-          snp2.must_be_kind_of Google::Cloud::Spanner::Snapshot
+          _(snp2).must_be_kind_of Google::Cloud::Spanner::Snapshot
           results2 = snp2.execute_query "SELECT * FROM other_users"
         end
       end
     end
-    nested_error.message.must_equal "Nested snapshots are not allowed"
+    _(nested_error.message).must_equal "Nested snapshots are not allowed"
 
     shutdown_client! client
 
@@ -261,35 +261,35 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
   end
 
   def assert_results results
-    results.must_be_kind_of Google::Cloud::Spanner::Results
+    _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
-    results.fields.wont_be :nil?
-    results.fields.must_be_kind_of Google::Cloud::Spanner::Fields
-    results.fields.keys.count.must_equal 9
-    results.fields[:id].must_equal          :INT64
-    results.fields[:name].must_equal        :STRING
-    results.fields[:active].must_equal      :BOOL
-    results.fields[:age].must_equal         :INT64
-    results.fields[:score].must_equal       :FLOAT64
-    results.fields[:updated_at].must_equal  :TIMESTAMP
-    results.fields[:birthday].must_equal    :DATE
-    results.fields[:avatar].must_equal      :BYTES
-    results.fields[:project_ids].must_equal [:INT64]
+    _(results.fields).wont_be :nil?
+    _(results.fields).must_be_kind_of Google::Cloud::Spanner::Fields
+    _(results.fields.keys.count).must_equal 9
+    _(results.fields[:id]).must_equal          :INT64
+    _(results.fields[:name]).must_equal        :STRING
+    _(results.fields[:active]).must_equal      :BOOL
+    _(results.fields[:age]).must_equal         :INT64
+    _(results.fields[:score]).must_equal       :FLOAT64
+    _(results.fields[:updated_at]).must_equal  :TIMESTAMP
+    _(results.fields[:birthday]).must_equal    :DATE
+    _(results.fields[:avatar]).must_equal      :BYTES
+    _(results.fields[:project_ids]).must_equal [:INT64]
 
     rows = results.rows.to_a # grab them all from the enumerator
-    rows.count.must_equal 1
+    _(rows.count).must_equal 1
     row = rows.first
-    row.must_be_kind_of Google::Cloud::Spanner::Data
-    row.keys.must_equal [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
-    row[:id].must_equal 1
-    row[:name].must_equal "Charlie"
-    row[:active].must_equal true
-    row[:age].must_equal 29
-    row[:score].must_equal 0.9
-    row[:updated_at].must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
-    row[:birthday].must_equal Date.parse("1950-01-01")
-    row[:avatar].must_be_kind_of StringIO
-    row[:avatar].read.must_equal "image"
-    row[:project_ids].must_equal [1, 2, 3]
+    _(row).must_be_kind_of Google::Cloud::Spanner::Data
+    _(row.keys).must_equal [:id, :name, :active, :age, :score, :updated_at, :birthday, :avatar, :project_ids]
+    _(row[:id]).must_equal 1
+    _(row[:name]).must_equal "Charlie"
+    _(row[:active]).must_equal true
+    _(row[:age]).must_equal 29
+    _(row[:score]).must_equal 0.9
+    _(row[:updated_at]).must_equal Time.parse("2017-01-02T03:04:05.060000000Z")
+    _(row[:birthday]).must_equal Date.parse("1950-01-01")
+    _(row[:avatar]).must_be_kind_of StringIO
+    _(row[:avatar].read).must_equal "image"
+    _(row[:project_ids]).must_equal [1, 2, 3]
   end
 end

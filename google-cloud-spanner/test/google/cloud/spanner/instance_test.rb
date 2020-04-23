@@ -20,12 +20,12 @@ describe Google::Cloud::Spanner::Instance, :mock_spanner do
   let(:instance) { Google::Cloud::Spanner::Instance.from_grpc instance_grpc, spanner.service }
 
   it "knows the identifiers" do
-    instance.must_be_kind_of Google::Cloud::Spanner::Instance
-    instance.project_id.must_equal project
-    instance.instance_id.must_equal instance_id
+    _(instance).must_be_kind_of Google::Cloud::Spanner::Instance
+    _(instance.project_id).must_equal project
+    _(instance.instance_id).must_equal instance_id
 
-    instance.state.must_equal :READY
-    instance.must_be :ready?
-    instance.wont_be :creating?
+    _(instance.state).must_equal :READY
+    _(instance).must_be :ready?
+    _(instance).wont_be :creating?
   end
 end

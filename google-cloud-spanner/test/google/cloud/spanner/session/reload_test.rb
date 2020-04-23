@@ -31,18 +31,18 @@ describe Google::Cloud::Spanner::Session, :reload, :mock_spanner do
     mock.expect :get_session, session_grpc, [session_grpc.name, options: default_options]
     session.service.mocked_service = mock
 
-    session.must_be_kind_of Google::Cloud::Spanner::Session
+    _(session).must_be_kind_of Google::Cloud::Spanner::Session
 
     session.reload!
 
     mock.verify
 
-    session.must_be_kind_of Google::Cloud::Spanner::Session
+    _(session).must_be_kind_of Google::Cloud::Spanner::Session
 
-    session.project_id.must_equal "test"
-    session.instance_id.must_equal "my-instance-id"
-    session.database_id.must_equal "my-database-id"
-    session.session_id.must_equal "session123"
+    _(session.project_id).must_equal "test"
+    _(session.instance_id).must_equal "my-instance-id"
+    _(session.database_id).must_equal "my-database-id"
+    _(session.session_id).must_equal "session123"
   end
 
   it "can recreate itself if error is raised on reload" do
@@ -53,18 +53,18 @@ describe Google::Cloud::Spanner::Session, :reload, :mock_spanner do
     mock.expect :create_session, session_grpc, [database_path(instance_id, database_id), session: nil, options: default_options]
     session.service.mocked_service = mock
 
-    session.must_be_kind_of Google::Cloud::Spanner::Session
+    _(session).must_be_kind_of Google::Cloud::Spanner::Session
 
     session.reload!
 
     mock.verify
 
-    session.must_be_kind_of Google::Cloud::Spanner::Session
+    _(session).must_be_kind_of Google::Cloud::Spanner::Session
 
-    session.project_id.must_equal "test"
-    session.instance_id.must_equal "my-instance-id"
-    session.database_id.must_equal "my-database-id"
-    session.session_id.must_equal "session123"
+    _(session.project_id).must_equal "test"
+    _(session.instance_id).must_equal "my-instance-id"
+    _(session.database_id).must_equal "my-database-id"
+    _(session.session_id).must_equal "session123"
   end
 
   it "can recreate itself with labels if error on reload" do
@@ -75,17 +75,17 @@ describe Google::Cloud::Spanner::Session, :reload, :mock_spanner do
     mock.expect :create_session, session_grpc_labels, [database_path(instance_id, database_id), session: Google::Spanner::V1::Session.new(labels: labels), options: default_options]
     session_labels.service.mocked_service = mock
 
-    session_labels.must_be_kind_of Google::Cloud::Spanner::Session
+    _(session_labels).must_be_kind_of Google::Cloud::Spanner::Session
 
     session_labels.reload!
 
     mock.verify
 
-    session_labels.must_be_kind_of Google::Cloud::Spanner::Session
+    _(session_labels).must_be_kind_of Google::Cloud::Spanner::Session
 
-    session_labels.project_id.must_equal "test"
-    session_labels.instance_id.must_equal "my-instance-id"
-    session_labels.database_id.must_equal "my-database-id"
-    session_labels.session_id.must_equal "session123"
+    _(session_labels.project_id).must_equal "test"
+    _(session_labels.instance_id).must_equal "my-instance-id"
+    _(session_labels.database_id).must_equal "my-database-id"
+    _(session_labels.session_id).must_equal "session123"
   end
 end

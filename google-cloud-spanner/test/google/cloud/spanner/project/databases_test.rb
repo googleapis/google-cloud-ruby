@@ -46,7 +46,7 @@ describe Google::Cloud::Spanner::Project, :databases, :mock_spanner do
 
     mock.verify
 
-    databases.size.must_equal 3
+    _(databases.size).must_equal 3
   end
 
   it "paginates databases" do
@@ -60,13 +60,13 @@ describe Google::Cloud::Spanner::Project, :databases, :mock_spanner do
 
     mock.verify
 
-    first_databases.size.must_equal 3
+    _(first_databases.size).must_equal 3
     token = first_databases.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
 
-    second_databases.size.must_equal 2
-    second_databases.token.must_be :nil?
+    _(second_databases.size).must_equal 2
+    _(second_databases.token).must_be :nil?
   end
 
   it "paginates databases with max set" do
@@ -78,10 +78,10 @@ describe Google::Cloud::Spanner::Project, :databases, :mock_spanner do
 
     mock.verify
 
-    databases.size.must_equal 3
+    _(databases.size).must_equal 3
     token = databases.token
-    token.wont_be :nil?
-    token.must_equal "next_page_token"
+    _(token).wont_be :nil?
+    _(token).must_equal "next_page_token"
   end
 
   it "paginates databases with next? and next" do
@@ -95,11 +95,11 @@ describe Google::Cloud::Spanner::Project, :databases, :mock_spanner do
 
     mock.verify
 
-    first_databases.size.must_equal 3
-    first_databases.next?.must_equal true
+    _(first_databases.size).must_equal 3
+    _(first_databases.next?).must_equal true
 
-    second_databases.size.must_equal 2
-    second_databases.next?.must_equal false
+    _(second_databases.size).must_equal 2
+    _(second_databases.next?).must_equal false
   end
 
   it "paginates databases with next? and next and max set" do
@@ -113,11 +113,11 @@ describe Google::Cloud::Spanner::Project, :databases, :mock_spanner do
 
     mock.verify
 
-    first_databases.size.must_equal 3
-    first_databases.next?.must_equal true
+    _(first_databases.size).must_equal 3
+    _(first_databases.next?).must_equal true
 
-    second_databases.size.must_equal 2
-    second_databases.next?.must_equal false
+    _(second_databases.size).must_equal 2
+    _(second_databases.next?).must_equal false
   end
 
   it "paginates databases with all" do
@@ -130,7 +130,7 @@ describe Google::Cloud::Spanner::Project, :databases, :mock_spanner do
 
     mock.verify
 
-    databases.size.must_equal 5
+    _(databases.size).must_equal 5
   end
 
   it "paginates databases with all and max set" do
@@ -143,7 +143,7 @@ describe Google::Cloud::Spanner::Project, :databases, :mock_spanner do
 
     mock.verify
 
-    databases.size.must_equal 5
+    _(databases.size).must_equal 5
   end
 
   it "iterates databases with all using Enumerator" do
@@ -156,7 +156,7 @@ describe Google::Cloud::Spanner::Project, :databases, :mock_spanner do
 
     mock.verify
 
-    databases.size.must_equal 5
+    _(databases.size).must_equal 5
   end
 
   it "iterates databases with all and request_limit set" do
@@ -169,6 +169,6 @@ describe Google::Cloud::Spanner::Project, :databases, :mock_spanner do
 
     mock.verify
 
-    databases.size.must_equal 6
+    _(databases.size).must_equal 6
   end
 end

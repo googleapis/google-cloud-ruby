@@ -29,11 +29,11 @@ describe Google::Cloud::Spanner::Instance, :config, :mock_spanner do
 
     mock.verify
 
-    config.must_be_kind_of Google::Cloud::Spanner::Instance::Config
-    config.project_id.must_equal project
-    config.instance_config_id.must_equal instance_config_hash[:name].split("/").last
-    config.path.must_equal instance_config_hash[:name]
-    config.name.must_equal instance_config_hash[:display_name]
-    config.display_name.must_equal instance_config_hash[:display_name]
+    _(config).must_be_kind_of Google::Cloud::Spanner::Instance::Config
+    _(config.project_id).must_equal project
+    _(config.instance_config_id).must_equal instance_config_hash[:name].split("/").last
+    _(config.path).must_equal instance_config_hash[:name]
+    _(config.name).must_equal instance_config_hash[:display_name]
+    _(config.display_name).must_equal instance_config_hash[:display_name]
   end
 end
