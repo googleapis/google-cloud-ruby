@@ -234,7 +234,23 @@ name = client.feed_path project: "my-project", feed: "my-feed"
 response = client.get_feed name: name
 ```
 
-In the 1.0 client, you can also use the paths module as a convenience module.
+Because helpers take keyword arguments, some can now generate several different
+variations on the path that were not available under earlier versions of the
+library. For example, `feed_path` can generate paths with either a folder or
+organziation as the parent resource.
+
+New:
+```
+client = Google::Cloud::Asset.asset_service
+
+# Create paths with different parent resource types
+name2 = client.feed_path folder: "my-folder", feed: "my-feed"
+# => "folders/my-folder/feeds/my-feed"
+name3 = client.feed_path organization: "my-org", feed: "my-feed"
+# => "organizations/my-org/feeds/my-feed"
+```
+
+Finally, in the 1.0 client, you can also use the paths module as a convenience module.
 
 New:
 ```
