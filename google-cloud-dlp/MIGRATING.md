@@ -264,7 +264,7 @@ name2 = client.inspect_template_path organization: "my-org",
                                      inspect_template: "my-template"
 ```
 
-Finall, in the 1.0 client, you can also use the paths module as a convenience module.
+Finally, in the 1.0 client, you can also use the paths module as a convenience module.
 
 New:
 ```
