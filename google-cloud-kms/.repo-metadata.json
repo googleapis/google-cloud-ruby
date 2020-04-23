@@ -1,9 +1,5 @@
 {
-    "name": "cloudkms",
     "language": "ruby",
     "distribution_name": "google-cloud-kms",
-    "module_name": "Kms",
-    "module_name_credentials": "Kms::V1",
-    "env_var_prefix": "KMS",
     "client_documentation": "https://googleapis.dev/ruby/google-cloud-kms/latest"
 }
