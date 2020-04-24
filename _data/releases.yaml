@@ -98,6 +98,8 @@ google-cloud-automl:
 - v0.3.0
 - v0.2.0
 - v0.1.0
+google-cloud-automl-v1:
+- v0.1.0
 google-cloud-bigquery:
 - v1.21.0
 - v1.20.0
