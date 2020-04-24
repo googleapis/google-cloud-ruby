@@ -65,6 +65,7 @@ google-cloud-access_approval:
 google-cloud-access_approval-v1:
 - v0.1.0
 google-cloud-asset:
+- v1.0.1
 - v1.0.0
 - v0.8.1
 - v0.8.0
