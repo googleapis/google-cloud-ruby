@@ -22,33 +22,33 @@ describe Google::Cloud::Dns::Change, :mock_dns do
   let(:change) { Google::Cloud::Dns::Change.from_gapi done_change_gapi, zone }
 
   it "knows its attributes" do
-    change.id.must_equal "dns-change-1234567890"
-    change.additions.count.must_equal 1
-    change.additions.first.must_be_kind_of Google::Cloud::Dns::Record
-    change.deletions.count.must_equal 1
-    change.deletions.first.must_be_kind_of Google::Cloud::Dns::Record
-    change.status.must_equal "done"
-    change.must_be :done?
-    change.wont_be :pending?
+    _(change.id).must_equal "dns-change-1234567890"
+    _(change.additions.count).must_equal 1
+    _(change.additions.first).must_be_kind_of Google::Cloud::Dns::Record
+    _(change.deletions.count).must_equal 1
+    _(change.deletions.first).must_be_kind_of Google::Cloud::Dns::Record
+    _(change.status).must_equal "done"
+    _(change).must_be :done?
+    _(change).wont_be :pending?
 
     start_time = Time.new 2015, 1, 1, 0, 0, 0, 0
-    change.started_at.must_equal start_time
+    _(change.started_at).must_equal start_time
   end
 
   it "can represent a pending change" do
     pending_change = Google::Cloud::Dns::Change.from_gapi pending_change_gapi, zone
 
-    pending_change.id.must_equal "dns-change-1234567890"
-    pending_change.additions.count.must_equal 1
-    pending_change.additions.first.must_be_kind_of Google::Cloud::Dns::Record
-    pending_change.deletions.count.must_equal 1
-    pending_change.deletions.first.must_be_kind_of Google::Cloud::Dns::Record
-    pending_change.status.must_equal "pending"
-    pending_change.wont_be :done?
-    pending_change.must_be :pending?
+    _(pending_change.id).must_equal "dns-change-1234567890"
+    _(pending_change.additions.count).must_equal 1
+    _(pending_change.additions.first).must_be_kind_of Google::Cloud::Dns::Record
+    _(pending_change.deletions.count).must_equal 1
+    _(pending_change.deletions.first).must_be_kind_of Google::Cloud::Dns::Record
+    _(pending_change.status).must_equal "pending"
+    _(pending_change).wont_be :done?
+    _(pending_change).must_be :pending?
 
     start_time = Time.new 2015, 1, 1, 0, 0, 0, 0
-    pending_change.started_at.must_equal start_time
+    _(pending_change.started_at).must_equal start_time
   end
 
   it "can reload itself" do
@@ -57,13 +57,13 @@ describe Google::Cloud::Dns::Change, :mock_dns do
     mock.expect :get_change, done_change_gapi(change.id), [project, zone.id, change.id]
 
     dns.service.mocked_service = mock
-    change.must_be :done?
+    _(change).must_be :done?
     change.reload!
-    change.must_be :pending?
+    _(change).must_be :pending?
     change.reload!
     mock.verify
 
-    change.must_be :done?
+    _(change).must_be :done?
   end
 
   it "can reload itself with refresh alias" do
@@ -72,13 +72,13 @@ describe Google::Cloud::Dns::Change, :mock_dns do
     mock.expect :get_change, done_change_gapi(change.id), [project, zone.id, change.id]
 
     dns.service.mocked_service = mock
-    change.must_be :done?
+    _(change).must_be :done?
     change.refresh!
-    change.must_be :pending?
+    _(change).must_be :pending?
     change.refresh!
     mock.verify
 
-    change.must_be :done?
+    _(change).must_be :done?
   end
 
   it "can wait until done" do
@@ -97,10 +97,10 @@ describe Google::Cloud::Dns::Change, :mock_dns do
     end
 
     dns.service.mocked_service = mock
-    pending_change.must_be :pending?
+    _(pending_change).must_be :pending?
     pending_change.wait_until_done!
     mock.verify
 
-    pending_change.must_be :done?
+    _(pending_change).must_be :done?
   end
 end

@@ -55,8 +55,8 @@ EOS
   it "imports records from zonefile file path" do
     importer = Google::Cloud::Dns::Importer.new zone, zonefile_path
     records = importer.records
-    records.size.must_be :>=, 16
-    records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
+    _(records.size).must_be :>=, 16
+    records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
     record_must_be records[0], "example.com.", "SOA", 3600, ["ns.example.com. username.example.com. 2007120710 1d 2h 4w 1h"]
     record_must_be records[1], "example.com.", "MX", 3600, ["10 mail.example.com.", "20 mail2.example.com.", "50 mail3"]
     record_must_be records[2], "example.com.", "A", 3600, ["192.0.2.1"]
@@ -79,8 +79,8 @@ EOS
   it "imports records from zonefile IO instance" do
     importer = Google::Cloud::Dns::Importer.new zone, zonefile_io
     records = importer.records
-    records.size.must_equal 8
-    records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
+    _(records.size).must_equal 8
+    records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
     record_must_be records[0], "example.com.", "SOA", 3600, ["ns1.example.com. hostmaster.example.com. 2002022401 3H 15 1w 3h"]
     record_must_be records[1], "example.com.", "MX", 86400, ["10 mail.another.com."]
     record_must_be records[2], "ns1.example.com.", "A", 86400, ["192.168.0.1"]
@@ -94,7 +94,7 @@ EOS
   it "accepts an only option string" do
     importer = Google::Cloud::Dns::Importer.new zone, zonefile_io
     records = importer.records only: "A"
-    records.size.must_equal 4
+    _(records.size).must_equal 4
     record_must_be records[0], "ns1.example.com.", "A", 86400, ["192.168.0.1"]
     record_must_be records[1], "www.example.com.", "A", 3600, ["192.168.0.2"]
     record_must_be records[2], "bill.example.com.", "A", 86400, ["192.168.0.3"]
@@ -104,7 +104,7 @@ EOS
   it "accepts an only option array" do
     importer = Google::Cloud::Dns::Importer.new zone, zonefile_io
     records = importer.records only: ["A","NS"]
-    records.size.must_equal 5
+    _(records.size).must_equal 5
     record_must_be records[0], "ns1.example.com.", "A", 86400, ["192.168.0.1"]
     record_must_be records[1], "www.example.com.", "A", 3600, ["192.168.0.2"]
     record_must_be records[2], "bill.example.com.", "A", 86400, ["192.168.0.3"]
@@ -115,7 +115,7 @@ EOS
   it "accepts an except option string" do
     importer = Google::Cloud::Dns::Importer.new zone, zonefile_io
     records = importer.records except: "A"
-    records.size.must_equal 4
+    _(records.size).must_equal 4
     record_must_be records[0], "example.com.", "SOA", 3600, ["ns1.example.com. hostmaster.example.com. 2002022401 3H 15 1w 3h"]
     record_must_be records[1], "example.com.", "MX", 86400, ["10 mail.another.com."]
     record_must_be records[2], "example.com.", "NS", 86400, ["ns1.example.com.", "ns2.smokeyjoe.com."]
@@ -125,16 +125,16 @@ EOS
   it "accepts an except option array" do
     importer = Google::Cloud::Dns::Importer.new zone, zonefile_io
     records = importer.records except: ["A","CNAME"]
-    records.size.must_equal 3
+    _(records.size).must_equal 3
     record_must_be records[0], "example.com.", "SOA", 3600, ["ns1.example.com. hostmaster.example.com. 2002022401 3H 15 1w 3h"]
     record_must_be records[1], "example.com.", "MX", 86400, ["10 mail.another.com."]
     record_must_be records[2], "example.com.", "NS", 86400, ["ns1.example.com.", "ns2.smokeyjoe.com."]
   end
 
   def record_must_be record, name, type, ttl, data
-    record.name.must_equal name
-    record.type.must_equal type
-    record.ttl.must_equal ttl
-    record.data.must_equal data
+    _(record.name).must_equal name
+    _(record.type).must_equal type
+    _(record.ttl).must_equal ttl
+    _(record.data).must_equal data
   end
 end

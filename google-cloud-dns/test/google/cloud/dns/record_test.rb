@@ -24,63 +24,63 @@ describe Google::Cloud::Dns::Record, :mock_dns do
   let(:record) { Google::Cloud::Dns::Record.from_gapi record_gapi }
 
   it "knows its attributes" do
-    record.name.must_equal record_name
-    record.type.must_equal record_type
-    record.ttl.must_equal  record_ttl
-    record.data.must_equal record_data
+    _(record.name).must_equal record_name
+    _(record.type).must_equal record_type
+    _(record.ttl).must_equal  record_ttl
+    _(record.data).must_equal record_data
   end
 
   it "exports to zonefile record string" do
     zonefile_records = record.to_zonefile_records
-    zonefile_records.count.must_equal 2
-    zonefile_records.first.must_equal "#{record_name} #{record_ttl} IN #{record_type} #{record_data.first}"
-    zonefile_records.last.must_equal "#{record_name} #{record_ttl} IN #{record_type} #{record_data.last}"
+    _(zonefile_records.count).must_equal 2
+    _(zonefile_records.first).must_equal "#{record_name} #{record_ttl} IN #{record_type} #{record_data.first}"
+    _(zonefile_records.last).must_equal "#{record_name} #{record_ttl} IN #{record_type} #{record_data.last}"
   end
 
   it "knows if it is equal to other records" do
     dupe = record.dup
-    dupe.must_equal record
+    _(dupe).must_equal record
     dupe.data = ["5.6.7.8"]
-    dupe.wont_equal record
+    _(dupe).wont_equal record
   end
 
   it "duplicates all its data deeply" do
     dupe = record.dup
-    dupe.must_equal record
-    dupe.data.must_equal record.data
-    dupe.data[0].must_equal record.data[0]
+    _(dupe).must_equal record
+    _(dupe.data).must_equal record.data
+    _(dupe.data[0]).must_equal record.data[0]
 
     dupe.data[0] = "5.6.7.8"
 
-    dupe.wont_equal record
-    dupe.data.wont_equal record.data
-    dupe.data[0].wont_equal record.data[0]
+    _(dupe).wont_equal record
+    _(dupe.data).wont_equal record.data
+    _(dupe.data[0]).wont_equal record.data[0]
   end
 
   it "duplicates its data array" do
     dupe = record.dup
-    dupe.must_equal record
-    dupe.data.must_equal record.data
-    dupe.data.count.must_equal record.data.count
+    _(dupe).must_equal record
+    _(dupe.data).must_equal record.data
+    _(dupe.data.count).must_equal record.data.count
 
     dupe.data << "ns-cloud-b3.googledomains.com."
 
-    dupe.wont_equal record
-    dupe.data.wont_equal record.data
-    dupe.data.count.wont_equal record.data.count
+    _(dupe).wont_equal record
+    _(dupe.data).wont_equal record.data
+    _(dupe.data.count).wont_equal record.data.count
   end
 
   it "duplicates its data array elements" do
     dupe = record.dup
-    dupe.must_equal record
-    dupe.data.must_equal record.data
-    dupe.data[0].must_equal record.data[0]
+    _(dupe).must_equal record
+    _(dupe.data).must_equal record.data
+    _(dupe.data[0]).must_equal record.data[0]
 
     dupe.data[0].gsub! "com", "net"
 
-    dupe.wont_equal record
-    dupe.data.wont_equal record.data
-    dupe.data[0].wont_equal record.data[0]
+    _(dupe).wont_equal record
+    _(dupe.data).wont_equal record.data
+    _(dupe.data[0]).wont_equal record.data[0]
   end
 
   it "is comparable in arrays" do
@@ -88,15 +88,15 @@ describe Google::Cloud::Dns::Record, :mock_dns do
                  Google::Cloud::Dns::Record.new("example.net.", "A", 86400, "localhost"),
                  Google::Cloud::Dns::Record.new("example.org.", "A", 86400, "localhost") ]
     changed = original.map(&:dup)
-    changed.must_equal original
+    _(changed).must_equal original
     changed.first.ttl = 18600
-    changed.wont_equal original
+    _(changed).wont_equal original
 
     existing = original - changed
     updated = changed - original
-    existing.count.must_equal 1
-    updated.count.must_equal 1
-    existing.first.must_equal original.first
-    updated.first.must_equal changed.first
+    _(existing.count).must_equal 1
+    _(updated.count).must_equal 1
+    _(existing.first).must_equal original.first
+    _(updated.first).must_equal changed.first
   end
 end

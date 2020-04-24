@@ -28,16 +28,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
   let(:updated_soa) { Google::Cloud::Dns::Record.new "example.com.", "SOA", 18600, "ns-cloud-b1.googledomains.com. dns-admin.google.com. 1 21600 3600 1209600 300" }
 
   it "knows its attributes" do
-    zone.name.must_equal zone_name
-    zone.dns.must_equal zone.dns
-    zone.description.must_equal ""
-    zone.id.must_equal 123456789
-    zone.name_servers.must_equal [ "virtual-dns-1.google.example",
+    _(zone.name).must_equal zone_name
+    _(zone.dns).must_equal zone.dns
+    _(zone.description).must_equal ""
+    _(zone.id).must_equal 123456789
+    _(zone.name_servers).must_equal [ "virtual-dns-1.google.example",
                                    "virtual-dns-2.google.example" ]
-    zone.name_server_set.must_be :nil?
+    _(zone.name_server_set).must_be :nil?
 
     creation_time = Time.new 2015, 1, 1, 0, 0, 0, 0
-    zone.created_at.must_equal creation_time
+    _(zone.created_at).must_equal creation_time
   end
 
   it "can delete itself" do
@@ -101,8 +101,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.change found_change
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal found_change
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal found_change
   end
 
   it "returns nil when it cannot find a change" do
@@ -113,7 +113,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     dns.service.mocked_service = stub
     change = zone.change "dns-change-0987654321"
-    change.must_be :nil?
+    _(change).must_be :nil?
   end
 
   it "lists changes" do
@@ -125,8 +125,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     changes = zone.changes
     mock.verify
 
-    changes.size.must_equal num_changes
-    changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
+    _(changes.size).must_equal num_changes
+    changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
   end
 
   it "lists changes with max set" do
@@ -137,10 +137,10 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     changes = zone.changes max: 3
     mock.verify
 
-    changes.count.must_equal 3
-    changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    changes.token.wont_be :nil?
-    changes.token.must_equal "next_page_token"
+    _(changes.count).must_equal 3
+    changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(changes.token).wont_be :nil?
+    _(changes.token).must_equal "next_page_token"
   end
 
   it "lists changes with order set to asc" do
@@ -151,10 +151,10 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     changes = zone.changes order: :asc
     mock.verify
 
-    changes.count.must_equal 3
-    changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    changes.token.wont_be :nil?
-    changes.token.must_equal "next_page_token"
+    _(changes.count).must_equal 3
+    changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(changes.token).wont_be :nil?
+    _(changes.token).must_equal "next_page_token"
   end
 
   it "lists changes with order set to desc" do
@@ -165,10 +165,10 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     changes = zone.changes order: :desc
     mock.verify
 
-    changes.count.must_equal 3
-    changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    changes.token.wont_be :nil?
-    changes.token.must_equal "next_page_token"
+    _(changes.count).must_equal 3
+    changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(changes.token).wont_be :nil?
+    _(changes.token).must_equal "next_page_token"
   end
 
   it "paginates changes" do
@@ -179,17 +179,17 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     dns.service.mocked_service = mock
 
     first_changes = zone.changes
-    first_changes.count.must_equal 3
-    first_changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    first_changes.token.wont_be :nil?
-    first_changes.token.must_equal "next_page_token"
+    _(first_changes.count).must_equal 3
+    first_changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(first_changes.token).wont_be :nil?
+    _(first_changes.token).must_equal "next_page_token"
 
     second_changes = zone.changes token: first_changes.token
     mock.verify
 
-    second_changes.count.must_equal 2
-    second_changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    second_changes.token.must_be :nil?
+    _(second_changes.count).must_equal 2
+    second_changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(second_changes.token).must_be :nil?
   end
 
   it "paginates changes with next? and next" do
@@ -200,16 +200,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     dns.service.mocked_service = mock
 
     first_changes = zone.changes
-    first_changes.count.must_equal 3
-    first_changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    first_changes.next?.must_equal true
+    _(first_changes.count).must_equal 3
+    first_changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(first_changes.next?).must_equal true
 
     second_changes = first_changes.next
     mock.verify
 
-    second_changes.count.must_equal 2
-    second_changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    second_changes.next?.must_equal false
+    _(second_changes.count).must_equal 2
+    second_changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(second_changes.next?).must_equal false
   end
 
   it "paginates changes with next? and next and max set" do
@@ -220,16 +220,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     dns.service.mocked_service = mock
 
     first_changes = zone.changes max: 3
-    first_changes.count.must_equal 3
-    first_changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    first_changes.next?.must_equal true
+    _(first_changes.count).must_equal 3
+    first_changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(first_changes.next?).must_equal true
 
     second_changes = first_changes.next
     mock.verify
 
-    second_changes.count.must_equal 2
-    second_changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    second_changes.next?.must_equal false
+    _(second_changes.count).must_equal 2
+    second_changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(second_changes.next?).must_equal false
   end
 
   it "paginates changes with next? and next and order set to asc" do
@@ -240,16 +240,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     dns.service.mocked_service = mock
 
     first_changes = zone.changes order: :asc
-    first_changes.count.must_equal 3
-    first_changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    first_changes.next?.must_equal true
+    _(first_changes.count).must_equal 3
+    first_changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(first_changes.next?).must_equal true
 
     second_changes = first_changes.next
     mock.verify
 
-    second_changes.count.must_equal 2
-    second_changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    second_changes.next?.must_equal false
+    _(second_changes.count).must_equal 2
+    second_changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(second_changes.next?).must_equal false
   end
 
   it "paginates changes with next? and next and order set to desc" do
@@ -260,16 +260,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     dns.service.mocked_service = mock
 
     first_changes = zone.changes order: :desc
-    first_changes.count.must_equal 3
-    first_changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    first_changes.next?.must_equal true
+    _(first_changes.count).must_equal 3
+    first_changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(first_changes.next?).must_equal true
 
     second_changes = first_changes.next
     mock.verify
 
-    second_changes.count.must_equal 2
-    second_changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
-    second_changes.next?.must_equal false
+    _(second_changes.count).must_equal 2
+    second_changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
+    _(second_changes.next?).must_equal false
   end
 
   it "paginates changes with all" do
@@ -282,8 +282,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     changes = zone.changes.all.to_a
     mock.verify
 
-    changes.count.must_equal 5
-    changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
+    _(changes.count).must_equal 5
+    changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
   end
 
   it "paginates changes with all and max set" do
@@ -295,8 +295,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     changes = zone.changes(max: 3).all.to_a
     mock.verify
 
-    changes.count.must_equal 5
-    changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
+    _(changes.count).must_equal 5
+    changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
   end
 
   it "paginates changes with all and order set to asc" do
@@ -309,8 +309,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     changes = zone.changes(order: :asc).all.to_a
     mock.verify
 
-    changes.count.must_equal 5
-    changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
+    _(changes.count).must_equal 5
+    changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
   end
 
   it "paginates changes with all and order set to desc" do
@@ -322,8 +322,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     changes = zone.changes(order: :desc).all.to_a
     mock.verify
 
-    changes.count.must_equal 5
-    changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
+    _(changes.count).must_equal 5
+    changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
   end
 
   it "paginates changes with all using Enumerator" do
@@ -336,8 +336,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     changes = zone.changes.all.take(5)
     mock.verify
 
-    changes.count.must_equal 5
-    changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
+    _(changes.count).must_equal 5
+    changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
   end
 
   it "paginates changes with all with request_limit set" do
@@ -350,8 +350,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     changes = zone.changes.all(request_limit: 1).to_a
     mock.verify
 
-    changes.count.must_equal 6
-    changes.each { |z| z.must_be_kind_of Google::Cloud::Dns::Change }
+    _(changes.count).must_equal 6
+    changes.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Change }
   end
 
   it "lists records" do
@@ -363,8 +363,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     records = zone.records
     mock.verify
 
-    records.size.must_equal num_records
-    records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
+    _(records.size).must_equal num_records
+    records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
   end
 
   it "lists records with name param" do
@@ -376,8 +376,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     records = zone.records record_name
     mock.verify
 
-    records.size.must_equal num_records
-    records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
+    _(records.size).must_equal num_records
+    records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
   end
 
   it "lists records with name and type params" do
@@ -389,8 +389,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     records = zone.records record_name, record_type
     mock.verify
 
-    records.size.must_equal num_records
-    records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
+    _(records.size).must_equal num_records
+    records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
   end
 
   it "lists records with subdomain and type params" do
@@ -402,8 +402,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     records = zone.records "www", "A"
     mock.verify
 
-    records.size.must_equal num_records
-    records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
+    _(records.size).must_equal num_records
+    records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
   end
 
   it "paginates records" do
@@ -414,17 +414,17 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     dns.service.mocked_service = mock
 
     first_records = zone.records
-    first_records.count.must_equal 3
-    first_records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
-    first_records.token.wont_be :nil?
-    first_records.token.must_equal "next_page_token"
+    _(first_records.count).must_equal 3
+    first_records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
+    _(first_records.token).wont_be :nil?
+    _(first_records.token).must_equal "next_page_token"
 
     second_records = zone.records token: first_records.token
     mock.verify
 
-    second_records.count.must_equal 2
-    second_records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
-    second_records.token.must_be :nil?
+    _(second_records.count).must_equal 2
+    second_records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
+    _(second_records.token).must_be :nil?
   end
 
   it "paginates records with next? and next" do
@@ -435,16 +435,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     dns.service.mocked_service = mock
 
     first_records = zone.records
-    first_records.count.must_equal 3
-    first_records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
-    first_records.next?.must_equal true
+    _(first_records.count).must_equal 3
+    first_records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
+    _(first_records.next?).must_equal true
 
     second_records = first_records.next
     mock.verify
 
-    second_records.count.must_equal 2
-    second_records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
-    second_records.next?.must_equal false
+    _(second_records.count).must_equal 2
+    second_records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
+    _(second_records.next?).must_equal false
   end
 
   it "paginates records with next? and next and max set" do
@@ -455,16 +455,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     dns.service.mocked_service = mock
 
     first_records = zone.records max: 3
-    first_records.count.must_equal 3
-    first_records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
-    first_records.next?.must_equal true
+    _(first_records.count).must_equal 3
+    first_records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
+    _(first_records.next?).must_equal true
 
     second_records = first_records.next
     mock.verify
 
-    second_records.count.must_equal 2
-    second_records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
-    second_records.next?.must_equal false
+    _(second_records.count).must_equal 2
+    second_records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
+    _(second_records.next?).must_equal false
   end
 
   it "loads all records with all" do
@@ -477,8 +477,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     all_records = zone.records.all.to_a
     mock.verify
 
-    all_records.count.must_equal 5
-    all_records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
+    _(all_records.count).must_equal 5
+    all_records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
   end
 
   it "paginates records with all and max set" do
@@ -491,8 +491,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     all_records = zone.records(max: 3).all.to_a
     mock.verify
 
-    all_records.count.must_equal 5
-    all_records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
+    _(all_records.count).must_equal 5
+    all_records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
   end
 
   it "loads all records with all using Enumerator" do
@@ -505,8 +505,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     all_records = zone.records.all.take(5)
     mock.verify
 
-    all_records.count.must_equal 5
-    all_records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
+    _(all_records.count).must_equal 5
+    all_records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
   end
 
   it "loads all records with all with request_limit set" do
@@ -519,71 +519,71 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     all_records = zone.records.all(request_limit: 1).to_a
     mock.verify
 
-    all_records.count.must_equal 6
-    all_records.each { |z| z.must_be_kind_of Google::Cloud::Dns::Record }
+    _(all_records.count).must_equal 6
+    all_records.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Record }
   end
 
   it "can create a record" do
     record = zone.record record_name, record_type, record_ttl, record_data
 
-    record.name.must_equal record_name
-    record.type.must_equal record_type
-    record.ttl.must_equal  record_ttl
-    record.data.must_equal record_data
+    _(record.name).must_equal record_name
+    _(record.type).must_equal record_type
+    _(record.ttl).must_equal  record_ttl
+    _(record.data).must_equal record_data
   end
 
   it "creates a record with a fully domain name when not given one" do
     record = zone.record "example.com", record_type, record_ttl, record_data
 
-    record.name.must_equal "example.com." # it appends "."
-    record.type.must_equal record_type
-    record.ttl.must_equal  record_ttl
-    record.data.must_equal record_data
+    _(record.name).must_equal "example.com." # it appends "."
+    _(record.type).must_equal record_type
+    _(record.ttl).must_equal  record_ttl
+    _(record.data).must_equal record_data
   end
 
   it "creates a record when given nil for the domain name" do
     record = zone.record nil, record_type, record_ttl, record_data
 
-    record.name.must_equal "example.com."
-    record.type.must_equal record_type
-    record.ttl.must_equal  record_ttl
-    record.data.must_equal record_data
+    _(record.name).must_equal "example.com."
+    _(record.type).must_equal record_type
+    _(record.ttl).must_equal  record_ttl
+    _(record.data).must_equal record_data
   end
 
   it "creates a record when given an empty string for the domain name" do
     record = zone.record "", record_type, record_ttl, record_data
 
-    record.name.must_equal "example.com."
-    record.type.must_equal record_type
-    record.ttl.must_equal  record_ttl
-    record.data.must_equal record_data
+    _(record.name).must_equal "example.com."
+    _(record.type).must_equal record_type
+    _(record.ttl).must_equal  record_ttl
+    _(record.data).must_equal record_data
   end
 
   it "creates a record when given '@' for the domain name" do
     record = zone.record "@", record_type, record_ttl, record_data
 
-    record.name.must_equal "example.com."
-    record.type.must_equal record_type
-    record.ttl.must_equal  record_ttl
-    record.data.must_equal record_data
+    _(record.name).must_equal "example.com."
+    _(record.type).must_equal record_type
+    _(record.ttl).must_equal  record_ttl
+    _(record.data).must_equal record_data
   end
 
   it "creates a record with a qualified name when given only a subdomain" do
     record = zone.record "www", record_type, record_ttl, record_data
 
-    record.name.must_equal "www.example.com."
-    record.type.must_equal record_type
-    record.ttl.must_equal  record_ttl
-    record.data.must_equal record_data
+    _(record.name).must_equal "www.example.com."
+    _(record.type).must_equal record_type
+    _(record.ttl).must_equal  record_ttl
+    _(record.data).must_equal record_data
   end
 
   it "creates a record without changing name when it is a NAPTR record" do
     record = zone.record "1.2.3.4", "NAPTR", 3600, "10 100 \"U\" \"E2U+sip\" \"!^\\+44111555(.+)$!sip:7\\1@sip.example.com!\" ."
 
-    record.name.must_equal "1.2.3.4"
-    record.type.must_equal "NAPTR"
-    record.ttl.must_equal  3600
-    record.data.must_equal ["10 100 \"U\" \"E2U+sip\" \"!^\\+44111555(.+)$!sip:7\\1@sip.example.com!\" ."]
+    _(record.name).must_equal "1.2.3.4"
+    _(record.type).must_equal "NAPTR"
+    _(record.ttl).must_equal  3600
+    _(record.data).must_equal ["10 100 \"U\" \"E2U+sip\" \"!^\\+44111555(.+)$!sip:7\\1@sip.example.com!\" ."]
   end
 
   it "adds and removes records with update" do
@@ -603,27 +603,27 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.update to_add, to_remove
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.first.name.must_equal to_add.name
-    change.additions.first.type.must_equal to_add.type
-    change.additions.first.ttl.must_equal  to_add.ttl
-    change.additions.first.data.must_equal to_add.data
-    change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.type.must_equal to_remove.type
-    change.deletions.first.ttl.must_equal  to_remove.ttl
-    change.deletions.first.data.must_equal to_remove.data
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions.first.name).must_equal to_add.name
+    _(change.additions.first.type).must_equal to_add.type
+    _(change.additions.first.ttl).must_equal  to_add.ttl
+    _(change.additions.first.data).must_equal to_add.data
+    _(change.deletions.first.name).must_equal to_remove.name
+    _(change.deletions.first.type).must_equal to_remove.type
+    _(change.deletions.first.ttl).must_equal  to_remove.ttl
+    _(change.deletions.first.data).must_equal to_remove.data
   end
 
   it "returns nil when calling update without any records to change" do
     change = zone.update [], []
-    change.must_be :nil?
+    _(change).must_be :nil?
   end
 
   it "returns nil when calling update with records that have not changed" do
     a_record = zone.record zone.dns, "A", 18600, "0.0.0.0"
     change = zone.update a_record, a_record
-    change.must_be :nil?
+    _(change).must_be :nil?
   end
 
   it "only updates the records that have changed" do
@@ -649,16 +649,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.update to_add, to_remove
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.first.name.must_equal to_add.first.name
-    change.additions.first.type.must_equal to_add.first.type
-    change.additions.first.ttl.must_equal  to_add.first.ttl
-    change.additions.first.data.must_equal to_add.first.data
-    change.deletions.first.name.must_equal to_remove.first.name
-    change.deletions.first.type.must_equal to_remove.first.type
-    change.deletions.first.ttl.must_equal  to_remove.first.ttl
-    change.deletions.first.data.must_equal to_remove.first.data
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions.first.name).must_equal to_add.first.name
+    _(change.additions.first.type).must_equal to_add.first.type
+    _(change.additions.first.ttl).must_equal  to_add.first.ttl
+    _(change.additions.first.data).must_equal to_add.first.data
+    _(change.deletions.first.name).must_equal to_remove.first.name
+    _(change.deletions.first.type).must_equal to_remove.first.type
+    _(change.deletions.first.ttl).must_equal  to_remove.first.ttl
+    _(change.deletions.first.data).must_equal to_remove.first.data
   end
 
   it "adds a record" do
@@ -678,14 +678,14 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.add "example.net.", "A", 18600, "example.com."
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.first.name.must_equal to_add.name
-    change.additions.first.type.must_equal to_add.type
-    change.additions.first.ttl.must_equal  to_add.ttl
-    change.additions.first.data.must_equal to_add.data
-    change.additions[1].data.must_equal updated_soa.data
-    change.deletions.first.data.must_equal soa.data
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions.first.name).must_equal to_add.name
+    _(change.additions.first.type).must_equal to_add.type
+    _(change.additions.first.ttl).must_equal  to_add.ttl
+    _(change.additions.first.data).must_equal to_add.data
+    _(change.additions[1].data).must_equal updated_soa.data
+    _(change.deletions.first.data).must_equal soa.data
   end
 
   it "adds a record with a subdomain" do
@@ -705,14 +705,14 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.add "www", "A", 18600, "example.net."
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.first.name.must_equal to_add.name
-    change.additions.first.type.must_equal to_add.type
-    change.additions.first.ttl.must_equal  to_add.ttl
-    change.additions.first.data.must_equal to_add.data
-    change.additions[1].data.must_equal updated_soa.data
-    change.deletions.first.data.must_equal soa.data
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions.first.name).must_equal to_add.name
+    _(change.additions.first.type).must_equal to_add.type
+    _(change.additions.first.ttl).must_equal  to_add.ttl
+    _(change.additions.first.data).must_equal to_add.data
+    _(change.additions[1].data).must_equal updated_soa.data
+    _(change.deletions.first.data).must_equal soa.data
   end
 
   it "updates without updating soa" do
@@ -730,13 +730,13 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.update to_add, skip_soa: true
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.first.name.must_equal to_add.name
-    change.additions.first.type.must_equal to_add.type
-    change.additions.first.ttl.must_equal  to_add.ttl
-    change.additions.first.data.must_equal to_add.data
-    change.deletions.must_be :empty?
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions.first.name).must_equal to_add.name
+    _(change.additions.first.type).must_equal to_add.type
+    _(change.additions.first.ttl).must_equal  to_add.ttl
+    _(change.additions.first.data).must_equal to_add.data
+    _(change.deletions).must_be :empty?
   end
 
   it "updates with an integer for soa_serial" do
@@ -758,7 +758,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.update to_add, [], soa_serial: 10
     mock.verify
 
-    change.additions[1].data.must_equal expected_soa.data
+    _(change.additions[1].data).must_equal expected_soa.data
   end
 
   it "updates with a lambda for soa_serial" do
@@ -780,7 +780,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.update to_add, [], soa_serial: lambda { |sn| sn + 10 }
     mock.verify
 
-    change.additions[1].data.must_equal expected_soa.data
+    _(change.additions[1].data).must_equal expected_soa.data
   end
 
   it "removes records by name and type" do
@@ -804,13 +804,13 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.remove "example.net.", "A"
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.must_be :empty?
-    change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.type.must_equal to_remove.type
-    change.deletions.first.ttl.must_equal  to_remove.ttl
-    change.deletions.first.data.must_equal to_remove.data
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions).must_be :empty?
+    _(change.deletions.first.name).must_equal to_remove.name
+    _(change.deletions.first.type).must_equal to_remove.type
+    _(change.deletions.first.ttl).must_equal  to_remove.ttl
+    _(change.deletions.first.data).must_equal to_remove.data
   end
 
   it "removes records by subdomain name and type" do
@@ -834,13 +834,13 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.remove "www", "A"
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.must_be :empty?
-    change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.type.must_equal to_remove.type
-    change.deletions.first.ttl.must_equal  to_remove.ttl
-    change.deletions.first.data.must_equal to_remove.data
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions).must_be :empty?
+    _(change.deletions.first.name).must_equal to_remove.name
+    _(change.deletions.first.type).must_equal to_remove.type
+    _(change.deletions.first.ttl).must_equal  to_remove.ttl
+    _(change.deletions.first.data).must_equal to_remove.data
   end
 
   it "replaces records by name and type" do
@@ -865,16 +865,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.replace "example.net.", "A", 18600, "example.com."
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.first.name.must_equal to_add.name
-    change.additions.first.type.must_equal to_add.type
-    change.additions.first.ttl.must_equal  to_add.ttl
-    change.additions.first.data.must_equal to_add.data
-    change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.type.must_equal to_remove.type
-    change.deletions.first.ttl.must_equal  to_remove.ttl
-    change.deletions.first.data.must_equal to_remove.data
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions.first.name).must_equal to_add.name
+    _(change.additions.first.type).must_equal to_add.type
+    _(change.additions.first.ttl).must_equal  to_add.ttl
+    _(change.additions.first.data).must_equal to_add.data
+    _(change.deletions.first.name).must_equal to_remove.name
+    _(change.deletions.first.type).must_equal to_remove.type
+    _(change.deletions.first.ttl).must_equal  to_remove.ttl
+    _(change.deletions.first.data).must_equal to_remove.data
   end
 
   it "replaces records by subdomain and type" do
@@ -899,16 +899,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     change = zone.replace "www", "A", 18600, "example.net."
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.first.name.must_equal to_add.name
-    change.additions.first.type.must_equal to_add.type
-    change.additions.first.ttl.must_equal  to_add.ttl
-    change.additions.first.data.must_equal to_add.data
-    change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.type.must_equal to_remove.type
-    change.deletions.first.ttl.must_equal  to_remove.ttl
-    change.deletions.first.data.must_equal to_remove.data
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions.first.name).must_equal to_add.name
+    _(change.additions.first.type).must_equal to_add.type
+    _(change.additions.first.ttl).must_equal  to_add.ttl
+    _(change.additions.first.data).must_equal to_add.data
+    _(change.deletions.first.name).must_equal to_remove.name
+    _(change.deletions.first.type).must_equal to_remove.type
+    _(change.deletions.first.ttl).must_equal  to_remove.ttl
+    _(change.deletions.first.data).must_equal to_remove.data
   end
 
   it "modifies records by name and type" do
@@ -935,16 +935,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     end
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.first.name.must_equal to_add.name
-    change.additions.first.type.must_equal to_add.type
-    change.additions.first.ttl.must_equal  to_add.ttl
-    change.additions.first.data.must_equal to_add.data
-    change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.type.must_equal to_remove.type
-    change.deletions.first.ttl.must_equal  to_remove.ttl
-    change.deletions.first.data.must_equal to_remove.data
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions.first.name).must_equal to_add.name
+    _(change.additions.first.type).must_equal to_add.type
+    _(change.additions.first.ttl).must_equal  to_add.ttl
+    _(change.additions.first.data).must_equal to_add.data
+    _(change.deletions.first.name).must_equal to_remove.name
+    _(change.deletions.first.type).must_equal to_remove.type
+    _(change.deletions.first.ttl).must_equal  to_remove.ttl
+    _(change.deletions.first.data).must_equal to_remove.data
   end
 
   it "modifies records by subdomain and type" do
@@ -971,16 +971,16 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     end
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
-    change.additions.first.name.must_equal to_add.name
-    change.additions.first.type.must_equal to_add.type
-    change.additions.first.ttl.must_equal  to_add.ttl
-    change.additions.first.data.must_equal to_add.data
-    change.deletions.first.name.must_equal to_remove.name
-    change.deletions.first.type.must_equal to_remove.type
-    change.deletions.first.ttl.must_equal  to_remove.ttl
-    change.deletions.first.data.must_equal to_remove.data
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
+    _(change.additions.first.name).must_equal to_add.name
+    _(change.additions.first.type).must_equal to_add.type
+    _(change.additions.first.ttl).must_equal  to_add.ttl
+    _(change.additions.first.data).must_equal to_add.data
+    _(change.deletions.first.name).must_equal to_remove.name
+    _(change.deletions.first.type).must_equal to_remove.type
+    _(change.deletions.first.ttl).must_equal  to_remove.ttl
+    _(change.deletions.first.data).must_equal to_remove.data
   end
 
   it "allows for multiple changes in one update using the DSL" do

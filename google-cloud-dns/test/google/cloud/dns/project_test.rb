@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Dns::Project, :mock_dns do
   it "knows the project identifier" do
-    dns.project.must_equal project
+    _(dns.project).must_equal project
   end
 
   it "knows its quota information" do
@@ -27,14 +27,14 @@ describe Google::Cloud::Dns::Project, :mock_dns do
     dns.reload!
     mock.verify
 
-    dns.id.must_equal project
-    dns.number.must_equal 123456789
-    dns.zones_quota.must_equal 101
-    dns.records_per_zone.must_equal 1002
-    dns.additions_per_change.must_equal 103
-    dns.deletions_per_change.must_equal 104
-    dns.total_data_per_change.must_equal 8000
-    dns.data_per_record.must_equal 105
+    _(dns.id).must_equal project
+    _(dns.number).must_equal 123456789
+    _(dns.zones_quota).must_equal 101
+    _(dns.records_per_zone).must_equal 1002
+    _(dns.additions_per_change).must_equal 103
+    _(dns.deletions_per_change).must_equal 104
+    _(dns.total_data_per_change).must_equal 8000
+    _(dns.data_per_record).must_equal 105
   end
 
   it "finds a zone" do
@@ -46,8 +46,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
     zone = dns.zone found_zone
     mock.verify
 
-    zone.must_be_kind_of Google::Cloud::Dns::Zone
-    zone.name.must_equal found_zone
+    _(zone).must_be_kind_of Google::Cloud::Dns::Zone
+    _(zone.name).must_equal found_zone
   end
 
   it "returns nil when it cannot find a zone" do
@@ -58,7 +58,7 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
     dns.service.mocked_service = stub
     zone = dns.zone "example.org."
-    zone.must_be :nil?
+    _(zone).must_be :nil?
   end
 
   it "lists zones" do
@@ -70,8 +70,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
     zones = dns.zones
     mock.verify
 
-    zones.size.must_equal num_zones
-    zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
+    _(zones.size).must_equal num_zones
+    zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
   end
 
   it "paginates zones" do
@@ -81,17 +81,17 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
     dns.service.mocked_service = mock
     first_zones = dns.zones
-    first_zones.count.must_equal 3
-    first_zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
-    first_zones.token.wont_be :nil?
-    first_zones.token.must_equal "next_page_token"
+    _(first_zones.count).must_equal 3
+    first_zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
+    _(first_zones.token).wont_be :nil?
+    _(first_zones.token).must_equal "next_page_token"
 
     second_zones = dns.zones token: first_zones.token
     mock.verify
 
-    second_zones.count.must_equal 2
-    second_zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
-    second_zones.token.must_be :nil?
+    _(second_zones.count).must_equal 2
+    second_zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
+    _(second_zones.token).must_be :nil?
   end
 
   it "paginates zones with max set" do
@@ -102,10 +102,10 @@ describe Google::Cloud::Dns::Project, :mock_dns do
     zones = dns.zones max: 3
     mock.verify
 
-    zones.count.must_equal 3
-    zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
-    zones.token.wont_be :nil?
-    zones.token.must_equal "next_page_token"
+    _(zones.count).must_equal 3
+    zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
+    _(zones.token).wont_be :nil?
+    _(zones.token).must_equal "next_page_token"
   end
 
   it "paginates zones without max set" do
@@ -116,10 +116,10 @@ describe Google::Cloud::Dns::Project, :mock_dns do
     zones = dns.zones
     mock.verify
 
-    zones.count.must_equal 3
-    zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
-    zones.token.wont_be :nil?
-    zones.token.must_equal "next_page_token"
+    _(zones.count).must_equal 3
+    zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
+    _(zones.token).wont_be :nil?
+    _(zones.token).must_equal "next_page_token"
   end
 
   it "paginates zones with next? and next" do
@@ -129,16 +129,16 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
     dns.service.mocked_service = mock
     first_zones = dns.zones
-    first_zones.count.must_equal 3
-    first_zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
-    first_zones.next?.must_equal true
+    _(first_zones.count).must_equal 3
+    first_zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
+    _(first_zones.next?).must_equal true
 
     second_zones = first_zones.next
     mock.verify
 
-    second_zones.count.must_equal 2
-    second_zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
-    second_zones.next?.must_equal false
+    _(second_zones.count).must_equal 2
+    second_zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
+    _(second_zones.next?).must_equal false
   end
 
   it "paginates zones with next? and next and max set" do
@@ -148,16 +148,16 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
     dns.service.mocked_service = mock
     first_zones = dns.zones max: 3
-    first_zones.count.must_equal 3
-    first_zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
-    first_zones.next?.must_equal true
+    _(first_zones.count).must_equal 3
+    first_zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
+    _(first_zones.next?).must_equal true
 
     second_zones = first_zones.next
     mock.verify
 
-    second_zones.count.must_equal 2
-    second_zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
-    second_zones.next?.must_equal false
+    _(second_zones.count).must_equal 2
+    second_zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
+    _(second_zones.next?).must_equal false
   end
 
   it "paginates zones with all" do
@@ -169,8 +169,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
     zones = dns.zones.all.to_a
     mock.verify
 
-    zones.count.must_equal 5
-    zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
+    _(zones.count).must_equal 5
+    zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
   end
 
   it "paginates zones with all and max set" do
@@ -182,8 +182,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
     zones = dns.zones(max: 3).all.to_a
     mock.verify
 
-    zones.count.must_equal 5
-    zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
+    _(zones.count).must_equal 5
+    zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
   end
 
   it "iterates all zones with all using Enumerator" do
@@ -195,8 +195,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
     zones = dns.zones.all.take(5)
     mock.verify
 
-    zones.count.must_equal 5
-    zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
+    _(zones.count).must_equal 5
+    zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
   end
 
   it "iterates all zones with all with request_limit set" do
@@ -208,8 +208,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
     zones = dns.zones.all(request_limit: 1).to_a
     mock.verify
 
-    zones.count.must_equal 6
-    zones.each { |z| z.must_be_kind_of Google::Cloud::Dns::Zone }
+    _(zones.count).must_equal 6
+    zones.each { |z| _(z).must_be_kind_of Google::Cloud::Dns::Zone }
   end
 
   it "creates a zone" do
@@ -221,11 +221,11 @@ describe Google::Cloud::Dns::Project, :mock_dns do
     zone = dns.create_zone "example-zone", "example.net."
     mock.verify
 
-    zone.must_be_kind_of Google::Cloud::Dns::Zone
-    zone.name.must_equal "example-zone"
-    zone.dns.must_equal "example.net."
-    zone.description.must_equal ""
-    zone.name_server_set.must_be :nil?
+    _(zone).must_be_kind_of Google::Cloud::Dns::Zone
+    _(zone.name).must_equal "example-zone"
+    _(zone.dns).must_equal "example.net."
+    _(zone.description).must_equal ""
+    _(zone.name_server_set).must_be :nil?
   end
 
   it "creates a zone with a description" do
@@ -238,11 +238,11 @@ describe Google::Cloud::Dns::Project, :mock_dns do
                             description: "Example Zone Description"
     mock.verify
 
-    zone.must_be_kind_of Google::Cloud::Dns::Zone
-    zone.name.must_equal "example-zone"
-    zone.dns.must_equal "example.net."
-    zone.description.must_equal "Example Zone Description"
-    zone.name_server_set.must_be :nil?
+    _(zone).must_be_kind_of Google::Cloud::Dns::Zone
+    _(zone.name).must_equal "example-zone"
+    _(zone.dns).must_equal "example.net."
+    _(zone.description).must_equal "Example Zone Description"
+    _(zone.name_server_set).must_be :nil?
   end
 
   it "creates a zone with a name_server_set" do
@@ -255,11 +255,11 @@ describe Google::Cloud::Dns::Project, :mock_dns do
                             name_server_set: "example-set"
     mock.verify
 
-    zone.must_be_kind_of Google::Cloud::Dns::Zone
-    zone.name.must_equal "example-zone"
-    zone.dns.must_equal "example.net."
-    zone.description.must_equal ""
-    zone.name_server_set.must_equal "example-set"
+    _(zone).must_be_kind_of Google::Cloud::Dns::Zone
+    _(zone.name).must_equal "example-zone"
+    _(zone.dns).must_equal "example.net."
+    _(zone.description).must_equal ""
+    _(zone.name_server_set).must_equal "example-set"
   end
 
   it "reload! calls to the API" do

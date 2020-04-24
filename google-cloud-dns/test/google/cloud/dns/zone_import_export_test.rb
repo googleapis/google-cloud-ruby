@@ -67,7 +67,7 @@ EOS
     zonefile = zone.to_zonefile
     mock.verify
 
-    zonefile.must_equal zone_export_expected.strip
+    _(zonefile).must_equal zone_export_expected.strip
   end
 
   it "exports records to a zonefile file" do
@@ -79,7 +79,7 @@ EOS
       zone.export tmpfile
       mock.verify
 
-      File.read(tmpfile).must_equal zone_export_expected.strip
+      _(File.read(tmpfile)).must_equal zone_export_expected.strip
     end
   end
 
@@ -102,11 +102,11 @@ EOS
     change = zone.import zonefile_io
     mock.verify
 
-    change.must_be_kind_of Google::Cloud::Dns::Change
-    change.id.must_equal "dns-change-created"
+    _(change).must_be_kind_of Google::Cloud::Dns::Change
+    _(change.id).must_equal "dns-change-created"
     record_must_be change.additions[0], to_add[0]
     record_must_be change.additions[1], to_add[1]
-    change.deletions.must_be :empty?
+    _(change.deletions).must_be :empty?
   end
 
   def list_records_gapi
@@ -122,9 +122,9 @@ EOS
   end
 
   def record_must_be actual, expected
-    actual.name.must_equal expected.name
-    actual.type.must_equal expected.type
-    actual.ttl.must_equal expected.ttl
-    actual.data.must_equal expected.data
+    _(actual.name).must_equal expected.name
+    _(actual.type).must_equal expected.type
+    _(actual.ttl).must_equal expected.ttl
+    _(actual.data).must_equal expected.data
   end
 end
