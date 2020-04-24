@@ -214,8 +214,7 @@ strings passed to many calls. These helpers have changed in two ways:
   on a separate paths module that you can include elsewhere for convenience.
 * In older releases, arguments to a resource path helper are passed as
   _positional_ arguments. In the 1.0 release, they are passed as named _keyword_
-  arguments. Some helpers also support different sets of arguments, each set
-  corresponding to a different type of path.
+  arguments.
 
 Following is an example involving using a resource path helper.
 
