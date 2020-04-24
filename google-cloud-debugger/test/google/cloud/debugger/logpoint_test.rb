@@ -30,23 +30,23 @@ describe Google::Cloud::Debugger::Logpoint, :mock_debugger do
 
   describe "#format_message" do
     it "formats basic message" do
-      logpoint.format_message("Hello World", []).must_equal "Hello World"
+      _(logpoint.format_message("Hello World", [])).must_equal "Hello World"
     end
 
     it "formats message with expressions" do
-      logpoint.format_message("Hello $0$1", ["World", :!]).must_equal "Hello \"World\":!"
+      _(logpoint.format_message("Hello $0$1", ["World", :!])).must_equal "Hello \"World\":!"
     end
 
     it "formats message with extra expressions" do
-      logpoint.format_message("Hello $0$1", ["World", :!, :zomg]).must_equal "Hello \"World\":!"
+      _(logpoint.format_message("Hello $0$1", ["World", :!, :zomg])).must_equal "Hello \"World\":!"
     end
 
     it "formats message with extra placeholder" do
-      logpoint.format_message("Hello $0$1$2", ["World", :!]).must_equal "Hello \"World\":!"
+      _(logpoint.format_message("Hello $0$1$2", ["World", :!])).must_equal "Hello \"World\":!"
     end
 
     it "doesn't substitute escaped placeholder and unescape them" do
-      logpoint.format_message("Hello 0 $0 $$0 $$$$0", ["World"]).must_equal "Hello 0 \"World\" $0 $$0"
+      _(logpoint.format_message("Hello 0 $0 $$0 $$$$0", ["World"])).must_equal "Hello 0 \"World\" $0 $$0"
     end
   end
 
@@ -54,7 +54,7 @@ describe Google::Cloud::Debugger::Logpoint, :mock_debugger do
     it "returns false if logpoint is evaluated already" do
       logpoint.complete
 
-      logpoint.evaluate([]).must_equal false
+      _(logpoint.evaluate([])).must_equal false
     end
 
     it "returns false if logpoint condition check fails" do
@@ -70,7 +70,7 @@ describe Google::Cloud::Debugger::Logpoint, :mock_debugger do
         logpoint.stub :check_condition, true do
           logpoint.evaluate([nil])
 
-          logpoint.evaluated_log_message.must_equal "test log message"
+          _(logpoint.evaluated_log_message).must_equal "test log message"
         end
       end
     end
@@ -80,7 +80,7 @@ describe Google::Cloud::Debugger::Logpoint, :mock_debugger do
 
       logpoint.evaluate []
 
-      logpoint.complete?.must_equal false
+      _(logpoint.complete?).must_equal false
     end
   end
 end

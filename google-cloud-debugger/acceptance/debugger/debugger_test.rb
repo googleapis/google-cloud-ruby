@@ -30,17 +30,17 @@ describe Google::Cloud::Debugger, :debugger do
       breakpoint.is_final_state
     end
 
-    breakpoint.must_be :is_final_state
+    _(breakpoint).must_be :is_final_state
 
     stack_frame = breakpoint.stack_frames[0]
-    stack_frame.function.must_equal "trigger_breakpoint"
-    stack_frame.locals.size.must_equal 1
-    stack_frame.locals.first.name.must_equal "local_var"
-    stack_frame.locals.first.value.must_equal "42"
+    _(stack_frame.function).must_equal "trigger_breakpoint"
+    _(stack_frame.locals.size).must_equal 1
+    _(stack_frame.locals.first.name).must_equal "local_var"
+    _(stack_frame.locals.first.value).must_equal "42"
 
-    breakpoint.evaluated_expressions.size.must_equal 1
-    breakpoint.evaluated_expressions.first.name.must_equal "local_var"
-    breakpoint.evaluated_expressions.first.value.must_equal "42"
+    _(breakpoint.evaluated_expressions.size).must_equal 1
+    _(breakpoint.evaluated_expressions.first.name).must_equal "local_var"
+    _(breakpoint.evaluated_expressions.first.value).must_equal "42"
   end
 
   it "catches and evaluates logpoint" do
@@ -66,10 +66,10 @@ describe Google::Cloud::Debugger, :debugger do
       !entries.empty?
     end
 
-    entries.wont_be :empty?
+    _(entries).wont_be :empty?
 
-    entries.first.payload.must_match "LOGPOINT"
-    entries.first.payload.must_match "local_var is 42"
-    entries.first.payload.must_match token.to_s
+    _(entries.first.payload).must_match "LOGPOINT"
+    _(entries.first.payload).must_match "local_var is 42"
+    _(entries.first.payload).must_match token.to_s
   end
 end

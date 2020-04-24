@@ -30,8 +30,8 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
     it "insert a buffer full variable into variable table" do
       snappoint = Google::Cloud::Debugger::Snappoint.new
 
-      snappoint.variable_table.size.must_equal 1
-      snappoint.variable_table[0].status.description.must_equal Google::Cloud::Debugger::Breakpoint::Variable::BUFFER_FULL_MSG
+      _(snappoint.variable_table.size).must_equal 1
+      _(snappoint.variable_table[0].status.description).must_equal Google::Cloud::Debugger::Breakpoint::Variable::BUFFER_FULL_MSG
     end
   end
 
@@ -42,8 +42,8 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
       snappoint.expressions = mock_expressions
 
       stubbed_readonly_eval_expression = ->(b, e) {
-        b.must_equal mock_binding
-        e.must_equal mock_expressions.first
+        _(b).must_equal mock_binding
+        _(e).must_equal mock_expressions.first
         "Readonly Evaluated"
       }
 
@@ -58,10 +58,10 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
         Google::Cloud::Debugger::Breakpoint::Variable.stub :from_rb_var, stubbed_from_var do
           snappoint.eval_expressions mock_binding
 
-          snappoint.evaluated_expressions.size.must_equal 1
-          snappoint.evaluated_expressions.first.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
-          snappoint.evaluated_expressions.first.value.must_equal "Readonly Evaluated".inspect
-          snappoint.evaluated_expressions.first.name.must_equal mock_expressions.first
+          _(snappoint.evaluated_expressions.size).must_equal 1
+          _(snappoint.evaluated_expressions.first).must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+          _(snappoint.evaluated_expressions.first.value).must_equal "Readonly Evaluated".inspect
+          _(snappoint.evaluated_expressions.first.name).must_equal mock_expressions.first
         end
       end
     end
@@ -71,7 +71,7 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
     it "returns false if breakpoint is evaluated already" do
       snappoint.complete
 
-      snappoint.evaluate([]).must_equal false
+      _(snappoint.evaluate([])).must_equal false
     end
 
     it "returns false if condition check fails" do
@@ -84,7 +84,7 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
       stubbed_eval_call_stack = ->(_) { raise }
       snappoint.stub :eval_call_stack, stubbed_eval_call_stack do
         snappoint.stub :check_condition, true do
-          snappoint.evaluate([nil]).must_equal false
+          _(snappoint.evaluate([nil])).must_equal false
         end
       end
     end
@@ -95,7 +95,7 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
       snappoint.stub :eval_call_stack, nil do
         snappoint.stub :eval_expressions, stubbed_eval_expressions do
           snappoint.stub :check_condition, true do
-            snappoint.evaluate([nil]).must_equal false
+            _(snappoint.evaluate([nil])).must_equal false
           end
         end
       end
@@ -108,8 +108,8 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
       snappoint.stub :check_condition, true do
         snappoint.evaluate([binding])
 
-        snappoint.evaluated_expressions.wont_be_empty
-        snappoint.stack_frames.wont_be_empty
+        _(snappoint.evaluated_expressions).wont_be_empty
+        _(snappoint.stack_frames).wont_be_empty
       end
     end
 
@@ -121,7 +121,7 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
         snappoint.stub :eval_expressions, [] do
           snappoint.stub :check_condition, true do
             snappoint.stub :complete, mocked_complete do
-              snappoint.evaluate([nil]).must_equal true
+              _(snappoint.evaluate([nil])).must_equal true
             end
           end
         end
@@ -134,15 +134,15 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
   describe "#eval_expressions" do
     it "set @evaluated_expressions to array of Breakpoint::Variable" do
       snappoint.eval_expressions binding
-      snappoint.evaluated_expressions.must_be_kind_of Array
-      snappoint.evaluated_expressions.all? { |var| var.is_a? Google::Cloud::Debugger::Breakpoint::Variable }.must_equal true
+      _(snappoint.evaluated_expressions).must_be_kind_of Array
+      _(snappoint.evaluated_expressions.all? { |var| var.is_a? Google::Cloud::Debugger::Breakpoint::Variable }).must_equal true
     end
 
     it "sets the Breakpoint::Variable name to the expression itself" do
       snappoint.eval_expressions binding
 
-      snappoint.evaluated_expressions.wont_be_empty
-      snappoint.evaluated_expressions.first.name.must_equal snappoint.expressions.first
+      _(snappoint.evaluated_expressions).wont_be_empty
+      _(snappoint.evaluated_expressions.first.name).must_equal snappoint.expressions.first
     end
 
     it "create a error variable if expression evaluation fails with mutation error" do
@@ -152,10 +152,10 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
         snappoint.expressions = ["hello"]
         snappoint.eval_expressions binding
 
-        snappoint.evaluated_expressions.size.must_equal 1
-        snappoint.evaluated_expressions.first.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
-        snappoint.evaluated_expressions.first.name.must_equal "hello"
-        snappoint.evaluated_expressions.first.status.refers_to.must_equal Google::Cloud::Debugger::Breakpoint::StatusMessage::VARIABLE_VALUE
+        _(snappoint.evaluated_expressions.size).must_equal 1
+        _(snappoint.evaluated_expressions.first).must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+        _(snappoint.evaluated_expressions.first.name).must_equal "hello"
+        _(snappoint.evaluated_expressions.first.status.refers_to).must_equal Google::Cloud::Debugger::Breakpoint::StatusMessage::VARIABLE_VALUE
       end
     end
 
@@ -168,13 +168,13 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
 
       snappoint.eval_expressions binding
 
-      snappoint.evaluated_expressions.size.must_equal count
+      _(snappoint.evaluated_expressions.size).must_equal count
 
       count.times do |i|
         if i < count - 1
-          snappoint.evaluated_expressions[i].value.must_match /x+/
+          _(snappoint.evaluated_expressions[i].value).must_match /x+/
         else
-          snappoint.evaluated_expressions[i].buffer_full_variable?.must_equal true
+          _(snappoint.evaluated_expressions[i].buffer_full_variable?).must_equal true
         end
       end
     end
@@ -185,7 +185,7 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
       snappoint.stack_frames = []
       snappoint.eval_call_stack binding.callers
 
-      snappoint.stack_frames.all? { |sf| sf.is_a? Google::Cloud::Debugger::Breakpoint::StackFrame }.must_equal true
+      _(snappoint.stack_frames.all? { |sf| sf.is_a? Google::Cloud::Debugger::Breakpoint::StackFrame }).must_equal true
     end
 
     it "gets local variables within STACK_EVAL_DEPTH level" do
@@ -194,11 +194,11 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
       snappoint.stack_frames = []
       snappoint.eval_call_stack [binding, *binding.callers]
 
-      snappoint.stack_frames.wont_be_empty
-      snappoint.stack_frames.first.locals.first.value.must_equal "test-local-var".inspect
+      _(snappoint.stack_frames).wont_be_empty
+      _(snappoint.stack_frames.first.locals.first.value).must_equal "test-local-var".inspect
       snappoint.stack_frames.each_with_index do |sf, i|
         if i >= Google::Cloud::Debugger::Snappoint::STACK_EVAL_DEPTH
-          sf.locals.must_be_empty
+          _(sf.locals).must_be_empty
         end
       end
     end
@@ -213,13 +213,13 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
       snappoint.eval_expressions binding
       snappoint.eval_call_stack [binding]
 
-      snappoint.evaluated_expressions.size.must_equal count
+      _(snappoint.evaluated_expressions.size).must_equal count
 
 
-      snappoint.stack_frames.first.locals.size.must_equal 2
+      _(snappoint.stack_frames.first.locals.size).must_equal 2
       snappoint.stack_frames.first.locals.each do |var|
         if var.name == "long_str"
-          var.buffer_full_variable?.must_equal true
+          _(var.buffer_full_variable?).must_equal true
         end
       end
     end
@@ -235,7 +235,7 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
 
       snappoint.evaluate [binding]
 
-      snappoint.send(:calculate_total_size).must_equal "'hello'".bytesize + String.to_s.bytesize +
+      _(snappoint.send(:calculate_total_size)).must_equal "'hello'".bytesize + String.to_s.bytesize +
                                                         "hello".inspect.bytesize + "local_var".bytesize +
                                                         "test-local-var".inspect.bytesize + String.to_s.bytesize
     end
@@ -244,9 +244,9 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
   describe "#convert_variable" do
     it "convert the Ruby variable if current breakpoint is within limit" do
       var = snappoint.send :convert_variable, 1, name: "one"
-      var.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
-      var.value.must_equal "1"
-      var.name.must_equal "one"
+      _(var).must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+      _(var.value).must_equal "1"
+      _(var.name).must_equal "one"
     end
 
     it "returns buffer full referencing variable if current breakpoint size is full" do
@@ -255,11 +255,11 @@ describe Google::Cloud::Debugger::Snappoint, :mock_debugger do
 
         var = snappoint.send :convert_variable, 1
 
-        var.must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
-        var.value.must_be_nil
-        var.name.must_be_nil
-        var.type.must_be_nil
-        var.var_table_index.must_equal 0
+        _(var).must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+        _(var.value).must_be_nil
+        _(var.name).must_be_nil
+        _(var.type).must_be_nil
+        _(var.var_table_index).must_equal 0
       end
     end
   end

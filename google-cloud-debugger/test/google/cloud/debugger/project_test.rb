@@ -16,8 +16,8 @@ require "helper"
 
 describe Google::Cloud::Debugger::Project, :mock_debugger do
   it "knows the project identifier" do
-    debugger.must_be_kind_of Google::Cloud::Debugger::Project
-    debugger.project.must_equal project
+    _(debugger).must_be_kind_of Google::Cloud::Debugger::Project
+    _(debugger.project).must_equal project
   end
 
   describe "#start" do

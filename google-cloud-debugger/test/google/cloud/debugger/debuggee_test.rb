@@ -19,27 +19,27 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
     it "sets debuggee id when registered successfully" do
       mocked_response = OpenStruct.new(debuggee: OpenStruct.new(id: debuggee_id))
       debuggee.service.stub :register_debuggee, mocked_response do
-        debuggee.register.must_equal true
+        _(debuggee.register).must_equal true
       end
-      debuggee.id.must_equal debuggee_id
+      _(debuggee.id).must_equal debuggee_id
     end
 
     it "revokes debuggee id if registration request raises exception" do
       mocked_register_debuggee = ->() { raise }
 
       debuggee.service.stub :register_debuggee, mocked_register_debuggee do
-        debuggee.register.must_equal false
+        _(debuggee.register).must_equal false
       end
 
-      debuggee.id.must_be_nil
+      _(debuggee.id).must_be_nil
     end
   end
 
   describe "#registered" do
     it "returns true if debuggee id isn't nil" do
-      debuggee.registered?.must_equal true
+      _(debuggee.registered?).must_equal true
       debuggee.instance_variable_set :@id, nil
-      debuggee.registered?.must_equal false
+      _(debuggee.registered?).must_equal false
     end
   end
 
@@ -47,20 +47,20 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
     it "unsets debuggee id" do
       debuggee.revoke_registration
 
-      debuggee.id.must_be_nil
-      debuggee.registered?.must_equal false
+      _(debuggee.id).must_be_nil
+      _(debuggee.registered?).must_equal false
     end
   end
 
   describe "#to_grpc" do
     it "has all the attributes" do
       grpc = debuggee.to_grpc
-      grpc.id.must_equal debuggee_id
-      grpc.project.must_equal project
-      grpc.uniquifier.wont_be_nil
-      grpc.description.wont_be_nil
-      grpc.agent_version.wont_be_nil
-      grpc.labels.to_a.wont_be_empty
+      _(grpc.id).must_equal debuggee_id
+      _(grpc.project).must_equal project
+      _(grpc.uniquifier).wont_be_nil
+      _(grpc.description).wont_be_nil
+      _(grpc.agent_version).wont_be_nil
+      _(grpc.labels.to_a).wont_be_empty
     end
 
     it "uses numeric project ID if available" do
@@ -74,7 +74,7 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
       mock_env = Google::Cloud::Env.new metadata_cache: metadata_cache
       debuggee.instance_variable_set :@env, mock_env
       grpc = debuggee.to_grpc
-      grpc.project.must_equal numeric_id.to_s
+      _(grpc.project).must_equal numeric_id.to_s
     end
   end
 
@@ -82,7 +82,7 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
     it "returns nil if fails to read file" do
       stubbed_read = ->(_) { raise }
       File.stub :read, stubbed_read do
-        debuggee.send(:read_app_json_file, nil).must_be_nil
+        _(debuggee.send(:read_app_json_file, nil)).must_be_nil
       end
     end
 
@@ -91,7 +91,7 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
 
       File.stub :read, nil do
         JSON.stub :parse, stubbed_parse do
-          debuggee.send(:read_app_json_file, nil).must_be_nil
+          _(debuggee.send(:read_app_json_file, nil)).must_be_nil
         end
       end
     end
@@ -109,8 +109,8 @@ describe Google::Cloud::Debugger::Debuggee, :mock_debugger do
       uniquifier1 = debuggee.send(:compute_uniquifier, partial_debuggee)
       uniquifier2 = debuggee.send(:compute_uniquifier, partial_debuggee)
 
-      uniquifier1.must_equal uniquifier2
-      uniquifier1.must_equal debuggee.instance_variable_get(:@computed_uniquifier)
+      _(uniquifier1).must_equal uniquifier2
+      _(uniquifier1).must_equal debuggee.instance_variable_get(:@computed_uniquifier)
     end
 
     it "calls AppUniquifierGenerator.generate_app_uniquifier if source context is missing" do

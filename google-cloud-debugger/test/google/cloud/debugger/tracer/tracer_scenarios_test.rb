@@ -56,7 +56,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
   it "catches breakpoint from function call" do
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
-      breakpoints.first.must_equal breakpoint1
+      _(breakpoints.first).must_equal breakpoint1
       hit = true
     end
 
@@ -69,7 +69,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    hit.must_equal true
+    _(hit).must_equal true
   end
 
   it "catches breakpoint called from a child thread" do
@@ -91,13 +91,13 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    hit.must_equal true
+    _(hit).must_equal true
   end
 
   it "catches breakpoint from block yield" do
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
-      breakpoints.first.must_equal breakpoint2
+      _(breakpoints.first).must_equal breakpoint2
       hit = true
     end
 
@@ -110,13 +110,13 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    hit.must_equal true
+    _(hit).must_equal true
   end
 
   it "catches breakpoint when function interleave files" do
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
-      breakpoints.first.must_equal breakpoint3
+      _(breakpoints.first).must_equal breakpoint3
       hit = true
     end
 
@@ -129,13 +129,13 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    hit.must_equal true
+    _(hit).must_equal true
   end
 
   it "catches breakpoint when function interleave files#2" do
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
-      breakpoints.first.must_equal breakpoint8
+      _(breakpoints.first).must_equal breakpoint8
       hit = true
     end
 
@@ -148,13 +148,13 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    hit.must_equal true
+    _(hit).must_equal true
   end
 
   it "catches breakpoint when function interleave files#3" do
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
-      breakpoints.first.must_equal breakpoint9
+      _(breakpoints.first).must_equal breakpoint9
       hit = true
     end
 
@@ -167,13 +167,13 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    hit.must_equal true
+    _(hit).must_equal true
   end
 
   it "catches breakpoint from lambda function" do
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
-      breakpoints.first.must_equal breakpoint4
+      _(breakpoints.first).must_equal breakpoint4
       hit = true
     end
 
@@ -186,13 +186,13 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    hit.must_equal true
+    _(hit).must_equal true
   end
 
   it "catches breakpoint from proc" do
     hit = false
     stubbed_breakpoints_hit = ->(breakpoints, call_stack_bindings) do
-      breakpoints.first.must_equal breakpoint5
+      _(breakpoints.first).must_equal breakpoint5
       hit = true
     end
 
@@ -205,7 +205,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    hit.must_equal true
+    _(hit).must_equal true
   end
 
   it "catches breakpoint from fiber" do
@@ -224,7 +224,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    hit.must_equal true
+    _(hit).must_equal true
   end
 
   it "catches breakpoint from fiber after fiber yields" do
@@ -245,7 +245,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       tracer.stop
     end
 
-    hit.must_equal true
+    _(hit).must_equal true
   end
 
   it "doesn't raise error when tracing dynamically defined methods" do
@@ -254,7 +254,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
 
     tracer.stub :breakpoints_hit, nil do
       tracer.start
-      dynamic_define_method.must_equal 42
+      _(dynamic_define_method).must_equal 42
       tracer.stop
     end
   end

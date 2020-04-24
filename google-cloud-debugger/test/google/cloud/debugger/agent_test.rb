@@ -17,25 +17,25 @@ require "helper"
 describe Google::Cloud::Debugger::Agent, :mock_debugger do
   describe "#initialize" do
     it "initializes all the children components" do
-      agent.debuggee.must_be_kind_of Google::Cloud::Debugger::Debuggee
-      agent.tracer.must_be_kind_of Google::Cloud::Debugger::Tracer
-      agent.breakpoint_manager.must_be_kind_of Google::Cloud::Debugger::BreakpointManager
-      agent.breakpoint_manager.on_breakpoints_change.must_be_kind_of Method
-      agent.transmitter.must_be_kind_of Google::Cloud::Debugger::Transmitter
-      agent.logger.must_be_kind_of Google::Cloud::Logging::Logger
+      _(agent.debuggee).must_be_kind_of Google::Cloud::Debugger::Debuggee
+      _(agent.tracer).must_be_kind_of Google::Cloud::Debugger::Tracer
+      _(agent.breakpoint_manager).must_be_kind_of Google::Cloud::Debugger::BreakpointManager
+      _(agent.breakpoint_manager.on_breakpoints_change).must_be_kind_of Method
+      _(agent.transmitter).must_be_kind_of Google::Cloud::Debugger::Transmitter
+      _(agent.logger).must_be_kind_of Google::Cloud::Logging::Logger
     end
 
     it "the default logger shares same project_id and credentials" do
-      agent.logger.project.must_equal service.project
+      _(agent.logger.project).must_equal service.project
 
-      agent.logger.writer.logging.service.credentials.must_equal service.credentials
+      _(agent.logger.writer.logging.service.credentials).must_equal service.credentials
     end
 
     it "uses the logger passed in" do
       new_agent = Google::Cloud::Debugger::Agent.new nil, logger: "test-logger",
                                                           service_name: nil,
                                                           service_version: nil
-      new_agent.logger.must_equal "test-logger"
+      _(new_agent.logger).must_equal "test-logger"
     end
   end
 

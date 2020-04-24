@@ -334,8 +334,8 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator, :instance_c_methods_whi
 
     it "doesn't allow #`" do
       result = evaluator.readonly_eval_expression binding, "`ls`"
-      result.must_be_kind_of Google::Cloud::Debugger::MutationError
-      result.message.match("#{evaluator::MUTATION_DETECTED_MSG}|#{evaluator::PROHIBITED_OPERATION_MSG}").wont_be_nil
+      _(result).must_be_kind_of Google::Cloud::Debugger::MutationError
+      _(result.message.match("#{evaluator::MUTATION_DETECTED_MSG}|#{evaluator::PROHIBITED_OPERATION_MSG}")).wont_be_nil
     end
 
     it "doesn't allow #eval" do

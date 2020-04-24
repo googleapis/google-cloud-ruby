@@ -43,18 +43,18 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
     it "starts pending agents" do
       Google::Cloud::Debugger::Credentials.stub :default, "/default/keyfile.json" do
         middleware
-        debugger.agent.async_running?.must_equal false
+        _(debugger.agent.async_running?).must_equal false
         Google::Cloud::Debugger::Middleware.start_agents
-        debugger.agent.async_running?.must_equal true
+        _(debugger.agent.async_running?).must_equal true
       end
     end
 
     it "causes later agents to start automatically" do
       Google::Cloud::Debugger::Credentials.stub :default, "/default/keyfile.json" do
         Google::Cloud::Debugger::Middleware.start_agents
-        debugger.agent.async_running?.must_equal false
+        _(debugger.agent.async_running?).must_equal false
         middleware
-        debugger.agent.async_running?.must_equal true
+        _(debugger.agent.async_running?).must_equal true
       end
     end
 
@@ -63,7 +63,7 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
         middleware
         Google::Cloud::Debugger::Middleware.start_agents
         Google::Cloud::Debugger::Middleware.start_agents
-        debugger.agent.async_running?.must_equal true
+        _(debugger.agent.async_running?).must_equal true
       end
     end
   end
@@ -93,11 +93,11 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
         debugger = middleware.instance_variable_get :@debugger
         env = { "rack.logger" => logger }
 
-        debugger.agent.logger.wont_equal logger
+        _(debugger.agent.logger).wont_equal logger
 
         middleware.call env
 
-        debugger.agent.logger.must_equal logger
+        _(debugger.agent.logger).must_equal logger
       end
     end
 
@@ -107,11 +107,11 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
         debugger = middleware.instance_variable_get :@debugger
         env = { "rack.logger" => logger }
 
-        debugger.agent.logger.wont_equal logger
+        _(debugger.agent.logger).wont_equal logger
 
         middleware.call env
 
-        debugger.agent.logger.wont_equal logger
+        _(debugger.agent.logger).wont_equal logger
       end
     end
 
@@ -124,13 +124,13 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
             debugger.agent.quota_manager.consume
           end
 
-          debugger.agent.quota_manager.more?.must_equal false
+          _(debugger.agent.quota_manager.more?).must_equal false
         }
 
         rack_app.stub :call, stubbed_call do
           middleware.call({})
 
-          debugger.agent.quota_manager.more?.must_equal true
+          _(debugger.agent.quota_manager.more?).must_equal true
         end
       end
     end

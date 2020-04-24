@@ -47,10 +47,10 @@ describe Google::Cloud::Debugger::Railtie do
         Google::Cloud::Debugger::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::Debugger.configure do |config|
-          config.project_id.must_equal "test-project"
-          config.credentials.must_equal "test/keyfile"
-          config.service_name.must_equal "test-module"
-          config.service_version.must_equal "test-version"
+          _(config.project_id).must_equal "test-project"
+          _(config.credentials).must_equal "test/keyfile"
+          _(config.service_name).must_equal "test-module"
+          _(config.service_version).must_equal "test-version"
         end
       end
     end
@@ -67,10 +67,10 @@ describe Google::Cloud::Debugger::Railtie do
         Google::Cloud::Debugger::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::Debugger.configure do |config|
-          config.project_id.must_equal "another-test-project"
-          config.keyfile.must_equal "/another/test/keyfile"
-          config.service_name.must_equal "another-test-module"
-          config.service_version.must_equal "another-test-version"
+          _(config.project_id).must_equal "another-test-project"
+          _(config.keyfile).must_equal "/another/test/keyfile"
+          _(config.service_name).must_equal "another-test-module"
+          _(config.service_version).must_equal "another-test-version"
         end
       end
     end
@@ -80,16 +80,16 @@ describe Google::Cloud::Debugger::Railtie do
 
       Google::Cloud::Debugger::Railtie.stub :valid_credentials?, false do
         Google::Cloud::Debugger::Railtie.send :consolidate_rails_config, rails_config
-        Google::Cloud.configure.use_debugger.must_equal false
+        _(Google::Cloud.configure.use_debugger).must_equal false
       end
     end
 
     it "Set use_debugger to true if Rails is in production" do
       Google::Cloud::Debugger::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, true do
-          Google::Cloud.configure.use_debugger.must_be_nil
+          _(Google::Cloud.configure.use_debugger).must_be_nil
           Google::Cloud::Debugger::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_debugger.must_equal true
+          _(Google::Cloud.configure.use_debugger).must_equal true
         end
       end
     end
@@ -99,7 +99,7 @@ describe Google::Cloud::Debugger::Railtie do
         Rails.env.stub :production?, true do
           Google::Cloud.configure.use_debugger = false
           Google::Cloud::Debugger::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_debugger.must_equal false
+          _(Google::Cloud.configure.use_debugger).must_equal false
         end
       end
     end
@@ -110,7 +110,7 @@ describe Google::Cloud::Debugger::Railtie do
       Google::Cloud::Debugger::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, false do
           Google::Cloud::Debugger::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_debugger.must_equal true
+          _(Google::Cloud.configure.use_debugger).must_equal true
         end
       end
     end
