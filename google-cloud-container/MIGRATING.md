@@ -71,7 +71,7 @@ timeout for all Kubernetes Engine V1 ClusterManager clients:
 ```
 Google::Cloud::Container::V1::ClusterManager::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -80,7 +80,7 @@ timeout for the `create_cluster` call:
 
 ```
 Google::Cloud::Container::V1::ClusterManager::Client.configure do |config|
-  config.rpcs.create_cluster.timeout = 20_000
+  config.rpcs.create_cluster.timeout = 20.0
 end
 ```
 
@@ -90,7 +90,7 @@ globally:
 ```
 Google::Cloud::Container.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -188,7 +188,7 @@ client = Google::Cloud::Container.new
 name = "projects/my-project/locations/-/clusters/my-cluster"
 logging_service = "logging.googleapis.com"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.set_logging_service logging_service, name: name, options: options
 ```
@@ -204,7 +204,7 @@ logging_service = "logging.googleapis.com"
 # then add further keyword arguments for the call options.
 response = client.set_logging_service(
   { name: name, logging_service: logging_service },
-  timeout: 10_000
+  timeout: 10.0
 )
 ```
 
