@@ -159,6 +159,8 @@ google-cloud-bigquery-data_transfer:
 - v0.2.1
 - v0.2.0
 - v0.1.0
+google-cloud-bigquery-data_transfer-v1:
+- v0.1.0
 google-cloud-bigquery-storage:
 - v0.1.0
 google-cloud-bigquery-storage-v1:
