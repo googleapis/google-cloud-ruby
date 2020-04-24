@@ -26,6 +26,10 @@ To summarize:
     specifies whether they are required or optional. Additionally, you can pass
     a proto request object instead of separate arguments. See
     [Passing Arguments](#passing-arguments) for more info.
+ *  Previously, some client classes included class methods for constructing
+    resource paths. These paths are now instance methods on the client objects,
+    and are also available in a separate paths module. See
+    [Resource Path Helpers](#resource-path-helpers) for more info.
  *  Some classes have moved into different namespaces. See
     [Class Namespaces](#class-namespaces) for more info.
 
@@ -192,6 +196,61 @@ parent = "projects/my-project/locations/-"
 # Use a hash to wrap the normal call arguments (or pass a request object), and
 # then add further keyword arguments for the call options.
 response = client.analyze_sentiment({ parent: parent }, timeout: 10_000)
+```
+
+### Resource Path Helpers
+
+The client library includes helper methods for generating the resource path
+strings passed to many calls. These helpers have changed in two ways:
+
+* In older releases, they are _class_ methods on the client class. In the 1.0
+  release, they are _instance_ methods on the client. They are also available
+  on a separate paths module that you can include elsewhere for convenience.
+* In older releases, arguments to a resource path helper are passed as
+  _positional_ arguments. In the 1.0 release, they are passed as named _keyword_
+  arguments.
+
+Following is an example involving using a resource path helper.
+
+Old:
+```
+client = Google::Cloud::Redis.new
+
+# Call the helper on the client class
+parent = Google::Cloud::Redis::V1::CloudRedisClient.location_path(
+  "my-project", "-"
+)
+
+response = client.list_instances parent
+```
+
+New:
+```
+client = Google::Cloud::Redis.cloud_redis
+
+# Call the helper on the client instance, and use keyword arguments
+parent = client.location_path project: "my-project", location: "-"
+
+response = client.list_instances parent: parent
+```
+
+In the 1.0 client, you can also use the paths module as a convenience module.
+
+New:
+```
+# Bring the session_path method into the current class
+include Google::Cloud::Redis::V1::CloudRedis::Paths
+
+def foo
+  client = Google::Cloud::Redis.cloud_redis
+
+  # Call the included helper method
+  parent = location_path project: "my-project", location: "-"
+
+  response = client.list_instances parent: parent
+
+  # Do something with response...
+end
 ```
 
 ### Class Namespaces
