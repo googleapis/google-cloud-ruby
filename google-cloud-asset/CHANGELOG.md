@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.1 / 2020-04-24
+
+#### Documentation
+
+* Cover multi-pattern path helpers in the migration guide
+
 ### 1.0.0 / 2020-04-16
 
 This is a major update with significant new features, improved documentation, and a fair number of breaking changes.
