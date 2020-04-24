@@ -20,18 +20,18 @@ describe Google::Cloud::Debugger::Backoff do
   describe "#succeeded" do
     it "resets the backoff session" do
       backoff.failed
-      backoff.backing_off?.must_equal true
+      _(backoff.backing_off?).must_equal true
 
       backoff.succeeded
-      backoff.backing_off?.must_equal false
+      _(backoff.backing_off?).must_equal false
     end
   end
 
   describe "#failed" do
     it "initializes the backoff session" do
-      backoff.backing_off?.must_equal false
+      _(backoff.backing_off?).must_equal false
       backoff.failed
-      backoff.backing_off?.must_equal true
+      _(backoff.backing_off?).must_equal true
     end
 
     it "increases the backoff counter with each call" do
@@ -41,7 +41,7 @@ describe Google::Cloud::Debugger::Backoff do
       backoff.failed
       interval2 = backoff.interval
 
-      (interval2 > interval1).must_equal true
+      _((interval2 > interval1)).must_equal true
     end
   end
 end

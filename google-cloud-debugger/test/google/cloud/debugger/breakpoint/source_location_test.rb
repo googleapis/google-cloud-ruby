@@ -27,13 +27,13 @@ describe Google::Cloud::Debugger::Breakpoint::SourceLocation, :mock_debugger do
   }
 
   it "knows its attributes" do
-    source_loc.path.must_equal "my_app/my_class.rb"
-    source_loc.line.must_equal 321
+    _(source_loc.path).must_equal "my_app/my_class.rb"
+    _(source_loc.line).must_equal 321
   end
 
   it "converts to grpc" do
     grpc = source_loc.to_grpc
-    grpc.path.must_equal source_location_grpc.path
-    grpc.line.must_equal source_location_grpc.line
+    _(grpc.path).must_equal source_location_grpc.path
+    _(grpc.line).must_equal source_location_grpc.line
   end
  end

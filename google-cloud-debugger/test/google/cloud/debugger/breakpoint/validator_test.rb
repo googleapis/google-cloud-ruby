@@ -21,36 +21,36 @@ describe Google::Cloud::Debugger::Breakpoint::Validator, :mock_debugger do
 
   describe ".validate" do
     it "return true if breakpoint is valid" do
-      validator.validate(breakpoint).must_equal true
+      _(validator.validate(breakpoint)).must_equal true
     end
 
     it "returns false if breakpoint's target file doesn't exist" do
       breakpoint.location.path = "/path/to/not-exist.rb"
 
-      validator.validate(breakpoint).must_equal false
+      _(validator.validate(breakpoint)).must_equal false
 
-      breakpoint.complete?.must_equal true
-      breakpoint.status.description.must_equal validator::FILE_NOT_FOUND_MSG
+      _(breakpoint.complete?).must_equal true
+      _(breakpoint.status.description).must_equal validator::FILE_NOT_FOUND_MSG
     end
 
     it "returns false if breakpoints target file isn't a ruby file" do
       breakpoint.location.path = "/path/to/not-ruby-file"
 
       validator.stub :verify_file_path, true do
-        validator.validate(breakpoint).must_equal false
+        _(validator.validate(breakpoint)).must_equal false
       end
 
-      breakpoint.complete?.must_equal true
-      breakpoint.status.description.must_equal validator::WRONG_FILE_TYPE_MSG
+      _(breakpoint.complete?).must_equal true
+      _(breakpoint.status.description).must_equal validator::WRONG_FILE_TYPE_MSG
     end
 
     it "returns false if breakpoint line number is too large" do
       breakpoint.location.line = 999999
 
-      validator.validate(breakpoint).must_equal false
+      _(validator.validate(breakpoint)).must_equal false
 
-      breakpoint.complete?.must_equal true
-      breakpoint.status.description.must_equal validator::INVALID_LINE_MSG
+      _(breakpoint.complete?).must_equal true
+      _(breakpoint.status.description).must_equal validator::INVALID_LINE_MSG
     end
 
     it "returns false if breakpoint is on a blank line" do
@@ -62,12 +62,12 @@ describe Google::Cloud::Debugger::Breakpoint::Validator, :mock_debugger do
 
       validator.stub :verify_file_path, true do
         validator.stub :verify_file_type, true do
-          validator.validate(breakpoint).must_equal false
+          _(validator.validate(breakpoint)).must_equal false
         end
       end
 
-      breakpoint.complete?.must_equal true
-      breakpoint.status.description.must_equal validator::INVALID_LINE_MSG
+      _(breakpoint.complete?).must_equal true
+      _(breakpoint.status.description).must_equal validator::INVALID_LINE_MSG
     end
 
     it "returns false if breakpoint is on a blank line" do
@@ -79,12 +79,12 @@ describe Google::Cloud::Debugger::Breakpoint::Validator, :mock_debugger do
 
       validator.stub :verify_file_path, true do
         validator.stub :verify_file_type, true do
-          validator.validate(breakpoint).must_equal false
+          _(validator.validate(breakpoint)).must_equal false
         end
       end
 
-      breakpoint.complete?.must_equal true
-      breakpoint.status.description.must_equal validator::INVALID_LINE_MSG
+      _(breakpoint.complete?).must_equal true
+      _(breakpoint.status.description).must_equal validator::INVALID_LINE_MSG
     end
   end
 end

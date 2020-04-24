@@ -54,7 +54,7 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       local_var = "original local var"
       expression = "local_var = 'new local var'"
       expression_triggers_mutation expression, binding
-      local_var.must_equal "original local var"
+      _(local_var).must_equal "original local var"
     end
 
     it "allows setting local variable in readonly function calls" do
@@ -65,14 +65,14 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       $global_var = "original global var"
       expression = "$global_var = 'new global var'"
       expression_triggers_mutation expression, binding
-      $global_var.must_equal "original global var"
+      _($global_var).must_equal "original global var"
     end
 
     it "doesn't allow setting instance variable" do
       @instance_var = "original instance var"
       expression = "@instance_var = 'new instance var'"
       expression_triggers_mutation expression, binding
-      @instance_var.must_equal "original instance var"
+      _(@instance_var).must_equal "original instance var"
     end
 
     it "doesn't allow setting class variable" do
@@ -84,28 +84,28 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       TEST_CONST  = "original constant"
       expression = "TEST_CONST = 'new constant'"
       expression_triggers_mutation expression, binding
-      TEST_CONST.must_equal "original constant"
+      _(TEST_CONST).must_equal "original constant"
     end
 
     it "doesn't allow << operator" do
       ary = [1,2]
       expression = "ary << 3"
       expression_triggers_mutation expression, binding
-      ary.size.must_equal 2
+      _(ary.size).must_equal 2
     end
 
     it "doesn't allow array set" do
       ary = [1,2]
       expression = "ary[0] = 2"
       expression_triggers_mutation expression, binding
-      ary.must_include 1
+      _(ary).must_include 1
     end
 
     it "doesn't allow hash set with string key" do
       hsh = {"abc" => 123}
       expression = "hsh['abc'] = 456"
       expression_triggers_mutation expression, binding
-      hsh["abc"].must_equal 123
+      _(hsh["abc"]).must_equal 123
     end
 
     it "doesn't allow return operation in expression" do
@@ -113,10 +113,10 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
       result = evaluator.readonly_eval_expression binding, expression
       if RUBY_VERSION.to_f >= 2.6
         # Ruby 2.6 raises LocalJumpError
-        result.message.must_match "unexpected return"
+        _(result.message).must_match "unexpected return"
       else
         # Ruby 2.4 and 2.5 treat this as a mutation
-        result.message.must_match evaluator::PROHIBITED_OPERATION_MSG
+        _(result.message).must_match evaluator::PROHIBITED_OPERATION_MSG
       end
     end
 
@@ -144,36 +144,36 @@ describe Google::Cloud::Debugger::Breakpoint::Evaluator do
     it "returns ZeroDivisionError" do
       expression = "1/0"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_be_kind_of ZeroDivisionError
-      result.message.must_match "divided by 0"
+      _(result).must_be_kind_of ZeroDivisionError
+      _(result.message).must_match "divided by 0"
     end
 
     it "returns NameError" do
       expression = "a_thing_that_is_not_defined"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_be_kind_of NameError
-      result.message.must_match "undefined local variable or method"
+      _(result).must_be_kind_of NameError
+      _(result.message).must_match "undefined local variable or method"
     end
 
     it "returns NoMethodError" do
       expression = "nil.blahblahblah"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_be_kind_of NoMethodError
-      result.message.must_match "undefined method"
+      _(result).must_be_kind_of NoMethodError
+      _(result.message).must_match "undefined method"
     end
 
     it "returns ArgumentError" do
       expression = "nil.send"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_be_kind_of ArgumentError
-      result.message.must_match "no method name given"
+      _(result).must_be_kind_of ArgumentError
+      _(result.message).must_match "no method name given"
     end
 
     it "errors out if evaluation takes too long" do
       expression = "infinite_loop()"
       result = evaluator.readonly_eval_expression binding, expression
-      result.must_be_kind_of Google::Cloud::Debugger::EvaluationError
-      result.message.must_match "Evaluation exceeded time limit"
+      _(result).must_be_kind_of Google::Cloud::Debugger::EvaluationError
+      _(result.message).must_match "Evaluation exceeded time limit"
     end
 
     it "does not allow direct mutating in allow_mutating_methods" do

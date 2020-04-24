@@ -31,14 +31,14 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
       mocked_list_breakpoints = ->(_, _) { raise }
 
       breakpoint_manager.service.stub :list_active_breakpoints, mocked_list_breakpoints do
-        breakpoint_manager.sync_active_breakpoints(nil).must_equal false
+        _(breakpoint_manager.sync_active_breakpoints(nil)).must_equal false
       end
     end
 
     it "returns true if response.wait_expired is true" do
       mocked_response = OpenStruct.new(wait_expired: true)
       breakpoint_manager.service.stub :list_active_breakpoints, mocked_response do
-        breakpoint_manager.sync_active_breakpoints(nil).must_equal true
+        _(breakpoint_manager.sync_active_breakpoints(nil)).must_equal true
       end
     end
 
@@ -46,13 +46,13 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
       wait_token = "a unique token"
       mocked_response = OpenStruct.new(wait_expired: false, next_wait_token: wait_token)
 
-      breakpoint_manager.wait_token.must_equal :init
+      _(breakpoint_manager.wait_token).must_equal :init
 
       breakpoint_manager.service.stub :list_active_breakpoints, mocked_response do
         breakpoint_manager.sync_active_breakpoints(nil)
       end
 
-      breakpoint_manager.wait_token.must_equal wait_token
+      _(breakpoint_manager.wait_token).must_equal wait_token
     end
 
     it "calls #update_breakpoints with a list of Google::Cloud::Debugger::Breakpoints" do
@@ -66,7 +66,7 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
       breakpoint_manager.service.stub :list_active_breakpoints, mocked_response do
         Google::Cloud::Debugger::Breakpoint.stub :from_grpc, breakpoint1 do
           breakpoint_manager.stub :update_breakpoints, mocked_update_breakpoints do
-            breakpoint_manager.sync_active_breakpoints(nil).must_equal true
+            _(breakpoint_manager.sync_active_breakpoints(nil)).must_equal true
           end
         end
       end
@@ -82,9 +82,9 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
         Google::Cloud::Debugger::Breakpoint.stub :from_grpc, breakpoint1 do
           app_root = "my/app/path"
           breakpoint_manager.agent.app_root = app_root
-          breakpoint_manager.sync_active_breakpoints(nil).must_equal true
+          _(breakpoint_manager.sync_active_breakpoints(nil)).must_equal true
 
-          breakpoint1.full_path.must_match app_root
+          _(breakpoint1.full_path).must_match app_root
         end
       end
     end
@@ -92,72 +92,72 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
 
   describe "#update_breakpoints" do
     it "addes new breakpoints" do
-      breakpoint_manager.active_breakpoints.must_be_empty
-      breakpoint_manager.completed_breakpoints.must_be_empty
+      _(breakpoint_manager.active_breakpoints).must_be_empty
+      _(breakpoint_manager.completed_breakpoints).must_be_empty
 
       breakpoint_manager.update_breakpoints [breakpoint1]
 
-      breakpoint_manager.active_breakpoints.size.must_equal 1
-      breakpoint_manager.completed_breakpoints.must_be_empty
+      _(breakpoint_manager.active_breakpoints.size).must_equal 1
+      _(breakpoint_manager.completed_breakpoints).must_be_empty
 
-      breakpoint_manager.active_breakpoints.first.must_equal breakpoint1
+      _(breakpoint_manager.active_breakpoints.first).must_equal breakpoint1
     end
 
     it "doesn't add breakpoints already in @active_breakpoints" do
       breakpoint_manager.update_breakpoints [breakpoint1, breakpoint2]
 
-      breakpoint_manager.active_breakpoints.size.must_equal 2
+      _(breakpoint_manager.active_breakpoints.size).must_equal 2
 
       breakpoint_manager.update_breakpoints [breakpoint1, breakpoint2, breakpoint3]
 
-      breakpoint_manager.active_breakpoints.size.must_equal 3
+      _(breakpoint_manager.active_breakpoints.size).must_equal 3
 
-      breakpoint_manager.active_breakpoints.must_include breakpoint1
-      breakpoint_manager.active_breakpoints.must_include breakpoint2
-      breakpoint_manager.active_breakpoints.must_include breakpoint3
+      _(breakpoint_manager.active_breakpoints).must_include breakpoint1
+      _(breakpoint_manager.active_breakpoints).must_include breakpoint2
+      _(breakpoint_manager.active_breakpoints).must_include breakpoint3
     end
 
     it "removes old breakpoints not in new list" do
       breakpoint_manager.update_breakpoints [breakpoint1, breakpoint2]
 
-      breakpoint_manager.active_breakpoints.size.must_equal 2
+      _(breakpoint_manager.active_breakpoints.size).must_equal 2
 
       breakpoint_manager.update_breakpoints [breakpoint2, breakpoint3]
 
-      breakpoint_manager.active_breakpoints.size.must_equal 2
+      _(breakpoint_manager.active_breakpoints.size).must_equal 2
 
-      breakpoint_manager.active_breakpoints.must_include breakpoint2
-      breakpoint_manager.active_breakpoints.must_include breakpoint3
+      _(breakpoint_manager.active_breakpoints).must_include breakpoint2
+      _(breakpoint_manager.active_breakpoints).must_include breakpoint3
     end
 
     it "removes old breakpoints from @completed_breakpoints not in new list" do
       breakpoint_manager.update_breakpoints [breakpoint1, breakpoint2]
       breakpoint_manager.mark_off breakpoint2
 
-      breakpoint_manager.active_breakpoints.size.must_equal 1
-      breakpoint_manager.completed_breakpoints.size.must_equal 1
-      breakpoint_manager.active_breakpoints.first.must_equal breakpoint1
-      breakpoint_manager.completed_breakpoints.first.must_equal breakpoint2
+      _(breakpoint_manager.active_breakpoints.size).must_equal 1
+      _(breakpoint_manager.completed_breakpoints.size).must_equal 1
+      _(breakpoint_manager.active_breakpoints.first).must_equal breakpoint1
+      _(breakpoint_manager.completed_breakpoints.first).must_equal breakpoint2
 
       breakpoint_manager.update_breakpoints [breakpoint3]
 
-      breakpoint_manager.active_breakpoints.size.must_equal 1
-      breakpoint_manager.active_breakpoints.first.must_equal breakpoint3
-      breakpoint_manager.completed_breakpoints.must_be_empty
+      _(breakpoint_manager.active_breakpoints.size).must_equal 1
+      _(breakpoint_manager.active_breakpoints.first).must_equal breakpoint3
+      _(breakpoint_manager.completed_breakpoints).must_be_empty
     end
 
     it "doesn't add breakpoints already in @completed_breakpoints" do
       breakpoint_manager.update_breakpoints [breakpoint1]
       breakpoint_manager.mark_off breakpoint1
 
-      breakpoint_manager.active_breakpoints.must_be_empty
-      breakpoint_manager.completed_breakpoints.size.must_equal 1
+      _(breakpoint_manager.active_breakpoints).must_be_empty
+      _(breakpoint_manager.completed_breakpoints.size).must_equal 1
 
       breakpoint_manager.update_breakpoints [breakpoint1]
 
-      breakpoint_manager.active_breakpoints.must_be_empty
-      breakpoint_manager.completed_breakpoints.size.must_equal 1
-      breakpoint_manager.completed_breakpoints.must_include breakpoint1
+      _(breakpoint_manager.active_breakpoints).must_be_empty
+      _(breakpoint_manager.completed_breakpoints.size).must_equal 1
+      _(breakpoint_manager.completed_breakpoints).must_include breakpoint1
     end
 
     it "only add valid breakpoints" do
@@ -165,8 +165,8 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
         breakpoint_manager.update_breakpoints [breakpoint1, breakpoint2]
       end
 
-      breakpoint_manager.active_breakpoints.size.must_equal 1
-      breakpoint_manager.active_breakpoints.first.must_equal breakpoint2
+      _(breakpoint_manager.active_breakpoints.size).must_equal 1
+      _(breakpoint_manager.active_breakpoints.first).must_equal breakpoint2
     end
   end
 
@@ -275,26 +275,26 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
     it "moves a breakpoint from @active_breakpoints list to @completed_breakpoints list" do
       breakpoint_manager.update_breakpoints [breakpoint1]
 
-      breakpoint_manager.active_breakpoints.size.must_equal 1
-      breakpoint_manager.completed_breakpoints.must_be_empty
+      _(breakpoint_manager.active_breakpoints.size).must_equal 1
+      _(breakpoint_manager.completed_breakpoints).must_be_empty
 
       breakpoint_manager.mark_off breakpoint1
 
-      breakpoint_manager.active_breakpoints.must_be_empty
-      breakpoint_manager.completed_breakpoints.size.must_equal 1
-      breakpoint_manager.completed_breakpoints.must_include breakpoint1
+      _(breakpoint_manager.active_breakpoints).must_be_empty
+      _(breakpoint_manager.completed_breakpoints.size).must_equal 1
+      _(breakpoint_manager.completed_breakpoints).must_include breakpoint1
     end
 
     it "doesn't mark off a breakpoint not in @active_breakpoints" do
       breakpoint_manager.update_breakpoints [breakpoint1]
 
-      breakpoint_manager.active_breakpoints.size.must_equal 1
-      breakpoint_manager.completed_breakpoints.must_be_empty
+      _(breakpoint_manager.active_breakpoints.size).must_equal 1
+      _(breakpoint_manager.completed_breakpoints).must_be_empty
 
       breakpoint_manager.mark_off breakpoint2
 
-      breakpoint_manager.active_breakpoints.size.must_equal 1
-      breakpoint_manager.completed_breakpoints.must_be_empty
+      _(breakpoint_manager.active_breakpoints.size).must_equal 1
+      _(breakpoint_manager.completed_breakpoints).must_be_empty
     end
   end
 
@@ -308,7 +308,7 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
         breakpoint3
       ]
 
-      breakpoint_manager.breakpoints.must_equal [breakpoint1, breakpoint2, breakpoint3]
+      _(breakpoint_manager.breakpoints).must_equal [breakpoint1, breakpoint2, breakpoint3]
     end
   end
 
@@ -322,7 +322,7 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
         breakpoint3
       ]
 
-      breakpoint_manager.active_breakpoints.must_equal [breakpoint1, breakpoint2]
+      _(breakpoint_manager.active_breakpoints).must_equal [breakpoint1, breakpoint2]
     end
   end
 
@@ -336,28 +336,28 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
         breakpoint3
       ]
 
-      breakpoint_manager.completed_breakpoints.must_equal [breakpoint3]
+      _(breakpoint_manager.completed_breakpoints).must_equal [breakpoint3]
     end
   end
 
   describe "#all_complete?" do
     it "returns true only if there are active breakpoints" do
-      breakpoint_manager.all_complete?.must_equal true
+      _(breakpoint_manager.all_complete?).must_equal true
       breakpoint_manager.instance_variable_set :@active_breakpoints, [
         breakpoint1,
         breakpoint2
       ]
-      breakpoint_manager.all_complete?.must_equal false
+      _(breakpoint_manager.all_complete?).must_equal false
       breakpoint_manager.instance_variable_set :@active_breakpoints, []
-      breakpoint_manager.all_complete?.must_equal true
+      _(breakpoint_manager.all_complete?).must_equal true
     end
 
     it "return true if there are only completed breakpoints" do
-      breakpoint_manager.all_complete?.must_equal true
+      _(breakpoint_manager.all_complete?).must_equal true
       breakpoint_manager.instance_variable_set :@completed_breakpoints, [
         breakpoint3
       ]
-      breakpoint_manager.all_complete?.must_equal true
+      _(breakpoint_manager.all_complete?).must_equal true
     end
   end
 
@@ -371,10 +371,10 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
         breakpoint3
       ]
 
-      breakpoint_manager.breakpoints.wont_be_empty
+      _(breakpoint_manager.breakpoints).wont_be_empty
 
       breakpoint_manager.clear_breakpoints
-      breakpoint_manager.breakpoints.must_be_empty
+      _(breakpoint_manager.breakpoints).must_be_empty
     end
   end
 
@@ -388,8 +388,8 @@ describe Google::Cloud::Debugger::BreakpointManager, :mock_debugger do
       breakpoint_manager.agent.transmitter.stub :submit, mocked_submit do
         breakpoints = breakpoint_manager.send :filter_breakpoints, [breakpoint1, breakpoint2]
 
-        breakpoints.size.must_equal 1
-        breakpoints.first.must_equal breakpoint1
+        _(breakpoints.size).must_equal 1
+        _(breakpoints.first).must_equal breakpoint1
       end
 
       mocked_submit.verify

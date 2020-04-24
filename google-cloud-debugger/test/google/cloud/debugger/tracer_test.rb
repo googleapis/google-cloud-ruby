@@ -22,7 +22,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
         original_hash = agent.tracer.breakpoints_cache
         new_hash = agent.tracer.update_breakpoints_cache
 
-        original_hash.object_id.wont_equal new_hash.object_id
+        _(original_hash.object_id).wont_equal new_hash.object_id
       end
     end
 
@@ -35,9 +35,9 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       breakpoint_manager.stub :active_breakpoints, [breakpoint1, breakpoint2, breakpoint3, breakpoint4] do
         breakpoints_hash = agent.tracer.update_breakpoints_cache
 
-        breakpoints_hash["path/to/file1.rb"][123].must_equal [breakpoint1]
-        breakpoints_hash["path/to/file1.rb"][345].must_equal [breakpoint2]
-        breakpoints_hash["path/to/file2.rb"][987].must_equal [breakpoint3, breakpoint4]
+        _(breakpoints_hash["path/to/file1.rb"][123]).must_equal [breakpoint1]
+        _(breakpoints_hash["path/to/file1.rb"][345]).must_equal [breakpoint2]
+        _(breakpoints_hash["path/to/file2.rb"][987]).must_equal [breakpoint3, breakpoint4]
       end
     end
   end
@@ -61,7 +61,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
       breakpoint_manager.instance_variable_set :@active_breakpoints, [breakpoint]
 
       tracer.update_breakpoints_cache
-      tracer.breakpoints_cache.wont_be_empty
+      _(tracer.breakpoints_cache).wont_be_empty
 
       stubbed_evaluate = ->(_) { breakpoint.complete }
       mocked_disable_traces = Minitest::Mock.new
@@ -88,7 +88,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
         tracer.breakpoints_hit [breakpoint], nil
       end
 
-      breakpoint.complete?.wont_equal true
+      _(breakpoint.complete?).wont_equal true
     end
 
     it "records time used after each evaluation if there's a quota manager" do
@@ -105,7 +105,7 @@ describe Google::Cloud::Debugger::Tracer, :mock_debugger do
         tracer.breakpoints_hit [breakpoint], nil
       end
 
-      time_used.wont_equal 0
+      _(time_used).wont_equal 0
     end
   end
 

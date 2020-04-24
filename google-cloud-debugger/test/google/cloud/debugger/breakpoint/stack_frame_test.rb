@@ -28,10 +28,10 @@ describe Google::Cloud::Debugger::Breakpoint::StackFrame, :mock_debugger do
 
   describe ".from_grpc" do
     it "has all of the attributes" do
-      stack_frame.function.must_equal "index"
-      stack_frame.location.must_be_kind_of Google::Cloud::Debugger::Breakpoint::SourceLocation
-      stack_frame.arguments[0].must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
-      stack_frame.locals[0].must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+      _(stack_frame.function).must_equal "index"
+      _(stack_frame.location).must_be_kind_of Google::Cloud::Debugger::Breakpoint::SourceLocation
+      _(stack_frame.arguments[0]).must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
+      _(stack_frame.locals[0]).must_be_kind_of Google::Cloud::Debugger::Breakpoint::Variable
     end
   end
 
@@ -39,20 +39,20 @@ describe Google::Cloud::Debugger::Breakpoint::StackFrame, :mock_debugger do
     it "has all of the attributes" do
       grpc = stack_frame.to_grpc
 
-      grpc.function.must_equal stack_frame_grpc.function
-      grpc.location.must_equal stack_frame_grpc.location
-      grpc.arguments.must_equal stack_frame_grpc.arguments
-      grpc.locals.must_equal stack_frame_grpc.locals
+      _(grpc.function).must_equal stack_frame_grpc.function
+      _(grpc.location).must_equal stack_frame_grpc.location
+      _(grpc.arguments).must_equal stack_frame_grpc.arguments
+      _(grpc.locals).must_equal stack_frame_grpc.locals
     end
 
     it "has arguments even if missing from object" do
       stack_frame.arguments = nil
-      stack_frame.to_grpc.arguments.must_equal []
+      _(stack_frame.to_grpc.arguments).must_equal []
     end
 
     it "has locals even if missing from object" do
       stack_frame.locals = nil
-      stack_frame.to_grpc.locals.must_equal []
+      _(stack_frame.to_grpc.locals).must_equal []
     end
   end
 end

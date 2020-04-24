@@ -35,9 +35,9 @@ describe Google::Cloud::Debugger::Breakpoint::StatusMessage, :mock_debugger do
 
   describe ".from_grpc" do
     it "knows all of its attributes" do
-      status_message.is_error.must_equal true
-      status_message.refers_to.must_equal Google::Cloud::Debugger::Breakpoint::StatusMessage::UNSPECIFIED
-      status_message.description.must_equal "test error message"
+      _(status_message.is_error).must_equal true
+      _(status_message.refers_to).must_equal Google::Cloud::Debugger::Breakpoint::StatusMessage::UNSPECIFIED
+      _(status_message.description).must_equal "test error message"
     end
   end
 
@@ -45,10 +45,10 @@ describe Google::Cloud::Debugger::Breakpoint::StatusMessage, :mock_debugger do
     it "exports all of the content" do
       grpc = status_message.to_grpc
 
-      grpc.must_be_kind_of Google::Devtools::Clouddebugger::V2::StatusMessage
-      grpc.is_error.must_equal true
-      grpc.refers_to.must_equal :UNSPECIFIED
-      grpc.description.format.must_equal "test error message"
+      _(grpc).must_be_kind_of Google::Devtools::Clouddebugger::V2::StatusMessage
+      _(grpc.is_error).must_equal true
+      _(grpc.refers_to).must_equal :UNSPECIFIED
+      _(grpc.description.format).must_equal "test error message"
     end
   end
 end

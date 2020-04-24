@@ -20,49 +20,49 @@ describe Google::Cloud::Debugger::RequestQuotaManager, :mock_debugger do
 
   describe "#more?" do
     it "returns false when all the time quota is used up" do
-      quota_manager.more?.must_equal true
+      _(quota_manager.more?).must_equal true
 
       quota_manager.consume time: (quota_manager.time_quota + 1)
 
-      quota_manager.more?.must_equal false
+      _(quota_manager.more?).must_equal false
     end
 
     it "returns false when all the count quota is used up" do
-      quota_manager.more?.must_equal true
+      _(quota_manager.more?).must_equal true
 
       quota_manager.count_quota.times do
         quota_manager.consume
       end
 
-      quota_manager.more?.must_equal false
+      _(quota_manager.more?).must_equal false
     end
   end
 
   describe "#reset" do
     it "resets time quota" do
-      quota_manager.more?.must_equal true
+      _(quota_manager.more?).must_equal true
 
       quota_manager.consume time: (quota_manager.time_quota + 1)
 
-      quota_manager.more?.must_equal false
+      _(quota_manager.more?).must_equal false
 
       quota_manager.reset
 
-      quota_manager.more?.must_equal true
+      _(quota_manager.more?).must_equal true
     end
 
     it "resets count quota" do
-      quota_manager.more?.must_equal true
+      _(quota_manager.more?).must_equal true
 
       quota_manager.count_quota.times do
         quota_manager.consume
       end
 
-      quota_manager.more?.must_equal false
+      _(quota_manager.more?).must_equal false
 
       quota_manager.reset
 
-      quota_manager.more?.must_equal true
+      _(quota_manager.more?).must_equal true
     end
   end
 end

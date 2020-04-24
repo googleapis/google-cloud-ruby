@@ -151,24 +151,24 @@ class EvaluatorSpec < Minitest::Spec
 
   def expression_must_equal expression, expected, binding = binding()
     result = evaluator.readonly_eval_expression binding, expression
-    result.must_equal expected
+    _(result).must_equal expected
   end
 
   def expression_must_be_kind_of expression, expected, binding = binding()
     result = evaluator.readonly_eval_expression binding, expression
-    result.must_be_kind_of expected
+    _(result).must_be_kind_of expected
   end
 
   def expression_prohibited expression, binding = binding()
     result = evaluator.readonly_eval_expression binding, expression
-    result.must_be_kind_of Google::Cloud::Debugger::MutationError
-    result.message.must_match Google::Cloud::Debugger::Breakpoint::Evaluator::PROHIBITED_OPERATION_MSG
+    _(result).must_be_kind_of Google::Cloud::Debugger::MutationError
+    _(result.message).must_match Google::Cloud::Debugger::Breakpoint::Evaluator::PROHIBITED_OPERATION_MSG
   end
 
   def expression_triggers_mutation expression, binding = binding()
     result = evaluator.readonly_eval_expression binding, expression
-    result.must_be_kind_of Google::Cloud::Debugger::MutationError
-    result.message.must_match Google::Cloud::Debugger::Breakpoint::Evaluator::MUTATION_DETECTED_MSG
+    _(result).must_be_kind_of Google::Cloud::Debugger::MutationError
+    _(result.message).must_match Google::Cloud::Debugger::Breakpoint::Evaluator::MUTATION_DETECTED_MSG
   end
 end
 
