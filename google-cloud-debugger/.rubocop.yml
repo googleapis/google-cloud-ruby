@@ -1,9 +1,10 @@
+require: rubocop-minitest
+
 inherit_gem:
   google-style: google-style.yml
 
 AllCops:
   Exclude:
-    - "acceptance/**/*"
     - "integration/**/*"
     - "google-cloud-debugger.gemspec"
     - "lib/google/devtools/**/*"
@@ -12,7 +13,6 @@ AllCops:
     - "lib/google/cloud/debugger/v2.rb"
     - "Rakefile"
     - "support/**/*"
-    - "test/**/*"
     - "tmp/**/*"
 
 Documentation:

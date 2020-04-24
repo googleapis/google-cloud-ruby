@@ -9,3 +9,5 @@ gem "google-cloud-logging", path: "../google-cloud-logging"
 gem "stackdriver-core", path: "../stackdriver-core"
 
 gem "rake"
+
+gem "rubocop-minitest"
