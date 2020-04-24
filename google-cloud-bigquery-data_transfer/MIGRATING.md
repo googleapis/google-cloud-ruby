@@ -71,7 +71,7 @@ timeout for all BigQuery DataTransfer V1 clients:
 ```
 Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -80,7 +80,7 @@ timeout for the `get_data_source` call:
 
 ```
 Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.configure do |config|
-  config.rpcs.get_data_source.timeout = 20_000
+  config.rpcs.get_data_source.timeout = 20.0
 end
 ```
 
@@ -90,7 +90,7 @@ services globally:
 ```
 Google::Cloud::Bigquery::DataTransfer.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -178,7 +178,7 @@ client = Google::Cloud::Bigquery::DataTransfer.new
 
 name = "projects/my-project/dataSources/my-source"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.get_data_source name, options: options
 ```
@@ -191,7 +191,7 @@ name = "projects/my-project/dataSources/my-source"
 
 # Use a hash to wrap the normal call arguments (or pass a request object), and
 # then add further keyword arguments for the call options.
-response = client.get_data_source({ name: name }, timeout: 10_000)
+response = client.get_data_source({ name: name }, timeout: 10.0)
 ```
 
 ### Resource Path Helpers

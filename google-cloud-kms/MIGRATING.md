@@ -76,7 +76,7 @@ timeout for all KMS V1 clients:
 ```
 Google::Cloud::Kms::V1::KeyManagementService::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -85,7 +85,7 @@ timeout for the `list_key_rings` call:
 
 ```
 Google::Cloud::Kms::V1::KeyManagementService::Client.configure do |config|
-  config.rpcs.list_key_rings.timeout = 20_000
+  config.rpcs.list_key_rings.timeout = 20.0
 end
 ```
 
@@ -95,7 +95,7 @@ services globally:
 ```
 Google::Cloud::Kms.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -188,7 +188,7 @@ client = Google::Cloud::Kms.new
 
 parent = "projects/my-project/locations/my-location"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.list_key_rings parent, page_size: 10, options: options
 ```
@@ -203,7 +203,7 @@ parent = "projects/my-project/locations/my-location"
 # then add further keyword arguments for the call options.
 response = client.list_key_rings(
   { parent: parent, page_size: 10 },
-  timeout: 10_000
+  timeout: 10.0
 )
 ```
 

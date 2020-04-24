@@ -75,7 +75,7 @@ timeout for all AutoML V1 clients:
 ```
 Google::Cloud::AutoML::V1::AutoML::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -84,7 +84,7 @@ timeout for the `create_dataset` call:
 
 ```
 Google::Cloud::AutoML::V1::AutoML::Client.configure do |config|
-  config.rpcs.create_dataset.timeout = 20_000
+  config.rpcs.create_dataset.timeout = 20.0
 end
 ```
 
@@ -94,7 +94,7 @@ services globally:
 ```
 Google::Cloud::AutoML.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -185,7 +185,7 @@ client = Google::Cloud::AutoML::AutoML.new
 
 parent = "projects/my-project/locations/my-location"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.list_datasets parent, page_size: 10, options: options
 ```
@@ -200,7 +200,7 @@ parent = "projects/my-project/locations/my-location"
 # then add further keyword arguments for the call options.
 response = client.batch_annotate_images(
   { parent: parent, page_size: 10 },
-  timeout: 10_000
+  timeout: 10.0
 )
 ```
 

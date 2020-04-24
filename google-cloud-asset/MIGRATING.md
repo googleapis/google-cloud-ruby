@@ -74,7 +74,7 @@ timeout for all Asset V1 clients:
 ```
 Google::Cloud::Asset::V1::AssetService::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -83,7 +83,7 @@ timeout for the `create_feed` call:
 
 ```
 Google::Cloud::Asset::V1::AssetService::Client.configure do |config|
-  config.rpcs.create_feed.timeout = 20_000
+  config.rpcs.create_feed.timeout = 20.0
 end
 ```
 
@@ -93,7 +93,7 @@ services globally:
 ```
 Google::Cloud::Asset.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -181,7 +181,7 @@ client = Google::Cloud::Asset.new
 
 name = "projects/my-project/feeds/my-feed"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.get_feed name, options: options
 ```
@@ -194,7 +194,7 @@ name = "projects/my-project/feeds/my-feed"
 
 # Use a hash to wrap the normal call arguments (or pass a request object), and
 # then add further keyword arguments for the call options.
-response = client.get_feed({ name: name }, timeout: 10_000)
+response = client.get_feed({ name: name }, timeout: 10.0)
 ```
 
 ### Resource Path Helpers

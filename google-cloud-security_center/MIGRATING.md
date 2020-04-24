@@ -75,7 +75,7 @@ timeout for all SecurityCenter V1 clients:
 ```
 Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -84,7 +84,7 @@ timeout for the `list_findings` call:
 
 ```
 Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.configure do |config|
-  config.rpcs.list_findings.timeout = 20_000
+  config.rpcs.list_findings.timeout = 20.0
 end
 ```
 
@@ -94,7 +94,7 @@ globally:
 ```
 Google::Cloud::SecurityCenter.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -186,7 +186,7 @@ client = Google::Cloud::SecurityCenter.new
 parent = "organizations/my-org/sources/-"
 ordering = "name"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.list_findings parent, order_by: ordering, options: options
 ```
@@ -202,7 +202,7 @@ ordering = "name"
 # then add further keyword arguments for the call options.
 response = client.list_findings(
   { parent: parent, order_by: ordering },
-  timeout: 10_000
+  timeout: 10.0
 )
 ```
 

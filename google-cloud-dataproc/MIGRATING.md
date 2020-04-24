@@ -74,7 +74,7 @@ timeout for all Dataproc V1 ClusterController clients:
 ```
 Google::Cloud::Dataproc::V1::ClusterController::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -83,7 +83,7 @@ timeout for the `create_cluster` call:
 
 ```
 Google::Cloud::Dataproc::V1::ClusterController::Client.configure do |config|
-  config.rpcs.create_cluster.timeout = 20_000
+  config.rpcs.create_cluster.timeout = 20.0
 end
 ```
 
@@ -93,7 +93,7 @@ services globally:
 ```
 Google::Cloud::Dataproc.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -192,7 +192,7 @@ project_id = "my-project"
 region = "us-central1"
 cluster_name = "my_cluster"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.get_cluster project_id, region, cluster_name, options: options
 ```
@@ -209,7 +209,7 @@ cluster_name = "my_cluster"
 # then add further keyword arguments for the call options.
 response = client.get_feed(
     { project_id: project_id, region: region, cluster_name: cluster_name },
-    timeout: 10_000)
+    timeout: 10.0)
 ```
 
 ### Resource Path Helpers

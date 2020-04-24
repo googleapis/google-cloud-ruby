@@ -75,7 +75,7 @@ timeout for all Speech V1 clients:
 ```
 Google::Cloud::Speech::V1::Speech::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -84,7 +84,7 @@ timeout for the `recognize` call:
 
 ```
 Google::Cloud::Speech::V1::Speech::Client.configure do |config|
-  config.rpcs.recognize.timeout = 20_000
+  config.rpcs.recognize.timeout = 20.0
 end
 ```
 
@@ -94,7 +94,7 @@ services globally:
 ```
 Google::Cloud::Speech.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -210,7 +210,7 @@ audio = {
   uri: "gs://cloud-samples-data/speech/brooklyn_bridge.flac"
 }
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.recognize config, audio, options: options
 ```
@@ -232,7 +232,7 @@ audio = {
 # then add further keyword arguments for the call options.
 response = client.batch_annotate_images(
   { config: config, audio: audio },
-  timeout: 10_000)
+  timeout: 10.0)
 ```
 
 ### Streaming Interface

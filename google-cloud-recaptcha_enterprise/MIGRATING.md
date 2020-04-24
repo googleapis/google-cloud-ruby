@@ -77,7 +77,7 @@ timeout for all reCAPTCHA Enterprise V1 clients:
 ```
 Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -86,7 +86,7 @@ timeout for the `create_assessment` call:
 
 ```
 Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.configure do |config|
-  config.rpcs.create_assessment.timeout = 20_000
+  config.rpcs.create_assessment.timeout = 20.0
 end
 ```
 
@@ -96,7 +96,7 @@ services globally:
 ```
 Google::Cloud::RecaptchaEnterprise.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -185,7 +185,7 @@ client = Google::Cloud::RecaptchaEnterprise.new
 
 parent = "projects/my-project"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.list_keys parent, page_size: 10, options: options
 ```
@@ -200,7 +200,7 @@ parent = "projects/my-project"
 # then add further keyword arguments for the call options.
 response = client.list_keys(
   { parent: parent, page_size: 10 },
-  timeout: 10_000
+  timeout: 10.0
 )
 ```
 

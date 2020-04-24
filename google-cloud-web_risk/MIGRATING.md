@@ -97,7 +97,7 @@ timeout for all Web Risk V1 clients:
 ```
 Google::Cloud::WebRisk::V1::WebRiskService::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -106,7 +106,7 @@ timeout for the `search_uris` call:
 
 ```
 Google::Cloud::WebRisk::V1::WebRiskService::Client.configure do |config|
-  config.rpcs.search_uris.timeout = 20_000
+  config.rpcs.search_uris.timeout = 20.0
 end
 ```
 
@@ -116,7 +116,7 @@ services globally:
 ```
 Google::Cloud::WebRisk.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -208,7 +208,7 @@ client = Google::Cloud::Webrisk.new
 uri = "http://example.com"
 threat_types = [Google::Cloud::Webrisk::V1beta1::ThreatType::MALWARE]
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.search_uris uri, threat_types, options: options
 ```
@@ -224,6 +224,6 @@ threat_types = [Google::Cloud::WebRisk::V1::ThreatType::MALWARE]
 # then add further keyword arguments for the call options.
 response = client.search_uris(
   { uri: uri, threat_types: threat_types },
-  timeout: 10_000
+  timeout: 10.0
 )
 ```

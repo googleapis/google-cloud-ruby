@@ -71,7 +71,7 @@ timeout for all Speech V1 clients:
 ```
 Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -80,7 +80,7 @@ timeout for the `annotate_video` call:
 
 ```
 Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.configure do |config|
-  config.rpcs.annotate_video.timeout = 20_000
+  config.rpcs.annotate_video.timeout = 20.0
 end
 ```
 
@@ -90,7 +90,7 @@ services globally:
 ```
 Google::Cloud::VideoIntelligence.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -182,7 +182,7 @@ client = Google::Cloud::VideoIntelligence.new
 features = [Google::Cloud::VideoIntelligence::V1::Feature::FACE_DETECTION]
 input_uri = "gs://my-bucket/my-video"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.annotate_video features, input_uri: input_uri, options: options
 ```
@@ -198,7 +198,7 @@ input_uri = "gs://my-bucket/my-video"
 # then add further keyword arguments for the call options.
 response = client.annotate_video(
   { features: features, input_uri: input_uri },
-  timeout: 10_000)
+  timeout: 10.0)
 ```
 
 

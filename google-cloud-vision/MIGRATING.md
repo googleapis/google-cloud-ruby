@@ -79,7 +79,7 @@ timeout for all Vision V1 image annotator clients:
 ```
 Google::Cloud::Vision::V1::ImageAnnotator::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -88,7 +88,7 @@ timeout for the `batch_annotate_images` call:
 
 ```
 Google::Cloud::Vision::V1::ImageAnnotator::Client.configure do |config|
-  config.rpcs.batch_annotate_images.timeout = 20_000
+  config.rpcs.batch_annotate_images.timeout = 20.0
 end
 ```
 
@@ -98,7 +98,7 @@ services globally:
 ```
 Google::Cloud::Vision.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -188,7 +188,7 @@ client = Google::Cloud::Vision::ImageAnnotator.new
 
 requests = my_create_requests
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.batch_annotate_images requests, options: options
 ```
@@ -201,7 +201,7 @@ requests = my_create_requests
 
 # Use a hash to wrap the normal call arguments (or pass a request object), and
 # then add further keyword arguments for the call options.
-response = client.batch_annotate_images({ requests: requests }, timeout: 10_000)
+response = client.batch_annotate_images({ requests: requests }, timeout: 10.0)
 ```
 
 ### Resource Path Helpers

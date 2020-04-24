@@ -72,7 +72,7 @@ timeout for all Dialogflow V2 sessions clients:
 ```
 Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -81,7 +81,7 @@ timeout for the `detect_intent` call:
 
 ```
 Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
-  config.rpcs.detect_intent.timeout = 20_000
+  config.rpcs.detect_intent.timeout = 20.0
 end
 ```
 
@@ -91,7 +91,7 @@ services globally:
 ```
 Google::Cloud::Dialogflow.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -190,7 +190,7 @@ client = Google::Cloud::Dialogflow::Sessions.new
 session = "projects/my-project/agent/sessions/my-session"
 query = { text: { text: "book a meeting room", language_code: "en-US" } }
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.detect_intent session, query, options: options
 ```
@@ -206,7 +206,7 @@ query = { text: { text: "book a meeting room", language_code: "en-US" } }
 # then add further keyword arguments for the call options.
 response = client.detect_intent(
   { session: session, query_input: query },
-  timeout: 10_000
+  timeout: 10.0
 )
 ```
 

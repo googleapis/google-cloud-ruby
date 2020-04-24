@@ -72,7 +72,7 @@ timeout for all Talent V4beta1 application service clients:
 ```
 Google::Cloud::Talent::V4beta1::ApplicationService::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -81,7 +81,7 @@ timeout for the `list_applications` call:
 
 ```
 Google::Cloud::Talent::V4beta1::ApplicationService::Client.configure do |config|
-  config.rpcs.list_applications.timeout = 20_000
+  config.rpcs.list_applications.timeout = 20.0
 end
 ```
 
@@ -91,7 +91,7 @@ services globally:
 ```
 Google::Cloud::Talent.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -182,7 +182,7 @@ client = Google::Cloud::Talent::ApplicationService.new
 
 parent = "projects/my-project/tenants/my-tenant/profiles/my-profile"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.list_applications parent, page_size: 10, options: options
 ```
@@ -197,7 +197,7 @@ parent = "projects/my-project/tenants/my-tenant/profiles/my-profile"
 # then add further keyword arguments for the call options.
 response = client.list_applications(
   { parent: parent, page_size: 10 },
-  timeout: 10_000
+  timeout: 10.0
 ) 
 ```
 
