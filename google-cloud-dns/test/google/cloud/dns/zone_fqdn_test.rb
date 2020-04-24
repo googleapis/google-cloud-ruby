@@ -20,29 +20,29 @@ describe Google::Cloud::Dns::Zone, :fqdn, :mock_dns do
   let(:zone) { Google::Cloud::Dns::Zone.from_gapi random_zone_gapi(zone_name, zone_dns), dns.service }
 
   it "knows a fully qualified domain name when given one" do
-    zone.fqdn("example.org.").must_equal "example.org."
+    _(zone.fqdn("example.org.")).must_equal "example.org."
   end
 
   it "creates a fully qualified domain name when not given one" do
-    zone.fqdn("example.net").must_equal "example.net."
+    _(zone.fqdn("example.net")).must_equal "example.net."
   end
 
   it "uses the zone's fully qualified domain name when given nil" do
-    zone.fqdn(nil).must_equal "example.com."
+    _(zone.fqdn(nil)).must_equal "example.com."
   end
 
   it "uses the zone's fully qualified domain name when given empty string" do
-    zone.fqdn("").must_equal "example.com."
-    zone.fqdn("  ").must_equal "example.com." # spaces
-    zone.fqdn("\t").must_equal "example.com." # tab
-    zone.fqdn("\n").must_equal "example.com." # new lines
+    _(zone.fqdn("")).must_equal "example.com."
+    _(zone.fqdn("  ")).must_equal "example.com." # spaces
+    _(zone.fqdn("\t")).must_equal "example.com." # tab
+    _(zone.fqdn("\n")).must_equal "example.com." # new lines
   end
 
   it "uses the zone's fully qualified domain name when given @" do
-    zone.fqdn("").must_equal "example.com."
+    _(zone.fqdn("")).must_equal "example.com."
   end
 
   it "prepends the zone's fully qualified domain name when given a subdomain" do
-    zone.fqdn("www").must_equal "www.example.com."
+    _(zone.fqdn("www")).must_equal "www.example.com."
   end
 end

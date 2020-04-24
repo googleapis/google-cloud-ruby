@@ -49,42 +49,42 @@ describe Google::Cloud::Dns, :dns do
 
   it "lists all zones" do
     all_zones = dns.zones.all(request_limit: 3).to_a
-    all_zones.count.wont_equal 0
+    _(all_zones.count).wont_equal 0
   end
 
   it "creates and deletes a zone" do
     create_zone_name = "#{zone_name}-crtst1"
     create_zone_dns  = "crtst1.#{zone_dns}"
-    dns.zone(create_zone_name).must_be :nil?
+    _(dns.zone(create_zone_name)).must_be :nil?
     create_zone = dns.create_zone create_zone_name, create_zone_dns
-    create_zone.wont_be :nil?
-    create_zone.must_be_kind_of Google::Cloud::Dns::Zone
-    dns.zone(create_zone_name).wont_be :nil?
+    _(create_zone).wont_be :nil?
+    _(create_zone).must_be_kind_of Google::Cloud::Dns::Zone
+    _(dns.zone(create_zone_name)).wont_be :nil?
     create_zone.delete force: true
-    dns.zone(create_zone_name).must_be :nil?
+    _(dns.zone(create_zone_name)).must_be :nil?
   end
 
   it "knows its attributes" do
-    zone.name.must_equal zone_name
-    zone.dns.must_equal zone.dns
-    zone.description.must_equal ""
-    zone.id.wont_be :nil?
+    _(zone.name).must_equal zone_name
+    _(zone.dns).must_equal zone.dns
+    _(zone.description).must_equal ""
+    _(zone.id).wont_be :nil?
     zone.name_servers.each do |name_server|
-      name_server.must_include ".googledomains.com."
+      _(name_server).must_include ".googledomains.com."
     end
-    zone.name_server_set.must_be :nil?
-    zone.created_at.must_be_kind_of Time
+    _(zone.name_server_set).must_be :nil?
+    _(zone.created_at).must_be_kind_of Time
   end
 
   it "return 0 or more zones" do
-    zone.records.all.count.must_be :>=, 0
+    _(zone.records.all.count).must_be :>=, 0
   end
 
   describe "Zones" do
     it "gets the metadata for a zone" do
-      zone.name.must_equal zone_name
-      zone.dns.must_equal  zone_dns
-      zone.created_at.wont_be :nil?
+      _(zone.name).must_equal zone_name
+      _(zone.dns).must_equal  zone_dns
+      _(zone.created_at).wont_be :nil?
     end
 
     it "supports all types of records" do
@@ -103,15 +103,15 @@ describe Google::Cloud::Dns, :dns do
       end.wait_until_done!
 
       records = zone.records.all
-      records.must_include a_record
-      records.must_include aaaa_record
-      records.must_include cname_record
-      records.must_include mx_record
-      records.must_include ns_record
-      records.must_include soa_record
-      records.must_include spf_record
-      records.must_include srv_record
-      records.must_include txt_record
+      _(records).must_include a_record
+      _(records).must_include aaaa_record
+      _(records).must_include cname_record
+      _(records).must_include mx_record
+      _(records).must_include ns_record
+      _(records).must_include soa_record
+      _(records).must_include spf_record
+      _(records).must_include srv_record
+      _(records).must_include txt_record
     end
 
     it "imports records from a zone file" do
@@ -127,9 +127,9 @@ describe Google::Cloud::Dns, :dns do
         import_zone.import(tmpfile.path).wait_until_done!
 
         imported_records = import_zone.records.all
-        imported_records.must_include import_zone.record("@", "A", 3600, "192.0.2.1")
-        imported_records.must_include import_zone.record("@", "AAAA", 3600, "2001:db8:10::1")
-        imported_records.must_include import_zone.record("@", "MX", 3600, ["10 mail.#{import_zone.dns}",
+        _(imported_records).must_include import_zone.record("@", "A", 3600, "192.0.2.1")
+        _(imported_records).must_include import_zone.record("@", "AAAA", 3600, "2001:db8:10::1")
+        _(imported_records).must_include import_zone.record("@", "MX", 3600, ["10 mail.#{import_zone.dns}",
                                                                            "20 mail2.#{import_zone.dns}",
                                                                            "50 mail3.#{import_zone.dns}"])
       end
@@ -150,11 +150,11 @@ describe Google::Cloud::Dns, :dns do
         export_zone.export tmpfile
 
         exported_zonefile = tmpfile.read
-        exported_zonefile.must_include "#{export_zone.dns} 86400 IN A 1.2.3.4"
-        exported_zonefile.must_include "#{export_zone.dns} 86400 IN AAAA 2607:f8b0:400a:801::1005"
-        exported_zonefile.must_include "redirect.#{export_zone.dns} 86400 IN CNAME example.com."
-        exported_zonefile.must_include "#{export_zone.dns} 86400 IN MX 10 mail.#{export_zone.dns}"
-        exported_zonefile.must_include "#{export_zone.dns} 86400 IN MX 20 mail2.#{export_zone.dns}"
+        _(exported_zonefile).must_include "#{export_zone.dns} 86400 IN A 1.2.3.4"
+        _(exported_zonefile).must_include "#{export_zone.dns} 86400 IN AAAA 2607:f8b0:400a:801::1005"
+        _(exported_zonefile).must_include "redirect.#{export_zone.dns} 86400 IN CNAME example.com."
+        _(exported_zonefile).must_include "#{export_zone.dns} 86400 IN MX 10 mail.#{export_zone.dns}"
+        _(exported_zonefile).must_include "#{export_zone.dns} 86400 IN MX 20 mail2.#{export_zone.dns}"
       end
     end
   end
@@ -162,53 +162,53 @@ describe Google::Cloud::Dns, :dns do
   describe "Changes" do
     it "creates a change" do
       change = zone.replace zone.dns, "A", 86400, "5.6.7.8"
-      change.must_be_kind_of Google::Cloud::Dns::Change
+      _(change).must_be_kind_of Google::Cloud::Dns::Change
       change.wait_until_done!
-      change.must_be :done?
-      change.status.must_equal "done"
+      _(change).must_be :done?
+      _(change.status).must_equal "done"
       new_a_record = change.additions.first
-      new_a_record.name.must_equal zone.dns
-      new_a_record.type.must_equal "A"
-      new_a_record.ttl.must_equal 86400
-      new_a_record.data.must_equal ["5.6.7.8"]
+      _(new_a_record.name).must_equal zone.dns
+      _(new_a_record.type).must_equal "A"
+      _(new_a_record.ttl).must_equal 86400
+      _(new_a_record.data).must_equal ["5.6.7.8"]
     end
 
     it "gets a list of changes" do
-      zone.changes.count.must_be :>=, 0
+      _(zone.changes.count).must_be :>=, 0
     end
 
     it "gets a single change" do
       all_changes = zone.changes.all
-      all_changes.count.must_be :>=, 0
+      _(all_changes.count).must_be :>=, 0
       change = zone.change all_changes.first.id
-      change.must_be_kind_of Google::Cloud::Dns::Change
+      _(change).must_be_kind_of Google::Cloud::Dns::Change
     end
   end
 
   describe "Records" do
     it "returns 0 or more records" do
-      zone.records.all.count.must_be :>=, 0
+      _(zone.records.all.count).must_be :>=, 0
     end
 
     it "retrieve records by name and type" do
       change = zone.add "retrieve.#{zone.dns}", "A", 86400, "9.10.11.12"
       change.wait_until_done!
 
-      zone.records("retrieve.#{zone.dns}", "A").all.count.must_be :>=, 1
+      _(zone.records("retrieve.#{zone.dns}", "A").all.count).must_be :>=, 1
     end
 
     it "replaces records" do
-      zone.records("replace.#{zone.dns}", "A").all.count.must_be :zero?
+      _(zone.records("replace.#{zone.dns}", "A").all.count).must_be :zero?
 
       change = zone.add "replace.#{zone.dns}", "A", 86400, "1.2.3.4"
       change.wait_until_done!
 
-      zone.records("replace.#{zone.dns}", "A").all.count.wont_be :zero?
+      _(zone.records("replace.#{zone.dns}", "A").all.count).wont_be :zero?
 
       change = zone.replace "replace.#{zone.dns}", "A", 86400, "5.6.7.8"
       change.wait_until_done!
 
-      zone.records("replace.#{zone.dns}", "A").all.count.wont_be :zero?
+      _(zone.records("replace.#{zone.dns}", "A").all.count).wont_be :zero?
     end
   end
 
