@@ -2,7 +2,13 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "rake", "~> 12.0"
+gem "google-cloud-core", path: "../google-cloud-core"
+gem "google-cloud-env", path: "../google-cloud-env"
+gem "google-cloud-errors", path: "../google-cloud-errors"
+gem "google-cloud-automl-v1", path: "../google-cloud-automl-v1"
+gem "google-cloud-automl-v1beta1", path: "../google-cloud-automl-v1beta1"
+
+gem "rake"
 
 # Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
 # See https://github.com/googleapis/google-cloud-ruby/issues/4110
