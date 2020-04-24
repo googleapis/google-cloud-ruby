@@ -267,6 +267,8 @@ google-cloud-dataproc:
 - v0.2.1
 - v0.2.0
 - v0.1.0
+google-cloud-dataproc-v1beta2:
+- v0.1.0
 google-cloud-datastore:
 - v1.8.0
 - v1.7.2
