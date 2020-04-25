@@ -75,7 +75,7 @@ timeout for all Redis V1 clients:
 ```
 Google::Cloud::Redis::V1::CloudRedis::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -84,7 +84,7 @@ timeout for the `list_instances` call:
 
 ```
 Google::Cloud::Redis::V1::CloudRedis::Client.configure do |config|
-  config.rpcs.list_instances.timeout = 20_000
+  config.rpcs.list_instances.timeout = 20.0
 end
 ```
 
@@ -94,7 +94,7 @@ globally:
 ```
 Google::Cloud::Redis.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -182,7 +182,7 @@ client = Google::Cloud::Redis.new
 
 parent = "projects/my-project/locations/-"
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.list_instances parent, options: options
 ```
@@ -195,7 +195,7 @@ parent = "projects/my-project/locations/-"
 
 # Use a hash to wrap the normal call arguments (or pass a request object), and
 # then add further keyword arguments for the call options.
-response = client.analyze_sentiment({ parent: parent }, timeout: 10_000)
+response = client.analyze_sentiment({ parent: parent }, timeout: 10.0)
 ```
 
 ### Resource Path Helpers

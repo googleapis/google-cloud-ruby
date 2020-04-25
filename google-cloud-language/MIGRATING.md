@@ -71,7 +71,7 @@ timeout for all Language V1 clients:
 ```
 Google::Cloud::Language::V1::LanguageService::Client.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -80,7 +80,7 @@ timeout for the `analyze_sentiment` call:
 
 ```
 Google::Cloud::Language::V1::LanguageService::Client.configure do |config|
-  config.rpcs.analyze_sentinment.timeout = 20_000
+  config.rpcs.analyze_sentinment.timeout = 20.0
 end
 ```
 
@@ -90,7 +90,7 @@ globally:
 ```
 Google::Cloud::Language.configure do |config|
   config.credentials = "/path/to/credentials.json"
-  config.timeout = 10_000
+  config.timeout = 10.0
 end
 ```
 
@@ -193,7 +193,7 @@ document = {
   type: Google::Cloud::Language::V1::Document::Type::PLAIN_TEXT
 }
 
-options = Google::Gax::CallOptions.new timeout: 10_000
+options = Google::Gax::CallOptions.new timeout: 10.0
 
 response = client.analyze_sentiment document, options: options
 ```
@@ -212,7 +212,7 @@ encoding = Google:Cloud::Language::V1::EncodingType::UTF8
 # then add further keyword arguments for the call options.
 response = client.analyze_sentiment(
   { document: document, encoding_type: encoding },
-  timeout: 10_000
+  timeout: 10.0
 )
 ```
 
