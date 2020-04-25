@@ -8,10 +8,15 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-webrisk is the official library for Web Risk API."
-  gem.summary       = "API Client library for Web Risk API"
+  gem.description   = "This library is deprecated, and will no longer receive updates. Please use google-cloud-web_risk instead."
+  gem.summary       = "Obsolete API Client library for Web Risk API"
   gem.homepage      = "https://github.com/googleapis/googleapis"
   gem.license       = "Apache-2.0"
+
+  gem.post_install_message =
+    "The google-cloud-webrisk library is deprecated. Please use google-cloud-web_risk instead." \
+    " See https://googleapis.dev/ruby/google-cloud-web_risk/latest/file.MIGRATING.html for" \
+    " detailed information on the differences."
 
   gem.platform      = Gem::Platform::RUBY
 
