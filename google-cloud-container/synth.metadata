@@ -1,34 +1,18 @@
 {
   "sources": [
     {
-      "generator": {
-        "name": "artman",
-        "version": "2.0.0",
-        "dockerImage": "googleapis/artman@sha256:b3b47805231a305d0f40c4bf069df20f6a2635574e6d4259fac651d3f9f6e098"
-      }
-    },
-    {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/google-cloud-ruby.git",
-        "sha": "3b2d6e237a9df5b950652210de641a55529891d0"
+        "remote": "git@github.com:googleapis/google-cloud-ruby.git",
+        "sha": "b1d32feaa3f4ed68cf0b724d4b0a4fa46f797f5e"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "1bd77e8ce6f953ac641af7966d0c52646afc16a8",
-        "internalRef": "305974465",
-        "log": "1bd77e8ce6f953ac641af7966d0c52646afc16a8\nPublishing ComputeRouteMatrix request and reply messages.\n\nPiperOrigin-RevId: 305974465\n\nf9d76ac088f5d444b16d5e17fe58a9eea57b7a99\nchore: enable gapic v2 and proto annotation for Documentai API.\n\ncommitter: @summer-ji-eng\nPiperOrigin-RevId: 305961792\n\n13736ead90e0fa65103eb03fea775a1c010564af\nUpdate bazel version for kokoro build to 3.0.0.\n(Hoping that will help with java 11 failures)\n\nPiperOrigin-RevId: 305950091\n\nab869e90c6ced0ef30fcc8e8fbe8e527a695d3cb\nchore: enable gapicv2 for longrunning API\n\nCommitter: @miraleung\nPiperOrigin-RevId: 305942456\n\ncf18ab5200e41e9d0cfef88c6c4bcdd394faf1ca\nfeat: Adding OS Config AgentEndpointService V1 RegisterAgent rpc\n\nPiperOrigin-RevId: 305925954\n\n1e92c343790ae63f88817afde60bd2d5bc775f36\nDialogflow weekly v2/v2beta1 library update:\n- Update comments on Contexts and Sessions resources.\n\nPiperOrigin-RevId: 305919798\n\n1df336ab4a989e7b0bc363baa9fc91eb66b0625e\nfeat: Adding OS Config AgentEndpointService V1Beta RegisterAgent rpc\n\nPiperOrigin-RevId: 305900738\n\n1692c3d51ee7d4366ce81892df1b9ca9846480d3\nchore: enable gapic v2 and proto annotation for automl API.\n\ncommitter: @xiaozhenliu\nPiperOrigin-RevId: 305894083\n\n"
-      }
-    },
-    {
-      "git": {
-        "name": "synthtool",
-        "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "21c3b57ae54ae9db6a3a6b48b31c970c6ab56f19",
-        "log": "21c3b57ae54ae9db6a3a6b48b31c970c6ab56f19\nbuild(nodejs): remove unused codecov config (#486)\n\n\n"
+        "sha": "28e76243c23cc282efbb288cb558c174e3e5e9ee",
+        "internalRef": "308294748"
       }
     }
   ],
@@ -37,20 +21,9 @@
       "client": {
         "source": "googleapis",
         "apiName": "container",
-        "apiVersion": "v1beta1",
-        "language": "ruby",
-        "generator": "gapic",
-        "config": "google/container/artman_container_v1beta1.yaml"
-      }
-    },
-    {
-      "client": {
-        "source": "googleapis",
-        "apiName": "container",
         "apiVersion": "v1",
         "language": "ruby",
-        "generator": "gapic",
-        "config": "google/container/artman_container_v1.yaml"
+        "generator": "gapic-generator-ruby"
       }
     }
   ]
