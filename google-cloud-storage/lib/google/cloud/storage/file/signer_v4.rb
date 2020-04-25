@@ -164,6 +164,7 @@ module Google
 
           def required_fields issuer, time
             {
+              "bucket" => @bucket_name,
               "key" => @file_name,
               "x-goog-date" => time.strftime("%Y%m%dT%H%M%SZ"),
               "x-goog-credential" => "#{issuer}/#{time.strftime '%Y%m%d'}/auto/storage/goog4_request",
