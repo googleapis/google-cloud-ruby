@@ -8,6 +8,9 @@ require_relative "command.rb"
 require_relative "kokoro_builder.rb"
 
 class Kokoro < Command
+  # Normally true. Set to false temporarily when releases are frozen.
+  RELEASE_PLEASE_ENABLED = false
+
   attr_reader :tag
 
   def initialize ruby_versions, gems, updated_gems, gem: nil
@@ -20,7 +23,9 @@ class Kokoro < Command
     @failed         = false
     @tag            = nil
     @updated        = @updated_gems.include? @gem
-    @should_release = ENV.fetch("OS", "") == "linux" && RUBY_VERSION == @ruby_versions.sort.last
+    @should_release = RELEASE_PLEASE_ENABLED &&
+                      ENV.fetch("OS", "") == "linux" &&
+                      RUBY_VERSION == @ruby_versions.sort.last
     @pr_number      = ENV["KOKORO_GITHUB_PULL_REQUEST_NUMBER"]
   end
 
