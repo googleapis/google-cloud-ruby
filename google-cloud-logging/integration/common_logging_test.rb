@@ -27,8 +27,8 @@ describe Google::Cloud::Logging do
       end
     end
 
-    response["logger_class"].must_equal "Google::Cloud::Logging::Logger"
-    response["writer_class"].must_equal "Google::Cloud::Logging::AsyncWriter"
+    _(response["logger_class"]).must_equal "Google::Cloud::Logging::Logger"
+    _(response["writer_class"]).must_equal "Google::Cloud::Logging::AsyncWriter"
   end
 
   it "submits logs on GAE" do
@@ -45,7 +45,7 @@ describe Google::Cloud::Logging do
       logs.length == 1
     end
 
-    logs.length.must_equal 1
+    _(logs.length).must_equal 1
   end
 end
 

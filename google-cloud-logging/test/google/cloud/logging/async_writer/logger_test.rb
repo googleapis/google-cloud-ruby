@@ -24,11 +24,11 @@ describe Google::Cloud::Logging::AsyncWriter, :logger, :mock_logging do
 
     async = logging.async_writer
     logger = async.logger log_name, resource, labels
-    logger.must_be_kind_of Google::Cloud::Logging::Logger
-    logger.log_name.must_equal log_name
-    logger.resource.must_equal resource
-    logger.labels.must_equal labels
-    logger.writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
+    _(logger).must_be_kind_of Google::Cloud::Logging::Logger
+    _(logger.log_name).must_equal log_name
+    _(logger.resource).must_equal resource
+    _(logger.labels).must_equal labels
+    _(logger.writer).must_be_kind_of Google::Cloud::Logging::AsyncWriter
   end
 
   it "creates a ruby logger object with labels using symbols" do
@@ -40,11 +40,11 @@ describe Google::Cloud::Logging::AsyncWriter, :logger, :mock_logging do
 
     async = logging.async_writer
     logger = async.logger log_name, resource, labels
-    logger.must_be_kind_of Google::Cloud::Logging::Logger
-    logger.log_name.must_equal log_name
-    logger.resource.must_equal resource
-    logger.labels.must_equal labels
-    logger.writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
+    _(logger).must_be_kind_of Google::Cloud::Logging::Logger
+    _(logger.log_name).must_equal log_name
+    _(logger.resource).must_equal resource
+    _(logger.labels).must_equal labels
+    _(logger.writer).must_be_kind_of Google::Cloud::Logging::AsyncWriter
   end
 
   it "creates a ruby logger object without labels" do
@@ -55,10 +55,10 @@ describe Google::Cloud::Logging::AsyncWriter, :logger, :mock_logging do
 
     async = logging.async_writer
     logger = async.logger log_name, resource
-    logger.must_be_kind_of Google::Cloud::Logging::Logger
-    logger.log_name.must_equal log_name
-    logger.resource.must_equal resource
-    logger.labels.must_be :empty?
-    logger.writer.must_be_kind_of Google::Cloud::Logging::AsyncWriter
+    _(logger).must_be_kind_of Google::Cloud::Logging::Logger
+    _(logger.log_name).must_equal log_name
+    _(logger.resource).must_equal resource
+    _(logger.labels).must_be :empty?
+    _(logger.writer).must_be_kind_of Google::Cloud::Logging::AsyncWriter
   end
 end

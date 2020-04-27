@@ -27,8 +27,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    resource_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    resource_descriptors.size.must_equal num_descriptors
+    resource_descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(resource_descriptors.size).must_equal num_descriptors
   end
 
   it "lists resource descriptors with find_resource_descriptors alias" do
@@ -43,8 +43,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    resource_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    resource_descriptors.size.must_equal num_descriptors
+    resource_descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(resource_descriptors.size).must_equal num_descriptors
   end
 
   it "paginates resource descriptors" do
@@ -61,14 +61,14 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    first_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    first_descriptors.count.must_equal 3
-    first_descriptors.token.wont_be :nil?
-    first_descriptors.token.must_equal "next_page_token"
+    first_descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(first_descriptors.count).must_equal 3
+    _(first_descriptors.token).wont_be :nil?
+    _(first_descriptors.token).must_equal "next_page_token"
 
-    second_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    second_descriptors.count.must_equal 2
-    second_descriptors.token.must_be :nil?
+    second_descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(second_descriptors.count).must_equal 2
+    _(second_descriptors.token).must_be :nil?
   end
 
   it "paginates resource descriptors with next? and next" do
@@ -86,13 +86,13 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    first_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    first_descriptors.count.must_equal 3
-    first_descriptors.next?.must_equal true #must_be :next?
+    first_descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(first_descriptors.count).must_equal 3
+    _(first_descriptors.next?).must_equal true #must_be :next?
 
-    second_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    second_descriptors.count.must_equal 2
-    second_descriptors.next?.must_equal false #wont_be :next?
+    second_descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(second_descriptors.count).must_equal 2
+    _(second_descriptors.next?).must_equal false #wont_be :next?
   end
 
   it "paginates resource descriptors with next? and next and max set" do
@@ -110,21 +110,21 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    first_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    first_descriptors.count.must_equal 3
-    first_descriptors.next?.must_equal true
-    first_descriptors.token.must_equal "next_page_token"
+    first_descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(first_descriptors.count).must_equal 3
+    _(first_descriptors.next?).must_equal true
+    _(first_descriptors.token).must_equal "next_page_token"
 
     # ensure the correct values are propogated to the ivars
-    first_descriptors.instance_variable_get(:@max).must_equal 3
+    _(first_descriptors.instance_variable_get(:@max)).must_equal 3
 
-    second_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    second_descriptors.count.must_equal 2
-    second_descriptors.next?.must_equal true
-    second_descriptors.token.must_equal "second_page_token"
+    second_descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(second_descriptors.count).must_equal 2
+    _(second_descriptors.next?).must_equal true
+    _(second_descriptors.token).must_equal "second_page_token"
 
     # ensure the correct values are propogated to the ivars
-    second_descriptors.instance_variable_get(:@max).must_equal 3
+    _(second_descriptors.instance_variable_get(:@max)).must_equal 3
   end
 
   it "paginates resource descriptors with all" do
@@ -141,8 +141,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    descriptors.count.must_equal 5
+    descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(descriptors.count).must_equal 5
   end
 
   it "paginates resource descriptors with all and max set" do
@@ -159,8 +159,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    descriptors.count.must_equal 5
+    descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(descriptors.count).must_equal 5
   end
 
   it "paginates resource descriptors with all using Enumerator" do
@@ -177,8 +177,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    descriptors.count.must_equal 5
+    descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(descriptors.count).must_equal 5
   end
 
   it "paginates resource descriptors with all and request_limit set" do
@@ -195,8 +195,8 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    descriptors.count.must_equal 6
+    descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(descriptors.count).must_equal 6
   end
 
   it "paginates resource descriptors with max set" do
@@ -210,10 +210,10 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    resource_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    resource_descriptors.count.must_equal 3
-    resource_descriptors.token.wont_be :nil?
-    resource_descriptors.token.must_equal "next_page_token"
+    resource_descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(resource_descriptors.count).must_equal 3
+    _(resource_descriptors.token).wont_be :nil?
+    _(resource_descriptors.token).must_equal "next_page_token"
   end
 
   it "paginates resource descriptors without max set" do
@@ -227,10 +227,10 @@ describe Google::Cloud::Logging::Project, :resource_descriptors, :mock_logging d
 
     mock.verify
 
-    resource_descriptors.each { |m| m.must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
-    resource_descriptors.count.must_equal 3
-    resource_descriptors.token.wont_be :nil?
-    resource_descriptors.token.must_equal "next_page_token"
+    resource_descriptors.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::ResourceDescriptor }
+    _(resource_descriptors.count).must_equal 3
+    _(resource_descriptors.token).wont_be :nil?
+    _(resource_descriptors.token).must_equal "next_page_token"
   end
 
   def list_resource_descriptors_hash count = 2, token = nil

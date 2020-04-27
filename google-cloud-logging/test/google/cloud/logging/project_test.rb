@@ -16,8 +16,8 @@ require "helper"
 
 describe Google::Cloud::Logging::Project, :mock_logging do
   it "knows the project identifier" do
-    logging.must_be_kind_of Google::Cloud::Logging::Project
-    logging.project.must_equal project
+    _(logging).must_be_kind_of Google::Cloud::Logging::Project
+    _(logging.project).must_equal project
   end
 
   it "creates an empty entry" do
@@ -25,17 +25,17 @@ describe Google::Cloud::Logging::Project, :mock_logging do
     Google::Cloud::Logging::Entry.stub :insert_id, "abc-123" do
       entry = logging.entry
     end
-    entry.must_be_kind_of Google::Cloud::Logging::Entry
-    entry.resource.must_be_kind_of Google::Cloud::Logging::Resource
+    _(entry).must_be_kind_of Google::Cloud::Logging::Entry
+    _(entry.resource).must_be_kind_of Google::Cloud::Logging::Resource
 
-    entry.must_be_kind_of Google::Cloud::Logging::Entry
-    entry.log_name.must_be :nil?
-    entry.resource.must_be :empty?
-    entry.timestamp.must_be :nil?
-    entry.severity.must_equal :DEFAULT
-    entry.insert_id.must_equal "abc-123"
-    entry.labels.must_be :empty?
-    entry.payload.must_be :nil?
+    _(entry).must_be_kind_of Google::Cloud::Logging::Entry
+    _(entry.log_name).must_be :nil?
+    _(entry.resource).must_be :empty?
+    _(entry.timestamp).must_be :nil?
+    _(entry.severity).must_equal :DEFAULT
+    _(entry.insert_id).must_equal "abc-123"
+    _(entry.labels).must_be :empty?
+    _(entry.payload).must_be :nil?
   end
 
   it "creates an entry with all attributes" do
@@ -57,24 +57,24 @@ describe Google::Cloud::Logging::Project, :mock_logging do
                           labels: labels,
                           payload: payload
 
-    entry.must_be_kind_of Google::Cloud::Logging::Entry
-    entry.log_name.must_equal "projects/#{project}/logs/#{log_name}"
-    entry.resource.must_equal resource
-    entry.timestamp.must_equal timestamp
-    entry.severity.must_equal severity
-    entry.insert_id.must_equal insert_id
-    entry.labels.must_equal labels
-    entry.payload.must_equal payload
+    _(entry).must_be_kind_of Google::Cloud::Logging::Entry
+    _(entry.log_name).must_equal "projects/#{project}/logs/#{log_name}"
+    _(entry.resource).must_equal resource
+    _(entry.timestamp).must_equal timestamp
+    _(entry.severity).must_equal severity
+    _(entry.insert_id).must_equal insert_id
+    _(entry.labels).must_equal labels
+    _(entry.payload).must_equal payload
   end
 
   it "creates a resource instance" do
     resource = logging.resource "gae_app",
                                 "module_id" => "1",
                                 "version_id" => "20150925t173233"
-    resource.must_be_kind_of Google::Cloud::Logging::Resource
-    resource.type.must_equal   "gae_app"
-    resource.labels["module_id"].must_equal "1"
-    resource.labels["version_id"].must_equal "20150925t173233"
+    _(resource).must_be_kind_of Google::Cloud::Logging::Resource
+    _(resource.type).must_equal   "gae_app"
+    _(resource.labels["module_id"]).must_equal "1"
+    _(resource.labels["version_id"]).must_equal "20150925t173233"
   end
 
   it "deletes a log" do
@@ -88,7 +88,7 @@ describe Google::Cloud::Logging::Project, :mock_logging do
 
     mock.verify
 
-    success.must_equal true
+    _(success).must_equal true
   end
 
   it "deletes a log with full path name" do
@@ -102,6 +102,6 @@ describe Google::Cloud::Logging::Project, :mock_logging do
 
     mock.verify
 
-    success.must_equal true
+    _(success).must_equal true
   end
 end

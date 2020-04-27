@@ -23,25 +23,25 @@ describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
   end
 
   it "returns the correct data when empty" do
-    entry.must_be :empty?
+    _(entry).must_be :empty?
     # empty even though insert_id has a value
-    entry.insert_id.must_equal default_insert_id
+    _(entry.insert_id).must_equal default_insert_id
 
     grpc = entry.to_grpc
 
-    grpc.log_name.must_be :empty?
-    grpc.resource.must_be :nil?
-    grpc.severity.must_equal :DEFAULT
-    grpc.timestamp.must_be :nil?
-    grpc.insert_id.must_equal default_insert_id
-    Google::Cloud::Logging::Convert.map_to_hash(grpc.labels).must_be :empty?
-    grpc.text_payload.must_be :empty?
-    grpc.json_payload.must_be :nil?
-    grpc.proto_payload.must_be :nil?
-    grpc.http_request.must_be :nil?
-    grpc.operation.must_be :nil?
-    grpc.trace.must_be :empty?
-    grpc.source_location.must_be :nil?
+    _(grpc.log_name).must_be :empty?
+    _(grpc.resource).must_be :nil?
+    _(grpc.severity).must_equal :DEFAULT
+    _(grpc.timestamp).must_be :nil?
+    _(grpc.insert_id).must_equal default_insert_id
+    _(Google::Cloud::Logging::Convert.map_to_hash(grpc.labels)).must_be :empty?
+    _(grpc.text_payload).must_be :empty?
+    _(grpc.json_payload).must_be :nil?
+    _(grpc.proto_payload).must_be :nil?
+    _(grpc.http_request).must_be :nil?
+    _(grpc.operation).must_be :nil?
+    _(grpc.trace).must_be :empty?
+    _(grpc.source_location).must_be :nil?
   end
 
   it "returns the correct data when data is added" do
@@ -83,41 +83,41 @@ describe Google::Cloud::Logging::Entry, :to_grpc, :mock_logging do
 
     grpc = entry.to_grpc
 
-    grpc.log_name.must_equal "projects/test/logs/testlog"
+    _(grpc.log_name).must_equal "projects/test/logs/testlog"
 
-    grpc.resource.type.must_equal        "webapp_server"
-    Google::Cloud::Logging::Convert.map_to_hash(grpc.resource.labels).must_equal({ "description" => "The server is running in test",
+    _(grpc.resource.type).must_equal        "webapp_server"
+    _(Google::Cloud::Logging::Convert.map_to_hash(grpc.resource.labels)).must_equal({ "description" => "The server is running in test",
                                                                      "env"         => "test",
                                                                      "valueType"   => "STRING" })
 
-    grpc.severity.must_equal :ERROR
-    grpc.timestamp.must_equal Google::Protobuf::Timestamp.new(seconds: Time.parse("2016-01-02T03:04:05Z").to_i)
-    grpc.insert_id.must_equal "insert123"
-    Google::Cloud::Logging::Convert.map_to_hash(grpc.labels).must_equal("env" => "test", "fizz" => "buzz")
-    grpc.text_payload.must_equal "payload"
-    grpc.json_payload.must_be :nil?
-    grpc.proto_payload.must_be :nil?
+    _(grpc.severity).must_equal :ERROR
+    _(grpc.timestamp).must_equal Google::Protobuf::Timestamp.new(seconds: Time.parse("2016-01-02T03:04:05Z").to_i)
+    _(grpc.insert_id).must_equal "insert123"
+    _(Google::Cloud::Logging::Convert.map_to_hash(grpc.labels)).must_equal("env" => "test", "fizz" => "buzz")
+    _(grpc.text_payload).must_equal "payload"
+    _(grpc.json_payload).must_be :nil?
+    _(grpc.proto_payload).must_be :nil?
 
-    grpc.http_request.request_method.must_equal "POST"
-    grpc.http_request.request_url.must_equal "http://test.local/fizz?buzz"
-    grpc.http_request.request_size.must_equal 456
-    grpc.http_request.status.must_equal 201
-    grpc.http_request.response_size.must_equal 345
-    grpc.http_request.user_agent.must_equal "google-cloud/1.0.0"
-    grpc.http_request.remote_ip.must_equal "127.0.0.1"
-    grpc.http_request.referer.must_equal "http://test.local/referer"
-    grpc.http_request.cache_hit.must_equal true
-    grpc.http_request.cache_validated_with_origin_server.must_equal false
+    _(grpc.http_request.request_method).must_equal "POST"
+    _(grpc.http_request.request_url).must_equal "http://test.local/fizz?buzz"
+    _(grpc.http_request.request_size).must_equal 456
+    _(grpc.http_request.status).must_equal 201
+    _(grpc.http_request.response_size).must_equal 345
+    _(grpc.http_request.user_agent).must_equal "google-cloud/1.0.0"
+    _(grpc.http_request.remote_ip).must_equal "127.0.0.1"
+    _(grpc.http_request.referer).must_equal "http://test.local/referer"
+    _(grpc.http_request.cache_hit).must_equal true
+    _(grpc.http_request.cache_validated_with_origin_server).must_equal false
 
-    grpc.operation.id.must_equal "abc123"
-    grpc.operation.producer.must_equal "NewApp.NewClass#new_method"
-    grpc.operation.first.must_equal true
-    grpc.operation.last.must_equal false
+    _(grpc.operation.id).must_equal "abc123"
+    _(grpc.operation.producer).must_equal "NewApp.NewClass#new_method"
+    _(grpc.operation.first).must_equal true
+    _(grpc.operation.last).must_equal false
 
-    grpc.trace.must_equal "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824"
+    _(grpc.trace).must_equal "projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824"
 
-    grpc.source_location.file.must_equal "my_app/my_class.rb"
-    grpc.source_location.line.must_equal 123
-    grpc.source_location.function.must_equal "#my_method"
+    _(grpc.source_location.file).must_equal "my_app/my_class.rb"
+    _(grpc.source_location.line).must_equal 123
+    _(grpc.source_location.function).must_equal "#my_method"
   end
 end

@@ -20,9 +20,9 @@ describe Google::Cloud::Logging::Metric, :mock_logging do
   let(:metric) { Google::Cloud::Logging::Metric.from_grpc metric_grpc, logging.service }
 
   it "knows its attributes" do
-    metric.name.must_equal        metric_hash[:name]
-    metric.description.must_equal metric_hash[:description]
-    metric.filter.must_equal      metric_hash[:filter]
+    _(metric.name).must_equal        metric_hash[:name]
+    _(metric.description).must_equal metric_hash[:description]
+    _(metric.filter).must_equal      metric_hash[:filter]
   end
 
   it "can save itself" do
@@ -43,9 +43,9 @@ describe Google::Cloud::Logging::Metric, :mock_logging do
 
     mock.verify
 
-    metric.must_be_kind_of Google::Cloud::Logging::Metric
-    metric.description.must_equal new_metric_description
-    metric.filter.must_equal new_metric_filter
+    _(metric).must_be_kind_of Google::Cloud::Logging::Metric
+    _(metric.description).must_equal new_metric_description
+    _(metric.filter).must_equal new_metric_filter
   end
 
   it "can refresh itself" do

@@ -72,11 +72,11 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
         end
       end
 
-      middleware.logger.must_be_kind_of Google::Cloud::Logging::Logger
+      _(middleware.logger).must_be_kind_of Google::Cloud::Logging::Logger
     end
 
     it "uses the logger provided if given" do
-      middleware.logger.must_equal logger
+      _(middleware.logger).must_equal logger
     end
 
     it "invokes the on_init callback when provided" do
@@ -95,7 +95,7 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
   describe "#call" do
     it "sets env[\"rack.logger\"] to the given logger" do
       stubbed_call = ->(env) {
-        env["rack.logger"].must_equal logger
+        _(env["rack.logger"]).must_equal logger
       }
       rack_app.stub :call, stubbed_call do
         middleware.call rack_env
@@ -104,8 +104,8 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
 
     it "calls logger.add_request_info to track trace_id" do
       stubbed_add_request_info = ->(args) {
-        args[:trace_id].must_equal trace_id
-        args[:env].must_equal rack_env
+        _(args[:trace_id]).must_equal trace_id
+        _(args[:env]).must_equal rack_env
       }
       logger.stub :add_request_info, stubbed_add_request_info do
         middleware.call rack_env
@@ -116,7 +116,7 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
       ["/healthz", "/_ah/health"].each do |path|
         rack_env = { "PATH_INFO" => path }
         stubbed_add_request_info = ->(args) {
-          args[:log_name].must_equal "ruby_health_check_log"
+          _(args[:log_name]).must_equal "ruby_health_check_log"
         }
         logger.stub :add_request_info, stubbed_add_request_info do
           middleware.call rack_env
@@ -136,7 +136,7 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
           assert_raises StandardError do
             middleware.call rack_env
           end
-          method_called.must_equal true
+          _(method_called).must_equal true
         end
       end
     end
@@ -150,22 +150,22 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
     it "returns resource of right type if given parameters" do
       Google::Cloud::Logging::Middleware.stub :default_monitored_resource, default_rc do
         rc = Google::Cloud::Logging::Middleware.build_monitored_resource custom_type, custom_labels
-        rc.type.must_equal custom_type
-        rc.labels.must_equal custom_labels
+        _(rc.type).must_equal custom_type
+        _(rc.labels).must_equal custom_labels
       end
     end
 
     it "returns default monitored resource if only given type" do
       Google::Cloud::Logging::Middleware.stub :default_monitored_resource, default_rc do
         rc = Google::Cloud::Logging::Middleware.build_monitored_resource custom_type
-        rc.must_equal default_rc
+        _(rc).must_equal default_rc
       end
     end
 
     it "returns default monitored resource if only given labels" do
       Google::Cloud::Logging::Middleware.stub :default_monitored_resource, default_rc do
         rc = Google::Cloud::Logging::Middleware.build_monitored_resource nil, custom_labels
-        rc.must_equal default_rc
+        _(rc).must_equal default_rc
       end
     end
   end
@@ -174,28 +174,28 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
     it "returns resource of type gae_app if app_engine? is true" do
       Google::Cloud.stub :env, OpenStruct.new(:app_engine? => true, :container_engine? => false, :compute_engine? => true) do
         rc = Google::Cloud::Logging::Middleware.build_monitored_resource
-        rc.type.must_equal "gae_app"
+        _(rc.type).must_equal "gae_app"
       end
     end
 
     it "returns resource of type container if container_engine? is true" do
       Google::Cloud.stub :env, OpenStruct.new(:app_engine? => false, :container_engine? => true, :compute_engine? => true) do
         rc = Google::Cloud::Logging::Middleware.build_monitored_resource
-        rc.type.must_equal "container"
+        _(rc.type).must_equal "container"
       end
     end
 
     it "returns resource of type gce_instance if compute_engine? is true" do
       Google::Cloud.stub :env, OpenStruct.new(:app_engine? => false, :container_engine? => false, :compute_engine? => true) do
         rc = Google::Cloud::Logging::Middleware.build_monitored_resource
-        rc.type.must_equal "gce_instance"
+        _(rc.type).must_equal "gce_instance"
       end
     end
 
     it "returns resource of type global if not on GCP" do
       Google::Cloud.stub :env, OpenStruct.new(:app_engine? => false, :container_engine? => false, :compute_engine? => false) do
         rc = Google::Cloud::Logging::Middleware.build_monitored_resource
-        rc.type.must_equal "global"
+        _(rc.type).must_equal "global"
       end
     end
   end

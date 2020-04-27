@@ -20,50 +20,50 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
   let(:sink_grpc) { Google::Logging::V2::LogSink.new sink_hash }
 
   it "knows its attributes" do
-    sink.name.must_equal        sink_hash[:name]
-    sink.destination.must_equal sink_hash[:destination]
-    sink.filter.must_equal      sink_hash[:filter]
-    sink.writer_identity.must_equal  "roles/owner"
+    _(sink.name).must_equal        sink_hash[:name]
+    _(sink.destination).must_equal sink_hash[:destination]
+    _(sink.filter).must_equal      sink_hash[:filter]
+    _(sink.writer_identity).must_equal  "roles/owner"
   end
 
   it "has deprecated values" do
     assert_output nil, /version is deprecated/ do
-      sink.version.must_equal :V2
+      _(sink.version).must_equal :V2
     end
     assert_output nil, /version= is deprecated and will be ignored/ do
       sink.version = :V1
     end
     assert_output nil, /unspecified\? is deprecated/ do
-      sink.wont_be :unspecified?
+      _(sink).wont_be :unspecified?
     end
     assert_output nil, /v2\? is deprecated/ do
-      sink.must_be :v2?
+      _(sink).must_be :v2?
     end
     assert_output nil, /v1\? is deprecated/ do
-      sink.wont_be :v1?
+      _(sink).wont_be :v1?
     end
 
     assert_output nil, /start_at is deprecated/ do
-      sink.start_at.must_be :nil?
+      _(sink.start_at).must_be :nil?
     end
     assert_output nil, /start_at= is deprecated and will be ignored/ do
       sink.start_at = Time.now
     end
     assert_output nil, /start_at is deprecated/ do
-      sink.start_time.must_be :nil?
+      _(sink.start_time).must_be :nil?
     end
     assert_output nil, /start_at= is deprecated and will be ignored/ do
       sink.start_time = Time.now
     end
 
     assert_output nil, /end_at is deprecated/ do
-      sink.end_at.must_be :nil?
+      _(sink.end_at).must_be :nil?
     end
     assert_output nil, /end_at= is deprecated and will be ignored/ do
       sink.end_at = Time.now
     end
     assert_output nil, /end_at is deprecated/ do
-      sink.end_time.must_be :nil?
+      _(sink.end_time).must_be :nil?
     end
     assert_output nil, /end_at= is deprecated and will be ignored/ do
       sink.end_time = Time.now
@@ -91,10 +91,10 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
 
     mock.verify
 
-    sink.must_be_kind_of Google::Cloud::Logging::Sink
-    sink.destination.must_equal new_sink_destination
-    sink.filter.must_equal new_sink_filter
-    sink.writer_identity.must_equal "roles/owner"
+    _(sink).must_be_kind_of Google::Cloud::Logging::Sink
+    _(sink.destination).must_equal new_sink_destination
+    _(sink.filter).must_equal new_sink_filter
+    _(sink.writer_identity).must_equal "roles/owner"
   end
 
   it "can save itself with unique_writer_identity" do
@@ -121,10 +121,10 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
 
     mock.verify
 
-    sink.must_be_kind_of Google::Cloud::Logging::Sink
-    sink.destination.must_equal new_sink_destination
-    sink.filter.must_equal new_sink_filter
-    sink.writer_identity.must_equal "serviceAccount:cloud-logs@system.gserviceaccount.com"
+    _(sink).must_be_kind_of Google::Cloud::Logging::Sink
+    _(sink.destination).must_equal new_sink_destination
+    _(sink.filter).must_equal new_sink_filter
+    _(sink.writer_identity).must_equal "serviceAccount:cloud-logs@system.gserviceaccount.com"
   end
 
   it "can refresh itself" do

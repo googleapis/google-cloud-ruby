@@ -19,9 +19,9 @@ describe Google::Cloud::Logging::Entry::Operation, :mock_logging do
   let(:operation) { Google::Cloud::Logging::Entry::Operation.from_grpc operation_grpc }
 
   it "has attributes" do
-    operation.id.must_equal "xyz789"
-    operation.producer.must_equal "MyApp.MyClass#my_method"
-    operation.first.must_equal false
-    operation.last.must_equal false
+    _(operation.id).must_equal "xyz789"
+    _(operation.producer).must_equal "MyApp.MyClass#my_method"
+    _(operation.first).must_equal false
+    _(operation.last).must_equal false
   end
 end

@@ -25,31 +25,31 @@ describe Google::Cloud::Logging::Convert, :object_to_value do
 
   it "converts nil object" do
     value = Google::Cloud::Logging::Convert.object_to_value nil
-    value.must_equal null_value
+    _(value).must_equal null_value
   end
 
   it "converts true object" do
     value = Google::Cloud::Logging::Convert.object_to_value true
-    value.must_equal true_value
+    _(value).must_equal true_value
   end
 
   it "converts string object" do
     value = Google::Cloud::Logging::Convert.object_to_value "bif"
-    value.must_equal string_value
+    _(value).must_equal string_value
   end
 
   it "converts num object" do
     value = Google::Cloud::Logging::Convert.object_to_value 3.14
-    value.must_equal num_value
+    _(value).must_equal num_value
   end
 
   it "converts struct object" do
     value = Google::Cloud::Logging::Convert.object_to_value({ "foo" => "bar" })
-    value.must_equal struct_value
+    _(value).must_equal struct_value
   end
 
   it "converts list object" do
     value = Google::Cloud::Logging::Convert.object_to_value ["hello", "world"]
-    value.must_equal list_value
+    _(value).must_equal list_value
   end
 end

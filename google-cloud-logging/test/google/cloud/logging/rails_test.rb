@@ -50,12 +50,12 @@ describe Google::Cloud::Logging::Railtie do
         Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::Logging.configure do |config|
-          config.project_id.must_equal "test-project"
-          config.credentials.must_equal "test/keyfile"
-          config.log_name.must_equal "test-log-name"
-          config.log_name_map.must_equal "test-path" => "log-name"
-          config.monitored_resource.type.must_equal "test-type"
-          config.monitored_resource.labels.must_equal test: "label"
+          _(config.project_id).must_equal "test-project"
+          _(config.credentials).must_equal "test/keyfile"
+          _(config.log_name).must_equal "test-log-name"
+          _(config.log_name_map).must_equal "test-path" => "log-name"
+          _(config.monitored_resource.type).must_equal "test-type"
+          _(config.monitored_resource.labels).must_equal test: "label"
         end
       end
     end
@@ -73,11 +73,11 @@ describe Google::Cloud::Logging::Railtie do
         Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::Logging.configure do |config|
-          config.project_id.must_equal "another-test-project"
-          config.credentials.must_equal "/another/test/keyfile"
-          config.log_name.must_equal  "another-test-log-name"
-          config.log_name_map.must_equal "test-path" => "another-log-name"
-          config.monitored_resource.type.must_equal "another-test-type"
+          _(config.project_id).must_equal "another-test-project"
+          _(config.credentials).must_equal "/another/test/keyfile"
+          _(config.log_name).must_equal  "another-test-log-name"
+          _(config.log_name_map).must_equal "test-path" => "another-log-name"
+          _(config.monitored_resource.type).must_equal "another-test-type"
         end
       end
     end
@@ -87,16 +87,16 @@ describe Google::Cloud::Logging::Railtie do
 
       Google::Cloud::Logging::Railtie.stub :valid_credentials?, false do
         Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
-        Google::Cloud.configure.use_logging.must_equal false
+        _(Google::Cloud.configure.use_logging).must_equal false
       end
     end
 
     it "Set use_logging to true if Rails is in production" do
       Google::Cloud::Logging::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, true do
-          Google::Cloud.configure.use_logging.must_be_nil
+          _(Google::Cloud.configure.use_logging).must_be_nil
           Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_logging.must_equal true
+          _(Google::Cloud.configure.use_logging).must_equal true
         end
       end
     end
@@ -107,7 +107,7 @@ describe Google::Cloud::Logging::Railtie do
       Google::Cloud::Logging::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, false do
           Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_logging.must_equal true
+          _(Google::Cloud.configure.use_logging).must_equal true
         end
       end
     end
@@ -133,12 +133,12 @@ describe Google::Cloud::Logging::Railtie do
         Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::Logging.configure do |config|
-          config.project_id.must_equal "test-project"
-          config.credentials.must_equal "test/keyfile"
-          config.log_name.must_equal "test-log-name"
-          config.log_name_map.must_equal "test-path" => "log-name"
-          config.monitored_resource.type.must_equal "test-type"
-          config.monitored_resource.labels.must_equal test: "label"
+          _(config.project_id).must_equal "test-project"
+          _(config.credentials).must_equal "test/keyfile"
+          _(config.log_name).must_equal "test-log-name"
+          _(config.log_name_map).must_equal "test-path" => "log-name"
+          _(config.monitored_resource.type).must_equal "test-type"
+          _(config.monitored_resource.labels).must_equal test: "label"
         end
       end
     end
@@ -156,11 +156,11 @@ describe Google::Cloud::Logging::Railtie do
         Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::Logging.configure do |config|
-          config.project_id.must_equal "another-test-project"
-          config.credentials.must_equal "/another/test/keyfile"
-          config.log_name.must_equal  "another-test-log-name"
-          config.log_name_map.must_equal "test-path" => "another-log-name"
-          config.monitored_resource.type.must_equal "another-test-type"
+          _(config.project_id).must_equal "another-test-project"
+          _(config.credentials).must_equal "/another/test/keyfile"
+          _(config.log_name).must_equal  "another-test-log-name"
+          _(config.log_name_map).must_equal "test-path" => "another-log-name"
+          _(config.monitored_resource.type).must_equal "another-test-type"
         end
       end
     end
@@ -170,16 +170,16 @@ describe Google::Cloud::Logging::Railtie do
 
       Google::Cloud::Logging::Railtie.stub :valid_credentials?, false do
         Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
-        Google::Cloud.configure.use_logging.must_equal false
+        _(Google::Cloud.configure.use_logging).must_equal false
       end
     end
 
     it "Set use_logging to true if Rails is in production" do
       Google::Cloud::Logging::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, true do
-          Google::Cloud.configure.use_logging.must_be_nil
+          _(Google::Cloud.configure.use_logging).must_be_nil
           Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_logging.must_equal true
+          _(Google::Cloud.configure.use_logging).must_equal true
         end
       end
     end
@@ -189,7 +189,7 @@ describe Google::Cloud::Logging::Railtie do
         Rails.env.stub :production?, true do
           Google::Cloud.configure.use_logging = false
           Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_logging.must_equal false
+          _(Google::Cloud.configure.use_logging).must_equal false
         end
       end
     end
@@ -200,7 +200,7 @@ describe Google::Cloud::Logging::Railtie do
       Google::Cloud::Logging::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, false do
           Google::Cloud::Logging::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_logging.must_equal true
+          _(Google::Cloud.configure.use_logging).must_equal true
         end
       end
     end

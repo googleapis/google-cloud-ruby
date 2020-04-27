@@ -27,9 +27,9 @@ describe Google::Cloud::Logging do
       end
     end
 
-    response["monitored_resource"]["type"].must_equal "gae_app"
-    response["monitored_resource"]["labels"]["module_id"].wont_be_nil
-    response["monitored_resource"]["labels"]["version_id"].wont_be_nil
+    _(response["monitored_resource"]["type"]).must_equal "gae_app"
+    _(response["monitored_resource"]["labels"]["module_id"]).wont_be_nil
+    _(response["monitored_resource"]["labels"]["version_id"]).wont_be_nil
   end
 
   it "injects trace_id into each log entry" do
@@ -46,6 +46,6 @@ describe Google::Cloud::Logging do
       logs.length == 1
     end
 
-    logs[0]["labels"]["traceId"].wont_be_nil
+    _(logs[0]["labels"]["traceId"]).wont_be_nil
   end
 end

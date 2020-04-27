@@ -27,8 +27,8 @@ describe Google::Cloud::Logging do
       end
     end
 
-    response["monitored_resource"]["type"].must_equal "container"
-    response["monitored_resource"]["labels"]["cluster_name"].wont_be_nil
-    response["monitored_resource"]["labels"]["namespace_id"].wont_be_nil
+    _(response["monitored_resource"]["type"]).must_equal "container"
+    _(response["monitored_resource"]["labels"]["cluster_name"]).wont_be_nil
+    _(response["monitored_resource"]["labels"]["namespace_id"]).wont_be_nil
   end
 end
