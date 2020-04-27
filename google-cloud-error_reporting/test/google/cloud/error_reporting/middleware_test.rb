@@ -69,7 +69,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
 
   describe "#initialize" do
     it "uses the error_reporting given" do
-      middleware.error_reporting.must_equal error_reporting
+      _(middleware.error_reporting).must_equal error_reporting
     end
 
     it "creates a default async_error_reporter if not given one" do
@@ -79,7 +79,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
           middleware = Google::Cloud::ErrorReporting::Middleware.new nil,
                                                                      project_id: project_id
 
-          middleware.error_reporting.must_equal "A default reporter"
+          _(middleware.error_reporting).must_equal "A default reporter"
         end
       end
     end
@@ -88,30 +88,30 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
       Google::Cloud::ErrorReporting.instance_variable_set :@default_reporter, nil
       Google::Cloud::ErrorReporting.stub :new, nil do
         mw = Google::Cloud::ErrorReporting::Middleware.new nil, project_id: project_id
-        Google::Cloud::ErrorReporting.instance_variable_get(:@default_reporter).object_id.must_equal mw.error_reporting.object_id
+        _(Google::Cloud::ErrorReporting.instance_variable_get(:@default_reporter).object_id).must_equal mw.error_reporting.object_id
       end
     end
 
     it "sets Google::Cloud::ErrorReporting.configure" do
-      Google::Cloud::ErrorReporting.configure.project_id.must_be_nil
-      Google::Cloud::ErrorReporting.configure.credentials.must_be_nil
-      Google::Cloud::ErrorReporting.configure.service_name.must_be_nil
-      Google::Cloud::ErrorReporting.configure.service_version.must_be_nil
+      _(Google::Cloud::ErrorReporting.configure.project_id).must_be_nil
+      _(Google::Cloud::ErrorReporting.configure.credentials).must_be_nil
+      _(Google::Cloud::ErrorReporting.configure.service_name).must_be_nil
+      _(Google::Cloud::ErrorReporting.configure.service_version).must_be_nil
 
       # Constructs a new Middleware, which sets Google::Cloud::ErrorReporting.configure
       middleware
 
-      Google::Cloud::ErrorReporting.configure.project_id.must_equal project_id
-      Google::Cloud::ErrorReporting.configure.credentials.must_equal credentials
-      Google::Cloud::ErrorReporting.configure.service_name.must_equal service_name
-      Google::Cloud::ErrorReporting.configure.service_version.must_equal service_version
+      _(Google::Cloud::ErrorReporting.configure.project_id).must_equal project_id
+      _(Google::Cloud::ErrorReporting.configure.credentials).must_equal credentials
+      _(Google::Cloud::ErrorReporting.configure.service_name).must_equal service_name
+      _(Google::Cloud::ErrorReporting.configure.service_version).must_equal service_version
     end
   end
 
   describe "#call" do
     it "catches exception and also raise it back up" do
       stub_report_exception = ->(_, exception) {
-        exception.message.must_equal app_exception_msg
+        _(exception.message).must_equal app_exception_msg
       }
 
       middleware.stub :report_exception, stub_report_exception do
@@ -119,7 +119,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
           middleware.call rack_env
         end
 
-        exception.message.must_equal app_exception_msg
+        _(exception.message).must_equal app_exception_msg
       end
     end
 
@@ -128,7 +128,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
         env['sinatra.error'] = app_exception
       }
       stub_report_exception = ->(_, exception) {
-        exception.message.must_equal app_exception_msg
+        _(exception.message).must_equal app_exception_msg
       }
 
       rack_app.stub :call, stub_call do
@@ -143,7 +143,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
         env['rack.exception'] = app_exception
       }
       stub_report_exception = ->(_, exception) {
-        exception.message.must_equal app_exception_msg
+        _(exception.message).must_equal app_exception_msg
       }
 
       rack_app.stub :call, stub_call do
@@ -166,7 +166,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
 
     it "calls error_reporting#report to report the error" do
       stub_reporting = ->(error_event) {
-        error_event.must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
+        _(error_event).must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
       }
 
       middleware.error_reporting.stub :report, stub_reporting do
@@ -177,10 +177,10 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     it "calls error_reporting#report when no correct status found" do
       stub_error_reporting = MiniTest::Mock.new
       stub_error_reporting.expect :report, nil do |error_event|
-        error_event.must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
+        _(error_event).must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
       end
       stub_http_status = ->(exception) {
-        exception.message.must_equal app_exception_msg
+        _(exception.message).must_equal app_exception_msg
         nil
       }
 
@@ -194,7 +194,7 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     it "doesn't report if the exception maps to a HTTP code less than 500" do
       stub_reporting = ->(_) { fail "This exception should've been skipped" }
       stub_http_status = ->(exception) {
-        exception.message.must_equal app_exception_msg
+        _(exception.message).must_equal app_exception_msg
         407
       }
 
@@ -210,32 +210,32 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
     it "injects service_name and service_version" do
       error_event = middleware.error_event_from_exception rack_env, app_exception
 
-      error_event.service_name.must_equal service_name
-      error_event.service_version.must_equal service_version
+      _(error_event.service_name).must_equal service_name
+      _(error_event.service_version).must_equal service_version
     end
 
     it "injects http data from Rack::Request" do
       error_event = middleware.error_event_from_exception rack_env, app_exception
 
-      error_event.http_method.must_equal "GET"
-      error_event.http_url.must_match "localhost:3000"
-      error_event.http_user_agent.must_match "chrome-1.2.3"
-      error_event.http_referrer.must_be_nil
-      error_event.http_status.must_equal 500
-      error_event.http_remote_ip.must_equal "127.0.0.1"
+      _(error_event.http_method).must_equal "GET"
+      _(error_event.http_url).must_match "localhost:3000"
+      _(error_event.http_user_agent).must_match "chrome-1.2.3"
+      _(error_event.http_referrer).must_be_nil
+      _(error_event.http_status).must_equal 500
+      _(error_event.http_remote_ip).must_equal "127.0.0.1"
     end
   end
 
   describe ".http_status" do
     it "returns right http_status code based on exception class" do
       status = middleware.send :http_status, app_exception
-      status.must_equal 500
+      _(status).must_equal 500
     end
 
     it "returns right http_status code based on exception class #2" do
       app_exception.class.stub :name, "ActionController::ParameterMissing" do
         status = middleware.send :http_status, app_exception
-        status.must_equal 400
+        _(status).must_equal 400
       end
     end
   end

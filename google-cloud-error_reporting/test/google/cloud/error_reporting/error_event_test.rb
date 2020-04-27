@@ -27,47 +27,47 @@ describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
   it "has attributes" do
     timestamp = Time.parse "2014-10-02T15:01:23.045123456Z"
 
-    error_event.event_time.must_equal timestamp
-    error_event.message.must_equal "error message"
-    error_event.service_name.must_equal "default"
-    error_event.service_version.must_equal "v1"
-    error_event.user.must_equal "testerson"
-    error_event.http_method.must_equal "GET"
-    error_event.http_url.must_equal "http://test.local/foo?bar=baz"
-    error_event.http_user_agent.must_equal "google-cloud/1.0.0"
-    error_event.http_referrer.must_equal "http://test/local/referrer"
-    error_event.http_status.must_equal 200
-    error_event.http_remote_ip.must_equal "127.0.0.1"
-    error_event.file_path.must_equal "/path/to/file.txt"
-    error_event.line_number.must_equal 5
-    error_event.function_name.must_equal "testee"
+    _(error_event.event_time).must_equal timestamp
+    _(error_event.message).must_equal "error message"
+    _(error_event.service_name).must_equal "default"
+    _(error_event.service_version).must_equal "v1"
+    _(error_event.user).must_equal "testerson"
+    _(error_event.http_method).must_equal "GET"
+    _(error_event.http_url).must_equal "http://test.local/foo?bar=baz"
+    _(error_event.http_user_agent).must_equal "google-cloud/1.0.0"
+    _(error_event.http_referrer).must_equal "http://test/local/referrer"
+    _(error_event.http_status).must_equal 200
+    _(error_event.http_remote_ip).must_equal "127.0.0.1"
+    _(error_event.file_path).must_equal "/path/to/file.txt"
+    _(error_event.line_number).must_equal 5
+    _(error_event.function_name).must_equal "testee"
   end
 
   it "works even if GRPC object doesn't have them" do
     error_event_hash.clear
 
-    error_event.message.must_be_empty
-    error_event.event_time.must_be_nil
-    error_event.service_name.must_be_nil
-    error_event.service_version.must_be_nil
-    error_event.user.must_be_nil
-    error_event.http_method.must_be_nil
-    error_event.http_url.must_be_nil
-    error_event.http_user_agent.must_be_nil
-    error_event.http_referrer.must_be_nil
-    error_event.http_status.must_be_nil
-    error_event.http_remote_ip.must_be_nil
-    error_event.file_path.must_be_nil
-    error_event.line_number.must_be_nil
-    error_event.function_name.must_be_nil
+    _(error_event.message).must_be_empty
+    _(error_event.event_time).must_be_nil
+    _(error_event.service_name).must_be_nil
+    _(error_event.service_version).must_be_nil
+    _(error_event.user).must_be_nil
+    _(error_event.http_method).must_be_nil
+    _(error_event.http_url).must_be_nil
+    _(error_event.http_user_agent).must_be_nil
+    _(error_event.http_referrer).must_be_nil
+    _(error_event.http_status).must_be_nil
+    _(error_event.http_remote_ip).must_be_nil
+    _(error_event.file_path).must_be_nil
+    _(error_event.line_number).must_be_nil
+    _(error_event.function_name).must_be_nil
   end
 
   describe "#to_grpc" do
     it "to_grpc returns a different grpc object with same attributes" do
       new_error_event_grpc = error_event.to_grpc
 
-      new_error_event_grpc.must_equal error_event_grpc
-      new_error_event_grpc.object_id.wont_equal error_event_grpc.object_id
+      _(new_error_event_grpc).must_equal error_event_grpc
+      _(new_error_event_grpc.object_id).wont_equal error_event_grpc.object_id
     end
   end
 
@@ -79,14 +79,14 @@ describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
     it "includes exception message when backtrace isn't present" do
       error_event =
         Google::Cloud::ErrorReporting::ErrorEvent.from_exception exception
-      error_event.message.must_equal error_message
+      _(error_event.message).must_equal error_message
     end
 
     it "includes exception message when backtrace is an empty array" do
       exception.set_backtrace([])
       error_event =
         Google::Cloud::ErrorReporting::ErrorEvent.from_exception exception
-      error_event.message.must_equal error_message
+      _(error_event.message).must_equal error_message
     end
 
     it "includes exception message and backtrace if backtrace is available" do
@@ -95,8 +95,8 @@ describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
 
       error_event =
         Google::Cloud::ErrorReporting::ErrorEvent.from_exception exception
-      error_event.message.must_match error_message
-      error_event.message.must_match backtrace
+      _(error_event.message).must_match error_message
+      _(error_event.message).must_match backtrace
     end
 
     it "builds an error_event with current info from exception" do
@@ -105,12 +105,12 @@ describe Google::Cloud::ErrorReporting::ErrorEvent, :mock_error_reporting do
 
       error_event =
         Google::Cloud::ErrorReporting::ErrorEvent.from_exception exception
-      error_event.message.must_match error_message
-      error_event.file_path.must_equal(
+      _(error_event.message).must_match error_message
+      _(error_event.file_path).must_equal(
         "test/test_more.rb"
       )
-      error_event.line_number.must_equal 123
-      error_event.function_name.must_equal(
+      _(error_event.line_number).must_equal 123
+      _(error_event.function_name).must_equal(
         "testee_sub"
       )
     end

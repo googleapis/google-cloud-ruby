@@ -63,8 +63,8 @@ describe Google::Cloud::ErrorReporting, :error_reporting do
       end
     end
 
-    error_event.service_context.service.must_equal service_name
-    error_event.service_context.version.must_equal service_version
-    error_event.message.must_match token.to_s
+    _(error_event.service_context.service).must_equal service_name
+    _(error_event.service_context.version).must_equal service_version
+    _(error_event.message).must_match token.to_s
   end
 end
