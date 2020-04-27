@@ -11,3 +11,5 @@ gem "stackdriver-core", path: "../stackdriver-core"
 
 gem "minitest-reporters", "~> 1.3.5", require: false
 gem "rake"
+
+gem "rubocop-minitest"
