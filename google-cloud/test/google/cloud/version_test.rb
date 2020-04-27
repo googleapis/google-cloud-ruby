@@ -17,6 +17,6 @@ require "google/cloud/version"
 
 describe Google::Cloud, :version do
   it "has a version" do
-    Google::Cloud::VERSION.wont_be :nil?
+    assert Google::Cloud::VERSION
   end
 end
