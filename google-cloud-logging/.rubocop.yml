@@ -1,16 +1,17 @@
-require: rubocop-minitest
-
 inherit_gem:
   google-style: google-style.yml
 
 AllCops:
   Exclude:
+    - "acceptance/**/*"
+    - "integration/**/*"
     - "google-cloud-logging.gemspec"
     - "lib/google/logging/**/*"
     - "lib/google/cloud/logging/v2.rb"
     - "lib/google/cloud/logging/v2/**/*"
     - "Rakefile"
     - "support/**/*"
+    - "test/**/*"
 
 Documentation:
   Enabled: false
