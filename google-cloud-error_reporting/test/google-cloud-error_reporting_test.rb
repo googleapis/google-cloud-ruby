@@ -21,16 +21,16 @@ describe Google::Cloud do
       gcloud = Google::Cloud.new
       stubbed_error_reporting =
         ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
-          project.must_be_nil
-          keyfile.must_be_nil
-          scope.must_be :nil?
-          timeout.must_be :nil?
-          client_config.must_be :nil?
+          _(project).must_be_nil
+          _(keyfile).must_be_nil
+          _(scope).must_be :nil?
+          _(timeout).must_be :nil?
+          _(client_config).must_be :nil?
           "fake-error_reporting-project-object"
         }
       Google::Cloud.stub :error_reporting, stubbed_error_reporting do
         project = gcloud.error_reporting
-        project.must_equal "fake-error_reporting-project-object"
+        _(project).must_equal "fake-error_reporting-project-object"
       end
     end
 
@@ -38,16 +38,16 @@ describe Google::Cloud do
       gcloud = Google::Cloud.new "test-project-id", "/path/to/a/keyfile"
       stubbed_error_reporting =
         ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
-          project.must_equal "test-project-id"
-          keyfile.must_equal "/path/to/a/keyfile"
-          scope.must_be :nil?
-          timeout.must_be :nil?
-          client_config.must_be :nil?
+          _(project).must_equal "test-project-id"
+          _(keyfile).must_equal "/path/to/a/keyfile"
+          _(scope).must_be :nil?
+          _(timeout).must_be :nil?
+          _(client_config).must_be :nil?
           "error_reporting-project-object"
         }
       Google::Cloud.stub :error_reporting, stubbed_error_reporting do
         project = gcloud.error_reporting
-        project.must_equal "error_reporting-project-object"
+        _(project).must_equal "error_reporting-project-object"
       end
     end
 
@@ -55,18 +55,18 @@ describe Google::Cloud do
       gcloud = Google::Cloud.new "test-project-id", "/path/to/a/keyfile"
       stubbed_error_reporting =
         ->(project, keyfile, scope: nil, timeout: nil, client_config: nil) {
-          project.must_equal "test-project-id"
-          keyfile.must_equal "/path/to/a/keyfile"
-          scope.must_equal "http://example.com/scope"
-          timeout.must_equal 60
-          client_config.must_equal({ "gax" => "options" })
+          _(project).must_equal "test-project-id"
+          _(keyfile).must_equal "/path/to/a/keyfile"
+          _(scope).must_equal "http://example.com/scope"
+          _(timeout).must_equal 60
+          _(client_config).must_equal({ "gax" => "options" })
           "error_reporting-project-object"
         }
       Google::Cloud.stub :error_reporting, stubbed_error_reporting do
         project = gcloud.error_reporting scope: "http://example.com/scope",
                                          timeout: 60,
                                          client_config: { "gax" => "options" }
-        project.must_equal "error_reporting-project-object"
+        _(project).must_equal "error_reporting-project-object"
       end
     end
   end
@@ -76,16 +76,16 @@ describe Google::Cloud do
       gcloud = Google::Cloud.new
       stubbed_new =
         ->(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil) {
-          project_id.must_be_nil
-          credentials.must_be_nil
-          scope.must_be :nil?
-          timeout.must_be :nil?
-          client_config.must_be :nil?
+          _(project_id).must_be_nil
+          _(credentials).must_be_nil
+          _(scope).must_be :nil?
+          _(timeout).must_be :nil?
+          _(client_config).must_be :nil?
           "fake-error_reporting-project-object"
         }
       Google::Cloud::ErrorReporting.stub :new, stubbed_new do
         project = gcloud.error_reporting
-        project.must_equal "fake-error_reporting-project-object"
+        _(project).must_equal "fake-error_reporting-project-object"
       end
     end
 
@@ -93,16 +93,16 @@ describe Google::Cloud do
       gcloud = Google::Cloud.new "test-project-id", "/path/to/a/keyfile"
       stubbed_new =
         ->(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil) {
-          project_id.must_equal "test-project-id"
-          credentials.must_equal "/path/to/a/keyfile"
-          scope.must_be :nil?
-          timeout.must_be :nil?
-          client_config.must_be :nil?
+          _(project_id).must_equal "test-project-id"
+          _(credentials).must_equal "/path/to/a/keyfile"
+          _(scope).must_be :nil?
+          _(timeout).must_be :nil?
+          _(client_config).must_be :nil?
           "error_reporting-project-object"
         }
       Google::Cloud::ErrorReporting.stub :new, stubbed_new do
         project = gcloud.error_reporting
-        project.must_equal "error_reporting-project-object"
+        _(project).must_equal "error_reporting-project-object"
       end
     end
 
@@ -110,18 +110,18 @@ describe Google::Cloud do
       gcloud = Google::Cloud.new "test-project-id", "/path/to/a/keyfile"
       stubbed_new =
         ->(project_id: nil, credentials: nil, scope: nil, timeout: nil, client_config: nil) {
-          project_id.must_equal "test-project-id"
-          credentials.must_equal "/path/to/a/keyfile"
-          scope.must_equal "http://example.com/scope"
-          timeout.must_equal 60
-          client_config.must_equal({ "gax" => "options" })
+          _(project_id).must_equal "test-project-id"
+          _(credentials).must_equal "/path/to/a/keyfile"
+          _(scope).must_equal "http://example.com/scope"
+          _(timeout).must_equal 60
+          _(client_config).must_equal({ "gax" => "options" })
           "error_reporting-project-object"
         }
       Google::Cloud::ErrorReporting.stub :new, stubbed_new do
         project = gcloud.error_reporting scope: "http://example.com/scope",
                                          timeout: 60,
                                          client_config: { "gax" => "options" }
-        project.must_equal "error_reporting-project-object"
+        _(project).must_equal "error_reporting-project-object"
       end
     end
   end

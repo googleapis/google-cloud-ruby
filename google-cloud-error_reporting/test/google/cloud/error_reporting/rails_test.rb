@@ -50,11 +50,11 @@ describe Google::Cloud::ErrorReporting::Railtie do
         Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::ErrorReporting.configure do |config|
-          config.project_id.must_equal "test-project"
-          config.credentials.must_equal "test/keyfile"
-          config.service_name.must_equal "test-service"
-          config.service_version.must_equal "test-version"
-          config.ignore_classes.must_equal simple_ignore_classes
+          _(config.project_id).must_equal "test-project"
+          _(config.credentials).must_equal "test/keyfile"
+          _(config.service_name).must_equal "test-service"
+          _(config.service_version).must_equal "test-version"
+          _(config.ignore_classes).must_equal simple_ignore_classes
         end
       end
     end
@@ -72,11 +72,11 @@ describe Google::Cloud::ErrorReporting::Railtie do
         Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::ErrorReporting.configure do |config|
-          config.project_id.must_equal "another-test-project"
-          config.credentials.must_equal "/another/test/keyfile"
-          config.service_name.must_equal "another-test-service"
-          config.service_version.must_equal "another-test-version"
-          config.ignore_classes.must_equal another_ignore_classes
+          _(config.project_id).must_equal "another-test-project"
+          _(config.credentials).must_equal "/another/test/keyfile"
+          _(config.service_name).must_equal "another-test-service"
+          _(config.service_version).must_equal "another-test-version"
+          _(config.ignore_classes).must_equal another_ignore_classes
         end
       end
     end
@@ -86,16 +86,16 @@ describe Google::Cloud::ErrorReporting::Railtie do
 
       Google::Cloud::ErrorReporting::Railtie.stub :valid_credentials?, false do
         Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
-        Google::Cloud.configure.use_error_reporting.must_equal false
+        _(Google::Cloud.configure.use_error_reporting).must_equal false
       end
     end
 
     it "Set use_error_reporting to true if Rails is in production" do
       Google::Cloud::ErrorReporting::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, true do
-          Google::Cloud.configure.use_error_reporting.must_be_nil
+          _(Google::Cloud.configure.use_error_reporting).must_be_nil
           Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_error_reporting.must_equal true
+          _(Google::Cloud.configure.use_error_reporting).must_equal true
         end
       end
     end
@@ -105,7 +105,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
         Rails.env.stub :production?, true do
           Google::Cloud.configure.use_error_reporting = false
           Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_error_reporting.must_equal false
+          _(Google::Cloud.configure.use_error_reporting).must_equal false
         end
       end
     end
@@ -116,7 +116,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
       Google::Cloud::ErrorReporting::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, false do
           Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_error_reporting.must_equal true
+          _(Google::Cloud.configure.use_error_reporting).must_equal true
         end
       end
     end
@@ -140,11 +140,11 @@ describe Google::Cloud::ErrorReporting::Railtie do
         Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::ErrorReporting.configure do |config|
-          config.project_id.must_equal "test-project"
-          config.credentials.must_equal "test/keyfile"
-          config.service_name.must_equal "test-service"
-          config.service_version.must_equal "test-version"
-          config.ignore_classes.must_equal simple_ignore_classes
+          _(config.project_id).must_equal "test-project"
+          _(config.credentials).must_equal "test/keyfile"
+          _(config.service_name).must_equal "test-service"
+          _(config.service_version).must_equal "test-version"
+          _(config.ignore_classes).must_equal simple_ignore_classes
         end
       end
     end
@@ -162,11 +162,11 @@ describe Google::Cloud::ErrorReporting::Railtie do
         Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
 
         Google::Cloud::ErrorReporting.configure do |config|
-          config.project_id.must_equal "another-test-project"
-          config.credentials.must_equal "/another/test/keyfile"
-          config.service_name.must_equal "another-test-service"
-          config.service_version.must_equal "another-test-version"
-          config.ignore_classes.must_equal another_ignore_classes
+          _(config.project_id).must_equal "another-test-project"
+          _(config.credentials).must_equal "/another/test/keyfile"
+          _(config.service_name).must_equal "another-test-service"
+          _(config.service_version).must_equal "another-test-version"
+          _(config.ignore_classes).must_equal another_ignore_classes
         end
       end
     end
@@ -176,16 +176,16 @@ describe Google::Cloud::ErrorReporting::Railtie do
 
       Google::Cloud::ErrorReporting::Railtie.stub :valid_credentials?, false do
         Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
-        Google::Cloud.configure.use_error_reporting.must_equal false
+        _(Google::Cloud.configure.use_error_reporting).must_equal false
       end
     end
 
     it "Set use_error_reporting to true if Rails is in production" do
       Google::Cloud::ErrorReporting::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, true do
-          Google::Cloud.configure.use_error_reporting.must_be_nil
+          _(Google::Cloud.configure.use_error_reporting).must_be_nil
           Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_error_reporting.must_equal true
+          _(Google::Cloud.configure.use_error_reporting).must_equal true
         end
       end
     end
@@ -196,7 +196,7 @@ describe Google::Cloud::ErrorReporting::Railtie do
       Google::Cloud::ErrorReporting::Railtie.stub :valid_credentials?, true do
         Rails.env.stub :production?, false do
           Google::Cloud::ErrorReporting::Railtie.send :consolidate_rails_config, rails_config
-          Google::Cloud.configure.use_error_reporting.must_equal true
+          _(Google::Cloud.configure.use_error_reporting).must_equal true
         end
       end
     end

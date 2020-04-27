@@ -18,23 +18,23 @@ require "helper"
 
 describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
   it "knows the project identifier" do
-    error_reporting.must_be_kind_of Google::Cloud::ErrorReporting::Project
-    error_reporting.project.must_equal project
+    _(error_reporting).must_be_kind_of Google::Cloud::ErrorReporting::Project
+    _(error_reporting.project).must_equal project
   end
 
   describe "#error_event" do
     it "creates an empty error_event" do
       ENV.stub :[], nil do
         error_event = error_reporting.error_event
-        error_event.must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
+        _(error_event).must_be_kind_of Google::Cloud::ErrorReporting::ErrorEvent
 
-        error_event.service_name.must_equal "ruby"
-        error_event.service_version.must_be_nil
+        _(error_event.service_name).must_equal "ruby"
+        _(error_event.service_version).must_be_nil
 
-        error_event.message.must_be_nil
-        error_event.event_time.must_be_nil
-        error_event.user.must_be_nil
-        error_event.http_url.must_be_nil
+        _(error_event.message).must_be_nil
+        _(error_event.event_time).must_be_nil
+        _(error_event.user).must_be_nil
+        _(error_event.http_url).must_be_nil
       end
     end
 
@@ -57,15 +57,15 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
                                                 line_number: line_number,
                                                 function_name: function_name
 
-      error_event.service_name.must_equal service_name
-      error_event.service_version.must_equal service_version
+      _(error_event.service_name).must_equal service_name
+      _(error_event.service_version).must_equal service_version
 
-      error_event.message.must_equal message
-      error_event.event_time.must_equal timestamp
-      error_event.user.must_equal user
-      error_event.file_path.must_equal file_path
-      error_event.line_number.must_equal line_number
-      error_event.function_name.must_equal function_name
+      _(error_event.message).must_equal message
+      _(error_event.event_time).must_equal timestamp
+      _(error_event.user).must_equal user
+      _(error_event.file_path).must_equal file_path
+      _(error_event.line_number).must_equal line_number
+      _(error_event.function_name).must_equal function_name
     end
   end
 
@@ -76,8 +76,8 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
 
     it "injects service_name and service_version" do
       stub_report = ->(error_event) {
-        error_event.service_name.must_equal service_name
-        error_event.service_version.must_equal service_version
+        _(error_event.service_name).must_equal service_name
+        _(error_event.service_version).must_equal service_version
       }
 
       error_reporting.stub :report, stub_report do
@@ -89,8 +89,8 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
 
     it "injects default service_name and service_version if not provided" do
       stub_report = ->(error_event) {
-        error_event.service_name.must_equal service_name
-        error_event.service_version.must_equal service_version
+        _(error_event.service_name).must_equal service_name
+        _(error_event.service_version).must_equal service_version
       }
 
       error_reporting.class.stub :default_service_name, service_name do
@@ -120,7 +120,7 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
     it "calls Google::Cloud.env.project_id if no environment variable found" do
       Google::Cloud.env.stub :project_id, "another-project" do
         ENV.stub :[], nil do
-          Google::Cloud::ErrorReporting::Project.default_project_id.must_equal "another-project"
+          _(Google::Cloud::ErrorReporting::Project.default_project_id).must_equal "another-project"
         end
       end
     end
@@ -130,7 +130,7 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
     it "calls Google::Cloud.env.app_engine_service_id if no environment variable found" do
       Google::Cloud.env.stub :app_engine_service_id, "another-service-id" do
         ENV.stub :[], nil do
-          Google::Cloud::ErrorReporting::Project.default_service_name.must_equal "another-service-id"
+          _(Google::Cloud::ErrorReporting::Project.default_service_name).must_equal "another-service-id"
         end
       end
     end
@@ -138,7 +138,7 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
     it "defaults to 'ruby'" do
       Google::Cloud.env.stub :app_engine_service_id, nil do
         ENV.stub :[], nil do
-          Google::Cloud::ErrorReporting::Project.default_service_name.must_equal "ruby"
+          _(Google::Cloud::ErrorReporting::Project.default_service_name).must_equal "ruby"
         end
       end
     end
@@ -148,7 +148,7 @@ describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
     it "calls Google::Cloud.env.app_engine_service_version if no environment variable found" do
       Google::Cloud.env.stub :app_engine_service_version, "another-service-version" do
         ENV.stub :[], nil do
-          Google::Cloud::ErrorReporting::Project.default_service_version.must_equal "another-service-version"
+          _(Google::Cloud::ErrorReporting::Project.default_service_version).must_equal "another-service-version"
         end
       end
     end
