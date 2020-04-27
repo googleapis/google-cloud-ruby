@@ -17,61 +17,60 @@ require "helper"
 describe Gcloud do
 
   it "is an alias to Google::Cloud" do
-    Gcloud.must_equal Google::Cloud
+    assert_equal Google::Cloud, Gcloud
   end
 
   it "can require BigQuery" do
     require "gcloud/bigquery"
 
-    Gcloud::Bigquery.must_equal Google::Cloud::Bigquery
+    assert_equal Google::Cloud::Bigquery, Gcloud::Bigquery
   end
 
   it "can require Datastore" do
     require "gcloud/datastore"
 
-    Gcloud::Datastore.must_equal Google::Cloud::Datastore
+    assert_equal Google::Cloud::Datastore, Gcloud::Datastore
   end
 
   it "can require DNS" do
     require "gcloud/dns"
 
-    Gcloud::Dns.must_equal Google::Cloud::Dns
+    assert_equal Google::Cloud::Dns, Gcloud::Dns
   end
 
   it "can require Logging" do
     require "gcloud/logging"
 
-    Gcloud::Logging.must_equal Google::Cloud::Logging
+    assert_equal Google::Cloud::Logging, Gcloud::Logging
   end
 
   it "can require Pub/Sub" do
     require "gcloud/pubsub"
 
-    Gcloud::Pubsub.must_equal Google::Cloud::Pubsub
+    assert_equal Google::Cloud::Pubsub, Gcloud::Pubsub
   end
 
   it "can require Resource Manager" do
     require "gcloud/resource_manager"
 
-    Gcloud::ResourceManager.must_equal Google::Cloud::ResourceManager
+    assert_equal Google::Cloud::ResourceManager, Gcloud::ResourceManager
   end
 
   it "can require Storage" do
     require "gcloud/storage"
 
-    Gcloud::Storage.must_equal Google::Cloud::Storage
+    assert_equal Google::Cloud::Storage, Gcloud::Storage
   end
 
   it "can require Translate" do
     require "gcloud/translate"
 
-    Gcloud::Translate.must_equal Google::Cloud::Translate
-
+    assert_equal Google::Cloud::Translate, Gcloud::Translate
   end
 
   it "can require Vision" do
     require "gcloud/vision"
 
-    Gcloud::Vision.must_equal Google::Cloud::Vision
+    assert_equal Google::Cloud::Vision, Gcloud::Vision
   end
 end
