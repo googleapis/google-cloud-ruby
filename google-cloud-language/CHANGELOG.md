@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.1 / 2020-04-27
+
+#### Documentation
+
+* Updated the sample timeouts in the migration guide to reflect seconds
+
 ### 1.1.0 / 2020-04-13
 
 #### Features
