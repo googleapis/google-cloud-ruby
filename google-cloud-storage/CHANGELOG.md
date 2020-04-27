@@ -1,5 +1,11 @@
 # Release History
 
+### 1.26.1 / 2020-04-27
+
+#### Bug Fixes
+
+* Add missing bucket condition in SignerV4#post_object
+
 ### 1.26.0 / 2020-04-06
 
 #### Features
