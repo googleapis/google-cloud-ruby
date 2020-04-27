@@ -25,44 +25,44 @@ describe Google::Cloud::Logging, :logging do
                                  pubsub_dest,
                                  filter: "severity = ALERT"
 
-      sink.name.must_equal "#{prefix}-sink"
-      sink.destination.must_equal pubsub_dest
-      sink.filter.must_equal "severity = ALERT"
+      _(sink.name).must_equal "#{prefix}-sink"
+      _(sink.destination).must_equal pubsub_dest
+      _(sink.filter).must_equal "severity = ALERT"
 
       sink.filter = "severity >= WARNING"
 
       sink.save
 
-      sink.name.must_equal "#{prefix}-sink"
-      sink.destination.must_equal pubsub_dest
-      sink.filter.must_equal "severity >= WARNING"
+      _(sink.name).must_equal "#{prefix}-sink"
+      _(sink.destination).must_equal pubsub_dest
+      _(sink.filter).must_equal "severity >= WARNING"
 
       sink.refresh!
 
-      sink.name.must_equal "#{prefix}-sink"
-      sink.destination.must_equal pubsub_dest
-      sink.filter.must_equal "severity >= WARNING"
+      _(sink.name).must_equal "#{prefix}-sink"
+      _(sink.destination).must_equal pubsub_dest
+      _(sink.filter).must_equal "severity >= WARNING"
 
       dup_sink = logging.sink "#{prefix}-sink"
 
-      dup_sink.name.must_equal "#{prefix}-sink"
-      dup_sink.destination.must_equal pubsub_dest
-      dup_sink.filter.must_equal "severity >= WARNING"
+      _(dup_sink.name).must_equal "#{prefix}-sink"
+      _(dup_sink.destination).must_equal pubsub_dest
+      _(dup_sink.filter).must_equal "severity >= WARNING"
 
-      logging.sinks.wont_be :empty?
-      logging.sinks(max: 1).length.must_equal 1
+      _(logging.sinks).wont_be :empty?
+      _(logging.sinks(max: 1).length).must_equal 1
 
       sink.delete
 
-      logging.sink("#{prefix}-sink").must_be :nil?
+      _(logging.sink("#{prefix}-sink")).must_be :nil?
     end
 
     it "lists sinks" do
       pubsub_dest = "pubsub.googleapis.com/projects/#{logging.project}/topics/#{prefix}-topic"
       sink = logging.create_sink "#{prefix}-list-sink", pubsub_dest
 
-      logging.sinks.wont_be :empty?
-      logging.sinks(max: 1).length.must_equal 1
+      _(logging.sinks).wont_be :empty?
+      _(logging.sinks(max: 1).length).must_equal 1
 
       sink.delete
     end
@@ -74,37 +74,37 @@ describe Google::Cloud::Logging, :logging do
                                      "severity = ALERT",
                                      description: "Metric for acceptance tsets"
 
-      metric.name.must_equal "#{prefix}-metric"
-      metric.description.must_equal "Metric for acceptance tsets"
-      metric.filter.must_equal "severity = ALERT"
+      _(metric.name).must_equal "#{prefix}-metric"
+      _(metric.description).must_equal "Metric for acceptance tsets"
+      _(metric.filter).must_equal "severity = ALERT"
 
       metric.description = "Metric for acceptance tests"
       metric.filter = "severity >= WARNING"
 
       metric.save
 
-      metric.name.must_equal "#{prefix}-metric"
-      metric.description.must_equal "Metric for acceptance tests"
-      metric.filter.must_equal "severity >= WARNING"
+      _(metric.name).must_equal "#{prefix}-metric"
+      _(metric.description).must_equal "Metric for acceptance tests"
+      _(metric.filter).must_equal "severity >= WARNING"
 
       metric.refresh!
 
-      metric.name.must_equal "#{prefix}-metric"
-      metric.description.must_equal "Metric for acceptance tests"
-      metric.filter.must_equal "severity >= WARNING"
+      _(metric.name).must_equal "#{prefix}-metric"
+      _(metric.description).must_equal "Metric for acceptance tests"
+      _(metric.filter).must_equal "severity >= WARNING"
 
       dup_metric = logging.metric "#{prefix}-metric"
 
-      dup_metric.name.must_equal "#{prefix}-metric"
-      dup_metric.description.must_equal "Metric for acceptance tests"
-      dup_metric.filter.must_equal "severity >= WARNING"
+      _(dup_metric.name).must_equal "#{prefix}-metric"
+      _(dup_metric.description).must_equal "Metric for acceptance tests"
+      _(dup_metric.filter).must_equal "severity >= WARNING"
 
-      logging.metrics.wont_be :empty?
-      logging.metrics(max: 1).length.must_equal 1
+      _(logging.metrics).wont_be :empty?
+      _(logging.metrics(max: 1).length).must_equal 1
 
       metric.delete
 
-      logging.metric("#{prefix}-metric").must_be :nil?
+      _(logging.metric("#{prefix}-metric")).must_be :nil?
     end
   end
 
@@ -134,11 +134,11 @@ describe Google::Cloud::Logging, :logging do
         sleep delay
         delay += 1
       end
-      entries.wont_be_empty
-      logging.entries(max: 1).length.must_equal 1
+      _(entries).wont_be_empty
+      _(logging.entries(max: 1).length).must_equal 1
 
-      logging.logs.wont_be :empty?
-      logging.logs(max: 1).length.must_equal 1
+      _(logging.logs).wont_be :empty?
+      _(logging.logs(max: 1).length).must_equal 1
     end
   end
 
@@ -167,12 +167,12 @@ describe Google::Cloud::Logging, :logging do
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("symbol").map &:payload
 
-      written_entries.must_include "Danger Will Robinson (:debug)!"
-      written_entries.must_include "Danger Will Robinson (:info)!"
-      written_entries.must_include "Danger Will Robinson (:warn)!"
-      written_entries.must_include "Danger Will Robinson (:error)!"
-      written_entries.must_include "Danger Will Robinson (:fatal)!"
-      written_entries.must_include "Danger Will Robinson (:unknown)!"
+      _(written_entries).must_include "Danger Will Robinson (:debug)!"
+      _(written_entries).must_include "Danger Will Robinson (:info)!"
+      _(written_entries).must_include "Danger Will Robinson (:warn)!"
+      _(written_entries).must_include "Danger Will Robinson (:error)!"
+      _(written_entries).must_include "Danger Will Robinson (:fatal)!"
+      _(written_entries).must_include "Danger Will Robinson (:unknown)!"
     end
 
     it "writes to a log with add and a string" do
@@ -191,12 +191,12 @@ describe Google::Cloud::Logging, :logging do
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("string").map &:payload
 
-      written_entries.must_include "Danger Will Robinson ('debug')!"
-      written_entries.must_include "Danger Will Robinson ('info')!"
-      written_entries.must_include "Danger Will Robinson ('warn')!"
-      written_entries.must_include "Danger Will Robinson ('error')!"
-      written_entries.must_include "Danger Will Robinson ('fatal')!"
-      written_entries.must_include "Danger Will Robinson ('unknown')!"
+      _(written_entries).must_include "Danger Will Robinson ('debug')!"
+      _(written_entries).must_include "Danger Will Robinson ('info')!"
+      _(written_entries).must_include "Danger Will Robinson ('warn')!"
+      _(written_entries).must_include "Danger Will Robinson ('error')!"
+      _(written_entries).must_include "Danger Will Robinson ('fatal')!"
+      _(written_entries).must_include "Danger Will Robinson ('unknown')!"
     end
 
     it "writes to a log with add and a constant" do
@@ -215,12 +215,12 @@ describe Google::Cloud::Logging, :logging do
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("constant").map &:payload
 
-      written_entries.must_include "Danger Will Robinson (DEBUG)!"
-      written_entries.must_include "Danger Will Robinson (INFO)!"
-      written_entries.must_include "Danger Will Robinson (WARN)!"
-      written_entries.must_include "Danger Will Robinson (ERROR)!"
-      written_entries.must_include "Danger Will Robinson (FATAL)!"
-      written_entries.must_include "Danger Will Robinson (UNKNOWN)!"
+      _(written_entries).must_include "Danger Will Robinson (DEBUG)!"
+      _(written_entries).must_include "Danger Will Robinson (INFO)!"
+      _(written_entries).must_include "Danger Will Robinson (WARN)!"
+      _(written_entries).must_include "Danger Will Robinson (ERROR)!"
+      _(written_entries).must_include "Danger Will Robinson (FATAL)!"
+      _(written_entries).must_include "Danger Will Robinson (UNKNOWN)!"
     end
 
     it "writes to a log with named functions" do
@@ -239,12 +239,12 @@ describe Google::Cloud::Logging, :logging do
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("method").map &:payload
 
-      written_entries.must_include "Danger Will Robinson (debug)!"
-      written_entries.must_include "Danger Will Robinson (info)!"
-      written_entries.must_include "Danger Will Robinson (warn)!"
-      written_entries.must_include "Danger Will Robinson (error)!"
-      written_entries.must_include "Danger Will Robinson (fatal)!"
-      written_entries.must_include "Danger Will Robinson (unknown)!"
+      _(written_entries).must_include "Danger Will Robinson (debug)!"
+      _(written_entries).must_include "Danger Will Robinson (info)!"
+      _(written_entries).must_include "Danger Will Robinson (warn)!"
+      _(written_entries).must_include "Danger Will Robinson (error)!"
+      _(written_entries).must_include "Danger Will Robinson (fatal)!"
+      _(written_entries).must_include "Danger Will Robinson (unknown)!"
     end
 
     def entries_via_backoff type
@@ -286,12 +286,12 @@ describe Google::Cloud::Logging, :logging do
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("symbol").map &:payload
 
-      written_entries.must_include "Danger Will Robinson (:debug)!"
-      written_entries.must_include "Danger Will Robinson (:info)!"
-      written_entries.must_include "Danger Will Robinson (:warn)!"
-      written_entries.must_include "Danger Will Robinson (:error)!"
-      written_entries.must_include "Danger Will Robinson (:fatal)!"
-      written_entries.must_include "Danger Will Robinson (:unknown)!"
+      _(written_entries).must_include "Danger Will Robinson (:debug)!"
+      _(written_entries).must_include "Danger Will Robinson (:info)!"
+      _(written_entries).must_include "Danger Will Robinson (:warn)!"
+      _(written_entries).must_include "Danger Will Robinson (:error)!"
+      _(written_entries).must_include "Danger Will Robinson (:fatal)!"
+      _(written_entries).must_include "Danger Will Robinson (:unknown)!"
     end
 
     it "writes to a log with add and a string" do
@@ -310,12 +310,12 @@ describe Google::Cloud::Logging, :logging do
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("string").map &:payload
 
-      written_entries.must_include "Danger Will Robinson ('debug')!"
-      written_entries.must_include "Danger Will Robinson ('info')!"
-      written_entries.must_include "Danger Will Robinson ('warn')!"
-      written_entries.must_include "Danger Will Robinson ('error')!"
-      written_entries.must_include "Danger Will Robinson ('fatal')!"
-      written_entries.must_include "Danger Will Robinson ('unknown')!"
+      _(written_entries).must_include "Danger Will Robinson ('debug')!"
+      _(written_entries).must_include "Danger Will Robinson ('info')!"
+      _(written_entries).must_include "Danger Will Robinson ('warn')!"
+      _(written_entries).must_include "Danger Will Robinson ('error')!"
+      _(written_entries).must_include "Danger Will Robinson ('fatal')!"
+      _(written_entries).must_include "Danger Will Robinson ('unknown')!"
     end
 
     it "writes to a log with add and a constant" do
@@ -334,12 +334,12 @@ describe Google::Cloud::Logging, :logging do
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("constant").map &:payload
 
-      written_entries.must_include "Danger Will Robinson (DEBUG)!"
-      written_entries.must_include "Danger Will Robinson (INFO)!"
-      written_entries.must_include "Danger Will Robinson (WARN)!"
-      written_entries.must_include "Danger Will Robinson (ERROR)!"
-      written_entries.must_include "Danger Will Robinson (FATAL)!"
-      written_entries.must_include "Danger Will Robinson (UNKNOWN)!"
+      _(written_entries).must_include "Danger Will Robinson (DEBUG)!"
+      _(written_entries).must_include "Danger Will Robinson (INFO)!"
+      _(written_entries).must_include "Danger Will Robinson (WARN)!"
+      _(written_entries).must_include "Danger Will Robinson (ERROR)!"
+      _(written_entries).must_include "Danger Will Robinson (FATAL)!"
+      _(written_entries).must_include "Danger Will Robinson (UNKNOWN)!"
     end
 
     it "writes to a log with named functions" do
@@ -358,12 +358,12 @@ describe Google::Cloud::Logging, :logging do
       skip "Removed due to inconsistent failure by the service to retrieve written_entries. Reinstate when service stabilizes."
       written_entries = entries_via_backoff("method").map &:payload
 
-      written_entries.must_include "Danger Will Robinson (debug)!"
-      written_entries.must_include "Danger Will Robinson (info)!"
-      written_entries.must_include "Danger Will Robinson (warn)!"
-      written_entries.must_include "Danger Will Robinson (error)!"
-      written_entries.must_include "Danger Will Robinson (fatal)!"
-      written_entries.must_include "Danger Will Robinson (unknown)!"
+      _(written_entries).must_include "Danger Will Robinson (debug)!"
+      _(written_entries).must_include "Danger Will Robinson (info)!"
+      _(written_entries).must_include "Danger Will Robinson (warn)!"
+      _(written_entries).must_include "Danger Will Robinson (error)!"
+      _(written_entries).must_include "Danger Will Robinson (fatal)!"
+      _(written_entries).must_include "Danger Will Robinson (unknown)!"
     end
 
     def entries_via_backoff type

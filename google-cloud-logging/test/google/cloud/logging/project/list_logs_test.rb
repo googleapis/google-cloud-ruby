@@ -28,8 +28,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
 
     mock.verify
 
-    logs.each { |m| m.must_be_kind_of String }
-    logs.size.must_equal num_logs
+    logs.each { |m| _(m).must_be_kind_of String }
+    _(logs.size).must_equal num_logs
   end
 
   it "lists logs with find_logs alias" do
@@ -45,8 +45,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
 
     mock.verify
 
-    logs.each { |m| m.must_be_kind_of String }
-    logs.size.must_equal num_logs
+    logs.each { |m| _(m).must_be_kind_of String }
+    _(logs.size).must_equal num_logs
   end
 
   it "paginates logs" do
@@ -63,14 +63,14 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
 
     mock.verify
 
-    first_logs.each { |m| m.must_be_kind_of String }
-    first_logs.count.must_equal 3
-    first_logs.token.wont_be :nil?
-    first_logs.token.must_equal "next_page_token"
+    first_logs.each { |m| _(m).must_be_kind_of String }
+    _(first_logs.count).must_equal 3
+    _(first_logs.token).wont_be :nil?
+    _(first_logs.token).must_equal "next_page_token"
 
-    second_logs.each { |m| m.must_be_kind_of String }
-    second_logs.count.must_equal 2
-    second_logs.token.must_be :nil?
+    second_logs.each { |m| _(m).must_be_kind_of String }
+    _(second_logs.count).must_equal 2
+    _(second_logs.token).must_be :nil?
   end
 
   it "paginates logs using next? and next" do
@@ -87,13 +87,13 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
 
     mock.verify
 
-    first_logs.each { |m| m.must_be_kind_of String }
-    first_logs.count.must_equal 3
-    first_logs.next?.must_equal true #must_be :next?
+    first_logs.each { |m| _(m).must_be_kind_of String }
+    _(first_logs.count).must_equal 3
+    _(first_logs.next?).must_equal true #must_be :next?
 
-    second_logs.each { |m| m.must_be_kind_of String }
-    second_logs.count.must_equal 2
-    second_logs.next?.must_equal false #wont_be :next?
+    second_logs.each { |m| _(m).must_be_kind_of String }
+    _(second_logs.count).must_equal 2
+    _(second_logs.next?).must_equal false #wont_be :next?
   end
 
   it "paginates logs using all" do
@@ -109,8 +109,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
 
     mock.verify
 
-    all_logs.each { |m| m.must_be_kind_of String }
-    all_logs.count.must_equal 5
+    all_logs.each { |m| _(m).must_be_kind_of String }
+    _(all_logs.count).must_equal 5
   end
 
   it "paginates logs using all using Enumerator" do
@@ -126,8 +126,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
 
     mock.verify
 
-    all_logs.each { |m| m.must_be_kind_of String }
-    all_logs.count.must_equal 5
+    all_logs.each { |m| _(m).must_be_kind_of String }
+    _(all_logs.count).must_equal 5
   end
 
   it "paginates logs using all with request_limit set" do
@@ -143,8 +143,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
 
     mock.verify
 
-    all_logs.each { |m| m.must_be_kind_of String }
-    all_logs.count.must_equal 6
+    all_logs.each { |m| _(m).must_be_kind_of String }
+    _(all_logs.count).must_equal 6
   end
 
   it "paginates logs with a resource" do
@@ -158,10 +158,10 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
 
     mock.verify
 
-    logs.each { |m| m.must_be_kind_of String }
-    logs.count.must_equal 3
-    logs.token.wont_be :nil?
-    logs.token.must_equal "next_page_token"
+    logs.each { |m| _(m).must_be_kind_of String }
+    _(logs.count).must_equal 3
+    _(logs.token).wont_be :nil?
+    _(logs.token).must_equal "next_page_token"
   end
 
   it "paginates logs with a resource" do
@@ -178,23 +178,23 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
 
     mock.verify
 
-    first_logs.each { |m| m.must_be_kind_of String }
-    first_logs.count.must_equal 3
-    first_logs.next?.must_equal true
-    first_logs.token.must_equal "next_page_token"
+    first_logs.each { |m| _(m).must_be_kind_of String }
+    _(first_logs.count).must_equal 3
+    _(first_logs.next?).must_equal true
+    _(first_logs.token).must_equal "next_page_token"
 
     # ensure the correct values are propogated to the ivars
-    first_logs.instance_variable_get(:@resource).must_equal "projects/project1"
-    first_logs.instance_variable_get(:@max).must_be_nil
+    _(first_logs.instance_variable_get(:@resource)).must_equal "projects/project1"
+    _(first_logs.instance_variable_get(:@max)).must_be_nil
 
-    second_logs.each { |m| m.must_be_kind_of String }
-    second_logs.count.must_equal 2
-    second_logs.next?.must_equal true
-    second_logs.token.must_equal "second_page_token"
+    second_logs.each { |m| _(m).must_be_kind_of String }
+    _(second_logs.count).must_equal 2
+    _(second_logs.next?).must_equal true
+    _(second_logs.token).must_equal "second_page_token"
 
     # ensure the correct values are propogated to the ivars
-    second_logs.instance_variable_get(:@resource).must_equal "projects/project1"
-    second_logs.instance_variable_get(:@max).must_be_nil
+    _(second_logs.instance_variable_get(:@resource)).must_equal "projects/project1"
+    _(second_logs.instance_variable_get(:@max)).must_be_nil
   end
 
   it "paginates logs with a resource" do
@@ -211,23 +211,23 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
 
     mock.verify
 
-    first_logs.each { |m| m.must_be_kind_of String }
-    first_logs.count.must_equal 3
-    first_logs.next?.must_equal true
-    first_logs.token.must_equal "next_page_token"
+    first_logs.each { |m| _(m).must_be_kind_of String }
+    _(first_logs.count).must_equal 3
+    _(first_logs.next?).must_equal true
+    _(first_logs.token).must_equal "next_page_token"
 
     # ensure the correct values are propogated to the ivars
-    first_logs.instance_variable_get(:@resource).must_be_nil
-    first_logs.instance_variable_get(:@max).must_equal 3
+    _(first_logs.instance_variable_get(:@resource)).must_be_nil
+    _(first_logs.instance_variable_get(:@max)).must_equal 3
 
-    second_logs.each { |m| m.must_be_kind_of String }
-    second_logs.count.must_equal 2
-    second_logs.next?.must_equal true
-    second_logs.token.must_equal "second_page_token"
+    second_logs.each { |m| _(m).must_be_kind_of String }
+    _(second_logs.count).must_equal 2
+    _(second_logs.next?).must_equal true
+    _(second_logs.token).must_equal "second_page_token"
 
     # ensure the correct values are propogated to the ivars
-    second_logs.instance_variable_get(:@resource).must_be_nil
-    second_logs.instance_variable_get(:@max).must_equal 3
+    _(second_logs.instance_variable_get(:@resource)).must_be_nil
+    _(second_logs.instance_variable_get(:@max)).must_equal 3
   end
 
   def list_logs_hash count = 2, token = nil

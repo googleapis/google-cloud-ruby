@@ -27,8 +27,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    sinks.size.must_equal num_sinks
+    sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(sinks.size).must_equal num_sinks
   end
 
   it "lists sinks with find_sinks alias" do
@@ -43,8 +43,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    sinks.size.must_equal num_sinks
+    sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(sinks.size).must_equal num_sinks
   end
 
   it "paginates sinks" do
@@ -61,14 +61,14 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    first_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    first_sinks.count.must_equal 3
-    first_sinks.token.wont_be :nil?
-    first_sinks.token.must_equal "next_page_token"
+    first_sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(first_sinks.count).must_equal 3
+    _(first_sinks.token).wont_be :nil?
+    _(first_sinks.token).must_equal "next_page_token"
 
-    second_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    second_sinks.count.must_equal 2
-    second_sinks.token.must_be :nil?
+    second_sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(second_sinks.count).must_equal 2
+    _(second_sinks.token).must_be :nil?
   end
 
   it "paginates sinks with next? and next" do
@@ -85,13 +85,13 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    first_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    first_sinks.count.must_equal 3
-    first_sinks.next?.must_equal true #must_be :next?
+    first_sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(first_sinks.count).must_equal 3
+    _(first_sinks.next?).must_equal true #must_be :next?
 
-    second_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    second_sinks.count.must_equal 2
-    second_sinks.next?.must_equal false #wont_be :next?
+    second_sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(second_sinks.count).must_equal 2
+    _(second_sinks.next?).must_equal false #wont_be :next?
   end
 
   it "paginates sinks with next? and next and max set" do
@@ -108,21 +108,21 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    first_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    first_sinks.count.must_equal 3
-    first_sinks.next?.must_equal true
-    first_sinks.token.must_equal "next_page_token"
+    first_sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(first_sinks.count).must_equal 3
+    _(first_sinks.next?).must_equal true
+    _(first_sinks.token).must_equal "next_page_token"
 
     # ensure the correct values are propogated to the ivars
-    first_sinks.instance_variable_get(:@max).must_equal 3
+    _(first_sinks.instance_variable_get(:@max)).must_equal 3
 
-    second_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    second_sinks.count.must_equal 2
-    second_sinks.next?.must_equal true
-    second_sinks.token.must_equal "second_page_token"
+    second_sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(second_sinks.count).must_equal 2
+    _(second_sinks.next?).must_equal true
+    _(second_sinks.token).must_equal "second_page_token"
 
     # ensure the correct values are propogated to the ivars
-    second_sinks.instance_variable_get(:@max).must_equal 3
+    _(second_sinks.instance_variable_get(:@max)).must_equal 3
   end
 
   it "paginates sinks with all" do
@@ -138,8 +138,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    all_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    all_sinks.count.must_equal 5
+    all_sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(all_sinks.count).must_equal 5
   end
 
   it "paginates sinks with all and max set" do
@@ -155,8 +155,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    all_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    all_sinks.count.must_equal 5
+    all_sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(all_sinks.count).must_equal 5
   end
 
   it "paginates sinks with all using Enumerator" do
@@ -172,8 +172,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    all_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    all_sinks.count.must_equal 5
+    all_sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(all_sinks.count).must_equal 5
   end
 
   it "paginates sinks with all and request_limit set" do
@@ -189,8 +189,8 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    all_sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    all_sinks.count.must_equal 6
+    all_sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(all_sinks.count).must_equal 6
   end
 
   it "paginates sinks with max set" do
@@ -205,10 +205,10 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    sinks.count.must_equal 3
-    sinks.token.wont_be :nil?
-    sinks.token.must_equal "next_page_token"
+    sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(sinks.count).must_equal 3
+    _(sinks.token).wont_be :nil?
+    _(sinks.token).must_equal "next_page_token"
   end
 
   it "paginates sinks without max set" do
@@ -223,10 +223,10 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    sinks.each { |s| s.must_be_kind_of Google::Cloud::Logging::Sink }
-    sinks.count.must_equal 3
-    sinks.token.wont_be :nil?
-    sinks.token.must_equal "next_page_token"
+    sinks.each { |s| _(s).must_be_kind_of Google::Cloud::Logging::Sink }
+    _(sinks.count).must_equal 3
+    _(sinks.token).wont_be :nil?
+    _(sinks.token).must_equal "next_page_token"
   end
 
   it "creates a sink" do
@@ -246,11 +246,11 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    sink.must_be_kind_of Google::Cloud::Logging::Sink
-    sink.name.must_equal new_sink_name
-    sink.destination.must_equal new_sink_destination
-    sink.filter.must_be :empty?
-    sink.writer_identity.must_equal "roles/owner"
+    _(sink).must_be_kind_of Google::Cloud::Logging::Sink
+    _(sink.name).must_equal new_sink_name
+    _(sink.destination).must_equal new_sink_destination
+    _(sink.filter).must_be :empty?
+    _(sink.writer_identity).must_equal "roles/owner"
   end
 
   it "creates a sink with additional attributes" do
@@ -278,11 +278,11 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    sink.must_be_kind_of Google::Cloud::Logging::Sink
-    sink.name.must_equal new_sink_name
-    sink.destination.must_equal new_sink_destination
-    sink.filter.must_equal new_sink_filter
-    sink.writer_identity.must_equal "roles/owner"
+    _(sink).must_be_kind_of Google::Cloud::Logging::Sink
+    _(sink.name).must_equal new_sink_name
+    _(sink.destination).must_equal new_sink_destination
+    _(sink.filter).must_equal new_sink_filter
+    _(sink.writer_identity).must_equal "roles/owner"
   end
 
   it "creates a sink with unique_writer_identity" do
@@ -302,11 +302,11 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    sink.must_be_kind_of Google::Cloud::Logging::Sink
-    sink.name.must_equal new_sink_name
-    sink.destination.must_equal new_sink_destination
-    sink.filter.must_be :empty?
-    sink.writer_identity.must_equal "serviceAccount:cloud-logs@system.gserviceaccount.com"
+    _(sink).must_be_kind_of Google::Cloud::Logging::Sink
+    _(sink.name).must_equal new_sink_name
+    _(sink.destination).must_equal new_sink_destination
+    _(sink.filter).must_be :empty?
+    _(sink.writer_identity).must_equal "serviceAccount:cloud-logs@system.gserviceaccount.com"
   end
 
   it "gets a sink" do
@@ -321,9 +321,9 @@ describe Google::Cloud::Logging::Project, :sinks, :mock_logging do
 
     mock.verify
 
-    sink.must_be_kind_of Google::Cloud::Logging::Sink
-    sink.name.must_equal sink_name
-    sink.writer_identity.must_equal "roles/owner"
+    _(sink).must_be_kind_of Google::Cloud::Logging::Sink
+    _(sink.name).must_equal sink_name
+    _(sink.writer_identity).must_equal "roles/owner"
   end
 
   def list_sinks_hash count = 2, token = nil

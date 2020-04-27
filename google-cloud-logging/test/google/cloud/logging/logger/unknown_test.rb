@@ -53,11 +53,11 @@ describe Google::Cloud::Logging::Logger, :unknown, :mock_logging do
   end
 
   it "knows its log level using helper methods" do
-    logger.wont_be :debug?
-    logger.wont_be :info?
-    logger.wont_be :warn?
-    logger.wont_be :error?
-    logger.wont_be :fatal?
+    _(logger).wont_be :debug?
+    _(logger).wont_be :info?
+    _(logger).wont_be :warn?
+    _(logger).wont_be :error?
+    _(logger).wont_be :fatal?
   end
 
   it "does not create a log entry with #debug" do

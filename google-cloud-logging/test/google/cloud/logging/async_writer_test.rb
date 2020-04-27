@@ -127,7 +127,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       async_writer.instance_variable_get(:@batch).nil?
     }
 
-    wait_result.must_equal :completed
+    _(wait_result).must_equal :completed
 
     async_writer.wait! 1
 

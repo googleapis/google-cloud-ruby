@@ -17,13 +17,13 @@ require "helper"
 describe Google::Cloud::Logging::Project, :shared_async_writer, :mock_logging do
   it "returns the same async writer object" do
     async1 = logging.shared_async_writer
-    async1.must_be_kind_of Google::Cloud::Logging::AsyncWriter
-    async1.logging.must_be_same_as logging
-    async1.max_count.must_equal 10000
-    async1.max_bytes.must_equal 10000000
-    async1.interval.must_equal 5
-    async1.threads.must_equal 10
+    _(async1).must_be_kind_of Google::Cloud::Logging::AsyncWriter
+    _(async1.logging).must_be_same_as logging
+    _(async1.max_count).must_equal 10000
+    _(async1.max_bytes).must_equal 10000000
+    _(async1.interval).must_equal 5
+    _(async1.threads).must_equal 10
     async2 = logging.shared_async_writer
-    async2.must_be_same_as async1
+    _(async2).must_be_same_as async1
   end
 end

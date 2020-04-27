@@ -20,15 +20,15 @@ describe Google::Cloud::Logging::Resource, :mock_logging do
   let(:resource) { Google::Cloud::Logging::Resource.from_grpc resource_grpc }
 
   it "knows its attributes" do
-    resource.type.must_equal resource_hash[:type]
-    resource.labels.keys.sort.must_equal   resource_hash[:labels].keys.sort
-    resource.labels.values.sort.must_equal resource_hash[:labels].values.sort
+    _(resource.type).must_equal resource_hash[:type]
+    _(resource.labels.keys.sort).must_equal   resource_hash[:labels].keys.sort
+    _(resource.labels.values.sort).must_equal resource_hash[:labels].values.sort
   end
 
   it "can export to a grpc object" do
     grpc = resource.to_grpc
-    grpc.type.must_equal resource_hash[:type]
-    grpc.labels.keys.sort.must_equal   resource_hash[:labels].keys.sort
-    grpc.labels.values.sort.must_equal resource_hash[:labels].values.sort
+    _(grpc.type).must_equal resource_hash[:type]
+    _(grpc.labels.keys.sort).must_equal   resource_hash[:labels].keys.sort
+    _(grpc.labels.values.sort).must_equal resource_hash[:labels].values.sort
   end
 end

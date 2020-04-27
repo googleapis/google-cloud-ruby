@@ -60,8 +60,8 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
   it "@labels instance variable is default to empty hash if not given" do
     logger = Google::Cloud::Logging::Logger.new logging, log_name, resource
-    logger.labels.must_be_kind_of Hash
-    logger.labels.must_be :empty?
+    _(logger.labels).must_be_kind_of Hash
+    _(logger.labels).must_be :empty?
   end
 
   it "creates a DEBUG log entry with #debug" do
@@ -174,7 +174,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
     it "associates given info to current Thread ID" do
       logger.add_request_info info: request_info
-      logger.request_info.must_equal request_info
+      _(logger.request_info).must_equal request_info
     end
 
     it "passes request info to log writes" do
@@ -280,27 +280,27 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
   end
 
   it "recognizes formatter attribute even though it doesn't care" do
-    logger.formatter.wont_be_nil
+    _(logger.formatter).wont_be_nil
     formatter = ::Logger::Formatter.new
     formatter.datetime_format = "meow"
     logger.formatter = formatter
-    logger.formatter.must_equal formatter
+    _(logger.formatter).must_equal formatter
   end
 
   it "recognizes datetime_format attribute even though it doesn't care" do
-    logger.datetime_format.must_equal ""
+    _(logger.datetime_format).must_equal ""
     logger.datetime_format = "meow"
-    logger.datetime_format.must_equal "meow"
+    _(logger.datetime_format).must_equal "meow"
   end
 
   describe "log_name attribute" do
     it "is aliased as progname" do
       new_log_name = "another_web_app_log"
-      logger.log_name.must_equal log_name
-      logger.progname.must_equal log_name
+      _(logger.log_name).must_equal log_name
+      _(logger.progname).must_equal log_name
       logger.progname = new_log_name
-      logger.log_name.must_equal new_log_name
-      logger.progname.must_equal new_log_name
+      _(logger.log_name).must_equal new_log_name
+      _(logger.progname).must_equal new_log_name
     end
 
     it "is reflected in log writes" do
@@ -319,11 +319,11 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
   describe "level attribute" do
     it "is aliased as sev_threshold" do
-      logger.level.must_equal ::Logger::DEBUG
-      logger.sev_threshold.must_equal ::Logger::DEBUG
+      _(logger.level).must_equal ::Logger::DEBUG
+      _(logger.sev_threshold).must_equal ::Logger::DEBUG
       logger.sev_threshold = ::Logger::ERROR
-      logger.level.must_equal ::Logger::ERROR
-      logger.sev_threshold.must_equal ::Logger::ERROR
+      _(logger.level).must_equal ::Logger::ERROR
+      _(logger.sev_threshold).must_equal ::Logger::ERROR
     end
 
     it "controls log writes" do
@@ -345,7 +345,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       mocked_write_entry.expect :call, nil, [::Logger::INFO, "Correct info message"]
       mocked_write_entry.expect :call, nil, [::Logger::FATAL, "Correct fatal message"]
 
-      logger.level.must_equal ::Logger::DEBUG
+      _(logger.level).must_equal ::Logger::DEBUG
 
       logger.stub :write_entry, mocked_write_entry do
         logger.info "Correct info message"
@@ -353,11 +353,11 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
           logger.info "Wrong info message"
           logger.fatal "Correct fatal message"
 
-          logger.level.must_equal ::Logger::FATAL
+          _(logger.level).must_equal ::Logger::FATAL
         end
       end
 
-      logger.level.must_equal ::Logger::DEBUG
+      _(logger.level).must_equal ::Logger::DEBUG
 
       mocked_write_entry.verify
     end

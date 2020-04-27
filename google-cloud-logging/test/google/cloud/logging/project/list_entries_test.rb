@@ -28,8 +28,8 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    entries.size.must_equal num_entries
+    entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(entries.size).must_equal num_entries
   end
 
   it "lists entries with find_entries alias" do
@@ -45,8 +45,8 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    entries.size.must_equal num_entries
+    entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(entries.size).must_equal num_entries
   end
 
   it "paginates entries" do
@@ -63,14 +63,14 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    first_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    first_entries.count.must_equal 3
-    first_entries.token.wont_be :nil?
-    first_entries.token.must_equal "next_page_token"
+    first_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(first_entries.count).must_equal 3
+    _(first_entries.token).wont_be :nil?
+    _(first_entries.token).must_equal "next_page_token"
 
-    second_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    second_entries.count.must_equal 2
-    second_entries.token.must_be :nil?
+    second_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(second_entries.count).must_equal 2
+    _(second_entries.token).must_be :nil?
   end
 
   it "paginates entries with criteria" do
@@ -92,28 +92,28 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    first_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    first_entries.count.must_equal 3
-    first_entries.token.wont_be :nil?
-    first_entries.token.must_equal "next_page_token"
+    first_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(first_entries.count).must_equal 3
+    _(first_entries.token).wont_be :nil?
+    _(first_entries.token).must_equal "next_page_token"
 
     # ensure the correct values are propogated to the ivars
-    first_entries.instance_variable_get(:@projects).must_equal ["project1", "project2", "project3"],
-    first_entries.instance_variable_get(:@resources).must_be_nil
-    first_entries.instance_variable_get(:@filter).must_equal 'resource.type:"gce_"'
-    first_entries.instance_variable_get(:@order).must_equal "timestamp"
-    first_entries.instance_variable_get(:@max).must_be_nil
+    _(first_entries.instance_variable_get(:@projects)).must_equal ["project1", "project2", "project3"],
+    _(first_entries.instance_variable_get(:@resources)).must_be_nil
+    _(first_entries.instance_variable_get(:@filter)).must_equal 'resource.type:"gce_"'
+    _(first_entries.instance_variable_get(:@order)).must_equal "timestamp"
+    _(first_entries.instance_variable_get(:@max)).must_be_nil
 
-    second_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    second_entries.count.must_equal 2
-    second_entries.token.must_be :nil?
+    second_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(second_entries.count).must_equal 2
+    _(second_entries.token).must_be :nil?
 
     # ensure the correct values are propogated to the ivars
-    second_entries.instance_variable_get(:@projects).must_equal ["project1", "project2", "project3"],
-    second_entries.instance_variable_get(:@resources).must_be_nil
-    second_entries.instance_variable_get(:@filter).must_equal 'resource.type:"gce_"'
-    second_entries.instance_variable_get(:@order).must_equal "timestamp"
-    second_entries.instance_variable_get(:@max).must_be_nil
+    _(second_entries.instance_variable_get(:@projects)).must_equal ["project1", "project2", "project3"],
+    _(second_entries.instance_variable_get(:@resources)).must_be_nil
+    _(second_entries.instance_variable_get(:@filter)).must_equal 'resource.type:"gce_"'
+    _(second_entries.instance_variable_get(:@order)).must_equal "timestamp"
+    _(second_entries.instance_variable_get(:@max)).must_be_nil
   end
 
   it "paginates entries using next? and next" do
@@ -130,13 +130,13 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    first_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    first_entries.count.must_equal 3
-    first_entries.next?.must_equal true #must_be :next?
+    first_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(first_entries.count).must_equal 3
+    _(first_entries.next?).must_equal true #must_be :next?
 
-    second_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    second_entries.count.must_equal 2
-    second_entries.next?.must_equal false #wont_be :next?
+    second_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(second_entries.count).must_equal 2
+    _(second_entries.next?).must_equal false #wont_be :next?
   end
 
   it "paginates entries with criteria using next? and next" do
@@ -155,29 +155,29 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    first_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    first_entries.count.must_equal 3
-    first_entries.next?.must_equal true #must_be :next?
-    first_entries.token.must_equal "next_page_token"
+    first_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(first_entries.count).must_equal 3
+    _(first_entries.next?).must_equal true #must_be :next?
+    _(first_entries.token).must_equal "next_page_token"
 
     # ensure the correct values are propogated to the ivars
-    first_entries.instance_variable_get(:@projects).must_equal ["project1", "project2", "project3"],
-    first_entries.instance_variable_get(:@resources).must_be_nil
-    first_entries.instance_variable_get(:@filter).must_equal 'resource.type:"gce_"'
-    first_entries.instance_variable_get(:@order).must_equal "timestamp"
-    first_entries.instance_variable_get(:@max).must_be_nil
+    _(first_entries.instance_variable_get(:@projects)).must_equal ["project1", "project2", "project3"],
+    _(first_entries.instance_variable_get(:@resources)).must_be_nil
+    _(first_entries.instance_variable_get(:@filter)).must_equal 'resource.type:"gce_"'
+    _(first_entries.instance_variable_get(:@order)).must_equal "timestamp"
+    _(first_entries.instance_variable_get(:@max)).must_be_nil
 
-    second_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    second_entries.count.must_equal 2
-    second_entries.next?.must_equal false #wont_be :next?
-    second_entries.token.must_be :nil?
+    second_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(second_entries.count).must_equal 2
+    _(second_entries.next?).must_equal false #wont_be :next?
+    _(second_entries.token).must_be :nil?
 
     # ensure the correct values are propogated to the ivars
-    second_entries.instance_variable_get(:@projects).must_equal ["project1", "project2", "project3"],
-    second_entries.instance_variable_get(:@resources).must_be_nil
-    second_entries.instance_variable_get(:@filter).must_equal 'resource.type:"gce_"'
-    second_entries.instance_variable_get(:@order).must_equal "timestamp"
-    second_entries.instance_variable_get(:@max).must_be_nil
+    _(second_entries.instance_variable_get(:@projects)).must_equal ["project1", "project2", "project3"],
+    _(second_entries.instance_variable_get(:@resources)).must_be_nil
+    _(second_entries.instance_variable_get(:@filter)).must_equal 'resource.type:"gce_"'
+    _(second_entries.instance_variable_get(:@order)).must_equal "timestamp"
+    _(second_entries.instance_variable_get(:@max)).must_be_nil
   end
 
   it "paginates entries using all" do
@@ -193,8 +193,8 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    all_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    all_entries.count.must_equal 5
+    all_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(all_entries.count).must_equal 5
   end
 
   it "paginates entries with criteria using all" do
@@ -212,8 +212,8 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    all_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    all_entries.count.must_equal 5
+    all_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(all_entries.count).must_equal 5
   end
 
   it "paginates entries using all using Enumerator" do
@@ -229,8 +229,8 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    all_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    all_entries.count.must_equal 5
+    all_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(all_entries.count).must_equal 5
   end
 
   it "paginates entries using all with request_limit set" do
@@ -246,8 +246,8 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    all_entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    all_entries.count.must_equal 6
+    all_entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(all_entries.count).must_equal 6
   end
 
   it "paginates entries with one project" do
@@ -261,10 +261,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    entries.count.must_equal 3
-    entries.token.wont_be :nil?
-    entries.token.must_equal "next_page_token"
+    entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(entries.count).must_equal 3
+    _(entries.token).wont_be :nil?
+    _(entries.token).must_equal "next_page_token"
   end
 
   it "paginates entries with multiple projects" do
@@ -278,10 +278,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    entries.count.must_equal 3
-    entries.token.wont_be :nil?
-    entries.token.must_equal "next_page_token"
+    entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(entries.count).must_equal 3
+    _(entries.token).wont_be :nil?
+    _(entries.token).must_equal "next_page_token"
   end
 
   it "paginates entries with multiple resources" do
@@ -295,10 +295,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    entries.count.must_equal 3
-    entries.token.wont_be :nil?
-    entries.token.must_equal "next_page_token"
+    entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(entries.count).must_equal 3
+    _(entries.token).wont_be :nil?
+    _(entries.token).must_equal "next_page_token"
   end
 
   it "paginates entries with a filter" do
@@ -315,10 +315,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    entries.count.must_equal 3
-    entries.token.wont_be :nil?
-    entries.token.must_equal "next_page_token"
+    entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(entries.count).must_equal 3
+    _(entries.token).wont_be :nil?
+    _(entries.token).must_equal "next_page_token"
   end
 
   it "paginates entries with order asc" do
@@ -333,10 +333,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    entries.count.must_equal 3
-    entries.token.wont_be :nil?
-    entries.token.must_equal "next_page_token"
+    entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(entries.count).must_equal 3
+    _(entries.token).wont_be :nil?
+    _(entries.token).must_equal "next_page_token"
   end
 
   it "paginates entries with order desc" do
@@ -351,10 +351,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    entries.count.must_equal 3
-    entries.token.wont_be :nil?
-    entries.token.must_equal "next_page_token"
+    entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(entries.count).must_equal 3
+    _(entries.token).wont_be :nil?
+    _(entries.token).must_equal "next_page_token"
   end
 
   it "paginates entries with max set" do
@@ -369,10 +369,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    entries.count.must_equal 3
-    entries.token.wont_be :nil?
-    entries.token.must_equal "next_page_token"
+    entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(entries.count).must_equal 3
+    _(entries.token).wont_be :nil?
+    _(entries.token).must_equal "next_page_token"
   end
 
   it "paginates entries without max set" do
@@ -387,10 +387,10 @@ describe Google::Cloud::Logging::Project, :list_entries, :mock_logging do
 
     mock.verify
 
-    entries.each { |m| m.must_be_kind_of Google::Cloud::Logging::Entry }
-    entries.count.must_equal 3
-    entries.token.wont_be :nil?
-    entries.token.must_equal "next_page_token"
+    entries.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Entry }
+    _(entries.count).must_equal 3
+    _(entries.token).wont_be :nil?
+    _(entries.token).must_equal "next_page_token"
   end
 
   def list_entries_hash count = 2, token = nil

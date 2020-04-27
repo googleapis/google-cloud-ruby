@@ -27,8 +27,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    metrics.size.must_equal num_metrics
+    metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(metrics.size).must_equal num_metrics
   end
 
   it "lists metrics with find_metrics alias" do
@@ -43,8 +43,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    metrics.size.must_equal num_metrics
+    metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(metrics.size).must_equal num_metrics
   end
 
   it "paginates metrics" do
@@ -61,14 +61,14 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    first_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    first_metrics.count.must_equal 3
-    first_metrics.token.wont_be :nil?
-    first_metrics.token.must_equal "next_page_token"
+    first_metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(first_metrics.count).must_equal 3
+    _(first_metrics.token).wont_be :nil?
+    _(first_metrics.token).must_equal "next_page_token"
 
-    second_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    second_metrics.count.must_equal 2
-    second_metrics.token.must_be :nil?
+    second_metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(second_metrics.count).must_equal 2
+    _(second_metrics.token).must_be :nil?
   end
 
   it "paginates metrics with next? and next" do
@@ -85,13 +85,13 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    first_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    first_metrics.count.must_equal 3
-    first_metrics.next?.must_equal true #must_be :next?
+    first_metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(first_metrics.count).must_equal 3
+    _(first_metrics.next?).must_equal true #must_be :next?
 
-    second_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    second_metrics.count.must_equal 2
-    second_metrics.next?.must_equal false #wont_be :next?
+    second_metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(second_metrics.count).must_equal 2
+    _(second_metrics.next?).must_equal false #wont_be :next?
   end
 
   it "paginates metrics with next? and next and max set" do
@@ -108,21 +108,21 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    first_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    first_metrics.count.must_equal 3
-    first_metrics.next?.must_equal true
-    first_metrics.token.must_equal "next_page_token"
+    first_metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(first_metrics.count).must_equal 3
+    _(first_metrics.next?).must_equal true
+    _(first_metrics.token).must_equal "next_page_token"
 
     # ensure the correct values are propogated to the ivars
-    first_metrics.instance_variable_get(:@max).must_equal 3
+    _(first_metrics.instance_variable_get(:@max)).must_equal 3
 
-    second_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    second_metrics.count.must_equal 2
-    second_metrics.next?.must_equal true
-    second_metrics.token.must_equal "second_page_token"
+    second_metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(second_metrics.count).must_equal 2
+    _(second_metrics.next?).must_equal true
+    _(second_metrics.token).must_equal "second_page_token"
 
     # ensure the correct values are propogated to the ivars
-    second_metrics.instance_variable_get(:@max).must_equal 3
+    _(second_metrics.instance_variable_get(:@max)).must_equal 3
   end
 
   it "paginates metrics with all" do
@@ -138,8 +138,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    all_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    all_metrics.count.must_equal 5
+    all_metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(all_metrics.count).must_equal 5
   end
 
   it "paginates metrics with all and max set" do
@@ -155,8 +155,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    all_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    all_metrics.count.must_equal 5
+    all_metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(all_metrics.count).must_equal 5
   end
 
   it "iterates metrics with all using Enumerator" do
@@ -172,8 +172,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    all_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    all_metrics.count.must_equal 5
+    all_metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(all_metrics.count).must_equal 5
   end
 
   it "iterates metrics with all request_limit set" do
@@ -189,8 +189,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    all_metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    all_metrics.count.must_equal 6
+    all_metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(all_metrics.count).must_equal 6
   end
 
   it "paginates metrics with max set" do
@@ -204,10 +204,10 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    metrics.count.must_equal 3
-    metrics.token.wont_be :nil?
-    metrics.token.must_equal "next_page_token"
+    metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(metrics.count).must_equal 3
+    _(metrics.token).wont_be :nil?
+    _(metrics.token).must_equal "next_page_token"
   end
 
   it "paginates metrics without max set" do
@@ -221,10 +221,10 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    metrics.each { |m| m.must_be_kind_of Google::Cloud::Logging::Metric }
-    metrics.count.must_equal 3
-    metrics.token.wont_be :nil?
-    metrics.token.must_equal "next_page_token"
+    metrics.each { |m| _(m).must_be_kind_of Google::Cloud::Logging::Metric }
+    _(metrics.count).must_equal 3
+    _(metrics.token).wont_be :nil?
+    _(metrics.token).must_equal "next_page_token"
   end
 
   it "creates a metric" do
@@ -245,10 +245,10 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    metric.must_be_kind_of Google::Cloud::Logging::Metric
-    metric.name.must_equal new_metric_name
-    metric.filter.must_equal new_metric_filter
-    metric.description.must_be :empty?
+    _(metric).must_be_kind_of Google::Cloud::Logging::Metric
+    _(metric.name).must_equal new_metric_name
+    _(metric.filter).must_equal new_metric_filter
+    _(metric.description).must_be :empty?
 
   end
 
@@ -272,10 +272,10 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     metric = logging.create_metric new_metric_name, new_metric_filter, description: new_metric_description
     mock.verify
 
-    metric.must_be_kind_of Google::Cloud::Logging::Metric
-    metric.name.must_equal new_metric_name
-    metric.filter.must_equal new_metric_filter
-    metric.description.must_equal new_metric_description
+    _(metric).must_be_kind_of Google::Cloud::Logging::Metric
+    _(metric.name).must_equal new_metric_name
+    _(metric.filter).must_equal new_metric_filter
+    _(metric.description).must_equal new_metric_description
   end
 
   it "gets a metric" do
@@ -290,8 +290,8 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
 
     mock.verify
 
-    metric.must_be_kind_of Google::Cloud::Logging::Metric
-    metric.name.must_equal metric_name
+    _(metric).must_be_kind_of Google::Cloud::Logging::Metric
+    _(metric.name).must_equal metric_name
   end
 
   it "returns nil when getting a metric that is not found" do
@@ -306,7 +306,7 @@ describe Google::Cloud::Logging::Project, :metrics, :mock_logging do
     logging.service.mocked_metrics = stub
 
     metric = logging.metric metric_name
-    metric.must_be :nil?
+    _(metric).must_be :nil?
   end
 
   def list_metrics_hash count = 2, token = nil
