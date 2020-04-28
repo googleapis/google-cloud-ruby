@@ -155,7 +155,7 @@ module Google
               max_threads: @threads, max_queue: @max_queue
             @thread ||= Thread.new { run_background }
 
-            publish_batch! if @batch.ready?
+            publish_batch! if @batch && @batch.ready?
 
             @cond.broadcast
           end
@@ -222,6 +222,9 @@ module Google
         # writer. To stop the writer, first call {#stop} and then call {#wait!}
         # to block until the writer is stopped.
         #
+        # @param [Number, nil] timeout The maximum number of seconds to wait for
+        #   shutdown to complete. The default value is `nil`.
+        #
         # @return [AsyncWriter] returns self so calls can be chained.
         def wait! timeout = nil
           synchronize do
@@ -237,18 +240,21 @@ module Google
         ##
         # Stop this asynchronous writer and block until it has been stopped.
         #
-        # @param [Number] timeout Timeout in seconds.
+        # @param [Number, nil] timeout The maximum number of seconds to wait for
+        #   shutdown to complete. The default value is `nil`.
         # @param [Boolean] force If set to true, and the writer hasn't stopped
-        #     within the given timeout, kill it forcibly by terminating the
-        #     thread. This should be used with extreme caution, as it can
-        #     leave RPCs unfinished. Default is false.
+        #   within the given timeout, kill it forcibly by terminating the
+        #   thread. This should be used with extreme caution, as it can
+        #   leave RPCs unfinished. Default is false.
         #
-        # @return [Symbol] Returns `:stopped` if the AsyncWriter was already
-        #     stopped at the time of invocation, `:waited` if it stopped
-        #     during the timeout period, `:timeout` if it is still running
-        #     after the timeout, or `:forced` if it was forcibly killed.
+        # @return [Symbol] Returns `:new` if {#write_entries} has never been
+        #   called on the AsyncWriter, `:stopped` if it was already stopped
+        #   at the time of invocation, `:waited` if it stopped during the
+        #   timeout period, `:timeout` if it is still running after the
+        #   timeout, or `:forced` if it was forcibly killed.
         #
         def stop! timeout = nil, force: nil
+          return :new unless @thread_pool
           return :stopped if stopped?
 
           stop

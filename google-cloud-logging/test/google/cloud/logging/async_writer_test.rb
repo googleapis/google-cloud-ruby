@@ -57,6 +57,27 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     [entries, log_name: nil, resource: nil, labels: nil, partial_success: true, options: default_options]
   end
 
+  it "does not raise error on empty entries" do
+    mock = Minitest::Mock.new
+    logging.service.mocked_logging = mock
+
+    async_writer.write_entries []
+    status = async_writer.stop! 1
+    _(status).must_equal :waited
+
+    mock.verify
+  end
+
+  it "does not raise error if stop! called before write_entries" do
+    mock = Minitest::Mock.new
+    logging.service.mocked_logging = mock
+
+    status = async_writer.stop! 1
+    _(status).must_equal :new
+
+    mock.verify
+  end
+
   it "writes a single entry" do
     mock = Minitest::Mock.new
     logging.service.mocked_logging = mock
@@ -69,7 +90,8 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       resource: resource,
       labels: labels1
     )
-    async_writer.stop! 1
+    status = async_writer.stop! 1
+    _(status).must_equal :waited
 
     mock.verify
   end
@@ -92,7 +114,8 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
       resource: resource,
       labels: labels1
     )
-    async_writer.stop! 1
+    status = async_writer.stop! 1
+    _(status).must_equal :waited
 
     mock.verify
   end
