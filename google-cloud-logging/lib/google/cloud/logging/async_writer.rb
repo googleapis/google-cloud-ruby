@@ -155,7 +155,7 @@ module Google
               max_threads: @threads, max_queue: @max_queue
             @thread ||= Thread.new { run_background }
 
-            publish_batch! if @batch && @batch.ready?
+            publish_batch! if @batch&.ready?
 
             @cond.broadcast
           end
