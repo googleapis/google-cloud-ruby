@@ -34,14 +34,14 @@ module Google
         #     Additional domain-specific parameters, any string must be up to 25000
         #     characters long.
         #
-        #     <h4>AutoML Vision Classification</h4>
+        #     AutoML Vision Classification
         #
         #     `score_threshold`
         #     : (float) A value from 0.0 to 1.0. When the model
         #       makes predictions for an image, it will only produce results that have
         #       at least this confidence score. The default is 0.5.
         #
-        #     <h4>AutoML Vision Object Detection</h4>
+        #     AutoML Vision Object Detection
         #
         #     `score_threshold`
         #     : (float) When Model detects objects on the image,
@@ -53,7 +53,7 @@ module Google
         #       boxes returned. The default is 100. The
         #       number of returned bounding boxes might be limited by the server.
         #
-        #     <h4>AutoML Tables</h4>
+        #     AutoML Tables
         #
         #     `feature_importance`
         #     : (boolean) Whether
@@ -96,12 +96,12 @@ module Google
         #   @return [Google::Protobuf::Map{String => String}]
         #     Additional domain-specific prediction response metadata.
         #
-        #     <h4>AutoML Vision Object Detection</h4>
+        #     AutoML Vision Object Detection
         #
         #     `max_bounding_box_count`
         #     : (int64) The maximum number of bounding boxes to return per image.
         #
-        #     <h4>AutoML Natural Language Sentiment Analysis</h4>
+        #     AutoML Natural Language Sentiment Analysis
         #
         #     `sentiment_score`
         #     : (float, deprecated) A value between -1 and 1,
@@ -142,7 +142,7 @@ module Google
         #     Additional domain-specific parameters for the predictions, any string must
         #     be up to 25000 characters long.
         #
-        #     <h4>AutoML Natural Language Classification</h4>
+        #     AutoML Natural Language Classification
         #
         #     `score_threshold`
         #     : (float) A value from 0.0 to 1.0. When the model
@@ -150,14 +150,14 @@ module Google
         #       that have at least this confidence score. The default is 0.5.
         #
         #
-        #     <h4>AutoML Vision Classification</h4>
+        #     AutoML Vision Classification
         #
         #     `score_threshold`
         #     : (float) A value from 0.0 to 1.0. When the model
         #       makes predictions for an image, it will only produce results that
         #       have at least this confidence score. The default is 0.5.
         #
-        #     <h4>AutoML Vision Object Detection</h4>
+        #     AutoML Vision Object Detection
         #
         #     `score_threshold`
         #     : (float) When Model detects objects on the image,
@@ -168,7 +168,7 @@ module Google
         #     : (int64) The maximum number of bounding
         #       boxes returned per image. The default is 100, the
         #       number of bounding boxes returned might be limited by the server.
-        #     <h4>AutoML Video Intelligence Classification</h4>
+        #     AutoML Video Intelligence Classification
         #
         #     `score_threshold`
         #     : (float) A value from 0.0 to 1.0. When the model
@@ -206,7 +206,7 @@ module Google
         #       type, the quality of it depends on training data, but there are no
         #       metrics provided to describe that quality.
         #
-        #     <h4>AutoML Video Intelligence Object Tracking</h4>
+        #     AutoML Video Intelligence Object Tracking
         #
         #     `score_threshold`
         #     : (float) When Model detects objects on video frames,
@@ -243,12 +243,12 @@ module Google
         #   @return [Google::Protobuf::Map{String => String}]
         #     Additional domain-specific prediction response metadata.
         #
-        #     <h4>AutoML Vision Object Detection</h4>
+        #     AutoML Vision Object Detection
         #
         #     `max_bounding_box_count`
         #     : (int64) The maximum number of bounding boxes returned per image.
         #
-        #     <h4>AutoML Video Intelligence Object Tracking</h4>
+        #     AutoML Video Intelligence Object Tracking
         #
         #     `max_bounding_box_count`
         #     : (int64) The maximum number of bounding boxes returned per frame.
