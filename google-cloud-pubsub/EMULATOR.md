@@ -17,7 +17,7 @@ require "google/cloud/pubsub"
 # Make Pub/Sub use the emulator
 ENV["PUBSUB_EMULATOR_HOST"] = "localhost:8918"
 
-pubsub = Google::Cloud::PubSub.new "emulator-project-id"
+pubsub = Google::Cloud::PubSub.new project_id:"emulator-project-id"
 
 # Get a topic in the current project
 my_topic = pubsub.new_topic "my-topic"
