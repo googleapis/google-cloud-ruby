@@ -34,9 +34,9 @@ module Google
             # @param user [String]
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def posix_account_path user:, project:
-              raise ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+              raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
 
               "users/#{user}/projects/#{project}"
             end
@@ -51,9 +51,9 @@ module Google
             # @param user [String]
             # @param fingerprint [String]
             #
-            # @return [String]
+            # @return [::String]
             def ssh_public_key_path user:, fingerprint:
-              raise ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+              raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
 
               "users/#{user}/sshPublicKeys/#{fingerprint}"
             end
@@ -67,7 +67,7 @@ module Google
             #
             # @param user [String]
             #
-            # @return [String]
+            # @return [::String]
             def user_path user:
               "users/#{user}"
             end
