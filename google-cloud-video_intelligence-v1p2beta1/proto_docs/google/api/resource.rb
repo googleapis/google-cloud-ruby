@@ -128,7 +128,7 @@ module Google
     #         - pattern: "shelves/{shelf}"
     #           parent_type: "cloudresourcemanager.googleapis.com/Folder"
     # @!attribute [rw] type
-    #   @return [String]
+    #   @return [::String]
     #     The resource type. It must be in the format of
     #     \\{service_name}/\\{resource_type_kind}. The `resource_type_kind` must be
     #     singular and must not include version numbers.
@@ -140,7 +140,7 @@ module Google
     #     should use PascalCase (UpperCamelCase). The maximum number of
     #     characters allowed for the `resource_type_kind` is 100.
     # @!attribute [rw] pattern
-    #   @return [Array<String>]
+    #   @return [::Array<::String>]
     #     Optional. The relative resource name pattern associated with this resource
     #     type. The DNS prefix of the full resource name shouldn't be specified here.
     #
@@ -161,11 +161,11 @@ module Google
     #     the same component name (e.g. "project") refers to IDs of the same
     #     type of resource.
     # @!attribute [rw] name_field
-    #   @return [String]
+    #   @return [::String]
     #     Optional. The field on the resource that designates the resource name
     #     field. If omitted, this is assumed to be "name".
     # @!attribute [rw] history
-    #   @return [Google::Api::ResourceDescriptor::History]
+    #   @return [::Google::Api::ResourceDescriptor::History]
     #     Optional. The historical or future-looking state of the resource pattern.
     #
     #     Example:
@@ -182,19 +182,19 @@ module Google
     #           };
     #         }
     # @!attribute [rw] plural
-    #   @return [String]
+    #   @return [::String]
     #     The plural name used in the resource name, such as 'projects' for
     #     the name of 'projects/\\{project}'. It is the same concept of the `plural`
     #     field in k8s CRD spec
     #     https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
     # @!attribute [rw] singular
-    #   @return [String]
+    #   @return [::String]
     #     The same concept of the `singular` field in k8s CRD spec
     #     https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
     #     Such as "project" for the `resourcemanager.googleapis.com/Project` type.
     class ResourceDescriptor
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
 
       # A description of the historical or future-looking state of the
       # resource pattern.
@@ -216,7 +216,7 @@ module Google
     # Defines a proto annotation that describes a string field that refers to
     # an API resource.
     # @!attribute [rw] type
-    #   @return [String]
+    #   @return [::String]
     #     The resource type that the annotated field references.
     #
     #     Example:
@@ -227,7 +227,7 @@ module Google
     #           }];
     #         }
     # @!attribute [rw] child_type
-    #   @return [String]
+    #   @return [::String]
     #     The resource type of a child collection that the annotated field
     #     references. This is useful for annotating the `parent` field that
     #     doesn't have a fixed resource type.
@@ -240,8 +240,8 @@ module Google
     #         };
     #       }
     class ResourceReference
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end
