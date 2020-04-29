@@ -41,15 +41,15 @@ module Google
             ##
             # Configure the OsLoginService Client class.
             #
-            # See {Google::Cloud::OsLogin::V1beta::OsLoginService::Client::Configuration}
+            # See {::Google::Cloud::OsLogin::V1beta::OsLoginService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all OsLoginService clients:
             #
-            #     Google::Cloud::OsLogin::V1beta::OsLoginService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -129,7 +129,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::OsLogin::V1beta::OsLoginService::Client::Configuration}
+            # See {::Google::Cloud::OsLogin::V1beta::OsLoginService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -150,13 +150,13 @@ module Google
             # To create a new OsLoginService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+            #     client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
             #
             # To create a new OsLoginService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the OsLoginService client.
@@ -183,8 +183,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @os_login_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::OsLogin::V1beta::OsLoginService::Stub,
+              @os_login_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::OsLogin::V1beta::OsLoginService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -199,12 +199,12 @@ module Google
             #
             # @overload delete_posix_account(request, options = nil)
             #   Pass arguments to `delete_posix_account` via a request object, either of type
-            #   {Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest} or an equivalent Hash.
+            #   {::Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest, Hash]
+            #   @param request [::Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_posix_account(name: nil)
@@ -212,32 +212,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. A reference to the POSIX account to update. POSIX accounts are identified
             #     by the project ID they are associated with. A reference to the POSIX
             #     account is in format `users/{user}/projects/{project}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_posix_account request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_posix_account.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -258,8 +258,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -267,12 +267,12 @@ module Google
             #
             # @overload delete_ssh_public_key(request, options = nil)
             #   Pass arguments to `delete_ssh_public_key` via a request object, either of type
-            #   {Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest, Hash]
+            #   @param request [::Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_ssh_public_key(name: nil)
@@ -280,32 +280,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The fingerprint of the public key to update. Public keys are identified by
             #     their SHA-256 fingerprint. The fingerprint of the public key is in format
             #     `users/{user}/sshPublicKeys/{fingerprint}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_ssh_public_key request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_ssh_public_key.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -326,8 +326,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -336,12 +336,12 @@ module Google
             #
             # @overload get_login_profile(request, options = nil)
             #   Pass arguments to `get_login_profile` via a request object, either of type
-            #   {Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest} or an equivalent Hash.
+            #   {::Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest, Hash]
+            #   @param request [::Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_login_profile(name: nil, project_id: nil, system_id: nil)
@@ -349,34 +349,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The unique ID for the user in format `users/{user}`.
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     The project ID of the Google Cloud Platform project.
-            #   @param system_id [String]
+            #   @param system_id [::String]
             #     A system ID for filtering the results of the request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::OsLogin::V1beta::LoginProfile]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::OsLogin::V1beta::LoginProfile]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::OsLogin::V1beta::LoginProfile]
+            # @return [::Google::Cloud::OsLogin::V1beta::LoginProfile]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_login_profile request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_login_profile.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -397,8 +397,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -406,12 +406,12 @@ module Google
             #
             # @overload get_ssh_public_key(request, options = nil)
             #   Pass arguments to `get_ssh_public_key` via a request object, either of type
-            #   {Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest, Hash]
+            #   @param request [::Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_ssh_public_key(name: nil)
@@ -419,32 +419,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The fingerprint of the public key to retrieve. Public keys are identified
             #     by their SHA-256 fingerprint. The fingerprint of the public key is in
             #     format `users/{user}/sshPublicKeys/{fingerprint}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::OsLogin::Common::SshPublicKey]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::OsLogin::Common::SshPublicKey]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::OsLogin::Common::SshPublicKey]
+            # @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_ssh_public_key request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_ssh_public_key.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -465,8 +465,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -476,12 +476,12 @@ module Google
             #
             # @overload import_ssh_public_key(request, options = nil)
             #   Pass arguments to `import_ssh_public_key` via a request object, either of type
-            #   {Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest, Hash]
+            #   @param request [::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload import_ssh_public_key(parent: nil, ssh_public_key: nil, project_id: nil)
@@ -489,34 +489,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     The unique ID for the user in format `users/{user}`.
-            #   @param ssh_public_key [Google::Cloud::OsLogin::Common::SshPublicKey, Hash]
+            #   @param ssh_public_key [::Google::Cloud::OsLogin::Common::SshPublicKey, ::Hash]
             #     Required. The SSH public key and expiration time.
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     The project ID of the Google Cloud Platform project.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyResponse]
+            # @return [::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def import_ssh_public_key request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.import_ssh_public_key.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -537,8 +537,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -547,12 +547,12 @@ module Google
             #
             # @overload update_ssh_public_key(request, options = nil)
             #   Pass arguments to `update_ssh_public_key` via a request object, either of type
-            #   {Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest, Hash]
+            #   @param request [::Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_ssh_public_key(name: nil, ssh_public_key: nil, update_mask: nil)
@@ -560,36 +560,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The fingerprint of the public key to update. Public keys are identified by
             #     their SHA-256 fingerprint. The fingerprint of the public key is in format
             #     `users/{user}/sshPublicKeys/{fingerprint}`.
-            #   @param ssh_public_key [Google::Cloud::OsLogin::Common::SshPublicKey, Hash]
+            #   @param ssh_public_key [::Google::Cloud::OsLogin::Common::SshPublicKey, ::Hash]
             #     Required. The SSH public key and expiration time.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask to control which fields get updated. Updates all if not present.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::OsLogin::Common::SshPublicKey]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::OsLogin::Common::SshPublicKey]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::OsLogin::Common::SshPublicKey]
+            # @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_ssh_public_key request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_ssh_public_key.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -610,8 +610,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -621,7 +621,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::OsLogin::V1beta::OsLoginService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::OsLogin::V1beta::OsLoginService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -632,22 +632,22 @@ module Google
             # To modify the global config, setting the timeout for delete_posix_account
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::OsLogin::V1beta::OsLoginService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.delete_posix_account.timeout = 20_000
+            #     ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.delete_posix_account.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.delete_posix_account.timeout = 20_000
+            #     client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.delete_posix_account.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"oslogin.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -659,29 +659,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -689,10 +689,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "oslogin.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -700,14 +700,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -748,49 +748,49 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `delete_posix_account`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_posix_account
                 ##
                 # RPC-specific configuration for `delete_ssh_public_key`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_ssh_public_key
                 ##
                 # RPC-specific configuration for `get_login_profile`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_login_profile
                 ##
                 # RPC-specific configuration for `get_ssh_public_key`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_ssh_public_key
                 ##
                 # RPC-specific configuration for `import_ssh_public_key`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :import_ssh_public_key
                 ##
                 # RPC-specific configuration for `update_ssh_public_key`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_ssh_public_key
 
                 # @private
                 def initialize parent_rpcs = nil
                   delete_posix_account_config = parent_rpcs&.delete_posix_account if parent_rpcs&.respond_to? :delete_posix_account
-                  @delete_posix_account = Gapic::Config::Method.new delete_posix_account_config
+                  @delete_posix_account = ::Gapic::Config::Method.new delete_posix_account_config
                   delete_ssh_public_key_config = parent_rpcs&.delete_ssh_public_key if parent_rpcs&.respond_to? :delete_ssh_public_key
-                  @delete_ssh_public_key = Gapic::Config::Method.new delete_ssh_public_key_config
+                  @delete_ssh_public_key = ::Gapic::Config::Method.new delete_ssh_public_key_config
                   get_login_profile_config = parent_rpcs&.get_login_profile if parent_rpcs&.respond_to? :get_login_profile
-                  @get_login_profile = Gapic::Config::Method.new get_login_profile_config
+                  @get_login_profile = ::Gapic::Config::Method.new get_login_profile_config
                   get_ssh_public_key_config = parent_rpcs&.get_ssh_public_key if parent_rpcs&.respond_to? :get_ssh_public_key
-                  @get_ssh_public_key = Gapic::Config::Method.new get_ssh_public_key_config
+                  @get_ssh_public_key = ::Gapic::Config::Method.new get_ssh_public_key_config
                   import_ssh_public_key_config = parent_rpcs&.import_ssh_public_key if parent_rpcs&.respond_to? :import_ssh_public_key
-                  @import_ssh_public_key = Gapic::Config::Method.new import_ssh_public_key_config
+                  @import_ssh_public_key = ::Gapic::Config::Method.new import_ssh_public_key_config
                   update_ssh_public_key_config = parent_rpcs&.update_ssh_public_key if parent_rpcs&.respond_to? :update_ssh_public_key
-                  @update_ssh_public_key = Gapic::Config::Method.new update_ssh_public_key_config
+                  @update_ssh_public_key = ::Gapic::Config::Method.new update_ssh_public_key_config
 
                   yield self if block_given?
                 end
