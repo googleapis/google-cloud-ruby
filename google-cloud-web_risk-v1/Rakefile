@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or WEBRISK_TEST_PROJECT=test123 WEBRISK_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/web_risk/v1/web_risk_service/credentials"
-  Google::Cloud::WebRisk::V1::WebRiskService::Credentials.env_vars.each do |path|
+  ::Google::Cloud::WebRisk::V1::WebRiskService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["WEBRISK_PROJECT"] = project
