@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/text_to_speech/v1"
 
-client = Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new
+client = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new
 request = my_create_request
 response = client.list_voices request
 ```
