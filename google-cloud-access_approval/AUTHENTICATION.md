@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-access_approval
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::AccessApproval::V1::AccessApproval::Credentials`):
+`::Google::Cloud::AccessApproval::V1::AccessApproval::Credentials`):
 
 1. `ACCESS_APPROVAL_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `ACCESS_APPROVAL_KEYFILE` - Path to JSON file, or JSON contents
