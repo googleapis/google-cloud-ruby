@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-dlp
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Dlp::V2::DlpService::Credentials`):
+`::Google::Cloud::Dlp::V2::DlpService::Credentials`):
 
 1. `DLP_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `DLP_KEYFILE` - Path to JSON file, or JSON contents
