@@ -36,15 +36,15 @@ module Google
             ##
             # Configure the VideoIntelligenceService Client class.
             #
-            # See {Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client::Configuration}
+            # See {::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all VideoIntelligenceService clients:
             #
-            #     Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -84,7 +84,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client::Configuration}
+            # See {::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -105,13 +105,13 @@ module Google
             # To create a new VideoIntelligenceService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.new
+            #     client = ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.new
             #
             # To create a new VideoIntelligenceService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the VideoIntelligenceService client.
@@ -143,8 +143,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @video_intelligence_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Stub,
+              @video_intelligence_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -155,7 +155,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Operations]
+            # @return [::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Operations]
             #
             attr_reader :operations_client
 
@@ -169,12 +169,12 @@ module Google
             #
             # @overload annotate_video(request, options = nil)
             #   Pass arguments to `annotate_video` via a request object, either of type
-            #   {Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest} or an equivalent Hash.
+            #   {::Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest, Hash]
+            #   @param request [::Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload annotate_video(input_uri: nil, input_content: nil, features: nil, video_context: nil, output_uri: nil, location_id: nil)
@@ -182,7 +182,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param input_uri [String]
+            #   @param input_uri [::String]
             #     Input video location. Currently, only
             #     [Google Cloud Storage](https://cloud.google.com/storage/) URIs are
             #     supported, which must be specified in the following format:
@@ -193,47 +193,47 @@ module Google
             #     multiple videos. Supported wildcards: '*' to match 0 or more characters;
             #     '?' to match 1 character. If unset, the input video should be embedded
             #     in the request as `input_content`. If set, `input_content` should be unset.
-            #   @param input_content [String]
+            #   @param input_content [::String]
             #     The video data bytes.
             #     If unset, the input video(s) should be specified via `input_uri`.
             #     If set, `input_uri` should be unset.
-            #   @param features [Array<Google::Cloud::VideoIntelligence::V1::Feature>]
+            #   @param features [::Array<::Google::Cloud::VideoIntelligence::V1::Feature>]
             #     Required. Requested video annotation features.
-            #   @param video_context [Google::Cloud::VideoIntelligence::V1::VideoContext, Hash]
+            #   @param video_context [::Google::Cloud::VideoIntelligence::V1::VideoContext, ::Hash]
             #     Additional video context and/or feature-specific parameters.
-            #   @param output_uri [String]
+            #   @param output_uri [::String]
             #     Optional. Location where the output (in JSON format) should be stored.
             #     Currently, only [Google Cloud Storage](https://cloud.google.com/storage/)
             #     URIs are supported, which must be specified in the following format:
             #     `gs://bucket-id/object-id` (other URI formats return
             #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more information, see
             #     [Request URIs](https://cloud.google.com/storage/docs/request-endpoints).
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     Optional. Cloud region where annotation should take place. Supported cloud
             #     regions: `us-east1`, `us-west1`, `europe-west1`, `asia-east1`. If no region
             #     is specified, a region will be determined based on video file location.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def annotate_video request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VideoIntelligence::V1::AnnotateVideoRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.annotate_video.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::VideoIntelligence::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -245,12 +245,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @video_intelligence_service_stub.call_rpc :annotate_video, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -260,7 +260,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -271,22 +271,22 @@ module Google
             # To modify the global config, setting the timeout for annotate_video
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.annotate_video.timeout = 20_000
+            #     ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.annotate_video.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.annotate_video.timeout = 20_000
+            #     client = ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.annotate_video.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"videointelligence.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -298,29 +298,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -328,10 +328,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "videointelligence.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -339,14 +339,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -387,14 +387,14 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `annotate_video`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :annotate_video
 
                 # @private
                 def initialize parent_rpcs = nil
                   annotate_video_config = parent_rpcs&.annotate_video if parent_rpcs&.respond_to? :annotate_video
-                  @annotate_video = Gapic::Config::Method.new annotate_video_config
+                  @annotate_video = ::Gapic::Config::Method.new annotate_video_config
 
                   yield self if block_given?
                 end

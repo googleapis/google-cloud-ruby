@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/video_intelligence/v1"
 
-client = Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.new
+client = ::Google::Cloud::VideoIntelligence::V1::VideoIntelligenceService::Client.new
 request = my_create_request
 response = client.annotate_video request
 ```
