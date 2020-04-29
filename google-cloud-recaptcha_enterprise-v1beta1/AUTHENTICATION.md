@@ -27,7 +27,7 @@ export RECAPTCHA_ENTERPRISE_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/recaptcha_enterprise/v1beta1"
 
-client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-recaptcha_enterprise-v1beta1
 checks for credentials are configured on the service Credentials class (such as
-{Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Credentials}):
+{::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Credentials}):
 
 1. `RECAPTCHA_ENTERPRISE_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `RECAPTCHA_ENTERPRISE_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/recaptcha_enterprise/v1beta1"
 
 ENV["RECAPTCHA_ENTERPRISE_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/recaptcha_enterprise/v1beta1"
 
-client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new do |config|
+client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/recaptcha_enterprise/v1beta1"
 
-Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.configure do |config|
+::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
 ```
 
 ### Cloud SDK

@@ -34,9 +34,9 @@ module Google
             # @param project [String]
             # @param assessment [String]
             #
-            # @return [String]
+            # @return [::String]
             def assessment_path project:, assessment:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/assessments/#{assessment}"
             end
@@ -51,9 +51,9 @@ module Google
             # @param project [String]
             # @param key [String]
             #
-            # @return [String]
+            # @return [::String]
             def key_path project:, key:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/keys/#{key}"
             end
@@ -67,7 +67,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def project_path project:
               "projects/#{project}"
             end

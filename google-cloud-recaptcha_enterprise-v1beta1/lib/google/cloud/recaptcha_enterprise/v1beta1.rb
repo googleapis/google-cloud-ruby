@@ -26,7 +26,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/recaptcha_enterprise/v1beta1"
-      #     client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+      #     client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
       #
       module V1beta1
       end
