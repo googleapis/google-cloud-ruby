@@ -36,7 +36,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/talent/v4beta1/completion"
-        #     client = Google::Cloud::Talent::V4beta1::Completion::Client.new
+        #     client = ::Google::Cloud::Talent::V4beta1::Completion::Client.new
         #
         module Completion
         end

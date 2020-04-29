@@ -23,7 +23,7 @@ require "google/cloud/talent/v4beta1/tenant_service_pb"
 require "google/cloud/talent/v4beta1/tenant_service_services_pb"
 require "google/cloud/talent/v4beta1/tenant_service"
 
-class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
+class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
   def test_create_tenant
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Talent::V4beta1::Tenant.new
+    grpc_response = ::Google::Cloud::Talent::V4beta1::Tenant.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -59,15 +59,15 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
     create_tenant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_tenant, name
-      assert_kind_of Google::Cloud::Talent::V4beta1::CreateTenantRequest, request
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::CreateTenantRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Talent::V4beta1::Tenant), request.tenant
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Tenant), request.tenant
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_tenant_client_stub do
       # Create client
-      client = Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
+      client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -84,7 +84,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.create_tenant Google::Cloud::Talent::V4beta1::CreateTenantRequest.new(parent: parent, tenant: tenant) do |response, operation|
+      client.create_tenant ::Google::Cloud::Talent::V4beta1::CreateTenantRequest.new(parent: parent, tenant: tenant) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -96,7 +96,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_tenant Google::Cloud::Talent::V4beta1::CreateTenantRequest.new(parent: parent, tenant: tenant), grpc_options do |response, operation|
+      client.create_tenant ::Google::Cloud::Talent::V4beta1::CreateTenantRequest.new(parent: parent, tenant: tenant), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -108,7 +108,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
   def test_get_tenant
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Talent::V4beta1::Tenant.new
+    grpc_response = ::Google::Cloud::Talent::V4beta1::Tenant.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -118,14 +118,14 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
     get_tenant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_tenant, name
-      assert_kind_of Google::Cloud::Talent::V4beta1::GetTenantRequest, request
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::GetTenantRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_tenant_client_stub do
       # Create client
-      client = Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
+      client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -142,7 +142,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_tenant Google::Cloud::Talent::V4beta1::GetTenantRequest.new(name: name) do |response, operation|
+      client.get_tenant ::Google::Cloud::Talent::V4beta1::GetTenantRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -154,7 +154,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_tenant Google::Cloud::Talent::V4beta1::GetTenantRequest.new(name: name), grpc_options do |response, operation|
+      client.get_tenant ::Google::Cloud::Talent::V4beta1::GetTenantRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -166,7 +166,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
   def test_update_tenant
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Talent::V4beta1::Tenant.new
+    grpc_response = ::Google::Cloud::Talent::V4beta1::Tenant.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -177,15 +177,15 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
     update_tenant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_tenant, name
-      assert_kind_of Google::Cloud::Talent::V4beta1::UpdateTenantRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Talent::V4beta1::Tenant), request.tenant
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::UpdateTenantRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::Tenant), request.tenant
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_tenant_client_stub do
       # Create client
-      client = Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
+      client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -202,7 +202,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.update_tenant Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask) do |response, operation|
+      client.update_tenant ::Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -214,7 +214,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_tenant Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_tenant ::Google::Cloud::Talent::V4beta1::UpdateTenantRequest.new(tenant: tenant, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -226,7 +226,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
   def test_delete_tenant
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -236,14 +236,14 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
     delete_tenant_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_tenant, name
-      assert_kind_of Google::Cloud::Talent::V4beta1::DeleteTenantRequest, request
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::DeleteTenantRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_tenant_client_stub do
       # Create client
-      client = Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
+      client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -260,7 +260,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.delete_tenant Google::Cloud::Talent::V4beta1::DeleteTenantRequest.new(name: name) do |response, operation|
+      client.delete_tenant ::Google::Cloud::Talent::V4beta1::DeleteTenantRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -272,7 +272,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_tenant Google::Cloud::Talent::V4beta1::DeleteTenantRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_tenant ::Google::Cloud::Talent::V4beta1::DeleteTenantRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -284,7 +284,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
   def test_list_tenants
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Talent::V4beta1::ListTenantsResponse.new
+    grpc_response = ::Google::Cloud::Talent::V4beta1::ListTenantsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -296,7 +296,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
     list_tenants_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_tenants, name
-      assert_kind_of Google::Cloud::Talent::V4beta1::ListTenantsRequest, request
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::ListTenantsRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.page_token
       assert_equal 42, request.page_size
@@ -305,7 +305,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_tenants_client_stub do
       # Create client
-      client = Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
+      client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -324,7 +324,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_tenants Google::Cloud::Talent::V4beta1::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
+      client.list_tenants ::Google::Cloud::Talent::V4beta1::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -338,7 +338,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_tenants Google::Cloud::Talent::V4beta1::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
+      client.list_tenants ::Google::Cloud::Talent::V4beta1::ListTenantsRequest.new(parent: parent, page_token: page_token, page_size: page_size), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -354,7 +354,7 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
+      client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -364,6 +364,6 @@ class Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Talent::V4beta1::TenantService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Talent::V4beta1::TenantService::Client::Configuration, config
   end
 end

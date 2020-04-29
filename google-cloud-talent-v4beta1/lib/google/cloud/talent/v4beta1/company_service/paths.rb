@@ -44,24 +44,24 @@ module Google
             #   @param project [String]
             #   @param company [String]
             #
-            # @return [String]
+            # @return [::String]
             def company_path **args
               resources = {
                 "company:project:tenant" => (proc do |project:, tenant:, company:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "tenant cannot contain /" if tenant.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "tenant cannot contain /" if tenant.to_s.include? "/"
 
                   "projects/#{project}/tenants/#{tenant}/companies/#{company}"
                 end),
                 "company:project"        => (proc do |project:, company:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/companies/#{company}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -74,7 +74,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def project_path project:
               "projects/#{project}"
             end
@@ -89,9 +89,9 @@ module Google
             # @param project [String]
             # @param tenant [String]
             #
-            # @return [String]
+            # @return [::String]
             def tenant_path project:, tenant:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/tenants/#{tenant}"
             end

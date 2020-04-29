@@ -23,7 +23,7 @@ require "google/cloud/talent/v4beta1/completion_service_pb"
 require "google/cloud/talent/v4beta1/completion_service_services_pb"
 require "google/cloud/talent/v4beta1/completion"
 
-class Google::Cloud::Talent::V4beta1::Completion::ClientTest < Minitest::Test
+class ::Google::Cloud::Talent::V4beta1::Completion::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Talent::V4beta1::Completion::ClientTest < Minitest::Test
 
   def test_complete_query
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Talent::V4beta1::CompleteQueryResponse.new
+    grpc_response = ::Google::Cloud::Talent::V4beta1::CompleteQueryResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -64,7 +64,7 @@ class Google::Cloud::Talent::V4beta1::Completion::ClientTest < Minitest::Test
 
     complete_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :complete_query, name
-      assert_kind_of Google::Cloud::Talent::V4beta1::CompleteQueryRequest, request
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::CompleteQueryRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.query
       assert_equal ["hello world"], request.language_codes
@@ -77,7 +77,7 @@ class Google::Cloud::Talent::V4beta1::Completion::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, complete_query_client_stub do
       # Create client
-      client = Google::Cloud::Talent::V4beta1::Completion::Client.new do |config|
+      client = ::Google::Cloud::Talent::V4beta1::Completion::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -94,7 +94,7 @@ class Google::Cloud::Talent::V4beta1::Completion::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.complete_query Google::Cloud::Talent::V4beta1::CompleteQueryRequest.new(parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type) do |response, operation|
+      client.complete_query ::Google::Cloud::Talent::V4beta1::CompleteQueryRequest.new(parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -106,7 +106,7 @@ class Google::Cloud::Talent::V4beta1::Completion::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.complete_query Google::Cloud::Talent::V4beta1::CompleteQueryRequest.new(parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type), grpc_options do |response, operation|
+      client.complete_query ::Google::Cloud::Talent::V4beta1::CompleteQueryRequest.new(parent: parent, query: query, language_codes: language_codes, page_size: page_size, company: company, scope: scope, type: type), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -121,7 +121,7 @@ class Google::Cloud::Talent::V4beta1::Completion::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Talent::V4beta1::Completion::Client.new do |config|
+      client = ::Google::Cloud::Talent::V4beta1::Completion::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -131,6 +131,6 @@ class Google::Cloud::Talent::V4beta1::Completion::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Talent::V4beta1::Completion::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Talent::V4beta1::Completion::Client::Configuration, config
   end
 end

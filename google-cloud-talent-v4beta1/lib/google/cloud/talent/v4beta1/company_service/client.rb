@@ -38,15 +38,15 @@ module Google
             ##
             # Configure the CompanyService Client class.
             #
-            # See {Google::Cloud::Talent::V4beta1::CompanyService::Client::Configuration}
+            # See {::Google::Cloud::Talent::V4beta1::CompanyService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all CompanyService clients:
             #
-            #     Google::Cloud::Talent::V4beta1::CompanyService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Talent::V4beta1::CompanyService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -106,7 +106,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Talent::V4beta1::CompanyService::Client::Configuration}
+            # See {::Google::Cloud::Talent::V4beta1::CompanyService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -127,13 +127,13 @@ module Google
             # To create a new CompanyService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Talent::V4beta1::CompanyService::Client.new
+            #     client = ::Google::Cloud::Talent::V4beta1::CompanyService::Client.new
             #
             # To create a new CompanyService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Talent::V4beta1::CompanyService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Talent::V4beta1::CompanyService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the CompanyService client.
@@ -160,8 +160,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @company_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Talent::V4beta1::CompanyService::Stub,
+              @company_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Talent::V4beta1::CompanyService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -176,12 +176,12 @@ module Google
             #
             # @overload create_company(request, options = nil)
             #   Pass arguments to `create_company` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::CreateCompanyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::CreateCompanyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::CreateCompanyRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::CreateCompanyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_company(parent: nil, company: nil)
@@ -189,36 +189,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the tenant under which the company is created.
             #
             #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}", for example,
             #     "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
             #     is created, for example, "projects/foo".
-            #   @param company [Google::Cloud::Talent::V4beta1::Company, Hash]
+            #   @param company [::Google::Cloud::Talent::V4beta1::Company, ::Hash]
             #     Required. The company to be created.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::Company]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::Company]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::Company]
+            # @return [::Google::Cloud::Talent::V4beta1::Company]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_company request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::CreateCompanyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::CreateCompanyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_company.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -239,8 +239,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -248,12 +248,12 @@ module Google
             #
             # @overload get_company(request, options = nil)
             #   Pass arguments to `get_company` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::GetCompanyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::GetCompanyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::GetCompanyRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::GetCompanyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_company(name: nil)
@@ -261,7 +261,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the company to be retrieved.
             #
             #     The format is
@@ -272,26 +272,26 @@ module Google
             #     example, "projects/api-test-project/companies/bar".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::Company]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::Company]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::Company]
+            # @return [::Google::Cloud::Talent::V4beta1::Company]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_company request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::GetCompanyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::GetCompanyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_company.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -312,8 +312,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -321,12 +321,12 @@ module Google
             #
             # @overload update_company(request, options = nil)
             #   Pass arguments to `update_company` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::UpdateCompanyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::UpdateCompanyRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_company(company: nil, update_mask: nil)
@@ -334,38 +334,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param company [Google::Cloud::Talent::V4beta1::Company, Hash]
+            #   @param company [::Google::Cloud::Talent::V4beta1::Company, ::Hash]
             #     Required. The company resource to replace the current resource in the system.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Strongly recommended for the best service experience.
             #
-            #     If {Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#update_mask update_mask} is provided, only the specified fields in
-            #     {Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#company company} are updated. Otherwise all the fields are updated.
+            #     If {::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#update_mask update_mask} is provided, only the specified fields in
+            #     {::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#company company} are updated. Otherwise all the fields are updated.
             #
             #     A field mask to specify the company fields to be updated. Only
-            #     top level fields of {Google::Cloud::Talent::V4beta1::Company Company} are supported.
+            #     top level fields of {::Google::Cloud::Talent::V4beta1::Company Company} are supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::Company]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::Company]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::Company]
+            # @return [::Google::Cloud::Talent::V4beta1::Company]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_company request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::UpdateCompanyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_company.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -386,8 +386,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -396,12 +396,12 @@ module Google
             #
             # @overload delete_company(request, options = nil)
             #   Pass arguments to `delete_company` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::DeleteCompanyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::DeleteCompanyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::DeleteCompanyRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::DeleteCompanyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_company(name: nil)
@@ -409,7 +409,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the company to be deleted.
             #
             #     The format is
@@ -420,26 +420,26 @@ module Google
             #     example, "projects/foo/companies/bar".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_company request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::DeleteCompanyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::DeleteCompanyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_company.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -460,8 +460,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -469,12 +469,12 @@ module Google
             #
             # @overload list_companies(request, options = nil)
             #   Pass arguments to `list_companies` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::ListCompaniesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::ListCompaniesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::ListCompaniesRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::ListCompaniesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_companies(parent: nil, page_token: nil, page_size: nil, require_open_jobs: nil)
@@ -482,7 +482,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the tenant under which the company is created.
             #
             #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}", for example,
@@ -490,40 +490,40 @@ module Google
             #
             #     If tenant id is unspecified, the default tenant will be used, for
             #     example, "projects/foo".
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The starting indicator from which to return results.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of companies to be returned, at most 100.
             #     Default is 100 if a non-positive number is provided.
-            #   @param require_open_jobs [Boolean]
+            #   @param require_open_jobs [::Boolean]
             #     Set to true if the companies requested must have open jobs.
             #
             #     Defaults to false.
             #
-            #     If true, at most {Google::Cloud::Talent::V4beta1::ListCompaniesRequest#page_size page_size} of companies are fetched, among which
+            #     If true, at most {::Google::Cloud::Talent::V4beta1::ListCompaniesRequest#page_size page_size} of companies are fetched, among which
             #     only those with open jobs are returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Talent::V4beta1::Company>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Talent::V4beta1::Company>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Talent::V4beta1::Company>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Talent::V4beta1::Company>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_companies request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::ListCompaniesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::ListCompaniesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_companies.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -541,12 +541,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @company_service_stub.call_rpc :list_companies, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @company_service_stub, :list_companies, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @company_service_stub, :list_companies, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -556,7 +556,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Talent::V4beta1::CompanyService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Talent::V4beta1::CompanyService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -567,22 +567,22 @@ module Google
             # To modify the global config, setting the timeout for create_company
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Talent::V4beta1::CompanyService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_company.timeout = 20_000
+            #     ::Google::Cloud::Talent::V4beta1::CompanyService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_company.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Talent::V4beta1::CompanyService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_company.timeout = 20_000
+            #     client = ::Google::Cloud::Talent::V4beta1::CompanyService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_company.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"jobs.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -594,29 +594,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -624,10 +624,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "jobs.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -635,14 +635,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -683,42 +683,42 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_company`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_company
                 ##
                 # RPC-specific configuration for `get_company`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_company
                 ##
                 # RPC-specific configuration for `update_company`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_company
                 ##
                 # RPC-specific configuration for `delete_company`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_company
                 ##
                 # RPC-specific configuration for `list_companies`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_companies
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_company_config = parent_rpcs&.create_company if parent_rpcs&.respond_to? :create_company
-                  @create_company = Gapic::Config::Method.new create_company_config
+                  @create_company = ::Gapic::Config::Method.new create_company_config
                   get_company_config = parent_rpcs&.get_company if parent_rpcs&.respond_to? :get_company
-                  @get_company = Gapic::Config::Method.new get_company_config
+                  @get_company = ::Gapic::Config::Method.new get_company_config
                   update_company_config = parent_rpcs&.update_company if parent_rpcs&.respond_to? :update_company
-                  @update_company = Gapic::Config::Method.new update_company_config
+                  @update_company = ::Gapic::Config::Method.new update_company_config
                   delete_company_config = parent_rpcs&.delete_company if parent_rpcs&.respond_to? :delete_company
-                  @delete_company = Gapic::Config::Method.new delete_company_config
+                  @delete_company = ::Gapic::Config::Method.new delete_company_config
                   list_companies_config = parent_rpcs&.list_companies if parent_rpcs&.respond_to? :list_companies
-                  @list_companies = Gapic::Config::Method.new list_companies_config
+                  @list_companies = ::Gapic::Config::Method.new list_companies_config
 
                   yield self if block_given?
                 end

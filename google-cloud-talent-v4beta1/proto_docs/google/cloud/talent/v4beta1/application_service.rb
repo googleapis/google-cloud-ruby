@@ -23,98 +23,98 @@ module Google
       module V4beta1
         # The Request of the CreateApplication method.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the profile under which the application is created.
         #
         #     The format is
         #     "projects/\\{project_id}/tenants/\\{tenant_id}/profiles/\\{profile_id}".
         #     For example, "projects/foo/tenants/bar/profiles/baz".
         # @!attribute [rw] application
-        #   @return [Google::Cloud::Talent::V4beta1::Application]
+        #   @return [::Google::Cloud::Talent::V4beta1::Application]
         #     Required. The application to be created.
         class CreateApplicationRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request for getting a application by name.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the application to be retrieved.
         #
         #     The format is
         #     "projects/\\{project_id}/tenants/\\{tenant_id}/profiles/\\{profile_id}/applications/\\{application_id}".
         #     For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
         class GetApplicationRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request for updating a specified application.
         # @!attribute [rw] application
-        #   @return [Google::Cloud::Talent::V4beta1::Application]
+        #   @return [::Google::Cloud::Talent::V4beta1::Application]
         #     Required. The application resource to replace the current resource in the system.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Strongly recommended for the best service experience.
         #
-        #     If {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#update_mask update_mask} is provided, only the specified fields in
-        #     {Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#application application} are updated. Otherwise all the fields are updated.
+        #     If {::Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#update_mask update_mask} is provided, only the specified fields in
+        #     {::Google::Cloud::Talent::V4beta1::UpdateApplicationRequest#application application} are updated. Otherwise all the fields are updated.
         #
         #     A field mask to specify the application fields to be updated. Only
-        #     top level fields of {Google::Cloud::Talent::V4beta1::Application Application} are supported.
+        #     top level fields of {::Google::Cloud::Talent::V4beta1::Application Application} are supported.
         class UpdateApplicationRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to delete a application.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the application to be deleted.
         #
         #     The format is
         #     "projects/\\{project_id}/tenants/\\{tenant_id}/profiles/\\{profile_id}/applications/\\{application_id}".
         #     For example, "projects/foo/tenants/bar/profiles/baz/applications/qux".
         class DeleteApplicationRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # List applications for which the client has ACL visibility.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the profile under which the application is created.
         #
         #     The format is
         #     "projects/\\{project_id}/tenants/\\{tenant_id}/profiles/\\{profile_id}", for
         #     example, "projects/foo/tenants/bar/profiles/baz".
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     The starting indicator from which to return results.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The maximum number of applications to be returned, at most 100.
         #     Default is 100 if a non-positive number is provided.
         class ListApplicationsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The List applications response object.
         # @!attribute [rw] applications
-        #   @return [Array<Google::Cloud::Talent::V4beta1::Application>]
+        #   @return [::Array<::Google::Cloud::Talent::V4beta1::Application>]
         #     Applications for the current client.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     A token to retrieve the next page of results.
         # @!attribute [rw] metadata
-        #   @return [Google::Cloud::Talent::V4beta1::ResponseMetadata]
+        #   @return [::Google::Cloud::Talent::V4beta1::ResponseMetadata]
         #     Additional information for the API invocation, such as the request
         #     tracking id.
         class ListApplicationsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

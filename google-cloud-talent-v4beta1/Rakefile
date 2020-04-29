@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or TALENT_TEST_PROJECT=test123 TALENT_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/talent/v4beta1/application_service/credentials"
-  Google::Cloud::Talent::V4beta1::ApplicationService::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Talent::V4beta1::ApplicationService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["TALENT_PROJECT"] = project

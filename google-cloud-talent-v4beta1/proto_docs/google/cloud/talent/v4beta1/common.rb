@@ -23,43 +23,43 @@ module Google
       module V4beta1
         # Message representing a period of time between two timestamps.
         # @!attribute [rw] start_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Begin of the period (inclusive).
         # @!attribute [rw] end_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     End of the period (exclusive).
         class TimestampRange
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A resource that represents a location with full geographic information.
         # @!attribute [rw] location_type
-        #   @return [Google::Cloud::Talent::V4beta1::Location::LocationType]
+        #   @return [::Google::Cloud::Talent::V4beta1::Location::LocationType]
         #     The type of a location, which corresponds to the address lines field of
-        #     {Google::Type::PostalAddress google.type.PostalAddress}. For example, "Downtown, Atlanta, GA, USA"
-        #     has a type of {Google::Cloud::Talent::V4beta1::Location::LocationType::NEIGHBORHOOD LocationType.NEIGHBORHOOD}, and "Kansas City, KS, USA"
-        #     has a type of {Google::Cloud::Talent::V4beta1::Location::LocationType::LOCALITY LocationType.LOCALITY}.
+        #     {::Google::Type::PostalAddress google.type.PostalAddress}. For example, "Downtown, Atlanta, GA, USA"
+        #     has a type of {::Google::Cloud::Talent::V4beta1::Location::LocationType::NEIGHBORHOOD LocationType.NEIGHBORHOOD}, and "Kansas City, KS, USA"
+        #     has a type of {::Google::Cloud::Talent::V4beta1::Location::LocationType::LOCALITY LocationType.LOCALITY}.
         # @!attribute [rw] postal_address
-        #   @return [Google::Type::PostalAddress]
+        #   @return [::Google::Type::PostalAddress]
         #     Postal address of the location that includes human readable information,
         #     such as postal delivery and payments addresses. Given a postal address,
         #     a postal service can deliver items to a premises, P.O. Box, or other
         #     delivery location.
         # @!attribute [rw] lat_lng
-        #   @return [Google::Type::LatLng]
+        #   @return [::Google::Type::LatLng]
         #     An object representing a latitude/longitude pair.
         # @!attribute [rw] radius_miles
-        #   @return [Float]
+        #   @return [::Float]
         #     Radius in miles of the job location. This value is derived from the
         #     location bounding box in which a circle with the specified radius
-        #     centered from {Google::Type::LatLng google.type.LatLng} covers the area associated with the
+        #     centered from {::Google::Type::LatLng google.type.LatLng} covers the area associated with the
         #     job location.
         #     For example, currently, "Mountain View, CA, USA" has a radius of
         #     6.17 miles.
         class Location
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # An enum which represents the type of a location.
           module LocationType
@@ -106,8 +106,8 @@ module Google
         # conducting the job search. This information is used to improve the
         # performance of the service.
         # @!attribute [rw] domain
-        #   @return [String]
-        #     Required if {Google::Cloud::Talent::V4beta1::RequestMetadata#allow_missing_ids allow_missing_ids} is unset or `false`.
+        #   @return [::String]
+        #     Required if {::Google::Cloud::Talent::V4beta1::RequestMetadata#allow_missing_ids allow_missing_ids} is unset or `false`.
         #
         #     The client-defined scope or source of the service call, which typically
         #     is the domain on
@@ -123,8 +123,8 @@ module Google
         #
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] session_id
-        #   @return [String]
-        #     Required if {Google::Cloud::Talent::V4beta1::RequestMetadata#allow_missing_ids allow_missing_ids} is unset or `false`.
+        #   @return [::String]
+        #     Required if {::Google::Cloud::Talent::V4beta1::RequestMetadata#allow_missing_ids allow_missing_ids} is unset or `false`.
         #
         #     A unique session identification string. A session is defined as the
         #     duration of an end user's interaction with the service over a certain
@@ -137,8 +137,8 @@ module Google
         #
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] user_id
-        #   @return [String]
-        #     Required if {Google::Cloud::Talent::V4beta1::RequestMetadata#allow_missing_ids allow_missing_ids} is unset or `false`.
+        #   @return [::String]
+        #     Required if {::Google::Cloud::Talent::V4beta1::RequestMetadata#allow_missing_ids allow_missing_ids} is unset or `false`.
         #
         #     A unique user identification string, as determined by the client.
         #     To have the strongest positive impact on search quality
@@ -151,43 +151,43 @@ module Google
         #
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] allow_missing_ids
-        #   @return [Boolean]
-        #     Only set when any of {Google::Cloud::Talent::V4beta1::RequestMetadata#domain domain}, {Google::Cloud::Talent::V4beta1::RequestMetadata#session_id session_id} and {Google::Cloud::Talent::V4beta1::RequestMetadata#user_id user_id} isn't
+        #   @return [::Boolean]
+        #     Only set when any of {::Google::Cloud::Talent::V4beta1::RequestMetadata#domain domain}, {::Google::Cloud::Talent::V4beta1::RequestMetadata#session_id session_id} and {::Google::Cloud::Talent::V4beta1::RequestMetadata#user_id user_id} isn't
         #     available for some reason. It is highly recommended not to set this field
-        #     and provide accurate {Google::Cloud::Talent::V4beta1::RequestMetadata#domain domain}, {Google::Cloud::Talent::V4beta1::RequestMetadata#session_id session_id} and {Google::Cloud::Talent::V4beta1::RequestMetadata#user_id user_id} for the
+        #     and provide accurate {::Google::Cloud::Talent::V4beta1::RequestMetadata#domain domain}, {::Google::Cloud::Talent::V4beta1::RequestMetadata#session_id session_id} and {::Google::Cloud::Talent::V4beta1::RequestMetadata#user_id user_id} for the
         #     best service experience.
         # @!attribute [rw] device_info
-        #   @return [Google::Cloud::Talent::V4beta1::DeviceInfo]
+        #   @return [::Google::Cloud::Talent::V4beta1::DeviceInfo]
         #     The type of device used by the job seeker at the time of the call to the
         #     service.
         class RequestMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Additional information returned to client, such as debugging information.
         # @!attribute [rw] request_id
-        #   @return [String]
+        #   @return [::String]
         #     A unique id associated with this call.
         #     This id is logged for tracking purposes.
         class ResponseMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Device information collected from the job seeker, candidate, or
         # other entity conducting the job search. Providing this information improves
         # the quality of the search results across devices.
         # @!attribute [rw] device_type
-        #   @return [Google::Cloud::Talent::V4beta1::DeviceInfo::DeviceType]
+        #   @return [::Google::Cloud::Talent::V4beta1::DeviceInfo::DeviceType]
         #     Type of the device.
         # @!attribute [rw] id
-        #   @return [String]
+        #   @return [::String]
         #     A device-specific ID. The ID must be a unique identifier that
         #     distinguishes the device from other devices.
         class DeviceInfo
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # An enumeration describing an API access portal and exposure mechanism.
           module DeviceType
@@ -219,8 +219,8 @@ module Google
 
         # Custom attribute values that are either filterable or non-filterable.
         # @!attribute [rw] string_values
-        #   @return [Array<String>]
-        #     Exactly one of {Google::Cloud::Talent::V4beta1::CustomAttribute#string_values string_values} or {Google::Cloud::Talent::V4beta1::CustomAttribute#long_values long_values} must be specified.
+        #   @return [::Array<::String>]
+        #     Exactly one of {::Google::Cloud::Talent::V4beta1::CustomAttribute#string_values string_values} or {::Google::Cloud::Talent::V4beta1::CustomAttribute#long_values long_values} must be specified.
         #
         #     This field is used to perform a string match (`CASE_SENSITIVE_MATCH` or
         #     `CASE_INSENSITIVE_MATCH`) search.
@@ -231,33 +231,33 @@ module Google
         #
         #     Empty string isn't allowed.
         # @!attribute [rw] long_values
-        #   @return [Array<Integer>]
-        #     Exactly one of {Google::Cloud::Talent::V4beta1::CustomAttribute#string_values string_values} or {Google::Cloud::Talent::V4beta1::CustomAttribute#long_values long_values} must be specified.
+        #   @return [::Array<::Integer>]
+        #     Exactly one of {::Google::Cloud::Talent::V4beta1::CustomAttribute#string_values string_values} or {::Google::Cloud::Talent::V4beta1::CustomAttribute#long_values long_values} must be specified.
         #
         #     This field is used to perform number range search.
         #     (`EQ`, `GT`, `GE`, `LE`, `LT`) over filterable `long_value`.
         #
-        #     Currently at most 1 {Google::Cloud::Talent::V4beta1::CustomAttribute#long_values long_values} is supported.
+        #     Currently at most 1 {::Google::Cloud::Talent::V4beta1::CustomAttribute#long_values long_values} is supported.
         # @!attribute [rw] filterable
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     If the `filterable` flag is true, custom field values are searchable.
         #     If false, values are not searchable.
         #
         #     Default is false.
         class CustomAttribute
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Spell check result.
         # @!attribute [rw] corrected
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Indicates if the query was corrected by the spell checker.
         # @!attribute [rw] corrected_text
-        #   @return [String]
+        #   @return [::String]
         #     Correction output consisting of the corrected keyword string.
         # @!attribute [rw] corrected_html
-        #   @return [String]
+        #   @return [::String]
         #     Corrected output with html tags to highlight the corrected words.
         #     Corrected words are called out with the "<b><i>...</i></b>" html tags.
         #
@@ -266,113 +266,113 @@ module Google
         #     correction is enabled, this value is
         #     "software <b><i>engineer</i></b>".
         class SpellingCorrection
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Job compensation details.
         # @!attribute [rw] entries
-        #   @return [Array<Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry>]
+        #   @return [::Array<::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry>]
         #     Job compensation information.
         #
         #     At most one entry can be of type
-        #     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::BASE CompensationInfo.CompensationType.BASE}, which is
+        #     {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::BASE CompensationInfo.CompensationType.BASE}, which is
         #     referred as **base compensation entry** for the job.
         # @!attribute [r] annualized_base_compensation_range
-        #   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange]
+        #   @return [::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange]
         #     Output only. Annualized base compensation range. Computed as base compensation entry's
-        #     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} times
-        #     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year CompensationEntry.expected_units_per_year}.
+        #     {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} times
+        #     {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year CompensationEntry.expected_units_per_year}.
         #
-        #     See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationEntry} for explanation on compensation annualization.
+        #     See {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationEntry} for explanation on compensation annualization.
         # @!attribute [r] annualized_total_compensation_range
-        #   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange]
+        #   @return [::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange]
         #     Output only. Annualized total compensation range. Computed as all compensation entries'
-        #     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} times
-        #     {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year CompensationEntry.expected_units_per_year}.
+        #     {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} times
+        #     {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year CompensationEntry.expected_units_per_year}.
         #
-        #     See {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationEntry} for explanation on compensation annualization.
+        #     See {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry CompensationEntry} for explanation on compensation annualization.
         class CompensationInfo
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A compensation entry that represents one component of compensation, such
           # as base pay, bonus, or other compensation type.
           #
           # Annualization: One compensation entry can be annualized if
-          # - it contains valid {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}.
-          # - and its {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year} is set or can be derived.
-          # Its annualized range is determined as ({Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}) times
-          # {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}.
+          # - it contains valid {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount} or {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}.
+          # - and its {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year} is set or can be derived.
+          # Its annualized range is determined as ({::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount amount} or {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range range}) times
+          # {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#expected_units_per_year expected_units_per_year}.
           # @!attribute [rw] type
-          #   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType]
+          #   @return [::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType]
           #     Compensation type.
           #
-          #     Default is {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType.COMPENSATION_TYPE_UNSPECIFIED}.
+          #     Default is {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationType::COMPENSATION_TYPE_UNSPECIFIED CompensationType.COMPENSATION_TYPE_UNSPECIFIED}.
           # @!attribute [rw] unit
-          #   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit]
+          #   @return [::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit]
           #     Frequency of the specified amount.
           #
-          #     Default is {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED}.
+          #     Default is {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED}.
           # @!attribute [rw] amount
-          #   @return [Google::Type::Money]
+          #   @return [::Google::Type::Money]
           #     Compensation amount.
           # @!attribute [rw] range
-          #   @return [Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange]
+          #   @return [::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationRange]
           #     Compensation range.
           # @!attribute [rw] description
-          #   @return [String]
+          #   @return [::String]
           #     Compensation description.  For example, could
           #     indicate equity terms or provide additional context to an estimated
           #     bonus.
           # @!attribute [rw] expected_units_per_year
-          #   @return [Google::Protobuf::DoubleValue]
+          #   @return [::Google::Protobuf::DoubleValue]
           #     Expected number of units paid each year. If not specified, when
-          #     {Google::Cloud::Talent::V4beta1::Job#employment_types Job.employment_types} is FULLTIME, a default value is inferred
-          #     based on {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}. Default values:
+          #     {::Google::Cloud::Talent::V4beta1::Job#employment_types Job.employment_types} is FULLTIME, a default value is inferred
+          #     based on {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#unit unit}. Default values:
           #     - HOURLY: 2080
           #     - DAILY: 260
           #     - WEEKLY: 52
           #     - MONTHLY: 12
           #     - ANNUAL: 1
           class CompensationEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Compensation range.
           # @!attribute [rw] max_compensation
-          #   @return [Google::Type::Money]
+          #   @return [::Google::Type::Money]
           #     The maximum amount of compensation. If left empty, the value is set
           #     to a maximal compensation value and the currency code is set to
-          #     match the {Google::Type::Money#currency_code currency code} of
+          #     match the {::Google::Type::Money#currency_code currency code} of
           #     min_compensation.
           # @!attribute [rw] min_compensation
-          #   @return [Google::Type::Money]
+          #   @return [::Google::Type::Money]
           #     The minimum amount of compensation. If left empty, the value is set
           #     to zero and the currency code is set to match the
-          #     {Google::Type::Money#currency_code currency code} of max_compensation.
+          #     {::Google::Type::Money#currency_code currency code} of max_compensation.
           class CompensationRange
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # The type of compensation.
           #
           # For compensation amounts specified in non-monetary amounts,
-          # describe the compensation scheme in the {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry.description}.
+          # describe the compensation scheme in the {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry.description}.
           #
           # For example, tipping format is described in
-          # {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry.description} (for example, "expect 15-20% tips based
+          # {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry.description} (for example, "expect 15-20% tips based
           # on customer bill.") and an estimate of the tips provided in
-          # {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} or {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry.range} ($10 per hour).
+          # {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} or {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry.range} ($10 per hour).
           #
-          # For example, equity is described in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry.description}
+          # For example, equity is described in {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry.description}
           # (for example, "1% - 2% equity vesting over 4 years, 1 year cliff") and
-          # value estimated in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} or
-          # {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry.range}. If no value estimate is possible, units are
-          # {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED} and then further
-          # clarified in {Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry.description} field.
+          # value estimated in {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#amount CompensationEntry.amount} or
+          # {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#range CompensationEntry.range}. If no value estimate is possible, units are
+          # {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationUnit::COMPENSATION_UNIT_UNSPECIFIED CompensationUnit.COMPENSATION_UNIT_UNSPECIFIED} and then further
+          # clarified in {::Google::Cloud::Talent::V4beta1::CompensationInfo::CompensationEntry#description CompensationEntry.description} field.
           module CompensationType
             # Default value.
             COMPENSATION_TYPE_UNSPECIFIED = 0
@@ -435,125 +435,125 @@ module Google
 
         # Resource that represents a license or certification.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Name of license or certification.
         #
         #     Number of characters allowed is 100.
         # @!attribute [rw] acquire_date
-        #   @return [Google::Type::Date]
+        #   @return [::Google::Type::Date]
         #     Acquisition date or effective date of license or certification.
         # @!attribute [rw] expire_date
-        #   @return [Google::Type::Date]
+        #   @return [::Google::Type::Date]
         #     Expiration date of license of certification.
         # @!attribute [rw] authority
-        #   @return [String]
+        #   @return [::String]
         #     Authority of license, such as government.
         #
         #     Number of characters allowed is 100.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Description of license or certification.
         #
         #     Number of characters allowed is 100,000.
         class Certification
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Resource that represents a skill of a candidate.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Skill display name.
         #
         #     For example, "Java", "Python".
         #
         #     Number of characters allowed is 100.
         # @!attribute [rw] last_used_date
-        #   @return [Google::Type::Date]
+        #   @return [::Google::Type::Date]
         #     The last time this skill was used.
         # @!attribute [rw] level
-        #   @return [Google::Cloud::Talent::V4beta1::SkillProficiencyLevel]
+        #   @return [::Google::Cloud::Talent::V4beta1::SkillProficiencyLevel]
         #     Skill proficiency level which indicates how proficient the candidate is at
         #     this skill.
         # @!attribute [rw] context
-        #   @return [String]
+        #   @return [::String]
         #     A paragraph describes context of this skill.
         #
         #     Number of characters allowed is 100,000.
         # @!attribute [r] skill_name_snippet
-        #   @return [String]
-        #     Output only. Skill name snippet shows how the {Google::Cloud::Talent::V4beta1::Skill#display_name display_name} is related to a search
-        #     query. It's empty if the {Google::Cloud::Talent::V4beta1::Skill#display_name display_name} isn't related to the search
+        #   @return [::String]
+        #     Output only. Skill name snippet shows how the {::Google::Cloud::Talent::V4beta1::Skill#display_name display_name} is related to a search
+        #     query. It's empty if the {::Google::Cloud::Talent::V4beta1::Skill#display_name display_name} isn't related to the search
         #     query.
         class Skill
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Details of an interview.
         # @!attribute [rw] rating
-        #   @return [Google::Cloud::Talent::V4beta1::Rating]
+        #   @return [::Google::Cloud::Talent::V4beta1::Rating]
         #     The rating on this interview.
         # @!attribute [rw] outcome
-        #   @return [Google::Cloud::Talent::V4beta1::Outcome]
+        #   @return [::Google::Cloud::Talent::V4beta1::Outcome]
         #     Required. The overall decision resulting from this interview (positive, negative,
         #     nuetral).
         class Interview
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The details of the score received for an assessment or interview.
         # @!attribute [rw] overall
-        #   @return [Float]
+        #   @return [::Float]
         #     Overall score.
         # @!attribute [rw] min
-        #   @return [Float]
+        #   @return [::Float]
         #     The minimum value for the score.
         # @!attribute [rw] max
-        #   @return [Float]
+        #   @return [::Float]
         #     The maximum value for the score.
         # @!attribute [rw] interval
-        #   @return [Float]
+        #   @return [::Float]
         #     The steps within the score (for example, interval = 1 max = 5
         #     min = 1 indicates that the score can be 1, 2, 3, 4, or 5)
         class Rating
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Metadata used for long running operations returned by CTS batch APIs.
-        # It's used to replace {Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}.
+        # It's used to replace {::Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}.
         # @!attribute [rw] state
-        #   @return [Google::Cloud::Talent::V4beta1::BatchOperationMetadata::State]
+        #   @return [::Google::Cloud::Talent::V4beta1::BatchOperationMetadata::State]
         #     The state of a long running operation.
         # @!attribute [rw] state_description
-        #   @return [String]
+        #   @return [::String]
         #     More detailed information about operation state.
         # @!attribute [rw] success_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Count of successful item(s) inside an operation.
         # @!attribute [rw] failure_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Count of failed item(s) inside an operation.
         # @!attribute [rw] total_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Count of total item(s) inside an operation.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time when the batch operation is created.
         # @!attribute [rw] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time when the batch operation status is updated. The metadata and the
-        #     {Google::Cloud::Talent::V4beta1::BatchOperationMetadata#update_time update_time} is refreshed every minute otherwise cached data is
+        #     {::Google::Cloud::Talent::V4beta1::BatchOperationMetadata#update_time update_time} is refreshed every minute otherwise cached data is
         #     returned.
         # @!attribute [rw] end_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time when the batch operation is finished and
-        #     {Google::Longrunning::Operation#done google.longrunning.Operation.done} is set to `true`.
+        #     {::Google::Longrunning::Operation#done google.longrunning.Operation.done} is set to `true`.
         class BatchOperationMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           module State
             # Default value.
@@ -730,7 +730,7 @@ module Google
           # The job is offered as a contracted position with the understanding
           # that it's converted into a full-time position at the end of the
           # contract. Jobs of this type are also returned by a search for
-          # {Google::Cloud::Talent::V4beta1::EmploymentType::CONTRACTOR EmploymentType.CONTRACTOR} jobs.
+          # {::Google::Cloud::Talent::V4beta1::EmploymentType::CONTRACTOR EmploymentType.CONTRACTOR} jobs.
           CONTRACT_TO_HIRE = 4
 
           # The job is offered as a temporary employment opportunity, usually
@@ -886,13 +886,13 @@ module Google
         # eligible for searches in the specified region.
         module PostingRegion
           # If the region is unspecified, the job is only returned if it
-          # matches the {Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter}.
+          # matches the {::Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter}.
           POSTING_REGION_UNSPECIFIED = 0
 
           # In addition to exact location matching, job posting is returned when the
-          # {Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} in the search query is in the same administrative area
+          # {::Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} in the search query is in the same administrative area
           # as the returned job posting. For example, if a `ADMINISTRATIVE_AREA` job
-          # is posted in "CA, USA", it's returned if {Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} has
+          # is posted in "CA, USA", it's returned if {::Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} has
           # "Mountain View".
           #
           # Administrative area refers to top-level administrative subdivision of this
@@ -901,9 +901,9 @@ module Google
           ADMINISTRATIVE_AREA = 1
 
           # In addition to exact location matching, job is returned when
-          # {Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} in search query is in the same country as this job.
+          # {::Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} in search query is in the same country as this job.
           # For example, if a `NATION_WIDE` job is posted in "USA", it's
-          # returned if {Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} has 'Mountain View'.
+          # returned if {::Google::Cloud::Talent::V4beta1::LocationFilter LocationFilter} has 'Mountain View'.
           NATION = 2
 
           # Job allows employees to work remotely (telecommute).
@@ -1038,10 +1038,10 @@ module Google
 
           # Job application signal.
           #
-          # In the context of {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
+          # In the context of {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
           # to the candidate's most recent application.
-          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
-          # calculated from max({Google::Cloud::Talent::V4beta1::Application#create_time Application.create_time}) from all {Google::Cloud::Talent::V4beta1::Application Application}
+          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
+          # calculated from max({::Google::Cloud::Talent::V4beta1::Application#create_time Application.create_time}) from all {::Google::Cloud::Talent::V4beta1::Application Application}
           # records where [Application.source][google.cloud.talent.v4beta1.Application.source] is any of the following:
           #  [APPLY_DIRECT_WEB][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_WEB]
           #  [APPLY_DIRECT_MOBILE_WEB][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_MOBILE_WEB]
@@ -1049,55 +1049,55 @@ module Google
           #  [APPLY_DIRECT_IN_PERSON][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_DIRECT_IN_PERSON]
           #  [APPLY_INDIRECT][google.cloud.talent.v4beta1.Application.ApplicationSource.APPLY_INDIRECT]
           #
-          # In the context of {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
-          # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
-          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is JOB_APPLICATION.
+          # In the context of {::Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
+          # {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
+          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is JOB_APPLICATION.
           JOB_APPLICATION = 1
 
           # Resume update signal.
           #
-          # In the context of {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
+          # In the context of {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
           # to the candidate's most recent update to their resume.
-          # For a {Google::Cloud::Talent::V4beta1::SummarizedProfile#summary SummarizedProfile.summary},
-          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
-          # calculated from max({Google::Cloud::Talent::V4beta1::Profile#resume_update_time Profile.resume_update_time}) from all
-          # {Google::Cloud::Talent::V4beta1::SummarizedProfile#profiles SummarizedProfile.profiles}.
+          # For a {::Google::Cloud::Talent::V4beta1::SummarizedProfile#summary SummarizedProfile.summary},
+          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
+          # calculated from max({::Google::Cloud::Talent::V4beta1::Profile#resume_update_time Profile.resume_update_time}) from all
+          # {::Google::Cloud::Talent::V4beta1::SummarizedProfile#profiles SummarizedProfile.profiles}.
           #
-          # In the context of {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
-          # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
-          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is RESUME_UPDATE.
+          # In the context of {::Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
+          # {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
+          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is RESUME_UPDATE.
           RESUME_UPDATE = 2
 
           # Candidate update signal.
           #
-          # In the context of {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
+          # In the context of {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
           # to the candidate's most recent update to their profile.
-          # For a {Google::Cloud::Talent::V4beta1::SummarizedProfile#summary SummarizedProfile.summary},
-          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
-          # calculated from max({Google::Cloud::Talent::V4beta1::Profile#candidate_update_time Profile.candidate_update_time}) from all
-          # {Google::Cloud::Talent::V4beta1::SummarizedProfile#profiles SummarizedProfile.profiles}.
+          # For a {::Google::Cloud::Talent::V4beta1::SummarizedProfile#summary SummarizedProfile.summary},
+          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
+          # calculated from max({::Google::Cloud::Talent::V4beta1::Profile#candidate_update_time Profile.candidate_update_time}) from all
+          # {::Google::Cloud::Talent::V4beta1::SummarizedProfile#profiles SummarizedProfile.profiles}.
           #
-          # In the context of {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
-          # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
-          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is CANDIDATE_UPDATE.
+          # In the context of {::Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
+          # {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
+          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is CANDIDATE_UPDATE.
           CANDIDATE_UPDATE = 3
 
           # Client submission signal.
           #
-          # In the context of {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
+          # In the context of {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals}, this signal is related
           # to the candidate's most recent submission.
-          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
-          # calculated from max({Google::Cloud::Talent::V4beta1::Application#create_time Application.create_time}) from all {Google::Cloud::Talent::V4beta1::Application Application}
-          # records where {Google::Cloud::Talent::V4beta1::Application#stage Application.stage} is any of the following:
-          #  {Google::Cloud::Talent::V4beta1::Application::ApplicationStage::HIRING_MANAGER_REVIEW HIRING_MANAGER_REVIEW}
-          #  {Google::Cloud::Talent::V4beta1::Application::ApplicationStage::INTERVIEW INTERVIEW}
-          #  {Google::Cloud::Talent::V4beta1::Application::ApplicationStage::OFFER_EXTENDED OFFER_EXTENDED}
-          #  {Google::Cloud::Talent::V4beta1::Application::ApplicationStage::OFFER_ACCEPTED OFFER_ACCEPTED}
-          #  {Google::Cloud::Talent::V4beta1::Application::ApplicationStage::STARTED STARTED}
+          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#last_update_time last_update_time} is
+          # calculated from max({::Google::Cloud::Talent::V4beta1::Application#create_time Application.create_time}) from all {::Google::Cloud::Talent::V4beta1::Application Application}
+          # records where {::Google::Cloud::Talent::V4beta1::Application#stage Application.stage} is any of the following:
+          #  {::Google::Cloud::Talent::V4beta1::Application::ApplicationStage::HIRING_MANAGER_REVIEW HIRING_MANAGER_REVIEW}
+          #  {::Google::Cloud::Talent::V4beta1::Application::ApplicationStage::INTERVIEW INTERVIEW}
+          #  {::Google::Cloud::Talent::V4beta1::Application::ApplicationStage::OFFER_EXTENDED OFFER_EXTENDED}
+          #  {::Google::Cloud::Talent::V4beta1::Application::ApplicationStage::OFFER_ACCEPTED OFFER_ACCEPTED}
+          #  {::Google::Cloud::Talent::V4beta1::Application::ApplicationStage::STARTED STARTED}
           #
-          # In the context of {Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
-          # {Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
-          # {Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is CLIENT_SUBMISSION.
+          # In the context of {::Google::Cloud::Talent::V4beta1::AvailabilityFilter AvailabilityFilter}, the filter is applied on
+          # {::Google::Cloud::Talent::V4beta1::Profile#availability_signals Profile.availability_signals} where
+          # {::Google::Cloud::Talent::V4beta1::AvailabilitySignal#type type} is CLIENT_SUBMISSION.
           CLIENT_SUBMISSION = 4
         end
       end

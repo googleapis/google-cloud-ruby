@@ -38,15 +38,15 @@ module Google
             ##
             # Configure the EventService Client class.
             #
-            # See {Google::Cloud::Talent::V4beta1::EventService::Client::Configuration}
+            # See {::Google::Cloud::Talent::V4beta1::EventService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all EventService clients:
             #
-            #     Google::Cloud::Talent::V4beta1::EventService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Talent::V4beta1::EventService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -80,7 +80,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Talent::V4beta1::EventService::Client::Configuration}
+            # See {::Google::Cloud::Talent::V4beta1::EventService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -101,13 +101,13 @@ module Google
             # To create a new EventService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Talent::V4beta1::EventService::Client.new
+            #     client = ::Google::Cloud::Talent::V4beta1::EventService::Client.new
             #
             # To create a new EventService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Talent::V4beta1::EventService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Talent::V4beta1::EventService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the EventService client.
@@ -134,8 +134,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @event_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Talent::V4beta1::EventService::Stub,
+              @event_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Talent::V4beta1::EventService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -156,12 +156,12 @@ module Google
             #
             # @overload create_client_event(request, options = nil)
             #   Pass arguments to `create_client_event` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::CreateClientEventRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::CreateClientEventRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::CreateClientEventRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::CreateClientEventRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_client_event(parent: nil, client_event: nil)
@@ -169,37 +169,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the tenant under which the event is created.
             #
             #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}", for example,
             #     "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
             #     is created, for example, "projects/foo".
-            #   @param client_event [Google::Cloud::Talent::V4beta1::ClientEvent, Hash]
+            #   @param client_event [::Google::Cloud::Talent::V4beta1::ClientEvent, ::Hash]
             #     Required. Events issued when end user interacts with customer's application that
             #     uses Cloud Talent Solution.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::ClientEvent]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::ClientEvent]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::ClientEvent]
+            # @return [::Google::Cloud::Talent::V4beta1::ClientEvent]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_client_event request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::CreateClientEventRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::CreateClientEventRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_client_event.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -220,8 +220,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -231,7 +231,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Talent::V4beta1::EventService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Talent::V4beta1::EventService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -242,22 +242,22 @@ module Google
             # To modify the global config, setting the timeout for create_client_event
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Talent::V4beta1::EventService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_client_event.timeout = 20_000
+            #     ::Google::Cloud::Talent::V4beta1::EventService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_client_event.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Talent::V4beta1::EventService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_client_event.timeout = 20_000
+            #     client = ::Google::Cloud::Talent::V4beta1::EventService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_client_event.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"jobs.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -269,29 +269,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -299,10 +299,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "jobs.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -310,14 +310,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -358,14 +358,14 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_client_event`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_client_event
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_client_event_config = parent_rpcs&.create_client_event if parent_rpcs&.respond_to? :create_client_event
-                  @create_client_event = Gapic::Config::Method.new create_client_event_config
+                  @create_client_event = ::Gapic::Config::Method.new create_client_event_config
 
                   yield self if block_given?
                 end

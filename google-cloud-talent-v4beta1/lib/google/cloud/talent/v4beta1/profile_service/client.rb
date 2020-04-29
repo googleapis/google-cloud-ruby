@@ -39,15 +39,15 @@ module Google
             ##
             # Configure the ProfileService Client class.
             #
-            # See {Google::Cloud::Talent::V4beta1::ProfileService::Client::Configuration}
+            # See {::Google::Cloud::Talent::V4beta1::ProfileService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all ProfileService clients:
             #
-            #     Google::Cloud::Talent::V4beta1::ProfileService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Talent::V4beta1::ProfileService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -109,7 +109,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Talent::V4beta1::ProfileService::Client::Configuration}
+            # See {::Google::Cloud::Talent::V4beta1::ProfileService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -130,13 +130,13 @@ module Google
             # To create a new ProfileService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Talent::V4beta1::ProfileService::Client.new
+            #     client = ::Google::Cloud::Talent::V4beta1::ProfileService::Client.new
             #
             # To create a new ProfileService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Talent::V4beta1::ProfileService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Talent::V4beta1::ProfileService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the ProfileService client.
@@ -163,8 +163,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @profile_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Talent::V4beta1::ProfileService::Stub,
+              @profile_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Talent::V4beta1::ProfileService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -179,12 +179,12 @@ module Google
             #
             # @overload list_profiles(request, options = nil)
             #   Pass arguments to `list_profiles` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::ListProfilesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::ListProfilesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::ListProfilesRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::ListProfilesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_profiles(parent: nil, filter: nil, page_token: nil, page_size: nil, read_mask: nil)
@@ -192,12 +192,12 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the tenant under which the profile is created.
             #
             #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}". For example,
             #     "projects/foo/tenants/bar".
-            #   @param filter [String]
+            #   @param filter [::String]
             #     The filter string specifies the profiles to be enumerated.
             #
             #     Supported operator: =, AND
@@ -215,16 +215,16 @@ module Google
             #
             #     * externalId = "externalId-1"
             #     * groupId = "groupId-1"
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The token that specifies the current offset (that is, starting result).
             #
-            #     Please set the value to {Google::Cloud::Talent::V4beta1::ListProfilesResponse#next_page_token ListProfilesResponse.next_page_token} to
+            #     Please set the value to {::Google::Cloud::Talent::V4beta1::ListProfilesResponse#next_page_token ListProfilesResponse.next_page_token} to
             #     continue the list.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of profiles to be returned, at most 100.
             #
             #     Default is 100 unless a positive number smaller than 100 is specified.
-            #   @param read_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     A field mask to specify the profile fields to be listed in response.
             #     All fields are listed if it is unset.
             #
@@ -233,26 +233,26 @@ module Google
             #     * name
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Talent::V4beta1::Profile>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Talent::V4beta1::Profile>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Talent::V4beta1::Profile>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Talent::V4beta1::Profile>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_profiles request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::ListProfilesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::ListProfilesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_profiles.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -270,12 +270,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @profile_service_stub.call_rpc :list_profiles, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @profile_service_stub, :list_profiles, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @profile_service_stub, :list_profiles, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -283,12 +283,12 @@ module Google
             #
             # @overload create_profile(request, options = nil)
             #   Pass arguments to `create_profile` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::CreateProfileRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::CreateProfileRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::CreateProfileRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::CreateProfileRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_profile(parent: nil, profile: nil)
@@ -296,35 +296,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The name of the tenant this profile belongs to.
             #
             #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}". For example,
             #     "projects/foo/tenants/bar".
-            #   @param profile [Google::Cloud::Talent::V4beta1::Profile, Hash]
+            #   @param profile [::Google::Cloud::Talent::V4beta1::Profile, ::Hash]
             #     Required. The profile to be created.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::Profile]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::Profile]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::Profile]
+            # @return [::Google::Cloud::Talent::V4beta1::Profile]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_profile request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::CreateProfileRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::CreateProfileRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_profile.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -345,8 +345,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -354,12 +354,12 @@ module Google
             #
             # @overload get_profile(request, options = nil)
             #   Pass arguments to `get_profile` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::GetProfileRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::GetProfileRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::GetProfileRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::GetProfileRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_profile(name: nil)
@@ -367,7 +367,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the profile to get.
             #
             #     The format is
@@ -375,26 +375,26 @@ module Google
             #     example, "projects/foo/tenants/bar/profiles/baz".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::Profile]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::Profile]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::Profile]
+            # @return [::Google::Cloud::Talent::V4beta1::Profile]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_profile request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::GetProfileRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::GetProfileRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_profile.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -415,8 +415,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -424,12 +424,12 @@ module Google
             #
             # @overload update_profile(request, options = nil)
             #   Pass arguments to `update_profile` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::UpdateProfileRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::UpdateProfileRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::UpdateProfileRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::UpdateProfileRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_profile(profile: nil, update_mask: nil)
@@ -437,34 +437,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param profile [Google::Cloud::Talent::V4beta1::Profile, Hash]
+            #   @param profile [::Google::Cloud::Talent::V4beta1::Profile, ::Hash]
             #     Required. Profile to be updated.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     A field mask to specify the profile fields to update.
             #
             #     A full update is performed if it is unset.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::Profile]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::Profile]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::Profile]
+            # @return [::Google::Cloud::Talent::V4beta1::Profile]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_profile request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::UpdateProfileRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::UpdateProfileRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_profile.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -485,8 +485,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -496,12 +496,12 @@ module Google
             #
             # @overload delete_profile(request, options = nil)
             #   Pass arguments to `delete_profile` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::DeleteProfileRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::DeleteProfileRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::DeleteProfileRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::DeleteProfileRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_profile(name: nil)
@@ -509,7 +509,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the profile to be deleted.
             #
             #     The format is
@@ -517,26 +517,26 @@ module Google
             #     example, "projects/foo/tenants/bar/profiles/baz".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_profile request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::DeleteProfileRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::DeleteProfileRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_profile.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -557,8 +557,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -567,16 +567,16 @@ module Google
             # For example, search by raw queries "software engineer in Mountain View" or
             # search by structured filters (location filter, education filter, etc.).
             #
-            # See {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest} for more information.
+            # See {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest} for more information.
             #
             # @overload search_profiles(request, options = nil)
             #   Pass arguments to `search_profiles` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::SearchProfilesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::SearchProfilesRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::SearchProfilesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload search_profiles(parent: nil, request_metadata: nil, profile_query: nil, page_size: nil, page_token: nil, offset: nil, disable_spell_check: nil, order_by: nil, case_sensitive_sort: nil, histogram_queries: nil, result_set_id: nil, strict_keywords_search: nil)
@@ -584,45 +584,45 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the tenant to search within.
             #
             #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}". For example,
             #     "projects/foo/tenants/bar".
-            #   @param request_metadata [Google::Cloud::Talent::V4beta1::RequestMetadata, Hash]
+            #   @param request_metadata [::Google::Cloud::Talent::V4beta1::RequestMetadata, ::Hash]
             #     Required. The meta information collected about the profile search user. This is used
             #     to improve the search quality of the service. These values are provided by
             #     users, and must be precise and consistent.
-            #   @param profile_query [Google::Cloud::Talent::V4beta1::ProfileQuery, Hash]
-            #     Search query to execute. See {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
-            #   @param page_size [Integer]
+            #   @param profile_query [::Google::Cloud::Talent::V4beta1::ProfileQuery, ::Hash]
+            #     Search query to execute. See {::Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
+            #   @param page_size [::Integer]
             #     A limit on the number of profiles returned in the search results.
             #     A value above the default value 10 can increase search response time.
             #
             #     The maximum value allowed is 100. Otherwise an error is thrown.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The pageToken, similar to offset enables users of the API to paginate
             #     through the search results. To retrieve the first page of results, set the
             #     pageToken to empty. The search response includes a
-            #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse#next_page_token nextPageToken} field that can be
+            #     {::Google::Cloud::Talent::V4beta1::SearchProfilesResponse#next_page_token nextPageToken} field that can be
             #     used to populate the pageToken field for the next page of results. Using
             #     pageToken instead of offset increases the performance of the API,
             #     especially compared to larger offset values.
-            #   @param offset [Integer]
+            #   @param offset [::Integer]
             #     An integer that specifies the current offset (that is, starting result) in
-            #     search results. This field is only considered if {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token} is unset.
+            #     search results. This field is only considered if {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token} is unset.
             #
             #     The maximum allowed value is 5000. Otherwise an error is thrown.
             #
             #     For example, 0 means to search from the first profile, and 10 means to
             #     search from the 11th profile. This can be used for pagination, for example
             #     pageSize = 10 and offset = 10 means to search from the second page.
-            #   @param disable_spell_check [Boolean]
+            #   @param disable_spell_check [::Boolean]
             #     This flag controls the spell-check feature. If `false`, the
             #     service attempts to correct a misspelled query.
             #
             #     For example, "enginee" is corrected to "engineer".
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     The criteria that determines how search results are sorted.
             #     Defaults is "relevance desc" if no value is specified.
             #
@@ -630,25 +630,25 @@ module Google
             #
             #     * "relevance desc": By descending relevance, as determined by the API
             #        algorithms.
-            #     * "update_date desc": Sort by {Google::Cloud::Talent::V4beta1::Profile#update_time Profile.update_time} in descending order
+            #     * "update_date desc": Sort by {::Google::Cloud::Talent::V4beta1::Profile#update_time Profile.update_time} in descending order
             #       (recently updated profiles first).
-            #     * "create_date desc": Sort by {Google::Cloud::Talent::V4beta1::Profile#create_time Profile.create_time} in descending order
+            #     * "create_date desc": Sort by {::Google::Cloud::Talent::V4beta1::Profile#create_time Profile.create_time} in descending order
             #       (recently created profiles first).
-            #     * "first_name": Sort by {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name PersonName.PersonStructuredName.given_name} in
+            #     * "first_name": Sort by {::Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name PersonName.PersonStructuredName.given_name} in
             #       ascending order.
-            #     * "first_name desc": Sort by {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name PersonName.PersonStructuredName.given_name}
+            #     * "first_name desc": Sort by {::Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name PersonName.PersonStructuredName.given_name}
             #       in descending order.
-            #     * "last_name": Sort by {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName.PersonStructuredName.family_name} in
+            #     * "last_name": Sort by {::Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName.PersonStructuredName.family_name} in
             #       ascending order.
-            #     * "last_name desc": Sort by {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName.PersonStructuredName.family_name}
+            #     * "last_name desc": Sort by {::Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName.PersonStructuredName.family_name}
             #       in ascending order.
-            #   @param case_sensitive_sort [Boolean]
+            #   @param case_sensitive_sort [::Boolean]
             #     When sort by field is based on alphabetical order, sort values case
             #     sensitively (based on ASCII) when the value is set to true. Default value
             #     is case in-sensitive sort (false).
-            #   @param histogram_queries [Array<Google::Cloud::Talent::V4beta1::HistogramQuery, Hash>]
+            #   @param histogram_queries [::Array<::Google::Cloud::Talent::V4beta1::HistogramQuery, ::Hash>]
             #     A list of expressions specifies histogram requests against matching
-            #     profiles for {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
+            #     profiles for {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
             #
             #     The expression syntax looks like a function definition with parameters.
             #
@@ -700,13 +700,13 @@ module Google
             #     * experience_in_months: experience in months. 0 means 0 month to 1 month
             #     (exclusive).
             #     * application_date: The application date specifies application start dates.
-            #     See {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter} for more details.
+            #     See {::Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter} for more details.
             #     * application_outcome_notes: The application outcome reason specifies the
             #     reasons behind the outcome of the job application.
-            #     See {Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter ApplicationOutcomeNotesFilter} for more details.
+            #     See {::Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter ApplicationOutcomeNotesFilter} for more details.
             #     * application_job_title: The application job title specifies the job
             #     applied for in the application.
-            #     See {Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter} for more details.
+            #     See {::Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter} for more details.
             #     * hirable_status: Hirable status specifies the profile's hirable status.
             #     * string_custom_attribute: String custom attributes. Values can be accessed
             #     via square bracket notation like string_custom_attribute["key1"].
@@ -721,28 +721,28 @@ module Google
             #     * count(string_custom_attribute["assigned_recruiter"])
             #     * count(numeric_custom_attribute["favorite_number"],
             #     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])
-            #   @param result_set_id [String]
+            #   @param result_set_id [::String]
             #     An id that uniquely identifies the result set of a
-            #     {Google::Cloud::Talent::V4beta1::ProfileService::Client#search_profiles SearchProfiles} call. The id should be
+            #     {::Google::Cloud::Talent::V4beta1::ProfileService::Client#search_profiles SearchProfiles} call. The id should be
             #     retrieved from the
-            #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse} message returned from a previous
-            #     invocation of {Google::Cloud::Talent::V4beta1::ProfileService::Client#search_profiles SearchProfiles}.
+            #     {::Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse} message returned from a previous
+            #     invocation of {::Google::Cloud::Talent::V4beta1::ProfileService::Client#search_profiles SearchProfiles}.
             #
             #     A result set is an ordered list of search results.
             #
             #     If this field is not set, a new result set is computed based on the
-            #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query}.  A new {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id result_set_id} is returned as a handle to
+            #     {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query}.  A new {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id result_set_id} is returned as a handle to
             #     access this result set.
             #
             #     If this field is set, the service will ignore the resource and
-            #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query} values, and simply retrieve a page of results from the
-            #     corresponding result set.  In this case, one and only one of {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
-            #     or {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#offset offset} must be set.
+            #     {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query} values, and simply retrieve a page of results from the
+            #     corresponding result set.  In this case, one and only one of {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
+            #     or {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#offset offset} must be set.
             #
-            #     A typical use case is to invoke {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest} without this
-            #     field, then use the resulting {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id result_set_id} in
-            #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse} to page through the results.
-            #   @param strict_keywords_search [Boolean]
+            #     A typical use case is to invoke {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest} without this
+            #     field, then use the resulting {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id result_set_id} in
+            #     {::Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse} to page through the results.
+            #   @param strict_keywords_search [::Boolean]
             #     This flag is used to indicate whether the service will attempt to
             #     understand synonyms and terms related to the search query or treat the
             #     query "as is" when it generates a set of results. By default this flag is
@@ -758,26 +758,26 @@ module Google
             #     longer boolean strings.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::SearchProfilesResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::SearchProfilesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::SearchProfilesResponse]
+            # @return [::Google::Cloud::Talent::V4beta1::SearchProfilesResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def search_profiles request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::SearchProfilesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::SearchProfilesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.search_profiles.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -798,8 +798,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -809,7 +809,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Talent::V4beta1::ProfileService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Talent::V4beta1::ProfileService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -820,22 +820,22 @@ module Google
             # To modify the global config, setting the timeout for list_profiles
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Talent::V4beta1::ProfileService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_profiles.timeout = 20_000
+            #     ::Google::Cloud::Talent::V4beta1::ProfileService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_profiles.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Talent::V4beta1::ProfileService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_profiles.timeout = 20_000
+            #     client = ::Google::Cloud::Talent::V4beta1::ProfileService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_profiles.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"jobs.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -847,29 +847,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -877,10 +877,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "jobs.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -888,14 +888,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -936,49 +936,49 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_profiles`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_profiles
                 ##
                 # RPC-specific configuration for `create_profile`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_profile
                 ##
                 # RPC-specific configuration for `get_profile`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_profile
                 ##
                 # RPC-specific configuration for `update_profile`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_profile
                 ##
                 # RPC-specific configuration for `delete_profile`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_profile
                 ##
                 # RPC-specific configuration for `search_profiles`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :search_profiles
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_profiles_config = parent_rpcs&.list_profiles if parent_rpcs&.respond_to? :list_profiles
-                  @list_profiles = Gapic::Config::Method.new list_profiles_config
+                  @list_profiles = ::Gapic::Config::Method.new list_profiles_config
                   create_profile_config = parent_rpcs&.create_profile if parent_rpcs&.respond_to? :create_profile
-                  @create_profile = Gapic::Config::Method.new create_profile_config
+                  @create_profile = ::Gapic::Config::Method.new create_profile_config
                   get_profile_config = parent_rpcs&.get_profile if parent_rpcs&.respond_to? :get_profile
-                  @get_profile = Gapic::Config::Method.new get_profile_config
+                  @get_profile = ::Gapic::Config::Method.new get_profile_config
                   update_profile_config = parent_rpcs&.update_profile if parent_rpcs&.respond_to? :update_profile
-                  @update_profile = Gapic::Config::Method.new update_profile_config
+                  @update_profile = ::Gapic::Config::Method.new update_profile_config
                   delete_profile_config = parent_rpcs&.delete_profile if parent_rpcs&.respond_to? :delete_profile
-                  @delete_profile = Gapic::Config::Method.new delete_profile_config
+                  @delete_profile = ::Gapic::Config::Method.new delete_profile_config
                   search_profiles_config = parent_rpcs&.search_profiles if parent_rpcs&.respond_to? :search_profiles
-                  @search_profiles = Gapic::Config::Method.new search_profiles_config
+                  @search_profiles = ::Gapic::Config::Method.new search_profiles_config
 
                   yield self if block_given?
                 end

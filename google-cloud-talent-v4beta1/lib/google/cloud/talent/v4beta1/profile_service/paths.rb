@@ -35,10 +35,10 @@ module Google
             # @param tenant [String]
             # @param profile [String]
             #
-            # @return [String]
+            # @return [::String]
             def profile_path project:, tenant:, profile:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "tenant cannot contain /" if tenant.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "tenant cannot contain /" if tenant.to_s.include? "/"
 
               "projects/#{project}/tenants/#{tenant}/profiles/#{profile}"
             end
@@ -53,9 +53,9 @@ module Google
             # @param project [String]
             # @param tenant [String]
             #
-            # @return [String]
+            # @return [::String]
             def tenant_path project:, tenant:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/tenants/#{tenant}"
             end

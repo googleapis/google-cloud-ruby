@@ -36,7 +36,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/talent/v4beta1/tenant_service"
-        #     client = Google::Cloud::Talent::V4beta1::TenantService::Client.new
+        #     client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new
         #
         module TenantService
         end

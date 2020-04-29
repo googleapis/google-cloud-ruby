@@ -24,7 +24,7 @@ module Google
       module V4beta1
         module TenantService
           # Credentials for the TenantService API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform",
               "https://www.googleapis.com/auth/jobs"

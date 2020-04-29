@@ -22,26 +22,26 @@ module Google
     # This resource represents a long-running operation that is the result of a
     # network API call.
     # @!attribute [rw] name
-    #   @return [String]
+    #   @return [::String]
     #     The server-assigned name, which is only unique within the same service that
     #     originally returns it. If you use the default HTTP mapping, the
     #     `name` should have the format of `operations/some/unique/name`.
     # @!attribute [rw] metadata
-    #   @return [Google::Protobuf::Any]
+    #   @return [::Google::Protobuf::Any]
     #     Service-specific metadata associated with the operation.  It typically
     #     contains progress information and common metadata such as create time.
     #     Some services might not provide such metadata.  Any method that returns a
     #     long-running operation should document the metadata type, if any.
     # @!attribute [rw] done
-    #   @return [Boolean]
+    #   @return [::Boolean]
     #     If the value is `false`, it means the operation is still in progress.
     #     If true, the operation is completed, and either `error` or `response` is
     #     available.
     # @!attribute [rw] error
-    #   @return [Google::Rpc::Status]
+    #   @return [::Google::Rpc::Status]
     #     The error result of the operation in case of failure or cancellation.
     # @!attribute [rw] response
-    #   @return [Google::Protobuf::Any]
+    #   @return [::Google::Protobuf::Any]
     #     The normal response of the operation in case of success.  If the original
     #     method returns no data on success, such as `Delete`, the response is
     #     `google.protobuf.Empty`.  If the original method is standard
@@ -51,65 +51,65 @@ module Google
     #     is `TakeSnapshot()`, the inferred response type is
     #     `TakeSnapshotResponse`.
     class Operation
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # The request message for Operations.GetOperation.
     # @!attribute [rw] name
-    #   @return [String]
+    #   @return [::String]
     #     The name of the operation resource.
     class GetOperationRequest
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # The request message for Operations.ListOperations.
     # @!attribute [rw] name
-    #   @return [String]
+    #   @return [::String]
     #     The name of the operation collection.
     # @!attribute [rw] filter
-    #   @return [String]
+    #   @return [::String]
     #     The standard list filter.
     # @!attribute [rw] page_size
-    #   @return [Integer]
+    #   @return [::Integer]
     #     The standard list page size.
     # @!attribute [rw] page_token
-    #   @return [String]
+    #   @return [::String]
     #     The standard list page token.
     class ListOperationsRequest
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # The response message for Operations.ListOperations.
     # @!attribute [rw] operations
-    #   @return [Array<Google::Longrunning::Operation>]
+    #   @return [::Array<::Google::Longrunning::Operation>]
     #     A list of operations that matches the specified filter in the request.
     # @!attribute [rw] next_page_token
-    #   @return [String]
+    #   @return [::String]
     #     The standard List next-page token.
     class ListOperationsResponse
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # The request message for Operations.CancelOperation.
     # @!attribute [rw] name
-    #   @return [String]
+    #   @return [::String]
     #     The name of the operation resource to be cancelled.
     class CancelOperationRequest
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # The request message for Operations.DeleteOperation.
     # @!attribute [rw] name
-    #   @return [String]
+    #   @return [::String]
     #     The name of the operation resource to be deleted.
     class DeleteOperationRequest
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # A message representing the message types used by a long-running operation.
@@ -124,7 +124,7 @@ module Google
     #     };
     #   }
     # @!attribute [rw] response_type
-    #   @return [String]
+    #   @return [::String]
     #     Required. The message name of the primary return type for this
     #     long-running operation.
     #     This type will be used to deserialize the LRO's response.
@@ -134,7 +134,7 @@ module Google
     #
     #     Note: Altering this value constitutes a breaking change.
     # @!attribute [rw] metadata_type
-    #   @return [String]
+    #   @return [::String]
     #     Required. The message name of the metadata type for this long-running
     #     operation.
     #
@@ -143,8 +143,8 @@ module Google
     #
     #     Note: Altering this value constitutes a breaking change.
     class OperationInfo
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end
