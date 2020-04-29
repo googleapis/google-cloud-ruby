@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-automl
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::AutoML::V1::PredictionService::Credentials`):
+`::Google::Cloud::AutoML::V1::PredictionService::Credentials`):
 
 1. `AUTOML_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `AUTOML_KEYFILE` - Path to JSON file, or JSON contents
