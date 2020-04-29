@@ -33,7 +33,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def project_path project:
               "projects/#{project}"
             end
@@ -48,9 +48,9 @@ module Google
             # @param project [String]
             # @param secret [String]
             #
-            # @return [String]
+            # @return [::String]
             def secret_path project:, secret:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/secrets/#{secret}"
             end
@@ -66,10 +66,10 @@ module Google
             # @param secret [String]
             # @param secret_version [String]
             #
-            # @return [String]
+            # @return [::String]
             def secret_version_path project:, secret:, secret_version:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
 
               "projects/#{project}/secrets/#{secret}/versions/#{secret_version}"
             end
