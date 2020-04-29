@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/language/v1"
 
-client = Google::Cloud::Language::V1::LanguageService::Client.new
+client = ::Google::Cloud::Language::V1::LanguageService::Client.new
 request = my_create_request
 response = client.analyze_sentiment request
 ```
