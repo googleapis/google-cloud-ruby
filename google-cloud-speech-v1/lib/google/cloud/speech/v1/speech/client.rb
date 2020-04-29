@@ -36,15 +36,15 @@ module Google
             ##
             # Configure the Speech Client class.
             #
-            # See {Google::Cloud::Speech::V1::Speech::Client::Configuration}
+            # See {::Google::Cloud::Speech::V1::Speech::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all Speech clients:
             #
-            #     Google::Cloud::Speech::V1::Speech::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Speech::V1::Speech::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -94,7 +94,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Speech::V1::Speech::Client::Configuration}
+            # See {::Google::Cloud::Speech::V1::Speech::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -115,13 +115,13 @@ module Google
             # To create a new Speech client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Speech::V1::Speech::Client.new
+            #     client = ::Google::Cloud::Speech::V1::Speech::Client.new
             #
             # To create a new Speech client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Speech::V1::Speech::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Speech::V1::Speech::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Speech client.
@@ -153,8 +153,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @speech_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Speech::V1::Speech::Stub,
+              @speech_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Speech::V1::Speech::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -165,7 +165,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::Speech::V1::Speech::Operations]
+            # @return [::Google::Cloud::Speech::V1::Speech::Operations]
             #
             attr_reader :operations_client
 
@@ -177,12 +177,12 @@ module Google
             #
             # @overload recognize(request, options = nil)
             #   Pass arguments to `recognize` via a request object, either of type
-            #   {Google::Cloud::Speech::V1::RecognizeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Speech::V1::RecognizeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Speech::V1::RecognizeRequest, Hash]
+            #   @param request [::Google::Cloud::Speech::V1::RecognizeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload recognize(config: nil, audio: nil)
@@ -190,33 +190,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param config [Google::Cloud::Speech::V1::RecognitionConfig, Hash]
+            #   @param config [::Google::Cloud::Speech::V1::RecognitionConfig, ::Hash]
             #     Required. Provides information to the recognizer that specifies how to
             #     process the request.
-            #   @param audio [Google::Cloud::Speech::V1::RecognitionAudio, Hash]
+            #   @param audio [::Google::Cloud::Speech::V1::RecognitionAudio, ::Hash]
             #     Required. The audio data to be recognized.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Speech::V1::RecognizeResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Speech::V1::RecognizeResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Speech::V1::RecognizeResponse]
+            # @return [::Google::Cloud::Speech::V1::RecognizeResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def recognize request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Speech::V1::RecognizeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Speech::V1::RecognizeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.recognize.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Speech::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -231,8 +231,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -245,12 +245,12 @@ module Google
             #
             # @overload long_running_recognize(request, options = nil)
             #   Pass arguments to `long_running_recognize` via a request object, either of type
-            #   {Google::Cloud::Speech::V1::LongRunningRecognizeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Speech::V1::LongRunningRecognizeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Speech::V1::LongRunningRecognizeRequest, Hash]
+            #   @param request [::Google::Cloud::Speech::V1::LongRunningRecognizeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload long_running_recognize(config: nil, audio: nil)
@@ -258,33 +258,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param config [Google::Cloud::Speech::V1::RecognitionConfig, Hash]
+            #   @param config [::Google::Cloud::Speech::V1::RecognitionConfig, ::Hash]
             #     Required. Provides information to the recognizer that specifies how to
             #     process the request.
-            #   @param audio [Google::Cloud::Speech::V1::RecognitionAudio, Hash]
+            #   @param audio [::Google::Cloud::Speech::V1::RecognitionAudio, ::Hash]
             #     Required. The audio data to be recognized.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def long_running_recognize request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Speech::V1::LongRunningRecognizeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Speech::V1::LongRunningRecognizeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.long_running_recognize.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Speech::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -296,49 +296,49 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @speech_stub.call_rpc :long_running_recognize, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Performs bidirectional streaming speech recognition: receive results while
             # sending audio. This method is only available via the gRPC API (not REST).
             #
-            # @param request [Gapic::StreamInput, Enumerable<Google::Cloud::Speech::V1::StreamingRecognizeRequest, Hash>]
-            #   An enumerable of {Google::Cloud::Speech::V1::StreamingRecognizeRequest} instances.
-            # @param options [Gapic::CallOptions, Hash]
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Speech::V1::StreamingRecognizeRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::Speech::V1::StreamingRecognizeRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
             #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Enumerable<Google::Cloud::Speech::V1::StreamingRecognizeResponse>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Enumerable<::Google::Cloud::Speech::V1::StreamingRecognizeResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Enumerable<Google::Cloud::Speech::V1::StreamingRecognizeResponse>]
+            # @return [::Enumerable<::Google::Cloud::Speech::V1::StreamingRecognizeResponse>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def streaming_recognize request, options = nil
-              unless request.is_a? Enumerable
-                raise ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
                 request = request.to_enum
               end
 
               request = request.lazy.map do |req|
-                Gapic::Protobuf.coerce req, to: Google::Cloud::Speech::V1::StreamingRecognizeRequest
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::Speech::V1::StreamingRecognizeRequest
               end
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.streaming_recognize.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Speech::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -353,8 +353,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -364,7 +364,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Speech::V1::Speech::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Speech::V1::Speech::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -375,22 +375,22 @@ module Google
             # To modify the global config, setting the timeout for recognize
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Speech::V1::Speech::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.recognize.timeout = 20_000
+            #     ::Google::Cloud::Speech::V1::Speech::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.recognize.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Speech::V1::Speech::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.recognize.timeout = 20_000
+            #     client = ::Google::Cloud::Speech::V1::Speech::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.recognize.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"speech.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -402,29 +402,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -432,10 +432,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "speech.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -443,14 +443,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -491,28 +491,28 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `recognize`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :recognize
                 ##
                 # RPC-specific configuration for `long_running_recognize`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :long_running_recognize
                 ##
                 # RPC-specific configuration for `streaming_recognize`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :streaming_recognize
 
                 # @private
                 def initialize parent_rpcs = nil
                   recognize_config = parent_rpcs&.recognize if parent_rpcs&.respond_to? :recognize
-                  @recognize = Gapic::Config::Method.new recognize_config
+                  @recognize = ::Gapic::Config::Method.new recognize_config
                   long_running_recognize_config = parent_rpcs&.long_running_recognize if parent_rpcs&.respond_to? :long_running_recognize
-                  @long_running_recognize = Gapic::Config::Method.new long_running_recognize_config
+                  @long_running_recognize = ::Gapic::Config::Method.new long_running_recognize_config
                   streaming_recognize_config = parent_rpcs&.streaming_recognize if parent_rpcs&.respond_to? :streaming_recognize
-                  @streaming_recognize = Gapic::Config::Method.new streaming_recognize_config
+                  @streaming_recognize = ::Gapic::Config::Method.new streaming_recognize_config
 
                   yield self if block_given?
                 end

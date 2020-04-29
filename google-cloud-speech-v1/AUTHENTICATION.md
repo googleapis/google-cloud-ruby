@@ -27,7 +27,7 @@ export SPEECH_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/speech/v1"
 
-client = Google::Cloud::Speech::V1::Speech::Client.new
+client = ::Google::Cloud::Speech::V1::Speech::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-speech-v1
 checks for credentials are configured on the service Credentials class (such as
-{Google::Cloud::Speech::V1::Speech::Credentials}):
+{::Google::Cloud::Speech::V1::Speech::Credentials}):
 
 1. `SPEECH_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SPEECH_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/speech/v1"
 
 ENV["SPEECH_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Speech::V1::Speech::Client.new
+client = ::Google::Cloud::Speech::V1::Speech::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/speech/v1"
 
-client = Google::Cloud::Speech::V1::Speech::Client.new do |config|
+client = ::Google::Cloud::Speech::V1::Speech::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/speech/v1"
 
-Google::Cloud::Speech::V1::Speech::Client.configure do |config|
+::Google::Cloud::Speech::V1::Speech::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Speech::V1::Speech::Client.new
+client = ::Google::Cloud::Speech::V1::Speech::Client.new
 ```
 
 ### Cloud SDK
