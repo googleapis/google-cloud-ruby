@@ -86,7 +86,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or KMS_TEST_PROJECT=test123 KMS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/kms/v1/key_management_service/credentials"
-  Google::Cloud::Kms::V1::KeyManagementService::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Kms::V1::KeyManagementService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["KMS_PROJECT"] = project

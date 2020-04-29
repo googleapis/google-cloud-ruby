@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-kms
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Kms::V1::KeyManagementService::Credentials`):
+`::Google::Cloud::Kms::V1::KeyManagementService::Credentials`):
 
 1. `KMS_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `KMS_KEYFILE` - Path to JSON file, or JSON contents
