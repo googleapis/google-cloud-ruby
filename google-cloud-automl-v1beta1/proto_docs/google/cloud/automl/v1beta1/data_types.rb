@@ -24,16 +24,16 @@ module Google
         # Indicated the type of data that can be stored in a structured data entity
         # (e.g. a table).
         # @!attribute [rw] list_element_type
-        #   @return [Google::Cloud::AutoML::V1beta1::DataType]
-        #     If {Google::Cloud::AutoML::V1beta1::DataType#type_code type_code} == {Google::Cloud::AutoML::V1beta1::TypeCode::ARRAY ARRAY},
+        #   @return [::Google::Cloud::AutoML::V1beta1::DataType]
+        #     If {::Google::Cloud::AutoML::V1beta1::DataType#type_code type_code} == {::Google::Cloud::AutoML::V1beta1::TypeCode::ARRAY ARRAY},
         #     then `list_element_type` is the type of the elements.
         # @!attribute [rw] struct_type
-        #   @return [Google::Cloud::AutoML::V1beta1::StructType]
-        #     If {Google::Cloud::AutoML::V1beta1::DataType#type_code type_code} == {Google::Cloud::AutoML::V1beta1::TypeCode::STRUCT STRUCT}, then `struct_type`
+        #   @return [::Google::Cloud::AutoML::V1beta1::StructType]
+        #     If {::Google::Cloud::AutoML::V1beta1::DataType#type_code type_code} == {::Google::Cloud::AutoML::V1beta1::TypeCode::STRUCT STRUCT}, then `struct_type`
         #     provides type information for the struct's fields.
         # @!attribute [rw] time_format
-        #   @return [String]
-        #     If {Google::Cloud::AutoML::V1beta1::DataType#type_code type_code} == {Google::Cloud::AutoML::V1beta1::TypeCode::TIMESTAMP TIMESTAMP}
+        #   @return [::String]
+        #     If {::Google::Cloud::AutoML::V1beta1::DataType#type_code type_code} == {::Google::Cloud::AutoML::V1beta1::TypeCode::TIMESTAMP TIMESTAMP}
         #     then `time_format` provides the format in which that time field is
         #     expressed. The time_format must either be one of:
         #     * `UNIX_SECONDS`
@@ -45,39 +45,39 @@ module Google
         #     or be written in `strftime` syntax. If time_format is not set, then the
         #     default format as described on the type_code is used.
         # @!attribute [rw] type_code
-        #   @return [Google::Cloud::AutoML::V1beta1::TypeCode]
-        #     Required. The {Google::Cloud::AutoML::V1beta1::TypeCode TypeCode} for this type.
+        #   @return [::Google::Cloud::AutoML::V1beta1::TypeCode]
+        #     Required. The {::Google::Cloud::AutoML::V1beta1::TypeCode TypeCode} for this type.
         # @!attribute [rw] nullable
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     If true, this DataType can also be `NULL`. In .CSV files `NULL` value is
         #     expressed as an empty string.
         class DataType
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # `StructType` defines the DataType-s of a {Google::Cloud::AutoML::V1beta1::TypeCode::STRUCT STRUCT} type.
+        # `StructType` defines the DataType-s of a {::Google::Cloud::AutoML::V1beta1::TypeCode::STRUCT STRUCT} type.
         # @!attribute [rw] fields
-        #   @return [Google::Protobuf::Map{String => Google::Cloud::AutoML::V1beta1::DataType}]
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AutoML::V1beta1::DataType}]
         #     Unordered map of struct field names to their data types.
         #     Fields cannot be added or removed via Update. Their names and
         #     data types are still mutable.
         class StructType
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [Google::Cloud::AutoML::V1beta1::DataType]
+          #   @return [::Google::Cloud::AutoML::V1beta1::DataType]
           class FieldsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # `TypeCode` is used as a part of
-        # {Google::Cloud::AutoML::V1beta1::DataType DataType}.
+        # {::Google::Cloud::AutoML::V1beta1::DataType DataType}.
         module TypeCode
           # Not specified. Should not be used.
           TYPE_CODE_UNSPECIFIED = 0
@@ -87,7 +87,7 @@ module Google
           FLOAT64 = 3
 
           # Must be between 0AD and 9999AD. Encoded as `string` according to
-          # {Google::Cloud::AutoML::V1beta1::DataType#time_format time_format}, or, if
+          # {::Google::Cloud::AutoML::V1beta1::DataType#time_format time_format}, or, if
           # that format is not set, then in RFC 3339 `date-time` format, where
           # `time-offset` = `"Z"` (e.g. 1985-04-12T23:20:50.52Z).
           TIMESTAMP = 4
@@ -97,11 +97,11 @@ module Google
 
           # Encoded as `list`, where the list elements are represented according to
           #
-          # {Google::Cloud::AutoML::V1beta1::DataType#list_element_type list_element_type}.
+          # {::Google::Cloud::AutoML::V1beta1::DataType#list_element_type list_element_type}.
           ARRAY = 8
 
           # Encoded as `struct`, where field values are represented according to
-          # {Google::Cloud::AutoML::V1beta1::DataType#struct_type struct_type}.
+          # {::Google::Cloud::AutoML::V1beta1::DataType#struct_type struct_type}.
           STRUCT = 9
 
           # Values of this type are not further understood by AutoML,

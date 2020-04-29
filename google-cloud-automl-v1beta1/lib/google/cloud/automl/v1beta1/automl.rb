@@ -50,7 +50,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/automl/v1beta1/automl"
-        #     client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+        #     client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new
         #
         module AutoML
         end

@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or AUTOML_TEST_PROJECT=test123 AUTOML_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/automl/v1beta1/prediction_service/credentials"
-  Google::Cloud::AutoML::V1beta1::PredictionService::Credentials.env_vars.each do |path|
+  ::Google::Cloud::AutoML::V1beta1::PredictionService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["AUTOML_PROJECT"] = project

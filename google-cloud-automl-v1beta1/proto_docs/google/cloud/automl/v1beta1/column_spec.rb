@@ -26,49 +26,49 @@ module Google
         # Used by:
         #   *   Tables
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The resource name of the column specs.
         #     Form:
         #
         #     `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/tableSpecs/{table_spec_id}/columnSpecs/{column_spec_id}`
         # @!attribute [rw] data_type
-        #   @return [Google::Cloud::AutoML::V1beta1::DataType]
+        #   @return [::Google::Cloud::AutoML::V1beta1::DataType]
         #     The data type of elements stored in the column.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The name of the column to show in the interface. The name can
         #     be up to 100 characters long and can consist only of ASCII Latin letters
         #     A-Z and a-z, ASCII digits 0-9, underscores(_), and forward slashes(/), and
         #     must start with a letter or a digit.
         # @!attribute [rw] data_stats
-        #   @return [Google::Cloud::AutoML::V1beta1::DataStats]
+        #   @return [::Google::Cloud::AutoML::V1beta1::DataStats]
         #     Output only. Stats of the series of values in the column.
         #     This field may be stale, see the ancestor's
         #     Dataset.tables_dataset_metadata.stats_update_time field
         #     for the timestamp at which these stats were last updated.
         # @!attribute [rw] top_correlated_columns
-        #   @return [Array<Google::Cloud::AutoML::V1beta1::ColumnSpec::CorrelatedColumn>]
+        #   @return [::Array<::Google::Cloud::AutoML::V1beta1::ColumnSpec::CorrelatedColumn>]
         #     Deprecated.
         # @!attribute [rw] etag
-        #   @return [String]
+        #   @return [::String]
         #     Used to perform consistent read-modify-write updates. If not set, a blind
         #     "overwrite" update happens.
         class ColumnSpec
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Identifies the table's column, and its correlation with the column this
           # ColumnSpec describes.
           # @!attribute [rw] column_spec_id
-          #   @return [String]
+          #   @return [::String]
           #     The column_spec_id of the correlated column, which belongs to the same
           #     table as the in-context column.
           # @!attribute [rw] correlation_stats
-          #   @return [Google::Cloud::AutoML::V1beta1::CorrelationStats]
+          #   @return [::Google::Cloud::AutoML::V1beta1::CorrelationStats]
           #     Correlation between this and the in-context column.
           class CorrelatedColumn
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

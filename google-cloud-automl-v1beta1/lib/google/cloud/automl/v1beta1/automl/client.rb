@@ -51,15 +51,15 @@ module Google
             ##
             # Configure the AutoMl Client class.
             #
-            # See {Google::Cloud::AutoML::V1beta1::AutoML::Client::Configuration}
+            # See {::Google::Cloud::AutoML::V1beta1::AutoML::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all AutoMl clients:
             #
-            #     Google::Cloud::AutoML::V1beta1::AutoML::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::AutoML::V1beta1::AutoML::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -211,7 +211,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::AutoML::V1beta1::AutoML::Client::Configuration}
+            # See {::Google::Cloud::AutoML::V1beta1::AutoML::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -232,13 +232,13 @@ module Google
             # To create a new AutoMl client with the default
             # configuration:
             #
-            #     client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #     client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new
             #
             # To create a new AutoMl client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the AutoMl client.
@@ -270,8 +270,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @auto_ml_stub = Gapic::ServiceStub.new(
-                Google::Cloud::AutoML::V1beta1::AutoMl::Stub,
+              @auto_ml_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::AutoML::V1beta1::AutoMl::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -282,7 +282,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::AutoML::V1beta1::AutoML::Operations]
+            # @return [::Google::Cloud::AutoML::V1beta1::AutoML::Operations]
             #
             attr_reader :operations_client
 
@@ -293,12 +293,12 @@ module Google
             #
             # @overload create_dataset(request, options = nil)
             #   Pass arguments to `create_dataset` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::CreateDatasetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::CreateDatasetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_dataset(parent: nil, dataset: nil)
@@ -306,32 +306,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the project to create the dataset for.
-            #   @param dataset [Google::Cloud::AutoML::V1beta1::Dataset, Hash]
+            #   @param dataset [::Google::Cloud::AutoML::V1beta1::Dataset, ::Hash]
             #     Required. The dataset to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1beta1::Dataset]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1beta1::Dataset]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1beta1::Dataset]
+            # @return [::Google::Cloud::AutoML::V1beta1::Dataset]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_dataset request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::CreateDatasetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::CreateDatasetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_dataset.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -352,8 +352,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -361,12 +361,12 @@ module Google
             #
             # @overload get_dataset(request, options = nil)
             #   Pass arguments to `get_dataset` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::GetDatasetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::GetDatasetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::GetDatasetRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::GetDatasetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_dataset(name: nil)
@@ -374,30 +374,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the dataset to retrieve.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1beta1::Dataset]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1beta1::Dataset]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1beta1::Dataset]
+            # @return [::Google::Cloud::AutoML::V1beta1::Dataset]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_dataset request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::GetDatasetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::GetDatasetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_dataset.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -418,8 +418,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -427,12 +427,12 @@ module Google
             #
             # @overload list_datasets(request, options = nil)
             #   Pass arguments to `list_datasets` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::ListDatasetsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::ListDatasetsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_datasets(parent: nil, filter: nil, page_size: nil, page_token: nil)
@@ -440,9 +440,9 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the project from which to list datasets.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     An expression for filtering the results of the request.
             #
             #       * `dataset_metadata` - for existence of the case (e.g.
@@ -450,36 +450,36 @@ module Google
             #
             #       * `translation_dataset_metadata:*` --> The dataset has
             #                                              translation_dataset_metadata.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Requested page size. Server may return fewer results than requested.
             #     If unspecified, server will pick a default size.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying a page of results for the server to return
             #     Typically obtained via
-            #     {Google::Cloud::AutoML::V1beta1::ListDatasetsResponse#next_page_token ListDatasetsResponse.next_page_token} of the previous
-            #     {Google::Cloud::AutoML::V1beta1::AutoML::Client#list_datasets AutoMl.ListDatasets} call.
+            #     {::Google::Cloud::AutoML::V1beta1::ListDatasetsResponse#next_page_token ListDatasetsResponse.next_page_token} of the previous
+            #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#list_datasets AutoMl.ListDatasets} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Dataset>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::Dataset>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Dataset>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::Dataset>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_datasets request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::ListDatasetsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::ListDatasetsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_datasets.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -497,12 +497,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :list_datasets, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @auto_ml_stub, :list_datasets, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @auto_ml_stub, :list_datasets, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -510,12 +510,12 @@ module Google
             #
             # @overload update_dataset(request, options = nil)
             #   Pass arguments to `update_dataset` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_dataset(dataset: nil, update_mask: nil)
@@ -523,32 +523,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param dataset [Google::Cloud::AutoML::V1beta1::Dataset, Hash]
+            #   @param dataset [::Google::Cloud::AutoML::V1beta1::Dataset, ::Hash]
             #     Required. The dataset which replaces the resource on the server.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The update mask applies to the resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1beta1::Dataset]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1beta1::Dataset]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1beta1::Dataset]
+            # @return [::Google::Cloud::AutoML::V1beta1::Dataset]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_dataset request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_dataset.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -569,25 +569,25 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Deletes a dataset and all of its contents.
             # Returns empty response in the
-            # {Google::Longrunning::Operation#response response} field when it completes,
+            # {::Google::Longrunning::Operation#response response} field when it completes,
             # and `delete_details` in the
-            # {Google::Longrunning::Operation#metadata metadata} field.
+            # {::Google::Longrunning::Operation#metadata metadata} field.
             #
             # @overload delete_dataset(request, options = nil)
             #   Pass arguments to `delete_dataset` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_dataset(name: nil)
@@ -595,30 +595,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the dataset to delete.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_dataset request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_dataset.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -636,12 +636,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :delete_dataset, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -650,19 +650,19 @@ module Google
             #
             # For Tables:
             # *   A
-            # {Google::Cloud::AutoML::V1beta1::InputConfig#params schema_inference_version}
+            # {::Google::Cloud::AutoML::V1beta1::InputConfig#params schema_inference_version}
             #     parameter must be explicitly set.
             # Returns an empty response in the
-            # {Google::Longrunning::Operation#response response} field when it completes.
+            # {::Google::Longrunning::Operation#response response} field when it completes.
             #
             # @overload import_data(request, options = nil)
             #   Pass arguments to `import_data` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::ImportDataRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::ImportDataRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::ImportDataRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::ImportDataRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload import_data(name: nil, input_config: nil)
@@ -670,34 +670,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Dataset name. Dataset must already exist. All imported
             #     annotations and examples will be added.
-            #   @param input_config [Google::Cloud::AutoML::V1beta1::InputConfig, Hash]
+            #   @param input_config [::Google::Cloud::AutoML::V1beta1::InputConfig, ::Hash]
             #     Required. The desired input location and its domain specific semantics,
             #     if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def import_data request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::ImportDataRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::ImportDataRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.import_data.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -715,27 +715,27 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :import_data, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Exports dataset's data to the provided output location.
             # Returns an empty response in the
-            # {Google::Longrunning::Operation#response response} field when it completes.
+            # {::Google::Longrunning::Operation#response response} field when it completes.
             #
             # @overload export_data(request, options = nil)
             #   Pass arguments to `export_data` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::ExportDataRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::ExportDataRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::ExportDataRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::ExportDataRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload export_data(name: nil, output_config: nil)
@@ -743,32 +743,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the dataset.
-            #   @param output_config [Google::Cloud::AutoML::V1beta1::OutputConfig, Hash]
+            #   @param output_config [::Google::Cloud::AutoML::V1beta1::OutputConfig, ::Hash]
             #     Required. The desired output location.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def export_data request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::ExportDataRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::ExportDataRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.export_data.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -786,12 +786,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :export_data, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -799,12 +799,12 @@ module Google
             #
             # @overload get_annotation_spec(request, options = nil)
             #   Pass arguments to `get_annotation_spec` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_annotation_spec(name: nil)
@@ -812,30 +812,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the annotation spec to retrieve.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1beta1::AnnotationSpec]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1beta1::AnnotationSpec]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1beta1::AnnotationSpec]
+            # @return [::Google::Cloud::AutoML::V1beta1::AnnotationSpec]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_annotation_spec request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_annotation_spec.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -856,8 +856,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -865,12 +865,12 @@ module Google
             #
             # @overload get_table_spec(request, options = nil)
             #   Pass arguments to `get_table_spec` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::GetTableSpecRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::GetTableSpecRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::GetTableSpecRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::GetTableSpecRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_table_spec(name: nil, field_mask: nil)
@@ -878,32 +878,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the table spec to retrieve.
-            #   @param field_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1beta1::TableSpec]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1beta1::TableSpec]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1beta1::TableSpec]
+            # @return [::Google::Cloud::AutoML::V1beta1::TableSpec]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_table_spec request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::GetTableSpecRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::GetTableSpecRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_table_spec.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -924,8 +924,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -933,12 +933,12 @@ module Google
             #
             # @overload list_table_specs(request, options = nil)
             #   Pass arguments to `list_table_specs` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_table_specs(parent: nil, field_mask: nil, filter: nil, page_size: nil, page_token: nil)
@@ -946,42 +946,42 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the dataset to list table specs from.
-            #   @param field_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Filter expression, see go/filtering.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Requested page size. The server can return fewer results than requested.
             #     If unspecified, the server will pick a default size.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying a page of results for the server to return.
             #     Typically obtained from the
-            #     {Google::Cloud::AutoML::V1beta1::ListTableSpecsResponse#next_page_token ListTableSpecsResponse.next_page_token} field of the previous
-            #     {Google::Cloud::AutoML::V1beta1::AutoML::Client#list_table_specs AutoMl.ListTableSpecs} call.
+            #     {::Google::Cloud::AutoML::V1beta1::ListTableSpecsResponse#next_page_token ListTableSpecsResponse.next_page_token} field of the previous
+            #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#list_table_specs AutoMl.ListTableSpecs} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::AutoML::V1beta1::TableSpec>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::TableSpec>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::AutoML::V1beta1::TableSpec>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::TableSpec>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_table_specs request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_table_specs.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -999,12 +999,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :list_table_specs, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @auto_ml_stub, :list_table_specs, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @auto_ml_stub, :list_table_specs, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1012,12 +1012,12 @@ module Google
             #
             # @overload update_table_spec(request, options = nil)
             #   Pass arguments to `update_table_spec` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_table_spec(table_spec: nil, update_mask: nil)
@@ -1025,32 +1025,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param table_spec [Google::Cloud::AutoML::V1beta1::TableSpec, Hash]
+            #   @param table_spec [::Google::Cloud::AutoML::V1beta1::TableSpec, ::Hash]
             #     Required. The table spec which replaces the resource on the server.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The update mask applies to the resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1beta1::TableSpec]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1beta1::TableSpec]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1beta1::TableSpec]
+            # @return [::Google::Cloud::AutoML::V1beta1::TableSpec]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_table_spec request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_table_spec.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1071,8 +1071,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1080,12 +1080,12 @@ module Google
             #
             # @overload get_column_spec(request, options = nil)
             #   Pass arguments to `get_column_spec` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_column_spec(name: nil, field_mask: nil)
@@ -1093,32 +1093,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the column spec to retrieve.
-            #   @param field_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1beta1::ColumnSpec]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1beta1::ColumnSpec]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1beta1::ColumnSpec]
+            # @return [::Google::Cloud::AutoML::V1beta1::ColumnSpec]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_column_spec request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_column_spec.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1139,8 +1139,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1148,12 +1148,12 @@ module Google
             #
             # @overload list_column_specs(request, options = nil)
             #   Pass arguments to `list_column_specs` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_column_specs(parent: nil, field_mask: nil, filter: nil, page_size: nil, page_token: nil)
@@ -1161,42 +1161,42 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the table spec to list column specs from.
-            #   @param field_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Filter expression, see go/filtering.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Requested page size. The server can return fewer results than requested.
             #     If unspecified, the server will pick a default size.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying a page of results for the server to return.
             #     Typically obtained from the
-            #     {Google::Cloud::AutoML::V1beta1::ListColumnSpecsResponse#next_page_token ListColumnSpecsResponse.next_page_token} field of the previous
-            #     {Google::Cloud::AutoML::V1beta1::AutoML::Client#list_column_specs AutoMl.ListColumnSpecs} call.
+            #     {::Google::Cloud::AutoML::V1beta1::ListColumnSpecsResponse#next_page_token ListColumnSpecsResponse.next_page_token} field of the previous
+            #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#list_column_specs AutoMl.ListColumnSpecs} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::AutoML::V1beta1::ColumnSpec>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::ColumnSpec>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::AutoML::V1beta1::ColumnSpec>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::ColumnSpec>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_column_specs request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_column_specs.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1214,12 +1214,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :list_column_specs, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @auto_ml_stub, :list_column_specs, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @auto_ml_stub, :list_column_specs, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1227,12 +1227,12 @@ module Google
             #
             # @overload update_column_spec(request, options = nil)
             #   Pass arguments to `update_column_spec` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_column_spec(column_spec: nil, update_mask: nil)
@@ -1240,32 +1240,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param column_spec [Google::Cloud::AutoML::V1beta1::ColumnSpec, Hash]
+            #   @param column_spec [::Google::Cloud::AutoML::V1beta1::ColumnSpec, ::Hash]
             #     Required. The column spec which replaces the resource on the server.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The update mask applies to the resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1beta1::ColumnSpec]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1beta1::ColumnSpec]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1beta1::ColumnSpec]
+            # @return [::Google::Cloud::AutoML::V1beta1::ColumnSpec]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_column_spec request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_column_spec.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1286,25 +1286,25 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Creates a model.
-            # Returns a Model in the {Google::Longrunning::Operation#response response}
+            # Returns a Model in the {::Google::Longrunning::Operation#response response}
             # field when it completes.
             # When you create a model, several model evaluations are created for it:
             # a global evaluation, and one evaluation for each annotation spec.
             #
             # @overload create_model(request, options = nil)
             #   Pass arguments to `create_model` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::CreateModelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::CreateModelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::CreateModelRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::CreateModelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_model(parent: nil, model: nil)
@@ -1312,32 +1312,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the parent project where the model is being created.
-            #   @param model [Google::Cloud::AutoML::V1beta1::Model, Hash]
+            #   @param model [::Google::Cloud::AutoML::V1beta1::Model, ::Hash]
             #     Required. The model to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_model request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::CreateModelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::CreateModelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_model.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1355,12 +1355,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :create_model, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1368,12 +1368,12 @@ module Google
             #
             # @overload get_model(request, options = nil)
             #   Pass arguments to `get_model` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::GetModelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::GetModelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::GetModelRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::GetModelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_model(name: nil)
@@ -1381,30 +1381,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the model.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1beta1::Model]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1beta1::Model]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1beta1::Model]
+            # @return [::Google::Cloud::AutoML::V1beta1::Model]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_model request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::GetModelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::GetModelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_model.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1425,8 +1425,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1434,12 +1434,12 @@ module Google
             #
             # @overload list_models(request, options = nil)
             #   Pass arguments to `list_models` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::ListModelsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::ListModelsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::ListModelsRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::ListModelsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_models(parent: nil, filter: nil, page_size: nil, page_token: nil)
@@ -1447,9 +1447,9 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the project, from which to list the models.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     An expression for filtering the results of the request.
             #
             #       * `model_metadata` - for existence of the case (e.g.
@@ -1459,35 +1459,35 @@ module Google
             #       * `image_classification_model_metadata:*` --> The model has
             #                                            image_classification_model_metadata.
             #       * `dataset_id=5` --> The model was created from a dataset with ID 5.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Requested page size.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying a page of results for the server to return
             #     Typically obtained via
-            #     {Google::Cloud::AutoML::V1beta1::ListModelsResponse#next_page_token ListModelsResponse.next_page_token} of the previous
-            #     {Google::Cloud::AutoML::V1beta1::AutoML::Client#list_models AutoMl.ListModels} call.
+            #     {::Google::Cloud::AutoML::V1beta1::ListModelsResponse#next_page_token ListModelsResponse.next_page_token} of the previous
+            #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#list_models AutoMl.ListModels} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Model>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::Model>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::AutoML::V1beta1::Model>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::Model>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_models request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::ListModelsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::ListModelsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_models.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1505,29 +1505,29 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :list_models, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @auto_ml_stub, :list_models, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @auto_ml_stub, :list_models, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Deletes a model.
             # Returns `google.protobuf.Empty` in the
-            # {Google::Longrunning::Operation#response response} field when it completes,
+            # {::Google::Longrunning::Operation#response response} field when it completes,
             # and `delete_details` in the
-            # {Google::Longrunning::Operation#metadata metadata} field.
+            # {::Google::Longrunning::Operation#metadata metadata} field.
             #
             # @overload delete_model(request, options = nil)
             #   Pass arguments to `delete_model` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::DeleteModelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::DeleteModelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::DeleteModelRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::DeleteModelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_model(name: nil)
@@ -1535,30 +1535,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the model being deleted.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_model request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::DeleteModelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::DeleteModelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_model.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1576,12 +1576,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :delete_model, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1596,16 +1596,16 @@ module Google
             # deployment automatically.
             #
             # Returns an empty response in the
-            # {Google::Longrunning::Operation#response response} field when it completes.
+            # {::Google::Longrunning::Operation#response response} field when it completes.
             #
             # @overload deploy_model(request, options = nil)
             #   Pass arguments to `deploy_model` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::DeployModelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::DeployModelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::DeployModelRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::DeployModelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload deploy_model(image_object_detection_model_deployment_metadata: nil, image_classification_model_deployment_metadata: nil, name: nil)
@@ -1613,34 +1613,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param image_object_detection_model_deployment_metadata [Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata, Hash]
+            #   @param image_object_detection_model_deployment_metadata [::Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata, ::Hash]
             #     Model deployment metadata specific to Image Object Detection.
-            #   @param image_classification_model_deployment_metadata [Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata, Hash]
+            #   @param image_classification_model_deployment_metadata [::Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata, ::Hash]
             #     Model deployment metadata specific to Image Classification.
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the model to deploy.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def deploy_model request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::DeployModelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::DeployModelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.deploy_model.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1658,12 +1658,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :deploy_model, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1673,16 +1673,16 @@ module Google
             # all other domains manage deployment automatically.
             #
             # Returns an empty response in the
-            # {Google::Longrunning::Operation#response response} field when it completes.
+            # {::Google::Longrunning::Operation#response response} field when it completes.
             #
             # @overload undeploy_model(request, options = nil)
             #   Pass arguments to `undeploy_model` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::UndeployModelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::UndeployModelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::UndeployModelRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::UndeployModelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload undeploy_model(name: nil)
@@ -1690,30 +1690,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the model to undeploy.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def undeploy_model request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::UndeployModelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::UndeployModelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.undeploy_model.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1731,12 +1731,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :undeploy_model, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1744,19 +1744,19 @@ module Google
             # Storage location. A model is considered export-able if and only if it has
             # an export format defined for it in
             #
-            # {Google::Cloud::AutoML::V1beta1::ModelExportOutputConfig ModelExportOutputConfig}.
+            # {::Google::Cloud::AutoML::V1beta1::ModelExportOutputConfig ModelExportOutputConfig}.
             #
             # Returns an empty response in the
-            # {Google::Longrunning::Operation#response response} field when it completes.
+            # {::Google::Longrunning::Operation#response response} field when it completes.
             #
             # @overload export_model(request, options = nil)
             #   Pass arguments to `export_model` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::ExportModelRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::ExportModelRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::ExportModelRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::ExportModelRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload export_model(name: nil, output_config: nil)
@@ -1764,32 +1764,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the model to export.
-            #   @param output_config [Google::Cloud::AutoML::V1beta1::ModelExportOutputConfig, Hash]
+            #   @param output_config [::Google::Cloud::AutoML::V1beta1::ModelExportOutputConfig, ::Hash]
             #     Required. The desired output location and configuration.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def export_model request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::ExportModelRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::ExportModelRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.export_model.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1807,12 +1807,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :export_model, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1829,16 +1829,16 @@ module Google
             # Currently only available for Tables.
             #
             # Returns an empty response in the
-            # {Google::Longrunning::Operation#response response} field when it completes.
+            # {::Google::Longrunning::Operation#response response} field when it completes.
             #
             # @overload export_evaluated_examples(request, options = nil)
             #   Pass arguments to `export_evaluated_examples` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload export_evaluated_examples(name: nil, output_config: nil)
@@ -1846,33 +1846,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the model whose evaluated examples are to
             #     be exported.
-            #   @param output_config [Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesOutputConfig, Hash]
+            #   @param output_config [::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesOutputConfig, ::Hash]
             #     Required. The desired output location and configuration.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def export_evaluated_examples request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.export_evaluated_examples.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1890,12 +1890,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :export_evaluated_examples, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1903,12 +1903,12 @@ module Google
             #
             # @overload get_model_evaluation(request, options = nil)
             #   Pass arguments to `get_model_evaluation` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_model_evaluation(name: nil)
@@ -1916,30 +1916,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name for the model evaluation.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1beta1::ModelEvaluation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1beta1::ModelEvaluation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1beta1::ModelEvaluation]
+            # @return [::Google::Cloud::AutoML::V1beta1::ModelEvaluation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_model_evaluation request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_model_evaluation.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1960,8 +1960,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1969,12 +1969,12 @@ module Google
             #
             # @overload list_model_evaluations(request, options = nil)
             #   Pass arguments to `list_model_evaluations` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_model_evaluations(parent: nil, filter: nil, page_size: nil, page_token: nil)
@@ -1982,11 +1982,11 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the model to list the model evaluations for.
             #     If modelId is set as "-", this will list model evaluations from across all
             #     models of the parent location.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     An expression for filtering the results of the request.
             #
             #       * `annotation_spec_id` - for =, !=  or existence. See example below for
@@ -1998,35 +1998,35 @@ module Google
             #                                 annotation spec with ID different than 4.
             #       * `NOT annotation_spec_id:*` --> The model evaluation was done for
             #                                    aggregate of all annotation specs.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Requested page size.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying a page of results for the server to return.
             #     Typically obtained via
-            #     {Google::Cloud::AutoML::V1beta1::ListModelEvaluationsResponse#next_page_token ListModelEvaluationsResponse.next_page_token} of the previous
-            #     {Google::Cloud::AutoML::V1beta1::AutoML::Client#list_model_evaluations AutoMl.ListModelEvaluations} call.
+            #     {::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsResponse#next_page_token ListModelEvaluationsResponse.next_page_token} of the previous
+            #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#list_model_evaluations AutoMl.ListModelEvaluations} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::AutoML::V1beta1::ModelEvaluation>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::ModelEvaluation>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::AutoML::V1beta1::ModelEvaluation>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::ModelEvaluation>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_model_evaluations request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_model_evaluations.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2044,12 +2044,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :list_model_evaluations, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @auto_ml_stub, :list_model_evaluations, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @auto_ml_stub, :list_model_evaluations, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2059,7 +2059,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::AutoML::V1beta1::AutoML::Client::Configuration::Rpcs}
+            # {::Google::Cloud::AutoML::V1beta1::AutoML::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -2070,22 +2070,22 @@ module Google
             # To modify the global config, setting the timeout for create_dataset
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::AutoML::V1beta1::AutoML::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_dataset.timeout = 20_000
+            #     ::Google::Cloud::AutoML::V1beta1::AutoML::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_dataset.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_dataset.timeout = 20_000
+            #     client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_dataset.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"automl.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -2097,29 +2097,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -2127,10 +2127,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "automl.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -2138,14 +2138,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -2186,175 +2186,175 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_dataset`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_dataset
                 ##
                 # RPC-specific configuration for `get_dataset`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_dataset
                 ##
                 # RPC-specific configuration for `list_datasets`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_datasets
                 ##
                 # RPC-specific configuration for `update_dataset`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_dataset
                 ##
                 # RPC-specific configuration for `delete_dataset`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_dataset
                 ##
                 # RPC-specific configuration for `import_data`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :import_data
                 ##
                 # RPC-specific configuration for `export_data`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :export_data
                 ##
                 # RPC-specific configuration for `get_annotation_spec`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_annotation_spec
                 ##
                 # RPC-specific configuration for `get_table_spec`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_table_spec
                 ##
                 # RPC-specific configuration for `list_table_specs`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_table_specs
                 ##
                 # RPC-specific configuration for `update_table_spec`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_table_spec
                 ##
                 # RPC-specific configuration for `get_column_spec`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_column_spec
                 ##
                 # RPC-specific configuration for `list_column_specs`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_column_specs
                 ##
                 # RPC-specific configuration for `update_column_spec`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_column_spec
                 ##
                 # RPC-specific configuration for `create_model`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_model
                 ##
                 # RPC-specific configuration for `get_model`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_model
                 ##
                 # RPC-specific configuration for `list_models`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_models
                 ##
                 # RPC-specific configuration for `delete_model`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_model
                 ##
                 # RPC-specific configuration for `deploy_model`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :deploy_model
                 ##
                 # RPC-specific configuration for `undeploy_model`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :undeploy_model
                 ##
                 # RPC-specific configuration for `export_model`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :export_model
                 ##
                 # RPC-specific configuration for `export_evaluated_examples`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :export_evaluated_examples
                 ##
                 # RPC-specific configuration for `get_model_evaluation`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_model_evaluation
                 ##
                 # RPC-specific configuration for `list_model_evaluations`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_model_evaluations
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_dataset_config = parent_rpcs&.create_dataset if parent_rpcs&.respond_to? :create_dataset
-                  @create_dataset = Gapic::Config::Method.new create_dataset_config
+                  @create_dataset = ::Gapic::Config::Method.new create_dataset_config
                   get_dataset_config = parent_rpcs&.get_dataset if parent_rpcs&.respond_to? :get_dataset
-                  @get_dataset = Gapic::Config::Method.new get_dataset_config
+                  @get_dataset = ::Gapic::Config::Method.new get_dataset_config
                   list_datasets_config = parent_rpcs&.list_datasets if parent_rpcs&.respond_to? :list_datasets
-                  @list_datasets = Gapic::Config::Method.new list_datasets_config
+                  @list_datasets = ::Gapic::Config::Method.new list_datasets_config
                   update_dataset_config = parent_rpcs&.update_dataset if parent_rpcs&.respond_to? :update_dataset
-                  @update_dataset = Gapic::Config::Method.new update_dataset_config
+                  @update_dataset = ::Gapic::Config::Method.new update_dataset_config
                   delete_dataset_config = parent_rpcs&.delete_dataset if parent_rpcs&.respond_to? :delete_dataset
-                  @delete_dataset = Gapic::Config::Method.new delete_dataset_config
+                  @delete_dataset = ::Gapic::Config::Method.new delete_dataset_config
                   import_data_config = parent_rpcs&.import_data if parent_rpcs&.respond_to? :import_data
-                  @import_data = Gapic::Config::Method.new import_data_config
+                  @import_data = ::Gapic::Config::Method.new import_data_config
                   export_data_config = parent_rpcs&.export_data if parent_rpcs&.respond_to? :export_data
-                  @export_data = Gapic::Config::Method.new export_data_config
+                  @export_data = ::Gapic::Config::Method.new export_data_config
                   get_annotation_spec_config = parent_rpcs&.get_annotation_spec if parent_rpcs&.respond_to? :get_annotation_spec
-                  @get_annotation_spec = Gapic::Config::Method.new get_annotation_spec_config
+                  @get_annotation_spec = ::Gapic::Config::Method.new get_annotation_spec_config
                   get_table_spec_config = parent_rpcs&.get_table_spec if parent_rpcs&.respond_to? :get_table_spec
-                  @get_table_spec = Gapic::Config::Method.new get_table_spec_config
+                  @get_table_spec = ::Gapic::Config::Method.new get_table_spec_config
                   list_table_specs_config = parent_rpcs&.list_table_specs if parent_rpcs&.respond_to? :list_table_specs
-                  @list_table_specs = Gapic::Config::Method.new list_table_specs_config
+                  @list_table_specs = ::Gapic::Config::Method.new list_table_specs_config
                   update_table_spec_config = parent_rpcs&.update_table_spec if parent_rpcs&.respond_to? :update_table_spec
-                  @update_table_spec = Gapic::Config::Method.new update_table_spec_config
+                  @update_table_spec = ::Gapic::Config::Method.new update_table_spec_config
                   get_column_spec_config = parent_rpcs&.get_column_spec if parent_rpcs&.respond_to? :get_column_spec
-                  @get_column_spec = Gapic::Config::Method.new get_column_spec_config
+                  @get_column_spec = ::Gapic::Config::Method.new get_column_spec_config
                   list_column_specs_config = parent_rpcs&.list_column_specs if parent_rpcs&.respond_to? :list_column_specs
-                  @list_column_specs = Gapic::Config::Method.new list_column_specs_config
+                  @list_column_specs = ::Gapic::Config::Method.new list_column_specs_config
                   update_column_spec_config = parent_rpcs&.update_column_spec if parent_rpcs&.respond_to? :update_column_spec
-                  @update_column_spec = Gapic::Config::Method.new update_column_spec_config
+                  @update_column_spec = ::Gapic::Config::Method.new update_column_spec_config
                   create_model_config = parent_rpcs&.create_model if parent_rpcs&.respond_to? :create_model
-                  @create_model = Gapic::Config::Method.new create_model_config
+                  @create_model = ::Gapic::Config::Method.new create_model_config
                   get_model_config = parent_rpcs&.get_model if parent_rpcs&.respond_to? :get_model
-                  @get_model = Gapic::Config::Method.new get_model_config
+                  @get_model = ::Gapic::Config::Method.new get_model_config
                   list_models_config = parent_rpcs&.list_models if parent_rpcs&.respond_to? :list_models
-                  @list_models = Gapic::Config::Method.new list_models_config
+                  @list_models = ::Gapic::Config::Method.new list_models_config
                   delete_model_config = parent_rpcs&.delete_model if parent_rpcs&.respond_to? :delete_model
-                  @delete_model = Gapic::Config::Method.new delete_model_config
+                  @delete_model = ::Gapic::Config::Method.new delete_model_config
                   deploy_model_config = parent_rpcs&.deploy_model if parent_rpcs&.respond_to? :deploy_model
-                  @deploy_model = Gapic::Config::Method.new deploy_model_config
+                  @deploy_model = ::Gapic::Config::Method.new deploy_model_config
                   undeploy_model_config = parent_rpcs&.undeploy_model if parent_rpcs&.respond_to? :undeploy_model
-                  @undeploy_model = Gapic::Config::Method.new undeploy_model_config
+                  @undeploy_model = ::Gapic::Config::Method.new undeploy_model_config
                   export_model_config = parent_rpcs&.export_model if parent_rpcs&.respond_to? :export_model
-                  @export_model = Gapic::Config::Method.new export_model_config
+                  @export_model = ::Gapic::Config::Method.new export_model_config
                   export_evaluated_examples_config = parent_rpcs&.export_evaluated_examples if parent_rpcs&.respond_to? :export_evaluated_examples
-                  @export_evaluated_examples = Gapic::Config::Method.new export_evaluated_examples_config
+                  @export_evaluated_examples = ::Gapic::Config::Method.new export_evaluated_examples_config
                   get_model_evaluation_config = parent_rpcs&.get_model_evaluation if parent_rpcs&.respond_to? :get_model_evaluation
-                  @get_model_evaluation = Gapic::Config::Method.new get_model_evaluation_config
+                  @get_model_evaluation = ::Gapic::Config::Method.new get_model_evaluation_config
                   list_model_evaluations_config = parent_rpcs&.list_model_evaluations if parent_rpcs&.respond_to? :list_model_evaluations
-                  @list_model_evaluations = Gapic::Config::Method.new list_model_evaluations_config
+                  @list_model_evaluations = ::Gapic::Config::Method.new list_model_evaluations_config
 
                   yield self if block_given?
                 end
