@@ -86,7 +86,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SECRET_MANAGER_TEST_PROJECT=test123 SECRET_MANAGER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/secret_manager/v1/secret_manager_service/credentials"
-  Google::Cloud::SecretManager::V1::SecretManagerService::Credentials.env_vars.each do |path|
+  ::Google::Cloud::SecretManager::V1::SecretManagerService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["SECRET_MANAGER_PROJECT"] = project

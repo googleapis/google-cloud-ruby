@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-secret_manager
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::SecretManager::V1::SecretManagerService::Credentials`):
+`::Google::Cloud::SecretManager::V1::SecretManagerService::Credentials`):
 
 1. `SECRET_MANAGER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SECRET_MANAGER_KEYFILE` - Path to JSON file, or JSON contents
