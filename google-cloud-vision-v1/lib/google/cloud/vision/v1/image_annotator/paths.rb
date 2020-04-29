@@ -35,10 +35,10 @@ module Google
             # @param location [String]
             # @param product_set [String]
             #
-            # @return [String]
+            # @return [::String]
             def product_set_path project:, location:, product_set:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/productSets/#{product_set}"
             end

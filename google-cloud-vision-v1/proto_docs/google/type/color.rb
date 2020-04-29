@@ -139,16 +139,16 @@ module Google
     #
     #     // ...
     # @!attribute [rw] red
-    #   @return [Float]
+    #   @return [::Float]
     #     The amount of red in the color as a value in the interval [0, 1].
     # @!attribute [rw] green
-    #   @return [Float]
+    #   @return [::Float]
     #     The amount of green in the color as a value in the interval [0, 1].
     # @!attribute [rw] blue
-    #   @return [Float]
+    #   @return [::Float]
     #     The amount of blue in the color as a value in the interval [0, 1].
     # @!attribute [rw] alpha
-    #   @return [Google::Protobuf::FloatValue]
+    #   @return [::Google::Protobuf::FloatValue]
     #     The fraction of this color that should be applied to the pixel. That is,
     #     the final pixel color is defined by the equation:
     #
@@ -161,8 +161,8 @@ module Google
     #     If omitted, this color object is to be rendered as a solid color
     #     (as if the alpha value had been explicitly given with a value of 1.0).
     class Color
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end

@@ -23,7 +23,7 @@ require "google/cloud/vision/v1/image_annotator_pb"
 require "google/cloud/vision/v1/image_annotator_services_pb"
 require "google/cloud/vision/v1/image_annotator"
 
-class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
+class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
 
   def test_batch_annotate_images
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new
+    grpc_response = ::Google::Cloud::Vision::V1::BatchAnnotateImagesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -59,15 +59,15 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
 
     batch_annotate_images_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_annotate_images, name
-      assert_kind_of Google::Cloud::Vision::V1::BatchAnnotateImagesRequest, request
-      assert_kind_of Google::Cloud::Vision::V1::AnnotateImageRequest, request.requests.first
+      assert_kind_of ::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest, request
+      assert_kind_of ::Google::Cloud::Vision::V1::AnnotateImageRequest, request.requests.first
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, batch_annotate_images_client_stub do
       # Create client
-      client = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
+      client = ::Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -84,7 +84,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.batch_annotate_images Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent) do |response, operation|
+      client.batch_annotate_images ::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -96,7 +96,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_annotate_images Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent), grpc_options do |response, operation|
+      client.batch_annotate_images ::Google::Cloud::Vision::V1::BatchAnnotateImagesRequest.new(requests: requests, parent: parent), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -108,7 +108,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
 
   def test_batch_annotate_files
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Vision::V1::BatchAnnotateFilesResponse.new
+    grpc_response = ::Google::Cloud::Vision::V1::BatchAnnotateFilesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -119,15 +119,15 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
 
     batch_annotate_files_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_annotate_files, name
-      assert_kind_of Google::Cloud::Vision::V1::BatchAnnotateFilesRequest, request
-      assert_kind_of Google::Cloud::Vision::V1::AnnotateFileRequest, request.requests.first
+      assert_kind_of ::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest, request
+      assert_kind_of ::Google::Cloud::Vision::V1::AnnotateFileRequest, request.requests.first
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, batch_annotate_files_client_stub do
       # Create client
-      client = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
+      client = ::Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -144,7 +144,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.batch_annotate_files Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent) do |response, operation|
+      client.batch_annotate_files ::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -156,7 +156,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.batch_annotate_files Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent), grpc_options do |response, operation|
+      client.batch_annotate_files ::Google::Cloud::Vision::V1::BatchAnnotateFilesRequest.new(requests: requests, parent: parent), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -168,7 +168,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
 
   def test_async_batch_annotate_images
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -180,16 +180,16 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
 
     async_batch_annotate_images_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :async_batch_annotate_images, name
-      assert_kind_of Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest, request
-      assert_kind_of Google::Cloud::Vision::V1::AnnotateImageRequest, request.requests.first
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Vision::V1::OutputConfig), request.output_config
+      assert_kind_of ::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest, request
+      assert_kind_of ::Google::Cloud::Vision::V1::AnnotateImageRequest, request.requests.first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Vision::V1::OutputConfig), request.output_config
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, async_batch_annotate_images_client_stub do
       # Create client
-      client = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
+      client = ::Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -208,7 +208,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.async_batch_annotate_images Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent) do |response, operation|
+      client.async_batch_annotate_images ::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -222,7 +222,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.async_batch_annotate_images Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent), grpc_options do |response, operation|
+      client.async_batch_annotate_images ::Google::Cloud::Vision::V1::AsyncBatchAnnotateImagesRequest.new(requests: requests, output_config: output_config, parent: parent), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -235,7 +235,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
 
   def test_async_batch_annotate_files
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -246,15 +246,15 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
 
     async_batch_annotate_files_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :async_batch_annotate_files, name
-      assert_kind_of Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest, request
-      assert_kind_of Google::Cloud::Vision::V1::AsyncAnnotateFileRequest, request.requests.first
+      assert_kind_of ::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest, request
+      assert_kind_of ::Google::Cloud::Vision::V1::AsyncAnnotateFileRequest, request.requests.first
       assert_equal "hello world", request.parent
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, async_batch_annotate_files_client_stub do
       # Create client
-      client = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
+      client = ::Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -273,7 +273,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.async_batch_annotate_files Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent) do |response, operation|
+      client.async_batch_annotate_files ::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -287,7 +287,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.async_batch_annotate_files Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent), grpc_options do |response, operation|
+      client.async_batch_annotate_files ::Google::Cloud::Vision::V1::AsyncBatchAnnotateFilesRequest.new(requests: requests, parent: parent), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -303,7 +303,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
+      client = ::Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -313,7 +313,7 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Vision::V1::ImageAnnotator::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Vision::V1::ImageAnnotator::Client::Configuration, config
   end
 
   def test_operations_client
@@ -321,11 +321,11 @@ class Google::Cloud::Vision::V1::ImageAnnotator::ClientTest < Minitest::Test
 
     client = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
+      client = ::Google::Cloud::Vision::V1::ImageAnnotator::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
 
-    assert_kind_of Google::Cloud::Vision::V1::ImageAnnotator::Operations, client.operations_client
+    assert_kind_of ::Google::Cloud::Vision::V1::ImageAnnotator::Operations, client.operations_client
   end
 end

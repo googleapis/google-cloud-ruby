@@ -24,57 +24,57 @@ module Google
         # A vertex represents a 2D point in the image.
         # NOTE: the vertex coordinates are in the same scale as the original image.
         # @!attribute [rw] x
-        #   @return [Integer]
+        #   @return [::Integer]
         #     X coordinate.
         # @!attribute [rw] y
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Y coordinate.
         class Vertex
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A vertex represents a 2D point in the image.
         # NOTE: the normalized vertex coordinates are relative to the original image
         # and range from 0 to 1.
         # @!attribute [rw] x
-        #   @return [Float]
+        #   @return [::Float]
         #     X coordinate.
         # @!attribute [rw] y
-        #   @return [Float]
+        #   @return [::Float]
         #     Y coordinate.
         class NormalizedVertex
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A bounding polygon for the detected image annotation.
         # @!attribute [rw] vertices
-        #   @return [Array<Google::Cloud::Vision::V1::Vertex>]
+        #   @return [::Array<::Google::Cloud::Vision::V1::Vertex>]
         #     The bounding polygon vertices.
         # @!attribute [rw] normalized_vertices
-        #   @return [Array<Google::Cloud::Vision::V1::NormalizedVertex>]
+        #   @return [::Array<::Google::Cloud::Vision::V1::NormalizedVertex>]
         #     The bounding polygon normalized vertices.
         class BoundingPoly
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A 3D position in the image, used primarily for Face detection landmarks.
         # A valid Position must have both x and y coordinates.
         # The position coordinates are in the same scale as the original image.
         # @!attribute [rw] x
-        #   @return [Float]
+        #   @return [::Float]
         #     X coordinate.
         # @!attribute [rw] y
-        #   @return [Float]
+        #   @return [::Float]
         #     Y coordinate.
         # @!attribute [rw] z
-        #   @return [Float]
+        #   @return [::Float]
         #     Z coordinate (or depth).
         class Position
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
