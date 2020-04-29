@@ -46,15 +46,15 @@ module Google
             ##
             # Configure the DlpService Client class.
             #
-            # See {Google::Cloud::Dlp::V2::DlpService::Client::Configuration}
+            # See {::Google::Cloud::Dlp::V2::DlpService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all DlpService clients:
             #
-            #     Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -292,7 +292,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Dlp::V2::DlpService::Client::Configuration}
+            # See {::Google::Cloud::Dlp::V2::DlpService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -313,13 +313,13 @@ module Google
             # To create a new DlpService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new
             #
             # To create a new DlpService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the DlpService client.
@@ -346,8 +346,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @dlp_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Dlp::V2::DlpService::Stub,
+              @dlp_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Dlp::V2::DlpService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -370,12 +370,12 @@ module Google
             #
             # @overload inspect_content(request, options = nil)
             #   Pass arguments to `inspect_content` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::InspectContentRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::InspectContentRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::InspectContentRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::InspectContentRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload inspect_content(parent: nil, inspect_config: nil, item: nil, inspect_template_name: nil, location_id: nil)
@@ -383,44 +383,44 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     The parent resource name, for example projects/my-project-id.
-            #   @param inspect_config [Google::Cloud::Dlp::V2::InspectConfig, Hash]
+            #   @param inspect_config [::Google::Cloud::Dlp::V2::InspectConfig, ::Hash]
             #     Configuration for the inspector. What specified here will override
             #     the template referenced by the inspect_template_name argument.
-            #   @param item [Google::Cloud::Dlp::V2::ContentItem, Hash]
+            #   @param item [::Google::Cloud::Dlp::V2::ContentItem, ::Hash]
             #     The item to inspect.
-            #   @param inspect_template_name [String]
+            #   @param inspect_template_name [::String]
             #     Template to use. Any configuration directly specified in
             #     inspect_config will override those set in the template. Singular fields
             #     that are set in this request will replace their corresponding fields in the
             #     template. Repeated fields are appended. Singular sub-messages and groups
             #     are recursively merged.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location to process content inspection. Reserved for future
             #     extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::InspectContentResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::InspectContentResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::InspectContentResponse]
+            # @return [::Google::Cloud::Dlp::V2::InspectContentResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def inspect_content request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::InspectContentRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::InspectContentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.inspect_content.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -441,8 +441,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -457,12 +457,12 @@ module Google
             #
             # @overload redact_image(request, options = nil)
             #   Pass arguments to `redact_image` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::RedactImageRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::RedactImageRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::RedactImageRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::RedactImageRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload redact_image(parent: nil, location_id: nil, inspect_config: nil, image_redaction_configs: nil, include_findings: nil, byte_item: nil)
@@ -470,42 +470,42 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     The parent resource name, for example projects/my-project-id.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location to process the request. Reserved for future
             #     extensions.
-            #   @param inspect_config [Google::Cloud::Dlp::V2::InspectConfig, Hash]
+            #   @param inspect_config [::Google::Cloud::Dlp::V2::InspectConfig, ::Hash]
             #     Configuration for the inspector.
-            #   @param image_redaction_configs [Array<Google::Cloud::Dlp::V2::RedactImageRequest::ImageRedactionConfig, Hash>]
+            #   @param image_redaction_configs [::Array<::Google::Cloud::Dlp::V2::RedactImageRequest::ImageRedactionConfig, ::Hash>]
             #     The configuration for specifying what content to redact from images.
-            #   @param include_findings [Boolean]
+            #   @param include_findings [::Boolean]
             #     Whether the response should include findings along with the redacted
             #     image.
-            #   @param byte_item [Google::Cloud::Dlp::V2::ByteContentItem, Hash]
+            #   @param byte_item [::Google::Cloud::Dlp::V2::ByteContentItem, ::Hash]
             #     The content must be PNG, JPEG, SVG or BMP.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::RedactImageResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::RedactImageResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::RedactImageResponse]
+            # @return [::Google::Cloud::Dlp::V2::RedactImageResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def redact_image request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::RedactImageRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::RedactImageRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.redact_image.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -526,8 +526,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -542,12 +542,12 @@ module Google
             #
             # @overload deidentify_content(request, options = nil)
             #   Pass arguments to `deidentify_content` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::DeidentifyContentRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::DeidentifyContentRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::DeidentifyContentRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::DeidentifyContentRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload deidentify_content(parent: nil, deidentify_config: nil, inspect_config: nil, item: nil, inspect_template_name: nil, deidentify_template_name: nil, location_id: nil)
@@ -555,55 +555,55 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     The parent resource name, for example projects/my-project-id.
-            #   @param deidentify_config [Google::Cloud::Dlp::V2::DeidentifyConfig, Hash]
+            #   @param deidentify_config [::Google::Cloud::Dlp::V2::DeidentifyConfig, ::Hash]
             #     Configuration for the de-identification of the content item.
             #     Items specified here will override the template referenced by the
             #     deidentify_template_name argument.
-            #   @param inspect_config [Google::Cloud::Dlp::V2::InspectConfig, Hash]
+            #   @param inspect_config [::Google::Cloud::Dlp::V2::InspectConfig, ::Hash]
             #     Configuration for the inspector.
             #     Items specified here will override the template referenced by the
             #     inspect_template_name argument.
-            #   @param item [Google::Cloud::Dlp::V2::ContentItem, Hash]
+            #   @param item [::Google::Cloud::Dlp::V2::ContentItem, ::Hash]
             #     The item to de-identify. Will be treated as text.
-            #   @param inspect_template_name [String]
+            #   @param inspect_template_name [::String]
             #     Template to use. Any configuration directly specified in
             #     inspect_config will override those set in the template. Singular fields
             #     that are set in this request will replace their corresponding fields in the
             #     template. Repeated fields are appended. Singular sub-messages and groups
             #     are recursively merged.
-            #   @param deidentify_template_name [String]
+            #   @param deidentify_template_name [::String]
             #     Template to use. Any configuration directly specified in
             #     deidentify_config will override those set in the template. Singular fields
             #     that are set in this request will replace their corresponding fields in the
             #     template. Repeated fields are appended. Singular sub-messages and groups
             #     are recursively merged.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location to process de-identification. Reserved for future
             #     extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::DeidentifyContentResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::DeidentifyContentResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::DeidentifyContentResponse]
+            # @return [::Google::Cloud::Dlp::V2::DeidentifyContentResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def deidentify_content request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::DeidentifyContentRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::DeidentifyContentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.deidentify_content.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -624,8 +624,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -636,12 +636,12 @@ module Google
             #
             # @overload reidentify_content(request, options = nil)
             #   Pass arguments to `reidentify_content` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::ReidentifyContentRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::ReidentifyContentRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::ReidentifyContentRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::ReidentifyContentRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload reidentify_content(parent: nil, reidentify_config: nil, inspect_config: nil, item: nil, inspect_template_name: nil, reidentify_template_name: nil, location_id: nil)
@@ -649,9 +649,9 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name.
-            #   @param reidentify_config [Google::Cloud::Dlp::V2::DeidentifyConfig, Hash]
+            #   @param reidentify_config [::Google::Cloud::Dlp::V2::DeidentifyConfig, ::Hash]
             #     Configuration for the re-identification of the content item.
             #     This field shares the same proto message type that is used for
             #     de-identification, however its usage here is for the reversal of the
@@ -662,48 +662,48 @@ module Google
             #
             #      - `CryptoDeterministicConfig`
             #      - `CryptoReplaceFfxFpeConfig`
-            #   @param inspect_config [Google::Cloud::Dlp::V2::InspectConfig, Hash]
+            #   @param inspect_config [::Google::Cloud::Dlp::V2::InspectConfig, ::Hash]
             #     Configuration for the inspector.
-            #   @param item [Google::Cloud::Dlp::V2::ContentItem, Hash]
+            #   @param item [::Google::Cloud::Dlp::V2::ContentItem, ::Hash]
             #     The item to re-identify. Will be treated as text.
-            #   @param inspect_template_name [String]
+            #   @param inspect_template_name [::String]
             #     Template to use. Any configuration directly specified in
             #     `inspect_config` will override those set in the template. Singular fields
             #     that are set in this request will replace their corresponding fields in the
             #     template. Repeated fields are appended. Singular sub-messages and groups
             #     are recursively merged.
-            #   @param reidentify_template_name [String]
+            #   @param reidentify_template_name [::String]
             #     Template to use. References an instance of `DeidentifyTemplate`.
             #     Any configuration directly specified in `reidentify_config` or
             #     `inspect_config` will override those set in the template. Singular fields
             #     that are set in this request will replace their corresponding fields in the
             #     template. Repeated fields are appended. Singular sub-messages and groups
             #     are recursively merged.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location to process content reidentification.  Reserved for
             #     future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::ReidentifyContentResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::ReidentifyContentResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::ReidentifyContentResponse]
+            # @return [::Google::Cloud::Dlp::V2::ReidentifyContentResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def reidentify_content request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::ReidentifyContentRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ReidentifyContentRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.reidentify_content.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -724,8 +724,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -735,12 +735,12 @@ module Google
             #
             # @overload list_info_types(request, options = nil)
             #   Pass arguments to `list_info_types` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::ListInfoTypesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::ListInfoTypesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::ListInfoTypesRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::ListInfoTypesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_info_types(language_code: nil, filter: nil, location_id: nil)
@@ -748,38 +748,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param language_code [String]
+            #   @param language_code [::String]
             #     BCP-47 language code for localized infoType friendly
             #     names. If omitted, or if localized strings are not available,
             #     en-US strings will be returned.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     filter to only return infoTypes supported by certain parts of the
             #     API. Defaults to supported_by=INSPECT.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location to list info types. Reserved for future
             #     extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::ListInfoTypesResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::ListInfoTypesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::ListInfoTypesResponse]
+            # @return [::Google::Cloud::Dlp::V2::ListInfoTypesResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_info_types request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::ListInfoTypesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListInfoTypesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_info_types.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -794,8 +794,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -805,12 +805,12 @@ module Google
             #
             # @overload create_inspect_template(request, options = nil)
             #   Pass arguments to `create_inspect_template` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::CreateInspectTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::CreateInspectTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_inspect_template(parent: nil, inspect_template: nil, template_id: nil, location_id: nil)
@@ -818,41 +818,41 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
             #     organizations/my-org-id.
-            #   @param inspect_template [Google::Cloud::Dlp::V2::InspectTemplate, Hash]
+            #   @param inspect_template [::Google::Cloud::Dlp::V2::InspectTemplate, ::Hash]
             #     Required. The InspectTemplate to create.
-            #   @param template_id [String]
+            #   @param template_id [::String]
             #     The template id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
             #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location to store the inspection template. Reserved for
             #     future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::InspectTemplate]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::InspectTemplate]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::InspectTemplate]
+            # @return [::Google::Cloud::Dlp::V2::InspectTemplate]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_inspect_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::CreateInspectTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::CreateInspectTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_inspect_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -873,8 +873,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -883,12 +883,12 @@ module Google
             #
             # @overload update_inspect_template(request, options = nil)
             #   Pass arguments to `update_inspect_template` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_inspect_template(name: nil, inspect_template: nil, update_mask: nil)
@@ -896,36 +896,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of organization and inspectTemplate to be updated,
             #     for example `organizations/433245324/inspectTemplates/432452342` or
             #     projects/project-id/inspectTemplates/432452342.
-            #   @param inspect_template [Google::Cloud::Dlp::V2::InspectTemplate, Hash]
+            #   @param inspect_template [::Google::Cloud::Dlp::V2::InspectTemplate, ::Hash]
             #     New InspectTemplate value.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask to control which fields get updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::InspectTemplate]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::InspectTemplate]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::InspectTemplate]
+            # @return [::Google::Cloud::Dlp::V2::InspectTemplate]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_inspect_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_inspect_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -946,8 +946,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -956,12 +956,12 @@ module Google
             #
             # @overload get_inspect_template(request, options = nil)
             #   Pass arguments to `get_inspect_template` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::GetInspectTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::GetInspectTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::GetInspectTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::GetInspectTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_inspect_template(name: nil)
@@ -969,32 +969,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the organization and inspectTemplate to be read,
             #     for example `organizations/433245324/inspectTemplates/432452342` or
             #     projects/project-id/inspectTemplates/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::InspectTemplate]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::InspectTemplate]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::InspectTemplate]
+            # @return [::Google::Cloud::Dlp::V2::InspectTemplate]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_inspect_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::GetInspectTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetInspectTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_inspect_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1015,8 +1015,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1025,12 +1025,12 @@ module Google
             #
             # @overload list_inspect_templates(request, options = nil)
             #   Pass arguments to `list_inspect_templates` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::ListInspectTemplatesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::ListInspectTemplatesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::ListInspectTemplatesRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::ListInspectTemplatesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_inspect_templates(parent: nil, page_token: nil, page_size: nil, order_by: nil, location_id: nil)
@@ -1038,16 +1038,16 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
             #     organizations/my-org-id.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Page token to continue retrieval. Comes from previous call
             #     to `ListInspectTemplates`.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Size of the page, can be limited by server. If zero server returns
             #     a page of max size 100.
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Comma separated list of fields to order by,
             #     followed by `asc` or `desc` postfix. This list is case-insensitive,
             #     default sorting order is ascending, redundant space characters are
@@ -1061,31 +1061,31 @@ module Google
             #     - `update_time`: corresponds to time the template was last updated.
             #     - `name`: corresponds to template's name.
             #     - `display_name`: corresponds to template's display name.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location where inspection templates will be retrieved from.
             #     Use `-` for all locations. Reserved for future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dlp::V2::InspectTemplate>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::InspectTemplate>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dlp::V2::InspectTemplate>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::InspectTemplate>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_inspect_templates request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::ListInspectTemplatesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListInspectTemplatesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_inspect_templates.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1103,12 +1103,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_inspect_templates, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @dlp_service_stub, :list_inspect_templates, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @dlp_service_stub, :list_inspect_templates, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1117,12 +1117,12 @@ module Google
             #
             # @overload delete_inspect_template(request, options = nil)
             #   Pass arguments to `delete_inspect_template` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_inspect_template(name: nil)
@@ -1130,32 +1130,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the organization and inspectTemplate to be
             #     deleted, for example `organizations/433245324/inspectTemplates/432452342`
             #     or projects/project-id/inspectTemplates/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_inspect_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_inspect_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1176,8 +1176,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1188,12 +1188,12 @@ module Google
             #
             # @overload create_deidentify_template(request, options = nil)
             #   Pass arguments to `create_deidentify_template` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_deidentify_template(parent: nil, deidentify_template: nil, template_id: nil, location_id: nil)
@@ -1201,41 +1201,41 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
             #     organizations/my-org-id.
-            #   @param deidentify_template [Google::Cloud::Dlp::V2::DeidentifyTemplate, Hash]
+            #   @param deidentify_template [::Google::Cloud::Dlp::V2::DeidentifyTemplate, ::Hash]
             #     Required. The DeidentifyTemplate to create.
-            #   @param template_id [String]
+            #   @param template_id [::String]
             #     The template id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
             #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location to store the deidentification template. Reserved
             #     for future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::DeidentifyTemplate]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::DeidentifyTemplate]
+            # @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_deidentify_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_deidentify_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1256,8 +1256,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1267,12 +1267,12 @@ module Google
             #
             # @overload update_deidentify_template(request, options = nil)
             #   Pass arguments to `update_deidentify_template` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_deidentify_template(name: nil, deidentify_template: nil, update_mask: nil)
@@ -1280,37 +1280,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of organization and deidentify template to be
             #     updated, for example
             #     `organizations/433245324/deidentifyTemplates/432452342` or
             #     projects/project-id/deidentifyTemplates/432452342.
-            #   @param deidentify_template [Google::Cloud::Dlp::V2::DeidentifyTemplate, Hash]
+            #   @param deidentify_template [::Google::Cloud::Dlp::V2::DeidentifyTemplate, ::Hash]
             #     New DeidentifyTemplate value.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask to control which fields get updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::DeidentifyTemplate]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::DeidentifyTemplate]
+            # @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_deidentify_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_deidentify_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1331,8 +1331,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1342,12 +1342,12 @@ module Google
             #
             # @overload get_deidentify_template(request, options = nil)
             #   Pass arguments to `get_deidentify_template` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_deidentify_template(name: nil)
@@ -1355,32 +1355,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the organization and deidentify template to be
             #     read, for example `organizations/433245324/deidentifyTemplates/432452342`
             #     or projects/project-id/deidentifyTemplates/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::DeidentifyTemplate]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::DeidentifyTemplate]
+            # @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_deidentify_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_deidentify_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1401,8 +1401,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1412,12 +1412,12 @@ module Google
             #
             # @overload list_deidentify_templates(request, options = nil)
             #   Pass arguments to `list_deidentify_templates` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_deidentify_templates(parent: nil, page_token: nil, page_size: nil, order_by: nil, location_id: nil)
@@ -1425,16 +1425,16 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
             #     organizations/my-org-id.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Page token to continue retrieval. Comes from previous call
             #     to `ListDeidentifyTemplates`.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Size of the page, can be limited by server. If zero server returns
             #     a page of max size 100.
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Comma separated list of fields to order by,
             #     followed by `asc` or `desc` postfix. This list is case-insensitive,
             #     default sorting order is ascending, redundant space characters are
@@ -1448,31 +1448,31 @@ module Google
             #     - `update_time`: corresponds to time the template was last updated.
             #     - `name`: corresponds to template's name.
             #     - `display_name`: corresponds to template's display name.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location where deidentifications templates will be retrieved
             #     from. Use `-` for all locations. Reserved for future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dlp::V2::DeidentifyTemplate>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::DeidentifyTemplate>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dlp::V2::DeidentifyTemplate>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::DeidentifyTemplate>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_deidentify_templates request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_deidentify_templates.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1490,12 +1490,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_deidentify_templates, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @dlp_service_stub, :list_deidentify_templates, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @dlp_service_stub, :list_deidentify_templates, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1505,12 +1505,12 @@ module Google
             #
             # @overload delete_deidentify_template(request, options = nil)
             #   Pass arguments to `delete_deidentify_template` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_deidentify_template(name: nil)
@@ -1518,33 +1518,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the organization and deidentify template to be
             #     deleted, for example
             #     `organizations/433245324/deidentifyTemplates/432452342` or
             #     projects/project-id/deidentifyTemplates/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_deidentify_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_deidentify_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1565,8 +1565,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1576,12 +1576,12 @@ module Google
             #
             # @overload create_job_trigger(request, options = nil)
             #   Pass arguments to `create_job_trigger` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::CreateJobTriggerRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::CreateJobTriggerRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::CreateJobTriggerRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::CreateJobTriggerRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_job_trigger(parent: nil, job_trigger: nil, trigger_id: nil, location_id: nil)
@@ -1589,40 +1589,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id.
-            #   @param job_trigger [Google::Cloud::Dlp::V2::JobTrigger, Hash]
+            #   @param job_trigger [::Google::Cloud::Dlp::V2::JobTrigger, ::Hash]
             #     Required. The JobTrigger to create.
-            #   @param trigger_id [String]
+            #   @param trigger_id [::String]
             #     The trigger id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
             #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location to store the job trigger. Reserved for
             #     future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::JobTrigger]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::JobTrigger]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::JobTrigger]
+            # @return [::Google::Cloud::Dlp::V2::JobTrigger]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_job_trigger request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::CreateJobTriggerRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::CreateJobTriggerRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_job_trigger.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1643,8 +1643,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1653,12 +1653,12 @@ module Google
             #
             # @overload update_job_trigger(request, options = nil)
             #   Pass arguments to `update_job_trigger` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::UpdateJobTriggerRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::UpdateJobTriggerRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::UpdateJobTriggerRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::UpdateJobTriggerRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_job_trigger(name: nil, job_trigger: nil, update_mask: nil)
@@ -1666,35 +1666,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the project and the triggeredJob, for example
             #     `projects/dlp-test-project/jobTriggers/53234423`.
-            #   @param job_trigger [Google::Cloud::Dlp::V2::JobTrigger, Hash]
+            #   @param job_trigger [::Google::Cloud::Dlp::V2::JobTrigger, ::Hash]
             #     New JobTrigger value.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask to control which fields get updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::JobTrigger]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::JobTrigger]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::JobTrigger]
+            # @return [::Google::Cloud::Dlp::V2::JobTrigger]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_job_trigger request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::UpdateJobTriggerRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::UpdateJobTriggerRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_job_trigger.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1715,8 +1715,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1729,12 +1729,12 @@ module Google
             #
             # @overload hybrid_inspect_job_trigger(request, options = nil)
             #   Pass arguments to `hybrid_inspect_job_trigger` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload hybrid_inspect_job_trigger(name: nil, hybrid_item: nil)
@@ -1742,33 +1742,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the trigger to execute a hybrid inspect on, for
             #     example `projects/dlp-test-project/jobTriggers/53234423`.
-            #   @param hybrid_item [Google::Cloud::Dlp::V2::HybridContentItem, Hash]
+            #   @param hybrid_item [::Google::Cloud::Dlp::V2::HybridContentItem, ::Hash]
             #     The item to inspect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::HybridInspectResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::HybridInspectResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::HybridInspectResponse]
+            # @return [::Google::Cloud::Dlp::V2::HybridInspectResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def hybrid_inspect_job_trigger request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.hybrid_inspect_job_trigger.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1789,8 +1789,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1799,12 +1799,12 @@ module Google
             #
             # @overload get_job_trigger(request, options = nil)
             #   Pass arguments to `get_job_trigger` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::GetJobTriggerRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::GetJobTriggerRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::GetJobTriggerRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::GetJobTriggerRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_job_trigger(name: nil)
@@ -1812,31 +1812,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the project and the triggeredJob, for example
             #     `projects/dlp-test-project/jobTriggers/53234423`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::JobTrigger]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::JobTrigger]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::JobTrigger]
+            # @return [::Google::Cloud::Dlp::V2::JobTrigger]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_job_trigger request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::GetJobTriggerRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetJobTriggerRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_job_trigger.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1857,8 +1857,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1867,12 +1867,12 @@ module Google
             #
             # @overload list_job_triggers(request, options = nil)
             #   Pass arguments to `list_job_triggers` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::ListJobTriggersRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::ListJobTriggersRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::ListJobTriggersRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::ListJobTriggersRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_job_triggers(parent: nil, page_token: nil, page_size: nil, order_by: nil, filter: nil, location_id: nil)
@@ -1880,15 +1880,15 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name, for example `projects/my-project-id`.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Page token to continue retrieval. Comes from previous call
             #     to ListJobTriggers. `order_by` field must not
             #     change for subsequent calls.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Size of the page, can be limited by a server.
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Comma separated list of triggeredJob fields to order by,
             #     followed by `asc` or `desc` postfix. This list is case-insensitive,
             #     default sorting order is ascending, redundant space characters are
@@ -1904,7 +1904,7 @@ module Google
             #     - `name`: corresponds to JobTrigger's name.
             #     - `display_name`: corresponds to JobTrigger's display name.
             #     - `status`: corresponds to JobTrigger's status.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Allows filtering.
             #
             #     Supported syntax:
@@ -1929,31 +1929,31 @@ module Google
             #     * last_run_time > \"2017-12-12T00:00:00+00:00\"
             #
             #     The length of this field should be no more than 500 characters.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location where job triggers will be retrieved from.
             #     Use `-` for all locations. Reserved for future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dlp::V2::JobTrigger>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::JobTrigger>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dlp::V2::JobTrigger>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::JobTrigger>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_job_triggers request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::ListJobTriggersRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListJobTriggersRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_job_triggers.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1971,12 +1971,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_job_triggers, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @dlp_service_stub, :list_job_triggers, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @dlp_service_stub, :list_job_triggers, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1985,12 +1985,12 @@ module Google
             #
             # @overload delete_job_trigger(request, options = nil)
             #   Pass arguments to `delete_job_trigger` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::DeleteJobTriggerRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::DeleteJobTriggerRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::DeleteJobTriggerRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::DeleteJobTriggerRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_job_trigger(name: nil)
@@ -1998,31 +1998,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the project and the triggeredJob, for example
             #     `projects/dlp-test-project/jobTriggers/53234423`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_job_trigger request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::DeleteJobTriggerRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::DeleteJobTriggerRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_job_trigger.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2043,8 +2043,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2053,12 +2053,12 @@ module Google
             #
             # @overload activate_job_trigger(request, options = nil)
             #   Pass arguments to `activate_job_trigger` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::ActivateJobTriggerRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::ActivateJobTriggerRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload activate_job_trigger(name: nil)
@@ -2066,31 +2066,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the trigger to activate, for example
             #     `projects/dlp-test-project/jobTriggers/53234423`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::DlpJob]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::DlpJob]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::DlpJob]
+            # @return [::Google::Cloud::Dlp::V2::DlpJob]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def activate_job_trigger request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::ActivateJobTriggerRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ActivateJobTriggerRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.activate_job_trigger.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2111,8 +2111,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2126,12 +2126,12 @@ module Google
             #
             # @overload create_dlp_job(request, options = nil)
             #   Pass arguments to `create_dlp_job` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::CreateDlpJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::CreateDlpJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::CreateDlpJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::CreateDlpJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_dlp_job(parent: nil, inspect_job: nil, risk_job: nil, job_id: nil, location_id: nil)
@@ -2139,42 +2139,42 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id.
-            #   @param inspect_job [Google::Cloud::Dlp::V2::InspectJobConfig, Hash]
+            #   @param inspect_job [::Google::Cloud::Dlp::V2::InspectJobConfig, ::Hash]
             #     Set to control what and how to inspect.
-            #   @param risk_job [Google::Cloud::Dlp::V2::RiskAnalysisJobConfig, Hash]
+            #   @param risk_job [::Google::Cloud::Dlp::V2::RiskAnalysisJobConfig, ::Hash]
             #     Set to choose what metric to calculate.
-            #   @param job_id [String]
+            #   @param job_id [::String]
             #     The job id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
             #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location to store and process the job. Reserved for
             #     future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::DlpJob]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::DlpJob]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::DlpJob]
+            # @return [::Google::Cloud::Dlp::V2::DlpJob]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_dlp_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::CreateDlpJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::CreateDlpJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_dlp_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2195,8 +2195,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2206,12 +2206,12 @@ module Google
             #
             # @overload list_dlp_jobs(request, options = nil)
             #   Pass arguments to `list_dlp_jobs` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::ListDlpJobsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::ListDlpJobsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::ListDlpJobsRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::ListDlpJobsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_dlp_jobs(parent: nil, filter: nil, page_size: nil, page_token: nil, type: nil, order_by: nil, location_id: nil)
@@ -2219,9 +2219,9 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Allows filtering.
             #
             #     Supported syntax:
@@ -2250,13 +2250,13 @@ module Google
             #     * end_time > \"2017-12-12T00:00:00+00:00\"
             #
             #     The length of this field should be no more than 500 characters.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The standard list page size.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The standard list page token.
-            #   @param type [Google::Cloud::Dlp::V2::DlpJobType]
+            #   @param type [::Google::Cloud::Dlp::V2::DlpJobType]
             #     The type of job. Defaults to `DlpJobType.INSPECT`
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Comma separated list of fields to order by,
             #     followed by `asc` or `desc` postfix. This list is case-insensitive,
             #     default sorting order is ascending, redundant space characters are
@@ -2270,31 +2270,31 @@ module Google
             #     - `end_time`: corresponds to time the job ended.
             #     - `name`: corresponds to job's name.
             #     - `state`: corresponds to `state`
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location where jobs will be retrieved from.
             #     Use `-` for all locations. Reserved for future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dlp::V2::DlpJob>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::DlpJob>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dlp::V2::DlpJob>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::DlpJob>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_dlp_jobs request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::ListDlpJobsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListDlpJobsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_dlp_jobs.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2312,12 +2312,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_dlp_jobs, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @dlp_service_stub, :list_dlp_jobs, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @dlp_service_stub, :list_dlp_jobs, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2327,12 +2327,12 @@ module Google
             #
             # @overload get_dlp_job(request, options = nil)
             #   Pass arguments to `get_dlp_job` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::GetDlpJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::GetDlpJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::GetDlpJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::GetDlpJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_dlp_job(name: nil)
@@ -2340,30 +2340,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the DlpJob resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::DlpJob]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::DlpJob]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::DlpJob]
+            # @return [::Google::Cloud::Dlp::V2::DlpJob]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_dlp_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::GetDlpJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetDlpJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_dlp_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2384,8 +2384,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2397,12 +2397,12 @@ module Google
             #
             # @overload delete_dlp_job(request, options = nil)
             #   Pass arguments to `delete_dlp_job` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::DeleteDlpJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::DeleteDlpJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::DeleteDlpJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::DeleteDlpJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_dlp_job(name: nil)
@@ -2410,30 +2410,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the DlpJob resource to be deleted.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_dlp_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::DeleteDlpJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::DeleteDlpJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_dlp_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2454,8 +2454,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2467,12 +2467,12 @@ module Google
             #
             # @overload cancel_dlp_job(request, options = nil)
             #   Pass arguments to `cancel_dlp_job` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::CancelDlpJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::CancelDlpJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::CancelDlpJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::CancelDlpJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload cancel_dlp_job(name: nil)
@@ -2480,30 +2480,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the DlpJob resource to be cancelled.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def cancel_dlp_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::CancelDlpJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::CancelDlpJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.cancel_dlp_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2524,8 +2524,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2535,12 +2535,12 @@ module Google
             #
             # @overload create_stored_info_type(request, options = nil)
             #   Pass arguments to `create_stored_info_type` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_stored_info_type(parent: nil, config: nil, stored_info_type_id: nil, location_id: nil)
@@ -2548,41 +2548,41 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
             #     organizations/my-org-id.
-            #   @param config [Google::Cloud::Dlp::V2::StoredInfoTypeConfig, Hash]
+            #   @param config [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig, ::Hash]
             #     Required. Configuration of the storedInfoType to create.
-            #   @param stored_info_type_id [String]
+            #   @param stored_info_type_id [::String]
             #     The storedInfoType ID can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
             #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
             #     characters. Can be empty to allow the system to generate one.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location to store the stored infoType. Reserved for
             #     future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::StoredInfoType]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::StoredInfoType]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::StoredInfoType]
+            # @return [::Google::Cloud::Dlp::V2::StoredInfoType]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_stored_info_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_stored_info_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2603,8 +2603,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2615,12 +2615,12 @@ module Google
             #
             # @overload update_stored_info_type(request, options = nil)
             #   Pass arguments to `update_stored_info_type` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_stored_info_type(name: nil, config: nil, update_mask: nil)
@@ -2628,38 +2628,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of organization and storedInfoType to be updated,
             #     for example `organizations/433245324/storedInfoTypes/432452342` or
             #     projects/project-id/storedInfoTypes/432452342.
-            #   @param config [Google::Cloud::Dlp::V2::StoredInfoTypeConfig, Hash]
+            #   @param config [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig, ::Hash]
             #     Updated configuration for the storedInfoType. If not provided, a new
             #     version of the storedInfoType will be created with the existing
             #     configuration.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask to control which fields get updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::StoredInfoType]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::StoredInfoType]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::StoredInfoType]
+            # @return [::Google::Cloud::Dlp::V2::StoredInfoType]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_stored_info_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_stored_info_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2680,8 +2680,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2691,12 +2691,12 @@ module Google
             #
             # @overload get_stored_info_type(request, options = nil)
             #   Pass arguments to `get_stored_info_type` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_stored_info_type(name: nil)
@@ -2704,32 +2704,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the organization and storedInfoType to be read,
             #     for example `organizations/433245324/storedInfoTypes/432452342` or
             #     projects/project-id/storedInfoTypes/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::StoredInfoType]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::StoredInfoType]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::StoredInfoType]
+            # @return [::Google::Cloud::Dlp::V2::StoredInfoType]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_stored_info_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_stored_info_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2750,8 +2750,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2761,12 +2761,12 @@ module Google
             #
             # @overload list_stored_info_types(request, options = nil)
             #   Pass arguments to `list_stored_info_types` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_stored_info_types(parent: nil, page_token: nil, page_size: nil, order_by: nil, location_id: nil)
@@ -2774,16 +2774,16 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent resource name, for example projects/my-project-id or
             #     organizations/my-org-id.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Page token to continue retrieval. Comes from previous call
             #     to `ListStoredInfoTypes`.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Size of the page, can be limited by server. If zero server returns
             #     a page of max size 100.
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Comma separated list of fields to order by,
             #     followed by `asc` or `desc` postfix. This list is case-insensitive,
             #     default sorting order is ascending, redundant space characters are
@@ -2798,31 +2798,31 @@ module Google
             #     - `state`: corresponds to the state of the resource.
             #     - `name`: corresponds to resource name.
             #     - `display_name`: corresponds to info type's display name.
-            #   @param location_id [String]
+            #   @param location_id [::String]
             #     The geographic location where stored infoTypes will be retrieved from.
             #     Use `-` for all locations. Reserved for future extensions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dlp::V2::StoredInfoType>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::StoredInfoType>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dlp::V2::StoredInfoType>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::StoredInfoType>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_stored_info_types request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_stored_info_types.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2840,12 +2840,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @dlp_service_stub.call_rpc :list_stored_info_types, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @dlp_service_stub, :list_stored_info_types, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @dlp_service_stub, :list_stored_info_types, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2855,12 +2855,12 @@ module Google
             #
             # @overload delete_stored_info_type(request, options = nil)
             #   Pass arguments to `delete_stored_info_type` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_stored_info_type(name: nil)
@@ -2868,32 +2868,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the organization and storedInfoType to be
             #     deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
             #     projects/project-id/storedInfoTypes/432452342.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_stored_info_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_stored_info_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2914,8 +2914,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2928,12 +2928,12 @@ module Google
             #
             # @overload hybrid_inspect_dlp_job(request, options = nil)
             #   Pass arguments to `hybrid_inspect_dlp_job` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload hybrid_inspect_dlp_job(name: nil, hybrid_item: nil)
@@ -2941,33 +2941,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the job to execute a hybrid inspect on, for
             #     example `projects/dlp-test-project/dlpJob/53234423`.
-            #   @param hybrid_item [Google::Cloud::Dlp::V2::HybridContentItem, Hash]
+            #   @param hybrid_item [::Google::Cloud::Dlp::V2::HybridContentItem, ::Hash]
             #     The item to inspect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dlp::V2::HybridInspectResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dlp::V2::HybridInspectResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dlp::V2::HybridInspectResponse]
+            # @return [::Google::Cloud::Dlp::V2::HybridInspectResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def hybrid_inspect_dlp_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.hybrid_inspect_dlp_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2988,8 +2988,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -3001,12 +3001,12 @@ module Google
             #
             # @overload finish_dlp_job(request, options = nil)
             #   Pass arguments to `finish_dlp_job` via a request object, either of type
-            #   {Google::Cloud::Dlp::V2::FinishDlpJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dlp::V2::FinishDlpJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dlp::V2::FinishDlpJobRequest, Hash]
+            #   @param request [::Google::Cloud::Dlp::V2::FinishDlpJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload finish_dlp_job(name: nil)
@@ -3014,30 +3014,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the DlpJob resource to be cancelled.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def finish_dlp_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dlp::V2::FinishDlpJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dlp::V2::FinishDlpJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.finish_dlp_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -3058,8 +3058,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -3069,7 +3069,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Dlp::V2::DlpService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Dlp::V2::DlpService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -3080,22 +3080,22 @@ module Google
             # To modify the global config, setting the timeout for inspect_content
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.inspect_content.timeout = 20_000
+            #     ::Google::Cloud::Dlp::V2::DlpService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.inspect_content.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.inspect_content.timeout = 20_000
+            #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.inspect_content.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"dlp.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -3107,29 +3107,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -3137,10 +3137,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "dlp.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -3148,14 +3148,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -3196,245 +3196,245 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `inspect_content`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :inspect_content
                 ##
                 # RPC-specific configuration for `redact_image`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :redact_image
                 ##
                 # RPC-specific configuration for `deidentify_content`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :deidentify_content
                 ##
                 # RPC-specific configuration for `reidentify_content`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :reidentify_content
                 ##
                 # RPC-specific configuration for `list_info_types`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_info_types
                 ##
                 # RPC-specific configuration for `create_inspect_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_inspect_template
                 ##
                 # RPC-specific configuration for `update_inspect_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_inspect_template
                 ##
                 # RPC-specific configuration for `get_inspect_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_inspect_template
                 ##
                 # RPC-specific configuration for `list_inspect_templates`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_inspect_templates
                 ##
                 # RPC-specific configuration for `delete_inspect_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_inspect_template
                 ##
                 # RPC-specific configuration for `create_deidentify_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_deidentify_template
                 ##
                 # RPC-specific configuration for `update_deidentify_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_deidentify_template
                 ##
                 # RPC-specific configuration for `get_deidentify_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_deidentify_template
                 ##
                 # RPC-specific configuration for `list_deidentify_templates`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_deidentify_templates
                 ##
                 # RPC-specific configuration for `delete_deidentify_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_deidentify_template
                 ##
                 # RPC-specific configuration for `create_job_trigger`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_job_trigger
                 ##
                 # RPC-specific configuration for `update_job_trigger`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_job_trigger
                 ##
                 # RPC-specific configuration for `hybrid_inspect_job_trigger`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :hybrid_inspect_job_trigger
                 ##
                 # RPC-specific configuration for `get_job_trigger`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_job_trigger
                 ##
                 # RPC-specific configuration for `list_job_triggers`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_job_triggers
                 ##
                 # RPC-specific configuration for `delete_job_trigger`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_job_trigger
                 ##
                 # RPC-specific configuration for `activate_job_trigger`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :activate_job_trigger
                 ##
                 # RPC-specific configuration for `create_dlp_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_dlp_job
                 ##
                 # RPC-specific configuration for `list_dlp_jobs`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_dlp_jobs
                 ##
                 # RPC-specific configuration for `get_dlp_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_dlp_job
                 ##
                 # RPC-specific configuration for `delete_dlp_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_dlp_job
                 ##
                 # RPC-specific configuration for `cancel_dlp_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :cancel_dlp_job
                 ##
                 # RPC-specific configuration for `create_stored_info_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_stored_info_type
                 ##
                 # RPC-specific configuration for `update_stored_info_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_stored_info_type
                 ##
                 # RPC-specific configuration for `get_stored_info_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_stored_info_type
                 ##
                 # RPC-specific configuration for `list_stored_info_types`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_stored_info_types
                 ##
                 # RPC-specific configuration for `delete_stored_info_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_stored_info_type
                 ##
                 # RPC-specific configuration for `hybrid_inspect_dlp_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :hybrid_inspect_dlp_job
                 ##
                 # RPC-specific configuration for `finish_dlp_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :finish_dlp_job
 
                 # @private
                 def initialize parent_rpcs = nil
                   inspect_content_config = parent_rpcs&.inspect_content if parent_rpcs&.respond_to? :inspect_content
-                  @inspect_content = Gapic::Config::Method.new inspect_content_config
+                  @inspect_content = ::Gapic::Config::Method.new inspect_content_config
                   redact_image_config = parent_rpcs&.redact_image if parent_rpcs&.respond_to? :redact_image
-                  @redact_image = Gapic::Config::Method.new redact_image_config
+                  @redact_image = ::Gapic::Config::Method.new redact_image_config
                   deidentify_content_config = parent_rpcs&.deidentify_content if parent_rpcs&.respond_to? :deidentify_content
-                  @deidentify_content = Gapic::Config::Method.new deidentify_content_config
+                  @deidentify_content = ::Gapic::Config::Method.new deidentify_content_config
                   reidentify_content_config = parent_rpcs&.reidentify_content if parent_rpcs&.respond_to? :reidentify_content
-                  @reidentify_content = Gapic::Config::Method.new reidentify_content_config
+                  @reidentify_content = ::Gapic::Config::Method.new reidentify_content_config
                   list_info_types_config = parent_rpcs&.list_info_types if parent_rpcs&.respond_to? :list_info_types
-                  @list_info_types = Gapic::Config::Method.new list_info_types_config
+                  @list_info_types = ::Gapic::Config::Method.new list_info_types_config
                   create_inspect_template_config = parent_rpcs&.create_inspect_template if parent_rpcs&.respond_to? :create_inspect_template
-                  @create_inspect_template = Gapic::Config::Method.new create_inspect_template_config
+                  @create_inspect_template = ::Gapic::Config::Method.new create_inspect_template_config
                   update_inspect_template_config = parent_rpcs&.update_inspect_template if parent_rpcs&.respond_to? :update_inspect_template
-                  @update_inspect_template = Gapic::Config::Method.new update_inspect_template_config
+                  @update_inspect_template = ::Gapic::Config::Method.new update_inspect_template_config
                   get_inspect_template_config = parent_rpcs&.get_inspect_template if parent_rpcs&.respond_to? :get_inspect_template
-                  @get_inspect_template = Gapic::Config::Method.new get_inspect_template_config
+                  @get_inspect_template = ::Gapic::Config::Method.new get_inspect_template_config
                   list_inspect_templates_config = parent_rpcs&.list_inspect_templates if parent_rpcs&.respond_to? :list_inspect_templates
-                  @list_inspect_templates = Gapic::Config::Method.new list_inspect_templates_config
+                  @list_inspect_templates = ::Gapic::Config::Method.new list_inspect_templates_config
                   delete_inspect_template_config = parent_rpcs&.delete_inspect_template if parent_rpcs&.respond_to? :delete_inspect_template
-                  @delete_inspect_template = Gapic::Config::Method.new delete_inspect_template_config
+                  @delete_inspect_template = ::Gapic::Config::Method.new delete_inspect_template_config
                   create_deidentify_template_config = parent_rpcs&.create_deidentify_template if parent_rpcs&.respond_to? :create_deidentify_template
-                  @create_deidentify_template = Gapic::Config::Method.new create_deidentify_template_config
+                  @create_deidentify_template = ::Gapic::Config::Method.new create_deidentify_template_config
                   update_deidentify_template_config = parent_rpcs&.update_deidentify_template if parent_rpcs&.respond_to? :update_deidentify_template
-                  @update_deidentify_template = Gapic::Config::Method.new update_deidentify_template_config
+                  @update_deidentify_template = ::Gapic::Config::Method.new update_deidentify_template_config
                   get_deidentify_template_config = parent_rpcs&.get_deidentify_template if parent_rpcs&.respond_to? :get_deidentify_template
-                  @get_deidentify_template = Gapic::Config::Method.new get_deidentify_template_config
+                  @get_deidentify_template = ::Gapic::Config::Method.new get_deidentify_template_config
                   list_deidentify_templates_config = parent_rpcs&.list_deidentify_templates if parent_rpcs&.respond_to? :list_deidentify_templates
-                  @list_deidentify_templates = Gapic::Config::Method.new list_deidentify_templates_config
+                  @list_deidentify_templates = ::Gapic::Config::Method.new list_deidentify_templates_config
                   delete_deidentify_template_config = parent_rpcs&.delete_deidentify_template if parent_rpcs&.respond_to? :delete_deidentify_template
-                  @delete_deidentify_template = Gapic::Config::Method.new delete_deidentify_template_config
+                  @delete_deidentify_template = ::Gapic::Config::Method.new delete_deidentify_template_config
                   create_job_trigger_config = parent_rpcs&.create_job_trigger if parent_rpcs&.respond_to? :create_job_trigger
-                  @create_job_trigger = Gapic::Config::Method.new create_job_trigger_config
+                  @create_job_trigger = ::Gapic::Config::Method.new create_job_trigger_config
                   update_job_trigger_config = parent_rpcs&.update_job_trigger if parent_rpcs&.respond_to? :update_job_trigger
-                  @update_job_trigger = Gapic::Config::Method.new update_job_trigger_config
+                  @update_job_trigger = ::Gapic::Config::Method.new update_job_trigger_config
                   hybrid_inspect_job_trigger_config = parent_rpcs&.hybrid_inspect_job_trigger if parent_rpcs&.respond_to? :hybrid_inspect_job_trigger
-                  @hybrid_inspect_job_trigger = Gapic::Config::Method.new hybrid_inspect_job_trigger_config
+                  @hybrid_inspect_job_trigger = ::Gapic::Config::Method.new hybrid_inspect_job_trigger_config
                   get_job_trigger_config = parent_rpcs&.get_job_trigger if parent_rpcs&.respond_to? :get_job_trigger
-                  @get_job_trigger = Gapic::Config::Method.new get_job_trigger_config
+                  @get_job_trigger = ::Gapic::Config::Method.new get_job_trigger_config
                   list_job_triggers_config = parent_rpcs&.list_job_triggers if parent_rpcs&.respond_to? :list_job_triggers
-                  @list_job_triggers = Gapic::Config::Method.new list_job_triggers_config
+                  @list_job_triggers = ::Gapic::Config::Method.new list_job_triggers_config
                   delete_job_trigger_config = parent_rpcs&.delete_job_trigger if parent_rpcs&.respond_to? :delete_job_trigger
-                  @delete_job_trigger = Gapic::Config::Method.new delete_job_trigger_config
+                  @delete_job_trigger = ::Gapic::Config::Method.new delete_job_trigger_config
                   activate_job_trigger_config = parent_rpcs&.activate_job_trigger if parent_rpcs&.respond_to? :activate_job_trigger
-                  @activate_job_trigger = Gapic::Config::Method.new activate_job_trigger_config
+                  @activate_job_trigger = ::Gapic::Config::Method.new activate_job_trigger_config
                   create_dlp_job_config = parent_rpcs&.create_dlp_job if parent_rpcs&.respond_to? :create_dlp_job
-                  @create_dlp_job = Gapic::Config::Method.new create_dlp_job_config
+                  @create_dlp_job = ::Gapic::Config::Method.new create_dlp_job_config
                   list_dlp_jobs_config = parent_rpcs&.list_dlp_jobs if parent_rpcs&.respond_to? :list_dlp_jobs
-                  @list_dlp_jobs = Gapic::Config::Method.new list_dlp_jobs_config
+                  @list_dlp_jobs = ::Gapic::Config::Method.new list_dlp_jobs_config
                   get_dlp_job_config = parent_rpcs&.get_dlp_job if parent_rpcs&.respond_to? :get_dlp_job
-                  @get_dlp_job = Gapic::Config::Method.new get_dlp_job_config
+                  @get_dlp_job = ::Gapic::Config::Method.new get_dlp_job_config
                   delete_dlp_job_config = parent_rpcs&.delete_dlp_job if parent_rpcs&.respond_to? :delete_dlp_job
-                  @delete_dlp_job = Gapic::Config::Method.new delete_dlp_job_config
+                  @delete_dlp_job = ::Gapic::Config::Method.new delete_dlp_job_config
                   cancel_dlp_job_config = parent_rpcs&.cancel_dlp_job if parent_rpcs&.respond_to? :cancel_dlp_job
-                  @cancel_dlp_job = Gapic::Config::Method.new cancel_dlp_job_config
+                  @cancel_dlp_job = ::Gapic::Config::Method.new cancel_dlp_job_config
                   create_stored_info_type_config = parent_rpcs&.create_stored_info_type if parent_rpcs&.respond_to? :create_stored_info_type
-                  @create_stored_info_type = Gapic::Config::Method.new create_stored_info_type_config
+                  @create_stored_info_type = ::Gapic::Config::Method.new create_stored_info_type_config
                   update_stored_info_type_config = parent_rpcs&.update_stored_info_type if parent_rpcs&.respond_to? :update_stored_info_type
-                  @update_stored_info_type = Gapic::Config::Method.new update_stored_info_type_config
+                  @update_stored_info_type = ::Gapic::Config::Method.new update_stored_info_type_config
                   get_stored_info_type_config = parent_rpcs&.get_stored_info_type if parent_rpcs&.respond_to? :get_stored_info_type
-                  @get_stored_info_type = Gapic::Config::Method.new get_stored_info_type_config
+                  @get_stored_info_type = ::Gapic::Config::Method.new get_stored_info_type_config
                   list_stored_info_types_config = parent_rpcs&.list_stored_info_types if parent_rpcs&.respond_to? :list_stored_info_types
-                  @list_stored_info_types = Gapic::Config::Method.new list_stored_info_types_config
+                  @list_stored_info_types = ::Gapic::Config::Method.new list_stored_info_types_config
                   delete_stored_info_type_config = parent_rpcs&.delete_stored_info_type if parent_rpcs&.respond_to? :delete_stored_info_type
-                  @delete_stored_info_type = Gapic::Config::Method.new delete_stored_info_type_config
+                  @delete_stored_info_type = ::Gapic::Config::Method.new delete_stored_info_type_config
                   hybrid_inspect_dlp_job_config = parent_rpcs&.hybrid_inspect_dlp_job if parent_rpcs&.respond_to? :hybrid_inspect_dlp_job
-                  @hybrid_inspect_dlp_job = Gapic::Config::Method.new hybrid_inspect_dlp_job_config
+                  @hybrid_inspect_dlp_job = ::Gapic::Config::Method.new hybrid_inspect_dlp_job_config
                   finish_dlp_job_config = parent_rpcs&.finish_dlp_job if parent_rpcs&.respond_to? :finish_dlp_job
-                  @finish_dlp_job = Gapic::Config::Method.new finish_dlp_job_config
+                  @finish_dlp_job = ::Gapic::Config::Method.new finish_dlp_job_config
 
                   yield self if block_given?
                 end

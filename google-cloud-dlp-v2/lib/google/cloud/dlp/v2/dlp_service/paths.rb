@@ -61,35 +61,35 @@ module Google
             #   @param location [String]
             #   @param deidentify_template [String]
             #
-            # @return [String]
+            # @return [::String]
             def deidentify_template_path **args
               resources = {
                 "deidentify_template:organization"          => (proc do |organization:, deidentify_template:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/deidentifyTemplates/#{deidentify_template}"
                 end),
                 "deidentify_template:project"               => (proc do |project:, deidentify_template:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/deidentifyTemplates/#{deidentify_template}"
                 end),
                 "deidentify_template:location:organization" => (proc do |organization:, location:, deidentify_template:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "organizations/#{organization}/locations/#{location}/deidentifyTemplates/#{deidentify_template}"
                 end),
                 "deidentify_template:location:project"      => (proc do |project:, location:, deidentify_template:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/deidentifyTemplates/#{deidentify_template}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -113,24 +113,24 @@ module Google
             #   @param location [String]
             #   @param dlp_job [String]
             #
-            # @return [String]
+            # @return [::String]
             def dlp_job_path **args
               resources = {
                 "dlp_job:project"          => (proc do |project:, dlp_job:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/dlpJobs/#{dlp_job}"
                 end),
                 "dlp_job:location:project" => (proc do |project:, location:, dlp_job:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/dlpJobs/#{dlp_job}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -171,35 +171,35 @@ module Google
             #   @param location [String]
             #   @param inspect_template [String]
             #
-            # @return [String]
+            # @return [::String]
             def inspect_template_path **args
               resources = {
                 "inspect_template:organization"          => (proc do |organization:, inspect_template:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/inspectTemplates/#{inspect_template}"
                 end),
                 "inspect_template:project"               => (proc do |project:, inspect_template:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/inspectTemplates/#{inspect_template}"
                 end),
                 "inspect_template:location:organization" => (proc do |organization:, location:, inspect_template:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "organizations/#{organization}/locations/#{location}/inspectTemplates/#{inspect_template}"
                 end),
                 "inspect_template:location:project"      => (proc do |project:, location:, inspect_template:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/inspectTemplates/#{inspect_template}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -223,24 +223,24 @@ module Google
             #   @param location [String]
             #   @param job_trigger [String]
             #
-            # @return [String]
+            # @return [::String]
             def job_trigger_path **args
               resources = {
                 "job_trigger:project"          => (proc do |project:, job_trigger:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/jobTriggers/#{job_trigger}"
                 end),
                 "job_trigger:location:project" => (proc do |project:, location:, job_trigger:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/jobTriggers/#{job_trigger}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -254,9 +254,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
@@ -270,7 +270,7 @@ module Google
             #
             # @param organization [String]
             #
-            # @return [String]
+            # @return [::String]
             def organization_path organization:
               "organizations/#{organization}"
             end
@@ -285,9 +285,9 @@ module Google
             # @param organization [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def organization_location_path organization:, location:
-              raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
               "organizations/#{organization}/locations/#{location}"
             end
@@ -301,7 +301,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def project_path project:
               "projects/#{project}"
             end
@@ -343,35 +343,35 @@ module Google
             #   @param location [String]
             #   @param stored_info_type [String]
             #
-            # @return [String]
+            # @return [::String]
             def stored_info_type_path **args
               resources = {
                 "organization:stored_info_type"          => (proc do |organization:, stored_info_type:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/storedInfoTypes/#{stored_info_type}"
                 end),
                 "project:stored_info_type"               => (proc do |project:, stored_info_type:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/storedInfoTypes/#{stored_info_type}"
                 end),
                 "location:organization:stored_info_type" => (proc do |organization:, location:, stored_info_type:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "organizations/#{organization}/locations/#{location}/storedInfoTypes/#{stored_info_type}"
                 end),
                 "location:project:stored_info_type"      => (proc do |project:, location:, stored_info_type:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/storedInfoTypes/#{stored_info_type}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 

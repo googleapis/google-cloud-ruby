@@ -23,7 +23,7 @@ module Google
       module V2
         # List of exclude infoTypes.
         # @!attribute [rw] info_types
-        #   @return [Array<Google::Cloud::Dlp::V2::InfoType>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
         #     InfoType list in ExclusionRule rule drops a finding when it overlaps or
         #     contained within with a finding of an infoType from this list. For
         #     example, for `InspectionRuleSet.info_types` containing "PHONE_NUMBER"` and
@@ -33,60 +33,60 @@ module Google
         #     That leads to "555-222-2222@example.org" to generate only a single
         #     finding, namely email address.
         class ExcludeInfoTypes
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The rule that specifies conditions when findings of infoTypes specified in
         # `InspectionRuleSet` are removed from results.
         # @!attribute [rw] dictionary
-        #   @return [Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
         #     Dictionary which defines the rule.
         # @!attribute [rw] regex
-        #   @return [Google::Cloud::Dlp::V2::CustomInfoType::Regex]
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
         #     Regular expression which defines the rule.
         # @!attribute [rw] exclude_info_types
-        #   @return [Google::Cloud::Dlp::V2::ExcludeInfoTypes]
+        #   @return [::Google::Cloud::Dlp::V2::ExcludeInfoTypes]
         #     Set of infoTypes for which findings would affect this rule.
         # @!attribute [rw] matching_type
-        #   @return [Google::Cloud::Dlp::V2::MatchingType]
+        #   @return [::Google::Cloud::Dlp::V2::MatchingType]
         #     How the rule is applied, see MatchingType documentation for details.
         class ExclusionRule
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A single inspection rule to be applied to infoTypes, specified in
         # `InspectionRuleSet`.
         # @!attribute [rw] hotword_rule
-        #   @return [Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
         #     Hotword-based detection rule.
         # @!attribute [rw] exclusion_rule
-        #   @return [Google::Cloud::Dlp::V2::ExclusionRule]
+        #   @return [::Google::Cloud::Dlp::V2::ExclusionRule]
         #     Exclusion rule.
         class InspectionRule
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Rule set for modifying a set of infoTypes to alter behavior under certain
         # circumstances, depending on the specific details of the rules within the set.
         # @!attribute [rw] info_types
-        #   @return [Array<Google::Cloud::Dlp::V2::InfoType>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
         #     List of infoTypes this rule set is applied to.
         # @!attribute [rw] rules
-        #   @return [Array<Google::Cloud::Dlp::V2::InspectionRule>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InspectionRule>]
         #     Set of rules to be applied to infoTypes. The rules are applied in order.
         class InspectionRuleSet
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configuration description of the scanning process.
         # When used with redactContent only info_types and min_likelihood are currently
         # used.
         # @!attribute [rw] info_types
-        #   @return [Array<Google::Cloud::Dlp::V2::InfoType>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
         #     Restricts what info_types to look for. The values must correspond to
         #     InfoType values returned by ListInfoTypes or listed at
         #     https://cloud.google.com/dlp/docs/infotypes-reference.
@@ -99,84 +99,84 @@ module Google
         #     run you should specify specific InfoTypes listed in the reference,
         #     otherwise a default list will be used, which may change over time.
         # @!attribute [rw] min_likelihood
-        #   @return [Google::Cloud::Dlp::V2::Likelihood]
+        #   @return [::Google::Cloud::Dlp::V2::Likelihood]
         #     Only returns findings equal or above this threshold. The default is
         #     POSSIBLE.
         #     See https://cloud.google.com/dlp/docs/likelihood to learn more.
         # @!attribute [rw] limits
-        #   @return [Google::Cloud::Dlp::V2::InspectConfig::FindingLimits]
+        #   @return [::Google::Cloud::Dlp::V2::InspectConfig::FindingLimits]
         #     Configuration to control the number of findings returned.
         # @!attribute [rw] include_quote
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     When true, a contextual quote from the data that triggered a finding is
         #     included in the response; see Finding.quote.
         # @!attribute [rw] exclude_info_types
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     When true, excludes type information of the findings.
         # @!attribute [rw] custom_info_types
-        #   @return [Array<Google::Cloud::Dlp::V2::CustomInfoType>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::CustomInfoType>]
         #     CustomInfoTypes provided by the user. See
         #     https://cloud.google.com/dlp/docs/creating-custom-infotypes to learn more.
         # @!attribute [rw] content_options
-        #   @return [Array<Google::Cloud::Dlp::V2::ContentOption>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ContentOption>]
         #     List of options defining data content to scan.
         #     If empty, text, images, and other content will be included.
         # @!attribute [rw] rule_set
-        #   @return [Array<Google::Cloud::Dlp::V2::InspectionRuleSet>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InspectionRuleSet>]
         #     Set of rules to apply to the findings for this InspectConfig.
         #     Exclusion rules, contained in the set are executed in the end, other
         #     rules are executed in the order they are specified for each info type.
         class InspectConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Configuration to control the number of findings returned.
           # @!attribute [rw] max_findings_per_item
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Max number of findings that will be returned for each item scanned.
           #     When set within `InspectJobConfig`,
           #     the maximum returned is 2000 regardless if this is set higher.
           #     When set within `InspectContentRequest`, this field is ignored.
           # @!attribute [rw] max_findings_per_request
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Max number of findings that will be returned per request/job.
           #     When set within `InspectContentRequest`, the maximum returned is 2000
           #     regardless if this is set higher.
           # @!attribute [rw] max_findings_per_info_type
-          #   @return [Array<Google::Cloud::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::InspectConfig::FindingLimits::InfoTypeLimit>]
           #     Configuration of findings limit given for specified infoTypes.
           class FindingLimits
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Max findings configuration per infoType, per content item or long
             # running DlpJob.
             # @!attribute [rw] info_type
-            #   @return [Google::Cloud::Dlp::V2::InfoType]
+            #   @return [::Google::Cloud::Dlp::V2::InfoType]
             #     Type of information the findings limit applies to. Only one limit per
             #     info_type should be provided. If InfoTypeLimit does not have an
             #     info_type, the DLP API applies the limit against all info_types that
             #     are found but not specified in another InfoTypeLimit.
             # @!attribute [rw] max_findings
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Max findings limit for the given infoType.
             class InfoTypeLimit
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
         end
 
         # Container for bytes to inspect or redact.
         # @!attribute [rw] type
-        #   @return [Google::Cloud::Dlp::V2::ByteContentItem::BytesType]
+        #   @return [::Google::Cloud::Dlp::V2::ByteContentItem::BytesType]
         #     The type of data stored in the bytes string. Default will be TEXT_UTF8.
         # @!attribute [rw] data
-        #   @return [String]
+        #   @return [::String]
         #     Content data to inspect or redact.
         class ByteContentItem
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The type of data being sent to in data.
           module BytesType
@@ -208,50 +208,50 @@ module Google
 
         # Container structure for the content to inspect.
         # @!attribute [rw] value
-        #   @return [String]
+        #   @return [::String]
         #     String data to inspect or redact.
         # @!attribute [rw] table
-        #   @return [Google::Cloud::Dlp::V2::Table]
+        #   @return [::Google::Cloud::Dlp::V2::Table]
         #     Structured content for inspection. See
         #     https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table to
         #     learn more.
         # @!attribute [rw] byte_item
-        #   @return [Google::Cloud::Dlp::V2::ByteContentItem]
+        #   @return [::Google::Cloud::Dlp::V2::ByteContentItem]
         #     Content data to inspect or redact. Replaces `type` and `data`.
         class ContentItem
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Structured content to inspect. Up to 50,000 `Value`s per request allowed.
         # See https://cloud.google.com/dlp/docs/inspecting-text#inspecting_a_table to
         # learn more.
         # @!attribute [rw] headers
-        #   @return [Array<Google::Cloud::Dlp::V2::FieldId>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     Headers of the table.
         # @!attribute [rw] rows
-        #   @return [Array<Google::Cloud::Dlp::V2::Table::Row>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Table::Row>]
         #     Rows of the table.
         class Table
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Values of the row.
           # @!attribute [rw] values
-          #   @return [Array<Google::Cloud::Dlp::V2::Value>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::Value>]
           #     Individual cells.
           class Row
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # All the findings for a single scanned item.
         # @!attribute [rw] findings
-        #   @return [Array<Google::Cloud::Dlp::V2::Finding>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Finding>]
         #     List of findings for an item.
         # @!attribute [rw] findings_truncated
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     If true, then this item might have more findings than were returned,
         #     and the findings returned are an arbitrary subset of all findings.
         #     The findings list might be truncated because the input items were too
@@ -259,53 +259,53 @@ module Google
         #     allowed for a single API call. For best results, divide the input into
         #     smaller batches.
         class InspectResult
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents a piece of potentially sensitive content.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Resource name in format
         #     projects/\\{project}/locations/\\{location}/findings/\\{finding}
         #     Populated only when viewing persisted findings.
         # @!attribute [rw] quote
-        #   @return [String]
+        #   @return [::String]
         #     The content that was found. Even if the content is not textual, it
         #     may be converted to a textual representation here.
         #     Provided if `include_quote` is true and the finding is
         #     less than or equal to 4096 bytes long. If the finding exceeds 4096 bytes
         #     in length, the quote may be omitted.
         # @!attribute [rw] info_type
-        #   @return [Google::Cloud::Dlp::V2::InfoType]
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     The type of content that might have been found.
         #     Provided if `excluded_types` is false.
         # @!attribute [rw] likelihood
-        #   @return [Google::Cloud::Dlp::V2::Likelihood]
+        #   @return [::Google::Cloud::Dlp::V2::Likelihood]
         #     Confidence of how likely it is that the `info_type` is correct.
         # @!attribute [rw] location
-        #   @return [Google::Cloud::Dlp::V2::Location]
+        #   @return [::Google::Cloud::Dlp::V2::Location]
         #     Where the content was found.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp when finding was detected.
         # @!attribute [rw] quote_info
-        #   @return [Google::Cloud::Dlp::V2::QuoteInfo]
+        #   @return [::Google::Cloud::Dlp::V2::QuoteInfo]
         #     Contains data parsed from quotes. Only populated if include_quote was set
         #     to true and a supported infoType was requested. Currently supported
         #     infoTypes: DATE, DATE_OF_BIRTH and TIME.
         # @!attribute [rw] resource_name
-        #   @return [String]
+        #   @return [::String]
         #     The job that stored the finding.
         # @!attribute [rw] trigger_name
-        #   @return [String]
+        #   @return [::String]
         #     Job trigger name, if applicable, for this finding.
         #     (-- api-linter: core::0122::name-suffix=disabled
         #         aip.dev/not-precedent: AIP-122 discourages _name suffixes for
         #         resource names, but this has existed as part of the bigquery schema
         #         before this rule existed. --)
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The labels associated with this `InspectFinding`.
         #
         #     Label keys must be between 1 and 63 characters long and must conform
@@ -320,58 +320,58 @@ module Google
         #     * `"environment" : "production"`
         #     * `"pipeline" : "etl"`
         # @!attribute [rw] job_create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Time the job started that produced this finding.
         # @!attribute [rw] job_name
-        #   @return [String]
+        #   @return [::String]
         #     The job that stored the finding.
         #     (-- api-linter: core::0122::name-suffix=disabled
         #         aip.dev/not-precedent: AIP-122 discourages _name suffixes for
         #         resource names, but this has existed as part of the bigquery schema
         #         before this rule existed. --)
         class Finding
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Specifies the location of the finding.
         # @!attribute [rw] byte_range
-        #   @return [Google::Cloud::Dlp::V2::Range]
+        #   @return [::Google::Cloud::Dlp::V2::Range]
         #     Zero-based byte offsets delimiting the finding.
         #     These are relative to the finding's containing element.
         #     Note that when the content is not textual, this references
         #     the UTF-8 encoded textual representation of the content.
         #     Omitted if content is an image.
         # @!attribute [rw] codepoint_range
-        #   @return [Google::Cloud::Dlp::V2::Range]
+        #   @return [::Google::Cloud::Dlp::V2::Range]
         #     Unicode character offsets delimiting the finding.
         #     These are relative to the finding's containing element.
         #     Provided when the content is text.
         # @!attribute [rw] content_locations
-        #   @return [Array<Google::Cloud::Dlp::V2::ContentLocation>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ContentLocation>]
         #     List of nested objects pointing to the precise location of the finding
         #     within the file or record.
         # @!attribute [rw] container
-        #   @return [Google::Cloud::Dlp::V2::Container]
+        #   @return [::Google::Cloud::Dlp::V2::Container]
         #     Information about the container where this finding occurred, if available.
         class Location
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Precise location of the finding within a document, record, image, or metadata
         # container.
         # @!attribute [rw] container_name
-        #   @return [String]
+        #   @return [::String]
         #     Name of the container where the finding is located.
         #     The top level name is the source file name or table name. Names of some
         #     common storage containers are formatted as follows:
@@ -383,80 +383,80 @@ module Google
         #     Nested names could be absent if the embedded object has no string
         #     identifier (for an example an image contained within a document).
         # @!attribute [rw] record_location
-        #   @return [Google::Cloud::Dlp::V2::RecordLocation]
+        #   @return [::Google::Cloud::Dlp::V2::RecordLocation]
         #     Location within a row or record of a database table.
         # @!attribute [rw] image_location
-        #   @return [Google::Cloud::Dlp::V2::ImageLocation]
+        #   @return [::Google::Cloud::Dlp::V2::ImageLocation]
         #     Location within an image's pixels.
         # @!attribute [rw] document_location
-        #   @return [Google::Cloud::Dlp::V2::DocumentLocation]
+        #   @return [::Google::Cloud::Dlp::V2::DocumentLocation]
         #     Location data for document files.
         # @!attribute [rw] container_timestamp
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Findings container modification timestamp, if applicable.
         #     For Google Cloud Storage contains last file modification timestamp.
         #     For BigQuery table contains last_modified_time property.
         #     For Datastore - not populated.
         # @!attribute [rw] container_version
-        #   @return [String]
+        #   @return [::String]
         #     Findings container version, if available
         #     ("generation" for Google Cloud Storage).
         class ContentLocation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Location of a finding within a document.
         # @!attribute [rw] file_offset
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Offset of the line, from the beginning of the file, where the finding
         #     is located.
         class DocumentLocation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Location of a finding within a row or record.
         # @!attribute [rw] record_key
-        #   @return [Google::Cloud::Dlp::V2::RecordKey]
+        #   @return [::Google::Cloud::Dlp::V2::RecordKey]
         #     Key of the finding.
         # @!attribute [rw] field_id
-        #   @return [Google::Cloud::Dlp::V2::FieldId]
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     Field id of the field containing the finding.
         # @!attribute [rw] table_location
-        #   @return [Google::Cloud::Dlp::V2::TableLocation]
+        #   @return [::Google::Cloud::Dlp::V2::TableLocation]
         #     Location within a `ContentItem.Table`.
         class RecordLocation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Location of a finding within a table.
         # @!attribute [rw] row_index
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The zero-based index of the row where the finding is located.
         class TableLocation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents a container that may contain DLP findings.
         # Examples of a container include a file, table, or database record.
         # @!attribute [rw] type
-        #   @return [String]
+        #   @return [::String]
         #     Container type, for example BigQuery or Google Cloud Storage.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     Project where the finding was found.
         #     Can be different from the project that owns the finding.
         # @!attribute [rw] full_path
-        #   @return [String]
+        #   @return [::String]
         #     A string representation of the full container name.
         #     Examples:
         #     - BigQuery: 'Project:DataSetId.TableId'
         #     - Google Cloud Storage: 'gs://Bucket/folders/filename.txt'
         # @!attribute [rw] root_path
-        #   @return [String]
+        #   @return [::String]
         #     The root of the container.
         #     Examples:
         #     - For BigQuery table `project_id:dataset_id.table_id`, the root is
@@ -464,7 +464,7 @@ module Google
         #     - For Google Cloud Storage file `gs://bucket/folder/filename.txt`, the root
         #      is `gs://bucket`
         # @!attribute [rw] relative_path
-        #   @return [String]
+        #   @return [::String]
         #     The rest of the path after the root.
         #     Examples:
         #     - For BigQuery table `project_id:dataset_id.table_id`, the relative path is
@@ -472,196 +472,196 @@ module Google
         #     - Google Cloud Storage file `gs://bucket/folder/filename.txt`, the relative
         #      path is `folder/filename.txt`
         # @!attribute [rw] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Findings container modification timestamp, if applicable.
         #     For Google Cloud Storage contains last file modification timestamp.
         #     For BigQuery table contains last_modified_time property.
         #     For Datastore - not populated.
         # @!attribute [rw] version
-        #   @return [String]
+        #   @return [::String]
         #     Findings container version, if available
         #     ("generation" for Google Cloud Storage).
         class Container
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Generic half-open interval [start, end)
         # @!attribute [rw] start
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Index of the first character of the range (inclusive).
         # @!attribute [rw] end
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Index of the last character of the range (exclusive).
         class Range
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Location of the finding within an image.
         # @!attribute [rw] bounding_boxes
-        #   @return [Array<Google::Cloud::Dlp::V2::BoundingBox>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::BoundingBox>]
         #     Bounding boxes locating the pixels within the image containing the finding.
         class ImageLocation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Bounding box encompassing detected text within an image.
         # @!attribute [rw] top
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Top coordinate of the bounding box. (0,0) is upper left.
         # @!attribute [rw] left
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Left coordinate of the bounding box. (0,0) is upper left.
         # @!attribute [rw] width
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Width of the bounding box in pixels.
         # @!attribute [rw] height
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Height of the bounding box in pixels.
         class BoundingBox
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to search for potentially sensitive info in an image and redact it
         # by covering it with a colored rectangle.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location to process the request. Reserved for future
         #     extensions.
         # @!attribute [rw] inspect_config
-        #   @return [Google::Cloud::Dlp::V2::InspectConfig]
+        #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     Configuration for the inspector.
         # @!attribute [rw] image_redaction_configs
-        #   @return [Array<Google::Cloud::Dlp::V2::RedactImageRequest::ImageRedactionConfig>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::RedactImageRequest::ImageRedactionConfig>]
         #     The configuration for specifying what content to redact from images.
         # @!attribute [rw] include_findings
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Whether the response should include findings along with the redacted
         #     image.
         # @!attribute [rw] byte_item
-        #   @return [Google::Cloud::Dlp::V2::ByteContentItem]
+        #   @return [::Google::Cloud::Dlp::V2::ByteContentItem]
         #     The content must be PNG, JPEG, SVG or BMP.
         class RedactImageRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Configuration for determining how redaction of images should occur.
           # @!attribute [rw] info_type
-          #   @return [Google::Cloud::Dlp::V2::InfoType]
+          #   @return [::Google::Cloud::Dlp::V2::InfoType]
           #     Only one per info_type should be provided per request. If not
           #     specified, and redact_all_text is false, the DLP API will redact all
           #     text that it matches against all info_types that are found, but not
           #     specified in another ImageRedactionConfig.
           # @!attribute [rw] redact_all_text
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     If true, all text found in the image, regardless whether it matches an
           #     info_type, is redacted. Only one should be provided.
           # @!attribute [rw] redaction_color
-          #   @return [Google::Cloud::Dlp::V2::Color]
+          #   @return [::Google::Cloud::Dlp::V2::Color]
           #     The color to use when redacting content from an image. If not specified,
           #     the default is black.
           class ImageRedactionConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Represents a color in the RGB color space.
         # @!attribute [rw] red
-        #   @return [Float]
+        #   @return [::Float]
         #     The amount of red in the color as a value in the interval [0, 1].
         # @!attribute [rw] green
-        #   @return [Float]
+        #   @return [::Float]
         #     The amount of green in the color as a value in the interval [0, 1].
         # @!attribute [rw] blue
-        #   @return [Float]
+        #   @return [::Float]
         #     The amount of blue in the color as a value in the interval [0, 1].
         class Color
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Results of redacting an image.
         # @!attribute [rw] redacted_image
-        #   @return [String]
+        #   @return [::String]
         #     The redacted image. The type will be the same as the original image.
         # @!attribute [rw] extracted_text
-        #   @return [String]
+        #   @return [::String]
         #     If an image was being inspected and the InspectConfig's include_quote was
         #     set to true, then this field will include all text, if any, that was found
         #     in the image.
         # @!attribute [rw] inspect_result
-        #   @return [Google::Cloud::Dlp::V2::InspectResult]
+        #   @return [::Google::Cloud::Dlp::V2::InspectResult]
         #     The findings. Populated when include_findings in the request is true.
         class RedactImageResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to de-identify a list of items.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] deidentify_config
-        #   @return [Google::Cloud::Dlp::V2::DeidentifyConfig]
+        #   @return [::Google::Cloud::Dlp::V2::DeidentifyConfig]
         #     Configuration for the de-identification of the content item.
         #     Items specified here will override the template referenced by the
         #     deidentify_template_name argument.
         # @!attribute [rw] inspect_config
-        #   @return [Google::Cloud::Dlp::V2::InspectConfig]
+        #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     Configuration for the inspector.
         #     Items specified here will override the template referenced by the
         #     inspect_template_name argument.
         # @!attribute [rw] item
-        #   @return [Google::Cloud::Dlp::V2::ContentItem]
+        #   @return [::Google::Cloud::Dlp::V2::ContentItem]
         #     The item to de-identify. Will be treated as text.
         # @!attribute [rw] inspect_template_name
-        #   @return [String]
+        #   @return [::String]
         #     Template to use. Any configuration directly specified in
         #     inspect_config will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
         # @!attribute [rw] deidentify_template_name
-        #   @return [String]
+        #   @return [::String]
         #     Template to use. Any configuration directly specified in
         #     deidentify_config will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location to process de-identification. Reserved for future
         #     extensions.
         class DeidentifyContentRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Results of de-identifying a ContentItem.
         # @!attribute [rw] item
-        #   @return [Google::Cloud::Dlp::V2::ContentItem]
+        #   @return [::Google::Cloud::Dlp::V2::ContentItem]
         #     The de-identified item.
         # @!attribute [rw] overview
-        #   @return [Google::Cloud::Dlp::V2::TransformationOverview]
+        #   @return [::Google::Cloud::Dlp::V2::TransformationOverview]
         #     An overview of the changes that were made on the `item`.
         class DeidentifyContentResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to re-identify an item.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name.
         # @!attribute [rw] reidentify_config
-        #   @return [Google::Cloud::Dlp::V2::DeidentifyConfig]
+        #   @return [::Google::Cloud::Dlp::V2::DeidentifyConfig]
         #     Configuration for the re-identification of the content item.
         #     This field shares the same proto message type that is used for
         #     de-identification, however its usage here is for the reversal of the
@@ -673,20 +673,20 @@ module Google
         #      - `CryptoDeterministicConfig`
         #      - `CryptoReplaceFfxFpeConfig`
         # @!attribute [rw] inspect_config
-        #   @return [Google::Cloud::Dlp::V2::InspectConfig]
+        #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     Configuration for the inspector.
         # @!attribute [rw] item
-        #   @return [Google::Cloud::Dlp::V2::ContentItem]
+        #   @return [::Google::Cloud::Dlp::V2::ContentItem]
         #     The item to re-identify. Will be treated as text.
         # @!attribute [rw] inspect_template_name
-        #   @return [String]
+        #   @return [::String]
         #     Template to use. Any configuration directly specified in
         #     `inspect_config` will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
         # @!attribute [rw] reidentify_template_name
-        #   @return [String]
+        #   @return [::String]
         #     Template to use. References an instance of `DeidentifyTemplate`.
         #     Any configuration directly specified in `reidentify_config` or
         #     `inspect_config` will override those set in the template. Singular fields
@@ -694,65 +694,65 @@ module Google
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location to process content reidentification.  Reserved for
         #     future extensions.
         class ReidentifyContentRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Results of re-identifying a item.
         # @!attribute [rw] item
-        #   @return [Google::Cloud::Dlp::V2::ContentItem]
+        #   @return [::Google::Cloud::Dlp::V2::ContentItem]
         #     The re-identified item.
         # @!attribute [rw] overview
-        #   @return [Google::Cloud::Dlp::V2::TransformationOverview]
+        #   @return [::Google::Cloud::Dlp::V2::TransformationOverview]
         #     An overview of the changes that were made to the `item`.
         class ReidentifyContentResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to search for potentially sensitive info in a ContentItem.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] inspect_config
-        #   @return [Google::Cloud::Dlp::V2::InspectConfig]
+        #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     Configuration for the inspector. What specified here will override
         #     the template referenced by the inspect_template_name argument.
         # @!attribute [rw] item
-        #   @return [Google::Cloud::Dlp::V2::ContentItem]
+        #   @return [::Google::Cloud::Dlp::V2::ContentItem]
         #     The item to inspect.
         # @!attribute [rw] inspect_template_name
-        #   @return [String]
+        #   @return [::String]
         #     Template to use. Any configuration directly specified in
         #     inspect_config will override those set in the template. Singular fields
         #     that are set in this request will replace their corresponding fields in the
         #     template. Repeated fields are appended. Singular sub-messages and groups
         #     are recursively merged.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location to process content inspection. Reserved for future
         #     extensions.
         class InspectContentRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Results of inspecting an item.
         # @!attribute [rw] result
-        #   @return [Google::Cloud::Dlp::V2::InspectResult]
+        #   @return [::Google::Cloud::Dlp::V2::InspectResult]
         #     The findings.
         class InspectContentResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Cloud repository for storing output.
         # @!attribute [rw] table
-        #   @return [Google::Cloud::Dlp::V2::BigQueryTable]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
         #     Store findings in an existing table or a new table in an existing
         #     dataset. If table_id is not set a new one will be generated
         #     for you with the following format:
@@ -768,7 +768,7 @@ module Google
         #     compute a different privacy metric, or use different sets of
         #     quasi-identifiers, cannot store their results in the same table.
         # @!attribute [rw] output_schema
-        #   @return [Google::Cloud::Dlp::V2::OutputStorageConfig::OutputSchema]
+        #   @return [::Google::Cloud::Dlp::V2::OutputStorageConfig::OutputSchema]
         #     Schema used for writing the findings for Inspect jobs. This field is only
         #     used for Inspect and must be unspecified for Risk jobs. Columns are derived
         #     from the `Finding` object. If appending to an existing table, any columns
@@ -780,8 +780,8 @@ module Google
         #     existing table that has a schema.
         #     Only for use with external storage.
         class OutputStorageConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Predefined schemas for storing findings.
           # Only for use with external storage.
@@ -809,170 +809,170 @@ module Google
 
         # Statistics regarding a specific InfoType.
         # @!attribute [rw] info_type
-        #   @return [Google::Cloud::Dlp::V2::InfoType]
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     The type of finding this stat is for.
         # @!attribute [rw] count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Number of findings for this infoType.
         class InfoTypeStats
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The results of an inspect DataSource job.
         # @!attribute [rw] requested_options
-        #   @return [Google::Cloud::Dlp::V2::InspectDataSourceDetails::RequestedOptions]
+        #   @return [::Google::Cloud::Dlp::V2::InspectDataSourceDetails::RequestedOptions]
         #     The configuration used for this job.
         # @!attribute [rw] result
-        #   @return [Google::Cloud::Dlp::V2::InspectDataSourceDetails::Result]
+        #   @return [::Google::Cloud::Dlp::V2::InspectDataSourceDetails::Result]
         #     A summary of the outcome of this inspect job.
         class InspectDataSourceDetails
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Snapshot of the inspection configuration.
           # @!attribute [rw] snapshot_inspect_template
-          #   @return [Google::Cloud::Dlp::V2::InspectTemplate]
+          #   @return [::Google::Cloud::Dlp::V2::InspectTemplate]
           #     If run with an InspectTemplate, a snapshot of its state at the time of
           #     this run.
           # @!attribute [rw] job_config
-          #   @return [Google::Cloud::Dlp::V2::InspectJobConfig]
+          #   @return [::Google::Cloud::Dlp::V2::InspectJobConfig]
           #     Inspect config.
           class RequestedOptions
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # All result fields mentioned below are updated while the job is processing.
           # @!attribute [rw] processed_bytes
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Total size in bytes that were processed.
           # @!attribute [rw] total_estimated_bytes
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Estimate of the number of bytes to process.
           # @!attribute [rw] info_type_stats
-          #   @return [Array<Google::Cloud::Dlp::V2::InfoTypeStats>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::InfoTypeStats>]
           #     Statistics of how many instances of each info type were found during
           #     inspect job.
           # @!attribute [rw] hybrid_stats
-          #   @return [Google::Cloud::Dlp::V2::HybridInspectStatistics]
+          #   @return [::Google::Cloud::Dlp::V2::HybridInspectStatistics]
           #     Statistics related to the processing of hybrid inspect.
           #     Early access feature is in a pre-release state and might change or have
           #     limited support. For more information, see
           #     https://cloud.google.com/products#product-launch-stages.
           class Result
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Statistics related to processing hybrid inspect requests.s
         # @!attribute [rw] processed_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The number of hybrid inspection requests processed within this job.
         # @!attribute [rw] aborted_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The number of hybrid inspection requests aborted because the job ran
         #     out of quota or was ended before they could be processed.
         # @!attribute [rw] pending_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The number of hybrid requests currently being processed. Only populated
         #     when called via method `getDlpJob`.
         #     A burst of traffic may cause hybrid inspect requests to be enqueued.
         #     Processing will take place as quickly as possible, but resource limitations
         #     may impact how long a request is enqueued for.
         class HybridInspectStatistics
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # InfoType description.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Internal name of the infoType.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Human readable form of the infoType name.
         # @!attribute [rw] supported_by
-        #   @return [Array<Google::Cloud::Dlp::V2::InfoTypeSupportedBy>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoTypeSupportedBy>]
         #     Which parts of the API supports this InfoType.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Description of the infotype. Translated when language is provided in the
         #     request.
         class InfoTypeDescription
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request for the list of infoTypes.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     BCP-47 language code for localized infoType friendly
         #     names. If omitted, or if localized strings are not available,
         #     en-US strings will be returned.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     filter to only return infoTypes supported by certain parts of the
         #     API. Defaults to supported_by=INSPECT.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location to list info types. Reserved for future
         #     extensions.
         class ListInfoTypesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response to the ListInfoTypes request.
         # @!attribute [rw] info_types
-        #   @return [Array<Google::Cloud::Dlp::V2::InfoTypeDescription>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoTypeDescription>]
         #     Set of sensitive infoTypes.
         class ListInfoTypesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configuration for a risk analysis job. See
         # https://cloud.google.com/dlp/docs/concepts-risk-analysis to learn more.
         # @!attribute [rw] privacy_metric
-        #   @return [Google::Cloud::Dlp::V2::PrivacyMetric]
+        #   @return [::Google::Cloud::Dlp::V2::PrivacyMetric]
         #     Privacy metric to compute.
         # @!attribute [rw] source_table
-        #   @return [Google::Cloud::Dlp::V2::BigQueryTable]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
         #     Input dataset to compute metrics over.
         # @!attribute [rw] actions
-        #   @return [Array<Google::Cloud::Dlp::V2::Action>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Action>]
         #     Actions to execute at the completion of the job. Are executed in the order
         #     provided.
         class RiskAnalysisJobConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A column with a semantic tag attached.
         # @!attribute [rw] field
-        #   @return [Google::Cloud::Dlp::V2::FieldId]
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     Required. Identifies the column.
         # @!attribute [rw] info_type
-        #   @return [Google::Cloud::Dlp::V2::InfoType]
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     A column can be tagged with a InfoType to use the relevant public
         #     dataset as a statistical model of population, if available. We
         #     currently support US ZIP codes, region codes, ages and genders.
         #     To programmatically obtain the list of supported InfoTypes, use
         #     ListInfoTypes with the supported_by=RISK_ANALYSIS filter.
         # @!attribute [rw] custom_tag
-        #   @return [String]
+        #   @return [::String]
         #     A column can be tagged with a custom tag. In this case, the user must
         #     indicate an auxiliary table that contains statistical information on
         #     the possible values of this column (below).
         # @!attribute [rw] inferred
-        #   @return [Google::Protobuf::Empty]
+        #   @return [::Google::Protobuf::Empty]
         #     If no semantic tag is indicated, we infer the statistical model from
         #     the distribution of values in the input data
         class QuasiId
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # An auxiliary table containing statistical information on the relative
@@ -983,92 +983,92 @@ module Google
         # corresponding relative frequency is assumed to be zero (and thus, the
         # tuple is highly reidentifiable).
         # @!attribute [rw] table
-        #   @return [Google::Cloud::Dlp::V2::BigQueryTable]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
         #     Required. Auxiliary table location.
         # @!attribute [rw] quasi_ids
-        #   @return [Array<Google::Cloud::Dlp::V2::StatisticalTable::QuasiIdentifierField>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::StatisticalTable::QuasiIdentifierField>]
         #     Required. Quasi-identifier columns.
         # @!attribute [rw] relative_frequency
-        #   @return [Google::Cloud::Dlp::V2::FieldId]
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     Required. The relative frequency column must contain a floating-point
         #     number between 0 and 1 (inclusive). Null values are assumed to be zero.
         class StatisticalTable
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A quasi-identifier column has a custom_tag, used to know which column
           # in the data corresponds to which column in the statistical model.
           # @!attribute [rw] field
-          #   @return [Google::Cloud::Dlp::V2::FieldId]
+          #   @return [::Google::Cloud::Dlp::V2::FieldId]
           #     Identifies the column.
           # @!attribute [rw] custom_tag
-          #   @return [String]
+          #   @return [::String]
           #     A column can be tagged with a custom tag. In this case, the user must
           #     indicate an auxiliary table that contains statistical information on
           #     the possible values of this column (below).
           class QuasiIdentifierField
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Privacy metric to compute for reidentification risk analysis.
         # @!attribute [rw] numerical_stats_config
-        #   @return [Google::Cloud::Dlp::V2::PrivacyMetric::NumericalStatsConfig]
+        #   @return [::Google::Cloud::Dlp::V2::PrivacyMetric::NumericalStatsConfig]
         #     Numerical stats
         # @!attribute [rw] categorical_stats_config
-        #   @return [Google::Cloud::Dlp::V2::PrivacyMetric::CategoricalStatsConfig]
+        #   @return [::Google::Cloud::Dlp::V2::PrivacyMetric::CategoricalStatsConfig]
         #     Categorical stats
         # @!attribute [rw] k_anonymity_config
-        #   @return [Google::Cloud::Dlp::V2::PrivacyMetric::KAnonymityConfig]
+        #   @return [::Google::Cloud::Dlp::V2::PrivacyMetric::KAnonymityConfig]
         #     K-anonymity
         # @!attribute [rw] l_diversity_config
-        #   @return [Google::Cloud::Dlp::V2::PrivacyMetric::LDiversityConfig]
+        #   @return [::Google::Cloud::Dlp::V2::PrivacyMetric::LDiversityConfig]
         #     l-diversity
         # @!attribute [rw] k_map_estimation_config
-        #   @return [Google::Cloud::Dlp::V2::PrivacyMetric::KMapEstimationConfig]
+        #   @return [::Google::Cloud::Dlp::V2::PrivacyMetric::KMapEstimationConfig]
         #     k-map
         # @!attribute [rw] delta_presence_estimation_config
-        #   @return [Google::Cloud::Dlp::V2::PrivacyMetric::DeltaPresenceEstimationConfig]
+        #   @return [::Google::Cloud::Dlp::V2::PrivacyMetric::DeltaPresenceEstimationConfig]
         #     delta-presence
         class PrivacyMetric
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Compute numerical stats over an individual column, including
           # min, max, and quantiles.
           # @!attribute [rw] field
-          #   @return [Google::Cloud::Dlp::V2::FieldId]
+          #   @return [::Google::Cloud::Dlp::V2::FieldId]
           #     Field to compute numerical stats on. Supported types are
           #     integer, float, date, datetime, timestamp, time.
           class NumericalStatsConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Compute numerical stats over an individual column, including
           # number of distinct values and value count distribution.
           # @!attribute [rw] field
-          #   @return [Google::Cloud::Dlp::V2::FieldId]
+          #   @return [::Google::Cloud::Dlp::V2::FieldId]
           #     Field to compute categorical stats on. All column types are
           #     supported except for arrays and structs. However, it may be more
           #     informative to use NumericalStats when the field type is supported,
           #     depending on the data.
           class CategoricalStatsConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # k-anonymity metric, used for analysis of reidentification risk.
           # @!attribute [rw] quasi_ids
-          #   @return [Array<Google::Cloud::Dlp::V2::FieldId>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
           #     Set of fields to compute k-anonymity over. When multiple fields are
           #     specified, they are considered a single composite key. Structs and
           #     repeated data types are not supported; however, nested fields are
           #     supported so long as they are not structs themselves or nested within
           #     a repeated field.
           # @!attribute [rw] entity_id
-          #   @return [Google::Cloud::Dlp::V2::EntityId]
+          #   @return [::Google::Cloud::Dlp::V2::EntityId]
           #     Message indicating that multiple rows might be associated to a
           #     single individual. If the same entity_id is associated to multiple
           #     quasi-identifier tuples over distinct rows, we consider the entire
@@ -1080,22 +1080,22 @@ module Google
           #     entity ID. If more rows are associated with the same entity ID, some
           #     might be ignored.
           class KAnonymityConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # l-diversity metric, used for analysis of reidentification risk.
           # @!attribute [rw] quasi_ids
-          #   @return [Array<Google::Cloud::Dlp::V2::FieldId>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
           #     Set of quasi-identifiers indicating how equivalence classes are
           #     defined for the l-diversity computation. When multiple fields are
           #     specified, they are considered a single composite key.
           # @!attribute [rw] sensitive_attribute
-          #   @return [Google::Cloud::Dlp::V2::FieldId]
+          #   @return [::Google::Cloud::Dlp::V2::FieldId]
           #     Sensitive field for computing the l-value.
           class LDiversityConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Reidentifiability metric. This corresponds to a risk model similar to what
@@ -1105,46 +1105,46 @@ module Google
           # statistical model (indicated as one or several BigQuery tables), or by
           # extrapolating from the distribution of values in the input dataset.
           # @!attribute [rw] quasi_ids
-          #   @return [Array<Google::Cloud::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::PrivacyMetric::KMapEstimationConfig::TaggedField>]
           #     Required. Fields considered to be quasi-identifiers. No two columns can
           #     have the same tag.
           # @!attribute [rw] region_code
-          #   @return [String]
+          #   @return [::String]
           #     ISO 3166-1 alpha-2 region code to use in the statistical modeling.
           #     Set if no column is tagged with a region-specific InfoType (like
           #     US_ZIP_5) or a region code.
           # @!attribute [rw] auxiliary_tables
-          #   @return [Array<Google::Cloud::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable>]
           #     Several auxiliary tables can be used in the analysis. Each custom_tag
           #     used to tag a quasi-identifiers column must appear in exactly one column
           #     of one auxiliary table.
           class KMapEstimationConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # A column with a semantic tag attached.
             # @!attribute [rw] field
-            #   @return [Google::Cloud::Dlp::V2::FieldId]
+            #   @return [::Google::Cloud::Dlp::V2::FieldId]
             #     Required. Identifies the column.
             # @!attribute [rw] info_type
-            #   @return [Google::Cloud::Dlp::V2::InfoType]
+            #   @return [::Google::Cloud::Dlp::V2::InfoType]
             #     A column can be tagged with a InfoType to use the relevant public
             #     dataset as a statistical model of population, if available. We
             #     currently support US ZIP codes, region codes, ages and genders.
             #     To programmatically obtain the list of supported InfoTypes, use
             #     ListInfoTypes with the supported_by=RISK_ANALYSIS filter.
             # @!attribute [rw] custom_tag
-            #   @return [String]
+            #   @return [::String]
             #     A column can be tagged with a custom tag. In this case, the user must
             #     indicate an auxiliary table that contains statistical information on
             #     the possible values of this column (below).
             # @!attribute [rw] inferred
-            #   @return [Google::Protobuf::Empty]
+            #   @return [::Google::Protobuf::Empty]
             #     If no semantic tag is indicated, we infer the statistical model from
             #     the distribution of values in the input data
             class TaggedField
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # An auxiliary table contains statistical information on the relative
@@ -1155,30 +1155,30 @@ module Google
             # corresponding relative frequency is assumed to be zero (and thus, the
             # tuple is highly reidentifiable).
             # @!attribute [rw] table
-            #   @return [Google::Cloud::Dlp::V2::BigQueryTable]
+            #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
             #     Required. Auxiliary table location.
             # @!attribute [rw] quasi_ids
-            #   @return [Array<Google::Cloud::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable::QuasiIdField>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::PrivacyMetric::KMapEstimationConfig::AuxiliaryTable::QuasiIdField>]
             #     Required. Quasi-identifier columns.
             # @!attribute [rw] relative_frequency
-            #   @return [Google::Cloud::Dlp::V2::FieldId]
+            #   @return [::Google::Cloud::Dlp::V2::FieldId]
             #     Required. The relative frequency column must contain a floating-point
             #     number between 0 and 1 (inclusive). Null values are assumed to be zero.
             class AuxiliaryTable
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
 
               # A quasi-identifier column has a custom_tag, used to know which column
               # in the data corresponds to which column in the statistical model.
               # @!attribute [rw] field
-              #   @return [Google::Cloud::Dlp::V2::FieldId]
+              #   @return [::Google::Cloud::Dlp::V2::FieldId]
               #     Identifies the column.
               # @!attribute [rw] custom_tag
-              #   @return [String]
+              #   @return [::String]
               #     A auxiliary field.
               class QuasiIdField
-                include Google::Protobuf::MessageExts
-                extend Google::Protobuf::MessageExts::ClassMethods
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
               end
             end
           end
@@ -1188,203 +1188,203 @@ module Google
           # Similarly to the k-map metric, we cannot compute δ-presence exactly without
           # knowing the attack dataset, so we use a statistical model instead.
           # @!attribute [rw] quasi_ids
-          #   @return [Array<Google::Cloud::Dlp::V2::QuasiId>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::QuasiId>]
           #     Required. Fields considered to be quasi-identifiers. No two fields can
           #     have the same tag.
           # @!attribute [rw] region_code
-          #   @return [String]
+          #   @return [::String]
           #     ISO 3166-1 alpha-2 region code to use in the statistical modeling.
           #     Set if no column is tagged with a region-specific InfoType (like
           #     US_ZIP_5) or a region code.
           # @!attribute [rw] auxiliary_tables
-          #   @return [Array<Google::Cloud::Dlp::V2::StatisticalTable>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::StatisticalTable>]
           #     Several auxiliary tables can be used in the analysis. Each custom_tag
           #     used to tag a quasi-identifiers field must appear in exactly one
           #     field of one auxiliary table.
           class DeltaPresenceEstimationConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Result of a risk analysis operation request.
         # @!attribute [rw] requested_privacy_metric
-        #   @return [Google::Cloud::Dlp::V2::PrivacyMetric]
+        #   @return [::Google::Cloud::Dlp::V2::PrivacyMetric]
         #     Privacy metric to compute.
         # @!attribute [rw] requested_source_table
-        #   @return [Google::Cloud::Dlp::V2::BigQueryTable]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
         #     Input dataset to compute metrics over.
         # @!attribute [rw] numerical_stats_result
-        #   @return [Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::NumericalStatsResult]
+        #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::NumericalStatsResult]
         #     Numerical stats result
         # @!attribute [rw] categorical_stats_result
-        #   @return [Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::CategoricalStatsResult]
+        #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::CategoricalStatsResult]
         #     Categorical stats result
         # @!attribute [rw] k_anonymity_result
-        #   @return [Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KAnonymityResult]
+        #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KAnonymityResult]
         #     K-anonymity result
         # @!attribute [rw] l_diversity_result
-        #   @return [Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::LDiversityResult]
+        #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::LDiversityResult]
         #     L-divesity result
         # @!attribute [rw] k_map_estimation_result
-        #   @return [Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KMapEstimationResult]
+        #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KMapEstimationResult]
         #     K-map result
         # @!attribute [rw] delta_presence_estimation_result
-        #   @return [Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult]
+        #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult]
         #     Delta-presence result
         class AnalyzeDataSourceRiskDetails
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Result of the numerical stats computation.
           # @!attribute [rw] min_value
-          #   @return [Google::Cloud::Dlp::V2::Value]
+          #   @return [::Google::Cloud::Dlp::V2::Value]
           #     Minimum value appearing in the column.
           # @!attribute [rw] max_value
-          #   @return [Google::Cloud::Dlp::V2::Value]
+          #   @return [::Google::Cloud::Dlp::V2::Value]
           #     Maximum value appearing in the column.
           # @!attribute [rw] quantile_values
-          #   @return [Array<Google::Cloud::Dlp::V2::Value>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::Value>]
           #     List of 99 values that partition the set of field values into 100 equal
           #     sized buckets.
           class NumericalStatsResult
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Result of the categorical stats computation.
           # @!attribute [rw] value_frequency_histogram_buckets
-          #   @return [Array<Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::CategoricalStatsResult::CategoricalStatsHistogramBucket>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::CategoricalStatsResult::CategoricalStatsHistogramBucket>]
           #     Histogram of value frequencies in the column.
           class CategoricalStatsResult
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Histogram of value frequencies in the column.
             # @!attribute [rw] value_frequency_lower_bound
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Lower bound on the value frequency of the values in this bucket.
             # @!attribute [rw] value_frequency_upper_bound
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Upper bound on the value frequency of the values in this bucket.
             # @!attribute [rw] bucket_size
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Total number of values in this bucket.
             # @!attribute [rw] bucket_values
-            #   @return [Array<Google::Cloud::Dlp::V2::ValueFrequency>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::ValueFrequency>]
             #     Sample of value frequencies in this bucket. The total number of
             #     values returned per bucket is capped at 20.
             # @!attribute [rw] bucket_value_count
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Total number of distinct values in this bucket.
             class CategoricalStatsHistogramBucket
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
           # Result of the k-anonymity computation.
           # @!attribute [rw] equivalence_class_histogram_buckets
-          #   @return [Array<Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KAnonymityResult::KAnonymityHistogramBucket>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KAnonymityResult::KAnonymityHistogramBucket>]
           #     Histogram of k-anonymity equivalence classes.
           class KAnonymityResult
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # The set of columns' values that share the same ldiversity value
             # @!attribute [rw] quasi_ids_values
-            #   @return [Array<Google::Cloud::Dlp::V2::Value>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::Value>]
             #     Set of values defining the equivalence class. One value per
             #     quasi-identifier column in the original KAnonymity metric message.
             #     The order is always the same as the original request.
             # @!attribute [rw] equivalence_class_size
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Size of the equivalence class, for example number of rows with the
             #     above set of values.
             class KAnonymityEquivalenceClass
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # Histogram of k-anonymity equivalence classes.
             # @!attribute [rw] equivalence_class_size_lower_bound
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Lower bound on the size of the equivalence classes in this bucket.
             # @!attribute [rw] equivalence_class_size_upper_bound
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Upper bound on the size of the equivalence classes in this bucket.
             # @!attribute [rw] bucket_size
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Total number of equivalence classes in this bucket.
             # @!attribute [rw] bucket_values
-            #   @return [Array<Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KAnonymityResult::KAnonymityEquivalenceClass>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KAnonymityResult::KAnonymityEquivalenceClass>]
             #     Sample of equivalence classes in this bucket. The total number of
             #     classes returned per bucket is capped at 20.
             # @!attribute [rw] bucket_value_count
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Total number of distinct equivalence classes in this bucket.
             class KAnonymityHistogramBucket
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
           # Result of the l-diversity computation.
           # @!attribute [rw] sensitive_value_frequency_histogram_buckets
-          #   @return [Array<Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::LDiversityResult::LDiversityHistogramBucket>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::LDiversityResult::LDiversityHistogramBucket>]
           #     Histogram of l-diversity equivalence class sensitive value frequencies.
           class LDiversityResult
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # The set of columns' values that share the same ldiversity value.
             # @!attribute [rw] quasi_ids_values
-            #   @return [Array<Google::Cloud::Dlp::V2::Value>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::Value>]
             #     Quasi-identifier values defining the k-anonymity equivalence
             #     class. The order is always the same as the original request.
             # @!attribute [rw] equivalence_class_size
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Size of the k-anonymity equivalence class.
             # @!attribute [rw] num_distinct_sensitive_values
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Number of distinct sensitive values in this equivalence class.
             # @!attribute [rw] top_sensitive_values
-            #   @return [Array<Google::Cloud::Dlp::V2::ValueFrequency>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::ValueFrequency>]
             #     Estimated frequencies of top sensitive values.
             class LDiversityEquivalenceClass
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # Histogram of l-diversity equivalence class sensitive value frequencies.
             # @!attribute [rw] sensitive_value_frequency_lower_bound
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Lower bound on the sensitive value frequencies of the equivalence
             #     classes in this bucket.
             # @!attribute [rw] sensitive_value_frequency_upper_bound
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Upper bound on the sensitive value frequencies of the equivalence
             #     classes in this bucket.
             # @!attribute [rw] bucket_size
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Total number of equivalence classes in this bucket.
             # @!attribute [rw] bucket_values
-            #   @return [Array<Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::LDiversityResult::LDiversityEquivalenceClass>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::LDiversityResult::LDiversityEquivalenceClass>]
             #     Sample of equivalence classes in this bucket. The total number of
             #     classes returned per bucket is capped at 20.
             # @!attribute [rw] bucket_value_count
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Total number of distinct equivalence classes in this bucket.
             class LDiversityHistogramBucket
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
           # Result of the reidentifiability analysis. Note that these results are an
           # estimation, not exact values.
           # @!attribute [rw] k_map_estimation_histogram
-          #   @return [Array<Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KMapEstimationResult::KMapEstimationHistogramBucket>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KMapEstimationResult::KMapEstimationHistogramBucket>]
           #     The intervals [min_anonymity, max_anonymity] do not overlap. If a value
           #     doesn't correspond to any such interval, the associated frequency is
           #     zero. For example, the following records:
@@ -1394,19 +1394,19 @@ module Google
           #     mean that there are no record with an estimated anonymity of 4, 5, or
           #     larger than 10.
           class KMapEstimationResult
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # A tuple of values for the quasi-identifier columns.
             # @!attribute [rw] quasi_ids_values
-            #   @return [Array<Google::Cloud::Dlp::V2::Value>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::Value>]
             #     The quasi-identifier values.
             # @!attribute [rw] estimated_anonymity
-            #   @return [Integer]
+            #   @return [::Integer]
             #     The estimated anonymity for these quasi-identifier values.
             class KMapEstimationQuasiIdValues
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # A KMapEstimationHistogramBucket message with the following values:
@@ -1418,31 +1418,31 @@ module Google
             # case is when min_anonymity = max_anonymity = 1: the frequency field then
             # corresponds to the number of uniquely identifiable records.
             # @!attribute [rw] min_anonymity
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Always positive.
             # @!attribute [rw] max_anonymity
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Always greater than or equal to min_anonymity.
             # @!attribute [rw] bucket_size
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Number of records within these anonymity bounds.
             # @!attribute [rw] bucket_values
-            #   @return [Array<Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KMapEstimationResult::KMapEstimationQuasiIdValues>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::KMapEstimationResult::KMapEstimationQuasiIdValues>]
             #     Sample of quasi-identifier tuple values in this bucket. The total
             #     number of classes returned per bucket is capped at 20.
             # @!attribute [rw] bucket_value_count
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Total number of distinct quasi-identifier tuple values in this bucket.
             class KMapEstimationHistogramBucket
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
           # Result of the δ-presence computation. Note that these results are an
           # estimation, not exact values.
           # @!attribute [rw] delta_presence_estimation_histogram
-          #   @return [Array<Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult::DeltaPresenceEstimationHistogramBucket>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult::DeltaPresenceEstimationHistogramBucket>]
           #     The intervals [min_probability, max_probability) do not overlap. If a
           #     value doesn't correspond to any such interval, the associated frequency
           #     is zero. For example, the following records:
@@ -1452,15 +1452,15 @@ module Google
           #     mean that there are no record with an estimated probability in [0.1, 0.2)
           #     nor larger or equal to 0.4.
           class DeltaPresenceEstimationResult
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # A tuple of values for the quasi-identifier columns.
             # @!attribute [rw] quasi_ids_values
-            #   @return [Array<Google::Cloud::Dlp::V2::Value>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::Value>]
             #     The quasi-identifier values.
             # @!attribute [rw] estimated_probability
-            #   @return [Float]
+            #   @return [::Float]
             #     The estimated probability that a given individual sharing these
             #     quasi-identifier values is in the dataset. This value, typically called
             #     δ, is the ratio between the number of records in the dataset with these
@@ -1470,8 +1470,8 @@ module Google
             #     same quasi-identifier values, and an estimated 100 people in the entire
             #     population with these values, then δ is 0.15.
             class DeltaPresenceEstimationQuasiIdValues
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # A DeltaPresenceEstimationHistogramBucket message with the following
@@ -1484,38 +1484,38 @@ module Google
             # then, every individual who shares this quasi-identifier combination is in
             # the dataset.
             # @!attribute [rw] min_probability
-            #   @return [Float]
+            #   @return [::Float]
             #     Between 0 and 1.
             # @!attribute [rw] max_probability
-            #   @return [Float]
+            #   @return [::Float]
             #     Always greater than or equal to min_probability.
             # @!attribute [rw] bucket_size
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Number of records within these probability bounds.
             # @!attribute [rw] bucket_values
-            #   @return [Array<Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult::DeltaPresenceEstimationQuasiIdValues>]
+            #   @return [::Array<::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails::DeltaPresenceEstimationResult::DeltaPresenceEstimationQuasiIdValues>]
             #     Sample of quasi-identifier tuple values in this bucket. The total
             #     number of classes returned per bucket is capped at 20.
             # @!attribute [rw] bucket_value_count
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Total number of distinct quasi-identifier tuple values in this bucket.
             class DeltaPresenceEstimationHistogramBucket
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
         end
 
         # A value of a field, including its frequency.
         # @!attribute [rw] value
-        #   @return [Google::Cloud::Dlp::V2::Value]
+        #   @return [::Google::Cloud::Dlp::V2::Value]
         #     A value contained in the field in question.
         # @!attribute [rw] count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     How many times the value is contained in the field.
         class ValueFrequency
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Set of primitive values supported by the system.
@@ -1525,90 +1525,90 @@ module Google
         # 123456789, the number of bytes would be counted as 9, even though an
         # int64 only holds up to 8 bytes of data.
         # @!attribute [rw] integer_value
-        #   @return [Integer]
+        #   @return [::Integer]
         #     integer
         # @!attribute [rw] float_value
-        #   @return [Float]
+        #   @return [::Float]
         #     float
         # @!attribute [rw] string_value
-        #   @return [String]
+        #   @return [::String]
         #     string
         # @!attribute [rw] boolean_value
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     boolean
         # @!attribute [rw] timestamp_value
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     timestamp
         # @!attribute [rw] time_value
-        #   @return [Google::Type::TimeOfDay]
+        #   @return [::Google::Type::TimeOfDay]
         #     time of day
         # @!attribute [rw] date_value
-        #   @return [Google::Type::Date]
+        #   @return [::Google::Type::Date]
         #     date
         # @!attribute [rw] day_of_week_value
-        #   @return [Google::Type::DayOfWeek]
+        #   @return [::Google::Type::DayOfWeek]
         #     day of week
         class Value
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Message for infoType-dependent details parsed from quote.
         # @!attribute [rw] date_time
-        #   @return [Google::Cloud::Dlp::V2::DateTime]
+        #   @return [::Google::Cloud::Dlp::V2::DateTime]
         #     The date time indicated by the quote.
         class QuoteInfo
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Message for a date time object.
         # e.g. 2018-01-01, 5th August.
         # @!attribute [rw] date
-        #   @return [Google::Type::Date]
+        #   @return [::Google::Type::Date]
         #     One or more of the following must be set.
         #     Must be a valid date or time value.
         # @!attribute [rw] day_of_week
-        #   @return [Google::Type::DayOfWeek]
+        #   @return [::Google::Type::DayOfWeek]
         #     Day of week
         # @!attribute [rw] time
-        #   @return [Google::Type::TimeOfDay]
+        #   @return [::Google::Type::TimeOfDay]
         #     Time of day
         # @!attribute [rw] time_zone
-        #   @return [Google::Cloud::Dlp::V2::DateTime::TimeZone]
+        #   @return [::Google::Cloud::Dlp::V2::DateTime::TimeZone]
         #     Time zone
         class DateTime
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Time zone of the date time object.
           # @!attribute [rw] offset_minutes
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Set only if the offset can be determined. Positive for time ahead of UTC.
           #     E.g. For "UTC-9", this value is -540.
           class TimeZone
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # The configuration that controls how the data will change.
         # @!attribute [rw] info_type_transformations
-        #   @return [Google::Cloud::Dlp::V2::InfoTypeTransformations]
+        #   @return [::Google::Cloud::Dlp::V2::InfoTypeTransformations]
         #     Treat the dataset as free-form text and apply the same free text
         #     transformation everywhere.
         # @!attribute [rw] record_transformations
-        #   @return [Google::Cloud::Dlp::V2::RecordTransformations]
+        #   @return [::Google::Cloud::Dlp::V2::RecordTransformations]
         #     Treat the dataset as structured. Transformations can be applied to
         #     specific locations within structured datasets, such as transforming
         #     a column within a table.
         # @!attribute [rw] transformation_error_handling
-        #   @return [Google::Cloud::Dlp::V2::TransformationErrorHandling]
+        #   @return [::Google::Cloud::Dlp::V2::TransformationErrorHandling]
         #     Mode for handling transformation errors. If left unspecified, the default
         #     mode is `TransformationErrorHandling.ThrowError`.
         class DeidentifyConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # How to handle transformation errors during de-identification. A
@@ -1620,19 +1620,19 @@ module Google
         # handled, is returned in the response as part of the
         # `TransformationOverviews`.
         # @!attribute [rw] throw_error
-        #   @return [Google::Cloud::Dlp::V2::TransformationErrorHandling::ThrowError]
+        #   @return [::Google::Cloud::Dlp::V2::TransformationErrorHandling::ThrowError]
         #     Throw an error
         # @!attribute [rw] leave_untransformed
-        #   @return [Google::Cloud::Dlp::V2::TransformationErrorHandling::LeaveUntransformed]
+        #   @return [::Google::Cloud::Dlp::V2::TransformationErrorHandling::LeaveUntransformed]
         #     Ignore errors
         class TransformationErrorHandling
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Throw an error and fail the request when a transformation error occurs.
           class ThrowError
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Skips the data without modifying it if the requested transformation would
@@ -1640,58 +1640,58 @@ module Google
           # an an IP address, this mode would leave the IP address unchanged in the
           # response.
           class LeaveUntransformed
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # A rule for transforming a value.
         # @!attribute [rw] replace_config
-        #   @return [Google::Cloud::Dlp::V2::ReplaceValueConfig]
+        #   @return [::Google::Cloud::Dlp::V2::ReplaceValueConfig]
         #     Replace
         # @!attribute [rw] redact_config
-        #   @return [Google::Cloud::Dlp::V2::RedactConfig]
+        #   @return [::Google::Cloud::Dlp::V2::RedactConfig]
         #     Redact
         # @!attribute [rw] character_mask_config
-        #   @return [Google::Cloud::Dlp::V2::CharacterMaskConfig]
+        #   @return [::Google::Cloud::Dlp::V2::CharacterMaskConfig]
         #     Mask
         # @!attribute [rw] crypto_replace_ffx_fpe_config
-        #   @return [Google::Cloud::Dlp::V2::CryptoReplaceFfxFpeConfig]
+        #   @return [::Google::Cloud::Dlp::V2::CryptoReplaceFfxFpeConfig]
         #     Ffx-Fpe
         # @!attribute [rw] fixed_size_bucketing_config
-        #   @return [Google::Cloud::Dlp::V2::FixedSizeBucketingConfig]
+        #   @return [::Google::Cloud::Dlp::V2::FixedSizeBucketingConfig]
         #     Fixed size bucketing
         # @!attribute [rw] bucketing_config
-        #   @return [Google::Cloud::Dlp::V2::BucketingConfig]
+        #   @return [::Google::Cloud::Dlp::V2::BucketingConfig]
         #     Bucketing
         # @!attribute [rw] replace_with_info_type_config
-        #   @return [Google::Cloud::Dlp::V2::ReplaceWithInfoTypeConfig]
+        #   @return [::Google::Cloud::Dlp::V2::ReplaceWithInfoTypeConfig]
         #     Replace with infotype
         # @!attribute [rw] time_part_config
-        #   @return [Google::Cloud::Dlp::V2::TimePartConfig]
+        #   @return [::Google::Cloud::Dlp::V2::TimePartConfig]
         #     Time extraction
         # @!attribute [rw] crypto_hash_config
-        #   @return [Google::Cloud::Dlp::V2::CryptoHashConfig]
+        #   @return [::Google::Cloud::Dlp::V2::CryptoHashConfig]
         #     Crypto
         # @!attribute [rw] date_shift_config
-        #   @return [Google::Cloud::Dlp::V2::DateShiftConfig]
+        #   @return [::Google::Cloud::Dlp::V2::DateShiftConfig]
         #     Date Shift
         # @!attribute [rw] crypto_deterministic_config
-        #   @return [Google::Cloud::Dlp::V2::CryptoDeterministicConfig]
+        #   @return [::Google::Cloud::Dlp::V2::CryptoDeterministicConfig]
         #     Deterministic Crypto
         class PrimitiveTransformation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # For use with `Date`, `Timestamp`, and `TimeOfDay`, extract or preserve a
         # portion of the value.
         # @!attribute [rw] part_to_extract
-        #   @return [Google::Cloud::Dlp::V2::TimePartConfig::TimePart]
+        #   @return [::Google::Cloud::Dlp::V2::TimePartConfig::TimePart]
         #     The part of the time to keep.
         class TimePartConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Components that make up time.
           module TimePart
@@ -1726,21 +1726,21 @@ module Google
         # Currently, only string and integer values can be hashed.
         # See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
         # @!attribute [rw] crypto_key
-        #   @return [Google::Cloud::Dlp::V2::CryptoKey]
+        #   @return [::Google::Cloud::Dlp::V2::CryptoKey]
         #     The key used by the hash function.
         class CryptoHashConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Pseudonymization method that generates deterministic encryption for the given
         # input. Outputs a base64 encoded representation of the encrypted output.
         # Uses AES-SIV based on the RFC https://tools.ietf.org/html/rfc5297.
         # @!attribute [rw] crypto_key
-        #   @return [Google::Cloud::Dlp::V2::CryptoKey]
+        #   @return [::Google::Cloud::Dlp::V2::CryptoKey]
         #     The key used by the encryption function.
         # @!attribute [rw] surrogate_info_type
-        #   @return [Google::Cloud::Dlp::V2::InfoType]
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     The custom info type to annotate the surrogate with.
         #     This annotation will be applied to the surrogate by prefixing it with
         #     the name of the custom info type followed by the number of
@@ -1774,7 +1774,7 @@ module Google
         #     the symbol with the hex code point 29DD might be used like so:
         #     ⧝MY_TOKEN_TYPE.
         # @!attribute [rw] context
-        #   @return [Google::Cloud::Dlp::V2::FieldId]
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     A context may be used for higher security and maintaining
         #     referential integrity such that the same identifier in two different
         #     contexts will be given a distinct surrogate. The context is appended to
@@ -1794,45 +1794,45 @@ module Google
         #     Note that case (1) is expected when an `InfoTypeTransformation` is
         #     applied to both structured and non-structured `ContentItem`s.
         class CryptoDeterministicConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Replace each input value with a given `Value`.
         # @!attribute [rw] new_value
-        #   @return [Google::Cloud::Dlp::V2::Value]
+        #   @return [::Google::Cloud::Dlp::V2::Value]
         #     Value to replace it with.
         class ReplaceValueConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Replace each matching finding with the name of the info_type.
         class ReplaceWithInfoTypeConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Redact a given value. For example, if used with an `InfoTypeTransformation`
         # transforming PHONE_NUMBER, and input 'My phone number is 206-555-0123', the
         # output would be 'My phone number is '.
         class RedactConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Characters to skip when doing deidentification of a value. These will be left
         # alone and skipped.
         # @!attribute [rw] characters_to_skip
-        #   @return [String]
+        #   @return [::String]
         #     Characters to not transform when masking.
         # @!attribute [rw] common_characters_to_ignore
-        #   @return [Google::Cloud::Dlp::V2::CharsToIgnore::CommonCharsToIgnore]
+        #   @return [::Google::Cloud::Dlp::V2::CharsToIgnore::CommonCharsToIgnore]
         #     Common characters to not transform when masking. Useful to avoid removing
         #     punctuation.
         class CharsToIgnore
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Convenience enum for indication common characters to not transform.
           module CommonCharsToIgnore
@@ -1863,31 +1863,31 @@ module Google
         # type. (This allows you to take a long like 123 and modify it to a string like
         # **3.
         # @!attribute [rw] masking_character
-        #   @return [String]
+        #   @return [::String]
         #     Character to use to mask the sensitive values&mdash;for example, `*` for an
         #     alphabetic string such as a name, or `0` for a numeric string such as ZIP
         #     code or credit card number. This string must have a length of 1. If not
         #     supplied, this value defaults to `*` for strings, and `0` for digits.
         # @!attribute [rw] number_to_mask
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Number of characters to mask. If not set, all matching chars will be
         #     masked. Skipped characters do not count towards this tally.
         # @!attribute [rw] reverse_order
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Mask characters in reverse order. For example, if `masking_character` is
         #     `0`, `number_to_mask` is `14`, and `reverse_order` is `false`, then the
         #     input string `1234-5678-9012-3456` is masked as `00000000000000-3456`.
         #     If `masking_character` is `*`, `number_to_mask` is `3`, and `reverse_order`
         #     is `true`, then the string `12345` is masked as `12***`.
         # @!attribute [rw] characters_to_ignore
-        #   @return [Array<Google::Cloud::Dlp::V2::CharsToIgnore>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::CharsToIgnore>]
         #     When masking a string, items in this list will be skipped when replacing
         #     characters. For example, if the input string is `555-555-5555` and you
         #     instruct Cloud DLP to skip `-` and mask 5 characters with `*`, Cloud DLP
         #     returns `***-**5-5555`.
         class CharacterMaskConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Buckets values based on fixed size ranges. The
@@ -1907,24 +1907,24 @@ module Google
         #
         # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
         # @!attribute [rw] lower_bound
-        #   @return [Google::Cloud::Dlp::V2::Value]
+        #   @return [::Google::Cloud::Dlp::V2::Value]
         #     Required. Lower bound value of buckets. All values less than `lower_bound`
         #     are grouped together into a single bucket; for example if `lower_bound` =
         #     10, then all values less than 10 are replaced with the value “-10”.
         # @!attribute [rw] upper_bound
-        #   @return [Google::Cloud::Dlp::V2::Value]
+        #   @return [::Google::Cloud::Dlp::V2::Value]
         #     Required. Upper bound value of buckets. All values greater than upper_bound
         #     are grouped together into a single bucket; for example if `upper_bound` =
         #     89, then all values greater than 89 are replaced with the value “89+”.
         # @!attribute [rw] bucket_size
-        #   @return [Float]
+        #   @return [::Float]
         #     Required. Size of each bucket (except for minimum and maximum buckets). So
         #     if `lower_bound` = 10, `upper_bound` = 89, and `bucket_size` = 10, then the
         #     following buckets would be used: -10, 10-20, 20-30, 30-40, 40-50, 50-60,
         #     60-70, 70-80, 80-89, 89+. Precision up to 2 decimals works.
         class FixedSizeBucketingConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Generalization function that buckets values based on ranges. The ranges and
@@ -1937,27 +1937,27 @@ module Google
         # the type of the bound before comparing.
         # See https://cloud.google.com/dlp/docs/concepts-bucketing to learn more.
         # @!attribute [rw] buckets
-        #   @return [Array<Google::Cloud::Dlp::V2::BucketingConfig::Bucket>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::BucketingConfig::Bucket>]
         #     Set of buckets. Ranges must be non-overlapping.
         class BucketingConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Bucket is represented as a range, along with replacement values.
           # @!attribute [rw] min
-          #   @return [Google::Cloud::Dlp::V2::Value]
+          #   @return [::Google::Cloud::Dlp::V2::Value]
           #     Lower bound of the range, inclusive. Type should be the same as max if
           #     used.
           # @!attribute [rw] max
-          #   @return [Google::Cloud::Dlp::V2::Value]
+          #   @return [::Google::Cloud::Dlp::V2::Value]
           #     Upper bound of the range, exclusive; type must match min.
           # @!attribute [rw] replacement_value
-          #   @return [Google::Cloud::Dlp::V2::Value]
+          #   @return [::Google::Cloud::Dlp::V2::Value]
           #     Replacement value for this bucket. If not provided
           #     the default behavior will be to hyphenate the min-max range.
           class Bucket
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -1975,10 +1975,10 @@ module Google
         # do not require preserving the input alphabet space and size, plus warrant
         # referential integrity.
         # @!attribute [rw] crypto_key
-        #   @return [Google::Cloud::Dlp::V2::CryptoKey]
+        #   @return [::Google::Cloud::Dlp::V2::CryptoKey]
         #     Required. The key used by the encryption algorithm.
         # @!attribute [rw] context
-        #   @return [Google::Cloud::Dlp::V2::FieldId]
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     The 'tweak', a context may be used for higher security since the same
         #     identifier in two different contexts won't be given the same surrogate. If
         #     the context is not set, a default tweak will be used.
@@ -2000,10 +2000,10 @@ module Google
         #     - a 64 bit integer is encoded followed by a single byte of value 1
         #     - a string is encoded in UTF-8 format followed by a single byte of value 2
         # @!attribute [rw] common_alphabet
-        #   @return [Google::Cloud::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet]
+        #   @return [::Google::Cloud::Dlp::V2::CryptoReplaceFfxFpeConfig::FfxCommonNativeAlphabet]
         #     Common alphabets.
         # @!attribute [rw] custom_alphabet
-        #   @return [String]
+        #   @return [::String]
         #     This is supported by mapping these to the alphanumeric characters
         #     that the FFX mode natively supports. This happens before/after
         #     encryption/decryption.
@@ -2012,10 +2012,10 @@ module Google
         #     This must be encoded as ASCII.
         #     The order of characters does not matter.
         # @!attribute [rw] radix
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The native way to select the alphabet. Must be in the range [2, 95].
         # @!attribute [rw] surrogate_info_type
-        #   @return [Google::Cloud::Dlp::V2::InfoType]
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     The custom infoType to annotate the surrogate with.
         #     This annotation will be applied to the surrogate by prefixing it with
         #     the name of the custom infoType followed by the number of
@@ -2042,8 +2042,8 @@ module Google
         #     the symbol with the hex code point 29DD might be used like so:
         #     ⧝MY_TOKEN_TYPE
         class CryptoReplaceFfxFpeConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # These are commonly used subsets of the alphabet that the FFX mode
           # natively supports. In the algorithm, the alphabet is selected using
@@ -2072,23 +2072,23 @@ module Google
         # IAM policy on the KMS CryptoKey (KEK) to ensure an attacker cannot
         # unwrap the data crypto key.
         # @!attribute [rw] transient
-        #   @return [Google::Cloud::Dlp::V2::TransientCryptoKey]
+        #   @return [::Google::Cloud::Dlp::V2::TransientCryptoKey]
         #     Transient crypto key
         # @!attribute [rw] unwrapped
-        #   @return [Google::Cloud::Dlp::V2::UnwrappedCryptoKey]
+        #   @return [::Google::Cloud::Dlp::V2::UnwrappedCryptoKey]
         #     Unwrapped crypto key
         # @!attribute [rw] kms_wrapped
-        #   @return [Google::Cloud::Dlp::V2::KmsWrappedCryptoKey]
+        #   @return [::Google::Cloud::Dlp::V2::KmsWrappedCryptoKey]
         #     Kms wrapped key
         class CryptoKey
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Use this to have a random data crypto key generated.
         # It will be discarded after the request finishes.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Name of the key.
         #     This is an arbitrary string used to differentiate different keys.
         #     A unique key is generated per name: two separate `TransientCryptoKey`
@@ -2096,18 +2096,18 @@ module Google
         #     When the data crypto key is generated, this name is not used in any way
         #     (repeating the api call will result in a different key being generated).
         class TransientCryptoKey
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Using raw keys is prone to security risks due to accidentally
         # leaking the key. Choose another type of key if possible.
         # @!attribute [rw] key
-        #   @return [String]
+        #   @return [::String]
         #     Required. A 128/192/256 bit key.
         class UnwrappedCryptoKey
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Include to use an existing data crypto key wrapped by KMS.
@@ -2116,43 +2116,43 @@ module Google
         # to perform a crypto transformation using a kms-wrapped crypto key:
         # dlp.kms.encrypt
         # @!attribute [rw] wrapped_key
-        #   @return [String]
+        #   @return [::String]
         #     Required. The wrapped data crypto key.
         # @!attribute [rw] crypto_key_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the KMS CryptoKey to use for unwrapping.
         class KmsWrappedCryptoKey
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Shifts dates by random number of days, with option to be consistent for the
         # same context. See https://cloud.google.com/dlp/docs/concepts-date-shifting
         # to learn more.
         # @!attribute [rw] upper_bound_days
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Required. Range of shift in days. Actual shift will be selected at random
         #     within this range (inclusive ends). Negative means shift to earlier in
         #     time. Must not be more than 365250 days (1000 years) each direction.
         #
         #     For example, 3 means shift date to at most 3 days into the future.
         # @!attribute [rw] lower_bound_days
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Required. For example, -5 means shift date to at most 5 days back in the
         #     past.
         # @!attribute [rw] context
-        #   @return [Google::Cloud::Dlp::V2::FieldId]
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     Points to the field that contains the context, for example, an entity id.
         #     If set, must also set cryptoKey. If set, shift will be consistent for the
         #     given context.
         # @!attribute [rw] crypto_key
-        #   @return [Google::Cloud::Dlp::V2::CryptoKey]
+        #   @return [::Google::Cloud::Dlp::V2::CryptoKey]
         #     Causes the shift to be computed based on this key and the context. This
         #     results in the same shift for the same context and crypto_key. If
         #     set, must also set context. Can only be applied to table items.
         class DateShiftConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A type of transformation that will scan unstructured text and
@@ -2160,35 +2160,35 @@ module Google
         # transformation is applied to only values that were identified as a specific
         # info_type.
         # @!attribute [rw] transformations
-        #   @return [Array<Google::Cloud::Dlp::V2::InfoTypeTransformations::InfoTypeTransformation>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoTypeTransformations::InfoTypeTransformation>]
         #     Required. Transformation for each infoType. Cannot specify more than one
         #     for a given infoType.
         class InfoTypeTransformations
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A transformation to apply to text that is identified as a specific
           # info_type.
           # @!attribute [rw] info_types
-          #   @return [Array<Google::Cloud::Dlp::V2::InfoType>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
           #     InfoTypes to apply the transformation to. An empty list will cause
           #     this transformation to apply to all findings that correspond to
           #     infoTypes that were requested in `InspectConfig`.
           # @!attribute [rw] primitive_transformation
-          #   @return [Google::Cloud::Dlp::V2::PrimitiveTransformation]
+          #   @return [::Google::Cloud::Dlp::V2::PrimitiveTransformation]
           #     Required. Primitive transformation to apply to the infoType.
           class InfoTypeTransformation
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # The transformation to apply to the field.
         # @!attribute [rw] fields
-        #   @return [Array<Google::Cloud::Dlp::V2::FieldId>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     Required. Input field(s) to apply the transformation to.
         # @!attribute [rw] condition
-        #   @return [Google::Cloud::Dlp::V2::RecordCondition]
+        #   @return [::Google::Cloud::Dlp::V2::RecordCondition]
         #     Only apply the transformation if the condition evaluates to true for the
         #     given `RecordCondition`. The conditions are allowed to reference fields
         #     that are not used in the actual transformation.
@@ -2199,50 +2199,50 @@ module Google
         #     column for the same record is within a specific range.
         #     - Redact a field if the date of birth field is greater than 85.
         # @!attribute [rw] primitive_transformation
-        #   @return [Google::Cloud::Dlp::V2::PrimitiveTransformation]
+        #   @return [::Google::Cloud::Dlp::V2::PrimitiveTransformation]
         #     Apply the transformation to the entire field.
         # @!attribute [rw] info_type_transformations
-        #   @return [Google::Cloud::Dlp::V2::InfoTypeTransformations]
+        #   @return [::Google::Cloud::Dlp::V2::InfoTypeTransformations]
         #     Treat the contents of the field as free text, and selectively
         #     transform content that matches an `InfoType`.
         class FieldTransformation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A type of transformation that is applied over structured data such as a
         # table.
         # @!attribute [rw] field_transformations
-        #   @return [Array<Google::Cloud::Dlp::V2::FieldTransformation>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FieldTransformation>]
         #     Transform the record by applying various field transformations.
         # @!attribute [rw] record_suppressions
-        #   @return [Array<Google::Cloud::Dlp::V2::RecordSuppression>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::RecordSuppression>]
         #     Configuration defining which records get suppressed entirely. Records that
         #     match any suppression rule are omitted from the output.
         class RecordTransformations
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configuration to suppress records whose suppression conditions evaluate to
         # true.
         # @!attribute [rw] condition
-        #   @return [Google::Cloud::Dlp::V2::RecordCondition]
+        #   @return [::Google::Cloud::Dlp::V2::RecordCondition]
         #     A condition that when it evaluates to true will result in the record being
         #     evaluated to be suppressed from the transformed content.
         class RecordSuppression
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A condition for determining whether a transformation should be applied to
         # a field.
         # @!attribute [rw] expressions
-        #   @return [Google::Cloud::Dlp::V2::RecordCondition::Expressions]
+        #   @return [::Google::Cloud::Dlp::V2::RecordCondition::Expressions]
         #     An expression.
         class RecordCondition
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The field type of `value` and `field` do not need to match to be
           # considered equal, but not all comparisons are possible.
@@ -2264,39 +2264,39 @@ module Google
           # If we fail to compare do to type mismatch, a warning will be given and
           # the condition will evaluate to false.
           # @!attribute [rw] field
-          #   @return [Google::Cloud::Dlp::V2::FieldId]
+          #   @return [::Google::Cloud::Dlp::V2::FieldId]
           #     Required. Field within the record this condition is evaluated against.
           # @!attribute [rw] operator
-          #   @return [Google::Cloud::Dlp::V2::RelationalOperator]
+          #   @return [::Google::Cloud::Dlp::V2::RelationalOperator]
           #     Required. Operator used to compare the field or infoType to the value.
           # @!attribute [rw] value
-          #   @return [Google::Cloud::Dlp::V2::Value]
+          #   @return [::Google::Cloud::Dlp::V2::Value]
           #     Value to compare against. [Mandatory, except for `EXISTS` tests.]
           class Condition
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A collection of conditions.
           # @!attribute [rw] conditions
-          #   @return [Array<Google::Cloud::Dlp::V2::RecordCondition::Condition>]
+          #   @return [::Array<::Google::Cloud::Dlp::V2::RecordCondition::Condition>]
           #     A collection of conditions.
           class Conditions
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # An expression, consisting or an operator and conditions.
           # @!attribute [rw] logical_operator
-          #   @return [Google::Cloud::Dlp::V2::RecordCondition::Expressions::LogicalOperator]
+          #   @return [::Google::Cloud::Dlp::V2::RecordCondition::Expressions::LogicalOperator]
           #     The operator to apply to the result of conditions. Default and currently
           #     only supported value is `AND`.
           # @!attribute [rw] conditions
-          #   @return [Google::Cloud::Dlp::V2::RecordCondition::Conditions]
+          #   @return [::Google::Cloud::Dlp::V2::RecordCondition::Conditions]
           #     Conditions to apply to the expression.
           class Expressions
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Logical operators for conditional checks.
             module LogicalOperator
@@ -2311,61 +2311,61 @@ module Google
 
         # Overview of the modifications that occurred.
         # @!attribute [rw] transformed_bytes
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Total size in bytes that were transformed in some way.
         # @!attribute [rw] transformation_summaries
-        #   @return [Array<Google::Cloud::Dlp::V2::TransformationSummary>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::TransformationSummary>]
         #     Transformations applied to the dataset.
         class TransformationOverview
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Summary of a single transformation.
         # Only one of 'transformation', 'field_transformation', or 'record_suppress'
         # will be set.
         # @!attribute [rw] info_type
-        #   @return [Google::Cloud::Dlp::V2::InfoType]
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     Set if the transformation was limited to a specific InfoType.
         # @!attribute [rw] field
-        #   @return [Google::Cloud::Dlp::V2::FieldId]
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     Set if the transformation was limited to a specific FieldId.
         # @!attribute [rw] transformation
-        #   @return [Google::Cloud::Dlp::V2::PrimitiveTransformation]
+        #   @return [::Google::Cloud::Dlp::V2::PrimitiveTransformation]
         #     The specific transformation these stats apply to.
         # @!attribute [rw] field_transformations
-        #   @return [Array<Google::Cloud::Dlp::V2::FieldTransformation>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FieldTransformation>]
         #     The field transformation that was applied.
         #     If multiple field transformations are requested for a single field,
         #     this list will contain all of them; otherwise, only one is supplied.
         # @!attribute [rw] record_suppress
-        #   @return [Google::Cloud::Dlp::V2::RecordSuppression]
+        #   @return [::Google::Cloud::Dlp::V2::RecordSuppression]
         #     The specific suppression option these stats apply to.
         # @!attribute [rw] results
-        #   @return [Array<Google::Cloud::Dlp::V2::TransformationSummary::SummaryResult>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::TransformationSummary::SummaryResult>]
         #     Collection of all transformations that took place or had an error.
         # @!attribute [rw] transformed_bytes
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Total size in bytes that were transformed in some way.
         class TransformationSummary
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A collection that informs the user the number of times a particular
           # `TransformationResultCode` and error details occurred.
           # @!attribute [rw] count
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Number of transformations counted by this result.
           # @!attribute [rw] code
-          #   @return [Google::Cloud::Dlp::V2::TransformationSummary::TransformationResultCode]
+          #   @return [::Google::Cloud::Dlp::V2::TransformationSummary::TransformationResultCode]
           #     Outcome of the transformation.
           # @!attribute [rw] details
-          #   @return [String]
+          #   @return [::String]
           #     A place for warnings or errors to show up if a transformation didn't
           #     work as expected.
           class SummaryResult
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Possible outcomes of transformations.
@@ -2383,7 +2383,7 @@ module Google
 
         # Schedule for triggeredJobs.
         # @!attribute [rw] recurrence_period_duration
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     With this option a job is started a regular periodic basis. For
         #     example: every day (86400 seconds).
         #
@@ -2393,15 +2393,15 @@ module Google
         #     This value must be set to a time duration greater than or equal
         #     to 1 day and can be no longer than 60 days.
         class Schedule
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Job trigger option for hybrid jobs. Jobs must be manually created
         # and finished.
         class Manual
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The inspectTemplate contains a configuration (set of types of sensitive data
@@ -2409,130 +2409,130 @@ module Google
         # InspectConfig. See https://cloud.google.com/dlp/docs/concepts-templates
         # to learn more.
         # @!attribute [r] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The template name.
         #
         #     The template will have one of the following formats:
         #     `projects/PROJECT_ID/inspectTemplates/TEMPLATE_ID` OR
         #     `organizations/ORGANIZATION_ID/inspectTemplates/TEMPLATE_ID`;
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Display name (max 256 chars).
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Short description (max 256 chars).
         # @!attribute [r] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation timestamp of an inspectTemplate.
         # @!attribute [r] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last update timestamp of an inspectTemplate.
         # @!attribute [rw] inspect_config
-        #   @return [Google::Cloud::Dlp::V2::InspectConfig]
+        #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     The core content of the template. Configuration of the scanning process.
         class InspectTemplate
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # DeidentifyTemplates contains instructions on how to de-identify content.
         # See https://cloud.google.com/dlp/docs/concepts-templates to learn more.
         # @!attribute [r] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The template name.
         #
         #     The template will have one of the following formats:
         #     `projects/PROJECT_ID/deidentifyTemplates/TEMPLATE_ID` OR
         #     `organizations/ORGANIZATION_ID/deidentifyTemplates/TEMPLATE_ID`
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Display name (max 256 chars).
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Short description (max 256 chars).
         # @!attribute [r] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation timestamp of an inspectTemplate.
         # @!attribute [r] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last update timestamp of an inspectTemplate.
         # @!attribute [rw] deidentify_config
-        #   @return [Google::Cloud::Dlp::V2::DeidentifyConfig]
+        #   @return [::Google::Cloud::Dlp::V2::DeidentifyConfig]
         #     ///////////// // The core content of the template  // ///////////////
         class DeidentifyTemplate
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Details information about an error encountered during job execution or
         # the results of an unsuccessful activation of the JobTrigger.
         # @!attribute [rw] details
-        #   @return [Google::Rpc::Status]
+        #   @return [::Google::Rpc::Status]
         #     Detailed error codes and messages.
         # @!attribute [rw] timestamps
-        #   @return [Array<Google::Protobuf::Timestamp>]
+        #   @return [::Array<::Google::Protobuf::Timestamp>]
         #     The times the error occurred.
         class Error
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains a configuration to make dlp api calls on a repeating basis.
         # See https://cloud.google.com/dlp/docs/concepts-job-triggers to learn more.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Unique resource name for the triggeredJob, assigned by the service when the
         #     triggeredJob is created, for example
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Display name (max 100 chars)
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     User provided description (max 256 chars)
         # @!attribute [rw] inspect_job
-        #   @return [Google::Cloud::Dlp::V2::InspectJobConfig]
+        #   @return [::Google::Cloud::Dlp::V2::InspectJobConfig]
         #     For inspect jobs, a snapshot of the configuration.
         # @!attribute [rw] triggers
-        #   @return [Array<Google::Cloud::Dlp::V2::JobTrigger::Trigger>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::JobTrigger::Trigger>]
         #     A list of triggers which will be OR'ed together. Only one in the list
         #     needs to trigger for a job to be started. The list may contain only
         #     a single Schedule trigger and must have at least one object.
         # @!attribute [r] errors
-        #   @return [Array<Google::Cloud::Dlp::V2::Error>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
         #     Output only. A stream of errors encountered when the trigger was activated.
         #     Repeated errors may result in the JobTrigger automatically being paused.
         #     Will return the last 100 errors. Whenever the JobTrigger is modified
         #     this list will be cleared.
         # @!attribute [r] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation timestamp of a triggeredJob.
         # @!attribute [r] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last update timestamp of a triggeredJob.
         # @!attribute [r] last_run_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp of the last time this trigger executed.
         # @!attribute [rw] status
-        #   @return [Google::Cloud::Dlp::V2::JobTrigger::Status]
+        #   @return [::Google::Cloud::Dlp::V2::JobTrigger::Status]
         #     Required. A status for this trigger.
         class JobTrigger
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # What event needs to occur for a new job to be started.
           # @!attribute [rw] schedule
-          #   @return [Google::Cloud::Dlp::V2::Schedule]
+          #   @return [::Google::Cloud::Dlp::V2::Schedule]
           #     Create a job on a repeating basis based on the elapse of time.
           # @!attribute [rw] manual
-          #   @return [Google::Cloud::Dlp::V2::Manual]
+          #   @return [::Google::Cloud::Dlp::V2::Manual]
           #     For use with hybrid jobs. Jobs must be manually created and finished.
           #     Early access feature is in a pre-release state and might change or have
           #     limited support. For more information, see
           #     https://cloud.google.com/products#product-launch-stages.
           class Trigger
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Whether the trigger is currently active. If PAUSED or CANCELLED, no jobs
@@ -2557,38 +2557,38 @@ module Google
         # A task to execute on the completion of a job.
         # See https://cloud.google.com/dlp/docs/concepts-actions to learn more.
         # @!attribute [rw] save_findings
-        #   @return [Google::Cloud::Dlp::V2::Action::SaveFindings]
+        #   @return [::Google::Cloud::Dlp::V2::Action::SaveFindings]
         #     Save resulting findings in a provided location.
         # @!attribute [rw] pub_sub
-        #   @return [Google::Cloud::Dlp::V2::Action::PublishToPubSub]
+        #   @return [::Google::Cloud::Dlp::V2::Action::PublishToPubSub]
         #     Publish a notification to a pubsub topic.
         # @!attribute [rw] publish_summary_to_cscc
-        #   @return [Google::Cloud::Dlp::V2::Action::PublishSummaryToCscc]
+        #   @return [::Google::Cloud::Dlp::V2::Action::PublishSummaryToCscc]
         #     Publish summary to Cloud Security Command Center (Alpha).
         # @!attribute [rw] publish_findings_to_cloud_data_catalog
-        #   @return [Google::Cloud::Dlp::V2::Action::PublishFindingsToCloudDataCatalog]
+        #   @return [::Google::Cloud::Dlp::V2::Action::PublishFindingsToCloudDataCatalog]
         #     Publish findings to Cloud Datahub.
         # @!attribute [rw] job_notification_emails
-        #   @return [Google::Cloud::Dlp::V2::Action::JobNotificationEmails]
+        #   @return [::Google::Cloud::Dlp::V2::Action::JobNotificationEmails]
         #     Enable email notification for project owners and editors on job's
         #     completion/failure.
         # @!attribute [rw] publish_to_stackdriver
-        #   @return [Google::Cloud::Dlp::V2::Action::PublishToStackdriver]
+        #   @return [::Google::Cloud::Dlp::V2::Action::PublishToStackdriver]
         #     Enable Stackdriver metric dlp.googleapis.com/finding_count.
         class Action
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # If set, the detailed findings will be persisted to the specified
           # OutputStorageConfig. Only a single instance of this action can be
           # specified.
           # Compatible with: Inspect, Risk
           # @!attribute [rw] output_config
-          #   @return [Google::Cloud::Dlp::V2::OutputStorageConfig]
+          #   @return [::Google::Cloud::Dlp::V2::OutputStorageConfig]
           #     Location to store findings outside of DLP.
           class SaveFindings
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Publish a message into given Pub/Sub topic when DlpJob has completed. The
@@ -2597,14 +2597,14 @@ module Google
           # [`DlpJob.name`](/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
           # Compatible with: Inspect, Risk
           # @!attribute [rw] topic
-          #   @return [String]
+          #   @return [::String]
           #     Cloud Pub/Sub topic to send notifications to. The topic must have given
           #     publishing access rights to the DLP API service account executing
           #     the long running DlpJob sending the notifications.
           #     Format is projects/\\{project}/topics/\\{topic}.
           class PublishToPubSub
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Publish the result summary of a DlpJob to the Cloud Security
@@ -2618,8 +2618,8 @@ module Google
           # Only a single instance of this action can be specified.
           # Compatible with: Inspect
           class PublishSummaryToCscc
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Publish findings of a DlpJob to Cloud Data Catalog. Labels summarizing the
@@ -2633,15 +2633,15 @@ module Google
           # all resources being scanned are BigQuery tables.
           # Compatible with: Inspect
           class PublishFindingsToCloudDataCatalog
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Enable email notification to project owners and editors on jobs's
           # completion/failure.
           class JobNotificationEmails
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Enable Stackdriver metric dlp.googleapis.com/finding_count. This
@@ -2649,77 +2649,77 @@ module Google
           # how many findings were found for it. CustomDetectors will be bucketed
           # as 'Custom' under the Stackdriver label 'info_type'.
           class PublishToStackdriver
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Request message for CreateInspectTemplate.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] inspect_template
-        #   @return [Google::Cloud::Dlp::V2::InspectTemplate]
+        #   @return [::Google::Cloud::Dlp::V2::InspectTemplate]
         #     Required. The InspectTemplate to create.
         # @!attribute [rw] template_id
-        #   @return [String]
+        #   @return [::String]
         #     The template id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
         #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location to store the inspection template. Reserved for
         #     future extensions.
         class CreateInspectTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for UpdateInspectTemplate.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of organization and inspectTemplate to be updated,
         #     for example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         # @!attribute [rw] inspect_template
-        #   @return [Google::Cloud::Dlp::V2::InspectTemplate]
+        #   @return [::Google::Cloud::Dlp::V2::InspectTemplate]
         #     New InspectTemplate value.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Mask to control which fields get updated.
         class UpdateInspectTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for GetInspectTemplate.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the organization and inspectTemplate to be read,
         #     for example `organizations/433245324/inspectTemplates/432452342` or
         #     projects/project-id/inspectTemplates/432452342.
         class GetInspectTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for ListInspectTemplates.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
         #     to `ListInspectTemplates`.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Size of the page, can be limited by server. If zero server returns
         #     a page of max size 100.
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Comma separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
@@ -2734,137 +2734,137 @@ module Google
         #     - `name`: corresponds to template's name.
         #     - `display_name`: corresponds to template's display name.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location where inspection templates will be retrieved from.
         #     Use `-` for all locations. Reserved for future extensions.
         class ListInspectTemplatesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response message for ListInspectTemplates.
         # @!attribute [rw] inspect_templates
-        #   @return [Array<Google::Cloud::Dlp::V2::InspectTemplate>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InspectTemplate>]
         #     List of inspectTemplates, up to page_size in ListInspectTemplatesRequest.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     If the next page is available then the next page token to be used
         #     in following ListInspectTemplates request.
         class ListInspectTemplatesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for DeleteInspectTemplate.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the organization and inspectTemplate to be
         #     deleted, for example `organizations/433245324/inspectTemplates/432452342`
         #     or projects/project-id/inspectTemplates/432452342.
         class DeleteInspectTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for CreateJobTrigger.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] job_trigger
-        #   @return [Google::Cloud::Dlp::V2::JobTrigger]
+        #   @return [::Google::Cloud::Dlp::V2::JobTrigger]
         #     Required. The JobTrigger to create.
         # @!attribute [rw] trigger_id
-        #   @return [String]
+        #   @return [::String]
         #     The trigger id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
         #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location to store the job trigger. Reserved for
         #     future extensions.
         class CreateJobTriggerRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for ActivateJobTrigger.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the trigger to activate, for example
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         class ActivateJobTriggerRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for UpdateJobTrigger.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the project and the triggeredJob, for example
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         # @!attribute [rw] job_trigger
-        #   @return [Google::Cloud::Dlp::V2::JobTrigger]
+        #   @return [::Google::Cloud::Dlp::V2::JobTrigger]
         #     New JobTrigger value.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Mask to control which fields get updated.
         class UpdateJobTriggerRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for GetJobTrigger.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the project and the triggeredJob, for example
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         class GetJobTriggerRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for CreateDlpJobRequest. Used to initiate long running
         # jobs such as calculating risk metrics or inspecting Google Cloud
         # Storage.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] inspect_job
-        #   @return [Google::Cloud::Dlp::V2::InspectJobConfig]
+        #   @return [::Google::Cloud::Dlp::V2::InspectJobConfig]
         #     Set to control what and how to inspect.
         # @!attribute [rw] risk_job
-        #   @return [Google::Cloud::Dlp::V2::RiskAnalysisJobConfig]
+        #   @return [::Google::Cloud::Dlp::V2::RiskAnalysisJobConfig]
         #     Set to choose what metric to calculate.
         # @!attribute [rw] job_id
-        #   @return [String]
+        #   @return [::String]
         #     The job id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
         #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location to store and process the job. Reserved for
         #     future extensions.
         class CreateDlpJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for ListJobTriggers.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name, for example `projects/my-project-id`.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
         #     to ListJobTriggers. `order_by` field must not
         #     change for subsequent calls.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Size of the page, can be limited by a server.
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Comma separated list of triggeredJob fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
@@ -2881,7 +2881,7 @@ module Google
         #     - `display_name`: corresponds to JobTrigger's display name.
         #     - `status`: corresponds to JobTrigger's status.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     Allows filtering.
         #
         #     Supported syntax:
@@ -2907,92 +2907,92 @@ module Google
         #
         #     The length of this field should be no more than 500 characters.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location where job triggers will be retrieved from.
         #     Use `-` for all locations. Reserved for future extensions.
         class ListJobTriggersRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response message for ListJobTriggers.
         # @!attribute [rw] job_triggers
-        #   @return [Array<Google::Cloud::Dlp::V2::JobTrigger>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::JobTrigger>]
         #     List of triggeredJobs, up to page_size in ListJobTriggersRequest.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     If the next page is available then the next page token to be used
         #     in following ListJobTriggers request.
         class ListJobTriggersResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for DeleteJobTrigger.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the project and the triggeredJob, for example
         #     `projects/dlp-test-project/jobTriggers/53234423`.
         class DeleteJobTriggerRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Controls what and how to inspect for findings.
         # @!attribute [rw] storage_config
-        #   @return [Google::Cloud::Dlp::V2::StorageConfig]
+        #   @return [::Google::Cloud::Dlp::V2::StorageConfig]
         #     The data to scan.
         # @!attribute [rw] inspect_config
-        #   @return [Google::Cloud::Dlp::V2::InspectConfig]
+        #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
         #     How and what to scan for.
         # @!attribute [rw] inspect_template_name
-        #   @return [String]
+        #   @return [::String]
         #     If provided, will be used as the default for all values in InspectConfig.
         #     `inspect_config` will be merged into the values persisted as part of the
         #     template.
         # @!attribute [rw] actions
-        #   @return [Array<Google::Cloud::Dlp::V2::Action>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Action>]
         #     Actions to execute at the completion of the job.
         class InspectJobConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Combines all of the information about a DLP job.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The server-assigned name.
         # @!attribute [rw] type
-        #   @return [Google::Cloud::Dlp::V2::DlpJobType]
+        #   @return [::Google::Cloud::Dlp::V2::DlpJobType]
         #     The type of job.
         # @!attribute [rw] state
-        #   @return [Google::Cloud::Dlp::V2::DlpJob::JobState]
+        #   @return [::Google::Cloud::Dlp::V2::DlpJob::JobState]
         #     State of a job.
         # @!attribute [rw] risk_details
-        #   @return [Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails]
+        #   @return [::Google::Cloud::Dlp::V2::AnalyzeDataSourceRiskDetails]
         #     Results from analyzing risk of a data source.
         # @!attribute [rw] inspect_details
-        #   @return [Google::Cloud::Dlp::V2::InspectDataSourceDetails]
+        #   @return [::Google::Cloud::Dlp::V2::InspectDataSourceDetails]
         #     Results from inspecting a data source.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Time when the job was created.
         # @!attribute [rw] start_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Time when the job started.
         # @!attribute [rw] end_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Time when the job finished.
         # @!attribute [rw] job_trigger_name
-        #   @return [String]
+        #   @return [::String]
         #     If created by a job trigger, the resource name of the trigger that
         #     instantiated the job.
         # @!attribute [rw] errors
-        #   @return [Array<Google::Cloud::Dlp::V2::Error>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
         #     A stream of errors encountered running the job.
         class DlpJob
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Possible states of a job. New items may be added.
           module JobState
@@ -3025,19 +3025,19 @@ module Google
 
         # The request message for [DlpJobs.GetDlpJob][].
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the DlpJob resource.
         class GetDlpJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The request message for listing DLP jobs.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     Allows filtering.
         #
         #     Supported syntax:
@@ -3067,16 +3067,16 @@ module Google
         #
         #     The length of this field should be no more than 500 characters.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The standard list page size.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     The standard list page token.
         # @!attribute [rw] type
-        #   @return [Google::Cloud::Dlp::V2::DlpJobType]
+        #   @return [::Google::Cloud::Dlp::V2::DlpJobType]
         #     The type of job. Defaults to `DlpJobType.INSPECT`
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Comma separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
@@ -3091,120 +3091,120 @@ module Google
         #     - `name`: corresponds to job's name.
         #     - `state`: corresponds to `state`
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location where jobs will be retrieved from.
         #     Use `-` for all locations. Reserved for future extensions.
         class ListDlpJobsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The response message for listing DLP jobs.
         # @!attribute [rw] jobs
-        #   @return [Array<Google::Cloud::Dlp::V2::DlpJob>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DlpJob>]
         #     A list of DlpJobs that matches the specified filter in the request.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     The standard List next-page token.
         class ListDlpJobsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The request message for canceling a DLP job.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the DlpJob resource to be cancelled.
         class CancelDlpJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The request message for finishing a DLP hybrid job.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the DlpJob resource to be cancelled.
         class FinishDlpJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The request message for deleting a DLP job.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the DlpJob resource to be deleted.
         class DeleteDlpJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for CreateDeidentifyTemplate.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] deidentify_template
-        #   @return [Google::Cloud::Dlp::V2::DeidentifyTemplate]
+        #   @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
         #     Required. The DeidentifyTemplate to create.
         # @!attribute [rw] template_id
-        #   @return [String]
+        #   @return [::String]
         #     The template id can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
         #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location to store the deidentification template. Reserved
         #     for future extensions.
         class CreateDeidentifyTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for UpdateDeidentifyTemplate.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of organization and deidentify template to be
         #     updated, for example
         #     `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         # @!attribute [rw] deidentify_template
-        #   @return [Google::Cloud::Dlp::V2::DeidentifyTemplate]
+        #   @return [::Google::Cloud::Dlp::V2::DeidentifyTemplate]
         #     New DeidentifyTemplate value.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Mask to control which fields get updated.
         class UpdateDeidentifyTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for GetDeidentifyTemplate.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the organization and deidentify template to be
         #     read, for example `organizations/433245324/deidentifyTemplates/432452342`
         #     or projects/project-id/deidentifyTemplates/432452342.
         class GetDeidentifyTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for ListDeidentifyTemplates.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
         #     to `ListDeidentifyTemplates`.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Size of the page, can be limited by server. If zero server returns
         #     a page of max size 100.
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Comma separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
@@ -3219,38 +3219,38 @@ module Google
         #     - `name`: corresponds to template's name.
         #     - `display_name`: corresponds to template's display name.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location where deidentifications templates will be retrieved
         #     from. Use `-` for all locations. Reserved for future extensions.
         class ListDeidentifyTemplatesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response message for ListDeidentifyTemplates.
         # @!attribute [rw] deidentify_templates
-        #   @return [Array<Google::Cloud::Dlp::V2::DeidentifyTemplate>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DeidentifyTemplate>]
         #     List of deidentify templates, up to page_size in
         #     ListDeidentifyTemplatesRequest.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     If the next page is available then the next page token to be used
         #     in following ListDeidentifyTemplates request.
         class ListDeidentifyTemplatesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for DeleteDeidentifyTemplate.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the organization and deidentify template to be
         #     deleted, for example
         #     `organizations/433245324/deidentifyTemplates/432452342` or
         #     projects/project-id/deidentifyTemplates/432452342.
         class DeleteDeidentifyTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configuration for a custom dictionary created from a data source of any size
@@ -3260,78 +3260,78 @@ module Google
         # location. Consider using `CustomInfoType.Dictionary` for smaller dictionaries
         # that satisfy the size requirements.
         # @!attribute [rw] output_path
-        #   @return [Google::Cloud::Dlp::V2::CloudStoragePath]
+        #   @return [::Google::Cloud::Dlp::V2::CloudStoragePath]
         #     Location to store dictionary artifacts in Google Cloud Storage. These files
         #     will only be accessible by project owners and the DLP API. If any of these
         #     artifacts are modified, the dictionary is considered invalid and can no
         #     longer be used.
         # @!attribute [rw] cloud_storage_file_set
-        #   @return [Google::Cloud::Dlp::V2::CloudStorageFileSet]
+        #   @return [::Google::Cloud::Dlp::V2::CloudStorageFileSet]
         #     Set of files containing newline-delimited lists of dictionary phrases.
         # @!attribute [rw] big_query_field
-        #   @return [Google::Cloud::Dlp::V2::BigQueryField]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryField]
         #     Field in a BigQuery table where each cell represents a dictionary phrase.
         class LargeCustomDictionaryConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Summary statistics of a custom dictionary.
         # @!attribute [rw] approx_num_phrases
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Approximate number of distinct phrases in the dictionary.
         class LargeCustomDictionaryStats
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configuration for stored infoTypes. All fields and subfield are provided
         # by the user. For more information, see
         # https://cloud.google.com/dlp/docs/creating-custom-infotypes.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Display name of the StoredInfoType (max 256 characters).
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Description of the StoredInfoType (max 256 characters).
         # @!attribute [rw] large_custom_dictionary
-        #   @return [Google::Cloud::Dlp::V2::LargeCustomDictionaryConfig]
+        #   @return [::Google::Cloud::Dlp::V2::LargeCustomDictionaryConfig]
         #     StoredInfoType where findings are defined by a dictionary of phrases.
         # @!attribute [rw] dictionary
-        #   @return [Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
         #     Store dictionary-based CustomInfoType.
         # @!attribute [rw] regex
-        #   @return [Google::Cloud::Dlp::V2::CustomInfoType::Regex]
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
         #     Store regular expression-based StoredInfoType.
         class StoredInfoTypeConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Statistics for a StoredInfoType.
         # @!attribute [rw] large_custom_dictionary
-        #   @return [Google::Cloud::Dlp::V2::LargeCustomDictionaryStats]
+        #   @return [::Google::Cloud::Dlp::V2::LargeCustomDictionaryStats]
         #     StoredInfoType where findings are defined by a dictionary of phrases.
         class StoredInfoTypeStats
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Version of a StoredInfoType, including the configuration used to build it,
         # create timestamp, and current state.
         # @!attribute [rw] config
-        #   @return [Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
+        #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
         #     StoredInfoType configuration.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Create timestamp of the version. Read-only, determined by the system
         #     when the version is created.
         # @!attribute [rw] state
-        #   @return [Google::Cloud::Dlp::V2::StoredInfoTypeState]
+        #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeState]
         #     Stored info type version state. Read-only, updated by the system
         #     during dictionary creation.
         # @!attribute [rw] errors
-        #   @return [Array<Google::Cloud::Dlp::V2::Error>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Error>]
         #     Errors that occurred when creating this storedInfoType version, or
         #     anomalies detected in the storedInfoType data that render it unusable. Only
         #     the five most recent errors will be displayed, with the most recent error
@@ -3346,98 +3346,98 @@ module Google
         #     storedInfoType to continue using it, reusing the same `config` if it was
         #     not the source of the error.
         # @!attribute [rw] stats
-        #   @return [Google::Cloud::Dlp::V2::StoredInfoTypeStats]
+        #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeStats]
         #     Statistics about this storedInfoType version.
         class StoredInfoTypeVersion
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # StoredInfoType resource message that contains information about the current
         # version and any pending updates.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Resource name.
         # @!attribute [rw] current_version
-        #   @return [Google::Cloud::Dlp::V2::StoredInfoTypeVersion]
+        #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeVersion]
         #     Current version of the stored info type.
         # @!attribute [rw] pending_versions
-        #   @return [Array<Google::Cloud::Dlp::V2::StoredInfoTypeVersion>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::StoredInfoTypeVersion>]
         #     Pending versions of the stored info type. Empty if no versions are
         #     pending.
         class StoredInfoType
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for CreateStoredInfoType.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] config
-        #   @return [Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
+        #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
         #     Required. Configuration of the storedInfoType to create.
         # @!attribute [rw] stored_info_type_id
-        #   @return [String]
+        #   @return [::String]
         #     The storedInfoType ID can contain uppercase and lowercase letters,
         #     numbers, and hyphens; that is, it must match the regular
         #     expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
         #     characters. Can be empty to allow the system to generate one.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location to store the stored infoType. Reserved for
         #     future extensions.
         class CreateStoredInfoTypeRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for UpdateStoredInfoType.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of organization and storedInfoType to be updated,
         #     for example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         # @!attribute [rw] config
-        #   @return [Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
+        #   @return [::Google::Cloud::Dlp::V2::StoredInfoTypeConfig]
         #     Updated configuration for the storedInfoType. If not provided, a new
         #     version of the storedInfoType will be created with the existing
         #     configuration.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Mask to control which fields get updated.
         class UpdateStoredInfoTypeRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for GetStoredInfoType.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the organization and storedInfoType to be read,
         #     for example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         class GetStoredInfoTypeRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for ListStoredInfoTypes.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The parent resource name, for example projects/my-project-id or
         #     organizations/my-org-id.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Page token to continue retrieval. Comes from previous call
         #     to `ListStoredInfoTypes`.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Size of the page, can be limited by server. If zero server returns
         #     a page of max size 100.
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Comma separated list of fields to order by,
         #     followed by `asc` or `desc` postfix. This list is case-insensitive,
         #     default sorting order is ascending, redundant space characters are
@@ -3453,101 +3453,101 @@ module Google
         #     - `name`: corresponds to resource name.
         #     - `display_name`: corresponds to info type's display name.
         # @!attribute [rw] location_id
-        #   @return [String]
+        #   @return [::String]
         #     The geographic location where stored infoTypes will be retrieved from.
         #     Use `-` for all locations. Reserved for future extensions.
         class ListStoredInfoTypesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response message for ListStoredInfoTypes.
         # @!attribute [rw] stored_info_types
-        #   @return [Array<Google::Cloud::Dlp::V2::StoredInfoType>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::StoredInfoType>]
         #     List of storedInfoTypes, up to page_size in ListStoredInfoTypesRequest.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     If the next page is available then the next page token to be used
         #     in following ListStoredInfoTypes request.
         class ListStoredInfoTypesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for DeleteStoredInfoType.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the organization and storedInfoType to be
         #     deleted, for example `organizations/433245324/storedInfoTypes/432452342` or
         #     projects/project-id/storedInfoTypes/432452342.
         class DeleteStoredInfoTypeRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to search for potentially sensitive info in a custom location.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the trigger to execute a hybrid inspect on, for
         #     example `projects/dlp-test-project/jobTriggers/53234423`.
         # @!attribute [rw] hybrid_item
-        #   @return [Google::Cloud::Dlp::V2::HybridContentItem]
+        #   @return [::Google::Cloud::Dlp::V2::HybridContentItem]
         #     The item to inspect.
         class HybridInspectJobTriggerRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to search for potentially sensitive info in a custom location.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the job to execute a hybrid inspect on, for
         #     example `projects/dlp-test-project/dlpJob/53234423`.
         # @!attribute [rw] hybrid_item
-        #   @return [Google::Cloud::Dlp::V2::HybridContentItem]
+        #   @return [::Google::Cloud::Dlp::V2::HybridContentItem]
         #     The item to inspect.
         class HybridInspectDlpJobRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # An individual hybrid item to inspect. Will be stored temporarily during
         # processing.
         # @!attribute [rw] item
-        #   @return [Google::Cloud::Dlp::V2::ContentItem]
+        #   @return [::Google::Cloud::Dlp::V2::ContentItem]
         #     The item to inspect.
         # @!attribute [rw] finding_details
-        #   @return [Google::Cloud::Dlp::V2::HybridFindingDetails]
+        #   @return [::Google::Cloud::Dlp::V2::HybridFindingDetails]
         #     Supplementary information that will be added to each finding.
         class HybridContentItem
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Populate to associate additional data with each finding.
         # @!attribute [rw] container_details
-        #   @return [Google::Cloud::Dlp::V2::Container]
+        #   @return [::Google::Cloud::Dlp::V2::Container]
         #     Details about the container where the content being inspected is from.
         # @!attribute [rw] file_offset
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Offset in bytes of the line, from the beginning of the file, where the
         #     finding  is located. Populate if the item being scanned is only part of a
         #     bigger item, such as a shard of a file and you want to track the absolute
         #     position of the finding.
         # @!attribute [rw] row_offset
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Offset of the row for tables. Populate if the row(s) being scanned are
         #     part of a bigger dataset and you want to keep track of their absolute
         #     position.
         # @!attribute [rw] table_options
-        #   @return [Google::Cloud::Dlp::V2::TableOptions]
+        #   @return [::Google::Cloud::Dlp::V2::TableOptions]
         #     If the container is a table, additional information to make findings
         #     meaningful such as the columns that are primary keys. If not known ahead
         #     of time, can also be set within each inspect hybrid call and the two
         #     will be merged. Note that identifying_fields will only be stored to
         #     BigQuery, and only if the BigQuery action has been included.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels to represent user provided metadata about the data being inspected.
         #     If configured by the job, some key values may be required.
         #     The labels associated with `Finding`'s produced by hybrid
@@ -3565,23 +3565,23 @@ module Google
         #     * `"environment" : "production"`
         #     * `"pipeline" : "etl"`
         class HybridFindingDetails
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Quota exceeded errors will be thrown once quota has been met.
         class HybridInspectResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Operators available for comparing the value of fields.

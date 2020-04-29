@@ -23,36 +23,36 @@ module Google
       module V2
         # Type of information detected by the API.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Name of the information type. Either a name of your choosing when
         #     creating a CustomInfoType, or one of the names listed
         #     at https://cloud.google.com/dlp/docs/infotypes-reference when specifying
         #     a built-in type. InfoType names should conform to the pattern
         #     `[a-zA-Z0-9_]{1,64}`.
         class InfoType
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A reference to a StoredInfoType to use with scanning.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Resource name of the requested `StoredInfoType`, for example
         #     `organizations/433245324/storedInfoTypes/432452342` or
         #     `projects/project-id/storedInfoTypes/432452342`.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp indicating when the version of the `StoredInfoType` used for
         #     inspection was created. Output-only field, populated by the system.
         class StoredType
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Custom information type provided by the user. Used to find domain-specific
         # sensitive information configurable to the data in question.
         # @!attribute [rw] info_type
-        #   @return [Google::Cloud::Dlp::V2::InfoType]
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     CustomInfoType can either be a new infoType, or an extension of built-in
         #     infoType, when the name matches one of existing infoTypes and that infoType
         #     is specified in `InspectContent.info_types` field. Specifying the latter
@@ -60,36 +60,36 @@ module Google
         #     not specified in `InspectContent.info_types` list then the name is treated
         #     as a custom info type.
         # @!attribute [rw] likelihood
-        #   @return [Google::Cloud::Dlp::V2::Likelihood]
+        #   @return [::Google::Cloud::Dlp::V2::Likelihood]
         #     Likelihood to return for this CustomInfoType. This base value can be
         #     altered by a detection rule if the finding meets the criteria specified by
         #     the rule. Defaults to `VERY_LIKELY` if not specified.
         # @!attribute [rw] dictionary
-        #   @return [Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
         #     A list of phrases to detect as a CustomInfoType.
         # @!attribute [rw] regex
-        #   @return [Google::Cloud::Dlp::V2::CustomInfoType::Regex]
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
         #     Regular expression based CustomInfoType.
         # @!attribute [rw] surrogate_type
-        #   @return [Google::Cloud::Dlp::V2::CustomInfoType::SurrogateType]
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::SurrogateType]
         #     Message for detecting output from deidentification transformations that
         #     support reversing.
         # @!attribute [rw] stored_type
-        #   @return [Google::Cloud::Dlp::V2::StoredType]
+        #   @return [::Google::Cloud::Dlp::V2::StoredType]
         #     Load an existing `StoredInfoType` resource for use in
         #     `InspectDataSource`. Not currently supported in `InspectContent`.
         # @!attribute [rw] detection_rules
-        #   @return [Array<Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule>]
         #     Set of detection rules to apply to all findings of this CustomInfoType.
         #     Rules are applied in order that they are specified. Not supported for the
         #     `surrogate_type` CustomInfoType.
         # @!attribute [rw] exclusion_type
-        #   @return [Google::Cloud::Dlp::V2::CustomInfoType::ExclusionType]
+        #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::ExclusionType]
         #     If set to EXCLUSION_TYPE_EXCLUDE this infoType will not cause a finding
         #     to be returned. It still can be used for rules matching.
         class CustomInfoType
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Custom information type based on a dictionary of words or phrases. This can
           # be used to match sensitive information specific to the data, such as a list
@@ -115,41 +115,41 @@ module Google
           # these constraints, consider using `LargeCustomDictionaryConfig` in the
           # `StoredInfoType` API.
           # @!attribute [rw] word_list
-          #   @return [Google::Cloud::Dlp::V2::CustomInfoType::Dictionary::WordList]
+          #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary::WordList]
           #     List of words or phrases to search for.
           # @!attribute [rw] cloud_storage_path
-          #   @return [Google::Cloud::Dlp::V2::CloudStoragePath]
+          #   @return [::Google::Cloud::Dlp::V2::CloudStoragePath]
           #     Newline-delimited file of words in Cloud Storage. Only a single file
           #     is accepted.
           class Dictionary
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Message defining a list of words or phrases to search for in the data.
             # @!attribute [rw] words
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             #     Words or phrases defining the dictionary. The dictionary must contain
             #     at least one phrase and every phrase must contain at least 2 characters
             #     that are letters or digits. [required]
             class WordList
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
           # Message defining a custom regular expression.
           # @!attribute [rw] pattern
-          #   @return [String]
+          #   @return [::String]
           #     Pattern defining the regular expression. Its syntax
           #     (https://github.com/google/re2/wiki/Syntax) can be found under the
           #     google/re2 repository on GitHub.
           # @!attribute [rw] group_indexes
-          #   @return [Array<Integer>]
+          #   @return [::Array<::Integer>]
           #     The index of the submatch to extract as findings. When not
           #     specified, the entire match is returned. No more than 3 may be included.
           class Regex
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Message for detecting output from deidentification transformations
@@ -161,8 +161,8 @@ module Google
           # transformation such as `surrogate_info_type`. This CustomInfoType does
           # not support the use of `detection_rules`.
           class SurrogateType
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Deprecated; use `InspectionRuleSet` instead. Rule for modifying a
@@ -170,32 +170,32 @@ module Google
           # on the specific details of the rule. Not supported for the `surrogate_type`
           # custom infoType.
           # @!attribute [rw] hotword_rule
-          #   @return [Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
+          #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::HotwordRule]
           #     Hotword-based detection rule.
           class DetectionRule
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Message for specifying a window around a finding to apply a detection
             # rule.
             # @!attribute [rw] window_before
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Number of characters before the finding to consider.
             # @!attribute [rw] window_after
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Number of characters after the finding to consider.
             class Proximity
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # Message for specifying an adjustment to the likelihood of a finding as
             # part of a detection rule.
             # @!attribute [rw] fixed_likelihood
-            #   @return [Google::Cloud::Dlp::V2::Likelihood]
+            #   @return [::Google::Cloud::Dlp::V2::Likelihood]
             #     Set the likelihood of a finding to a fixed value.
             # @!attribute [rw] relative_likelihood
-            #   @return [Integer]
+            #   @return [::Integer]
             #     Increase or decrease the likelihood by the specified number of
             #     levels. For example, if a finding would be `POSSIBLE` without the
             #     detection rule and `relative_likelihood` is 1, then it is upgraded to
@@ -205,17 +205,17 @@ module Google
             #     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
             #     a final likelihood of `LIKELY`.
             class LikelihoodAdjustment
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # The rule that adjusts the likelihood of findings within a certain
             # proximity of hotwords.
             # @!attribute [rw] hotword_regex
-            #   @return [Google::Cloud::Dlp::V2::CustomInfoType::Regex]
+            #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
             #     Regular expression pattern defining what qualifies as a hotword.
             # @!attribute [rw] proximity
-            #   @return [Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
+            #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::Proximity]
             #     Proximity of the finding within which the entire hotword must reside.
             #     The total length of the window cannot exceed 1000 characters. Note that
             #     the finding itself will be included in the window, so that hotwords may
@@ -225,11 +225,11 @@ module Google
             #     a company office using the hotword regex "\(xxx\)", where "xxx"
             #     is the area code in question.
             # @!attribute [rw] likelihood_adjustment
-            #   @return [Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
+            #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule::LikelihoodAdjustment]
             #     Likelihood adjustment to apply to all matching findings.
             class HotwordRule
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
@@ -245,11 +245,11 @@ module Google
 
         # General identifier of a data field in a storage service.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Name describing the field.
         class FieldId
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Datastore partition ID.
@@ -259,36 +259,36 @@ module Google
         # A partition ID contains several dimensions:
         # project ID and namespace ID.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     The ID of the project to which the entities belong.
         # @!attribute [rw] namespace_id
-        #   @return [String]
+        #   @return [::String]
         #     If not empty, the ID of the namespace to which the entities belong.
         class PartitionId
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A representation of a Datastore kind.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The name of the kind.
         class KindExpression
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Options defining a data set within Google Cloud Datastore.
         # @!attribute [rw] partition_id
-        #   @return [Google::Cloud::Dlp::V2::PartitionId]
+        #   @return [::Google::Cloud::Dlp::V2::PartitionId]
         #     A partition ID identifies a grouping of entities. The grouping is always
         #     by project and namespace, however the namespace ID may be empty.
         # @!attribute [rw] kind
-        #   @return [Google::Cloud::Dlp::V2::KindExpression]
+        #   @return [::Google::Cloud::Dlp::V2::KindExpression]
         #     The kind to process.
         class DatastoreOptions
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Message representing a set of files in a Cloud Storage bucket. Regular
@@ -324,10 +324,10 @@ module Google
         # include all files directly under `gs://mybucket/directory/`, without matching
         # across `/`
         # @!attribute [rw] bucket_name
-        #   @return [String]
+        #   @return [::String]
         #     The name of a Cloud Storage bucket. Required.
         # @!attribute [rw] include_regex
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     A list of regular expressions matching file paths to include. All files in
         #     the bucket that match at least one of these regular expressions will be
         #     included in the set of files, except for those that also match an item in
@@ -338,7 +338,7 @@ module Google
         #     [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
         #     under the google/re2 repository on GitHub.
         # @!attribute [rw] exclude_regex
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     A list of regular expressions matching file paths to exclude. All files in
         #     the bucket that match at least one of these regular expressions will be
         #     excluded from the scan.
@@ -347,46 +347,46 @@ module Google
         #     [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
         #     under the google/re2 repository on GitHub.
         class CloudStorageRegexFileSet
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Options defining a file or a set of files within a Google Cloud Storage
         # bucket.
         # @!attribute [rw] file_set
-        #   @return [Google::Cloud::Dlp::V2::CloudStorageOptions::FileSet]
+        #   @return [::Google::Cloud::Dlp::V2::CloudStorageOptions::FileSet]
         #     The set of one or more files to scan.
         # @!attribute [rw] bytes_limit_per_file
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Max number of bytes to scan from a file. If a scanned file's size is bigger
         #     than this value then the rest of the bytes are omitted. Only one
         #     of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
         # @!attribute [rw] bytes_limit_per_file_percent
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Max percentage of bytes to scan from a file. The rest are omitted. The
         #     number of bytes scanned is rounded down. Must be between 0 and 100,
         #     inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one
         #     of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
         # @!attribute [rw] file_types
-        #   @return [Array<Google::Cloud::Dlp::V2::FileType>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FileType>]
         #     List of file type groups to include in the scan.
         #     If empty, all files are scanned and available data format processors
         #     are applied. In addition, the binary content of the selected files
         #     is always scanned as well.
         # @!attribute [rw] sample_method
-        #   @return [Google::Cloud::Dlp::V2::CloudStorageOptions::SampleMethod]
+        #   @return [::Google::Cloud::Dlp::V2::CloudStorageOptions::SampleMethod]
         # @!attribute [rw] files_limit_percent
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Limits the number of files to scan to this percentage of the input FileSet.
         #     Number of files scanned is rounded down. Must be between 0 and 100,
         #     inclusively. Both 0 and 100 means no limit. Defaults to 0.
         class CloudStorageOptions
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Set of files to scan.
           # @!attribute [rw] url
-          #   @return [String]
+          #   @return [::String]
           #     The Cloud Storage url of the file(s) to scan, in the format
           #     `gs://<bucket>/<path>`. Trailing wildcard in the path is allowed.
           #
@@ -398,12 +398,12 @@ module Google
           #
           #     Exactly one of `url` or `regex_file_set` must be set.
           # @!attribute [rw] regex_file_set
-          #   @return [Google::Cloud::Dlp::V2::CloudStorageRegexFileSet]
+          #   @return [::Google::Cloud::Dlp::V2::CloudStorageRegexFileSet]
           #     The regex-filtered set of files to scan. Exactly one of `url` or
           #     `regex_file_set` must be set.
           class FileSet
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # How to sample bytes if not all bytes are scanned. Meaningful only when used
@@ -423,57 +423,57 @@ module Google
 
         # Message representing a set of files in Cloud Storage.
         # @!attribute [rw] url
-        #   @return [String]
+        #   @return [::String]
         #     The url, in the format `gs://<bucket>/<path>`. Trailing wildcard in the
         #     path is allowed.
         class CloudStorageFileSet
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Message representing a single file or path in Cloud Storage.
         # @!attribute [rw] path
-        #   @return [String]
+        #   @return [::String]
         #     A url representing a file or path (no wildcards) in Cloud Storage.
         #     Example: gs://[BUCKET_NAME]/dictionary.txt
         class CloudStoragePath
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Options defining BigQuery table and row identifiers.
         # @!attribute [rw] table_reference
-        #   @return [Google::Cloud::Dlp::V2::BigQueryTable]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
         #     Complete BigQuery table reference.
         # @!attribute [rw] identifying_fields
-        #   @return [Array<Google::Cloud::Dlp::V2::FieldId>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     Table fields that may uniquely identify a row within the table. When
         #     `actions.saveFindings.outputConfig.table` is specified, the values of
         #     columns specified here are available in the output table under
         #     `location.content_locations.record_location.record_key.id_values`. Nested
         #     fields such as `person.birthdate.year` are allowed.
         # @!attribute [rw] rows_limit
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Max number of rows to scan. If the table has more rows than this value, the
         #     rest of the rows are omitted. If not set, or if set to 0, all rows will be
         #     scanned. Only one of rows_limit and rows_limit_percent can be specified.
         #     Cannot be used in conjunction with TimespanConfig.
         # @!attribute [rw] rows_limit_percent
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Max percentage of rows to scan. The rest are omitted. The number of rows
         #     scanned is rounded down. Must be between 0 and 100, inclusively. Both 0 and
         #     100 means no limit. Defaults to 0. Only one of rows_limit and
         #     rows_limit_percent can be specified. Cannot be used in conjunction with
         #     TimespanConfig.
         # @!attribute [rw] sample_method
-        #   @return [Google::Cloud::Dlp::V2::BigQueryOptions::SampleMethod]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryOptions::SampleMethod]
         # @!attribute [rw] excluded_fields
-        #   @return [Array<Google::Cloud::Dlp::V2::FieldId>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     References to fields excluded from scanning. This allows you to skip
         #     inspection of entire columns which you know have no findings.
         class BigQueryOptions
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # How to sample rows if not all rows are scanned. Meaningful only when used
           # in conjunction with either rows_limit or rows_limit_percent. If not
@@ -491,37 +491,37 @@ module Google
 
         # Shared message indicating Cloud storage type.
         # @!attribute [rw] datastore_options
-        #   @return [Google::Cloud::Dlp::V2::DatastoreOptions]
+        #   @return [::Google::Cloud::Dlp::V2::DatastoreOptions]
         #     Google Cloud Datastore options.
         # @!attribute [rw] cloud_storage_options
-        #   @return [Google::Cloud::Dlp::V2::CloudStorageOptions]
+        #   @return [::Google::Cloud::Dlp::V2::CloudStorageOptions]
         #     Google Cloud Storage options.
         # @!attribute [rw] big_query_options
-        #   @return [Google::Cloud::Dlp::V2::BigQueryOptions]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryOptions]
         #     BigQuery options.
         # @!attribute [rw] hybrid_options
-        #   @return [Google::Cloud::Dlp::V2::HybridOptions]
+        #   @return [::Google::Cloud::Dlp::V2::HybridOptions]
         #     Hybrid inspection options.
         #     Early access feature is in a pre-release state and might change or have
         #     limited support. For more information, see
         #     https://cloud.google.com/products#product-launch-stages.
         # @!attribute [rw] timespan_config
-        #   @return [Google::Cloud::Dlp::V2::StorageConfig::TimespanConfig]
+        #   @return [::Google::Cloud::Dlp::V2::StorageConfig::TimespanConfig]
         class StorageConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Configuration of the timespan of the items to include in scanning.
           # Currently only supported when inspecting Google Cloud Storage and BigQuery.
           # @!attribute [rw] start_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Exclude files or rows older than this value.
           # @!attribute [rw] end_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Exclude files or rows newer than this value.
           #     If set to zero, no upper time limit is applied.
           # @!attribute [rw] timestamp_field
-          #   @return [Google::Cloud::Dlp::V2::FieldId]
+          #   @return [::Google::Cloud::Dlp::V2::FieldId]
           #     Specification of the field containing the timestamp of scanned items.
           #     Used for data sources like Datastore and BigQuery.
           #
@@ -537,25 +537,25 @@ module Google
           #     Datastore entity will be scanned if the timestamp property does not
           #     exist or its value is empty or invalid.
           # @!attribute [rw] enable_auto_population_of_timespan_config
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     When the job is started by a JobTrigger we will automatically figure out
           #     a valid start_time to avoid scanning files that have not been modified
           #     since the last time the JobTrigger executed. This will be based on the
           #     time of the execution of the last run of the JobTrigger.
           class TimespanConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Configuration to control jobs where the content being inspected is outside
         # of Google Cloud Platform.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     A short description of where the data is coming from. Will be stored once
         #     in the job. 256 max length.
         # @!attribute [rw] required_finding_label_keys
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     These are labels that each inspection request must include within their
         #     'finding_labels' map. Request may contain others, but any missing one of
         #     these will be rejected.
@@ -565,7 +565,7 @@ module Google
         #
         #     No more than 10 keys can be required.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     To organize findings, these labels will be added to each finding.
         #
         #     Label keys must be between 1 and 63 characters long and must conform
@@ -580,46 +580,46 @@ module Google
         #     * `"environment" : "production"`
         #     * `"pipeline" : "etl"`
         # @!attribute [rw] table_options
-        #   @return [Google::Cloud::Dlp::V2::TableOptions]
+        #   @return [::Google::Cloud::Dlp::V2::TableOptions]
         #     If the container is a table, additional information to make findings
         #     meaningful such as the columns that are primary keys.
         class HybridOptions
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Row key for identifying a record in BigQuery table.
         # @!attribute [rw] table_reference
-        #   @return [Google::Cloud::Dlp::V2::BigQueryTable]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
         #     Complete BigQuery table reference.
         # @!attribute [rw] row_number
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Row number inferred at the time the table was scanned. This value is
         #     nondeterministic, cannot be queried, and may be null for inspection
         #     jobs. To locate findings within a table, specify
         #     `inspect_job.storage_config.big_query_options.identifying_fields` in
         #     `CreateDlpJobRequest`.
         class BigQueryKey
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Record key for a finding in Cloud Datastore.
         # @!attribute [rw] entity_key
-        #   @return [Google::Cloud::Dlp::V2::Key]
+        #   @return [::Google::Cloud::Dlp::V2::Key]
         #     Datastore entity key.
         class DatastoreKey
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A unique identifier for a Datastore entity.
@@ -627,12 +627,12 @@ module Google
         # reserved/read-only, the key is reserved/read-only.
         # A reserved/read-only key is forbidden in certain documented contexts.
         # @!attribute [rw] partition_id
-        #   @return [Google::Cloud::Dlp::V2::PartitionId]
+        #   @return [::Google::Cloud::Dlp::V2::PartitionId]
         #     Entities are partitioned into subsets, currently identified by a project
         #     ID and namespace ID.
         #     Queries are scoped to a single partition.
         # @!attribute [rw] path
-        #   @return [Array<Google::Cloud::Dlp::V2::Key::PathElement>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::Key::PathElement>]
         #     The entity path.
         #     An entity path consists of one or more elements composed of a kind and a
         #     string or numerical identifier, which identify entities. The first
@@ -643,48 +643,48 @@ module Google
         #
         #     A path can never be empty, and a path can have at most 100 elements.
         class Key
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A (kind, ID/name) pair used to construct a key path.
           #
           # If either name or ID is set, the element is complete.
           # If neither is set, the element is incomplete.
           # @!attribute [rw] kind
-          #   @return [String]
+          #   @return [::String]
           #     The kind of the entity.
           #     A kind matching regex `__.*__` is reserved/read-only.
           #     A kind must not contain more than 1500 bytes when UTF-8 encoded.
           #     Cannot be `""`.
           # @!attribute [rw] id
-          #   @return [Integer]
+          #   @return [::Integer]
           #     The auto-allocated ID of the entity.
           #     Never equal to zero. Values less than zero are discouraged and may not
           #     be supported in the future.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     The name of the entity.
           #     A name matching regex `__.*__` is reserved/read-only.
           #     A name must not be more than 1500 bytes when UTF-8 encoded.
           #     Cannot be `""`.
           class PathElement
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Message for a unique key indicating a record that contains a finding.
         # @!attribute [rw] datastore_key
-        #   @return [Google::Cloud::Dlp::V2::DatastoreKey]
+        #   @return [::Google::Cloud::Dlp::V2::DatastoreKey]
         # @!attribute [rw] big_query_key
-        #   @return [Google::Cloud::Dlp::V2::BigQueryKey]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryKey]
         # @!attribute [rw] id_values
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Values of identifying columns in the given row. Order of values matches
         #     the order of `identifying_fields` specified in the scanning request.
         class RecordKey
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Message defining the location of a BigQuery table. A table is uniquely
@@ -693,30 +693,30 @@ module Google
         # `<project_id>:<dataset_id>.<table_id>` or
         # `<project_id>.<dataset_id>.<table_id>`.
         # @!attribute [rw] project_id
-        #   @return [String]
+        #   @return [::String]
         #     The Google Cloud Platform project ID of the project containing the table.
         #     If omitted, project ID is inferred from the API call.
         # @!attribute [rw] dataset_id
-        #   @return [String]
+        #   @return [::String]
         #     Dataset ID of the table.
         # @!attribute [rw] table_id
-        #   @return [String]
+        #   @return [::String]
         #     Name of the table.
         class BigQueryTable
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Message defining a field of a BigQuery table.
         # @!attribute [rw] table
-        #   @return [Google::Cloud::Dlp::V2::BigQueryTable]
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
         #     Source table of the field.
         # @!attribute [rw] field
-        #   @return [Google::Cloud::Dlp::V2::FieldId]
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     Designated field in the BigQuery table.
         class BigQueryField
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # An entity in a dataset is a field or set of fields that correspond to a
@@ -725,23 +725,23 @@ module Google
         # identifier. This message is used when generalizations or analysis must take
         # into account that multiple rows correspond to the same entity.
         # @!attribute [rw] field
-        #   @return [Google::Cloud::Dlp::V2::FieldId]
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
         #     Composite key indicating which field contains the entity identifier.
         class EntityId
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Instructions regarding the table content being inspected.
         # @!attribute [rw] identifying_fields
-        #   @return [Array<Google::Cloud::Dlp::V2::FieldId>]
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     The columns that are the primary keys for table objects included in
         #     ContentItem. A copy of this cell's value will stored alongside alongside
         #     each finding so that the finding can be traced to the specific row it came
         #     from. No more than 3 may be provided.
         class TableOptions
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Categorization of results based on how likely they are to represent a match,

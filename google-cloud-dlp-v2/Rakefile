@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DLP_TEST_PROJECT=test123 DLP_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/dlp/v2/dlp_service/credentials"
-  Google::Cloud::Dlp::V2::DlpService::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Dlp::V2::DlpService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["DLP_PROJECT"] = project

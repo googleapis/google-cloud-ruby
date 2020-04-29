@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/dlp/v2"
 
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+client = ::Google::Cloud::Dlp::V2::DlpService::Client.new
 request = my_create_request
 response = client.inspect_content request
 ```

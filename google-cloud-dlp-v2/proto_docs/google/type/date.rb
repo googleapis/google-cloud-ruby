@@ -28,23 +28,23 @@ module Google
     # * A year on its own, with zero month and day values
     # * A year and month value, with a zero day, e.g. a credit card expiration date
     #
-    # Related types are {Google::Type::TimeOfDay google.type.TimeOfDay} and `google.protobuf.Timestamp`.
+    # Related types are {::Google::Type::TimeOfDay google.type.TimeOfDay} and `google.protobuf.Timestamp`.
     # @!attribute [rw] year
-    #   @return [Integer]
+    #   @return [::Integer]
     #     Year of date. Must be from 1 to 9999, or 0 if specifying a date without
     #     a year.
     # @!attribute [rw] month
-    #   @return [Integer]
+    #   @return [::Integer]
     #     Month of year. Must be from 1 to 12, or 0 if specifying a year without a
     #     month and day.
     # @!attribute [rw] day
-    #   @return [Integer]
+    #   @return [::Integer]
     #     Day of month. Must be from 1 to 31 and valid for the year and month, or 0
     #     if specifying a year by itself or a year and month where the day is not
     #     significant.
     class Date
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end
