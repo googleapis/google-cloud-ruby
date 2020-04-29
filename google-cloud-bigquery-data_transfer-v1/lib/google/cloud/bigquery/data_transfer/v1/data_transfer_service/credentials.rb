@@ -25,7 +25,7 @@ module Google
         module V1
           module DataTransferService
             # Credentials for the DataTransferService API.
-            class Credentials < Google::Auth::Credentials
+            class Credentials < ::Google::Auth::Credentials
               self.scope = [
                 "https://www.googleapis.com/auth/cloud-platform"
               ]

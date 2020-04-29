@@ -25,36 +25,36 @@ module Google
           # Represents preferences for sending email notifications for transfer run
           # events.
           # @!attribute [rw] enable_failure_email
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     If true, email notifications will be sent on transfer run failures.
           class EmailPreferences
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Options customizing the data transfer schedule.
           # @!attribute [rw] disable_auto_scheduling
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     If true, automatic scheduling of data transfer runs for this configuration
           #     will be disabled. The runs can be started on ad-hoc basis using
           #     StartManualTransferRuns API. When automatic scheduling is disabled, the
           #     TransferConfig.schedule field will be ignored.
           # @!attribute [rw] start_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Specifies time to start scheduling transfer runs. The first run will be
           #     scheduled at or after the start time according to a recurrence pattern
           #     defined in the schedule string. The start time can be changed at any
           #     moment. The time when a data transfer can be trigerred manually is not
           #     limited by this option.
           # @!attribute [rw] end_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Defines time to stop scheduling transfer runs. A transfer run cannot be
           #     scheduled at or after the end time. The end time can be changed at any
           #     moment. The time when a data transfer can be trigerred manually is not
           #     limited by this option.
           class ScheduleOptions
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Represents a data transfer configuration. A transfer configuration
@@ -64,7 +64,7 @@ module Google
           # `destination_dataset_id` is created when needed and shared with the
           # appropriate data source service account.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     The resource name of the transfer config.
           #     Transfer config names have the form of
           #     `projects/{project_id}/locations/{region}/transferConfigs/{config_id}`.
@@ -73,19 +73,19 @@ module Google
           #     is not provided, usually a uuid, even though it is not guaranteed or
           #     required, will be generated for config_id.
           # @!attribute [rw] destination_dataset_id
-          #   @return [String]
+          #   @return [::String]
           #     The BigQuery target dataset id.
           # @!attribute [rw] display_name
-          #   @return [String]
+          #   @return [::String]
           #     User specified display name for the data transfer.
           # @!attribute [rw] data_source_id
-          #   @return [String]
+          #   @return [::String]
           #     Data source id. Cannot be changed once data transfer is created.
           # @!attribute [rw] params
-          #   @return [Google::Protobuf::Struct]
+          #   @return [::Google::Protobuf::Struct]
           #     Data transfer specific parameters.
           # @!attribute [rw] schedule
-          #   @return [String]
+          #   @return [::String]
           #     Data transfer schedule.
           #     If the data source does not support a custom schedule, this should be
           #     empty. If it is empty, the default value for the data source will be
@@ -99,10 +99,10 @@ module Google
           #     https://cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#the_schedule_format
           #     NOTE: the granularity should be at least 8 hours, or less frequent.
           # @!attribute [rw] schedule_options
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::ScheduleOptions]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleOptions]
           #     Options customizing the data transfer schedule.
           # @!attribute [rw] data_refresh_window_days
-          #   @return [Integer]
+          #   @return [::Integer]
           #     The number of days to look back to automatically refresh the data.
           #     For example, if `data_refresh_window_days = 10`, then every day
           #     BigQuery reingests data for [today-10, today-1], rather than ingesting data
@@ -110,114 +110,114 @@ module Google
           #     Only valid if the data source supports the feature. Set the value to  0
           #     to use the default value.
           # @!attribute [rw] disabled
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     Is this config disabled. When set to true, no runs are scheduled
           #     for a given transfer.
           # @!attribute [r] update_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Data transfer modification time. Ignored by server on input.
           # @!attribute [r] next_run_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Next time when data transfer will run.
           # @!attribute [r] state
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferState]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TransferState]
           #     Output only. State of the most recently updated transfer run.
           # @!attribute [rw] user_id
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Deprecated. Unique ID of the user on whose behalf transfer is done.
           # @!attribute [r] dataset_region
-          #   @return [String]
+          #   @return [::String]
           #     Output only. Region in which BigQuery dataset is located.
           # @!attribute [rw] notification_pubsub_topic
-          #   @return [String]
+          #   @return [::String]
           #     Pub/Sub topic where notifications will be sent after transfer runs
           #     associated with this transfer config finish.
           # @!attribute [rw] email_preferences
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
           #     Email notifications will be sent according to these preferences
           #     to the email address of the user who owns this transfer config.
           class TransferConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Represents a data transfer run.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     The resource name of the transfer run.
           #     Transfer run names have the form
           #     `projects/{project_id}/locations/{location}/transferConfigs/{config_id}/runs/{run_id}`.
           #     The name is ignored when creating a transfer run.
           # @!attribute [rw] schedule_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Minimum time after which a transfer run can be started.
           # @!attribute [rw] run_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     For batch transfer runs, specifies the date and time of the data should be
           #     ingested.
           # @!attribute [rw] error_status
-          #   @return [Google::Rpc::Status]
+          #   @return [::Google::Rpc::Status]
           #     Status of the transfer run.
           # @!attribute [r] start_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Time when transfer run was started.
           #     Parameter ignored by server for input requests.
           # @!attribute [r] end_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Time when transfer run ended.
           #     Parameter ignored by server for input requests.
           # @!attribute [r] update_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Last time the data transfer run state was updated.
           # @!attribute [r] params
-          #   @return [Google::Protobuf::Struct]
+          #   @return [::Google::Protobuf::Struct]
           #     Output only. Data transfer specific parameters.
           # @!attribute [r] destination_dataset_id
-          #   @return [String]
+          #   @return [::String]
           #     Output only. The BigQuery target dataset id.
           # @!attribute [r] data_source_id
-          #   @return [String]
+          #   @return [::String]
           #     Output only. Data source id.
           # @!attribute [rw] state
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferState]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TransferState]
           #     Data transfer run state. Ignored for input requests.
           # @!attribute [rw] user_id
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Deprecated. Unique ID of the user on whose behalf transfer is done.
           # @!attribute [r] schedule
-          #   @return [String]
+          #   @return [::String]
           #     Output only. Describes the schedule of this transfer run if it was
           #     created as part of a regular schedule. For batch transfer runs that are
           #     scheduled manually, this is empty.
           #     NOTE: the system might choose to delay the schedule depending on the
           #     current load, so `schedule_time` doesn't always match this.
           # @!attribute [r] notification_pubsub_topic
-          #   @return [String]
+          #   @return [::String]
           #     Output only. Pub/Sub topic where a notification will be sent after this
           #     transfer run finishes
           # @!attribute [r] email_preferences
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
           #     Output only. Email notifications will be sent according to these
           #     preferences to the email address of the user who owns the transfer config
           #     this run was derived from.
           class TransferRun
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Represents a user facing message for a particular data transfer run.
           # @!attribute [rw] message_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Time when message was logged.
           # @!attribute [rw] severity
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage::MessageSeverity]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage::MessageSeverity]
           #     Message severity.
           # @!attribute [rw] message_text
-          #   @return [String]
+          #   @return [::String]
           #     Message text.
           class TransferMessage
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Represents data transfer user facing message severity.
             module MessageSeverity
