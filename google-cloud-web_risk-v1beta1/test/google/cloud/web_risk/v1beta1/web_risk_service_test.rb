@@ -23,7 +23,7 @@ require "google/cloud/webrisk/v1beta1/webrisk_pb"
 require "google/cloud/webrisk/v1beta1/webrisk_services_pb"
 require "google/cloud/web_risk/v1beta1/web_risk_service"
 
-class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Test
+class ::Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
 
   def test_compute_threat_list_diff
     # Create GRPC objects.
-    grpc_response = Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffResponse.new
+    grpc_response = ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -60,16 +60,16 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
 
     compute_threat_list_diff_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :compute_threat_list_diff, name
-      assert_kind_of Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest, request
+      assert_kind_of ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest, request
       assert_equal :THREAT_TYPE_UNSPECIFIED, request.threat_type
       assert_equal "hello world", request.version_token
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest::Constraints), request.constraints
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest::Constraints), request.constraints
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, compute_threat_list_diff_client_stub do
       # Create client
-      client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new do |config|
+      client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -86,7 +86,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.compute_threat_list_diff Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints) do |response, operation|
+      client.compute_threat_list_diff ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -98,7 +98,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.compute_threat_list_diff Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints), grpc_options do |response, operation|
+      client.compute_threat_list_diff ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new(threat_type: threat_type, version_token: version_token, constraints: constraints), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -110,7 +110,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
 
   def test_search_uris
     # Create GRPC objects.
-    grpc_response = Google::Cloud::WebRisk::V1beta1::SearchUrisResponse.new
+    grpc_response = ::Google::Cloud::WebRisk::V1beta1::SearchUrisResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -121,7 +121,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
 
     search_uris_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_uris, name
-      assert_kind_of Google::Cloud::WebRisk::V1beta1::SearchUrisRequest, request
+      assert_kind_of ::Google::Cloud::WebRisk::V1beta1::SearchUrisRequest, request
       assert_equal "hello world", request.uri
       assert_equal [:THREAT_TYPE_UNSPECIFIED], request.threat_types
       refute_nil options
@@ -129,7 +129,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, search_uris_client_stub do
       # Create client
-      client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new do |config|
+      client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -146,7 +146,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.search_uris Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new(uri: uri, threat_types: threat_types) do |response, operation|
+      client.search_uris ::Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new(uri: uri, threat_types: threat_types) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -158,7 +158,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.search_uris Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new(uri: uri, threat_types: threat_types), grpc_options do |response, operation|
+      client.search_uris ::Google::Cloud::WebRisk::V1beta1::SearchUrisRequest.new(uri: uri, threat_types: threat_types), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -170,7 +170,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
 
   def test_search_hashes
     # Create GRPC objects.
-    grpc_response = Google::Cloud::WebRisk::V1beta1::SearchHashesResponse.new
+    grpc_response = ::Google::Cloud::WebRisk::V1beta1::SearchHashesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -181,7 +181,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
 
     search_hashes_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_hashes, name
-      assert_kind_of Google::Cloud::WebRisk::V1beta1::SearchHashesRequest, request
+      assert_kind_of ::Google::Cloud::WebRisk::V1beta1::SearchHashesRequest, request
       assert_equal "hello world", request.hash_prefix
       assert_equal [:THREAT_TYPE_UNSPECIFIED], request.threat_types
       refute_nil options
@@ -189,7 +189,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
 
     Gapic::ServiceStub.stub :new, search_hashes_client_stub do
       # Create client
-      client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new do |config|
+      client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -206,7 +206,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object
-      client.search_hashes Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types) do |response, operation|
+      client.search_hashes ::Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -218,7 +218,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
       end
 
       # Use protobuf object with options
-      client.search_hashes Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types), grpc_options do |response, operation|
+      client.search_hashes ::Google::Cloud::WebRisk::V1beta1::SearchHashesRequest.new(hash_prefix: hash_prefix, threat_types: threat_types), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -233,7 +233,7 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new do |config|
+      client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -243,6 +243,6 @@ class Google::Cloud::WebRisk::V1beta1::WebRiskService::ClientTest < Minitest::Te
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::WebRisk::V1beta1::WebRiskService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client::Configuration, config
   end
 end

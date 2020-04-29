@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/web_risk/v1beta1"
 
-client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
+client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
 request = my_create_request
 response = client.compute_threat_list_diff request
 ```
