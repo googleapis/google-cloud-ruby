@@ -39,7 +39,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/recommender/v1/recommender"
-        #     client = Google::Cloud::Recommender::V1::Recommender::Client.new
+        #     client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
         #
         module Recommender
         end

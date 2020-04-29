@@ -36,11 +36,11 @@ module Google
             # @param recommender [String]
             # @param recommendation [String]
             #
-            # @return [String]
+            # @return [::String]
             def recommendation_path project:, location:, recommender:, recommendation:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "recommender cannot contain /" if recommender.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "recommender cannot contain /" if recommender.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/recommenders/#{recommender}/recommendations/#{recommendation}"
             end
@@ -56,10 +56,10 @@ module Google
             # @param location [String]
             # @param recommender [String]
             #
-            # @return [String]
+            # @return [::String]
             def recommender_path project:, location:, recommender:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/recommenders/#{recommender}"
             end

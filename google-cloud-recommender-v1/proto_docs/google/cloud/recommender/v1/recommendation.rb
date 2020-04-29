@@ -24,14 +24,14 @@ module Google
         # A recommendation along with a suggested action. E.g., a rightsizing
         # recommendation for an underutilized VM, IAM role recommendations, etc
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Name of recommendation.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Free-form human readable summary in English. The maximum length is 500
         #     characters.
         # @!attribute [rw] recommender_subtype
-        #   @return [String]
+        #   @return [::String]
         #     Contains an identifier for a subtype of recommendations produced for the
         #     same recommender. Subtype is a function of content and impact, meaning a
         #     new subtype might be added when significant changes to `content` or
@@ -42,52 +42,52 @@ module Google
         #       For recommender = "google.iam.policy.Recommender",
         #       recommender_subtype can be one of "REMOVE_ROLE"/"REPLACE_ROLE"
         # @!attribute [rw] last_refresh_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Last time this recommendation was refreshed by the system that created it
         #     in the first place.
         # @!attribute [rw] primary_impact
-        #   @return [Google::Cloud::Recommender::V1::Impact]
+        #   @return [::Google::Cloud::Recommender::V1::Impact]
         #     The primary impact that this recommendation can have while trying to
         #     optimize for one category.
         # @!attribute [rw] additional_impact
-        #   @return [Array<Google::Cloud::Recommender::V1::Impact>]
+        #   @return [::Array<::Google::Cloud::Recommender::V1::Impact>]
         #     Optional set of additional impact that this recommendation may have when
         #     trying to optimize for the primary category. These may be positive
         #     or negative.
         # @!attribute [rw] content
-        #   @return [Google::Cloud::Recommender::V1::RecommendationContent]
+        #   @return [::Google::Cloud::Recommender::V1::RecommendationContent]
         #     Content of the recommendation describing recommended changes to resources.
         # @!attribute [rw] state_info
-        #   @return [Google::Cloud::Recommender::V1::RecommendationStateInfo]
+        #   @return [::Google::Cloud::Recommender::V1::RecommendationStateInfo]
         #     Information for state. Contains state and metadata.
         # @!attribute [rw] etag
-        #   @return [String]
+        #   @return [::String]
         #     Fingerprint of the Recommendation. Provides optimistic locking when
         #     updating states.
         class Recommendation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains what resources are changing and how they are changing.
         # @!attribute [rw] operation_groups
-        #   @return [Array<Google::Cloud::Recommender::V1::OperationGroup>]
+        #   @return [::Array<::Google::Cloud::Recommender::V1::OperationGroup>]
         #     Operations to one or more Google Cloud resources grouped in such a way
         #     that, all operations within one group are expected to be performed
         #     atomically and in an order.
         class RecommendationContent
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Group of operations that need to be performed atomically.
         # @!attribute [rw] operations
-        #   @return [Array<Google::Cloud::Recommender::V1::Operation>]
+        #   @return [::Array<::Google::Cloud::Recommender::V1::Operation>]
         #     List of operations across one or more resources that belong to this group.
         #     Loosely based on RFC6902 and should be performed in the order they appear.
         class OperationGroup
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains an operation for a resource loosely based on the JSON-PATCH format
@@ -100,45 +100,45 @@ module Google
         # * Allows extension to custom operations not natively supported by RFC6902.
         # See https://tools.ietf.org/html/rfc6902 for details on the original RFC.
         # @!attribute [rw] action
-        #   @return [String]
+        #   @return [::String]
         #     Type of this operation. Contains one of 'and', 'remove', 'replace', 'move',
         #     'copy', 'test' and custom operations. This field is case-insensitive and
         #     always populated.
         # @!attribute [rw] resource_type
-        #   @return [String]
+        #   @return [::String]
         #     Type of GCP resource being modified/tested. This field is always populated.
         #     Example: cloudresourcemanager.googleapis.com/Project,
         #     compute.googleapis.com/Instance
         # @!attribute [rw] resource
-        #   @return [String]
+        #   @return [::String]
         #     Contains the fully qualified resource name. This field is always populated.
         #     ex: //cloudresourcemanager.googleapis.com/projects/foo.
         # @!attribute [rw] path
-        #   @return [String]
+        #   @return [::String]
         #     Path to the target field being operated on. If the operation is at the
         #     resource level, then path should be "/". This field is always populated.
         # @!attribute [rw] source_resource
-        #   @return [String]
+        #   @return [::String]
         #     Can be set with action 'copy' to copy resource configuration across
         #     different resources of the same type. Example: A resource clone can be
         #     done via action = 'copy', path = "/", from = "/",
         #     source_resource = <source> and resource_name = <target>.
         #     This field is empty for all other values of `action`.
         # @!attribute [rw] source_path
-        #   @return [String]
+        #   @return [::String]
         #     Can be set with action 'copy' or 'move' to indicate the source field within
         #     resource or source_resource, ignored if provided for other operation types.
         # @!attribute [rw] value
-        #   @return [Google::Protobuf::Value]
+        #   @return [::Google::Protobuf::Value]
         #     Value for the `path` field. Will be set for actions:'add'/'replace'.
         #     Maybe set for action: 'test'. Either this or `value_matcher` will be set
         #     for 'test' operation. An exact match must be performed.
         # @!attribute [rw] value_matcher
-        #   @return [Google::Cloud::Recommender::V1::ValueMatcher]
+        #   @return [::Google::Cloud::Recommender::V1::ValueMatcher]
         #     Can be set for action 'test' for advanced matching for the value of
         #     'path' field. Either this or `value` will be set for 'test' operation.
         # @!attribute [rw] path_filters
-        #   @return [Google::Protobuf::Map{String => Google::Protobuf::Value}]
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
         #     Set of filters to apply if `path` refers to array elements or nested array
         #     elements in order to narrow down to a single unique element that is being
         #     tested/modified.
@@ -160,70 +160,70 @@ module Google
         #     When both path_filters and path_value_matchers are set, an implicit AND
         #     must be performed.
         # @!attribute [rw] path_value_matchers
-        #   @return [Google::Protobuf::Map{String => Google::Cloud::Recommender::V1::ValueMatcher}]
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Recommender::V1::ValueMatcher}]
         #     Similar to path_filters, this contains set of filters to apply if `path`
         #     field referes to array elements. This is meant to support value matching
         #     beyond exact match. To perform exact match, use path_filters.
         #     When both path_filters and path_value_matchers are set, an implicit AND
         #     must be performed.
         class Operation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [Google::Protobuf::Value]
+          #   @return [::Google::Protobuf::Value]
           class PathFiltersEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [Google::Cloud::Recommender::V1::ValueMatcher]
+          #   @return [::Google::Cloud::Recommender::V1::ValueMatcher]
           class PathValueMatchersEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Contains various matching options for values for a GCP resource field.
         # @!attribute [rw] matches_pattern
-        #   @return [String]
+        #   @return [::String]
         #     To be used for full regex matching. The regular expression is using the
         #     Google RE2 syntax (https://github.com/google/re2/wiki/Syntax), so to be
         #     used with RE2::FullMatch
         class ValueMatcher
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains metadata about how much money a recommendation can save or incur.
         # @!attribute [rw] cost
-        #   @return [Google::Type::Money]
+        #   @return [::Google::Type::Money]
         #     An approximate projection on amount saved or amount incurred. Negative cost
         #     units indicate cost savings and positive cost units indicate increase.
         #     See google.type.Money documentation for positive/negative units.
         # @!attribute [rw] duration
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     Duration for which this cost applies.
         class CostProjection
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains the impact a recommendation can have for a given category.
         # @!attribute [rw] category
-        #   @return [Google::Cloud::Recommender::V1::Impact::Category]
+        #   @return [::Google::Cloud::Recommender::V1::Impact::Category]
         #     Category that is being targeted.
         # @!attribute [rw] cost_projection
-        #   @return [Google::Cloud::Recommender::V1::CostProjection]
+        #   @return [::Google::Cloud::Recommender::V1::CostProjection]
         #     Use with CategoryType.COST
         class Impact
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The category of the impact.
           module Category
@@ -246,22 +246,22 @@ module Google
 
         # Information for state. Contains state and metadata.
         # @!attribute [rw] state
-        #   @return [Google::Cloud::Recommender::V1::RecommendationStateInfo::State]
+        #   @return [::Google::Cloud::Recommender::V1::RecommendationStateInfo::State]
         #     The state of the recommendation, Eg ACTIVE, SUCCEEDED, FAILED.
         # @!attribute [rw] state_metadata
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     A map of metadata for the state, provided by user or automations systems.
         class RecommendationStateInfo
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class StateMetadataEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Represents Recommendation State
