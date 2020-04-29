@@ -27,7 +27,7 @@ export ACCESS_APPROVAL_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/access_approval/v1"
 
-client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-access_approval-v1
 checks for credentials are configured on the service Credentials class (such as
-{Google::Cloud::AccessApproval::V1::AccessApproval::Credentials}):
+{::Google::Cloud::AccessApproval::V1::AccessApproval::Credentials}):
 
 1. `ACCESS_APPROVAL_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `ACCESS_APPROVAL_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/access_approval/v1"
 
 ENV["ACCESS_APPROVAL_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/access_approval/v1"
 
-client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
+client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/access_approval/v1"
 
-Google::Cloud::AccessApproval::V1::AccessApproval::Client.configure do |config|
+::Google::Cloud::AccessApproval::V1::AccessApproval::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
 ```
 
 ### Cloud SDK

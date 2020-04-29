@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/access_approval/v1"
 
-client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
 request = my_create_request
 response = client.list_approval_requests request
 ```

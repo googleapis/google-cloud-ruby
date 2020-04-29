@@ -23,7 +23,7 @@ require "google/cloud/accessapproval/v1/accessapproval_pb"
 require "google/cloud/accessapproval/v1/accessapproval_services_pb"
 require "google/cloud/access_approval/v1/access_approval"
 
-class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::Test
+class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
   def test_list_approval_requests
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AccessApproval::V1::ListApprovalRequestsResponse.new
+    grpc_response = ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -61,7 +61,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
     list_approval_requests_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_approval_requests, name
-      assert_kind_of Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage, request
+      assert_kind_of ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.filter
       assert_equal 42, request.page_size
@@ -71,7 +71,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_approval_requests_client_stub do
       # Create client
-      client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
+      client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -90,7 +90,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.list_approval_requests Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_approval_requests ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -104,7 +104,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_approval_requests Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_approval_requests ::Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -117,7 +117,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
   def test_get_approval_request
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AccessApproval::V1::ApprovalRequest.new
+    grpc_response = ::Google::Cloud::AccessApproval::V1::ApprovalRequest.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -127,14 +127,14 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
     get_approval_request_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_approval_request, name
-      assert_kind_of Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage, request
+      assert_kind_of ::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_approval_request_client_stub do
       # Create client
-      client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
+      client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -151,7 +151,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.get_approval_request Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new(name: name) do |response, operation|
+      client.get_approval_request ::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -163,7 +163,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_approval_request Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new(name: name), grpc_options do |response, operation|
+      client.get_approval_request ::Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -175,7 +175,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
   def test_approve_approval_request
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AccessApproval::V1::ApprovalRequest.new
+    grpc_response = ::Google::Cloud::AccessApproval::V1::ApprovalRequest.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -186,15 +186,15 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
     approve_approval_request_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :approve_approval_request, name
-      assert_kind_of Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage, request
+      assert_kind_of ::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Timestamp), request.expire_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.expire_time
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, approve_approval_request_client_stub do
       # Create client
-      client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
+      client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -211,7 +211,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.approve_approval_request Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new(name: name, expire_time: expire_time) do |response, operation|
+      client.approve_approval_request ::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new(name: name, expire_time: expire_time) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -223,7 +223,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.approve_approval_request Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new(name: name, expire_time: expire_time), grpc_options do |response, operation|
+      client.approve_approval_request ::Google::Cloud::AccessApproval::V1::ApproveApprovalRequestMessage.new(name: name, expire_time: expire_time), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -235,7 +235,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
   def test_dismiss_approval_request
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AccessApproval::V1::ApprovalRequest.new
+    grpc_response = ::Google::Cloud::AccessApproval::V1::ApprovalRequest.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -245,14 +245,14 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
     dismiss_approval_request_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :dismiss_approval_request, name
-      assert_kind_of Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage, request
+      assert_kind_of ::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, dismiss_approval_request_client_stub do
       # Create client
-      client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
+      client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -269,7 +269,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.dismiss_approval_request Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new(name: name) do |response, operation|
+      client.dismiss_approval_request ::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -281,7 +281,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.dismiss_approval_request Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new(name: name), grpc_options do |response, operation|
+      client.dismiss_approval_request ::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -293,7 +293,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
   def test_get_access_approval_settings
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AccessApproval::V1::AccessApprovalSettings.new
+    grpc_response = ::Google::Cloud::AccessApproval::V1::AccessApprovalSettings.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -303,14 +303,14 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
     get_access_approval_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_access_approval_settings, name
-      assert_kind_of Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage, request
+      assert_kind_of ::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_access_approval_settings_client_stub do
       # Create client
-      client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
+      client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -327,7 +327,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.get_access_approval_settings Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new(name: name) do |response, operation|
+      client.get_access_approval_settings ::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -339,7 +339,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_access_approval_settings Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new(name: name), grpc_options do |response, operation|
+      client.get_access_approval_settings ::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -351,7 +351,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
   def test_update_access_approval_settings
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AccessApproval::V1::AccessApprovalSettings.new
+    grpc_response = ::Google::Cloud::AccessApproval::V1::AccessApprovalSettings.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -362,15 +362,15 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
     update_access_approval_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_access_approval_settings, name
-      assert_kind_of Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AccessApproval::V1::AccessApprovalSettings), request.settings
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AccessApproval::V1::AccessApprovalSettings), request.settings
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_access_approval_settings_client_stub do
       # Create client
-      client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
+      client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -387,7 +387,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.update_access_approval_settings Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new(settings: settings, update_mask: update_mask) do |response, operation|
+      client.update_access_approval_settings ::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new(settings: settings, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -399,7 +399,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_access_approval_settings Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new(settings: settings, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_access_approval_settings ::Google::Cloud::AccessApproval::V1::UpdateAccessApprovalSettingsMessage.new(settings: settings, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -411,7 +411,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
   def test_delete_access_approval_settings
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -421,14 +421,14 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
     delete_access_approval_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_access_approval_settings, name
-      assert_kind_of Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage, request
+      assert_kind_of ::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_access_approval_settings_client_stub do
       # Create client
-      client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
+      client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -445,7 +445,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.delete_access_approval_settings Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new(name: name) do |response, operation|
+      client.delete_access_approval_settings ::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -457,7 +457,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.delete_access_approval_settings Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new(name: name), grpc_options do |response, operation|
+      client.delete_access_approval_settings ::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -472,7 +472,7 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
+      client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -482,6 +482,6 @@ class Google::Cloud::AccessApproval::V1::AccessApproval::ClientTest < Minitest::
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::AccessApproval::V1::AccessApproval::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::AccessApproval::V1::AccessApproval::Client::Configuration, config
   end
 end
