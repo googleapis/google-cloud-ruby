@@ -27,7 +27,7 @@ export CONTAINER_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/container/v1beta1"
 
-client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-container-v1beta1
 checks for credentials are configured on the service Credentials class (such as
-{Google::Cloud::Container::V1beta1::ClusterManager::Credentials}):
+{::Google::Cloud::Container::V1beta1::ClusterManager::Credentials}):
 
 1. `CONTAINER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `CONTAINER_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/container/v1beta1"
 
 ENV["CONTAINER_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/container/v1beta1"
 
-client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
+client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/container/v1beta1"
 
-Google::Cloud::Container::V1beta1::ClusterManager::Client.configure do |config|
+::Google::Cloud::Container::V1beta1::ClusterManager::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new
 ```
 
 ### Cloud SDK

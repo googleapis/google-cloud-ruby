@@ -26,7 +26,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/container/v1beta1"
-      #     client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+      #     client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new
       #
       module V1beta1
       end
