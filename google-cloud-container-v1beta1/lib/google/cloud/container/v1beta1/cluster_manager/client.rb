@@ -36,15 +36,15 @@ module Google
             ##
             # Configure the ClusterManager Client class.
             #
-            # See {Google::Cloud::Container::V1beta1::ClusterManager::Client::Configuration}
+            # See {::Google::Cloud::Container::V1beta1::ClusterManager::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all ClusterManager clients:
             #
-            #     Google::Cloud::Container::V1beta1::ClusterManager::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Container::V1beta1::ClusterManager::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -206,7 +206,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Container::V1beta1::ClusterManager::Client::Configuration}
+            # See {::Google::Cloud::Container::V1beta1::ClusterManager::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -227,13 +227,13 @@ module Google
             # To create a new ClusterManager client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #     client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new
             #
             # To create a new ClusterManager client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the ClusterManager client.
@@ -260,8 +260,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @cluster_manager_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Container::V1beta1::ClusterManager::Stub,
+              @cluster_manager_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Container::V1beta1::ClusterManager::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -277,12 +277,12 @@ module Google
             #
             # @overload list_clusters(request, options = nil)
             #   Pass arguments to `list_clusters` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::ListClustersRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::ListClustersRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::ListClustersRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::ListClustersRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_clusters(project_id: nil, zone: nil, parent: nil)
@@ -290,41 +290,41 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the parent field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides, or "-" for all zones.
             #     This field has been deprecated and replaced by the parent field.
-            #   @param parent [String]
+            #   @param parent [::String]
             #     The parent (project and location) where the clusters will be listed.
             #     Specified in the format `projects/*/locations/*`.
             #     Location "-" matches all zones and all regions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::ListClustersResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::ListClustersResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::ListClustersResponse]
+            # @return [::Google::Cloud::Container::V1beta1::ListClustersResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_clusters request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::ListClustersRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::ListClustersRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_clusters.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -345,8 +345,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -354,12 +354,12 @@ module Google
             #
             # @overload get_cluster(request, options = nil)
             #   Pass arguments to `get_cluster` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::GetClusterRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::GetClusterRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::GetClusterRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::GetClusterRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_cluster(project_id: nil, zone: nil, cluster_id: nil, name: nil)
@@ -367,43 +367,43 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to retrieve.
             #     This field has been deprecated and replaced by the name field.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to retrieve.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Cluster]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Cluster]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Cluster]
+            # @return [::Google::Cloud::Container::V1beta1::Cluster]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_cluster request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::GetClusterRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::GetClusterRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_cluster.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -424,8 +424,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -445,12 +445,12 @@ module Google
             #
             # @overload create_cluster(request, options = nil)
             #   Pass arguments to `create_cluster` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::CreateClusterRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::CreateClusterRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::CreateClusterRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::CreateClusterRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_cluster(project_id: nil, zone: nil, cluster: nil, parent: nil)
@@ -458,43 +458,43 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the parent field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the parent field.
-            #   @param cluster [Google::Cloud::Container::V1beta1::Cluster, Hash]
+            #   @param cluster [::Google::Cloud::Container::V1beta1::Cluster, ::Hash]
             #     Required. A [cluster
             #     resource](https://cloud.google.com/container-engine/reference/rest/v1beta1/projects.zones.clusters)
-            #   @param parent [String]
+            #   @param parent [::String]
             #     The parent (project and location) where the cluster will be created.
             #     Specified in the format `projects/*/locations/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_cluster request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::CreateClusterRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::CreateClusterRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_cluster.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -515,8 +515,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -524,12 +524,12 @@ module Google
             #
             # @overload update_cluster(request, options = nil)
             #   Pass arguments to `update_cluster` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::UpdateClusterRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::UpdateClusterRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::UpdateClusterRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::UpdateClusterRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_cluster(project_id: nil, zone: nil, cluster_id: nil, update: nil, name: nil)
@@ -537,45 +537,45 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param update [Google::Cloud::Container::V1beta1::ClusterUpdate, Hash]
+            #   @param update [::Google::Cloud::Container::V1beta1::ClusterUpdate, ::Hash]
             #     Required. A description of the update.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to update.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_cluster request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::UpdateClusterRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::UpdateClusterRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_cluster.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -596,8 +596,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -605,12 +605,12 @@ module Google
             #
             # @overload update_node_pool(request, options = nil)
             #   Pass arguments to `update_node_pool` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::UpdateNodePoolRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::UpdateNodePoolRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, workload_metadata_config: nil, name: nil)
@@ -618,22 +618,22 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param node_pool_id [String]
+            #   @param node_pool_id [::String]
             #     Required. Deprecated. The name of the node pool to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param node_version [String]
+            #   @param node_version [::String]
             #     Required. The Kubernetes version to change the nodes to (typically an
             #     upgrade).
             #
@@ -645,36 +645,36 @@ module Google
             #     - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
             #     - "1.X.Y-gke.N": picks an explicit Kubernetes version
             #     - "-": picks the Kubernetes master version
-            #   @param image_type [String]
+            #   @param image_type [::String]
             #     Required. The desired image type for the node pool.
-            #   @param workload_metadata_config [Google::Cloud::Container::V1beta1::WorkloadMetadataConfig, Hash]
+            #   @param workload_metadata_config [::Google::Cloud::Container::V1beta1::WorkloadMetadataConfig, ::Hash]
             #     The desired image type for the node pool.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster, node pool) of the node pool to
             #     update. Specified in the format
             #     `projects/*/locations/*/clusters/*/nodePools/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_node_pool request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::UpdateNodePoolRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_node_pool.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -695,8 +695,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -704,12 +704,12 @@ module Google
             #
             # @overload set_node_pool_autoscaling(request, options = nil)
             #   Pass arguments to `set_node_pool_autoscaling` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetNodePoolAutoscalingRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetNodePoolAutoscalingRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetNodePoolAutoscalingRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetNodePoolAutoscalingRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_node_pool_autoscaling(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, autoscaling: nil, name: nil)
@@ -717,49 +717,49 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param node_pool_id [String]
+            #   @param node_pool_id [::String]
             #     Required. Deprecated. The name of the node pool to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param autoscaling [Google::Cloud::Container::V1beta1::NodePoolAutoscaling, Hash]
+            #   @param autoscaling [::Google::Cloud::Container::V1beta1::NodePoolAutoscaling, ::Hash]
             #     Required. Autoscaling configuration for the node pool.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster, node pool) of the node pool to set
             #     autoscaler settings. Specified in the format
             #     `projects/*/locations/*/clusters/*/nodePools/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_node_pool_autoscaling request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetNodePoolAutoscalingRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetNodePoolAutoscalingRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_node_pool_autoscaling.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -780,8 +780,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -789,12 +789,12 @@ module Google
             #
             # @overload set_logging_service(request, options = nil)
             #   Pass arguments to `set_logging_service` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetLoggingServiceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetLoggingServiceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetLoggingServiceRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetLoggingServiceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_logging_service(project_id: nil, zone: nil, cluster_id: nil, logging_service: nil, name: nil)
@@ -802,49 +802,49 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param logging_service [String]
+            #   @param logging_service [::String]
             #     Required. The logging service the cluster should use to write metrics.
             #     Currently available options:
             #
             #     * "logging.googleapis.com" - the Google Cloud Logging service
             #     * "none" - no metrics will be exported from the cluster
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set logging.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_logging_service request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetLoggingServiceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetLoggingServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_logging_service.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -865,8 +865,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -874,12 +874,12 @@ module Google
             #
             # @overload set_monitoring_service(request, options = nil)
             #   Pass arguments to `set_monitoring_service` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetMonitoringServiceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetMonitoringServiceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetMonitoringServiceRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetMonitoringServiceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_monitoring_service(project_id: nil, zone: nil, cluster_id: nil, monitoring_service: nil, name: nil)
@@ -887,49 +887,49 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param monitoring_service [String]
+            #   @param monitoring_service [::String]
             #     Required. The monitoring service the cluster should use to write metrics.
             #     Currently available options:
             #
             #     * "monitoring.googleapis.com" - the Google Cloud Monitoring service
             #     * "none" - no metrics will be exported from the cluster
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set monitoring.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_monitoring_service request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetMonitoringServiceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetMonitoringServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_monitoring_service.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -950,8 +950,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -959,12 +959,12 @@ module Google
             #
             # @overload set_addons_config(request, options = nil)
             #   Pass arguments to `set_addons_config` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetAddonsConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetAddonsConfigRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetAddonsConfigRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetAddonsConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_addons_config(project_id: nil, zone: nil, cluster_id: nil, addons_config: nil, name: nil)
@@ -972,46 +972,46 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param addons_config [Google::Cloud::Container::V1beta1::AddonsConfig, Hash]
+            #   @param addons_config [::Google::Cloud::Container::V1beta1::AddonsConfig, ::Hash]
             #     Required. The desired configurations for the various addons available to run in the
             #     cluster.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set addons.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_addons_config request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetAddonsConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetAddonsConfigRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_addons_config.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1032,8 +1032,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1041,12 +1041,12 @@ module Google
             #
             # @overload set_locations(request, options = nil)
             #   Pass arguments to `set_locations` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetLocationsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetLocationsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetLocationsRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetLocationsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_locations(project_id: nil, zone: nil, cluster_id: nil, locations: nil, name: nil)
@@ -1054,19 +1054,19 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param locations [Array<String>]
+            #   @param locations [::Array<::String>]
             #     Required. The desired list of Google Compute Engine
             #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the cluster's nodes
             #     should be located. Changing the locations a cluster is in will result
@@ -1074,31 +1074,31 @@ module Google
             #     whether locations are being added or removed.
             #
             #     This list must always include the cluster's primary zone.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set locations.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_locations request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetLocationsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetLocationsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_locations.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1119,8 +1119,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1128,12 +1128,12 @@ module Google
             #
             # @overload update_master(request, options = nil)
             #   Pass arguments to `update_master` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::UpdateMasterRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::UpdateMasterRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::UpdateMasterRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::UpdateMasterRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_master(project_id: nil, zone: nil, cluster_id: nil, master_version: nil, name: nil)
@@ -1141,19 +1141,19 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param master_version [String]
+            #   @param master_version [::String]
             #     Required. The Kubernetes version to change the master to.
             #
             #     Users may specify either explicit versions offered by
@@ -1164,31 +1164,31 @@ module Google
             #     - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version
             #     - "1.X.Y-gke.N": picks an explicit Kubernetes version
             #     - "-": picks the default Kubernetes version
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to update.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_master request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::UpdateMasterRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::UpdateMasterRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_master.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1209,8 +1209,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1220,12 +1220,12 @@ module Google
             #
             # @overload set_master_auth(request, options = nil)
             #   Pass arguments to `set_master_auth` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetMasterAuthRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetMasterAuthRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetMasterAuthRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetMasterAuthRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_master_auth(project_id: nil, zone: nil, cluster_id: nil, action: nil, update: nil, name: nil)
@@ -1233,47 +1233,47 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
-            #   @param action [Google::Cloud::Container::V1beta1::SetMasterAuthRequest::Action]
+            #   @param action [::Google::Cloud::Container::V1beta1::SetMasterAuthRequest::Action]
             #     Required. The exact form of action to be taken on the master auth.
-            #   @param update [Google::Cloud::Container::V1beta1::MasterAuth, Hash]
+            #   @param update [::Google::Cloud::Container::V1beta1::MasterAuth, ::Hash]
             #     Required. A description of the update.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set auth.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_master_auth request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetMasterAuthRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetMasterAuthRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_master_auth.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1294,8 +1294,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1311,12 +1311,12 @@ module Google
             #
             # @overload delete_cluster(request, options = nil)
             #   Pass arguments to `delete_cluster` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::DeleteClusterRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::DeleteClusterRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::DeleteClusterRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::DeleteClusterRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_cluster(project_id: nil, zone: nil, cluster_id: nil, name: nil)
@@ -1324,43 +1324,43 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to delete.
             #     This field has been deprecated and replaced by the name field.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to delete.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_cluster request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::DeleteClusterRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::DeleteClusterRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_cluster.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1381,8 +1381,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1390,12 +1390,12 @@ module Google
             #
             # @overload list_operations(request, options = nil)
             #   Pass arguments to `list_operations` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::ListOperationsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::ListOperationsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::ListOperationsRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::ListOperationsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_operations(project_id: nil, zone: nil, parent: nil)
@@ -1403,40 +1403,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the parent field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for, or `-` for
             #     all zones. This field has been deprecated and replaced by the parent field.
-            #   @param parent [String]
+            #   @param parent [::String]
             #     The parent (project and location) where the operations will be listed.
             #     Specified in the format `projects/*/locations/*`.
             #     Location "-" matches all zones and all regions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::ListOperationsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::ListOperationsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::ListOperationsResponse]
+            # @return [::Google::Cloud::Container::V1beta1::ListOperationsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_operations request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::ListOperationsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::ListOperationsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_operations.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1457,8 +1457,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1466,12 +1466,12 @@ module Google
             #
             # @overload get_operation(request, options = nil)
             #   Pass arguments to `get_operation` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::GetOperationRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::GetOperationRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::GetOperationRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::GetOperationRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_operation(project_id: nil, zone: nil, operation_id: nil, name: nil)
@@ -1479,43 +1479,43 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param operation_id [String]
+            #   @param operation_id [::String]
             #     Required. Deprecated. The server-assigned `name` of the operation.
             #     This field has been deprecated and replaced by the name field.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, operation id) of the operation to get.
             #     Specified in the format `projects/*/locations/*/operations/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_operation request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::GetOperationRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::GetOperationRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_operation.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1536,8 +1536,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1545,12 +1545,12 @@ module Google
             #
             # @overload cancel_operation(request, options = nil)
             #   Pass arguments to `cancel_operation` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::CancelOperationRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::CancelOperationRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::CancelOperationRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::CancelOperationRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload cancel_operation(project_id: nil, zone: nil, operation_id: nil, name: nil)
@@ -1558,42 +1558,42 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param operation_id [String]
+            #   @param operation_id [::String]
             #     Required. Deprecated. The server-assigned `name` of the operation.
             #     This field has been deprecated and replaced by the name field.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, operation id) of the operation to cancel.
             #     Specified in the format `projects/*/locations/*/operations/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def cancel_operation request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::CancelOperationRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::CancelOperationRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.cancel_operation.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1614,8 +1614,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1623,12 +1623,12 @@ module Google
             #
             # @overload get_server_config(request, options = nil)
             #   Pass arguments to `get_server_config` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::GetServerConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::GetServerConfigRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::GetServerConfigRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::GetServerConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_server_config(project_id: nil, zone: nil, name: nil)
@@ -1636,39 +1636,39 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) to return operations for.
             #     This field has been deprecated and replaced by the name field.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project and location) of the server config to get,
             #     specified in the format `projects/*/locations/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::ServerConfig]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::ServerConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::ServerConfig]
+            # @return [::Google::Cloud::Container::V1beta1::ServerConfig]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_server_config request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::GetServerConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::GetServerConfigRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_server_config.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1689,8 +1689,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1698,12 +1698,12 @@ module Google
             #
             # @overload list_node_pools(request, options = nil)
             #   Pass arguments to `list_node_pools` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::ListNodePoolsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::ListNodePoolsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::ListNodePoolsRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::ListNodePoolsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_node_pools(project_id: nil, zone: nil, cluster_id: nil, parent: nil)
@@ -1711,43 +1711,43 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://developers.google.com/console/help/new/#projectnumber).
             #     This field has been deprecated and replaced by the parent field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the parent field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the parent field.
-            #   @param parent [String]
+            #   @param parent [::String]
             #     The parent (project, location, cluster id) where the node pools will be
             #     listed. Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::ListNodePoolsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::ListNodePoolsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::ListNodePoolsResponse]
+            # @return [::Google::Cloud::Container::V1beta1::ListNodePoolsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_node_pools request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::ListNodePoolsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::ListNodePoolsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_node_pools.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1768,8 +1768,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1777,12 +1777,12 @@ module Google
             #
             # @overload get_node_pool(request, options = nil)
             #   Pass arguments to `get_node_pool` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::GetNodePoolRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::GetNodePoolRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::GetNodePoolRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::GetNodePoolRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, name: nil)
@@ -1790,47 +1790,47 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://developers.google.com/console/help/new/#projectnumber).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
-            #   @param node_pool_id [String]
+            #   @param node_pool_id [::String]
             #     Required. Deprecated. The name of the node pool.
             #     This field has been deprecated and replaced by the name field.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster, node pool id) of the node pool to
             #     get. Specified in the format
             #     `projects/*/locations/*/clusters/*/nodePools/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::NodePool]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::NodePool]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::NodePool]
+            # @return [::Google::Cloud::Container::V1beta1::NodePool]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_node_pool request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::GetNodePoolRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::GetNodePoolRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_node_pool.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1851,8 +1851,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1860,12 +1860,12 @@ module Google
             #
             # @overload create_node_pool(request, options = nil)
             #   Pass arguments to `create_node_pool` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::CreateNodePoolRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::CreateNodePoolRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::CreateNodePoolRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::CreateNodePoolRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool: nil, parent: nil)
@@ -1873,46 +1873,46 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://developers.google.com/console/help/new/#projectnumber).
             #     This field has been deprecated and replaced by the parent field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the parent field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the parent field.
-            #   @param node_pool [Google::Cloud::Container::V1beta1::NodePool, Hash]
+            #   @param node_pool [::Google::Cloud::Container::V1beta1::NodePool, ::Hash]
             #     Required. The node pool to create.
-            #   @param parent [String]
+            #   @param parent [::String]
             #     The parent (project, location, cluster id) where the node pool will be
             #     created. Specified in the format
             #     `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_node_pool request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::CreateNodePoolRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::CreateNodePoolRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_node_pool.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1933,8 +1933,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1942,12 +1942,12 @@ module Google
             #
             # @overload delete_node_pool(request, options = nil)
             #   Pass arguments to `delete_node_pool` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::DeleteNodePoolRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::DeleteNodePoolRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::DeleteNodePoolRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::DeleteNodePoolRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, name: nil)
@@ -1955,47 +1955,47 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://developers.google.com/console/help/new/#projectnumber).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
-            #   @param node_pool_id [String]
+            #   @param node_pool_id [::String]
             #     Required. Deprecated. The name of the node pool to delete.
             #     This field has been deprecated and replaced by the name field.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster, node pool id) of the node pool to
             #     delete. Specified in the format
             #     `projects/*/locations/*/clusters/*/nodePools/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_node_pool request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::DeleteNodePoolRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::DeleteNodePoolRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_node_pool.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2016,8 +2016,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2026,12 +2026,12 @@ module Google
             #
             # @overload rollback_node_pool_upgrade(request, options = nil)
             #   Pass arguments to `rollback_node_pool_upgrade` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload rollback_node_pool_upgrade(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, name: nil)
@@ -2039,47 +2039,47 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to rollback.
             #     This field has been deprecated and replaced by the name field.
-            #   @param node_pool_id [String]
+            #   @param node_pool_id [::String]
             #     Required. Deprecated. The name of the node pool to rollback.
             #     This field has been deprecated and replaced by the name field.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster, node pool id) of the node poll to
             #     rollback upgrade.
             #     Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def rollback_node_pool_upgrade request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.rollback_node_pool_upgrade.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2100,8 +2100,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2109,12 +2109,12 @@ module Google
             #
             # @overload set_node_pool_management(request, options = nil)
             #   Pass arguments to `set_node_pool_management` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetNodePoolManagementRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetNodePoolManagementRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetNodePoolManagementRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetNodePoolManagementRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_node_pool_management(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, management: nil, name: nil)
@@ -2122,49 +2122,49 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to update.
             #     This field has been deprecated and replaced by the name field.
-            #   @param node_pool_id [String]
+            #   @param node_pool_id [::String]
             #     Required. Deprecated. The name of the node pool to update.
             #     This field has been deprecated and replaced by the name field.
-            #   @param management [Google::Cloud::Container::V1beta1::NodeManagement, Hash]
+            #   @param management [::Google::Cloud::Container::V1beta1::NodeManagement, ::Hash]
             #     Required. NodeManagement configuration for the node pool.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster, node pool id) of the node pool to set
             #     management properties. Specified in the format
             #     `projects/*/locations/*/clusters/*/nodePools/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_node_pool_management request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetNodePoolManagementRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetNodePoolManagementRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_node_pool_management.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2185,8 +2185,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2194,12 +2194,12 @@ module Google
             #
             # @overload set_labels(request, options = nil)
             #   Pass arguments to `set_labels` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetLabelsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetLabelsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetLabelsRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetLabelsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_labels(project_id: nil, zone: nil, cluster_id: nil, resource_labels: nil, label_fingerprint: nil, name: nil)
@@ -2207,52 +2207,52 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://developers.google.com/console/help/new/#projectnumber).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
-            #   @param resource_labels [Hash{String => String}]
+            #   @param resource_labels [::Hash{::String => ::String}]
             #     Required. The labels to set for that cluster.
-            #   @param label_fingerprint [String]
+            #   @param label_fingerprint [::String]
             #     Required. The fingerprint of the previous set of labels for this resource,
             #     used to detect conflicts. The fingerprint is initially generated by
             #     Kubernetes Engine and changes after every request to modify or update
             #     labels. You must always provide an up-to-date fingerprint hash when
             #     updating or changing labels. Make a <code>get()</code> request to the
             #     resource to get the latest fingerprint.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster id) of the cluster to set labels.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_labels request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetLabelsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetLabelsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_labels.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2273,8 +2273,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2282,12 +2282,12 @@ module Google
             #
             # @overload set_legacy_abac(request, options = nil)
             #   Pass arguments to `set_legacy_abac` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetLegacyAbacRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetLegacyAbacRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetLegacyAbacRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetLegacyAbacRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_legacy_abac(project_id: nil, zone: nil, cluster_id: nil, enabled: nil, name: nil)
@@ -2295,45 +2295,45 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to update.
             #     This field has been deprecated and replaced by the name field.
-            #   @param enabled [Boolean]
+            #   @param enabled [::Boolean]
             #     Required. Whether ABAC authorization will be enabled in the cluster.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster id) of the cluster to set legacy abac.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_legacy_abac request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetLegacyAbacRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetLegacyAbacRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_legacy_abac.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2354,8 +2354,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2363,12 +2363,12 @@ module Google
             #
             # @overload start_ip_rotation(request, options = nil)
             #   Pass arguments to `start_ip_rotation` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::StartIPRotationRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::StartIPRotationRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::StartIPRotationRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::StartIPRotationRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload start_ip_rotation(project_id: nil, zone: nil, cluster_id: nil, name: nil, rotate_credentials: nil)
@@ -2376,45 +2376,45 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://developers.google.com/console/help/new/#projectnumber).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster id) of the cluster to start IP
             #     rotation. Specified in the format `projects/*/locations/*/clusters/*`.
-            #   @param rotate_credentials [Boolean]
+            #   @param rotate_credentials [::Boolean]
             #     Whether to rotate credentials during IP rotation.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def start_ip_rotation request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::StartIPRotationRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::StartIPRotationRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.start_ip_rotation.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2435,8 +2435,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2444,12 +2444,12 @@ module Google
             #
             # @overload complete_ip_rotation(request, options = nil)
             #   Pass arguments to `complete_ip_rotation` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::CompleteIPRotationRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::CompleteIPRotationRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::CompleteIPRotationRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::CompleteIPRotationRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload complete_ip_rotation(project_id: nil, zone: nil, cluster_id: nil, name: nil)
@@ -2457,43 +2457,43 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://developers.google.com/console/help/new/#projectnumber).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster id) of the cluster to complete IP
             #     rotation. Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def complete_ip_rotation request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::CompleteIPRotationRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::CompleteIPRotationRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.complete_ip_rotation.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2514,8 +2514,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2523,12 +2523,12 @@ module Google
             #
             # @overload set_node_pool_size(request, options = nil)
             #   Pass arguments to `set_node_pool_size` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetNodePoolSizeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetNodePoolSizeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetNodePoolSizeRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetNodePoolSizeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_node_pool_size(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_count: nil, name: nil)
@@ -2536,49 +2536,49 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster to update.
             #     This field has been deprecated and replaced by the name field.
-            #   @param node_pool_id [String]
+            #   @param node_pool_id [::String]
             #     Required. Deprecated. The name of the node pool to update.
             #     This field has been deprecated and replaced by the name field.
-            #   @param node_count [Integer]
+            #   @param node_count [::Integer]
             #     Required. The desired node count for the pool.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster, node pool id) of the node pool to set
             #     size.
             #     Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_node_pool_size request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetNodePoolSizeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetNodePoolSizeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_node_pool_size.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2599,8 +2599,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2608,12 +2608,12 @@ module Google
             #
             # @overload set_network_policy(request, options = nil)
             #   Pass arguments to `set_network_policy` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetNetworkPolicyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetNetworkPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetNetworkPolicyRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetNetworkPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_network_policy(project_id: nil, zone: nil, cluster_id: nil, network_policy: nil, name: nil)
@@ -2621,45 +2621,45 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. Deprecated. The Google Developers Console [project ID or project
             #     number](https://developers.google.com/console/help/new/#projectnumber).
             #     This field has been deprecated and replaced by the name field.
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. Deprecated. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
             #     This field has been deprecated and replaced by the name field.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
-            #   @param network_policy [Google::Cloud::Container::V1beta1::NetworkPolicy, Hash]
+            #   @param network_policy [::Google::Cloud::Container::V1beta1::NetworkPolicy, ::Hash]
             #     Required. Configuration options for the NetworkPolicy feature.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster id) of the cluster to set networking
             #     policy. Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_network_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetNetworkPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetNetworkPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_network_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2680,8 +2680,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2689,12 +2689,12 @@ module Google
             #
             # @overload set_maintenance_policy(request, options = nil)
             #   Pass arguments to `set_maintenance_policy` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::SetMaintenancePolicyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::SetMaintenancePolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::SetMaintenancePolicyRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::SetMaintenancePolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_maintenance_policy(project_id: nil, zone: nil, cluster_id: nil, maintenance_policy: nil, name: nil)
@@ -2702,44 +2702,44 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param project_id [String]
+            #   @param project_id [::String]
             #     Required. The Google Developers Console [project ID or project
             #     number](https://support.google.com/cloud/answer/6158840).
-            #   @param zone [String]
+            #   @param zone [::String]
             #     Required. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster
             #     resides.
-            #   @param cluster_id [String]
+            #   @param cluster_id [::String]
             #     Required. The name of the cluster to update.
-            #   @param maintenance_policy [Google::Cloud::Container::V1beta1::MaintenancePolicy, Hash]
+            #   @param maintenance_policy [::Google::Cloud::Container::V1beta1::MaintenancePolicy, ::Hash]
             #     Required. The maintenance policy to be set for the cluster. An empty field
             #     clears the existing maintenance policy.
-            #   @param name [String]
+            #   @param name [::String]
             #     The name (project, location, cluster id) of the cluster to set maintenance
             #     policy.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::Operation]
+            # @return [::Google::Cloud::Container::V1beta1::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_maintenance_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::SetMaintenancePolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::SetMaintenancePolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_maintenance_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2760,8 +2760,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2769,12 +2769,12 @@ module Google
             #
             # @overload list_usable_subnetworks(request, options = nil)
             #   Pass arguments to `list_usable_subnetworks` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::ListUsableSubnetworksRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::ListUsableSubnetworksRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::ListUsableSubnetworksRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::ListUsableSubnetworksRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_usable_subnetworks(parent: nil, filter: nil, page_size: nil, page_token: nil)
@@ -2782,44 +2782,44 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent project where subnetworks are usable.
             #     Specified in the format `projects/*`.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Filtering currently only supports equality on the networkProjectId and must
             #     be in the form: "networkProjectId=[PROJECTID]", where `networkProjectId`
             #     is the project which owns the listed subnetworks. This defaults to the
             #     parent project ID.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The max number of results per page that should be returned. If the number
             #     of available results is larger than `page_size`, a `next_page_token` is
             #     returned which can be used to get the next page of results in subsequent
             #     requests. Acceptable values are 0 to 500, inclusive. (Default: 500)
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Specifies a page token to use. Set this to the nextPageToken returned by
             #     previous list requests to get the next page of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Container::V1beta1::UsableSubnetwork>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Container::V1beta1::UsableSubnetwork>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Container::V1beta1::UsableSubnetwork>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Container::V1beta1::UsableSubnetwork>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_usable_subnetworks request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::ListUsableSubnetworksRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::ListUsableSubnetworksRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_usable_subnetworks.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2837,12 +2837,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :list_usable_subnetworks, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @cluster_manager_stub, :list_usable_subnetworks, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @cluster_manager_stub, :list_usable_subnetworks, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2850,12 +2850,12 @@ module Google
             #
             # @overload list_locations(request, options = nil)
             #   Pass arguments to `list_locations` via a request object, either of type
-            #   {Google::Cloud::Container::V1beta1::ListLocationsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Container::V1beta1::ListLocationsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Container::V1beta1::ListLocationsRequest, Hash]
+            #   @param request [::Google::Cloud::Container::V1beta1::ListLocationsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_locations(parent: nil)
@@ -2863,31 +2863,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Contains the name of the resource requested.
             #     Specified in the format `projects/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Container::V1beta1::ListLocationsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::ListLocationsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Container::V1beta1::ListLocationsResponse]
+            # @return [::Google::Cloud::Container::V1beta1::ListLocationsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_locations request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Container::V1beta1::ListLocationsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::ListLocationsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_locations.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2908,8 +2908,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2919,7 +2919,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Container::V1beta1::ClusterManager::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Container::V1beta1::ClusterManager::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -2930,22 +2930,22 @@ module Google
             # To modify the global config, setting the timeout for list_clusters
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Container::V1beta1::ClusterManager::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_clusters.timeout = 20_000
+            #     ::Google::Cloud::Container::V1beta1::ClusterManager::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_clusters.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_clusters.timeout = 20_000
+            #     client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_clusters.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"container.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -2957,29 +2957,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -2987,10 +2987,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "container.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -2998,14 +2998,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -3046,231 +3046,231 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_clusters`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_clusters
                 ##
                 # RPC-specific configuration for `get_cluster`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_cluster
                 ##
                 # RPC-specific configuration for `create_cluster`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_cluster
                 ##
                 # RPC-specific configuration for `update_cluster`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_cluster
                 ##
                 # RPC-specific configuration for `update_node_pool`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_node_pool
                 ##
                 # RPC-specific configuration for `set_node_pool_autoscaling`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_node_pool_autoscaling
                 ##
                 # RPC-specific configuration for `set_logging_service`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_logging_service
                 ##
                 # RPC-specific configuration for `set_monitoring_service`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_monitoring_service
                 ##
                 # RPC-specific configuration for `set_addons_config`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_addons_config
                 ##
                 # RPC-specific configuration for `set_locations`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_locations
                 ##
                 # RPC-specific configuration for `update_master`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_master
                 ##
                 # RPC-specific configuration for `set_master_auth`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_master_auth
                 ##
                 # RPC-specific configuration for `delete_cluster`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_cluster
                 ##
                 # RPC-specific configuration for `list_operations`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_operations
                 ##
                 # RPC-specific configuration for `get_operation`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_operation
                 ##
                 # RPC-specific configuration for `cancel_operation`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :cancel_operation
                 ##
                 # RPC-specific configuration for `get_server_config`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_server_config
                 ##
                 # RPC-specific configuration for `list_node_pools`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_node_pools
                 ##
                 # RPC-specific configuration for `get_node_pool`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_node_pool
                 ##
                 # RPC-specific configuration for `create_node_pool`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_node_pool
                 ##
                 # RPC-specific configuration for `delete_node_pool`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_node_pool
                 ##
                 # RPC-specific configuration for `rollback_node_pool_upgrade`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :rollback_node_pool_upgrade
                 ##
                 # RPC-specific configuration for `set_node_pool_management`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_node_pool_management
                 ##
                 # RPC-specific configuration for `set_labels`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_labels
                 ##
                 # RPC-specific configuration for `set_legacy_abac`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_legacy_abac
                 ##
                 # RPC-specific configuration for `start_ip_rotation`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :start_ip_rotation
                 ##
                 # RPC-specific configuration for `complete_ip_rotation`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :complete_ip_rotation
                 ##
                 # RPC-specific configuration for `set_node_pool_size`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_node_pool_size
                 ##
                 # RPC-specific configuration for `set_network_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_network_policy
                 ##
                 # RPC-specific configuration for `set_maintenance_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_maintenance_policy
                 ##
                 # RPC-specific configuration for `list_usable_subnetworks`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_usable_subnetworks
                 ##
                 # RPC-specific configuration for `list_locations`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_locations
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_clusters_config = parent_rpcs&.list_clusters if parent_rpcs&.respond_to? :list_clusters
-                  @list_clusters = Gapic::Config::Method.new list_clusters_config
+                  @list_clusters = ::Gapic::Config::Method.new list_clusters_config
                   get_cluster_config = parent_rpcs&.get_cluster if parent_rpcs&.respond_to? :get_cluster
-                  @get_cluster = Gapic::Config::Method.new get_cluster_config
+                  @get_cluster = ::Gapic::Config::Method.new get_cluster_config
                   create_cluster_config = parent_rpcs&.create_cluster if parent_rpcs&.respond_to? :create_cluster
-                  @create_cluster = Gapic::Config::Method.new create_cluster_config
+                  @create_cluster = ::Gapic::Config::Method.new create_cluster_config
                   update_cluster_config = parent_rpcs&.update_cluster if parent_rpcs&.respond_to? :update_cluster
-                  @update_cluster = Gapic::Config::Method.new update_cluster_config
+                  @update_cluster = ::Gapic::Config::Method.new update_cluster_config
                   update_node_pool_config = parent_rpcs&.update_node_pool if parent_rpcs&.respond_to? :update_node_pool
-                  @update_node_pool = Gapic::Config::Method.new update_node_pool_config
+                  @update_node_pool = ::Gapic::Config::Method.new update_node_pool_config
                   set_node_pool_autoscaling_config = parent_rpcs&.set_node_pool_autoscaling if parent_rpcs&.respond_to? :set_node_pool_autoscaling
-                  @set_node_pool_autoscaling = Gapic::Config::Method.new set_node_pool_autoscaling_config
+                  @set_node_pool_autoscaling = ::Gapic::Config::Method.new set_node_pool_autoscaling_config
                   set_logging_service_config = parent_rpcs&.set_logging_service if parent_rpcs&.respond_to? :set_logging_service
-                  @set_logging_service = Gapic::Config::Method.new set_logging_service_config
+                  @set_logging_service = ::Gapic::Config::Method.new set_logging_service_config
                   set_monitoring_service_config = parent_rpcs&.set_monitoring_service if parent_rpcs&.respond_to? :set_monitoring_service
-                  @set_monitoring_service = Gapic::Config::Method.new set_monitoring_service_config
+                  @set_monitoring_service = ::Gapic::Config::Method.new set_monitoring_service_config
                   set_addons_config_config = parent_rpcs&.set_addons_config if parent_rpcs&.respond_to? :set_addons_config
-                  @set_addons_config = Gapic::Config::Method.new set_addons_config_config
+                  @set_addons_config = ::Gapic::Config::Method.new set_addons_config_config
                   set_locations_config = parent_rpcs&.set_locations if parent_rpcs&.respond_to? :set_locations
-                  @set_locations = Gapic::Config::Method.new set_locations_config
+                  @set_locations = ::Gapic::Config::Method.new set_locations_config
                   update_master_config = parent_rpcs&.update_master if parent_rpcs&.respond_to? :update_master
-                  @update_master = Gapic::Config::Method.new update_master_config
+                  @update_master = ::Gapic::Config::Method.new update_master_config
                   set_master_auth_config = parent_rpcs&.set_master_auth if parent_rpcs&.respond_to? :set_master_auth
-                  @set_master_auth = Gapic::Config::Method.new set_master_auth_config
+                  @set_master_auth = ::Gapic::Config::Method.new set_master_auth_config
                   delete_cluster_config = parent_rpcs&.delete_cluster if parent_rpcs&.respond_to? :delete_cluster
-                  @delete_cluster = Gapic::Config::Method.new delete_cluster_config
+                  @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
                   list_operations_config = parent_rpcs&.list_operations if parent_rpcs&.respond_to? :list_operations
-                  @list_operations = Gapic::Config::Method.new list_operations_config
+                  @list_operations = ::Gapic::Config::Method.new list_operations_config
                   get_operation_config = parent_rpcs&.get_operation if parent_rpcs&.respond_to? :get_operation
-                  @get_operation = Gapic::Config::Method.new get_operation_config
+                  @get_operation = ::Gapic::Config::Method.new get_operation_config
                   cancel_operation_config = parent_rpcs&.cancel_operation if parent_rpcs&.respond_to? :cancel_operation
-                  @cancel_operation = Gapic::Config::Method.new cancel_operation_config
+                  @cancel_operation = ::Gapic::Config::Method.new cancel_operation_config
                   get_server_config_config = parent_rpcs&.get_server_config if parent_rpcs&.respond_to? :get_server_config
-                  @get_server_config = Gapic::Config::Method.new get_server_config_config
+                  @get_server_config = ::Gapic::Config::Method.new get_server_config_config
                   list_node_pools_config = parent_rpcs&.list_node_pools if parent_rpcs&.respond_to? :list_node_pools
-                  @list_node_pools = Gapic::Config::Method.new list_node_pools_config
+                  @list_node_pools = ::Gapic::Config::Method.new list_node_pools_config
                   get_node_pool_config = parent_rpcs&.get_node_pool if parent_rpcs&.respond_to? :get_node_pool
-                  @get_node_pool = Gapic::Config::Method.new get_node_pool_config
+                  @get_node_pool = ::Gapic::Config::Method.new get_node_pool_config
                   create_node_pool_config = parent_rpcs&.create_node_pool if parent_rpcs&.respond_to? :create_node_pool
-                  @create_node_pool = Gapic::Config::Method.new create_node_pool_config
+                  @create_node_pool = ::Gapic::Config::Method.new create_node_pool_config
                   delete_node_pool_config = parent_rpcs&.delete_node_pool if parent_rpcs&.respond_to? :delete_node_pool
-                  @delete_node_pool = Gapic::Config::Method.new delete_node_pool_config
+                  @delete_node_pool = ::Gapic::Config::Method.new delete_node_pool_config
                   rollback_node_pool_upgrade_config = parent_rpcs&.rollback_node_pool_upgrade if parent_rpcs&.respond_to? :rollback_node_pool_upgrade
-                  @rollback_node_pool_upgrade = Gapic::Config::Method.new rollback_node_pool_upgrade_config
+                  @rollback_node_pool_upgrade = ::Gapic::Config::Method.new rollback_node_pool_upgrade_config
                   set_node_pool_management_config = parent_rpcs&.set_node_pool_management if parent_rpcs&.respond_to? :set_node_pool_management
-                  @set_node_pool_management = Gapic::Config::Method.new set_node_pool_management_config
+                  @set_node_pool_management = ::Gapic::Config::Method.new set_node_pool_management_config
                   set_labels_config = parent_rpcs&.set_labels if parent_rpcs&.respond_to? :set_labels
-                  @set_labels = Gapic::Config::Method.new set_labels_config
+                  @set_labels = ::Gapic::Config::Method.new set_labels_config
                   set_legacy_abac_config = parent_rpcs&.set_legacy_abac if parent_rpcs&.respond_to? :set_legacy_abac
-                  @set_legacy_abac = Gapic::Config::Method.new set_legacy_abac_config
+                  @set_legacy_abac = ::Gapic::Config::Method.new set_legacy_abac_config
                   start_ip_rotation_config = parent_rpcs&.start_ip_rotation if parent_rpcs&.respond_to? :start_ip_rotation
-                  @start_ip_rotation = Gapic::Config::Method.new start_ip_rotation_config
+                  @start_ip_rotation = ::Gapic::Config::Method.new start_ip_rotation_config
                   complete_ip_rotation_config = parent_rpcs&.complete_ip_rotation if parent_rpcs&.respond_to? :complete_ip_rotation
-                  @complete_ip_rotation = Gapic::Config::Method.new complete_ip_rotation_config
+                  @complete_ip_rotation = ::Gapic::Config::Method.new complete_ip_rotation_config
                   set_node_pool_size_config = parent_rpcs&.set_node_pool_size if parent_rpcs&.respond_to? :set_node_pool_size
-                  @set_node_pool_size = Gapic::Config::Method.new set_node_pool_size_config
+                  @set_node_pool_size = ::Gapic::Config::Method.new set_node_pool_size_config
                   set_network_policy_config = parent_rpcs&.set_network_policy if parent_rpcs&.respond_to? :set_network_policy
-                  @set_network_policy = Gapic::Config::Method.new set_network_policy_config
+                  @set_network_policy = ::Gapic::Config::Method.new set_network_policy_config
                   set_maintenance_policy_config = parent_rpcs&.set_maintenance_policy if parent_rpcs&.respond_to? :set_maintenance_policy
-                  @set_maintenance_policy = Gapic::Config::Method.new set_maintenance_policy_config
+                  @set_maintenance_policy = ::Gapic::Config::Method.new set_maintenance_policy_config
                   list_usable_subnetworks_config = parent_rpcs&.list_usable_subnetworks if parent_rpcs&.respond_to? :list_usable_subnetworks
-                  @list_usable_subnetworks = Gapic::Config::Method.new list_usable_subnetworks_config
+                  @list_usable_subnetworks = ::Gapic::Config::Method.new list_usable_subnetworks_config
                   list_locations_config = parent_rpcs&.list_locations if parent_rpcs&.respond_to? :list_locations
-                  @list_locations = Gapic::Config::Method.new list_locations_config
+                  @list_locations = ::Gapic::Config::Method.new list_locations_config
 
                   yield self if block_given?
                 end
