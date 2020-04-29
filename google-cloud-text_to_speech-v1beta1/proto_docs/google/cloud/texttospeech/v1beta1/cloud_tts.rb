@@ -23,7 +23,7 @@ module Google
       module V1beta1
         # The top-level message sent by the client for the `ListVoices` method.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Recommended.
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If
         #     specified, the ListVoices call will only return voices that can be used to
@@ -33,52 +33,52 @@ module Google
         #     will also get supported "cmn-*" voices; specifying "zh-hk" will also get
         #     supported "yue-*" voices.
         class ListVoicesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The message returned to the client by the `ListVoices` method.
         # @!attribute [rw] voices
-        #   @return [Array<Google::Cloud::TextToSpeech::V1beta1::Voice>]
+        #   @return [::Array<::Google::Cloud::TextToSpeech::V1beta1::Voice>]
         #     The list of voices.
         class ListVoicesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Description of a voice supported by the TTS service.
         # @!attribute [rw] language_codes
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     The languages that this voice supports, expressed as
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tags (e.g.
         #     "en-US", "es-419", "cmn-tw").
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The name of this voice.  Each distinct voice has a unique name.
         # @!attribute [rw] ssml_gender
-        #   @return [Google::Cloud::TextToSpeech::V1beta1::SsmlVoiceGender]
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::SsmlVoiceGender]
         #     The gender of this voice.
         # @!attribute [rw] natural_sample_rate_hertz
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The natural sample rate (in hertz) for this voice.
         class Voice
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The top-level message sent by the client for the `SynthesizeSpeech` method.
         # @!attribute [rw] input
-        #   @return [Google::Cloud::TextToSpeech::V1beta1::SynthesisInput]
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::SynthesisInput]
         #     Required. The Synthesizer requires either plain text or SSML as input.
         # @!attribute [rw] voice
-        #   @return [Google::Cloud::TextToSpeech::V1beta1::VoiceSelectionParams]
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::VoiceSelectionParams]
         #     Required. The desired voice of the synthesized audio.
         # @!attribute [rw] audio_config
-        #   @return [Google::Cloud::TextToSpeech::V1beta1::AudioConfig]
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::AudioConfig]
         #     Required. The configuration of the synthesized audio.
         class SynthesizeSpeechRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Contains text input to be synthesized. Either `text` or `ssml` must be
@@ -86,22 +86,22 @@ module Google
         # [google.rpc.Code.INVALID_ARGUMENT][]. The input size is limited to 5000
         # characters.
         # @!attribute [rw] text
-        #   @return [String]
+        #   @return [::String]
         #     The raw text to be synthesized.
         # @!attribute [rw] ssml
-        #   @return [String]
+        #   @return [::String]
         #     The SSML document to be synthesized. The SSML document must be valid
         #     and well-formed. Otherwise the RPC will fail and return
         #     [google.rpc.Code.INVALID_ARGUMENT][]. For more information, see
         #     [SSML](/speech/text-to-speech/docs/ssml).
         class SynthesisInput
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Description of which voice to use for a synthesis request.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Required. The language (and potentially also the region) of the voice expressed as a
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag, e.g.
         #     "en-US". This should not include a script tag (e.g. use
@@ -114,38 +114,38 @@ module Google
         #     available), or even a different language, e.g. using "nb" (Norwegian
         #     Bokmal) instead of "no" (Norwegian)".
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The name of the voice. If not set, the service will choose a
         #     voice based on the other parameters such as language_code and gender.
         # @!attribute [rw] ssml_gender
-        #   @return [Google::Cloud::TextToSpeech::V1beta1::SsmlVoiceGender]
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::SsmlVoiceGender]
         #     The preferred gender of the voice. If not set, the service will
         #     choose a voice based on the other parameters such as language_code and
         #     name. Note that this is only a preference, not requirement; if a
         #     voice of the appropriate gender is not available, the synthesizer should
         #     substitute a voice with a different gender rather than failing the request.
         class VoiceSelectionParams
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Description of audio data to be synthesized.
         # @!attribute [rw] audio_encoding
-        #   @return [Google::Cloud::TextToSpeech::V1beta1::AudioEncoding]
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::AudioEncoding]
         #     Required. The format of the audio byte stream.
         # @!attribute [rw] speaking_rate
-        #   @return [Float]
+        #   @return [::Float]
         #     Optional. Input only. Speaking rate/speed, in the range [0.25, 4.0]. 1.0 is
         #     the normal native speed supported by the specific voice. 2.0 is twice as
         #     fast, and 0.5 is half as fast. If unset(0.0), defaults to the native 1.0
         #     speed. Any other values < 0.25 or > 4.0 will return an error.
         # @!attribute [rw] pitch
-        #   @return [Float]
+        #   @return [::Float]
         #     Optional. Input only. Speaking pitch, in the range [-20.0, 20.0]. 20 means
         #     increase 20 semitones from the original pitch. -20 means decrease 20
         #     semitones from the original pitch.
         # @!attribute [rw] volume_gain_db
-        #   @return [Float]
+        #   @return [::Float]
         #     Optional. Input only. Volume gain (in dB) of the normal native volume
         #     supported by the specific voice, in the range [-96.0, 16.0]. If unset, or
         #     set to a value of 0.0 (dB), will play at normal native signal amplitude. A
@@ -155,7 +155,7 @@ module Google
         #     Strongly recommend not to exceed +10 (dB) as there's usually no effective
         #     increase in loudness for any value greater than that.
         # @!attribute [rw] sample_rate_hertz
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The synthesis sample rate (in hertz) for this audio. When this is
         #     specified in SynthesizeSpeechRequest, if this is different from the voice's
         #     natural sample rate, then the synthesizer will honor this request by
@@ -164,7 +164,7 @@ module Google
         #     encoding chosen, in which case it will fail the request and return
         #     [google.rpc.Code.INVALID_ARGUMENT][].
         # @!attribute [rw] effects_profile_id
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. Input only. An identifier which selects 'audio effects' profiles
         #     that are applied on (post synthesized) text to speech. Effects are applied
         #     on top of each other in the order they are given. See
@@ -172,21 +172,21 @@ module Google
         #     profiles](https://cloud.google.com/text-to-speech/docs/audio-profiles) for
         #     current supported profile ids.
         class AudioConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The message returned to the client by the `SynthesizeSpeech` method.
         # @!attribute [rw] audio_content
-        #   @return [String]
+        #   @return [::String]
         #     The audio data bytes encoded as specified in the request, including the
         #     header for encodings that are wrapped in containers (e.g. MP3, OGG_OPUS).
         #     For LINEAR16 audio, we include the WAV header. Note: as
         #     with all bytes fields, protobuffers use a pure binary representation,
         #     whereas JSON representations use base64.
         class SynthesizeSpeechResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Gender of the voice as described in
