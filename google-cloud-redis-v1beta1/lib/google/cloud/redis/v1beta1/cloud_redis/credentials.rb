@@ -24,7 +24,7 @@ module Google
       module V1beta1
         module CloudRedis
           # Credentials for the CloudRedis API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"
             ]
