@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or IOT_TEST_PROJECT=test123 IOT_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/iot/v1/device_manager/credentials"
-  Google::Cloud::Iot::V1::DeviceManager::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Iot::V1::DeviceManager::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["IOT_PROJECT"] = project

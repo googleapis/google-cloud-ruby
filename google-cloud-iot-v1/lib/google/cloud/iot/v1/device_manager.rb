@@ -36,7 +36,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/iot/v1/device_manager"
-        #     client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+        #     client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new
         #
         module DeviceManager
         end

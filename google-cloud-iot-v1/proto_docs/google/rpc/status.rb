@@ -27,20 +27,20 @@ module Google
     # You can find out more about this error model and how to work with it in the
     # [API Design Guide](https://cloud.google.com/apis/design/errors).
     # @!attribute [rw] code
-    #   @return [Integer]
+    #   @return [::Integer]
     #     The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
     # @!attribute [rw] message
-    #   @return [String]
+    #   @return [::String]
     #     A developer-facing error message, which should be in English. Any
     #     user-facing error message should be localized and sent in the
-    #     {Google::Rpc::Status#details google.rpc.Status.details} field, or localized by the client.
+    #     {::Google::Rpc::Status#details google.rpc.Status.details} field, or localized by the client.
     # @!attribute [rw] details
-    #   @return [Array<Google::Protobuf::Any>]
+    #   @return [::Array<::Google::Protobuf::Any>]
     #     A list of messages that carry the error details.  There is a common set of
     #     message types for APIs to use.
     class Status
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end
