@@ -29,58 +29,58 @@ module Google
           # Thus, whoever uses this api can decide to generate either generic ui,
           # or custom data source specific forms.
           # @!attribute [rw] param_id
-          #   @return [String]
+          #   @return [::String]
           #     Parameter identifier.
           # @!attribute [rw] display_name
-          #   @return [String]
+          #   @return [::String]
           #     Parameter display name in the user interface.
           # @!attribute [rw] description
-          #   @return [String]
+          #   @return [::String]
           #     Parameter description.
           # @!attribute [rw] type
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::DataSourceParameter::Type]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::DataSourceParameter::Type]
           #     Parameter type.
           # @!attribute [rw] required
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     Is parameter required.
           # @!attribute [rw] repeated
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     Deprecated. This field has no effect.
           # @!attribute [rw] validation_regex
-          #   @return [String]
+          #   @return [::String]
           #     Regular expression which can be used for parameter validation.
           # @!attribute [rw] allowed_values
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     All possible values for the parameter.
           # @!attribute [rw] min_value
-          #   @return [Google::Protobuf::DoubleValue]
+          #   @return [::Google::Protobuf::DoubleValue]
           #     For integer and double values specifies minimum allowed value.
           # @!attribute [rw] max_value
-          #   @return [Google::Protobuf::DoubleValue]
+          #   @return [::Google::Protobuf::DoubleValue]
           #     For integer and double values specifies maxminum allowed value.
           # @!attribute [rw] fields
-          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::DataSourceParameter>]
+          #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::DataSourceParameter>]
           #     Deprecated. This field has no effect.
           # @!attribute [rw] validation_description
-          #   @return [String]
+          #   @return [::String]
           #     Description of the requirements for this field, in case the user input does
           #     not fulfill the regex pattern or min/max values.
           # @!attribute [rw] validation_help_url
-          #   @return [String]
+          #   @return [::String]
           #     URL to a help document to further explain the naming requirements.
           # @!attribute [rw] immutable
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     Cannot be changed after initial creation.
           # @!attribute [rw] recurse
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     Deprecated. This field has no effect.
           # @!attribute [rw] deprecated
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     If true, it should not be used in new transfers, and it should not be
           #     visible to users.
           class DataSourceParameter
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Parameter type.
             module Type
@@ -111,76 +111,76 @@ module Google
           # Represents data source metadata. Metadata is sufficient to
           # render UI and request proper OAuth tokens.
           # @!attribute [r] name
-          #   @return [String]
+          #   @return [::String]
           #     Output only. Data source resource name.
           # @!attribute [rw] data_source_id
-          #   @return [String]
+          #   @return [::String]
           #     Data source id.
           # @!attribute [rw] display_name
-          #   @return [String]
+          #   @return [::String]
           #     User friendly data source name.
           # @!attribute [rw] description
-          #   @return [String]
+          #   @return [::String]
           #     User friendly data source description string.
           # @!attribute [rw] client_id
-          #   @return [String]
+          #   @return [::String]
           #     Data source client id which should be used to receive refresh token.
           # @!attribute [rw] scopes
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     Api auth scopes for which refresh token needs to be obtained. These are
           #     scopes needed by a data source to prepare data and ingest them into
           #     BigQuery, e.g., https://www.googleapis.com/auth/bigquery
           # @!attribute [rw] transfer_type
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferType]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TransferType]
           #     Deprecated. This field has no effect.
           # @!attribute [rw] supports_multiple_transfers
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     Deprecated. This field has no effect.
           # @!attribute [rw] update_deadline_seconds
-          #   @return [Integer]
+          #   @return [::Integer]
           #     The number of seconds to wait for an update from the data source
           #     before the Data Transfer Service marks the transfer as FAILED.
           # @!attribute [rw] default_schedule
-          #   @return [String]
+          #   @return [::String]
           #     Default data transfer schedule.
           #     Examples of valid schedules include:
           #     `1st,3rd monday of month 15:30`,
           #     `every wed,fri of jan,jun 13:15`, and
           #     `first sunday of quarter 00:00`.
           # @!attribute [rw] supports_custom_schedule
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     Specifies whether the data source supports a user defined schedule, or
           #     operates on the default schedule.
           #     When set to `true`, user can override default schedule.
           # @!attribute [rw] parameters
-          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::DataSourceParameter>]
+          #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::DataSourceParameter>]
           #     Data source parameters.
           # @!attribute [rw] help_url
-          #   @return [String]
+          #   @return [::String]
           #     Url for the help document for this data source.
           # @!attribute [rw] authorization_type
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::DataSource::AuthorizationType]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::DataSource::AuthorizationType]
           #     Indicates the type of authorization.
           # @!attribute [rw] data_refresh_type
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::DataSource::DataRefreshType]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::DataSource::DataRefreshType]
           #     Specifies whether the data source supports automatic data refresh for the
           #     past few days, and how it's supported.
           #     For some data sources, data might not be complete until a few days later,
           #     so it's useful to refresh data automatically.
           # @!attribute [rw] default_data_refresh_window_days
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Default data refresh window on days.
           #     Only meaningful when `data_refresh_type` = `SLIDING_WINDOW`.
           # @!attribute [rw] manual_runs_disabled
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     Disables backfilling and manual run scheduling
           #     for the data source.
           # @!attribute [rw] minimum_schedule_interval
-          #   @return [Google::Protobuf::Duration]
+          #   @return [::Google::Protobuf::Duration]
           #     The minimum interval for scheduler to schedule runs.
           class DataSource
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # The type of authorization needed for this data source.
             module AuthorizationType
@@ -220,49 +220,49 @@ module Google
 
           # A request to get data source info.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     Required. The field will contain name of the resource requested, for example:
           #     `projects/{project_id}/dataSources/{data_source_id}` or
           #     `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`
           class GetDataSourceRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Request to list supported data sources and their data transfer settings.
           # @!attribute [rw] parent
-          #   @return [String]
+          #   @return [::String]
           #     Required. The BigQuery project id for which data sources should be returned.
           #     Must be in the form: `projects/{project_id}` or
           #     `projects/{project_id}/locations/{location_id}
           # @!attribute [rw] page_token
-          #   @return [String]
+          #   @return [::String]
           #     Pagination token, which can be used to request a specific page
           #     of `ListDataSourcesRequest` list results. For multiple-page
           #     results, `ListDataSourcesResponse` outputs
           #     a `next_page` token, which can be used as the
           #     `page_token` value to request the next page of list results.
           # @!attribute [rw] page_size
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Page size. The default page size is the maximum value of 1000 results.
           class ListDataSourcesRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Returns list of supported data sources and their metadata.
           # @!attribute [rw] data_sources
-          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::DataSource>]
+          #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::DataSource>]
           #     List of supported data sources and their transfer settings.
           # @!attribute [r] next_page_token
-          #   @return [String]
+          #   @return [::String]
           #     Output only. The next-pagination token. For multiple-page list results,
           #     this token can be used as the
           #     `ListDataSourcesRequest.page_token`
           #     to request the next page of list results.
           class ListDataSourcesResponse
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to create a data transfer configuration. If new credentials are
@@ -272,16 +272,16 @@ module Google
           # authorization code. Otherwise, the transfer configuration will be associated
           # with the calling user.
           # @!attribute [rw] parent
-          #   @return [String]
+          #   @return [::String]
           #     Required. The BigQuery project id where the transfer configuration should be created.
           #     Must be in the format projects/\\{project_id}/locations/\\{location_id} or
           #     projects/\\{project_id}. If specified location and location of the
           #     destination bigquery dataset do not match - the request will fail.
           # @!attribute [rw] transfer_config
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
           #     Required. Data transfer configuration to create.
           # @!attribute [rw] authorization_code
-          #   @return [String]
+          #   @return [::String]
           #     Optional OAuth2 authorization code to use with this transfer configuration.
           #     This is required if new credentials are needed, as indicated by
           #     `CheckValidCreds`.
@@ -299,7 +299,7 @@ module Google
           #       returned in the title bar of the browser, with the page text prompting
           #       the user to copy the code and paste it in the application.
           # @!attribute [rw] version_info
-          #   @return [String]
+          #   @return [::String]
           #     Optional version info. If users want to find a very recent access token,
           #     that is, immediately after approving access, users have to set the
           #     version_info claim in the token request. To obtain the version_info, users
@@ -307,23 +307,23 @@ module Google
           #     version_info back in the authorization response which be be put in a JWT
           #     claim in the token request.
           # @!attribute [rw] service_account_name
-          #   @return [String]
+          #   @return [::String]
           #     Optional service account name. If this field is set, transfer config will
           #     be created with this service account credentials. It requires that
           #     requesting user calling this API has permissions to act as this service
           #     account.
           class CreateTransferConfigRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to update a transfer configuration. To update the user id of the
           # transfer configuration, an authorization code needs to be provided.
           # @!attribute [rw] transfer_config
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
           #     Required. Data transfer configuration to create.
           # @!attribute [rw] authorization_code
-          #   @return [String]
+          #   @return [::String]
           #     Optional OAuth2 authorization code to use with this transfer configuration.
           #     If it is provided, the transfer configuration will be associated with the
           #     authorizing user.
@@ -341,10 +341,10 @@ module Google
           #       returned in the title bar of the browser, with the page text prompting
           #       the user to copy the code and paste it in the application.
           # @!attribute [rw] update_mask
-          #   @return [Google::Protobuf::FieldMask]
+          #   @return [::Google::Protobuf::FieldMask]
           #     Required. Required list of fields to be updated in this request.
           # @!attribute [rw] version_info
-          #   @return [String]
+          #   @return [::String]
           #     Optional version info. If users want to find a very recent access token,
           #     that is, immediately after approving access, users have to set the
           #     version_info claim in the token request. To obtain the version_info, users
@@ -352,129 +352,129 @@ module Google
           #     version_info back in the authorization response which be be put in a JWT
           #     claim in the token request.
           # @!attribute [rw] service_account_name
-          #   @return [String]
+          #   @return [::String]
           #     Optional service account name. If this field is set and
           #     "service_account_name" is set in update_mask, transfer config will be
           #     updated to use this service account credentials. It requires that
           #     requesting user calling this API has permissions to act as this service
           #     account.
           class UpdateTransferConfigRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to get data transfer information.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     Required. The field will contain name of the resource requested, for example:
           #     `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
           class GetTransferConfigRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to delete data transfer information. All associated transfer runs
           # and log messages will be deleted as well.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     Required. The field will contain name of the resource requested, for example:
           #     `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`
           class DeleteTransferConfigRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to get data transfer run information.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     Required. The field will contain name of the resource requested, for example:
           #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
           class GetTransferRunRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to delete data transfer run information.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     Required. The field will contain name of the resource requested, for example:
           #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
           class DeleteTransferRunRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to list data transfers configured for a BigQuery project.
           # @!attribute [rw] parent
-          #   @return [String]
+          #   @return [::String]
           #     Required. The BigQuery project id for which data sources
           #     should be returned: `projects/{project_id}` or
           #     `projects/{project_id}/locations/{location_id}`
           # @!attribute [rw] data_source_ids
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     When specified, only configurations of requested data sources are returned.
           # @!attribute [rw] page_token
-          #   @return [String]
+          #   @return [::String]
           #     Pagination token, which can be used to request a specific page
           #     of `ListTransfersRequest` list results. For multiple-page
           #     results, `ListTransfersResponse` outputs
           #     a `next_page` token, which can be used as the
           #     `page_token` value to request the next page of list results.
           # @!attribute [rw] page_size
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Page size. The default page size is the maximum value of 1000 results.
           class ListTransferConfigsRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # The returned list of pipelines in the project.
           # @!attribute [r] transfer_configs
-          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig>]
+          #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig>]
           #     Output only. The stored pipeline transfer configurations.
           # @!attribute [r] next_page_token
-          #   @return [String]
+          #   @return [::String]
           #     Output only. The next-pagination token. For multiple-page list results,
           #     this token can be used as the
           #     `ListTransferConfigsRequest.page_token`
           #     to request the next page of list results.
           class ListTransferConfigsResponse
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to list data transfer runs. UI can use this method to show/filter
           # specific data transfer runs. The data source can use this method to request
           # all scheduled transfer runs.
           # @!attribute [rw] parent
-          #   @return [String]
+          #   @return [::String]
           #     Required. Name of transfer configuration for which transfer runs should be retrieved.
           #     Format of transfer configuration resource name is:
           #     `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] states
-          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferState>]
+          #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::TransferState>]
           #     When specified, only transfer runs with requested states are returned.
           # @!attribute [rw] page_token
-          #   @return [String]
+          #   @return [::String]
           #     Pagination token, which can be used to request a specific page
           #     of `ListTransferRunsRequest` list results. For multiple-page
           #     results, `ListTransferRunsResponse` outputs
           #     a `next_page` token, which can be used as the
           #     `page_token` value to request the next page of list results.
           # @!attribute [rw] page_size
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Page size. The default page size is the maximum value of 1000 results.
           # @!attribute [rw] run_attempt
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest::RunAttempt]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest::RunAttempt]
           #     Indicates how run attempts are to be pulled.
           class ListTransferRunsRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Represents which runs should be pulled.
             module RunAttempt
@@ -488,57 +488,57 @@ module Google
 
           # The returned list of pipelines in the project.
           # @!attribute [r] transfer_runs
-          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
+          #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
           #     Output only. The stored pipeline transfer runs.
           # @!attribute [r] next_page_token
-          #   @return [String]
+          #   @return [::String]
           #     Output only. The next-pagination token. For multiple-page list results,
           #     this token can be used as the
           #     `ListTransferRunsRequest.page_token`
           #     to request the next page of list results.
           class ListTransferRunsResponse
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to get user facing log messages associated with data transfer run.
           # @!attribute [rw] parent
-          #   @return [String]
+          #   @return [::String]
           #     Required. Transfer run name in the form:
           #     `projects/{project_id}/transferConfigs/{config_id}/runs/{run_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}/runs/{run_id}`
           # @!attribute [rw] page_token
-          #   @return [String]
+          #   @return [::String]
           #     Pagination token, which can be used to request a specific page
           #     of `ListTransferLogsRequest` list results. For multiple-page
           #     results, `ListTransferLogsResponse` outputs
           #     a `next_page` token, which can be used as the
           #     `page_token` value to request the next page of list results.
           # @!attribute [rw] page_size
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Page size. The default page size is the maximum value of 1000 results.
           # @!attribute [rw] message_types
-          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage::MessageSeverity>]
+          #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage::MessageSeverity>]
           #     Message types to return. If not populated - INFO, WARNING and ERROR
           #     messages are returned.
           class ListTransferLogsRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # The returned list transfer run messages.
           # @!attribute [r] transfer_messages
-          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage>]
+          #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::TransferMessage>]
           #     Output only. The stored pipeline transfer messages.
           # @!attribute [r] next_page_token
-          #   @return [String]
+          #   @return [::String]
           #     Output only. The next-pagination token. For multiple-page list results,
           #     this token can be used as the
           #     `GetTransferRunLogRequest.page_token`
           #     to request the next page of list results.
           class ListTransferLogsResponse
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to determine whether the user has valid credentials. This method
@@ -548,96 +548,96 @@ module Google
           # returns false, as it cannot be determined whether the credentials are
           # already valid merely based on the user id.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     Required. The data source in the form:
           #     `projects/{project_id}/dataSources/{data_source_id}` or
           #     `projects/{project_id}/locations/{location_id}/dataSources/{data_source_id}`.
           class CheckValidCredsRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A response indicating whether the credentials exist and are valid.
           # @!attribute [rw] has_valid_creds
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     If set to `true`, the credentials exist and are valid.
           class CheckValidCredsResponse
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to schedule transfer runs for a time range.
           # @!attribute [rw] parent
-          #   @return [String]
+          #   @return [::String]
           #     Required. Transfer configuration name in the form:
           #     `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] start_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Required. Start time of the range of transfer runs. For example,
           #     `"2017-05-25T00:00:00+00:00"`.
           # @!attribute [rw] end_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Required. End time of the range of transfer runs. For example,
           #     `"2017-05-30T00:00:00+00:00"`.
           class ScheduleTransferRunsRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A response to schedule transfer runs for a time range.
           # @!attribute [rw] runs
-          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
+          #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
           #     The transfer runs that were scheduled.
           class ScheduleTransferRunsResponse
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A request to start manual transfer runs.
           # @!attribute [rw] parent
-          #   @return [String]
+          #   @return [::String]
           #     Transfer configuration name in the form:
           #     `projects/{project_id}/transferConfigs/{config_id}` or
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] requested_time_range
-          #   @return [Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange]
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange]
           #     Time range for the transfer runs that should be started.
           # @!attribute [rw] requested_run_time
-          #   @return [Google::Protobuf::Timestamp]
+          #   @return [::Google::Protobuf::Timestamp]
           #     Specific run_time for a transfer run to be started. The
           #     requested_run_time must not be in the future.
           class StartManualTransferRunsRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # A specification for a time range, this will request transfer runs with
             # run_time between start_time (inclusive) and end_time (exclusive).
             # @!attribute [rw] start_time
-            #   @return [Google::Protobuf::Timestamp]
+            #   @return [::Google::Protobuf::Timestamp]
             #     Start time of the range of transfer runs. For example,
             #     `"2017-05-25T00:00:00+00:00"`. The start_time must be strictly less than
             #     the end_time. Creates transfer runs where run_time is in the range betwen
             #     start_time (inclusive) and end_time (exlusive).
             # @!attribute [rw] end_time
-            #   @return [Google::Protobuf::Timestamp]
+            #   @return [::Google::Protobuf::Timestamp]
             #     End time of the range of transfer runs. For example,
             #     `"2017-05-30T00:00:00+00:00"`. The end_time must not be in the future.
             #     Creates transfer runs where run_time is in the range betwen start_time
             #     (inclusive) and end_time (exlusive).
             class TimeRange
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
           # A response to start manual transfer runs.
           # @!attribute [rw] runs
-          #   @return [Array<Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
+          #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
           #     The transfer runs that were created.
           class StartManualTransferRunsResponse
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

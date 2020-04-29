@@ -40,7 +40,7 @@ module Google
           # To load this service and instantiate a client:
           #
           #     require "google/cloud/bigquery/data_transfer/v1/data_transfer_service"
-          #     client = Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
+          #     client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
           #
           module DataTransferService
           end

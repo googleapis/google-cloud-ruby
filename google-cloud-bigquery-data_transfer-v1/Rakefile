@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DATA_TRANSFER_TEST_PROJECT=test123 DATA_TRANSFER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/bigquery/data_transfer/v1/data_transfer_service/credentials"
-  Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["DATA_TRANSFER_PROJECT"] = project

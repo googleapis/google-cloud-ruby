@@ -45,24 +45,24 @@ module Google
               #   @param location [String]
               #   @param data_source [String]
               #
-              # @return [String]
+              # @return [::String]
               def data_source_path **args
                 resources = {
                   "data_source:project"          => (proc do |project:, data_source:|
-                    raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                     "projects/#{project}/dataSources/#{data_source}"
                   end),
                   "data_source:location:project" => (proc do |project:, location:, data_source:|
-                    raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                    raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                    raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                     "projects/#{project}/locations/#{location}/dataSources/#{data_source}"
                   end)
                 }
 
                 resource = resources[args.keys.sort.join(":")]
-                raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+                raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
                 resource.call(**args)
               end
 
@@ -76,9 +76,9 @@ module Google
               # @param project [String]
               # @param location [String]
               #
-              # @return [String]
+              # @return [::String]
               def location_path project:, location:
-                raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                 "projects/#{project}/locations/#{location}"
               end
@@ -92,7 +92,7 @@ module Google
               #
               # @param project [String]
               #
-              # @return [String]
+              # @return [::String]
               def project_path project:
                 "projects/#{project}"
               end
@@ -119,26 +119,26 @@ module Google
               #   @param transfer_config [String]
               #   @param run [String]
               #
-              # @return [String]
+              # @return [::String]
               def run_path **args
                 resources = {
                   "project:run:transfer_config"          => (proc do |project:, transfer_config:, run:|
-                    raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                    raise ArgumentError, "transfer_config cannot contain /" if transfer_config.to_s.include? "/"
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                    raise ::ArgumentError, "transfer_config cannot contain /" if transfer_config.to_s.include? "/"
 
                     "projects/#{project}/transferConfigs/#{transfer_config}/runs/#{run}"
                   end),
                   "location:project:run:transfer_config" => (proc do |project:, location:, transfer_config:, run:|
-                    raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                    raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-                    raise ArgumentError, "transfer_config cannot contain /" if transfer_config.to_s.include? "/"
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                    raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                    raise ::ArgumentError, "transfer_config cannot contain /" if transfer_config.to_s.include? "/"
 
                     "projects/#{project}/locations/#{location}/transferConfigs/#{transfer_config}/runs/#{run}"
                   end)
                 }
 
                 resource = resources[args.keys.sort.join(":")]
-                raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+                raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
                 resource.call(**args)
               end
 
@@ -162,24 +162,24 @@ module Google
               #   @param location [String]
               #   @param transfer_config [String]
               #
-              # @return [String]
+              # @return [::String]
               def transfer_config_path **args
                 resources = {
                   "project:transfer_config"          => (proc do |project:, transfer_config:|
-                    raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                     "projects/#{project}/transferConfigs/#{transfer_config}"
                   end),
                   "location:project:transfer_config" => (proc do |project:, location:, transfer_config:|
-                    raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                    raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                    raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                     "projects/#{project}/locations/#{location}/transferConfigs/#{transfer_config}"
                   end)
                 }
 
                 resource = resources[args.keys.sort.join(":")]
-                raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+                raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
                 resource.call(**args)
               end
 
