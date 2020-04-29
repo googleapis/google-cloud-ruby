@@ -36,11 +36,11 @@ module Google
             # @param key_ring [String]
             # @param crypto_key [String]
             #
-            # @return [String]
+            # @return [::String]
             def crypto_key_path project:, location:, key_ring:, crypto_key:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}"
             end
@@ -58,12 +58,12 @@ module Google
             # @param crypto_key [String]
             # @param crypto_key_version [String]
             #
-            # @return [String]
+            # @return [::String]
             def crypto_key_version_path project:, location:, key_ring:, crypto_key:, crypto_key_version:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
-              raise ArgumentError, "crypto_key cannot contain /" if crypto_key.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+              raise ::ArgumentError, "crypto_key cannot contain /" if crypto_key.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}/cryptoKeyVersions/#{crypto_key_version}"
             end
@@ -80,11 +80,11 @@ module Google
             # @param key_ring [String]
             # @param import_job [String]
             #
-            # @return [String]
+            # @return [::String]
             def import_job_path project:, location:, key_ring:, import_job:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/importJobs/#{import_job}"
             end
@@ -100,10 +100,10 @@ module Google
             # @param location [String]
             # @param key_ring [String]
             #
-            # @return [String]
+            # @return [::String]
             def key_ring_path project:, location:, key_ring:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/keyRings/#{key_ring}"
             end
@@ -118,9 +118,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
