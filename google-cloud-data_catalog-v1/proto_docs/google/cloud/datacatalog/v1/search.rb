@@ -24,40 +24,40 @@ module Google
         # A result that appears in the response of a search request. Each result
         # captures details of one entry that matches the search.
         # @!attribute [rw] search_result_type
-        #   @return [Google::Cloud::DataCatalog::V1::SearchResultType]
+        #   @return [::Google::Cloud::DataCatalog::V1::SearchResultType]
         #     Type of the search result. This field can be used to determine which Get
         #     method to call to fetch the full resource.
         # @!attribute [rw] search_result_subtype
-        #   @return [String]
+        #   @return [::String]
         #     Sub-type of the search result. This is a dot-delimited description of the
         #     resource's full type, and is the same as the value callers would provide in
         #     the "type" search facet.  Examples: `entry.table`, `entry.dataStream`,
         #     `tagTemplate`.
         # @!attribute [rw] relative_resource_name
-        #   @return [String]
+        #   @return [::String]
         #     The relative resource name of the resource in URL format.
         #     Examples:
         #
         #      * `projects/{project_id}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`
         #      * `projects/{project_id}/tagTemplates/{tag_template_id}`
         # @!attribute [rw] linked_resource
-        #   @return [String]
+        #   @return [::String]
         #     The full name of the cloud resource the entry belongs to. See:
         #     https://cloud.google.com/apis/design/resource_names#full_resource_name.
         #     Example:
         #
         #      * `//bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId`
         # @!attribute [r] integrated_system
-        #   @return [Google::Cloud::DataCatalog::V1::IntegratedSystem]
+        #   @return [::Google::Cloud::DataCatalog::V1::IntegratedSystem]
         #     Output only. This field indicates the entry's source system that Data Catalog
         #     integrates with, such as BigQuery or Cloud Pub/Sub.
         # @!attribute [rw] user_specified_system
-        #   @return [String]
+        #   @return [::String]
         #     This field indicates the entry's source system that Data Catalog does not
         #     integrate with.
         class SearchCatalogResult
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The different types of resources that can be returned in search.
@@ -65,13 +65,13 @@ module Google
           # Default unknown type.
           SEARCH_RESULT_TYPE_UNSPECIFIED = 0
 
-          # An {Google::Cloud::DataCatalog::V1::Entry Entry}.
+          # An {::Google::Cloud::DataCatalog::V1::Entry Entry}.
           ENTRY = 1
 
-          # A {Google::Cloud::DataCatalog::V1::TagTemplate TagTemplate}.
+          # A {::Google::Cloud::DataCatalog::V1::TagTemplate TagTemplate}.
           TAG_TEMPLATE = 2
 
-          # An {Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}.
+          # An {::Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}.
           ENTRY_GROUP = 3
         end
       end

@@ -37,7 +37,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/data_catalog/v1/data_catalog"
-        #     client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+        #     client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
         #
         module DataCatalog
         end

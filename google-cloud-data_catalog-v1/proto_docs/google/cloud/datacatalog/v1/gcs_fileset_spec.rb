@@ -23,7 +23,7 @@ module Google
       module V1
         # Describes a Cloud Storage fileset entry.
         # @!attribute [rw] file_patterns
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Required. Patterns to identify a set of files in Google Cloud Storage. See [Cloud
         #     Storage documentation](/storage/docs/gsutil/addlhelp/WildcardNames) for
         #     more information. Note that bucket wildcards are currently not supported.
@@ -51,27 +51,27 @@ module Google
         #
         #      * `gs://bucket_name/[a-m]??.j*g`
         # @!attribute [r] sample_gcs_file_specs
-        #   @return [Array<Google::Cloud::DataCatalog::V1::GcsFileSpec>]
+        #   @return [::Array<::Google::Cloud::DataCatalog::V1::GcsFileSpec>]
         #     Output only. Sample files contained in this fileset, not all files
         #     contained in this fileset are represented here.
         class GcsFilesetSpec
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specifications of a single file in Cloud Storage.
         # @!attribute [rw] file_path
-        #   @return [String]
+        #   @return [::String]
         #     Required. The full file path. Example: `gs://bucket_name/a/b.txt`.
         # @!attribute [r] gcs_timestamps
-        #   @return [Google::Cloud::DataCatalog::V1::SystemTimestamps]
+        #   @return [::Google::Cloud::DataCatalog::V1::SystemTimestamps]
         #     Output only. Timestamps about the Cloud Storage file.
         # @!attribute [r] size_bytes
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The size of the file, in bytes.
         class GcsFileSpec
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
