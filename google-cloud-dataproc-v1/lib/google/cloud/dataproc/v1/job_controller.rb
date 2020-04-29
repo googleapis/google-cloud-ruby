@@ -36,7 +36,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dataproc/v1/job_controller"
-        #     client = Google::Cloud::Dataproc::V1::JobController::Client.new
+        #     client = ::Google::Cloud::Dataproc::V1::JobController::Client.new
         #
         module JobController
         end

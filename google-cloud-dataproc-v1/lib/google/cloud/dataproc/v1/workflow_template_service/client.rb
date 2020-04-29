@@ -39,15 +39,15 @@ module Google
             ##
             # Configure the WorkflowTemplateService Client class.
             #
-            # See {Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client::Configuration}
+            # See {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all WorkflowTemplateService clients:
             #
-            #     Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -135,7 +135,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client::Configuration}
+            # See {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -156,13 +156,13 @@ module Google
             # To create a new WorkflowTemplateService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+            #     client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
             #
             # To create a new WorkflowTemplateService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the WorkflowTemplateService client.
@@ -194,8 +194,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @workflow_template_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Dataproc::V1::WorkflowTemplateService::Stub,
+              @workflow_template_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -206,7 +206,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::Dataproc::V1::WorkflowTemplateService::Operations]
+            # @return [::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Operations]
             #
             attr_reader :operations_client
 
@@ -217,12 +217,12 @@ module Google
             #
             # @overload create_workflow_template(request, options = nil)
             #   Pass arguments to `create_workflow_template` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_workflow_template(parent: nil, template: nil)
@@ -230,7 +230,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the region or location, as described
             #     in https://cloud.google.com/apis/design/resource_names.
             #
@@ -241,30 +241,30 @@ module Google
             #     * For `projects.locations.workflowTemplates.create`, the resource name of
             #       the location has the following format:
             #       `projects/{project_id}/locations/{location}`
-            #   @param template [Google::Cloud::Dataproc::V1::WorkflowTemplate, Hash]
+            #   @param template [::Google::Cloud::Dataproc::V1::WorkflowTemplate, ::Hash]
             #     Required. The Dataproc workflow template to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dataproc::V1::WorkflowTemplate]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dataproc::V1::WorkflowTemplate]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dataproc::V1::WorkflowTemplate]
+            # @return [::Google::Cloud::Dataproc::V1::WorkflowTemplate]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_workflow_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_workflow_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -285,8 +285,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -297,12 +297,12 @@ module Google
             #
             # @overload get_workflow_template(request, options = nil)
             #   Pass arguments to `get_workflow_template` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_workflow_template(name: nil, version: nil)
@@ -310,7 +310,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the workflow template, as described
             #     in https://cloud.google.com/apis/design/resource_names.
             #
@@ -321,33 +321,33 @@ module Google
             #     * For `projects.locations.workflowTemplates.get`, the resource name of the
             #       template has the following format:
             #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
-            #   @param version [Integer]
+            #   @param version [::Integer]
             #     Optional. The version of workflow template to retrieve. Only previously
             #     instantiated versions can be retrieved.
             #
             #     If unspecified, retrieves the current version.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dataproc::V1::WorkflowTemplate]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dataproc::V1::WorkflowTemplate]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dataproc::V1::WorkflowTemplate]
+            # @return [::Google::Cloud::Dataproc::V1::WorkflowTemplate]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_workflow_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_workflow_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -368,8 +368,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -385,23 +385,23 @@ module Google
             # This will cause any inflight jobs to be cancelled and workflow-owned
             # clusters to be deleted.
             #
-            # The {Google::Longrunning::Operation#metadata Operation.metadata} will be
+            # The {::Google::Longrunning::Operation#metadata Operation.metadata} will be
             # [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
             # Also see [Using
             # WorkflowMetadata](https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
             #
             # On successful completion,
-            # {Google::Longrunning::Operation#response Operation.response} will be
-            # {Google::Protobuf::Empty Empty}.
+            # {::Google::Longrunning::Operation#response Operation.response} will be
+            # {::Google::Protobuf::Empty Empty}.
             #
             # @overload instantiate_workflow_template(request, options = nil)
             #   Pass arguments to `instantiate_workflow_template` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload instantiate_workflow_template(name: nil, version: nil, request_id: nil, parameters: nil)
@@ -409,7 +409,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the workflow template, as described
             #     in https://cloud.google.com/apis/design/resource_names.
             #
@@ -420,14 +420,14 @@ module Google
             #     * For `projects.locations.workflowTemplates.instantiate`, the resource name
             #       of the template has the following format:
             #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
-            #   @param version [Integer]
+            #   @param version [::Integer]
             #     Optional. The version of workflow template to instantiate. If specified,
             #     the workflow will be instantiated only if the current version of
             #     the workflow template has the supplied version.
             #
             #     This option cannot be used to instantiate a previous version of
             #     workflow template.
-            #   @param request_id [String]
+            #   @param request_id [::String]
             #     Optional. A tag that prevents multiple concurrent workflow
             #     instances with the same tag from running. This mitigates risk of
             #     concurrent instances started due to retries.
@@ -437,31 +437,31 @@ module Google
             #
             #     The tag must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
-            #   @param parameters [Hash{String => String}]
+            #   @param parameters [::Hash{::String => ::String}]
             #     Optional. Map from parameter names to values that should be used for those
             #     parameters. Values may not exceed 100 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def instantiate_workflow_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.instantiate_workflow_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -479,20 +479,20 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @workflow_template_service_stub.call_rpc :instantiate_workflow_template, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Instantiates a template and begins execution.
             #
             # This method is equivalent to executing the sequence
-            # {Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template CreateWorkflowTemplate}, {Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template InstantiateWorkflowTemplate},
-            # {Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#delete_workflow_template DeleteWorkflowTemplate}.
+            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template CreateWorkflowTemplate}, {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template InstantiateWorkflowTemplate},
+            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#delete_workflow_template DeleteWorkflowTemplate}.
             #
             # The returned Operation can be used to track execution of
             # workflow by polling
@@ -504,23 +504,23 @@ module Google
             # This will cause any inflight jobs to be cancelled and workflow-owned
             # clusters to be deleted.
             #
-            # The {Google::Longrunning::Operation#metadata Operation.metadata} will be
+            # The {::Google::Longrunning::Operation#metadata Operation.metadata} will be
             # [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#workflowmetadata).
             # Also see [Using
             # WorkflowMetadata](https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
             #
             # On successful completion,
-            # {Google::Longrunning::Operation#response Operation.response} will be
-            # {Google::Protobuf::Empty Empty}.
+            # {::Google::Longrunning::Operation#response Operation.response} will be
+            # {::Google::Protobuf::Empty Empty}.
             #
             # @overload instantiate_inline_workflow_template(request, options = nil)
             #   Pass arguments to `instantiate_inline_workflow_template` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload instantiate_inline_workflow_template(parent: nil, template: nil, request_id: nil)
@@ -528,7 +528,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the region or location, as described
             #     in https://cloud.google.com/apis/design/resource_names.
             #
@@ -539,9 +539,9 @@ module Google
             #     * For `projects.locations.workflowTemplates.instantiateinline`, the
             #       resource name of the location has the following format:
             #       `projects/{project_id}/locations/{location}`
-            #   @param template [Google::Cloud::Dataproc::V1::WorkflowTemplate, Hash]
+            #   @param template [::Google::Cloud::Dataproc::V1::WorkflowTemplate, ::Hash]
             #     Required. The workflow template to instantiate.
-            #   @param request_id [String]
+            #   @param request_id [::String]
             #     Optional. A tag that prevents multiple concurrent workflow
             #     instances with the same tag from running. This mitigates risk of
             #     concurrent instances started due to retries.
@@ -553,26 +553,26 @@ module Google
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def instantiate_inline_workflow_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.instantiate_inline_workflow_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -590,12 +590,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @workflow_template_service_stub.call_rpc :instantiate_inline_workflow_template, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -604,12 +604,12 @@ module Google
             #
             # @overload update_workflow_template(request, options = nil)
             #   Pass arguments to `update_workflow_template` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_workflow_template(template: nil)
@@ -617,32 +617,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param template [Google::Cloud::Dataproc::V1::WorkflowTemplate, Hash]
+            #   @param template [::Google::Cloud::Dataproc::V1::WorkflowTemplate, ::Hash]
             #     Required. The updated workflow template.
             #
             #     The `template.version` field must match the current version.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dataproc::V1::WorkflowTemplate]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dataproc::V1::WorkflowTemplate]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dataproc::V1::WorkflowTemplate]
+            # @return [::Google::Cloud::Dataproc::V1::WorkflowTemplate]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_workflow_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_workflow_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -663,8 +663,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -672,12 +672,12 @@ module Google
             #
             # @overload list_workflow_templates(request, options = nil)
             #   Pass arguments to `list_workflow_templates` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_workflow_templates(parent: nil, page_size: nil, page_token: nil)
@@ -685,7 +685,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the region or location, as described
             #     in https://cloud.google.com/apis/design/resource_names.
             #
@@ -696,33 +696,33 @@ module Google
             #     * For `projects.locations.workflowTemplates.list`, the
             #       resource name of the location has the following format:
             #       `projects/{project_id}/locations/{location}`
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Optional. The maximum number of results to return in each response.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. The page token, returned by a previous call, to request the
             #     next page of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dataproc::V1::WorkflowTemplate>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataproc::V1::WorkflowTemplate>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dataproc::V1::WorkflowTemplate>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dataproc::V1::WorkflowTemplate>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_workflow_templates request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_workflow_templates.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -740,12 +740,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @workflow_template_service_stub.call_rpc :list_workflow_templates, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @workflow_template_service_stub, :list_workflow_templates, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @workflow_template_service_stub, :list_workflow_templates, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -753,12 +753,12 @@ module Google
             #
             # @overload delete_workflow_template(request, options = nil)
             #   Pass arguments to `delete_workflow_template` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_workflow_template(name: nil, version: nil)
@@ -766,7 +766,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the workflow template, as described
             #     in https://cloud.google.com/apis/design/resource_names.
             #
@@ -777,32 +777,32 @@ module Google
             #     * For `projects.locations.workflowTemplates.instantiate`, the resource name
             #       of the template has the following format:
             #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
-            #   @param version [Integer]
+            #   @param version [::Integer]
             #     Optional. The version of workflow template to delete. If specified,
             #     will only delete the template if the current server version matches
             #     specified version.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_workflow_template request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_workflow_template.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -823,8 +823,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -834,7 +834,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -845,22 +845,22 @@ module Google
             # To modify the global config, setting the timeout for create_workflow_template
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_workflow_template.timeout = 20_000
+            #     ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_workflow_template.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_workflow_template.timeout = 20_000
+            #     client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_workflow_template.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"dataproc.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -872,29 +872,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -902,10 +902,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "dataproc.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -913,14 +913,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -961,56 +961,56 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_workflow_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_workflow_template
                 ##
                 # RPC-specific configuration for `get_workflow_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_workflow_template
                 ##
                 # RPC-specific configuration for `instantiate_workflow_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :instantiate_workflow_template
                 ##
                 # RPC-specific configuration for `instantiate_inline_workflow_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :instantiate_inline_workflow_template
                 ##
                 # RPC-specific configuration for `update_workflow_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_workflow_template
                 ##
                 # RPC-specific configuration for `list_workflow_templates`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_workflow_templates
                 ##
                 # RPC-specific configuration for `delete_workflow_template`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_workflow_template
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_workflow_template_config = parent_rpcs&.create_workflow_template if parent_rpcs&.respond_to? :create_workflow_template
-                  @create_workflow_template = Gapic::Config::Method.new create_workflow_template_config
+                  @create_workflow_template = ::Gapic::Config::Method.new create_workflow_template_config
                   get_workflow_template_config = parent_rpcs&.get_workflow_template if parent_rpcs&.respond_to? :get_workflow_template
-                  @get_workflow_template = Gapic::Config::Method.new get_workflow_template_config
+                  @get_workflow_template = ::Gapic::Config::Method.new get_workflow_template_config
                   instantiate_workflow_template_config = parent_rpcs&.instantiate_workflow_template if parent_rpcs&.respond_to? :instantiate_workflow_template
-                  @instantiate_workflow_template = Gapic::Config::Method.new instantiate_workflow_template_config
+                  @instantiate_workflow_template = ::Gapic::Config::Method.new instantiate_workflow_template_config
                   instantiate_inline_workflow_template_config = parent_rpcs&.instantiate_inline_workflow_template if parent_rpcs&.respond_to? :instantiate_inline_workflow_template
-                  @instantiate_inline_workflow_template = Gapic::Config::Method.new instantiate_inline_workflow_template_config
+                  @instantiate_inline_workflow_template = ::Gapic::Config::Method.new instantiate_inline_workflow_template_config
                   update_workflow_template_config = parent_rpcs&.update_workflow_template if parent_rpcs&.respond_to? :update_workflow_template
-                  @update_workflow_template = Gapic::Config::Method.new update_workflow_template_config
+                  @update_workflow_template = ::Gapic::Config::Method.new update_workflow_template_config
                   list_workflow_templates_config = parent_rpcs&.list_workflow_templates if parent_rpcs&.respond_to? :list_workflow_templates
-                  @list_workflow_templates = Gapic::Config::Method.new list_workflow_templates_config
+                  @list_workflow_templates = ::Gapic::Config::Method.new list_workflow_templates_config
                   delete_workflow_template_config = parent_rpcs&.delete_workflow_template if parent_rpcs&.respond_to? :delete_workflow_template
-                  @delete_workflow_template = Gapic::Config::Method.new delete_workflow_template_config
+                  @delete_workflow_template = ::Gapic::Config::Method.new delete_workflow_template_config
 
                   yield self if block_given?
                 end

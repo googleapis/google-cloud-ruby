@@ -38,7 +38,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dataproc/v1/workflow_template_service"
-        #     client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+        #     client = ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
         #
         module WorkflowTemplateService
         end

@@ -39,15 +39,15 @@ module Google
             ##
             # Configure the AutoscalingPolicyService Client class.
             #
-            # See {Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client::Configuration}
+            # See {::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all AutoscalingPolicyService clients:
             #
-            #     Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -107,7 +107,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client::Configuration}
+            # See {::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -128,13 +128,13 @@ module Google
             # To create a new AutoscalingPolicyService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new
+            #     client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new
             #
             # To create a new AutoscalingPolicyService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the AutoscalingPolicyService client.
@@ -161,8 +161,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @autoscaling_policy_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Stub,
+              @autoscaling_policy_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -177,12 +177,12 @@ module Google
             #
             # @overload create_autoscaling_policy(request, options = nil)
             #   Pass arguments to `create_autoscaling_policy` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_autoscaling_policy(parent: nil, policy: nil)
@@ -190,7 +190,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The "resource name" of the region or location, as described
             #     in https://cloud.google.com/apis/design/resource_names.
             #
@@ -201,30 +201,30 @@ module Google
             #     * For `projects.locations.autoscalingPolicies.create`, the resource name
             #       of the location has the following format:
             #       `projects/{project_id}/locations/{location}`
-            #   @param policy [Google::Cloud::Dataproc::V1::AutoscalingPolicy, Hash]
+            #   @param policy [::Google::Cloud::Dataproc::V1::AutoscalingPolicy, ::Hash]
             #     Required. The autoscaling policy to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dataproc::V1::AutoscalingPolicy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
+            # @return [::Google::Cloud::Dataproc::V1::AutoscalingPolicy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_autoscaling_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_autoscaling_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -245,8 +245,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -257,12 +257,12 @@ module Google
             #
             # @overload update_autoscaling_policy(request, options = nil)
             #   Pass arguments to `update_autoscaling_policy` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_autoscaling_policy(policy: nil)
@@ -270,30 +270,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param policy [Google::Cloud::Dataproc::V1::AutoscalingPolicy, Hash]
+            #   @param policy [::Google::Cloud::Dataproc::V1::AutoscalingPolicy, ::Hash]
             #     Required. The updated autoscaling policy.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dataproc::V1::AutoscalingPolicy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
+            # @return [::Google::Cloud::Dataproc::V1::AutoscalingPolicy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_autoscaling_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::UpdateAutoscalingPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_autoscaling_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -314,8 +314,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -323,12 +323,12 @@ module Google
             #
             # @overload get_autoscaling_policy(request, options = nil)
             #   Pass arguments to `get_autoscaling_policy` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_autoscaling_policy(name: nil)
@@ -336,7 +336,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The "resource name" of the autoscaling policy, as described
             #     in https://cloud.google.com/apis/design/resource_names.
             #
@@ -349,26 +349,26 @@ module Google
             #       `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dataproc::V1::AutoscalingPolicy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dataproc::V1::AutoscalingPolicy]
+            # @return [::Google::Cloud::Dataproc::V1::AutoscalingPolicy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_autoscaling_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::GetAutoscalingPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_autoscaling_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -389,8 +389,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -398,12 +398,12 @@ module Google
             #
             # @overload list_autoscaling_policies(request, options = nil)
             #   Pass arguments to `list_autoscaling_policies` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_autoscaling_policies(parent: nil, page_size: nil, page_token: nil)
@@ -411,7 +411,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The "resource name" of the region or location, as described
             #     in https://cloud.google.com/apis/design/resource_names.
             #
@@ -422,34 +422,34 @@ module Google
             #     * For `projects.locations.autoscalingPolicies.list`, the resource name
             #       of the location has the following format:
             #       `projects/{project_id}/locations/{location}`
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Optional. The maximum number of results to return in each response.
             #     Must be less than or equal to 1000. Defaults to 100.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. The page token, returned by a previous call, to request the
             #     next page of results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dataproc::V1::AutoscalingPolicy>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataproc::V1::AutoscalingPolicy>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dataproc::V1::AutoscalingPolicy>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dataproc::V1::AutoscalingPolicy>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_autoscaling_policies request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::ListAutoscalingPoliciesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_autoscaling_policies.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -467,12 +467,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @autoscaling_policy_service_stub.call_rpc :list_autoscaling_policies, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @autoscaling_policy_service_stub, :list_autoscaling_policies, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @autoscaling_policy_service_stub, :list_autoscaling_policies, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -481,12 +481,12 @@ module Google
             #
             # @overload delete_autoscaling_policy(request, options = nil)
             #   Pass arguments to `delete_autoscaling_policy` via a request object, either of type
-            #   {Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest, Hash]
+            #   @param request [::Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_autoscaling_policy(name: nil)
@@ -494,7 +494,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The "resource name" of the autoscaling policy, as described
             #     in https://cloud.google.com/apis/design/resource_names.
             #
@@ -507,26 +507,26 @@ module Google
             #       `projects/{project_id}/locations/{location}/autoscalingPolicies/{policy_id}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_autoscaling_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataproc::V1::DeleteAutoscalingPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_autoscaling_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -547,8 +547,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -558,7 +558,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -569,22 +569,22 @@ module Google
             # To modify the global config, setting the timeout for create_autoscaling_policy
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_autoscaling_policy.timeout = 20_000
+            #     ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_autoscaling_policy.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_autoscaling_policy.timeout = 20_000
+            #     client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_autoscaling_policy.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"dataproc.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -596,29 +596,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -626,10 +626,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "dataproc.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -637,14 +637,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -685,42 +685,42 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_autoscaling_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_autoscaling_policy
                 ##
                 # RPC-specific configuration for `update_autoscaling_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_autoscaling_policy
                 ##
                 # RPC-specific configuration for `get_autoscaling_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_autoscaling_policy
                 ##
                 # RPC-specific configuration for `list_autoscaling_policies`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_autoscaling_policies
                 ##
                 # RPC-specific configuration for `delete_autoscaling_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_autoscaling_policy
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_autoscaling_policy_config = parent_rpcs&.create_autoscaling_policy if parent_rpcs&.respond_to? :create_autoscaling_policy
-                  @create_autoscaling_policy = Gapic::Config::Method.new create_autoscaling_policy_config
+                  @create_autoscaling_policy = ::Gapic::Config::Method.new create_autoscaling_policy_config
                   update_autoscaling_policy_config = parent_rpcs&.update_autoscaling_policy if parent_rpcs&.respond_to? :update_autoscaling_policy
-                  @update_autoscaling_policy = Gapic::Config::Method.new update_autoscaling_policy_config
+                  @update_autoscaling_policy = ::Gapic::Config::Method.new update_autoscaling_policy_config
                   get_autoscaling_policy_config = parent_rpcs&.get_autoscaling_policy if parent_rpcs&.respond_to? :get_autoscaling_policy
-                  @get_autoscaling_policy = Gapic::Config::Method.new get_autoscaling_policy_config
+                  @get_autoscaling_policy = ::Gapic::Config::Method.new get_autoscaling_policy_config
                   list_autoscaling_policies_config = parent_rpcs&.list_autoscaling_policies if parent_rpcs&.respond_to? :list_autoscaling_policies
-                  @list_autoscaling_policies = Gapic::Config::Method.new list_autoscaling_policies_config
+                  @list_autoscaling_policies = ::Gapic::Config::Method.new list_autoscaling_policies_config
                   delete_autoscaling_policy_config = parent_rpcs&.delete_autoscaling_policy if parent_rpcs&.respond_to? :delete_autoscaling_policy
-                  @delete_autoscaling_policy = Gapic::Config::Method.new delete_autoscaling_policy_config
+                  @delete_autoscaling_policy = ::Gapic::Config::Method.new delete_autoscaling_policy_config
 
                   yield self if block_given?
                 end
