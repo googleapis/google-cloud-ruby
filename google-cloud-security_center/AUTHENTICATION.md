@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-security_center
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::SecurityCenter::V1::SecurityCenter::Credentials`):
+`::Google::Cloud::SecurityCenter::V1::SecurityCenter::Credentials`):
 
 1. `SECURITY_CENTER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SECURITY_CENTER_KEYFILE` - Path to JSON file, or JSON contents
