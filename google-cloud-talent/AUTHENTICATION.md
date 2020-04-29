@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-talent
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Talent::V4beta1::ApplicationService::Credentials`):
+`::Google::Cloud::Talent::V4beta1::ApplicationService::Credentials`):
 
 1. `TALENT_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `TALENT_KEYFILE` - Path to JSON file, or JSON contents
