@@ -34,9 +34,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
@@ -52,10 +52,10 @@ module Google
             # @param location [String]
             # @param queue [String]
             #
-            # @return [String]
+            # @return [::String]
             def queue_path project:, location:, queue:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/queues/#{queue}"
             end
@@ -72,11 +72,11 @@ module Google
             # @param queue [String]
             # @param task [String]
             #
-            # @return [String]
+            # @return [::String]
             def task_path project:, location:, queue:, task:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "queue cannot contain /" if queue.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "queue cannot contain /" if queue.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/queues/#{queue}/tasks/#{task}"
             end

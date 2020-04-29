@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or TASKS_TEST_PROJECT=test123 TASKS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/tasks/v2beta3/cloud_tasks/credentials"
-  Google::Cloud::Tasks::V2beta3::CloudTasks::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Tasks::V2beta3::CloudTasks::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["TASKS_PROJECT"] = project

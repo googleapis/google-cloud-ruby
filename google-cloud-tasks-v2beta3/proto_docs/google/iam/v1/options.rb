@@ -22,7 +22,7 @@ module Google
     module V1
       # Encapsulates settings provided to GetIamPolicy.
       # @!attribute [rw] requested_policy_version
-      #   @return [Integer]
+      #   @return [::Integer]
       #     Optional. The policy format version to be returned.
       #
       #     Valid values are 0, 1, and 3. Requests specifying an invalid value will be
@@ -32,8 +32,8 @@ module Google
       #     Policies without any conditional bindings may specify any valid value or
       #     leave the field unset.
       class GetPolicyOptions
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
       end
     end
   end
