@@ -23,7 +23,7 @@ require "google/cloud/billing/v1/cloud_catalog_pb"
 require "google/cloud/billing/v1/cloud_catalog_services_pb"
 require "google/cloud/billing/v1/cloud_catalog"
 
-class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
+class ::Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
 
   def test_list_services
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Billing::V1::ListServicesResponse.new
+    grpc_response = ::Google::Cloud::Billing::V1::ListServicesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -59,7 +59,7 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
 
     list_services_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_services, name
-      assert_kind_of Google::Cloud::Billing::V1::ListServicesRequest, request
+      assert_kind_of ::Google::Cloud::Billing::V1::ListServicesRequest, request
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
       refute_nil options
@@ -67,7 +67,7 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_services_client_stub do
       # Create client
-      client = Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
+      client = ::Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -86,7 +86,7 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_services Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_services ::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -100,7 +100,7 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_services Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_services ::Google::Cloud::Billing::V1::ListServicesRequest.new(page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -113,7 +113,7 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
 
   def test_list_skus
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Billing::V1::ListSkusResponse.new
+    grpc_response = ::Google::Cloud::Billing::V1::ListSkusResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -128,10 +128,10 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
 
     list_skus_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_skus, name
-      assert_kind_of Google::Cloud::Billing::V1::ListSkusRequest, request
+      assert_kind_of ::Google::Cloud::Billing::V1::ListSkusRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Timestamp), request.start_time
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::Timestamp), request.end_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.start_time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request.end_time
       assert_equal "hello world", request.currency_code
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -140,7 +140,7 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_skus_client_stub do
       # Create client
-      client = Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
+      client = ::Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -159,7 +159,7 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_skus Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_skus ::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -173,7 +173,7 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_skus Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_skus ::Google::Cloud::Billing::V1::ListSkusRequest.new(parent: parent, start_time: start_time, end_time: end_time, currency_code: currency_code, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -189,7 +189,7 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
+      client = ::Google::Cloud::Billing::V1::CloudCatalog::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -199,6 +199,6 @@ class Google::Cloud::Billing::V1::CloudCatalog::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Billing::V1::CloudCatalog::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Billing::V1::CloudCatalog::Client::Configuration, config
   end
 end

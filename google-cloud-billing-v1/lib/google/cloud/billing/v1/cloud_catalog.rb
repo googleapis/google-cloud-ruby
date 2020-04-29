@@ -38,7 +38,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/billing/v1/cloud_catalog"
-        #     client = Google::Cloud::Billing::V1::CloudCatalog::Client.new
+        #     client = ::Google::Cloud::Billing::V1::CloudCatalog::Client.new
         #
         module CloudCatalog
         end

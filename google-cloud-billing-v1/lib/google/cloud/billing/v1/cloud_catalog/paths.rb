@@ -33,7 +33,7 @@ module Google
             #
             # @param service [String]
             #
-            # @return [String]
+            # @return [::String]
             def service_path service:
               "services/#{service}"
             end

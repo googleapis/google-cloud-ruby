@@ -78,7 +78,7 @@ module Google
       # For a description of IAM and its features, see the
       # [IAM developer's guide](https://cloud.google.com/iam/docs).
       # @!attribute [rw] version
-      #   @return [Integer]
+      #   @return [::Integer]
       #     Specifies the format of the policy.
       #
       #     Valid values are 0, 1, and 3. Requests specifying an invalid value will be
@@ -94,12 +94,12 @@ module Google
       #     If no etag is provided in the call to `setIamPolicy`, version compliance
       #     checks against the stored policy is skipped.
       # @!attribute [rw] bindings
-      #   @return [Array<Google::Iam::V1::Binding>]
+      #   @return [::Array<::Google::Iam::V1::Binding>]
       #     Associates a list of `members` to a `role`. Optionally may specify a
       #     `condition` that determines when binding is in effect.
       #     `bindings` with no members will result in an error.
       # @!attribute [rw] etag
-      #   @return [String]
+      #   @return [::String]
       #     `etag` is used for optimistic concurrency control as a way to help
       #     prevent simultaneous updates of a policy from overwriting each other.
       #     It is strongly suggested that systems make use of the `etag` in the
@@ -113,17 +113,17 @@ module Google
       #     'setIamPolicy' will not fail even if the incoming policy version does not
       #     meet the requirements for modifying the stored policy.
       class Policy
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
       end
 
       # Associates `members` with a `role`.
       # @!attribute [rw] role
-      #   @return [String]
+      #   @return [::String]
       #     Role that is assigned to `members`.
       #     For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
       # @!attribute [rw] members
-      #   @return [Array<String>]
+      #   @return [::Array<::String>]
       #     Specifies the identities requesting access for a Cloud Platform resource.
       #     `members` can have the following values:
       #
@@ -147,50 +147,50 @@ module Google
       #     * `domain:{domain}`: The G Suite domain (primary) that represents all the
       #        users of that domain. For example, `google.com` or `example.com`.
       # @!attribute [rw] condition
-      #   @return [Google::Type::Expr]
+      #   @return [::Google::Type::Expr]
       #     The condition that is associated with this binding.
       #     NOTE: An unsatisfied condition will not allow user access via current
       #     binding. Different bindings, including their conditions, are examined
       #     independently.
       class Binding
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
       end
 
       # The difference delta between two policies.
       # @!attribute [rw] binding_deltas
-      #   @return [Array<Google::Iam::V1::BindingDelta>]
+      #   @return [::Array<::Google::Iam::V1::BindingDelta>]
       #     The delta for Bindings between two policies.
       # @!attribute [rw] audit_config_deltas
-      #   @return [Array<Google::Iam::V1::AuditConfigDelta>]
+      #   @return [::Array<::Google::Iam::V1::AuditConfigDelta>]
       #     The delta for AuditConfigs between two policies.
       class PolicyDelta
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
       end
 
       # One delta entry for Binding. Each individual change (only one member in each
       # entry) to a binding will be a separate entry.
       # @!attribute [rw] action
-      #   @return [Google::Iam::V1::BindingDelta::Action]
+      #   @return [::Google::Iam::V1::BindingDelta::Action]
       #     The action that was performed on a Binding.
       #     Required
       # @!attribute [rw] role
-      #   @return [String]
+      #   @return [::String]
       #     Role that is assigned to `members`.
       #     For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
       #     Required
       # @!attribute [rw] member
-      #   @return [String]
+      #   @return [::String]
       #     A single identity requesting access for a Cloud Platform resource.
       #     Follows the same format of Binding.members.
       #     Required
       # @!attribute [rw] condition
-      #   @return [Google::Type::Expr]
+      #   @return [::Google::Type::Expr]
       #     The condition that is associated with this binding.
       class BindingDelta
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
 
         # The type of action performed on a Binding in a policy.
         module Action
@@ -208,28 +208,28 @@ module Google
       # One delta entry for AuditConfig. Each individual change (only one
       # exempted_member in each entry) to a AuditConfig will be a separate entry.
       # @!attribute [rw] action
-      #   @return [Google::Iam::V1::AuditConfigDelta::Action]
+      #   @return [::Google::Iam::V1::AuditConfigDelta::Action]
       #     The action that was performed on an audit configuration in a policy.
       #     Required
       # @!attribute [rw] service
-      #   @return [String]
+      #   @return [::String]
       #     Specifies a service that was configured for Cloud Audit Logging.
       #     For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
       #     `allServices` is a special value that covers all services.
       #     Required
       # @!attribute [rw] exempted_member
-      #   @return [String]
+      #   @return [::String]
       #     A single identity that is exempted from "data access" audit
       #     logging for the `service` specified above.
       #     Follows the same format of Binding.members.
       # @!attribute [rw] log_type
-      #   @return [String]
+      #   @return [::String]
       #     Specifies the log_type that was be enabled. ADMIN_ACTIVITY is always
       #     enabled, and cannot be configured.
       #     Required
       class AuditConfigDelta
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
 
         # The type of action performed on an audit configuration in a policy.
         module Action
