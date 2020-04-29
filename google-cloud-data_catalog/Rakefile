@@ -86,7 +86,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DATA_CATALOG_TEST_PROJECT=test123 DATA_CATALOG_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/data_catalog/v1/data_catalog/credentials"
-  Google::Cloud::DataCatalog::V1::DataCatalog::Credentials.env_vars.each do |path|
+  ::Google::Cloud::DataCatalog::V1::DataCatalog::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["DATA_CATALOG_PROJECT"] = project
