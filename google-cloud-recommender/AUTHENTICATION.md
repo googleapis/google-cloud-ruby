@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-recommender
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Recommender::V1::Recommender::Credentials`):
+`::Google::Cloud::Recommender::V1::Recommender::Credentials`):
 
 1. `RECOMMENDER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `RECOMMENDER_KEYFILE` - Path to JSON file, or JSON contents
