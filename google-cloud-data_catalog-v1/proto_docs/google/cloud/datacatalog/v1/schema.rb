@@ -23,36 +23,36 @@ module Google
       module V1
         # Represents a schema (e.g. BigQuery, GoogleSQL, Avro schema).
         # @!attribute [rw] columns
-        #   @return [Array<Google::Cloud::DataCatalog::V1::ColumnSchema>]
+        #   @return [::Array<::Google::Cloud::DataCatalog::V1::ColumnSchema>]
         #     Required. Schema of columns. A maximum of 10,000 columns and sub-columns can be
         #     specified.
         class Schema
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Representation of a column within a schema. Columns could be nested inside
         # other columns.
         # @!attribute [rw] column
-        #   @return [String]
+        #   @return [::String]
         #     Required. Name of the column.
         # @!attribute [rw] type
-        #   @return [String]
+        #   @return [::String]
         #     Required. Type of the column.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Description of the column. Default value is an empty string.
         # @!attribute [rw] mode
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A column's mode indicates whether the values in this column are required,
         #     nullable, etc. Only `NULLABLE`, `REQUIRED` and `REPEATED` are supported.
         #     Default mode is `NULLABLE`.
         # @!attribute [rw] subcolumns
-        #   @return [Array<Google::Cloud::DataCatalog::V1::ColumnSchema>]
+        #   @return [::Array<::Google::Cloud::DataCatalog::V1::ColumnSchema>]
         #     Optional. Schema of sub-columns. A column can have zero or more sub-columns.
         class ColumnSchema
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

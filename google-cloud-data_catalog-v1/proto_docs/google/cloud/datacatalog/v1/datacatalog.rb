@@ -22,15 +22,15 @@ module Google
     module DataCatalog
       module V1
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalog}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalog}.
         # @!attribute [rw] scope
-        #   @return [Google::Cloud::DataCatalog::V1::SearchCatalogRequest::Scope]
+        #   @return [::Google::Cloud::DataCatalog::V1::SearchCatalogRequest::Scope]
         #     Required. The scope of this search request. A `scope` that has empty
         #     `include_org_ids`, `include_project_ids` AND false
         #     `include_gcp_public_datasets` is considered invalid. Data Catalog will
         #     return an error in such a case.
         # @!attribute [rw] query
-        #   @return [String]
+        #   @return [::String]
         #     Required. The query string in search query syntax. The query must be non-empty.
         #
         #     Query strings can be simple as "x" or more qualified as:
@@ -44,19 +44,19 @@ module Google
         #     Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
         #     for more information.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Number of results in the search page. If <=0 then defaults to 10. Max limit
         #     for page_size is 1000. Throws an invalid argument for page_size > 1000.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Pagination token returned in an earlier
-        #     {Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}, which
+        #     {::Google::Cloud::DataCatalog::V1::SearchCatalogResponse#next_page_token SearchCatalogResponse.next_page_token}, which
         #     indicates that this is a continuation of a prior
-        #     {Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalogRequest}
+        #     {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalogRequest}
         #     call, and that the system should return the next page of data. If empty,
         #     the first page is returned.
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Specifies the ordering of results, currently supported case-sensitive
         #     choices are:
         #
@@ -66,28 +66,28 @@ module Google
         #
         #     If not specified, defaults to `relevance` descending.
         class SearchCatalogRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The criteria that select the subspace used for query matching.
           # @!attribute [rw] include_org_ids
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     The list of organization IDs to search within. To find your organization
           #     ID, follow instructions in
           #     https://cloud.google.com/resource-manager/docs/creating-managing-organization.
           # @!attribute [rw] include_project_ids
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     The list of project IDs to search within. To learn more about the
           #     distinction between project names/IDs/numbers, go to
           #     https://cloud.google.com/docs/overview/#projects.
           # @!attribute [rw] include_gcp_public_datasets
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     If `true`, include Google Cloud Platform (GCP) public datasets in the
           #     search results. Info on GCP public datasets is available at
           #     https://cloud.google.com/public-datasets/. By default, GCP public
           #     datasets are excluded.
           # @!attribute [rw] restricted_locations
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     Optional. The list of locations to search within.
           #     1. If empty, search will be performed in all locations;
           #     2. If any of the locations are NOT in the valid locations list, error
@@ -124,34 +124,34 @@ module Google
           #      * us-west1
           #      * us-west2
           class Scope
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Response message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalog}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#search_catalog SearchCatalog}.
         # @!attribute [rw] results
-        #   @return [Array<Google::Cloud::DataCatalog::V1::SearchCatalogResult>]
+        #   @return [::Array<::Google::Cloud::DataCatalog::V1::SearchCatalogResult>]
         #     Search results.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     The token that can be used to retrieve the next page of results.
         # @!attribute [rw] unreachable
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Unreachable locations. Search result does not include data from those
         #     locations. Users can get additional information on the error by repeating
         #     the search request with a more restrictive parameter -- setting the value
         #     for `SearchDataCatalogRequest.scope.include_locations`.
         class SearchCatalogResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry_group CreateEntryGroup}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry_group CreateEntryGroup}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the project this entry group is in. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}
@@ -159,99 +159,99 @@ module Google
         #     Note that this EntryGroup and its child resources may not actually be
         #     stored in the location in this name.
         # @!attribute [rw] entry_group_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The id of the entry group to create.
         #     The id must begin with a letter or underscore, contain only English
         #     letters, numbers and underscores, and be at most 64 characters.
         # @!attribute [rw] entry_group
-        #   @return [Google::Cloud::DataCatalog::V1::EntryGroup]
+        #   @return [::Google::Cloud::DataCatalog::V1::EntryGroup]
         #     The entry group to create. Defaults to an empty entry group.
         class CreateEntryGroupRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry_group UpdateEntryGroup}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry_group UpdateEntryGroup}.
         # @!attribute [rw] entry_group
-        #   @return [Google::Cloud::DataCatalog::V1::EntryGroup]
+        #   @return [::Google::Cloud::DataCatalog::V1::EntryGroup]
         #     Required. The updated entry group. "name" field must be set.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     The fields to update on the entry group. If absent or empty, all modifiable
         #     fields are updated.
         class UpdateEntryGroupRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry_group GetEntryGroup}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry_group GetEntryGroup}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entry group. For example,
         #     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
         # @!attribute [rw] read_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     The fields to return. If not set or empty, all fields are returned.
         class GetEntryGroupRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry_group DeleteEntryGroup}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry_group DeleteEntryGroup}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entry group. For example,
         #     `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
         # @!attribute [rw] force
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Optional. If true, deletes all entries in the entry group.
         class DeleteEntryGroupRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entry_groups ListEntryGroups}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entry_groups ListEntryGroups}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the location that contains the entry groups, which can be
         #     provided in URL format. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
         #     Throws an invalid argument for `page_size > 1000`.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Token that specifies which page is requested. If empty, the first page is
         #     returned.
         class ListEntryGroupsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entry_groups ListEntryGroups}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entry_groups ListEntryGroups}.
         # @!attribute [rw] entry_groups
-        #   @return [Array<Google::Cloud::DataCatalog::V1::EntryGroup>]
+        #   @return [::Array<::Google::Cloud::DataCatalog::V1::EntryGroup>]
         #     EntryGroup details.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results. It is set to empty if no items
         #     remain in results.
         class ListEntryGroupsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry CreateEntry}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry CreateEntry}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entry group this entry is in. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}
@@ -259,23 +259,23 @@ module Google
         #     Note that this Entry and its child resources may not actually be stored in
         #     the location in this name.
         # @!attribute [rw] entry_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The id of the entry to create.
         # @!attribute [rw] entry
-        #   @return [Google::Cloud::DataCatalog::V1::Entry]
+        #   @return [::Google::Cloud::DataCatalog::V1::Entry]
         #     Required. The entry to create.
         class CreateEntryRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry UpdateEntry}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry UpdateEntry}.
         # @!attribute [rw] entry
-        #   @return [Google::Cloud::DataCatalog::V1::Entry]
+        #   @return [::Google::Cloud::DataCatalog::V1::Entry]
         #     Required. The updated entry. The "name" field must be set.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     The fields to update on the entry. If absent or empty, all modifiable
         #     fields are updated.
         #
@@ -297,38 +297,38 @@ module Google
         #        * linked_resource
         #        * source_system_timestamps
         class UpdateEntryRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry DeleteEntry}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry DeleteEntry}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entry. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
         class DeleteEntryRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry GetEntry}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_entry GetEntry}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entry. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
         class GetEntryRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#lookup_entry LookupEntry}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#lookup_entry LookupEntry}.
         # @!attribute [rw] linked_resource
-        #   @return [String]
+        #   @return [::String]
         #     The full name of the Google Cloud Platform resource the Data Catalog
         #     entry represents. See:
         #     https://cloud.google.com/apis/design/resource_names#full_resource_name.
@@ -339,7 +339,7 @@ module Google
         #      * //bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId
         #      * //pubsub.googleapis.com/projects/projectId/topics/topicId
         # @!attribute [rw] sql_resource
-        #   @return [String]
+        #   @return [::String]
         #     The SQL name of the entry. SQL names are case-sensitive.
         #
         #     Examples:
@@ -353,8 +353,8 @@ module Google
         #     `*_id`s shoud satisfy the standard SQL rules for identifiers.
         #     https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
         class LookupEntryRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Entry Metadata.
@@ -366,9 +366,9 @@ module Google
         #
         # An Entry resource contains resource details, such as its schema. An Entry can
         # also be used to attach flexible metadata, such as a
-        # {Google::Cloud::DataCatalog::V1::Tag Tag}.
+        # {::Google::Cloud::DataCatalog::V1::Tag Tag}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The Data Catalog resource name of the entry in URL format. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
@@ -376,7 +376,7 @@ module Google
         #     Note that this Entry and its child resources may not actually be stored in
         #     the location in this name.
         # @!attribute [rw] linked_resource
-        #   @return [String]
+        #   @return [::String]
         #     The resource this metadata entry refers to.
         #
         #     For Google Cloud Platform resources, `linked_resource` is the [full name of
@@ -390,11 +390,11 @@ module Google
         #     user_specified_type, this field is optional and defaults to an empty
         #     string.
         # @!attribute [rw] type
-        #   @return [Google::Cloud::DataCatalog::V1::EntryType]
+        #   @return [::Google::Cloud::DataCatalog::V1::EntryType]
         #     The type of the entry.
         #     Only used for Entries with types in the EntryType enum.
         # @!attribute [rw] user_specified_type
-        #   @return [String]
+        #   @return [::String]
         #     Entry type if it does not fit any of the input-allowed values listed in
         #     `EntryType` enum above. When creating an entry, users should check the
         #     enum values first, if nothing matches the entry to be created, then
@@ -406,57 +406,57 @@ module Google
         #     Currently, only FILESET enum value is allowed. All other entries created
         #     through Data Catalog must use `user_specified_type`.
         # @!attribute [r] integrated_system
-        #   @return [Google::Cloud::DataCatalog::V1::IntegratedSystem]
+        #   @return [::Google::Cloud::DataCatalog::V1::IntegratedSystem]
         #     Output only. This field indicates the entry's source system that Data Catalog
         #     integrates with, such as BigQuery or Pub/Sub.
         # @!attribute [rw] user_specified_system
-        #   @return [String]
+        #   @return [::String]
         #     This field indicates the entry's source system that Data Catalog does not
         #     integrate with. `user_specified_system` strings must begin with a letter
         #     or underscore and can only contain letters, numbers, and underscores; are
         #     case insensitive; must be at least 1 character and at most 64 characters
         #     long.
         # @!attribute [rw] gcs_fileset_spec
-        #   @return [Google::Cloud::DataCatalog::V1::GcsFilesetSpec]
+        #   @return [::Google::Cloud::DataCatalog::V1::GcsFilesetSpec]
         #     Specification that applies to a Cloud Storage fileset. This is only valid
         #     on entries of type FILESET.
         # @!attribute [rw] bigquery_table_spec
-        #   @return [Google::Cloud::DataCatalog::V1::BigQueryTableSpec]
+        #   @return [::Google::Cloud::DataCatalog::V1::BigQueryTableSpec]
         #     Specification that applies to a BigQuery table. This is only valid on
         #     entries of type `TABLE`.
         # @!attribute [rw] bigquery_date_sharded_spec
-        #   @return [Google::Cloud::DataCatalog::V1::BigQueryDateShardedSpec]
+        #   @return [::Google::Cloud::DataCatalog::V1::BigQueryDateShardedSpec]
         #     Specification for a group of BigQuery tables with name pattern
         #     `[prefix]YYYYMMDD`. Context:
         #     https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Display information such as title and description. A short name to identify
         #     the entry, for example, "Analytics Data - Jan 2011". Default value is an
         #     empty string.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Entry description, which can consist of several sentences or paragraphs
         #     that describe entry contents. Default value is an empty string.
         # @!attribute [rw] schema
-        #   @return [Google::Cloud::DataCatalog::V1::Schema]
+        #   @return [::Google::Cloud::DataCatalog::V1::Schema]
         #     Schema of the entry. An entry might not have any schema attached to it.
         # @!attribute [rw] source_system_timestamps
-        #   @return [Google::Cloud::DataCatalog::V1::SystemTimestamps]
+        #   @return [::Google::Cloud::DataCatalog::V1::SystemTimestamps]
         #     Timestamps about the underlying resource, not about this Data Catalog
         #     entry. Output only when Entry is of type in the EntryType enum. For entries
         #     with user_specified_type, this field is optional and defaults to an empty
         #     timestamp.
         class Entry
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # EntryGroup Metadata.
         # An EntryGroup resource represents a logical grouping of zero or more
-        # Data Catalog {Google::Cloud::DataCatalog::V1::Entry Entry} resources.
+        # Data Catalog {::Google::Cloud::DataCatalog::V1::Entry Entry} resources.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The resource name of the entry group in URL format. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}
@@ -464,26 +464,26 @@ module Google
         #     Note that this EntryGroup and its child resources may not actually be
         #     stored in the location in this name.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     A short name to identify the entry group, for example,
         #     "analytics data - jan 2011". Default value is an empty string.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Entry group description, which can consist of several sentences or
         #     paragraphs that describe entry group contents. Default value is an empty
         #     string.
         # @!attribute [r] data_catalog_timestamps
-        #   @return [Google::Cloud::DataCatalog::V1::SystemTimestamps]
+        #   @return [::Google::Cloud::DataCatalog::V1::SystemTimestamps]
         #     Output only. Timestamps about this EntryGroup. Default value is empty timestamps.
         class EntryGroup
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template CreateTagTemplate}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template CreateTagTemplate}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the project and the template location
         #     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
         #
@@ -491,35 +491,35 @@ module Google
         #
         #     * projects/\\{project_id}/locations/us-central1
         # @!attribute [rw] tag_template_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The id of the tag template to create.
         # @!attribute [rw] tag_template
-        #   @return [Google::Cloud::DataCatalog::V1::TagTemplate]
+        #   @return [::Google::Cloud::DataCatalog::V1::TagTemplate]
         #     Required. The tag template to create.
         class CreateTagTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_tag_template GetTagTemplate}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#get_tag_template GetTagTemplate}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the tag template. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}
         class GetTagTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template UpdateTagTemplate}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template UpdateTagTemplate}.
         # @!attribute [rw] tag_template
-        #   @return [Google::Cloud::DataCatalog::V1::TagTemplate]
+        #   @return [::Google::Cloud::DataCatalog::V1::TagTemplate]
         #     Required. The template to update. The "name" field must be set.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     The field mask specifies the parts of the template to overwrite.
         #
         #     Allowed fields:
@@ -528,31 +528,31 @@ module Google
         #
         #     If absent or empty, all of the allowed fields above will be updated.
         class UpdateTagTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template DeleteTagTemplate}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template DeleteTagTemplate}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the tag template to delete. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}
         # @!attribute [rw] force
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Required. Currently, this field must always be set to `true`.
         #     This confirms the deletion of any possible tags using this template.
         #     `force = false` will be supported in the future.
         class DeleteTagTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag CreateTag}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag CreateTag}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the resource to attach this tag to. Tags can be attached to
         #     Entries. Example:
         #
@@ -561,43 +561,43 @@ module Google
         #     Note that this Tag and its child resources may not actually be stored in
         #     the location in this name.
         # @!attribute [rw] tag
-        #   @return [Google::Cloud::DataCatalog::V1::Tag]
+        #   @return [::Google::Cloud::DataCatalog::V1::Tag]
         #     Required. The tag to create.
         class CreateTagRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag UpdateTag}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag UpdateTag}.
         # @!attribute [rw] tag
-        #   @return [Google::Cloud::DataCatalog::V1::Tag]
+        #   @return [::Google::Cloud::DataCatalog::V1::Tag]
         #     Required. The updated tag. The "name" field must be set.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     The fields to update on the Tag. If absent or empty, all modifiable fields
         #     are updated. Currently the only modifiable field is the field `fields`.
         class UpdateTagRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag DeleteTag}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag DeleteTag}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the tag to delete. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}/tags/\\{tag_id}
         class DeleteTagRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template_field CreateTagTemplateField}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template_field CreateTagTemplateField}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the project and the template location
         #     [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
         #
@@ -605,32 +605,32 @@ module Google
         #
         #     * projects/\\{project_id}/locations/us-central1/tagTemplates/\\{tag_template_id}
         # @!attribute [rw] tag_template_field_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The ID of the tag template field to create.
         #     Field ids can contain letters (both uppercase and lowercase), numbers
         #     (0-9), underscores (_) and dashes (-). Field IDs must be at least 1
         #     character long and at most 128 characters long. Field IDs must also be
         #     unique within their template.
         # @!attribute [rw] tag_template_field
-        #   @return [Google::Cloud::DataCatalog::V1::TagTemplateField]
+        #   @return [::Google::Cloud::DataCatalog::V1::TagTemplateField]
         #     Required. The tag template field to create.
         class CreateTagTemplateFieldRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template_field UpdateTagTemplateField}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_tag_template_field UpdateTagTemplateField}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the tag template field. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}
         # @!attribute [rw] tag_template_field
-        #   @return [Google::Cloud::DataCatalog::V1::TagTemplateField]
+        #   @return [::Google::Cloud::DataCatalog::V1::TagTemplateField]
         #     Required. The template to update.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Optional. The field mask specifies the parts of the template to be updated.
         #     Allowed fields:
         #
@@ -646,119 +646,119 @@ module Google
         #     values cannot be deleted nor renamed. Updating a template field from
         #     optional to required is NOT allowed.
         class UpdateTagTemplateFieldRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field RenameTagTemplateField}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#rename_tag_template_field RenameTagTemplateField}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the tag template. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}
         # @!attribute [rw] new_tag_template_field_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The new ID of this tag template field. For example, `my_new_field`.
         class RenameTagTemplateFieldRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template_field DeleteTagTemplateField}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_tag_template_field DeleteTagTemplateField}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the tag template field to delete. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/tagTemplates/\\{tag_template_id}/fields/\\{tag_template_field_id}
         # @!attribute [rw] force
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Required. Currently, this field must always be set to `true`.
         #     This confirms the deletion of this field from any tags using this field.
         #     `force = false` will be supported in the future.
         class DeleteTagTemplateFieldRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags ListTags}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags ListTags}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the Data Catalog resource to list the tags of. The resource
-        #     could be an {Google::Cloud::DataCatalog::V1::Entry Entry} or an
-        #     {Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}.
+        #     could be an {::Google::Cloud::DataCatalog::V1::Entry Entry} or an
+        #     {::Google::Cloud::DataCatalog::V1::EntryGroup EntryGroup}.
         #
         #     Examples:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The maximum number of tags to return. Default is 10. Max limit is 1000.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token that specifies which page is requested. If empty, the first page is
         #     returned.
         class ListTagsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags ListTags}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags ListTags}.
         # @!attribute [rw] tags
-        #   @return [Array<Google::Cloud::DataCatalog::V1::Tag>]
-        #     {Google::Cloud::DataCatalog::V1::Tag Tag} details.
+        #   @return [::Array<::Google::Cloud::DataCatalog::V1::Tag>]
+        #     {::Google::Cloud::DataCatalog::V1::Tag Tag} details.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results. It is set to empty if no items
         #     remain in results.
         class ListTagsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entries ListEntries}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entries ListEntries}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entry group that contains the entries, which can
         #     be provided in URL format. Example:
         #
         #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The maximum number of items to return. Default is 10. Max limit is 1000.
         #     Throws an invalid argument for `page_size > 1000`.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token that specifies which page is requested. If empty, the first page is
         #     returned.
         # @!attribute [rw] read_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     The fields to return for each Entry. If not set or empty, all
         #     fields are returned.
         #     For example, setting read_mask to contain only one path "name" will cause
         #     ListEntries to return a list of Entries with only "name" field.
         class ListEntriesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response message for
-        # {Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entries ListEntries}.
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_entries ListEntries}.
         # @!attribute [rw] entries
-        #   @return [Array<Google::Cloud::DataCatalog::V1::Entry>]
+        #   @return [::Array<::Google::Cloud::DataCatalog::V1::Entry>]
         #     Entry details.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results. It is set to empty if no items
         #     remain in results.
         class ListEntriesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Entry resources in Data Catalog can be of different types e.g. a BigQuery

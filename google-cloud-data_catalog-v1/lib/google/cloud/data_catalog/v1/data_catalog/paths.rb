@@ -36,11 +36,11 @@ module Google
             # @param entry_group [String]
             # @param entry [String]
             #
-            # @return [String]
+            # @return [::String]
             def entry_path project:, location:, entry_group:, entry:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "entry_group cannot contain /" if entry_group.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "entry_group cannot contain /" if entry_group.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/entryGroups/#{entry_group}/entries/#{entry}"
             end
@@ -56,10 +56,10 @@ module Google
             # @param location [String]
             # @param entry_group [String]
             #
-            # @return [String]
+            # @return [::String]
             def entry_group_path project:, location:, entry_group:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/entryGroups/#{entry_group}"
             end
@@ -74,9 +74,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
@@ -94,12 +94,12 @@ module Google
             # @param entry [String]
             # @param tag [String]
             #
-            # @return [String]
+            # @return [::String]
             def tag_path project:, location:, entry_group:, entry:, tag:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "entry_group cannot contain /" if entry_group.to_s.include? "/"
-              raise ArgumentError, "entry cannot contain /" if entry.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "entry_group cannot contain /" if entry_group.to_s.include? "/"
+              raise ::ArgumentError, "entry cannot contain /" if entry.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/entryGroups/#{entry_group}/entries/#{entry}/tags/#{tag}"
             end
@@ -115,10 +115,10 @@ module Google
             # @param location [String]
             # @param tag_template [String]
             #
-            # @return [String]
+            # @return [::String]
             def tag_template_path project:, location:, tag_template:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/tagTemplates/#{tag_template}"
             end
@@ -135,11 +135,11 @@ module Google
             # @param tag_template [String]
             # @param field [String]
             #
-            # @return [String]
+            # @return [::String]
             def tag_template_field_path project:, location:, tag_template:, field:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "tag_template cannot contain /" if tag_template.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "tag_template cannot contain /" if tag_template.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/tagTemplates/#{tag_template}/fields/#{field}"
             end
