@@ -23,7 +23,7 @@ require "google/cloud/scheduler/v1/cloudscheduler_pb"
 require "google/cloud/scheduler/v1/cloudscheduler_services_pb"
 require "google/cloud/scheduler/v1/cloud_scheduler"
 
-class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
+class ::Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
   def test_list_jobs
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Scheduler::V1::ListJobsResponse.new
+    grpc_response = ::Google::Cloud::Scheduler::V1::ListJobsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -60,7 +60,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
     list_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_jobs, name
-      assert_kind_of Google::Cloud::Scheduler::V1::ListJobsRequest, request
+      assert_kind_of ::Google::Cloud::Scheduler::V1::ListJobsRequest, request
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -69,7 +69,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_jobs_client_stub do
       # Create client
-      client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+      client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -88,7 +88,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_jobs Google::Cloud::Scheduler::V1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_jobs ::Google::Cloud::Scheduler::V1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -102,7 +102,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_jobs Google::Cloud::Scheduler::V1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_jobs ::Google::Cloud::Scheduler::V1::ListJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -115,7 +115,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
   def test_get_job
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Scheduler::V1::Job.new
+    grpc_response = ::Google::Cloud::Scheduler::V1::Job.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -125,14 +125,14 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
     get_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_job, name
-      assert_kind_of Google::Cloud::Scheduler::V1::GetJobRequest, request
+      assert_kind_of ::Google::Cloud::Scheduler::V1::GetJobRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_job_client_stub do
       # Create client
-      client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+      client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -149,7 +149,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_job Google::Cloud::Scheduler::V1::GetJobRequest.new(name: name) do |response, operation|
+      client.get_job ::Google::Cloud::Scheduler::V1::GetJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_job Google::Cloud::Scheduler::V1::GetJobRequest.new(name: name), grpc_options do |response, operation|
+      client.get_job ::Google::Cloud::Scheduler::V1::GetJobRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -173,7 +173,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
   def test_create_job
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Scheduler::V1::Job.new
+    grpc_response = ::Google::Cloud::Scheduler::V1::Job.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -184,15 +184,15 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
     create_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_job, name
-      assert_kind_of Google::Cloud::Scheduler::V1::CreateJobRequest, request
+      assert_kind_of ::Google::Cloud::Scheduler::V1::CreateJobRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Scheduler::V1::Job), request.job
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Scheduler::V1::Job), request.job
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_job_client_stub do
       # Create client
-      client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+      client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -209,7 +209,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.create_job Google::Cloud::Scheduler::V1::CreateJobRequest.new(parent: parent, job: job) do |response, operation|
+      client.create_job ::Google::Cloud::Scheduler::V1::CreateJobRequest.new(parent: parent, job: job) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -221,7 +221,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_job Google::Cloud::Scheduler::V1::CreateJobRequest.new(parent: parent, job: job), grpc_options do |response, operation|
+      client.create_job ::Google::Cloud::Scheduler::V1::CreateJobRequest.new(parent: parent, job: job), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -233,7 +233,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
   def test_update_job
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Scheduler::V1::Job.new
+    grpc_response = ::Google::Cloud::Scheduler::V1::Job.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -244,15 +244,15 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
     update_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_job, name
-      assert_kind_of Google::Cloud::Scheduler::V1::UpdateJobRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Scheduler::V1::Job), request.job
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::Scheduler::V1::UpdateJobRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Scheduler::V1::Job), request.job
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_job_client_stub do
       # Create client
-      client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+      client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -269,7 +269,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.update_job Google::Cloud::Scheduler::V1::UpdateJobRequest.new(job: job, update_mask: update_mask) do |response, operation|
+      client.update_job ::Google::Cloud::Scheduler::V1::UpdateJobRequest.new(job: job, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -281,7 +281,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_job Google::Cloud::Scheduler::V1::UpdateJobRequest.new(job: job, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_job ::Google::Cloud::Scheduler::V1::UpdateJobRequest.new(job: job, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -293,7 +293,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
   def test_delete_job
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -303,14 +303,14 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
     delete_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_job, name
-      assert_kind_of Google::Cloud::Scheduler::V1::DeleteJobRequest, request
+      assert_kind_of ::Google::Cloud::Scheduler::V1::DeleteJobRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_job_client_stub do
       # Create client
-      client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+      client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -327,7 +327,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.delete_job Google::Cloud::Scheduler::V1::DeleteJobRequest.new(name: name) do |response, operation|
+      client.delete_job ::Google::Cloud::Scheduler::V1::DeleteJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -339,7 +339,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_job Google::Cloud::Scheduler::V1::DeleteJobRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_job ::Google::Cloud::Scheduler::V1::DeleteJobRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -351,7 +351,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
   def test_pause_job
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Scheduler::V1::Job.new
+    grpc_response = ::Google::Cloud::Scheduler::V1::Job.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -361,14 +361,14 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
     pause_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :pause_job, name
-      assert_kind_of Google::Cloud::Scheduler::V1::PauseJobRequest, request
+      assert_kind_of ::Google::Cloud::Scheduler::V1::PauseJobRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, pause_job_client_stub do
       # Create client
-      client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+      client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -385,7 +385,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.pause_job Google::Cloud::Scheduler::V1::PauseJobRequest.new(name: name) do |response, operation|
+      client.pause_job ::Google::Cloud::Scheduler::V1::PauseJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -397,7 +397,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.pause_job Google::Cloud::Scheduler::V1::PauseJobRequest.new(name: name), grpc_options do |response, operation|
+      client.pause_job ::Google::Cloud::Scheduler::V1::PauseJobRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -409,7 +409,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
   def test_resume_job
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Scheduler::V1::Job.new
+    grpc_response = ::Google::Cloud::Scheduler::V1::Job.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -419,14 +419,14 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
     resume_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :resume_job, name
-      assert_kind_of Google::Cloud::Scheduler::V1::ResumeJobRequest, request
+      assert_kind_of ::Google::Cloud::Scheduler::V1::ResumeJobRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, resume_job_client_stub do
       # Create client
-      client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+      client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -443,7 +443,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.resume_job Google::Cloud::Scheduler::V1::ResumeJobRequest.new(name: name) do |response, operation|
+      client.resume_job ::Google::Cloud::Scheduler::V1::ResumeJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -455,7 +455,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.resume_job Google::Cloud::Scheduler::V1::ResumeJobRequest.new(name: name), grpc_options do |response, operation|
+      client.resume_job ::Google::Cloud::Scheduler::V1::ResumeJobRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -467,7 +467,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
   def test_run_job
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Scheduler::V1::Job.new
+    grpc_response = ::Google::Cloud::Scheduler::V1::Job.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -477,14 +477,14 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
     run_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :run_job, name
-      assert_kind_of Google::Cloud::Scheduler::V1::RunJobRequest, request
+      assert_kind_of ::Google::Cloud::Scheduler::V1::RunJobRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, run_job_client_stub do
       # Create client
-      client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+      client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -501,7 +501,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.run_job Google::Cloud::Scheduler::V1::RunJobRequest.new(name: name) do |response, operation|
+      client.run_job ::Google::Cloud::Scheduler::V1::RunJobRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -513,7 +513,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.run_job Google::Cloud::Scheduler::V1::RunJobRequest.new(name: name), grpc_options do |response, operation|
+      client.run_job ::Google::Cloud::Scheduler::V1::RunJobRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -528,7 +528,7 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+      client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -538,6 +538,6 @@ class Google::Cloud::Scheduler::V1::CloudScheduler::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Scheduler::V1::CloudScheduler::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Scheduler::V1::CloudScheduler::Client::Configuration, config
   end
 end
