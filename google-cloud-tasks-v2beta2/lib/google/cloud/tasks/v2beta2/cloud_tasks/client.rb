@@ -39,15 +39,15 @@ module Google
             ##
             # Configure the CloudTasks Client class.
             #
-            # See {Google::Cloud::Tasks::V2beta2::CloudTasks::Client::Configuration}
+            # See {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all CloudTasks clients:
             #
-            #     Google::Cloud::Tasks::V2beta2::CloudTasks::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -167,7 +167,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Tasks::V2beta2::CloudTasks::Client::Configuration}
+            # See {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -188,13 +188,13 @@ module Google
             # To create a new CloudTasks client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
+            #     client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
             #
             # To create a new CloudTasks client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the CloudTasks client.
@@ -221,8 +221,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @cloud_tasks_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Tasks::V2beta2::CloudTasks::Stub,
+              @cloud_tasks_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Tasks::V2beta2::CloudTasks::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -239,12 +239,12 @@ module Google
             #
             # @overload list_queues(request, options = nil)
             #   Pass arguments to `list_queues` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::ListQueuesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::ListQueuesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::ListQueuesRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::ListQueuesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_queues(parent: nil, filter: nil, page_size: nil, page_token: nil)
@@ -252,11 +252,11 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The location name.
             #     For example: `projects/PROJECT_ID/locations/LOCATION_ID`
-            #   @param filter [String]
-            #     `filter` can be used to specify a subset of queues. Any {Google::Cloud::Tasks::V2beta2::Queue Queue}
+            #   @param filter [::String]
+            #     `filter` can be used to specify a subset of queues. Any {::Google::Cloud::Tasks::V2beta2::Queue Queue}
             #     field can be used as a filter and several operators as supported.
             #     For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
             #     described in
@@ -267,45 +267,45 @@ module Google
             #
             #     Note that using filters might cause fewer queues than the
             #     requested_page size to be returned.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Requested page size.
             #
             #     The maximum page size is 9800. If unspecified, the page size will
             #     be the maximum. Fewer queues than requested might be returned,
             #     even if more queues exist; use the
-            #     {Google::Cloud::Tasks::V2beta2::ListQueuesResponse#next_page_token next_page_token} in the
+            #     {::Google::Cloud::Tasks::V2beta2::ListQueuesResponse#next_page_token next_page_token} in the
             #     response to determine if more queues exist.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying the page of results to return.
             #
             #     To request the first page results, page_token must be empty. To
             #     request the next page of results, page_token must be the value of
-            #     {Google::Cloud::Tasks::V2beta2::ListQueuesResponse#next_page_token next_page_token} returned
-            #     from the previous call to {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_queues ListQueues}
+            #     {::Google::Cloud::Tasks::V2beta2::ListQueuesResponse#next_page_token next_page_token} returned
+            #     from the previous call to {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_queues ListQueues}
             #     method. It is an error to switch the value of the
-            #     {Google::Cloud::Tasks::V2beta2::ListQueuesRequest#filter filter} while iterating through pages.
+            #     {::Google::Cloud::Tasks::V2beta2::ListQueuesRequest#filter filter} while iterating through pages.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Queue>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Tasks::V2beta2::Queue>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Queue>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Tasks::V2beta2::Queue>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_queues request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::ListQueuesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::ListQueuesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_queues.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -323,12 +323,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_tasks_stub.call_rpc :list_queues, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @cloud_tasks_stub, :list_queues, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @cloud_tasks_stub, :list_queues, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -336,12 +336,12 @@ module Google
             #
             # @overload get_queue(request, options = nil)
             #   Pass arguments to `get_queue` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::GetQueueRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::GetQueueRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::GetQueueRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::GetQueueRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_queue(name: nil)
@@ -349,31 +349,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the queue. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Queue]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Queue]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Queue]
+            # @return [::Google::Cloud::Tasks::V2beta2::Queue]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_queue request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::GetQueueRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::GetQueueRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_queue.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -394,8 +394,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -414,12 +414,12 @@ module Google
             #
             # @overload create_queue(request, options = nil)
             #   Pass arguments to `create_queue` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::CreateQueueRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::CreateQueueRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::CreateQueueRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::CreateQueueRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_queue(parent: nil, queue: nil)
@@ -427,39 +427,39 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The location name in which the queue will be created.
             #     For example: `projects/PROJECT_ID/locations/LOCATION_ID`
             #
             #     The list of allowed locations can be obtained by calling Cloud
             #     Tasks' implementation of
             #     [ListLocations][google.cloud.location.Locations.ListLocations].
-            #   @param queue [Google::Cloud::Tasks::V2beta2::Queue, Hash]
+            #   @param queue [::Google::Cloud::Tasks::V2beta2::Queue, ::Hash]
             #     Required. The queue to create.
             #
             #     [Queue's name][google.cloud.tasks.v2beta2.Queue.name] cannot be the same as an existing queue.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Queue]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Queue]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Queue]
+            # @return [::Google::Cloud::Tasks::V2beta2::Queue]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_queue request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::CreateQueueRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::CreateQueueRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_queue.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -480,8 +480,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -503,12 +503,12 @@ module Google
             #
             # @overload update_queue(request, options = nil)
             #   Pass arguments to `update_queue` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::UpdateQueueRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::UpdateQueueRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::UpdateQueueRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::UpdateQueueRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_queue(queue: nil, update_mask: nil)
@@ -516,40 +516,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param queue [Google::Cloud::Tasks::V2beta2::Queue, Hash]
+            #   @param queue [::Google::Cloud::Tasks::V2beta2::Queue, ::Hash]
             #     Required. The queue to create or update.
             #
-            #     The queue's {Google::Cloud::Tasks::V2beta2::Queue#name name} must be specified.
+            #     The queue's {::Google::Cloud::Tasks::V2beta2::Queue#name name} must be specified.
             #
             #     Output only fields cannot be modified using UpdateQueue.
             #     Any value specified for an output only field will be ignored.
-            #     The queue's {Google::Cloud::Tasks::V2beta2::Queue#name name} cannot be changed.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #     The queue's {::Google::Cloud::Tasks::V2beta2::Queue#name name} cannot be changed.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     A mask used to specify which fields of the queue are being updated.
             #
             #     If empty, then all fields will be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Queue]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Queue]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Queue]
+            # @return [::Google::Cloud::Tasks::V2beta2::Queue]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_queue request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::UpdateQueueRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::UpdateQueueRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_queue.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -570,8 +570,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -591,12 +591,12 @@ module Google
             #
             # @overload delete_queue(request, options = nil)
             #   Pass arguments to `delete_queue` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::DeleteQueueRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::DeleteQueueRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::DeleteQueueRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::DeleteQueueRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_queue(name: nil)
@@ -604,31 +604,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The queue name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_queue request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::DeleteQueueRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::DeleteQueueRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_queue.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -649,8 +649,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -663,12 +663,12 @@ module Google
             #
             # @overload purge_queue(request, options = nil)
             #   Pass arguments to `purge_queue` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::PurgeQueueRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::PurgeQueueRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::PurgeQueueRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::PurgeQueueRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload purge_queue(name: nil)
@@ -676,31 +676,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The queue name. For example:
             #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Queue]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Queue]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Queue]
+            # @return [::Google::Cloud::Tasks::V2beta2::Queue]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def purge_queue request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::PurgeQueueRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::PurgeQueueRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.purge_queue.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -721,8 +721,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -730,18 +730,18 @@ module Google
             #
             # If a queue is paused then the system will stop dispatching tasks
             # until the queue is resumed via
-            # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#resume_queue ResumeQueue}. Tasks can still be added
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#resume_queue ResumeQueue}. Tasks can still be added
             # when the queue is paused. A queue is paused if its
-            # {Google::Cloud::Tasks::V2beta2::Queue#state state} is {Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED}.
+            # {::Google::Cloud::Tasks::V2beta2::Queue#state state} is {::Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED}.
             #
             # @overload pause_queue(request, options = nil)
             #   Pass arguments to `pause_queue` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::PauseQueueRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::PauseQueueRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::PauseQueueRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::PauseQueueRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload pause_queue(name: nil)
@@ -749,31 +749,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The queue name. For example:
             #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Queue]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Queue]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Queue]
+            # @return [::Google::Cloud::Tasks::V2beta2::Queue]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def pause_queue request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::PauseQueueRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::PauseQueueRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.pause_queue.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -794,18 +794,18 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Resume a queue.
             #
             # This method resumes a queue after it has been
-            # {Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED} or
-            # {Google::Cloud::Tasks::V2beta2::Queue::State::DISABLED DISABLED}. The state of a queue is stored
-            # in the queue's {Google::Cloud::Tasks::V2beta2::Queue#state state}; after calling this method it
-            # will be set to {Google::Cloud::Tasks::V2beta2::Queue::State::RUNNING RUNNING}.
+            # {::Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED} or
+            # {::Google::Cloud::Tasks::V2beta2::Queue::State::DISABLED DISABLED}. The state of a queue is stored
+            # in the queue's {::Google::Cloud::Tasks::V2beta2::Queue#state state}; after calling this method it
+            # will be set to {::Google::Cloud::Tasks::V2beta2::Queue::State::RUNNING RUNNING}.
             #
             # WARNING: Resuming many high-QPS queues at the same time can
             # lead to target overloading. If you are resuming high-QPS
@@ -815,12 +815,12 @@ module Google
             #
             # @overload resume_queue(request, options = nil)
             #   Pass arguments to `resume_queue` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::ResumeQueueRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::ResumeQueueRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::ResumeQueueRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::ResumeQueueRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload resume_queue(name: nil)
@@ -828,31 +828,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The queue name. For example:
             #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Queue]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Queue]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Queue]
+            # @return [::Google::Cloud::Tasks::V2beta2::Queue]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def resume_queue request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::ResumeQueueRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::ResumeQueueRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.resume_queue.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -873,12 +873,12 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Gets the access control policy for a {Google::Cloud::Tasks::V2beta2::Queue Queue}.
+            # Gets the access control policy for a {::Google::Cloud::Tasks::V2beta2::Queue Queue}.
             # Returns an empty policy if the resource exists and does not have a policy
             # set.
             #
@@ -890,12 +890,12 @@ module Google
             #
             # @overload get_iam_policy(request, options = nil)
             #   Pass arguments to `get_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::GetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_iam_policy(resource: nil, options: nil)
@@ -903,34 +903,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param options [Google::Iam::V1::GetPolicyOptions, Hash]
+            #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
             #     `GetIamPolicy`. This field is only used by Cloud IAM.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::GetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -951,12 +951,12 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Sets the access control policy for a {Google::Cloud::Tasks::V2beta2::Queue Queue}. Replaces any existing
+            # Sets the access control policy for a {::Google::Cloud::Tasks::V2beta2::Queue Queue}. Replaces any existing
             # policy.
             #
             # Note: The Cloud Console does not check queue-level IAM permissions yet.
@@ -970,12 +970,12 @@ module Google
             #
             # @overload set_iam_policy(request, options = nil)
             #   Pass arguments to `set_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::SetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_iam_policy(resource: nil, policy: nil)
@@ -983,36 +983,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being specified.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param policy [Google::Iam::V1::Policy, Hash]
+            #   @param policy [::Google::Iam::V1::Policy, ::Hash]
             #     REQUIRED: The complete policy to be applied to the `resource`. The size of
             #     the policy is limited to a few 10s of KB. An empty policy is a
             #     valid policy but certain Cloud Platform services (such as Projects)
             #     might reject them.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::SetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1033,12 +1033,12 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Returns permissions that a caller has on a {Google::Cloud::Tasks::V2beta2::Queue Queue}.
+            # Returns permissions that a caller has on a {::Google::Cloud::Tasks::V2beta2::Queue Queue}.
             # If the resource does not exist, this will return an empty set of
             # permissions, not a [NOT_FOUND][google.rpc.Code.NOT_FOUND] error.
             #
@@ -1048,12 +1048,12 @@ module Google
             #
             # @overload test_iam_permissions(request, options = nil)
             #   Pass arguments to `test_iam_permissions` via a request object, either of type
-            #   {Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::TestIamPermissionsRequest, Hash]
+            #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload test_iam_permissions(resource: nil, permissions: nil)
@@ -1061,36 +1061,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy detail is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param permissions [Array<String>]
+            #   @param permissions [::Array<::String>]
             #     The set of permissions to check for the `resource`. Permissions with
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more
             #     information see
             #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::TestIamPermissionsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::TestIamPermissionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::TestIamPermissionsResponse]
+            # @return [::Google::Iam::V1::TestIamPermissionsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def test_iam_permissions request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::TestIamPermissionsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1111,16 +1111,16 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Lists the tasks in a queue.
             #
-            # By default, only the {Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC} view is retrieved
+            # By default, only the {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC} view is retrieved
             # due to performance considerations;
-            # {Google::Cloud::Tasks::V2beta2::ListTasksRequest#response_view response_view} controls the
+            # {::Google::Cloud::Tasks::V2beta2::ListTasksRequest#response_view response_view} controls the
             # subset of information which is returned.
             #
             # The tasks may be returned in any order. The ordering may change at any
@@ -1128,12 +1128,12 @@ module Google
             #
             # @overload list_tasks(request, options = nil)
             #   Pass arguments to `list_tasks` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::ListTasksRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::ListTasksRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::ListTasksRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::ListTasksRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_tasks(parent: nil, response_view: nil, page_size: nil, page_token: nil)
@@ -1141,63 +1141,63 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The queue name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
-            #   @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
+            #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
+            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
             #     returned.
             #
-            #     By default response_view is {Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
+            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
             #     information is retrieved by default because some data, such as
             #     payloads, might be desirable to return only when needed because
             #     of its large size or because of the sensitivity of data that it
             #     contains.
             #
-            #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
             #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
-            #   @param page_size [Integer]
+            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #   @param page_size [::Integer]
             #     Maximum page size.
             #
             #     Fewer tasks than requested might be returned, even if more tasks exist; use
-            #     {Google::Cloud::Tasks::V2beta2::ListTasksResponse#next_page_token next_page_token} in the response to
+            #     {::Google::Cloud::Tasks::V2beta2::ListTasksResponse#next_page_token next_page_token} in the response to
             #     determine if more tasks exist.
             #
             #     The maximum page size is 1000. If unspecified, the page size will be the
             #     maximum.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying the page of results to return.
             #
             #     To request the first page results, page_token must be empty. To
             #     request the next page of results, page_token must be the value of
-            #     {Google::Cloud::Tasks::V2beta2::ListTasksResponse#next_page_token next_page_token} returned
-            #     from the previous call to {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_tasks ListTasks}
+            #     {::Google::Cloud::Tasks::V2beta2::ListTasksResponse#next_page_token next_page_token} returned
+            #     from the previous call to {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_tasks ListTasks}
             #     method.
             #
             #     The page token is valid for only 2 hours.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Task>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Tasks::V2beta2::Task>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Tasks::V2beta2::Task>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Tasks::V2beta2::Task>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_tasks request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::ListTasksRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::ListTasksRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_tasks.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1215,12 +1215,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_tasks_stub.call_rpc :list_tasks, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @cloud_tasks_stub, :list_tasks, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @cloud_tasks_stub, :list_tasks, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1228,12 +1228,12 @@ module Google
             #
             # @overload get_task(request, options = nil)
             #   Pass arguments to `get_task` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::GetTaskRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::GetTaskRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::GetTaskRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::GetTaskRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_task(name: nil, response_view: nil)
@@ -1241,44 +1241,44 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The task name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
-            #   @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
+            #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
+            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
             #     returned.
             #
-            #     By default response_view is {Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
+            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
             #     information is retrieved by default because some data, such as
             #     payloads, might be desirable to return only when needed because
             #     of its large size or because of the sensitivity of data that it
             #     contains.
             #
-            #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
             #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Task]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Task]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Task]
+            # @return [::Google::Cloud::Tasks::V2beta2::Task]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_task request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::GetTaskRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::GetTaskRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_task.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1299,8 +1299,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1308,18 +1308,18 @@ module Google
             #
             # Tasks cannot be updated after creation; there is no UpdateTask command.
             #
-            # * For {Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget App Engine queues}, the maximum task size is
+            # * For {::Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget App Engine queues}, the maximum task size is
             #   100KB.
-            # * For {Google::Cloud::Tasks::V2beta2::PullTarget pull queues}, the maximum task size is 1MB.
+            # * For {::Google::Cloud::Tasks::V2beta2::PullTarget pull queues}, the maximum task size is 1MB.
             #
             # @overload create_task(request, options = nil)
             #   Pass arguments to `create_task` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::CreateTaskRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::CreateTaskRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::CreateTaskRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::CreateTaskRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_task(parent: nil, task: nil, response_view: nil)
@@ -1327,22 +1327,22 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The queue name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
             #
             #     The queue must already exist.
-            #   @param task [Google::Cloud::Tasks::V2beta2::Task, Hash]
+            #   @param task [::Google::Cloud::Tasks::V2beta2::Task, ::Hash]
             #     Required. The task to add.
             #
             #     Task names have the following format:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
-            #     The user can optionally specify a task {Google::Cloud::Tasks::V2beta2::Task#name name}. If a
+            #     The user can optionally specify a task {::Google::Cloud::Tasks::V2beta2::Task#name name}. If a
             #     name is not specified then the system will generate a random
             #     unique task id, which will be set in the task returned in the
-            #     {Google::Cloud::Tasks::V2beta2::Task#name response}.
+            #     {::Google::Cloud::Tasks::V2beta2::Task#name response}.
             #
-            #     If {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} is not set or is in the
+            #     If {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} is not set or is in the
             #     past then Cloud Tasks will set it to the current time.
             #
             #     Task De-duplication:
@@ -1358,7 +1358,7 @@ module Google
             #     for ~9days after the original task was deleted or completed.
             #
             #     Because there is an extra lookup cost to identify duplicate task
-            #     names, these {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task CreateTask} calls have significantly
+            #     names, these {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task CreateTask} calls have significantly
             #     increased latency. Using hashed strings for the task id or for
             #     the prefix of the task id is recommended. Choosing task ids that
             #     are sequential or have sequential prefixes, for example using a
@@ -1366,41 +1366,41 @@ module Google
             #     task commands. The infrastructure relies on an approximately
             #     uniform distribution of task ids to store and serve tasks
             #     efficiently.
-            #   @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
+            #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
+            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
             #     returned.
             #
-            #     By default response_view is {Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
+            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
             #     information is retrieved by default because some data, such as
             #     payloads, might be desirable to return only when needed because
             #     of its large size or because of the sensitivity of data that it
             #     contains.
             #
-            #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
             #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Task]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Task]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Task]
+            # @return [::Google::Cloud::Tasks::V2beta2::Task]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_task request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::CreateTaskRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::CreateTaskRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_task.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1421,8 +1421,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1434,12 +1434,12 @@ module Google
             #
             # @overload delete_task(request, options = nil)
             #   Pass arguments to `delete_task` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::DeleteTaskRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::DeleteTaskRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::DeleteTaskRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::DeleteTaskRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_task(name: nil)
@@ -1447,31 +1447,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The task name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_task request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::DeleteTaskRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::DeleteTaskRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_task.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1492,42 +1492,42 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Leases tasks from a pull queue for
-            # {Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration lease_duration}.
+            # {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration lease_duration}.
             #
             # This method is invoked by the worker to obtain a lease. The
             # worker must acknowledge the task via
-            # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#acknowledge_task AcknowledgeTask} after they have
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#acknowledge_task AcknowledgeTask} after they have
             # performed the work associated with the task.
             #
-            # The {Google::Cloud::Tasks::V2beta2::PullMessage#payload payload} is intended to store data that
+            # The {::Google::Cloud::Tasks::V2beta2::PullMessage#payload payload} is intended to store data that
             # the worker needs to perform the work associated with the task. To
-            # return the payloads in the {Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response}, set
-            # {Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#response_view response_view} to
-            # {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}.
+            # return the payloads in the {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response}, set
+            # {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#response_view response_view} to
+            # {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}.
             #
-            # A maximum of 10 qps of {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks}
+            # A maximum of 10 qps of {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks}
             # requests are allowed per
             # queue. [RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]
             # is returned when this limit is
             # exceeded. [RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]
             # is also returned when
-            # {Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second max_tasks_dispatched_per_second}
+            # {::Google::Cloud::Tasks::V2beta2::RateLimits#max_tasks_dispatched_per_second max_tasks_dispatched_per_second}
             # is exceeded.
             #
             # @overload lease_tasks(request, options = nil)
             #   Pass arguments to `lease_tasks` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::LeaseTasksRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::LeaseTasksRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload lease_tasks(parent: nil, max_tasks: nil, lease_duration: nil, response_view: nil, filter: nil)
@@ -1535,10 +1535,10 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The queue name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
-            #   @param max_tasks [Integer]
+            #   @param max_tasks [::Integer]
             #     The maximum number of tasks to lease.
             #
             #     The system will make a best effort to return as close to as
@@ -1546,53 +1546,53 @@ module Google
             #
             #     The largest that `max_tasks` can be is 1000.
             #
-            #     The maximum total size of a {Google::Cloud::Tasks::V2beta2::LeaseTasksResponse lease tasks response} is
+            #     The maximum total size of a {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse lease tasks response} is
             #     32 MB. If the sum of all task sizes requested reaches this limit,
             #     fewer tasks than requested are returned.
-            #   @param lease_duration [Google::Protobuf::Duration, Hash]
+            #   @param lease_duration [::Google::Protobuf::Duration, ::Hash]
             #     Required. The duration of the lease.
             #
-            #     Each task returned in the {Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response} will
-            #     have its {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} set to the current
+            #     Each task returned in the {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response} will
+            #     have its {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} set to the current
             #     time plus the `lease_duration`. The task is leased until its
-            #     {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}; thus, the task will not be
-            #     returned to another {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} call
-            #     before its {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}.
+            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}; thus, the task will not be
+            #     returned to another {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} call
+            #     before its {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}.
             #
             #
             #     After the worker has successfully finished the work associated
             #     with the task, the worker must call via
-            #     {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#acknowledge_task AcknowledgeTask} before the
-            #     {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}. Otherwise the task will be
-            #     returned to a later {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} call so
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#acknowledge_task AcknowledgeTask} before the
+            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}. Otherwise the task will be
+            #     returned to a later {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} call so
             #     that another worker can retry it.
             #
             #     The maximum lease duration is 1 week.
             #     `lease_duration` will be truncated to the nearest second.
-            #   @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
+            #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
+            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
             #     returned.
             #
-            #     By default response_view is {Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
+            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
             #     information is retrieved by default because some data, such as
             #     payloads, might be desirable to return only when needed because
             #     of its large size or because of the sensitivity of data that it
             #     contains.
             #
-            #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
             #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
-            #   @param filter [String]
+            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #   @param filter [::String]
             #     `filter` can be used to specify a subset of tasks to lease.
             #
             #     When `filter` is set to `tag=<my-tag>` then the
-            #     {Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response} will contain only tasks whose
-            #     {Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} is equal to `<my-tag>`. `<my-tag>` must be
+            #     {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response} will contain only tasks whose
+            #     {::Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} is equal to `<my-tag>`. `<my-tag>` must be
             #     less than 500 characters.
             #
             #     When `filter` is set to `tag_function=oldest_tag()`, only tasks which have
             #     the same tag as the task with the oldest
-            #     {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} will be returned.
+            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} will be returned.
             #
             #     Grammar Syntax:
             #
@@ -1610,30 +1610,30 @@ module Google
             #     [bytes](https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-),
             #     only UTF-8 encoded tags can be used in Cloud Tasks. Tag which
             #     aren't UTF-8 encoded can't be used in the
-            #     {Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter filter} and the task's
-            #     {Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} will be displayed as empty in Cloud Tasks.
+            #     {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter filter} and the task's
+            #     {::Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} will be displayed as empty in Cloud Tasks.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::LeaseTasksResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::LeaseTasksResponse]
+            # @return [::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def lease_tasks request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::LeaseTasksRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.lease_tasks.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1654,33 +1654,33 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Acknowledges a pull task.
             #
             # The worker, that is, the entity that
-            # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks leased} this task must call this method
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks leased} this task must call this method
             # to indicate that the work associated with the task has finished.
             #
             # The worker must acknowledge a task within the
-            # {Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration lease_duration} or the lease
+            # {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration lease_duration} or the lease
             # will expire and the task will become available to be leased
             # again. After the task is acknowledged, it will not be returned
-            # by a later {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks},
-            # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#get_task GetTask}, or
-            # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_tasks ListTasks}.
+            # by a later {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks},
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#get_task GetTask}, or
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_tasks ListTasks}.
             #
             # @overload acknowledge_task(request, options = nil)
             #   Pass arguments to `acknowledge_task` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload acknowledge_task(name: nil, schedule_time: nil)
@@ -1688,37 +1688,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The task name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
-            #   @param schedule_time [Google::Protobuf::Timestamp, Hash]
+            #   @param schedule_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Required. The task's current schedule time, available in the
-            #     {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} returned by
-            #     {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} response or
-            #     {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response. This restriction is
+            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} returned by
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} response or
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response. This restriction is
             #     to ensure that your worker currently holds the lease.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def acknowledge_task request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::AcknowledgeTaskRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.acknowledge_task.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1739,8 +1739,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1748,16 +1748,16 @@ module Google
             #
             # The worker can use this method to extend the lease by a new
             # duration, starting from now. The new task lease will be
-            # returned in the task's {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}.
+            # returned in the task's {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}.
             #
             # @overload renew_lease(request, options = nil)
             #   Pass arguments to `renew_lease` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::RenewLeaseRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::RenewLeaseRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::RenewLeaseRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::RenewLeaseRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload renew_lease(name: nil, schedule_time: nil, lease_duration: nil, response_view: nil)
@@ -1765,56 +1765,56 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The task name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
-            #   @param schedule_time [Google::Protobuf::Timestamp, Hash]
+            #   @param schedule_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Required. The task's current schedule time, available in the
-            #     {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} returned by
-            #     {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} response or
-            #     {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response. This restriction is
+            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} returned by
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} response or
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response. This restriction is
             #     to ensure that your worker currently holds the lease.
-            #   @param lease_duration [Google::Protobuf::Duration, Hash]
+            #   @param lease_duration [::Google::Protobuf::Duration, ::Hash]
             #     Required. The desired new lease duration, starting from now.
             #
             #
             #     The maximum lease duration is 1 week.
             #     `lease_duration` will be truncated to the nearest second.
-            #   @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
+            #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
+            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
             #     returned.
             #
-            #     By default response_view is {Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
+            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
             #     information is retrieved by default because some data, such as
             #     payloads, might be desirable to return only when needed because
             #     of its large size or because of the sensitivity of data that it
             #     contains.
             #
-            #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
             #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Task]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Task]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Task]
+            # @return [::Google::Cloud::Tasks::V2beta2::Task]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def renew_lease request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::RenewLeaseRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::RenewLeaseRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.renew_lease.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1835,26 +1835,26 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Cancel a pull task's lease.
             #
             # The worker can use this method to cancel a task's lease by
-            # setting its {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} to now. This will
+            # setting its {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} to now. This will
             # make the task available to be leased to the next caller of
-            # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks}.
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks}.
             #
             # @overload cancel_lease(request, options = nil)
             #   Pass arguments to `cancel_lease` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::CancelLeaseRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::CancelLeaseRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::CancelLeaseRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::CancelLeaseRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload cancel_lease(name: nil, schedule_time: nil, response_view: nil)
@@ -1862,50 +1862,50 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The task name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
-            #   @param schedule_time [Google::Protobuf::Timestamp, Hash]
+            #   @param schedule_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Required. The task's current schedule time, available in the
-            #     {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} returned by
-            #     {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} response or
-            #     {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response. This restriction is
+            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} returned by
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} response or
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response. This restriction is
             #     to ensure that your worker currently holds the lease.
-            #   @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
+            #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
+            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
             #     returned.
             #
-            #     By default response_view is {Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
+            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
             #     information is retrieved by default because some data, such as
             #     payloads, might be desirable to return only when needed because
             #     of its large size or because of the sensitivity of data that it
             #     contains.
             #
-            #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
             #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Task]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Task]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Task]
+            # @return [::Google::Cloud::Tasks::V2beta2::Task]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def cancel_lease request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::CancelLeaseRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::CancelLeaseRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.cancel_lease.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1926,47 +1926,47 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Forces a task to run now.
             #
             # When this method is called, Cloud Tasks will dispatch the task, even if
-            # the task is already running, the queue has reached its {Google::Cloud::Tasks::V2beta2::RateLimits RateLimits} or
-            # is {Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED}.
+            # the task is already running, the queue has reached its {::Google::Cloud::Tasks::V2beta2::RateLimits RateLimits} or
+            # is {::Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED}.
             #
             # This command is meant to be used for manual debugging. For
-            # example, {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} can be used to retry a failed
+            # example, {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} can be used to retry a failed
             # task after a fix has been made or to manually force a task to be
             # dispatched now.
             #
             # The dispatched task is returned. That is, the task that is returned
-            # contains the {Google::Cloud::Tasks::V2beta2::Task#status status} after the task is dispatched but
+            # contains the {::Google::Cloud::Tasks::V2beta2::Task#status status} after the task is dispatched but
             # before the task is received by its target.
             #
             # If Cloud Tasks receives a successful response from the task's
             # target, then the task will be deleted; otherwise the task's
-            # {Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} will be reset to the time that
-            # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} was called plus the retry delay specified
-            # in the queue's {Google::Cloud::Tasks::V2beta2::RetryConfig RetryConfig}.
+            # {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} will be reset to the time that
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} was called plus the retry delay specified
+            # in the queue's {::Google::Cloud::Tasks::V2beta2::RetryConfig RetryConfig}.
             #
-            # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} returns
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} returns
             # [NOT_FOUND][google.rpc.Code.NOT_FOUND] when it is called on a
             # task that has already succeeded or permanently failed.
             #
-            # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} cannot be called on a
-            # {Google::Cloud::Tasks::V2beta2::PullMessage pull task}.
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} cannot be called on a
+            # {::Google::Cloud::Tasks::V2beta2::PullMessage pull task}.
             #
             # @overload run_task(request, options = nil)
             #   Pass arguments to `run_task` via a request object, either of type
-            #   {Google::Cloud::Tasks::V2beta2::RunTaskRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Tasks::V2beta2::RunTaskRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Tasks::V2beta2::RunTaskRequest, Hash]
+            #   @param request [::Google::Cloud::Tasks::V2beta2::RunTaskRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload run_task(name: nil, response_view: nil)
@@ -1974,44 +1974,44 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The task name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
-            #   @param response_view [Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {Google::Cloud::Tasks::V2beta2::Task Task} will be
+            #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
+            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
             #     returned.
             #
-            #     By default response_view is {Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
+            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
             #     information is retrieved by default because some data, such as
             #     payloads, might be desirable to return only when needed because
             #     of its large size or because of the sensitivity of data that it
             #     contains.
             #
-            #     Authorization for {Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
             #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Tasks::V2beta2::Task]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Task]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Tasks::V2beta2::Task]
+            # @return [::Google::Cloud::Tasks::V2beta2::Task]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def run_task request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Tasks::V2beta2::RunTaskRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Tasks::V2beta2::RunTaskRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.run_task.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Tasks::V2beta2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2032,8 +2032,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2043,7 +2043,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Tasks::V2beta2::CloudTasks::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -2054,22 +2054,22 @@ module Google
             # To modify the global config, setting the timeout for list_queues
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Tasks::V2beta2::CloudTasks::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_queues.timeout = 20_000
+            #     ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_queues.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_queues.timeout = 20_000
+            #     client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_queues.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"cloudtasks.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -2081,29 +2081,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -2111,10 +2111,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "cloudtasks.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -2122,14 +2122,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -2170,147 +2170,147 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_queues`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_queues
                 ##
                 # RPC-specific configuration for `get_queue`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_queue
                 ##
                 # RPC-specific configuration for `create_queue`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_queue
                 ##
                 # RPC-specific configuration for `update_queue`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_queue
                 ##
                 # RPC-specific configuration for `delete_queue`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_queue
                 ##
                 # RPC-specific configuration for `purge_queue`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :purge_queue
                 ##
                 # RPC-specific configuration for `pause_queue`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :pause_queue
                 ##
                 # RPC-specific configuration for `resume_queue`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :resume_queue
                 ##
                 # RPC-specific configuration for `get_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_iam_policy
                 ##
                 # RPC-specific configuration for `set_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_iam_policy
                 ##
                 # RPC-specific configuration for `test_iam_permissions`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_iam_permissions
                 ##
                 # RPC-specific configuration for `list_tasks`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_tasks
                 ##
                 # RPC-specific configuration for `get_task`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_task
                 ##
                 # RPC-specific configuration for `create_task`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_task
                 ##
                 # RPC-specific configuration for `delete_task`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_task
                 ##
                 # RPC-specific configuration for `lease_tasks`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :lease_tasks
                 ##
                 # RPC-specific configuration for `acknowledge_task`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :acknowledge_task
                 ##
                 # RPC-specific configuration for `renew_lease`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :renew_lease
                 ##
                 # RPC-specific configuration for `cancel_lease`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :cancel_lease
                 ##
                 # RPC-specific configuration for `run_task`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :run_task
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_queues_config = parent_rpcs&.list_queues if parent_rpcs&.respond_to? :list_queues
-                  @list_queues = Gapic::Config::Method.new list_queues_config
+                  @list_queues = ::Gapic::Config::Method.new list_queues_config
                   get_queue_config = parent_rpcs&.get_queue if parent_rpcs&.respond_to? :get_queue
-                  @get_queue = Gapic::Config::Method.new get_queue_config
+                  @get_queue = ::Gapic::Config::Method.new get_queue_config
                   create_queue_config = parent_rpcs&.create_queue if parent_rpcs&.respond_to? :create_queue
-                  @create_queue = Gapic::Config::Method.new create_queue_config
+                  @create_queue = ::Gapic::Config::Method.new create_queue_config
                   update_queue_config = parent_rpcs&.update_queue if parent_rpcs&.respond_to? :update_queue
-                  @update_queue = Gapic::Config::Method.new update_queue_config
+                  @update_queue = ::Gapic::Config::Method.new update_queue_config
                   delete_queue_config = parent_rpcs&.delete_queue if parent_rpcs&.respond_to? :delete_queue
-                  @delete_queue = Gapic::Config::Method.new delete_queue_config
+                  @delete_queue = ::Gapic::Config::Method.new delete_queue_config
                   purge_queue_config = parent_rpcs&.purge_queue if parent_rpcs&.respond_to? :purge_queue
-                  @purge_queue = Gapic::Config::Method.new purge_queue_config
+                  @purge_queue = ::Gapic::Config::Method.new purge_queue_config
                   pause_queue_config = parent_rpcs&.pause_queue if parent_rpcs&.respond_to? :pause_queue
-                  @pause_queue = Gapic::Config::Method.new pause_queue_config
+                  @pause_queue = ::Gapic::Config::Method.new pause_queue_config
                   resume_queue_config = parent_rpcs&.resume_queue if parent_rpcs&.respond_to? :resume_queue
-                  @resume_queue = Gapic::Config::Method.new resume_queue_config
+                  @resume_queue = ::Gapic::Config::Method.new resume_queue_config
                   get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
-                  @get_iam_policy = Gapic::Config::Method.new get_iam_policy_config
+                  @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
-                  @set_iam_policy = Gapic::Config::Method.new set_iam_policy_config
+                  @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                   test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
-                  @test_iam_permissions = Gapic::Config::Method.new test_iam_permissions_config
+                  @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                   list_tasks_config = parent_rpcs&.list_tasks if parent_rpcs&.respond_to? :list_tasks
-                  @list_tasks = Gapic::Config::Method.new list_tasks_config
+                  @list_tasks = ::Gapic::Config::Method.new list_tasks_config
                   get_task_config = parent_rpcs&.get_task if parent_rpcs&.respond_to? :get_task
-                  @get_task = Gapic::Config::Method.new get_task_config
+                  @get_task = ::Gapic::Config::Method.new get_task_config
                   create_task_config = parent_rpcs&.create_task if parent_rpcs&.respond_to? :create_task
-                  @create_task = Gapic::Config::Method.new create_task_config
+                  @create_task = ::Gapic::Config::Method.new create_task_config
                   delete_task_config = parent_rpcs&.delete_task if parent_rpcs&.respond_to? :delete_task
-                  @delete_task = Gapic::Config::Method.new delete_task_config
+                  @delete_task = ::Gapic::Config::Method.new delete_task_config
                   lease_tasks_config = parent_rpcs&.lease_tasks if parent_rpcs&.respond_to? :lease_tasks
-                  @lease_tasks = Gapic::Config::Method.new lease_tasks_config
+                  @lease_tasks = ::Gapic::Config::Method.new lease_tasks_config
                   acknowledge_task_config = parent_rpcs&.acknowledge_task if parent_rpcs&.respond_to? :acknowledge_task
-                  @acknowledge_task = Gapic::Config::Method.new acknowledge_task_config
+                  @acknowledge_task = ::Gapic::Config::Method.new acknowledge_task_config
                   renew_lease_config = parent_rpcs&.renew_lease if parent_rpcs&.respond_to? :renew_lease
-                  @renew_lease = Gapic::Config::Method.new renew_lease_config
+                  @renew_lease = ::Gapic::Config::Method.new renew_lease_config
                   cancel_lease_config = parent_rpcs&.cancel_lease if parent_rpcs&.respond_to? :cancel_lease
-                  @cancel_lease = Gapic::Config::Method.new cancel_lease_config
+                  @cancel_lease = ::Gapic::Config::Method.new cancel_lease_config
                   run_task_config = parent_rpcs&.run_task if parent_rpcs&.respond_to? :run_task
-                  @run_task = Gapic::Config::Method.new run_task_config
+                  @run_task = ::Gapic::Config::Method.new run_task_config
 
                   yield self if block_given?
                 end

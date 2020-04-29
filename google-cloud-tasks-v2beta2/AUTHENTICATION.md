@@ -27,7 +27,7 @@ export TASKS_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/tasks/v2beta2"
 
-client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
+client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-tasks-v2beta2
 checks for credentials are configured on the service Credentials class (such as
-{Google::Cloud::Tasks::V2beta2::CloudTasks::Credentials}):
+{::Google::Cloud::Tasks::V2beta2::CloudTasks::Credentials}):
 
 1. `TASKS_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `TASKS_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/tasks/v2beta2"
 
 ENV["TASKS_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
+client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/tasks/v2beta2"
 
-client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new do |config|
+client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/tasks/v2beta2"
 
-Google::Cloud::Tasks::V2beta2::CloudTasks::Client.configure do |config|
+::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
+client = ::Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
 ```
 
 ### Cloud SDK
