@@ -23,7 +23,7 @@ module Google
       module V1
         # Home office and physical location of the principal.
         # @!attribute [rw] principal_office_country
-        #   @return [String]
+        #   @return [::String]
         #     The "home office" location of the principal. A two-letter country code
         #     (ISO 3166-1 alpha-2), such as "US", "DE" or "GB" or a region code. In some
         #     limited situations Google systems may refer refer to a region code instead
@@ -40,7 +40,7 @@ module Google
         #       <li>ANY: Any location</li>
         #     </ol>
         # @!attribute [rw] principal_physical_location_country
-        #   @return [String]
+        #   @return [::String]
         #     Physical location of the principal at the time of the access. A
         #     two-letter country code (ISO 3166-1 alpha-2), such as "US", "DE" or "GB" or
         #     a region code. In some limited situations Google systems may refer refer to
@@ -57,19 +57,19 @@ module Google
         #       <li>ANY: Any location</li>
         #     </ol>
         class AccessLocations
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # @!attribute [rw] type
-        #   @return [Google::Cloud::AccessApproval::V1::AccessReason::Type]
+        #   @return [::Google::Cloud::AccessApproval::V1::AccessReason::Type]
         #     Type of access justification.
         # @!attribute [rw] detail
-        #   @return [String]
+        #   @return [::String]
         #     More detail about certain reason types. See comments for each type above.
         class AccessReason
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Type of access justification.
           module Type
@@ -102,42 +102,42 @@ module Google
 
         # A decision that has been made to approve access to a resource.
         # @!attribute [rw] approve_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time at which approval was granted.
         # @!attribute [rw] expire_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the approval expires.
         class ApproveDecision
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A decision that has been made to dismiss an approval request.
         # @!attribute [rw] dismiss_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the approval request was dismissed.
         class DismissDecision
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The properties associated with the resource of the request.
         # @!attribute [rw] excludes_descendants
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Whether an approval will exclude the descendants of the resource being
         #     requested.
         class ResourceProperties
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request for the customer to approve access to a resource.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The resource name of the request. Format is
         #     "\\{projects|folders|organizations}/\\{id}/approvalRequests/\\{approval_request_id}".
         # @!attribute [rw] requested_resource_name
-        #   @return [String]
+        #   @return [::String]
         #     The resource for which approval is being requested. The format of the
         #     resource name is defined at
         #     https://cloud.google.com/apis/design/resource_names. The resource name here
@@ -146,35 +146,35 @@ module Google
         #     resource name (e.g. "shelves/shelf1/books/book2") as described in the
         #     resource name specification.
         # @!attribute [rw] requested_resource_properties
-        #   @return [Google::Cloud::AccessApproval::V1::ResourceProperties]
+        #   @return [::Google::Cloud::AccessApproval::V1::ResourceProperties]
         #     Properties related to the resource represented by requested_resource_name.
         # @!attribute [rw] requested_reason
-        #   @return [Google::Cloud::AccessApproval::V1::AccessReason]
+        #   @return [::Google::Cloud::AccessApproval::V1::AccessReason]
         #     The justification for which approval is being requested.
         # @!attribute [rw] requested_locations
-        #   @return [Google::Cloud::AccessApproval::V1::AccessLocations]
+        #   @return [::Google::Cloud::AccessApproval::V1::AccessLocations]
         #     The locations for which approval is being requested.
         # @!attribute [rw] request_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time at which approval was requested.
         # @!attribute [rw] requested_expiration
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The requested expiration for the approval. If the request is approved,
         #     access will be granted from the time of approval until the expiration time.
         # @!attribute [rw] approve
-        #   @return [Google::Cloud::AccessApproval::V1::ApproveDecision]
+        #   @return [::Google::Cloud::AccessApproval::V1::ApproveDecision]
         #     Access was approved.
         # @!attribute [rw] dismiss
-        #   @return [Google::Cloud::AccessApproval::V1::DismissDecision]
+        #   @return [::Google::Cloud::AccessApproval::V1::DismissDecision]
         #     The request was dismissed.
         class ApprovalRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents the enrollment of a cloud resource into a specific service.
         # @!attribute [rw] cloud_product
-        #   @return [String]
+        #   @return [::String]
         #     The product for which Access Approval will be enrolled. Allowed values are
         #     listed below (case-sensitive):
         #     <ol>
@@ -190,16 +190,16 @@ module Google
         #       <li>storage.googleapis.com</li>
         #     <ol>
         # @!attribute [rw] enrollment_level
-        #   @return [Google::Cloud::AccessApproval::V1::EnrollmentLevel]
+        #   @return [::Google::Cloud::AccessApproval::V1::EnrollmentLevel]
         #     The enrollment level of the service.
         class EnrolledService
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Settings on a Project/Folder/Organization related to Access Approval.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The resource name of the settings. Format is one of:
         #     <ol>
         #       <li>"projects/\\{project_id}/accessApprovalSettings"</li>
@@ -207,13 +207,13 @@ module Google
         #       <li>"organizations/\\{organization_id}/accessApprovalSettings"</li>
         #     <ol>
         # @!attribute [rw] notification_emails
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     A list of email addresses to which notifications relating to approval
         #     requests should be sent. Notifications relating to a resource will be sent
         #     to all emails in the settings of ancestor resources of that resource. A
         #     maximum of 50 email addresses are allowed.
         # @!attribute [rw] enrolled_services
-        #   @return [Array<Google::Cloud::AccessApproval::V1::EnrolledService>]
+        #   @return [::Array<::Google::Cloud::AccessApproval::V1::EnrolledService>]
         #     A list of Google Cloud Services for which the given resource has Access
         #     Approval enrolled. Access requests for the resource given by name against
         #     any of these services contained here will be required to have explicit
@@ -226,24 +226,24 @@ module Google
         #     enrolled services will be enforced, to be expanded as the set of supported
         #     services is expanded.
         # @!attribute [r] enrolled_ancestor
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Output only. This field is read only (not settable via
         #     UpdateAccessAccessApprovalSettings method). If the field is true, that
         #     indicates that at least one service is enrolled for Access Approval in one
         #     or more ancestors of the Project or Folder (this field will always be
         #     unset for the organization since organizations do not have ancestors).
         class AccessApprovalSettings
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to list approval requests.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     The parent resource. This may be "projects/\\{project_id}",
         #     "folders/\\{folder_id}", or "organizations/\\{organization_id}".
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     A filter on the type of approval requests to retrieve. Must be one of the
         #     following values:
         #     <ol>
@@ -254,73 +254,73 @@ module Google
         #       <li>DISMISSED: Only dismissed (including expired) requests.</li>
         #     </ol>
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Requested page size.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     A token identifying the page of results to return.
         class ListApprovalRequestsMessage
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response to listing of ApprovalRequest objects.
         # @!attribute [rw] approval_requests
-        #   @return [Array<Google::Cloud::AccessApproval::V1::ApprovalRequest>]
+        #   @return [::Array<::Google::Cloud::AccessApproval::V1::ApprovalRequest>]
         #     Approval request details.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no more.
         class ListApprovalRequestsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to get an approval request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Name of the approval request to retrieve.
         class GetApprovalRequestMessage
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to approve an ApprovalRequest.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Name of the approval request to approve.
         # @!attribute [rw] expire_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The expiration time of this approval.
         class ApproveApprovalRequestMessage
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to dismiss an approval request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Name of the ApprovalRequest to dismiss.
         class DismissApprovalRequestMessage
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to get access approval settings.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Name of the AccessApprovalSettings to retrieve.
         class GetAccessApprovalSettingsMessage
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to update access approval settings.
         # @!attribute [rw] settings
-        #   @return [Google::Cloud::AccessApproval::V1::AccessApprovalSettings]
+        #   @return [::Google::Cloud::AccessApproval::V1::AccessApprovalSettings]
         #     The new AccessApprovalSettings.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     The update mask applies to the settings. Only the top level fields of
         #     AccessApprovalSettings (notification_emails & enrolled_services) are
         #     supported. For each field, if it is included, the currently stored value
@@ -332,17 +332,17 @@ module Google
         #     If this field is left unset, only the notification_emails field will be
         #     updated.
         class UpdateAccessApprovalSettingsMessage
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to delete access approval settings.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Name of the AccessApprovalSettings to delete.
         class DeleteAccessApprovalSettingsMessage
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Represents the type of enrollment for a given service to Access Approval.

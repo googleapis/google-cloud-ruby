@@ -34,7 +34,7 @@ module Google
         # Google personnel. It defines the following resource model:
         #
         # - The API has a collection of
-        #   {Google::Cloud::AccessApproval::V1::ApprovalRequest ApprovalRequest}
+        #   {::Google::Cloud::AccessApproval::V1::ApprovalRequest ApprovalRequest}
         #   resources, named `approvalRequests/{approval_request_id}`
         # - The API has top-level settings per Project/Folder/Organization, named
         #   `accessApprovalSettings`
@@ -67,7 +67,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/access_approval/v1/access_approval"
-        #     client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+        #     client = ::Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
         #
         module AccessApproval
         end
