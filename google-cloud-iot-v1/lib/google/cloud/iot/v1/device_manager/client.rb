@@ -38,15 +38,15 @@ module Google
             ##
             # Configure the DeviceManager Client class.
             #
-            # See {Google::Cloud::Iot::V1::DeviceManager::Client::Configuration}
+            # See {::Google::Cloud::Iot::V1::DeviceManager::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all DeviceManager clients:
             #
-            #     Google::Cloud::Iot::V1::DeviceManager::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Iot::V1::DeviceManager::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -176,7 +176,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Iot::V1::DeviceManager::Client::Configuration}
+            # See {::Google::Cloud::Iot::V1::DeviceManager::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -197,13 +197,13 @@ module Google
             # To create a new DeviceManager client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+            #     client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new
             #
             # To create a new DeviceManager client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Iot::V1::DeviceManager::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the DeviceManager client.
@@ -230,8 +230,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @device_manager_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Iot::V1::DeviceManager::Stub,
+              @device_manager_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Iot::V1::DeviceManager::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -246,12 +246,12 @@ module Google
             #
             # @overload create_device_registry(request, options = nil)
             #   Pass arguments to `create_device_registry` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::CreateDeviceRegistryRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::CreateDeviceRegistryRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::CreateDeviceRegistryRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::CreateDeviceRegistryRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_device_registry(parent: nil, device_registry: nil)
@@ -259,35 +259,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The project and cloud region where this device registry must be created.
             #     For example, `projects/example-project/locations/us-central1`.
-            #   @param device_registry [Google::Cloud::Iot::V1::DeviceRegistry, Hash]
+            #   @param device_registry [::Google::Cloud::Iot::V1::DeviceRegistry, ::Hash]
             #     Required. The device registry. The field `name` must be empty. The server will
             #     generate that field from the device registry `id` provided and the
             #     `parent` field.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::DeviceRegistry]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::DeviceRegistry]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::DeviceRegistry]
+            # @return [::Google::Cloud::Iot::V1::DeviceRegistry]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_device_registry request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::CreateDeviceRegistryRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::CreateDeviceRegistryRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_device_registry.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -308,8 +308,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -317,12 +317,12 @@ module Google
             #
             # @overload get_device_registry(request, options = nil)
             #   Pass arguments to `get_device_registry` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::GetDeviceRegistryRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::GetDeviceRegistryRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::GetDeviceRegistryRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::GetDeviceRegistryRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_device_registry(name: nil)
@@ -330,31 +330,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the device registry. For example,
             #     `projects/example-project/locations/us-central1/registries/my-registry`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::DeviceRegistry]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::DeviceRegistry]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::DeviceRegistry]
+            # @return [::Google::Cloud::Iot::V1::DeviceRegistry]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_device_registry request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::GetDeviceRegistryRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::GetDeviceRegistryRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_device_registry.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -375,8 +375,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -384,12 +384,12 @@ module Google
             #
             # @overload update_device_registry(request, options = nil)
             #   Pass arguments to `update_device_registry` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_device_registry(device_registry: nil, update_mask: nil)
@@ -397,11 +397,11 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param device_registry [Google::Cloud::Iot::V1::DeviceRegistry, Hash]
+            #   @param device_registry [::Google::Cloud::Iot::V1::DeviceRegistry, ::Hash]
             #     Required. The new values for the device registry. The `id` field must be empty, and
             #     the `name` field must indicate the path of the resource. For example,
             #     `projects/example-project/locations/us-central1/registries/my-registry`.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Only updates the `device_registry` fields indicated by this mask.
             #     The field mask must not be empty, and it must not contain fields that
             #     are immutable or only set by the server.
@@ -409,26 +409,26 @@ module Google
             #     `mqtt_config`, and `state_notification_config`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::DeviceRegistry]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::DeviceRegistry]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::DeviceRegistry]
+            # @return [::Google::Cloud::Iot::V1::DeviceRegistry]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_device_registry request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_device_registry.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -449,8 +449,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -458,12 +458,12 @@ module Google
             #
             # @overload delete_device_registry(request, options = nil)
             #   Pass arguments to `delete_device_registry` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_device_registry(name: nil)
@@ -471,31 +471,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the device registry. For example,
             #     `projects/example-project/locations/us-central1/registries/my-registry`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_device_registry request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_device_registry.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -516,8 +516,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -525,12 +525,12 @@ module Google
             #
             # @overload list_device_registries(request, options = nil)
             #   Pass arguments to `list_device_registries` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::ListDeviceRegistriesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::ListDeviceRegistriesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::ListDeviceRegistriesRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::ListDeviceRegistriesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_device_registries(parent: nil, page_size: nil, page_token: nil)
@@ -538,40 +538,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The project and cloud region path. For example,
             #     `projects/example-project/locations/us-central1`.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of registries to return in the response. If this value
             #     is zero, the service will select a default size. A call may return fewer
             #     objects than requested. A non-empty `next_page_token` in the response
             #     indicates that more data is available.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The value returned by the last `ListDeviceRegistriesResponse`; indicates
             #     that this is a continuation of a prior `ListDeviceRegistries` call and
             #     the system should return the next page of data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Iot::V1::DeviceRegistry>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Iot::V1::DeviceRegistry>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Iot::V1::DeviceRegistry>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Iot::V1::DeviceRegistry>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_device_registries request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::ListDeviceRegistriesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::ListDeviceRegistriesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_device_registries.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -589,12 +589,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :list_device_registries, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @device_manager_stub, :list_device_registries, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @device_manager_stub, :list_device_registries, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -602,12 +602,12 @@ module Google
             #
             # @overload create_device(request, options = nil)
             #   Pass arguments to `create_device` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::CreateDeviceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::CreateDeviceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::CreateDeviceRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::CreateDeviceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_device(parent: nil, device: nil)
@@ -615,36 +615,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The name of the device registry where this device should be created.
             #     For example,
             #     `projects/example-project/locations/us-central1/registries/my-registry`.
-            #   @param device [Google::Cloud::Iot::V1::Device, Hash]
+            #   @param device [::Google::Cloud::Iot::V1::Device, ::Hash]
             #     Required. The device registration details. The field `name` must be empty. The server
             #     generates `name` from the device registry `id` and the
             #     `parent` field.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::Device]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::Device]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::Device]
+            # @return [::Google::Cloud::Iot::V1::Device]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_device request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::CreateDeviceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::CreateDeviceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_device.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -665,8 +665,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -674,12 +674,12 @@ module Google
             #
             # @overload get_device(request, options = nil)
             #   Pass arguments to `get_device` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::GetDeviceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::GetDeviceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::GetDeviceRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::GetDeviceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_device(name: nil, field_mask: nil)
@@ -687,35 +687,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
             #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-            #   @param field_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The fields of the `Device` resource to be returned in the response. If the
             #     field mask is unset or empty, all fields are returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::Device]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::Device]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::Device]
+            # @return [::Google::Cloud::Iot::V1::Device]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_device request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::GetDeviceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::GetDeviceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_device.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -736,8 +736,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -745,12 +745,12 @@ module Google
             #
             # @overload update_device(request, options = nil)
             #   Pass arguments to `update_device` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::UpdateDeviceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::UpdateDeviceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::UpdateDeviceRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::UpdateDeviceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_device(device: nil, update_mask: nil)
@@ -758,38 +758,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param device [Google::Cloud::Iot::V1::Device, Hash]
+            #   @param device [::Google::Cloud::Iot::V1::Device, ::Hash]
             #     Required. The new values for the device. The `id` and `num_id` fields must
             #     be empty, and the field `name` must specify the name path. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0`or
             #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Only updates the `device` fields indicated by this mask.
             #     The field mask must not be empty, and it must not contain fields that
             #     are immutable or only set by the server.
             #     Mutable top-level fields: `credentials`, `blocked`, and `metadata`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::Device]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::Device]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::Device]
+            # @return [::Google::Cloud::Iot::V1::Device]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_device request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::UpdateDeviceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::UpdateDeviceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_device.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -810,8 +810,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -819,12 +819,12 @@ module Google
             #
             # @overload delete_device(request, options = nil)
             #   Pass arguments to `delete_device` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::DeleteDeviceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::DeleteDeviceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::DeleteDeviceRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::DeleteDeviceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_device(name: nil)
@@ -832,32 +832,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
             #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_device request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::DeleteDeviceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::DeleteDeviceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_device.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -878,8 +878,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -887,12 +887,12 @@ module Google
             #
             # @overload list_devices(request, options = nil)
             #   Pass arguments to `list_devices` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::ListDevicesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::ListDevicesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::ListDevicesRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::ListDevicesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_devices(parent: nil, device_num_ids: nil, device_ids: nil, field_mask: nil, gateway_list_options: nil, page_size: nil, page_token: nil)
@@ -900,52 +900,52 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The device registry path. Required. For example,
             #     `projects/my-project/locations/us-central1/registries/my-registry`.
-            #   @param device_num_ids [Array<Integer>]
+            #   @param device_num_ids [::Array<::Integer>]
             #     A list of device numeric IDs. If empty, this field is ignored. Maximum
             #     IDs: 10,000.
-            #   @param device_ids [Array<String>]
+            #   @param device_ids [::Array<::String>]
             #     A list of device string IDs. For example, `['device0', 'device12']`.
             #     If empty, this field is ignored. Maximum IDs: 10,000
-            #   @param field_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The fields of the `Device` resource to be returned in the response. The
             #     fields `id` and `num_id` are always returned, along with any
             #     other fields specified.
-            #   @param gateway_list_options [Google::Cloud::Iot::V1::GatewayListOptions, Hash]
+            #   @param gateway_list_options [::Google::Cloud::Iot::V1::GatewayListOptions, ::Hash]
             #     Options related to gateways.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of devices to return in the response. If this value
             #     is zero, the service will select a default size. A call may return fewer
             #     objects than requested. A non-empty `next_page_token` in the response
             #     indicates that more data is available.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The value returned by the last `ListDevicesResponse`; indicates
             #     that this is a continuation of a prior `ListDevices` call and
             #     the system should return the next page of data.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Iot::V1::Device>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Iot::V1::Device>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Iot::V1::Device>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Iot::V1::Device>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_devices request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::ListDevicesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::ListDevicesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_devices.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -963,12 +963,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @device_manager_stub.call_rpc :list_devices, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @device_manager_stub, :list_devices, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @device_manager_stub, :list_devices, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -978,12 +978,12 @@ module Google
             #
             # @overload modify_cloud_to_device_config(request, options = nil)
             #   Pass arguments to `modify_cloud_to_device_config` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload modify_cloud_to_device_config(name: nil, version_to_update: nil, binary_data: nil)
@@ -991,40 +991,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
             #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-            #   @param version_to_update [Integer]
+            #   @param version_to_update [::Integer]
             #     The version number to update. If this value is zero, it will not check the
             #     version number of the server and will always update the current version;
             #     otherwise, this update will fail if the version number found on the server
             #     does not match this version number. This is used to support multiple
             #     simultaneous updates without losing data.
-            #   @param binary_data [String]
+            #   @param binary_data [::String]
             #     Required. The configuration data for the device.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::DeviceConfig]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::DeviceConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::DeviceConfig]
+            # @return [::Google::Cloud::Iot::V1::DeviceConfig]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def modify_cloud_to_device_config request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::ModifyCloudToDeviceConfigRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.modify_cloud_to_device_config.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1045,8 +1045,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1055,12 +1055,12 @@ module Google
             #
             # @overload list_device_config_versions(request, options = nil)
             #   Pass arguments to `list_device_config_versions` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_device_config_versions(name: nil, num_versions: nil)
@@ -1068,36 +1068,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
             #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-            #   @param num_versions [Integer]
+            #   @param num_versions [::Integer]
             #     The number of versions to list. Versions are listed in decreasing order of
             #     the version number. The maximum number of versions retained is 10. If this
             #     value is zero, it will return all the versions available.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::ListDeviceConfigVersionsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::ListDeviceConfigVersionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::ListDeviceConfigVersionsResponse]
+            # @return [::Google::Cloud::Iot::V1::ListDeviceConfigVersionsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_device_config_versions request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::ListDeviceConfigVersionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_device_config_versions.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1118,8 +1118,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1128,12 +1128,12 @@ module Google
             #
             # @overload list_device_states(request, options = nil)
             #   Pass arguments to `list_device_states` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::ListDeviceStatesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::ListDeviceStatesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::ListDeviceStatesRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::ListDeviceStatesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_device_states(name: nil, num_states: nil)
@@ -1141,36 +1141,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
             #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-            #   @param num_states [Integer]
+            #   @param num_states [::Integer]
             #     The number of states to list. States are listed in descending order of
             #     update time. The maximum number of states retained is 10. If this
             #     value is zero, it will return all the states available.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::ListDeviceStatesResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::ListDeviceStatesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::ListDeviceStatesResponse]
+            # @return [::Google::Cloud::Iot::V1::ListDeviceStatesResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_device_states request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::ListDeviceStatesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::ListDeviceStatesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_device_states.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1191,8 +1191,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1201,12 +1201,12 @@ module Google
             #
             # @overload set_iam_policy(request, options = nil)
             #   Pass arguments to `set_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::SetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_iam_policy(resource: nil, policy: nil)
@@ -1214,36 +1214,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being specified.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param policy [Google::Iam::V1::Policy, Hash]
+            #   @param policy [::Google::Iam::V1::Policy, ::Hash]
             #     REQUIRED: The complete policy to be applied to the `resource`. The size of
             #     the policy is limited to a few 10s of KB. An empty policy is a
             #     valid policy but certain Cloud Platform services (such as Projects)
             #     might reject them.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::SetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1264,8 +1264,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1275,12 +1275,12 @@ module Google
             #
             # @overload get_iam_policy(request, options = nil)
             #   Pass arguments to `get_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::GetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_iam_policy(resource: nil, options: nil)
@@ -1288,34 +1288,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param options [Google::Iam::V1::GetPolicyOptions, Hash]
+            #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
             #     `GetIamPolicy`. This field is only used by Cloud IAM.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::GetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1336,8 +1336,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1347,12 +1347,12 @@ module Google
             #
             # @overload test_iam_permissions(request, options = nil)
             #   Pass arguments to `test_iam_permissions` via a request object, either of type
-            #   {Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::TestIamPermissionsRequest, Hash]
+            #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload test_iam_permissions(resource: nil, permissions: nil)
@@ -1360,36 +1360,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy detail is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param permissions [Array<String>]
+            #   @param permissions [::Array<::String>]
             #     The set of permissions to check for the `resource`. Permissions with
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more
             #     information see
             #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::TestIamPermissionsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::TestIamPermissionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::TestIamPermissionsResponse]
+            # @return [::Google::Iam::V1::TestIamPermissionsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def test_iam_permissions request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::TestIamPermissionsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1410,8 +1410,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1431,12 +1431,12 @@ module Google
             #
             # @overload send_command_to_device(request, options = nil)
             #   Pass arguments to `send_command_to_device` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::SendCommandToDeviceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::SendCommandToDeviceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::SendCommandToDeviceRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::SendCommandToDeviceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload send_command_to_device(name: nil, binary_data: nil, subfolder: nil)
@@ -1444,13 +1444,13 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the device. For example,
             #     `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
             #     `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
-            #   @param binary_data [String]
+            #   @param binary_data [::String]
             #     Required. The command data to send to the device.
-            #   @param subfolder [String]
+            #   @param subfolder [::String]
             #     Optional subfolder for the command. If empty, the command will be delivered
             #     to the /devices/\\{device-id}/commands topic, otherwise it will be delivered
             #     to the /devices/\\{device-id}/commands/\\{subfolder} topic. Multi-level
@@ -1458,26 +1458,26 @@ module Google
             #     and must not contain any MQTT wildcards ("+" or "#") or null characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::SendCommandToDeviceResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::SendCommandToDeviceResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::SendCommandToDeviceResponse]
+            # @return [::Google::Cloud::Iot::V1::SendCommandToDeviceResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def send_command_to_device request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::SendCommandToDeviceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::SendCommandToDeviceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.send_command_to_device.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1498,8 +1498,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1507,12 +1507,12 @@ module Google
             #
             # @overload bind_device_to_gateway(request, options = nil)
             #   Pass arguments to `bind_device_to_gateway` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::BindDeviceToGatewayRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::BindDeviceToGatewayRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::BindDeviceToGatewayRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::BindDeviceToGatewayRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload bind_device_to_gateway(parent: nil, gateway_id: nil, device_id: nil)
@@ -1520,38 +1520,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The name of the registry. For example,
             #     `projects/example-project/locations/us-central1/registries/my-registry`.
-            #   @param gateway_id [String]
+            #   @param gateway_id [::String]
             #     Required. The value of `gateway_id` can be either the device numeric ID or the
             #     user-defined device identifier.
-            #   @param device_id [String]
+            #   @param device_id [::String]
             #     Required. The device to associate with the specified gateway. The value of
             #     `device_id` can be either the device numeric ID or the user-defined device
             #     identifier.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::BindDeviceToGatewayResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::BindDeviceToGatewayResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::BindDeviceToGatewayResponse]
+            # @return [::Google::Cloud::Iot::V1::BindDeviceToGatewayResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def bind_device_to_gateway request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::BindDeviceToGatewayRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::BindDeviceToGatewayRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.bind_device_to_gateway.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1572,8 +1572,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1581,12 +1581,12 @@ module Google
             #
             # @overload unbind_device_from_gateway(request, options = nil)
             #   Pass arguments to `unbind_device_from_gateway` via a request object, either of type
-            #   {Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest, Hash]
+            #   @param request [::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload unbind_device_from_gateway(parent: nil, gateway_id: nil, device_id: nil)
@@ -1594,38 +1594,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The name of the registry. For example,
             #     `projects/example-project/locations/us-central1/registries/my-registry`.
-            #   @param gateway_id [String]
+            #   @param gateway_id [::String]
             #     Required. The value of `gateway_id` can be either the device numeric ID or the
             #     user-defined device identifier.
-            #   @param device_id [String]
+            #   @param device_id [::String]
             #     Required. The device to disassociate from the specified gateway. The value of
             #     `device_id` can be either the device numeric ID or the user-defined device
             #     identifier.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Iot::V1::UnbindDeviceFromGatewayResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Iot::V1::UnbindDeviceFromGatewayResponse]
+            # @return [::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def unbind_device_from_gateway request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iot::V1::UnbindDeviceFromGatewayRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.unbind_device_from_gateway.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Iot::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1646,8 +1646,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1657,7 +1657,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Iot::V1::DeviceManager::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Iot::V1::DeviceManager::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -1668,22 +1668,22 @@ module Google
             # To modify the global config, setting the timeout for create_device_registry
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Iot::V1::DeviceManager::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_device_registry.timeout = 20_000
+            #     ::Google::Cloud::Iot::V1::DeviceManager::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_device_registry.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Iot::V1::DeviceManager::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_device_registry.timeout = 20_000
+            #     client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_device_registry.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"cloudiot.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1695,29 +1695,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -1725,10 +1725,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "cloudiot.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -1736,14 +1736,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -1784,140 +1784,140 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_device_registry`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_device_registry
                 ##
                 # RPC-specific configuration for `get_device_registry`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_device_registry
                 ##
                 # RPC-specific configuration for `update_device_registry`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_device_registry
                 ##
                 # RPC-specific configuration for `delete_device_registry`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_device_registry
                 ##
                 # RPC-specific configuration for `list_device_registries`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_device_registries
                 ##
                 # RPC-specific configuration for `create_device`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_device
                 ##
                 # RPC-specific configuration for `get_device`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_device
                 ##
                 # RPC-specific configuration for `update_device`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_device
                 ##
                 # RPC-specific configuration for `delete_device`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_device
                 ##
                 # RPC-specific configuration for `list_devices`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_devices
                 ##
                 # RPC-specific configuration for `modify_cloud_to_device_config`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :modify_cloud_to_device_config
                 ##
                 # RPC-specific configuration for `list_device_config_versions`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_device_config_versions
                 ##
                 # RPC-specific configuration for `list_device_states`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_device_states
                 ##
                 # RPC-specific configuration for `set_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_iam_policy
                 ##
                 # RPC-specific configuration for `get_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_iam_policy
                 ##
                 # RPC-specific configuration for `test_iam_permissions`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_iam_permissions
                 ##
                 # RPC-specific configuration for `send_command_to_device`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :send_command_to_device
                 ##
                 # RPC-specific configuration for `bind_device_to_gateway`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :bind_device_to_gateway
                 ##
                 # RPC-specific configuration for `unbind_device_from_gateway`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :unbind_device_from_gateway
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_device_registry_config = parent_rpcs&.create_device_registry if parent_rpcs&.respond_to? :create_device_registry
-                  @create_device_registry = Gapic::Config::Method.new create_device_registry_config
+                  @create_device_registry = ::Gapic::Config::Method.new create_device_registry_config
                   get_device_registry_config = parent_rpcs&.get_device_registry if parent_rpcs&.respond_to? :get_device_registry
-                  @get_device_registry = Gapic::Config::Method.new get_device_registry_config
+                  @get_device_registry = ::Gapic::Config::Method.new get_device_registry_config
                   update_device_registry_config = parent_rpcs&.update_device_registry if parent_rpcs&.respond_to? :update_device_registry
-                  @update_device_registry = Gapic::Config::Method.new update_device_registry_config
+                  @update_device_registry = ::Gapic::Config::Method.new update_device_registry_config
                   delete_device_registry_config = parent_rpcs&.delete_device_registry if parent_rpcs&.respond_to? :delete_device_registry
-                  @delete_device_registry = Gapic::Config::Method.new delete_device_registry_config
+                  @delete_device_registry = ::Gapic::Config::Method.new delete_device_registry_config
                   list_device_registries_config = parent_rpcs&.list_device_registries if parent_rpcs&.respond_to? :list_device_registries
-                  @list_device_registries = Gapic::Config::Method.new list_device_registries_config
+                  @list_device_registries = ::Gapic::Config::Method.new list_device_registries_config
                   create_device_config = parent_rpcs&.create_device if parent_rpcs&.respond_to? :create_device
-                  @create_device = Gapic::Config::Method.new create_device_config
+                  @create_device = ::Gapic::Config::Method.new create_device_config
                   get_device_config = parent_rpcs&.get_device if parent_rpcs&.respond_to? :get_device
-                  @get_device = Gapic::Config::Method.new get_device_config
+                  @get_device = ::Gapic::Config::Method.new get_device_config
                   update_device_config = parent_rpcs&.update_device if parent_rpcs&.respond_to? :update_device
-                  @update_device = Gapic::Config::Method.new update_device_config
+                  @update_device = ::Gapic::Config::Method.new update_device_config
                   delete_device_config = parent_rpcs&.delete_device if parent_rpcs&.respond_to? :delete_device
-                  @delete_device = Gapic::Config::Method.new delete_device_config
+                  @delete_device = ::Gapic::Config::Method.new delete_device_config
                   list_devices_config = parent_rpcs&.list_devices if parent_rpcs&.respond_to? :list_devices
-                  @list_devices = Gapic::Config::Method.new list_devices_config
+                  @list_devices = ::Gapic::Config::Method.new list_devices_config
                   modify_cloud_to_device_config_config = parent_rpcs&.modify_cloud_to_device_config if parent_rpcs&.respond_to? :modify_cloud_to_device_config
-                  @modify_cloud_to_device_config = Gapic::Config::Method.new modify_cloud_to_device_config_config
+                  @modify_cloud_to_device_config = ::Gapic::Config::Method.new modify_cloud_to_device_config_config
                   list_device_config_versions_config = parent_rpcs&.list_device_config_versions if parent_rpcs&.respond_to? :list_device_config_versions
-                  @list_device_config_versions = Gapic::Config::Method.new list_device_config_versions_config
+                  @list_device_config_versions = ::Gapic::Config::Method.new list_device_config_versions_config
                   list_device_states_config = parent_rpcs&.list_device_states if parent_rpcs&.respond_to? :list_device_states
-                  @list_device_states = Gapic::Config::Method.new list_device_states_config
+                  @list_device_states = ::Gapic::Config::Method.new list_device_states_config
                   set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
-                  @set_iam_policy = Gapic::Config::Method.new set_iam_policy_config
+                  @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                   get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
-                  @get_iam_policy = Gapic::Config::Method.new get_iam_policy_config
+                  @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
-                  @test_iam_permissions = Gapic::Config::Method.new test_iam_permissions_config
+                  @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                   send_command_to_device_config = parent_rpcs&.send_command_to_device if parent_rpcs&.respond_to? :send_command_to_device
-                  @send_command_to_device = Gapic::Config::Method.new send_command_to_device_config
+                  @send_command_to_device = ::Gapic::Config::Method.new send_command_to_device_config
                   bind_device_to_gateway_config = parent_rpcs&.bind_device_to_gateway if parent_rpcs&.respond_to? :bind_device_to_gateway
-                  @bind_device_to_gateway = Gapic::Config::Method.new bind_device_to_gateway_config
+                  @bind_device_to_gateway = ::Gapic::Config::Method.new bind_device_to_gateway_config
                   unbind_device_from_gateway_config = parent_rpcs&.unbind_device_from_gateway if parent_rpcs&.respond_to? :unbind_device_from_gateway
-                  @unbind_device_from_gateway = Gapic::Config::Method.new unbind_device_from_gateway_config
+                  @unbind_device_from_gateway = ::Gapic::Config::Method.new unbind_device_from_gateway_config
 
                   yield self if block_given?
                 end

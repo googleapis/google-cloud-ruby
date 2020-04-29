@@ -27,7 +27,7 @@ export IOT_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/iot/v1"
 
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-iot-v1
 checks for credentials are configured on the service Credentials class (such as
-{Google::Cloud::Iot::V1::DeviceManager::Credentials}):
+{::Google::Cloud::Iot::V1::DeviceManager::Credentials}):
 
 1. `IOT_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `IOT_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/iot/v1"
 
 ENV["IOT_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/iot/v1"
 
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new do |config|
+client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/iot/v1"
 
-Google::Cloud::Iot::V1::DeviceManager::Client.configure do |config|
+::Google::Cloud::Iot::V1::DeviceManager::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new
 ```
 
 ### Cloud SDK

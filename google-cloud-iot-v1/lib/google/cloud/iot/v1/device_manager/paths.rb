@@ -36,11 +36,11 @@ module Google
             # @param registry [String]
             # @param device [String]
             #
-            # @return [String]
+            # @return [::String]
             def device_path project:, location:, registry:, device:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "registry cannot contain /" if registry.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "registry cannot contain /" if registry.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/registries/#{registry}/devices/#{device}"
             end
@@ -55,9 +55,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
@@ -73,10 +73,10 @@ module Google
             # @param location [String]
             # @param registry [String]
             #
-            # @return [String]
+            # @return [::String]
             def registry_path project:, location:, registry:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/registries/#{registry}"
             end
