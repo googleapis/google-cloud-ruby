@@ -50,6 +50,9 @@ class PostObjectConformanceTest < MockStorage
                                          bucket_bound_hostname: bucket_bound_hostname
 
         _(post_object.url).must_equal output.url
+
+        _(post_object.fields.keys.sort).must_equal output.fields.keys.sort
+
         _(post_object.fields["key"]).must_equal output.fields["key"]
         _(post_object.fields["x-goog-algorithm"]).must_equal output.fields["x-goog-algorithm"]
         _(post_object.fields["x-goog-credential"]).must_equal output.fields["x-goog-credential"]
@@ -84,6 +87,9 @@ class PostObjectConformanceTest < MockStorage
                                                             bucket_bound_hostname: bucket_bound_hostname
 
         _(post_object.url).must_equal output.url
+
+        _(post_object.fields.keys.sort).must_equal output.fields.keys.sort
+
         _(post_object.fields["key"]).must_equal output.fields["key"]
         _(post_object.fields["x-goog-algorithm"]).must_equal output.fields["x-goog-algorithm"]
         _(post_object.fields["x-goog-credential"]).must_equal output.fields["x-goog-credential"]
