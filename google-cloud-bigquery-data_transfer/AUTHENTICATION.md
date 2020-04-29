@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-bigquery-data_transfer
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Credentials`):
+`::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Credentials`):
 
 1. `DATA_TRANSFER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `DATA_TRANSFER_KEYFILE` - Path to JSON file, or JSON contents
