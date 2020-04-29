@@ -23,16 +23,16 @@ module Google
       module V1beta1
         # A time period inside of an example that has a time dimension (e.g. video).
         # @!attribute [rw] start_time_offset
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     Start of the time segment (inclusive), represented as the duration since
         #     the example start.
         # @!attribute [rw] end_time_offset
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     End of the time segment (exclusive), represented as the duration since the
         #     example start.
         class TimeSegment
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

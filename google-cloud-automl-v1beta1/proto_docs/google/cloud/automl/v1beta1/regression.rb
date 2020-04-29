@@ -23,24 +23,24 @@ module Google
       module V1beta1
         # Metrics for regression problems.
         # @!attribute [rw] root_mean_squared_error
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. Root Mean Squared Error (RMSE).
         # @!attribute [rw] mean_absolute_error
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. Mean Absolute Error (MAE).
         # @!attribute [rw] mean_absolute_percentage_error
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. Mean absolute percentage error. Only set if all ground truth
         #     values are are positive.
         # @!attribute [rw] r_squared
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. R squared.
         # @!attribute [rw] root_mean_squared_log_error
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. Root mean squared log error.
         class RegressionEvaluationMetrics
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

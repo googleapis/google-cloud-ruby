@@ -23,20 +23,20 @@ module Google
       module V1beta1
         # A contiguous part of a text (string), assuming it has an UTF-8 NFC encoding.
         # @!attribute [rw] content
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The content of the TextSegment.
         # @!attribute [rw] start_offset
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Required. Zero-based character index of the first character of the text
         #     segment (counting characters from the beginning of the text).
         # @!attribute [rw] end_offset
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Required. Zero-based character index of the first character past the end of
         #     the text segment (counting character from the beginning of the text).
         #     The character at the end_offset is NOT included in the text segment.
         class TextSegment
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

@@ -21,16 +21,16 @@ module Google
   module Cloud
     module AutoML
       module V1beta1
-        # Request message for {Google::Cloud::AutoML::V1beta1::PredictionService::Client#predict PredictionService.Predict}.
+        # Request message for {::Google::Cloud::AutoML::V1beta1::PredictionService::Client#predict PredictionService.Predict}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Name of the model requested to serve the prediction.
         # @!attribute [rw] payload
-        #   @return [Google::Cloud::AutoML::V1beta1::ExamplePayload]
+        #   @return [::Google::Cloud::AutoML::V1beta1::ExamplePayload]
         #     Required. Payload to perform a prediction on. The payload must match the
         #     problem type that the model was trained to solve.
         # @!attribute [rw] params
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Additional domain-specific parameters, any string must be up to 25000
         #     characters long.
         #
@@ -52,33 +52,33 @@ module Google
         #            should be populated in the returned TablesAnnotation.
         #            The default is false.
         class PredictRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ParamsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
-        # Response message for {Google::Cloud::AutoML::V1beta1::PredictionService::Client#predict PredictionService.Predict}.
+        # Response message for {::Google::Cloud::AutoML::V1beta1::PredictionService::Client#predict PredictionService.Predict}.
         # @!attribute [rw] payload
-        #   @return [Array<Google::Cloud::AutoML::V1beta1::AnnotationPayload>]
+        #   @return [::Array<::Google::Cloud::AutoML::V1beta1::AnnotationPayload>]
         #     Prediction result.
         #     Translation and Text Sentiment will return precisely one payload.
         # @!attribute [rw] preprocessed_input
-        #   @return [Google::Cloud::AutoML::V1beta1::ExamplePayload]
+        #   @return [::Google::Cloud::AutoML::V1beta1::ExamplePayload]
         #     The preprocessed example that AutoML actually makes prediction on.
         #     Empty if AutoML does not preprocess the input example.
         #     * For Text Extraction:
         #       If the input is a .pdf file, the OCR'ed text will be provided in
-        #       {Google::Cloud::AutoML::V1beta1::Document#document_text document_text}.
+        #       {::Google::Cloud::AutoML::V1beta1::Document#document_text document_text}.
         # @!attribute [rw] metadata
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Additional domain-specific prediction response metadata.
         #
         #     * For Image Object Detection:
@@ -95,32 +95,32 @@ module Google
         #          The sentiment_score shouldn't be confused with "score" or "magnitude"
         #          from the previous Natural Language Sentiment Analysis API.
         class PredictResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class MetadataEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
-        # Request message for {Google::Cloud::AutoML::V1beta1::PredictionService::Client#batch_predict PredictionService.BatchPredict}.
+        # Request message for {::Google::Cloud::AutoML::V1beta1::PredictionService::Client#batch_predict PredictionService.BatchPredict}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Name of the model requested to serve the batch prediction.
         # @!attribute [rw] input_config
-        #   @return [Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig]
+        #   @return [::Google::Cloud::AutoML::V1beta1::BatchPredictInputConfig]
         #     Required. The input configuration for batch prediction.
         # @!attribute [rw] output_config
-        #   @return [Google::Cloud::AutoML::V1beta1::BatchPredictOutputConfig]
+        #   @return [::Google::Cloud::AutoML::V1beta1::BatchPredictOutputConfig]
         #     Required. The Configuration specifying where output predictions should
         #     be written.
         # @!attribute [rw] params
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Required. Additional domain-specific parameters for the predictions, any string must
         #     be up to 25000 characters long.
         #
@@ -192,24 +192,24 @@ module Google
         #          at least that long as a relative value of video frame size will be
         #          returned. Value in 0 to 1 range. Default is 0.
         class BatchPredictRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ParamsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Result of the Batch Predict. This message is returned in
-        # {Google::Longrunning::Operation#response response} of the operation returned
-        # by the {Google::Cloud::AutoML::V1beta1::PredictionService::Client#batch_predict PredictionService.BatchPredict}.
+        # {::Google::Longrunning::Operation#response response} of the operation returned
+        # by the {::Google::Cloud::AutoML::V1beta1::PredictionService::Client#batch_predict PredictionService.BatchPredict}.
         # @!attribute [rw] metadata
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Additional domain-specific prediction response metadata.
         #
         #     *  For Image Object Detection:
@@ -220,16 +220,16 @@ module Google
         #      `max_bounding_box_count` - (int64) At most that many bounding boxes per
         #          frame could have been returned.
         class BatchPredictResult
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class MetadataEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

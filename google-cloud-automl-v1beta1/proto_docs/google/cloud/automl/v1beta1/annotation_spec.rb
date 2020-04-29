@@ -23,22 +23,22 @@ module Google
       module V1beta1
         # A definition of an annotation spec.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Resource name of the annotation spec.
         #     Form:
         #
         #     'projects/\\{project_id}/locations/\\{location_id}/datasets/\\{dataset_id}/annotationSpecs/\\{annotation_spec_id}'
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the annotation spec to show in the interface. The name can be
         #     up to 32 characters long and must match the regexp `[a-zA-Z0-9_]+`.
         # @!attribute [rw] example_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of examples in the parent dataset
         #     labeled by the annotation spec.
         class AnnotationSpec
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

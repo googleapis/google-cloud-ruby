@@ -31,13 +31,13 @@ module Google
         # Used by:
         #   *   Tables
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The resource name of the table spec.
         #     Form:
         #
         #     `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/tableSpecs/{table_spec_id}`
         # @!attribute [rw] time_column_spec_id
-        #   @return [String]
+        #   @return [::String]
         #     column_spec_id of the time column. Only used if the parent dataset's
         #     ml_use_column_spec_id is not set. Used to split rows into TRAIN, VALIDATE
         #     and TEST sets such that oldest rows go to TRAIN set, newest to TEST, and
@@ -47,27 +47,27 @@ module Google
         #     will be assigned by AutoML. NOTE: Updates of this field will instantly
         #     affect any other users concurrently working with the dataset.
         # @!attribute [rw] row_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of rows (i.e. examples) in the table.
         # @!attribute [rw] valid_row_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of valid rows (i.e. without values that don't match
         #     DataType-s of their columns).
         # @!attribute [rw] column_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of columns of the table. That is, the number of
         #     child ColumnSpec-s.
         # @!attribute [rw] input_configs
-        #   @return [Array<Google::Cloud::AutoML::V1beta1::InputConfig>]
+        #   @return [::Array<::Google::Cloud::AutoML::V1beta1::InputConfig>]
         #     Output only. Input configs via which data currently residing in the table
         #     had been imported.
         # @!attribute [rw] etag
-        #   @return [String]
+        #   @return [::String]
         #     Used to perform consistent read-modify-write updates. If not set, a blind
         #     "overwrite" update happens.
         class TableSpec
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

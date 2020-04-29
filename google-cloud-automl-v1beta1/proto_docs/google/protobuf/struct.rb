@@ -28,19 +28,19 @@ module Google
     #
     # The JSON representation for `Struct` is JSON object.
     # @!attribute [rw] fields
-    #   @return [Google::Protobuf::Map{String => Google::Protobuf::Value}]
+    #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
     #     Unordered map of dynamically typed values.
     class Struct
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
 
       # @!attribute [rw] key
-      #   @return [String]
+      #   @return [::String]
       # @!attribute [rw] value
-      #   @return [Google::Protobuf::Value]
+      #   @return [::Google::Protobuf::Value]
       class FieldsEntry
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
       end
     end
 
@@ -51,37 +51,37 @@ module Google
     #
     # The JSON representation for `Value` is JSON value.
     # @!attribute [rw] null_value
-    #   @return [Google::Protobuf::NullValue]
+    #   @return [::Google::Protobuf::NullValue]
     #     Represents a null value.
     # @!attribute [rw] number_value
-    #   @return [Float]
+    #   @return [::Float]
     #     Represents a double value.
     # @!attribute [rw] string_value
-    #   @return [String]
+    #   @return [::String]
     #     Represents a string value.
     # @!attribute [rw] bool_value
-    #   @return [Boolean]
+    #   @return [::Boolean]
     #     Represents a boolean value.
     # @!attribute [rw] struct_value
-    #   @return [Google::Protobuf::Struct]
+    #   @return [::Google::Protobuf::Struct]
     #     Represents a structured value.
     # @!attribute [rw] list_value
-    #   @return [Google::Protobuf::ListValue]
+    #   @return [::Google::Protobuf::ListValue]
     #     Represents a repeated `Value`.
     class Value
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # `ListValue` is a wrapper around a repeated field of values.
     #
     # The JSON representation for `ListValue` is JSON array.
     # @!attribute [rw] values
-    #   @return [Array<Google::Protobuf::Value>]
+    #   @return [::Array<::Google::Protobuf::Value>]
     #     Repeated field of dynamically typed values.
     class ListValue
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # `NullValue` is a singleton enumeration to represent the null value for the

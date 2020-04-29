@@ -27,7 +27,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/automl/v1beta1"
-      #     client = Google::Cloud::AutoML::V1beta1::PredictionService::Client.new
+      #     client = ::Google::Cloud::AutoML::V1beta1::PredictionService::Client.new
       #
       module V1beta1
       end

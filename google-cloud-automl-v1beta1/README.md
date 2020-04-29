@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/automl/v1beta1"
 
-client = Google::Cloud::AutoML::V1beta1::PredictionService::Client.new
+client = ::Google::Cloud::AutoML::V1beta1::PredictionService::Client.new
 request = my_create_request
 response = client.predict request
 ```

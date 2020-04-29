@@ -23,7 +23,7 @@ require "google/cloud/automl/v1beta1/service_pb"
 require "google/cloud/automl/v1beta1/service_services_pb"
 require "google/cloud/automl/v1beta1/automl"
 
-class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
+class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_create_dataset
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::Dataset.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::Dataset.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -59,15 +59,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     create_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_dataset, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::CreateDatasetRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AutoML::V1beta1::Dataset), request.dataset
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::Dataset), request.dataset
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_dataset_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -84,7 +84,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.create_dataset Google::Cloud::AutoML::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |response, operation|
+      client.create_dataset ::Google::Cloud::AutoML::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -96,7 +96,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_dataset Google::Cloud::AutoML::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options do |response, operation|
+      client.create_dataset ::Google::Cloud::AutoML::V1beta1::CreateDatasetRequest.new(parent: parent, dataset: dataset), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -108,7 +108,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_get_dataset
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::Dataset.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::Dataset.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -118,14 +118,14 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     get_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_dataset, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::GetDatasetRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetDatasetRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_dataset_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -142,7 +142,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_dataset Google::Cloud::AutoML::V1beta1::GetDatasetRequest.new(name: name) do |response, operation|
+      client.get_dataset ::Google::Cloud::AutoML::V1beta1::GetDatasetRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -154,7 +154,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_dataset Google::Cloud::AutoML::V1beta1::GetDatasetRequest.new(name: name), grpc_options do |response, operation|
+      client.get_dataset ::Google::Cloud::AutoML::V1beta1::GetDatasetRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -166,7 +166,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_list_datasets
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::ListDatasetsResponse.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::ListDatasetsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -179,7 +179,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     list_datasets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_datasets, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::ListDatasetsRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.filter
       assert_equal 42, request.page_size
@@ -189,7 +189,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_datasets_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -208,7 +208,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_datasets Google::Cloud::AutoML::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_datasets ::Google::Cloud::AutoML::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -222,7 +222,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_datasets Google::Cloud::AutoML::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_datasets ::Google::Cloud::AutoML::V1beta1::ListDatasetsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -235,7 +235,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_update_dataset
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::Dataset.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::Dataset.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -246,15 +246,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     update_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_dataset, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AutoML::V1beta1::Dataset), request.dataset
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::Dataset), request.dataset
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_dataset_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -271,7 +271,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.update_dataset Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask) do |response, operation|
+      client.update_dataset ::Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -283,7 +283,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_dataset Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_dataset ::Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest.new(dataset: dataset, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -295,7 +295,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_delete_dataset
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -305,14 +305,14 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     delete_dataset_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_dataset, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_dataset_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -331,7 +331,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.delete_dataset Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest.new(name: name) do |response, operation|
+      client.delete_dataset ::Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -345,7 +345,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_dataset Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_dataset ::Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest.new(name: name), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -358,7 +358,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_import_data
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -369,15 +369,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     import_data_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_data, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::ImportDataRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::ImportDataRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AutoML::V1beta1::InputConfig), request.input_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::InputConfig), request.input_config
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, import_data_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -396,7 +396,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.import_data Google::Cloud::AutoML::V1beta1::ImportDataRequest.new(name: name, input_config: input_config) do |response, operation|
+      client.import_data ::Google::Cloud::AutoML::V1beta1::ImportDataRequest.new(name: name, input_config: input_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -410,7 +410,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.import_data Google::Cloud::AutoML::V1beta1::ImportDataRequest.new(name: name, input_config: input_config), grpc_options do |response, operation|
+      client.import_data ::Google::Cloud::AutoML::V1beta1::ImportDataRequest.new(name: name, input_config: input_config), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -423,7 +423,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_export_data
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -434,15 +434,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     export_data_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_data, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::ExportDataRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::ExportDataRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AutoML::V1beta1::OutputConfig), request.output_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::OutputConfig), request.output_config
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, export_data_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -461,7 +461,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.export_data Google::Cloud::AutoML::V1beta1::ExportDataRequest.new(name: name, output_config: output_config) do |response, operation|
+      client.export_data ::Google::Cloud::AutoML::V1beta1::ExportDataRequest.new(name: name, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -475,7 +475,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_data Google::Cloud::AutoML::V1beta1::ExportDataRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
+      client.export_data ::Google::Cloud::AutoML::V1beta1::ExportDataRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -488,7 +488,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_get_annotation_spec
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::AnnotationSpec.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::AnnotationSpec.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -498,14 +498,14 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     get_annotation_spec_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_annotation_spec, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_annotation_spec_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -522,7 +522,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_annotation_spec Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest.new(name: name) do |response, operation|
+      client.get_annotation_spec ::Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -534,7 +534,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_annotation_spec Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest.new(name: name), grpc_options do |response, operation|
+      client.get_annotation_spec ::Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -546,7 +546,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_get_table_spec
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::TableSpec.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::TableSpec.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -557,15 +557,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     get_table_spec_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_table_spec, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::GetTableSpecRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetTableSpecRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.field_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_table_spec_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -582,7 +582,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_table_spec Google::Cloud::AutoML::V1beta1::GetTableSpecRequest.new(name: name, field_mask: field_mask) do |response, operation|
+      client.get_table_spec ::Google::Cloud::AutoML::V1beta1::GetTableSpecRequest.new(name: name, field_mask: field_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -594,7 +594,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_table_spec Google::Cloud::AutoML::V1beta1::GetTableSpecRequest.new(name: name, field_mask: field_mask), grpc_options do |response, operation|
+      client.get_table_spec ::Google::Cloud::AutoML::V1beta1::GetTableSpecRequest.new(name: name, field_mask: field_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -606,7 +606,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_list_table_specs
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::ListTableSpecsResponse.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::ListTableSpecsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -620,9 +620,9 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     list_table_specs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_table_specs, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.field_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
       assert_equal "hello world", request.filter
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -631,7 +631,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_table_specs_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -650,7 +650,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_table_specs Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_table_specs ::Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -664,7 +664,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_table_specs Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_table_specs ::Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -677,7 +677,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_update_table_spec
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::TableSpec.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::TableSpec.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -688,15 +688,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     update_table_spec_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_table_spec, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AutoML::V1beta1::TableSpec), request.table_spec
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::TableSpec), request.table_spec
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_table_spec_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -713,7 +713,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.update_table_spec Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest.new(table_spec: table_spec, update_mask: update_mask) do |response, operation|
+      client.update_table_spec ::Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest.new(table_spec: table_spec, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -725,7 +725,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_table_spec Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest.new(table_spec: table_spec, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_table_spec ::Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest.new(table_spec: table_spec, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -737,7 +737,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_get_column_spec
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::ColumnSpec.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::ColumnSpec.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -748,15 +748,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     get_column_spec_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_column_spec, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.field_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_column_spec_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -773,7 +773,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_column_spec Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest.new(name: name, field_mask: field_mask) do |response, operation|
+      client.get_column_spec ::Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest.new(name: name, field_mask: field_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -785,7 +785,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_column_spec Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest.new(name: name, field_mask: field_mask), grpc_options do |response, operation|
+      client.get_column_spec ::Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest.new(name: name, field_mask: field_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -797,7 +797,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_list_column_specs
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::ListColumnSpecsResponse.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::ListColumnSpecsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -811,9 +811,9 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     list_column_specs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_column_specs, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.field_mask
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.field_mask
       assert_equal "hello world", request.filter
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -822,7 +822,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_column_specs_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -841,7 +841,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_column_specs Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_column_specs ::Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -855,7 +855,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_column_specs Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_column_specs ::Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest.new(parent: parent, field_mask: field_mask, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -868,7 +868,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_update_column_spec
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::ColumnSpec.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::ColumnSpec.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -879,15 +879,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     update_column_spec_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_column_spec, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AutoML::V1beta1::ColumnSpec), request.column_spec
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ColumnSpec), request.column_spec
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_column_spec_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -904,7 +904,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.update_column_spec Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest.new(column_spec: column_spec, update_mask: update_mask) do |response, operation|
+      client.update_column_spec ::Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest.new(column_spec: column_spec, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -916,7 +916,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.update_column_spec Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest.new(column_spec: column_spec, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_column_spec ::Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest.new(column_spec: column_spec, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -928,7 +928,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_create_model
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -939,15 +939,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     create_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_model, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::CreateModelRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::CreateModelRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AutoML::V1beta1::Model), request.model
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::Model), request.model
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_model_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -966,7 +966,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.create_model Google::Cloud::AutoML::V1beta1::CreateModelRequest.new(parent: parent, model: model) do |response, operation|
+      client.create_model ::Google::Cloud::AutoML::V1beta1::CreateModelRequest.new(parent: parent, model: model) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -980,7 +980,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_model Google::Cloud::AutoML::V1beta1::CreateModelRequest.new(parent: parent, model: model), grpc_options do |response, operation|
+      client.create_model ::Google::Cloud::AutoML::V1beta1::CreateModelRequest.new(parent: parent, model: model), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -993,7 +993,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_get_model
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::Model.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::Model.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1003,14 +1003,14 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     get_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_model, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::GetModelRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetModelRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_model_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1027,7 +1027,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_model Google::Cloud::AutoML::V1beta1::GetModelRequest.new(name: name) do |response, operation|
+      client.get_model ::Google::Cloud::AutoML::V1beta1::GetModelRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1039,7 +1039,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_model Google::Cloud::AutoML::V1beta1::GetModelRequest.new(name: name), grpc_options do |response, operation|
+      client.get_model ::Google::Cloud::AutoML::V1beta1::GetModelRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1051,7 +1051,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_list_models
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::ListModelsResponse.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::ListModelsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1064,7 +1064,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     list_models_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_models, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::ListModelsRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::ListModelsRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.filter
       assert_equal 42, request.page_size
@@ -1074,7 +1074,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_models_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1093,7 +1093,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_models Google::Cloud::AutoML::V1beta1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_models ::Google::Cloud::AutoML::V1beta1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1107,7 +1107,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_models Google::Cloud::AutoML::V1beta1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_models ::Google::Cloud::AutoML::V1beta1::ListModelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1120,7 +1120,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_delete_model
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1130,14 +1130,14 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     delete_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_model, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::DeleteModelRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::DeleteModelRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_model_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1156,7 +1156,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.delete_model Google::Cloud::AutoML::V1beta1::DeleteModelRequest.new(name: name) do |response, operation|
+      client.delete_model ::Google::Cloud::AutoML::V1beta1::DeleteModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1170,7 +1170,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.delete_model Google::Cloud::AutoML::V1beta1::DeleteModelRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_model ::Google::Cloud::AutoML::V1beta1::DeleteModelRequest.new(name: name), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1183,7 +1183,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_deploy_model
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1193,14 +1193,14 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     deploy_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :deploy_model, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::DeployModelRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata), request.image_object_detection_model_deployment_metadata
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::DeployModelRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata), request.image_object_detection_model_deployment_metadata
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, deploy_model_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1219,7 +1219,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.deploy_model Google::Cloud::AutoML::V1beta1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata) do |response, operation|
+      client.deploy_model ::Google::Cloud::AutoML::V1beta1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1233,7 +1233,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.deploy_model Google::Cloud::AutoML::V1beta1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata), grpc_options do |response, operation|
+      client.deploy_model ::Google::Cloud::AutoML::V1beta1::DeployModelRequest.new(image_object_detection_model_deployment_metadata: image_object_detection_model_deployment_metadata), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1246,7 +1246,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_undeploy_model
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1256,14 +1256,14 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     undeploy_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :undeploy_model, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::UndeployModelRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::UndeployModelRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, undeploy_model_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1282,7 +1282,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.undeploy_model Google::Cloud::AutoML::V1beta1::UndeployModelRequest.new(name: name) do |response, operation|
+      client.undeploy_model ::Google::Cloud::AutoML::V1beta1::UndeployModelRequest.new(name: name) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1296,7 +1296,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.undeploy_model Google::Cloud::AutoML::V1beta1::UndeployModelRequest.new(name: name), grpc_options do |response, operation|
+      client.undeploy_model ::Google::Cloud::AutoML::V1beta1::UndeployModelRequest.new(name: name), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1309,7 +1309,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_export_model
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1320,15 +1320,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     export_model_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_model, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::ExportModelRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::ExportModelRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AutoML::V1beta1::ModelExportOutputConfig), request.output_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ModelExportOutputConfig), request.output_config
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, export_model_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1347,7 +1347,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.export_model Google::Cloud::AutoML::V1beta1::ExportModelRequest.new(name: name, output_config: output_config) do |response, operation|
+      client.export_model ::Google::Cloud::AutoML::V1beta1::ExportModelRequest.new(name: name, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1361,7 +1361,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_model Google::Cloud::AutoML::V1beta1::ExportModelRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
+      client.export_model ::Google::Cloud::AutoML::V1beta1::ExportModelRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1374,7 +1374,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_export_evaluated_examples
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1385,15 +1385,15 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     export_evaluated_examples_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_evaluated_examples, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest, request
       assert_equal "hello world", request.name
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesOutputConfig), request.output_config
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesOutputConfig), request.output_config
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, export_evaluated_examples_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1412,7 +1412,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.export_evaluated_examples Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest.new(name: name, output_config: output_config) do |response, operation|
+      client.export_evaluated_examples ::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest.new(name: name, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1426,7 +1426,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.export_evaluated_examples Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
+      client.export_evaluated_examples ::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest.new(name: name, output_config: output_config), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1439,7 +1439,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_get_model_evaluation
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::ModelEvaluation.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::ModelEvaluation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1449,14 +1449,14 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     get_model_evaluation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_model_evaluation, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_model_evaluation_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1473,7 +1473,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_model_evaluation Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest.new(name: name) do |response, operation|
+      client.get_model_evaluation ::Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1485,7 +1485,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_model_evaluation Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest.new(name: name), grpc_options do |response, operation|
+      client.get_model_evaluation ::Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1497,7 +1497,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
   def test_list_model_evaluations
     # Create GRPC objects.
-    grpc_response = Google::Cloud::AutoML::V1beta1::ListModelEvaluationsResponse.new
+    grpc_response = ::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1510,7 +1510,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     list_model_evaluations_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_model_evaluations, name
-      assert_kind_of Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest, request
+      assert_kind_of ::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.filter
       assert_equal 42, request.page_size
@@ -1520,7 +1520,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     Gapic::ServiceStub.stub :new, list_model_evaluations_client_stub do
       # Create client
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -1539,7 +1539,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_model_evaluations Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_model_evaluations ::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1553,7 +1553,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_model_evaluations Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_model_evaluations ::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1569,7 +1569,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -1579,7 +1579,7 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::AutoML::V1beta1::AutoML::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::AutoML::V1beta1::AutoML::Client::Configuration, config
   end
 
   def test_operations_client
@@ -1587,11 +1587,11 @@ class Google::Cloud::AutoML::V1beta1::AutoML::ClientTest < Minitest::Test
 
     client = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+      client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
 
-    assert_kind_of Google::Cloud::AutoML::V1beta1::AutoML::Operations, client.operations_client
+    assert_kind_of ::Google::Cloud::AutoML::V1beta1::AutoML::Operations, client.operations_client
   end
 end

@@ -23,14 +23,14 @@ module Google
       module V1beta1
         # A range between two double numbers.
         # @!attribute [rw] start
-        #   @return [Float]
+        #   @return [::Float]
         #     Start of the range, inclusive.
         # @!attribute [rw] end
-        #   @return [Float]
+        #   @return [::Float]
         #     End of the range, exclusive.
         class DoubleRange
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
