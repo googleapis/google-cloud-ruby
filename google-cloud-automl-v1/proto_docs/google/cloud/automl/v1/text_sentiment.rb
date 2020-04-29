@@ -23,9 +23,9 @@ module Google
       module V1
         # Contains annotation details specific to text sentiment.
         # @!attribute [rw] sentiment
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The sentiment with the semantic, as given to the
-        #     {Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData} when populating the dataset from which the model used
+        #     {::Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData} when populating the dataset from which the model used
         #     for the prediction had been trained.
         #     The sentiment values are between 0 and
         #     Dataset.text_sentiment_dataset_metadata.sentiment_max (inclusive),
@@ -37,44 +37,44 @@ module Google
         #     The sentiment shouldn't be confused with "score" or "magnitude"
         #     from the previous Natural Language Sentiment Analysis API.
         class TextSentimentAnnotation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Model evaluation metrics for text sentiment problems.
         # @!attribute [rw] precision
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. Precision.
         # @!attribute [rw] recall
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. Recall.
         # @!attribute [rw] f1_score
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. The harmonic mean of recall and precision.
         # @!attribute [rw] mean_absolute_error
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. Mean absolute error. Only set for the overall model
         #     evaluation, not for evaluation of a single annotation spec.
         # @!attribute [rw] mean_squared_error
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. Mean squared error. Only set for the overall model
         #     evaluation, not for evaluation of a single annotation spec.
         # @!attribute [rw] linear_kappa
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. Linear weighted kappa. Only set for the overall model
         #     evaluation, not for evaluation of a single annotation spec.
         # @!attribute [rw] quadratic_kappa
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. Quadratic weighted kappa. Only set for the overall model
         #     evaluation, not for evaluation of a single annotation spec.
         # @!attribute [rw] confusion_matrix
-        #   @return [Google::Cloud::AutoML::V1::ClassificationEvaluationMetrics::ConfusionMatrix]
+        #   @return [::Google::Cloud::AutoML::V1::ClassificationEvaluationMetrics::ConfusionMatrix]
         #     Output only. Confusion matrix of the evaluation.
         #     Only set for the overall model evaluation, not for evaluation of a single
         #     annotation spec.
         class TextSentimentEvaluationMetrics
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

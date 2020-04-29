@@ -23,55 +23,55 @@ module Google
       module V1
         # Dataset metadata that is specific to translation.
         # @!attribute [rw] source_language_code
-        #   @return [String]
+        #   @return [::String]
         #     Required. The BCP-47 language code of the source language.
         # @!attribute [rw] target_language_code
-        #   @return [String]
+        #   @return [::String]
         #     Required. The BCP-47 language code of the target language.
         class TranslationDatasetMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Evaluation metrics for the dataset.
         # @!attribute [rw] bleu_score
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. BLEU score.
         # @!attribute [rw] base_bleu_score
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. BLEU score for base model.
         class TranslationEvaluationMetrics
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Model metadata that is specific to translation.
         # @!attribute [rw] base_model
-        #   @return [String]
+        #   @return [::String]
         #     The resource name of the model to use as a baseline to train the custom
         #     model. If unset, we use the default base model provided by Google
         #     Translate. Format:
         #     `projects/{project_id}/locations/{location_id}/models/{model_id}`
         # @!attribute [rw] source_language_code
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Inferred from the dataset.
         #     The source language (The BCP-47 language code) that is used for training.
         # @!attribute [rw] target_language_code
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The target language (The BCP-47 language code) that is used
         #     for training.
         class TranslationModelMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Annotation details specific to translation.
         # @!attribute [rw] translated_content
-        #   @return [Google::Cloud::AutoML::V1::TextSnippet]
+        #   @return [::Google::Cloud::AutoML::V1::TextSnippet]
         #     Output only . The translated content.
         class TranslationAnnotation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

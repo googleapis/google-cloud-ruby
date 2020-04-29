@@ -23,37 +23,37 @@ module Google
       module V1
         # Dataset metadata for classification.
         # @!attribute [rw] classification_type
-        #   @return [Google::Cloud::AutoML::V1::ClassificationType]
+        #   @return [::Google::Cloud::AutoML::V1::ClassificationType]
         #     Required. Type of the classification problem.
         class TextClassificationDatasetMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Model metadata that is specific to text classification.
         # @!attribute [rw] classification_type
-        #   @return [Google::Cloud::AutoML::V1::ClassificationType]
+        #   @return [::Google::Cloud::AutoML::V1::ClassificationType]
         #     Output only. Classification type of the dataset used to train this model.
         class TextClassificationModelMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Dataset metadata that is specific to text extraction
         class TextExtractionDatasetMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Model metadata that is specific to text extraction.
         class TextExtractionModelMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Dataset metadata for text sentiment.
         # @!attribute [rw] sentiment_max
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Required. A sentiment is expressed as an integer ordinal, where higher value
         #     means a more positive sentiment. The range of sentiments that will be used
         #     is between 0 and sentiment_max (inclusive on both ends), and all the values
@@ -61,14 +61,14 @@ module Google
         #     created.
         #     sentiment_max value must be between 1 and 10 (inclusive).
         class TextSentimentDatasetMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Model metadata that is specific to text sentiment.
         class TextSentimentModelMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

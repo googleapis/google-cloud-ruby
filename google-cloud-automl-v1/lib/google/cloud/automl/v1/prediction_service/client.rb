@@ -41,15 +41,15 @@ module Google
             ##
             # Configure the PredictionService Client class.
             #
-            # See {Google::Cloud::AutoML::V1::PredictionService::Client::Configuration}
+            # See {::Google::Cloud::AutoML::V1::PredictionService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all PredictionService clients:
             #
-            #     Google::Cloud::AutoML::V1::PredictionService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::AutoML::V1::PredictionService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -85,7 +85,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::AutoML::V1::PredictionService::Client::Configuration}
+            # See {::Google::Cloud::AutoML::V1::PredictionService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -106,13 +106,13 @@ module Google
             # To create a new PredictionService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::AutoML::V1::PredictionService::Client.new
+            #     client = ::Google::Cloud::AutoML::V1::PredictionService::Client.new
             #
             # To create a new PredictionService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::AutoML::V1::PredictionService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::AutoML::V1::PredictionService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the PredictionService client.
@@ -144,8 +144,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @prediction_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::AutoML::V1::PredictionService::Stub,
+              @prediction_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::AutoML::V1::PredictionService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -156,7 +156,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::AutoML::V1::PredictionService::Operations]
+            # @return [::Google::Cloud::AutoML::V1::PredictionService::Operations]
             #
             attr_reader :operations_client
 
@@ -202,12 +202,12 @@ module Google
             #
             # @overload predict(request, options = nil)
             #   Pass arguments to `predict` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1::PredictRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1::PredictRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1::PredictRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1::PredictRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload predict(name: nil, payload: nil, params: nil)
@@ -215,12 +215,12 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Name of the model requested to serve the prediction.
-            #   @param payload [Google::Cloud::AutoML::V1::ExamplePayload, Hash]
+            #   @param payload [::Google::Cloud::AutoML::V1::ExamplePayload, ::Hash]
             #     Required. Payload to perform a prediction on. The payload must match the
             #     problem type that the model was trained to solve.
-            #   @param params [Hash{String => String}]
+            #   @param params [::Hash{::String => ::String}]
             #     Additional domain-specific parameters, any string must be up to 25000
             #     characters long.
             #
@@ -254,26 +254,26 @@ module Google
             #       objects. The default is false.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::AutoML::V1::PredictResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::AutoML::V1::PredictResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::AutoML::V1::PredictResponse]
+            # @return [::Google::Cloud::AutoML::V1::PredictResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def predict request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1::PredictRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1::PredictRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.predict.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -294,17 +294,17 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Perform a batch prediction. Unlike the online {Google::Cloud::AutoML::V1::PredictionService::Client#predict Predict}, batch
+            # Perform a batch prediction. Unlike the online {::Google::Cloud::AutoML::V1::PredictionService::Client#predict Predict}, batch
             # prediction result won't be immediately available in the response. Instead,
             # a long running operation object is returned. User can poll the operation
             # result via GetOperation
-            # method. Once the operation is done, {Google::Cloud::AutoML::V1::BatchPredictResult BatchPredictResult} is returned in
-            # the {Google::Longrunning::Operation#response response} field.
+            # method. Once the operation is done, {::Google::Cloud::AutoML::V1::BatchPredictResult BatchPredictResult} is returned in
+            # the {::Google::Longrunning::Operation#response response} field.
             # Available for following ML scenarios:
             #
             # * AutoML Vision Classification
@@ -317,12 +317,12 @@ module Google
             #
             # @overload batch_predict(request, options = nil)
             #   Pass arguments to `batch_predict` via a request object, either of type
-            #   {Google::Cloud::AutoML::V1::BatchPredictRequest} or an equivalent Hash.
+            #   {::Google::Cloud::AutoML::V1::BatchPredictRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::AutoML::V1::BatchPredictRequest, Hash]
+            #   @param request [::Google::Cloud::AutoML::V1::BatchPredictRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload batch_predict(name: nil, input_config: nil, output_config: nil, params: nil)
@@ -330,14 +330,14 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Name of the model requested to serve the batch prediction.
-            #   @param input_config [Google::Cloud::AutoML::V1::BatchPredictInputConfig, Hash]
+            #   @param input_config [::Google::Cloud::AutoML::V1::BatchPredictInputConfig, ::Hash]
             #     Required. The input configuration for batch prediction.
-            #   @param output_config [Google::Cloud::AutoML::V1::BatchPredictOutputConfig, Hash]
+            #   @param output_config [::Google::Cloud::AutoML::V1::BatchPredictOutputConfig, ::Hash]
             #     Required. The Configuration specifying where output predictions should
             #     be written.
-            #   @param params [Hash{String => String}]
+            #   @param params [::Hash{::String => ::String}]
             #     Additional domain-specific parameters for the predictions, any string must
             #     be up to 25000 characters long.
             #
@@ -423,26 +423,26 @@ module Google
             #       returned. Value in 0 to 1 range. Default is 0.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def batch_predict request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::AutoML::V1::BatchPredictRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AutoML::V1::BatchPredictRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_predict.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Automl::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -460,12 +460,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @prediction_service_stub.call_rpc :batch_predict, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -475,7 +475,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::AutoML::V1::PredictionService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::AutoML::V1::PredictionService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -486,22 +486,22 @@ module Google
             # To modify the global config, setting the timeout for predict
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::AutoML::V1::PredictionService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.predict.timeout = 20_000
+            #     ::Google::Cloud::AutoML::V1::PredictionService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.predict.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::AutoML::V1::PredictionService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.predict.timeout = 20_000
+            #     client = ::Google::Cloud::AutoML::V1::PredictionService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.predict.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"automl.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -513,29 +513,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -543,10 +543,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "automl.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -554,14 +554,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -602,21 +602,21 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `predict`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :predict
                 ##
                 # RPC-specific configuration for `batch_predict`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_predict
 
                 # @private
                 def initialize parent_rpcs = nil
                   predict_config = parent_rpcs&.predict if parent_rpcs&.respond_to? :predict
-                  @predict = Gapic::Config::Method.new predict_config
+                  @predict = ::Gapic::Config::Method.new predict_config
                   batch_predict_config = parent_rpcs&.batch_predict if parent_rpcs&.respond_to? :batch_predict
-                  @batch_predict = Gapic::Config::Method.new batch_predict_config
+                  @batch_predict = ::Gapic::Config::Method.new batch_predict_config
 
                   yield self if block_given?
                 end

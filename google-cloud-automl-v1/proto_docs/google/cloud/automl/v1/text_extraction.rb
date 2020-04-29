@@ -23,48 +23,48 @@ module Google
       module V1
         # Annotation for identifying spans of text.
         # @!attribute [rw] text_segment
-        #   @return [Google::Cloud::AutoML::V1::TextSegment]
+        #   @return [::Google::Cloud::AutoML::V1::TextSegment]
         #     An entity annotation will set this, which is the part of the original
         #     text to which the annotation pertains.
         # @!attribute [rw] score
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. A confidence estimate between 0.0 and 1.0. A higher value
         #     means greater confidence in correctness of the annotation.
         class TextExtractionAnnotation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Model evaluation metrics for text extraction problems.
         # @!attribute [rw] au_prc
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. The Area under precision recall curve metric.
         # @!attribute [rw] confidence_metrics_entries
-        #   @return [Array<Google::Cloud::AutoML::V1::TextExtractionEvaluationMetrics::ConfidenceMetricsEntry>]
+        #   @return [::Array<::Google::Cloud::AutoML::V1::TextExtractionEvaluationMetrics::ConfidenceMetricsEntry>]
         #     Output only. Metrics that have confidence thresholds.
         #     Precision-recall curve can be derived from it.
         class TextExtractionEvaluationMetrics
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Metrics for a single confidence threshold.
           # @!attribute [rw] confidence_threshold
-          #   @return [Float]
+          #   @return [::Float]
           #     Output only. The confidence threshold value used to compute the metrics.
           #     Only annotations with score of at least this threshold are considered to
           #     be ones the model would return.
           # @!attribute [rw] recall
-          #   @return [Float]
+          #   @return [::Float]
           #     Output only. Recall under the given confidence threshold.
           # @!attribute [rw] precision
-          #   @return [Float]
+          #   @return [::Float]
           #     Output only. Precision under the given confidence threshold.
           # @!attribute [rw] f1_score
-          #   @return [Float]
+          #   @return [::Float]
           #     Output only. The harmonic mean of recall and precision.
           class ConfidenceMetricsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end
