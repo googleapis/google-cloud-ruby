@@ -26,7 +26,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/web_risk/v1beta1"
-      #     client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
+      #     client = ::Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
       #
       module V1beta1
       end
