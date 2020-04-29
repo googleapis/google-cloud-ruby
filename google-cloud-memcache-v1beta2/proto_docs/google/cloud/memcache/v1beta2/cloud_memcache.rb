@@ -22,7 +22,7 @@ module Google
     module Memcache
       module V1beta2
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Unique name of the resource in this scope including project and
         #     location using the form:
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
@@ -32,107 +32,107 @@ module Google
         #     zones Memcached nodes within an instances should be provisioned in.
         #     Refer to [zones] field for more details.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Optional. User provided name for the instance only used for display
         #     purposes. Cannot be more than 80 characters.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Resource labels to represent user-provided metadata.
         #     Refer to cloud documentation on labels for more details.
         #     https://cloud.google.com/compute/docs/labeling-resources
         # @!attribute [rw] authorized_network
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The full name of the Google Compute Engine
         #     [network](/compute/docs/networks-and-firewalls#networks) to which the
         #     instance is connected. If left unspecified, the `default` network
         #     will be used.
         # @!attribute [rw] zones
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. Zones where Memcached nodes should be provisioned in.
         #     Memcached nodes will be equally distributed across these zones. If not
         #     provided, the service will by default create nodes in all zones in the
         #     region for the instance.
         # @!attribute [rw] node_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Required. Number of nodes in the Memcached instance.
         # @!attribute [rw] node_config
-        #   @return [Google::Cloud::Memcache::V1beta2::Instance::NodeConfig]
+        #   @return [::Google::Cloud::Memcache::V1beta2::Instance::NodeConfig]
         #     Required. Configuration for Memcached nodes.
         # @!attribute [rw] memcache_version
-        #   @return [Google::Cloud::Memcache::V1beta2::MemcacheVersion]
+        #   @return [::Google::Cloud::Memcache::V1beta2::MemcacheVersion]
         #     Optional. The major version of Memcached software.
         #     If not provided, latest supported version will be used. Currently the
         #     latest supported major version is MEMCACHE_1_5.
         #     The minor version will be automatically determined by our system based on
         #     the latest supported minor version.
         # @!attribute [rw] parameters
-        #   @return [Google::Cloud::Memcache::V1beta2::MemcacheParameters]
+        #   @return [::Google::Cloud::Memcache::V1beta2::MemcacheParameters]
         #     Optional: User defined parameters to apply to the memcached process
         #     on each node.
         # @!attribute [r] memcache_nodes
-        #   @return [Array<Google::Cloud::Memcache::V1beta2::Instance::Node>]
+        #   @return [::Array<::Google::Cloud::Memcache::V1beta2::Instance::Node>]
         #     Output only. List of Memcached nodes.
         #     Refer to [Node] message for more details.
         # @!attribute [r] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the instance was created.
         # @!attribute [r] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the instance was updated.
         # @!attribute [r] state
-        #   @return [Google::Cloud::Memcache::V1beta2::Instance::State]
+        #   @return [::Google::Cloud::Memcache::V1beta2::Instance::State]
         #     Output only. The state of this Memcached instance.
         # @!attribute [r] memcache_full_version
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The full version of memcached server running on this instance.
         #     System automatically determines the full memcached version for an instance
         #     based on the input MemcacheVersion.
         #     The full version format will be "memcached-1.5.16".
         # @!attribute [rw] instance_messages
-        #   @return [Array<Google::Cloud::Memcache::V1beta2::Instance::InstanceMessage>]
+        #   @return [::Array<::Google::Cloud::Memcache::V1beta2::Instance::InstanceMessage>]
         #     List of messages that describe current statuses of memcached instance.
         # @!attribute [r] discovery_endpoint
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Endpoint for Discovery API
         class Instance
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Configuration for a Memcached Node.
           # @!attribute [rw] cpu_count
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Required. Number of cpus per Memcached node.
           # @!attribute [rw] memory_size_mb
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Required. Memory size in MiB for each Memcached node.
           class NodeConfig
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [r] node_id
-          #   @return [String]
+          #   @return [::String]
           #     Output only. Identifier of the Memcached node. The node id does not
           #     include project or location like the Memcached instance name.
           # @!attribute [r] zone
-          #   @return [String]
+          #   @return [::String]
           #     Output only. Location (GCP Zone) for the Memcached node.
           # @!attribute [r] state
-          #   @return [Google::Cloud::Memcache::V1beta2::Instance::Node::State]
+          #   @return [::Google::Cloud::Memcache::V1beta2::Instance::Node::State]
           #     Output only. Current state of the Memcached node.
           # @!attribute [r] host
-          #   @return [String]
+          #   @return [::String]
           #     Output only. Hostname or IP address of the Memcached node used by the
           #     clients to connect to the Memcached server on this node.
           # @!attribute [r] port
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Output only. The port number of the Memcached server on this node.
           # @!attribute [rw] parameters
-          #   @return [Google::Cloud::Memcache::V1beta2::MemcacheParameters]
+          #   @return [::Google::Cloud::Memcache::V1beta2::MemcacheParameters]
           #     User defined parameters currently applied to the node.
           class Node
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Different states of a Memcached node.
             # LINT.IfChange
@@ -155,14 +155,14 @@ module Google
           end
 
           # @!attribute [rw] code
-          #   @return [Google::Cloud::Memcache::V1beta2::Instance::InstanceMessage::Code]
+          #   @return [::Google::Cloud::Memcache::V1beta2::Instance::InstanceMessage::Code]
           #     A code that correspond to one type of user-facing message.
           # @!attribute [rw] message
-          #   @return [String]
+          #   @return [::String]
           #     Message on memcached instance which will be exposed to users.
           class InstanceMessage
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             module Code
               # Message Code not set.
@@ -174,12 +174,12 @@ module Google
           end
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Different states of a Memcached instance.
@@ -202,14 +202,14 @@ module Google
           end
         end
 
-        # Request for {Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#list_instances ListInstances}.
+        # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#list_instances ListInstances}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the instance location using the form:
         #         `projects/{project_id}/locations/{location_id}`
         #     where `location_id` refers to a GCP region
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The maximum number of items to return.
         #
         #     If not specified, a default value of 1000 will be used by the service.
@@ -218,60 +218,60 @@ module Google
         #     [next_page_token][CloudMemcache.ListInstancesResponse.next_page_token]
         #     to determine if there are more instances left to be queried.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     The next_page_token value returned from a previous List request,
         #     if any.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     List filter. For example, exclude all Memcached instances with name as
         #     my-instance by specifying "name != my-instance".
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     Sort results. Supported values are "name", "name desc" or "" (unsorted).
         class ListInstancesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for {Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#list_instances ListInstances}.
+        # Response for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#list_instances ListInstances}.
         # @!attribute [rw] resources
-        #   @return [Array<Google::Cloud::Memcache::V1beta2::Instance>]
+        #   @return [::Array<::Google::Cloud::Memcache::V1beta2::Instance>]
         #     A list of Memcached instances in the project in the specified location,
         #     or across all locations.
         #
         #     If the `location_id` in the parent field of the request is "-", all regions
         #     available to the project are queried, and the results aggregated.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no more
         #     results in the list.
         # @!attribute [rw] unreachable
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Locations that could not be reached.
         class ListInstancesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#get_instance GetInstance}.
+        # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#get_instance GetInstance}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Memcached instance resource name in the format:
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #     where `location_id` refers to a GCP region
         class GetInstanceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#create_instance CreateInstance}.
+        # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#create_instance CreateInstance}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the instance location using the form:
         #         `projects/{project_id}/locations/{location_id}`
         #     where `location_id` refers to a GCP region
         # @!attribute [rw] instance_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The logical name of the Memcached instance in the user
         #     project with the following restrictions:
         #
@@ -281,148 +281,148 @@ module Google
         #     * Must end with a number or a letter.
         #     * Must be unique within the user project / location
         # @!attribute [rw] resource
-        #   @return [Google::Cloud::Memcache::V1beta2::Instance]
+        #   @return [::Google::Cloud::Memcache::V1beta2::Instance]
         #     Required. A Memcached [Instance] resource
         class CreateInstanceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#update_instance UpdateInstance}.
+        # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#update_instance UpdateInstance}.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update.
         #      *   `displayName`
         # @!attribute [rw] resource
-        #   @return [Google::Cloud::Memcache::V1beta2::Instance]
+        #   @return [::Google::Cloud::Memcache::V1beta2::Instance]
         #     Required. A Memcached [Instance] resource.
         #     Only fields specified in update_mask are updated.
         class UpdateInstanceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#delete_instance DeleteInstance}.
+        # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#delete_instance DeleteInstance}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Memcached instance resource name in the format:
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #     where `location_id` refers to a GCP region
         class DeleteInstanceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#apply_parameters ApplyParameters}.
+        # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#apply_parameters ApplyParameters}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the Memcached instance for which parameter group updates
         #     should be applied.
         # @!attribute [rw] node_ids
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Nodes to which we should apply the instance-level parameter group.
         # @!attribute [rw] apply_all
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Whether to apply instance-level parameter group to all nodes. If set to
         #     true, will explicitly restrict users from specifying any nodes, and apply
         #     parameter group updates to all nodes within the instance.
         class ApplyParametersRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#update_parameters UpdateParameters}.
+        # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#update_parameters UpdateParameters}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the Memcached instance for which the parameters should be
         #     updated.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update.
         # @!attribute [rw] parameters
-        #   @return [Google::Cloud::Memcache::V1beta2::MemcacheParameters]
+        #   @return [::Google::Cloud::Memcache::V1beta2::MemcacheParameters]
         #     The parameters to apply to the instance.
         class UpdateParametersRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # @!attribute [r] id
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The unique ID associated with this set of parameters. Users
         #     can use this id to determine if the parameters associated with the instance
         #     differ from the parameters associated with the nodes and any action needs
         #     to be taken to apply parameters on nodes.
         # @!attribute [rw] params
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User defined set of parameters to use in the memcached process.
         class MemcacheParameters
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ParamsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Represents the metadata of a long-running operation.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Time when the operation was created.
         # @!attribute [rw] end_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Time when the operation finished running.
         # @!attribute [rw] target
-        #   @return [String]
+        #   @return [::String]
         #     Server-defined resource path for the target of the operation.
         # @!attribute [rw] verb
-        #   @return [String]
+        #   @return [::String]
         #     Name of the verb executed by the operation.
         # @!attribute [rw] status_detail
-        #   @return [String]
+        #   @return [::String]
         #     Human-readable status of the operation, if any.
         # @!attribute [rw] cancel_requested
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
         #     corresponding to `Code.CANCELLED`.
         # @!attribute [rw] api_version
-        #   @return [String]
+        #   @return [::String]
         #     API version used to start the operation.
         class OperationMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Metadata for the given [google.cloud.location.Location][google.cloud.location.Location].
         # @!attribute [r] available_zones
-        #   @return [Google::Protobuf::Map{String => Google::Cloud::Memcache::V1beta2::ZoneMetadata}]
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Memcache::V1beta2::ZoneMetadata}]
         #     Output only. The set of available zones in the location. The map is keyed
         #     by the lowercase ID of each zone, as defined by GCE. These keys can be
         #     specified in the `zones` field when creating a Memcached instance.
         class LocationMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [Google::Cloud::Memcache::V1beta2::ZoneMetadata]
+          #   @return [::Google::Cloud::Memcache::V1beta2::ZoneMetadata]
           class AvailableZonesEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         class ZoneMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Memcached versions supported by our service.
