@@ -44,7 +44,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dlp/v2/dlp_service"
-        #     client = Google::Cloud::Dlp::V2::DlpService::Client.new
+        #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new
         #
         module DlpService
         end
