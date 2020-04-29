@@ -23,7 +23,7 @@ require "google/cloud/texttospeech/v1/cloud_tts_pb"
 require "google/cloud/texttospeech/v1/cloud_tts_services_pb"
 require "google/cloud/text_to_speech/v1/text_to_speech"
 
-class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
+class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
 
   def test_list_voices
     # Create GRPC objects.
-    grpc_response = Google::Cloud::TextToSpeech::V1::ListVoicesResponse.new
+    grpc_response = ::Google::Cloud::TextToSpeech::V1::ListVoicesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -58,14 +58,14 @@ class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
 
     list_voices_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_voices, name
-      assert_kind_of Google::Cloud::TextToSpeech::V1::ListVoicesRequest, request
+      assert_kind_of ::Google::Cloud::TextToSpeech::V1::ListVoicesRequest, request
       assert_equal "hello world", request.language_code
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, list_voices_client_stub do
       # Create client
-      client = Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
+      client = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -82,7 +82,7 @@ class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list_voices Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new(language_code: language_code) do |response, operation|
+      client.list_voices ::Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new(language_code: language_code) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -94,7 +94,7 @@ class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list_voices Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new(language_code: language_code), grpc_options do |response, operation|
+      client.list_voices ::Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new(language_code: language_code), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -106,7 +106,7 @@ class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
 
   def test_synthesize_speech
     # Create GRPC objects.
-    grpc_response = Google::Cloud::TextToSpeech::V1::SynthesizeSpeechResponse.new
+    grpc_response = ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -118,16 +118,16 @@ class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
 
     synthesize_speech_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :synthesize_speech, name
-      assert_kind_of Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::TextToSpeech::V1::SynthesisInput), request.input
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::TextToSpeech::V1::VoiceSelectionParams), request.voice
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::TextToSpeech::V1::AudioConfig), request.audio_config
+      assert_kind_of ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1::SynthesisInput), request.input
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1::VoiceSelectionParams), request.voice
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1::AudioConfig), request.audio_config
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, synthesize_speech_client_stub do
       # Create client
-      client = Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
+      client = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -144,7 +144,7 @@ class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.synthesize_speech Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config) do |response, operation|
+      client.synthesize_speech ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -156,7 +156,7 @@ class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.synthesize_speech Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config), grpc_options do |response, operation|
+      client.synthesize_speech ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -171,7 +171,7 @@ class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
+      client = ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -181,6 +181,6 @@ class Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::TextToSpeech::V1::TextToSpeech::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Client::Configuration, config
   end
 end
