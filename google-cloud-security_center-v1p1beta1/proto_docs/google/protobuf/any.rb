@@ -99,7 +99,7 @@ module Google
     #       "value": "1.212s"
     #     }
     # @!attribute [rw] type_url
-    #   @return [String]
+    #   @return [::String]
     #     A URL/resource name that uniquely identifies the type of the serialized
     #     protocol buffer message. This string must contain at least
     #     one "/" character. The last segment of the URL's path must represent
@@ -128,11 +128,11 @@ module Google
     #     Schemes other than `http`, `https` (or the empty scheme) might be
     #     used with implementation specific semantics.
     # @!attribute [rw] value
-    #   @return [String]
+    #   @return [::String]
     #     Must be a valid serialized protocol buffer of the above specified type.
     class Any
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end

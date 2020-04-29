@@ -23,15 +23,15 @@ module Google
       module V1p1beta1
         # Cloud SCC's Notification
         # @!attribute [rw] notification_config_name
-        #   @return [String]
+        #   @return [::String]
         #     Name of the notification config that generated current notification.
         # @!attribute [rw] finding
-        #   @return [Google::Cloud::SecurityCenter::V1p1beta1::Finding]
+        #   @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
         #     If it's a Finding based notification config, this field will be
         #     populated.
         class NotificationMessage
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
