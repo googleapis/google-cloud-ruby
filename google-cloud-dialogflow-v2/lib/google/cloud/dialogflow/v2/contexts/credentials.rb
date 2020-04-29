@@ -24,7 +24,7 @@ module Google
       module V2
         module Contexts
           # Credentials for the Contexts API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform",
               "https://www.googleapis.com/auth/dialogflow"

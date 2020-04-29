@@ -36,7 +36,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dialogflow/v2/environments"
-        #     client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+        #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new
         #
         module Environments
         end

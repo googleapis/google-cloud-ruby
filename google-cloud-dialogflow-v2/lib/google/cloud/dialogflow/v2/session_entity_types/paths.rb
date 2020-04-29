@@ -45,25 +45,25 @@ module Google
             #   @param user [String]
             #   @param session [String]
             #
-            # @return [String]
+            # @return [::String]
             def session_path **args
               resources = {
                 "project:session"                  => (proc do |project:, session:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/agent/sessions/#{session}"
                 end),
                 "environment:project:session:user" => (proc do |project:, environment:, user:, session:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
-                  raise ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+                  raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
 
                   "projects/#{project}/agent/environments/#{environment}/users/#{user}/sessions/#{session}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -90,27 +90,27 @@ module Google
             #   @param session [String]
             #   @param entity_type [String]
             #
-            # @return [String]
+            # @return [::String]
             def session_entity_type_path **args
               resources = {
                 "entity_type:project:session"                  => (proc do |project:, session:, entity_type:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
                   "projects/#{project}/agent/sessions/#{session}/entityTypes/#{entity_type}"
                 end),
                 "entity_type:environment:project:session:user" => (proc do |project:, environment:, user:, session:, entity_type:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
-                  raise ArgumentError, "user cannot contain /" if user.to_s.include? "/"
-                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+                  raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+                  raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
                   "projects/#{project}/agent/environments/#{environment}/users/#{user}/sessions/#{session}/entityTypes/#{entity_type}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 

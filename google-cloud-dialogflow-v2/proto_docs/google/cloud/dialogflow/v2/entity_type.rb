@@ -25,34 +25,34 @@ module Google
         # Entity types serve as a tool for extracting parameter values from natural
         # language queries.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     The unique identifier of the entity type.
-        #     Required for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#update_entity_type EntityTypes.UpdateEntityType} and
-        #     {Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_update_entity_types EntityTypes.BatchUpdateEntityTypes} methods.
+        #     Required for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#update_entity_type EntityTypes.UpdateEntityType} and
+        #     {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_update_entity_types EntityTypes.BatchUpdateEntityTypes} methods.
         #     Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entity type.
         # @!attribute [rw] kind
-        #   @return [Google::Cloud::Dialogflow::V2::EntityType::Kind]
+        #   @return [::Google::Cloud::Dialogflow::V2::EntityType::Kind]
         #     Required. Indicates the kind of entity type.
         # @!attribute [rw] auto_expansion_mode
-        #   @return [Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode]
+        #   @return [::Google::Cloud::Dialogflow::V2::EntityType::AutoExpansionMode]
         #     Optional. Indicates whether the entity type can be automatically
         #     expanded.
         # @!attribute [rw] entities
-        #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::EntityType::Entity>]
         #     Optional. The collection of entity entries associated with the entity type.
         # @!attribute [rw] enable_fuzzy_extraction
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Optional. Enables fuzzy entity extraction during classification.
         class EntityType
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # An **entity entry** for an associated entity type.
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           #     Required. The primary value associated with this entity entry.
           #     For example, if the entity type is *vegetable*, the value could be
           #     *scallions*.
@@ -66,7 +66,7 @@ module Google
           #     *   A string that can contain references to other entity types (with or
           #         without aliases).
           # @!attribute [rw] synonyms
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     Required. A collection of value synonyms. For example, if the entity type
           #     is *vegetable*, and `value` is *scallions*, a synonym could be *green
           #     onions*.
@@ -75,8 +75,8 @@ module Google
           #
           #     *   This collection must contain exactly one synonym equal to `value`.
           class Entity
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Represents kinds of entities.
@@ -111,234 +111,234 @@ module Google
           end
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#list_entity_types EntityTypes.ListEntityTypes}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#list_entity_types EntityTypes.ListEntityTypes}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The agent to list all entity types from.
         #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The language used to access language-specific data.
         #     If not specified, the agent's default language is used.
         #     For more information, see
         #     [Multilingual intent and entity
         #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of items to return in a single page. By
         #     default 100 and at most 1000.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The next_page_token value returned from a previous list request.
         class ListEntityTypesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#list_entity_types EntityTypes.ListEntityTypes}.
+        # The response message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#list_entity_types EntityTypes.ListEntityTypes}.
         # @!attribute [rw] entity_types
-        #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::EntityType>]
         #     The list of agent entity types. There will be a maximum number of items
         #     returned based on the page_size field in the request.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no
         #     more results in the list.
         class ListEntityTypesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#get_entity_type EntityTypes.GetEntityType}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#get_entity_type EntityTypes.GetEntityType}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entity type.
         #     Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The language used to access language-specific data.
         #     If not specified, the agent's default language is used.
         #     For more information, see
         #     [Multilingual intent and entity
         #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         class GetEntityTypeRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#create_entity_type EntityTypes.CreateEntityType}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#create_entity_type EntityTypes.CreateEntityType}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The agent to create a entity type for.
         #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] entity_type
-        #   @return [Google::Cloud::Dialogflow::V2::EntityType]
+        #   @return [::Google::Cloud::Dialogflow::V2::EntityType]
         #     Required. The entity type to create.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The language used to access language-specific data.
         #     If not specified, the agent's default language is used.
         #     For more information, see
         #     [Multilingual intent and entity
         #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         class CreateEntityTypeRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#update_entity_type EntityTypes.UpdateEntityType}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#update_entity_type EntityTypes.UpdateEntityType}.
         # @!attribute [rw] entity_type
-        #   @return [Google::Cloud::Dialogflow::V2::EntityType]
+        #   @return [::Google::Cloud::Dialogflow::V2::EntityType]
         #     Required. The entity type to update.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The language used to access language-specific data.
         #     If not specified, the agent's default language is used.
         #     For more information, see
         #     [Multilingual intent and entity
         #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.
         class UpdateEntityTypeRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#delete_entity_type EntityTypes.DeleteEntityType}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#delete_entity_type EntityTypes.DeleteEntityType}.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entity type to delete.
         #     Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
         class DeleteEntityTypeRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_update_entity_types EntityTypes.BatchUpdateEntityTypes}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_update_entity_types EntityTypes.BatchUpdateEntityTypes}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the agent to update or create entity types in.
         #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] entity_type_batch_uri
-        #   @return [String]
+        #   @return [::String]
         #     The URI to a Google Cloud Storage file containing entity types to update
         #     or create. The file format can either be a serialized proto (of
         #     EntityBatch type) or a JSON object. Note: The URI must start with
         #     "gs://".
         # @!attribute [rw] entity_type_batch_inline
-        #   @return [Google::Cloud::Dialogflow::V2::EntityTypeBatch]
+        #   @return [::Google::Cloud::Dialogflow::V2::EntityTypeBatch]
         #     The collection of entity types to update or create.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The language used to access language-specific data.
         #     If not specified, the agent's default language is used.
         #     For more information, see
         #     [Multilingual intent and entity
         #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.
         class BatchUpdateEntityTypesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_update_entity_types EntityTypes.BatchUpdateEntityTypes}.
+        # The response message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_update_entity_types EntityTypes.BatchUpdateEntityTypes}.
         # @!attribute [rw] entity_types
-        #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::EntityType>]
         #     The collection of updated or created entity types.
         class BatchUpdateEntityTypesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_delete_entity_types EntityTypes.BatchDeleteEntityTypes}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_delete_entity_types EntityTypes.BatchDeleteEntityTypes}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the agent to delete all entities types for. Format:
         #     `projects/<Project ID>/agent`.
         # @!attribute [rw] entity_type_names
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Required. The names entity types to delete. All names must point to the
         #     same agent as `parent`.
         class BatchDeleteEntityTypesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_create_entities EntityTypes.BatchCreateEntities}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_create_entities EntityTypes.BatchCreateEntities}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entity type to create entities in. Format:
         #     `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
         # @!attribute [rw] entities
-        #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::EntityType::Entity>]
         #     Required. The entities to create.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The language used to access language-specific data.
         #     If not specified, the agent's default language is used.
         #     For more information, see
         #     [Multilingual intent and entity
         #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         class BatchCreateEntitiesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_update_entities EntityTypes.BatchUpdateEntities}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_update_entities EntityTypes.BatchUpdateEntities}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entity type to update or create entities in.
         #     Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
         # @!attribute [rw] entities
-        #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::EntityType::Entity>]
         #     Required. The entities to update or create.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The language used to access language-specific data.
         #     If not specified, the agent's default language is used.
         #     For more information, see
         #     [Multilingual intent and entity
         #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields get updated.
         class BatchUpdateEntitiesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_delete_entities EntityTypes.BatchDeleteEntities}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_delete_entities EntityTypes.BatchDeleteEntities}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the entity type to delete entries for. Format:
         #     `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
         # @!attribute [rw] entity_values
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Required. The reference `values` of the entities to delete. Note that
         #     these are not fully-qualified names, i.e. they don't start with
         #     `projects/<Project ID>`.
         # @!attribute [rw] language_code
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The language used to access language-specific data.
         #     If not specified, the agent's default language is used.
         #     For more information, see
         #     [Multilingual intent and entity
         #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
         class BatchDeleteEntitiesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # This message is a wrapper around a collection of entity types.
         # @!attribute [rw] entity_types
-        #   @return [Array<Google::Cloud::Dialogflow::V2::EntityType>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::EntityType>]
         #     A collection of entity types.
         class EntityTypeBatch
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

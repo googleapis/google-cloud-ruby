@@ -23,29 +23,29 @@ module Google
       module V2
         # Represents an agent environment.
         # @!attribute [r] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The unique identifier of this agent environment.
         #     Format: `projects/<Project ID>/agent/environments/<Environment ID>`.
         #     For Environment ID, "-" is reserved for 'draft' environment.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The developer-provided description for this environment.
         #     The maximum length is 500 characters. If exceeded, the request is rejected.
         # @!attribute [rw] agent_version
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The agent version loaded into this environment.
         #     Format: `projects/<Project ID>/agent/versions/<Version ID>`.
         # @!attribute [r] state
-        #   @return [Google::Cloud::Dialogflow::V2::Environment::State]
+        #   @return [::Google::Cloud::Dialogflow::V2::Environment::State]
         #     Output only. The state of this environment. This field is read-only, i.e., it cannot be
         #     set by create and update methods.
         # @!attribute [r] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last update time of this environment. This field is read-only, i.e., it
         #     cannot be set by create and update methods.
         class Environment
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Represents an environment state. When a environment is pointed to a new
           # agent version, the environment is temporarily set to the `LOADING` state.
@@ -67,35 +67,35 @@ module Google
           end
         end
 
-        # The request message for {Google::Cloud::Dialogflow::V2::Environments::Client#list_environments Environments.ListEnvironments}.
+        # The request message for {::Google::Cloud::Dialogflow::V2::Environments::Client#list_environments Environments.ListEnvironments}.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The agent to list all environments from.
         #     Format: `projects/<Project ID>/agent`.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of items to return in a single page. By default 100 and
         #     at most 1000.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The next_page_token value returned from a previous list request.
         class ListEnvironmentsRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {Google::Cloud::Dialogflow::V2::Environments::Client#list_environments Environments.ListEnvironments}.
+        # The response message for {::Google::Cloud::Dialogflow::V2::Environments::Client#list_environments Environments.ListEnvironments}.
         # @!attribute [rw] environments
-        #   @return [Array<Google::Cloud::Dialogflow::V2::Environment>]
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::Environment>]
         #     The list of agent environments. There will be a maximum number of items
         #     returned based on the page_size field in the request.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no
         #     more results in the list.
         class ListEnvironmentsResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

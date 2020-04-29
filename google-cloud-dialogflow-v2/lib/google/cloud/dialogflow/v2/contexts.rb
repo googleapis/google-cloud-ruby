@@ -39,8 +39,8 @@ module Google
         # geographic location, and so on.
         #
         # You can include contexts as input parameters of a
-        # {Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) request,
+        # {::Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
+        # {::Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) request,
         # or as output contexts included in the returned intent.
         # Contexts expire when an intent is matched, after the number of `DetectIntent`
         # requests specified by the `lifespan_count` parameter, or after 20 minutes
@@ -53,7 +53,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dialogflow/v2/contexts"
-        #     client = Google::Cloud::Dialogflow::V2::Contexts::Client.new
+        #     client = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new
         #
         module Contexts
         end

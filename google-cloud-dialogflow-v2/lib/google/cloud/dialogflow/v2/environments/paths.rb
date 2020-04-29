@@ -33,7 +33,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def agent_path project:
               "projects/#{project}/agent"
             end

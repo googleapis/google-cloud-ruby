@@ -23,7 +23,7 @@ require "google/cloud/dialogflow/v2/session_entity_type_pb"
 require "google/cloud/dialogflow/v2/session_entity_type_services_pb"
 require "google/cloud/dialogflow/v2/session_entity_types"
 
-class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::Test
+class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
   def test_list_session_entity_types
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dialogflow::V2::ListSessionEntityTypesResponse.new
+    grpc_response = ::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -60,7 +60,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
     list_session_entity_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_session_entity_types, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest, request
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -69,7 +69,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
     Gapic::ServiceStub.stub :new, list_session_entity_types_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -88,7 +88,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.list_session_entity_types Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_session_entity_types ::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -102,7 +102,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.list_session_entity_types Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_session_entity_types ::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -115,7 +115,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
   def test_get_session_entity_type
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dialogflow::V2::SessionEntityType.new
+    grpc_response = ::Google::Cloud::Dialogflow::V2::SessionEntityType.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -125,14 +125,14 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
     get_session_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_session_entity_type, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, get_session_entity_type_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -149,7 +149,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.get_session_entity_type Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest.new(name: name) do |response, operation|
+      client.get_session_entity_type ::Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -161,7 +161,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.get_session_entity_type Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest.new(name: name), grpc_options do |response, operation|
+      client.get_session_entity_type ::Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -173,7 +173,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
   def test_create_session_entity_type
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dialogflow::V2::SessionEntityType.new
+    grpc_response = ::Google::Cloud::Dialogflow::V2::SessionEntityType.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -184,15 +184,15 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
     create_session_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_session_entity_type, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_session_entity_type_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -209,7 +209,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.create_session_entity_type Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest.new(parent: parent, session_entity_type: session_entity_type) do |response, operation|
+      client.create_session_entity_type ::Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest.new(parent: parent, session_entity_type: session_entity_type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -221,7 +221,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.create_session_entity_type Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest.new(parent: parent, session_entity_type: session_entity_type), grpc_options do |response, operation|
+      client.create_session_entity_type ::Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest.new(parent: parent, session_entity_type: session_entity_type), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -233,7 +233,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
   def test_update_session_entity_type
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dialogflow::V2::SessionEntityType.new
+    grpc_response = ::Google::Cloud::Dialogflow::V2::SessionEntityType.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -244,15 +244,15 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
     update_session_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_session_entity_type, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Protobuf::FieldMask), request.update_mask
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::SessionEntityType), request.session_entity_type
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request.update_mask
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_session_entity_type_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -269,7 +269,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.update_session_entity_type Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest.new(session_entity_type: session_entity_type, update_mask: update_mask) do |response, operation|
+      client.update_session_entity_type ::Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest.new(session_entity_type: session_entity_type, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -281,7 +281,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.update_session_entity_type Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest.new(session_entity_type: session_entity_type, update_mask: update_mask), grpc_options do |response, operation|
+      client.update_session_entity_type ::Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest.new(session_entity_type: session_entity_type, update_mask: update_mask), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -293,7 +293,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
   def test_delete_session_entity_type
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -303,14 +303,14 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
     delete_session_entity_type_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_session_entity_type, name
-      assert_kind_of Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest, request
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest, request
       assert_equal "hello world", request.name
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, delete_session_entity_type_client_stub do
       # Create client
-      client = Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -327,7 +327,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
       end
 
       # Use protobuf object
-      client.delete_session_entity_type Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest.new(name: name) do |response, operation|
+      client.delete_session_entity_type ::Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest.new(name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -339,7 +339,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
       end
 
       # Use protobuf object with options
-      client.delete_session_entity_type Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest.new(name: name), grpc_options do |response, operation|
+      client.delete_session_entity_type ::Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest.new(name: name), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -354,7 +354,7 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
+      client = ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -364,6 +364,6 @@ class Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientTest < Minitest::
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client::Configuration, config
   end
 end

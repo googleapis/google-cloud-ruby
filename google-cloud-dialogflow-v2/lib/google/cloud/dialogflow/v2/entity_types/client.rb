@@ -50,7 +50,7 @@ module Google
           #
           # *   **User** - entities that are built for an individual user such as
           #     favorites, preferences, playlists, and so on. A user entity is
-          #     represented by the {Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
+          #     represented by the {::Google::Cloud::Dialogflow::V2::SessionEntityType SessionEntityType} type.
           #
           # For more information about entity types, see the
           # [Dialogflow
@@ -65,15 +65,15 @@ module Google
             ##
             # Configure the EntityTypes Client class.
             #
-            # See {Google::Cloud::Dialogflow::V2::EntityTypes::Client::Configuration}
+            # See {::Google::Cloud::Dialogflow::V2::EntityTypes::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all EntityTypes clients:
             #
-            #     Google::Cloud::Dialogflow::V2::EntityTypes::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -155,7 +155,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Dialogflow::V2::EntityTypes::Client::Configuration}
+            # See {::Google::Cloud::Dialogflow::V2::EntityTypes::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -176,13 +176,13 @@ module Google
             # To create a new EntityTypes client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #     client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
             #
             # To create a new EntityTypes client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the EntityTypes client.
@@ -214,8 +214,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @entity_types_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Dialogflow::V2::EntityTypes::Stub,
+              @entity_types_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Dialogflow::V2::EntityTypes::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -226,7 +226,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::Dialogflow::V2::EntityTypes::Operations]
+            # @return [::Google::Cloud::Dialogflow::V2::EntityTypes::Operations]
             #
             attr_reader :operations_client
 
@@ -237,12 +237,12 @@ module Google
             #
             # @overload list_entity_types(request, options = nil)
             #   Pass arguments to `list_entity_types` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::ListEntityTypesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::ListEntityTypesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::ListEntityTypesRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::ListEntityTypesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_entity_types(parent: nil, language_code: nil, page_size: nil, page_token: nil)
@@ -250,42 +250,42 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The agent to list all entity types from.
             #     Format: `projects/<Project ID>/agent`.
-            #   @param language_code [String]
+            #   @param language_code [::String]
             #     Optional. The language used to access language-specific data.
             #     If not specified, the agent's default language is used.
             #     For more information, see
             #     [Multilingual intent and entity
             #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return in a single page. By
             #     default 100 and at most 1000.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. The next_page_token value returned from a previous list request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dialogflow::V2::EntityType>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::EntityType>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dialogflow::V2::EntityType>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::EntityType>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_entity_types request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::ListEntityTypesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::ListEntityTypesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_entity_types.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -303,12 +303,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :list_entity_types, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @entity_types_stub, :list_entity_types, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @entity_types_stub, :list_entity_types, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -316,12 +316,12 @@ module Google
             #
             # @overload get_entity_type(request, options = nil)
             #   Pass arguments to `get_entity_type` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::GetEntityTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::GetEntityTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::GetEntityTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::GetEntityTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_entity_type(name: nil, language_code: nil)
@@ -329,10 +329,10 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the entity type.
             #     Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
-            #   @param language_code [String]
+            #   @param language_code [::String]
             #     Optional. The language used to access language-specific data.
             #     If not specified, the agent's default language is used.
             #     For more information, see
@@ -340,26 +340,26 @@ module Google
             #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dialogflow::V2::EntityType]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::EntityType]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dialogflow::V2::EntityType]
+            # @return [::Google::Cloud::Dialogflow::V2::EntityType]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_entity_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::GetEntityTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::GetEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_entity_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -380,8 +380,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -389,12 +389,12 @@ module Google
             #
             # @overload create_entity_type(request, options = nil)
             #   Pass arguments to `create_entity_type` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_entity_type(parent: nil, entity_type: nil, language_code: nil)
@@ -402,12 +402,12 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The agent to create a entity type for.
             #     Format: `projects/<Project ID>/agent`.
-            #   @param entity_type [Google::Cloud::Dialogflow::V2::EntityType, Hash]
+            #   @param entity_type [::Google::Cloud::Dialogflow::V2::EntityType, ::Hash]
             #     Required. The entity type to create.
-            #   @param language_code [String]
+            #   @param language_code [::String]
             #     Optional. The language used to access language-specific data.
             #     If not specified, the agent's default language is used.
             #     For more information, see
@@ -415,26 +415,26 @@ module Google
             #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dialogflow::V2::EntityType]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::EntityType]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dialogflow::V2::EntityType]
+            # @return [::Google::Cloud::Dialogflow::V2::EntityType]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_entity_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_entity_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -455,8 +455,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -464,12 +464,12 @@ module Google
             #
             # @overload update_entity_type(request, options = nil)
             #   Pass arguments to `update_entity_type` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_entity_type(entity_type: nil, language_code: nil, update_mask: nil)
@@ -477,38 +477,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param entity_type [Google::Cloud::Dialogflow::V2::EntityType, Hash]
+            #   @param entity_type [::Google::Cloud::Dialogflow::V2::EntityType, ::Hash]
             #     Required. The entity type to update.
-            #   @param language_code [String]
+            #   @param language_code [::String]
             #     Optional. The language used to access language-specific data.
             #     If not specified, the agent's default language is used.
             #     For more information, see
             #     [Multilingual intent and entity
             #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. The mask to control which fields get updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dialogflow::V2::EntityType]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::EntityType]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dialogflow::V2::EntityType]
+            # @return [::Google::Cloud::Dialogflow::V2::EntityType]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_entity_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_entity_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -529,8 +529,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -538,12 +538,12 @@ module Google
             #
             # @overload delete_entity_type(request, options = nil)
             #   Pass arguments to `delete_entity_type` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_entity_type(name: nil)
@@ -551,31 +551,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the entity type to delete.
             #     Format: `projects/<Project ID>/agent/entityTypes/<EntityType ID>`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_entity_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_entity_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -596,23 +596,23 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Updates/Creates multiple entity types in the specified agent.
             #
-            # Operation <response: {Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesResponse BatchUpdateEntityTypesResponse}>
+            # Operation <response: {::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesResponse BatchUpdateEntityTypesResponse}>
             #
             # @overload batch_update_entity_types(request, options = nil)
             #   Pass arguments to `batch_update_entity_types` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload batch_update_entity_types(parent: nil, entity_type_batch_uri: nil, entity_type_batch_inline: nil, language_code: nil, update_mask: nil)
@@ -620,46 +620,46 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The name of the agent to update or create entity types in.
             #     Format: `projects/<Project ID>/agent`.
-            #   @param entity_type_batch_uri [String]
+            #   @param entity_type_batch_uri [::String]
             #     The URI to a Google Cloud Storage file containing entity types to update
             #     or create. The file format can either be a serialized proto (of
             #     EntityBatch type) or a JSON object. Note: The URI must start with
             #     "gs://".
-            #   @param entity_type_batch_inline [Google::Cloud::Dialogflow::V2::EntityTypeBatch, Hash]
+            #   @param entity_type_batch_inline [::Google::Cloud::Dialogflow::V2::EntityTypeBatch, ::Hash]
             #     The collection of entity types to update or create.
-            #   @param language_code [String]
+            #   @param language_code [::String]
             #     Optional. The language used to access language-specific data.
             #     If not specified, the agent's default language is used.
             #     For more information, see
             #     [Multilingual intent and entity
             #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. The mask to control which fields get updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def batch_update_entity_types request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_update_entity_types.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -677,27 +677,27 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :batch_update_entity_types, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Deletes entity types in the specified agent.
             #
-            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
+            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload batch_delete_entity_types(request, options = nil)
             #   Pass arguments to `batch_delete_entity_types` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload batch_delete_entity_types(parent: nil, entity_type_names: nil)
@@ -705,34 +705,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The name of the agent to delete all entities types for. Format:
             #     `projects/<Project ID>/agent`.
-            #   @param entity_type_names [Array<String>]
+            #   @param entity_type_names [::Array<::String>]
             #     Required. The names entity types to delete. All names must point to the
             #     same agent as `parent`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def batch_delete_entity_types request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_delete_entity_types.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -750,27 +750,27 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :batch_delete_entity_types, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Creates multiple new entities in the specified entity type.
             #
-            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
+            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload batch_create_entities(request, options = nil)
             #   Pass arguments to `batch_create_entities` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload batch_create_entities(parent: nil, entities: nil, language_code: nil)
@@ -778,12 +778,12 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The name of the entity type to create entities in. Format:
             #     `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
-            #   @param entities [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity, Hash>]
+            #   @param entities [::Array<::Google::Cloud::Dialogflow::V2::EntityType::Entity, ::Hash>]
             #     Required. The entities to create.
-            #   @param language_code [String]
+            #   @param language_code [::String]
             #     Optional. The language used to access language-specific data.
             #     If not specified, the agent's default language is used.
             #     For more information, see
@@ -791,26 +791,26 @@ module Google
             #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def batch_create_entities request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_create_entities.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -828,12 +828,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :batch_create_entities, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -842,16 +842,16 @@ module Google
             # specified in the request.
             #
             #
-            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
+            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload batch_update_entities(request, options = nil)
             #   Pass arguments to `batch_update_entities` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload batch_update_entities(parent: nil, entities: nil, language_code: nil, update_mask: nil)
@@ -859,41 +859,41 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The name of the entity type to update or create entities in.
             #     Format: `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
-            #   @param entities [Array<Google::Cloud::Dialogflow::V2::EntityType::Entity, Hash>]
+            #   @param entities [::Array<::Google::Cloud::Dialogflow::V2::EntityType::Entity, ::Hash>]
             #     Required. The entities to update or create.
-            #   @param language_code [String]
+            #   @param language_code [::String]
             #     Optional. The language used to access language-specific data.
             #     If not specified, the agent's default language is used.
             #     For more information, see
             #     [Multilingual intent and entity
             #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. The mask to control which fields get updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def batch_update_entities request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_update_entities.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -911,28 +911,28 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :batch_update_entities, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Deletes entities in the specified entity type.
             #
             #
-            # Operation <response: {Google::Protobuf::Empty google.protobuf.Empty}>
+            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
             #
             # @overload batch_delete_entities(request, options = nil)
             #   Pass arguments to `batch_delete_entities` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload batch_delete_entities(parent: nil, entity_values: nil, language_code: nil)
@@ -940,14 +940,14 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The name of the entity type to delete entries for. Format:
             #     `projects/<Project ID>/agent/entityTypes/<Entity Type ID>`.
-            #   @param entity_values [Array<String>]
+            #   @param entity_values [::Array<::String>]
             #     Required. The reference `values` of the entities to delete. Note that
             #     these are not fully-qualified names, i.e. they don't start with
             #     `projects/<Project ID>`.
-            #   @param language_code [String]
+            #   @param language_code [::String]
             #     Optional. The language used to access language-specific data.
             #     If not specified, the agent's default language is used.
             #     For more information, see
@@ -955,26 +955,26 @@ module Google
             #     data](https://cloud.google.com/dialogflow/docs/agents-multilingual#intent-entity).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def batch_delete_entities request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_delete_entities.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -992,12 +992,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @entity_types_stub.call_rpc :batch_delete_entities, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1007,7 +1007,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Dialogflow::V2::EntityTypes::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Dialogflow::V2::EntityTypes::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -1018,22 +1018,22 @@ module Google
             # To modify the global config, setting the timeout for list_entity_types
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Dialogflow::V2::EntityTypes::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_entity_types.timeout = 20_000
+            #     ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_entity_types.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_entity_types.timeout = 20_000
+            #     client = ::Google::Cloud::Dialogflow::V2::EntityTypes::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_entity_types.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"dialogflow.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1045,29 +1045,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -1075,10 +1075,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "dialogflow.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -1086,14 +1086,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -1134,77 +1134,77 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_entity_types`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_entity_types
                 ##
                 # RPC-specific configuration for `get_entity_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_entity_type
                 ##
                 # RPC-specific configuration for `create_entity_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_entity_type
                 ##
                 # RPC-specific configuration for `update_entity_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_entity_type
                 ##
                 # RPC-specific configuration for `delete_entity_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_entity_type
                 ##
                 # RPC-specific configuration for `batch_update_entity_types`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_update_entity_types
                 ##
                 # RPC-specific configuration for `batch_delete_entity_types`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_delete_entity_types
                 ##
                 # RPC-specific configuration for `batch_create_entities`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_create_entities
                 ##
                 # RPC-specific configuration for `batch_update_entities`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_update_entities
                 ##
                 # RPC-specific configuration for `batch_delete_entities`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_delete_entities
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_entity_types_config = parent_rpcs&.list_entity_types if parent_rpcs&.respond_to? :list_entity_types
-                  @list_entity_types = Gapic::Config::Method.new list_entity_types_config
+                  @list_entity_types = ::Gapic::Config::Method.new list_entity_types_config
                   get_entity_type_config = parent_rpcs&.get_entity_type if parent_rpcs&.respond_to? :get_entity_type
-                  @get_entity_type = Gapic::Config::Method.new get_entity_type_config
+                  @get_entity_type = ::Gapic::Config::Method.new get_entity_type_config
                   create_entity_type_config = parent_rpcs&.create_entity_type if parent_rpcs&.respond_to? :create_entity_type
-                  @create_entity_type = Gapic::Config::Method.new create_entity_type_config
+                  @create_entity_type = ::Gapic::Config::Method.new create_entity_type_config
                   update_entity_type_config = parent_rpcs&.update_entity_type if parent_rpcs&.respond_to? :update_entity_type
-                  @update_entity_type = Gapic::Config::Method.new update_entity_type_config
+                  @update_entity_type = ::Gapic::Config::Method.new update_entity_type_config
                   delete_entity_type_config = parent_rpcs&.delete_entity_type if parent_rpcs&.respond_to? :delete_entity_type
-                  @delete_entity_type = Gapic::Config::Method.new delete_entity_type_config
+                  @delete_entity_type = ::Gapic::Config::Method.new delete_entity_type_config
                   batch_update_entity_types_config = parent_rpcs&.batch_update_entity_types if parent_rpcs&.respond_to? :batch_update_entity_types
-                  @batch_update_entity_types = Gapic::Config::Method.new batch_update_entity_types_config
+                  @batch_update_entity_types = ::Gapic::Config::Method.new batch_update_entity_types_config
                   batch_delete_entity_types_config = parent_rpcs&.batch_delete_entity_types if parent_rpcs&.respond_to? :batch_delete_entity_types
-                  @batch_delete_entity_types = Gapic::Config::Method.new batch_delete_entity_types_config
+                  @batch_delete_entity_types = ::Gapic::Config::Method.new batch_delete_entity_types_config
                   batch_create_entities_config = parent_rpcs&.batch_create_entities if parent_rpcs&.respond_to? :batch_create_entities
-                  @batch_create_entities = Gapic::Config::Method.new batch_create_entities_config
+                  @batch_create_entities = ::Gapic::Config::Method.new batch_create_entities_config
                   batch_update_entities_config = parent_rpcs&.batch_update_entities if parent_rpcs&.respond_to? :batch_update_entities
-                  @batch_update_entities = Gapic::Config::Method.new batch_update_entities_config
+                  @batch_update_entities = ::Gapic::Config::Method.new batch_update_entities_config
                   batch_delete_entities_config = parent_rpcs&.batch_delete_entities if parent_rpcs&.respond_to? :batch_delete_entities
-                  @batch_delete_entities = Gapic::Config::Method.new batch_delete_entities_config
+                  @batch_delete_entities = ::Gapic::Config::Method.new batch_delete_entities_config
 
                   yield self if block_given?
                 end

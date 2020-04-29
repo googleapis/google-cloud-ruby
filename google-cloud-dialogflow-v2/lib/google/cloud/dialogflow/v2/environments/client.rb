@@ -38,15 +38,15 @@ module Google
             ##
             # Configure the Environments Client class.
             #
-            # See {Google::Cloud::Dialogflow::V2::Environments::Client::Configuration}
+            # See {::Google::Cloud::Dialogflow::V2::Environments::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all Environments clients:
             #
-            #     Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -86,7 +86,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Dialogflow::V2::Environments::Client::Configuration}
+            # See {::Google::Cloud::Dialogflow::V2::Environments::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -107,13 +107,13 @@ module Google
             # To create a new Environments client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new
             #
             # To create a new Environments client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Environments client.
@@ -140,8 +140,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @environments_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Dialogflow::V2::Environments::Stub,
+              @environments_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Dialogflow::V2::Environments::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -156,12 +156,12 @@ module Google
             #
             # @overload list_environments(request, options = nil)
             #   Pass arguments to `list_environments` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_environments(parent: nil, page_size: nil, page_token: nil)
@@ -169,36 +169,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The agent to list all environments from.
             #     Format: `projects/<Project ID>/agent`.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return in a single page. By default 100 and
             #     at most 1000.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. The next_page_token value returned from a previous list request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dialogflow::V2::Environment>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::Environment>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dialogflow::V2::Environment>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::Environment>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_environments request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_environments.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -216,12 +216,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @environments_stub.call_rpc :list_environments, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @environments_stub, :list_environments, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @environments_stub, :list_environments, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -231,7 +231,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Dialogflow::V2::Environments::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Dialogflow::V2::Environments::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -242,22 +242,22 @@ module Google
             # To modify the global config, setting the timeout for list_environments
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_environments.timeout = 20_000
+            #     ::Google::Cloud::Dialogflow::V2::Environments::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_environments.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_environments.timeout = 20_000
+            #     client = ::Google::Cloud::Dialogflow::V2::Environments::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_environments.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"dialogflow.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -269,29 +269,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -299,10 +299,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "dialogflow.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -310,14 +310,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -358,14 +358,14 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_environments`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_environments
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_environments_config = parent_rpcs&.list_environments if parent_rpcs&.respond_to? :list_environments
-                  @list_environments = Gapic::Config::Method.new list_environments_config
+                  @list_environments = ::Gapic::Config::Method.new list_environments_config
 
                   yield self if block_given?
                 end

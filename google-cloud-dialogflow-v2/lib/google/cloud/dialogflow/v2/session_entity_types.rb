@@ -52,7 +52,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dialogflow/v2/session_entity_types"
-        #     client = Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new
+        #     client = ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new
         #
         module SessionEntityTypes
         end

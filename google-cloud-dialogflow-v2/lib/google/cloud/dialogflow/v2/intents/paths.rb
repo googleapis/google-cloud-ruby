@@ -33,7 +33,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def agent_path project:
               "projects/#{project}/agent"
             end
@@ -61,27 +61,27 @@ module Google
             #   @param session [String]
             #   @param context [String]
             #
-            # @return [String]
+            # @return [::String]
             def context_path **args
               resources = {
                 "context:project:session"                  => (proc do |project:, session:, context:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
                   "projects/#{project}/agent/sessions/#{session}/contexts/#{context}"
                 end),
                 "context:environment:project:session:user" => (proc do |project:, environment:, user:, session:, context:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
-                  raise ArgumentError, "user cannot contain /" if user.to_s.include? "/"
-                  raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "environment cannot contain /" if environment.to_s.include? "/"
+                  raise ::ArgumentError, "user cannot contain /" if user.to_s.include? "/"
+                  raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
                   "projects/#{project}/agent/environments/#{environment}/users/#{user}/sessions/#{session}/contexts/#{context}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -95,9 +95,9 @@ module Google
             # @param project [String]
             # @param intent [String]
             #
-            # @return [String]
+            # @return [::String]
             def intent_path project:, intent:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/agent/intents/#{intent}"
             end

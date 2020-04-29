@@ -34,8 +34,8 @@ module Google
         ##
         # An intent represents a mapping between input from a user and an action to
         # be taken by your application. When you pass user input to the
-        # {Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
-        # {Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) method, the
+        # {::Google::Cloud::Dialogflow::V2::Sessions::Client#detect_intent DetectIntent} (or
+        # {::Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent StreamingDetectIntent}) method, the
         # Dialogflow API analyzes the input and searches
         # for a matching intent. If no match is found, the Dialogflow API returns a
         # fallback intent (`is_fallback` = true).
@@ -68,7 +68,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/dialogflow/v2/intents"
-        #     client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+        #     client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new
         #
         module Intents
         end

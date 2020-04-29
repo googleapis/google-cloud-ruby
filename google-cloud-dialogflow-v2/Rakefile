@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or DIALOGFLOW_TEST_PROJECT=test123 DIALOGFLOW_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/dialogflow/v2/agents/credentials"
-  Google::Cloud::Dialogflow::V2::Agents::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Dialogflow::V2::Agents::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["DIALOGFLOW_PROJECT"] = project

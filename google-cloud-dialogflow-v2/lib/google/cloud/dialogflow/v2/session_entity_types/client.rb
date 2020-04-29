@@ -54,15 +54,15 @@ module Google
             ##
             # Configure the SessionEntityTypes Client class.
             #
-            # See {Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client::Configuration}
+            # See {::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all SessionEntityTypes clients:
             #
-            #     Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -122,7 +122,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client::Configuration}
+            # See {::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -143,13 +143,13 @@ module Google
             # To create a new SessionEntityTypes client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new
+            #     client = ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new
             #
             # To create a new SessionEntityTypes client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the SessionEntityTypes client.
@@ -176,8 +176,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @session_entity_types_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub,
+              @session_entity_types_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -196,12 +196,12 @@ module Google
             #
             # @overload list_session_entity_types(request, options = nil)
             #   Pass arguments to `list_session_entity_types` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_session_entity_types(parent: nil, page_size: nil, page_token: nil)
@@ -209,40 +209,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The session to list all session entity types from.
             #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
             #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
             #     sessions/<Session ID>`.
             #     If `Environment ID` is not specified, we assume default 'draft'
             #     environment. If `User ID` is not specified, we assume default '-' user.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return in a single page. By
             #     default 100 and at most 1000.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. The next_page_token value returned from a previous list request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Dialogflow::V2::SessionEntityType>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::SessionEntityType>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Dialogflow::V2::SessionEntityType>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::SessionEntityType>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_session_entity_types request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::ListSessionEntityTypesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_session_entity_types.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -260,12 +260,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @session_entity_types_stub.call_rpc :list_session_entity_types, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @session_entity_types_stub, :list_session_entity_types, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @session_entity_types_stub, :list_session_entity_types, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -277,12 +277,12 @@ module Google
             #
             # @overload get_session_entity_type(request, options = nil)
             #   Pass arguments to `get_session_entity_type` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_session_entity_type(name: nil)
@@ -290,7 +290,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the session entity type. Format:
             #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
             #     Display Name>` or `projects/<Project ID>/agent/environments/<Environment
@@ -300,26 +300,26 @@ module Google
             #     environment. If `User ID` is not specified, we assume default '-' user.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dialogflow::V2::SessionEntityType]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::SessionEntityType]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
+            # @return [::Google::Cloud::Dialogflow::V2::SessionEntityType]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_session_entity_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::GetSessionEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_session_entity_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -340,8 +340,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -356,12 +356,12 @@ module Google
             #
             # @overload create_session_entity_type(request, options = nil)
             #   Pass arguments to `create_session_entity_type` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_session_entity_type(parent: nil, session_entity_type: nil)
@@ -369,37 +369,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The session to create a session entity type for.
             #     Format: `projects/<Project ID>/agent/sessions/<Session ID>` or
             #     `projects/<Project ID>/agent/environments/<Environment ID>/users/<User ID>/
             #     sessions/<Session ID>`.
             #     If `Environment ID` is not specified, we assume default 'draft'
             #     environment. If `User ID` is not specified, we assume default '-' user.
-            #   @param session_entity_type [Google::Cloud::Dialogflow::V2::SessionEntityType, Hash]
+            #   @param session_entity_type [::Google::Cloud::Dialogflow::V2::SessionEntityType, ::Hash]
             #     Required. The session entity type to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dialogflow::V2::SessionEntityType]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::SessionEntityType]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
+            # @return [::Google::Cloud::Dialogflow::V2::SessionEntityType]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_session_entity_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::CreateSessionEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_session_entity_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -420,8 +420,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -433,12 +433,12 @@ module Google
             #
             # @overload update_session_entity_type(request, options = nil)
             #   Pass arguments to `update_session_entity_type` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_session_entity_type(session_entity_type: nil, update_mask: nil)
@@ -446,32 +446,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param session_entity_type [Google::Cloud::Dialogflow::V2::SessionEntityType, Hash]
+            #   @param session_entity_type [::Google::Cloud::Dialogflow::V2::SessionEntityType, ::Hash]
             #     Required. The session entity type to update.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. The mask to control which fields get updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Dialogflow::V2::SessionEntityType]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::SessionEntityType]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Dialogflow::V2::SessionEntityType]
+            # @return [::Google::Cloud::Dialogflow::V2::SessionEntityType]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_session_entity_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::UpdateSessionEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_session_entity_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -492,8 +492,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -505,12 +505,12 @@ module Google
             #
             # @overload delete_session_entity_type(request, options = nil)
             #   Pass arguments to `delete_session_entity_type` via a request object, either of type
-            #   {Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest, Hash]
+            #   @param request [::Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_session_entity_type(name: nil)
@@ -518,7 +518,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the entity type to delete. Format:
             #     `projects/<Project ID>/agent/sessions/<Session ID>/entityTypes/<Entity Type
             #     Display Name>` or `projects/<Project ID>/agent/environments/<Environment
@@ -528,26 +528,26 @@ module Google
             #     environment. If `User ID` is not specified, we assume default '-' user.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_session_entity_type request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::DeleteSessionEntityTypeRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_session_entity_type.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -568,8 +568,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -579,7 +579,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -590,22 +590,22 @@ module Google
             # To modify the global config, setting the timeout for list_session_entity_types
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_session_entity_types.timeout = 20_000
+            #     ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_session_entity_types.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_session_entity_types.timeout = 20_000
+            #     client = ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_session_entity_types.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"dialogflow.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -617,29 +617,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -647,10 +647,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "dialogflow.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -658,14 +658,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -706,42 +706,42 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_session_entity_types`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_session_entity_types
                 ##
                 # RPC-specific configuration for `get_session_entity_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_session_entity_type
                 ##
                 # RPC-specific configuration for `create_session_entity_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_session_entity_type
                 ##
                 # RPC-specific configuration for `update_session_entity_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_session_entity_type
                 ##
                 # RPC-specific configuration for `delete_session_entity_type`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_session_entity_type
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_session_entity_types_config = parent_rpcs&.list_session_entity_types if parent_rpcs&.respond_to? :list_session_entity_types
-                  @list_session_entity_types = Gapic::Config::Method.new list_session_entity_types_config
+                  @list_session_entity_types = ::Gapic::Config::Method.new list_session_entity_types_config
                   get_session_entity_type_config = parent_rpcs&.get_session_entity_type if parent_rpcs&.respond_to? :get_session_entity_type
-                  @get_session_entity_type = Gapic::Config::Method.new get_session_entity_type_config
+                  @get_session_entity_type = ::Gapic::Config::Method.new get_session_entity_type_config
                   create_session_entity_type_config = parent_rpcs&.create_session_entity_type if parent_rpcs&.respond_to? :create_session_entity_type
-                  @create_session_entity_type = Gapic::Config::Method.new create_session_entity_type_config
+                  @create_session_entity_type = ::Gapic::Config::Method.new create_session_entity_type_config
                   update_session_entity_type_config = parent_rpcs&.update_session_entity_type if parent_rpcs&.respond_to? :update_session_entity_type
-                  @update_session_entity_type = Gapic::Config::Method.new update_session_entity_type_config
+                  @update_session_entity_type = ::Gapic::Config::Method.new update_session_entity_type_config
                   delete_session_entity_type_config = parent_rpcs&.delete_session_entity_type if parent_rpcs&.respond_to? :delete_session_entity_type
-                  @delete_session_entity_type = Gapic::Config::Method.new delete_session_entity_type_config
+                  @delete_session_entity_type = ::Gapic::Config::Method.new delete_session_entity_type_config
 
                   yield self if block_given?
                 end
