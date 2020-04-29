@@ -26,7 +26,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/scheduler/v1"
-      #     client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new
+      #     client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new
       #
       module V1
       end

@@ -39,15 +39,15 @@ module Google
             ##
             # Configure the CloudScheduler Client class.
             #
-            # See {Google::Cloud::Scheduler::V1::CloudScheduler::Client::Configuration}
+            # See {::Google::Cloud::Scheduler::V1::CloudScheduler::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all CloudScheduler clients:
             #
-            #     Google::Cloud::Scheduler::V1::CloudScheduler::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -113,7 +113,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Scheduler::V1::CloudScheduler::Client::Configuration}
+            # See {::Google::Cloud::Scheduler::V1::CloudScheduler::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -134,13 +134,13 @@ module Google
             # To create a new CloudScheduler client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new
+            #     client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new
             #
             # To create a new CloudScheduler client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the CloudScheduler client.
@@ -167,8 +167,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @cloud_scheduler_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Scheduler::V1::CloudScheduler::Stub,
+              @cloud_scheduler_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Scheduler::V1::CloudScheduler::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -183,12 +183,12 @@ module Google
             #
             # @overload list_jobs(request, options = nil)
             #   Pass arguments to `list_jobs` via a request object, either of type
-            #   {Google::Cloud::Scheduler::V1::ListJobsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Scheduler::V1::ListJobsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Scheduler::V1::ListJobsRequest, Hash]
+            #   @param request [::Google::Cloud::Scheduler::V1::ListJobsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_jobs(parent: nil, page_size: nil, page_token: nil)
@@ -196,46 +196,46 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The location name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID`.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Requested page size.
             #
             #     The maximum page size is 500. If unspecified, the page size will
             #     be the maximum. Fewer jobs than requested might be returned,
             #     even if more jobs exist; use next_page_token to determine if more
             #     jobs exist.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying a page of results the server will return. To
             #     request the first page results, page_token must be empty. To
             #     request the next page of results, page_token must be the value of
-            #     {Google::Cloud::Scheduler::V1::ListJobsResponse#next_page_token next_page_token} returned from
-            #     the previous call to {Google::Cloud::Scheduler::V1::CloudScheduler::Client#list_jobs ListJobs}. It is an error to
+            #     {::Google::Cloud::Scheduler::V1::ListJobsResponse#next_page_token next_page_token} returned from
+            #     the previous call to {::Google::Cloud::Scheduler::V1::CloudScheduler::Client#list_jobs ListJobs}. It is an error to
             #     switch the value of [filter][google.cloud.scheduler.v1.ListJobsRequest.filter] or
             #     [order_by][google.cloud.scheduler.v1.ListJobsRequest.order_by] while iterating through pages.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Scheduler::V1::Job>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Scheduler::V1::Job>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Scheduler::V1::Job>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Scheduler::V1::Job>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_jobs request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Scheduler::V1::ListJobsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Scheduler::V1::ListJobsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_jobs.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Scheduler::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -253,12 +253,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_scheduler_stub.call_rpc :list_jobs, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @cloud_scheduler_stub, :list_jobs, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @cloud_scheduler_stub, :list_jobs, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -266,12 +266,12 @@ module Google
             #
             # @overload get_job(request, options = nil)
             #   Pass arguments to `get_job` via a request object, either of type
-            #   {Google::Cloud::Scheduler::V1::GetJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Scheduler::V1::GetJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Scheduler::V1::GetJobRequest, Hash]
+            #   @param request [::Google::Cloud::Scheduler::V1::GetJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_job(name: nil)
@@ -279,31 +279,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The job name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Scheduler::V1::Job]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Scheduler::V1::Job]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Scheduler::V1::Job]
+            # @return [::Google::Cloud::Scheduler::V1::Job]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Scheduler::V1::GetJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Scheduler::V1::GetJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Scheduler::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -324,8 +324,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -333,12 +333,12 @@ module Google
             #
             # @overload create_job(request, options = nil)
             #   Pass arguments to `create_job` via a request object, either of type
-            #   {Google::Cloud::Scheduler::V1::CreateJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Scheduler::V1::CreateJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Scheduler::V1::CreateJobRequest, Hash]
+            #   @param request [::Google::Cloud::Scheduler::V1::CreateJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_job(parent: nil, job: nil)
@@ -346,37 +346,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The location name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID`.
-            #   @param job [Google::Cloud::Scheduler::V1::Job, Hash]
+            #   @param job [::Google::Cloud::Scheduler::V1::Job, ::Hash]
             #     Required. The job to add. The user can optionally specify a name for the
-            #     job in {Google::Cloud::Scheduler::V1::Job#name name}. {Google::Cloud::Scheduler::V1::Job#name name} cannot be the same as an
+            #     job in {::Google::Cloud::Scheduler::V1::Job#name name}. {::Google::Cloud::Scheduler::V1::Job#name name} cannot be the same as an
             #     existing job. If a name is not specified then the system will
             #     generate a random unique name that will be returned
-            #     ({Google::Cloud::Scheduler::V1::Job#name name}) in the response.
+            #     ({::Google::Cloud::Scheduler::V1::Job#name name}) in the response.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Scheduler::V1::Job]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Scheduler::V1::Job]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Scheduler::V1::Job]
+            # @return [::Google::Cloud::Scheduler::V1::Job]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Scheduler::V1::CreateJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Scheduler::V1::CreateJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Scheduler::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -397,29 +397,29 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Updates a job.
             #
-            # If successful, the updated {Google::Cloud::Scheduler::V1::Job Job} is returned. If the job does
+            # If successful, the updated {::Google::Cloud::Scheduler::V1::Job Job} is returned. If the job does
             # not exist, `NOT_FOUND` is returned.
             #
             # If UpdateJob does not successfully return, it is possible for the
-            # job to be in an {Google::Cloud::Scheduler::V1::Job::State::UPDATE_FAILED Job.State.UPDATE_FAILED} state. A job in this state may
+            # job to be in an {::Google::Cloud::Scheduler::V1::Job::State::UPDATE_FAILED Job.State.UPDATE_FAILED} state. A job in this state may
             # not be executed. If this happens, retry the UpdateJob request
             # until a successful response is received.
             #
             # @overload update_job(request, options = nil)
             #   Pass arguments to `update_job` via a request object, either of type
-            #   {Google::Cloud::Scheduler::V1::UpdateJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Scheduler::V1::UpdateJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Scheduler::V1::UpdateJobRequest, Hash]
+            #   @param request [::Google::Cloud::Scheduler::V1::UpdateJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_job(job: nil, update_mask: nil)
@@ -427,35 +427,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param job [Google::Cloud::Scheduler::V1::Job, Hash]
-            #     Required. The new job properties. {Google::Cloud::Scheduler::V1::Job#name name} must be specified.
+            #   @param job [::Google::Cloud::Scheduler::V1::Job, ::Hash]
+            #     Required. The new job properties. {::Google::Cloud::Scheduler::V1::Job#name name} must be specified.
             #
             #     Output only fields cannot be modified using UpdateJob.
             #     Any value specified for an output only field will be ignored.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     A  mask used to specify which fields of the job are being updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Scheduler::V1::Job]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Scheduler::V1::Job]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Scheduler::V1::Job]
+            # @return [::Google::Cloud::Scheduler::V1::Job]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Scheduler::V1::UpdateJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Scheduler::V1::UpdateJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Scheduler::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -476,8 +476,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -485,12 +485,12 @@ module Google
             #
             # @overload delete_job(request, options = nil)
             #   Pass arguments to `delete_job` via a request object, either of type
-            #   {Google::Cloud::Scheduler::V1::DeleteJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Scheduler::V1::DeleteJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Scheduler::V1::DeleteJobRequest, Hash]
+            #   @param request [::Google::Cloud::Scheduler::V1::DeleteJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_job(name: nil)
@@ -498,31 +498,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The job name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Scheduler::V1::DeleteJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Scheduler::V1::DeleteJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Scheduler::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -543,27 +543,27 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Pauses a job.
             #
             # If a job is paused then the system will stop executing the job
-            # until it is re-enabled via {Google::Cloud::Scheduler::V1::CloudScheduler::Client#resume_job ResumeJob}. The
-            # state of the job is stored in {Google::Cloud::Scheduler::V1::Job#state state}; if paused it
-            # will be set to {Google::Cloud::Scheduler::V1::Job::State::PAUSED Job.State.PAUSED}. A job must be in {Google::Cloud::Scheduler::V1::Job::State::ENABLED Job.State.ENABLED}
+            # until it is re-enabled via {::Google::Cloud::Scheduler::V1::CloudScheduler::Client#resume_job ResumeJob}. The
+            # state of the job is stored in {::Google::Cloud::Scheduler::V1::Job#state state}; if paused it
+            # will be set to {::Google::Cloud::Scheduler::V1::Job::State::PAUSED Job.State.PAUSED}. A job must be in {::Google::Cloud::Scheduler::V1::Job::State::ENABLED Job.State.ENABLED}
             # to be paused.
             #
             # @overload pause_job(request, options = nil)
             #   Pass arguments to `pause_job` via a request object, either of type
-            #   {Google::Cloud::Scheduler::V1::PauseJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Scheduler::V1::PauseJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Scheduler::V1::PauseJobRequest, Hash]
+            #   @param request [::Google::Cloud::Scheduler::V1::PauseJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload pause_job(name: nil)
@@ -571,31 +571,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The job name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Scheduler::V1::Job]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Scheduler::V1::Job]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Scheduler::V1::Job]
+            # @return [::Google::Cloud::Scheduler::V1::Job]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def pause_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Scheduler::V1::PauseJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Scheduler::V1::PauseJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.pause_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Scheduler::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -616,26 +616,26 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Resume a job.
             #
-            # This method reenables a job after it has been {Google::Cloud::Scheduler::V1::Job::State::PAUSED Job.State.PAUSED}. The
-            # state of a job is stored in {Google::Cloud::Scheduler::V1::Job#state Job.state}; after calling this method it
-            # will be set to {Google::Cloud::Scheduler::V1::Job::State::ENABLED Job.State.ENABLED}. A job must be in
-            # {Google::Cloud::Scheduler::V1::Job::State::PAUSED Job.State.PAUSED} to be resumed.
+            # This method reenables a job after it has been {::Google::Cloud::Scheduler::V1::Job::State::PAUSED Job.State.PAUSED}. The
+            # state of a job is stored in {::Google::Cloud::Scheduler::V1::Job#state Job.state}; after calling this method it
+            # will be set to {::Google::Cloud::Scheduler::V1::Job::State::ENABLED Job.State.ENABLED}. A job must be in
+            # {::Google::Cloud::Scheduler::V1::Job::State::PAUSED Job.State.PAUSED} to be resumed.
             #
             # @overload resume_job(request, options = nil)
             #   Pass arguments to `resume_job` via a request object, either of type
-            #   {Google::Cloud::Scheduler::V1::ResumeJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Scheduler::V1::ResumeJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Scheduler::V1::ResumeJobRequest, Hash]
+            #   @param request [::Google::Cloud::Scheduler::V1::ResumeJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload resume_job(name: nil)
@@ -643,31 +643,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The job name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Scheduler::V1::Job]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Scheduler::V1::Job]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Scheduler::V1::Job]
+            # @return [::Google::Cloud::Scheduler::V1::Job]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def resume_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Scheduler::V1::ResumeJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Scheduler::V1::ResumeJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.resume_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Scheduler::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -688,8 +688,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -700,12 +700,12 @@ module Google
             #
             # @overload run_job(request, options = nil)
             #   Pass arguments to `run_job` via a request object, either of type
-            #   {Google::Cloud::Scheduler::V1::RunJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Scheduler::V1::RunJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Scheduler::V1::RunJobRequest, Hash]
+            #   @param request [::Google::Cloud::Scheduler::V1::RunJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload run_job(name: nil)
@@ -713,31 +713,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The job name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/jobs/JOB_ID`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Scheduler::V1::Job]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Scheduler::V1::Job]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Scheduler::V1::Job]
+            # @return [::Google::Cloud::Scheduler::V1::Job]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def run_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Scheduler::V1::RunJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Scheduler::V1::RunJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.run_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Scheduler::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -758,8 +758,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -769,7 +769,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Scheduler::V1::CloudScheduler::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Scheduler::V1::CloudScheduler::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -780,22 +780,22 @@ module Google
             # To modify the global config, setting the timeout for list_jobs
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Scheduler::V1::CloudScheduler::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_jobs.timeout = 20_000
+            #     ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_jobs.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_jobs.timeout = 20_000
+            #     client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_jobs.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"cloudscheduler.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -807,29 +807,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -837,10 +837,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "cloudscheduler.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -848,14 +848,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -896,63 +896,63 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_jobs`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_jobs
                 ##
                 # RPC-specific configuration for `get_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_job
                 ##
                 # RPC-specific configuration for `create_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_job
                 ##
                 # RPC-specific configuration for `update_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_job
                 ##
                 # RPC-specific configuration for `delete_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_job
                 ##
                 # RPC-specific configuration for `pause_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :pause_job
                 ##
                 # RPC-specific configuration for `resume_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :resume_job
                 ##
                 # RPC-specific configuration for `run_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :run_job
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_jobs_config = parent_rpcs&.list_jobs if parent_rpcs&.respond_to? :list_jobs
-                  @list_jobs = Gapic::Config::Method.new list_jobs_config
+                  @list_jobs = ::Gapic::Config::Method.new list_jobs_config
                   get_job_config = parent_rpcs&.get_job if parent_rpcs&.respond_to? :get_job
-                  @get_job = Gapic::Config::Method.new get_job_config
+                  @get_job = ::Gapic::Config::Method.new get_job_config
                   create_job_config = parent_rpcs&.create_job if parent_rpcs&.respond_to? :create_job
-                  @create_job = Gapic::Config::Method.new create_job_config
+                  @create_job = ::Gapic::Config::Method.new create_job_config
                   update_job_config = parent_rpcs&.update_job if parent_rpcs&.respond_to? :update_job
-                  @update_job = Gapic::Config::Method.new update_job_config
+                  @update_job = ::Gapic::Config::Method.new update_job_config
                   delete_job_config = parent_rpcs&.delete_job if parent_rpcs&.respond_to? :delete_job
-                  @delete_job = Gapic::Config::Method.new delete_job_config
+                  @delete_job = ::Gapic::Config::Method.new delete_job_config
                   pause_job_config = parent_rpcs&.pause_job if parent_rpcs&.respond_to? :pause_job
-                  @pause_job = Gapic::Config::Method.new pause_job_config
+                  @pause_job = ::Gapic::Config::Method.new pause_job_config
                   resume_job_config = parent_rpcs&.resume_job if parent_rpcs&.respond_to? :resume_job
-                  @resume_job = Gapic::Config::Method.new resume_job_config
+                  @resume_job = ::Gapic::Config::Method.new resume_job_config
                   run_job_config = parent_rpcs&.run_job if parent_rpcs&.respond_to? :run_job
-                  @run_job = Gapic::Config::Method.new run_job_config
+                  @run_job = ::Gapic::Config::Method.new run_job_config
 
                   yield self if block_given?
                 end

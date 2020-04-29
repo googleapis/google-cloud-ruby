@@ -85,7 +85,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or SCHEDULER_TEST_PROJECT=test123 SCHEDULER_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/scheduler/v1/cloud_scheduler/credentials"
-  Google::Cloud::Scheduler::V1::CloudScheduler::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Scheduler::V1::CloudScheduler::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["SCHEDULER_PROJECT"] = project
