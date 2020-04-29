@@ -37,7 +37,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/security_center/v1p1beta1/security_center"
-        #     client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
+        #     client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
         #
         module SecurityCenter
         end

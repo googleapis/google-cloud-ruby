@@ -38,15 +38,15 @@ module Google
             ##
             # Configure the SecurityCenter Client class.
             #
-            # See {Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client::Configuration}
+            # See {::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all SecurityCenter clients:
             #
-            #     Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -190,7 +190,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client::Configuration}
+            # See {::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -211,13 +211,13 @@ module Google
             # To create a new SecurityCenter client with the default
             # configuration:
             #
-            #     client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
+            #     client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
             #
             # To create a new SecurityCenter client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the SecurityCenter client.
@@ -249,8 +249,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @security_center_stub = Gapic::ServiceStub.new(
-                Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Stub,
+              @security_center_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -261,7 +261,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Operations]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Operations]
             #
             attr_reader :operations_client
 
@@ -272,12 +272,12 @@ module Google
             #
             # @overload create_source(request, options = nil)
             #   Pass arguments to `create_source` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_source(parent: nil, source: nil)
@@ -285,34 +285,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the new source's parent. Its format should be
             #     "organizations/[organization_id]".
-            #   @param source [Google::Cloud::SecurityCenter::V1p1beta1::Source, Hash]
+            #   @param source [::Google::Cloud::SecurityCenter::V1p1beta1::Source, ::Hash]
             #     Required. The Source being created, only the display_name and description
             #     will be used. All other fields will be ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::Source]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::Source]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::Source]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Source]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_source request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_source.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -333,8 +333,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -343,12 +343,12 @@ module Google
             #
             # @overload create_finding(request, options = nil)
             #   Pass arguments to `create_finding` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_finding(parent: nil, finding_id: nil, finding: nil)
@@ -356,38 +356,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the new finding's parent. Its format should be
             #     "organizations/[organization_id]/sources/[source_id]".
-            #   @param finding_id [String]
+            #   @param finding_id [::String]
             #     Required. Unique identifier provided by the client within the parent scope.
             #     It must be alphanumeric and less than or equal to 32 characters and
             #     greater than 0 characters in length.
-            #   @param finding [Google::Cloud::SecurityCenter::V1p1beta1::Finding, Hash]
+            #   @param finding [::Google::Cloud::SecurityCenter::V1p1beta1::Finding, ::Hash]
             #     Required. The Finding being created. The name and security_marks will be
             #     ignored as they are both output only fields on this resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::Finding]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::Finding]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_finding request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_finding.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -408,8 +408,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -417,12 +417,12 @@ module Google
             #
             # @overload create_notification_config(request, options = nil)
             #   Pass arguments to `create_notification_config` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_notification_config(parent: nil, config_id: nil, notification_config: nil)
@@ -430,40 +430,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the new notification config's parent. Its format
             #     is "organizations/[organization_id]".
-            #   @param config_id [String]
+            #   @param config_id [::String]
             #     Required.
             #     Unique identifier provided by the client within the parent scope.
             #     It must be between 1 and 128 characters, and contains alphanumeric
             #     characters, underscores or hyphens only.
-            #   @param notification_config [Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig, Hash]
+            #   @param notification_config [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig, ::Hash]
             #     Required. The notification config being created. The name and the service
             #     account will be ignored as they are both output only fields on this
             #     resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_notification_config request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_notification_config.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -484,8 +484,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -493,12 +493,12 @@ module Google
             #
             # @overload delete_notification_config(request, options = nil)
             #   Pass arguments to `delete_notification_config` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_notification_config(name: nil)
@@ -506,31 +506,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Name of the notification config to delete. Its format is
             #     "organizations/[organization_id]/notificationConfigs/[config_id]".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_notification_config request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_notification_config.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -551,8 +551,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -560,12 +560,12 @@ module Google
             #
             # @overload get_iam_policy(request, options = nil)
             #   Pass arguments to `get_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::GetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_iam_policy(resource: nil, options: nil)
@@ -573,34 +573,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param options [Google::Iam::V1::GetPolicyOptions, Hash]
+            #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
             #     `GetIamPolicy`. This field is only used by Cloud IAM.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::GetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -621,8 +621,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -630,12 +630,12 @@ module Google
             #
             # @overload get_notification_config(request, options = nil)
             #   Pass arguments to `get_notification_config` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_notification_config(name: nil)
@@ -643,31 +643,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Name of the notification config to get. Its format is
             #     "organizations/[organization_id]/notificationConfigs/[config_id]".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_notification_config request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_notification_config.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -688,8 +688,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -697,12 +697,12 @@ module Google
             #
             # @overload get_organization_settings(request, options = nil)
             #   Pass arguments to `get_organization_settings` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_organization_settings(name: nil)
@@ -710,31 +710,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Name of the organization to get organization settings for. Its
             #     format is "organizations/[organization_id]/organizationSettings".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_organization_settings request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_organization_settings.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -755,8 +755,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -764,12 +764,12 @@ module Google
             #
             # @overload get_source(request, options = nil)
             #   Pass arguments to `get_source` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_source(name: nil)
@@ -777,31 +777,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Relative resource name of the source. Its format is
             #     "organizations/[organization_id]/source/[source_id]".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::Source]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::Source]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::Source]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Source]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_source request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_source.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -822,8 +822,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -832,12 +832,12 @@ module Google
             #
             # @overload group_assets(request, options = nil)
             #   Pass arguments to `group_assets` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload group_assets(parent: nil, filter: nil, group_by: nil, compare_duration: nil, read_time: nil, having: nil, page_token: nil, page_size: nil)
@@ -845,10 +845,10 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Name of the organization to groupBy. Its format is
             #     "organizations/[organization_id]".
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Expression that defines the filter to apply across assets.
             #     The expression is a list of zero or more restrictions combined via logical
             #     operators `AND` and `OR`.
@@ -905,7 +905,7 @@ module Google
             #     * security_center_properties.resource_owners: `=`, `:`
             #
             #     For example, `resource_properties.size = 100` is a valid filter string.
-            #   @param group_by [String]
+            #   @param group_by [::String]
             #     Required. Expression that defines what assets fields to use for grouping.
             #     The string value should follow SQL syntax: comma separated list of fields.
             #     For example:
@@ -924,7 +924,7 @@ module Google
             #     * security_center_properties.resource_type
             #     * security_center_properties.resource_project_display_name
             #     * security_center_properties.resource_parent_display_name
-            #   @param compare_duration [Google::Protobuf::Duration, Hash]
+            #   @param compare_duration [::Google::Protobuf::Duration, ::Hash]
             #     When compare_duration is set, the GroupResult's "state_change" property is
             #     updated to indicate whether the asset was added, removed, or remained
             #     present during the compare_duration period of time that precedes the
@@ -952,44 +952,44 @@ module Google
             #
             #     If this field is set then `state_change` must be a specified field in
             #     `group_by`.
-            #   @param read_time [Google::Protobuf::Timestamp, Hash]
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Time used as a reference point when filtering assets. The filter is limited
             #     to assets existing at the supplied time and their values are those at that
             #     specific time. Absence of this field will default to the API's version of
             #     NOW.
-            #   @param having [String]
+            #   @param having [::String]
             #     Filter that specifies what fields to further filter on *after* the query
             #     filter has been executed. Currently only `state_change` is supported and
             #     requires compare_duration to be specified.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The value returned by the last `GroupAssetsResponse`; indicates
             #     that this is a continuation of a prior `GroupAssets` call, and that the
             #     system should return the next page of data.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of results to return in a single response. Default is
             #     10, minimum is 1, maximum is 1000.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::GroupResult>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::GroupResult>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def group_assets request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.group_assets.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1007,12 +1007,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :group_assets, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @security_center_stub, :group_assets, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @security_center_stub, :group_assets, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1024,12 +1024,12 @@ module Google
             #
             # @overload group_findings(request, options = nil)
             #   Pass arguments to `group_findings` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload group_findings(parent: nil, filter: nil, group_by: nil, read_time: nil, compare_duration: nil, having: nil, page_token: nil, page_size: nil)
@@ -1037,12 +1037,12 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Name of the source to groupBy. Its format is
             #     "organizations/[organization_id]/sources/[source_id]". To groupBy across
             #     all sources provide a source_id of `-`. For example:
             #     organizations/\\{organization_id}/sources/-
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Expression that defines the filter to apply across findings.
             #     The expression is a list of one or more restrictions combined via logical
             #     operators `AND` and `OR`.
@@ -1086,7 +1086,7 @@ module Google
             #     * source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
             #
             #     For example, `source_properties.size = 100` is a valid filter string.
-            #   @param group_by [String]
+            #   @param group_by [::String]
             #     Required. Expression that defines what assets fields to use for grouping
             #     (including `state_change`). The string value should follow SQL syntax:
             #     comma separated list of fields. For example: "parent,resource_name".
@@ -1101,12 +1101,12 @@ module Google
             #     The following fields are supported when compare_duration is set:
             #
             #     * state_change
-            #   @param read_time [Google::Protobuf::Timestamp, Hash]
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Time used as a reference point when filtering findings. The filter is
             #     limited to findings existing at the supplied time and their values are
             #     those at that specific time. Absence of this field will default to the
             #     API's version of NOW.
-            #   @param compare_duration [Google::Protobuf::Duration, Hash]
+            #   @param compare_duration [::Google::Protobuf::Duration, ::Hash]
             #     When compare_duration is set, the GroupResult's "state_change" attribute is
             #     updated to indicate whether the finding had its state changed, the
             #     finding's state remained unchanged, or if the finding was added during the
@@ -1133,39 +1133,39 @@ module Google
             #
             #     If this field is set then `state_change` must be a specified field in
             #     `group_by`.
-            #   @param having [String]
+            #   @param having [::String]
             #     Filter that specifies what fields to further filter on *after* the query
             #     filter has been executed. Currently only `finding.state` and `state_change`
             #     are supported and requires compare_duration to be specified.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The value returned by the last `GroupFindingsResponse`; indicates
             #     that this is a continuation of a prior `GroupFindings` call, and
             #     that the system should return the next page of data.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of results to return in a single response. Default is
             #     10, minimum is 1, maximum is 1000.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::GroupResult>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::GroupResult>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def group_findings request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.group_findings.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1183,12 +1183,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :group_findings, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @security_center_stub, :group_findings, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @security_center_stub, :group_findings, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1196,12 +1196,12 @@ module Google
             #
             # @overload list_assets(request, options = nil)
             #   Pass arguments to `list_assets` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_assets(parent: nil, filter: nil, order_by: nil, read_time: nil, compare_duration: nil, having: nil, field_mask: nil, page_token: nil, page_size: nil)
@@ -1209,10 +1209,10 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Name of the organization assets should belong to. Its format is
             #     "organizations/[organization_id]".
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Expression that defines the filter to apply across assets.
             #     The expression is a list of zero or more restrictions combined via logical
             #     operators `AND` and `OR`.
@@ -1269,7 +1269,7 @@ module Google
             #     * security_center_properties.resource_owners: `=`, `:`
             #
             #     For example, `resource_properties.size = 100` is a valid filter string.
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Expression that defines what fields and order to use for sorting. The
             #     string value should follow SQL syntax: comma separated list of fields. For
             #     example: "name,resource_properties.a_property". The default sorting order
@@ -1291,12 +1291,12 @@ module Google
             #     security_center_properties.resource_project
             #     security_center_properties.resource_project_display_name
             #     security_center_properties.resource_type
-            #   @param read_time [Google::Protobuf::Timestamp, Hash]
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Time used as a reference point when filtering assets. The filter is limited
             #     to assets existing at the supplied time and their values are those at that
             #     specific time. Absence of this field will default to the API's version of
             #     NOW.
-            #   @param compare_duration [Google::Protobuf::Duration, Hash]
+            #   @param compare_duration [::Google::Protobuf::Duration, ::Hash]
             #     When compare_duration is set, the ListAssetsResult's "state_change"
             #     attribute is updated to indicate whether the asset was added, removed, or
             #     remained present during the compare_duration period of time that precedes
@@ -1321,44 +1321,44 @@ module Google
             #     If compare_duration is not specified, then the only possible state_change
             #     is "UNUSED",  which will be the state_change set for all assets present at
             #     read_time.
-            #   @param having [String]
+            #   @param having [::String]
             #     Filter that specifies what fields to further filter on *after* the query
             #     filter has been executed. Currently only `state_change` is supported and
             #     requires compare_duration to be specified.
-            #   @param field_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional.
             #     A field mask to specify the ListAssetsResult fields to be listed in the
             #     response.
             #     An empty field mask will list all fields.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The value returned by the last `ListAssetsResponse`; indicates
             #     that this is a continuation of a prior `ListAssets` call, and
             #     that the system should return the next page of data.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of results to return in a single response. Default is
             #     10, minimum is 1, maximum is 1000.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsResponse::ListAssetsResult>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsResponse::ListAssetsResult>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsResponse::ListAssetsResult>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsResponse::ListAssetsResult>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_assets request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_assets.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1376,12 +1376,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_assets, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @security_center_stub, :list_assets, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_assets, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1392,12 +1392,12 @@ module Google
             #
             # @overload list_findings(request, options = nil)
             #   Pass arguments to `list_findings` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_findings(parent: nil, filter: nil, order_by: nil, read_time: nil, compare_duration: nil, having: nil, field_mask: nil, page_token: nil, page_size: nil)
@@ -1405,12 +1405,12 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Name of the source the findings belong to. Its format is
             #     "organizations/[organization_id]/sources/[source_id]". To list across all
             #     sources provide a source_id of `-`. For example:
             #     organizations/\\{organization_id}/sources/-
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Expression that defines the filter to apply across findings.
             #     The expression is a list of one or more restrictions combined via logical
             #     operators `AND` and `OR`.
@@ -1454,7 +1454,7 @@ module Google
             #     source_properties: `=`, `:`, `>`, `<`, `>=`, `<=`
             #
             #     For example, `source_properties.size = 100` is a valid filter string.
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Expression that defines what fields and order to use for sorting. The
             #     string value should follow SQL syntax: comma separated list of fields. For
             #     example: "name,resource_properties.a_property". The default sorting order
@@ -1473,12 +1473,12 @@ module Google
             #     event_time
             #     source_properties
             #     security_marks.marks
-            #   @param read_time [Google::Protobuf::Timestamp, Hash]
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Time used as a reference point when filtering findings. The filter is
             #     limited to findings existing at the supplied time and their values are
             #     those at that specific time. Absence of this field will default to the
             #     API's version of NOW.
-            #   @param compare_duration [Google::Protobuf::Duration, Hash]
+            #   @param compare_duration [::Google::Protobuf::Duration, ::Hash]
             #     When compare_duration is set, the ListFindingsResult's "state_change"
             #     attribute is updated to indicate whether the finding had its state changed,
             #     the finding's state remained unchanged, or if the finding was added in any
@@ -1503,43 +1503,43 @@ module Google
             #     If compare_duration is not specified, then the only possible state_change
             #     is "UNUSED", which will be the state_change set for all findings present at
             #     read_time.
-            #   @param having [String]
+            #   @param having [::String]
             #     Filter that specifies what fields to further filter on *after* the query
             #     filter has been executed. Currently only `finding.state` and `state_change`
             #     are supported and requires compare_duration to be specified.
-            #   @param field_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional.
             #     A field mask to specify the Finding fields to be listed in the response.
             #     An empty field mask will list all fields.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The value returned by the last `ListFindingsResponse`; indicates
             #     that this is a continuation of a prior `ListFindings` call, and
             #     that the system should return the next page of data.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of results to return in a single response. Default is
             #     10, minimum is 1, maximum is 1000.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsResponse::ListFindingsResult>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsResponse::ListFindingsResult>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsResponse::ListFindingsResult>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsResponse::ListFindingsResult>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_findings request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_findings.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1557,12 +1557,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_findings, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @security_center_stub, :list_findings, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_findings, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1570,12 +1570,12 @@ module Google
             #
             # @overload list_notification_configs(request, options = nil)
             #   Pass arguments to `list_notification_configs` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_notification_configs(parent: nil, page_token: nil, page_size: nil)
@@ -1583,38 +1583,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Name of the organization to list notification configs.
             #     Its format is "organizations/[organization_id]".
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The value returned by the last `ListNotificationConfigsResponse`; indicates
             #     that this is a continuation of a prior `ListNotificationConfigs` call, and
             #     that the system should return the next page of data.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of results to return in a single response. Default is
             #     10, minimum is 1, maximum is 1000.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_notification_configs request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_notification_configs.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1632,12 +1632,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_notification_configs, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @security_center_stub, :list_notification_configs, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_notification_configs, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1645,12 +1645,12 @@ module Google
             #
             # @overload list_sources(request, options = nil)
             #   Pass arguments to `list_sources` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_sources(parent: nil, page_token: nil, page_size: nil)
@@ -1658,38 +1658,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the parent of sources to list. Its format should
             #     be "organizations/[organization_id]".
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The value returned by the last `ListSourcesResponse`; indicates
             #     that this is a continuation of a prior `ListSources` call, and
             #     that the system should return the next page of data.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of results to return in a single response. Default is
             #     10, minimum is 1, maximum is 1000.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::Source>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::Source>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::SecurityCenter::V1p1beta1::Source>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1p1beta1::Source>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_sources request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_sources.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1707,12 +1707,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :list_sources, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @security_center_stub, :list_sources, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_sources, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1725,12 +1725,12 @@ module Google
             #
             # @overload run_asset_discovery(request, options = nil)
             #   Pass arguments to `run_asset_discovery` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload run_asset_discovery(parent: nil)
@@ -1738,31 +1738,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Name of the organization to run asset discovery for. Its format
             #     is "organizations/[organization_id]".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def run_asset_discovery request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.run_asset_discovery.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1780,12 +1780,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :run_asset_discovery, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1793,12 +1793,12 @@ module Google
             #
             # @overload set_finding_state(request, options = nil)
             #   Pass arguments to `set_finding_state` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_finding_state(name: nil, state: nil, start_time: nil)
@@ -1806,37 +1806,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The relative resource name of the finding. See:
             #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
             #     Example:
             #     "organizations/\\{organization_id}/sources/\\{source_id}/finding/\\{finding_id}".
-            #   @param state [Google::Cloud::SecurityCenter::V1p1beta1::Finding::State]
+            #   @param state [::Google::Cloud::SecurityCenter::V1p1beta1::Finding::State]
             #     Required. The desired State of the finding.
-            #   @param start_time [Google::Protobuf::Timestamp, Hash]
+            #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Required. The time at which the updated state takes effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::Finding]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::Finding]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_finding_state request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_finding_state.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1857,8 +1857,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1866,12 +1866,12 @@ module Google
             #
             # @overload set_iam_policy(request, options = nil)
             #   Pass arguments to `set_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::SetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_iam_policy(resource: nil, policy: nil)
@@ -1879,36 +1879,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being specified.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param policy [Google::Iam::V1::Policy, Hash]
+            #   @param policy [::Google::Iam::V1::Policy, ::Hash]
             #     REQUIRED: The complete policy to be applied to the `resource`. The size of
             #     the policy is limited to a few 10s of KB. An empty policy is a
             #     valid policy but certain Cloud Platform services (such as Projects)
             #     might reject them.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::SetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1929,8 +1929,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1938,12 +1938,12 @@ module Google
             #
             # @overload test_iam_permissions(request, options = nil)
             #   Pass arguments to `test_iam_permissions` via a request object, either of type
-            #   {Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::TestIamPermissionsRequest, Hash]
+            #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload test_iam_permissions(resource: nil, permissions: nil)
@@ -1951,36 +1951,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy detail is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param permissions [Array<String>]
+            #   @param permissions [::Array<::String>]
             #     The set of permissions to check for the `resource`. Permissions with
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more
             #     information see
             #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::TestIamPermissionsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::TestIamPermissionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::TestIamPermissionsResponse]
+            # @return [::Google::Iam::V1::TestIamPermissionsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def test_iam_permissions request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::TestIamPermissionsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2001,8 +2001,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2011,12 +2011,12 @@ module Google
             #
             # @overload update_finding(request, options = nil)
             #   Pass arguments to `update_finding` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_finding(finding: nil, update_mask: nil)
@@ -2024,14 +2024,14 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param finding [Google::Cloud::SecurityCenter::V1p1beta1::Finding, Hash]
+            #   @param finding [::Google::Cloud::SecurityCenter::V1p1beta1::Finding, ::Hash]
             #     Required. The finding resource to update or create if it does not already
             #     exist. parent, security_marks, and update_time will be ignored.
             #
             #     In the case of creation, the finding id portion of the name must be
             #     alphanumeric and less than or equal to 32 characters and greater than 0
             #     characters in length.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The FieldMask to use when updating the finding resource. This field should
             #     not be specified when creating a finding.
             #
@@ -2041,26 +2041,26 @@ module Google
             #     mask.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::Finding]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::Finding]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Finding]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_finding request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_finding.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2081,8 +2081,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2090,12 +2090,12 @@ module Google
             #
             # @overload update_notification_config(request, options = nil)
             #   Pass arguments to `update_notification_config` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_notification_config(notification_config: nil, update_mask: nil)
@@ -2103,34 +2103,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param notification_config [Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig, Hash]
+            #   @param notification_config [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig, ::Hash]
             #     Required. The notification config to update.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The FieldMask to use when updating the notification config.
             #
             #     If empty all mutable fields will be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_notification_config request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_notification_config.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2151,8 +2151,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2160,12 +2160,12 @@ module Google
             #
             # @overload update_organization_settings(request, options = nil)
             #   Pass arguments to `update_organization_settings` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_organization_settings(organization_settings: nil, update_mask: nil)
@@ -2173,34 +2173,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param organization_settings [Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings, Hash]
+            #   @param organization_settings [::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings, ::Hash]
             #     Required. The organization settings resource to update.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The FieldMask to use when updating the settings resource.
             #
             #      If empty all mutable fields will be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_organization_settings request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_organization_settings.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2221,8 +2221,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2230,12 +2230,12 @@ module Google
             #
             # @overload update_source(request, options = nil)
             #   Pass arguments to `update_source` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_source(source: nil, update_mask: nil)
@@ -2243,34 +2243,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param source [Google::Cloud::SecurityCenter::V1p1beta1::Source, Hash]
+            #   @param source [::Google::Cloud::SecurityCenter::V1p1beta1::Source, ::Hash]
             #     Required. The source resource to update.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The FieldMask to use when updating the source resource.
             #
             #     If empty all mutable fields will be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::Source]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::Source]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::Source]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::Source]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_source request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_source.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2291,8 +2291,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2300,12 +2300,12 @@ module Google
             #
             # @overload update_security_marks(request, options = nil)
             #   Pass arguments to `update_security_marks` via a request object, either of type
-            #   {Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest, Hash]
+            #   @param request [::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_security_marks(security_marks: nil, update_mask: nil, start_time: nil)
@@ -2313,40 +2313,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param security_marks [Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks, Hash]
+            #   @param security_marks [::Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks, ::Hash]
             #     Required. The security marks resource to update.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The FieldMask to use when updating the security marks resource.
             #
             #     The field mask must not contain duplicate fields.
             #     If empty or set to "marks", all marks will be replaced.  Individual
             #     marks can be updated using "marks.<mark_key>".
-            #   @param start_time [Google::Protobuf::Timestamp, Hash]
+            #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
             #     The time at which the updated SecurityMarks take effect.
             #     If not set uses current server time.  Updates will be applied to the
             #     SecurityMarks that are active immediately preceding this time.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks]
+            # @return [::Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_security_marks request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_security_marks.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecurityCenter::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2367,8 +2367,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2378,7 +2378,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client::Configuration::Rpcs}
+            # {::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -2389,22 +2389,22 @@ module Google
             # To modify the global config, setting the timeout for create_source
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_source.timeout = 20_000
+            #     ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_source.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_source.timeout = 20_000
+            #     client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_source.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"securitycenter.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -2416,29 +2416,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -2446,10 +2446,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "securitycenter.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -2457,14 +2457,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -2505,168 +2505,168 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_source`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_source
                 ##
                 # RPC-specific configuration for `create_finding`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_finding
                 ##
                 # RPC-specific configuration for `create_notification_config`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_notification_config
                 ##
                 # RPC-specific configuration for `delete_notification_config`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_notification_config
                 ##
                 # RPC-specific configuration for `get_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_iam_policy
                 ##
                 # RPC-specific configuration for `get_notification_config`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_notification_config
                 ##
                 # RPC-specific configuration for `get_organization_settings`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_organization_settings
                 ##
                 # RPC-specific configuration for `get_source`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_source
                 ##
                 # RPC-specific configuration for `group_assets`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :group_assets
                 ##
                 # RPC-specific configuration for `group_findings`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :group_findings
                 ##
                 # RPC-specific configuration for `list_assets`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_assets
                 ##
                 # RPC-specific configuration for `list_findings`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_findings
                 ##
                 # RPC-specific configuration for `list_notification_configs`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_notification_configs
                 ##
                 # RPC-specific configuration for `list_sources`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_sources
                 ##
                 # RPC-specific configuration for `run_asset_discovery`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :run_asset_discovery
                 ##
                 # RPC-specific configuration for `set_finding_state`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_finding_state
                 ##
                 # RPC-specific configuration for `set_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_iam_policy
                 ##
                 # RPC-specific configuration for `test_iam_permissions`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_iam_permissions
                 ##
                 # RPC-specific configuration for `update_finding`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_finding
                 ##
                 # RPC-specific configuration for `update_notification_config`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_notification_config
                 ##
                 # RPC-specific configuration for `update_organization_settings`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_organization_settings
                 ##
                 # RPC-specific configuration for `update_source`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_source
                 ##
                 # RPC-specific configuration for `update_security_marks`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_security_marks
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_source_config = parent_rpcs&.create_source if parent_rpcs&.respond_to? :create_source
-                  @create_source = Gapic::Config::Method.new create_source_config
+                  @create_source = ::Gapic::Config::Method.new create_source_config
                   create_finding_config = parent_rpcs&.create_finding if parent_rpcs&.respond_to? :create_finding
-                  @create_finding = Gapic::Config::Method.new create_finding_config
+                  @create_finding = ::Gapic::Config::Method.new create_finding_config
                   create_notification_config_config = parent_rpcs&.create_notification_config if parent_rpcs&.respond_to? :create_notification_config
-                  @create_notification_config = Gapic::Config::Method.new create_notification_config_config
+                  @create_notification_config = ::Gapic::Config::Method.new create_notification_config_config
                   delete_notification_config_config = parent_rpcs&.delete_notification_config if parent_rpcs&.respond_to? :delete_notification_config
-                  @delete_notification_config = Gapic::Config::Method.new delete_notification_config_config
+                  @delete_notification_config = ::Gapic::Config::Method.new delete_notification_config_config
                   get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
-                  @get_iam_policy = Gapic::Config::Method.new get_iam_policy_config
+                  @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   get_notification_config_config = parent_rpcs&.get_notification_config if parent_rpcs&.respond_to? :get_notification_config
-                  @get_notification_config = Gapic::Config::Method.new get_notification_config_config
+                  @get_notification_config = ::Gapic::Config::Method.new get_notification_config_config
                   get_organization_settings_config = parent_rpcs&.get_organization_settings if parent_rpcs&.respond_to? :get_organization_settings
-                  @get_organization_settings = Gapic::Config::Method.new get_organization_settings_config
+                  @get_organization_settings = ::Gapic::Config::Method.new get_organization_settings_config
                   get_source_config = parent_rpcs&.get_source if parent_rpcs&.respond_to? :get_source
-                  @get_source = Gapic::Config::Method.new get_source_config
+                  @get_source = ::Gapic::Config::Method.new get_source_config
                   group_assets_config = parent_rpcs&.group_assets if parent_rpcs&.respond_to? :group_assets
-                  @group_assets = Gapic::Config::Method.new group_assets_config
+                  @group_assets = ::Gapic::Config::Method.new group_assets_config
                   group_findings_config = parent_rpcs&.group_findings if parent_rpcs&.respond_to? :group_findings
-                  @group_findings = Gapic::Config::Method.new group_findings_config
+                  @group_findings = ::Gapic::Config::Method.new group_findings_config
                   list_assets_config = parent_rpcs&.list_assets if parent_rpcs&.respond_to? :list_assets
-                  @list_assets = Gapic::Config::Method.new list_assets_config
+                  @list_assets = ::Gapic::Config::Method.new list_assets_config
                   list_findings_config = parent_rpcs&.list_findings if parent_rpcs&.respond_to? :list_findings
-                  @list_findings = Gapic::Config::Method.new list_findings_config
+                  @list_findings = ::Gapic::Config::Method.new list_findings_config
                   list_notification_configs_config = parent_rpcs&.list_notification_configs if parent_rpcs&.respond_to? :list_notification_configs
-                  @list_notification_configs = Gapic::Config::Method.new list_notification_configs_config
+                  @list_notification_configs = ::Gapic::Config::Method.new list_notification_configs_config
                   list_sources_config = parent_rpcs&.list_sources if parent_rpcs&.respond_to? :list_sources
-                  @list_sources = Gapic::Config::Method.new list_sources_config
+                  @list_sources = ::Gapic::Config::Method.new list_sources_config
                   run_asset_discovery_config = parent_rpcs&.run_asset_discovery if parent_rpcs&.respond_to? :run_asset_discovery
-                  @run_asset_discovery = Gapic::Config::Method.new run_asset_discovery_config
+                  @run_asset_discovery = ::Gapic::Config::Method.new run_asset_discovery_config
                   set_finding_state_config = parent_rpcs&.set_finding_state if parent_rpcs&.respond_to? :set_finding_state
-                  @set_finding_state = Gapic::Config::Method.new set_finding_state_config
+                  @set_finding_state = ::Gapic::Config::Method.new set_finding_state_config
                   set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
-                  @set_iam_policy = Gapic::Config::Method.new set_iam_policy_config
+                  @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                   test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
-                  @test_iam_permissions = Gapic::Config::Method.new test_iam_permissions_config
+                  @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                   update_finding_config = parent_rpcs&.update_finding if parent_rpcs&.respond_to? :update_finding
-                  @update_finding = Gapic::Config::Method.new update_finding_config
+                  @update_finding = ::Gapic::Config::Method.new update_finding_config
                   update_notification_config_config = parent_rpcs&.update_notification_config if parent_rpcs&.respond_to? :update_notification_config
-                  @update_notification_config = Gapic::Config::Method.new update_notification_config_config
+                  @update_notification_config = ::Gapic::Config::Method.new update_notification_config_config
                   update_organization_settings_config = parent_rpcs&.update_organization_settings if parent_rpcs&.respond_to? :update_organization_settings
-                  @update_organization_settings = Gapic::Config::Method.new update_organization_settings_config
+                  @update_organization_settings = ::Gapic::Config::Method.new update_organization_settings_config
                   update_source_config = parent_rpcs&.update_source if parent_rpcs&.respond_to? :update_source
-                  @update_source = Gapic::Config::Method.new update_source_config
+                  @update_source = ::Gapic::Config::Method.new update_source_config
                   update_security_marks_config = parent_rpcs&.update_security_marks if parent_rpcs&.respond_to? :update_security_marks
-                  @update_security_marks = Gapic::Config::Method.new update_security_marks_config
+                  @update_security_marks = ::Gapic::Config::Method.new update_security_marks_config
 
                   yield self if block_given?
                 end

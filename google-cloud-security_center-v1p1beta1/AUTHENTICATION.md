@@ -27,7 +27,7 @@ export SECURITY_CENTER_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/security_center/v1p1beta1"
 
-client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
+client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-security_center-v1p1beta1
 checks for credentials are configured on the service Credentials class (such as
-{Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Credentials}):
+{::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Credentials}):
 
 1. `SECURITY_CENTER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SECURITY_CENTER_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/security_center/v1p1beta1"
 
 ENV["SECURITY_CENTER_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
+client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/security_center/v1p1beta1"
 
-client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
+client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/security_center/v1p1beta1"
 
-Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.configure do |config|
+::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
+client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
 ```
 
 ### Cloud SDK

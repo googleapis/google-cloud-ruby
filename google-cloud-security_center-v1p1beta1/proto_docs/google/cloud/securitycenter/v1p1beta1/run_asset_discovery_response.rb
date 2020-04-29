@@ -23,14 +23,14 @@ module Google
       module V1p1beta1
         # Response of asset discovery run
         # @!attribute [rw] state
-        #   @return [Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryResponse::State]
+        #   @return [::Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryResponse::State]
         #     The state of an asset discovery run.
         # @!attribute [rw] duration
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     The duration between asset discovery run start and end
         class RunAssetDiscoveryResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The state of an asset discovery run.
           module State
