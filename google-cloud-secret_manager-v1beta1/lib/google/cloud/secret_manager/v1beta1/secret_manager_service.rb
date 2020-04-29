@@ -36,13 +36,13 @@ module Google
         # Manages secrets and operations using those secrets. Implements a REST
         # model with the following objects:
         #
-        # * {Google::Cloud::SecretManager::V1beta1::Secret Secret}
-        # * {Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}
+        # * {::Google::Cloud::SecretManager::V1beta1::Secret Secret}
+        # * {::Google::Cloud::SecretManager::V1beta1::SecretVersion SecretVersion}
         #
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/secret_manager/v1beta1/secret_manager_service"
-        #     client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
+        #     client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
         #
         module SecretManagerService
         end

@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/secret_manager/v1beta1"
 
-client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
+client = ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
 request = my_create_request
 response = client.list_secrets request
 ```
