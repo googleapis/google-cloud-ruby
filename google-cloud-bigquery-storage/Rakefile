@@ -86,7 +86,7 @@ task :acceptance, :project, :keyfile do |t, args|
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BIGQUERY_STORAGE_TEST_PROJECT=test123 BIGQUERY_STORAGE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
   require "google/cloud/bigquery/storage/v1/big_query_read/credentials"
-  Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Credentials.env_vars.each do |path|
+  ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["BIGQUERY_STORAGE_PROJECT"] = project
