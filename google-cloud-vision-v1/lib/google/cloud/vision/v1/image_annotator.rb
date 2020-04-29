@@ -39,7 +39,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/vision/v1/image_annotator"
-        #     client = Google::Cloud::Vision::V1::ImageAnnotator::Client.new
+        #     client = ::Google::Cloud::Vision::V1::ImageAnnotator::Client.new
         #
         module ImageAnnotator
         end

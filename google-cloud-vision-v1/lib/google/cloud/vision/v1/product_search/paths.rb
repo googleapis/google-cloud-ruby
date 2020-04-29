@@ -34,9 +34,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
@@ -52,10 +52,10 @@ module Google
             # @param location [String]
             # @param product [String]
             #
-            # @return [String]
+            # @return [::String]
             def product_path project:, location:, product:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/products/#{product}"
             end
@@ -71,10 +71,10 @@ module Google
             # @param location [String]
             # @param product_set [String]
             #
-            # @return [String]
+            # @return [::String]
             def product_set_path project:, location:, product_set:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/productSets/#{product_set}"
             end
@@ -91,11 +91,11 @@ module Google
             # @param product [String]
             # @param reference_image [String]
             #
-            # @return [String]
+            # @return [::String]
             def reference_image_path project:, location:, product:, reference_image:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "product cannot contain /" if product.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "product cannot contain /" if product.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/products/#{product}/referenceImages/#{reference_image}"
             end
