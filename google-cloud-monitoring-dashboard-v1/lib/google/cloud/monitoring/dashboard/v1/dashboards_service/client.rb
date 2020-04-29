@@ -38,15 +38,15 @@ module Google
               ##
               # Configure the DashboardsService Client class.
               #
-              # See {Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client::Configuration}
+              # See {::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client::Configuration}
               # for a description of the configuration fields.
               #
               # ## Example
               #
               # To modify the configuration for all DashboardsService clients:
               #
-              #     Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.configure do |config|
-              #       config.timeout = 10_000
+              #     ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.configure do |config|
+              #       config.timeout = 10.0
               #     end
               #
               # @yield [config] Configure the Client client.
@@ -78,7 +78,7 @@ module Google
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client::Configuration}
+              # See {::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -99,13 +99,13 @@ module Google
               # To create a new DashboardsService client with the default
               # configuration:
               #
-              #     client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+              #     client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
               #
               # To create a new DashboardsService client with a custom
               # configuration:
               #
-              #     client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
-              #       config.timeout = 10_000
+              #     client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
+              #       config.timeout = 10.0
               #     end
               #
               # @yield [config] Configure the DashboardsService client.
@@ -132,8 +132,8 @@ module Google
                 end
                 @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-                @dashboards_service_stub = Gapic::ServiceStub.new(
-                  Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Stub,
+                @dashboards_service_stub = ::Gapic::ServiceStub.new(
+                  ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Stub,
                   credentials:  credentials,
                   endpoint:     @config.endpoint,
                   channel_args: @config.channel_args,
@@ -152,12 +152,12 @@ module Google
               #
               # @overload create_dashboard(request, options = nil)
               #   Pass arguments to `create_dashboard` via a request object, either of type
-              #   {Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest} or an equivalent Hash.
               #
-              #   @param request [Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest, Hash]
+              #   @param request [::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [Gapic::CallOptions, Hash]
+              #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
               # @overload create_dashboard(parent: nil, dashboard: nil)
@@ -165,34 +165,34 @@ module Google
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param parent [String]
+              #   @param parent [::String]
               #     Required. The project on which to execute the request. The format is
               #     `"projects/{project_id_or_number}"`. The \\{project_id_or_number} must match
               #     the dashboard resource name.
-              #   @param dashboard [Google::Cloud::Monitoring::Dashboard::V1::Dashboard, Hash]
+              #   @param dashboard [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard, ::Hash]
               #     Required. The initial dashboard specification.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @yieldparam response [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
+              # @return [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
               #
-              # @raise [Google::Cloud::Error] if the RPC is aborted.
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
               def create_dashboard request, options = nil
-                raise ArgumentError, "request must be provided" if request.nil?
+                raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_dashboard.metadata.to_h
 
                 # Set x-goog-api-client and x-goog-user-project headers
-                metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Monitoring::Dashboard::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -213,8 +213,8 @@ module Google
                   yield response, operation if block_given?
                   return response
                 end
-              rescue GRPC::BadStatus => e
-                raise Google::Cloud::Error.from_error(e)
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -226,12 +226,12 @@ module Google
               #
               # @overload list_dashboards(request, options = nil)
               #   Pass arguments to `list_dashboards` via a request object, either of type
-              #   {Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest} or an equivalent Hash.
               #
-              #   @param request [Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest, Hash]
+              #   @param request [::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [Gapic::CallOptions, Hash]
+              #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
               # @overload list_dashboards(parent: nil, page_size: nil, page_token: nil)
@@ -239,38 +239,38 @@ module Google
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param parent [String]
+              #   @param parent [::String]
               #     Required. The scope of the dashboards to list. A project scope must be
               #     specified in the form of `"projects/{project_id_or_number}"`.
-              #   @param page_size [Integer]
+              #   @param page_size [::Integer]
               #     A positive number that is the maximum number of results to return.
               #     If unspecified, a default of 1000 is used.
-              #   @param page_token [String]
+              #   @param page_token [::String]
               #     If this field is not empty then it must contain the `nextPageToken` value
               #     returned by a previous call to this method.  Using this field causes the
               #     method to return additional results from the previous method call.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Monitoring::Dashboard::V1::Dashboard>]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::Dashboard::V1::Dashboard>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [Gapic::PagedEnumerable<Google::Cloud::Monitoring::Dashboard::V1::Dashboard>]
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::Dashboard::V1::Dashboard>]
               #
-              # @raise [Google::Cloud::Error] if the RPC is aborted.
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
               def list_dashboards request, options = nil
-                raise ArgumentError, "request must be provided" if request.nil?
+                raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.list_dashboards.metadata.to_h
 
                 # Set x-goog-api-client and x-goog-user-project headers
-                metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Monitoring::Dashboard::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -288,12 +288,12 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dashboards_service_stub.call_rpc :list_dashboards, request, options: options do |response, operation|
-                  response = Gapic::PagedEnumerable.new @dashboards_service_stub, :list_dashboards, request, response, operation, options
+                  response = ::Gapic::PagedEnumerable.new @dashboards_service_stub, :list_dashboards, request, response, operation, options
                   yield response, operation if block_given?
                   return response
                 end
-              rescue GRPC::BadStatus => e
-                raise Google::Cloud::Error.from_error(e)
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -305,12 +305,12 @@ module Google
               #
               # @overload get_dashboard(request, options = nil)
               #   Pass arguments to `get_dashboard` via a request object, either of type
-              #   {Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest} or an equivalent Hash.
               #
-              #   @param request [Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest, Hash]
+              #   @param request [::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [Gapic::CallOptions, Hash]
+              #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
               # @overload get_dashboard(name: nil)
@@ -318,33 +318,33 @@ module Google
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param name [String]
+              #   @param name [::String]
               #     Required. The resource name of the Dashboard. The format is one of
               #     `"dashboards/{dashboard_id}"` (for system dashboards) or
               #     `"projects/{project_id_or_number}/dashboards/{dashboard_id}"`
               #     (for custom dashboards).
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @yieldparam response [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
+              # @return [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
               #
-              # @raise [Google::Cloud::Error] if the RPC is aborted.
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
               def get_dashboard request, options = nil
-                raise ArgumentError, "request must be provided" if request.nil?
+                raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.get_dashboard.metadata.to_h
 
                 # Set x-goog-api-client and x-goog-user-project headers
-                metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Monitoring::Dashboard::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -365,8 +365,8 @@ module Google
                   yield response, operation if block_given?
                   return response
                 end
-              rescue GRPC::BadStatus => e
-                raise Google::Cloud::Error.from_error(e)
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -378,12 +378,12 @@ module Google
               #
               # @overload delete_dashboard(request, options = nil)
               #   Pass arguments to `delete_dashboard` via a request object, either of type
-              #   {Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest} or an equivalent Hash.
               #
-              #   @param request [Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest, Hash]
+              #   @param request [::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [Gapic::CallOptions, Hash]
+              #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
               # @overload delete_dashboard(name: nil)
@@ -391,31 +391,31 @@ module Google
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param name [String]
+              #   @param name [::String]
               #     Required. The resource name of the Dashboard. The format is
               #     `"projects/{project_id_or_number}/dashboards/{dashboard_id}"`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [Google::Protobuf::Empty]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [Google::Protobuf::Empty]
+              # @return [::Google::Protobuf::Empty]
               #
-              # @raise [Google::Cloud::Error] if the RPC is aborted.
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
               def delete_dashboard request, options = nil
-                raise ArgumentError, "request must be provided" if request.nil?
+                raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.delete_dashboard.metadata.to_h
 
                 # Set x-goog-api-client and x-goog-user-project headers
-                metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Monitoring::Dashboard::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -436,8 +436,8 @@ module Google
                   yield response, operation if block_given?
                   return response
                 end
-              rescue GRPC::BadStatus => e
-                raise Google::Cloud::Error.from_error(e)
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -449,12 +449,12 @@ module Google
               #
               # @overload update_dashboard(request, options = nil)
               #   Pass arguments to `update_dashboard` via a request object, either of type
-              #   {Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest} or an equivalent Hash.
               #
-              #   @param request [Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest, Hash]
+              #   @param request [::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [Gapic::CallOptions, Hash]
+              #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
               # @overload update_dashboard(dashboard: nil)
@@ -462,30 +462,30 @@ module Google
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param dashboard [Google::Cloud::Monitoring::Dashboard::V1::Dashboard, Hash]
+              #   @param dashboard [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard, ::Hash]
               #     Required. The dashboard that will replace the existing dashboard.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @yieldparam response [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
+              # @return [::Google::Cloud::Monitoring::Dashboard::V1::Dashboard]
               #
-              # @raise [Google::Cloud::Error] if the RPC is aborted.
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
               def update_dashboard request, options = nil
-                raise ArgumentError, "request must be provided" if request.nil?
+                raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.update_dashboard.metadata.to_h
 
                 # Set x-goog-api-client and x-goog-user-project headers
-                metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Monitoring::Dashboard::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -506,8 +506,8 @@ module Google
                   yield response, operation if block_given?
                   return response
                 end
-              rescue GRPC::BadStatus => e
-                raise Google::Cloud::Error.from_error(e)
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -517,7 +517,7 @@ module Google
               # providing control over timeouts, retry behavior, logging, transport
               # parameters, and other low-level controls. Certain parameters can also be
               # applied individually to specific RPCs. See
-              # {Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client::Configuration::Rpcs}
+              # {::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client::Configuration::Rpcs}
               # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -528,22 +528,22 @@ module Google
               # To modify the global config, setting the timeout for create_dashboard
               # to 20 seconds, and all remaining timeouts to 10 seconds:
               #
-              #     Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.configure do |config|
-              #       config.timeout = 10_000
-              #       config.rpcs.create_dashboard.timeout = 20_000
+              #     ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.configure do |config|
+              #       config.timeout = 10.0
+              #       config.rpcs.create_dashboard.timeout = 20.0
               #     end
               #
               # To apply the above configuration only to a new client:
               #
-              #     client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
-              #       config.timeout = 10_000
-              #       config.rpcs.create_dashboard.timeout = 20_000
+              #     client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new do |config|
+              #       config.timeout = 10.0
+              #       config.rpcs.create_dashboard.timeout = 20.0
               #     end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
               #   Defaults to `"monitoring.googleapis.com"`.
-              #   @return [String]
+              #   @return [::String]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
               #    *  (`String`) The path to a service account key file in JSON format
@@ -555,29 +555,29 @@ module Google
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
-              #   @return [Object]
+              #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes
-              #   @return [Array<String>]
+              #   @return [::Array<::String>]
               # @!attribute [rw] lib_name
               #   The library name as recorded in instrumentation and logging
-              #   @return [String]
+              #   @return [::String]
               # @!attribute [rw] lib_version
               #   The library version as recorded in instrumentation and logging
-              #   @return [String]
+              #   @return [::String]
               # @!attribute [rw] channel_args
               #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
               #   `GRPC::Core::Channel` object is provided as the credential.
-              #   @return [Hash]
+              #   @return [::Hash]
               # @!attribute [rw] interceptors
               #   An array of interceptors that are run before calls are executed.
-              #   @return [Array<GRPC::ClientInterceptor>]
+              #   @return [::Array<::GRPC::ClientInterceptor>]
               # @!attribute [rw] timeout
-              #   The call timeout in milliseconds.
-              #   @return [Numeric]
+              #   The call timeout in seconds.
+              #   @return [::Numeric]
               # @!attribute [rw] metadata
               #   Additional gRPC headers to be sent with the call.
-              #   @return [Hash{Symbol=>String}]
+              #   @return [::Hash{::Symbol=>::String}]
               # @!attribute [rw] retry_policy
               #   The retry policy. The value is a hash with the following keys:
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -585,10 +585,10 @@ module Google
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
-              #   @return [Hash]
+              #   @return [::Hash]
               #
               class Configuration
-                extend Gapic::Config
+                extend ::Gapic::Config
 
                 config_attr :endpoint,     "monitoring.googleapis.com", String
                 config_attr :credentials,  nil do |value|
@@ -596,14 +596,14 @@ module Google
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                   allowed.any? { |klass| klass === value }
                 end
-                config_attr :scope,        nil, String, Array, nil
-                config_attr :lib_name,     nil, String, nil
-                config_attr :lib_version,  nil, String, nil
-                config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-                config_attr :interceptors, nil, Array, nil
-                config_attr :timeout,      nil, Numeric, nil
-                config_attr :metadata,     nil, Hash, nil
-                config_attr :retry_policy, nil, Hash, Proc, nil
+                config_attr :scope,        nil, ::String, ::Array, nil
+                config_attr :lib_name,     nil, ::String, nil
+                config_attr :lib_version,  nil, ::String, nil
+                config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+                config_attr :interceptors, nil, ::Array, nil
+                config_attr :timeout,      nil, ::Numeric, nil
+                config_attr :metadata,     nil, ::Hash, nil
+                config_attr :retry_policy, nil, ::Hash, Proc, nil
 
                 # @private
                 def initialize parent_config = nil
@@ -644,42 +644,42 @@ module Google
                 class Rpcs
                   ##
                   # RPC-specific configuration for `create_dashboard`
-                  # @return [Gapic::Config::Method]
+                  # @return [::Gapic::Config::Method]
                   #
                   attr_reader :create_dashboard
                   ##
                   # RPC-specific configuration for `list_dashboards`
-                  # @return [Gapic::Config::Method]
+                  # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_dashboards
                   ##
                   # RPC-specific configuration for `get_dashboard`
-                  # @return [Gapic::Config::Method]
+                  # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_dashboard
                   ##
                   # RPC-specific configuration for `delete_dashboard`
-                  # @return [Gapic::Config::Method]
+                  # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_dashboard
                   ##
                   # RPC-specific configuration for `update_dashboard`
-                  # @return [Gapic::Config::Method]
+                  # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_dashboard
 
                   # @private
                   def initialize parent_rpcs = nil
                     create_dashboard_config = parent_rpcs&.create_dashboard if parent_rpcs&.respond_to? :create_dashboard
-                    @create_dashboard = Gapic::Config::Method.new create_dashboard_config
+                    @create_dashboard = ::Gapic::Config::Method.new create_dashboard_config
                     list_dashboards_config = parent_rpcs&.list_dashboards if parent_rpcs&.respond_to? :list_dashboards
-                    @list_dashboards = Gapic::Config::Method.new list_dashboards_config
+                    @list_dashboards = ::Gapic::Config::Method.new list_dashboards_config
                     get_dashboard_config = parent_rpcs&.get_dashboard if parent_rpcs&.respond_to? :get_dashboard
-                    @get_dashboard = Gapic::Config::Method.new get_dashboard_config
+                    @get_dashboard = ::Gapic::Config::Method.new get_dashboard_config
                     delete_dashboard_config = parent_rpcs&.delete_dashboard if parent_rpcs&.respond_to? :delete_dashboard
-                    @delete_dashboard = Gapic::Config::Method.new delete_dashboard_config
+                    @delete_dashboard = ::Gapic::Config::Method.new delete_dashboard_config
                     update_dashboard_config = parent_rpcs&.update_dashboard if parent_rpcs&.respond_to? :update_dashboard
-                    @update_dashboard = Gapic::Config::Method.new update_dashboard_config
+                    @update_dashboard = ::Gapic::Config::Method.new update_dashboard_config
 
                     yield self if block_given?
                   end

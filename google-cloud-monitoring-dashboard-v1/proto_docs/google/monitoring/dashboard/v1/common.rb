@@ -29,7 +29,7 @@ module Google
           # (`cross_series_reducer` and `group_by_fields`).  For more details, see
           # [Aggregation](/monitoring/api/learn_more#aggregation).
           # @!attribute [rw] alignment_period
-          #   @return [Google::Protobuf::Duration]
+          #   @return [::Google::Protobuf::Duration]
           #     The alignment period for per-[time series][TimeSeries]
           #     alignment. If present, `alignmentPeriod` must be at least 60
           #     seconds.  After per-time series alignment, each time series will
@@ -39,7 +39,7 @@ module Google
           #     does not equal `ALIGN_NONE`, then this field must be defined;
           #     otherwise an error is returned.
           # @!attribute [rw] per_series_aligner
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::Aggregation::Aligner]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation::Aligner]
           #     The approach to be used to align individual time series. Not all
           #     alignment functions may be applied to all time series, depending
           #     on the metric type and value type of the original time
@@ -52,7 +52,7 @@ module Google
           #     and `alignmentPeriod` must be specified; otherwise, an error is
           #     returned.
           # @!attribute [rw] cross_series_reducer
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::Aggregation::Reducer]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation::Reducer]
           #     The approach to be used to combine time series. Not all reducer
           #     functions may be applied to all time series, depending on the
           #     metric type and the value type of the original time
@@ -65,7 +65,7 @@ module Google
           #     and `alignmentPeriod` must be specified; otherwise, an error is
           #     returned.
           # @!attribute [rw] group_by_fields
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     The set of fields to preserve when `crossSeriesReducer` is
           #     specified. The `groupByFields` determine how the time series are
           #     partitioned into subsets prior to applying the aggregation
@@ -81,8 +81,8 @@ module Google
           #     a single output time series. If `crossSeriesReducer` is not
           #     defined, this field is ignored.
           class Aggregation
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # The Aligner describes how to bring the data points in a single
             # time series into temporal alignment.
@@ -330,18 +330,18 @@ module Google
           # ranked with an aligner. The filter lets through up to `num_time_series` time
           # series, selecting them based on the relative ranking.
           # @!attribute [rw] ranking_method
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter::Method]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter::Method]
           #     `rankingMethod` is applied to each time series independently to produce the
           #     value which will be used to compare the time series to other time series.
           # @!attribute [rw] num_time_series
-          #   @return [Integer]
+          #   @return [::Integer]
           #     How many time series to return.
           # @!attribute [rw] direction
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter::Direction]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter::Direction]
           #     How to use the ranking to select time series that pass through the filter.
           class PickTimeSeriesFilter
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # The value reducers that can be applied to a PickTimeSeriesFilter.
             module Method
@@ -380,18 +380,18 @@ module Google
           # A filter that ranks streams based on their statistical relation to other
           # streams in a request.
           # @!attribute [rw] ranking_method
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter::Method]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter::Method]
           #     `rankingMethod` is applied to a set of time series, and then the produced
           #     value for each individual time series is used to compare a given time
           #     series to others.
           #     These are methods that cannot be applied stream-by-stream, but rather
           #     require the full context of a request to evaluate time series.
           # @!attribute [rw] num_time_series
-          #   @return [Integer]
+          #   @return [::Integer]
           #     How many time series to output.
           class StatisticalTimeSeriesFilter
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # The filter methods that can be applied to a stream.
             module Method

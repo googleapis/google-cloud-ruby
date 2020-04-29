@@ -27,7 +27,7 @@ module Google
         # To load this package, including all its services, and instantiate a client:
         #
         #     require "google/cloud/monitoring/dashboard/v1"
-        #     client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+        #     client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
         #
         module V1
         end

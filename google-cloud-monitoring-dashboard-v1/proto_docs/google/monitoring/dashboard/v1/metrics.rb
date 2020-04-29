@@ -25,21 +25,21 @@ module Google
           # TimeSeriesQuery collects the set of supported methods for querying time
           # series data from the Stackdriver metrics API.
           # @!attribute [rw] time_series_filter
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilter]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilter]
           #     Filter parameters to fetch time series.
           # @!attribute [rw] time_series_filter_ratio
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilterRatio]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilterRatio]
           #     Parameters to fetch a ratio between two time series filters.
           # @!attribute [rw] unit_override
-          #   @return [String]
+          #   @return [::String]
           #     The unit of data contained in fetched time series. If non-empty, this
           #     unit will override any unit that accompanies fetched data. The format is
           #     the same as the
           #     [`unit`](/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors)
           #     field in `MetricDescriptor`.
           class TimeSeriesQuery
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A filter that defines a subset of time series data that is displayed in a
@@ -47,82 +47,82 @@ module Google
           # [`ListTimeSeries`](/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)
           # method.
           # @!attribute [rw] filter
-          #   @return [String]
+          #   @return [::String]
           #     Required. The [monitoring filter](/monitoring/api/v3/filters) that identifies the
           #     metric types, resources, and projects to query.
           # @!attribute [rw] aggregation
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
           #     By default, the raw time series data is returned.
           #     Use this field to combine multiple time series for different views of the
           #     data.
           # @!attribute [rw] pick_time_series_filter
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter]
           #     Ranking based time series filter.
           # @!attribute [rw] statistical_time_series_filter
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter]
           #     Statistics based time series filter.
           class TimeSeriesFilter
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A pair of time series filters that define a ratio computation. The output
           # time series is the pair-wise division of each aligned element from the
           # numerator and denominator time series.
           # @!attribute [rw] numerator
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilterRatio::RatioPart]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilterRatio::RatioPart]
           #     The numerator of the ratio.
           # @!attribute [rw] denominator
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilterRatio::RatioPart]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilterRatio::RatioPart]
           #     The denominator of the ratio.
           # @!attribute [rw] secondary_aggregation
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
           #     Apply a second aggregation after the ratio is computed.
           # @!attribute [rw] pick_time_series_filter
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter]
           #     Ranking based time series filter.
           # @!attribute [rw] statistical_time_series_filter
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter]
           #     Statistics based time series filter.
           class TimeSeriesFilterRatio
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Describes a query to build the numerator or denominator of a
             # TimeSeriesFilterRatio.
             # @!attribute [rw] filter
-            #   @return [String]
+            #   @return [::String]
             #     Required. The [monitoring filter](/monitoring/api/v3/filters) that identifies the
             #     metric types, resources, and projects to query.
             # @!attribute [rw] aggregation
-            #   @return [Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
+            #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Aggregation]
             #     By default, the raw time series data is returned.
             #     Use this field to combine multiple time series for different views of the
             #     data.
             class RatioPart
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
           # Defines a threshold for categorizing time series values.
           # @!attribute [rw] label
-          #   @return [String]
+          #   @return [::String]
           #     A label for the threshold.
           # @!attribute [rw] value
-          #   @return [Float]
+          #   @return [::Float]
           #     The value of the threshold. The value should be defined in the native scale
           #     of the metric.
           # @!attribute [rw] color
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::Threshold::Color]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Threshold::Color]
           #     The state color for this threshold. Color is not allowed in a XyChart.
           # @!attribute [rw] direction
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::Threshold::Direction]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Threshold::Direction]
           #     The direction for the current threshold. Direction is not allowed in a
           #     XyChart.
           class Threshold
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # The color suggests an interpretation to the viewer when actual values cross
             # the threshold. Comments on each color provide UX guidance on how users can

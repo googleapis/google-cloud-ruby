@@ -25,23 +25,23 @@ module Google
           # Widget contains a single dashboard component and configuration of how to
           # present the component in the dashboard.
           # @!attribute [rw] title
-          #   @return [String]
+          #   @return [::String]
           #     Optional. The title of the widget.
           # @!attribute [rw] xy_chart
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::XyChart]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::XyChart]
           #     A chart of time series data.
           # @!attribute [rw] scorecard
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::Scorecard]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Scorecard]
           #     A scorecard summarizing time series data.
           # @!attribute [rw] text
-          #   @return [Google::Cloud::Monitoring::Dashboard::V1::Text]
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Text]
           #     A raw string or markdown displaying textual content.
           # @!attribute [rw] blank
-          #   @return [Google::Protobuf::Empty]
+          #   @return [::Google::Protobuf::Empty]
           #     A blank space.
           class Widget
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end
