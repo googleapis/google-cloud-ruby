@@ -23,21 +23,21 @@ module Google
       module V1beta1
         # The ReportPhishing request message.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the project for which the report will be created,
         #     in the format "projects/\\{project_number}".
         # @!attribute [rw] uri
-        #   @return [String]
+        #   @return [::String]
         #     Required. The URI that is being reported for phishing content to be analyzed.
         class ReportPhishingRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The ReportPhishing (empty) response message.
         class ReportPhishingResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
