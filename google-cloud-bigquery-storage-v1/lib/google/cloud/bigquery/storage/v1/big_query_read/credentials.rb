@@ -25,7 +25,7 @@ module Google
         module V1
           module BigQueryRead
             # Credentials for the BigQueryRead API.
-            class Credentials < Google::Auth::Credentials
+            class Credentials < ::Google::Auth::Credentials
               self.scope = [
                 "https://www.googleapis.com/auth/bigquery",
                 "https://www.googleapis.com/auth/bigquery.readonly",

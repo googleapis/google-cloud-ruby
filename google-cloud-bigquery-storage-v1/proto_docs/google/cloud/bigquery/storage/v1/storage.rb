@@ -24,14 +24,14 @@ module Google
         module V1
           # Request message for `CreateReadSession`.
           # @!attribute [rw] parent
-          #   @return [String]
+          #   @return [::String]
           #     Required. The request project that owns the session, in the form of
           #     `projects/{project_id}`.
           # @!attribute [rw] read_session
-          #   @return [Google::Cloud::Bigquery::Storage::V1::ReadSession]
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ReadSession]
           #     Required. Session to be created.
           # @!attribute [rw] max_stream_count
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Max initial number of streams. If unset or zero, the server will
           #     provide a value of streams so as to produce reasonable throughput. Must be
           #     non-negative. The number of streams may be lower than the requested number,
@@ -41,44 +41,44 @@ module Google
           #
           #     Streams must be read starting from offset 0.
           class CreateReadSessionRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Request message for `ReadRows`.
           # @!attribute [rw] read_stream
-          #   @return [String]
+          #   @return [::String]
           #     Required. Stream to read rows from.
           # @!attribute [rw] offset
-          #   @return [Integer]
+          #   @return [::Integer]
           #     The offset requested must be less than the last row read from Read.
           #     Requesting a larger offset is undefined. If not specified, start reading
           #     from offset zero.
           class ReadRowsRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Information on if the current connection is being throttled.
           # @!attribute [rw] throttle_percent
-          #   @return [Integer]
+          #   @return [::Integer]
           #     How much this connection is being throttled. Zero means no throttling,
           #     100 means fully throttled.
           class ThrottleState
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Estimated stream statistics for a given Stream.
           # @!attribute [rw] progress
-          #   @return [Google::Cloud::Bigquery::Storage::V1::StreamStats::Progress]
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::StreamStats::Progress]
           #     Represents the progress of the current stream.
           class StreamStats
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # @!attribute [rw] at_response_start
-            #   @return [Float]
+            #   @return [::Float]
             #     The fraction of rows assigned to the stream that have been processed by
             #     the server so far, not including the rows in the current response
             #     message.
@@ -92,44 +92,44 @@ module Google
             #     previous response may not necessarily be equal to the
             #     `at_response_start` value of the current response.
             # @!attribute [rw] at_response_end
-            #   @return [Float]
+            #   @return [::Float]
             #     Similar to `at_response_start`, except that this value includes the
             #     rows in the current response.
             class Progress
-              include Google::Protobuf::MessageExts
-              extend Google::Protobuf::MessageExts::ClassMethods
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
           # Response from calling `ReadRows` may include row data, progress and
           # throttling information.
           # @!attribute [rw] avro_rows
-          #   @return [Google::Cloud::Bigquery::Storage::V1::AvroRows]
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroRows]
           #     Serialized row data in AVRO format.
           # @!attribute [rw] arrow_record_batch
-          #   @return [Google::Cloud::Bigquery::Storage::V1::ArrowRecordBatch]
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowRecordBatch]
           #     Serialized row data in Arrow RecordBatch format.
           # @!attribute [rw] row_count
-          #   @return [Integer]
+          #   @return [::Integer]
           #     Number of serialized rows in the rows block.
           # @!attribute [rw] stats
-          #   @return [Google::Cloud::Bigquery::Storage::V1::StreamStats]
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::StreamStats]
           #     Statistics for the stream.
           # @!attribute [rw] throttle_state
-          #   @return [Google::Cloud::Bigquery::Storage::V1::ThrottleState]
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ThrottleState]
           #     Throttling state. If unset, the latest response still describes
           #     the current throttling status.
           class ReadRowsResponse
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Request message for `SplitReadStream`.
           # @!attribute [rw] name
-          #   @return [String]
+          #   @return [::String]
           #     Required. Name of the stream to split.
           # @!attribute [rw] fraction
-          #   @return [Float]
+          #   @return [::Float]
           #     A value in the range (0.0, 1.0) that specifies the fractional point at
           #     which the original stream should be split. The actual split point is
           #     evaluated on pre-filtered rows, so if a filter is provided, then there is
@@ -138,23 +138,23 @@ module Google
           #     server-side unit for assigning data is collections of rows, this fraction
           #     will always map to a data storage boundary on the server side.
           class SplitReadStreamRequest
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Response message for `SplitReadStream`.
           # @!attribute [rw] primary_stream
-          #   @return [Google::Cloud::Bigquery::Storage::V1::ReadStream]
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ReadStream]
           #     Primary stream, which contains the beginning portion of
           #     |original_stream|. An empty value indicates that the original stream can no
           #     longer be split.
           # @!attribute [rw] remainder_stream
-          #   @return [Google::Cloud::Bigquery::Storage::V1::ReadStream]
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::ReadStream]
           #     Remainder stream, which contains the tail of |original_stream|. An empty
           #     value indicates that the original stream can no longer be split.
           class SplitReadStreamResponse
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

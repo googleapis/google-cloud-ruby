@@ -41,15 +41,15 @@ module Google
               ##
               # Configure the BigQueryRead Client class.
               #
-              # See {Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client::Configuration}
+              # See {::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client::Configuration}
               # for a description of the configuration fields.
               #
               # ## Example
               #
               # To modify the configuration for all BigQueryRead clients:
               #
-              #     Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.configure do |config|
-              #       config.timeout = 10_000
+              #     ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.configure do |config|
+              #       config.timeout = 10.0
               #     end
               #
               # @yield [config] Configure the Client client.
@@ -105,7 +105,7 @@ module Google
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client::Configuration}
+              # See {::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -126,13 +126,13 @@ module Google
               # To create a new BigQueryRead client with the default
               # configuration:
               #
-              #     client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+              #     client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
               #
               # To create a new BigQueryRead client with a custom
               # configuration:
               #
-              #     client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
-              #       config.timeout = 10_000
+              #     client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
+              #       config.timeout = 10.0
               #     end
               #
               # @yield [config] Configure the BigQueryRead client.
@@ -159,8 +159,8 @@ module Google
                 end
                 @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-                @big_query_read_stub = Gapic::ServiceStub.new(
-                  Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Stub,
+                @big_query_read_stub = ::Gapic::ServiceStub.new(
+                  ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Stub,
                   credentials:  credentials,
                   endpoint:     @config.endpoint,
                   channel_args: @config.channel_args,
@@ -193,12 +193,12 @@ module Google
               #
               # @overload create_read_session(request, options = nil)
               #   Pass arguments to `create_read_session` via a request object, either of type
-              #   {Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest} or an equivalent Hash.
               #
-              #   @param request [Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest, Hash]
+              #   @param request [::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [Gapic::CallOptions, Hash]
+              #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
               # @overload create_read_session(parent: nil, read_session: nil, max_stream_count: nil)
@@ -206,12 +206,12 @@ module Google
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param parent [String]
+              #   @param parent [::String]
               #     Required. The request project that owns the session, in the form of
               #     `projects/{project_id}`.
-              #   @param read_session [Google::Cloud::Bigquery::Storage::V1::ReadSession, Hash]
+              #   @param read_session [::Google::Cloud::Bigquery::Storage::V1::ReadSession, ::Hash]
               #     Required. Session to be created.
-              #   @param max_stream_count [Integer]
+              #   @param max_stream_count [::Integer]
               #     Max initial number of streams. If unset or zero, the server will
               #     provide a value of streams so as to produce reasonable throughput. Must be
               #     non-negative. The number of streams may be lower than the requested number,
@@ -222,26 +222,26 @@ module Google
               #     Streams must be read starting from offset 0.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [Google::Cloud::Bigquery::Storage::V1::ReadSession]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @yieldparam response [::Google::Cloud::Bigquery::Storage::V1::ReadSession]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [Google::Cloud::Bigquery::Storage::V1::ReadSession]
+              # @return [::Google::Cloud::Bigquery::Storage::V1::ReadSession]
               #
-              # @raise [Google::Cloud::Error] if the RPC is aborted.
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
               def create_read_session request, options = nil
-                raise ArgumentError, "request must be provided" if request.nil?
+                raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = Gapic::Protobuf.coerce request, to: Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.create_read_session.metadata.to_h
 
                 # Set x-goog-api-client and x-goog-user-project headers
-                metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::Storage::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -262,8 +262,8 @@ module Google
                   yield response, operation if block_given?
                   return response
                 end
-              rescue GRPC::BadStatus => e
-                raise Google::Cloud::Error.from_error(e)
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -277,12 +277,12 @@ module Google
               #
               # @overload read_rows(request, options = nil)
               #   Pass arguments to `read_rows` via a request object, either of type
-              #   {Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest} or an equivalent Hash.
               #
-              #   @param request [Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest, Hash]
+              #   @param request [::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [Gapic::CallOptions, Hash]
+              #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
               # @overload read_rows(read_stream: nil, offset: nil)
@@ -290,34 +290,34 @@ module Google
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param read_stream [String]
+              #   @param read_stream [::String]
               #     Required. Stream to read rows from.
-              #   @param offset [Integer]
+              #   @param offset [::Integer]
               #     The offset requested must be less than the last row read from Read.
               #     Requesting a larger offset is undefined. If not specified, start reading
               #     from offset zero.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [Enumerable<Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse>]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @yieldparam response [::Enumerable<::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [Enumerable<Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse>]
+              # @return [::Enumerable<::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse>]
               #
-              # @raise [Google::Cloud::Error] if the RPC is aborted.
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
               def read_rows request, options = nil
-                raise ArgumentError, "request must be provided" if request.nil?
+                raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = Gapic::Protobuf.coerce request, to: Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.read_rows.metadata.to_h
 
                 # Set x-goog-api-client and x-goog-user-project headers
-                metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::Storage::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -338,8 +338,8 @@ module Google
                   yield response, operation if block_given?
                   return response
                 end
-              rescue GRPC::BadStatus => e
-                raise Google::Cloud::Error.from_error(e)
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -358,12 +358,12 @@ module Google
               #
               # @overload split_read_stream(request, options = nil)
               #   Pass arguments to `split_read_stream` via a request object, either of type
-              #   {Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest} or an equivalent Hash.
               #
-              #   @param request [Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest, Hash]
+              #   @param request [::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [Gapic::CallOptions, Hash]
+              #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
               # @overload split_read_stream(name: nil, fraction: nil)
@@ -371,9 +371,9 @@ module Google
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param name [String]
+              #   @param name [::String]
               #     Required. Name of the stream to split.
-              #   @param fraction [Float]
+              #   @param fraction [::Float]
               #     A value in the range (0.0, 1.0) that specifies the fractional point at
               #     which the original stream should be split. The actual split point is
               #     evaluated on pre-filtered rows, so if a filter is provided, then there is
@@ -383,26 +383,26 @@ module Google
               #     will always map to a data storage boundary on the server side.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [Google::Cloud::Bigquery::Storage::V1::SplitReadStreamResponse]
-              # @yieldparam operation [GRPC::ActiveCall::Operation]
+              # @yieldparam response [::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamResponse]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [Google::Cloud::Bigquery::Storage::V1::SplitReadStreamResponse]
+              # @return [::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamResponse]
               #
-              # @raise [Google::Cloud::Error] if the RPC is aborted.
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
               def split_read_stream request, options = nil
-                raise ArgumentError, "request must be provided" if request.nil?
+                raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = Gapic::Protobuf.coerce request, to: Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest
 
                 # Converts hash and nil to an options object
-                options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
                 metadata = @config.rpcs.split_read_stream.metadata.to_h
 
                 # Set x-goog-api-client and x-goog-user-project headers
-                metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
                   gapic_version: ::Google::Cloud::Bigquery::Storage::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -423,8 +423,8 @@ module Google
                   yield response, operation if block_given?
                   return response
                 end
-              rescue GRPC::BadStatus => e
-                raise Google::Cloud::Error.from_error(e)
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -434,7 +434,7 @@ module Google
               # providing control over timeouts, retry behavior, logging, transport
               # parameters, and other low-level controls. Certain parameters can also be
               # applied individually to specific RPCs. See
-              # {Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client::Configuration::Rpcs}
+              # {::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client::Configuration::Rpcs}
               # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -445,22 +445,22 @@ module Google
               # To modify the global config, setting the timeout for create_read_session
               # to 20 seconds, and all remaining timeouts to 10 seconds:
               #
-              #     Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.configure do |config|
-              #       config.timeout = 10_000
-              #       config.rpcs.create_read_session.timeout = 20_000
+              #     ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.configure do |config|
+              #       config.timeout = 10.0
+              #       config.rpcs.create_read_session.timeout = 20.0
               #     end
               #
               # To apply the above configuration only to a new client:
               #
-              #     client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
-              #       config.timeout = 10_000
-              #       config.rpcs.create_read_session.timeout = 20_000
+              #     client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
+              #       config.timeout = 10.0
+              #       config.rpcs.create_read_session.timeout = 20.0
               #     end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
               #   Defaults to `"bigquerystorage.googleapis.com"`.
-              #   @return [String]
+              #   @return [::String]
               # @!attribute [rw] credentials
               #   Credentials to send with calls. You may provide any of the following types:
               #    *  (`String`) The path to a service account key file in JSON format
@@ -472,29 +472,29 @@ module Google
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
-              #   @return [Object]
+              #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes
-              #   @return [Array<String>]
+              #   @return [::Array<::String>]
               # @!attribute [rw] lib_name
               #   The library name as recorded in instrumentation and logging
-              #   @return [String]
+              #   @return [::String]
               # @!attribute [rw] lib_version
               #   The library version as recorded in instrumentation and logging
-              #   @return [String]
+              #   @return [::String]
               # @!attribute [rw] channel_args
               #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
               #   `GRPC::Core::Channel` object is provided as the credential.
-              #   @return [Hash]
+              #   @return [::Hash]
               # @!attribute [rw] interceptors
               #   An array of interceptors that are run before calls are executed.
-              #   @return [Array<GRPC::ClientInterceptor>]
+              #   @return [::Array<::GRPC::ClientInterceptor>]
               # @!attribute [rw] timeout
-              #   The call timeout in milliseconds.
-              #   @return [Numeric]
+              #   The call timeout in seconds.
+              #   @return [::Numeric]
               # @!attribute [rw] metadata
               #   Additional gRPC headers to be sent with the call.
-              #   @return [Hash{Symbol=>String}]
+              #   @return [::Hash{::Symbol=>::String}]
               # @!attribute [rw] retry_policy
               #   The retry policy. The value is a hash with the following keys:
               #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -502,10 +502,10 @@ module Google
               #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
               #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
               #       trigger a retry.
-              #   @return [Hash]
+              #   @return [::Hash]
               #
               class Configuration
-                extend Gapic::Config
+                extend ::Gapic::Config
 
                 config_attr :endpoint,     "bigquerystorage.googleapis.com", String
                 config_attr :credentials,  nil do |value|
@@ -513,14 +513,14 @@ module Google
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                   allowed.any? { |klass| klass === value }
                 end
-                config_attr :scope,        nil, String, Array, nil
-                config_attr :lib_name,     nil, String, nil
-                config_attr :lib_version,  nil, String, nil
-                config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-                config_attr :interceptors, nil, Array, nil
-                config_attr :timeout,      nil, Numeric, nil
-                config_attr :metadata,     nil, Hash, nil
-                config_attr :retry_policy, nil, Hash, Proc, nil
+                config_attr :scope,        nil, ::String, ::Array, nil
+                config_attr :lib_name,     nil, ::String, nil
+                config_attr :lib_version,  nil, ::String, nil
+                config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+                config_attr :interceptors, nil, ::Array, nil
+                config_attr :timeout,      nil, ::Numeric, nil
+                config_attr :metadata,     nil, ::Hash, nil
+                config_attr :retry_policy, nil, ::Hash, Proc, nil
 
                 # @private
                 def initialize parent_config = nil
@@ -561,28 +561,28 @@ module Google
                 class Rpcs
                   ##
                   # RPC-specific configuration for `create_read_session`
-                  # @return [Gapic::Config::Method]
+                  # @return [::Gapic::Config::Method]
                   #
                   attr_reader :create_read_session
                   ##
                   # RPC-specific configuration for `read_rows`
-                  # @return [Gapic::Config::Method]
+                  # @return [::Gapic::Config::Method]
                   #
                   attr_reader :read_rows
                   ##
                   # RPC-specific configuration for `split_read_stream`
-                  # @return [Gapic::Config::Method]
+                  # @return [::Gapic::Config::Method]
                   #
                   attr_reader :split_read_stream
 
                   # @private
                   def initialize parent_rpcs = nil
                     create_read_session_config = parent_rpcs&.create_read_session if parent_rpcs&.respond_to? :create_read_session
-                    @create_read_session = Gapic::Config::Method.new create_read_session_config
+                    @create_read_session = ::Gapic::Config::Method.new create_read_session_config
                     read_rows_config = parent_rpcs&.read_rows if parent_rpcs&.respond_to? :read_rows
-                    @read_rows = Gapic::Config::Method.new read_rows_config
+                    @read_rows = ::Gapic::Config::Method.new read_rows_config
                     split_read_stream_config = parent_rpcs&.split_read_stream if parent_rpcs&.respond_to? :split_read_stream
-                    @split_read_stream = Gapic::Config::Method.new split_read_stream_config
+                    @split_read_stream = ::Gapic::Config::Method.new split_read_stream_config
 
                     yield self if block_given?
                   end

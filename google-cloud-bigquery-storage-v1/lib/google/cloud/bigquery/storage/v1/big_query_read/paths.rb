@@ -34,7 +34,7 @@ module Google
               #
               # @param project [String]
               #
-              # @return [String]
+              # @return [::String]
               def project_path project:
                 "projects/#{project}"
               end
@@ -50,10 +50,10 @@ module Google
               # @param location [String]
               # @param session [String]
               #
-              # @return [String]
+              # @return [::String]
               def read_session_path project:, location:, session:
-                raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                 "projects/#{project}/locations/#{location}/sessions/#{session}"
               end
@@ -70,11 +70,11 @@ module Google
               # @param session [String]
               # @param stream [String]
               #
-              # @return [String]
+              # @return [::String]
               def read_stream_path project:, location:, session:, stream:
-                raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-                raise ArgumentError, "session cannot contain /" if session.to_s.include? "/"
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "session cannot contain /" if session.to_s.include? "/"
 
                 "projects/#{project}/locations/#{location}/sessions/#{session}/streams/#{stream}"
               end
@@ -90,10 +90,10 @@ module Google
               # @param dataset [String]
               # @param table [String]
               #
-              # @return [String]
+              # @return [::String]
               def table_path project:, dataset:, table:
-                raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                raise ArgumentError, "dataset cannot contain /" if dataset.to_s.include? "/"
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "dataset cannot contain /" if dataset.to_s.include? "/"
 
                 "projects/#{project}/datasets/#{dataset}/tables/#{table}"
               end

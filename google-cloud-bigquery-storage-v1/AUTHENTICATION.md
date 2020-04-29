@@ -27,7 +27,7 @@ export BIGQUERY_STORAGE_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/bigquery/storage/v1"
 
-client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-bigquery-storage-v1
 checks for credentials are configured on the service Credentials class (such as
-{Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Credentials}):
+{::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Credentials}):
 
 1. `BIGQUERY_STORAGE_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `BIGQUERY_STORAGE_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/bigquery/storage/v1"
 
 ENV["BIGQUERY_STORAGE_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/bigquery/storage/v1"
 
-client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
+client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/bigquery/storage/v1"
 
-Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.configure do |config|
+::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
 ```
 
 ### Cloud SDK
