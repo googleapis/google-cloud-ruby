@@ -39,7 +39,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/os_login/v1/os_login_service"
-        #     client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+        #     client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new
         #
         module OsLoginService
         end

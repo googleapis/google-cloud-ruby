@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/os_login/v1"
 
-client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new
 request = my_create_request
 response = client.delete_posix_account request
 ```
