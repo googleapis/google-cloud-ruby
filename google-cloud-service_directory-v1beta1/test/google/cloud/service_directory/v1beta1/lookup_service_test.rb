@@ -23,7 +23,7 @@ require "google/cloud/servicedirectory/v1beta1/lookup_service_pb"
 require "google/cloud/servicedirectory/v1beta1/lookup_service_services_pb"
 require "google/cloud/service_directory/v1beta1/lookup_service"
 
-class Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Minitest::Test
+class ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Mini
 
   def test_resolve_service
     # Create GRPC objects.
-    grpc_response = Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse.new
+    grpc_response = ::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -60,7 +60,7 @@ class Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Mini
 
     resolve_service_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :resolve_service, name
-      assert_kind_of Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest, request
+      assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest, request
       assert_equal "hello world", request.name
       assert_equal 42, request.max_endpoints
       assert_equal "hello world", request.endpoint_filter
@@ -69,7 +69,7 @@ class Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Mini
 
     Gapic::ServiceStub.stub :new, resolve_service_client_stub do
       # Create client
-      client = Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new do |config|
+      client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -86,7 +86,7 @@ class Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Mini
       end
 
       # Use protobuf object
-      client.resolve_service Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new(name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter) do |response, operation|
+      client.resolve_service ::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new(name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -98,7 +98,7 @@ class Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Mini
       end
 
       # Use protobuf object with options
-      client.resolve_service Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new(name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter), grpc_options do |response, operation|
+      client.resolve_service ::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new(name: name, max_endpoints: max_endpoints, endpoint_filter: endpoint_filter), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -113,7 +113,7 @@ class Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Mini
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new do |config|
+      client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -123,6 +123,6 @@ class Google::Cloud::ServiceDirectory::V1beta1::LookupService::ClientTest < Mini
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client::Configuration, config
   end
 end

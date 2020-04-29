@@ -21,29 +21,29 @@ module Google
   module Cloud
     module ServiceDirectory
       module V1beta1
-        # A container for {Google::Cloud::ServiceDirectory::V1beta1::Service services}.
+        # A container for {::Google::Cloud::ServiceDirectory::V1beta1::Service services}.
         # Namespaces allow administrators to group services together and define
         # permissions for a collection of services.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Immutable. The resource name for the namespace in the format
         #     'projects/*/locations/*/namespaces/*'.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Resource labels associated with this Namespace.
         #     No more than 64 user labels can be associated with a given resource.  Label
         #     keys and values can be no longer than 63 characters.
         class Namespace
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

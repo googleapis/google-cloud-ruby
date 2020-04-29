@@ -35,22 +35,22 @@ module Google
         # resource model:
         #
         # - The API has a collection of
-        # {Google::Cloud::ServiceDirectory::V1beta1::Namespace Namespace}
+        # {::Google::Cloud::ServiceDirectory::V1beta1::Namespace Namespace}
         # resources, named `projects/*/locations/*/namespaces/*`.
         #
         # - Each Namespace has a collection of
-        # {Google::Cloud::ServiceDirectory::V1beta1::Service Service} resources, named
+        # {::Google::Cloud::ServiceDirectory::V1beta1::Service Service} resources, named
         # `projects/*/locations/*/namespaces/*/services/*`.
         #
         # - Each Service has a collection of
-        # {Google::Cloud::ServiceDirectory::V1beta1::Endpoint Endpoint}
+        # {::Google::Cloud::ServiceDirectory::V1beta1::Endpoint Endpoint}
         # resources, named
         # `projects/*/locations/*/namespaces/*/services/*/endpoints/*`.
         #
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/service_directory/v1beta1/registration_service"
-        #     client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
+        #     client = ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
         #
         module RegistrationService
         end

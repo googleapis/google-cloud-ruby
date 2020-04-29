@@ -37,12 +37,12 @@ module Google
             # @param service [String]
             # @param endpoint [String]
             #
-            # @return [String]
+            # @return [::String]
             def endpoint_path project:, location:, namespace:, service:, endpoint:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "namespace cannot contain /" if namespace.to_s.include? "/"
-              raise ArgumentError, "service cannot contain /" if service.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "namespace cannot contain /" if namespace.to_s.include? "/"
+              raise ::ArgumentError, "service cannot contain /" if service.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/namespaces/#{namespace}/services/#{service}/endpoints/#{endpoint}"
             end
@@ -57,9 +57,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
@@ -75,10 +75,10 @@ module Google
             # @param location [String]
             # @param namespace [String]
             #
-            # @return [String]
+            # @return [::String]
             def namespace_path project:, location:, namespace:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/namespaces/#{namespace}"
             end
@@ -95,11 +95,11 @@ module Google
             # @param namespace [String]
             # @param service [String]
             #
-            # @return [String]
+            # @return [::String]
             def service_path project:, location:, namespace:, service:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "namespace cannot contain /" if namespace.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "namespace cannot contain /" if namespace.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/namespaces/#{namespace}/services/#{service}"
             end

@@ -21,18 +21,18 @@ module Google
   module Cloud
     module ServiceDirectory
       module V1beta1
-        # The request message for {Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client#resolve_service LookupService.ResolveService}.
+        # The request message for {::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client#resolve_service LookupService.ResolveService}.
         # Looks up a service by its name, returns the service and its endpoints.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the service to resolve.
         # @!attribute [rw] max_endpoints
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of endpoints to return. Defaults to 25. Maximum is 100.
         #     If a value less than one is specified, the Default is used.
         #     If a value greater than the Maximum is specified, the Maximum is used.
         # @!attribute [rw] endpoint_filter
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The filter applied to the endpoints of the resolved service.
         #
         #     General filter string syntax:
@@ -52,16 +52,16 @@ module Google
         #       Endpoints that have "owner" field in metadata with a value that is not
         #       "sd" AND have the key/value foo=bar.
         class ResolveServiceRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client#resolve_service LookupService.ResolveService}.
+        # The response message for {::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client#resolve_service LookupService.ResolveService}.
         # @!attribute [rw] service
-        #   @return [Google::Cloud::ServiceDirectory::V1beta1::Service]
+        #   @return [::Google::Cloud::ServiceDirectory::V1beta1::Service]
         class ResolveServiceResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
