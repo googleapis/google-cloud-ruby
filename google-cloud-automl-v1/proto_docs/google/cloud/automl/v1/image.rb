@@ -23,29 +23,29 @@ module Google
       module V1
         # Dataset metadata that is specific to image classification.
         # @!attribute [rw] classification_type
-        #   @return [Google::Cloud::AutoML::V1::ClassificationType]
+        #   @return [::Google::Cloud::AutoML::V1::ClassificationType]
         #     Required. Type of the classification problem.
         class ImageClassificationDatasetMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Dataset metadata specific to image object detection.
         class ImageObjectDetectionDatasetMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Model metadata for image classification.
         # @!attribute [rw] base_model_id
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The ID of the `base` model. If it is specified, the new model
         #     will be created based on the `base` model. Otherwise, the new model will be
         #     created from scratch. The `base` model must be in the same
         #     `project` and `location` as the new model to create, and have the same
         #     `model_type`.
         # @!attribute [rw] train_budget_milli_node_hours
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The train budget of creating this model, expressed in milli node
         #     hours i.e. 1,000 value in this field means 1 node hour. The actual
         #     `train_cost` will be equal or less than this value. If further model
@@ -61,66 +61,66 @@ module Google
         #     and 100,000 milli node hours, inclusive. The default value is 24, 000 which
         #     represents one day in wall time.
         # @!attribute [rw] train_cost_milli_node_hours
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The actual train cost of creating this model, expressed in
         #     milli node hours, i.e. 1,000 value in this field means 1 node hour.
         #     Guaranteed to not exceed the train budget.
         # @!attribute [rw] stop_reason
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The reason that this create model operation stopped,
         #     e.g. `BUDGET_REACHED`, `MODEL_CONVERGED`.
         # @!attribute [rw] model_type
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Type of the model. The available values are:
         #     *   `cloud` - Model to be used via prediction calls to AutoML API.
         #                   This is the default value.
         #     *   `mobile-low-latency-1` - A model that, in addition to providing
         #                   prediction via AutoML API, can also be exported (see
-        #                   {Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
+        #                   {::Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
         #                   with TensorFlow afterwards. Expected to have low latency, but
         #                   may have lower prediction quality than other models.
         #     *   `mobile-versatile-1` - A model that, in addition to providing
         #                   prediction via AutoML API, can also be exported (see
-        #                   {Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
+        #                   {::Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
         #                   with TensorFlow afterwards.
         #     *   `mobile-high-accuracy-1` - A model that, in addition to providing
         #                   prediction via AutoML API, can also be exported (see
-        #                   {Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
+        #                   {::Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
         #                   with TensorFlow afterwards.  Expected to have a higher
         #                   latency, but should also have a higher prediction quality
         #                   than other models.
         #     *   `mobile-core-ml-low-latency-1` - A model that, in addition to providing
         #                   prediction via AutoML API, can also be exported (see
-        #                   {Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile device with Core
+        #                   {::Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile device with Core
         #                   ML afterwards. Expected to have low latency, but may have
         #                   lower prediction quality than other models.
         #     *   `mobile-core-ml-versatile-1` - A model that, in addition to providing
         #                   prediction via AutoML API, can also be exported (see
-        #                   {Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile device with Core
+        #                   {::Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile device with Core
         #                   ML afterwards.
         #     *   `mobile-core-ml-high-accuracy-1` - A model that, in addition to
         #                   providing prediction via AutoML API, can also be exported
-        #                   (see {Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile device with
+        #                   (see {::Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile device with
         #                   Core ML afterwards.  Expected to have a higher latency, but
         #                   should also have a higher prediction quality than other
         #                   models.
         # @!attribute [rw] node_qps
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. An approximate number of online prediction QPS that can
         #     be supported by this model per each node on which it is deployed.
         # @!attribute [rw] node_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of nodes this model is deployed on. A node is an
         #     abstraction of a machine resource, which can handle online prediction QPS
         #     as given in the node_qps field.
         class ImageClassificationModelMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Model metadata specific to image object detection.
         # @!attribute [rw] model_type
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Type of the model. The available values are:
         #     *   `cloud-high-accuracy-1` - (default) A model to be used via prediction
         #                   calls to AutoML API. Expected to have a higher latency, but
@@ -131,34 +131,34 @@ module Google
         #                   have lower prediction quality than other models.
         #     *   `mobile-low-latency-1` - A model that, in addition to providing
         #                   prediction via AutoML API, can also be exported (see
-        #                   {Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
+        #                   {::Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
         #                   with TensorFlow afterwards. Expected to have low latency, but
         #                   may have lower prediction quality than other models.
         #     *   `mobile-versatile-1` - A model that, in addition to providing
         #                   prediction via AutoML API, can also be exported (see
-        #                   {Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
+        #                   {::Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
         #                   with TensorFlow afterwards.
         #     *   `mobile-high-accuracy-1` - A model that, in addition to providing
         #                   prediction via AutoML API, can also be exported (see
-        #                   {Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
+        #                   {::Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}) and used on a mobile or edge device
         #                   with TensorFlow afterwards.  Expected to have a higher
         #                   latency, but should also have a higher prediction quality
         #                   than other models.
         # @!attribute [rw] node_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of nodes this model is deployed on. A node is an
         #     abstraction of a machine resource, which can handle online prediction QPS
         #     as given in the qps_per_node field.
         # @!attribute [rw] node_qps
-        #   @return [Float]
+        #   @return [::Float]
         #     Output only. An approximate number of online prediction QPS that can
         #     be supported by this model per each node on which it is deployed.
         # @!attribute [rw] stop_reason
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The reason that this create model operation stopped,
         #     e.g. `BUDGET_REACHED`, `MODEL_CONVERGED`.
         # @!attribute [rw] train_budget_milli_node_hours
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The train budget of creating this model, expressed in milli node
         #     hours i.e. 1,000 value in this field means 1 node hour. The actual
         #     `train_cost` will be equal or less than this value. If further model
@@ -175,32 +175,32 @@ module Google
         #     budget must be between 1,000 and 100,000 milli node hours, inclusive.
         #     The default value is 24, 000 which represents one day in wall time.
         # @!attribute [rw] train_cost_milli_node_hours
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The actual train cost of creating this model, expressed in
         #     milli node hours, i.e. 1,000 value in this field means 1 node hour.
         #     Guaranteed to not exceed the train budget.
         class ImageObjectDetectionModelMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Model deployment metadata specific to Image Classification.
         # @!attribute [rw] node_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Input only. The number of nodes to deploy the model on. A node is an
         #     abstraction of a machine resource, which can handle online prediction QPS
         #     as given in the model's
         #
-        #     {Google::Cloud::AutoML::V1::ImageClassificationModelMetadata#node_qps node_qps}.
+        #     {::Google::Cloud::AutoML::V1::ImageClassificationModelMetadata#node_qps node_qps}.
         #     Must be between 1 and 100, inclusive on both ends.
         class ImageClassificationModelDeploymentMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Model deployment metadata specific to Image Object Detection.
         # @!attribute [rw] node_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Input only. The number of nodes to deploy the model on. A node is an
         #     abstraction of a machine resource, which can handle online prediction QPS
         #     as given in the model's
@@ -208,8 +208,8 @@ module Google
         #     [qps_per_node][google.cloud.automl.v1.ImageObjectDetectionModelMetadata.qps_per_node].
         #     Must be between 1 and 100, inclusive on both ends.
         class ImageObjectDetectionModelDeploymentMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

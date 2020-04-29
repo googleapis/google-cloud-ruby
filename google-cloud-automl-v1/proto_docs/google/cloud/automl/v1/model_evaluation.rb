@@ -23,31 +23,31 @@ module Google
       module V1
         # Evaluation results of a model.
         # @!attribute [rw] classification_evaluation_metrics
-        #   @return [Google::Cloud::AutoML::V1::ClassificationEvaluationMetrics]
+        #   @return [::Google::Cloud::AutoML::V1::ClassificationEvaluationMetrics]
         #     Model evaluation metrics for image, text, video and tables
         #     classification.
         #     Tables problem is considered a classification when the target column
         #     is CATEGORY DataType.
         # @!attribute [rw] translation_evaluation_metrics
-        #   @return [Google::Cloud::AutoML::V1::TranslationEvaluationMetrics]
+        #   @return [::Google::Cloud::AutoML::V1::TranslationEvaluationMetrics]
         #     Model evaluation metrics for translation.
         # @!attribute [rw] image_object_detection_evaluation_metrics
-        #   @return [Google::Cloud::AutoML::V1::ImageObjectDetectionEvaluationMetrics]
+        #   @return [::Google::Cloud::AutoML::V1::ImageObjectDetectionEvaluationMetrics]
         #     Model evaluation metrics for image object detection.
         # @!attribute [rw] text_sentiment_evaluation_metrics
-        #   @return [Google::Cloud::AutoML::V1::TextSentimentEvaluationMetrics]
+        #   @return [::Google::Cloud::AutoML::V1::TextSentimentEvaluationMetrics]
         #     Evaluation metrics for text sentiment models.
         # @!attribute [rw] text_extraction_evaluation_metrics
-        #   @return [Google::Cloud::AutoML::V1::TextExtractionEvaluationMetrics]
+        #   @return [::Google::Cloud::AutoML::V1::TextExtractionEvaluationMetrics]
         #     Evaluation metrics for text extraction models.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Resource name of the model evaluation.
         #     Format:
         #
         #     `projects/{project_id}/locations/{location_id}/models/{model_id}/modelEvaluations/{model_evaluation_id}`
         # @!attribute [rw] annotation_spec_id
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The ID of the annotation spec that the model evaluation applies to. The
         #     The ID is empty for the overall model evaluation.
         #     For Tables annotation specs in the dataset do not exist and this ID is
@@ -55,12 +55,12 @@ module Google
         #
         #     [prediction_type-s][google.cloud.automl.v1.TablesModelMetadata.prediction_type]
         #     the
-        #     {Google::Cloud::AutoML::V1::ModelEvaluation#display_name display_name}
+        #     {::Google::Cloud::AutoML::V1::ModelEvaluation#display_name display_name}
         #     field is used.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The value of
-        #     {Google::Cloud::AutoML::V1::AnnotationSpec#display_name display_name}
+        #     {::Google::Cloud::AutoML::V1::AnnotationSpec#display_name display_name}
         #     at the moment when the model was trained. Because this field returns a
         #     value at model training time, for different models trained from the same
         #     dataset, the values may differ, since display names could had been changed
@@ -71,10 +71,10 @@ module Google
         #     are populated here.
         #     The display_name is empty for the overall model evaluation.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when this model evaluation was created.
         # @!attribute [rw] evaluated_example_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of examples used for model evaluation, i.e. for
         #     which ground truth from time of model creation is compared against the
         #     predicted annotations created by the model.
@@ -83,10 +83,10 @@ module Google
         #     Otherwise, this is the count of examples that according to the ground
         #     truth were annotated by the
         #
-        #     {Google::Cloud::AutoML::V1::ModelEvaluation#annotation_spec_id annotation_spec_id}.
+        #     {::Google::Cloud::AutoML::V1::ModelEvaluation#annotation_spec_id annotation_spec_id}.
         class ModelEvaluation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

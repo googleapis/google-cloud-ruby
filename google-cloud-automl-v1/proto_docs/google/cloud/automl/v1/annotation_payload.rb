@@ -23,36 +23,36 @@ module Google
       module V1
         # Contains annotation information that is relevant to AutoML.
         # @!attribute [rw] translation
-        #   @return [Google::Cloud::AutoML::V1::TranslationAnnotation]
+        #   @return [::Google::Cloud::AutoML::V1::TranslationAnnotation]
         #     Annotation details for translation.
         # @!attribute [rw] classification
-        #   @return [Google::Cloud::AutoML::V1::ClassificationAnnotation]
+        #   @return [::Google::Cloud::AutoML::V1::ClassificationAnnotation]
         #     Annotation details for content or image classification.
         # @!attribute [rw] image_object_detection
-        #   @return [Google::Cloud::AutoML::V1::ImageObjectDetectionAnnotation]
+        #   @return [::Google::Cloud::AutoML::V1::ImageObjectDetectionAnnotation]
         #     Annotation details for image object detection.
         # @!attribute [rw] text_extraction
-        #   @return [Google::Cloud::AutoML::V1::TextExtractionAnnotation]
+        #   @return [::Google::Cloud::AutoML::V1::TextExtractionAnnotation]
         #     Annotation details for text extraction.
         # @!attribute [rw] text_sentiment
-        #   @return [Google::Cloud::AutoML::V1::TextSentimentAnnotation]
+        #   @return [::Google::Cloud::AutoML::V1::TextSentimentAnnotation]
         #     Annotation details for text sentiment.
         # @!attribute [rw] annotation_spec_id
-        #   @return [String]
+        #   @return [::String]
         #     Output only . The resource ID of the annotation spec that
         #     this annotation pertains to. The annotation spec comes from either an
         #     ancestor dataset, or the dataset that was used to train the model in use.
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The value of
-        #     {Google::Cloud::AutoML::V1::AnnotationSpec#display_name display_name}
+        #     {::Google::Cloud::AutoML::V1::AnnotationSpec#display_name display_name}
         #     when the model was trained. Because this field returns a value at model
         #     training time, for different models trained using the same dataset, the
         #     returned value could be different as model owner could update the
         #     `display_name` between any two model training.
         class AnnotationPayload
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

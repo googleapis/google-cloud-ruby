@@ -21,11 +21,11 @@ module Google
   module Cloud
     module AutoML
       module V1
-        # Input configuration for {Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData} action.
+        # Input configuration for {::Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData} action.
         #
         # The format of input depends on dataset_metadata the Dataset into which
         # the import is happening has. As input source the
-        # {Google::Cloud::AutoML::V1::InputConfig#gcs_source gcs_source}
+        # {::Google::Cloud::AutoML::V1::InputConfig#gcs_source gcs_source}
         # is expected, unless specified otherwise. Additionally any input .CSV file
         # by itself must be 100MB or smaller, unless specified otherwise.
         # If an "example" file (that is, image, video etc.) with identical content
@@ -259,8 +259,8 @@ module Google
         # **In-line JSONL files**
         #
         # In-line .JSONL files contain, per line, a JSON document that wraps a
-        # {Google::Cloud::AutoML::V1::TextSnippet `text_snippet`} field followed by
-        # one or more {Google::Cloud::AutoML::V1::AnnotationPayload `annotations`}
+        # {::Google::Cloud::AutoML::V1::TextSnippet `text_snippet`} field followed by
+        # one or more {::Google::Cloud::AutoML::V1::AnnotationPayload `annotations`}
         # fields, which have `display_name` and `text_extraction` fields to describe
         # the entity from the text snippet. Multiple JSON documents can be separated
         # using line breaks (\n).
@@ -523,7 +523,7 @@ module Google
         # information.
         #
         # You can use either
-        # {Google::Cloud::AutoML::V1::InputConfig#gcs_source gcs_source} or
+        # {::Google::Cloud::AutoML::V1::InputConfig#gcs_source gcs_source} or
         # [bigquery_source][google.cloud.automl.v1.InputConfig.bigquery_source].
         # All input is concatenated into a
         # single
@@ -636,12 +636,12 @@ module Google
         #  failures, up to a certain count cap, is listed in
         #  Operation.metadata.partial_failures.
         # @!attribute [rw] gcs_source
-        #   @return [Google::Cloud::AutoML::V1::GcsSource]
+        #   @return [::Google::Cloud::AutoML::V1::GcsSource]
         #     The Google Cloud Storage location for the input content.
-        #     For {Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData}, `gcs_source` points to a CSV file with
-        #     a structure described in {Google::Cloud::AutoML::V1::InputConfig InputConfig}.
+        #     For {::Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData}, `gcs_source` points to a CSV file with
+        #     a structure described in {::Google::Cloud::AutoML::V1::InputConfig InputConfig}.
         # @!attribute [rw] params
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Additional domain-specific parameters describing the semantic of the
         #     imported data, any string must be up to 25000
         #     characters long.
@@ -654,16 +654,16 @@ module Google
         #       algorithm to use for the initial inference of the
         #       column data types of the imported table. Allowed values: "1".
         class InputConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ParamsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -671,7 +671,7 @@ module Google
         #
         # The format of input depends on the ML problem of the model used for
         # prediction. As input source the
-        # {Google::Cloud::AutoML::V1::InputConfig#gcs_source gcs_source}
+        # {::Google::Cloud::AutoML::V1::InputConfig#gcs_source gcs_source}
         # is expected, unless specified otherwise.
         #
         # The formats are represented in EBNF with commas being literal and with
@@ -869,7 +869,7 @@ module Google
         # information.
         #
         # You can use either
-        # {Google::Cloud::AutoML::V1::BatchPredictInputConfig#gcs_source gcs_source}
+        # {::Google::Cloud::AutoML::V1::BatchPredictInputConfig#gcs_source gcs_source}
         # or
         # [bigquery_source][BatchPredictInputConfig.bigquery_source].
         #
@@ -946,16 +946,16 @@ module Google
         #  per-row failures, up to a certain count cap, will be listed in
         #  Operation.metadata.partial_failures.
         # @!attribute [rw] gcs_source
-        #   @return [Google::Cloud::AutoML::V1::GcsSource]
+        #   @return [::Google::Cloud::AutoML::V1::GcsSource]
         #     Required. The Google Cloud Storage location for the input content.
         class BatchPredictInputConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Input configuration of a {Google::Cloud::AutoML::V1::Document Document}.
+        # Input configuration of a {::Google::Cloud::AutoML::V1::Document Document}.
         # @!attribute [rw] gcs_source
-        #   @return [Google::Cloud::AutoML::V1::GcsSource]
+        #   @return [::Google::Cloud::AutoML::V1::GcsSource]
         #     The Google Cloud Storage location of the document file. Only a single path
         #     should be given.
         #
@@ -963,8 +963,8 @@ module Google
         #
         #     Supported extensions: .PDF.
         class DocumentInputConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # *  For Translation:
@@ -999,7 +999,7 @@ module Google
         #           dataset a new table called `primary_table` will be created, and
         #           filled with precisely the same data as this obtained on import.
         # @!attribute [rw] gcs_destination
-        #   @return [Google::Cloud::AutoML::V1::GcsDestination]
+        #   @return [::Google::Cloud::AutoML::V1::GcsDestination]
         #     Required. The Google Cloud Storage location where the output is to be written to.
         #     For Image Object Detection, Text Extraction, Video Classification and
         #     Tables, in the given directory a new directory will be created with name:
@@ -1007,15 +1007,15 @@ module Google
         #     timestamp is in YYYY-MM-DDThh:mm:ss.sssZ ISO-8601 format. All export
         #     output will be written into that directory.
         class OutputConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Output configuration for BatchPredict Action.
         #
         # As destination the
         #
-        # {Google::Cloud::AutoML::V1::BatchPredictOutputConfig#gcs_destination gcs_destination}
+        # {::Google::Cloud::AutoML::V1::BatchPredictOutputConfig#gcs_destination gcs_destination}
         # must be set unless specified otherwise for a domain. If gcs_destination is
         # set then in the given directory a new directory is created. Its name
         # will be
@@ -1294,17 +1294,17 @@ module Google
         # //github.com/googleapis/googleapis/blob/master/google/rpc/status.proto)
         #           represented as a STRUCT, and containing only `code` and `message`.
         # @!attribute [rw] gcs_destination
-        #   @return [Google::Cloud::AutoML::V1::GcsDestination]
+        #   @return [::Google::Cloud::AutoML::V1::GcsDestination]
         #     Required. The Google Cloud Storage location of the directory where the output is to
         #     be written to.
         class BatchPredictOutputConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Output configuration for ModelExport Action.
         # @!attribute [rw] gcs_destination
-        #   @return [Google::Cloud::AutoML::V1::GcsDestination]
+        #   @return [::Google::Cloud::AutoML::V1::GcsDestination]
         #     Required. The Google Cloud Storage location where the model is to be written to.
         #     This location may only be set for the following model formats:
         #       "tflite", "edgetpu_tflite", "tf_saved_model", "tf_js", "core_ml".
@@ -1315,7 +1315,7 @@ module Google
         #      will be created. Inside the model and any of its supporting files
         #      will be written.
         # @!attribute [rw] model_format
-        #   @return [String]
+        #   @return [::String]
         #     The format in which the model must be exported. The available, and default,
         #     formats depend on the problem and model type (if given problem and type
         #     combination doesn't have a format listed, it means its models are not
@@ -1350,7 +1350,7 @@ module Google
         #     //cloud.google.com/vision/automl/docs/containers-gcs-quickstart)
         #     * core_ml - Used for iOS mobile devices.
         # @!attribute [rw] params
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Additional model-type and format specific parameters describing the
         #     requirements for the to be exported model files, any string must be up to
         #     25000 characters long.
@@ -1359,33 +1359,33 @@ module Google
         #         `cpu_architecture` - (string) "x86_64" (default).
         #         `gpu_architecture` - (string) "none" (default), "nvidia".
         class ModelExportOutputConfig
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ParamsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # The Google Cloud Storage location for the input content.
         # @!attribute [rw] input_uris
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Required. Google Cloud Storage URIs to input files, up to 2000
         #     characters long. Accepted forms:
         #     * Full object path, e.g. gs://bucket/directory/object.csv
         class GcsSource
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The Google Cloud Storage location where the output is to be written to.
         # @!attribute [rw] output_uri_prefix
-        #   @return [String]
+        #   @return [::String]
         #     Required. Google Cloud Storage URI to output directory, up to 2000
         #     characters long.
         #     Accepted forms:
@@ -1393,8 +1393,8 @@ module Google
         #     The requesting user must have write permission to the bucket.
         #     The directory is created if it doesn't exist.
         class GcsDestination
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

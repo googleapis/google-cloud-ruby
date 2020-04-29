@@ -24,49 +24,49 @@ module Google
         # A workspace for solving a single, particular machine learning (ML) problem.
         # A workspace contains examples that may be annotated.
         # @!attribute [rw] translation_dataset_metadata
-        #   @return [Google::Cloud::AutoML::V1::TranslationDatasetMetadata]
+        #   @return [::Google::Cloud::AutoML::V1::TranslationDatasetMetadata]
         #     Metadata for a dataset used for translation.
         # @!attribute [rw] image_classification_dataset_metadata
-        #   @return [Google::Cloud::AutoML::V1::ImageClassificationDatasetMetadata]
+        #   @return [::Google::Cloud::AutoML::V1::ImageClassificationDatasetMetadata]
         #     Metadata for a dataset used for image classification.
         # @!attribute [rw] text_classification_dataset_metadata
-        #   @return [Google::Cloud::AutoML::V1::TextClassificationDatasetMetadata]
+        #   @return [::Google::Cloud::AutoML::V1::TextClassificationDatasetMetadata]
         #     Metadata for a dataset used for text classification.
         # @!attribute [rw] image_object_detection_dataset_metadata
-        #   @return [Google::Cloud::AutoML::V1::ImageObjectDetectionDatasetMetadata]
+        #   @return [::Google::Cloud::AutoML::V1::ImageObjectDetectionDatasetMetadata]
         #     Metadata for a dataset used for image object detection.
         # @!attribute [rw] text_extraction_dataset_metadata
-        #   @return [Google::Cloud::AutoML::V1::TextExtractionDatasetMetadata]
+        #   @return [::Google::Cloud::AutoML::V1::TextExtractionDatasetMetadata]
         #     Metadata for a dataset used for text extraction.
         # @!attribute [rw] text_sentiment_dataset_metadata
-        #   @return [Google::Cloud::AutoML::V1::TextSentimentDatasetMetadata]
+        #   @return [::Google::Cloud::AutoML::V1::TextSentimentDatasetMetadata]
         #     Metadata for a dataset used for text sentiment.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The resource name of the dataset.
         #     Form: `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}`
         # @!attribute [rw] display_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the dataset to show in the interface. The name can be
         #     up to 32 characters long and can consist only of ASCII Latin letters A-Z
         #     and a-z, underscores
         #     (_), and ASCII digits 0-9.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     User-provided description of the dataset. The description can be up to
         #     25000 characters long.
         # @!attribute [rw] example_count
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The number of examples in the dataset.
         # @!attribute [rw] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when this dataset was created.
         # @!attribute [rw] etag
-        #   @return [String]
+        #   @return [::String]
         #     Used to perform consistent read-modify-write updates. If not set, a blind
         #     "overwrite" update happens.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels with user-defined metadata to organize your dataset.
         #
         #     Label keys and values can be no longer than 64 characters
@@ -76,16 +76,16 @@ module Google
         #
         #     See https://goo.gl/xmQnxf for more information on and examples of labels.
         class Dataset
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

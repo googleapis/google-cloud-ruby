@@ -27,25 +27,25 @@ module Google
         # have size 10 x 20 then a point with normalized coordinates (0.1, 0.3) would
         # be at the position (1, 6) on that plane.
         # @!attribute [rw] x
-        #   @return [Float]
+        #   @return [::Float]
         #     Required. Horizontal coordinate.
         # @!attribute [rw] y
-        #   @return [Float]
+        #   @return [::Float]
         #     Required. Vertical coordinate.
         class NormalizedVertex
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A bounding polygon of a detected object on a plane.
         # On output both vertices and normalized_vertices are provided.
         # The polygon is formed by connecting vertices in the order they are listed.
         # @!attribute [rw] normalized_vertices
-        #   @return [Array<Google::Cloud::AutoML::V1::NormalizedVertex>]
+        #   @return [::Array<::Google::Cloud::AutoML::V1::NormalizedVertex>]
         #     Output only . The bounding polygon normalized vertices.
         class BoundingPoly
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

@@ -35,10 +35,10 @@ module Google
             # @param location [String]
             # @param model [String]
             #
-            # @return [String]
+            # @return [::String]
             def model_path project:, location:, model:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/models/#{model}"
             end

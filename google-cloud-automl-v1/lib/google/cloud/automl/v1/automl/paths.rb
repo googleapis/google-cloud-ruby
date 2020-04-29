@@ -36,11 +36,11 @@ module Google
             # @param dataset [String]
             # @param annotation_spec [String]
             #
-            # @return [String]
+            # @return [::String]
             def annotation_spec_path project:, location:, dataset:, annotation_spec:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "dataset cannot contain /" if dataset.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "dataset cannot contain /" if dataset.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/datasets/#{dataset}/annotationSpecs/#{annotation_spec}"
             end
@@ -56,10 +56,10 @@ module Google
             # @param location [String]
             # @param dataset [String]
             #
-            # @return [String]
+            # @return [::String]
             def dataset_path project:, location:, dataset:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/datasets/#{dataset}"
             end
@@ -74,9 +74,9 @@ module Google
             # @param project [String]
             # @param location [String]
             #
-            # @return [String]
+            # @return [::String]
             def location_path project:, location:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
             end
@@ -92,10 +92,10 @@ module Google
             # @param location [String]
             # @param model [String]
             #
-            # @return [String]
+            # @return [::String]
             def model_path project:, location:, model:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/models/#{model}"
             end
@@ -112,11 +112,11 @@ module Google
             # @param model [String]
             # @param model_evaluation [String]
             #
-            # @return [String]
+            # @return [::String]
             def model_evaluation_path project:, location:, model:, model_evaluation:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ArgumentError, "model cannot contain /" if model.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "model cannot contain /" if model.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/models/#{model}/modelEvaluations/#{model_evaluation}"
             end
