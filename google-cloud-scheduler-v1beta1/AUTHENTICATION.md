@@ -27,7 +27,7 @@ export SCHEDULER_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/scheduler/v1beta1"
 
-client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
+client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-scheduler-v1beta1
 checks for credentials are configured on the service Credentials class (such as
-{Google::Cloud::Scheduler::V1beta1::CloudScheduler::Credentials}):
+{::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Credentials}):
 
 1. `SCHEDULER_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `SCHEDULER_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/scheduler/v1beta1"
 
 ENV["SCHEDULER_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
+client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ environment variables. Either on an individual client initialization:
 ```ruby
 require "google/cloud/scheduler/v1beta1"
 
-client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new do |config|
+client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or configured globally for all clients:
 ```ruby
 require "google/cloud/scheduler/v1beta1"
 
-Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.configure do |config|
+::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
+client = ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
 ```
 
 ### Cloud SDK
