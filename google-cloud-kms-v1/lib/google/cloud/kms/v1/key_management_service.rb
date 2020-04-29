@@ -36,10 +36,10 @@ module Google
         # Manages cryptographic keys and operations using those keys. Implements a REST
         # model with the following objects:
         #
-        # * {Google::Cloud::Kms::V1::KeyRing KeyRing}
-        # * {Google::Cloud::Kms::V1::CryptoKey CryptoKey}
-        # * {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
-        # * {Google::Cloud::Kms::V1::ImportJob ImportJob}
+        # * {::Google::Cloud::Kms::V1::KeyRing KeyRing}
+        # * {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}
+        # * {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+        # * {::Google::Cloud::Kms::V1::ImportJob ImportJob}
         #
         # If you are using manual gRPC libraries, see
         # [Using gRPC with Cloud KMS](https://cloud.google.com/kms/docs/grpc).
@@ -47,7 +47,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/kms/v1/key_management_service"
-        #     client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+        #     client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new
         #
         module KeyManagementService
         end

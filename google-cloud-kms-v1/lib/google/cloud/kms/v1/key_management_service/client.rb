@@ -32,10 +32,10 @@ module Google
           # Manages cryptographic keys and operations using those keys. Implements a REST
           # model with the following objects:
           #
-          # * {Google::Cloud::Kms::V1::KeyRing KeyRing}
-          # * {Google::Cloud::Kms::V1::CryptoKey CryptoKey}
-          # * {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
-          # * {Google::Cloud::Kms::V1::ImportJob ImportJob}
+          # * {::Google::Cloud::Kms::V1::KeyRing KeyRing}
+          # * {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}
+          # * {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+          # * {::Google::Cloud::Kms::V1::ImportJob ImportJob}
           #
           # If you are using manual gRPC libraries, see
           # [Using gRPC with Cloud KMS](https://cloud.google.com/kms/docs/grpc).
@@ -49,15 +49,15 @@ module Google
             ##
             # Configure the KeyManagementService Client class.
             #
-            # See {Google::Cloud::Kms::V1::KeyManagementService::Client::Configuration}
+            # See {::Google::Cloud::Kms::V1::KeyManagementService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all KeyManagementService clients:
             #
-            #     Google::Cloud::Kms::V1::KeyManagementService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Kms::V1::KeyManagementService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -261,7 +261,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Kms::V1::KeyManagementService::Client::Configuration}
+            # See {::Google::Cloud::Kms::V1::KeyManagementService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -282,13 +282,13 @@ module Google
             # To create a new KeyManagementService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #     client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new
             #
             # To create a new KeyManagementService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the KeyManagementService client.
@@ -315,8 +315,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @key_management_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Kms::V1::KeyManagementService::Stub,
+              @key_management_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Kms::V1::KeyManagementService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -327,16 +327,16 @@ module Google
             # Service calls
 
             ##
-            # Lists {Google::Cloud::Kms::V1::KeyRing KeyRings}.
+            # Lists {::Google::Cloud::Kms::V1::KeyRing KeyRings}.
             #
             # @overload list_key_rings(request, options = nil)
             #   Pass arguments to `list_key_rings` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::ListKeyRingsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::ListKeyRingsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::ListKeyRingsRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::ListKeyRingsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_key_rings(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
@@ -344,49 +344,49 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the location associated with the
-            #     {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
-            #   @param page_size [Integer]
-            #     Optional. Optional limit on the number of {Google::Cloud::Kms::V1::KeyRing KeyRings} to include in the
-            #     response.  Further {Google::Cloud::Kms::V1::KeyRing KeyRings} can subsequently be obtained by
-            #     including the {Google::Cloud::Kms::V1::ListKeyRingsResponse#next_page_token ListKeyRingsResponse.next_page_token} in a subsequent
+            #     {::Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
+            #   @param page_size [::Integer]
+            #     Optional. Optional limit on the number of {::Google::Cloud::Kms::V1::KeyRing KeyRings} to include in the
+            #     response.  Further {::Google::Cloud::Kms::V1::KeyRing KeyRings} can subsequently be obtained by
+            #     including the {::Google::Cloud::Kms::V1::ListKeyRingsResponse#next_page_token ListKeyRingsResponse.next_page_token} in a subsequent
             #     request.  If unspecified, the server will pick an appropriate default.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. Optional pagination token, returned earlier via
-            #     {Google::Cloud::Kms::V1::ListKeyRingsResponse#next_page_token ListKeyRingsResponse.next_page_token}.
-            #   @param filter [String]
+            #     {::Google::Cloud::Kms::V1::ListKeyRingsResponse#next_page_token ListKeyRingsResponse.next_page_token}.
+            #   @param filter [::String]
             #     Optional. Only include resources that match the filter in the response. For
             #     more information, see
             #     [Sorting and filtering list
             #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Optional. Specify how the results should be sorted. If not specified, the
             #     results will be sorted in the default order.  For more information, see
             #     [Sorting and filtering list
             #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Kms::V1::KeyRing>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Kms::V1::KeyRing>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Kms::V1::KeyRing>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Kms::V1::KeyRing>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_key_rings request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::ListKeyRingsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::ListKeyRingsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_key_rings.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -404,25 +404,25 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :list_key_rings, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @key_management_service_stub, :list_key_rings, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @key_management_service_stub, :list_key_rings, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Lists {Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
+            # Lists {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
             #
             # @overload list_crypto_keys(request, options = nil)
             #   Pass arguments to `list_crypto_keys` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::ListCryptoKeysRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::ListCryptoKeysRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::ListCryptoKeysRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::ListCryptoKeysRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_crypto_keys(parent: nil, page_size: nil, page_token: nil, version_view: nil, filter: nil, order_by: nil)
@@ -430,51 +430,51 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
-            #     Required. The resource name of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to list, in the format
+            #   @param parent [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::KeyRing KeyRing} to list, in the format
             #     `projects/*/locations/*/keyRings/*`.
-            #   @param page_size [Integer]
-            #     Optional. Optional limit on the number of {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} to include in the
-            #     response.  Further {Google::Cloud::Kms::V1::CryptoKey CryptoKeys} can subsequently be obtained by
-            #     including the {Google::Cloud::Kms::V1::ListCryptoKeysResponse#next_page_token ListCryptoKeysResponse.next_page_token} in a subsequent
+            #   @param page_size [::Integer]
+            #     Optional. Optional limit on the number of {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} to include in the
+            #     response.  Further {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} can subsequently be obtained by
+            #     including the {::Google::Cloud::Kms::V1::ListCryptoKeysResponse#next_page_token ListCryptoKeysResponse.next_page_token} in a subsequent
             #     request.  If unspecified, the server will pick an appropriate default.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. Optional pagination token, returned earlier via
-            #     {Google::Cloud::Kms::V1::ListCryptoKeysResponse#next_page_token ListCryptoKeysResponse.next_page_token}.
-            #   @param version_view [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
+            #     {::Google::Cloud::Kms::V1::ListCryptoKeysResponse#next_page_token ListCryptoKeysResponse.next_page_token}.
+            #   @param version_view [::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
             #     The fields of the primary version to include in the response.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Optional. Only include resources that match the filter in the response. For
             #     more information, see
             #     [Sorting and filtering list
             #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Optional. Specify how the results should be sorted. If not specified, the
             #     results will be sorted in the default order. For more information, see
             #     [Sorting and filtering list
             #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Kms::V1::CryptoKey>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Kms::V1::CryptoKey>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Kms::V1::CryptoKey>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Kms::V1::CryptoKey>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_crypto_keys request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::ListCryptoKeysRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::ListCryptoKeysRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_crypto_keys.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -492,25 +492,25 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :list_crypto_keys, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @key_management_service_stub, :list_crypto_keys, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @key_management_service_stub, :list_crypto_keys, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Lists {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}.
+            # Lists {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}.
             #
             # @overload list_crypto_key_versions(request, options = nil)
             #   Pass arguments to `list_crypto_key_versions` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_crypto_key_versions(parent: nil, page_size: nil, page_token: nil, view: nil, filter: nil, order_by: nil)
@@ -518,52 +518,52 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
-            #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to list, in the format
+            #   @param parent [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to list, in the format
             #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
-            #   @param page_size [Integer]
-            #     Optional. Optional limit on the number of {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} to
-            #     include in the response. Further {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} can
+            #   @param page_size [::Integer]
+            #     Optional. Optional limit on the number of {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} to
+            #     include in the response. Further {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} can
             #     subsequently be obtained by including the
-            #     {Google::Cloud::Kms::V1::ListCryptoKeyVersionsResponse#next_page_token ListCryptoKeyVersionsResponse.next_page_token} in a subsequent request.
+            #     {::Google::Cloud::Kms::V1::ListCryptoKeyVersionsResponse#next_page_token ListCryptoKeyVersionsResponse.next_page_token} in a subsequent request.
             #     If unspecified, the server will pick an appropriate default.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. Optional pagination token, returned earlier via
-            #     {Google::Cloud::Kms::V1::ListCryptoKeyVersionsResponse#next_page_token ListCryptoKeyVersionsResponse.next_page_token}.
-            #   @param view [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
+            #     {::Google::Cloud::Kms::V1::ListCryptoKeyVersionsResponse#next_page_token ListCryptoKeyVersionsResponse.next_page_token}.
+            #   @param view [::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionView]
             #     The fields to include in the response.
-            #   @param filter [String]
+            #   @param filter [::String]
             #     Optional. Only include resources that match the filter in the response. For
             #     more information, see
             #     [Sorting and filtering list
             #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Optional. Specify how the results should be sorted. If not specified, the
             #     results will be sorted in the default order. For more information, see
             #     [Sorting and filtering list
             #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Kms::V1::CryptoKeyVersion>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Kms::V1::CryptoKeyVersion>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Kms::V1::CryptoKeyVersion>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Kms::V1::CryptoKeyVersion>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_crypto_key_versions request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_crypto_key_versions.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -581,25 +581,25 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :list_crypto_key_versions, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @key_management_service_stub, :list_crypto_key_versions, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @key_management_service_stub, :list_crypto_key_versions, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Lists {Google::Cloud::Kms::V1::ImportJob ImportJobs}.
+            # Lists {::Google::Cloud::Kms::V1::ImportJob ImportJobs}.
             #
             # @overload list_import_jobs(request, options = nil)
             #   Pass arguments to `list_import_jobs` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::ListImportJobsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::ListImportJobsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::ListImportJobsRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::ListImportJobsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_import_jobs(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
@@ -607,49 +607,49 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
-            #     Required. The resource name of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to list, in the format
+            #   @param parent [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::KeyRing KeyRing} to list, in the format
             #     `projects/*/locations/*/keyRings/*`.
-            #   @param page_size [Integer]
-            #     Optional. Optional limit on the number of {Google::Cloud::Kms::V1::ImportJob ImportJobs} to include in the
-            #     response. Further {Google::Cloud::Kms::V1::ImportJob ImportJobs} can subsequently be obtained by
-            #     including the {Google::Cloud::Kms::V1::ListImportJobsResponse#next_page_token ListImportJobsResponse.next_page_token} in a subsequent
+            #   @param page_size [::Integer]
+            #     Optional. Optional limit on the number of {::Google::Cloud::Kms::V1::ImportJob ImportJobs} to include in the
+            #     response. Further {::Google::Cloud::Kms::V1::ImportJob ImportJobs} can subsequently be obtained by
+            #     including the {::Google::Cloud::Kms::V1::ListImportJobsResponse#next_page_token ListImportJobsResponse.next_page_token} in a subsequent
             #     request. If unspecified, the server will pick an appropriate default.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. Optional pagination token, returned earlier via
-            #     {Google::Cloud::Kms::V1::ListImportJobsResponse#next_page_token ListImportJobsResponse.next_page_token}.
-            #   @param filter [String]
+            #     {::Google::Cloud::Kms::V1::ListImportJobsResponse#next_page_token ListImportJobsResponse.next_page_token}.
+            #   @param filter [::String]
             #     Optional. Only include resources that match the filter in the response. For
             #     more information, see
             #     [Sorting and filtering list
             #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
-            #   @param order_by [String]
+            #   @param order_by [::String]
             #     Optional. Specify how the results should be sorted. If not specified, the
             #     results will be sorted in the default order. For more information, see
             #     [Sorting and filtering list
             #     results](https://cloud.google.com/kms/docs/sorting-and-filtering).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Kms::V1::ImportJob>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Kms::V1::ImportJob>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Kms::V1::ImportJob>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Kms::V1::ImportJob>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_import_jobs request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::ListImportJobsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::ListImportJobsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_import_jobs.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -667,25 +667,25 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @key_management_service_stub.call_rpc :list_import_jobs, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @key_management_service_stub, :list_import_jobs, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @key_management_service_stub, :list_import_jobs, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Returns metadata for a given {Google::Cloud::Kms::V1::KeyRing KeyRing}.
+            # Returns metadata for a given {::Google::Cloud::Kms::V1::KeyRing KeyRing}.
             #
             # @overload get_key_ring(request, options = nil)
             #   Pass arguments to `get_key_ring` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::GetKeyRingRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::GetKeyRingRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::GetKeyRingRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::GetKeyRingRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_key_ring(name: nil)
@@ -693,30 +693,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The {Google::Cloud::Kms::V1::KeyRing#name name} of the {Google::Cloud::Kms::V1::KeyRing KeyRing} to get.
+            #   @param name [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::KeyRing#name name} of the {::Google::Cloud::Kms::V1::KeyRing KeyRing} to get.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::KeyRing]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::KeyRing]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::KeyRing]
+            # @return [::Google::Cloud::Kms::V1::KeyRing]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_key_ring request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::GetKeyRingRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::GetKeyRingRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_key_ring.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -737,22 +737,22 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Returns metadata for a given {Google::Cloud::Kms::V1::CryptoKey CryptoKey}, as well as its
-            # {Google::Cloud::Kms::V1::CryptoKey#primary primary} {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
+            # Returns metadata for a given {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}, as well as its
+            # {::Google::Cloud::Kms::V1::CryptoKey#primary primary} {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
             #
             # @overload get_crypto_key(request, options = nil)
             #   Pass arguments to `get_crypto_key` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::GetCryptoKeyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::GetCryptoKeyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::GetCryptoKeyRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::GetCryptoKeyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_crypto_key(name: nil)
@@ -760,30 +760,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to get.
+            #   @param name [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to get.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::CryptoKey]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKey]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::CryptoKey]
+            # @return [::Google::Cloud::Kms::V1::CryptoKey]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_crypto_key request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::GetCryptoKeyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::GetCryptoKeyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_crypto_key.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -804,21 +804,21 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Returns metadata for a given {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
+            # Returns metadata for a given {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}.
             #
             # @overload get_crypto_key_version(request, options = nil)
             #   Pass arguments to `get_crypto_key_version` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_crypto_key_version(name: nil)
@@ -826,30 +826,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to get.
+            #   @param name [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to get.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::CryptoKeyVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_crypto_key_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_crypto_key_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -870,24 +870,24 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Returns the public key for the given {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. The
-            # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} must be
-            # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN} or
-            # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT ASYMMETRIC_DECRYPT}.
+            # Returns the public key for the given {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}. The
+            # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} must be
+            # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_SIGN ASYMMETRIC_SIGN} or
+            # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ASYMMETRIC_DECRYPT ASYMMETRIC_DECRYPT}.
             #
             # @overload get_public_key(request, options = nil)
             #   Pass arguments to `get_public_key` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::GetPublicKeyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::GetPublicKeyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::GetPublicKeyRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::GetPublicKeyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_public_key(name: nil)
@@ -895,31 +895,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The {Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to
+            #   @param name [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion#name name} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} public key to
             #     get.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::PublicKey]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::PublicKey]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::PublicKey]
+            # @return [::Google::Cloud::Kms::V1::PublicKey]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_public_key request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::GetPublicKeyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::GetPublicKeyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_public_key.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -940,21 +940,21 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Returns metadata for a given {Google::Cloud::Kms::V1::ImportJob ImportJob}.
+            # Returns metadata for a given {::Google::Cloud::Kms::V1::ImportJob ImportJob}.
             #
             # @overload get_import_job(request, options = nil)
             #   Pass arguments to `get_import_job` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::GetImportJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::GetImportJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::GetImportJobRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::GetImportJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_import_job(name: nil)
@@ -962,30 +962,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The {Google::Cloud::Kms::V1::ImportJob#name name} of the {Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
+            #   @param name [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::ImportJob#name name} of the {::Google::Cloud::Kms::V1::ImportJob ImportJob} to get.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::ImportJob]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::ImportJob]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::ImportJob]
+            # @return [::Google::Cloud::Kms::V1::ImportJob]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_import_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::GetImportJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::GetImportJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_import_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1006,21 +1006,21 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Create a new {Google::Cloud::Kms::V1::KeyRing KeyRing} in a given Project and Location.
+            # Create a new {::Google::Cloud::Kms::V1::KeyRing KeyRing} in a given Project and Location.
             #
             # @overload create_key_ring(request, options = nil)
             #   Pass arguments to `create_key_ring` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::CreateKeyRingRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::CreateKeyRingRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::CreateKeyRingRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::CreateKeyRingRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_key_ring(parent: nil, key_ring_id: nil, key_ring: nil)
@@ -1028,36 +1028,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the location associated with the
-            #     {Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
-            #   @param key_ring_id [String]
+            #     {::Google::Cloud::Kms::V1::KeyRing KeyRings}, in the format `projects/*/locations/*`.
+            #   @param key_ring_id [::String]
             #     Required. It must be unique within a location and match the regular
             #     expression `[a-zA-Z0-9_-]{1,63}`
-            #   @param key_ring [Google::Cloud::Kms::V1::KeyRing, Hash]
-            #     Required. A {Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
+            #   @param key_ring [::Google::Cloud::Kms::V1::KeyRing, ::Hash]
+            #     Required. A {::Google::Cloud::Kms::V1::KeyRing KeyRing} with initial field values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::KeyRing]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::KeyRing]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::KeyRing]
+            # @return [::Google::Cloud::Kms::V1::KeyRing]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_key_ring request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::CreateKeyRingRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::CreateKeyRingRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_key_ring.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1078,25 +1078,25 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Create a new {Google::Cloud::Kms::V1::CryptoKey CryptoKey} within a {Google::Cloud::Kms::V1::KeyRing KeyRing}.
+            # Create a new {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} within a {::Google::Cloud::Kms::V1::KeyRing KeyRing}.
             #
-            # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} and
-            # {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#algorithm CryptoKey.version_template.algorithm}
+            # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} and
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#algorithm CryptoKey.version_template.algorithm}
             # are required.
             #
             # @overload create_crypto_key(request, options = nil)
             #   Pass arguments to `create_crypto_key` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::CreateCryptoKeyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::CreateCryptoKeyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::CreateCryptoKeyRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::CreateCryptoKeyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_crypto_key(parent: nil, crypto_key_id: nil, crypto_key: nil, skip_initial_version_creation: nil)
@@ -1104,42 +1104,42 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
-            #     Required. The {Google::Cloud::Kms::V1::KeyRing#name name} of the KeyRing associated with the
-            #     {Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
-            #   @param crypto_key_id [String]
+            #   @param parent [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::KeyRing#name name} of the KeyRing associated with the
+            #     {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys}.
+            #   @param crypto_key_id [::String]
             #     Required. It must be unique within a KeyRing and match the regular
             #     expression `[a-zA-Z0-9_-]{1,63}`
-            #   @param crypto_key [Google::Cloud::Kms::V1::CryptoKey, Hash]
-            #     Required. A {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
-            #   @param skip_initial_version_creation [Boolean]
-            #     If set to true, the request will create a {Google::Cloud::Kms::V1::CryptoKey CryptoKey} without any
-            #     {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}. You must manually call
-            #     {Google::Cloud::Kms::V1::KeyManagementService::Client#create_crypto_key_version CreateCryptoKeyVersion} or
-            #     {Google::Cloud::Kms::V1::KeyManagementService::Client#import_crypto_key_version ImportCryptoKeyVersion}
-            #     before you can use this {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+            #   @param crypto_key [::Google::Cloud::Kms::V1::CryptoKey, ::Hash]
+            #     Required. A {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} with initial field values.
+            #   @param skip_initial_version_creation [::Boolean]
+            #     If set to true, the request will create a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} without any
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}. You must manually call
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client#create_crypto_key_version CreateCryptoKeyVersion} or
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client#import_crypto_key_version ImportCryptoKeyVersion}
+            #     before you can use this {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::CryptoKey]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKey]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::CryptoKey]
+            # @return [::Google::Cloud::Kms::V1::CryptoKey]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_crypto_key request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::CreateCryptoKeyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::CreateCryptoKeyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_crypto_key.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1160,25 +1160,25 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Create a new {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} in a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+            # Create a new {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} in a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
             #
             # The server will assign the next sequential id. If unset,
-            # {Google::Cloud::Kms::V1::CryptoKeyVersion#state state} will be set to
-            # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}.
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} will be set to
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED}.
             #
             # @overload create_crypto_key_version(request, options = nil)
             #   Pass arguments to `create_crypto_key_version` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_crypto_key_version(parent: nil, crypto_key_version: nil)
@@ -1186,33 +1186,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
-            #     Required. The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} associated with
-            #     the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}.
-            #   @param crypto_key_version [Google::Cloud::Kms::V1::CryptoKeyVersion, Hash]
-            #     Required. A {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with initial field values.
+            #   @param parent [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} associated with
+            #     the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions}.
+            #   @param crypto_key_version [::Google::Cloud::Kms::V1::CryptoKeyVersion, ::Hash]
+            #     Required. A {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with initial field values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::CryptoKeyVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_crypto_key_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_crypto_key_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1233,25 +1233,25 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Imports a new {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} into an existing {Google::Cloud::Kms::V1::CryptoKey CryptoKey} using the
+            # Imports a new {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} into an existing {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} using the
             # wrapped key material provided in the request.
             #
             # The version ID will be assigned the next sequential id within the
-            # {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
             #
             # @overload import_crypto_key_version(request, options = nil)
             #   Pass arguments to `import_crypto_key_version` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload import_crypto_key_version(parent: nil, algorithm: nil, import_job: nil, rsa_aes_wrapped_key: nil)
@@ -1259,27 +1259,27 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
-            #     Required. The {Google::Cloud::Kms::V1::CryptoKey#name name} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to
+            #   @param parent [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::CryptoKey#name name} of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to
             #     be imported into.
-            #   @param algorithm [Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm]
-            #     Required. The {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm algorithm} of
+            #   @param algorithm [::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm]
+            #     Required. The {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionAlgorithm algorithm} of
             #     the key being imported. This does not need to match the
-            #     {Google::Cloud::Kms::V1::CryptoKey#version_template version_template} of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} this
+            #     {::Google::Cloud::Kms::V1::CryptoKey#version_template version_template} of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} this
             #     version imports into.
-            #   @param import_job [String]
-            #     Required. The {Google::Cloud::Kms::V1::ImportJob#name name} of the {Google::Cloud::Kms::V1::ImportJob ImportJob} that was used to
+            #   @param import_job [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::ImportJob#name name} of the {::Google::Cloud::Kms::V1::ImportJob ImportJob} that was used to
             #     wrap this key material.
-            #   @param rsa_aes_wrapped_key [String]
+            #   @param rsa_aes_wrapped_key [::String]
             #     Wrapped key material produced with
-            #     {Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_3072_SHA1_AES_256 RSA_OAEP_3072_SHA1_AES_256}
+            #     {::Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_3072_SHA1_AES_256 RSA_OAEP_3072_SHA1_AES_256}
             #     or
-            #     {Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_4096_SHA1_AES_256 RSA_OAEP_4096_SHA1_AES_256}.
+            #     {::Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_4096_SHA1_AES_256 RSA_OAEP_4096_SHA1_AES_256}.
             #
             #     This field contains the concatenation of two wrapped keys:
             #     <ol>
             #       <li>An ephemeral AES-256 wrapping key wrapped with the
-            #           {Google::Cloud::Kms::V1::ImportJob#public_key public_key} using RSAES-OAEP with SHA-1,
+            #           {::Google::Cloud::Kms::V1::ImportJob#public_key public_key} using RSAES-OAEP with SHA-1,
             #           MGF1 with SHA-1, and an empty label.
             #       </li>
             #       <li>The key to be imported, wrapped with the ephemeral AES-256 key
@@ -1296,26 +1296,26 @@ module Google
             #     CKM_RSA_AES_KEY_WRAP.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::CryptoKeyVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def import_crypto_key_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.import_crypto_key_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1336,23 +1336,23 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Create a new {Google::Cloud::Kms::V1::ImportJob ImportJob} within a {Google::Cloud::Kms::V1::KeyRing KeyRing}.
+            # Create a new {::Google::Cloud::Kms::V1::ImportJob ImportJob} within a {::Google::Cloud::Kms::V1::KeyRing KeyRing}.
             #
-            # {Google::Cloud::Kms::V1::ImportJob#import_method ImportJob.import_method} is required.
+            # {::Google::Cloud::Kms::V1::ImportJob#import_method ImportJob.import_method} is required.
             #
             # @overload create_import_job(request, options = nil)
             #   Pass arguments to `create_import_job` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::CreateImportJobRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::CreateImportJobRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::CreateImportJobRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::CreateImportJobRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_import_job(parent: nil, import_job_id: nil, import_job: nil)
@@ -1360,36 +1360,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
-            #     Required. The {Google::Cloud::Kms::V1::KeyRing#name name} of the {Google::Cloud::Kms::V1::KeyRing KeyRing} associated with the
-            #     {Google::Cloud::Kms::V1::ImportJob ImportJobs}.
-            #   @param import_job_id [String]
+            #   @param parent [::String]
+            #     Required. The {::Google::Cloud::Kms::V1::KeyRing#name name} of the {::Google::Cloud::Kms::V1::KeyRing KeyRing} associated with the
+            #     {::Google::Cloud::Kms::V1::ImportJob ImportJobs}.
+            #   @param import_job_id [::String]
             #     Required. It must be unique within a KeyRing and match the regular
             #     expression `[a-zA-Z0-9_-]{1,63}`
-            #   @param import_job [Google::Cloud::Kms::V1::ImportJob, Hash]
-            #     Required. An {Google::Cloud::Kms::V1::ImportJob ImportJob} with initial field values.
+            #   @param import_job [::Google::Cloud::Kms::V1::ImportJob, ::Hash]
+            #     Required. An {::Google::Cloud::Kms::V1::ImportJob ImportJob} with initial field values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::ImportJob]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::ImportJob]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::ImportJob]
+            # @return [::Google::Cloud::Kms::V1::ImportJob]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_import_job request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::CreateImportJobRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::CreateImportJobRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_import_job.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1410,21 +1410,21 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Update a {Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
+            # Update a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
             #
             # @overload update_crypto_key(request, options = nil)
             #   Pass arguments to `update_crypto_key` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::UpdateCryptoKeyRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::UpdateCryptoKeyRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_crypto_key(crypto_key: nil, update_mask: nil)
@@ -1432,32 +1432,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param crypto_key [Google::Cloud::Kms::V1::CryptoKey, Hash]
-            #     Required. {Google::Cloud::Kms::V1::CryptoKey CryptoKey} with updated values.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param crypto_key [::Google::Cloud::Kms::V1::CryptoKey, ::Hash]
+            #     Required. {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} with updated values.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. List of fields to be updated in this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::CryptoKey]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKey]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::CryptoKey]
+            # @return [::Google::Cloud::Kms::V1::CryptoKey]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_crypto_key request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::UpdateCryptoKeyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::UpdateCryptoKeyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_crypto_key.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1478,27 +1478,27 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Update a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s metadata.
+            # Update a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s metadata.
             #
-            # {Google::Cloud::Kms::V1::CryptoKeyVersion#state state} may be changed between
-            # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} and
-            # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} using this
-            # method. See {Google::Cloud::Kms::V1::KeyManagementService::Client#destroy_crypto_key_version DestroyCryptoKeyVersion} and {Google::Cloud::Kms::V1::KeyManagementService::Client#restore_crypto_key_version RestoreCryptoKeyVersion} to
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} may be changed between
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::ENABLED ENABLED} and
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED} using this
+            # method. See {::Google::Cloud::Kms::V1::KeyManagementService::Client#destroy_crypto_key_version DestroyCryptoKeyVersion} and {::Google::Cloud::Kms::V1::KeyManagementService::Client#restore_crypto_key_version RestoreCryptoKeyVersion} to
             # move between other states.
             #
             # @overload update_crypto_key_version(request, options = nil)
             #   Pass arguments to `update_crypto_key_version` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_crypto_key_version(crypto_key_version: nil, update_mask: nil)
@@ -1506,32 +1506,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param crypto_key_version [Google::Cloud::Kms::V1::CryptoKeyVersion, Hash]
-            #     Required. {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with updated values.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param crypto_key_version [::Google::Cloud::Kms::V1::CryptoKeyVersion, ::Hash]
+            #     Required. {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with updated values.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. List of fields to be updated in this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::CryptoKeyVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_crypto_key_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_crypto_key_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1552,23 +1552,23 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Encrypts data, so that it can only be recovered by a call to {Google::Cloud::Kms::V1::KeyManagementService::Client#decrypt Decrypt}.
-            # The {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} must be
-            # {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
+            # Encrypts data, so that it can only be recovered by a call to {::Google::Cloud::Kms::V1::KeyManagementService::Client#decrypt Decrypt}.
+            # The {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} must be
+            # {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
             #
             # @overload encrypt(request, options = nil)
             #   Pass arguments to `encrypt` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::EncryptRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::EncryptRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::EncryptRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::EncryptRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload encrypt(name: nil, plaintext: nil, additional_authenticated_data: nil)
@@ -1576,53 +1576,53 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} or {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} or {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}
             #     to use for encryption.
             #
-            #     If a {Google::Cloud::Kms::V1::CryptoKey CryptoKey} is specified, the server will use its
-            #     {Google::Cloud::Kms::V1::CryptoKey#primary primary version}.
-            #   @param plaintext [String]
+            #     If a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} is specified, the server will use its
+            #     {::Google::Cloud::Kms::V1::CryptoKey#primary primary version}.
+            #   @param plaintext [::String]
             #     Required. The data to encrypt. Must be no larger than 64KiB.
             #
             #     The maximum size depends on the key version's
-            #     {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
-            #     {Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the plaintext must be no larger
-            #     than 64KiB. For {Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
+            #     {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the plaintext must be no larger
+            #     than 64KiB. For {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
             #     plaintext and additional_authenticated_data fields must be no larger than
             #     8KiB.
-            #   @param additional_authenticated_data [String]
+            #   @param additional_authenticated_data [::String]
             #     Optional. Optional data that, if specified, must also be provided during decryption
-            #     through {Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}.
+            #     through {::Google::Cloud::Kms::V1::DecryptRequest#additional_authenticated_data DecryptRequest.additional_authenticated_data}.
             #
             #     The maximum size depends on the key version's
-            #     {Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
-            #     {Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the AAD must be no larger than
-            #     64KiB. For {Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}. For
+            #     {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the AAD must be no larger than
+            #     64KiB. For {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of the
             #     plaintext and additional_authenticated_data fields must be no larger than
             #     8KiB.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::EncryptResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::EncryptResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::EncryptResponse]
+            # @return [::Google::Cloud::Kms::V1::EncryptResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def encrypt request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::EncryptRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::EncryptRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.encrypt.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1643,22 +1643,22 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Decrypts data that was protected by {Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt Encrypt}. The {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
-            # must be {Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
+            # Decrypts data that was protected by {::Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt Encrypt}. The {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
+            # must be {::Google::Cloud::Kms::V1::CryptoKey::CryptoKeyPurpose::ENCRYPT_DECRYPT ENCRYPT_DECRYPT}.
             #
             # @overload decrypt(request, options = nil)
             #   Pass arguments to `decrypt` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::DecryptRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::DecryptRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::DecryptRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::DecryptRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload decrypt(name: nil, ciphertext: nil, additional_authenticated_data: nil)
@@ -1666,37 +1666,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to use for decryption.
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to use for decryption.
             #     The server will choose the appropriate version.
-            #   @param ciphertext [String]
+            #   @param ciphertext [::String]
             #     Required. The encrypted data originally returned in
-            #     {Google::Cloud::Kms::V1::EncryptResponse#ciphertext EncryptResponse.ciphertext}.
-            #   @param additional_authenticated_data [String]
+            #     {::Google::Cloud::Kms::V1::EncryptResponse#ciphertext EncryptResponse.ciphertext}.
+            #   @param additional_authenticated_data [::String]
             #     Optional. Optional data that must match the data originally supplied in
-            #     {Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}.
+            #     {::Google::Cloud::Kms::V1::EncryptRequest#additional_authenticated_data EncryptRequest.additional_authenticated_data}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::DecryptResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::DecryptResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::DecryptResponse]
+            # @return [::Google::Cloud::Kms::V1::DecryptResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def decrypt request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::DecryptRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::DecryptRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.decrypt.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1717,23 +1717,23 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Signs data using a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
+            # Signs data using a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose}
             # ASYMMETRIC_SIGN, producing a signature that can be verified with the public
-            # key retrieved from {Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key GetPublicKey}.
+            # key retrieved from {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key GetPublicKey}.
             #
             # @overload asymmetric_sign(request, options = nil)
             #   Pass arguments to `asymmetric_sign` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::AsymmetricSignRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::AsymmetricSignRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::AsymmetricSignRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::AsymmetricSignRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload asymmetric_sign(name: nil, digest: nil)
@@ -1741,34 +1741,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
-            #   @param digest [Google::Cloud::Kms::V1::Digest, Hash]
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
+            #   @param digest [::Google::Cloud::Kms::V1::Digest, ::Hash]
             #     Required. The digest of the data to sign. The digest must be produced with
             #     the same digest algorithm as specified by the key version's
-            #     {Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
+            #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::AsymmetricSignResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::AsymmetricSignResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::AsymmetricSignResponse]
+            # @return [::Google::Cloud::Kms::V1::AsymmetricSignResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def asymmetric_sign request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::AsymmetricSignRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::AsymmetricSignRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.asymmetric_sign.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1789,23 +1789,23 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Decrypts data that was encrypted with a public key retrieved from
-            # {Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key GetPublicKey} corresponding to a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with
-            # {Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} ASYMMETRIC_DECRYPT.
+            # {::Google::Cloud::Kms::V1::KeyManagementService::Client#get_public_key GetPublicKey} corresponding to a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} with
+            # {::Google::Cloud::Kms::V1::CryptoKey#purpose CryptoKey.purpose} ASYMMETRIC_DECRYPT.
             #
             # @overload asymmetric_decrypt(request, options = nil)
             #   Pass arguments to `asymmetric_decrypt` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::AsymmetricDecryptRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::AsymmetricDecryptRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::AsymmetricDecryptRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::AsymmetricDecryptRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload asymmetric_decrypt(name: nil, ciphertext: nil)
@@ -1813,34 +1813,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for
             #     decryption.
-            #   @param ciphertext [String]
-            #     Required. The data encrypted with the named {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public
+            #   @param ciphertext [::String]
+            #     Required. The data encrypted with the named {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}'s public
             #     key using OAEP.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
+            # @return [::Google::Cloud::Kms::V1::AsymmetricDecryptResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def asymmetric_decrypt request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::AsymmetricDecryptRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::AsymmetricDecryptRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.asymmetric_decrypt.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1861,23 +1861,23 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Update the version of a {Google::Cloud::Kms::V1::CryptoKey CryptoKey} that will be used in {Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt Encrypt}.
+            # Update the version of a {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} that will be used in {::Google::Cloud::Kms::V1::KeyManagementService::Client#encrypt Encrypt}.
             #
             # Returns an error if called on an asymmetric key.
             #
             # @overload update_crypto_key_primary_version(request, options = nil)
             #   Pass arguments to `update_crypto_key_primary_version` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_crypto_key_primary_version(name: nil, crypto_key_version_id: nil)
@@ -1885,32 +1885,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKey CryptoKey} to update.
-            #   @param crypto_key_version_id [String]
-            #     Required. The id of the child {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as primary.
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} to update.
+            #   @param crypto_key_version_id [::String]
+            #     Required. The id of the child {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use as primary.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::CryptoKey]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKey]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::CryptoKey]
+            # @return [::Google::Cloud::Kms::V1::CryptoKey]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_crypto_key_primary_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_crypto_key_primary_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1931,32 +1931,32 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Schedule a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} for destruction.
+            # Schedule a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} for destruction.
             #
-            # Upon calling this method, {Google::Cloud::Kms::V1::CryptoKeyVersion#state CryptoKeyVersion.state} will be set to
-            # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED DESTROY_SCHEDULED}
-            # and {Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will be set to a time 24
-            # hours in the future, at which point the {Google::Cloud::Kms::V1::CryptoKeyVersion#state state}
+            # Upon calling this method, {::Google::Cloud::Kms::V1::CryptoKeyVersion#state CryptoKeyVersion.state} will be set to
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED DESTROY_SCHEDULED}
+            # and {::Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will be set to a time 24
+            # hours in the future, at which point the {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state}
             # will be changed to
-            # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}, and the key
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}, and the key
             # material will be irrevocably destroyed.
             #
-            # Before the {Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} is reached,
-            # {Google::Cloud::Kms::V1::KeyManagementService::Client#restore_crypto_key_version RestoreCryptoKeyVersion} may be called to reverse the process.
+            # Before the {::Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} is reached,
+            # {::Google::Cloud::Kms::V1::KeyManagementService::Client#restore_crypto_key_version RestoreCryptoKeyVersion} may be called to reverse the process.
             #
             # @overload destroy_crypto_key_version(request, options = nil)
             #   Pass arguments to `destroy_crypto_key_version` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload destroy_crypto_key_version(name: nil)
@@ -1964,30 +1964,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to destroy.
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to destroy.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::CryptoKeyVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def destroy_crypto_key_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.destroy_crypto_key_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2008,27 +2008,27 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Restore a {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} in the
-            # {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED DESTROY_SCHEDULED}
+            # Restore a {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} in the
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED DESTROY_SCHEDULED}
             # state.
             #
-            # Upon restoration of the CryptoKeyVersion, {Google::Cloud::Kms::V1::CryptoKeyVersion#state state}
-            # will be set to {Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED},
-            # and {Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will be cleared.
+            # Upon restoration of the CryptoKeyVersion, {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state}
+            # will be set to {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DISABLED DISABLED},
+            # and {::Google::Cloud::Kms::V1::CryptoKeyVersion#destroy_time destroy_time} will be cleared.
             #
             # @overload restore_crypto_key_version(request, options = nil)
             #   Pass arguments to `restore_crypto_key_version` via a request object, either of type
-            #   {Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest, Hash]
+            #   @param request [::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload restore_crypto_key_version(name: nil)
@@ -2036,30 +2036,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to restore.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Kms::V1::CryptoKeyVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Kms::V1::CryptoKeyVersion]
+            # @return [::Google::Cloud::Kms::V1::CryptoKeyVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def restore_crypto_key_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.restore_crypto_key_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -2080,8 +2080,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -2091,7 +2091,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Kms::V1::KeyManagementService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Kms::V1::KeyManagementService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -2102,22 +2102,22 @@ module Google
             # To modify the global config, setting the timeout for list_key_rings
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Kms::V1::KeyManagementService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_key_rings.timeout = 20_000
+            #     ::Google::Cloud::Kms::V1::KeyManagementService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_key_rings.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_key_rings.timeout = 20_000
+            #     client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_key_rings.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"cloudkms.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -2129,29 +2129,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -2159,10 +2159,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "cloudkms.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -2170,14 +2170,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -2218,168 +2218,168 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_key_rings`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_key_rings
                 ##
                 # RPC-specific configuration for `list_crypto_keys`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_crypto_keys
                 ##
                 # RPC-specific configuration for `list_crypto_key_versions`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_crypto_key_versions
                 ##
                 # RPC-specific configuration for `list_import_jobs`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_import_jobs
                 ##
                 # RPC-specific configuration for `get_key_ring`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_key_ring
                 ##
                 # RPC-specific configuration for `get_crypto_key`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_crypto_key
                 ##
                 # RPC-specific configuration for `get_crypto_key_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_crypto_key_version
                 ##
                 # RPC-specific configuration for `get_public_key`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_public_key
                 ##
                 # RPC-specific configuration for `get_import_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_import_job
                 ##
                 # RPC-specific configuration for `create_key_ring`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_key_ring
                 ##
                 # RPC-specific configuration for `create_crypto_key`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_crypto_key
                 ##
                 # RPC-specific configuration for `create_crypto_key_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_crypto_key_version
                 ##
                 # RPC-specific configuration for `import_crypto_key_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :import_crypto_key_version
                 ##
                 # RPC-specific configuration for `create_import_job`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_import_job
                 ##
                 # RPC-specific configuration for `update_crypto_key`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_crypto_key
                 ##
                 # RPC-specific configuration for `update_crypto_key_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_crypto_key_version
                 ##
                 # RPC-specific configuration for `encrypt`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :encrypt
                 ##
                 # RPC-specific configuration for `decrypt`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :decrypt
                 ##
                 # RPC-specific configuration for `asymmetric_sign`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :asymmetric_sign
                 ##
                 # RPC-specific configuration for `asymmetric_decrypt`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :asymmetric_decrypt
                 ##
                 # RPC-specific configuration for `update_crypto_key_primary_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_crypto_key_primary_version
                 ##
                 # RPC-specific configuration for `destroy_crypto_key_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :destroy_crypto_key_version
                 ##
                 # RPC-specific configuration for `restore_crypto_key_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :restore_crypto_key_version
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_key_rings_config = parent_rpcs&.list_key_rings if parent_rpcs&.respond_to? :list_key_rings
-                  @list_key_rings = Gapic::Config::Method.new list_key_rings_config
+                  @list_key_rings = ::Gapic::Config::Method.new list_key_rings_config
                   list_crypto_keys_config = parent_rpcs&.list_crypto_keys if parent_rpcs&.respond_to? :list_crypto_keys
-                  @list_crypto_keys = Gapic::Config::Method.new list_crypto_keys_config
+                  @list_crypto_keys = ::Gapic::Config::Method.new list_crypto_keys_config
                   list_crypto_key_versions_config = parent_rpcs&.list_crypto_key_versions if parent_rpcs&.respond_to? :list_crypto_key_versions
-                  @list_crypto_key_versions = Gapic::Config::Method.new list_crypto_key_versions_config
+                  @list_crypto_key_versions = ::Gapic::Config::Method.new list_crypto_key_versions_config
                   list_import_jobs_config = parent_rpcs&.list_import_jobs if parent_rpcs&.respond_to? :list_import_jobs
-                  @list_import_jobs = Gapic::Config::Method.new list_import_jobs_config
+                  @list_import_jobs = ::Gapic::Config::Method.new list_import_jobs_config
                   get_key_ring_config = parent_rpcs&.get_key_ring if parent_rpcs&.respond_to? :get_key_ring
-                  @get_key_ring = Gapic::Config::Method.new get_key_ring_config
+                  @get_key_ring = ::Gapic::Config::Method.new get_key_ring_config
                   get_crypto_key_config = parent_rpcs&.get_crypto_key if parent_rpcs&.respond_to? :get_crypto_key
-                  @get_crypto_key = Gapic::Config::Method.new get_crypto_key_config
+                  @get_crypto_key = ::Gapic::Config::Method.new get_crypto_key_config
                   get_crypto_key_version_config = parent_rpcs&.get_crypto_key_version if parent_rpcs&.respond_to? :get_crypto_key_version
-                  @get_crypto_key_version = Gapic::Config::Method.new get_crypto_key_version_config
+                  @get_crypto_key_version = ::Gapic::Config::Method.new get_crypto_key_version_config
                   get_public_key_config = parent_rpcs&.get_public_key if parent_rpcs&.respond_to? :get_public_key
-                  @get_public_key = Gapic::Config::Method.new get_public_key_config
+                  @get_public_key = ::Gapic::Config::Method.new get_public_key_config
                   get_import_job_config = parent_rpcs&.get_import_job if parent_rpcs&.respond_to? :get_import_job
-                  @get_import_job = Gapic::Config::Method.new get_import_job_config
+                  @get_import_job = ::Gapic::Config::Method.new get_import_job_config
                   create_key_ring_config = parent_rpcs&.create_key_ring if parent_rpcs&.respond_to? :create_key_ring
-                  @create_key_ring = Gapic::Config::Method.new create_key_ring_config
+                  @create_key_ring = ::Gapic::Config::Method.new create_key_ring_config
                   create_crypto_key_config = parent_rpcs&.create_crypto_key if parent_rpcs&.respond_to? :create_crypto_key
-                  @create_crypto_key = Gapic::Config::Method.new create_crypto_key_config
+                  @create_crypto_key = ::Gapic::Config::Method.new create_crypto_key_config
                   create_crypto_key_version_config = parent_rpcs&.create_crypto_key_version if parent_rpcs&.respond_to? :create_crypto_key_version
-                  @create_crypto_key_version = Gapic::Config::Method.new create_crypto_key_version_config
+                  @create_crypto_key_version = ::Gapic::Config::Method.new create_crypto_key_version_config
                   import_crypto_key_version_config = parent_rpcs&.import_crypto_key_version if parent_rpcs&.respond_to? :import_crypto_key_version
-                  @import_crypto_key_version = Gapic::Config::Method.new import_crypto_key_version_config
+                  @import_crypto_key_version = ::Gapic::Config::Method.new import_crypto_key_version_config
                   create_import_job_config = parent_rpcs&.create_import_job if parent_rpcs&.respond_to? :create_import_job
-                  @create_import_job = Gapic::Config::Method.new create_import_job_config
+                  @create_import_job = ::Gapic::Config::Method.new create_import_job_config
                   update_crypto_key_config = parent_rpcs&.update_crypto_key if parent_rpcs&.respond_to? :update_crypto_key
-                  @update_crypto_key = Gapic::Config::Method.new update_crypto_key_config
+                  @update_crypto_key = ::Gapic::Config::Method.new update_crypto_key_config
                   update_crypto_key_version_config = parent_rpcs&.update_crypto_key_version if parent_rpcs&.respond_to? :update_crypto_key_version
-                  @update_crypto_key_version = Gapic::Config::Method.new update_crypto_key_version_config
+                  @update_crypto_key_version = ::Gapic::Config::Method.new update_crypto_key_version_config
                   encrypt_config = parent_rpcs&.encrypt if parent_rpcs&.respond_to? :encrypt
-                  @encrypt = Gapic::Config::Method.new encrypt_config
+                  @encrypt = ::Gapic::Config::Method.new encrypt_config
                   decrypt_config = parent_rpcs&.decrypt if parent_rpcs&.respond_to? :decrypt
-                  @decrypt = Gapic::Config::Method.new decrypt_config
+                  @decrypt = ::Gapic::Config::Method.new decrypt_config
                   asymmetric_sign_config = parent_rpcs&.asymmetric_sign if parent_rpcs&.respond_to? :asymmetric_sign
-                  @asymmetric_sign = Gapic::Config::Method.new asymmetric_sign_config
+                  @asymmetric_sign = ::Gapic::Config::Method.new asymmetric_sign_config
                   asymmetric_decrypt_config = parent_rpcs&.asymmetric_decrypt if parent_rpcs&.respond_to? :asymmetric_decrypt
-                  @asymmetric_decrypt = Gapic::Config::Method.new asymmetric_decrypt_config
+                  @asymmetric_decrypt = ::Gapic::Config::Method.new asymmetric_decrypt_config
                   update_crypto_key_primary_version_config = parent_rpcs&.update_crypto_key_primary_version if parent_rpcs&.respond_to? :update_crypto_key_primary_version
-                  @update_crypto_key_primary_version = Gapic::Config::Method.new update_crypto_key_primary_version_config
+                  @update_crypto_key_primary_version = ::Gapic::Config::Method.new update_crypto_key_primary_version_config
                   destroy_crypto_key_version_config = parent_rpcs&.destroy_crypto_key_version if parent_rpcs&.respond_to? :destroy_crypto_key_version
-                  @destroy_crypto_key_version = Gapic::Config::Method.new destroy_crypto_key_version_config
+                  @destroy_crypto_key_version = ::Gapic::Config::Method.new destroy_crypto_key_version_config
                   restore_crypto_key_version_config = parent_rpcs&.restore_crypto_key_version if parent_rpcs&.respond_to? :restore_crypto_key_version
-                  @restore_crypto_key_version = Gapic::Config::Method.new restore_crypto_key_version_config
+                  @restore_crypto_key_version = ::Gapic::Config::Method.new restore_crypto_key_version_config
 
                   yield self if block_given?
                 end

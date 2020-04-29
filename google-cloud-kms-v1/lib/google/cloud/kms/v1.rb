@@ -27,7 +27,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/kms/v1"
-      #     client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+      #     client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new
       #
       module V1
       end

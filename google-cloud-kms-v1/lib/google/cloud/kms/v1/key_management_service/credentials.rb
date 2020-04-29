@@ -24,7 +24,7 @@ module Google
       module V1
         module KeyManagementService
           # Credentials for the KeyManagementService API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform",
               "https://www.googleapis.com/auth/cloudkms"

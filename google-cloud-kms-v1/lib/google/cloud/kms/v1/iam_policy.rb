@@ -59,7 +59,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/kms/v1/iam_policy"
-        #     client = Google::Cloud::Kms::V1::IAMPolicy::Client.new
+        #     client = ::Google::Cloud::Kms::V1::IAMPolicy::Client.new
         #
         module IAMPolicy
         end
