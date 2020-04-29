@@ -35,7 +35,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/container/v1/cluster_manager"
-        #     client = Google::Cloud::Container::V1::ClusterManager::Client.new
+        #     client = ::Google::Cloud::Container::V1::ClusterManager::Client.new
         #
         module ClusterManager
         end
