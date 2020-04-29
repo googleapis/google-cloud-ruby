@@ -24,16 +24,16 @@ module Google
         # Defines a Cloud Organization `Policy` which is used to specify `Constraints`
         # for configurations of Cloud Platform resources.
         # @!attribute [rw] version
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Version of the `Policy`. Default version is 0;
         # @!attribute [rw] constraint
-        #   @return [String]
+        #   @return [::String]
         #     The name of the `Constraint` the `Policy` is configuring, for example,
         #     `constraints/serviceuser.services`.
         #
         #     Immutable after creation.
         # @!attribute [rw] etag
-        #   @return [String]
+        #   @return [::String]
         #     An opaque tag indicating the current version of the `Policy`, used for
         #     concurrency control.
         #
@@ -50,24 +50,24 @@ module Google
         #     `SetOrgPolicy` request will result in an unconditional write of the
         #     `Policy`.
         # @!attribute [rw] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     The time stamp the `Policy` was previously updated. This is set by the
         #     server, not specified by the caller, and represents the last time a call to
         #     `SetOrgPolicy` was made for that `Policy`. Any value set by the client will
         #     be ignored.
         # @!attribute [rw] list_policy
-        #   @return [Google::Cloud::OrgPolicy::V1::Policy::ListPolicy]
+        #   @return [::Google::Cloud::OrgPolicy::V1::Policy::ListPolicy]
         #     List of values either allowed or disallowed.
         # @!attribute [rw] boolean_policy
-        #   @return [Google::Cloud::OrgPolicy::V1::Policy::BooleanPolicy]
+        #   @return [::Google::Cloud::OrgPolicy::V1::Policy::BooleanPolicy]
         #     For boolean `Constraints`, whether to enforce the `Constraint` or not.
         # @!attribute [rw] restore_default
-        #   @return [Google::Cloud::OrgPolicy::V1::Policy::RestoreDefault]
+        #   @return [::Google::Cloud::OrgPolicy::V1::Policy::RestoreDefault]
         #     Restores the default behavior of the constraint; independent of
         #     `Constraint` type.
         class Policy
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Used in `policy_type` to specify how `list_policy` behaves at this
           # resource.
@@ -91,24 +91,24 @@ module Google
           # values. If `all_values` is set to either `ALLOW` or `DENY`,
           # `allowed_values` and `denied_values` must be unset.
           # @!attribute [rw] allowed_values
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     List of values allowed  at this resource. Can only be set if `all_values`
           #     is set to `ALL_VALUES_UNSPECIFIED`.
           # @!attribute [rw] denied_values
-          #   @return [Array<String>]
+          #   @return [::Array<::String>]
           #     List of values denied at this resource. Can only be set if `all_values`
           #     is set to `ALL_VALUES_UNSPECIFIED`.
           # @!attribute [rw] all_values
-          #   @return [Google::Cloud::OrgPolicy::V1::Policy::ListPolicy::AllValues]
+          #   @return [::Google::Cloud::OrgPolicy::V1::Policy::ListPolicy::AllValues]
           #     The policy all_values state.
           # @!attribute [rw] suggested_value
-          #   @return [String]
+          #   @return [::String]
           #     Optional. The Google Cloud Console will try to default to a configuration
           #     that matches the value specified in this `Policy`. If `suggested_value`
           #     is not set, it will inherit the value specified higher in the hierarchy,
           #     unless `inherit_from_parent` is `false`.
           # @!attribute [rw] inherit_from_parent
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     Determines the inheritance behavior for this `Policy`.
           #
           #     By default, a `ListPolicy` set at a resource supercedes any `Policy` set
@@ -207,8 +207,8 @@ module Google
           #     The accepted values at `projects/bar` are `organizations/O1`,
           #       `folders/F1`, `projects/P1`.
           class ListPolicy
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # This enum can be used to set `Policies` that apply to all possible
             # configuration values rather than specific values in `allowed_values` or
@@ -234,7 +234,7 @@ module Google
           # Used in `policy_type` to specify how `boolean_policy` will behave at this
           # resource.
           # @!attribute [rw] enforced
-          #   @return [Boolean]
+          #   @return [::Boolean]
           #     If `true`, then the `Policy` is enforced. If `false`, then any
           #     configuration is acceptable.
           #
@@ -280,8 +280,8 @@ module Google
           #     The constraint at `projects/bar` is not enforced, because
           #     `constraint_default` for the `Constraint` is `ALLOW`.
           class BooleanPolicy
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Ignores policies set above this resource and restores the
@@ -297,8 +297,8 @@ module Google
           # enforcement of the `Constraint` for only those projects, allowing those
           # projects to have all services activated.
           class RestoreDefault
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

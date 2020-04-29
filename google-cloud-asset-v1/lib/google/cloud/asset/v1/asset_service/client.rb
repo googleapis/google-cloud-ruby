@@ -38,15 +38,15 @@ module Google
             ##
             # Configure the AssetService Client class.
             #
-            # See {Google::Cloud::Asset::V1::AssetService::Client::Configuration}
+            # See {::Google::Cloud::Asset::V1::AssetService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all AssetService clients:
             #
-            #     Google::Cloud::Asset::V1::AssetService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Asset::V1::AssetService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -88,7 +88,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Asset::V1::AssetService::Client::Configuration}
+            # See {::Google::Cloud::Asset::V1::AssetService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -109,13 +109,13 @@ module Google
             # To create a new AssetService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #     client = ::Google::Cloud::Asset::V1::AssetService::Client.new
             #
             # To create a new AssetService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Asset::V1::AssetService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the AssetService client.
@@ -147,8 +147,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @asset_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Asset::V1::AssetService::Stub,
+              @asset_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Asset::V1::AssetService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -159,7 +159,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::Asset::V1::AssetService::Operations]
+            # @return [::Google::Cloud::Asset::V1::AssetService::Operations]
             #
             attr_reader :operations_client
 
@@ -168,17 +168,17 @@ module Google
             ##
             # Exports assets with time and resource types to a given Cloud Storage
             # location. The output format is newline-delimited JSON.
-            # This API implements the {Google::Longrunning::Operation google.longrunning.Operation} API allowing you
+            # This API implements the {::Google::Longrunning::Operation google.longrunning.Operation} API allowing you
             # to keep track of the export.
             #
             # @overload export_assets(request, options = nil)
             #   Pass arguments to `export_assets` via a request object, either of type
-            #   {Google::Cloud::Asset::V1::ExportAssetsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Asset::V1::ExportAssetsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Asset::V1::ExportAssetsRequest, Hash]
+            #   @param request [::Google::Cloud::Asset::V1::ExportAssetsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload export_assets(parent: nil, read_time: nil, asset_types: nil, content_type: nil, output_config: nil)
@@ -186,51 +186,51 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The relative name of the root asset. This can only be an
             #     organization number (such as "organizations/123"), a project ID (such as
             #     "projects/my-project-id"), or a project number (such as "projects/12345"),
             #     or a folder number (such as "folders/123").
-            #   @param read_time [Google::Protobuf::Timestamp, Hash]
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Timestamp to take an asset snapshot. This can only be set to a timestamp
             #     between the current time and the current time minus 35 days (inclusive).
             #     If not specified, the current time will be used. Due to delays in resource
             #     data collection and indexing, there is a volatile window during which
             #     running the same query may get different results.
-            #   @param asset_types [Array<String>]
+            #   @param asset_types [::Array<::String>]
             #     A list of asset types of which to take a snapshot for. For example:
             #     "compute.googleapis.com/Disk". If specified, only matching assets will be
             #     returned. See [Introduction to Cloud Asset
             #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
             #     for all supported asset types.
-            #   @param content_type [Google::Cloud::Asset::V1::ContentType]
+            #   @param content_type [::Google::Cloud::Asset::V1::ContentType]
             #     Asset content type. If not specified, no content but the asset name will be
             #     returned.
-            #   @param output_config [Google::Cloud::Asset::V1::OutputConfig, Hash]
+            #   @param output_config [::Google::Cloud::Asset::V1::OutputConfig, ::Hash]
             #     Required. Output configuration indicating where the results will be output
             #     to. All results will be in newline delimited JSON format.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def export_assets request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Asset::V1::ExportAssetsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::ExportAssetsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.export_assets.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -248,12 +248,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @asset_service_stub.call_rpc :export_assets, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -267,12 +267,12 @@ module Google
             #
             # @overload batch_get_assets_history(request, options = nil)
             #   Pass arguments to `batch_get_assets_history` via a request object, either of type
-            #   {Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest, Hash]
+            #   @param request [::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload batch_get_assets_history(parent: nil, asset_names: nil, content_type: nil, read_time_window: nil)
@@ -280,11 +280,11 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The relative name of the root asset. It can only be an
             #     organization number (such as "organizations/123"), a project ID (such as
             #     "projects/my-project-id")", or a project number (such as "projects/12345").
-            #   @param asset_names [Array<String>]
+            #   @param asset_names [::Array<::String>]
             #     A list of the full names of the assets. For example:
             #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
             #     See [Resource
@@ -295,9 +295,9 @@ module Google
             #
             #     The request becomes a no-op if the asset name list is empty, and the max
             #     size of the asset name list is 100 in one request.
-            #   @param content_type [Google::Cloud::Asset::V1::ContentType]
+            #   @param content_type [::Google::Cloud::Asset::V1::ContentType]
             #     Optional. The content type.
-            #   @param read_time_window [Google::Cloud::Asset::V1::TimeWindow, Hash]
+            #   @param read_time_window [::Google::Cloud::Asset::V1::TimeWindow, ::Hash]
             #     Optional. The time window for the asset history. Both start_time and
             #     end_time are optional and if set, it must be after the current time minus
             #     35 days. If end_time is not set, it is default to current timestamp.
@@ -306,26 +306,26 @@ module Google
             #     window overlap with read_time_window.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse]
+            # @return [::Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def batch_get_assets_history request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.batch_get_assets_history.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -346,8 +346,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -356,12 +356,12 @@ module Google
             #
             # @overload create_feed(request, options = nil)
             #   Pass arguments to `create_feed` via a request object, either of type
-            #   {Google::Cloud::Asset::V1::CreateFeedRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Asset::V1::CreateFeedRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Asset::V1::CreateFeedRequest, Hash]
+            #   @param request [::Google::Cloud::Asset::V1::CreateFeedRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_feed(parent: nil, feed_id: nil, feed: nil)
@@ -369,16 +369,16 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The name of the project/folder/organization where this feed
             #     should be created in. It can only be an organization number (such as
             #     "organizations/123"), a folder number (such as "folders/123"), a project ID
             #     (such as "projects/my-project-id")", or a project number (such as
             #     "projects/12345").
-            #   @param feed_id [String]
+            #   @param feed_id [::String]
             #     Required. This is the client-assigned asset feed identifier and it needs to
             #     be unique under a specific parent project/folder/organization.
-            #   @param feed [Google::Cloud::Asset::V1::Feed, Hash]
+            #   @param feed [::Google::Cloud::Asset::V1::Feed, ::Hash]
             #     Required. The feed details. The field `name` must be empty and it will be generated
             #     in the format of:
             #     projects/project_number/feeds/feed_id
@@ -386,26 +386,26 @@ module Google
             #     organizations/organization_number/feeds/feed_id
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Asset::V1::Feed]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Asset::V1::Feed]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Asset::V1::Feed]
+            # @return [::Google::Cloud::Asset::V1::Feed]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_feed request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Asset::V1::CreateFeedRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::CreateFeedRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_feed.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -426,8 +426,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -435,12 +435,12 @@ module Google
             #
             # @overload get_feed(request, options = nil)
             #   Pass arguments to `get_feed` via a request object, either of type
-            #   {Google::Cloud::Asset::V1::GetFeedRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Asset::V1::GetFeedRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Asset::V1::GetFeedRequest, Hash]
+            #   @param request [::Google::Cloud::Asset::V1::GetFeedRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_feed(name: nil)
@@ -448,33 +448,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the Feed and it must be in the format of:
             #     projects/project_number/feeds/feed_id
             #     folders/folder_number/feeds/feed_id
             #     organizations/organization_number/feeds/feed_id
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Asset::V1::Feed]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Asset::V1::Feed]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Asset::V1::Feed]
+            # @return [::Google::Cloud::Asset::V1::Feed]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_feed request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Asset::V1::GetFeedRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::GetFeedRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_feed.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -495,8 +495,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -504,12 +504,12 @@ module Google
             #
             # @overload list_feeds(request, options = nil)
             #   Pass arguments to `list_feeds` via a request object, either of type
-            #   {Google::Cloud::Asset::V1::ListFeedsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Asset::V1::ListFeedsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Asset::V1::ListFeedsRequest, Hash]
+            #   @param request [::Google::Cloud::Asset::V1::ListFeedsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_feeds(parent: nil)
@@ -517,32 +517,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The parent project/folder/organization whose feeds are to be
             #     listed. It can only be using project/folder/organization number (such as
             #     "folders/12345")", or a project ID (such as "projects/my-project-id").
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Asset::V1::ListFeedsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Asset::V1::ListFeedsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Asset::V1::ListFeedsResponse]
+            # @return [::Google::Cloud::Asset::V1::ListFeedsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_feeds request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Asset::V1::ListFeedsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::ListFeedsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_feeds.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -563,8 +563,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -572,12 +572,12 @@ module Google
             #
             # @overload update_feed(request, options = nil)
             #   Pass arguments to `update_feed` via a request object, either of type
-            #   {Google::Cloud::Asset::V1::UpdateFeedRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Asset::V1::UpdateFeedRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Asset::V1::UpdateFeedRequest, Hash]
+            #   @param request [::Google::Cloud::Asset::V1::UpdateFeedRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_feed(feed: nil, update_mask: nil)
@@ -585,38 +585,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param feed [Google::Cloud::Asset::V1::Feed, Hash]
+            #   @param feed [::Google::Cloud::Asset::V1::Feed, ::Hash]
             #     Required. The new values of feed details. It must match an existing feed and the
             #     field `name` must be in the format of:
             #     projects/project_number/feeds/feed_id or
             #     folders/folder_number/feeds/feed_id or
             #     organizations/organization_number/feeds/feed_id.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Only updates the `feed` fields indicated by this mask.
             #     The field mask must not be empty, and it must not contain fields that
             #     are immutable or only set by the server.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Asset::V1::Feed]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Asset::V1::Feed]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Asset::V1::Feed]
+            # @return [::Google::Cloud::Asset::V1::Feed]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_feed request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Asset::V1::UpdateFeedRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::UpdateFeedRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_feed.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -637,8 +637,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -646,12 +646,12 @@ module Google
             #
             # @overload delete_feed(request, options = nil)
             #   Pass arguments to `delete_feed` via a request object, either of type
-            #   {Google::Cloud::Asset::V1::DeleteFeedRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Asset::V1::DeleteFeedRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Asset::V1::DeleteFeedRequest, Hash]
+            #   @param request [::Google::Cloud::Asset::V1::DeleteFeedRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_feed(name: nil)
@@ -659,33 +659,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The name of the feed and it must be in the format of:
             #     projects/project_number/feeds/feed_id
             #     folders/folder_number/feeds/feed_id
             #     organizations/organization_number/feeds/feed_id
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_feed request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Asset::V1::DeleteFeedRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::DeleteFeedRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_feed.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Asset::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -706,8 +706,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -717,7 +717,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Asset::V1::AssetService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Asset::V1::AssetService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -728,22 +728,22 @@ module Google
             # To modify the global config, setting the timeout for export_assets
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Asset::V1::AssetService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.export_assets.timeout = 20_000
+            #     ::Google::Cloud::Asset::V1::AssetService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.export_assets.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Asset::V1::AssetService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.export_assets.timeout = 20_000
+            #     client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.export_assets.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"cloudasset.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -755,29 +755,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -785,10 +785,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "cloudasset.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -796,14 +796,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -844,56 +844,56 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `export_assets`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :export_assets
                 ##
                 # RPC-specific configuration for `batch_get_assets_history`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :batch_get_assets_history
                 ##
                 # RPC-specific configuration for `create_feed`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_feed
                 ##
                 # RPC-specific configuration for `get_feed`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_feed
                 ##
                 # RPC-specific configuration for `list_feeds`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_feeds
                 ##
                 # RPC-specific configuration for `update_feed`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_feed
                 ##
                 # RPC-specific configuration for `delete_feed`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_feed
 
                 # @private
                 def initialize parent_rpcs = nil
                   export_assets_config = parent_rpcs&.export_assets if parent_rpcs&.respond_to? :export_assets
-                  @export_assets = Gapic::Config::Method.new export_assets_config
+                  @export_assets = ::Gapic::Config::Method.new export_assets_config
                   batch_get_assets_history_config = parent_rpcs&.batch_get_assets_history if parent_rpcs&.respond_to? :batch_get_assets_history
-                  @batch_get_assets_history = Gapic::Config::Method.new batch_get_assets_history_config
+                  @batch_get_assets_history = ::Gapic::Config::Method.new batch_get_assets_history_config
                   create_feed_config = parent_rpcs&.create_feed if parent_rpcs&.respond_to? :create_feed
-                  @create_feed = Gapic::Config::Method.new create_feed_config
+                  @create_feed = ::Gapic::Config::Method.new create_feed_config
                   get_feed_config = parent_rpcs&.get_feed if parent_rpcs&.respond_to? :get_feed
-                  @get_feed = Gapic::Config::Method.new get_feed_config
+                  @get_feed = ::Gapic::Config::Method.new get_feed_config
                   list_feeds_config = parent_rpcs&.list_feeds if parent_rpcs&.respond_to? :list_feeds
-                  @list_feeds = Gapic::Config::Method.new list_feeds_config
+                  @list_feeds = ::Gapic::Config::Method.new list_feeds_config
                   update_feed_config = parent_rpcs&.update_feed if parent_rpcs&.respond_to? :update_feed
-                  @update_feed = Gapic::Config::Method.new update_feed_config
+                  @update_feed = ::Gapic::Config::Method.new update_feed_config
                   delete_feed_config = parent_rpcs&.delete_feed if parent_rpcs&.respond_to? :delete_feed
-                  @delete_feed = Gapic::Config::Method.new delete_feed_config
+                  @delete_feed = ::Gapic::Config::Method.new delete_feed_config
 
                   yield self if block_given?
                 end

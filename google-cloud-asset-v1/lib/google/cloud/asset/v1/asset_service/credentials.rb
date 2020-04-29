@@ -24,7 +24,7 @@ module Google
       module V1
         module AssetService
           # Credentials for the AssetService API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform"
             ]

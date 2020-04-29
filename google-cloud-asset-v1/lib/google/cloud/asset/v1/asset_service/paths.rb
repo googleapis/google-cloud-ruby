@@ -51,28 +51,28 @@ module Google
             #   @param organization [String]
             #   @param feed [String]
             #
-            # @return [String]
+            # @return [::String]
             def feed_path **args
               resources = {
                 "feed:project"      => (proc do |project:, feed:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/feeds/#{feed}"
                 end),
                 "feed:folder"       => (proc do |folder:, feed:|
-                  raise ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/feeds/#{feed}"
                 end),
                 "feed:organization" => (proc do |organization:, feed:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/feeds/#{feed}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
