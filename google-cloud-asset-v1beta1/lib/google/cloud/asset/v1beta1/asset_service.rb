@@ -36,7 +36,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/asset/v1beta1/asset_service"
-        #     client = Google::Cloud::Asset::V1beta1::AssetService::Client.new
+        #     client = ::Google::Cloud::Asset::V1beta1::AssetService::Client.new
         #
         module AssetService
         end
