@@ -38,15 +38,15 @@ module Google
             ##
             # Configure the TenantService Client class.
             #
-            # See {Google::Cloud::Talent::V4beta1::TenantService::Client::Configuration}
+            # See {::Google::Cloud::Talent::V4beta1::TenantService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all TenantService clients:
             #
-            #     Google::Cloud::Talent::V4beta1::TenantService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Talent::V4beta1::TenantService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -106,7 +106,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Talent::V4beta1::TenantService::Client::Configuration}
+            # See {::Google::Cloud::Talent::V4beta1::TenantService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -127,13 +127,13 @@ module Google
             # To create a new TenantService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Talent::V4beta1::TenantService::Client.new
+            #     client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new
             #
             # To create a new TenantService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the TenantService client.
@@ -160,8 +160,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @tenant_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Talent::V4beta1::TenantService::Stub,
+              @tenant_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Talent::V4beta1::TenantService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -176,12 +176,12 @@ module Google
             #
             # @overload create_tenant(request, options = nil)
             #   Pass arguments to `create_tenant` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::CreateTenantRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::CreateTenantRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::CreateTenantRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::CreateTenantRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_tenant(parent: nil, tenant: nil)
@@ -189,35 +189,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the project under which the tenant is created.
             #
             #     The format is "projects/\\{project_id}", for example,
             #     "projects/foo".
-            #   @param tenant [Google::Cloud::Talent::V4beta1::Tenant, Hash]
+            #   @param tenant [::Google::Cloud::Talent::V4beta1::Tenant, ::Hash]
             #     Required. The tenant to be created.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::Tenant]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::Tenant]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::Tenant]
+            # @return [::Google::Cloud::Talent::V4beta1::Tenant]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_tenant request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::CreateTenantRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::CreateTenantRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_tenant.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -238,8 +238,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -247,12 +247,12 @@ module Google
             #
             # @overload get_tenant(request, options = nil)
             #   Pass arguments to `get_tenant` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::GetTenantRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::GetTenantRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::GetTenantRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::GetTenantRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_tenant(name: nil)
@@ -260,33 +260,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the tenant to be retrieved.
             #
             #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}", for example,
             #     "projects/foo/tenants/bar".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::Tenant]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::Tenant]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::Tenant]
+            # @return [::Google::Cloud::Talent::V4beta1::Tenant]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_tenant request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::GetTenantRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::GetTenantRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_tenant.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -307,8 +307,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -316,12 +316,12 @@ module Google
             #
             # @overload update_tenant(request, options = nil)
             #   Pass arguments to `update_tenant` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::UpdateTenantRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::UpdateTenantRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::UpdateTenantRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::UpdateTenantRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_tenant(tenant: nil, update_mask: nil)
@@ -329,38 +329,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param tenant [Google::Cloud::Talent::V4beta1::Tenant, Hash]
+            #   @param tenant [::Google::Cloud::Talent::V4beta1::Tenant, ::Hash]
             #     Required. The tenant resource to replace the current resource in the system.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Strongly recommended for the best service experience.
             #
-            #     If {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask} is provided, only the specified fields in
-            #     {Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant tenant} are updated. Otherwise all the fields are updated.
+            #     If {::Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask} is provided, only the specified fields in
+            #     {::Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant tenant} are updated. Otherwise all the fields are updated.
             #
             #     A field mask to specify the tenant fields to be updated. Only
-            #     top level fields of {Google::Cloud::Talent::V4beta1::Tenant Tenant} are supported.
+            #     top level fields of {::Google::Cloud::Talent::V4beta1::Tenant Tenant} are supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Talent::V4beta1::Tenant]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Talent::V4beta1::Tenant]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Talent::V4beta1::Tenant]
+            # @return [::Google::Cloud::Talent::V4beta1::Tenant]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_tenant request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::UpdateTenantRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::UpdateTenantRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_tenant.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -381,8 +381,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -390,12 +390,12 @@ module Google
             #
             # @overload delete_tenant(request, options = nil)
             #   Pass arguments to `delete_tenant` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::DeleteTenantRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::DeleteTenantRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::DeleteTenantRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::DeleteTenantRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_tenant(name: nil)
@@ -403,33 +403,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the tenant to be deleted.
             #
             #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}", for example,
             #     "projects/foo/tenants/bar".
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_tenant request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::DeleteTenantRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::DeleteTenantRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_tenant.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -450,8 +450,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -459,12 +459,12 @@ module Google
             #
             # @overload list_tenants(request, options = nil)
             #   Pass arguments to `list_tenants` via a request object, either of type
-            #   {Google::Cloud::Talent::V4beta1::ListTenantsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Talent::V4beta1::ListTenantsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Talent::V4beta1::ListTenantsRequest, Hash]
+            #   @param request [::Google::Cloud::Talent::V4beta1::ListTenantsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_tenants(parent: nil, page_token: nil, page_size: nil)
@@ -472,38 +472,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the project under which the tenant is created.
             #
             #     The format is "projects/\\{project_id}", for example,
             #     "projects/foo".
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The starting indicator from which to return results.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of tenants to be returned, at most 100.
             #     Default is 100 if a non-positive number is provided.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Talent::V4beta1::Tenant>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Talent::V4beta1::Tenant>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Talent::V4beta1::Tenant>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Talent::V4beta1::Tenant>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_tenants request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Talent::V4beta1::ListTenantsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4beta1::ListTenantsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_tenants.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -521,12 +521,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @tenant_service_stub.call_rpc :list_tenants, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @tenant_service_stub, :list_tenants, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @tenant_service_stub, :list_tenants, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -536,7 +536,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Talent::V4beta1::TenantService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Talent::V4beta1::TenantService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -547,22 +547,22 @@ module Google
             # To modify the global config, setting the timeout for create_tenant
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Talent::V4beta1::TenantService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_tenant.timeout = 20_000
+            #     ::Google::Cloud::Talent::V4beta1::TenantService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_tenant.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_tenant.timeout = 20_000
+            #     client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_tenant.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"jobs.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -574,29 +574,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -604,10 +604,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "jobs.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -615,14 +615,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -663,42 +663,42 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_tenant`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_tenant
                 ##
                 # RPC-specific configuration for `get_tenant`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_tenant
                 ##
                 # RPC-specific configuration for `update_tenant`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_tenant
                 ##
                 # RPC-specific configuration for `delete_tenant`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_tenant
                 ##
                 # RPC-specific configuration for `list_tenants`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_tenants
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_tenant_config = parent_rpcs&.create_tenant if parent_rpcs&.respond_to? :create_tenant
-                  @create_tenant = Gapic::Config::Method.new create_tenant_config
+                  @create_tenant = ::Gapic::Config::Method.new create_tenant_config
                   get_tenant_config = parent_rpcs&.get_tenant if parent_rpcs&.respond_to? :get_tenant
-                  @get_tenant = Gapic::Config::Method.new get_tenant_config
+                  @get_tenant = ::Gapic::Config::Method.new get_tenant_config
                   update_tenant_config = parent_rpcs&.update_tenant if parent_rpcs&.respond_to? :update_tenant
-                  @update_tenant = Gapic::Config::Method.new update_tenant_config
+                  @update_tenant = ::Gapic::Config::Method.new update_tenant_config
                   delete_tenant_config = parent_rpcs&.delete_tenant if parent_rpcs&.respond_to? :delete_tenant
-                  @delete_tenant = Gapic::Config::Method.new delete_tenant_config
+                  @delete_tenant = ::Gapic::Config::Method.new delete_tenant_config
                   list_tenants_config = parent_rpcs&.list_tenants if parent_rpcs&.respond_to? :list_tenants
-                  @list_tenants = Gapic::Config::Method.new list_tenants_config
+                  @list_tenants = ::Gapic::Config::Method.new list_tenants_config
 
                   yield self if block_given?
                 end

@@ -23,13 +23,13 @@ module Google
       module V4beta1
         # List profiles request.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the tenant under which the profile is created.
         #
         #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}". For example,
         #     "projects/foo/tenants/bar".
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     The filter string specifies the profiles to be enumerated.
         #
         #     Supported operator: =, AND
@@ -48,18 +48,18 @@ module Google
         #     * externalId = "externalId-1"
         #     * groupId = "groupId-1"
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     The token that specifies the current offset (that is, starting result).
         #
-        #     Please set the value to {Google::Cloud::Talent::V4beta1::ListProfilesResponse#next_page_token ListProfilesResponse.next_page_token} to
+        #     Please set the value to {::Google::Cloud::Talent::V4beta1::ListProfilesResponse#next_page_token ListProfilesResponse.next_page_token} to
         #     continue the list.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The maximum number of profiles to be returned, at most 100.
         #
         #     Default is 100 unless a positive number smaller than 100 is specified.
         # @!attribute [rw] read_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     A field mask to specify the profile fields to be listed in response.
         #     All fields are listed if it is unset.
         #
@@ -67,112 +67,112 @@ module Google
         #
         #     * name
         class ListProfilesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The List profiles response object.
         # @!attribute [rw] profiles
-        #   @return [Array<Google::Cloud::Talent::V4beta1::Profile>]
+        #   @return [::Array<::Google::Cloud::Talent::V4beta1::Profile>]
         #     Profiles for the specific tenant.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     A token to retrieve the next page of results. This is empty if there are no
         #     more results.
         class ListProfilesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Create profile request.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The name of the tenant this profile belongs to.
         #
         #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}". For example,
         #     "projects/foo/tenants/bar".
         # @!attribute [rw] profile
-        #   @return [Google::Cloud::Talent::V4beta1::Profile]
+        #   @return [::Google::Cloud::Talent::V4beta1::Profile]
         #     Required. The profile to be created.
         class CreateProfileRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Get profile request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the profile to get.
         #
         #     The format is
         #     "projects/\\{project_id}/tenants/\\{tenant_id}/profiles/\\{profile_id}". For
         #     example, "projects/foo/tenants/bar/profiles/baz".
         class GetProfileRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Update profile request
         # @!attribute [rw] profile
-        #   @return [Google::Cloud::Talent::V4beta1::Profile]
+        #   @return [::Google::Cloud::Talent::V4beta1::Profile]
         #     Required. Profile to be updated.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     A field mask to specify the profile fields to update.
         #
         #     A full update is performed if it is unset.
         class UpdateProfileRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Delete profile request.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the profile to be deleted.
         #
         #     The format is
         #     "projects/\\{project_id}/tenants/\\{tenant_id}/profiles/\\{profile_id}". For
         #     example, "projects/foo/tenants/bar/profiles/baz".
         class DeleteProfileRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The request body of the `SearchProfiles` call.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the tenant to search within.
         #
         #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}". For example,
         #     "projects/foo/tenants/bar".
         # @!attribute [rw] request_metadata
-        #   @return [Google::Cloud::Talent::V4beta1::RequestMetadata]
+        #   @return [::Google::Cloud::Talent::V4beta1::RequestMetadata]
         #     Required. The meta information collected about the profile search user. This is used
         #     to improve the search quality of the service. These values are provided by
         #     users, and must be precise and consistent.
         # @!attribute [rw] profile_query
-        #   @return [Google::Cloud::Talent::V4beta1::ProfileQuery]
-        #     Search query to execute. See {Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
+        #   @return [::Google::Cloud::Talent::V4beta1::ProfileQuery]
+        #     Search query to execute. See {::Google::Cloud::Talent::V4beta1::ProfileQuery ProfileQuery} for more details.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     A limit on the number of profiles returned in the search results.
         #     A value above the default value 10 can increase search response time.
         #
         #     The maximum value allowed is 100. Otherwise an error is thrown.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     The pageToken, similar to offset enables users of the API to paginate
         #     through the search results. To retrieve the first page of results, set the
         #     pageToken to empty. The search response includes a
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse#next_page_token nextPageToken} field that can be
+        #     {::Google::Cloud::Talent::V4beta1::SearchProfilesResponse#next_page_token nextPageToken} field that can be
         #     used to populate the pageToken field for the next page of results. Using
         #     pageToken instead of offset increases the performance of the API,
         #     especially compared to larger offset values.
         # @!attribute [rw] offset
-        #   @return [Integer]
+        #   @return [::Integer]
         #     An integer that specifies the current offset (that is, starting result) in
-        #     search results. This field is only considered if {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token} is unset.
+        #     search results. This field is only considered if {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token} is unset.
         #
         #     The maximum allowed value is 5000. Otherwise an error is thrown.
         #
@@ -180,13 +180,13 @@ module Google
         #     search from the 11th profile. This can be used for pagination, for example
         #     pageSize = 10 and offset = 10 means to search from the second page.
         # @!attribute [rw] disable_spell_check
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     This flag controls the spell-check feature. If `false`, the
         #     service attempts to correct a misspelled query.
         #
         #     For example, "enginee" is corrected to "engineer".
         # @!attribute [rw] order_by
-        #   @return [String]
+        #   @return [::String]
         #     The criteria that determines how search results are sorted.
         #     Defaults is "relevance desc" if no value is specified.
         #
@@ -194,27 +194,27 @@ module Google
         #
         #     * "relevance desc": By descending relevance, as determined by the API
         #        algorithms.
-        #     * "update_date desc": Sort by {Google::Cloud::Talent::V4beta1::Profile#update_time Profile.update_time} in descending order
+        #     * "update_date desc": Sort by {::Google::Cloud::Talent::V4beta1::Profile#update_time Profile.update_time} in descending order
         #       (recently updated profiles first).
-        #     * "create_date desc": Sort by {Google::Cloud::Talent::V4beta1::Profile#create_time Profile.create_time} in descending order
+        #     * "create_date desc": Sort by {::Google::Cloud::Talent::V4beta1::Profile#create_time Profile.create_time} in descending order
         #       (recently created profiles first).
-        #     * "first_name": Sort by {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name PersonName.PersonStructuredName.given_name} in
+        #     * "first_name": Sort by {::Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name PersonName.PersonStructuredName.given_name} in
         #       ascending order.
-        #     * "first_name desc": Sort by {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name PersonName.PersonStructuredName.given_name}
+        #     * "first_name desc": Sort by {::Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#given_name PersonName.PersonStructuredName.given_name}
         #       in descending order.
-        #     * "last_name": Sort by {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName.PersonStructuredName.family_name} in
+        #     * "last_name": Sort by {::Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName.PersonStructuredName.family_name} in
         #       ascending order.
-        #     * "last_name desc": Sort by {Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName.PersonStructuredName.family_name}
+        #     * "last_name desc": Sort by {::Google::Cloud::Talent::V4beta1::PersonName::PersonStructuredName#family_name PersonName.PersonStructuredName.family_name}
         #       in ascending order.
         # @!attribute [rw] case_sensitive_sort
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     When sort by field is based on alphabetical order, sort values case
         #     sensitively (based on ASCII) when the value is set to true. Default value
         #     is case in-sensitive sort (false).
         # @!attribute [rw] histogram_queries
-        #   @return [Array<Google::Cloud::Talent::V4beta1::HistogramQuery>]
+        #   @return [::Array<::Google::Cloud::Talent::V4beta1::HistogramQuery>]
         #     A list of expressions specifies histogram requests against matching
-        #     profiles for {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
+        #     profiles for {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
         #
         #     The expression syntax looks like a function definition with parameters.
         #
@@ -266,13 +266,13 @@ module Google
         #     * experience_in_months: experience in months. 0 means 0 month to 1 month
         #     (exclusive).
         #     * application_date: The application date specifies application start dates.
-        #     See {Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter} for more details.
+        #     See {::Google::Cloud::Talent::V4beta1::ApplicationDateFilter ApplicationDateFilter} for more details.
         #     * application_outcome_notes: The application outcome reason specifies the
         #     reasons behind the outcome of the job application.
-        #     See {Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter ApplicationOutcomeNotesFilter} for more details.
+        #     See {::Google::Cloud::Talent::V4beta1::ApplicationOutcomeNotesFilter ApplicationOutcomeNotesFilter} for more details.
         #     * application_job_title: The application job title specifies the job
         #     applied for in the application.
-        #     See {Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter} for more details.
+        #     See {::Google::Cloud::Talent::V4beta1::ApplicationJobFilter ApplicationJobFilter} for more details.
         #     * hirable_status: Hirable status specifies the profile's hirable status.
         #     * string_custom_attribute: String custom attributes. Values can be accessed
         #     via square bracket notation like string_custom_attribute["key1"].
@@ -288,29 +288,29 @@ module Google
         #     * count(numeric_custom_attribute["favorite_number"],
         #     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])
         # @!attribute [rw] result_set_id
-        #   @return [String]
+        #   @return [::String]
         #     An id that uniquely identifies the result set of a
-        #     {Google::Cloud::Talent::V4beta1::ProfileService::Client#search_profiles SearchProfiles} call. The id should be
+        #     {::Google::Cloud::Talent::V4beta1::ProfileService::Client#search_profiles SearchProfiles} call. The id should be
         #     retrieved from the
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse} message returned from a previous
-        #     invocation of {Google::Cloud::Talent::V4beta1::ProfileService::Client#search_profiles SearchProfiles}.
+        #     {::Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse} message returned from a previous
+        #     invocation of {::Google::Cloud::Talent::V4beta1::ProfileService::Client#search_profiles SearchProfiles}.
         #
         #     A result set is an ordered list of search results.
         #
         #     If this field is not set, a new result set is computed based on the
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query}.  A new {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id result_set_id} is returned as a handle to
+        #     {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query}.  A new {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id result_set_id} is returned as a handle to
         #     access this result set.
         #
         #     If this field is set, the service will ignore the resource and
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query} values, and simply retrieve a page of results from the
-        #     corresponding result set.  In this case, one and only one of {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
-        #     or {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#offset offset} must be set.
+        #     {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#profile_query profile_query} values, and simply retrieve a page of results from the
+        #     corresponding result set.  In this case, one and only one of {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#page_token page_token}
+        #     or {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#offset offset} must be set.
         #
-        #     A typical use case is to invoke {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest} without this
-        #     field, then use the resulting {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id result_set_id} in
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse} to page through the results.
+        #     A typical use case is to invoke {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest} without this
+        #     field, then use the resulting {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#result_set_id result_set_id} in
+        #     {::Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse} to page through the results.
         # @!attribute [rw] strict_keywords_search
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     This flag is used to indicate whether the service will attempt to
         #     understand synonyms and terms related to the search query or treat the
         #     query "as is" when it generates a set of results. By default this flag is
@@ -325,54 +325,54 @@ module Google
         #     allow recruiters to set this flag to true if they intend to search for
         #     longer boolean strings.
         class SearchProfilesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response of SearchProfiles method.
         # @!attribute [rw] estimated_total_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     An estimation of the number of profiles that match the specified query.
         #
         #     This number isn't guaranteed to be accurate.
         # @!attribute [rw] spell_correction
-        #   @return [Google::Cloud::Talent::V4beta1::SpellingCorrection]
+        #   @return [::Google::Cloud::Talent::V4beta1::SpellingCorrection]
         #     The spell checking result, and correction.
         # @!attribute [rw] metadata
-        #   @return [Google::Cloud::Talent::V4beta1::ResponseMetadata]
+        #   @return [::Google::Cloud::Talent::V4beta1::ResponseMetadata]
         #     Additional information for the API invocation, such as the request
         #     tracking id.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     A token to retrieve the next page of results. This is empty if there are no
         #     more results.
         # @!attribute [rw] histogram_query_results
-        #   @return [Array<Google::Cloud::Talent::V4beta1::HistogramQueryResult>]
+        #   @return [::Array<::Google::Cloud::Talent::V4beta1::HistogramQueryResult>]
         #     The histogram results that match with specified
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest.histogram_queries}.
+        #     {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest.histogram_queries}.
         # @!attribute [rw] summarized_profiles
-        #   @return [Array<Google::Cloud::Talent::V4beta1::SummarizedProfile>]
-        #     The profile entities that match the specified {Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
+        #   @return [::Array<::Google::Cloud::Talent::V4beta1::SummarizedProfile>]
+        #     The profile entities that match the specified {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest SearchProfilesRequest}.
         # @!attribute [rw] result_set_id
-        #   @return [String]
+        #   @return [::String]
         #     An id that uniquely identifies the result set of a
-        #     {Google::Cloud::Talent::V4beta1::ProfileService::Client#search_profiles SearchProfiles} call for consistent
+        #     {::Google::Cloud::Talent::V4beta1::ProfileService::Client#search_profiles SearchProfiles} call for consistent
         #     results.
         class SearchProfilesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Profile entry with metadata inside {Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}.
+        # Profile entry with metadata inside {::Google::Cloud::Talent::V4beta1::SearchProfilesResponse SearchProfilesResponse}.
         # @!attribute [rw] profiles
-        #   @return [Array<Google::Cloud::Talent::V4beta1::Profile>]
-        #     A list of profiles that are linked by {Google::Cloud::Talent::V4beta1::Profile#group_id Profile.group_id}.
+        #   @return [::Array<::Google::Cloud::Talent::V4beta1::Profile>]
+        #     A list of profiles that are linked by {::Google::Cloud::Talent::V4beta1::Profile#group_id Profile.group_id}.
         # @!attribute [rw] summary
-        #   @return [Google::Cloud::Talent::V4beta1::Profile]
+        #   @return [::Google::Cloud::Talent::V4beta1::Profile]
         #     A profile summary shows the profile summary and how the profile matches the
         #     search query.
         #
-        #     In profile summary, the profiles with the same {Google::Cloud::Talent::V4beta1::Profile#group_id Profile.group_id} are
+        #     In profile summary, the profiles with the same {::Google::Cloud::Talent::V4beta1::Profile#group_id Profile.group_id} are
         #     merged together. Among profiles, same education/employment records may be
         #     slightly different but they are merged into one with best efforts.
         #
@@ -383,8 +383,8 @@ module Google
         #     example, the school name in summary is set to "University of California at
         #     Berkeley" and the field of study is set to "Computer Science".
         class SummarizedProfile
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

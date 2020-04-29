@@ -23,23 +23,23 @@ module Google
       module V4beta1
         # The histogram request.
         # @!attribute [rw] histogram_query
-        #   @return [String]
+        #   @return [::String]
         #     An expression specifies a histogram request against matching resources
         #     (for example, jobs, profiles) for searches.
         #
-        #     See {Google::Cloud::Talent::V4beta1::SearchJobsRequest#histogram_queries SearchJobsRequest.histogram_queries} and
-        #     {Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest.histogram_queries} for details about syntax.
+        #     See {::Google::Cloud::Talent::V4beta1::SearchJobsRequest#histogram_queries SearchJobsRequest.histogram_queries} and
+        #     {::Google::Cloud::Talent::V4beta1::SearchProfilesRequest#histogram_queries SearchProfilesRequest.histogram_queries} for details about syntax.
         class HistogramQuery
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Histogram result that matches {Google::Cloud::Talent::V4beta1::HistogramQuery HistogramQuery} specified in searches.
+        # Histogram result that matches {::Google::Cloud::Talent::V4beta1::HistogramQuery HistogramQuery} specified in searches.
         # @!attribute [rw] histogram_query
-        #   @return [String]
+        #   @return [::String]
         #     Requested histogram expression.
         # @!attribute [rw] histogram
-        #   @return [Google::Protobuf::Map{String => Integer}]
+        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
         #     A map from the values of the facet associated with distinct values to the
         #     number of matching entries with corresponding value.
         #
@@ -51,16 +51,16 @@ module Google
         #     * (for anonymous numeric bucket) range formatted as `<low>-<high>`, for
         #       example, `0-1000`, `MIN-0`, and `0-MAX`.
         class HistogramQueryResult
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [Integer]
+          #   @return [::Integer]
           class HistogramEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

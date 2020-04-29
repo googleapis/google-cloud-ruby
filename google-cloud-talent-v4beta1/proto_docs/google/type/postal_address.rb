@@ -37,20 +37,20 @@ module Google
     # For more guidance on how to use this schema, please see:
     # https://support.google.com/business/answer/6397478
     # @!attribute [rw] revision
-    #   @return [Integer]
+    #   @return [::Integer]
     #     The schema revision of the `PostalAddress`. This must be set to 0, which is
     #     the latest revision.
     #
     #     All new revisions **must** be backward compatible with old revisions.
     # @!attribute [rw] region_code
-    #   @return [String]
+    #   @return [::String]
     #     Required. CLDR region code of the country/region of the address. This
     #     is never inferred and it is up to the user to ensure the value is
     #     correct. See http://cldr.unicode.org/ and
     #     http://www.unicode.org/cldr/charts/30/supplemental/territory_information.html
     #     for details. Example: "CH" for Switzerland.
     # @!attribute [rw] language_code
-    #   @return [String]
+    #   @return [::String]
     #     Optional. BCP-47 language code of the contents of this address (if
     #     known). This is often the UI language of the input form or is expected
     #     to match one of the languages used in the address' country/region, or their
@@ -64,20 +64,20 @@ module Google
     #
     #     Examples: "zh-Hant", "ja", "ja-Latn", "en".
     # @!attribute [rw] postal_code
-    #   @return [String]
+    #   @return [::String]
     #     Optional. Postal code of the address. Not all countries use or require
     #     postal codes to be present, but where they are used, they may trigger
     #     additional validation with other parts of the address (e.g. state/zip
     #     validation in the U.S.A.).
     # @!attribute [rw] sorting_code
-    #   @return [String]
+    #   @return [::String]
     #     Optional. Additional, country-specific, sorting code. This is not used
     #     in most regions. Where it is used, the value is either a string like
     #     "CEDEX", optionally followed by a number (e.g. "CEDEX 7"), or just a number
     #     alone, representing the "sector code" (Jamaica), "delivery area indicator"
     #     (Malawi) or "post office indicator" (e.g. Côte d'Ivoire).
     # @!attribute [rw] administrative_area
-    #   @return [String]
+    #   @return [::String]
     #     Optional. Highest administrative subdivision which is used for postal
     #     addresses of a country or region.
     #     For example, this can be a state, a province, an oblast, or a prefecture.
@@ -86,17 +86,17 @@ module Google
     #     Many countries don't use an administrative area in postal addresses. E.g.
     #     in Switzerland this should be left unpopulated.
     # @!attribute [rw] locality
-    #   @return [String]
+    #   @return [::String]
     #     Optional. Generally refers to the city/town portion of the address.
     #     Examples: US city, IT comune, UK post town.
     #     In regions of the world where localities are not well defined or do not fit
     #     into this structure well, leave locality empty and use address_lines.
     # @!attribute [rw] sublocality
-    #   @return [String]
+    #   @return [::String]
     #     Optional. Sublocality of the address.
     #     For example, this can be neighborhoods, boroughs, districts.
     # @!attribute [rw] address_lines
-    #   @return [Array<String>]
+    #   @return [::Array<::String>]
     #     Unstructured address lines describing the lower levels of an address.
     #
     #     Because values in address_lines do not have type information and may
@@ -120,16 +120,16 @@ module Google
     #     addresses (as opposed to guessing which parts of the address should be
     #     localities or administrative areas).
     # @!attribute [rw] recipients
-    #   @return [Array<String>]
+    #   @return [::Array<::String>]
     #     Optional. The recipient at the address.
     #     This field may, under certain circumstances, contain multiline information.
     #     For example, it might contain "care of" information.
     # @!attribute [rw] organization
-    #   @return [String]
+    #   @return [::String]
     #     Optional. The name of the organization at the address.
     class PostalAddress
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end

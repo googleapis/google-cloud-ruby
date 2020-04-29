@@ -23,23 +23,23 @@ module Google
       module V4beta1
         # The Request of the CreateCompany method.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the tenant under which the company is created.
         #
         #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}", for example,
         #     "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
         #     is created, for example, "projects/foo".
         # @!attribute [rw] company
-        #   @return [Google::Cloud::Talent::V4beta1::Company]
+        #   @return [::Google::Cloud::Talent::V4beta1::Company]
         #     Required. The company to be created.
         class CreateCompanyRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request for getting a company by name.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the company to be retrieved.
         #
         #     The format is
@@ -49,31 +49,31 @@ module Google
         #     If tenant id is unspecified, the default tenant is used, for
         #     example, "projects/api-test-project/companies/bar".
         class GetCompanyRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request for updating a specified company.
         # @!attribute [rw] company
-        #   @return [Google::Cloud::Talent::V4beta1::Company]
+        #   @return [::Google::Cloud::Talent::V4beta1::Company]
         #     Required. The company resource to replace the current resource in the system.
         # @!attribute [rw] update_mask
-        #   @return [Google::Protobuf::FieldMask]
+        #   @return [::Google::Protobuf::FieldMask]
         #     Strongly recommended for the best service experience.
         #
-        #     If {Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#update_mask update_mask} is provided, only the specified fields in
-        #     {Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#company company} are updated. Otherwise all the fields are updated.
+        #     If {::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#update_mask update_mask} is provided, only the specified fields in
+        #     {::Google::Cloud::Talent::V4beta1::UpdateCompanyRequest#company company} are updated. Otherwise all the fields are updated.
         #
         #     A field mask to specify the company fields to be updated. Only
-        #     top level fields of {Google::Cloud::Talent::V4beta1::Company Company} are supported.
+        #     top level fields of {::Google::Cloud::Talent::V4beta1::Company Company} are supported.
         class UpdateCompanyRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request to delete a company.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the company to be deleted.
         #
         #     The format is
@@ -83,13 +83,13 @@ module Google
         #     If tenant id is unspecified, the default tenant is used, for
         #     example, "projects/foo/companies/bar".
         class DeleteCompanyRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # List companies for which the client has ACL visibility.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. Resource name of the tenant under which the company is created.
         #
         #     The format is "projects/\\{project_id}/tenants/\\{tenant_id}", for example,
@@ -98,39 +98,39 @@ module Google
         #     If tenant id is unspecified, the default tenant will be used, for
         #     example, "projects/foo".
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     The starting indicator from which to return results.
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     The maximum number of companies to be returned, at most 100.
         #     Default is 100 if a non-positive number is provided.
         # @!attribute [rw] require_open_jobs
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Set to true if the companies requested must have open jobs.
         #
         #     Defaults to false.
         #
-        #     If true, at most {Google::Cloud::Talent::V4beta1::ListCompaniesRequest#page_size page_size} of companies are fetched, among which
+        #     If true, at most {::Google::Cloud::Talent::V4beta1::ListCompaniesRequest#page_size page_size} of companies are fetched, among which
         #     only those with open jobs are returned.
         class ListCompaniesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The List companies response object.
         # @!attribute [rw] companies
-        #   @return [Array<Google::Cloud::Talent::V4beta1::Company>]
+        #   @return [::Array<::Google::Cloud::Talent::V4beta1::Company>]
         #     Companies for the current client.
         # @!attribute [rw] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     A token to retrieve the next page of results.
         # @!attribute [rw] metadata
-        #   @return [Google::Cloud::Talent::V4beta1::ResponseMetadata]
+        #   @return [::Google::Cloud::Talent::V4beta1::ResponseMetadata]
         #     Additional information for the API invocation, such as the request
         #     tracking id.
         class ListCompaniesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

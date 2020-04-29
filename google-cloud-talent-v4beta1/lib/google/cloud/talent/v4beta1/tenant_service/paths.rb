@@ -33,7 +33,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def project_path project:
               "projects/#{project}"
             end
@@ -48,9 +48,9 @@ module Google
             # @param project [String]
             # @param tenant [String]
             #
-            # @return [String]
+            # @return [::String]
             def tenant_path project:, tenant:
-              raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/tenants/#{tenant}"
             end

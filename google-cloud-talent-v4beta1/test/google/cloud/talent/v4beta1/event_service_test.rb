@@ -23,7 +23,7 @@ require "google/cloud/talent/v4beta1/event_service_pb"
 require "google/cloud/talent/v4beta1/event_service_services_pb"
 require "google/cloud/talent/v4beta1/event_service"
 
-class Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Test
+class ::Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Test
 
   def test_create_client_event
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Talent::V4beta1::ClientEvent.new
+    grpc_response = ::Google::Cloud::Talent::V4beta1::ClientEvent.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -59,15 +59,15 @@ class Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Test
 
     create_client_event_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_client_event, name
-      assert_kind_of Google::Cloud::Talent::V4beta1::CreateClientEventRequest, request
+      assert_kind_of ::Google::Cloud::Talent::V4beta1::CreateClientEventRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Talent::V4beta1::ClientEvent), request.client_event
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Talent::V4beta1::ClientEvent), request.client_event
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_client_event_client_stub do
       # Create client
-      client = Google::Cloud::Talent::V4beta1::EventService::Client.new do |config|
+      client = ::Google::Cloud::Talent::V4beta1::EventService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -84,7 +84,7 @@ class Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.create_client_event Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event) do |response, operation|
+      client.create_client_event ::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -96,7 +96,7 @@ class Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.create_client_event Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event), grpc_options do |response, operation|
+      client.create_client_event ::Google::Cloud::Talent::V4beta1::CreateClientEventRequest.new(parent: parent, client_event: client_event), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -111,7 +111,7 @@ class Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Talent::V4beta1::EventService::Client.new do |config|
+      client = ::Google::Cloud::Talent::V4beta1::EventService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -121,6 +121,6 @@ class Google::Cloud::Talent::V4beta1::EventService::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Talent::V4beta1::EventService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Talent::V4beta1::EventService::Client::Configuration, config
   end
 end

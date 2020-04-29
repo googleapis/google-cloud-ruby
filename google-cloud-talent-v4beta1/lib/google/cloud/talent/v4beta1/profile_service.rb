@@ -37,7 +37,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/talent/v4beta1/profile_service"
-        #     client = Google::Cloud::Talent::V4beta1::ProfileService::Client.new
+        #     client = ::Google::Cloud::Talent::V4beta1::ProfileService::Client.new
         #
         module ProfileService
         end

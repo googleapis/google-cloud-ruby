@@ -21,24 +21,24 @@ module Google
   module Type
     # Represents a time of day. The date and time zone are either not significant
     # or are specified elsewhere. An API may choose to allow leap seconds. Related
-    # types are {Google::Type::Date google.type.Date} and `google.protobuf.Timestamp`.
+    # types are {::Google::Type::Date google.type.Date} and `google.protobuf.Timestamp`.
     # @!attribute [rw] hours
-    #   @return [Integer]
+    #   @return [::Integer]
     #     Hours of day in 24 hour format. Should be from 0 to 23. An API may choose
     #     to allow the value "24:00:00" for scenarios like business closing time.
     # @!attribute [rw] minutes
-    #   @return [Integer]
+    #   @return [::Integer]
     #     Minutes of hour of day. Must be from 0 to 59.
     # @!attribute [rw] seconds
-    #   @return [Integer]
+    #   @return [::Integer]
     #     Seconds of minutes of the time. Must normally be from 0 to 59. An API may
     #     allow the value 60 if it allows leap-seconds.
     # @!attribute [rw] nanos
-    #   @return [Integer]
+    #   @return [::Integer]
     #     Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999.
     class TimeOfDay
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
   end
 end
