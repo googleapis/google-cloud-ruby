@@ -36,7 +36,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/phishing_protection/v1beta1/phishing_protection_service"
-        #     client = Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new
+        #     client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new
         #
         module PhishingProtectionService
         end

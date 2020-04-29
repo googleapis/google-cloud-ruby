@@ -23,7 +23,7 @@ require "google/cloud/phishingprotection/v1beta1/phishingprotection_pb"
 require "google/cloud/phishingprotection/v1beta1/phishingprotection_services_pb"
 require "google/cloud/phishing_protection/v1beta1/phishing_protection_service"
 
-class Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::ClientTest < Minitest::Test
+class ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Cli
 
   def test_report_phishing
     # Create GRPC objects.
-    grpc_response = Google::Cloud::PhishingProtection::V1beta1::ReportPhishingResponse.new
+    grpc_response = ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -59,7 +59,7 @@ class Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Cli
 
     report_phishing_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :report_phishing, name
-      assert_kind_of Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest, request
+      assert_kind_of ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest, request
       assert_equal "hello world", request.parent
       assert_equal "hello world", request.uri
       refute_nil options
@@ -67,7 +67,7 @@ class Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Cli
 
     Gapic::ServiceStub.stub :new, report_phishing_client_stub do
       # Create client
-      client = Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new do |config|
+      client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -84,7 +84,7 @@ class Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Cli
       end
 
       # Use protobuf object
-      client.report_phishing Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri) do |response, operation|
+      client.report_phishing ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -96,7 +96,7 @@ class Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Cli
       end
 
       # Use protobuf object with options
-      client.report_phishing Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri), grpc_options do |response, operation|
+      client.report_phishing ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new(parent: parent, uri: uri), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -111,7 +111,7 @@ class Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Cli
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new do |config|
+      client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -121,6 +121,6 @@ class Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Cli
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client::Configuration, config
   end
 end

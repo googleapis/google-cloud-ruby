@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/phishing_protection/v1beta1"
 
-client = Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new
+client = ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new
 request = my_create_request
 response = client.report_phishing request
 ```
