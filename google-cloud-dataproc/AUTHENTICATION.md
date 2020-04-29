@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-dataproc
 checks for credentials are configured on the service Credentials class (such as
-`Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Credentials`):
+`::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Credentials`):
 
 1. `DATAPROC_CREDENTIALS` - Path to JSON file, or JSON contents
 2. `DATAPROC_KEYFILE` - Path to JSON file, or JSON contents
