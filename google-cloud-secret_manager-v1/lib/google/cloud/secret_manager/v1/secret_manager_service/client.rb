@@ -32,8 +32,8 @@ module Google
           # Manages secrets and operations using those secrets. Implements a REST
           # model with the following objects:
           #
-          # * {Google::Cloud::SecretManager::V1::Secret Secret}
-          # * {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}
+          # * {::Google::Cloud::SecretManager::V1::Secret Secret}
+          # * {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}
           #
           class Client
             include Paths
@@ -44,15 +44,15 @@ module Google
             ##
             # Configure the SecretManagerService Client class.
             #
-            # See {Google::Cloud::SecretManager::V1::SecretManagerService::Client::Configuration}
+            # See {::Google::Cloud::SecretManager::V1::SecretManagerService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all SecretManagerService clients:
             #
-            #     Google::Cloud::SecretManager::V1::SecretManagerService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::SecretManager::V1::SecretManagerService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -120,7 +120,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::SecretManager::V1::SecretManagerService::Client::Configuration}
+            # See {::Google::Cloud::SecretManager::V1::SecretManagerService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -141,13 +141,13 @@ module Google
             # To create a new SecretManagerService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::SecretManager::V1::SecretManagerService::Client.new
+            #     client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Client.new
             #
             # To create a new SecretManagerService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::SecretManager::V1::SecretManagerService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the SecretManagerService client.
@@ -174,8 +174,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @secret_manager_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::SecretManager::V1::SecretManagerService::Stub,
+              @secret_manager_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::SecretManager::V1::SecretManagerService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -186,16 +186,16 @@ module Google
             # Service calls
 
             ##
-            # Lists {Google::Cloud::SecretManager::V1::Secret Secrets}.
+            # Lists {::Google::Cloud::SecretManager::V1::Secret Secrets}.
             #
             # @overload list_secrets(request, options = nil)
             #   Pass arguments to `list_secrets` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::ListSecretsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::ListSecretsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::ListSecretsRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::ListSecretsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_secrets(parent: nil, page_size: nil, page_token: nil)
@@ -203,38 +203,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the project associated with the
-            #     {Google::Cloud::SecretManager::V1::Secret Secrets}, in the format `projects/*`.
-            #   @param page_size [Integer]
+            #     {::Google::Cloud::SecretManager::V1::Secret Secrets}, in the format `projects/*`.
+            #   @param page_size [::Integer]
             #     Optional. The maximum number of results to be returned in a single page. If
             #     set to 0, the server decides the number of results to return. If the
             #     number is greater than 25000, it is capped at 25000.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. Pagination token, returned earlier via
-            #     {Google::Cloud::SecretManager::V1::ListSecretsResponse#next_page_token ListSecretsResponse.next_page_token}.
+            #     {::Google::Cloud::SecretManager::V1::ListSecretsResponse#next_page_token ListSecretsResponse.next_page_token}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::SecretManager::V1::Secret>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecretManager::V1::Secret>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::SecretManager::V1::Secret>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecretManager::V1::Secret>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_secrets request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::ListSecretsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::ListSecretsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_secrets.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -252,25 +252,25 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @secret_manager_service_stub.call_rpc :list_secrets, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @secret_manager_service_stub, :list_secrets, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @secret_manager_service_stub, :list_secrets, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Creates a new {Google::Cloud::SecretManager::V1::Secret Secret} containing no {Google::Cloud::SecretManager::V1::SecretVersion SecretVersions}.
+            # Creates a new {::Google::Cloud::SecretManager::V1::Secret Secret} containing no {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions}.
             #
             # @overload create_secret(request, options = nil)
             #   Pass arguments to `create_secret` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::CreateSecretRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::CreateSecretRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::CreateSecretRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::CreateSecretRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_secret(parent: nil, secret_id: nil, secret: nil)
@@ -278,39 +278,39 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The resource name of the project to associate with the
-            #     {Google::Cloud::SecretManager::V1::Secret Secret}, in the format `projects/*`.
-            #   @param secret_id [String]
+            #     {::Google::Cloud::SecretManager::V1::Secret Secret}, in the format `projects/*`.
+            #   @param secret_id [::String]
             #     Required. This must be unique within the project.
             #
             #     A secret ID is a string with a maximum length of 255 characters and can
             #     contain uppercase and lowercase letters, numerals, and the hyphen (`-`) and
             #     underscore (`_`) characters.
-            #   @param secret [Google::Cloud::SecretManager::V1::Secret, Hash]
-            #     Required. A {Google::Cloud::SecretManager::V1::Secret Secret} with initial field values.
+            #   @param secret [::Google::Cloud::SecretManager::V1::Secret, ::Hash]
+            #     Required. A {::Google::Cloud::SecretManager::V1::Secret Secret} with initial field values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecretManager::V1::Secret]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::Secret]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecretManager::V1::Secret]
+            # @return [::Google::Cloud::SecretManager::V1::Secret]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_secret request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::CreateSecretRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::CreateSecretRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_secret.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -331,22 +331,22 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Creates a new {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} containing secret data and attaches
-            # it to an existing {Google::Cloud::SecretManager::V1::Secret Secret}.
+            # Creates a new {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} containing secret data and attaches
+            # it to an existing {::Google::Cloud::SecretManager::V1::Secret Secret}.
             #
             # @overload add_secret_version(request, options = nil)
             #   Pass arguments to `add_secret_version` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::AddSecretVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::AddSecretVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::AddSecretVersionRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::AddSecretVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload add_secret_version(parent: nil, payload: nil)
@@ -354,33 +354,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
-            #     Required. The resource name of the {Google::Cloud::SecretManager::V1::Secret Secret} to associate with the
-            #     {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format `projects/*/secrets/*`.
-            #   @param payload [Google::Cloud::SecretManager::V1::SecretPayload, Hash]
-            #     Required. The secret payload of the {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            #   @param parent [::String]
+            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::Secret Secret} to associate with the
+            #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format `projects/*/secrets/*`.
+            #   @param payload [::Google::Cloud::SecretManager::V1::SecretPayload, ::Hash]
+            #     Required. The secret payload of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecretManager::V1::SecretVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecretManager::V1::SecretVersion]
+            # @return [::Google::Cloud::SecretManager::V1::SecretVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def add_secret_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::AddSecretVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::AddSecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.add_secret_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -401,21 +401,21 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Gets metadata for a given {Google::Cloud::SecretManager::V1::Secret Secret}.
+            # Gets metadata for a given {::Google::Cloud::SecretManager::V1::Secret Secret}.
             #
             # @overload get_secret(request, options = nil)
             #   Pass arguments to `get_secret` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::GetSecretRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::GetSecretRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::GetSecretRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::GetSecretRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_secret(name: nil)
@@ -423,30 +423,30 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::SecretManager::V1::Secret Secret}, in the format `projects/*/secrets/*`.
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::Secret Secret}, in the format `projects/*/secrets/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecretManager::V1::Secret]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::Secret]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecretManager::V1::Secret]
+            # @return [::Google::Cloud::SecretManager::V1::Secret]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_secret request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::GetSecretRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::GetSecretRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_secret.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -467,21 +467,21 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Updates metadata of an existing {Google::Cloud::SecretManager::V1::Secret Secret}.
+            # Updates metadata of an existing {::Google::Cloud::SecretManager::V1::Secret Secret}.
             #
             # @overload update_secret(request, options = nil)
             #   Pass arguments to `update_secret` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::UpdateSecretRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::UpdateSecretRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::UpdateSecretRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::UpdateSecretRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_secret(secret: nil, update_mask: nil)
@@ -489,32 +489,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param secret [Google::Cloud::SecretManager::V1::Secret, Hash]
-            #     Required. {Google::Cloud::SecretManager::V1::Secret Secret} with updated field values.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param secret [::Google::Cloud::SecretManager::V1::Secret, ::Hash]
+            #     Required. {::Google::Cloud::SecretManager::V1::Secret Secret} with updated field values.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Specifies the fields to be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecretManager::V1::Secret]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::Secret]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecretManager::V1::Secret]
+            # @return [::Google::Cloud::SecretManager::V1::Secret]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_secret request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::UpdateSecretRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::UpdateSecretRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_secret.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -535,21 +535,21 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Deletes a {Google::Cloud::SecretManager::V1::Secret Secret}.
+            # Deletes a {::Google::Cloud::SecretManager::V1::Secret Secret}.
             #
             # @overload delete_secret(request, options = nil)
             #   Pass arguments to `delete_secret` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::DeleteSecretRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::DeleteSecretRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::DeleteSecretRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::DeleteSecretRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_secret(name: nil)
@@ -557,31 +557,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::SecretManager::V1::Secret Secret} to delete in the format
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::Secret Secret} to delete in the format
             #     `projects/*/secrets/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_secret request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::DeleteSecretRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::DeleteSecretRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_secret.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -602,22 +602,22 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Lists {Google::Cloud::SecretManager::V1::SecretVersion SecretVersions}. This call does not return secret
+            # Lists {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions}. This call does not return secret
             # data.
             #
             # @overload list_secret_versions(request, options = nil)
             #   Pass arguments to `list_secret_versions` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::ListSecretVersionsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::ListSecretVersionsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::ListSecretVersionsRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::ListSecretVersionsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_secret_versions(parent: nil, page_size: nil, page_token: nil)
@@ -625,39 +625,39 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
-            #     Required. The resource name of the {Google::Cloud::SecretManager::V1::Secret Secret} associated with the
-            #     {Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} to list, in the format
+            #   @param parent [::String]
+            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::Secret Secret} associated with the
+            #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} to list, in the format
             #     `projects/*/secrets/*`.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     Optional. The maximum number of results to be returned in a single page. If
             #     set to 0, the server decides the number of results to return. If the
             #     number is greater than 25000, it is capped at 25000.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     Optional. Pagination token, returned earlier via
             #     ListSecretVersionsResponse.next_page_token][].
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::SecretManager::V1::SecretVersion>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecretManager::V1::SecretVersion>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::SecretManager::V1::SecretVersion>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecretManager::V1::SecretVersion>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_secret_versions request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::ListSecretVersionsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::ListSecretVersionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_secret_versions.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -675,28 +675,28 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @secret_manager_service_stub.call_rpc :list_secret_versions, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @secret_manager_service_stub, :list_secret_versions, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @secret_manager_service_stub, :list_secret_versions, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Gets metadata for a {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            # Gets metadata for a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
             # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            # {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            # {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
             # @overload get_secret_version(request, options = nil)
             #   Pass arguments to `get_secret_version` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::GetSecretVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::GetSecretVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::GetSecretVersionRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::GetSecretVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_secret_version(name: nil)
@@ -704,33 +704,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
             #     `projects/*/secrets/*/versions/*`.
             #     `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            #     {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecretManager::V1::SecretVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecretManager::V1::SecretVersion]
+            # @return [::Google::Cloud::SecretManager::V1::SecretVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_secret_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::GetSecretVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::GetSecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_secret_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -751,24 +751,24 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Accesses a {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. This call returns the secret data.
+            # Accesses a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. This call returns the secret data.
             #
             # `projects/*/secrets/*/versions/latest` is an alias to the `latest`
-            # {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            # {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
             # @overload access_secret_version(request, options = nil)
             #   Pass arguments to `access_secret_version` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::AccessSecretVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::AccessSecretVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::AccessSecretVersionRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::AccessSecretVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload access_secret_version(name: nil)
@@ -776,31 +776,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} in the format
             #     `projects/*/secrets/*/versions/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecretManager::V1::AccessSecretVersionResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::AccessSecretVersionResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecretManager::V1::AccessSecretVersionResponse]
+            # @return [::Google::Cloud::SecretManager::V1::AccessSecretVersionResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def access_secret_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::AccessSecretVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::AccessSecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.access_secret_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -821,24 +821,24 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Disables a {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            # Disables a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
-            # Sets the {Google::Cloud::SecretManager::V1::SecretVersion#state state} of the {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to
-            # {Google::Cloud::SecretManager::V1::SecretVersion::State::DISABLED DISABLED}.
+            # Sets the {::Google::Cloud::SecretManager::V1::SecretVersion#state state} of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to
+            # {::Google::Cloud::SecretManager::V1::SecretVersion::State::DISABLED DISABLED}.
             #
             # @overload disable_secret_version(request, options = nil)
             #   Pass arguments to `disable_secret_version` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::DisableSecretVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::DisableSecretVersionRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload disable_secret_version(name: nil)
@@ -846,31 +846,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to disable in the format
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to disable in the format
             #     `projects/*/secrets/*/versions/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecretManager::V1::SecretVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecretManager::V1::SecretVersion]
+            # @return [::Google::Cloud::SecretManager::V1::SecretVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def disable_secret_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::DisableSecretVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::DisableSecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.disable_secret_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -891,24 +891,24 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Enables a {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            # Enables a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
-            # Sets the {Google::Cloud::SecretManager::V1::SecretVersion#state state} of the {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to
-            # {Google::Cloud::SecretManager::V1::SecretVersion::State::ENABLED ENABLED}.
+            # Sets the {::Google::Cloud::SecretManager::V1::SecretVersion#state state} of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to
+            # {::Google::Cloud::SecretManager::V1::SecretVersion::State::ENABLED ENABLED}.
             #
             # @overload enable_secret_version(request, options = nil)
             #   Pass arguments to `enable_secret_version` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::EnableSecretVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::EnableSecretVersionRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload enable_secret_version(name: nil)
@@ -916,31 +916,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to enable in the format
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to enable in the format
             #     `projects/*/secrets/*/versions/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecretManager::V1::SecretVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecretManager::V1::SecretVersion]
+            # @return [::Google::Cloud::SecretManager::V1::SecretVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def enable_secret_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::EnableSecretVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::EnableSecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.enable_secret_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -961,25 +961,25 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
-            # Destroys a {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+            # Destroys a {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
             #
-            # Sets the {Google::Cloud::SecretManager::V1::SecretVersion#state state} of the {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to
-            # {Google::Cloud::SecretManager::V1::SecretVersion::State::DESTROYED DESTROYED} and irrevocably destroys the
+            # Sets the {::Google::Cloud::SecretManager::V1::SecretVersion#state state} of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to
+            # {::Google::Cloud::SecretManager::V1::SecretVersion::State::DESTROYED DESTROYED} and irrevocably destroys the
             # secret data.
             #
             # @overload destroy_secret_version(request, options = nil)
             #   Pass arguments to `destroy_secret_version` via a request object, either of type
-            #   {Google::Cloud::SecretManager::V1::DestroySecretVersionRequest} or an equivalent Hash.
+            #   {::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::SecretManager::V1::DestroySecretVersionRequest, Hash]
+            #   @param request [::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload destroy_secret_version(name: nil)
@@ -987,31 +987,31 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
-            #     Required. The resource name of the {Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to destroy in the format
+            #   @param name [::String]
+            #     Required. The resource name of the {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion} to destroy in the format
             #     `projects/*/secrets/*/versions/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::SecretManager::V1::SecretVersion]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::SecretManager::V1::SecretVersion]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::SecretManager::V1::SecretVersion]
+            # @return [::Google::Cloud::SecretManager::V1::SecretVersion]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def destroy_secret_version request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::SecretManager::V1::DestroySecretVersionRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecretManager::V1::DestroySecretVersionRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.destroy_secret_version.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1032,25 +1032,25 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Sets the access control policy on the specified secret. Replaces any
             # existing policy.
             #
-            # Permissions on {Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} are enforced according
-            # to the policy set on the associated {Google::Cloud::SecretManager::V1::Secret Secret}.
+            # Permissions on {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersions} are enforced according
+            # to the policy set on the associated {::Google::Cloud::SecretManager::V1::Secret Secret}.
             #
             # @overload set_iam_policy(request, options = nil)
             #   Pass arguments to `set_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::SetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload set_iam_policy(resource: nil, policy: nil)
@@ -1058,36 +1058,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being specified.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param policy [Google::Iam::V1::Policy, Hash]
+            #   @param policy [::Google::Iam::V1::Policy, ::Hash]
             #     REQUIRED: The complete policy to be applied to the `resource`. The size of
             #     the policy is limited to a few 10s of KB. An empty policy is a
             #     valid policy but certain Cloud Platform services (such as Projects)
             #     might reject them.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def set_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::SetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.set_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1108,8 +1108,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1118,12 +1118,12 @@ module Google
             #
             # @overload get_iam_policy(request, options = nil)
             #   Pass arguments to `get_iam_policy` via a request object, either of type
-            #   {Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::GetIamPolicyRequest, Hash]
+            #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_iam_policy(resource: nil, options: nil)
@@ -1131,34 +1131,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param options [Google::Iam::V1::GetPolicyOptions, Hash]
+            #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
             #     `GetIamPolicy`. This field is only used by Cloud IAM.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::Policy]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::Policy]
+            # @return [::Google::Iam::V1::Policy]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_iam_policy request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::GetIamPolicyRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_iam_policy.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1179,8 +1179,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1194,12 +1194,12 @@ module Google
             #
             # @overload test_iam_permissions(request, options = nil)
             #   Pass arguments to `test_iam_permissions` via a request object, either of type
-            #   {Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+            #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Iam::V1::TestIamPermissionsRequest, Hash]
+            #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload test_iam_permissions(resource: nil, permissions: nil)
@@ -1207,36 +1207,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param resource [String]
+            #   @param resource [::String]
             #     REQUIRED: The resource for which the policy detail is being requested.
             #     See the operation documentation for the appropriate value for this field.
-            #   @param permissions [Array<String>]
+            #   @param permissions [::Array<::String>]
             #     The set of permissions to check for the `resource`. Permissions with
             #     wildcards (such as '*' or 'storage.*') are not allowed. For more
             #     information see
             #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Iam::V1::TestIamPermissionsResponse]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Iam::V1::TestIamPermissionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Iam::V1::TestIamPermissionsResponse]
+            # @return [::Google::Iam::V1::TestIamPermissionsResponse]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def test_iam_permissions request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Iam::V1::TestIamPermissionsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::SecretManager::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1257,8 +1257,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1268,7 +1268,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::SecretManager::V1::SecretManagerService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::SecretManager::V1::SecretManagerService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -1279,22 +1279,22 @@ module Google
             # To modify the global config, setting the timeout for list_secrets
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::SecretManager::V1::SecretManagerService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_secrets.timeout = 20_000
+            #     ::Google::Cloud::SecretManager::V1::SecretManagerService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_secrets.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::SecretManager::V1::SecretManagerService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.list_secrets.timeout = 20_000
+            #     client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.list_secrets.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"secretmanager.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1306,29 +1306,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -1336,10 +1336,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "secretmanager.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -1347,14 +1347,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -1395,112 +1395,112 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `list_secrets`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_secrets
                 ##
                 # RPC-specific configuration for `create_secret`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_secret
                 ##
                 # RPC-specific configuration for `add_secret_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :add_secret_version
                 ##
                 # RPC-specific configuration for `get_secret`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_secret
                 ##
                 # RPC-specific configuration for `update_secret`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_secret
                 ##
                 # RPC-specific configuration for `delete_secret`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_secret
                 ##
                 # RPC-specific configuration for `list_secret_versions`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_secret_versions
                 ##
                 # RPC-specific configuration for `get_secret_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_secret_version
                 ##
                 # RPC-specific configuration for `access_secret_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :access_secret_version
                 ##
                 # RPC-specific configuration for `disable_secret_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :disable_secret_version
                 ##
                 # RPC-specific configuration for `enable_secret_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :enable_secret_version
                 ##
                 # RPC-specific configuration for `destroy_secret_version`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :destroy_secret_version
                 ##
                 # RPC-specific configuration for `set_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :set_iam_policy
                 ##
                 # RPC-specific configuration for `get_iam_policy`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_iam_policy
                 ##
                 # RPC-specific configuration for `test_iam_permissions`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_iam_permissions
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_secrets_config = parent_rpcs&.list_secrets if parent_rpcs&.respond_to? :list_secrets
-                  @list_secrets = Gapic::Config::Method.new list_secrets_config
+                  @list_secrets = ::Gapic::Config::Method.new list_secrets_config
                   create_secret_config = parent_rpcs&.create_secret if parent_rpcs&.respond_to? :create_secret
-                  @create_secret = Gapic::Config::Method.new create_secret_config
+                  @create_secret = ::Gapic::Config::Method.new create_secret_config
                   add_secret_version_config = parent_rpcs&.add_secret_version if parent_rpcs&.respond_to? :add_secret_version
-                  @add_secret_version = Gapic::Config::Method.new add_secret_version_config
+                  @add_secret_version = ::Gapic::Config::Method.new add_secret_version_config
                   get_secret_config = parent_rpcs&.get_secret if parent_rpcs&.respond_to? :get_secret
-                  @get_secret = Gapic::Config::Method.new get_secret_config
+                  @get_secret = ::Gapic::Config::Method.new get_secret_config
                   update_secret_config = parent_rpcs&.update_secret if parent_rpcs&.respond_to? :update_secret
-                  @update_secret = Gapic::Config::Method.new update_secret_config
+                  @update_secret = ::Gapic::Config::Method.new update_secret_config
                   delete_secret_config = parent_rpcs&.delete_secret if parent_rpcs&.respond_to? :delete_secret
-                  @delete_secret = Gapic::Config::Method.new delete_secret_config
+                  @delete_secret = ::Gapic::Config::Method.new delete_secret_config
                   list_secret_versions_config = parent_rpcs&.list_secret_versions if parent_rpcs&.respond_to? :list_secret_versions
-                  @list_secret_versions = Gapic::Config::Method.new list_secret_versions_config
+                  @list_secret_versions = ::Gapic::Config::Method.new list_secret_versions_config
                   get_secret_version_config = parent_rpcs&.get_secret_version if parent_rpcs&.respond_to? :get_secret_version
-                  @get_secret_version = Gapic::Config::Method.new get_secret_version_config
+                  @get_secret_version = ::Gapic::Config::Method.new get_secret_version_config
                   access_secret_version_config = parent_rpcs&.access_secret_version if parent_rpcs&.respond_to? :access_secret_version
-                  @access_secret_version = Gapic::Config::Method.new access_secret_version_config
+                  @access_secret_version = ::Gapic::Config::Method.new access_secret_version_config
                   disable_secret_version_config = parent_rpcs&.disable_secret_version if parent_rpcs&.respond_to? :disable_secret_version
-                  @disable_secret_version = Gapic::Config::Method.new disable_secret_version_config
+                  @disable_secret_version = ::Gapic::Config::Method.new disable_secret_version_config
                   enable_secret_version_config = parent_rpcs&.enable_secret_version if parent_rpcs&.respond_to? :enable_secret_version
-                  @enable_secret_version = Gapic::Config::Method.new enable_secret_version_config
+                  @enable_secret_version = ::Gapic::Config::Method.new enable_secret_version_config
                   destroy_secret_version_config = parent_rpcs&.destroy_secret_version if parent_rpcs&.respond_to? :destroy_secret_version
-                  @destroy_secret_version = Gapic::Config::Method.new destroy_secret_version_config
+                  @destroy_secret_version = ::Gapic::Config::Method.new destroy_secret_version_config
                   set_iam_policy_config = parent_rpcs&.set_iam_policy if parent_rpcs&.respond_to? :set_iam_policy
-                  @set_iam_policy = Gapic::Config::Method.new set_iam_policy_config
+                  @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                   get_iam_policy_config = parent_rpcs&.get_iam_policy if parent_rpcs&.respond_to? :get_iam_policy
-                  @get_iam_policy = Gapic::Config::Method.new get_iam_policy_config
+                  @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   test_iam_permissions_config = parent_rpcs&.test_iam_permissions if parent_rpcs&.respond_to? :test_iam_permissions
-                  @test_iam_permissions = Gapic::Config::Method.new test_iam_permissions_config
+                  @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
                   yield self if block_given?
                 end

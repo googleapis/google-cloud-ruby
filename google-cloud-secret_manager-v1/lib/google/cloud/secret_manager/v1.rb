@@ -26,7 +26,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/secret_manager/v1"
-      #     client = Google::Cloud::SecretManager::V1::SecretManagerService::Client.new
+      #     client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Client.new
       #
       module V1
       end
