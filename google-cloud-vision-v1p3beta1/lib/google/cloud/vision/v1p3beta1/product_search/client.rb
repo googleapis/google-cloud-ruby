@@ -30,16 +30,16 @@ module Google
           # Manages Products and ProductSets of reference images for use in product
           # search. It uses the following resource model:
           #
-          # - The API has a collection of {Google::Cloud::Vision::V1p3beta1::ProductSet ProductSet} resources, named
+          # - The API has a collection of {::Google::Cloud::Vision::V1p3beta1::ProductSet ProductSet} resources, named
           # `projects/*/locations/*/productSets/*`, which acts as a way to put different
           # products into groups to limit identification.
           #
           # In parallel,
           #
-          # - The API has a collection of {Google::Cloud::Vision::V1p3beta1::Product Product} resources, named
+          # - The API has a collection of {::Google::Cloud::Vision::V1p3beta1::Product Product} resources, named
           #   `projects/*/locations/*/products/*`
           #
-          # - Each {Google::Cloud::Vision::V1p3beta1::Product Product} has a collection of {Google::Cloud::Vision::V1p3beta1::ReferenceImage ReferenceImage} resources, named
+          # - Each {::Google::Cloud::Vision::V1p3beta1::Product Product} has a collection of {::Google::Cloud::Vision::V1p3beta1::ReferenceImage ReferenceImage} resources, named
           #   `projects/*/locations/*/products/*/referenceImages/*`
           #
           class Client
@@ -51,15 +51,15 @@ module Google
             ##
             # Configure the ProductSearch Client class.
             #
-            # See {Google::Cloud::Vision::V1p3beta1::ProductSearch::Client::Configuration}
+            # See {::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all ProductSearch clients:
             #
-            #     Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -235,7 +235,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Vision::V1p3beta1::ProductSearch::Client::Configuration}
+            # See {::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -256,13 +256,13 @@ module Google
             # To create a new ProductSearch client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+            #     client = ::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
             #
             # To create a new ProductSearch client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the ProductSearch client.
@@ -294,8 +294,8 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @product_search_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Vision::V1p3beta1::ProductSearch::Stub,
+              @product_search_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Vision::V1p3beta1::ProductSearch::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -306,7 +306,7 @@ module Google
             ##
             # Get the associated client for long-running operations.
             #
-            # @return [Google::Cloud::Vision::V1p3beta1::ProductSearch::Operations]
+            # @return [::Google::Cloud::Vision::V1p3beta1::ProductSearch::Operations]
             #
             attr_reader :operations_client
 
@@ -322,12 +322,12 @@ module Google
             #
             # @overload create_product_set(request, options = nil)
             #   Pass arguments to `create_product_set` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::CreateProductSetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::CreateProductSetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::CreateProductSetRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::CreateProductSetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_product_set(parent: nil, product_set: nil, product_set_id: nil)
@@ -335,39 +335,39 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The project in which the ProductSet should be created.
             #
             #     Format is `projects/PROJECT_ID/locations/LOC_ID`.
-            #   @param product_set [Google::Cloud::Vision::V1p3beta1::ProductSet, Hash]
+            #   @param product_set [::Google::Cloud::Vision::V1p3beta1::ProductSet, ::Hash]
             #     Required. The ProductSet to create.
-            #   @param product_set_id [String]
+            #   @param product_set_id [::String]
             #     A user-supplied resource id for this ProductSet. If set, the server will
             #     attempt to use this value as the resource id. If it is already in use, an
             #     error is returned with code ALREADY_EXISTS. Must be at most 128 characters
             #     long. It cannot contain the character `/`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Vision::V1p3beta1::ProductSet]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Vision::V1p3beta1::ProductSet]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Vision::V1p3beta1::ProductSet]
+            # @return [::Google::Cloud::Vision::V1p3beta1::ProductSet]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_product_set request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::CreateProductSetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::CreateProductSetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_product_set.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -388,8 +388,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -402,12 +402,12 @@ module Google
             #
             # @overload list_product_sets(request, options = nil)
             #   Pass arguments to `list_product_sets` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::ListProductSetsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::ListProductSetsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::ListProductSetsRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::ListProductSetsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_product_sets(parent: nil, page_size: nil, page_token: nil)
@@ -415,36 +415,36 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The project from which ProductSets should be listed.
             #
             #     Format is `projects/PROJECT_ID/locations/LOC_ID`.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of items to return. Default 10, maximum 100.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The next_page_token returned from a previous List request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Vision::V1p3beta1::ProductSet>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Vision::V1p3beta1::ProductSet>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Vision::V1p3beta1::ProductSet>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Vision::V1p3beta1::ProductSet>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_product_sets request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::ListProductSetsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::ListProductSetsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_product_sets.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -462,12 +462,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @product_search_stub.call_rpc :list_product_sets, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @product_search_stub, :list_product_sets, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @product_search_stub, :list_product_sets, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -479,12 +479,12 @@ module Google
             #
             # @overload get_product_set(request, options = nil)
             #   Pass arguments to `get_product_set` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::GetProductSetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::GetProductSetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::GetProductSetRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::GetProductSetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_product_set(name: nil)
@@ -492,33 +492,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the ProductSet to get.
             #
             #     Format is:
             #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Vision::V1p3beta1::ProductSet]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Vision::V1p3beta1::ProductSet]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Vision::V1p3beta1::ProductSet]
+            # @return [::Google::Cloud::Vision::V1p3beta1::ProductSet]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_product_set request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::GetProductSetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::GetProductSetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_product_set.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -539,8 +539,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -555,12 +555,12 @@ module Google
             #
             # @overload update_product_set(request, options = nil)
             #   Pass arguments to `update_product_set` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::UpdateProductSetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::UpdateProductSetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::UpdateProductSetRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::UpdateProductSetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_product_set(product_set: nil, update_mask: nil)
@@ -568,35 +568,35 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param product_set [Google::Cloud::Vision::V1p3beta1::ProductSet, Hash]
+            #   @param product_set [::Google::Cloud::Vision::V1p3beta1::ProductSet, ::Hash]
             #     Required. The ProductSet resource which replaces the one on the server.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
-            #     The {Google::Protobuf::FieldMask FieldMask} that specifies which fields to
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The {::Google::Protobuf::FieldMask FieldMask} that specifies which fields to
             #     update.
             #     If update_mask isn't specified, all mutable fields are to be updated.
             #     Valid mask path is `display_name`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Vision::V1p3beta1::ProductSet]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Vision::V1p3beta1::ProductSet]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Vision::V1p3beta1::ProductSet]
+            # @return [::Google::Cloud::Vision::V1p3beta1::ProductSet]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_product_set request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::UpdateProductSetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::UpdateProductSetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_product_set.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -617,8 +617,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -633,12 +633,12 @@ module Google
             #
             # @overload delete_product_set(request, options = nil)
             #   Pass arguments to `delete_product_set` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::DeleteProductSetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::DeleteProductSetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::DeleteProductSetRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::DeleteProductSetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_product_set(name: nil)
@@ -646,33 +646,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the ProductSet to delete.
             #
             #     Format is:
             #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_product_set request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::DeleteProductSetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::DeleteProductSetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_product_set.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -693,8 +693,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -709,12 +709,12 @@ module Google
             #
             # @overload create_product(request, options = nil)
             #   Pass arguments to `create_product` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::CreateProductRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::CreateProductRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::CreateProductRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::CreateProductRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_product(parent: nil, product: nil, product_id: nil)
@@ -722,40 +722,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The project in which the Product should be created.
             #
             #     Format is
             #     `projects/PROJECT_ID/locations/LOC_ID`.
-            #   @param product [Google::Cloud::Vision::V1p3beta1::Product, Hash]
+            #   @param product [::Google::Cloud::Vision::V1p3beta1::Product, ::Hash]
             #     Required. The product to create.
-            #   @param product_id [String]
+            #   @param product_id [::String]
             #     A user-supplied resource id for this Product. If set, the server will
             #     attempt to use this value as the resource id. If it is already in use, an
             #     error is returned with code ALREADY_EXISTS. Must be at most 128 characters
             #     long. It cannot contain the character `/`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Vision::V1p3beta1::Product]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Vision::V1p3beta1::Product]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Vision::V1p3beta1::Product]
+            # @return [::Google::Cloud::Vision::V1p3beta1::Product]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_product request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::CreateProductRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::CreateProductRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_product.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -776,8 +776,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -789,12 +789,12 @@ module Google
             #
             # @overload list_products(request, options = nil)
             #   Pass arguments to `list_products` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::ListProductsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::ListProductsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::ListProductsRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::ListProductsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_products(parent: nil, page_size: nil, page_token: nil)
@@ -802,37 +802,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The project OR ProductSet from which Products should be listed.
             #
             #     Format:
             #     `projects/PROJECT_ID/locations/LOC_ID`
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of items to return. Default 10, maximum 100.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The next_page_token returned from a previous List request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Vision::V1p3beta1::Product>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Vision::V1p3beta1::Product>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Vision::V1p3beta1::Product>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Vision::V1p3beta1::Product>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_products request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::ListProductsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::ListProductsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_products.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -850,12 +850,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @product_search_stub.call_rpc :list_products, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @product_search_stub, :list_products, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @product_search_stub, :list_products, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -867,12 +867,12 @@ module Google
             #
             # @overload get_product(request, options = nil)
             #   Pass arguments to `get_product` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::GetProductRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::GetProductRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::GetProductRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::GetProductRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_product(name: nil)
@@ -880,33 +880,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the Product to get.
             #
             #     Format is:
             #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Vision::V1p3beta1::Product]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Vision::V1p3beta1::Product]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Vision::V1p3beta1::Product]
+            # @return [::Google::Cloud::Vision::V1p3beta1::Product]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_product request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::GetProductRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::GetProductRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_product.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -927,8 +927,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -949,12 +949,12 @@ module Google
             #
             # @overload update_product(request, options = nil)
             #   Pass arguments to `update_product` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::UpdateProductRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::UpdateProductRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::UpdateProductRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::UpdateProductRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_product(product: nil, update_mask: nil)
@@ -962,37 +962,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param product [Google::Cloud::Vision::V1p3beta1::Product, Hash]
+            #   @param product [::Google::Cloud::Vision::V1p3beta1::Product, ::Hash]
             #     Required. The Product resource which replaces the one on the server.
             #     product.name is immutable.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
-            #     The {Google::Protobuf::FieldMask FieldMask} that specifies which fields
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The {::Google::Protobuf::FieldMask FieldMask} that specifies which fields
             #     to update.
             #     If update_mask isn't specified, all mutable fields are to be updated.
             #     Valid mask paths include `product_labels`, `display_name`, and
             #     `description`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Vision::V1p3beta1::Product]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Vision::V1p3beta1::Product]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Vision::V1p3beta1::Product]
+            # @return [::Google::Cloud::Vision::V1p3beta1::Product]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_product request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::UpdateProductRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::UpdateProductRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_product.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1013,8 +1013,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1030,12 +1030,12 @@ module Google
             #
             # @overload delete_product(request, options = nil)
             #   Pass arguments to `delete_product` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::DeleteProductRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::DeleteProductRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::DeleteProductRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::DeleteProductRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_product(name: nil)
@@ -1043,33 +1043,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of product to delete.
             #
             #     Format is:
             #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_product request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::DeleteProductRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::DeleteProductRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_product.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1090,8 +1090,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1117,12 +1117,12 @@ module Google
             #
             # @overload create_reference_image(request, options = nil)
             #   Pass arguments to `create_reference_image` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::CreateReferenceImageRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::CreateReferenceImageRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::CreateReferenceImageRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::CreateReferenceImageRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_reference_image(parent: nil, reference_image: nil, reference_image_id: nil)
@@ -1130,41 +1130,41 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the product in which to create the reference image.
             #
             #     Format is
             #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
-            #   @param reference_image [Google::Cloud::Vision::V1p3beta1::ReferenceImage, Hash]
+            #   @param reference_image [::Google::Cloud::Vision::V1p3beta1::ReferenceImage, ::Hash]
             #     Required. The reference image to create.
             #     If an image ID is specified, it is ignored.
-            #   @param reference_image_id [String]
+            #   @param reference_image_id [::String]
             #     A user-supplied resource id for the ReferenceImage to be added. If set,
             #     the server will attempt to use this value as the resource id. If it is
             #     already in use, an error is returned with code ALREADY_EXISTS. Must be at
             #     most 128 characters long. It cannot contain the character `/`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Vision::V1p3beta1::ReferenceImage]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Vision::V1p3beta1::ReferenceImage]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Vision::V1p3beta1::ReferenceImage]
+            # @return [::Google::Cloud::Vision::V1p3beta1::ReferenceImage]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_reference_image request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::CreateReferenceImageRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::CreateReferenceImageRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_reference_image.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1185,8 +1185,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1204,12 +1204,12 @@ module Google
             #
             # @overload delete_reference_image(request, options = nil)
             #   Pass arguments to `delete_reference_image` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::DeleteReferenceImageRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::DeleteReferenceImageRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::DeleteReferenceImageRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::DeleteReferenceImageRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_reference_image(name: nil)
@@ -1217,7 +1217,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the reference image to delete.
             #
             #     Format is:
@@ -1225,26 +1225,26 @@ module Google
             #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_reference_image request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::DeleteReferenceImageRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::DeleteReferenceImageRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_reference_image.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1265,8 +1265,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1280,12 +1280,12 @@ module Google
             #
             # @overload list_reference_images(request, options = nil)
             #   Pass arguments to `list_reference_images` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::ListReferenceImagesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::ListReferenceImagesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::ListReferenceImagesRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::ListReferenceImagesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_reference_images(parent: nil, page_size: nil, page_token: nil)
@@ -1293,40 +1293,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the product containing the reference images.
             #
             #     Format is
             #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of items to return. Default 10, maximum 100.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     A token identifying a page of results to be returned. This is the value
             #     of `nextPageToken` returned in a previous reference image list request.
             #
             #     Defaults to the first page if not specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Vision::V1p3beta1::ReferenceImage>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Vision::V1p3beta1::ReferenceImage>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Vision::V1p3beta1::ReferenceImage>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Vision::V1p3beta1::ReferenceImage>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_reference_images request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::ListReferenceImagesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::ListReferenceImagesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_reference_images.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1344,12 +1344,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @product_search_stub.call_rpc :list_reference_images, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @product_search_stub, :list_reference_images, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @product_search_stub, :list_reference_images, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1361,12 +1361,12 @@ module Google
             #
             # @overload get_reference_image(request, options = nil)
             #   Pass arguments to `get_reference_image` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::GetReferenceImageRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::GetReferenceImageRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::GetReferenceImageRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::GetReferenceImageRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_reference_image(name: nil)
@@ -1374,7 +1374,7 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name of the ReferenceImage to get.
             #
             #     Format is:
@@ -1382,26 +1382,26 @@ module Google
             #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID/referenceImages/IMAGE_ID`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Vision::V1p3beta1::ReferenceImage]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Vision::V1p3beta1::ReferenceImage]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Vision::V1p3beta1::ReferenceImage]
+            # @return [::Google::Cloud::Vision::V1p3beta1::ReferenceImage]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_reference_image request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::GetReferenceImageRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::GetReferenceImageRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_reference_image.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1422,8 +1422,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1438,12 +1438,12 @@ module Google
             #
             # @overload add_product_to_product_set(request, options = nil)
             #   Pass arguments to `add_product_to_product_set` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::AddProductToProductSetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::AddProductToProductSetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::AddProductToProductSetRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::AddProductToProductSetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload add_product_to_product_set(name: nil, product: nil)
@@ -1451,38 +1451,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name for the ProductSet to modify.
             #
             #     Format is:
             #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
-            #   @param product [String]
+            #   @param product [::String]
             #     Required. The resource name for the Product to be added to this ProductSet.
             #
             #     Format is:
             #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def add_product_to_product_set request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::AddProductToProductSetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::AddProductToProductSetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.add_product_to_product_set.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1503,8 +1503,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1516,12 +1516,12 @@ module Google
             #
             # @overload remove_product_from_product_set(request, options = nil)
             #   Pass arguments to `remove_product_from_product_set` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::RemoveProductFromProductSetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::RemoveProductFromProductSetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::RemoveProductFromProductSetRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::RemoveProductFromProductSetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload remove_product_from_product_set(name: nil, product: nil)
@@ -1529,38 +1529,38 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The resource name for the ProductSet to modify.
             #
             #     Format is:
             #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
-            #   @param product [String]
+            #   @param product [::String]
             #     Required. The resource name for the Product to be removed from this ProductSet.
             #
             #     Format is:
             #     `projects/PROJECT_ID/locations/LOC_ID/products/PRODUCT_ID`
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def remove_product_from_product_set request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::RemoveProductFromProductSetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::RemoveProductFromProductSetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.remove_product_from_product_set.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1581,8 +1581,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1596,12 +1596,12 @@ module Google
             #
             # @overload list_products_in_product_set(request, options = nil)
             #   Pass arguments to `list_products_in_product_set` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::ListProductsInProductSetRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::ListProductsInProductSetRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::ListProductsInProductSetRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::ListProductsInProductSetRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_products_in_product_set(name: nil, page_size: nil, page_token: nil)
@@ -1609,37 +1609,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. The ProductSet resource for which to retrieve Products.
             #
             #     Format is:
             #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     The maximum number of items to return. Default 10, maximum 100.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     The next_page_token returned from a previous List request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Vision::V1p3beta1::Product>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Vision::V1p3beta1::Product>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Vision::V1p3beta1::Product>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Vision::V1p3beta1::Product>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_products_in_product_set request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::ListProductsInProductSetRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::ListProductsInProductSetRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_products_in_product_set.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1657,35 +1657,35 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @product_search_stub.call_rpc :list_products_in_product_set, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @product_search_stub, :list_products_in_product_set, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @product_search_stub, :list_products_in_product_set, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
             # Asynchronous API that imports a list of reference images to specified
             # product sets based on a list of image information.
             #
-            # The {Google::Longrunning::Operation google.longrunning.Operation} API can be
+            # The {::Google::Longrunning::Operation google.longrunning.Operation} API can be
             # used to keep track of the progress and results of the request.
             # `Operation.metadata` contains `BatchOperationMetadata`. (progress)
             # `Operation.response` contains `ImportProductSetsResponse`. (results)
             #
             # The input source of this method is a csv file on Google Cloud Storage.
             # For the format of the csv file please see
-            # {Google::Cloud::Vision::V1p3beta1::ImportProductSetsGcsSource#csv_file_uri ImportProductSetsGcsSource.csv_file_uri}.
+            # {::Google::Cloud::Vision::V1p3beta1::ImportProductSetsGcsSource#csv_file_uri ImportProductSetsGcsSource.csv_file_uri}.
             #
             # @overload import_product_sets(request, options = nil)
             #   Pass arguments to `import_product_sets` via a request object, either of type
-            #   {Google::Cloud::Vision::V1p3beta1::ImportProductSetsRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Vision::V1p3beta1::ImportProductSetsRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Vision::V1p3beta1::ImportProductSetsRequest, Hash]
+            #   @param request [::Google::Cloud::Vision::V1p3beta1::ImportProductSetsRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload import_product_sets(parent: nil, input_config: nil)
@@ -1693,34 +1693,34 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. The project in which the ProductSets should be imported.
             #
             #     Format is `projects/PROJECT_ID/locations/LOC_ID`.
-            #   @param input_config [Google::Cloud::Vision::V1p3beta1::ImportProductSetsInputConfig, Hash]
+            #   @param input_config [::Google::Cloud::Vision::V1p3beta1::ImportProductSetsInputConfig, ::Hash]
             #     Required. The input content for the list of requests.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::Operation]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::Operation]
+            # @return [::Gapic::Operation]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def import_product_sets request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Vision::V1p3beta1::ImportProductSetsRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Vision::V1p3beta1::ImportProductSetsRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.import_product_sets.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Vision::V1p3beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -1738,12 +1738,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @product_search_stub.call_rpc :import_product_sets, request, options: options do |response, operation|
-                response = Gapic::Operation.new response, @operations_client, options: options
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -1753,7 +1753,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Vision::V1p3beta1::ProductSearch::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -1764,22 +1764,22 @@ module Google
             # To modify the global config, setting the timeout for create_product_set
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_product_set.timeout = 20_000
+            #     ::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_product_set.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_product_set.timeout = 20_000
+            #     client = ::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_product_set.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"vision.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -1791,29 +1791,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -1821,10 +1821,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "vision.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -1832,14 +1832,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -1880,133 +1880,133 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_product_set`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_product_set
                 ##
                 # RPC-specific configuration for `list_product_sets`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_product_sets
                 ##
                 # RPC-specific configuration for `get_product_set`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_product_set
                 ##
                 # RPC-specific configuration for `update_product_set`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_product_set
                 ##
                 # RPC-specific configuration for `delete_product_set`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_product_set
                 ##
                 # RPC-specific configuration for `create_product`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_product
                 ##
                 # RPC-specific configuration for `list_products`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_products
                 ##
                 # RPC-specific configuration for `get_product`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_product
                 ##
                 # RPC-specific configuration for `update_product`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_product
                 ##
                 # RPC-specific configuration for `delete_product`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_product
                 ##
                 # RPC-specific configuration for `create_reference_image`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_reference_image
                 ##
                 # RPC-specific configuration for `delete_reference_image`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_reference_image
                 ##
                 # RPC-specific configuration for `list_reference_images`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_reference_images
                 ##
                 # RPC-specific configuration for `get_reference_image`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_reference_image
                 ##
                 # RPC-specific configuration for `add_product_to_product_set`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :add_product_to_product_set
                 ##
                 # RPC-specific configuration for `remove_product_from_product_set`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :remove_product_from_product_set
                 ##
                 # RPC-specific configuration for `list_products_in_product_set`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_products_in_product_set
                 ##
                 # RPC-specific configuration for `import_product_sets`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :import_product_sets
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_product_set_config = parent_rpcs&.create_product_set if parent_rpcs&.respond_to? :create_product_set
-                  @create_product_set = Gapic::Config::Method.new create_product_set_config
+                  @create_product_set = ::Gapic::Config::Method.new create_product_set_config
                   list_product_sets_config = parent_rpcs&.list_product_sets if parent_rpcs&.respond_to? :list_product_sets
-                  @list_product_sets = Gapic::Config::Method.new list_product_sets_config
+                  @list_product_sets = ::Gapic::Config::Method.new list_product_sets_config
                   get_product_set_config = parent_rpcs&.get_product_set if parent_rpcs&.respond_to? :get_product_set
-                  @get_product_set = Gapic::Config::Method.new get_product_set_config
+                  @get_product_set = ::Gapic::Config::Method.new get_product_set_config
                   update_product_set_config = parent_rpcs&.update_product_set if parent_rpcs&.respond_to? :update_product_set
-                  @update_product_set = Gapic::Config::Method.new update_product_set_config
+                  @update_product_set = ::Gapic::Config::Method.new update_product_set_config
                   delete_product_set_config = parent_rpcs&.delete_product_set if parent_rpcs&.respond_to? :delete_product_set
-                  @delete_product_set = Gapic::Config::Method.new delete_product_set_config
+                  @delete_product_set = ::Gapic::Config::Method.new delete_product_set_config
                   create_product_config = parent_rpcs&.create_product if parent_rpcs&.respond_to? :create_product
-                  @create_product = Gapic::Config::Method.new create_product_config
+                  @create_product = ::Gapic::Config::Method.new create_product_config
                   list_products_config = parent_rpcs&.list_products if parent_rpcs&.respond_to? :list_products
-                  @list_products = Gapic::Config::Method.new list_products_config
+                  @list_products = ::Gapic::Config::Method.new list_products_config
                   get_product_config = parent_rpcs&.get_product if parent_rpcs&.respond_to? :get_product
-                  @get_product = Gapic::Config::Method.new get_product_config
+                  @get_product = ::Gapic::Config::Method.new get_product_config
                   update_product_config = parent_rpcs&.update_product if parent_rpcs&.respond_to? :update_product
-                  @update_product = Gapic::Config::Method.new update_product_config
+                  @update_product = ::Gapic::Config::Method.new update_product_config
                   delete_product_config = parent_rpcs&.delete_product if parent_rpcs&.respond_to? :delete_product
-                  @delete_product = Gapic::Config::Method.new delete_product_config
+                  @delete_product = ::Gapic::Config::Method.new delete_product_config
                   create_reference_image_config = parent_rpcs&.create_reference_image if parent_rpcs&.respond_to? :create_reference_image
-                  @create_reference_image = Gapic::Config::Method.new create_reference_image_config
+                  @create_reference_image = ::Gapic::Config::Method.new create_reference_image_config
                   delete_reference_image_config = parent_rpcs&.delete_reference_image if parent_rpcs&.respond_to? :delete_reference_image
-                  @delete_reference_image = Gapic::Config::Method.new delete_reference_image_config
+                  @delete_reference_image = ::Gapic::Config::Method.new delete_reference_image_config
                   list_reference_images_config = parent_rpcs&.list_reference_images if parent_rpcs&.respond_to? :list_reference_images
-                  @list_reference_images = Gapic::Config::Method.new list_reference_images_config
+                  @list_reference_images = ::Gapic::Config::Method.new list_reference_images_config
                   get_reference_image_config = parent_rpcs&.get_reference_image if parent_rpcs&.respond_to? :get_reference_image
-                  @get_reference_image = Gapic::Config::Method.new get_reference_image_config
+                  @get_reference_image = ::Gapic::Config::Method.new get_reference_image_config
                   add_product_to_product_set_config = parent_rpcs&.add_product_to_product_set if parent_rpcs&.respond_to? :add_product_to_product_set
-                  @add_product_to_product_set = Gapic::Config::Method.new add_product_to_product_set_config
+                  @add_product_to_product_set = ::Gapic::Config::Method.new add_product_to_product_set_config
                   remove_product_from_product_set_config = parent_rpcs&.remove_product_from_product_set if parent_rpcs&.respond_to? :remove_product_from_product_set
-                  @remove_product_from_product_set = Gapic::Config::Method.new remove_product_from_product_set_config
+                  @remove_product_from_product_set = ::Gapic::Config::Method.new remove_product_from_product_set_config
                   list_products_in_product_set_config = parent_rpcs&.list_products_in_product_set if parent_rpcs&.respond_to? :list_products_in_product_set
-                  @list_products_in_product_set = Gapic::Config::Method.new list_products_in_product_set_config
+                  @list_products_in_product_set = ::Gapic::Config::Method.new list_products_in_product_set_config
                   import_product_sets_config = parent_rpcs&.import_product_sets if parent_rpcs&.respond_to? :import_product_sets
-                  @import_product_sets = Gapic::Config::Method.new import_product_sets_config
+                  @import_product_sets = ::Gapic::Config::Method.new import_product_sets_config
 
                   yield self if block_given?
                 end

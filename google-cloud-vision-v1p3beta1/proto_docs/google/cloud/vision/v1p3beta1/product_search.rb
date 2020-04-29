@@ -23,49 +23,49 @@ module Google
       module V1p3beta1
         # Parameters for a product search request.
         # @!attribute [rw] catalog_name
-        #   @return [String]
+        #   @return [::String]
         #     The resource name of the catalog to search.
         #
         #     Format is: `productSearch/catalogs/CATALOG_NAME`.
         # @!attribute [rw] category
-        #   @return [Google::Cloud::Vision::V1p3beta1::ProductSearchCategory]
+        #   @return [::Google::Cloud::Vision::V1p3beta1::ProductSearchCategory]
         #     The category to search in.
         #     Optional. It is inferred by the system if it is not specified.
         #     [Deprecated] Use `product_category`.
         # @!attribute [rw] product_category
-        #   @return [String]
+        #   @return [::String]
         #     The product category to search in.
         #     Optional. It is inferred by the system if it is not specified.
         #     Supported values are `bag`, `shoe`, `sunglasses`, `dress`, `outerwear`,
         #     `skirt`, `top`, `shorts`, and `pants`.
         # @!attribute [rw] normalized_bounding_poly
-        #   @return [Google::Cloud::Vision::V1p3beta1::NormalizedBoundingPoly]
+        #   @return [::Google::Cloud::Vision::V1p3beta1::NormalizedBoundingPoly]
         #     The bounding polygon around the area of interest in the image.
         #     Optional. If it is not specified, system discretion will be applied.
         #     [Deprecated] Use `bounding_poly`.
         # @!attribute [rw] bounding_poly
-        #   @return [Google::Cloud::Vision::V1p3beta1::BoundingPoly]
+        #   @return [::Google::Cloud::Vision::V1p3beta1::BoundingPoly]
         #     The bounding polygon around the area of interest in the image.
         #     Optional. If it is not specified, system discretion will be applied.
         # @!attribute [rw] view
-        #   @return [Google::Cloud::Vision::V1p3beta1::ProductSearchResultsView]
+        #   @return [::Google::Cloud::Vision::V1p3beta1::ProductSearchResultsView]
         #     Specifies the verbosity of the  product search results.
         #     Optional. Defaults to `BASIC`.
         # @!attribute [rw] product_set
-        #   @return [String]
+        #   @return [::String]
         #     The resource name of a
-        #     {Google::Cloud::Vision::V1p3beta1::ProductSet ProductSet} to be searched for
+        #     {::Google::Cloud::Vision::V1p3beta1::ProductSet ProductSet} to be searched for
         #     similar images.
         #
         #     Format is:
         #     `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`.
         # @!attribute [rw] product_categories
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     The list of product categories to search in. Currently, we only consider
         #     the first category, and either "homegoods" or "apparel" should be
         #     specified.
         # @!attribute [rw] filter
-        #   @return [String]
+        #   @return [::String]
         #     The filtering expression. This can be used to restrict search results based
         #     on Product labels. We currently support an AND of OR of key-value
         #     expressions, where each expression within an OR must have the same key.
@@ -73,74 +73,74 @@ module Google
         #     For example, "(color = red OR color = blue) AND brand = Google" is
         #     acceptable, but not "(color = red OR brand = Google)" or "color: red".
         class ProductSearchParams
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Results for a product search request.
         # @!attribute [rw] category
-        #   @return [Google::Cloud::Vision::V1p3beta1::ProductSearchCategory]
+        #   @return [::Google::Cloud::Vision::V1p3beta1::ProductSearchCategory]
         #     Product category.
         #     [Deprecated] Use `product_category`.
         # @!attribute [rw] product_category
-        #   @return [String]
+        #   @return [::String]
         #     Product category.
         #     Supported values are `bag` and `shoe`.
         #     [Deprecated] `product_category` is provided in each Product.
         # @!attribute [rw] index_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp of the index which provided these results. Changes made after
         #     this time are not reflected in the current results.
         # @!attribute [rw] products
-        #   @return [Array<Google::Cloud::Vision::V1p3beta1::ProductSearchResults::ProductInfo>]
+        #   @return [::Array<::Google::Cloud::Vision::V1p3beta1::ProductSearchResults::ProductInfo>]
         #     List of detected products.
         # @!attribute [rw] results
-        #   @return [Array<Google::Cloud::Vision::V1p3beta1::ProductSearchResults::Result>]
+        #   @return [::Array<::Google::Cloud::Vision::V1p3beta1::ProductSearchResults::Result>]
         #     List of results, one for each product match.
         class ProductSearchResults
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Information about a product.
           # @!attribute [rw] product_id
-          #   @return [String]
+          #   @return [::String]
           #     Product ID.
           # @!attribute [rw] image_uri
-          #   @return [String]
+          #   @return [::String]
           #     The URI of the image which matched the query image.
           #
           #     This field is returned only if `view` is set to `FULL` in
           #     the request.
           # @!attribute [rw] score
-          #   @return [Float]
+          #   @return [::Float]
           #     A confidence level on the match, ranging from 0 (no confidence) to
           #     1 (full confidence).
           #
           #     This field is returned only if `view` is set to `FULL` in
           #     the request.
           class ProductInfo
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Information about a product.
           # @!attribute [rw] product
-          #   @return [Google::Cloud::Vision::V1p3beta1::Product]
+          #   @return [::Google::Cloud::Vision::V1p3beta1::Product]
           #     The Product.
           # @!attribute [rw] score
-          #   @return [Float]
+          #   @return [::Float]
           #     A confidence level on the match, ranging from 0 (no confidence) to
           #     1 (full confidence).
           #
           #     This field is returned only if `view` is set to `FULL` in
           #     the request.
           # @!attribute [rw] image
-          #   @return [String]
+          #   @return [::String]
           #     The resource name of the image from the product that is the closest match
           #     to the query.
           class Result
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 

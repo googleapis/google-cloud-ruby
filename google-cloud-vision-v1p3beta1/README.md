@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/vision/v1p3beta1"
 
-client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+client = ::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
 request = my_create_request
 response = client.create_product_set request
 ```

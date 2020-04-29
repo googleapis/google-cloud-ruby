@@ -27,7 +27,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/vision/v1p3beta1"
-      #     client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+      #     client = ::Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
       #
       module V1p3beta1
       end
