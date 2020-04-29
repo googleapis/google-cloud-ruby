@@ -36,7 +36,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/video_intelligence/v1beta2/video_intelligence_service"
-        #     client = Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceService::Client.new
+        #     client = ::Google::Cloud::VideoIntelligence::V1beta2::VideoIntelligenceService::Client.new
         #
         module VideoIntelligenceService
         end
