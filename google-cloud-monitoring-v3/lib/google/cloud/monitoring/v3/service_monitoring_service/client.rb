@@ -41,15 +41,15 @@ module Google
             ##
             # Configure the ServiceMonitoringService Client class.
             #
-            # See {Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client::Configuration}
+            # See {::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # ## Example
             #
             # To modify the configuration for all ServiceMonitoringService clients:
             #
-            #     Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
-            #       config.timeout = 10_000
+            #     ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the Client client.
@@ -137,7 +137,7 @@ module Google
             # but structural changes (adding new fields, etc.) are not allowed. Structural changes
             # should be made on {Client.configure}.
             #
-            # See {Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client::Configuration}
+            # See {::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client::Configuration}
             # for a description of the configuration fields.
             #
             # @yield [config] Configure the Client client.
@@ -158,13 +158,13 @@ module Google
             # To create a new ServiceMonitoringService client with the default
             # configuration:
             #
-            #     client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #     client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
             #
             # To create a new ServiceMonitoringService client with a custom
             # configuration:
             #
-            #     client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
-            #       config.timeout = 10_000
+            #     client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+            #       config.timeout = 10.0
             #     end
             #
             # @yield [config] Configure the ServiceMonitoringService client.
@@ -191,8 +191,8 @@ module Google
               end
               @quota_project_id = credentials.respond_to?(:quota_project_id) ? credentials.quota_project_id : nil
 
-              @service_monitoring_service_stub = Gapic::ServiceStub.new(
-                Google::Cloud::Monitoring::V3::ServiceMonitoringService::Stub,
+              @service_monitoring_service_stub = ::Gapic::ServiceStub.new(
+                ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Stub,
                 credentials:  credentials,
                 endpoint:     @config.endpoint,
                 channel_args: @config.channel_args,
@@ -207,12 +207,12 @@ module Google
             #
             # @overload create_service(request, options = nil)
             #   Pass arguments to `create_service` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::CreateServiceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::CreateServiceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::CreateServiceRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::CreateServiceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_service(parent: nil, service_id: nil, service: nil)
@@ -220,37 +220,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the parent workspace. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
-            #   @param service_id [String]
+            #   @param service_id [::String]
             #     Optional. The Service id to use for this Service. If omitted, an id will be
             #     generated instead. Must match the pattern `[a-z0-9\-]+`
-            #   @param service [Google::Cloud::Monitoring::V3::Service, Hash]
+            #   @param service [::Google::Cloud::Monitoring::V3::Service, ::Hash]
             #     Required. The `Service` to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::Service]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::Service]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::Service]
+            # @return [::Google::Cloud::Monitoring::V3::Service]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_service request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::CreateServiceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::CreateServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_service.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -271,8 +271,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -280,12 +280,12 @@ module Google
             #
             # @overload get_service(request, options = nil)
             #   Pass arguments to `get_service` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::GetServiceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::GetServiceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::GetServiceRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::GetServiceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_service(name: nil)
@@ -293,32 +293,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the `Service`. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::Service]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::Service]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::Service]
+            # @return [::Google::Cloud::Monitoring::V3::Service]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_service request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::GetServiceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::GetServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_service.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -339,8 +339,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -348,12 +348,12 @@ module Google
             #
             # @overload list_services(request, options = nil)
             #   Pass arguments to `list_services` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::ListServicesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::ListServicesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::ListServicesRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::ListServicesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_services(parent: nil, filter: nil, page_size: nil, page_token: nil)
@@ -361,13 +361,13 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the parent containing the listed services, either a
             #     project or a Monitoring Workspace. The formats are:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #         workspaces/[HOST_PROJECT_ID_OR_NUMBER]
-            #   @param filter [String]
+            #   @param filter [::String]
             #     A filter specifying what `Service`s to return. The filter currently
             #     supports the following fields:
             #
@@ -383,35 +383,35 @@ module Google
             #     populated. For example, the filter `identifier_case = "CUSTOM"` would match
             #     all services with a value for the `custom` field. Valid options are
             #     "CUSTOM", "APP_ENGINE", "CLOUD_ENDPOINTS", and "CLUSTER_ISTIO".
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     A non-negative number that is the maximum number of results to return.
             #     When 0, use default page size.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     If this field is not empty then it must contain the `nextPageToken` value
             #     returned by a previous call to this method.  Using this field causes the
             #     method to return additional results from the previous method call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::Service>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::Service>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::Service>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::Service>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_services request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::ListServicesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::ListServicesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_services.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -429,12 +429,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :list_services, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @service_monitoring_service_stub, :list_services, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @service_monitoring_service_stub, :list_services, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -442,12 +442,12 @@ module Google
             #
             # @overload update_service(request, options = nil)
             #   Pass arguments to `update_service` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::UpdateServiceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::UpdateServiceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::UpdateServiceRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::UpdateServiceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_service(service: nil, update_mask: nil)
@@ -455,33 +455,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param service [Google::Cloud::Monitoring::V3::Service, Hash]
+            #   @param service [::Google::Cloud::Monitoring::V3::Service, ::Hash]
             #     Required. The `Service` to draw updates from.
             #     The given `name` specifies the resource to update.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     A set of field paths defining which fields to use for the update.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::Service]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::Service]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::Service]
+            # @return [::Google::Cloud::Monitoring::V3::Service]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_service request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::UpdateServiceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::UpdateServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_service.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -502,8 +502,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -511,12 +511,12 @@ module Google
             #
             # @overload delete_service(request, options = nil)
             #   Pass arguments to `delete_service` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::DeleteServiceRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::DeleteServiceRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::DeleteServiceRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::DeleteServiceRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_service(name: nil)
@@ -524,32 +524,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the `Service` to delete. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_service request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::DeleteServiceRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::DeleteServiceRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_service.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -570,8 +570,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -579,12 +579,12 @@ module Google
             #
             # @overload create_service_level_objective(request, options = nil)
             #   Pass arguments to `create_service_level_objective` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload create_service_level_objective(parent: nil, service_level_objective_id: nil, service_level_objective: nil)
@@ -592,40 +592,40 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the parent `Service`. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
-            #   @param service_level_objective_id [String]
+            #   @param service_level_objective_id [::String]
             #     Optional. The ServiceLevelObjective id to use for this
             #     ServiceLevelObjective. If omitted, an id will be generated instead. Must
             #     match the pattern `[a-z0-9\-]+`
-            #   @param service_level_objective [Google::Cloud::Monitoring::V3::ServiceLevelObjective, Hash]
+            #   @param service_level_objective [::Google::Cloud::Monitoring::V3::ServiceLevelObjective, ::Hash]
             #     Required. The `ServiceLevelObjective` to create.
             #     The provided `name` will be respected if no `ServiceLevelObjective` exists
             #     with this name.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::ServiceLevelObjective]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::ServiceLevelObjective]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::ServiceLevelObjective]
+            # @return [::Google::Cloud::Monitoring::V3::ServiceLevelObjective]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def create_service_level_objective request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.create_service_level_objective.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -646,8 +646,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -655,12 +655,12 @@ module Google
             #
             # @overload get_service_level_objective(request, options = nil)
             #   Pass arguments to `get_service_level_objective` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload get_service_level_objective(name: nil, view: nil)
@@ -668,37 +668,37 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the `ServiceLevelObjective` to get. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
-            #   @param view [Google::Cloud::Monitoring::V3::ServiceLevelObjective::View]
+            #   @param view [::Google::Cloud::Monitoring::V3::ServiceLevelObjective::View]
             #     View of the `ServiceLevelObjective` to return. If `DEFAULT`, return the
             #     `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
             #     `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
             #     `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::ServiceLevelObjective]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::ServiceLevelObjective]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::ServiceLevelObjective]
+            # @return [::Google::Cloud::Monitoring::V3::ServiceLevelObjective]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def get_service_level_objective request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.get_service_level_objective.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -719,8 +719,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -728,12 +728,12 @@ module Google
             #
             # @overload list_service_level_objectives(request, options = nil)
             #   Pass arguments to `list_service_level_objectives` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload list_service_level_objectives(parent: nil, filter: nil, page_size: nil, page_token: nil, view: nil)
@@ -741,48 +741,48 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [String]
+            #   @param parent [::String]
             #     Required. Resource name of the parent containing the listed SLOs, either a
             #     project or a Monitoring Workspace. The formats are:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]
             #         workspaces/[HOST_PROJECT_ID_OR_NUMBER]/services/-
-            #   @param filter [String]
+            #   @param filter [::String]
             #     A filter specifying what `ServiceLevelObjective`s to return.
-            #   @param page_size [Integer]
+            #   @param page_size [::Integer]
             #     A non-negative number that is the maximum number of results to return.
             #     When 0, use default page size.
-            #   @param page_token [String]
+            #   @param page_token [::String]
             #     If this field is not empty then it must contain the `nextPageToken` value
             #     returned by a previous call to this method.  Using this field causes the
             #     method to return additional results from the previous method call.
-            #   @param view [Google::Cloud::Monitoring::V3::ServiceLevelObjective::View]
+            #   @param view [::Google::Cloud::Monitoring::V3::ServiceLevelObjective::View]
             #     View of the `ServiceLevelObjective`s to return. If `DEFAULT`, return each
             #     `ServiceLevelObjective` as originally defined. If `EXPLICIT` and the
             #     `ServiceLevelObjective` is defined in terms of a `BasicSli`, replace the
             #     `BasicSli` with a `RequestBasedSli` spelling out how the SLI is computed.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::ServiceLevelObjective>]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::ServiceLevelObjective>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Gapic::PagedEnumerable<Google::Cloud::Monitoring::V3::ServiceLevelObjective>]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::ServiceLevelObjective>]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def list_service_level_objectives request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.list_service_level_objectives.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -800,12 +800,12 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :list_service_level_objectives, request, options: options do |response, operation|
-                response = Gapic::PagedEnumerable.new @service_monitoring_service_stub, :list_service_level_objectives, request, response, operation, options
+                response = ::Gapic::PagedEnumerable.new @service_monitoring_service_stub, :list_service_level_objectives, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -813,12 +813,12 @@ module Google
             #
             # @overload update_service_level_objective(request, options = nil)
             #   Pass arguments to `update_service_level_objective` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload update_service_level_objective(service_level_objective: nil, update_mask: nil)
@@ -826,33 +826,33 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param service_level_objective [Google::Cloud::Monitoring::V3::ServiceLevelObjective, Hash]
+            #   @param service_level_objective [::Google::Cloud::Monitoring::V3::ServiceLevelObjective, ::Hash]
             #     Required. The `ServiceLevelObjective` to draw updates from.
             #     The given `name` specifies the resource to update.
-            #   @param update_mask [Google::Protobuf::FieldMask, Hash]
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     A set of field paths defining which fields to use for the update.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Cloud::Monitoring::V3::ServiceLevelObjective]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Cloud::Monitoring::V3::ServiceLevelObjective]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Cloud::Monitoring::V3::ServiceLevelObjective]
+            # @return [::Google::Cloud::Monitoring::V3::ServiceLevelObjective]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def update_service_level_objective request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.update_service_level_objective.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -873,8 +873,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -882,12 +882,12 @@ module Google
             #
             # @overload delete_service_level_objective(request, options = nil)
             #   Pass arguments to `delete_service_level_objective` via a request object, either of type
-            #   {Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest} or an equivalent Hash.
+            #   {::Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest} or an equivalent Hash.
             #
-            #   @param request [Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest, Hash]
+            #   @param request [::Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest, ::Hash]
             #     A request object representing the call parameters. Required. To specify no
             #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [Gapic::CallOptions, Hash]
+            #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
             # @overload delete_service_level_objective(name: nil)
@@ -895,32 +895,32 @@ module Google
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [String]
+            #   @param name [::String]
             #     Required. Resource name of the `ServiceLevelObjective` to delete. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]/services/[SERVICE_ID]/serviceLevelObjectives/[SLO_NAME]
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [Google::Protobuf::Empty]
-            # @yieldparam operation [GRPC::ActiveCall::Operation]
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [Google::Protobuf::Empty]
+            # @return [::Google::Protobuf::Empty]
             #
-            # @raise [Google::Cloud::Error] if the RPC is aborted.
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
             def delete_service_level_objective request, options = nil
-              raise ArgumentError, "request must be provided" if request.nil?
+              raise ::ArgumentError, "request must be provided" if request.nil?
 
-              request = Gapic::Protobuf.coerce request, to: Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest
 
               # Converts hash and nil to an options object
-              options = Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
               # Customize the options with defaults
               metadata = @config.rpcs.delete_service_level_objective.metadata.to_h
 
               # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= Gapic::Headers.x_goog_api_client \
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
@@ -941,8 +941,8 @@ module Google
                 yield response, operation if block_given?
                 return response
               end
-            rescue GRPC::BadStatus => e
-              raise Google::Cloud::Error.from_error(e)
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
             end
 
             ##
@@ -952,7 +952,7 @@ module Google
             # providing control over timeouts, retry behavior, logging, transport
             # parameters, and other low-level controls. Certain parameters can also be
             # applied individually to specific RPCs. See
-            # {Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client::Configuration::Rpcs}
+            # {::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client::Configuration::Rpcs}
             # for a list of RPCs that can be configured independently.
             #
             # Configuration can be applied globally to all clients, or to a single client
@@ -963,22 +963,22 @@ module Google
             # To modify the global config, setting the timeout for create_service
             # to 20 seconds, and all remaining timeouts to 10 seconds:
             #
-            #     Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_service.timeout = 20_000
+            #     ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_service.timeout = 20.0
             #     end
             #
             # To apply the above configuration only to a new client:
             #
-            #     client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
-            #       config.timeout = 10_000
-            #       config.rpcs.create_service.timeout = 20_000
+            #     client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+            #       config.timeout = 10.0
+            #       config.rpcs.create_service.timeout = 20.0
             #     end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
             #   Defaults to `"monitoring.googleapis.com"`.
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] credentials
             #   Credentials to send with calls. You may provide any of the following types:
             #    *  (`String`) The path to a service account key file in JSON format
@@ -990,29 +990,29 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
-            #   @return [Object]
+            #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes
-            #   @return [Array<String>]
+            #   @return [::Array<::String>]
             # @!attribute [rw] lib_name
             #   The library name as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] lib_version
             #   The library version as recorded in instrumentation and logging
-            #   @return [String]
+            #   @return [::String]
             # @!attribute [rw] channel_args
             #   Extra parameters passed to the gRPC channel. Note: this is ignored if a
             #   `GRPC::Core::Channel` object is provided as the credential.
-            #   @return [Hash]
+            #   @return [::Hash]
             # @!attribute [rw] interceptors
             #   An array of interceptors that are run before calls are executed.
-            #   @return [Array<GRPC::ClientInterceptor>]
+            #   @return [::Array<::GRPC::ClientInterceptor>]
             # @!attribute [rw] timeout
-            #   The call timeout in milliseconds.
-            #   @return [Numeric]
+            #   The call timeout in seconds.
+            #   @return [::Numeric]
             # @!attribute [rw] metadata
             #   Additional gRPC headers to be sent with the call.
-            #   @return [Hash{Symbol=>String}]
+            #   @return [::Hash{::Symbol=>::String}]
             # @!attribute [rw] retry_policy
             #   The retry policy. The value is a hash with the following keys:
             #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
@@ -1020,10 +1020,10 @@ module Google
             #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
             #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
             #       trigger a retry.
-            #   @return [Hash]
+            #   @return [::Hash]
             #
             class Configuration
-              extend Gapic::Config
+              extend ::Gapic::Config
 
               config_attr :endpoint,     "monitoring.googleapis.com", String
               config_attr :credentials,  nil do |value|
@@ -1031,14 +1031,14 @@ module Google
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
                 allowed.any? { |klass| klass === value }
               end
-              config_attr :scope,        nil, String, Array, nil
-              config_attr :lib_name,     nil, String, nil
-              config_attr :lib_version,  nil, String, nil
-              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, Hash, nil)
-              config_attr :interceptors, nil, Array, nil
-              config_attr :timeout,      nil, Numeric, nil
-              config_attr :metadata,     nil, Hash, nil
-              config_attr :retry_policy, nil, Hash, Proc, nil
+              config_attr :scope,        nil, ::String, ::Array, nil
+              config_attr :lib_name,     nil, ::String, nil
+              config_attr :lib_version,  nil, ::String, nil
+              config_attr(:channel_args, { "grpc.service_config_disable_resolution"=>1 }, ::Hash, nil)
+              config_attr :interceptors, nil, ::Array, nil
+              config_attr :timeout,      nil, ::Numeric, nil
+              config_attr :metadata,     nil, ::Hash, nil
+              config_attr :retry_policy, nil, ::Hash, Proc, nil
 
               # @private
               def initialize parent_config = nil
@@ -1079,77 +1079,77 @@ module Google
               class Rpcs
                 ##
                 # RPC-specific configuration for `create_service`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_service
                 ##
                 # RPC-specific configuration for `get_service`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_service
                 ##
                 # RPC-specific configuration for `list_services`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_services
                 ##
                 # RPC-specific configuration for `update_service`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_service
                 ##
                 # RPC-specific configuration for `delete_service`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_service
                 ##
                 # RPC-specific configuration for `create_service_level_objective`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_service_level_objective
                 ##
                 # RPC-specific configuration for `get_service_level_objective`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_service_level_objective
                 ##
                 # RPC-specific configuration for `list_service_level_objectives`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_service_level_objectives
                 ##
                 # RPC-specific configuration for `update_service_level_objective`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_service_level_objective
                 ##
                 # RPC-specific configuration for `delete_service_level_objective`
-                # @return [Gapic::Config::Method]
+                # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_service_level_objective
 
                 # @private
                 def initialize parent_rpcs = nil
                   create_service_config = parent_rpcs&.create_service if parent_rpcs&.respond_to? :create_service
-                  @create_service = Gapic::Config::Method.new create_service_config
+                  @create_service = ::Gapic::Config::Method.new create_service_config
                   get_service_config = parent_rpcs&.get_service if parent_rpcs&.respond_to? :get_service
-                  @get_service = Gapic::Config::Method.new get_service_config
+                  @get_service = ::Gapic::Config::Method.new get_service_config
                   list_services_config = parent_rpcs&.list_services if parent_rpcs&.respond_to? :list_services
-                  @list_services = Gapic::Config::Method.new list_services_config
+                  @list_services = ::Gapic::Config::Method.new list_services_config
                   update_service_config = parent_rpcs&.update_service if parent_rpcs&.respond_to? :update_service
-                  @update_service = Gapic::Config::Method.new update_service_config
+                  @update_service = ::Gapic::Config::Method.new update_service_config
                   delete_service_config = parent_rpcs&.delete_service if parent_rpcs&.respond_to? :delete_service
-                  @delete_service = Gapic::Config::Method.new delete_service_config
+                  @delete_service = ::Gapic::Config::Method.new delete_service_config
                   create_service_level_objective_config = parent_rpcs&.create_service_level_objective if parent_rpcs&.respond_to? :create_service_level_objective
-                  @create_service_level_objective = Gapic::Config::Method.new create_service_level_objective_config
+                  @create_service_level_objective = ::Gapic::Config::Method.new create_service_level_objective_config
                   get_service_level_objective_config = parent_rpcs&.get_service_level_objective if parent_rpcs&.respond_to? :get_service_level_objective
-                  @get_service_level_objective = Gapic::Config::Method.new get_service_level_objective_config
+                  @get_service_level_objective = ::Gapic::Config::Method.new get_service_level_objective_config
                   list_service_level_objectives_config = parent_rpcs&.list_service_level_objectives if parent_rpcs&.respond_to? :list_service_level_objectives
-                  @list_service_level_objectives = Gapic::Config::Method.new list_service_level_objectives_config
+                  @list_service_level_objectives = ::Gapic::Config::Method.new list_service_level_objectives_config
                   update_service_level_objective_config = parent_rpcs&.update_service_level_objective if parent_rpcs&.respond_to? :update_service_level_objective
-                  @update_service_level_objective = Gapic::Config::Method.new update_service_level_objective_config
+                  @update_service_level_objective = ::Gapic::Config::Method.new update_service_level_objective_config
                   delete_service_level_objective_config = parent_rpcs&.delete_service_level_objective if parent_rpcs&.respond_to? :delete_service_level_objective
-                  @delete_service_level_objective = Gapic::Config::Method.new delete_service_level_objective_config
+                  @delete_service_level_objective = ::Gapic::Config::Method.new delete_service_level_objective_config
 
                   yield self if block_given?
                 end

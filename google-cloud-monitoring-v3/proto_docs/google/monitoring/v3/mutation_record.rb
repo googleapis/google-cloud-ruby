@@ -23,14 +23,14 @@ module Google
       module V3
         # Describes a change made to a configuration.
         # @!attribute [rw] mutate_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     When the change occurred.
         # @!attribute [rw] mutated_by
-        #   @return [String]
+        #   @return [::String]
         #     The email address of the user making the change.
         class MutationRecord
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

@@ -23,25 +23,25 @@ module Google
       module V3
         # A single strongly-typed value.
         # @!attribute [rw] bool_value
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     A Boolean value: `true` or `false`.
         # @!attribute [rw] int64_value
-        #   @return [Integer]
+        #   @return [::Integer]
         #     A 64-bit integer. Its range is approximately &plusmn;9.2x10<sup>18</sup>.
         # @!attribute [rw] double_value
-        #   @return [Float]
+        #   @return [::Float]
         #     A 64-bit double-precision floating-point number. Its magnitude
         #     is approximately &plusmn;10<sup>&plusmn;300</sup> and it has 16
         #     significant digits of precision.
         # @!attribute [rw] string_value
-        #   @return [String]
+        #   @return [::String]
         #     A variable-length string value.
         # @!attribute [rw] distribution_value
-        #   @return [Google::Api::Distribution]
+        #   @return [::Google::Api::Distribution]
         #     A distribution value.
         class TypedValue
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A closed time interval. It extends from the start time to the end time, and includes both: `[startTime, endTime]`. Valid time intervals depend on the [`MetricKind`](/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors#MetricKind) of the metric value. In no case can the end time be earlier than the start time.
@@ -63,16 +63,16 @@ module Google
         #   at the new start time could overwrite data written at the previous
         #   end time.
         # @!attribute [rw] end_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Required. The end of the time interval.
         # @!attribute [rw] start_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The beginning of the time interval.  The default value
         #     for the start time is the end time. The start time must not be
         #     later than the end time.
         class TimeInterval
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Describes how to combine multiple time series to provide a different view of
@@ -102,10 +102,10 @@ module Google
         # details, see [Filtering and
         # aggregation](https://cloud.google.com/monitoring/api/v3/aggregation).
         # @!attribute [rw] alignment_period
-        #   @return [Google::Protobuf::Duration]
+        #   @return [::Google::Protobuf::Duration]
         #     The `alignment_period` specifies a time interval, in seconds, that is used
         #     to divide the data in all the
-        #     {Google::Cloud::Monitoring::V3::TimeSeries time series} into consistent blocks of
+        #     {::Google::Cloud::Monitoring::V3::TimeSeries time series} into consistent blocks of
         #     time. This will be done before the per-series aligner can be applied to
         #     the data.
         #
@@ -114,7 +114,7 @@ module Google
         #     If no per-series aligner is specified, or the aligner `ALIGN_NONE` is
         #     specified, then this field is ignored.
         # @!attribute [rw] per_series_aligner
-        #   @return [Google::Cloud::Monitoring::V3::Aggregation::Aligner]
+        #   @return [::Google::Cloud::Monitoring::V3::Aggregation::Aligner]
         #     An `Aligner` describes how to bring the data points in a single
         #     time series into temporal alignment. Except for `ALIGN_NONE`, all
         #     alignments cause all the data points in an `alignment_period` to be
@@ -132,7 +132,7 @@ module Google
         #     and `alignment_period` must be specified; otherwise, an error is
         #     returned.
         # @!attribute [rw] cross_series_reducer
-        #   @return [Google::Cloud::Monitoring::V3::Aggregation::Reducer]
+        #   @return [::Google::Cloud::Monitoring::V3::Aggregation::Reducer]
         #     The reduction operation to be used to combine time series into a single
         #     time series, where the value of each data point in the resulting series is
         #     a function of all the already aligned values in the input time series.
@@ -148,7 +148,7 @@ module Google
         #     `ALIGN_NONE`. An `alignment_period` must also be specified; otherwise, an
         #     error is returned.
         # @!attribute [rw] group_by_fields
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     The set of fields to preserve when `cross_series_reducer` is
         #     specified. The `group_by_fields` determine how the time series are
         #     partitioned into subsets prior to applying the aggregation
@@ -164,8 +164,8 @@ module Google
         #     a single output time series. If `cross_series_reducer` is not
         #     defined, this field is ignored.
         class Aggregation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The `Aligner` specifies the operation that will be applied to the data
           # points in each alignment period in a time series. Except for
@@ -186,11 +186,11 @@ module Google
             ALIGN_NONE = 0
 
             # Align and convert to
-            # {Google::Api::MetricDescriptor::MetricKind::DELTA DELTA}.
+            # {::Google::Api::MetricDescriptor::MetricKind::DELTA DELTA}.
             # The output is `delta = y1 - y0`.
             #
             # This alignment is valid for
-            # {Google::Api::MetricDescriptor::MetricKind::CUMULATIVE CUMULATIVE} and
+            # {::Google::Api::MetricDescriptor::MetricKind::CUMULATIVE CUMULATIVE} and
             # `DELTA` metrics. If the selected alignment period results in periods
             # with no data, then the aligned value for such a period is created by
             # interpolation. The `value_type`  of the aligned result is the same as
@@ -337,10 +337,10 @@ module Google
 
             # Reduce by computing the mean value across time series for each
             # alignment period. This reducer is valid for
-            # {Google::Api::MetricDescriptor::MetricKind::DELTA DELTA} and
-            # {Google::Api::MetricDescriptor::MetricKind::GAUGE GAUGE} metrics with
+            # {::Google::Api::MetricDescriptor::MetricKind::DELTA DELTA} and
+            # {::Google::Api::MetricDescriptor::MetricKind::GAUGE GAUGE} metrics with
             # numeric or distribution values. The `value_type` of the output is
-            # {Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
+            # {::Google::Api::MetricDescriptor::ValueType::DOUBLE DOUBLE}.
             REDUCE_MEAN = 1
 
             # Reduce by computing the minimum value across time series for each

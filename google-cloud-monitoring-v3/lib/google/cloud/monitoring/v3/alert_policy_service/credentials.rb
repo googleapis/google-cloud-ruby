@@ -24,7 +24,7 @@ module Google
       module V3
         module AlertPolicyService
           # Credentials for the AlertPolicyService API.
-          class Credentials < Google::Auth::Credentials
+          class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/cloud-platform",
               "https://www.googleapis.com/auth/monitoring",

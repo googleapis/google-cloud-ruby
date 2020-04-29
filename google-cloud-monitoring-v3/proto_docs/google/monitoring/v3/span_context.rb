@@ -23,13 +23,13 @@ module Google
       module V3
         # The context of a span, attached to
         # [Exemplars][google.api.Distribution.Exemplars]
-        # in {Google::Api::Distribution Distribution} values during aggregation.
+        # in {::Google::Api::Distribution Distribution} values during aggregation.
         #
         # It contains the name of a span with format:
         #
         #     projects/[PROJECT_ID_OR_NUMBER]/traces/[TRACE_ID]/spans/[SPAN_ID]
         # @!attribute [rw] span_name
-        #   @return [String]
+        #   @return [::String]
         #     The resource name of the span. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/traces/[TRACE_ID]/spans/[SPAN_ID]
@@ -40,8 +40,8 @@ module Google
         #     `[SPAN_ID]` is a unique identifier for a span within a trace; it
         #     is a 16-character hexadecimal encoding of an 8-byte array.
         class SpanContext
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

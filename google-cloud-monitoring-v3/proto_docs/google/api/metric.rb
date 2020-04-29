@@ -23,10 +23,10 @@ module Google
     # deleting or altering it stops data collection and makes the metric type's
     # existing data unusable.
     # @!attribute [rw] name
-    #   @return [String]
+    #   @return [::String]
     #     The resource name of the metric descriptor.
     # @!attribute [rw] type
-    #   @return [String]
+    #   @return [::String]
     #     The metric type, including its DNS name prefix. The type is not
     #     URL-encoded.  All user-defined custom metric types have the DNS name
     #     `custom.googleapis.com`.  Metric types should use a natural hierarchical
@@ -35,7 +35,7 @@ module Google
     #         "custom.googleapis.com/invoice/paid/amount"
     #         "appengine.googleapis.com/http/server/response_latencies"
     # @!attribute [rw] labels
-    #   @return [Array<Google::Api::LabelDescriptor>]
+    #   @return [::Array<::Google::Api::LabelDescriptor>]
     #     The set of labels that can be used to describe a specific
     #     instance of this metric type. For example, the
     #     `appengine.googleapis.com/http/server/response_latencies` metric
@@ -43,15 +43,15 @@ module Google
     #     you can look at latencies for successful responses or just
     #     for responses that failed.
     # @!attribute [rw] metric_kind
-    #   @return [Google::Api::MetricDescriptor::MetricKind]
+    #   @return [::Google::Api::MetricDescriptor::MetricKind]
     #     Whether the metric records instantaneous values, changes to a value, etc.
     #     Some combinations of `metric_kind` and `value_type` might not be supported.
     # @!attribute [rw] value_type
-    #   @return [Google::Api::MetricDescriptor::ValueType]
+    #   @return [::Google::Api::MetricDescriptor::ValueType]
     #     Whether the measurement is an integer, a floating-point number, etc.
     #     Some combinations of `metric_kind` and `value_type` might not be supported.
     # @!attribute [rw] unit
-    #   @return [String]
+    #   @return [::String]
     #     The unit in which the metric value is reported. It is only applicable
     #     if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The
     #     supported units are a subset of [The Unified Code for Units of
@@ -118,17 +118,17 @@ module Google
     #     * `%` represents dimensionless value 1/100, and annotates values giving
     #        a percentage.
     # @!attribute [rw] description
-    #   @return [String]
+    #   @return [::String]
     #     A detailed description of the metric, which can be used in documentation.
     # @!attribute [rw] display_name
-    #   @return [String]
+    #   @return [::String]
     #     A concise name for the metric, which can be displayed in user interfaces.
     #     Use sentence case without an ending period, for example "Request count".
     #     This field is optional but it is recommended to be set for any metrics
     #     associated with user-visible concepts, such as Quota.
     class MetricDescriptor
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
 
       # The kind of measurement. It describes how the data is reported.
       module MetricKind
@@ -168,7 +168,7 @@ module Google
         # This value type can be used only if the metric kind is `GAUGE`.
         STRING = 4
 
-        # The value is a {Google::Api::Distribution `Distribution`}.
+        # The value is a {::Google::Api::Distribution `Distribution`}.
         DISTRIBUTION = 5
 
         # The value is money.
@@ -177,26 +177,26 @@ module Google
     end
 
     # A specific metric, identified by specifying values for all of the
-    # labels of a {Google::Api::MetricDescriptor `MetricDescriptor`}.
+    # labels of a {::Google::Api::MetricDescriptor `MetricDescriptor`}.
     # @!attribute [rw] type
-    #   @return [String]
-    #     An existing metric type, see {Google::Api::MetricDescriptor google.api.MetricDescriptor}.
+    #   @return [::String]
+    #     An existing metric type, see {::Google::Api::MetricDescriptor google.api.MetricDescriptor}.
     #     For example, `custom.googleapis.com/invoice/paid/amount`.
     # @!attribute [rw] labels
-    #   @return [Google::Protobuf::Map{String => String}]
+    #   @return [::Google::Protobuf::Map{::String => ::String}]
     #     The set of label values that uniquely identify this metric. All
     #     labels listed in the `MetricDescriptor` must be assigned values.
     class Metric
-      include Google::Protobuf::MessageExts
-      extend Google::Protobuf::MessageExts::ClassMethods
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
 
       # @!attribute [rw] key
-      #   @return [String]
+      #   @return [::String]
       # @!attribute [rw] value
-      #   @return [String]
+      #   @return [::String]
       class LabelsEntry
-        include Google::Protobuf::MessageExts
-        extend Google::Protobuf::MessageExts::ClassMethods
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
       end
     end
   end

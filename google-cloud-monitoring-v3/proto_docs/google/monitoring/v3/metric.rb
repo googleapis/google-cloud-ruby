@@ -23,7 +23,7 @@ module Google
       module V3
         # A single data point in a time series.
         # @!attribute [rw] interval
-        #   @return [Google::Cloud::Monitoring::V3::TimeInterval]
+        #   @return [::Google::Cloud::Monitoring::V3::TimeInterval]
         #     The time interval to which the data point applies.  For `GAUGE` metrics,
         #     the start time is optional, but if it is supplied, it must equal the
         #     end time.  For `DELTA` metrics, the start
@@ -34,11 +34,11 @@ module Google
         #     until an event resets the cumulative value to zero and sets a new start
         #     time for the following points.
         # @!attribute [rw] value
-        #   @return [Google::Cloud::Monitoring::V3::TypedValue]
+        #   @return [::Google::Cloud::Monitoring::V3::TypedValue]
         #     The value of the data point.
         class Point
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A collection of data points that describes the time-varying values
@@ -46,20 +46,20 @@ module Google
         # fully-specified monitored resource and a fully-specified metric.
         # This type is used for both listing and creating time series.
         # @!attribute [rw] metric
-        #   @return [Google::Api::Metric]
+        #   @return [::Google::Api::Metric]
         #     The associated metric. A fully-specified metric used to identify the time
         #     series.
         # @!attribute [rw] resource
-        #   @return [Google::Api::MonitoredResource]
+        #   @return [::Google::Api::MonitoredResource]
         #     The associated monitored resource.  Custom metrics can use only certain
         #     monitored resource types in their time series data.
         # @!attribute [rw] metadata
-        #   @return [Google::Api::MonitoredResourceMetadata]
+        #   @return [::Google::Api::MonitoredResourceMetadata]
         #     Output only. The associated monitored resource metadata. When reading a
         #     a timeseries, this field will include metadata labels that are explicitly
         #     named in the reduction. When creating a timeseries, this field is ignored.
         # @!attribute [rw] metric_kind
-        #   @return [Google::Api::MetricDescriptor::MetricKind]
+        #   @return [::Google::Api::MetricDescriptor::MetricKind]
         #     The metric kind of the time series. When listing time series, this metric
         #     kind might be different from the metric kind of the associated metric if
         #     this time series is an alignment or reduction of other time series.
@@ -70,7 +70,7 @@ module Google
         #     metric kind of the new descriptor and must be either `GAUGE` (the default)
         #     or `CUMULATIVE`.
         # @!attribute [rw] value_type
-        #   @return [Google::Api::MetricDescriptor::ValueType]
+        #   @return [::Google::Api::MetricDescriptor::ValueType]
         #     The value type of the time series. When listing time series, this value
         #     type might be different from the value type of the associated metric if
         #     this time series is an alignment or reduction of other time series.
@@ -78,7 +78,7 @@ module Google
         #     When creating a time series, this field is optional. If present, it must be
         #     the same as the type of the data in the `points` field.
         # @!attribute [rw] points
-        #   @return [Array<Google::Cloud::Monitoring::V3::Point>]
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::Point>]
         #     The data points of this time series. When listing time series, points are
         #     returned in reverse time order.
         #
@@ -88,93 +88,93 @@ module Google
         #     the value type of the descriptor is determined by the point's type, which
         #     must be `BOOL`, `INT64`, `DOUBLE`, or `DISTRIBUTION`.
         class TimeSeries
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A descriptor for the labels and points in a timeseries.
         # @!attribute [rw] label_descriptors
-        #   @return [Array<Google::Api::LabelDescriptor>]
+        #   @return [::Array<::Google::Api::LabelDescriptor>]
         #     Descriptors for the labels.
         # @!attribute [rw] point_descriptors
-        #   @return [Array<Google::Cloud::Monitoring::V3::TimeSeriesDescriptor::ValueDescriptor>]
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::TimeSeriesDescriptor::ValueDescriptor>]
         #     Descriptors for the point data value columns.
         class TimeSeriesDescriptor
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A descriptor for the value columns in a data point.
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           #     The value key.
           # @!attribute [rw] value_type
-          #   @return [Google::Api::MetricDescriptor::ValueType]
+          #   @return [::Google::Api::MetricDescriptor::ValueType]
           #     The value type.
           # @!attribute [rw] metric_kind
-          #   @return [Google::Api::MetricDescriptor::MetricKind]
+          #   @return [::Google::Api::MetricDescriptor::MetricKind]
           #     The value stream kind.
           class ValueDescriptor
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # Represents the values of a time series associated with a
         # TimeSeriesDescriptor.
         # @!attribute [rw] label_values
-        #   @return [Array<Google::Cloud::Monitoring::V3::LabelValue>]
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::LabelValue>]
         #     The values of the labels in the time series identifier, given in the same
         #     order as the `label_descriptors` field of the TimeSeriesDescriptor
         #     associated with this object. Each value must have a value of the type
         #     given in the corresponding entry of `label_descriptors`.
         # @!attribute [rw] point_data
-        #   @return [Array<Google::Cloud::Monitoring::V3::TimeSeriesData::PointData>]
+        #   @return [::Array<::Google::Cloud::Monitoring::V3::TimeSeriesData::PointData>]
         #     The points in the time series.
         class TimeSeriesData
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A point's value columns and time interval. Each point has one or more
           # point values corresponding to the entries in `point_descriptors` field in
           # the TimeSeriesDescriptor associated with this object.
           # @!attribute [rw] values
-          #   @return [Array<Google::Cloud::Monitoring::V3::TypedValue>]
+          #   @return [::Array<::Google::Cloud::Monitoring::V3::TypedValue>]
           #     The values that make up the point.
           # @!attribute [rw] time_interval
-          #   @return [Google::Cloud::Monitoring::V3::TimeInterval]
+          #   @return [::Google::Cloud::Monitoring::V3::TimeInterval]
           #     The time interval associated with the point.
           class PointData
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # A label value.
         # @!attribute [rw] bool_value
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     A bool label value.
         # @!attribute [rw] int64_value
-        #   @return [Integer]
+        #   @return [::Integer]
         #     An int64 label value.
         # @!attribute [rw] string_value
-        #   @return [String]
+        #   @return [::String]
         #     A string label value.
         class LabelValue
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # An error associated with a query in the time series query language format.
         # @!attribute [rw] locator
-        #   @return [Google::Cloud::Monitoring::V3::TextLocator]
+        #   @return [::Google::Cloud::Monitoring::V3::TextLocator]
         #     The location of the time series query language text that this error applies
         #     to.
         # @!attribute [rw] message
-        #   @return [String]
+        #   @return [::String]
         #     The error message.
         class QueryError
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A locator for text. Indicates a particular part of the text of a request or
@@ -198,7 +198,7 @@ module Google
         #
         # refers to the part of the text: "fox".
         # @!attribute [rw] source
-        #   @return [String]
+        #   @return [::String]
         #     The source of the text. The source may be a field in the request, in which
         #     case its format is the format of the
         #     google.rpc.BadRequest.FieldViolation.field field in
@@ -207,19 +207,19 @@ module Google
         #     referenced in the text of the query), in which case this is the name of
         #     the source (e.g. the macro name).
         # @!attribute [rw] start_position
-        #   @return [Google::Cloud::Monitoring::V3::TextLocator::Position]
+        #   @return [::Google::Cloud::Monitoring::V3::TextLocator::Position]
         #     The position of the first byte within the text.
         # @!attribute [rw] end_position
-        #   @return [Google::Cloud::Monitoring::V3::TextLocator::Position]
+        #   @return [::Google::Cloud::Monitoring::V3::TextLocator::Position]
         #     The position of the last byte within the text.
         # @!attribute [rw] nested_locator
-        #   @return [Google::Cloud::Monitoring::V3::TextLocator]
+        #   @return [::Google::Cloud::Monitoring::V3::TextLocator]
         #     If `source`, `start_position`, and `end_position` describe a call on
         #     some object (e.g. a macro in the time series query language text) and a
         #     location is to be designated in that object's text, `nested_locator`
         #     identifies the location within that object.
         # @!attribute [rw] nesting_reason
-        #   @return [String]
+        #   @return [::String]
         #     When `nested_locator` is set, this field gives the reason for the nesting.
         #     Usually, the reason is a macro invocation. In that case, the macro name
         #     (including the leading '@') signals the location of the macro call
@@ -227,20 +227,20 @@ module Google
         #     the location of the macro argument inside the macro body that got
         #     substituted away.
         class TextLocator
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The position of a byte within the text.
           # @!attribute [rw] line
-          #   @return [Integer]
+          #   @return [::Integer]
           #     The line, starting with 1, where the byte is positioned.
           # @!attribute [rw] column
-          #   @return [Integer]
+          #   @return [::Integer]
           #     The column within the line, starting with 1, where the byte is
           #     positioned. This is a byte index even though the text is UTF-8.
           class Position
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

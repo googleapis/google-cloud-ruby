@@ -43,7 +43,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/monitoring/v3/uptime_check_service"
-        #     client = Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
+        #     client = ::Google::Cloud::Monitoring::V3::UptimeCheckService::Client.new
         #
         module UptimeCheckService
         end

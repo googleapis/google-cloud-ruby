@@ -47,7 +47,7 @@ module Google
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/monitoring/v3/group_service"
-        #     client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+        #     client = ::Google::Cloud::Monitoring::V3::GroupService::Client.new
         #
         module GroupService
         end

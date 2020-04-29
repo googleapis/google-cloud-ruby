@@ -33,7 +33,7 @@ module Google
             #
             # @param folder [String]
             #
-            # @return [String]
+            # @return [::String]
             def folder_path folder:
               "folders/#{folder}"
             end
@@ -47,7 +47,7 @@ module Google
             #
             # @param organization [String]
             #
-            # @return [String]
+            # @return [::String]
             def organization_path organization:
               "organizations/#{organization}"
             end
@@ -61,7 +61,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def project_path project:
               "projects/#{project}"
             end
@@ -93,28 +93,28 @@ module Google
             #   @param folder [String]
             #   @param service [String]
             #
-            # @return [String]
+            # @return [::String]
             def service_path **args
               resources = {
                 "project:service"      => (proc do |project:, service:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/services/#{service}"
                 end),
                 "organization:service" => (proc do |organization:, service:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/services/#{service}"
                 end),
                 "folder:service"       => (proc do |folder:, service:|
-                  raise ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/services/#{service}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
@@ -148,31 +148,31 @@ module Google
             #   @param service [String]
             #   @param service_level_objective [String]
             #
-            # @return [String]
+            # @return [::String]
             def service_level_objective_path **args
               resources = {
                 "project:service:service_level_objective"      => (proc do |project:, service:, service_level_objective:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ArgumentError, "service cannot contain /" if service.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "service cannot contain /" if service.to_s.include? "/"
 
                   "projects/#{project}/services/#{service}/serviceLevelObjectives/#{service_level_objective}"
                 end),
                 "organization:service:service_level_objective" => (proc do |organization:, service:, service_level_objective:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-                  raise ArgumentError, "service cannot contain /" if service.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "service cannot contain /" if service.to_s.include? "/"
 
                   "organizations/#{organization}/services/#{service}/serviceLevelObjectives/#{service_level_objective}"
                 end),
                 "folder:service:service_level_objective"       => (proc do |folder:, service:, service_level_objective:|
-                  raise ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
-                  raise ArgumentError, "service cannot contain /" if service.to_s.include? "/"
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "service cannot contain /" if service.to_s.include? "/"
 
                   "folders/#{folder}/services/#{service}/serviceLevelObjectives/#{service_level_objective}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 

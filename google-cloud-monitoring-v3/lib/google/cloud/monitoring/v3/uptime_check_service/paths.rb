@@ -33,7 +33,7 @@ module Google
             #
             # @param folder [String]
             #
-            # @return [String]
+            # @return [::String]
             def folder_path folder:
               "folders/#{folder}"
             end
@@ -47,7 +47,7 @@ module Google
             #
             # @param organization [String]
             #
-            # @return [String]
+            # @return [::String]
             def organization_path organization:
               "organizations/#{organization}"
             end
@@ -61,7 +61,7 @@ module Google
             #
             # @param project [String]
             #
-            # @return [String]
+            # @return [::String]
             def project_path project:
               "projects/#{project}"
             end
@@ -93,28 +93,28 @@ module Google
             #   @param folder [String]
             #   @param uptime_check_config [String]
             #
-            # @return [String]
+            # @return [::String]
             def uptime_check_config_path **args
               resources = {
                 "project:uptime_check_config"      => (proc do |project:, uptime_check_config:|
-                  raise ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/uptimeCheckConfigs/#{uptime_check_config}"
                 end),
                 "organization:uptime_check_config" => (proc do |organization:, uptime_check_config:|
-                  raise ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
                   "organizations/#{organization}/uptimeCheckConfigs/#{uptime_check_config}"
                 end),
                 "folder:uptime_check_config"       => (proc do |folder:, uptime_check_config:|
-                  raise ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
                   "folders/#{folder}/uptimeCheckConfigs/#{uptime_check_config}"
                 end)
               }
 
               resource = resources[args.keys.sort.join(":")]
-              raise ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
             end
 
