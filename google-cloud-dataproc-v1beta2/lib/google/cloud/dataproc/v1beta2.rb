@@ -29,7 +29,7 @@ module Google
       # To load this package, including all its services, and instantiate a client:
       #
       #     require "google/cloud/dataproc/v1beta2"
-      #     client = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new
+      #     client = ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new
       #
       module V1beta2
       end

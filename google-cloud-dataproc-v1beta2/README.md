@@ -25,7 +25,7 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/dataproc/v1beta2"
 
-client = Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new
+client = ::Google::Cloud::Dataproc::V1beta2::AutoscalingPolicyService::Client.new
 request = my_create_request
 response = client.create_autoscaling_policy request
 ```

@@ -23,7 +23,7 @@ module Google
       module V1beta2
         # A Dataproc workflow template resource.
         # @!attribute [rw] id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The template id.
         #
         #     The id must contain only letters (a-z, A-Z), numbers (0-9),
@@ -32,7 +32,7 @@ module Google
         #
         #     .
         # @!attribute [r] name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The resource name of the workflow template, as described
         #     in https://cloud.google.com/apis/design/resource_names.
         #
@@ -44,7 +44,7 @@ module Google
         #       template has the following format:
         #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
         # @!attribute [rw] version
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. Used to perform a consistent read-modify-write.
         #
         #     This field should be left blank for a `CreateWorkflowTemplate` request. It
@@ -55,13 +55,13 @@ module Google
         #     current server version. The user updates other fields in the template,
         #     then returns it as part of the `UpdateWorkflowTemplate` request.
         # @!attribute [r] create_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time template was created.
         # @!attribute [r] update_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time template was last updated.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this template. These labels
         #     will be propagated to all jobs and clusters created by the workflow
         #     instance.
@@ -75,27 +75,27 @@ module Google
         #
         #     No more than 32 labels can be associated with a template.
         # @!attribute [rw] placement
-        #   @return [Google::Cloud::Dataproc::V1beta2::WorkflowTemplatePlacement]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::WorkflowTemplatePlacement]
         #     Required. WorkflowTemplate scheduling information.
         # @!attribute [rw] jobs
-        #   @return [Array<Google::Cloud::Dataproc::V1beta2::OrderedJob>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1beta2::OrderedJob>]
         #     Required. The Directed Acyclic Graph of Jobs to submit.
         # @!attribute [rw] parameters
-        #   @return [Array<Google::Cloud::Dataproc::V1beta2::TemplateParameter>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1beta2::TemplateParameter>]
         #     Optional. Template parameters whose values are substituted into the
         #     template. Values for parameters must be provided when the template is
         #     instantiated.
         class WorkflowTemplate
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -103,22 +103,22 @@ module Google
         #
         # Either `managed_cluster` or `cluster_selector` is required.
         # @!attribute [rw] managed_cluster
-        #   @return [Google::Cloud::Dataproc::V1beta2::ManagedCluster]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::ManagedCluster]
         #     Optional. A cluster that is managed by the workflow.
         # @!attribute [rw] cluster_selector
-        #   @return [Google::Cloud::Dataproc::V1beta2::ClusterSelector]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::ClusterSelector]
         #     Optional. A selector that chooses target cluster for jobs based
         #     on metadata.
         #
         #     The selector is evaluated at the time each job is submitted.
         class WorkflowTemplatePlacement
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Cluster that is managed by the workflow.
         # @!attribute [rw] cluster_name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The cluster name prefix. A unique cluster name will be formed by
         #     appending a random suffix.
         #
@@ -126,10 +126,10 @@ module Google
         #     and hyphens (-). Must begin with a letter. Cannot begin or end with
         #     hyphen. Must consist of between 2 and 35 characters.
         # @!attribute [rw] config
-        #   @return [Google::Cloud::Dataproc::V1beta2::ClusterConfig]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::ClusterConfig]
         #     Required. The cluster configuration.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this cluster.
         #
         #     Label keys must be between 1 and 63 characters long, and must conform to
@@ -141,79 +141,79 @@ module Google
         #
         #     No more than 32 labels can be associated with a given cluster.
         class ManagedCluster
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # A selector that chooses target cluster for jobs based on metadata.
         # @!attribute [rw] zone
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The zone where workflow process executes. This parameter does not
         #     affect the selection of the cluster.
         #
         #     If unspecified, the zone of the first cluster matching the selector
         #     is used.
         # @!attribute [rw] cluster_labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Required. The cluster labels. Cluster must have all labels
         #     to match.
         class ClusterSelector
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ClusterLabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # A job executed by the workflow.
         # @!attribute [rw] step_id
-        #   @return [String]
+        #   @return [::String]
         #     Required. The step id. The id must be unique among all jobs
         #     within the template.
         #
         #     The step id is used as prefix for job id, as job
         #     `goog-dataproc-workflow-step-id` label, and in
-        #     {Google::Cloud::Dataproc::V1beta2::OrderedJob#prerequisite_step_ids prerequisiteStepIds} field from other
+        #     {::Google::Cloud::Dataproc::V1beta2::OrderedJob#prerequisite_step_ids prerequisiteStepIds} field from other
         #     steps.
         #
         #     The id must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). Cannot begin or end with underscore
         #     or hyphen. Must consist of between 3 and 50 characters.
         # @!attribute [rw] hadoop_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::HadoopJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::HadoopJob]
         # @!attribute [rw] spark_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::SparkJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::SparkJob]
         # @!attribute [rw] pyspark_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::PySparkJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::PySparkJob]
         # @!attribute [rw] hive_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::HiveJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::HiveJob]
         # @!attribute [rw] pig_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::PigJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::PigJob]
         # @!attribute [rw] spark_r_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::SparkRJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::SparkRJob]
         #     Spark R job
         # @!attribute [rw] spark_sql_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::SparkSqlJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::SparkSqlJob]
         # @!attribute [rw] presto_job
-        #   @return [Google::Cloud::Dataproc::V1beta2::PrestoJob]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::PrestoJob]
         #     Presto job
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this job.
         #
         #     Label keys must be between 1 and 63 characters long, and must conform to
@@ -225,23 +225,23 @@ module Google
         #
         #     No more than 32 labels can be associated with a given job.
         # @!attribute [rw] scheduling
-        #   @return [Google::Cloud::Dataproc::V1beta2::JobScheduling]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::JobScheduling]
         #     Optional. Job scheduling configuration.
         # @!attribute [rw] prerequisite_step_ids
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Optional. The optional list of prerequisite job step_ids.
         #     If not specified, the job will start at the beginning of workflow.
         class OrderedJob
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -255,7 +255,7 @@ module Google
         # - Main class (in HadoopJob and SparkJob)
         # - Zone (in ClusterSelector)
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. Parameter name.
         #     The parameter name is used as the key, and paired with the
         #     parameter value, which are passed to the template when the template
@@ -264,12 +264,12 @@ module Google
         #     underscores (_), and must not start with a number. The maximum length is
         #     40 characters.
         # @!attribute [rw] fields
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Required. Paths to all fields that the parameter replaces.
         #     A field is allowed to appear in at most one parameter's list of field
         #     paths.
         #
-        #     A field path is similar in syntax to a {Google::Protobuf::FieldMask google.protobuf.FieldMask}.
+        #     A field path is similar in syntax to a {::Google::Protobuf::FieldMask google.protobuf.FieldMask}.
         #     For example, a field path that references the zone field of a workflow
         #     template's cluster selector would be specified as
         #     `placement.clusterSelector.zone`.
@@ -310,52 +310,52 @@ module Google
         #     - placement.clusterSelector.clusterLabels
         #     - jobs['step-id'].sparkJob.args
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Optional. Brief description of the parameter.
         #     Must not exceed 1024 characters.
         # @!attribute [rw] validation
-        #   @return [Google::Cloud::Dataproc::V1beta2::ParameterValidation]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::ParameterValidation]
         #     Optional. Validation rules to be applied to this parameter's value.
         class TemplateParameter
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configuration for parameter validation.
         # @!attribute [rw] regex
-        #   @return [Google::Cloud::Dataproc::V1beta2::RegexValidation]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::RegexValidation]
         #     Validation based on regular expressions.
         # @!attribute [rw] values
-        #   @return [Google::Cloud::Dataproc::V1beta2::ValueValidation]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::ValueValidation]
         #     Validation based on a list of allowed values.
         class ParameterValidation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Validation based on regular expressions.
         # @!attribute [rw] regexes
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Required. RE2 regular expressions used to validate the parameter's value.
         #     The value must match the regex in its entirety (substring
         #     matches are not sufficient).
         class RegexValidation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Validation based on a list of allowed values.
         # @!attribute [rw] values
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Required. List of allowed values for the parameter.
         class ValueValidation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A Dataproc workflow template resource.
         # @!attribute [r] template
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The resource name of the workflow template as described
         #     in https://cloud.google.com/apis/design/resource_names.
         #
@@ -367,47 +367,47 @@ module Google
         #       template has the following format:
         #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
         # @!attribute [r] version
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Output only. The version of template at the time of
         #     workflow instantiation.
         # @!attribute [r] create_cluster
-        #   @return [Google::Cloud::Dataproc::V1beta2::ClusterOperation]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::ClusterOperation]
         #     Output only. The create cluster operation metadata.
         # @!attribute [r] graph
-        #   @return [Google::Cloud::Dataproc::V1beta2::WorkflowGraph]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::WorkflowGraph]
         #     Output only. The workflow graph.
         # @!attribute [r] delete_cluster
-        #   @return [Google::Cloud::Dataproc::V1beta2::ClusterOperation]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::ClusterOperation]
         #     Output only. The delete cluster operation metadata.
         # @!attribute [r] state
-        #   @return [Google::Cloud::Dataproc::V1beta2::WorkflowMetadata::State]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::WorkflowMetadata::State]
         #     Output only. The workflow state.
         # @!attribute [r] cluster_name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The name of the target cluster.
         # @!attribute [rw] parameters
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Map from parameter names to values that were used for those parameters.
         # @!attribute [r] start_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Workflow start time.
         # @!attribute [r] end_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Workflow end time.
         # @!attribute [r] cluster_uuid
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The UUID of target cluster.
         class WorkflowMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ParametersEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # The operation state.
@@ -428,47 +428,47 @@ module Google
 
         # The cluster operation triggered by a workflow.
         # @!attribute [r] operation_id
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The id of the cluster operation.
         # @!attribute [r] error
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Error, if operation failed.
         # @!attribute [r] done
-        #   @return [Boolean]
+        #   @return [::Boolean]
         #     Output only. Indicates the operation is done.
         class ClusterOperation
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The workflow graph.
         # @!attribute [r] nodes
-        #   @return [Array<Google::Cloud::Dataproc::V1beta2::WorkflowNode>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1beta2::WorkflowNode>]
         #     Output only. The workflow nodes.
         class WorkflowGraph
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The workflow node.
         # @!attribute [r] step_id
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The name of the node.
         # @!attribute [r] prerequisite_step_ids
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Output only. Node's prerequisite nodes.
         # @!attribute [r] job_id
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The job id; populated after the node enters RUNNING state.
         # @!attribute [r] state
-        #   @return [Google::Cloud::Dataproc::V1beta2::WorkflowNode::NodeState]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::WorkflowNode::NodeState]
         #     Output only. The node state.
         # @!attribute [r] error
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The error detail.
         class WorkflowNode
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The workflow node state.
           module NodeState
@@ -495,7 +495,7 @@ module Google
 
         # A request to create a workflow template.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the region or location, as described
         #     in https://cloud.google.com/apis/design/resource_names.
         #
@@ -507,16 +507,16 @@ module Google
         #       the location has the following format:
         #       `projects/{project_id}/locations/{location}`
         # @!attribute [rw] template
-        #   @return [Google::Cloud::Dataproc::V1beta2::WorkflowTemplate]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate]
         #     Required. The Dataproc workflow template to create.
         class CreateWorkflowTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to fetch a workflow template.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the workflow template, as described
         #     in https://cloud.google.com/apis/design/resource_names.
         #
@@ -528,19 +528,19 @@ module Google
         #       template has the following format:
         #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
         # @!attribute [rw] version
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The version of workflow template to retrieve. Only previously
         #     instantiated versions can be retrieved.
         #
         #     If unspecified, retrieves the current version.
         class GetWorkflowTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to instantiate a workflow template.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the workflow template, as described
         #     in https://cloud.google.com/apis/design/resource_names.
         #
@@ -552,7 +552,7 @@ module Google
         #       of the template has the following format:
         #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
         # @!attribute [rw] version
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The version of workflow template to instantiate. If specified,
         #     the workflow will be instantiated only if the current version of
         #     the workflow template has the supplied version.
@@ -560,10 +560,10 @@ module Google
         #     This option cannot be used to instantiate a previous version of
         #     workflow template.
         # @!attribute [rw] instance_id
-        #   @return [String]
+        #   @return [::String]
         #     Deprecated. Please use `request_id` field instead.
         # @!attribute [rw] request_id
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A tag that prevents multiple concurrent workflow
         #     instances with the same tag from running. This mitigates risk of
         #     concurrent instances started due to retries.
@@ -574,26 +574,26 @@ module Google
         #     The tag must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         # @!attribute [rw] parameters
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Map from parameter names to values that should be used for those
         #     parameters. Values may not exceed 100 characters.
         class InstantiateWorkflowTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class ParametersEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
         # A request to instantiate an inline workflow template.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the region or location, as described
         #     in https://cloud.google.com/apis/design/resource_names.
         #
@@ -605,13 +605,13 @@ module Google
         #       resource name of the location has the following format:
         #       `projects/{project_id}/locations/{location}`
         # @!attribute [rw] template
-        #   @return [Google::Cloud::Dataproc::V1beta2::WorkflowTemplate]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate]
         #     Required. The workflow template to instantiate.
         # @!attribute [rw] instance_id
-        #   @return [String]
+        #   @return [::String]
         #     Deprecated. Please use `request_id` field instead.
         # @!attribute [rw] request_id
-        #   @return [String]
+        #   @return [::String]
         #     Optional. A tag that prevents multiple concurrent workflow
         #     instances with the same tag from running. This mitigates risk of
         #     concurrent instances started due to retries.
@@ -622,24 +622,24 @@ module Google
         #     The tag must contain only letters (a-z, A-Z), numbers (0-9),
         #     underscores (_), and hyphens (-). The maximum length is 40 characters.
         class InstantiateInlineWorkflowTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to update a workflow template.
         # @!attribute [rw] template
-        #   @return [Google::Cloud::Dataproc::V1beta2::WorkflowTemplate]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate]
         #     Required. The updated workflow template.
         #
         #     The `template.version` field must match the current version.
         class UpdateWorkflowTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to list workflow templates in a project.
         # @!attribute [rw] parent
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the region or location, as described
         #     in https://cloud.google.com/apis/design/resource_names.
         #
@@ -651,36 +651,36 @@ module Google
         #       resource name of the location has the following format:
         #       `projects/{project_id}/locations/{location}`
         # @!attribute [rw] page_size
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The maximum number of results to return in each response.
         # @!attribute [rw] page_token
-        #   @return [String]
+        #   @return [::String]
         #     Optional. The page token, returned by a previous call, to request the
         #     next page of results.
         class ListWorkflowTemplatesRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A response to a request to list workflow templates in a project.
         # @!attribute [r] templates
-        #   @return [Array<Google::Cloud::Dataproc::V1beta2::WorkflowTemplate>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate>]
         #     Output only. WorkflowTemplates list.
         # @!attribute [r] next_page_token
-        #   @return [String]
+        #   @return [::String]
         #     Output only. This token is included in the response if there are more
         #     results to fetch. To fetch additional results, provide this value as the
         #     page_token in a subsequent <code>ListWorkflowTemplatesRequest</code>.
         class ListWorkflowTemplatesResponse
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A request to delete a workflow template.
         #
         # Currently started workflows will remain running.
         # @!attribute [rw] name
-        #   @return [String]
+        #   @return [::String]
         #     Required. The resource name of the workflow template, as described
         #     in https://cloud.google.com/apis/design/resource_names.
         #
@@ -692,13 +692,13 @@ module Google
         #       of the template has the following format:
         #       `projects/{project_id}/locations/{location}/workflowTemplates/{template_id}`
         # @!attribute [rw] version
-        #   @return [Integer]
+        #   @return [::Integer]
         #     Optional. The version of workflow template to delete. If specified,
         #     will only delete the template if the current server version matches
         #     specified version.
         class DeleteWorkflowTemplateRequest
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

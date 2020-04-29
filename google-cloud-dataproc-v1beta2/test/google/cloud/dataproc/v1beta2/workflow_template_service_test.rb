@@ -23,7 +23,7 @@ require "google/cloud/dataproc/v1beta2/workflow_templates_pb"
 require "google/cloud/dataproc/v1beta2/workflow_templates_services_pb"
 require "google/cloud/dataproc/v1beta2/workflow_template_service"
 
-class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Minitest::Test
+class ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_rpc_count, :requests
 
@@ -48,7 +48,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
   def test_create_workflow_template
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dataproc::V1beta2::WorkflowTemplate.new
+    grpc_response = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -59,15 +59,15 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     create_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_workflow_template, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::CreateWorkflowTemplateRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::CreateWorkflowTemplateRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request.template
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request.template
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, create_workflow_template_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -84,7 +84,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object
-      client.create_workflow_template Google::Cloud::Dataproc::V1beta2::CreateWorkflowTemplateRequest.new(parent: parent, template: template) do |response, operation|
+      client.create_workflow_template ::Google::Cloud::Dataproc::V1beta2::CreateWorkflowTemplateRequest.new(parent: parent, template: template) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -96,7 +96,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.create_workflow_template Google::Cloud::Dataproc::V1beta2::CreateWorkflowTemplateRequest.new(parent: parent, template: template), grpc_options do |response, operation|
+      client.create_workflow_template ::Google::Cloud::Dataproc::V1beta2::CreateWorkflowTemplateRequest.new(parent: parent, template: template), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -108,7 +108,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
   def test_get_workflow_template
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dataproc::V1beta2::WorkflowTemplate.new
+    grpc_response = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -119,7 +119,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     get_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_workflow_template, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::GetWorkflowTemplateRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::GetWorkflowTemplateRequest, request
       assert_equal "hello world", request.name
       assert_equal 42, request.version
       refute_nil options
@@ -127,7 +127,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, get_workflow_template_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -144,7 +144,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object
-      client.get_workflow_template Google::Cloud::Dataproc::V1beta2::GetWorkflowTemplateRequest.new(name: name, version: version) do |response, operation|
+      client.get_workflow_template ::Google::Cloud::Dataproc::V1beta2::GetWorkflowTemplateRequest.new(name: name, version: version) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -156,7 +156,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.get_workflow_template Google::Cloud::Dataproc::V1beta2::GetWorkflowTemplateRequest.new(name: name, version: version), grpc_options do |response, operation|
+      client.get_workflow_template ::Google::Cloud::Dataproc::V1beta2::GetWorkflowTemplateRequest.new(name: name, version: version), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -168,7 +168,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
   def test_instantiate_workflow_template
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -182,7 +182,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     instantiate_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :instantiate_workflow_template, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::InstantiateWorkflowTemplateRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::InstantiateWorkflowTemplateRequest, request
       assert_equal "hello world", request.name
       assert_equal 42, request.version
       assert_equal "hello world", request.instance_id
@@ -193,7 +193,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, instantiate_workflow_template_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -212,7 +212,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object
-      client.instantiate_workflow_template Google::Cloud::Dataproc::V1beta2::InstantiateWorkflowTemplateRequest.new(name: name, version: version, instance_id: instance_id, request_id: request_id, parameters: parameters) do |response, operation|
+      client.instantiate_workflow_template ::Google::Cloud::Dataproc::V1beta2::InstantiateWorkflowTemplateRequest.new(name: name, version: version, instance_id: instance_id, request_id: request_id, parameters: parameters) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -226,7 +226,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.instantiate_workflow_template Google::Cloud::Dataproc::V1beta2::InstantiateWorkflowTemplateRequest.new(name: name, version: version, instance_id: instance_id, request_id: request_id, parameters: parameters), grpc_options do |response, operation|
+      client.instantiate_workflow_template ::Google::Cloud::Dataproc::V1beta2::InstantiateWorkflowTemplateRequest.new(name: name, version: version, instance_id: instance_id, request_id: request_id, parameters: parameters), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -239,7 +239,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
   def test_instantiate_inline_workflow_template
     # Create GRPC objects.
-    grpc_response = Google::Longrunning::Operation.new
+    grpc_response = ::Google::Longrunning::Operation.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -252,9 +252,9 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     instantiate_inline_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :instantiate_inline_workflow_template, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::InstantiateInlineWorkflowTemplateRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::InstantiateInlineWorkflowTemplateRequest, request
       assert_equal "hello world", request.parent
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request.template
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request.template
       assert_equal "hello world", request.instance_id
       assert_equal "hello world", request.request_id
       refute_nil options
@@ -262,7 +262,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, instantiate_inline_workflow_template_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -281,7 +281,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object
-      client.instantiate_inline_workflow_template Google::Cloud::Dataproc::V1beta2::InstantiateInlineWorkflowTemplateRequest.new(parent: parent, template: template, instance_id: instance_id, request_id: request_id) do |response, operation|
+      client.instantiate_inline_workflow_template ::Google::Cloud::Dataproc::V1beta2::InstantiateInlineWorkflowTemplateRequest.new(parent: parent, template: template, instance_id: instance_id, request_id: request_id) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -295,7 +295,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.instantiate_inline_workflow_template Google::Cloud::Dataproc::V1beta2::InstantiateInlineWorkflowTemplateRequest.new(parent: parent, template: template, instance_id: instance_id, request_id: request_id), grpc_options do |response, operation|
+      client.instantiate_inline_workflow_template ::Google::Cloud::Dataproc::V1beta2::InstantiateInlineWorkflowTemplateRequest.new(parent: parent, template: template, instance_id: instance_id, request_id: request_id), grpc_options do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -308,7 +308,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
   def test_update_workflow_template
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dataproc::V1beta2::WorkflowTemplate.new
+    grpc_response = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -318,14 +318,14 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     update_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_workflow_template, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::UpdateWorkflowTemplateRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request.template
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::UpdateWorkflowTemplateRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplate), request.template
       refute_nil options
     end
 
     Gapic::ServiceStub.stub :new, update_workflow_template_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -342,7 +342,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object
-      client.update_workflow_template Google::Cloud::Dataproc::V1beta2::UpdateWorkflowTemplateRequest.new(template: template) do |response, operation|
+      client.update_workflow_template ::Google::Cloud::Dataproc::V1beta2::UpdateWorkflowTemplateRequest.new(template: template) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -354,7 +354,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.update_workflow_template Google::Cloud::Dataproc::V1beta2::UpdateWorkflowTemplateRequest.new(template: template), grpc_options do |response, operation|
+      client.update_workflow_template ::Google::Cloud::Dataproc::V1beta2::UpdateWorkflowTemplateRequest.new(template: template), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -366,7 +366,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
   def test_list_workflow_templates
     # Create GRPC objects.
-    grpc_response = Google::Cloud::Dataproc::V1beta2::ListWorkflowTemplatesResponse.new
+    grpc_response = ::Google::Cloud::Dataproc::V1beta2::ListWorkflowTemplatesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -378,7 +378,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     list_workflow_templates_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_workflow_templates, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::ListWorkflowTemplatesRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::ListWorkflowTemplatesRequest, request
       assert_equal "hello world", request.parent
       assert_equal 42, request.page_size
       assert_equal "hello world", request.page_token
@@ -387,7 +387,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, list_workflow_templates_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -406,7 +406,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object
-      client.list_workflow_templates Google::Cloud::Dataproc::V1beta2::ListWorkflowTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_workflow_templates ::Google::Cloud::Dataproc::V1beta2::ListWorkflowTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -420,7 +420,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.list_workflow_templates Google::Cloud::Dataproc::V1beta2::ListWorkflowTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
+      client.list_workflow_templates ::Google::Cloud::Dataproc::V1beta2::ListWorkflowTemplatesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -433,7 +433,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
   def test_delete_workflow_template
     # Create GRPC objects.
-    grpc_response = Google::Protobuf::Empty.new
+    grpc_response = ::Google::Protobuf::Empty.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -444,7 +444,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     delete_workflow_template_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_workflow_template, name
-      assert_kind_of Google::Cloud::Dataproc::V1beta2::DeleteWorkflowTemplateRequest, request
+      assert_kind_of ::Google::Cloud::Dataproc::V1beta2::DeleteWorkflowTemplateRequest, request
       assert_equal "hello world", request.name
       assert_equal 42, request.version
       refute_nil options
@@ -452,7 +452,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     Gapic::ServiceStub.stub :new, delete_workflow_template_client_stub do
       # Create client
-      client = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -469,7 +469,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object
-      client.delete_workflow_template Google::Cloud::Dataproc::V1beta2::DeleteWorkflowTemplateRequest.new(name: name, version: version) do |response, operation|
+      client.delete_workflow_template ::Google::Cloud::Dataproc::V1beta2::DeleteWorkflowTemplateRequest.new(name: name, version: version) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -481,7 +481,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
       end
 
       # Use protobuf object with options
-      client.delete_workflow_template Google::Cloud::Dataproc::V1beta2::DeleteWorkflowTemplateRequest.new(name: name, version: version), grpc_options do |response, operation|
+      client.delete_workflow_template ::Google::Cloud::Dataproc::V1beta2::DeleteWorkflowTemplateRequest.new(name: name, version: version), grpc_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -496,7 +496,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     client = block_config = config = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
@@ -506,7 +506,7 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
     end
 
     assert_same block_config, config
-    assert_kind_of Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client::Configuration, config
   end
 
   def test_operations_client
@@ -514,11 +514,11 @@ class Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::ClientTest < Mi
 
     client = nil
     Gapic::ServiceStub.stub :new, nil do
-      client = Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
+      client = ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Client.new do |config|
         config.credentials = grpc_channel
       end
     end
 
-    assert_kind_of Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Operations, client.operations_client
+    assert_kind_of ::Google::Cloud::Dataproc::V1beta2::WorkflowTemplateService::Operations, client.operations_client
   end
 end

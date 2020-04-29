@@ -23,20 +23,20 @@ module Google
       module V1beta2
         # The status of the operation.
         # @!attribute [rw] state
-        #   @return [Google::Cloud::Dataproc::V1beta2::ClusterOperationStatus::State]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::ClusterOperationStatus::State]
         #     Output only. A message containing the operation state.
         # @!attribute [rw] inner_state
-        #   @return [String]
+        #   @return [::String]
         #     Output only. A message containing the detailed operation state.
         # @!attribute [rw] details
-        #   @return [String]
+        #   @return [::String]
         #     Output only. A message containing any operation metadata details.
         # @!attribute [rw] state_start_time
-        #   @return [Google::Protobuf::Timestamp]
+        #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time this state was entered.
         class ClusterOperationStatus
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The operation state.
           module State
@@ -56,40 +56,40 @@ module Google
 
         # Metadata describing the operation.
         # @!attribute [rw] cluster_name
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Name of the cluster for the operation.
         # @!attribute [rw] cluster_uuid
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Cluster UUID for the operation.
         # @!attribute [rw] status
-        #   @return [Google::Cloud::Dataproc::V1beta2::ClusterOperationStatus]
+        #   @return [::Google::Cloud::Dataproc::V1beta2::ClusterOperationStatus]
         #     Output only. Current operation status.
         # @!attribute [rw] status_history
-        #   @return [Array<Google::Cloud::Dataproc::V1beta2::ClusterOperationStatus>]
+        #   @return [::Array<::Google::Cloud::Dataproc::V1beta2::ClusterOperationStatus>]
         #     Output only. The previous operation status.
         # @!attribute [rw] operation_type
-        #   @return [String]
+        #   @return [::String]
         #     Output only. The operation type.
         # @!attribute [rw] description
-        #   @return [String]
+        #   @return [::String]
         #     Output only. Short description of operation.
         # @!attribute [rw] labels
-        #   @return [Google::Protobuf::Map{String => String}]
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Output only. Labels associated with the operation
         # @!attribute [rw] warnings
-        #   @return [Array<String>]
+        #   @return [::Array<::String>]
         #     Output only. Errors encountered during operation execution.
         class ClusterOperationMetadata
-          include Google::Protobuf::MessageExts
-          extend Google::Protobuf::MessageExts::ClassMethods
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # @!attribute [rw] key
-          #   @return [String]
+          #   @return [::String]
           # @!attribute [rw] value
-          #   @return [String]
+          #   @return [::String]
           class LabelsEntry
-            include Google::Protobuf::MessageExts
-            extend Google::Protobuf::MessageExts::ClassMethods
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end
